@@ -1,3 +1,0 @@
-- full-time XSS protection (super filter against GPC)
-- anti-brutalforce
-- allow-IP

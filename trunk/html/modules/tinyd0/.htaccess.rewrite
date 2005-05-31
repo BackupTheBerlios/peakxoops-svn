@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteRule ^rewrite/tc_(.*).html$ index.php?id=$1 [L]
+RewriteRule ^rewrite/(.*.html?)$ rewrite.php?wrap=$1 [L]
+RewriteRule ^rewrite/index.php(.*)$ index.php$1 [L]
+RewriteRule ^rewrite/comment_new.php(.*)$ comment_new.php$1 [L]
+RewriteRule ^rewrite/comment_post.php(.*)$ comment_post.php$1 [L]
+RewriteRule ^rewrite/comment_reply.php(.*)$ comment_reply.php$1 [L]
+RewriteRule ^rewrite/comment_edit.php(.*)$ comment_edit.php$1 [L]
+RewriteRule ^rewrite/comment_delete.php(.*)$ comment_delete.php$1 [L]
+RewriteRule ^rewrite/(.*)$ content/$1 [L]

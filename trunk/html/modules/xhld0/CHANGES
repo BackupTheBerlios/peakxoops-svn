@@ -1,6 +1,8 @@
 [xlang:en]
 CHANGES:
 
+  - fixed a problem of multiple <link>
+
 v.2.97 2005-5-27
   - fixed only description fields should pass nl2br()
   - updated myblocksadmin 0.29

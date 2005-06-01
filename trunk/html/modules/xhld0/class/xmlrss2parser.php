@@ -123,7 +123,7 @@ class XhldXmlRss2Parser extends SaxParser
     {
         if (!isset($this->_tempArr[$name])) {
             $this->_tempArr[$name] =& $value;
-        } else if( $name == 'pubdate' ) {
+        } else if( $name == 'pubdate' || $name == 'link' ) {
             $this->_tempArr[$name] = $value;
         } else {
             $this->_tempArr[$name] .= $delim.$value;

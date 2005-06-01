@@ -1,0 +1,139 @@
+[mlimg]
+[xlang:en]
+
+= Tell a Friend =
+
+It is hard to use The link for "Tell a friend" with multi-byte languages.
+
+Even with sigle-byte language, "mailto:" is not useful in the environments without MUA. eg) Internet Cafe
+
+Thus I've made a moudle of Form Mail working with a Smarty plugin collaborately.
+
+After you install this, a visitor can send e-mails to his friends by Form mail when he just click the icon.
+
+
+
+USAGE:
+
+- Install this module as usual.
+
+- Check "access rights" by groups admin in TellAFriend's admin
+
+- Copy modifier.xoops_tellafriend.php into class/smarty/plugins/
+
+- Edit the templates with links of "Tell a friend" as follows.
+
+
+
+NOTE:
+For anti-spam, I've made a restriction to send mails per IP or uid.
+If you want to change, go to preferences of TellAFriend's admin.
+
+
+
+SAMPLES of editing the templates.
+
+[b]news[/b]
+news_article.html
+[code]
+[d]<a target="_top" href="<{$mail_link}>">[/d]
+<a target="_top" href="<{$mail_link|xoops_tellafriend}>">
+[/code]
+news_archive.html
+[code]
+[d]<a href="<{$story.mail_link}>" target="_top" />[/d]
+<a href="<{$story.mail_link|xoops_tellafriend}>" target="_top" />
+[/code]
+
+[b]mylinks[/b]
+mylinks_link.html
+[code]
+[d]<a target="_top" href="mailto:?subject=<{$link.mail_subject}>&amp;body=<{$link.mail_body}>">[/d]
+<a target="_top" href="<{$link.mail_body|xoops_tellafriend:$link.mail_subject}>">
+[/code]
+
+[b]mydownloads[/b]
+mydownloads_download.html
+[code]
+[d]<a target="_top" href="mailto:?subject=<{$down.mail_subject}>&amp;body=<{$down.mail_body}>">[/d]
+<a target="_top" href="<{$down.mail_body|xoops_tellafriend:$down.mail_subject}>">
+[/code]
+
+[b]TinyD[/b]
+Go to preferences of TinyD, and turn 'Use tellafriend modulen' on.
+
+
+
+
+
+[/xlang:en]
+[xlang:ja]
+
+= Tell a Friend =
+
+いろいろ議論はありましたが、「友達に知らせる」をmailto:で行うのは、どうやっても「文字化け」は避けられないというのが結論です。
+
+また、メーラーがセットアップされている環境からのアクセスならともかく、インターネットカフェなどからでは、mailto:は意味がありません。
+
+
+というわけで、Smarty plug-in との組み合わせで、フォームメールを利用するモジュールを作ってみました。
+
+
+このモジュールの利用方法ですが、３つの手順が必要です。
+
+- まず、普通にインストールしてください。
+
+- class/smarty/plugins/ に modifier.xoops_tellafriend.php をコピーしてください
+
+- 「友達に知らせる」アイコンのあるテンプレートを編集してください。（サンプル参照）
+
+
+ゲストに許可したい場合は、グループ管理から、ゲストに対してモジュールアクセス権限を与えてください。
+スパム等の踏み台にされないよう、IP毎もしくはuid毎に送信数制限を設けてありますので、必要に応じて、「一般設定」から変更してください。
+
+
+------------------------------------------------------------------
+以下にテンプレート編集のサンプルを示します。
+
+[b]news[/b]
+news_artcle.html
+[code]
+[d]<a target="_top" href="<{$mail_link}>">[/d]
+<a target="_top" href="<{$mail_link|xoops_tellafriend}>">
+[/code]
+news_archive.html
+[code]
+[d]<a href="<{$story.mail_link}>" target="_top" />[/d]
+<a href="<{$story.mail_link|xoops_tellafriend}>" target="_top" />
+[/code]
+
+[b]mylinks[/b]
+mylinks_link.html
+[code]
+[d]<a target="_top" href="mailto:?subject=<{$link.mail_subject}>&amp;body=<{$link.mail_body}>">[/d]
+<a target="_top" href="<{$link.mail_body|xoops_tellafriend:$link.mail_subject}>">
+[/code]
+
+[b]mydownloads[/b]
+mydownloads_download.html
+[code]
+[d]<a target="_top" href="mailto:?subject=<{$down.mail_subject}>&amp;body=<{$down.mail_body}>">[/d]
+<a target="_top" href="<{$down.mail_body|xoops_tellafriend:$down.mail_subject}>">
+[/code]
+
+[b]TinyD[/b]
+TinyDの一般設定にて、「Tell a Friendモジュールを使う」を選択
+
+「友達に紹介」を持った他のモジュールでも、基本的には、mailto: となっている部分のテンプレート変数に、フィルタを追加するだけです。
+
+
+●言語ファイル
+
+korean
+tchinese
+schinese
+を、それぞれ、Lostworldさんとimdavidさんが作ってくれました。
+ありがとうございました。
+
+
+[/xlang:ja]

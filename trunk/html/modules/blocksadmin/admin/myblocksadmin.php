@@ -44,7 +44,7 @@ if( ! empty( $_GET['dirname'] ) ) {
 if( ! empty( $target_module ) && is_object( $target_module ) ) {
 	// specified by dirname
 	$target_mid = $target_module->getVar( 'mid' ) ;
-	$target_mname = $target_module->getVar( 'name' ) ;
+	$target_mname = $target_module->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $target_module->getVar('version') / 100.0 ) ;
 	$query4redirect = '?dirname='.urlencode(strip_tags($_GET['dirname'])) ;
 } else if( isset( $_GET['mid'] ) && $_GET['mid'] == 0 || $xoopsModule->getVar('dirname') == 'blocksadmin' ) {
 	$target_mid = 0 ;

@@ -1,0 +1,120 @@
+[xlang:en]
+
+ === xhld ===
+
+This is the most powerful and the latest headline module.
+
+xhld is an almost fully scratched module although it is based on XoopsHeadline in core of XOOPS2.
+
+[color=ff0000]
+If you are using xhld multiplly and you want to update this module,
+all instances of xhld should be updated.
+[/color]
+
+
+POINTS:
+
+- ATOM 0.3 ready!
+- RSS 0.9/1.0/2.0 ready!
+- free from allow_url_fopen (secure!)
+- recent headlines view
+- recent headlines block
+- extracting with headline's title
+- extracting with headline's link
+- fetchable RSS/RDF even via some proxy servers
+- Duplicatable V2.1
+- dynamic timezone calculation (Although you turn module/block's cache on, any visitors can see the published times with their timezone)
+
+  You can clone this module easily. only copy them.
+  And the rule of directory's name is quite simple.
+
+  This module judges its number by tale of directory's name.
+
+  modules/xhld0 - treated as No.0 module of xhld
+  modules/xhld1 - treated as No.1 moudle of xhld
+  modules/h2    - treated as No.2 module of xhld
+  modules/test0003 - treated as No.3 module of xhld
+  modules/xoopsheadline - treated as unnumbered module of xhld
+
+  The numbers of xhld have to be unique.
+  Also, unnumbered module have to be unique.
+
+  This module does not work with the module "XoopsHeadline" so well because of a problem of the language constants.
+  If you want to use headline modules multiplly, duplicate xhld.
+  After install this, you'd better to uninstall and remove "XoopsHeadline".
+
+  Or you can install xhld0 as xoopsheadline for compatibility of URI.
+
+
+
+[/xlang:en][xlang:ja]
+
+ === ヘッドラインモジュール xhld ===
+
+RSSやATOMを表示するモジュールです。
+歴史的には標準モジュールであるXoopsHeadlineがベースですが、今ではかなり書き変わって別物と化しているはずです。
+
+[color=ff0000]
+2.73以降、フィードの日時フォーマットが空文字の場合、日時が表示されません。
+日時が表示されなくなったな、と思ったら、「記事発行時間のフォーマット（短縮形）」を設定して下さい。デフォルトは、m/d H:i です。
+
+2.6から、RSS/ATOMのエンコード指定が意味あるものになりました。
+UTF-8以外のRSS/ATOMがありそうな場合は、一端、すべてのフィードについて、エンコーディングを「自動検出」として「更新・再取得」して下さい。
+このモジュールを複数利用している場合、上書きアップグレードはすべてのxhldモジュールに対して行ってください。
+そうしないとおかしくなります。
+[/color]
+
+
+売り:
+
+- ATOM 0.3 に対応しました
+
+- RSS 0.9, 1.0, 2.0 ready!
+
+- allow_url_fopen が Off でも正常に動作します （余計なリスクを負わずに済みます）
+
+- 全ヘッドラインタイトルを最新順にまとめて表示するメイン画面およびブロックがあります
+
+- ヘッドラインのタイトルで絞り込みが出来ます
+  例えば、/円/ として絞れば、レート確認用ブロックのできあがり！
+
+- ヘッドラインのリンクで絞り込みが出来ます
+  例えばアサヒ・コムのリンクを /business/ として絞れば、経済ニュース
+  ブロックのできあがり！
+
+- プロクシ経由でもRSS/RDFを取得できます（多分）
+
+- JavaScriptによるクライアントサイドの時差計算
+  こうすることで、モジュールキャッシュやブロックキャッシュを有効にし
+  た際に、異なるTimezoneを持つクライアントが連続して訪れるだけで時間
+  表示がおかしくなる、という不具合を防げます
+
+- Duplicatable バージョン2.1 (何じゃそりゃ:hammer:)
+
+  今度のDuplicatableはひと味違います。
+  かなり自由にディレクトリ名を決められます。
+  ただし、ちょっとしたルールがあるので、それだけは守らなくてはいけません。
+  (数字以外が１字以上)+(数字が１字以上)
+  という名前にしてください。
+
+  デフォルトの 'xhld0' は、もちろんOKです。
+  このディレクトリに置かれたモジュールは、xhldの0番目として扱われます。
+
+  このモジュールをコピーして、'test1' として置けば、xhldの1番目のできあがり。
+  'test00003' とかしても良いですが、これは3番目になります。
+
+  とりあえず、0,1,2,3 の４つだけ用意してあります。
+  テンプレートとsqlファイルを用意しさえすれば、いくつでも可能ですよ。
+  まあ、コンテンツ系とは違い、ヘッドラインブロックをそんなにいくつも
+  作らないだろうとは思いますが。
+
+  また、一つだけ、番号なしのdirnameも作れます。xhld ではなく、xoopsheadline とすることも可能です。
+
+  2.25以降、XoopsHeadlineモジュールが存在する状態でインストールしても、エラーで止まることはなくなりました。
+  ただ、それでも、XoopsHeadlineとXhldは、言語定数の問題があって、あまり相性が良くありません。
+  複数のヘッドライン系モジュールが必要であれば、Xhldを必要数だけインストールして、XoopsHeadlineそのものはアンインストールして、modules/ ディレクトリからも削除することをお勧めします。
+  xhld0 を xoopsheadline とリネームしてインストールすれば、URI互換もとれるはずです。
+
+
+
+[/xlang:ja]

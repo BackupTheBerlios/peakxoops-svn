@@ -1,0 +1,17 @@
+<script type="text/javascript" src="<{$block.mod_url}>/phpdate.js"></script>
+<ul>
+<{section name=i loop=$block.items max=$block.maxitem}>
+  <{if $block.items[i].title != ""}>
+  <li>
+    <{if $block.items[i].pubdate != "" }>
+      <script type="text/javascript">document.write(phpDate('<{$block.dtfmt_short}>', <{$block.items[i].pubdate}>));</script>
+      <noscript><{$block.items[i].date_short}></noscript>
+      &nbsp; 
+    <{/if}>
+    <a href="<{$block.items[i].link}>" target="_blank"><{$block.items[i].title}></a>
+    &nbsp; 
+    <a href="<{$block.items[i].site_url}>" target="_blank">(<{$block.items[i].site_name}>)</a>
+  </li>
+  <{/if}>
+<{/section}>
+</ul>

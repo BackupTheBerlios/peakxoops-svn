@@ -1,0 +1,45 @@
+<{strip}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=Shift_JIS">
+  <title><{$smarty.const._HL_HEADLINES}></title>
+</head>
+<body bgcolor="#ffffff">
+
+<{if $hlid}>
+  <p><{$hl_site_name}>&nbsp;#<{$num}></p>
+  <center>
+    <{if $prev_num}>
+      <a href="<{$mod_url}>/wap.php?id=<{$hlid}>&amp;num=<{$prev_num}>"><{$smarty.const._HL_PREV}></a>
+    <{else}>
+      <{$smarty.const._HL_PREV}>
+    <{/if}>
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <{if $next_num}>
+      <a href="<{$mod_url}>/wap.php?id=<{$hlid}>&amp;num=<{$next_num}>"><{$smarty.const._HL_NEXT}></a>
+    <{else}>
+      <{$smarty.const._HL_NEXT}>
+    <{/if}>
+  </center>
+  <p>
+    <{$item.title}><br>
+    <{$item.date_short}><br>
+    <{$item.description}><br>
+    <a href="<{$item.link}>"><{$smarty.const._HL_LINKTOORIGINAL}></a><br>
+    <a href="<{$mod_url}>/wap.php"><{$smarty.const._HL_LISTTITLE}></a>
+  </p>
+<{else}>
+  <p><{$smarty.const._HL_LISTTITLE}></p>
+  <{section name=i loop=$mixlist.items max=$mixlist.maxitem}>
+    <p>
+      <a href="<{$mod_url}>/wap.php?id=<{$mixlist.items[i].id}>&amp;num=<{$mixlist.items[i].num}>"><{$mixlist.items[i].title}></a>&nbsp;
+      (<{$mixlist.items[i].site_name}>)<br>
+      <{$mixlist.items[i].date_short}>
+    </p>
+  <{/section}>
+<{/if}>
+
+</body>
+</html>
+<{/strip}>

@@ -1,0 +1,43 @@
+<{strip}>
+<HDML VERSION="3.0" PUBLIC="TRUE">
+<DISPLAY NAME="<{$smarty.const._HL_HEADLINES}>">
+<{if $hlid}>
+  <{$hl_site_name}>&nbsp;#<{$num}>
+
+    <BR>
+    <{if $prev_num}>
+      <A TASK="GO" DEST="<{$mod_url}>/wap.php?id=<{$hlid}>&amp;num=<{$prev_num}>"><{$smarty.const._HL_PREV}></A>
+    <{else}>
+      <{$smarty.const._HL_PREV}>
+    <{/if}>
+
+    <{if $next_num}>
+      <RIGHT><A TASK="GO" DEST="<{$mod_url}>/wap.php?id=<{$hlid}>&amp;num=<{$next_num}>"><{$smarty.const._HL_NEXT}></A>
+    <{else}>
+      <RIGHT><{$smarty.const._HL_NEXT}>
+    <{/if}>
+
+    <BR>
+
+    <{$item.title}><BR>
+    <{$item.date_short}><BR>
+    <{$item.description}><BR>
+    <A TASK="GO" DEST="<{$item.link}>"><{$smarty.const._HL_LINKTOORIGINAL}></a><BR>
+    <A TASK="GO" DEST="<{$mod_url}>/wap.php"><{$smarty.const._HL_LISTTITLE}></A>
+    <BR>
+
+<{else}>
+
+  <{$smarty.const._HL_LISTTITLE}><br>
+  <{section name=i loop=$mixlist.items max=$mixlist.maxitem}>
+
+      <A TASK="GOSUB" DEST="<{$mod_url}>/wap.php?id=<{$mixlist.items[i].id}>&amp;num=<{$mixlist.items[i].num}>"><{$mixlist.items[i].title}></A>&nbsp;
+      (<{$mixlist.items[i].site_name}>)<br>
+      <{$mixlist.items[i].date_short}>
+      <BR>
+
+  <{/section}>
+<{/if}>
+</DISPLAY>
+</HDML>
+<{/strip}>

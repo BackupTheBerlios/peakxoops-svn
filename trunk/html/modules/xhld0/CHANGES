@@ -1,0 +1,395 @@
+[xlang:en]
+CHANGES:
+
+v.2.97 2005-5-27
+  - fixed only description fields should pass nl2br()
+  - updated myblocksadmin 0.29
+
+v.2.96a 2005-4-23
+  - fixed a bug in xmlatomparser.php with PHP5 & ATOM (thx scaf)
+
+v.2.96 2005-4-8
+  - fixed a bug in xmlrss2parser.php
+
+v.2.95 2005-4-5
+  - modified XOBJ_DTYPE of headline_xml
+  - modified error handling when fetching or parsing errors occured
+
+v.2.94 2005-3-30
+  - fixed some troubles when missing block's options
+  - modified compatibilities with XOOPS <= 2.0.5.2
+  - updated French (thx marco) (2.94a)
+
+v.2.93 2005-3-16
+  - added wap mode (still experimantal stage)
+  - added a script updating XML-parsed-cache for cron (include/update_cache.sh)
+
+v.2.92 2005-3-2
+  - updated myblocksadmin 0.27 & mymenu 0.12
+  - fixed a bug with magic_quotes_gpc environment (thx Ryuji)
+  - modified english language files (thx Peter)
+  - modified trimming XML before passing it to parser (2.92a)
+
+v.2.91 2005-2-21
+  - fixed a compatibility with PHP5 (thx OXTS5 & Marichan)
+  - added French (thx marco)
+  - added PortugueseBr (thx Xbartts)
+  - added Russian (thx FractalizeR)
+
+v.2.90 2005-2-11
+  - added exclude patterns
+  - modified IP check disabled with XoopsGTicket
+
+v.2.84 2005-1-27
+  - fixed dirname 'xhld' can't work (thx mikity)
+
+v.2.83 2005-1-15
+  - added a plugin for the sitemap module
+  - updated myblocksadmin 0.24 & mymenu 0.10
+
+v.2.82 2005-1-8
+  - updated myblocksadmin 0.23
+
+v.2.81 2005-1-5
+  - fixed missing ALTER TABLE in updating the module (thx jseymour)
+
+v.2.80 2005-1-4
+  - modified the each headline block as duplicatable
+  - added feeds selecting option into the each headline block
+  - fixed a serious bug of saxparser.php (thx JM2)
+  - updated myblocksadmin 0.22 & mymenu 0.07
+
+v.2.76 2004-12-21
+  - added tag handler <content:encoded>
+
+v.2.75 2004-12-20
+  - modified fetching datetime routine with unknown timezone (thx Tom_G3X)
+
+v.2.74 2004-12-16
+  - updated myblocksadmin (0.12) & mymenu (0.06)
+
+v.2.73 2004-12-12
+  - modified allowing a blank string as the short DATE format (thx takahashi)
+
+v.2.72 2004-12-10
+  - modified ticket system (thx nobunobu)
+  - updated myblocksadmin (0.11) & mymenu (0.05)
+
+v.2.71 2004-12-7
+  - fixed ticket system
+
+v.2.70 2004-12-6  (Don't forget updating the module)
+  - added a judgement whether timed-out or not
+  - modified that the old data won't be dropped when time-out or XML parse error occurred
+  - imported core files (saxparser.php&xmltaghandler.php) into this module
+  - fixed a bad code of saxparser.php for php5 compat (thx Marijuana)
+  - modified that some ISO-8859-1 characters displays correctly even if _CHARSET is not ISO-8859-1
+  - changed the setting of timeout from the module's config to each feeds
+  - added an option 'allow HTML' or not for protecting from XSS (thx JM2)
+  - added a ticket system for protecting from CSRF
+  - updated myblocksadmin (0.10) & mymenu (0.04)
+
+v2.63 2004-12-4
+  - modified feeds admin (thx Tom_G3X)
+
+v2.62 2004-12-3
+  - added utf8_decode for XOOPS working with ISO-8859-1
+  - added an option specifying max items per a feed
+  - updated myblocksadmin (0.08) & mymenu (0.02)
+
+v2.61 2004-12-3
+  - fixed typo in local headlinerenderer.php (thx Tom_G3X)
+  - modified feeds admin (thx Tom_G3X)
+
+v2.60 2004-12-2  (Don't forget updating the module)
+  - modified encoding selection & detection
+  - modified to be selectable aggregation methods from two
+  - modified feeds admin
+  - fixed error trapping
+
+v2.53 2004-11-27
+  - modified sorting headlines without pubdate
+  - modified admin can specify the short format of datetime item was published
+  - modified the long format of datetime is same as _DATESTRING
+
+v2.52 2004-11-25
+  - fixed a typo in xhld*_block.html (thx yokos)
+
+v2.51 2004-11-21
+  - fixed double definition of parser class (thx yokos)
+  - modified template xhld_index.html as displaying the latest 10 descriptions (thx Tom_G3X)
+  - modified users can specify its syndications explicitly
+  - fixed some handlers about errors
+
+v2.50 2004-11-18
+  - added a parser for ATOM 0.3 (special thx ohwada!)
+  - modified it stores parsed data instead of raw XML (much faster than older)
+  - modified some fields larger
+  - remade admin/index.php almost fully
+  - modified it uses textbox instead of select for feeds (minimum cache is 10min)
+  - fixed a lot of bugs origined from xoopsheadline
+
+v2.40 2004-11-16
+  - fixed double defined form name "headline_form" (thx godfield)
+  - modified not to use a template blocks/headline_block.html
+  - fixed application to RSS without pubdate field (thx godfield & haroa)
+  - fixed a bug about updating RSS/RDF feeds in admin
+
+v2.31 2004-11-10
+  - modified to convert the encoding from iso-8859-1 to utf-8 at updating cache
+  - added Spanish (thx MonDarSE)
+
+v2.30 2004-10-28
+  - modified to use $_GET or $_POST instead of $HTTP_*_VARS (for PHP5)
+  - modified as Dupilcatable V2.1 - it allows unnumbered dirname -
+  - modified all RSS feed should be ordered by pubdate desc
+  - fixed insecure codings eg.extracting $_POST
+  - changed icons of the module
+
+v2.25 2004-10-21
+  - modified compatibities against xoopsheadline
+
+v2.24 2004-10-21
+  - fixed a bug in sorting all headlines (thx Ryuji)
+
+v2.23 2004-10-4
+  - modified block's cache are cleared in editing or updating RSS/RDF records.
+  - modified XML's cache are cleared in editing or updating RSS/RDF records.
+  - added an option '10minutes' for XML cache
+
+v2.22 2004-9-26
+  - added a feature getting RSS/RDF via proxy (thx domifara & Takao_O)
+  - modified headline_xml field from text to mediumtext (thx domifara)
+  - fixed the targets of all links to be "_blank". (thx Nu-nrg)
+
+v2.21 2004-8-12
+  - fixed a typo in admin/index.php origined from xoopsheadline (thx doublebass)
+  - fixed the name of config's description (thx Tom_G3X)
+
+v2.20 2004-8-12
+  - added a main view displaying all headlines ordered as newer is upper. (special thx Tom_G3X)
+  - added an option specifying snoopy's timeout.
+  - modified templates of xhld*_index.html and xhld*_feed.html. If you use custom templates, update them manually. (thx Tom_G3X)
+  - modified the values of block's options will be kept when module is updated (thx nobunobu)
+  - modified the parser of w3c format
+  - added mymenu
+
+v2.11 2004-8-1
+  - fixed bug headline entries can't be deleted (thx Nu-nrg)
+  - modified function getting unixtime from dc:date(W3C) (thx Marijuana)
+  - added date/time into blocks as default  m/d HH:MM
+  - modified using date_format of smarty. you can change format only editing the template.
+  - added JavaScript displays headline's time properly whenever the block cache is enabled (thx Dave Lerner)
+
+v2.10 2004-7-20
+  - added a block ordered by timestamp desc from all headlines
+  - added a multiple-column option to normal headline block (thx Ryuji)
+  - added a option strlen limitation against title (thx Marijuana)
+
+v2.01 2004-7-13
+  - modified to be able to work with "allow_url_fopen off" using snoopy. (thx hokousya & toshimitsu)
+
+v2.00 2004-7-9
+  - 1st release
+
+[/xlang:en][xlang:ja]
+
+更新履歴:
+
+v.2.97 2005-5-27
+  - descriptionフィールドのみが、nl2br()の処理を通過するように修正
+  - updated myblocksadmin 0.29
+
+v.2.96a 2005-4-23
+  - PHP5 環境で ATOM がパース出来なかったのを修正 (thx scaf)
+
+v.2.96 2005-4-8
+  - xmlrss2parser.php で日時型を文字列結合してしまうバグを修正
+
+v.2.95 2005-4-5
+  - パース済みキャッシュの型を変更
+  - 取得ミス時の処理を修正
+
+v.2.94 2005-3-30
+  - ブロックオプションがおかしくなっている時の挙動を修正
+  - XOOPSコアバージョン2.0.5.2以下に対応
+  - フランス語ファイル更新 (thx marco) (2.94a)
+
+v.2.93 2005-3-16
+  - 一応、携帯対応 (また実験ステージですが)
+  - cron用キャッシュ強制更新スクリプトを作成 (include/update_cache.sh)
+
+v.2.92 2005-3-2
+  - updated myblocksadmin 0.27 & mymenu 0.12
+  - magic_quotes_gpc on 環境で正常に動作しなかったのを修正 (thx Ryuji)
+  - 英語ファイルを修正 (thx Peter)
+  - XMLをパーサに渡す前にtrim()するようにした (2.92a)
+
+v.2.91 2005-2-21
+  - PHP5で動作しなかったのを修正 (thx OXTS5 & Marichan)
+  - フランス語追加 (thx marco)
+  - ブラジルポルトガル語追加 (thx Xbartts)
+  - ロシア語追加 (thx FractalizeR)
+
+v.2.90 2005-2-11
+  - 排除パターンの新設
+  - チケットからIPチェック排除
+
+v.2.84 2005-1-27
+  - xhld という名前だけが動かなかったバグの修正 (thx mikity)
+
+v.2.83 2005-1-15
+  - sitemapモジュール用のプラグインを用意した
+  - updated myblocksadmin 0.24 & mymenu 0.10
+
+v.2.82 2005-1-8
+  - updated myblocksadmin 0.23
+
+v.2.81 2005-1-5
+  - モジュールアップデート時のALTER TABLEが抜けていたのを修正 (thx jseymour)
+
+v.2.80 2005-1-4
+  - フィード毎表示ブロックを複製可能とし、フィードを絞って表示できるようにした
+  - saxparser.php の危険な仕様を修正 (thx JM2)
+  - updated myblocksadmin 0.22 & mymenu 0.07
+
+v.2.76 2004-12-21
+  - <content:encoded>タグのハンドラを追加
+
+v.2.75 2004-12-20
+  - 知らないタイムゾーンでも、少しでも正確な日時を取得できるよう改善 (thx Tom_G3X)
+
+v.2.74 2004-12-16
+  - updated myblocksadmin (0.12) & mymenu (0.06)
+
+v.2.73 2004-12-12
+  - 短縮形の日時フォーマットが空文字でも許可するようにした (thx takahashi)
+
+v.2.72 2004-12-7
+  - チケットシステムの更新 (旧バージョンと混在せぬよう注意）(thx nobunobu)
+  - updated myblocksadmin (0.11) & mymenu (0.05)
+
+v.2.71 2004-12-7
+  - チケットシステムが有効になっていなかったバグの修正
+
+v.2.70 2004-12-6
+  - タイムアウトかどうかを判別するようにした
+  - サイトの通常アクセスで、取得時にタイムアウトがXMLパースエラーが起きたときは、キャッシュされたデータを表示するようにした
+  - saxparser.php,xmltaghandler.php をモジュール内に取り込んだ
+  - saxparser.php の $this = null; を削除した (php5対策) (thx Marijuana)
+  - ISO-8859-1のウムラウト等を表示できるように、HTML禁止時にはhtmlentitiesかけるようにした
+  - dc:date が DD-MM-YYYY という間違ったフォーマットになってるフィードに対応した
+  - タイムアウトを各フィード毎に設定できるようにした
+  - HTML許可・不許可をフィード毎に設定できるようにした(XSS対策) (thx JM2)
+  - 管理画面へのチケットシステムの本格導入
+  - myblocksadminを0.10に、mymenuを0.04にアップデートした
+
+v2.63 2004-12-4
+  - 各フィード管理画面にリンクをつけ、取得エラーを色分けした (thx Tom_G3X)
+
+v2.62 2004-12-3
+  - XOOPSそのものがISO-8859-1で動いている時の処理を追加
+  - 最新ブロックで、フィード毎の個数上限を指定出来るようにした
+  - myblocksadmin, mymenu を最新版にアップデートした
+
+v2.61 2004-12-3
+  - 日本語処理のtypoを修正 (thx Tom_G3X)
+  - フィード管理画面の細かな改善 (thx Tom_G3X)
+
+v2.60 2004-12-2  (またまた、モジュール更新を忘れずに）
+  - 文字コード選択の処理をまともにした（自動検出も実装）
+  - 新着一覧エントリの抽出方法を、２種類のパターンから選べるようにした
+  - フィード管理画面の改善
+  - エラー処理の改善
+
+v2.53 2004-11-27
+  - pubdate無しフィードは、すでに降順ソートされているとして扱うようにした
+  - 記事発行日の短縮形フォーマットを一般設定で指定できるようにした
+  - 記事発行日のフル記述フォーマットは、_DATESTRINGを参照するようにした
+
+v2.52 2004-11-25
+  - xhld*_block.html における$itemsのtypoを修正 (thx yokos)
+
+v2.51 2004-11-21
+  - パーサクラスが二重定義となってしまうバグの修正 (thx yokos)
+  - 新着一覧について最新10件の内容を表示するようにした (thx Tom_G3X)
+  - フィードタイプを、直接指定できるようにした（自動判別も可）
+  - エラー処理のおかしな点をあちこち修正
+  - XMLコードを"auto"で判定するのをやめた (2.51a)
+  - UTF-8 へ変換する際、バイト欠けで生じた0x00を消すようにした (2.51b)
+
+v2.50 2004-11-18
+  - ATOM 0.3 への対応 (special thx ohwada!)
+  - XMLパース済みデータをキャッシュするように変更 (100倍以上の高速化)
+  - あちこちフィールドサイズを大きめにした
+  - 管理者画面の作り直し
+  - キャッシュ時間などを数値指定出来るようにした（ただし、キャッシュは最短10分）
+  - オリジナル由来の細かいバグ潰し
+
+v2.40 2004-11-16
+  - フォーム名"headline_form"がダブっているのを修正 (thx godfield)
+  - 不思議な仕様だったテンプレート blocks/headline_block.html を標準仕様に
+  - pubdateの存在しないRSS/RDFへの処理を修正した (thx godfield & haroa)
+  - 管理画面の全RSS/RDFアップデートがおかしかったバグを修正
+
+v2.31 2004-11-10
+  - コード指定が ISO-8859-1 の時には、取得時にUTF-8コンバートするようにした
+  - スペイン語ファイルを追加 (thx MonDarSE)
+
+v2.30 2004-10-28
+  - $HTTP_*_VARS をすべて $_GET や $_POST に置き換えた (PHP5対応)
+  - Dupilcatable V2.1 仕様に変更 （番号無しdirnameの許可）
+  - RSS/RDFが時間順に並んでいないものでも、最新順となるよう改善
+  - あまり好ましくないコーディングを極力修正 ($_POST展開をやめる等)
+  - アイコン変更
+
+v2.25 2004-10-21
+  - XoopsHeadlineがあってもハングアップしないようにした（それでも、XoopsHeadline と一緒には使わないことをお勧めします）
+
+v2.24 2004-10-21
+  - ヘッドラインの降順ソートがおかしかったのを修正 (thx Ryuji)
+
+v2.23 2004-10-4
+  - mbstring設定が誤っているサーバについては、EUC-JPを強制セットするようにした
+  - RSS/RDF 編集・一括更新時に、ブロックキャッシュのクリアを行うようにした
+  - RSS/RDF 編集・一括更新時に、XMLキャッシュのクリアを行うようにした
+  - キャッシュタイムの選択肢に「10分」を追加
+
+v2.22 2004-9-26
+  - プロキシ経由でのRSS/RDF取得を可能にした (thx domifara & Takao_O)
+  - XML保存領域を、text から mediumtext にした (thx domifara)
+   -- すでにインストールされた分について必要であれば、フィールドをmodifyして下さい
+  - リンクターゲットを _blank で統一した (thx Nu-nrg)
+
+v2.21 2004-8-12
+  - オリジナル由来と思われるadmin/index.phpのtypoを修正 (thx doublebass)
+  - コンフィグ説明文の文字数オーバーを修正 (thx Tom_G3X)
+
+v2.20 2004-8-12
+  - トップページに、全ヘッドラインを時系列でソートした出力を表示 (special thx Tom_G3X)
+  - Snoopyのタイムアウト時間を指定する設定値を新設
+  - テンプレート xhld*_index.html および xhld*_feed.html の改良。カスタムテンプレートをお使いの方は、手作業でこの２つのテンプレートをアップデートして下さい (thx Tom_G3X)
+  - モジュールアップデートを行っても、ブロックオプション値が保存されるように改善 (thx nobunobu)
+  - <dc:date> (w3c形式) のパーサを改良して、多少のフォーマット違いにも対応できるようにした
+  - mymenu を導入
+
+v2.11 2004-8-1
+  - ヘッドラインエントリを削除できないバグの修正 (thx Nu-nrg)
+  - 日本語環境において、内部コードをEUC-JPと決めうちしている部分の修正 (thx Nu-nrg)
+  - dc:date(W3C形式)の処理をまともにした (thx Marijuana)
+  - 各ブロックで、日時を表示するようにした。デフォルトは、月/日 時:分
+  - 日付形式は、テンプレートファイル内で変更できるようにした
+  - ブロックキャッシュをかけても問題がないように、JavaScriptで時間を計算するようにした (thx Dave Lerner)
+
+v2.10 2004-7-20
+  - 全ヘッドラインを時系列でソートしてまとめて出力するブロックを追加
+  - 通常のヘッドラインブロックにおける複数列表示オプションを追加 (thx Ryuji)
+  - ブロック表示時のタイトル文字数制限オプションを追加 (thx Marijuana)
+
+v2.01 2004-7-13
+  - Snoopyを使ってallow_url_fopen offでも動くように（thx hokousya & toshimitsu)
+
+v2.00 2004-7-9
+  - 最初のリリース（...で、最後のリリースになると良いなあ）
+
+[/xlang:ja]

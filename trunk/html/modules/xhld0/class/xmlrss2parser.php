@@ -741,6 +741,7 @@ class XhldRssPubDateHandler extends XmlTagHandler
 
 class XhldRssDcDateHandler extends XmlTagHandler
 {
+	var $previous_tzoffset = null ;
 
    function XhldRssDcDateHandler()
    {
@@ -788,14 +789,17 @@ class XhldRssDcDateHandler extends XmlTagHandler
 			if( ! empty( $hourmin[0] ) ) $tzoffset -= $hourmin[0] * 3600 ;
 			if( ! empty( $hourmin[1] ) ) $tzoffset -= $hourmin[1] * 60 ;
 			$localdatetime = substr( $w3cDT , 0 , $pos ) ;
+			$this->previous_tzoffset = $tzoffset ;
 		} else if( ( $pos = strrpos( $w3cDT , '-' ) ) > 7 ) {
 			$hourmin = explode( ':' , substr( $w3cDT , $pos + 1 ) ) ;
 			if( ! empty( $hourmin[0] ) ) $tzoffset += $hourmin[0] * 3600 ;
 			if( ! empty( $hourmin[1] ) ) $tzoffset += $hourmin[1] * 60 ;
 			$localdatetime = substr( $w3cDT , 0 , $pos ) ;
+			$this->previous_tzoffset = $tzoffset ;
 		} else {
-			// no timezone
+			// no timezone (use previous tzoffset if exists)
 			$localdatetime = $w3cDT ;
+			if( isset( $this->previous_tzoffset ) ) $tzoffset = $this->previous_tzoffset ;
 		}
 
 		$localunixtime = strtotime( str_replace( 'T' , ' ' , $localdatetime ) ) ;

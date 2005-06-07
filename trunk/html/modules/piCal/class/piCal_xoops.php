@@ -220,25 +220,37 @@ function get_xoops_search_result( $keywords , $andor , $limit , $offset , $uid )
 // triggerEvent で渡すURIは、& で区切る (&amp; ではない)
 function notify_new_event( $event_id )
 {
-	$rs = mysql_query( "SELECT summary,admission,categories FROM $this->table WHERE id='$event_id'" , $this->conn ) ;
+	$rs = mysql_query( "SELECT summary,admission,categories,class,uid,groupid FROM $this->table WHERE id='$event_id'" , $this->conn ) ;
 	$event = mysql_fetch_object( $rs ) ;
-	if( $event->admission ) {
-		$notification_handler =& xoops_gethandler('notification');
 
-		// 新イベントの登録（全カテゴリー）のトリガー
-		$notification_handler->triggerEvent('global', 0, 'new_event', array('EVENT_SUMMARY' => $event->summary , 'EVENT_URI' => "$this->base_url/index.php?action=View&event_id=$event_id" ) ) ;
+	// No notification if not admitted yet
+	if( ! $event->admission ) return false ;
 
-		// 新イベントの登録（カテゴリー毎）のトリガー
-		$cids = explode( "," , $event->categories ) ;
-		foreach( $cids as $cid ) {
-			$cid = intval( $cid ) ;
-			if( isset( $this->categories[ $cid ] ) ) $notification_handler->triggerEvent('category', $cid, 'new_event', array('EVENT_SUMMARY' => $event->summary , 'CATEGORY_TITLE' => $this->text_sanitizer_for_show( $this->categories[ $cid ]->cat_title ) , 'EVENT_URI' => "$this->base_url/index.php?smode=List&cid=$cid" ) ) ;
+	// Private events
+	if( $event->class == 'PRIVATE' ) {
+		if( $event->groupid > 0 ) {
+			$member_handler =& xoops_gethandler('member');
+			$user_list = $member_handler->getUsersByGroup( $event->groupid ) ;
+		} else {
+			$user_list = array( $event->uid ) ;
 		}
-
-		return true ;
 	} else {
-		return false ;
+		$user_list = array() ;
 	}
+
+	$notification_handler =& xoops_gethandler('notification');
+
+	// 新イベントの登録（全カテゴリー）のトリガー
+	$notification_handler->triggerEvent('global', 0, 'new_event', array('EVENT_SUMMARY' => $event->summary , 'EVENT_URI' => "$this->base_url/index.php?action=View&event_id=$event_id" ) , $user_list , null , 0 ) ;
+
+	// 新イベントの登録（カテゴリー毎）のトリガー
+	$cids = explode( "," , $event->categories ) ;
+	foreach( $cids as $cid ) {
+		$cid = intval( $cid ) ;
+		if( isset( $this->categories[ $cid ] ) ) $notification_handler->triggerEvent('category', $cid, 'new_event', array('EVENT_SUMMARY' => $event->summary , 'CATEGORY_TITLE' => $this->text_sanitizer_for_show( $this->categories[ $cid ]->cat_title ) , 'EVENT_URI' => "$this->base_url/index.php?smode=List&cid=$cid" ) , $user_list , null , 0 ) ;
+	}
+
+	return true ;
 }
 
 

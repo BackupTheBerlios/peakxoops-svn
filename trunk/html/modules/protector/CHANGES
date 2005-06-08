@@ -1,6 +1,9 @@
 [xlang:en]
 = CHANGES = 
 
+
+ - added Finnish language files (thx kokko)
+
 2.40RC2 (2005/4/4)
  - modified the updating routine to delete old protector block (thx Dava_L)
  - updated Brazilian Portuguese & Spanish language files (thx Yuji)

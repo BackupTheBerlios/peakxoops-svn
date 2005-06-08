@@ -57,6 +57,15 @@ In content block, you can see inside of this tags on the other hand you can see 
 And you also want to add a link for full view, copy templates/blocks/tinycontent_content_block.html.dist to templates/blocks/tinycontent_content_block.html and edit it as you like.
 
 
+APPENDIX2:
+
+If you want to use SPAW integrated with myAlbum-P, set the path for
+phtos/thumbnails like this:
+
+/uploads/photos(number)/
+/uploads/thumbs(number)/
+
+
 [/xlang:en]
 [xlang:ja]
 
@@ -120,6 +129,18 @@ mh012 から、ブロックも複製可能となりました。複製可能モジュール内に、複製可能のブ
 バージョンも独立して、2.0としています。1.5 mh014 という表現があまりにも判りづらかったためです。
 
 最後になりましたが、TinyConentという素晴らしく、改造しやすいモジュールを公開してくれたCHAPIさんに感謝します。
+
+
+蛇足2:
+
+もし、common SPAW を myAlbum-P と協調的に使うためには、myAlbum-P側の
+画像/サムネイルディレクトリを次のようにする必要があります。
+
+/uploads/photos(number)/
+/uploads/thumbs(number)/
+
+他のパスにあってもSPAWの画像選択ダイアログは認識しませんので、ご注意
+ください。
 
 
 [/xlang:ja]

@@ -7,6 +7,7 @@ CHANGELOG:
 - fixed preview breaks editing mode
 - modified {X_SITEURL} in all of contents will be converted to XOOPS_URL
 - fixed WRAP2&3's URI to top in page navigation
+- modified common SPAW with myAlbum-P as attachment manager (2.17a)
 
 2005-5-11 2.16
 - added singlecontent.php for popup etc.
@@ -186,6 +187,7 @@ CHANGELOG:
 - プレビューすると、SPAWやPLAINなどのモードが破壊されていたのを修正
 - XOOPS_URLに強制変換される {X_SITEURL} というタグの導入
 - WRAP2やWRAP3がhomepageである時のページナビゲーションを修正
+- common SPAWでmyAlbum-Pの画像以外のファイルにも対応 (2.17a)
 
 2005-5-11 2.16
 - ポップアップ用等に使えるコントローラsinglecontent.php追加 (WRAP2未対応)

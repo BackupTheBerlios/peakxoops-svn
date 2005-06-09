@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 
 $modversion['name'] = _MI_XHNEWBB_NAME;
-$modversion['version'] = 1.00;
+$modversion['version'] = 1.10;
 $modversion['description'] = _MI_XHNEWBB_DESC;
 $modversion['credits'] = "Kazumi Ono<br />( http://www.myweb.ne.jp/ )";
 $modversion['author'] = "Original admin section (phpBB 1.4.4) by<br />The phpBB Group<br />( http://www.phpbb.com/ )<br />";
@@ -49,6 +49,7 @@ $modversion['tables'][3] = "xhnewbb_forums";
 $modversion['tables'][4] = "xhnewbb_posts";
 $modversion['tables'][5] = "xhnewbb_posts_text";
 $modversion['tables'][6] = "xhnewbb_topics";
+$modversion['tables'][7] = "xhnewbb_users2topics";
 
 
 // Admin things
@@ -76,37 +77,16 @@ $modversion['templates'][7]['file'] = 'xhnewbb_viewtopic_thread.html';
 $modversion['templates'][7]['description'] = '';
 
 // Blocks
-$modversion['blocks'][1]['file'] = "xhnewbb_new.php";
-$modversion['blocks'][1]['name'] = _MI_XHNEWBB_BNAME1;
-$modversion['blocks'][1]['description'] = "Shows recent topics in the forums";
-$modversion['blocks'][1]['show_func'] = "b_xhnewbb_new_show";
-$modversion['blocks'][1]['options'] = "10|1|time";
-$modversion['blocks'][1]['edit_func'] = "b_xhnewbb_new_edit";
-$modversion['blocks'][1]['template'] = 'xhnewbb_block_new.html';
-
-$modversion['blocks'][2]['file'] = "xhnewbb_new.php";
-$modversion['blocks'][2]['name'] = _MI_XHNEWBB_BNAME2;
-$modversion['blocks'][2]['description'] = "Shows most viewed topics in the forums";
-$modversion['blocks'][2]['show_func'] = "b_xhnewbb_new_show";
-$modversion['blocks'][2]['options'] = "10|1|views";
-$modversion['blocks'][2]['edit_func'] = "b_xhnewbb_new_edit";
-$modversion['blocks'][2]['template'] = 'xhnewbb_block_top.html';
-
-$modversion['blocks'][3]['file'] = "xhnewbb_new.php";
-$modversion['blocks'][3]['name'] = _MI_XHNEWBB_BNAME3;
-$modversion['blocks'][3]['description'] = "Shows most active topics in the forums";
-$modversion['blocks'][3]['show_func'] = "b_xhnewbb_new_show";
-$modversion['blocks'][3]['options'] = "10|1|replies";
-$modversion['blocks'][3]['edit_func'] = "b_xhnewbb_new_edit";
-$modversion['blocks'][3]['template'] = 'xhnewbb_block_active.html';
-
-$modversion['blocks'][4]['file'] = "xhnewbb_new.php";
-$modversion['blocks'][4]['name'] = _MI_XHNEWBB_BNAME4;
-$modversion['blocks'][4]['description'] = "Shows recent and private topics in the forums";
-$modversion['blocks'][4]['show_func'] = "b_xhnewbb_new_private_show";
-$modversion['blocks'][4]['options'] = "10|1|time";
-$modversion['blocks'][4]['edit_func'] = "b_xhnewbb_new_edit";
-$modversion['blocks'][4]['template'] = 'xhnewbb_block_prv.html';
+$modversion['blocks'][1] = array(
+	'file' => "xhnewbb_blocks.php" ,
+	'name' => _MI_XHNEWBB_BNAME1 ,
+	'description' => "" ,
+	'show_func' => "b_xhnewbb_main_show" ,
+	'options' => "10|1|time|public" ,
+	'edit_func' => "b_xhnewbb_main_edit" ,
+	'template' => 'xhnewbb_main_block.html' ,
+	'can_clone' => true
+	) ;
 
 // Search
 $modversion['hasSearch'] = 1;

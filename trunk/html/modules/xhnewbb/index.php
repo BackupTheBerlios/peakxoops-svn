@@ -43,7 +43,15 @@ if ( !$result = $xoopsDB->query($sql) ) {
 	exit();
 }
 
-$xoopsTpl->assign(array("lang_welcomemsg" => sprintf(_MD_XHNEWBB_WELCOME,$xoopsConfig['sitename']), "lang_tostart" => _MD_XHNEWBB_TOSTART, "lang_totaltopics" => _MD_XHNEWBB_TOTALTOPICSC, "lang_totalposts" => _MD_XHNEWBB_TOTALPOSTSC, "total_topics" => xhnewbb_get_total_topics(), "total_posts" => xhnewbb_get_total_posts(0, 'all'), "lang_lastvisit" => sprintf(_MD_XHNEWBB_LASTVISIT,formatTimestamp($last_visit)), "lang_currenttime" => sprintf(_MD_XHNEWBB_TIMENOW,formatTimestamp(time(),"m")), "lang_forum" => _MD_XHNEWBB_FORUM, "lang_topics" => _MD_XHNEWBB_TOPICS, "lang_posts" => _MD_XHNEWBB_POSTS, "lang_lastpost" => _MD_XHNEWBB_LASTPOST, "lang_moderators" => _MD_XHNEWBB_MODERATOR));
+$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+if( $uid > 0 ) {
+	$db =& Database::getInstance() ;
+	$lv_result = $db->query( "SELECT MAX(u2t_time) FROM ".$db->prefix("xhnewbb_users2topics")." WHERE uid='$uid'" ) ;
+	list( $last_visit ) = $db->fetchRow( $lv_result ) ;
+}
+if( empty( $last_visit ) ) $last_visit = time() ;
+
+$xoopsTpl->assign(array("lang_welcomemsg" => sprintf(_MD_XHNEWBB_WELCOME,$xoopsConfig['sitename']), "lang_tostart" => _MD_XHNEWBB_TOSTART, "lang_totaltopics" => _MD_XHNEWBB_TOTALTOPICSC, "lang_totalposts" => _MD_XHNEWBB_TOTALPOSTSC, "total_topics" => xhnewbb_get_total_topics(), "total_posts" => xhnewbb_get_total_posts(0, 'all'), "lang_lastvisit" => sprintf(_MD_XHNEWBB_LASTVISIT,formatTimestamp($last_visit,'m')), "lang_currenttime" => sprintf(_MD_XHNEWBB_TIMENOW,formatTimestamp(time(),"m")), "lang_forum" => _MD_XHNEWBB_FORUM, "lang_topics" => _MD_XHNEWBB_TOPICS, "lang_posts" => _MD_XHNEWBB_POSTS, "lang_lastpost" => _MD_XHNEWBB_LASTPOST, "lang_moderators" => _MD_XHNEWBB_MODERATOR));
 
 $viewcat = (!empty($_GET['cat'])) ? intval($_GET['cat']) : 0;
 $categories = array();
@@ -51,7 +59,11 @@ while ( $cat_row = $xoopsDB->fetchArray($result) ) {
 	$categories[] = $cat_row;
 }
 
-$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid';
+if( $uid > 0 ) {
+	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, u2t.u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = p.topic_id AND u2t.uid = '.$uid ;
+} else {
+	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, 0 AS u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid' ;
+}
 if ( $viewcat != 0 ) {
 	$sql .= ' WHERE f.cat_id = '.$viewcat;
 	$xoopsTpl->assign('forum_index_title', sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']));
@@ -77,7 +89,7 @@ if ($cat_count > 0) {
 		}
 		// Read 'lastread' cookie, if exists
 		// GIJ start
-		if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
+		/* if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
 		else {
 			$topic_lastreadtmp = explode( ',' , $_COOKIE['xhnewbb_topic_lastread'] ) ;
 			foreach( $topic_lastreadtmp as $tmp ) {
@@ -86,7 +98,7 @@ if ($cat_count > 0) {
 				$min = empty( $idmin[1] ) ? 0 : intval( $idmin[1] ) ;
 				$topic_lastread[ $id ] = $min ;
 			}
-		}
+		} */
 		// GIJ end
 		foreach ( $forums as $forum_row ) {
 			unset($last_post);
@@ -107,10 +119,10 @@ if ($cat_count > 0) {
 					} else {
 						$categories[$i]['forums']['forum_lastpost_user'][] = $xoopsConfig['anonymous'];
 					}
-					$forum_lastread = !empty($topic_lastread[$forum_row['topic_id']]) ? $topic_lastread[$forum_row['topic_id']] * 60 : false;
+					// $forum_lastread = !empty($topic_lastread[$forum_row['topic_id']]) ? $topic_lastread[$forum_row['topic_id']] * 60 : false;
 					if ( $forum_row['forum_type'] == 1 ) {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['locked_forum'];
-					} elseif ( $forum_row['post_time'] > $forum_lastread && !empty($forum_row['topic_id'])) {
+					} elseif ( $forum_row['post_time'] > $forum_row['u2t_time'] && !empty($forum_row['topic_id'])) {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['newposts_forum'];
 					} else {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['folder_forum'];

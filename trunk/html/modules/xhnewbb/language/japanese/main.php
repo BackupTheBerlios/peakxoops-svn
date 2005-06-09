@@ -9,7 +9,7 @@ define("_MD_XHNEWBB_GO","送信");
 //index.php
 define("_MD_XHNEWBB_FORUM","フォーラム");
 define("_MD_XHNEWBB_WELCOME","%s フォーラムへようこそ");
-define("_MD_XHNEWBB_TOPICS","スレッド");
+define("_MD_XHNEWBB_TOPICS","トピック");
 define("_MD_XHNEWBB_POSTS","投稿");
 define("_MD_XHNEWBB_LASTPOST","最終投稿");
 define("_MD_XHNEWBB_MODERATOR","モデレータ");
@@ -18,7 +18,7 @@ define("_MD_XHNEWBB_NONEWPOSTS","最終訪問日以降の新しい投稿はありません");
 define("_MD_XHNEWBB_PRIVATEFORUM","プライベート・フォーラム");
 define("_MD_XHNEWBB_BY","投稿者："); // Posted by
 define("_MD_XHNEWBB_TOSTART","興味のあるフォーラムへぜひご参加ください。");
-define("_MD_XHNEWBB_TOTALTOPICSC","総スレッド数: ");
+define("_MD_XHNEWBB_TOTALTOPICSC","総トピック数: ");
 define("_MD_XHNEWBB_TOTALPOSTSC","総投稿数: ");
 define("_MD_XHNEWBB_TIMENOW","現在の時刻: %s");
 define("_MD_XHNEWBB_LASTVISIT","最終訪問日時: %s");
@@ -31,7 +31,7 @@ define("_MD_XHNEWBB_MODERATEDBY","モデレータ ");
 define("_MD_XHNEWBB_SEARCH","検索");
 define("_MD_XHNEWBB_SEARCHRESULTS","検索結果");
 define("_MD_XHNEWBB_FORUMINDEX","メイン");
-define("_MD_XHNEWBB_POSTNEW","新規スレッド作成画面へ");
+define("_MD_XHNEWBB_POSTNEW","新規トピック作成画面へ");
 define("_MD_XHNEWBB_REGTOPOST","投稿するにはまず登録を");
 
 //search.php
@@ -43,7 +43,7 @@ define("_MD_XHNEWBB_FORUMC","フォーラム：");
 define("_MD_XHNEWBB_AUTHORC","投稿者：");
 define("_MD_XHNEWBB_SORTBY","ソート順:");
 define("_MD_XHNEWBB_DATE","日時");
-define("_MD_XHNEWBB_TOPIC","スレッド");
+define("_MD_XHNEWBB_TOPIC","トピック");
 define("_MD_XHNEWBB_USERNAME","ユーザ名");
 define("_MD_XHNEWBB_SEARCHIN","検索対象：");
 define("_MD_XHNEWBB_BODY","本文");
@@ -54,13 +54,13 @@ define("_MD_XHNEWBB_POSTTIME","投稿日時");
 define("_MD_XHNEWBB_REPLIES","返信");
 define("_MD_XHNEWBB_POSTER","投稿者");
 define("_MD_XHNEWBB_VIEWS","閲覧");
-define("_MD_XHNEWBB_MORETHAN","人気スレッド！");//New posts [ Popular ]
-define("_MD_XHNEWBB_MORETHAN2","人気スレッド！");
-define("_MD_XHNEWBB_TOPICLOCKED","ロックされたスレッド");
+define("_MD_XHNEWBB_MORETHAN","人気トピック！");//New posts [ Popular ]
+define("_MD_XHNEWBB_MORETHAN2","人気トピック！");
+define("_MD_XHNEWBB_TOPICLOCKED","ロックされたトピック");
 define("_MD_XHNEWBB_LEGEND","Legend"); //[MADA]
 define("_MD_XHNEWBB_NEXTPAGE","次のページ");
 define("_MD_XHNEWBB_SORTEDBY","ソート順:");
-define("_MD_XHNEWBB_TOPICTITLE","スレッドタイトル");
+define("_MD_XHNEWBB_TOPICTITLE","トピックタイトル");
 define("_MD_XHNEWBB_NUMBERREPLIES","返信");
 define("_MD_XHNEWBB_TOPICPOSTER","投稿者");
 define("_MD_XHNEWBB_LASTPOSTTIME","投稿日時");
@@ -72,13 +72,13 @@ define("_MD_XHNEWBB_BEGINNING","全て");
 
 //viewtopic.php
 define("_MD_XHNEWBB_AUTHOR","投稿者");
-define("_MD_XHNEWBB_LOCKTOPIC","このスレッドをロック");
-define("_MD_XHNEWBB_UNLOCKTOPIC","このスレッドのロックを解除");
+define("_MD_XHNEWBB_LOCKTOPIC","このトピックをロック");
+define("_MD_XHNEWBB_UNLOCKTOPIC","このトピックのロックを解除");
 
-define("_MD_XHNEWBB_MOVETOPIC","このスレッドを移動");
-define("_MD_XHNEWBB_DELETETOPIC","このスレッドを削除");
+define("_MD_XHNEWBB_MOVETOPIC","このトピックを移動");
+define("_MD_XHNEWBB_DELETETOPIC","このトピックを削除");
 define("_MD_XHNEWBB_TOP","トップ");
-define("_MD_XHNEWBB_PARENT","親スレッド");
+define("_MD_XHNEWBB_PARENT","親トピック");
 define("_MD_XHNEWBB_PREVTOPIC","前のトピック");
 define("_MD_XHNEWBB_NEXTTOPIC","次のトピック");
 
@@ -96,12 +96,12 @@ define("_MD_XHNEWBB_ERRORFORUM","エラー: フォーラムが選択されていません");
 define("_MD_XHNEWBB_ERRORPOST","エラー: 投稿が選択されていません");
 define("_MD_XHNEWBB_NORIGHTTOPOST","このフォーラムに投稿することはできません。");
 define("_MD_XHNEWBB_NORIGHTTOACCESS","このフォーラムへアクセスすることはできません。");
-define("_MD_XHNEWBB_ERRORTOPIC","エラー: スレッドが選択されていません");
+define("_MD_XHNEWBB_ERRORTOPIC","エラー: トピックが選択されていません");
 define("_MD_XHNEWBB_ERRORCONNECT","エラー: フォーラムデータベースにアクセスすることができませんでした。");
 define("_MD_XHNEWBB_ERROREXIST","エラー: 選択されたフォーラムは見つかりませんでした。もう一度やり直してください。");
 define("_MD_XHNEWBB_ERROROCCURED","エラーが発生しました。");
 define("_MD_XHNEWBB_COULDNOTQUERY","フォーラムデータベースに問い合わせすることができませんでした。");
-define("_MD_XHNEWBB_FORUMNOEXIST","エラー：選択されたフォーラム／スレッドが見つかりませんでした。もう一度やり直してください。");
+define("_MD_XHNEWBB_FORUMNOEXIST","エラー：選択されたフォーラム／トピックが見つかりませんでした。もう一度やり直してください。");
 define("_MD_XHNEWBB_USERNOEXIST","検索されたメンバーは見つかりませんでした。");
 define("_MD_XHNEWBB_COULDNOTREMOVE","エラー：データベースから投稿文を削除することができませんでした。");
 define("_MD_XHNEWBB_COULDNOTREMOVETXT","エラー：投稿文を削除することができませんでした。");
@@ -139,7 +139,7 @@ define("_MD_XHNEWBB_OPTIONS","オプション:");
 define("_MD_XHNEWBB_POSTANONLY","匿名で投稿する");
 define("_MD_XHNEWBB_DISABLESMILEY","顔アイコンを無効にする");
 define("_MD_XHNEWBB_DISABLEHTML","HTMLタグを無効にする");
-define("_MD_XHNEWBB_NEWPOSTNOTIFY", "このスレッドにおいて新規投稿があった場合に通知する");
+define("_MD_XHNEWBB_NEWPOSTNOTIFY", "このトピックにおいて新規投稿があった場合に通知する");
 define("_MD_XHNEWBB_ATTACHSIG","署名を付ける");
 define("_MD_XHNEWBB_POST","投稿する");
 define("_MD_XHNEWBB_SUBMIT","確定");
@@ -151,31 +151,31 @@ define("_MD_XHNEWBB_REPLY","この投稿に返信する");
 
 // topicmanager.php
 define("_MD_XHNEWBB_YANTMOTFTYCPTF","この機能を使用できるのはモデレータ／管理者のみです。");
-define("_MD_XHNEWBB_TTHBRFTD","スレッドをデータベースから削除しました。");
+define("_MD_XHNEWBB_TTHBRFTD","トピックをデータベースから削除しました。");
 define("_MD_XHNEWBB_RETURNTOTHEFORUM","フォーラムへ戻る");
 define("_MD_XHNEWBB_RTTFI","フォーラムメインへ戻る");
 define("_MD_XHNEWBB_EPGBATA","エラー ： もう一度やり直してください。");
-define("_MD_XHNEWBB_TTHBM","スレッドを移動しました。");
-define("_MD_XHNEWBB_VTUT","スレッドを見る");
-define("_MD_XHNEWBB_TTHBL","スレッドをロックしました。");
+define("_MD_XHNEWBB_TTHBM","トピックを移動しました。");
+define("_MD_XHNEWBB_VTUT","トピックを見る");
+define("_MD_XHNEWBB_TTHBL","トピックをロックしました。");
 
-define("_MD_XHNEWBB_VIEWTHETOPIC","スレッドを見る");
-define("_MD_XHNEWBB_TTHBU","スレッドのロックを解除しました。");
-define("_MD_XHNEWBB_OYPTDBATBOTFTTY","削除ボタンを押すと、選択したスレッドおよびそのスレッドに関連する投稿文を削除すます。");
-define("_MD_XHNEWBB_OYPTMBATBOTFTTY","移動ボタンを押すと、選択したスレッドおよびそのスレッドに関連する投稿文を選択したフォーラムへ移動します。");
-define("_MD_XHNEWBB_OYPTLBATBOTFTTY","ロックボタンを押すと、選択したスレッドをロックします（スレッド内での新規投稿を受け付けない）。スレッドのロックはいつでも解除することができます。");
-define("_MD_XHNEWBB_OYPTUBATBOTFTTY","ロックボタンを押すと、選択したスレッドのロックを解除します。");
-define("_MD_XHNEWBB_MOVETOPICTO","移動するスレッド:");
+define("_MD_XHNEWBB_VIEWTHETOPIC","トピックを見る");
+define("_MD_XHNEWBB_TTHBU","トピックのロックを解除しました。");
+define("_MD_XHNEWBB_OYPTDBATBOTFTTY","削除ボタンを押すと、選択したトピックおよびそのトピックに関連する投稿文を削除すます。");
+define("_MD_XHNEWBB_OYPTMBATBOTFTTY","移動ボタンを押すと、選択したトピックおよびそのトピックに関連する投稿文を選択したフォーラムへ移動します。");
+define("_MD_XHNEWBB_OYPTLBATBOTFTTY","ロックボタンを押すと、選択したトピックをロックします（トピック内での新規投稿を受け付けない）。トピックのロックはいつでも解除することができます。");
+define("_MD_XHNEWBB_OYPTUBATBOTFTTY","ロックボタンを押すと、選択したトピックのロックを解除します。");
+define("_MD_XHNEWBB_MOVETOPICTO","移動するトピック:");
 define("_MD_XHNEWBB_NOFORUMINDB","データベースにフォーラムはありません");
 define("_MD_XHNEWBB_DATABASEERROR","データベースエラー");
-define("_MD_XHNEWBB_DELTOPIC","スレッドを削除する");
-define("_MD_XHNEWBB_TOPICSTICKY","このスレッドは固定されています");
-define("_MD_XHNEWBB_STICKYTOPIC","このスレッドを固定する");
-define("_MD_XHNEWBB_UNSTICKYTOPIC","このスレッドの固定を解除する");
-define("_MD_XHNEWBB_TTHBS","スレッドを固定しました");
-define("_MD_XHNEWBB_TTHBUS","スレッドの固定を解除しました");
-define("_MD_XHNEWBB_OYPTSBATBOTFTTY","スレッド固定ボタンを押すと、選択したスレッドを固定します（常にフォーラム最上部に表示）。スレッドの固定はいつでも解除することができます。");
-define("_MD_XHNEWBB_OYPTTBATBOTFTTY","スレッド固定ボタンを押すと、選択したスレッドの固定を解除します。スレッドはいつでも再度固定することができます。");
+define("_MD_XHNEWBB_DELTOPIC","トピックを削除する");
+define("_MD_XHNEWBB_TOPICSTICKY","このトピックは固定されています");
+define("_MD_XHNEWBB_STICKYTOPIC","このトピックを固定する");
+define("_MD_XHNEWBB_UNSTICKYTOPIC","このトピックの固定を解除する");
+define("_MD_XHNEWBB_TTHBS","トピックを固定しました");
+define("_MD_XHNEWBB_TTHBUS","トピックの固定を解除しました");
+define("_MD_XHNEWBB_OYPTSBATBOTFTTY","トピック固定ボタンを押すと、選択したトピックを固定します（常にフォーラム最上部に表示）。トピックの固定はいつでも解除することができます。");
+define("_MD_XHNEWBB_OYPTTBATBOTFTTY","トピック固定ボタンを押すと、選択したトピックの固定を解除します。トピックはいつでも再度固定することができます。");
 
 // delete.php
 define("_MD_XHNEWBB_DELNOTALLOWED","この投稿を削除する権限がありません。");
@@ -183,7 +183,7 @@ define("_MD_XHNEWBB_AREUSUREDEL","この投稿およびこの投稿に対する返信を全て削除し
 define("_MD_XHNEWBB_POSTSDELETED","選択した投稿を削除しました。");
 
 // definitions moved from global.
-define("_MD_XHNEWBB_THREAD","スレッド");
+define("_MD_XHNEWBB_THREAD","トピック");
 define("_MD_XHNEWBB_FROM","居住地");
 define("_MD_XHNEWBB_JOINED","登録日");
 define("_MD_XHNEWBB_ONLINE","オンライン");

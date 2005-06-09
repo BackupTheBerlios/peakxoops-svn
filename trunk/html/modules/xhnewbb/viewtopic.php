@@ -187,7 +187,7 @@ function xhnewbb_show_tree(&$arr, $current=0, $key=0, $prefix='', $foundusers=ar
 				$eachposter =& $foundusers[$arr[$key]['obj']->uid()];
 			}
 			$poster_rank = $eachposter->rank();
-			if ( $poster_rank['image'] != '' ) {
+			if ( ! empty( $poster_rank['image'] ) ) {
 				$poster_rank['image'] = '<img src="'.XOOPS_UPLOAD_URL.'/'.$poster_rank['image'].'" alt="" />';
 			}
 			if ( $eachposter->isActive() ) {
@@ -265,12 +265,12 @@ if ( $viewmode == "thread" ) {
 			if ( 0 != $eachpost->uid() ) {
 				$eachposter = new XoopsUser($eachpost->uid());
 				$poster_rank = $eachposter->rank();
-				if ( $poster_rank['image'] != "" ) {
+				if ( ! empty( $poster_rank['image'] ) ) {
 					$poster_rank['image'] = "<img src='".XOOPS_UPLOAD_URL."/".$poster_rank['image']."' alt='' />";
 				}
 				if ( $eachposter->isActive() ) {
 					$poster_status = $eachposter->isOnline() ? _MD_XHNEWBB_ONLINE : '';
-					$posterarr =  array('poster_uid' => $eachposter->getVar('uid'), 'poster_uname' => '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$eachposter->getVar('uid').'">'.$eachposter->getVar('uname').'</a>', 'poster_avatar' => $eachposter->getVar('user_avatar'), 'poster_from' => $eachposter->getVar('user_from'), 'poster_regdate' => formatTimestamp($eachposter->getVar('user_regdate'), 's'), 'poster_postnum' => $eachposter->getVar('posts'), 'poster_sendpmtext' => sprintf(_SENDPMTO,$eachposter->getVar('uname')), 'poster_rank_title' => $poster_rank['title'], 'poster_rank_image' => $poster_rank['image'], 'poster_status' => $poster_status);
+					$posterarr =  array('poster_uid' => $eachposter->getVar('uid'), 'poster_uname' => '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$eachposter->getVar('uid').'">'.$eachposter->getVar('uname').'</a>', 'poster_avatar' => $eachposter->getVar('user_avatar'), 'poster_from' => $eachposter->getVar('user_from'), 'poster_regdate' => formatTimestamp($eachposter->getVar('user_regdate'), 's'), 'poster_postnum' => $eachposter->getVar('posts'), 'poster_sendpmtext' => sprintf(_SENDPMTO,$eachposter->getVar('uname')), 'poster_rank_title' => $poster_rank['title'], 'poster_rank_image' => @$poster_rank['image'], 'poster_status' => $poster_status);
 					if ( 1 == $forumdata['allow_sig'] && $eachpost->attachsig() == 1 && $eachposter->attachsig() == 1 ) {
 						$myts =& MytextSanitizer::getInstance();
 						$post_text .= "<p><br />----------------<br />". $myts->makeTareaData4Show($eachposter->getVar("user_sig", "N"), 0, 1, 1)."</p>";
@@ -310,12 +310,12 @@ if ( $viewmode == "thread" ) {
 				$eachposter =& $foundusers['user'.$eachpost->uid()];
 			}
 			$poster_rank = $eachposter->rank();
-			if ( $poster_rank['image'] != '' ) {
+			if ( ! empty( $poster_rank['image'] ) ) {
 				$poster_rank['image'] = '<img src="'.XOOPS_UPLOAD_URL.'/'.$poster_rank['image'].'" alt="" />';
 			}
 			if ( $eachposter->isActive() ) {
 				$poster_status = $eachposter->isOnline() ? _MD_XHNEWBB_ONLINE : '';
-				$posterarr =  array('poster_uid' => $eachposter->getVar('uid'), 'poster_uname' => '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$eachposter->getVar('uid').'">'.$eachposter->getVar('uname').'</a>', 'poster_avatar' => $eachposter->getVar('user_avatar'), 'poster_from' => $eachposter->getVar('user_from'), 'poster_regdate' => formatTimestamp($eachposter->getVar('user_regdate'), 's'), 'poster_postnum' => $eachposter->getVar('posts'), 'poster_sendpmtext' => sprintf(_SENDPMTO,$eachposter->getVar('uname')), 'poster_rank_title' => $poster_rank['title'], 'poster_rank_image' => $poster_rank['image'], 'poster_status' => $poster_status);
+				$posterarr =  array('poster_uid' => $eachposter->getVar('uid'), 'poster_uname' => '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$eachposter->getVar('uid').'">'.$eachposter->getVar('uname').'</a>', 'poster_avatar' => $eachposter->getVar('user_avatar'), 'poster_from' => $eachposter->getVar('user_from'), 'poster_regdate' => formatTimestamp($eachposter->getVar('user_regdate'), 's'), 'poster_postnum' => $eachposter->getVar('posts'), 'poster_sendpmtext' => sprintf(_SENDPMTO,$eachposter->getVar('uname')), 'poster_rank_title' => $poster_rank['title'], 'poster_rank_image' => @$poster_rank['image'], 'poster_status' => $poster_status);
 				if ( 1 == $forumdata['allow_sig'] && $eachpost->attachsig() == 1 && $eachposter->attachsig() == 1 ) {
 					$myts =& MytextSanitizer::getInstance();
 					$post_text .= '<p><br />----------------<br />'. $myts->makeTareaData4Show($eachposter->getVar('user_sig', 'N'), 0, 1, 1).'</p>';
@@ -349,7 +349,7 @@ $xoopsTpl->assign(array('forum_jumpbox' => xhnewbb_make_jumpbox($forum), 'lang_f
 
 // Read in cookie of 'lastread' times
 // GIJ eliminated unserialize
-if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
+/* if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
 else {
 	$topic_lastreadtmp = explode( ',' , $_COOKIE['xhnewbb_topic_lastread'] ) ;
 	foreach( $topic_lastreadtmp as $tmp ) {
@@ -358,21 +358,23 @@ else {
 		$min = empty( $idmin[1] ) ? 0 : intval( $idmin[1] ) ;
 		$topic_lastread[ $id ] = $min ;
 	}
-}
+}*/
 // GIJ end
 // if cookie is not set for this topic, update view count and set cookie
-if ( empty($topic_lastread[$topic_id]) ) {
+/* if ( empty($topic_lastread[$topic_id]) ) {
 	$sql = 'UPDATE '.$xoopsDB->prefix('xhnewbb_topics').' SET topic_views = topic_views + 1 WHERE topic_id ='. $topic_id;
 	$xoopsDB->queryF($sql);
-}
+}*/
+
+
+
 // Update cookie
 // FIXME: doesn't check if 4kB limit of cookie is exceeded!
 // Hack start Ryuji_edit(2003-09-15)　最新100topicに制限する
 
-// GIJ serialize ではなく、|, 区切りを使う。
-// しかも、記録は分単位。だから、250topicsまでOK
+// GIJ serialize
 
-$topic_lastread[$topic_id] = intval( ceil( time() / 60 ) ) ;
+/* $topic_lastread[$topic_id] = intval( ceil( time() / 60 ) ) ;
 
 arsort($topic_lastread);
 
@@ -382,11 +384,35 @@ foreach( $topic_lastread as $id => $time ) {
 	$str4cookie .= intval( $id ) . '|' . intval( $time ) . ',' ;
 	if( -- $counter < 0 ) break ;
 }
-$str4cookie = substr( $str4cookie , 0 , -1 ) ;
+$str4cookie = substr( $str4cookie , 0 , -1 ) ; */
 
-//  よくわからん……とりあえず、一端消してみる
+
+// remove old cookies
 setcookie( "xhnewbb_topic_lastread" , '' , time()-3600 ) ;
-setcookie("xhnewbb_topic_lastread", $str4cookie , time()+365*24*3600, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
+
+if( is_object( @$xoopsUser ) ) {
+
+	$uid = $xoopsUser->getVar('uid') ;
+
+	// already read
+	$result = $xoopsDB->query( 'SELECT count(*) FROM '.$xoopsDB->prefix('xhnewbb_users2topics')." WHERE uid='$uid' AND topic_id='$topic_id' AND u2t_time >= {$forumdata['topic_time']}" ) ;
+	list( $read ) = $xoopsDB->fetchRow( $result ) ;
+
+	var_dump( $forumdata['topic_time'] , $read ) ;
+
+	if( $read <= 0 ) {
+
+		// count up
+		$sql = 'UPDATE '.$xoopsDB->prefix('xhnewbb_topics').' SET topic_views = topic_views + 1 WHERE topic_id ='. $topic_id;
+		$xoopsDB->queryF($sql);
+
+		// store db
+		$xoopsDB->queryF( 'UPDATE '.$xoopsDB->prefix('xhnewbb_users2topics')." SET u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
+		if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->queryF( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_time=".time() ) ;
+	}
+}
+
+// setcookie("xhnewbb_topic_lastread", $str4cookie , time()+365*24*3600, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
 
 include XOOPS_ROOT_PATH.'/footer.php';
 ?>

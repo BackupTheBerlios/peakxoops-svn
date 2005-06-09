@@ -69,12 +69,12 @@ $expiredate1 = time() + 3600 * 24 * 365;
 $expiredate2 = time() + 600;
 
 // update LastVisit cookie. This cookie is updated each time auth.php runs
-setcookie("NewBBLastVisit", time(), $expiredate1,  $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
+// setcookie("NewBBLastVisit", time(), $expiredate1,  $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
 
 // set LastVisitTemp cookie, which only gets the time from the LastVisit
 // cookie if it does not exist yet
 // otherwise, it gets the time from the LastVisitTemp cookie
-if (!isset($_COOKIE["NewBBLastVisitTemp"])) {
+/* if (!isset($_COOKIE["NewBBLastVisitTemp"])) {
 	if(isset($_COOKIE["NewBBLastVisit"])){
 		$temptime = $_COOKIE["NewBBLastVisit"];
 	}else{
@@ -83,12 +83,12 @@ if (!isset($_COOKIE["NewBBLastVisitTemp"])) {
 }
 else {
 	$temptime = $_COOKIE["NewBBLastVisitTemp"];
-}
+}*/
 
 // set cookie.
-setcookie("NewBBLastVisitTemp", $temptime ,$expiredate2, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
+// setcookie("NewBBLastVisitTemp", $temptime ,$expiredate2, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
 
 // set vars for all scripts
-$last_visit = $temptime;
+// $last_visit = $temptime;
 
 ?>

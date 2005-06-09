@@ -93,6 +93,8 @@ if ( $forumdata['forum_type'] == 1 ) {
 	}
 }
 
+$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+
 $xoopsTpl->assign("forum_id", $forum);
 if ( $can_post == 1 ) {
 	$xoopsTpl->assign('viewer_can_post', true);
@@ -153,14 +155,14 @@ $forum_selection_order .= '</select>';
 // assign to template
 $xoopsTpl->assign('forum_selection_order', $forum_selection_order);
 
-$sortsince = !empty($_GET['sortsince']) ? intval($_GET['sortsince']) : 10000;
-$sel_since_array = array(1, 2, 5, 10, 20, 30, 40, 60, 75, 100);
+$sortsince = !empty($_GET['sortsince']) ? intval($_GET['sortsince']) : 365;
+$sel_since_array = array(1, 7, 30, 100);
 $forum_selection_since = '<select name="sortsince">';
 foreach ($sel_since_array as $sort_since_v) {
 	$forum_selection_since .= '<option value="'.$sort_since_v.'"'.(($sortsince == $sort_since_v) ? ' selected="selected"' : '').'>'.sprintf(_MD_XHNEWBB_FROMLASTDAYS,$sort_since_v).'</option>';
 }
 $forum_selection_since .= '<option value="365"'.(($sortsince == 365) ? ' selected="selected"' : '').'>'.sprintf(_MD_XHNEWBB_THELASTYEAR,365).'</option>';
-$forum_selection_since .= '<option value="1000"'.(($sortsince == 1000) ? ' selected="selected"' : '').'>'.sprintf(_MD_XHNEWBB_BEGINNING,1000).'</option>';
+$forum_selection_since .= '<option value="10000"'.(($sortsince == 10000) ? ' selected="selected"' : '').'>'.sprintf(_MD_XHNEWBB_BEGINNING,10000).'</option>';
 $forum_selection_since .= '</select>';
 
 // assign to template
@@ -185,7 +187,7 @@ $xoopsTpl->assign('lang_date', _MD_XHNEWBB_DATE);
 $startdate = time() - (86400* $sortsince);
 $start = !empty($_GET['start']) ? intval($_GET['start']) : 0;
 
-$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY topic_sticky DESC, '.$sortname.' '.$sortorder;
+$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = '.$uid.' WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY topic_sticky DESC, '.$sortname.' '.$sortorder;
 if ( !$result = $xoopsDB->query($sql,$forumdata['topics_per_page'],$start) ) {
 	redirect_header('index.php',2,_MD_XHNEWBB_ERROROCCURED);
 	exit();
@@ -193,7 +195,7 @@ if ( !$result = $xoopsDB->query($sql,$forumdata['topics_per_page'],$start) ) {
 
 // Read topic 'lastread' times from cookie, if exists
 // GIJ start
-if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
+/* if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
 else {
 	$topic_lastreadtmp = explode( ',' , $_COOKIE['xhnewbb_topic_lastread'] ) ;
 	foreach( $topic_lastreadtmp as $tmp ) {
@@ -202,8 +204,13 @@ else {
 		$min = empty( $idmin[1] ) ? 0 : intval( $idmin[1] ) ;
 		$topic_lastread[ $id ] = $min ;
 	}
-}
+} */
 // GIJ end
+
+
+
+
+
 while ( $myrow = $xoopsDB->fetchArray($result) ) {
 
  	if ( empty($myrow['last_poster']) ) {
@@ -215,13 +222,15 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 		$image = $bbImage['locked_topic'];
 	} else {
 		if ( $myrow['topic_replies'] >= $forumdata['hot_threshold'] ) {
-			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
+//			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
+			if ( $myrow['u2t_time'] < $myrow['last_post_time'] ) {
 				$image = $bbImage['hot_newposts_topic'];
 			} else {
 				$image = $bbImage['hot_folder_topic'];
 			}
 		} else {
-			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
+//			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
+			if ( $myrow['u2t_time'] < $myrow['last_post_time'] ) {
 				$image = $bbImage['newposts_topic'];
 			} else {
 				$image = $bbImage['folder_topic'];

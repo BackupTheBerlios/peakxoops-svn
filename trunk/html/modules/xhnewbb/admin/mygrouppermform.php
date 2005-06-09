@@ -1,5 +1,5 @@
 <?php
-// $Id: mygrouppermform.php,v 1.3 2004/12/20 04:23:18 gij Exp $
+// $Id: grouppermform.php,v 1.4 2003/09/29 18:25:27 okazu Exp $
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000-2003 XOOPS.org                           //
@@ -29,6 +29,8 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
 require_once XOOPS_ROOT_PATH.'/class/xoopsform/formelement.php';
 require_once XOOPS_ROOT_PATH.'/class/xoopsform/formhidden.php';
 require_once XOOPS_ROOT_PATH.'/class/xoopsform/formbutton.php';
@@ -56,7 +58,7 @@ class MyXoopsGroupPermForm extends XoopsForm
 	 * Tree structure of items
 	 * @var array
 	 */
-	var $_itemTree;
+	var $_itemTree = array() ;
 	/**
 	 * Name of permission
 	 * @var string
@@ -318,16 +320,18 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement
 
 		$ret .= '<table class="outer"><tr>';
 		$cols = 1;
-		foreach ($this->_optionTree[0]['children'] as $topitem) {
-			if ($cols > 4) {
-				$ret .= '</tr><tr>';
-				$cols = 1;
+		if( ! empty( $this->_optionTree[0]['children'] ) ) {
+			foreach ($this->_optionTree[0]['children'] as $topitem) {
+				if ($cols > 4) {
+					$ret .= '</tr><tr>';
+					$cols = 1;
+				}
+				$tree = '<td class="odd">';
+				$prefix = '';
+				$this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
+				$ret .= $tree.'</td>';
+				$cols++;
 			}
-			$tree = '<td class="odd">';
-			$prefix = '';
-			$this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
-			$ret .= $tree.'</td>';
-			$cols++;
 		}
 		$ret .= '</tr></table>';
 		return $ret;

@@ -88,6 +88,7 @@ CREATE TABLE xhnewbb_posts (
   KEY uid (uid),
   KEY pid (pid),
   KEY subject (subject(40)),
+  KEY (post_time),
   KEY forumid_uid (forum_id, uid),
   KEY topicid_uid (topic_id, uid),
   KEY topicid_postid_pid (topic_id, post_id, pid),
@@ -122,10 +123,32 @@ CREATE TABLE xhnewbb_topics (
   forum_id int(4) NOT NULL default '0',
   topic_status tinyint(1) NOT NULL default '0',
   topic_sticky tinyint(1) NOT NULL default '0',
+  topic_solved tinyint(1) NOT NULL default '0',
+  topic_rsv tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (topic_id),
   KEY forum_id (forum_id),
+  KEY (topic_time),
   KEY topic_last_post_id (topic_last_post_id),
   KEY topic_poster (topic_poster),
   KEY topic_forum (topic_id,forum_id),
   KEY topic_sticky (topic_sticky)
+) TYPE=MyISAM;
+# --------------------------------------------------------
+
+#
+# Table structure for table `users2topics`
+#
+
+CREATE TABLE xhnewbb_users2topics (
+  uid mediumint(8) unsigned NOT NULL default 0,
+  topic_id int(8) unsigned NOT NULL default 0,
+  u2t_time int(10) NOT NULL default 0,
+  u2t_marked tinyint NOT NULL default 0,
+  u2t_rsv tinyint NOT NULL default 0,
+  PRIMARY KEY (uid,topic_id),
+  KEY (uid),
+  KEY (topic_id),
+  KEY (u2t_time),
+  KEY (u2t_marked),
+  KEY (u2t_rsv)
 ) TYPE=MyISAM;

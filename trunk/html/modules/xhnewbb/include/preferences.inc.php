@@ -1,5 +1,5 @@
 <?php
-// $Id: preferences.inc.php,v 1.1 2004/12/20 04:23:18 gij Exp $
+// $Id: main.php,v 1.23.20.1 2004/07/29 18:22:38 mithyt2 Exp $
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -249,12 +249,14 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
     }
 
     $modname = $module->getVar('name');
+	$button_tray = new XoopsFormElementTray("");
     if ($module->getInfo('adminindex')) {
 //      $form->addElement(new XoopsFormHidden('redirect', XOOPS_URL.'/modules/'.$module->getVar('dirname').'/'.$module->getInfo('adminindex')));
-        $form->addElement(new XoopsFormHidden('redirect', XOOPS_URL.'/modules/'.$module->getVar('dirname').'/admin/admin.php?fct=preferences&op=showmod&mod='.$module->getVar('mid'))); // GIJ Patch
+        $button_tray->addElement(new XoopsFormHidden('redirect', XOOPS_URL.'/modules/'.$module->getVar('dirname').'/admin/admin.php?fct=preferences&op=showmod&mod='.$module->getVar('mid'))); // GIJ Patch
     }
     for ($i = 0; $i < $count; $i++) {
-      $title = (!defined($config[$i]->getVar('conf_desc')) || constant($config[$i]->getVar('conf_desc')) == '') ? constant($config[$i]->getVar('conf_title')) : constant($config[$i]->getVar('conf_title')).'<br /><br /><span style="font-weight:normal;">'.constant($config[$i]->getVar('conf_desc')).'</span>';
+      $title4tray = (!defined($config[$i]->getVar('conf_desc')) || constant($config[$i]->getVar('conf_desc')) == '') ? constant($config[$i]->getVar('conf_title')) : constant($config[$i]->getVar('conf_title')).'<br /><br /><span style="font-weight:normal;">'.constant($config[$i]->getVar('conf_desc')).'</span>'; // GIJ
+      $title = '' ; // GIJ
       switch ($config[$i]->getVar('conf_formtype')) {
       case 'textarea':
         $myts =& MyTextSanitizer::getInstance();
@@ -316,14 +318,18 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
         break;
       }
       $hidden = new XoopsFormHidden('conf_ids[]', $config[$i]->getVar('conf_id'));
-      $form->addElement($ele);
-      $form->addElement($hidden);
+      $ele_tray = new XoopsFormElementTray( $title4tray , '' ) ;
+      $ele_tray->addElement($ele);
+      $ele_tray->addElement($hidden);
+      $form->addElement( $ele_tray ) ;
+      unset($ele_tray);
       unset($ele);
       unset($hidden);
     }
-    $form->addElement(new XoopsFormHidden('op', 'save'));
-    $form->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ ) );
-    $form->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
+    $button_tray->addElement(new XoopsFormHidden('op', 'save'));
+    $button_tray->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ ) );
+    $button_tray->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
+    $form->addElement( $button_tray ) ;
     xoops_cp_header();
 	// GIJ patch start
 	include( './mymenu.php' ) ;
@@ -338,7 +344,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
     //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
     //  exit('Invalid referer');
     //}
-    if ( ! $xoopsGTicket->check() ) {
+    if ( ! $xoopsGTicket->check( true , 'system' ) ) {
       redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
     }
     require_once(XOOPS_ROOT_PATH.'/class/template.php');

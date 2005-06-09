@@ -33,12 +33,12 @@ foreach ($_POST as $k => $v) {
 switch (trim($mode)) {
 case 'editforum':
 	$myts =& MyTextSanitizer::getInstance();
-    if ( isset($_POST['save']) && $_POST['save'] != "" ) {
-		if ( !$_POST['delete'] ) {
+    if ( ! empty( $_POST['save'] ) ) {
+		if ( empty( $_POST['delete'] ) ) {
 			$name = $myts->makeTboxData4Save($_POST['name']);
 	 		$desc = $myts->makeTareaData4Save($_POST['desc']);
 
-			$sql = sprintf("UPDATE %s SET forum_name = '%s', forum_desc = '%s', forum_type = '%s', cat_id = %u, forum_access = %u, allow_html = '%s', allow_sig = '%s', posts_per_page = %u, hot_threshold = %u, topics_per_page = %u WHERE forum_id = %u", $xoopsDB->prefix("xhnewbb_forums"), $name, $desc, $type, $cat, $forum_access, $html, $sig, $ppp, $hot, $tpp, $forum);
+			$sql = sprintf("UPDATE %s SET forum_name = '%s', forum_desc = '%s', forum_type = '%s', cat_id = %u, forum_access = %u, allow_html = '%s', allow_sig = '%s', posts_per_page = %u, hot_threshold = %u, topics_per_page = %u, forum_weight = %u WHERE forum_id = %u", $xoopsDB->prefix("xhnewbb_forums"), $name, $desc, $type, $cat, $forum_access, $html, $sig, $ppp, $hot, $tpp, $weight , $forum);
 
 			if ( !$r = $xoopsDB->query($sql) ) {
 				redirect_header("./index.php", 1);
@@ -79,7 +79,7 @@ case 'editforum':
 					$mod_not_removed = 1;
 				}
 			}
-			if ( $mod_not_removed ) {
+			if ( ! empty( $mod_not_removed ) ) {
 	           	redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMUPDATED."<br />"._MD_XHNEWBB_A_HTSMHNBRBITHBTWNLBAMOTF);
             }else{
 	           	redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMUPDATED);
@@ -305,7 +305,11 @@ case 'editforum':
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_HOTTOPICTHRESHOLD ."</span></td><td><input type='text' name='hot' size='3' maxlength='3' value='". $myrow['hot_threshold']."' /></td></tr>
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_POSTPERPAGE ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOPPTTWBDPPOT ."</i></span></td>
 		<td><input type='text' name='ppp' size='3' maxlength='3' value='".$myrow['posts_per_page']."' /></td></tr>
-		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_TOPICPERFORUM ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOTPFTWBDPPOAF ."</i></span></td><td><input type='text' name='tpp' size='3' maxlength='3' value='". $myrow['topics_per_page'] ."' /></td></tr>";
+		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_TOPICPERFORUM ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOTPFTWBDPPOAF ."</i></span></td><td><input type='text' name='tpp' size='3' maxlength='3' value='". $myrow['topics_per_page'] ."' /></td></tr>
+		<tr class='bg1' align='left'>
+			<td><span class='fg2'>weight:</span></td>
+			<td><input type='text' name='weight' size='3' maxlength='3' value='". $myrow['forum_weight'] ."' /></td>
+		</tr>\n";
 		echo "<tr class='bg3' align='left'><td align='center' colspan='2'><input type='hidden' name='mode' value='editforum' /><input type='hidden' name='forum' value='$forum' /><input type='submit' name='save' value='". _MD_XHNEWBB_A_SAVECHANGES ."' />&nbsp;&nbsp;<input type='reset' value='". _MD_XHNEWBB_A_CLEAR ."' /></td></tr>";
 		echo "</tr></table></td></tr></table>";
 	}
@@ -325,7 +329,7 @@ case 'editforum':
 		<tr class='bg1' align='left'>
 		<td align='center' colspan="2"><select name='forum' SIZE="0">
 		<?php
-		$sql = "SELECT forum_name, forum_id FROM ".$xoopsDB->prefix("xhnewbb_forums")." ORDER BY forum_id";
+		$sql = "SELECT forum_name, forum_id FROM ".$xoopsDB->prefix("xhnewbb_forums")." ORDER BY forum_weight";
 		if ( $result = $xoopsDB->query($sql) ) {
 			if ( $myrow = $xoopsDB->fetchArray($result) ) {
 				do {
@@ -545,15 +549,16 @@ case 'addforum':
 			xoops_cp_footer();
 			exit();
 		}
-      	$desc = $myts->makeTareaData4Save($_POST['desc']);
-      	$name = $myts->makeTboxData4Save($_POST['name']);
-		$html = intval($_POST['html']);
-		$sig = intval($_POST['sig']);
-		$ppp = intval($_POST['ppp']);
-		$hot = intval($_POST['hot']);
-		$tpp = intval($_POST['tpp']);
+      	$desc = $myts->makeTareaData4Save(@$_POST['desc']);
+      	$name = $myts->makeTboxData4Save(@$_POST['name']);
+		$html = intval(@$_POST['html']);
+		$sig = intval(@$_POST['sig']);
+		$ppp = intval(@$_POST['ppp']);
+		$hot = intval(@$_POST['hot']);
+		$tpp = intval(@$_POST['tpp']);
+		$weight = intval(@$_POST['weight']);
 		$nextid = $xoopsDB->genId($xoopsDB->prefix("xhnewbb_forums")."_forum_id_seq");
-		$sql = "INSERT INTO ".$xoopsDB->prefix("xhnewbb_forums")." (forum_id, forum_name, forum_desc, forum_access, cat_id, forum_type, allow_html, allow_sig,posts_per_page,hot_threshold,topics_per_page) VALUES ($nextid, '$name', '$desc', $forum_access, $cat, $type, '$html', '$sig', $ppp, $hot, $tpp)";
+		$sql = "INSERT INTO ".$xoopsDB->prefix("xhnewbb_forums")." (forum_id, forum_name, forum_desc, forum_access, cat_id, forum_type, allow_html, allow_sig,posts_per_page,hot_threshold,topics_per_page,forum_weight) VALUES ($nextid, '$name', '$desc', $forum_access, $cat, $type, '$html', '$sig', $ppp, $hot, $tpp, $weight)";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
@@ -693,7 +698,11 @@ case 'addforum':
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_HOTTOPICTHRESHOLD ."</span></td><td><input type='text' name='hot' size='3' maxlength='3' value='10' /></td></tr>
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_POSTPERPAGE ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOPPTTWBDPPOT ."</i></span></td>
 		<td><input type='text' name='ppp' size='3' maxlength='3' value='10' /></td></tr>
-		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_TOPICPERFORUM ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOTPFTWBDPPOAF ."</i></span></td><td><input type='text' name='tpp' size='3' maxlength='3' value='20' /></td></tr>";
+		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_TOPICPERFORUM ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOTPFTWBDPPOAF ."</i></span></td><td><input type='text' name='tpp' size='3' maxlength='3' value='20' /></td></tr>
+		<tr class='bg1' align='left'>
+			<td><span class='fg2'>weight:</span></td>
+			<td><input type='text' name='weight' size='3' maxlength='3' value='0' /></td>
+		</tr>\n";
 		?>
 		<tr class='bg3' align='left'>
 		<td align='center' colspan="2">

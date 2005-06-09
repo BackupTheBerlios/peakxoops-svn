@@ -9,10 +9,7 @@ define("_MI_XHNEWBB_NAME","Forum");
 define("_MI_XHNEWBB_DESC","Forums module for XOOPS");
 
 // Names of blocks for this module (Not all module has blocks)
-define("_MI_XHNEWBB_BNAME1","Recent Topics");
-define("_MI_XHNEWBB_BNAME2","Most Viewed Topics");
-define("_MI_XHNEWBB_BNAME3","Most Active Topics");
-define("_MI_XHNEWBB_BNAME4","Recent Private Topics");
+define("_MI_XHNEWBB_BNAME1","Topics");
 
 // Names of admin menu items
 define("_MI_XHNEWBB_ADMENU1","Add Forum");

@@ -1251,12 +1251,19 @@ function get_weekly_html( )
 				if( $wtop_month == $wlast_month ) {
 					@include( $this->base_path . '/' . $this->plugins_path_monthly . '/' . $plugin['file'] ) ;
 				} else {
+					$plugin_returns_backup = $plugin_returns ;
 					$this->year = date( 'Y' , $wtop_unixtime ) ;
 					$this->month = $wtop_month ;
 					@include( $this->base_path . '/' . $this->plugins_path_monthly . '/' . $plugin['file'] ) ;
+					for( $d = 1 ; $d < 21 ; $d ++ ) {
+						$plugin_returns[ $d ] = @$plugin_returns_backup[ $d ] ;
+					}
 					$this->year = date( 'Y' , $wlast_unixtime ) ;
 					$this->month = $wlast_month ;
 					@include( $this->base_path . '/' . $this->plugins_path_monthly . '/' . $plugin['file'] ) ;
+					for( $d = 8 ; $d < 32 ; $d ++ ) {
+						$plugin_returns[ $d ] = @$plugin_returns_backup[ $d ] ;
+					}
 					$this->year = $year_backup ;
 					$this->month = $month_backup ;
 				}

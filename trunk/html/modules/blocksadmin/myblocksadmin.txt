@@ -175,6 +175,7 @@ $modversion['blocks'][(block_number)]['can_clone'] = true ;
 
 CHANGELOG:
 
+2005-06-09 0.30 fixed 'area' of GTicket in myblocksadmin
 2005-05-25 0.29 modified supporting nobunobu's SPAW based on 1.10RC
                 modified XoopsGTicket supports 'area' and 'referer'
                 fixed 'clone' action does not reflect content&c_type

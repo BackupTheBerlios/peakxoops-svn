@@ -51,7 +51,7 @@ if (isset($_POST['previewblock'])) {
   //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
   //  exit('Invalid Referer');
   //}
-  if ( ! $xoopsGTicket->check() ) {
+  if ( ! $xoopsGTicket->check( true , 'system' ) ) {
     redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
   }
 
@@ -156,7 +156,7 @@ if ( $op == 'order' ) {
   //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
   //  exit('Invalid Referer');
   //}
-  if ( ! $xoopsGTicket->check() ) {
+  if ( ! $xoopsGTicket->check( true , 'system' ) ) {
     redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
   }
   if ( !empty($_POST['side']) ) { $side = $_POST['side']; }
@@ -192,7 +192,7 @@ if ( $op == 'order' ) {
   if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
     exit('Invalid Referer');
   }
-  if ( ! $xoopsGTicket->check() ) {
+  if ( ! $xoopsGTicket->check( true , 'system' ) ) {
     redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
   }
   if ( !empty($_POST['bside']) ) { $bside = intval($_POST['bside']); } else { $bside = 0; }
@@ -211,7 +211,7 @@ if ( $op == 'update' ) {
   //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
   //  exit('Invalid Referer');
   //}
-  if ( ! $xoopsGTicket->check() ) {
+  if ( ! $xoopsGTicket->check( true , 'system' ) ) {
     redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
   }
 /*  if ( !empty($_POST['bside']) ) { $bside = intval($_POST['bside']); } else { $bside = 0; }
@@ -239,7 +239,7 @@ if ( $op == 'delete_ok' ) {
   //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
   //  exit('Invalid Referer');
   //}
-  if ( ! $xoopsGTicket->check() ) {
+  if ( ! $xoopsGTicket->check( true , 'system' ) ) {
     redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
   }
   // delete_block_ok($bid); GIJ imported from blocksadmin.php
@@ -332,7 +332,7 @@ if ($op == 'clone') {
 
 if ($op == 'clone_ok') {
 	// Ticket Check
-	if ( ! $xoopsGTicket->check() ) {
+	if ( ! $xoopsGTicket->check( true , 'system' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 

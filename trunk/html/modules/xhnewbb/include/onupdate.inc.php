@@ -6,6 +6,7 @@ if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 $ref = xoops_getenv('HTTP_REFERER');
 if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 ) {
 	/* Module specific part */
+	global $xoopsDB ;
 
 	// 1.0 to 1.10
 	$result = $xoopsDB->query( "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_users2topics")." LIMIT 1" ) ;

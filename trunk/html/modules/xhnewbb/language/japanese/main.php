@@ -40,7 +40,6 @@ define("_MD_XHNEWBB_SEARCHANY","指定したいくつかの条件で検索（デフォルト）");
 define("_MD_XHNEWBB_SEARCHALL","指定した全ての条件で検索");
 define("_MD_XHNEWBB_SEARCHALLFORUMS","全てのフォーラムを検索");
 define("_MD_XHNEWBB_FORUMC","フォーラム：");
-define("_MD_XHNEWBB_AUTHORC","投稿者：");
 define("_MD_XHNEWBB_SORTBY","ソート順:");
 define("_MD_XHNEWBB_DATE","日時");
 define("_MD_XHNEWBB_TOPIC","トピック");

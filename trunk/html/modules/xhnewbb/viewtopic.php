@@ -390,6 +390,12 @@ $str4cookie = substr( $str4cookie , 0 , -1 ) ; */
 // remove old cookies
 setcookie( "xhnewbb_topic_lastread" , '' , time()-3600 ) ;
 
+// count up
+if( @$_SESSION['xhnewbb_last_topic_id'] != $topic_id ) {
+	$_SESSION['xhnewbb_last_topic_id'] = $topic_id ;
+	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix("xhnewbb_topics")." SET topic_views = topic_views + 1 WHERE topic_id = '$topic_id'" ) ;
+}
+
 if( is_object( @$xoopsUser ) ) {
 
 	$uid = $xoopsUser->getVar('uid') ;
@@ -401,10 +407,6 @@ if( is_object( @$xoopsUser ) ) {
 	var_dump( $forumdata['topic_time'] , $read ) ;
 
 	if( $read <= 0 ) {
-
-		// count up
-		$sql = 'UPDATE '.$xoopsDB->prefix('xhnewbb_topics').' SET topic_views = topic_views + 1 WHERE topic_id ='. $topic_id;
-		$xoopsDB->queryF($sql);
 
 		// store db
 		$xoopsDB->queryF( 'UPDATE '.$xoopsDB->prefix('xhnewbb_users2topics')." SET u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;

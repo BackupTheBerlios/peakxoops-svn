@@ -329,7 +329,7 @@ case 'editforum':
 		<tr class='bg1' align='left'>
 		<td align='center' colspan="2"><select name='forum' SIZE="0">
 		<?php
-		$sql = "SELECT forum_name, forum_id FROM ".$xoopsDB->prefix("xhnewbb_forums")." ORDER BY forum_weight";
+		$sql = "SELECT forum_name, forum_id FROM ".$xoopsDB->prefix("xhnewbb_forums")." ORDER BY cat_id,forum_weight";
 		if ( $result = $xoopsDB->query($sql) ) {
 			if ( $myrow = $xoopsDB->fetchArray($result) ) {
 				do {

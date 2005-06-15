@@ -1,0 +1,8 @@
+<{foreach item=module from=$block.modules}>
+<{$module.name}>
+<ul>
+  <{foreach item=pending from=$module.pending}>
+  <li><a href="<{$pending.adminlink}>"><{$pending.lang_linkname}></a>: <{$pending.pendingnum}></li>
+  <{/foreach}>
+</ul>
+<{/foreach}>

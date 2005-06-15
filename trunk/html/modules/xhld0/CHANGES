@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGES:
 
+v.2.99 2005-6-15
+  - updated mymenu 0.14 & myblocksadmin 0.30
+  - fixed a problem of multiple <link> again
+
 v.2.98 2005-6-3
   - modified <dc:date> without timezones
   - fixed a problem of multiple <link>
@@ -199,6 +203,10 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.2.99 2005-6-15
+  - updated mymenu 0.14 & myblocksadmin 0.30
+  - 一つの<item>に複数の<link>が存在するフィードへの対応でのエンバグを修正
 
 v.2.98 2005-6-3
   - <dc:date> のタイムゾーン指定がない場合、直前の値を指定するようにした

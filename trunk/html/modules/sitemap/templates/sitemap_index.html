@@ -1,8 +1,16 @@
-
-<h3><{$xoops_sitename}> - <{$xoops_slogan}> &nbsp; <{$xoops_pagetitle}></h3>
-
+<{*
+<style type="text/css">
+img {
+behavior:url("images/pngbehavior.htc");
+}
+</style>
+*}>
+<br />
+<p align="center"><img src="<{$xoops_url}>/modules/sitemap/images/logo.gif" alt="" /></p>
+<br />
+<hr noshade color=#000000">
 <div style="padding: 7px;"><{$msgs}></div>
-
+<hr noshade color=#000000">
 <div style="margin: 0 10px;">
 
   <div align="right"><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/map.gif" /><a href="<{$xoops_url}>/">HOME</a>&nbsp;<a href="http://petitoops.net/"><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/chacha.gif" alt="" border="0" /></a></div>
@@ -13,7 +21,7 @@
 <tr>
 
 <{foreach name=i item=module from=$sitemap.modules}>
-<td width="33%">
+<td width="33%" valign="top">
   <{if $module.name}>
     <div><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/<{if $this.mods == $module.directory}>map<{else}>main<{/if}>.gif" /> <a class="menuMain" href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a></div>
     <{foreach item=parent from=$module.parent}>

@@ -3,22 +3,22 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-12 11:31:59
-define('_MI_INVISIBLE_DIRNAMES','Directory names of hiding modules');
-define('_MI_INVISIBLE_DIRNAMESDSC','Specify the name of modules should be hidden.<br />Dirnames should be separated with comma.<br />eg) xoopsheadline,newbb');
+define('_MI_INVISIBLE_DIRNAMES','Nom du r&eacute;pertoire des modules &agrave; cacher');
+define('_MI_INVISIBLE_DIRNAMESDSC',"Sp&eacute;cifier le nom des modules qui doivent &ecirc;tre cach&eacute;s.<br />Les noms des r&eacute;pertoires doivent &ecirc;tre s&eacute;par&eacute;s par une virgule.<br />ex : xoopsheadline,newbb ");
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-08 05:46:30
-define('_MI_ALLTIME_GUEST','All-time guest mode');
-define('_MI_ALLTIME_GUESTDSC','If you turn this module\'s cache on, set this option \'yes\'');
-define('_MI_INVISIBLE_WEIGHTS','Weights for hiding modules');
-define('_MI_INVISIBLE_WEIGHTSDSC','Modules which has this number as its order in ModulesAdmin will be invisible. The numbers should be separate by comma.<br />(Normally 0 or blank)');
+define('_MI_ALLTIME_GUEST','Mode invit&eacute; permanent');
+define('_MI_ALLTIME_GUESTDSC',"Si vous activez le cache sur le module, mettre cette option &agrave; 'oui'");
+define('_MI_INVISIBLE_WEIGHTS','Poids des modules &agrave; cacher');
+define('_MI_INVISIBLE_WEIGHTSDSC',"Les modules qui ont ce num&eacute;ro d'ordre dans l'administration des modules seront invisibles. Les nombres doivent &ecirc;tre s&eacute;par&eacute;s par une virgule.<br />(Normalement 0 ou &agrave; blanc)");
 
 define('_MI_SITEMAP_NAME', 'Plan du site');
 define('_MI_SITEMAP_MESSAGE', 'Message');
 
 define('_MI_MESSAGE', 'Message');
-define('_MI_MESSAGEEDSC', 'message qui apparaitra sur la page');
+define('_MI_MESSAGEEDSC', 'Message qui apparaitra sur la page');
 
-define('_MI_SHOW_SUBCATEGORIES', 'afficher les sous cat&eacute;gories');
-define('_MI_SHOW_SUBCATEGORIESDSC', 'afficher ou non les sous cat&eacute;gories');
+define('_MI_SHOW_SUBCATEGORIES', 'Afficher les sous-cat&eacute;gories');
+define('_MI_SHOW_SUBCATEGORIESDSC', 'Afficher ou non les sous-cat&eacute;gories');
 
 ?>

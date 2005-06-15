@@ -5,6 +5,9 @@ require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 
 $myts =& MyTextSanitizer::getInstance() ;
 
+$xoopsModuleConfig['with_lastmod'] = true ;
+
+
 if (function_exists('mb_http_output')) {
 	mb_http_output('pass');
 }

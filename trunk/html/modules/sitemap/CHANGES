@@ -1,0 +1,16 @@
+1.11 2005-06-15
+
+- modified xml_google.php for Google sitemaps
+- modified sitemap_index.html (thx flying.tux)
+- update langage files
+-- french (thx marco)
+
+
+1.10 2005-06-12
+
+- added xml_google.php for Google sitemaps
+
+
+1.00 2005-04-14
+
+- modified the structure of the directory for plugins

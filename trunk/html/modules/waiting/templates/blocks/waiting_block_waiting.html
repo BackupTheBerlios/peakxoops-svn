@@ -2,7 +2,16 @@
 <{$module.name}>
 <ul>
   <{foreach item=pending from=$module.pending}>
-  <li><a href="<{$pending.adminlink}>"><{$pending.lang_linkname}></a>: <{$pending.pendingnum}></li>
+  <li>
+    <{if $pending.pendingnum}>
+      <span style='font-weight:bold;'>
+    <{else}>
+      <span style='font-weight:normal;'>
+    <{/if}>
+
+      <a href="<{$pending.adminlink}>"><{$pending.lang_linkname}></a>:<{$pending.pendingnum}>
+    </span>
+  </li>
   <{/foreach}>
 </ul>
 <{/foreach}>

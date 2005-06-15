@@ -1,12 +1,16 @@
 <?php
-//
-// Modified by coldfire for WF-Downloads
-// DATE: 28/07/2004 11:38:36
-// XOOPS: 2.0.7
-// NOTES: This works for me. No guarantees implied. YMMV.
-//        I had to change the titles in the language files. Otherwise they would confilct with the myDownloads module. My Knowledge of Kanjis is quite poor. So I only prefix the Japanese titles with "wf-". Sumimansen. Dozo naoshite kudasai. Ja ne.
-//
-
+/*************************************************************************/
+# Waiting Contents Extensible                                            #
+# Plugin for module WF-Downloads                                         #
+#                                                                        #
+# Author                                                                 #
+# coldfire                                                               #
+#																		 #
+# Modified by                                                            #
+# flying.tux     -   flying.tux@gmail.com                                #
+#                                                                        #
+# Last modified on 21.04.2005                                            #
+/*************************************************************************/
 function b_waiting_wfdownloads()
 {
 	$xoopsDB =& Database::getInstance();
@@ -18,7 +22,7 @@ function b_waiting_wfdownloads()
 	if ( $result ) {
 		$block['adminlink'] = XOOPS_URL."/modules/wfdownloads/admin/newdownloads.php";
 		list($block['pendingnum']) = $xoopsDB->fetchRow($result);
-		$block['lang_linkname'] = _PI_WAITING_FILES ;
+		$block['lang_linkname'] = _PI_WAITING_WAITINGS ;
 	}
 	$ret[] = $block ;
 
@@ -42,7 +46,7 @@ function b_waiting_wfdownloads()
 	}
 	$ret[] = $block ;
 
-	// wfdownloads pending
+	// wfdownloads reviews
 	$block = array();
 	$result = $xoopsDB->query("SELECT COUNT(*) FROM ".$xoopsDB->prefix("wfdownloads_reviews")." WHERE submit=0");
 	if ( $result ) {
@@ -54,6 +58,5 @@ function b_waiting_wfdownloads()
 
 	return $ret;
 }
-
 
 ?>

@@ -92,14 +92,14 @@ function b_waiting_waiting_show($options)
                 // get the list of waitings
                 $_tmp = call_user_func("b_waiting_" . $mod);
                 if(isset($_tmp["lang_linkname"])){
-                    if($_tmp["pendingnum"] > 0 || $options[0] > 0){
+                    if( @$_tmp["pendingnum"] > 0 || $options[0] > 0){
                         $block["modules"][$mod]["pending"][] = $_tmp;
                     }
                     unset($_tmp);
                 }else{
                     // lang_linknameが無ければ、複数返してる
                     foreach($_tmp as $_one){
-                        if($_one["pendingnum"] > 0 || $options[0] > 0){
+                        if( @$_one["pendingnum"] > 0 || $options[0] > 0){
                             $block["modules"][$mod]["pending"][] = $_one;
                         }
                     }

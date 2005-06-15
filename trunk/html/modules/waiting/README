@@ -122,6 +122,7 @@ PLUGINS:
 -addresses (by gruessle)
 -Agenda-X (by GIJOE)
 -AMS (by karedokx)
+-catads (by Alain01)
 -CBB (by gravies)
 -MyAds (by Tom_G3X)
 -myAlbum-P (by GIJOE) multiple
@@ -131,7 +132,7 @@ PLUGINS:
 -news (by GIJOE)
 -PDlinks (by flying.tux)
 -PDdownloads (by flying.tux)
--piCal (by GIJOE)
+-piCal (by GIJOE) (>=0.8 has the module side plugin)
 -popnupblog (by dashboard)
 -simpleblog (by kousuke)
 -smartfaq (by mariuss)
@@ -139,9 +140,10 @@ PLUGINS:
 -system -- comments (by GIJOE)
 -tutorials (by GIJOE)
 -weblinks (by Tom_G3X)
--WF-downloads (by coldfire)
+-WF-downloads (by coldfire, flying.tux)
+-WF-links (by flying.tux)
 -WF-Sections (by GIJOE)
--WordPress ME (by nobunobu) multiple
+-WordPress ME (by nobunobu) multiple (>=0.5 has the module side plugin)
 -xcGallery (by nao-pon)
 -xDirectory (by GIJOE)
 -xfguestbook (by karedokx)
@@ -157,8 +159,10 @@ CHANGES:
 :ver 0.90|
 - modified the structure of the directory for plugins
 - modified system plugin (thx gravies)
-- 1 plugin added
+- 3 plugins added
 -- newbb2 or CBB (thx gravies)
+-- catads (thx Alain01)
+-- WF-links (thx flying.tux)
 
 :ver 0.86| by flying.tux
 - Italian updated

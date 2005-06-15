@@ -13,7 +13,7 @@ function b_waiting_PDlinks()
 	$xoopsDB =& Database::getInstance();
 	$ret = array() ;
 
-	// PDlinks links
+	// PDlinks waiting
 	$block = array();
 	$result = $xoopsDB->query("SELECT COUNT(*) FROM ".$xoopsDB->prefix("PDlinks_links")." WHERE status=0");
 	if ( $result ) {

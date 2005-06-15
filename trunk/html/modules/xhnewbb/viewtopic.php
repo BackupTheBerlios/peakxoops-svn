@@ -404,8 +404,6 @@ if( is_object( @$xoopsUser ) ) {
 	$result = $xoopsDB->query( 'SELECT count(*) FROM '.$xoopsDB->prefix('xhnewbb_users2topics')." WHERE uid='$uid' AND topic_id='$topic_id' AND u2t_time >= {$forumdata['topic_time']}" ) ;
 	list( $read ) = $xoopsDB->fetchRow( $result ) ;
 
-	var_dump( $forumdata['topic_time'] , $read ) ;
-
 	if( $read <= 0 ) {
 
 		// store db

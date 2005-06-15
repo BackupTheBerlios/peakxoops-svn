@@ -201,7 +201,7 @@ class MyXoopsGroupPermForm extends XoopsForm
 				$ret .= $elements[$i]->render();
 			}
 		}
-		$ret .= "</table>".$xoopsGTicket->getTicketHtml(__LINE__)."</form>";
+		$ret .= "</table>".$xoopsGTicket->getTicketHtml(__LINE__ , 1800 , 'myblocksadmin' )."</form>";
 		return $ret;
 	}
 }

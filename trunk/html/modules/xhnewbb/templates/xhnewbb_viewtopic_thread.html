@@ -1,8 +1,8 @@
 <!-- start module contents -->
-<table border="0" cellpadding='5' align='center'>
+<table border="0" width="100%" cellpadding='5' align='center'>
   <tr>
-    <td align='left'><img src='<{$xoops_url}>/modules/xhnewbb/images/folder.gif' alt='' /> <a href='<{$xoops_url}>/modules/xhnewbb/index.php'><{$lang_forum_index}></a><br />&nbsp;&nbsp;<img src='<{$xoops_url}>/modules/xhnewbb/images/folder.gif' alt='' /> <a href='<{$xoops_url}>/modules/xhnewbb/viewforum.php?forum=<{$forum_id}>'><{$forum_name}></a>
-<br />&nbsp;&nbsp;&nbsp;&nbsp;<img src='<{$xoops_url}>/modules/xhnewbb/images/folder.gif' alt='' /> <b><{$topic_title}></b></td><td align='right'><{$forum_post_or_register}></td>
+    <td align='left'><img src='<{$mod_url}>/images/folder.gif' alt='' /> <a href='<{$mod_url}>/index.php'><{$lang_forum_index}></a><br />&nbsp;&nbsp;<img src='<{$mod_url}>/images/folder.gif' alt='' /> <a href='<{$mod_url}>/viewforum.php?forum=<{$forum_id}>'><{$forum_name}></a>
+<br />&nbsp;&nbsp;&nbsp;&nbsp;<img src='<{$mod_url}>/images/folder.gif' alt='' /> <b><{$topic_title}></b></td><td align='right'><{$forum_post_or_register}></td>
   </tr>
 </table>
 
@@ -11,8 +11,21 @@
 <!-- start topic thread -->
 <table cellpadding="4" width="100%">
   <tr>
-    <td align="left"><a href="viewtopic.php?viewmode=flat&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
-    <td align="right"><a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
+    <{if $uid > 0 }>
+      <td style="width:19px;">
+        <{if $u2t_marked}>
+          <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=off">
+            <img src="<{$mod_url}>/images/mark_on.gif" />
+          </a>
+        <{else}>
+          <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=on">
+            <img src="<{$mod_url}>/images/mark_off.gif" />
+          </a>
+        <{/if}>
+      </td>
+    <{/if}>
+    <td align="left"><a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
+    <td align="right"><a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
   </tr>
 </table>
 <table cellspacing="1" class="outer">
@@ -27,8 +40,8 @@
 
 <table cellpadding="4" width="100%">
   <tr>
-    <td align="left"><a href="viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
-    <td align="right"><a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
+    <td align="left"><a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
+    <td align="right"><a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
   </tr>
 </table>
 

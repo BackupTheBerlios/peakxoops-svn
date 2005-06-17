@@ -35,12 +35,12 @@ foreach (array('forum', 'order') as $getint) {
 }
 $viewmode = (isset($_GET['viewmode']) && $_GET['viewmode'] != 'flat') ? 'thread' : 'flat';
 if ( empty($forum) ) {
-	redirect_header("index.php", 2, _MD_XHNEWBB_ERRORFORUM);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORFORUM);
 	exit();
 } else {
 	$sql = "SELECT forum_type, forum_name, forum_access, allow_html, allow_sig, posts_per_page, hot_threshold, topics_per_page FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id = $forum";
 	if ( !$result = $xoopsDB->query($sql) ) {
-		redirect_header('index.php',2,_MD_XHNEWBB_ERROROCCURED);
+		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERROROCCURED);
 		exit();
 	}
 	$forumdata = $xoopsDB->fetchArray($result);
@@ -59,7 +59,7 @@ if ( empty($forum) ) {
 			$accesserror = 1;
 		}
 		if ( $accesserror == 1 ) {
-			redirect_header("viewforum.php?order=$order&viewmode=$viewmode&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?order=$order&viewmode=$viewmode&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
 			exit();
 		}
 		// Ok, looks like we're good.
@@ -79,7 +79,7 @@ if ( empty($forum) ) {
 			$accesserror = 1;
 		}
 		if ( $accesserror == 1 ) {
-			redirect_header("viewforum.php?order=$order&viewmode=$viewmode&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?order=$order&viewmode=$viewmode&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
 			exit();
 		}
     }
@@ -92,7 +92,7 @@ if ( empty($forum) ) {
 	$hidden = "";
 	unset($post_id);
 	unset($topic_id);
-	include 'include/forumform.inc.php';
+	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 	include XOOPS_ROOT_PATH.'/footer.php';
 }
 ?>

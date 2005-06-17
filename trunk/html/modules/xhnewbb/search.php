@@ -106,12 +106,12 @@ if ( !isset($_POST['submit']) ) {
 	if ( isset($_POST['search_username']) && trim($_POST['search_username']) != "" ) {
 		$search_username = $myts->oopsAddSlashes(trim($_POST['search_username']));
 		if ( !$result = $xoopsDB->query("SELECT uid FROM ".$xoopsDB->prefix("users")." WHERE uname='$search_username'") ) {
-			redirect_header('search.php',1,_MD_XHNEWBB_ERROROCCURED);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/search.php",1,_MD_XHNEWBB_ERROROCCURED);
 			exit();
 		}
 		$row = $xoopsDB->fetchArray($result);
 		if ( !$row ) {
-			redirect_header('search.php',1,_MD_XHNEWBB_USERNOEXIST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/search.php",1,_MD_XHNEWBB_USERNOEXIST);
 			exit();
 		}
 		if ( isset($addquery) ) {
@@ -154,6 +154,7 @@ if ( !isset($_POST['submit']) ) {
 	}
 }
 $xoopsTpl->assign("lang_forumindex", sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']));
+$xoopsTpl->assign("mod_url" , XOOPS_URL.'/modules/xhnewbb' ) ;
 $xoopsTpl->assign("lang_search", _MD_XHNEWBB_SEARCH);
 $xoopsTpl->assign("lang_forum", _MD_XHNEWBB_FORUM);
 $xoopsTpl->assign("lang_topic", _MD_XHNEWBB_TOPIC);

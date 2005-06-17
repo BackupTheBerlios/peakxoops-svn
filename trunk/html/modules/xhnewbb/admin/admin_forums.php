@@ -22,8 +22,10 @@ include '../../../include/cp_header.php';
 include '../functions.php';
 include '../config.php';
 
-if (isset($_GET['mode'])){
+if (!empty($_GET['mode'])){
 	$mode = $_GET['mode'];
+} elseif (!empty($_POST['mode'])) {
+	$mode = $_POST['mode'];
 }
 
 foreach ($_POST as $k => $v) {
@@ -33,10 +35,14 @@ foreach ($_POST as $k => $v) {
 switch (trim($mode)) {
 case 'editforum':
 	$myts =& MyTextSanitizer::getInstance();
-    if ( ! empty( $_POST['save'] ) ) {
+	if ( ! empty( $_POST['save'] ) ) {
 		if ( empty( $_POST['delete'] ) ) {
-			$name = $myts->makeTboxData4Save($_POST['name']);
-	 		$desc = $myts->makeTareaData4Save($_POST['desc']);
+			foreach (array('name', 'desc') as $k) {
+				$$k = !empty($_POST[$k]) ? trim($myts->stripSlashesGPC($_POST[$k])) : '';
+			}
+			foreach (array('type', 'cat', 'forum_access', 'html', 'sig', 'ppp', 'hot', 'tpp', 'weight' , 'forum') as $k) {
+				$$k = !empty($_POST[$k]) ? intval($_POST[$k]) : 0;
+			}
 
 			$sql = sprintf("UPDATE %s SET forum_name = '%s', forum_desc = '%s', forum_type = '%s', cat_id = %u, forum_access = %u, allow_html = '%s', allow_sig = '%s', posts_per_page = %u, hot_threshold = %u, topics_per_page = %u, forum_weight = %u WHERE forum_id = %u", $xoopsDB->prefix("xhnewbb_forums"), $name, $desc, $type, $cat, $forum_access, $html, $sig, $ppp, $hot, $tpp, $weight , $forum);
 
@@ -51,22 +57,22 @@ case 'editforum':
 					if ( $mod_data->isActive() ) {
 						$sql = sprintf("INSERT INTO %s (forum_id, user_id) VALUES (%u, %u)", $xoopsDB->prefix("xhnewbb_forum_mods"), $forum, $mod);
 						if ( !$xoopsDB->query($sql) ) {
-		    				redirect_header("./index.php", 1);
+							redirect_header("./index.php", 1);
 							exit();
 						}
 					}
 				}
 			}
 
-			if ( !isset($mods) ) {
+			if ( !isset($_POST['mods']) ) {
 				$current_mods = "SELECT count(*) AS total FROM ".$xoopsDB->prefix("xhnewbb_forum_mods")." WHERE forum_id = $forum";
 				$r = $xoopsDB->query($current_mods);
 				list($total) = $xoopsDB->fetchRow($r);
 			} else {
-				$total = count($mods) + 1;
+				$total = count($_POST['mods']) + 1;
 			}
 
-			if ( isset($rem_mods) && $total > 1 ) {
+			if ( isset($_POST['rem_mods']) && $total > 1 ) {
 				while ( list($null, $mod) = each($_POST["rem_mods"]) ) {
 					$sql = sprintf("DELETE FROM %s WHERE forum_id = %u AND user_id = %u", $xoopsDB->prefix("xhnewbb_forum_mods"), $forum, $mod);
 					if ( !$xoopsDB->query($sql) ) {
@@ -75,18 +81,19 @@ case 'editforum':
 					}
 				}
 			} else {
-				if ( isset($rem_mods) ) {
+				if ( isset($_POST['rem_mods']) ) {
 					$mod_not_removed = 1;
 				}
 			}
 			if ( ! empty( $mod_not_removed ) ) {
-	           	redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMUPDATED."<br />"._MD_XHNEWBB_A_HTSMHNBRBITHBTWNLBAMOTF);
-            }else{
-	           	redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMUPDATED);
+				redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMUPDATED."<br />"._MD_XHNEWBB_A_HTSMHNBRBITHBTWNLBAMOTF);
+			}else{
+				redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMUPDATED);
 			}
 		} else {
+			$forum = !empty($_POST['forum']) ? intval($_POST['forum']) : 0;
 			$sql = "SELECT post_id FROM ".$xoopsDB->prefix("xhnewbb_posts")." WHERE forum_id = $forum";
-    		if ( !$r = $xoopsDB->query($sql) ) {
+			if ( !$r = $xoopsDB->query($sql) ) {
 				redirect_header("./index.php", 1);
 				exit();
 			}
@@ -136,17 +143,18 @@ case 'editforum':
 				redirect_header("./index.php", 1);
 				exit();
 			}
-           	redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMREMOVED);
+			redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMREMOVED);
 		}
 	}
 	if ( isset($_POST['submit']) && !isset($_POST['save']) ) {
+		$forum = !empty($_POST['forum']) ? intval($_POST['forum']) : 0;
 		$sql = "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id = $forum";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
 		}
 		if ( !$myrow = $xoopsDB->fetchArray($result) ) {
-             redirect_header("./index.php", 1, _MD_XHNEWBB_A_NOSUCHFORUM);
+			 redirect_header("./index.php", 1, _MD_XHNEWBB_A_NOSUCHFORUM);
 		}
 		$name = $myts->makeTboxData4Edit($myrow['forum_name']);
 		$desc = $myts->makeTareaData4Edit($myrow['forum_desc']);
@@ -160,22 +168,22 @@ case 'editforum':
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
-        <td align='center' colspan="2"><span class='fg2'><b><?php echo _MD_XHNEWBB_A_EDITTHISFORUM;?></b></span></td>
+		<td align='center' colspan="2"><span class='fg2'><b><?php echo _MD_XHNEWBB_A_EDITTHISFORUM;?></b></span></td>
 		</tr>
 		<tr class='bg1' align='left'>
-        <td colspan=2><input type="CHECKBOX" name='delete' value="1"><span class='fg2'> <?php echo _MD_XHNEWBB_A_DTFTWARAPITF;?></span></td>
+		<td colspan=2><input type="CHECKBOX" name='delete' value="1"><span class='fg2'> <?php echo _MD_XHNEWBB_A_DTFTWARAPITF;?></span></td>
 		</tr>
 		<tr class='bg1' align='left'>
-        <td><span class='fg2'><?php echo _MD_XHNEWBB_A_FORUMNAME;?></span></td>
-        <td><input type='text' name='name' SIZE="40" MAXLENGTH="150" value="<?php echo $name?>"></td>
+		<td><span class='fg2'><?php echo _MD_XHNEWBB_A_FORUMNAME;?></span></td>
+		<td><input type='text' name='name' SIZE="40" MAXLENGTH="150" value="<?php echo $name?>"></td>
 		</tr>
 		<tr class='bg1' align='left'>
-        <td><span class='fg2'><?php echo _MD_XHNEWBB_A_FORUMDESCRIPTION;?></span></td>
-        <td><TEXTAREA name='desc' ROWS="15" COLS="45" WRAP="VIRTUAL"><?php echo $desc?></TEXTAREA></td>
+		<td><span class='fg2'><?php echo _MD_XHNEWBB_A_FORUMDESCRIPTION;?></span></td>
+		<td><TEXTAREA name='desc' ROWS="15" COLS="45" WRAP="VIRTUAL"><?php echo $desc?></TEXTAREA></td>
 		</tr>
 		<tr class='bg1' align='left'>
-        <td valign="top"><span class='fg2'><?php echo _MD_XHNEWBB_A_MODERATOR;?></span></td>
-        <td><b>Current:</b><br />
+		<td valign="top"><span class='fg2'><?php echo _MD_XHNEWBB_A_MODERATOR;?></span></td>
+		<td><b>Current:</b><br />
 		<?php
 		$sql = "SELECT u.uname, u.uid FROM ".$xoopsDB->prefix("users")." u, ".$xoopsDB->prefix("xhnewbb_forum_mods")." f WHERE f.forum_id = $forum AND u.uid = f.user_id";
 		if ( !$r = $xoopsDB->query($sql) ) {
@@ -219,11 +227,11 @@ case 'editforum':
 			echo "<option value=\"0\">"._MD_XHNEWBB_A_NONE."</option>\n";
 		}
 		?>
-        </select></td>
+		</select></td>
 		</tr>
 		<tr class='bg1' align='left'>
-        <td><span class='fg2'><?php echo _MD_XHNEWBB_A_CATEGORY;?></span></td>
-        <td><select name='cat'>
+		<td><span class='fg2'><?php echo _MD_XHNEWBB_A_CATEGORY;?></span></td>
+		<td><select name='cat'>
 		<?php
 		$sql = "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_categories")."";
 		if ( !$r = $xoopsDB->query($sql) ) {
@@ -243,7 +251,7 @@ case 'editforum':
 			echo "<option value=\"0\">"._MD_XHNEWBB_A_NONE."</option>\n";
 		}
 		?>
-        </select></td>
+		</select></td>
 		<?php
 		switch( $myrow['forum_access'] ) {
 			case 1 :
@@ -264,11 +272,11 @@ case 'editforum':
 		<tr class='bg1' align='left'>
 		<td><span class='fg2'>Access Level:</span></td>
 		<td><select name='forum_access'>
-	    <option value="2" <?php echo $access2?>><?php echo _MD_XHNEWBB_A_ANONYMOUSPOST;?></option>
-	    <option value="1" <?php echo $access1?>><?php echo _MD_XHNEWBB_A_REGISTERUSERONLY;?></option>
-	    <option value="3" <?php echo $access3?>><?php echo _MD_XHNEWBB_A_MODERATORANDADMINONLY;?></option>
-	    </select>
-        </td>
+		<option value="2" <?php echo $access2?>><?php echo _MD_XHNEWBB_A_ANONYMOUSPOST;?></option>
+		<option value="1" <?php echo $access1?>><?php echo _MD_XHNEWBB_A_REGISTERUSERONLY;?></option>
+		<option value="3" <?php echo $access3?>><?php echo _MD_XHNEWBB_A_MODERATORANDADMINONLY;?></option>
+		</select>
+		</td>
 		</tr>
 		<tr class='bg1' align='left'>
 		<td><span class='fg2'><?php echo _MD_XHNEWBB_A_TYPE;?></span></td>
@@ -356,30 +364,32 @@ case 'editforum':
 		<?php
 	}
 	break;
+
 case 'editcat':
 	$myts =& MyTextSanitizer::getInstance();
-   	if ( isset($_POST['submit']) && isset($_POST['save']) ) {
+	if ( isset($_POST['submit']) && isset($_POST['save']) ) {
 		$new_title = $myts->makeTboxData4Save($_POST['new_title']);
+		$cat_id = !empty($_POST['cat_id']) ? intval($_POST['cat_id']) : 0;
 		$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_categories")." SET cat_title = '$new_title' WHERE cat_id = $cat_id";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
-   		} else {
+		} else {
 			redirect_header("./index.php", 1, _MD_XHNEWBB_A_CATEGORYUPDATED);
-	 	}
+		}
 	} else if(isset($_POST['submit']) && $_POST['submit'] != "") {
-		$sql = "SELECT cat_title FROM ".$xoopsDB->prefix("xhnewbb_categories")." WHERE cat_id = '$cat'";
-   		if ( !$result = $xoopsDB->query($sql) ) {
+		$sql = "SELECT cat_title FROM ".$xoopsDB->prefix("xhnewbb_categories")." WHERE cat_id = ".intval($_POST['cat']);
+		if ( !$result = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
-   		}
+		}
 		xoops_cp_header();
 		include( './mymenu.php' ) ;
 		echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
 		."<tr><td class=\"odd\">";
 		echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
-   		$cat_data = $xoopsDB->fetchArray($result);
-   		$cat_title = $myts->makeTboxData4Edit($cat_data["cat_title"]);
+		$cat_data = $xoopsDB->fetchArray($result);
+		$cat_title = $myts->makeTboxData4Edit($cat_data["cat_title"]);
 		?>
 		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
@@ -395,7 +405,7 @@ case 'editcat':
 		<td align='center' colspan="2">
 		<input type="hidden" name='mode' value="editcat" />
 		<input type="hidden" name="save" value="TRUE" />
-		<input type="hidden" name="cat_id" value="<?php echo $cat?>" />
+		<input type="hidden" name="cat_id" value="<?php echo intval( $_POST['cat'] ) ; ?>" />
 		<input type='submit' name='submit' value="<?php echo _MD_XHNEWBB_A_SAVECHANGES;?>" />
 		</td>
 		</tr>
@@ -404,10 +414,10 @@ case 'editcat':
 		<?php
 	} else {
 		$sql = "SELECT cat_id, cat_title FROM ".$xoopsDB->prefix("xhnewbb_categories")." ORDER BY cat_order";
-   		if ( !$result = $xoopsDB->query($sql) ) {
+		if ( !$result = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
-   		}
+		}
 		xoops_cp_header();
 		include( './mymenu.php' ) ;
 		echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
@@ -437,12 +447,12 @@ case 'editcat':
 		</tr>
 		</table></td></tr></table>
 		<?php
-   	}
+	}
 	break;
 case 'remcat':
 	$myts =& MyTextSanitizer::getInstance();
-    if ( isset($_POST['submit']) && $_POST['submit'] != "" ) {
-		$sql = sprintf("DELETE FROM %s WHERE cat_id = %u", $xoopsDB->prefix("xhnewbb_categories"), $cat);
+	if ( isset($_POST['submit']) && $_POST['submit'] != "" ) {
+		$sql = sprintf("DELETE FROM %s WHERE cat_id = %u", $xoopsDB->prefix("xhnewbb_categories"), $_POST['cat']);
 		if ( !$r = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
@@ -474,7 +484,7 @@ case 'remcat':
 			xoops_cp_footer();
 			exit();
 		}
-		while (  $m = $xoopsDB->fetchArray($r) ) {
+		while ( $m = $xoopsDB->fetchArray($r) ) {
 			echo "<option value=\"".$m['cat_id']."\">".$myts->makeTboxData4Show($m['cat_title'])."</option>\n";
 		}
 		?>
@@ -490,7 +500,7 @@ case 'remcat':
 	break;
 case 'addcat':
 	$myts =& MyTextSanitizer::getInstance();
-    if ( isset($_POST['submit']) && $_POST['submit'] != "" ) {
+	if ( isset($_POST['submit']) && $_POST['submit'] != "" ) {
 		$nextid = $xoopsDB->genId($xoopsDB->prefix("xhnewbb_categories")."_cat_id_seq");
 		$sql = "SELECT max(cat_order) AS highest FROM ".$xoopsDB->prefix("xhnewbb_categories")."";
 		if ( !$r = $xoopsDB->query($sql) ) {
@@ -499,7 +509,7 @@ case 'addcat':
 		}
 		list($highest) = $xoopsDB->fetchRow($r);
 		$highest++;
-		$title = $myts->makeTboxData4Save($title);
+		$title = $myts->makeTboxData4Save($_POST['title']);
 		$sql = "INSERT INTO ".$xoopsDB->prefix("xhnewbb_categories")." (cat_id, cat_title, cat_order) VALUES ($nextid, '$title', '$highest')";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
@@ -537,20 +547,27 @@ case 'addcat':
 	break;
 case 'addforum':
 	$myts =& MyTextSanitizer::getInstance();
-    if ( isset($_POST['submit']) && $_POST['submit'] != "" ) {
+	if ( isset($_POST['submit']) && $_POST['submit'] != "" ) {
+		foreach (array('name', 'desc') as $k) {
+			$$k = !empty($_POST[$k]) ? trim($myts->stripSlashesGPC($_POST[$k])) : '';
+		}
+		foreach (array('type', 'cat', 'forum_access', 'html', 'sig', 'ppp', 'hot', 'tpp', 'forum') as $k) {
+			$$k = !empty($_POST[$k]) ? intval($_POST[$k]) : 0;
+		}
+		$mods = !empty($_POST['mods']) ? $_POST['mods'] : array();
 		if ( $name == '' || $desc == '' || !is_array($mods) ) {
-            xoops_cp_header();
+			xoops_cp_header();
 			include( './mymenu.php' ) ;
-		    echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
+			echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
 			."<tr><td class=\"odd\">";
-		    echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
+			echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 			echo _MD_XHNEWBB_A_YDNFOATPOTFDYAA;
 			echo"</td></tr></table>";
 			xoops_cp_footer();
 			exit();
 		}
-      	$desc = $myts->makeTareaData4Save(@$_POST['desc']);
-      	$name = $myts->makeTboxData4Save(@$_POST['name']);
+		$desc = $myts->makeTareaData4Save(@$_POST['desc']);
+		$name = $myts->makeTboxData4Save(@$_POST['name']);
 		$html = intval(@$_POST['html']);
 		$sig = intval(@$_POST['sig']);
 		$ppp = intval(@$_POST['ppp']);
@@ -600,18 +617,18 @@ case 'addforum':
 				exit();
 			}
 		}
-       	redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMCREATED);
+		redirect_header("./index.php", 1, _MD_XHNEWBB_A_FORUMCREATED);
 	} else {
 		$sql = "SELECT count(*) AS total FROM ".$xoopsDB->prefix("xhnewbb_categories")."";
 		if ( !$r = $xoopsDB->query($sql) ) {
 			redirect_header("./index.php", 1);
 			exit();
 		}
-    xoops_cp_header();
+	xoops_cp_header();
 	include( './mymenu.php' ) ;
-    echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
+	echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
 	."<tr><td class=\"odd\">";
-    echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
+	echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 		list($total) = $xoopsDB->fetchRow($r);
 		if ( $total < 1 || !isset($total) ) {
 			echo _MD_XHNEWBB_A_EYMAACBYAF;
@@ -685,14 +702,14 @@ case 'addforum':
 		</tr>
 		<tr class='bg1' align='left'>
 		<td><span class='fg2'><?php echo _MD_XHNEWBB_A_TYPE;?></span></td>
-        <td><select name="type">
-        <option value="0"><?php echo _MD_XHNEWBB_A_PUBLIC;?></option>
-        <option value="1"><?php echo _MD_XHNEWBB_A_PRIVATE;?></option>
-        </select>
-        </td>
+		<td><select name="type">
+		<option value="0"><?php echo _MD_XHNEWBB_A_PUBLIC;?></option>
+		<option value="1"><?php echo _MD_XHNEWBB_A_PRIVATE;?></option>
+		</select>
+		</td>
 		</tr>
 		<?php
-		echo "<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_ALLOWHTML ."</span></td>			<td><input type='radio' name='html' value='1' />"._MD_XHNEWBB_A_YES."<input type='radio' name='html' value='0' checked='checked'  />"._MD_XHNEWBB_A_NO ."</td></tr>
+		echo "<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_ALLOWHTML ."</span></td>			<td><input type='radio' name='html' value='1' />"._MD_XHNEWBB_A_YES."<input type='radio' name='html' value='0' checked='checked' />"._MD_XHNEWBB_A_NO ."</td></tr>
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_ALLOWSIGNATURES ."</span></td>
 		<td><input type='radio' name='sig' value='1' checked='checked' />". _MD_XHNEWBB_A_YES ."<input type='radio' name='sig' value='0' />". _MD_XHNEWBB_A_NO ."</td></tr>
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_HOTTOPICTHRESHOLD ."</span></td><td><input type='text' name='hot' size='3' maxlength='3' value='10' /></td></tr>
@@ -718,13 +735,16 @@ case 'addforum':
 	break;
 case 'catorder':
 	$myts =& MyTextSanitizer::getInstance();
-    xoops_cp_header();
+	xoops_cp_header();
 	include( './mymenu.php' ) ;
-    echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
+	echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
 	."<tr><td class=\"odd\">";
-    echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
-    //    update catagories set cat_order = cat_order + 1 WHERE cat_order >= 2; update catagories set cat_order = cat_order - 2 where cat_id = 3;
-	if ( isset($up) && $up != "" ) {
+	echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
+	//	update catagories set cat_order = cat_order + 1 WHERE cat_order >= 2; update catagories set cat_order = cat_order - 2 where cat_id = 3;
+	$cat_id = !empty($_POST['cat_id']) ? intval($_POST['cat_id']) : 0;
+	$last_id = !empty($_POST['last_id']) ? intval($_POST['last_id']) : 0;
+	$current_order = !empty($_POST['current_order']) ? intval($_POST['current_order']) : 0;
+	if ( !empty($_POST['up'])) {
 		if ( $current_order > 1 ) {
 			$order = $current_order - 1;
 			$sql1 = "UPDATE ".$xoopsDB->prefix("xhnewbb_categories")." SET cat_order = $order WHERE cat_id = $cat_id";
@@ -743,9 +763,9 @@ case 'catorder':
 		} else {
 			echo "<div>"._MD_XHNEWBB_A_TCIATHU."</div><br />";
 		}
-	} else if ( isset($down) && $down != "" ) {
+	} else if ( !empty($_POST['down']) ) {
 		$sql = "SELECT cat_order FROM ".$xoopsDB->prefix("xhnewbb_categories")." ORDER BY cat_order DESC";
-		if ( !$r  = $xoopsDB->query($sql,1,0) ) {
+		if ( !$r = $xoopsDB->query($sql,1,0) ) {
 			echo"</td></tr></table>";
 			xoops_cp_footer();
 			exit();
@@ -754,13 +774,13 @@ case 'catorder':
 		if ( $last_number != $current_order ) {
 			$order = $current_order + 1;
 			$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_categories")." SET cat_order = $current_order WHERE cat_order = $order";
-			if ( !$r  = $xoopsDB->query($sql) ) {
+			if ( !$r = $xoopsDB->query($sql) ) {
 				echo"</td></tr></table>";
 				xoops_cp_footer();
 				exit();
 			}
 			$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_categories")." SET cat_order = $order where cat_id = $cat_id";
-			if ( !$r  = $xoopsDB->query($sql) ) {
+			if ( !$r = $xoopsDB->query($sql) ) {
 				echo"</td></tr></table>";
 				xoops_cp_footer();
 				exit();
@@ -772,18 +792,18 @@ case 'catorder':
 	}
 	?>
 	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
-    <table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
+	<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 	<table border="0" cellpadding="1" cellspacing="1" width="100%">
 	<tr class='bg3' align='left'>
-    <td align='center' colspan="3"><span class='fg2'><b><?php echo _MD_XHNEWBB_A_SETCATEGORYORDER;?></b></span><br />
-    <?php echo _MD_XHNEWBB_A_TODHITOTCWDOTIP;?><br />
-    <?php echo _MD_XHNEWBB_A_ECWMTCPUODITO;?></td>
-    </tr>
-    <tr class='bg3' align='center'>
-    <td><?php echo _MD_XHNEWBB_A_CATEGORY1;?></td><td><?php echo _MD_XHNEWBB_A_MOVEUP;?></td><td><?php echo _MD_XHNEWBB_A_MOVEDOWN;?></td>
-    </tr>
+	<td align='center' colspan="3"><span class='fg2'><b><?php echo _MD_XHNEWBB_A_SETCATEGORYORDER;?></b></span><br />
+	<?php echo _MD_XHNEWBB_A_TODHITOTCWDOTIP;?><br />
+	<?php echo _MD_XHNEWBB_A_ECWMTCPUODITO;?></td>
+	</tr>
+	<tr class='bg3' align='center'>
+	<td><?php echo _MD_XHNEWBB_A_CATEGORY1;?></td><td><?php echo _MD_XHNEWBB_A_MOVEUP;?></td><td><?php echo _MD_XHNEWBB_A_MOVEDOWN;?></td>
+	</tr>
 	<?php
-    $sql = "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_categories")." ORDER BY cat_order";
+	$sql = "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_categories")." ORDER BY cat_order";
 	if ( !$r = $xoopsDB->query($sql) ) {
 		exit();
 	}
@@ -804,11 +824,11 @@ case 'catorder':
 		$last_id = $m['cat_id'];
 	}
 	?>
-    </TABLE></TABLE>
+	</TABLE></TABLE>
 	<?php
 	break;
 case 'sync':
-	if ( ! empty( $submit ) ) {
+	if ( ! empty( $_POST['submit'] ) ) {
 		flush();
 		xhnewbb_sync(null, "all forums");
 		flush();

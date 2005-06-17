@@ -10,13 +10,24 @@
   </tr>
 
   <{foreach item=topic from=$block.topics}>
+  <{strip}>
   <tr class="<{cycle values="even,odd"}>">
-    <td><a href="<{$xoops_url}>/modules/xhnewbb/viewforum.php?forum=<{$topic.forum_id}>"><{$topic.forum_name}></a></td>
-    <td><a href="<{$xoops_url}>/modules/xhnewbb/viewtopic.php?topic_id=<{$topic.id}>&amp;forum=<{$topic.forum_id}>&amp;post_id=<{$topic.post_id}>#forumpost<{$topic.post_id}>"><{$topic.last_subject}></a></td>
+    <td>
+      <a href="<{$xoops_url}>/modules/xhnewbb/viewforum.php?forum=<{$topic.forum_id}>"><{$topic.forum_name}></a>
+    </td>
+    <td>
+      <a href="<{$xoops_url}>/modules/xhnewbb/viewtopic.php?topic_id=<{$topic.id}>&amp;forum=<{$topic.forum_id}>&amp;post_id=<{$topic.post_id}>#forumpost<{$topic.post_id}>">
+      <{if $topic.u2t_marked}>
+        <img src="<{$xoops_url}>/modules/xhnewbb/images/marked.gif" />
+      <{/if}>
+      <{$topic.last_subject}>
+      </a>
+    </td>
     <td align="center"><{$topic.replies}></td>
     <td align="center"><{$topic.views}></td>
-    <td align="right" nowrap="nowrap"><{$topic.date}> <{$topic.poster}></td>
+    <td align="right" nowrap="nowrap"><{$topic.date}>&nbsp;<{$topic.poster}></td>
   </tr>
+  <{/strip}>
   <{/foreach}>
 
   <{else}>

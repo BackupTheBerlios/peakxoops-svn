@@ -8,6 +8,7 @@ define("_MB_XHNEWBB_LPOST","最終投稿");
 define("_MB_XHNEWBB_VSTFRMS","フォーラムへ");
 define("_MB_XHNEWBB_DISPLAY","表示件数 %s 件");
 define("_MB_XHNEWBB_DISPLAYF","フルサイズ表示する"); 
+define("_MB_XHNEWBB_MARKISUP","チェックしたトピックの優先表示"); 
 
 define("_MB_XHNEWBB_ORDERTIMED","新着降順"); 
 define("_MB_XHNEWBB_ORDERVIEWSD","ヒット数降順"); 

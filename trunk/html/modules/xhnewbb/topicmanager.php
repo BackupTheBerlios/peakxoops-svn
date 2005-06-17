@@ -30,13 +30,13 @@ if ( $xoopsUser ) {
 	$accesserror = 1;
 }
 if ( $accesserror == 1 ) {
-	redirect_header("viewtopic.php?topic_id=$topic_id&amp;post_id=$post_id&amp;order=$order&amp;viewmode=$viewmode&amp;pid=$pid&amp;forum=$forum",3,_MD_XHNEWBB_YANTMOTFTYCPTF);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;post_id=$post_id&amp;order=$order&amp;viewmode=$viewmode&amp;pid=$pid&amp;forum=$forum",3,_MD_XHNEWBB_YANTMOTFTYCPTF);
 	exit();
 }
 
 include XOOPS_ROOT_PATH.'/header.php';
 OpenTable();
-if ( $_POST['submit'] ) {
+if ( ! empty( $_POST['submit'] ) ) {
 	foreach (array('forum', 'topic_id', 'newforum') as $getint) {
 	    ${$getint} = isset($_POST[$getint]) ? intval($_POST[$getint]) : 0;
     }
@@ -73,7 +73,12 @@ if ( $_POST['submit'] ) {
 			exit(_MD_XHNEWBB_COULDNOTQUERY);
 		}
 
+		// u2t table
+		$xoopsDB->query( "DELETE FROM ".$xoopsDB->prefix("xhnewbb_users2topics")." WHERE topic_id = $topic_id" ) ;
+		// end of u2t table
+
 		$sql = "DELETE FROM ".$xoopsDB->prefix("xhnewbb_posts_text")." WHERE ";
+		$set = false ;
 		for ( $x = 0; $x < count($posts_to_remove); $x++ ) {
 			if ( $set ) {
 				$sql .= " OR ";
@@ -88,7 +93,7 @@ if ( $_POST['submit'] ) {
 		xhnewbb_sync($forum, 'forum');
 		// RMV-NOTIFY
 		xoops_notification_deletebyitem ($xoopsModule->getVar('mid'), 'thread', $topic_id);
-		echo _MD_XHNEWBB_TTHBRFTD."<p><a href='viewforum.php?forum=$forum'>"._MD_XHNEWBB_RETURNTOTHEFORUM."</a></p><p><a href='index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBRFTD."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum'>"._MD_XHNEWBB_RETURNTOTHEFORUM."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'move':
 		if ($newforum > 0) {
@@ -103,35 +108,35 @@ if ( $_POST['submit'] ) {
 			xhnewbb_sync($newforum, 'forum');
 			xhnewbb_sync($forum, 'forum');
 		}
-		echo _MD_XHNEWBB_TTHBM."<p><a href='viewtopic.php?topic_id=$topic_id&amp;forum=$newforum'>"._MD_XHNEWBB_VTUT."</a></p><p><a href='index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBM."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$newforum'>"._MD_XHNEWBB_VTUT."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'lock':
 		$sql = sprintf("UPDATE %s SET topic_status = 1 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit(_MD_XHNEWBB_EPGBATA);
 		}
-		echo _MD_XHNEWBB_TTHBL."<p><a href='viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBL."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'unlock':
 		$sql = sprintf("UPDATE %s SET topic_status = 0 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit("Error - Could not unlock the selected topic. Please go back and try again.");
 		}
-		echo _MD_XHNEWBB_TTHBU."<p><a href='viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBU."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'sticky':
 		$sql = sprintf("UPDATE %s SET topic_sticky = 1 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit("Error - Could not sticky the selected topic. Please go back and try again.");
 		}
-		echo _MD_XHNEWBB_TTHBS."<p><a href='viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBS."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'unsticky':
 		$sql = sprintf("UPDATE %s SET topic_sticky = 0 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit("Error - Could not unsticky the selected topic. Please go back and try again.");
 		}
-		echo _MD_XHNEWBB_TTHBUS."<p><a href='viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBUS."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	}
 } else {  // No submit

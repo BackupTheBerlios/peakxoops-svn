@@ -284,6 +284,9 @@ class ForumPosts
 			if ( !$result = $this->db->query($sql) ) {
 				echo "Could not delete topic.";
 			}
+			// u2t table
+			$this->db->query( "DELETE FROM ".$this->db->prefix("xhnewbb_users2topics")." WHERE topic_id = $this->topic_id" ) ;
+			// end of u2t table
 		}
 		$mytree = new XoopsTree($this->db->prefix("xhnewbb_posts"), "post_id", "pid");
 		$arr = $mytree->getAllChild($this->post_id);

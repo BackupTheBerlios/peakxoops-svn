@@ -31,18 +31,35 @@
 
 include "header.php";
 
+$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+
+// updating u2t_marked
+if( $uid > 0 && ! empty( $_POST['update_mark'] ) && ! empty( $_POST['topic_ids'] ) ) {
+	foreach( $_POST['topic_ids'] as $topic_id ) {
+		$topic_id = intval( $topic_id ) ;
+		$mark_value = empty( $_POST['marked'][$topic_id] ) ? 0 : 1 ;
+		$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("xhnewbb_users2topics")." SET u2t_marked=$mark_value WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
+		if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->query( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_marked=$mark_value" ) ;
+	}
+
+	$forum = intval( @$_POST['forum'] ) ;
+
+	redirect_header( XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum" , 0 , _MD_XHNEWBB_UPDATED ) ;
+}
+
+
 $forum = intval($_GET['forum']);
 if ( $forum < 1 ) {
-	redirect_header("index.php", 2, _MD_XHNEWBB_ERRORFORUM);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORFORUM);
 	exit();
 }
 $sql = 'SELECT forum_type, forum_name, forum_access, allow_html, allow_sig, posts_per_page, hot_threshold, topics_per_page FROM '.$xoopsDB->prefix('xhnewbb_forums').' WHERE forum_id = '.$forum;
 if ( !$result = $xoopsDB->query($sql) ) {
-	redirect_header("index.php", 2, _MD_XHNEWBB_ERRORCONNECT);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORCONNECT);
 	exit();
 }
 if ( !$forumdata = $xoopsDB->fetchArray($result) ) {
-	redirect_header("index.php", 2, _MD_XHNEWBB_ERROREXIST);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERROREXIST);
 	exit();
 }
 // this page uses smarty template
@@ -65,7 +82,7 @@ if ( $forumdata['forum_type'] == 1 ) {
 		$accesserror = 1;
 	}
 	if ( $accesserror == 1 ) {
-		redirect_header("index.php",2,_MD_XHNEWBB_NORIGHTTOACCESS);
+		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_NORIGHTTOACCESS);
 		exit();
 	}
 	$can_post = 1;
@@ -93,12 +110,10 @@ if ( $forumdata['forum_type'] == 1 ) {
 	}
 }
 
-$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-
 $xoopsTpl->assign("forum_id", $forum);
 if ( $can_post == 1 ) {
 	$xoopsTpl->assign('viewer_can_post', true);
-  	$xoopsTpl->assign('forum_post_or_register', "<a href=\"newtopic.php?forum=".$forum."\"><img src=\"".$bbImage['post']."\" alt=\""._MD_XHNEWBB_POSTNEW."\" /></a>");
+  	$xoopsTpl->assign('forum_post_or_register', "<a href='".XOOPS_URL."/modules/xhnewbb/newtopic.php?forum=".$forum."'><img src=\"".$bbImage['post']."\" alt=\""._MD_XHNEWBB_POSTNEW."\" /></a>");
 } else {
 	$xoopsTpl->assign('viewer_can_post', false);
 	if ( $show_reg == 1 ) {
@@ -169,31 +184,31 @@ $forum_selection_since .= '</select>';
 $xoopsTpl->assign('forum_selection_since', $forum_selection_since);
 $xoopsTpl->assign('lang_go', _MD_XHNEWBB_GO);
 
-$xoopsTpl->assign('h_topic_link', "viewforum.php?forum=$forum&amp;sortname=t.topic_title&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_title" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_topic_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=t.topic_title&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_title" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_topic', _MD_XHNEWBB_TOPIC);
 
-$xoopsTpl->assign('h_reply_link', "viewforum.php?forum=$forum&amp;sortname=t.topic_replies&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_replies" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_reply_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=t.topic_replies&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_replies" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_replies', _MD_XHNEWBB_REPLIES);
 
-$xoopsTpl->assign('h_poster_link', "viewforum.php?forum=$forum&amp;sortname=u.uname&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "u.uname" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_poster_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=u.uname&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "u.uname" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_poster', _MD_XHNEWBB_POSTER);
 
-$xoopsTpl->assign('h_views_link', "viewforum.php?forum=$forum&amp;sortname=t.topic_views&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_views" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_views_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=t.topic_views&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_views" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_views', _MD_XHNEWBB_VIEWS);
 
-$xoopsTpl->assign('h_date_link', "viewforum.php?forum=$forum&amp;sortname=p.post_time&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "p.post_time" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_date_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=p.post_time&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "p.post_time" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_date', _MD_XHNEWBB_DATE);
 
 $startdate = time() - (86400* $sortsince);
 $start = !empty($_GET['start']) ? intval($_GET['start']) : 0;
 
 if( $uid > 0 ) {
-	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = '.$uid.' WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY topic_sticky DESC, '.$sortname.' '.$sortorder;
+	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time, u2t.u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = '.$uid.' WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY u2t.u2t_marked DESC , t.topic_sticky DESC, '.$sortname.' '.$sortorder;
 } else {
-	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, 0 AS u2t_time FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY topic_sticky DESC, '.$sortname.' '.$sortorder;
+	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, 0 AS u2t_time, 0 AS u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY t.topic_sticky DESC, '.$sortname.' '.$sortorder;
 }
 if ( !$result = $xoopsDB->query($sql,$forumdata['topics_per_page'],$start) ) {
-	redirect_header('index.php',2,_MD_XHNEWBB_ERROROCCURED);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERROROCCURED);
 	exit();
 }
 
@@ -243,7 +258,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	}
 	$pagination = '';
 	$addlink = '';
-	$topiclink = 'viewtopic.php?topic_id='.$myrow['topic_id'].'&amp;forum='.$forum;
+	$topiclink = XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=".$myrow['topic_id'].'&amp;forum='.$forum;
 	$totalpages = ceil(($myrow['topic_replies'] + 1) / $forumdata['posts_per_page']);
 	if ( $totalpages > 1 ) {
 		$pagination .= '&nbsp;&nbsp;&nbsp;<img src="'.XOOPS_URL.'/images/icons/posticon.gif" /> ';
@@ -267,8 +282,15 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	} else {
 		$topic_poster = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$myrow['topic_poster'].'">'.$xoopsConfig['anonymous'].'</a>';
 	}
-	$xoopsTpl->append('topics', array('topic_icon'=>$topic_icon, 'topic_folder'=>$image, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time']), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster'])));
+
+	$mark_checked = $myrow['u2t_marked'] ? 'checked="checked"' : '' ;
+
+	$xoopsTpl->append('topics', array('topic_id'=>$myrow['topic_id'], 'topic_icon'=>$topic_icon, 'topic_folder'=>$image, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time']), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster']), 'u2t_time' => $myrow['u2t_time'], 'mark_checked' => $mark_checked ));
 }
+
+$xoopsTpl->assign("mod_url" , XOOPS_URL.'/modules/xhnewbb' ) ;
+$xoopsTpl->assign('php_self_abs', XOOPS_URL."/modules/xhnewbb/viewforum.php" );
+$xoopsTpl->assign('uid', $uid);
 
 $xoopsTpl->assign('lang_by', _MD_XHNEWBB_BY);
 

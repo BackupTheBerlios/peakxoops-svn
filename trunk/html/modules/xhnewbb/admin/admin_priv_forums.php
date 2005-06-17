@@ -26,12 +26,15 @@ include( './mymenu.php' ) ;
 echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
 ."<tr><td class=\"odd\">";
 echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
-extract($_GET);
-if (isset($_POST)) {
-	foreach ($_POST as $key => $value) {
-		${$key} = $value;
-	}
+$op = '';
+if (!empty($_POST['op'])) {
+    $op = $_POST['op'];
+} elseif (!empty($_GET['op'])) {
+    $op = $_GET['op'];
 }
+
+$forum = !empty($_REQUEST['forum']) ? intval($_REQUEST['forum']) : 0;
+$op_userid = !empty($_REQUEST['op_userid']) ? intval($_REQUEST['op_userid']) : 0;
 
 	if ( empty( $op ) )
 	{
@@ -104,7 +107,7 @@ if (isset($_POST)) {
 		if ($op == "adduser")
 		{
 			// Add user(s) to the list for this forum.
-			if ($userids)
+			if (!empty($_POST['userids']))
 			{
 				while(list($null, $curr_userid) = each($_POST["userids"]))
 				{

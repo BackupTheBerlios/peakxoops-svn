@@ -1,6 +1,11 @@
 <?php
 
 //%%%%%%		Module Name phpBB  		%%%%%
+
+define("_MD_XHNEWBB_UPDATE","更新");
+define("_MD_XHNEWBB_UPDATED","更新しました");
+
+
 //functions.php
 define("_MD_XHNEWBB_ERROR","エラー");
 define("_MD_XHNEWBB_NOPOSTS","投稿はありません");

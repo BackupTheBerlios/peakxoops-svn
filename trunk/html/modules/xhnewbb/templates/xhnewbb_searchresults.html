@@ -1,7 +1,7 @@
 <!-- start module contents -->
 <table border="0" cellpadding="5" align="center">
   <tr>
-    <td colspan="2" align="left"><img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$lang_forumindex}></a><br />&nbsp;&nbsp;&nbsp;<img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<a href="search.php"><{$lang_search}></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<{$lang_searchresults}></td>
+    <td colspan="2" align="left"><img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<a href="<{$mod_url}>/index.php"><{$lang_forumindex}></a><br />&nbsp;&nbsp;&nbsp;<img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<a href="<{$mod_url}>/search.php"><{$lang_search}></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<{$lang_searchresults}></td>
   </tr>
 </table>
 
@@ -21,8 +21,8 @@
 		<{section name=i loop=$results}>
         <!-- start each result -->
         <tr align="center">
-          <td class="even"><a href="viewforum.php?forum=<{$results[i].forum_id}>"><{$results[i].forum_name}></a></td>
-          <td class="odd"><a href="viewtopic.php?topic_id=<{$results[i].topic_id}>&amp;forum=<{$results[i].forum_id}>"><{$results[i].topic_title}></a></td>
+          <td class="even"><a href="<{$mod_url}>/viewforum.php?forum=<{$results[i].forum_id}>"><{$results[i].forum_name}></a></td>
+          <td class="odd"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$results[i].topic_id}>&amp;forum=<{$results[i].forum_id}>"><{$results[i].topic_title}></a></td>
           <td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$results[i].user_id}>"><{$results[i].user_name}></a></td>
           <td class="odd"><{$results[i].topic_replies}></td>
           <td class="even"><{$results[i].topic_views}></td>
@@ -36,7 +36,7 @@
   </tr>
 </table>
 <br />
-<form name="Search" action="search.php" method="post">
+<form name="Search" action="<{$mod_url}>/search.php" method="post">
   <table class="outer" border="0" cellpadding="1" cellspacing="0" align="center" width="95%">
     <tr>
       <td>

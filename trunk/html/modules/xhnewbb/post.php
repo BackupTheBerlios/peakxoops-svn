@@ -35,12 +35,12 @@ foreach (array('forum', 'topic_id', 'post_id', 'order', 'pid') as $getint) {
 }
 $viewmode = (isset($_POST['viewmode']) && $_POST['viewmode'] != 'flat') ? 'thread' : 'flat';
 if ( empty($forum) ) {
-	redirect_header("index.php", 2, _MD_XHNEWBB_ERRORFORUM);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORFORUM);
 	exit();
 } else {
 	$sql = "SELECT forum_type, forum_name, forum_access, allow_html, allow_sig, posts_per_page, hot_threshold, topics_per_page FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id = ".$forum;
 	if ( !$result = $xoopsDB->query($sql) ) {
-		redirect_header('index.php',2,_MD_XHNEWBB_ERROROCCURED);
+		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERROROCCURED);
 		exit();
 	}
 	$forumdata = $xoopsDB->fetchArray($result);
@@ -63,7 +63,7 @@ if ( empty($forum) ) {
 		}
 
 		if ( $accesserror == 1 ) {
-			redirect_header("viewforum.php?order=".$order."&viewmode=".$viewmode."&forum=".$forum,2,_MD_XHNEWBB_NORIGHTTOPOST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?order=".$order."&viewmode=".$viewmode."&forum=".$forum,2,_MD_XHNEWBB_NORIGHTTOPOST);
 			exit();
 		}
 	} else {
@@ -82,10 +82,10 @@ if ( empty($forum) ) {
 			$accesserror = 1;
 		}
 		if ( $accesserror == 1 ) {
-			redirect_header("viewforum.php?order=".$order."&viewmode=".$viewmode."&forum=".$forum,2,_MD_XHNEWBB_NORIGHTTOPOST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?order=".$order."&viewmode=".$viewmode."&forum=".$forum,2,_MD_XHNEWBB_NORIGHTTOPOST);
 			exit();
 		}
-    }
+	}
 	if ( !empty($_POST['contents_preview']) ) {
 		include XOOPS_ROOT_PATH."/header.php";
 		echo"<table width='100%' border='0' cellspacing='1' class='outer'><tr><td>";
@@ -112,10 +112,10 @@ if ( empty($forum) ) {
 		$guestName = $myts->makeTboxData4PreviewInForm($_POST['guestName']); // Ryuji_edit(2003-05-06)
 
 		$attachsig = !empty($_POST['attachsig']) ? 1 : 0;
-		include 'include/forumform.inc.php';
+		include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 		echo"</td></tr></table>";
 	} else {
-		include_once 'class/class.forumposts.php';
+		include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
 		//Ryuji_edit(2003-05-06)
 		if((isset($_POST['message']))&&(!empty ($_POST['guestName']))){
 			$_POST['message'] = sprintf(_MD_XHNEWBB_FMT_GUESTSPOSTHEADER,$_POST['guestName']).$_POST['message'];
@@ -134,11 +134,11 @@ if ( empty($forum) ) {
 				$editerror = 1;
 			}
 			if ( $editerror == 1 ) {
-				redirect_header("viewtopic.php?topic_id=".$topic_id."&post_id=".$post_id."&order=".$order."&viewmode=".$viewmode."&pid=".$pid."&forum=".$forum,2,_MD_XHNEWBB_EDITNOTALLOWED);
+				redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=".$topic_id."&post_id=".$post_id."&order=".$order."&viewmode=".$viewmode."&pid=".$pid."&forum=".$forum,2,_MD_XHNEWBB_EDITNOTALLOWED);
 				exit();
 			}
 			$editor = $xoopsUser->getVar("uname");
-   			$on_date .= _MD_XHNEWBB_ON." ".formatTimestamp(time());
+   			$on_date = _MD_XHNEWBB_ON." ".formatTimestamp(time());
 			//$message .= "\n\n<small>[ "._MD_XHNEWBB_EDITEDBY." ".$editor." ".$on_date." ]</small>";
 		} else {
 			$isreply = 0;
@@ -150,9 +150,9 @@ if ( empty($forum) ) {
 					$uid = 0;
 				} else {
 					if ( !empty($topic_id) ) {
-						redirect_header("viewtopic.php?topic_id=".$topic_id."&order=".$order."&viewmode=".$viewmode."&pid=".$pid."&forum=".$forum,2,_MD_XHNEWBB_ANONNOTALLOWED);
+						redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=".$topic_id."&order=".$order."&viewmode=".$viewmode."&pid=".$pid."&forum=".$forum,2,_MD_XHNEWBB_ANONNOTALLOWED);
 					} else {
-						redirect_header("viewforum.php?forum=".$forum,2,_MD_XHNEWBB_ANONNOTALLOWED);
+						redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=".$forum,2,_MD_XHNEWBB_ANONNOTALLOWED);
 					}
 					exit();
 				}
@@ -169,14 +169,14 @@ if ( empty($forum) ) {
 			$forumpost->setIp($_SERVER['REMOTE_ADDR']);
 			$forumpost->setUid($uid);
 		}
-		$subject = xoops_trim($_POST['subject']);
+		$subject = xoops_trim(@$_POST['subject']);
 		$subject = ($subject == '') ? _NOTITLE : $subject;
 		$forumpost->setSubject($subject);
-		$forumpost->setText($_POST['message']);
-		$forumpost->setNohtml($_POST['nohtml']);
-		$forumpost->setNosmiley($_POST['nosmiley']);
-		$forumpost->setIcon($_POST['icon']);
-		$forumpost->setAttachsig($_POST['attachsig']);
+		$forumpost->setText(@$_POST['message']);
+		$forumpost->setNohtml(@$_POST['nohtml']);
+		$forumpost->setNosmiley(@$_POST['nosmiley']);
+		$forumpost->setIcon(@$_POST['icon']);
+		$forumpost->setAttachsig(@$_POST['attachsig']);
 		if (!$postid = $forumpost->store()) {
 			include_once(XOOPS_ROOT_PATH.'/header.php');
 			xoops_error('Could not insert forum post');
@@ -186,13 +186,22 @@ if ( empty($forum) ) {
 		if (is_object($xoopsUser) && !empty($isnew)) {
 			$xoopsUser->incrementPost();
 		}
+
+		// set u2t_marked
+		$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+		$topic_id = $forumpost->topic() ;
+		if( $uid > 0 ) {
+			$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("xhnewbb_users2topics")." SET u2t_marked=1 , u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
+			if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->query( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_marked=1 , u2t_time=".time() ) ;
+		}
+
 		// RMV-NOTIFY
 		// Define tags for notification message
 		$tags = array();
 		$tags['THREAD_NAME'] = $_POST['subject'];
-		$tags['THREAD_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/viewtopic.php?forum=' . $forum . '&post_id='.$postid.'&topic_id=' . $forumpost->topic();
+		$tags['THREAD_URL'] = XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/viewtopic.php?forum=$forum&post_id=$postid&topic_id=" . $forumpost->topic();
 		$tags['POST_URL'] = $tags['THREAD_URL'] . '#forumpost' . $postid;
-		include_once 'include/notification.inc.php';
+		include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/include/notification.inc.php';
 		$forum_info = xhnewbb_notify_iteminfo ('forum', $forum);
 		$tags['FORUM_NAME'] = $forum_info['name'];
 		$tags['FORUM_URL'] = $forum_info['url'];
@@ -217,19 +226,19 @@ if ( empty($forum) ) {
 		// appropriate event; if unchecked, then unsubscribe
 
 		if (!empty($xoopsUser) && !empty($xoopsModuleConfig['notification_enabled'])) {
-			if (!empty($HTTP_POST_VARS['notify'])) {
+			if (!empty($_POST['notify'])) {
 				$notification_handler->subscribe('thread', $forumpost->getTopicId(), 'new_post');
 			} else {
 				$notification_handler->unsubscribe('thread', $forumpost->getTopicId(), 'new_post');
 			}
 		}
 
-		if ( $HTTP_POST_VARS['viewmode'] == "flat" ) {
-			redirect_header("viewtopic.php?topic_id=".$forumpost->topic()."&amp;post_id=".$postid."&amp;order=".$order."&amp;viewmode=flat&amp;pid=".$pid."&amp;forum=".$forum."#forumpost".$postid."",2,_MD_XHNEWBB_THANKSSUBMIT);
+		if ( $_POST['viewmode'] == "flat" ) {
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=".$forumpost->topic()."&amp;post_id=".$postid."&amp;order=".$order."&amp;viewmode=flat&amp;pid=".$pid."&amp;forum=".$forum."#forumpost".$postid."",2,_MD_XHNEWBB_THANKSSUBMIT);
 			exit();
 		} else {
 			$post_id = $forumpost->postid();
-			redirect_header("viewtopic.php?topic_id=".$forumpost->topic()."&amp;post_id=".$postid."&amp;order=".$order."&amp;viewmode=thread&amp;pid=".$pid."&amp;forum=".$forum."#forumpost".$postid."",2,_MD_XHNEWBB_THANKSSUBMIT);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=".$forumpost->topic()."&amp;post_id=".$postid."&amp;order=".$order."&amp;viewmode=thread&amp;pid=".$pid."&amp;forum=".$forum."#forumpost".$postid."",2,_MD_XHNEWBB_THANKSSUBMIT);
 			exit();
 		}
 	}

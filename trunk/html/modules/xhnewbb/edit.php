@@ -34,15 +34,15 @@ foreach (array('forum', 'topic_id', 'post_id', 'order', 'pid') as $getint) {
 }
 $viewmode = (isset($_GET['viewmode']) && $_GET['viewmode'] != 'flat') ? 'thread' : 'flat';
 if ( empty($forum) ) {
-	redirect_header("index.php", 2, _MD_XHNEWBB_ERRORFORUM);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORFORUM);
 	exit();
 } elseif ( empty($post_id) ) {
-	redirect_header("viewforum.php?forum=$forum", 2, _MD_XHNEWBB_ERRORPOST);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum", 2, _MD_XHNEWBB_ERRORPOST);
 	exit();
 } else {
 	$sql = sprintf("SELECT forum_type, forum_name, forum_access, allow_html, allow_sig, posts_per_page, hot_threshold, topics_per_page FROM %s WHERE forum_id = %u", $xoopsDB->prefix("xhnewbb_forums"), $forum);
 	if ( !$result = $xoopsDB->query($sql) ) {
-		redirect_header('index.php',2,_MD_XHNEWBB_ERROROCCURED);
+		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERROROCCURED);
 		exit();
 	}
 	$forumdata = $xoopsDB->fetchArray($result);
@@ -61,7 +61,7 @@ if ( empty($forum) ) {
 			$accesserror = 1;
 		}
 		if ( $accesserror == 1 ) {
-			redirect_header("viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
 			exit();
 		}
 	} else {
@@ -80,12 +80,12 @@ if ( empty($forum) ) {
 			$accesserror = 1;
 		}
 		if ( $accesserror == 1 ) {
-			redirect_header("viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
+			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
 			exit();
 		}
     }
 	include XOOPS_ROOT_PATH."/header.php";
-	include_once 'class/class.forumposts.php';
+	include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
 	$forumpost = new ForumPosts($post_id);
 	$editerror = false;
 	if ( $forumpost->islocked() ) {
@@ -98,7 +98,7 @@ if ( empty($forum) ) {
 		}
 	}
 	if ( $editerror ) {
-		redirect_header("viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
+		redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
 		exit();
 	}
 	$nohtml = $forumpost->nohtml();
@@ -116,7 +116,7 @@ if ( empty($forum) ) {
 	$hidden = "";
 	$myts =& MyTextSanitizer::getInstance();
 	$viewmode = $myts->htmlspecialchars($viewmode);
-	include 'include/forumform.inc.php';
+	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 	include XOOPS_ROOT_PATH.'/footer.php';
 }
 ?>

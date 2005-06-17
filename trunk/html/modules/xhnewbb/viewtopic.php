@@ -32,13 +32,22 @@
 include 'header.php';
 $forum = isset($_GET['forum']) ? intval($_GET['forum']) : 0;
 $topic_id = isset($_GET['topic_id']) ? intval($_GET['topic_id']) : 0;
-if ( empty($forum) ) {
-	redirect_header('index.php',2,_MD_XHNEWBB_ERRORFORUM);
-	exit();
-} elseif ( empty($topic_id) ) {
-	redirect_header('viewforum.php?forum='.$forum,2,_MD_XHNEWBB_ERRORTOPIC);
-	exit();
+
+if( empty( $topic_id ) ) {
+	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERRORTOPIC);
+	exit;
 }
+
+if( empty( $forum ) ) {
+	$result = $xoopsDB->query( "SELECT forum_id FROM ".$xoopsDB->prefix("xhnewbb_topics")." WHERE topic_id = $topic_id" ) ;
+	list( $forum ) = $xoopsDB->fetchRow( $result ) ;
+	$_GET['forum'] = $forum ;
+	if( empty( $forum ) ) {
+		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERRORFORUM);
+		exit ;
+	}
+}
+
 $topic_time = (isset($_GET['topic_time'])) ? intval($_GET['topic_time']) : 0;
 $post_id = !empty($_GET['post_id']) ? intval($_GET['post_id']) : 0;
 
@@ -71,7 +80,7 @@ if ($viewmode != 'flat') {
 }
 
 include XOOPS_ROOT_PATH.'/header.php';
-include_once 'class/class.forumposts.php';
+include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
 
 if ( isset($_GET['move']) && 'next' == $_GET['move'] ) {
 	$sql = 'SELECT t.topic_id, t.topic_title, t.topic_time, t.topic_status, t.topic_sticky, t.topic_last_post_id, f.forum_id, f.forum_name, f.forum_access, f.forum_type, f.allow_html, f.allow_sig, f.posts_per_page, f.hot_threshold, f.topics_per_page FROM '.$xoopsDB->prefix('xhnewbb_topics').' t LEFT JOIN '.$xoopsDB->prefix('xhnewbb_forums').' f ON f.forum_id = t.forum_id WHERE t.topic_time > '.$topic_time.' AND t.forum_id = '.$forum.' ORDER BY t.topic_time ASC LIMIT 1';
@@ -82,12 +91,12 @@ if ( isset($_GET['move']) && 'next' == $_GET['move'] ) {
 }
 
 if ( !$result = $xoopsDB->query($sql) ) {
-	redirect_header('viewforum.php?forum='.$forum,2,_MD_XHNEWBB_ERROROCCURED);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum",2,_MD_XHNEWBB_ERROROCCURED);
 	exit();
 }
 
 if ( !$forumdata = $xoopsDB->fetchArray($result) ) {
-	redirect_header('viewforum.php?forum='.$forum,2,_MD_XHNEWBB_FORUMNOEXIST);
+	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum",2,_MD_XHNEWBB_FORUMNOEXIST);
 	exit();
 }
 $xoopsTpl->assign('topic_id', $forumdata['topic_id']);
@@ -111,7 +120,7 @@ if ( $forumdata['forum_type'] == 1 ) {
 		$accesserror = 1;
 	}
 	if ( $accesserror == 1 ) {
-		redirect_header("index.php",2,_MD_XHNEWBB_NORIGHTTOACCESS);
+		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_NORIGHTTOACCESS);
 		exit();
 	}
 	$can_post = 1;
@@ -345,7 +354,7 @@ if ( $viewmode == "thread" ) {
 }
 
 // create jump box
-$xoopsTpl->assign(array('forum_jumpbox' => xhnewbb_make_jumpbox($forum), 'lang_forum_index' => sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']), 'lang_from' => _MD_XHNEWBB_FROM, 'lang_joined' => _MD_XHNEWBB_JOINED, 'lang_posts' => _MD_XHNEWBB_POSTS, 'lang_poster' => _MD_XHNEWBB_POSTER, 'lang_thread' => _MD_XHNEWBB_THREAD, 'lang_edit' => _EDIT, 'lang_delete' => _DELETE, 'lang_reply' => _REPLY, 'lang_postedon' => _MD_XHNEWBB_POSTEDON));
+$xoopsTpl->assign(array('mod_url' => XOOPS_URL.'/modules/xhnewbb' , 'forum_jumpbox' => xhnewbb_make_jumpbox($forum), 'lang_forum_index' => sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']), 'lang_from' => _MD_XHNEWBB_FROM, 'lang_joined' => _MD_XHNEWBB_JOINED, 'lang_posts' => _MD_XHNEWBB_POSTS, 'lang_poster' => _MD_XHNEWBB_POSTER, 'lang_thread' => _MD_XHNEWBB_THREAD, 'lang_edit' => _EDIT, 'lang_delete' => _DELETE, 'lang_reply' => _REPLY, 'lang_postedon' => _MD_XHNEWBB_POSTEDON));
 
 // Read in cookie of 'lastread' times
 // GIJ eliminated unserialize
@@ -401,16 +410,33 @@ if( is_object( @$xoopsUser ) ) {
 	$uid = $xoopsUser->getVar('uid') ;
 
 	// already read
-	$result = $xoopsDB->query( 'SELECT count(*) FROM '.$xoopsDB->prefix('xhnewbb_users2topics')." WHERE uid='$uid' AND topic_id='$topic_id' AND u2t_time >= {$forumdata['topic_time']}" ) ;
-	list( $read ) = $xoopsDB->fetchRow( $result ) ;
-
-	if( $read <= 0 ) {
-
-		// store db
-		$xoopsDB->queryF( 'UPDATE '.$xoopsDB->prefix('xhnewbb_users2topics')." SET u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
-		if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->queryF( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_time=".time() ) ;
+	$result = $xoopsDB->query( 'SELECT u2t_time,u2t_marked FROM '.$xoopsDB->prefix('xhnewbb_users2topics')." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
+	if( $xoopsDB->getRowsNum( $result ) ) {
+		list( $u2t_time , $u2t_marked ) = $xoopsDB->fetchRow( $result ) ;
+	} else {
+		list( $u2t_time , $u2t_marked ) = array( 0 , 0 ) ;
 	}
+
+	if( $u2t_time <= $forumdata['topic_time'] || ! empty( $_GET['change_u2t_mark'] ) ) {
+
+		// u2t_marked on/off
+		$set_u2t_marked = '' ;
+		if( ! empty( $_GET['change_u2t_mark'] ) ) {
+			$u2t_marked = $_GET['change_u2t_mark'] == 'on' ? 1 : 0 ;
+			$set_u2t_marked = ",u2t_marked=$u2t_marked" ;
+		}
+		// update/insert u2t table
+		$xoopsDB->queryF( 'UPDATE '.$xoopsDB->prefix('xhnewbb_users2topics')." SET u2t_time=".time().$set_u2t_marked." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
+		if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->queryF( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_time=".time().$set_u2t_marked ) ;
+	}
+} else {
+	$uid = 0 ;
 }
+
+$xoopsTpl->assign( 'uid' , $uid ) ;
+$xoopsTpl->assign( 'u2t_time' , $u2t_time ) ;
+$xoopsTpl->assign( 'u2t_marked' , $u2t_marked ) ;
+
 
 // setcookie("xhnewbb_topic_lastread", $str4cookie , time()+365*24*3600, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
 

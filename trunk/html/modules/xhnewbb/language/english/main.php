@@ -1,6 +1,11 @@
 <?php
 // $Id: main.php,v 1.2 2003/12/17 09:42:25 gij Exp $
 //%%%%%%		Module Name phpBB  		%%%%%
+
+define("_MD_XHNEWBB_UPDATE","Update");
+define("_MD_XHNEWBB_UPDATED","Updated");
+
+
 //functions.php
 define("_MD_XHNEWBB_ERROR","Error");
 define("_MD_XHNEWBB_NOPOSTS","No Posts");
@@ -60,6 +65,7 @@ define("_MD_XHNEWBB_TOPICLOCKED","Topic is Locked");
 define("_MD_XHNEWBB_LEGEND","Legend");
 define("_MD_XHNEWBB_NEXTPAGE","Next Page");
 define("_MD_XHNEWBB_SORTEDBY","Sorted by");
+define("_MD_XHNEWBB_FORUMNAME","forum name");
 define("_MD_XHNEWBB_TOPICTITLE","topic title");
 define("_MD_XHNEWBB_NUMBERREPLIES","number of replies");
 define("_MD_XHNEWBB_TOPICPOSTER","topic poster");
@@ -69,6 +75,10 @@ define("_MD_XHNEWBB_DESCENDING","Descending order");
 define("_MD_XHNEWBB_FROMLASTDAYS","From last %s days");
 define("_MD_XHNEWBB_THELASTYEAR","From the last year");
 define("_MD_XHNEWBB_BEGINNING","From the beginning");
+define("_MD_XHNEWBB_WHRSOLVED","Status:");
+define("_MD_XHNEWBB_SOLVEDNO","UnSolved");
+define("_MD_XHNEWBB_SOLVEDYES","Solved");
+define("_MD_XHNEWBB_SOLVEDBOTH","Both");
 
 //viewtopic.php
 define("_MD_XHNEWBB_AUTHOR","Author");
@@ -111,6 +121,7 @@ define("_MD_XHNEWBB_ON","on"); //Posted on
 define("_MD_XHNEWBB_USERWROTE","%s wrote:"); // %s is username
 
 //post.php
+define("_MD_XHNEWBB_FORMTITLEINPREVIEW","Post from preview");
 define("_MD_XHNEWBB_EDITNOTALLOWED","You're not allowed to edit this post!");
 define("_MD_XHNEWBB_EDITEDBY","Edited by");
 define("_MD_XHNEWBB_ANONNOTALLOWED","Anonymous user not allowed to post.<br>Please register.");
@@ -132,6 +143,7 @@ define("_MD_XHNEWBB_GUESTNAMEC","Your Name:");
 define("_MD_XHNEWBB_UNAMEC","User:");
 define("_MD_XHNEWBB_FMT_UNAME","%s");
 define("_MD_XHNEWBB_MESSAGEICON","Message Icon:");
+define("_MD_XHNEWBB_SOLVEDCHECKBOX","Solved");
 define("_MD_XHNEWBB_MESSAGEC","Message:");
 define("_MD_XHNEWBB_ALLOWEDHTML","Allowed HTML:");
 define("_MD_XHNEWBB_OPTIONS","Options:");

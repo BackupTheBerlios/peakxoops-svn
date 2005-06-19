@@ -116,6 +116,7 @@ if ( empty($forum) ) {
 	$hidden = "";
 	$myts =& MyTextSanitizer::getInstance();
 	$viewmode = $myts->htmlspecialchars($viewmode);
+	$formTitle = _MD_XHNEWBB_EDITMODEC ;
 	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 	include XOOPS_ROOT_PATH.'/footer.php';
 }

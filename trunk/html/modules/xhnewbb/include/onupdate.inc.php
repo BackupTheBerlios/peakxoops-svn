@@ -24,7 +24,9 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 		  KEY (u2t_marked),
 		  KEY (u2t_rsv)
 		) TYPE=MyISAM;" ) ;
-
+	}
+	$result = $xoopsDB->query( "SELECT topic_solved FROM ".$xoopsDB->prefix("xhnewbb_topics")." LIMIT 1" ) ;
+	if( ! $result ) {
 		$xoopsDB->queryF( "ALTER TABLE ".$xoopsDB->prefix("xhnewbb_topics")." ADD topic_solved tinyint(1) NOT NULL default '0', ADD topic_rsv tinyint(1) NOT NULL default '0', ADD KEY (topic_time)" ) ;
 
 		$xoopsDB->queryF( "ALTER TABLE ".$xoopsDB->prefix("xhnewbb_posts")." ADD KEY (post_time)" ) ;

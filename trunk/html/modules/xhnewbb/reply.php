@@ -119,6 +119,7 @@ if ( empty($forum) ) {
 	$forum=$forumpost->forum();
 	$isreply =1;
 	$istopic = 0;
+	$formTitle = _MD_XHNEWBB_REPLY ;
 	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 	include XOOPS_ROOT_PATH.'/footer.php';
 }

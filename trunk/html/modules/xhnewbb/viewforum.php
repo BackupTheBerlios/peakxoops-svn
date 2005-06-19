@@ -47,6 +47,11 @@ if( $uid > 0 && ! empty( $_POST['update_mark'] ) && ! empty( $_POST['topic_ids']
 	redirect_header( XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum" , 0 , _MD_XHNEWBB_UPDATED ) ;
 }
 
+// updating topic_solved
+if( $uid > 0 && ! empty( $_GET['flip_solved'] ) && ! empty( $_GET['topic_id'] ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
+	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix("xhnewbb_topics")." SET topic_solved = ! topic_solved WHERE topic_id=".intval($_GET['topic_id']) ) ;
+}
+
 
 $forum = intval($_GET['forum']);
 if ( $forum < 1 ) {
@@ -143,6 +148,7 @@ foreach ( $moderators as $mods ) {
 $xoopsTpl->assign('forum_moderators', $forum_moderators);
 
 
+// sort order
 $sel_sort_array = array("t.topic_title"=>_MD_XHNEWBB_TOPICTITLE, "t.topic_replies"=>_MD_XHNEWBB_NUMBERREPLIES, "u.uname"=>_MD_XHNEWBB_TOPICPOSTER, "t.topic_views"=>_MD_XHNEWBB_VIEWS, "p.post_time"=>_MD_XHNEWBB_LASTPOSTTIME);
 if ( !isset($_GET['sortname']) || !in_array($_GET['sortname'], array_keys($sel_sort_array)) ) {
 	$sortname = "p.post_time";
@@ -157,19 +163,35 @@ foreach ( $sel_sort_array as $sort_k => $sort_v ) {
 	$forum_selection_sort .= '<option value="'.$sort_k.'"'.(($sortname == $sort_k) ? ' selected="selected"' : '').'>'.$sort_v.'</option>';
 }
 $forum_selection_sort .= '</select>';
-
-// assign to template
 $xoopsTpl->assign('forum_selection_sort', $forum_selection_sort);
 
+// solved or unsolved
+$sel_solved_array = array("unsolved"=>_MD_XHNEWBB_SOLVEDNO, "solved"=>_MD_XHNEWBB_SOLVEDYES, "both"=>_MD_XHNEWBB_SOLVEDBOTH);
+$whr_solved_array = array("unsolved"=>'t.topic_solved=0', "solved"=>'t.topic_solved=1', "both"=>'1');
+if ( !isset($_GET['solved']) || !in_array($_GET['solved'], array_keys($sel_solved_array)) ) {
+	$solved = "both";
+} else {
+	$solved = $_GET['solved'];
+}
+
+$xoopsTpl->assign('lang_solvedby', _MD_XHNEWBB_WHRSOLVED);
+
+$forum_selection_solved = '<select name="solved">';
+foreach ( $sel_solved_array as $solved_k => $solved_v ) {
+	$forum_selection_solved .= '<option value="'.$solved_k.'"'.(($solved == $solved_k) ? ' selected="selected"' : '').'>'.$solved_v.'</option>';
+}
+$forum_selection_solved .= '</select>';
+$xoopsTpl->assign('forum_selection_solved', $forum_selection_solved);
+
+// sort order
 $sortorder = (!isset($_GET['sortorder']) || $_GET['sortorder'] != "ASC") ? "DESC" : "ASC";
 $forum_selection_order = '<select name="sortorder">';
 $forum_selection_order .= '<option value="ASC"'.(($sortorder == "ASC") ? ' selected="selected"' : '').'>'._MD_XHNEWBB_ASCENDING.'</option>';
 $forum_selection_order .= '<option value="DESC"'.(($sortorder == "DESC") ? ' selected="selected"' : '').'>'._MD_XHNEWBB_DESCENDING.'</option>';
 $forum_selection_order .= '</select>';
-
-// assign to template
 $xoopsTpl->assign('forum_selection_order', $forum_selection_order);
 
+// since
 $sortsince = !empty($_GET['sortsince']) ? intval($_GET['sortsince']) : 365;
 $sel_since_array = array(1, 7, 30, 100);
 $forum_selection_since = '<select name="sortsince">';
@@ -179,33 +201,32 @@ foreach ($sel_since_array as $sort_since_v) {
 $forum_selection_since .= '<option value="365"'.(($sortsince == 365) ? ' selected="selected"' : '').'>'.sprintf(_MD_XHNEWBB_THELASTYEAR,365).'</option>';
 $forum_selection_since .= '<option value="10000"'.(($sortsince == 10000) ? ' selected="selected"' : '').'>'.sprintf(_MD_XHNEWBB_BEGINNING,10000).'</option>';
 $forum_selection_since .= '</select>';
-
-// assign to template
 $xoopsTpl->assign('forum_selection_since', $forum_selection_since);
 $xoopsTpl->assign('lang_go', _MD_XHNEWBB_GO);
 
-$xoopsTpl->assign('h_topic_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=t.topic_title&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_title" && $sortorder == "DESC") ? "ASC" : "DESC"));
+// th linke
+$xoopsTpl->assign('h_topic_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;solved=$solved&amp;sortname=t.topic_title&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_title" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_topic', _MD_XHNEWBB_TOPIC);
 
-$xoopsTpl->assign('h_reply_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=t.topic_replies&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_replies" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_reply_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;solved=$solved&amp;sortname=t.topic_replies&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_replies" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_replies', _MD_XHNEWBB_REPLIES);
 
-$xoopsTpl->assign('h_poster_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=u.uname&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "u.uname" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_poster_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;solved=$solved&amp;sortname=u.uname&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "u.uname" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_poster', _MD_XHNEWBB_POSTER);
 
-$xoopsTpl->assign('h_views_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=t.topic_views&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_views" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_views_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;solved=$solved&amp;sortname=t.topic_views&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "t.topic_views" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_views', _MD_XHNEWBB_VIEWS);
 
-$xoopsTpl->assign('h_date_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;sortname=p.post_time&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "p.post_time" && $sortorder == "DESC") ? "ASC" : "DESC"));
+$xoopsTpl->assign('h_date_link', XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;solved=$solved&amp;sortname=p.post_time&amp;sortsince=$sortsince&amp;sortorder=". (($sortname == "p.post_time" && $sortorder == "DESC") ? "ASC" : "DESC"));
 $xoopsTpl->assign('lang_date', _MD_XHNEWBB_DATE);
 
 $startdate = time() - (86400* $sortsince);
 $start = !empty($_GET['start']) ? intval($_GET['start']) : 0;
 
 if( $uid > 0 ) {
-	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time, u2t.u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = '.$uid.' WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY u2t.u2t_marked DESC , t.topic_sticky DESC, '.$sortname.' '.$sortorder;
+	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time, u2t.u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics')." u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = $uid WHERE ({$whr_solved_array[$solved]}) AND t.forum_id = $forum AND (p.post_time > $startdate OR t.topic_sticky=1) ORDER BY u2t.u2t_marked DESC , t.topic_sticky DESC, $sortname $sortorder" ;
 } else {
-	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, 0 AS u2t_time, 0 AS u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid WHERE t.forum_id = '.$forum.' AND (p.post_time > '.$startdate.' OR t.topic_sticky=1) ORDER BY t.topic_sticky DESC, '.$sortname.' '.$sortorder;
+	$sql = 'SELECT t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, 0 AS u2t_time, 0 AS u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users')." u2 ON  u2.uid = p.uid WHERE ({$whr_solved_array[$solved]}) AND t.forum_id = $forum AND (p.post_time > $startdate OR t.topic_sticky=1) ORDER BY t.topic_sticky DESC, $sortname $sortorder" ;
 }
 if ( !$result = $xoopsDB->query($sql,$forumdata['topics_per_page'],$start) ) {
 	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERROROCCURED);
@@ -272,17 +293,24 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 			}
 		}
 	}
-	if ( $myrow['icon'] ) {
-		$topic_icon = '<img src="'.XOOPS_URL.'/images/subject/'.$myrow['icon'].'" alt="" />';
-	} else {
-		$topic_icon = '<img src="'.XOOPS_URL.'/images/icons/no_posticon.gif" alt="" />';
+
+	// icon
+	if( ! preg_match( '/^icon[1-7]\.gif$/' , $myrow['icon'] ) ) $myrow['icon'] = 'icon1.gif' ;
+	if( ! $myrow['topic_solved'] ) $myrow['icon'] = substr( $myrow['icon'] , 0 , 5 ) . '_r.gif' ;
+	$topic_icon = '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$myrow['icon'].'" alt="" />';
+	// moderator can change solved
+	if( $uid > 0 && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
+		$topic_icon = "<a href='".XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder'>$topic_icon</a>" ;
 	}
+
+	// topic_poster
 	if ( $myrow['topic_poster'] != 0 && $myrow['uname'] ) {
 		$topic_poster = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$myrow['topic_poster'].'">'.$myrow['uname'].'</a>';
 	} else {
 		$topic_poster = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$myrow['topic_poster'].'">'.$xoopsConfig['anonymous'].'</a>';
 	}
 
+	// marked
 	$mark_checked = $myrow['u2t_marked'] ? 'checked="checked"' : '' ;
 
 	$xoopsTpl->append('topics', array('topic_id'=>$myrow['topic_id'], 'topic_icon'=>$topic_icon, 'topic_folder'=>$image, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time']), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster']), 'u2t_time' => $myrow['u2t_time'], 'mark_checked' => $mark_checked ));
@@ -310,15 +338,15 @@ $xoopsTpl->assign('lang_topicsticky', _MD_XHNEWBB_TOPICSTICKY);
 $xoopsTpl->assign("lang_search", _MD_XHNEWBB_SEARCH);
 $xoopsTpl->assign("lang_advsearch", _MD_XHNEWBB_ADVSEARCH);
 
-$sql = 'SELECT COUNT(*) FROM '.$xoopsDB->prefix('xhnewbb_topics').' WHERE forum_id = '.$forum.' AND (topic_time > '.$startdate.' OR topic_sticky = 1)';
+$sql = "SELECT COUNT(*) FROM ".$xoopsDB->prefix("xhnewbb_topics")." t WHERE ({$whr_solved_array[$solved]}) AND forum_id = $forum AND (topic_time > $startdate OR topic_sticky = 1)" ;
 if ( !$r = $xoopsDB->query($sql) ) {
 	//redirect_header('index.php',2,_MD_XHNEWBB_ERROROCCURED);
 	//exit();
 }
 list($all_topics) = $xoopsDB->fetchRow($r);
 if ( $all_topics > $forumdata['topics_per_page'] ) {
-	include XOOPS_ROOT_PATH.'/class/pagenav.php';
-	$nav = new XoopsPageNav($all_topics, $forumdata['topics_per_page'], $start, "start", 'forum='.$forum.'&amp;sortname='.$sortname.'&amp;sortorder='.$sortorder.'&amp;sortsince='.$sortsince);
+	include XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';
+	$nav = new XhXoopsPageNav( XOOPS_URL.'/modules/xhnewbb/viewallforum.php' , $all_topics, $forumdata['topics_per_page'], $start, "start", "solved=$solved&amp;sortname=$sortname&amp;sortorder=$sortorder&amp;sortsince=$sortsince" ) ;
 	$xoopsTpl->assign('forum_pagenav', $nav->renderNav(4));
 } else {
 	$xoopsTpl->assign('forum_pagenav', '');

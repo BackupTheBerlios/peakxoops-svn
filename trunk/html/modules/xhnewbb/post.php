@@ -104,14 +104,17 @@ if ( empty($forum) ) {
 		}
 		themecenterposts($p_subject,$p_message);
 		echo "<br />";
-		$subject = $myts->makeTboxData4PreviewInForm($_POST['subject']);
-		$message = $myts->makeTareaData4PreviewInForm($_POST['message']);
-		$hidden = $myts->makeTboxData4PreviewInForm($_POST['hidden']);
+		$subject = $myts->makeTboxData4PreviewInForm(@$_POST['subject']);
+		$message = $myts->makeTareaData4PreviewInForm(@$_POST['message']);
+		$hidden = $myts->makeTboxData4PreviewInForm(@$_POST['hidden']);
 		$notify = !empty($_POST['notify']) ? 1 : 0;
 
-		$guestName = $myts->makeTboxData4PreviewInForm($_POST['guestName']); // Ryuji_edit(2003-05-06)
+		$guestName = $myts->makeTboxData4PreviewInForm(@$_POST['guestName']); // Ryuji_edit(2003-05-06)
 
 		$attachsig = !empty($_POST['attachsig']) ? 1 : 0;
+		$icon = preg_match( '/^icon[1-7]\.gif$/' , @$_POST['icon'] ) ? $_POST['icon'] : '' ;
+		$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
+		$formTitle = _MD_XHNEWBB_FORMTITLEINPREVIEW ;
 		include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 		echo"</td></tr></table>";
 	} else {
@@ -176,6 +179,7 @@ if ( empty($forum) ) {
 		$forumpost->setNohtml(@$_POST['nohtml']);
 		$forumpost->setNosmiley(@$_POST['nosmiley']);
 		$forumpost->setIcon(@$_POST['icon']);
+		$forumpost->setSolved(@$_POST['solved']);
 		$forumpost->setAttachsig(@$_POST['attachsig']);
 		if (!$postid = $forumpost->store()) {
 			include_once(XOOPS_ROOT_PATH.'/header.php');

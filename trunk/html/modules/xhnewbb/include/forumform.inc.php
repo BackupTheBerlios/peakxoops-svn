@@ -40,7 +40,8 @@ include_once XOOPS_ROOT_PATH."/class/xoopslists.php";
 
 // variable check
 $nosmiley = empty( $nosmiley ) ? 0 : 1 ;
-$icon = empty( $icon ) ? 0 : 1 ;
+$icon = empty( $icon ) ? 'icon7.gif' : htmlspecialchars( $icon , ENT_QUOTES ) ;
+$solved = isset( $solved ) ? $solved : 1 ;
 $post_id = empty( $post_id ) ? 0 : $post_id ;
 $formTitle = empty( $formTitle ) ? "" : $formTitle ;
 $guestName = empty( $guestName ) ? "" : $guestName ;
@@ -79,19 +80,29 @@ if($post_id > 0){
 	}
 }
 //icon of message
-$icons_radio = new XoopsFormRadio(_MD_XHNEWBB_MESSAGEICON, 'icon', $icon);
+$icons_tray =  new XoopsFormElementTray(_MD_XHNEWBB_MESSAGEICON,'&nbsp; &nbsp;');
+//$icons_radio = new XoopsFormRadio(_MD_XHNEWBB_MESSAGEICON, 'icon', $icon);
+$icons_radio = new XoopsFormRadio('', 'icon', $icon);
 $subject_icons = XoopsLists::getSubjectsList();
 foreach ($subject_icons as $iconfile) {
 	$icons_radio->addOption($iconfile, '<img src="'.XOOPS_URL.'/images/subject/'.$iconfile.'" alt="" />');
 }
-$forum_form->addElement($icons_radio);
+if( is_object( @$xoopsUser ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $forum , $xoopsUser->getVar('uid') ) ) ) {
+	$solved_checkbox = new XoopsFormCheckbox('', 'solved', $solved ) ;
+	$solved_checkbox->addOption( 1 , _MD_XHNEWBB_SOLVEDCHECKBOX ) ;
+} else {
+	$solved_checkbox = new XoopsFormHidden('solved', 0) ;
+}
+$icons_tray->addElement($icons_radio);
+$icons_tray->addElement($solved_checkbox);
+$forum_form->addElement($icons_tray);
 
 //message body
 $tarea_tray =  new XoopsFormElementTray(_MD_XHNEWBB_MESSAGEC,'<br />');
 $tarea_tray->addElement(new XoopsFormDhtmlTextArea("", 'message', $message, 15, 60), true);
 if ( !empty($isreply) && isset($hidden) && $hidden != "" ) {
-	$tarea_tray->addElement(new XoopsFormHidden('isreply', 1));
-	$tarea_tray->addElement(new XoopsFormHidden('hidden', $hidden));
+	$forum_form->addElement(new XoopsFormHidden('isreply', 1));
+	$forum_form->addElement(new XoopsFormHidden('hidden', $hidden));
 	$quoteButton = new XoopsFormButton('', 'quote', _MD_XHNEWBB_QUOTE, 'button');
 	$quoteButton->setExtra(" onclick='xoopsGetElementById(\"message\").value=xoopsGetElementById(\"message\").value + xoopsGetElementById(\"hidden\").value; xoopsGetElementById(\"hidden\").value=\"\";'");
 	$tarea_tray->addElement($quoteButton);
@@ -122,7 +133,7 @@ if ( $forumdata['allow_html'] ) {
 	$html_checkbox->addOption(1, _MD_XHNEWBB_DISABLEHTML);
 	$option_tray->addElement($html_checkbox);
 } else {
-	$option_tray->addElement(new XoopsFormHidden('nohtml', 1));
+	$forum_form->addElement(new XoopsFormHidden('nohtml', 1));
 }
 
 //signature
@@ -142,7 +153,7 @@ if ( $forumdata['allow_sig'] && $xoopsUser ) {
 
 //notify
 if (!empty($xoopsUser) && !empty($xoopsModuleConfig['notification_enabled'])) {
-	$option_tray->addElement(new XoopsFormHidden('istopic', 1));
+	$forum_form->addElement(new XoopsFormHidden('istopic', 1));
 	if (!empty($notify)) {
 		// If 'notify' set, use that value (e.g. preview)
 		//echo ' checked="checked"';

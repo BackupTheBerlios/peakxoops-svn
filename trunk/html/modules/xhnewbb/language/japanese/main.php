@@ -64,6 +64,7 @@ define("_MD_XHNEWBB_TOPICLOCKED","ロックされたトピック");
 define("_MD_XHNEWBB_LEGEND","Legend"); //[MADA]
 define("_MD_XHNEWBB_NEXTPAGE","次のページ");
 define("_MD_XHNEWBB_SORTEDBY","ソート順:");
+define("_MD_XHNEWBB_FORUMNAME","フォーラム名");
 define("_MD_XHNEWBB_TOPICTITLE","トピックタイトル");
 define("_MD_XHNEWBB_NUMBERREPLIES","返信");
 define("_MD_XHNEWBB_TOPICPOSTER","投稿者");
@@ -73,6 +74,10 @@ define("_MD_XHNEWBB_DESCENDING","降順");
 define("_MD_XHNEWBB_FROMLASTDAYS","過去%s日分");
 define("_MD_XHNEWBB_THELASTYEAR","過去1年分");
 define("_MD_XHNEWBB_BEGINNING","全て");
+define("_MD_XHNEWBB_WHRSOLVED","Q&Aステータス:");
+define("_MD_XHNEWBB_SOLVEDNO","未解決");
+define("_MD_XHNEWBB_SOLVEDYES","解決済");
+define("_MD_XHNEWBB_SOLVEDBOTH","両方");
 
 //viewtopic.php
 define("_MD_XHNEWBB_AUTHOR","投稿者");
@@ -115,6 +120,7 @@ define("_MD_XHNEWBB_ON","投稿日時："); //Posted on
 define("_MD_XHNEWBB_USERWROTE","%sさんは書きました："); // %s is username
 
 //post.php
+define("_MD_XHNEWBB_FORMTITLEINPREVIEW","プレビューからの再投稿");
 define("_MD_XHNEWBB_EDITNOTALLOWED","投稿文を編集することはできません。");
 define("_MD_XHNEWBB_EDITEDBY","編集ログ：");
 define("_MD_XHNEWBB_ANONNOTALLOWED","ゲスト訪問者の方による投稿は許可されていません。<br>投稿をご希望の方はメンバー登録をして下さい。");
@@ -137,6 +143,7 @@ define("_MD_XHNEWBB_GUESTNAMEC","ゲスト名:");
 define("_MD_XHNEWBB_UNAMEC","ユーザ名:");
 define("_MD_XHNEWBB_FMT_UNAME","%s さん");
 define("_MD_XHNEWBB_MESSAGEICON","メッセージアイコン:");
+define("_MD_XHNEWBB_SOLVEDCHECKBOX","解決済");
 define("_MD_XHNEWBB_MESSAGEC","メッセージ:");
 define("_MD_XHNEWBB_ALLOWEDHTML","使用可能なHTMLタグ :");
 define("_MD_XHNEWBB_OPTIONS","オプション:");

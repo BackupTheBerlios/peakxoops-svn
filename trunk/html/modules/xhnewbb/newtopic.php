@@ -92,6 +92,7 @@ if ( empty($forum) ) {
 	$hidden = "";
 	unset($post_id);
 	unset($topic_id);
+	$formTitle = _MD_XHNEWBB_POST ;
 	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 	include XOOPS_ROOT_PATH.'/footer.php';
 }

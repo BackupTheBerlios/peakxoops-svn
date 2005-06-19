@@ -6,7 +6,7 @@
     <th><{$block.lang_topic}></th>
     <th align="center"><{$block.lang_replies}></th>
     <th align="center"><{$block.lang_views}></th>
-    <th align="right"><{$block.lang_lastpost}></th>
+    <th align="center" colspan="2"><{$block.lang_lastpost}></th>
   </tr>
 
   <{foreach item=topic from=$block.topics}>
@@ -25,7 +25,8 @@
     </td>
     <td align="center"><{$topic.replies}></td>
     <td align="center"><{$topic.views}></td>
-    <td align="right" nowrap="nowrap"><{$topic.date}>&nbsp;<{$topic.poster}></td>
+    <td align="center" nowrap="nowrap"><{$topic.poster}></td>
+    <td align="right" nowrap="nowrap"><{$topic.date}></td>
   </tr>
   <{/strip}>
   <{/foreach}>
@@ -41,9 +42,9 @@
   <{foreach item=topic from=$block.topics}>
   <tr class="<{cycle values="even,odd"}>">
     <td><a href="<{$xoops_url}>/modules/xhnewbb/viewtopic.php?topic_id=<{$topic.id}>&amp;forum=<{$topic.forum_id}>"><{$topic.title}></a></td>
-    <td align="center"><{$topic.replies}></td>
+    <{* <td align="center"><{$topic.replies}></td> *}>
     <{* <td align="center"><{$topic.views}></td> *}>
-    <td align="right"><{$topic.date}> <{$topic.poster}></td>
+    <td align="right" nowrap="nowrap"><{$topic.date}></td>
   </tr>
   <{/foreach}>
 

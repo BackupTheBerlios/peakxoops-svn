@@ -46,6 +46,7 @@ class ForumPosts
 	var $nosmiley = 0;
 	var $uid;
 	var $icon;
+	var $solved = 0 ;
 	var $attachsig;
 	var $prefix;
 	var $db;
@@ -139,6 +140,10 @@ class ForumPosts
 		$this->icon=$value;
 	}
 
+	function setSolved($value){
+		$this->solved=$value;
+	}
+
 	function setAttachsig($value){
 		$this->attachsig=$value;
 	}
@@ -153,7 +158,7 @@ class ForumPosts
 			if ( empty($this->topic_id) ) {
 				$this->topic_id = $this->db->genId($this->db->prefix("xhnewbb_topics")."_topic_id_seq");
 				$datetime = time();
-				$sql = "INSERT INTO ".$this->db->prefix("xhnewbb_topics")." (topic_id, topic_title, topic_poster, forum_id, topic_time) VALUES (".$this->topic_id.",'$subject', ".$this->uid.", ".$this->forum_id.", $datetime)";
+				$sql = "INSERT INTO ".$this->db->prefix("xhnewbb_topics")." (topic_id, topic_title, topic_poster, forum_id, topic_time, topic_solved ) VALUES (".$this->topic_id.",'$subject', ".$this->uid.", ".$this->forum_id.", $datetime , $this->solved )";
    				if ( !$result = $this->db->query($sql) ) {
 					return false;
    				}
@@ -187,7 +192,7 @@ class ForumPosts
    				}
    			}
 			if ( $this->pid == 0 ) {
-				$sql = sprintf("UPDATE %s SET topic_last_post_id = %u, topic_time = %u WHERE topic_id = %u", $this->db->prefix("xhnewbb_topics"), $this->post_id, $datetime, $this->topic_id);
+				$sql = sprintf("UPDATE %s SET topic_last_post_id = %u, topic_time = %u, topic_solved = %u WHERE topic_id = %u", $this->db->prefix("xhnewbb_topics"), $this->post_id, $datetime, $this->solved, $this->topic_id);
    				if ( !$result = $this->db->query($sql) ) {
    				}
 				$sql = sprintf("UPDATE %s SET forum_posts = forum_posts+1, forum_topics = forum_topics+1, forum_last_post_id = %u WHERE forum_id = %u", $this->db->prefix("xhnewbb_forums"), $this->post_id, $this->forum_id);
@@ -195,7 +200,7 @@ class ForumPosts
    				if ( !$result ) {
    				}
 			} else {
-				$sql = "UPDATE ".$this->db->prefix("xhnewbb_topics")." SET topic_replies=topic_replies+1, topic_last_post_id = ".$this->post_id.", topic_time = $datetime WHERE topic_id =".$this->topic_id."";
+				$sql = "UPDATE ".$this->db->prefix("xhnewbb_topics")." SET topic_replies=topic_replies+1, topic_last_post_id = ".$this->post_id.", topic_time = $datetime, topic_solved = $this->solved WHERE topic_id =".$this->topic_id."";
    				if ( !$result = $this->db->query($sql) ) {
    				}
 				$sql = "UPDATE ".$this->db->prefix("xhnewbb_forums")." SET forum_posts = forum_posts+1, forum_last_post_id = ".$this->post_id." WHERE forum_id = ".$this->forum_id."";
@@ -205,7 +210,7 @@ class ForumPosts
 			}
 		}else{
 			if ( $this->istopic() ) {
-				$sql = "UPDATE ".$this->db->prefix("xhnewbb_topics")." SET topic_title = '$subject' WHERE topic_id = ".$this->topic_id."";
+				$sql = "UPDATE ".$this->db->prefix("xhnewbb_topics")." SET topic_title = '$subject' , topic_solved = $this->solved WHERE topic_id = ".$this->topic_id."";
 			 	if ( !$result = $this->db->query($sql) ) {
 			 		return false;
 			 	}
@@ -235,7 +240,7 @@ class ForumPosts
 	}
 
 	function getPost($id) {
-		$sql = 'SELECT p.*, t.post_text, tp.topic_status FROM '.$this->db->prefix('xhnewbb_posts').' p LEFT JOIN '.$this->db->prefix('xhnewbb_posts_text').' t ON p.post_id=t.post_id LEFT JOIN '.$this->db->prefix('xhnewbb_topics').' tp ON tp.topic_id=p.topic_id WHERE p.post_id='.$id;
+		$sql = 'SELECT p.*, t.post_text, tp.topic_status, tp.topic_solved FROM '.$this->db->prefix('xhnewbb_posts').' p LEFT JOIN '.$this->db->prefix('xhnewbb_posts_text').' t ON p.post_id=t.post_id LEFT JOIN '.$this->db->prefix('xhnewbb_topics').' tp ON tp.topic_id=p.topic_id WHERE p.post_id='.$id;
 		$array = $this->db->fetchArray($this->db->query($sql));
 		$this->post_id = $array['post_id'];
 		$this->pid = $array['pid'];
@@ -253,6 +258,7 @@ class ForumPosts
 		if ($array['pid'] == 0) {
 			$this->istopic = true;
 		}
+		$this->solved = $array['topic_solved'] ;
 		if ($array['topic_status'] == 1) {
 			$this->islocked = true;
 		}

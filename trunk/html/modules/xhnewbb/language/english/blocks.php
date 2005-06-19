@@ -9,6 +9,7 @@ define("_MB_XHNEWBB_LPOST","Last Post");
 define("_MB_XHNEWBB_VSTFRMS"," Visit Forums");
 define("_MB_XHNEWBB_DISPLAY","Display %s posts");
 define("_MB_XHNEWBB_DISPLAYF","Display in full size");
+define("_MB_XHNEWBB_MARKISUP","Marked topics are upper"); 
 
 define("_MB_XHNEWBB_ORDERTIMED","Newest is first"); 
 define("_MB_XHNEWBB_ORDERVIEWSD","Most viewed is first"); 

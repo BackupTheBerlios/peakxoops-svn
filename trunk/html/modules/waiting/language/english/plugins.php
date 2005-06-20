@@ -9,6 +9,7 @@ define("_PI_WAITING_SUBMITTED","Sumbmitted");
 define("_PI_WAITING_INACTIVE_USERS","Inactive Users");
 define("_PI_WAITING_BROKENS","Brokens");
 define("_PI_WAITING_MODREQS","Modreqs");
+define("_PI_WAITING_REQUESTS","Requests");
 define("_PI_WAITING_REVIEWS","Reviews");
 define("_PI_WAITING_PREVIEWS","Previews");
 define("_PI_WAITING_COMMENTS","Comments");

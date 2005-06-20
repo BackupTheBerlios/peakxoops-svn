@@ -9,6 +9,7 @@ define("_PI_WAITING_SUBMITTED","新規投稿");
 define("_PI_WAITING_INACTIVE_USERS","待機ユーザ");
 define("_PI_WAITING_BROKENS","破損報告");
 define("_PI_WAITING_MODREQS","修正申請");
+define("_PI_WAITING_REQUESTS","リクエスト");
 define("_PI_WAITING_REVIEWS","レビュー");
 define("_PI_WAITING_PREVIEWS","プレビュー");
 define("_PI_WAITING_COMMENTS","コメント");

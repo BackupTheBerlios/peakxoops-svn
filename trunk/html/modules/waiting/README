@@ -143,6 +143,7 @@ PLUGINS:
 -WF-downloads (by coldfire, flying.tux)
 -WF-links (by flying.tux)
 -WF-Sections (by GIJOE)
+-WordBook (by AgD)
 -WordPress ME (by nobunobu) multiple (>=0.5 has the module side plugin)
 -xcGallery (by nao-pon)
 -xDirectory (by GIJOE)
@@ -155,6 +156,13 @@ PLUGINS:
 
 
 CHANGES:
+
+
+- 1 plugin added
+-- WordBook (thx AgD)
+
+:ver 0.91|
+- updated Italian (thx flying.tux)1
 
 :ver 0.90|
 - modified the structure of the directory for plugins

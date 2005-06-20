@@ -5,6 +5,10 @@
 // WEB		::	Ryu's Planning <http://ryus.biz/>
 //
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-06-21 04:50:48
+define('_PI_WAITING_REQUESTS','Requests');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-06-15 16:48:07
 define('_PI_WAITING_INACTIVE_USERS','Inactive Users');
 

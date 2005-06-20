@@ -8,10 +8,11 @@
 // Appended by Xoops Language Checker -GIJOE- in 2005-06-15 16:48:07
 define('_PI_WAITING_INACTIVE_USERS','Inactive Users');
 
-define("_PI_WAITING_WAITINGS","Waitings");
+define("_PI_WAITING_WAITINGS","Enviados");
 define("_PI_WAITING_SUBMITTED","Sumbmitted");
 define("_PI_WAITING_BROKENS","Brokens");
 define("_PI_WAITING_MODREQS","Modreqs");
+define("_PI_WAITING_REQUESTS","Solicitados");
 define("_PI_WAITING_REVIEWS","Reviews");
 define("_PI_WAITING_PREVIEWS","Previews");
 define("_PI_WAITING_COMMENTS","Comments");

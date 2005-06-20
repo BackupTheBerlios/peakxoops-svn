@@ -6,12 +6,13 @@
 # Author                                                                 #
 # flying.tux     -   flying.tux@gmail.com                                #
 #                                                                        #
-# Last modified on 21.04.2005                                            #
+# Last modified on 16.06.2005                                            #
 /*************************************************************************/
 
-// Appended by Xoops Language Checker -GIJOE- in 2005-06-15 16:48:06
-define('_PI_WAITING_INACTIVE_USERS','Inactive Users');
+// Appended by Xoops Language Checker -GIJOE- in 2005-06-21 04:50:47
+define('_PI_WAITING_REQUESTS','Requests');
 
+define('_PI_WAITING_INACTIVE_USERS','Utenti inattivi');
 define("_PI_WAITING_WAITINGS","In attesa");
 define("_PI_WAITING_SUBMITTED","In attesa");
 define("_PI_WAITING_BROKENS","Interrotti");

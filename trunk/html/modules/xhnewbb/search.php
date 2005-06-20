@@ -153,7 +153,8 @@ if ( !isset($_POST['submit']) ) {
 		}
 	}
 }
-$xoopsTpl->assign("lang_forumindex", sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']));
+$xoopsTpl->assign("lang_forumindex",_MD_XHNEWBB_FORUMINDEX);
+$xoopsTpl->assign("lang_alltopicsindex",_MD_XHNEWBB_ALLTOPICSINDEX);
 $xoopsTpl->assign("mod_url" , XOOPS_URL.'/modules/xhnewbb' ) ;
 $xoopsTpl->assign("lang_search", _MD_XHNEWBB_SEARCH);
 $xoopsTpl->assign("lang_forum", _MD_XHNEWBB_FORUM);

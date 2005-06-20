@@ -22,6 +22,9 @@
       <{/if}>
       <{$topic.last_subject}>
       </a>
+      <{if ! $topic.solved}>
+        <img src="<{$xoops_url}>/modules/xhnewbb/images/unsolved.gif" />
+      <{/if}>
     </td>
     <td align="center"><{$topic.replies}></td>
     <td align="center"><{$topic.views}></td>
@@ -53,5 +56,7 @@
 </table>
 
 <div style="text-align:right; padding: 5px;">
-<a href="<{$xoops_url}>/modules/xhnewbb/"><{$block.lang_visitforums}></a>
+  <a href="<{$xoops_url}>/modules/xhnewbb/viewallforum.php"><{$block.lang_listalltopics}></a>
+  &nbsp;
+  <a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$block.lang_visitforums}></a>
 </div>

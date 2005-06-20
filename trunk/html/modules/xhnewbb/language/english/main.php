@@ -35,7 +35,8 @@ define("_MD_XHNEWBB_SUBJECT","Subject");
 define("_MD_XHNEWBB_MODERATEDBY","Moderated by");
 define("_MD_XHNEWBB_SEARCH","Search");
 define("_MD_XHNEWBB_SEARCHRESULTS","Search Results");
-define("_MD_XHNEWBB_FORUMINDEX","%s Forum Index");
+define("_MD_XHNEWBB_FORUMINDEX","Forum Index");
+define("_MD_XHNEWBB_ALLTOPICSINDEX","Topic Index");
 define("_MD_XHNEWBB_POSTNEW","Post New Message");
 define("_MD_XHNEWBB_REGTOPOST","Register To Post");
 

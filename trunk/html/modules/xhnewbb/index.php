@@ -66,7 +66,7 @@ if( $uid > 0 ) {
 }
 if ( $viewcat != 0 ) {
 	$sql .= ' WHERE f.cat_id = '.$viewcat;
-	$xoopsTpl->assign('forum_index_title', sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']));
+	$xoopsTpl->assign('forum_index_title', _MD_XHNEWBB_FORUMINDEX);
 } else {
 	$xoopsTpl->assign('forum_index_title', '');
 }

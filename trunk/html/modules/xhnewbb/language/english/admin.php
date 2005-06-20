@@ -72,7 +72,6 @@ define("_MD_XHNEWBB_A_MOVEDOWN","Move Down");
 
 define("_MD_XHNEWBB_A_FORUMUPDATE","Forum Settings Updated");
 define("_MD_XHNEWBB_A_RETURNTOADMINPANEL","Return to the Administration Panel.");
-define("_MD_XHNEWBB_A_RETURNTOFORUMINDEX","Return to the forum index");
 define("_MD_XHNEWBB_A_ALLOWHTML","Allow HTML:");
 define("_MD_XHNEWBB_A_YES","Yes");
 define("_MD_XHNEWBB_A_NO","No");

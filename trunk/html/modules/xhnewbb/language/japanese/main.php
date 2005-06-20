@@ -35,7 +35,8 @@ define("_MD_XHNEWBB_SUBJECT","題名");
 define("_MD_XHNEWBB_MODERATEDBY","モデレータ ");
 define("_MD_XHNEWBB_SEARCH","検索");
 define("_MD_XHNEWBB_SEARCHRESULTS","検索結果");
-define("_MD_XHNEWBB_FORUMINDEX","メイン");
+define("_MD_XHNEWBB_FORUMINDEX","フォーラム一覧");
+define("_MD_XHNEWBB_ALLTOPICSINDEX","トピック一覧");
 define("_MD_XHNEWBB_POSTNEW","新規トピック作成画面へ");
 define("_MD_XHNEWBB_REGTOPOST","投稿するにはまず登録を");
 
@@ -164,7 +165,7 @@ define("_MD_XHNEWBB_REPLY","この投稿に返信する");
 define("_MD_XHNEWBB_YANTMOTFTYCPTF","この機能を使用できるのはモデレータ／管理者のみです。");
 define("_MD_XHNEWBB_TTHBRFTD","トピックをデータベースから削除しました。");
 define("_MD_XHNEWBB_RETURNTOTHEFORUM","フォーラムへ戻る");
-define("_MD_XHNEWBB_RTTFI","フォーラムメインへ戻る");
+define("_MD_XHNEWBB_RTTFI","フォーラム一覧へ戻る");
 define("_MD_XHNEWBB_EPGBATA","エラー ： もう一度やり直してください。");
 define("_MD_XHNEWBB_TTHBM","トピックを移動しました。");
 define("_MD_XHNEWBB_VTUT","トピックを見る");

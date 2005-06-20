@@ -354,7 +354,7 @@ if ( $viewmode == "thread" ) {
 }
 
 // create jump box
-$xoopsTpl->assign(array('mod_url' => XOOPS_URL.'/modules/xhnewbb' , 'forum_jumpbox' => xhnewbb_make_jumpbox($forum), 'lang_forum_index' => sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']), 'lang_from' => _MD_XHNEWBB_FROM, 'lang_joined' => _MD_XHNEWBB_JOINED, 'lang_posts' => _MD_XHNEWBB_POSTS, 'lang_poster' => _MD_XHNEWBB_POSTER, 'lang_thread' => _MD_XHNEWBB_THREAD, 'lang_edit' => _EDIT, 'lang_delete' => _DELETE, 'lang_reply' => _REPLY, 'lang_postedon' => _MD_XHNEWBB_POSTEDON));
+$xoopsTpl->assign(array('mod_url' => XOOPS_URL.'/modules/xhnewbb' , 'forum_jumpbox' => xhnewbb_make_jumpbox($forum), 'lang_forum_index' => _MD_XHNEWBB_FORUMINDEX, 'lang_alltopicsindex' => _MD_XHNEWBB_ALLTOPICSINDEX, 'lang_from' => _MD_XHNEWBB_FROM, 'lang_joined' => _MD_XHNEWBB_JOINED, 'lang_posts' => _MD_XHNEWBB_POSTS, 'lang_poster' => _MD_XHNEWBB_POSTER, 'lang_thread' => _MD_XHNEWBB_THREAD, 'lang_edit' => _EDIT, 'lang_delete' => _DELETE, 'lang_reply' => _REPLY, 'lang_postedon' => _MD_XHNEWBB_POSTEDON));
 
 // Read in cookie of 'lastread' times
 // GIJ eliminated unserialize

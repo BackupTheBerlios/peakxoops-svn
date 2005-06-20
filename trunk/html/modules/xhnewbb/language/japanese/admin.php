@@ -75,7 +75,6 @@ define("_MD_XHNEWBB_A_MOVEDOWN","下に移動");
 
 define("_MD_XHNEWBB_A_FORUMUPDATE","フォーラムの設定を更新しました。");
 define("_MD_XHNEWBB_A_RETURNTOADMINPANEL","管理画面へ戻る");
-define("_MD_XHNEWBB_A_RETURNTOFORUMINDEX","フォーラムのメインページへ戻る");
 define("_MD_XHNEWBB_A_ALLOWHTML","HTMLタグを使用可能にする：");
 define("_MD_XHNEWBB_A_YES","はい");
 define("_MD_XHNEWBB_A_NO","いいえ");

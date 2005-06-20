@@ -74,9 +74,9 @@ function b_xhnewbb_main_show( $options )
 	}
 
 	if( $uid > 0 && $is_markup ) {
-		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, u2t.u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 LEFT JOIN ".$db->prefix("xhnewbb_users2topics")." u2t ON  u2t.topic_id=t.topic_id AND u2t.uid=$uid WHERE $whr_class ORDER BY u2t.u2t_marked<=>1 DESC , $odr" ;
+		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, t.topic_solved, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, u2t.u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 LEFT JOIN ".$db->prefix("xhnewbb_users2topics")." u2t ON  u2t.topic_id=t.topic_id AND u2t.uid=$uid WHERE $whr_class ORDER BY u2t.u2t_marked<=>1 DESC , $odr" ;
 	} else {
-		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, 0 AS u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 WHERE $whr_class ORDER BY $odr" ;
+		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, t.topic_solved, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, 0 AS u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 WHERE $whr_class ORDER BY $odr" ;
 	}
 
 	if (!$result = $db->query($query,$max_topics,0)) {
@@ -89,6 +89,7 @@ function b_xhnewbb_main_show( $options )
 	$block['lang_views'] = _MB_XHNEWBB_VIEWS;
 	$block['lang_lastpost'] = _MB_XHNEWBB_LPOST;
 	$block['lang_visitforums'] = _MB_XHNEWBB_VSTFRMS;
+	$block['lang_listalltopics'] = _MB_XHNEWBB_LISTALLTOPICS;
 	while ($arr = $db->fetchArray($result)) {
 		$topic['forum_id'] = $arr['forum_id'];
 		$topic['forum_name'] = $myts->makeTboxData4Show($arr['forum_name']);
@@ -109,6 +110,7 @@ function b_xhnewbb_main_show( $options )
 			// Ryuji_edit(2003-11-11) hack end
 //			}
 //		}
+		$topic['solved'] = $arr['topic_solved'];
 		$topic['u2t_marked'] = $arr['u2t_marked'];
 		$block['topics'][] =& $topic;
 		unset($topic);

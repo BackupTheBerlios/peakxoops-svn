@@ -127,7 +127,8 @@ if ( $can_post == 1 ) {
 		$xoopsTpl->assign('forum_post_or_register', "");
 	}
 }
-$xoopsTpl->assign('forum_index_title', sprintf(_MD_XHNEWBB_FORUMINDEX,$xoopsConfig['sitename']));
+$xoopsTpl->assign('forum_index_title', _MD_XHNEWBB_FORUMINDEX);
+$xoopsTpl->assign("lang_alltopicsindex", _MD_XHNEWBB_ALLTOPICSINDEX) ;
 $xoopsTpl->assign('forum_image_folder', $bbImage['folder_topic']);
 $myts =& MyTextSanitizer::getInstance();
 $xoopsTpl->assign('forum_name', $myts->makeTboxData4Show($forumdata['forum_name']));

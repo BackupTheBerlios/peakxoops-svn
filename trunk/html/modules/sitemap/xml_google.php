@@ -1,6 +1,19 @@
 <?php
 
-include '../../mainfile.php';
+if( ! defined( 'SITEMAP_ROOT_CONTROLLER_LOADED' ) ) {
+	if( ! empty( $_SERVER['REQUEST_URI'] ) ) {
+		$_SERVER['REQUEST_URI'] = str_replace( 'xml_google.php' , 'modules/sitemap/xml_google.php' , $_SERVER['REQUEST_URI'] ) ;
+	} else {
+		$_SERVER['REQUEST_URI'] = '/modules/sitemap/xml_google.php' ;
+	}
+	define( 'SITEMAP_ROOT_CONTROLLER_LOADED' , 1 ) ;
+	chdir( './modules/sitemap/' ) ;
+	require 'xml_google.php' ;
+	exit ;
+} else {
+	require '../../mainfile.php' ;
+}
+
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 
 $myts =& MyTextSanitizer::getInstance() ;

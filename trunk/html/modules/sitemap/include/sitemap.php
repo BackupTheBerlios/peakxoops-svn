@@ -9,7 +9,7 @@ function sitemap_show()
 
 	// invisible weights
 	$invisible_weights = array() ;
-	if( trim( $xoopsModuleConfig['invisible_weights'] ) !== '' ) {
+	if( trim( @$xoopsModuleConfig['invisible_weights'] ) !== '' ) {
 		$invisible_weights = explode( ',' , $xoopsModuleConfig['invisible_weights'] ) ;
 	}
 
@@ -124,7 +124,7 @@ function sitemap_get_categoires_map($table, $id_name, $pid_name, $title_name, $u
 		$sitemap['parent'][$i]['url'] = $url.$catid;
 
 		// 子の出力
-        if($xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
+        if(@$xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
     		$j = 0;
     		$child_ary = $mytree->getChildTreeArray($catid, $order);
     		foreach ($child_ary as $child)

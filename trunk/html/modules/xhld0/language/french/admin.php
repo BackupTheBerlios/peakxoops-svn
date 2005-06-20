@@ -5,7 +5,7 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( '_AM_DBUPDATED' ) ) {
 
 // list of encodings allowed   (name):(title)|(name):(title)|...
-define('_AM_ENCODINGS','utf-8:UTF-8|iso-8859-1:ISO-8859-1|us-ascii:US-ASCII') ;
+define('_AM_ENCODINGS','utf-8:UTF-8|iso-8859-1:ISO-8859-1|iso-8859-15:ISO-8859-15|us-ascii:US-ASCII') ;
 define('_AM_ENCODING_AUTO',"auto détection") ;
 
 define("_AM_DBUPDATED","Base de données mise à jour avec succès!");

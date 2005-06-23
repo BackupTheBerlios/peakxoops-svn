@@ -1,28 +1,21 @@
 <?php
-// $Id: plugins.php,v 1.1 2005/04/20 03:27:04 gij Exp $
-// FILE		::	plugins.php
-// AUTHOR	::	Ryuji AMANO <info@ryus.biz>
-// WEB		::	Ryu's Planning <http://ryus.biz/>
-//
 
-// Appended by Xoops Language Checker -GIJOE- in 2005-06-15 16:48:07
-define('_PI_WAITING_INACTIVE_USERS','Inactive Users');
-
-define("_PI_WAITING_WAITINGS","Enviados");
-define("_PI_WAITING_SUBMITTED","Sumbmitted");
-define("_PI_WAITING_BROKENS","Brokens");
-define("_PI_WAITING_MODREQS","Modreqs");
-define("_PI_WAITING_REQUESTS","Solicitados");
-define("_PI_WAITING_REVIEWS","Reviews");
+define('_PI_WAITING_INACTIVE_USERS','Usuarios Inactivos');
+define("_PI_WAITING_WAITINGS","Esperando");
+define("_PI_WAITING_SUBMITTED","Pendientes");
+define("_PI_WAITING_BROKENS","Rotos");
+define("_PI_WAITING_MODREQS","Mods Solicitados");
+define("_PI_WAITING_REVIEWS","Análisis");
 define("_PI_WAITING_PREVIEWS","Previews");
-define("_PI_WAITING_COMMENTS","Comments");
-define("_PI_WAITING_LINKS","Links");
-define("_PI_WAITING_FILES","Files");
+define("_PI_WAITING_COMMENTS","Comentarios");
+define("_PI_WAITING_LINKS","Enlaces");
+define("_PI_WAITING_FILES","Ficheros");
 define("_PI_WAITING_BLOGS","Blogs");
-define("_PI_WAITING_EVENTS","Events");
-define("_PI_WAITING_ASKED","Asked");
-define("_PI_WAITING_NEWANSWERS","New Answers");
-define("_PI_WAITING_ANSWERED","Answered");
-define("_PI_WAITING_WAITINGS_FMT","Waitings (%s)");
+define("_PI_WAITING_EVENTS","Eventos");
+define("_PI_WAITING_ASKED","Preguntas");
+define("_PI_WAITING_NEWANSWERS","Nuevas Respuestas");
+define("_PI_WAITING_ANSWERED","Respondido");
+define("_PI_WAITING_WAITINGS_FMT","Esperando (%s)");
+define("_PI_WAITING_REQUESTS","Solicitados");
 
 ?>

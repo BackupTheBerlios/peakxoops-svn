@@ -1,12 +1,17 @@
 [xlang:en]
 
+- fixed and modified usages of the plugin manager (thx tohokuaiki)
+- added Canadian Holidays locale (thx sdmacint)
+- modified plugins
+-- weblog (thx tohokuaiki)
+
 v.080RC5 (2005-5-27)
 - updated myblocksadmin into 0.29
 - fixed RRULE FREQ=YEARLY without BYMONTH (thx Andrey)
 - modified the order of categories in editing events
 - update russian (thx Andrey)
 - added plugins
--- weblog (thx yshima)
+-- weblinks (thx yshima)
 -- yomi (thx yshima)
 - fixed typos in some plugins
 
@@ -266,7 +271,7 @@ v.080RC5 (2005-5-27)
 - スケジュール編集画面で、カテゴリーの親子関係を表示するようにした
 - ロシア語ファイル更新 (thx Andrey)
 - プラグイン２つ追加
--- weblog (thx yshima)
+-- weblinks (thx yshima)
 -- yomi (thx yshima)
 - 既存のプラグインにあったtypoをいくつか修正
 

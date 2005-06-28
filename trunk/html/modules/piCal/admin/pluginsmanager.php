@@ -222,7 +222,7 @@ include( './mymenu.php' ) ;
 	    <td class='$oddeven' align='right'>
 	      <select name='pi_types[0]'>$type_options</select>
 	      &nbsp; <br />
-	      <input type='text' name='pi_weight[$pi_id]' value='0' size='3' style='text-align:right;' />
+	      <input type='text' name='pi_weight[0]' value='0' size='3' style='text-align:right;' />
 	    </td>
 	    <td class='$oddeven'>
 	      <select name='pi_dirnames[0]'>$dirname_options</select>

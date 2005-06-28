@@ -412,7 +412,9 @@ case "edit" :
 
 	// html header
 	if( $header_tarea_height > 0 ) {
-		$form->addElement( new XoopsFormTextArea( _TC_HTML_HEADER , 'html_header' , htmlspecialchars( $html_header , ENT_QUOTES ) , $header_tarea_height , $tarea_width ) ) ;
+		$h_area = new XoopsFormTextArea( _TC_HTML_HEADER , 'html_header' , htmlspecialchars( $html_header , ENT_QUOTES ) , $header_tarea_height , $tarea_width ) ;
+		$h_area->setExtra( "style='width: {$tarea_width}em;'" ) ;
+		$form->addElement( $h_area ) ;
 	} else {
 		$form->addElement( new XoopsFormHidden( 'html_header' , htmlspecialchars( $html_header , ENT_QUOTES ) ) ) ;
 	}
@@ -437,7 +439,7 @@ case "edit" :
 		} else {
 			$t_area = new XoopsFormTextArea( _TC_CONTENT . "<br /><br /><br /><br /><a href='$mymodurl/admin/text_wiki_sample.php?lang={$xoopsConfig['language']}' target='_blak'>Text_Wiki Sample</a>" , 'message' , htmlspecialchars( $message , ENT_QUOTES ) , $body_tarea_height , $tarea_width ) ;
 		}
-		if( $tarea_width != 35 ) $t_area->setExtra( "style='width: $tarea_width em;'" ) ;
+		$t_area->setExtra( "style='width: {$tarea_width}em;'" ) ;
 		$form->addElement( $t_area ) ;
 	}
 

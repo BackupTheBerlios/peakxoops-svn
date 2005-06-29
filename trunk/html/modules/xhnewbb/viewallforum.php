@@ -48,6 +48,10 @@ if( $uid > 0 && ! empty( $_POST['update_mark'] ) && ! empty( $_POST['topic_ids']
 // updating topic_solved
 if( $uid > 0 && ! empty( $_GET['flip_solved'] ) && ! empty( $_GET['topic_id'] ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
 	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix("xhnewbb_topics")." SET topic_solved = ! topic_solved WHERE topic_id=".intval($_GET['topic_id']) ) ;
+	if( ! headers_sent() ) {
+		header( "Location: ".XOOPS_URL."/modules/xhnewbb/viewallforum.php?solved=".@$_GET['solved']."&sortname=".@$_GET['sortname']."&sortorder=".@$_GET['sortorder']."&sortsince=".intval(@$_GET['sortsince'])."&start=".intval(@$_GET['start']) ) ;
+		exit ;
+	}
 }
 
 // this page uses smarty template
@@ -210,7 +214,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	$topic_icon = '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$myrow['icon'].'" alt="" border="" />';
 	// moderator can change solved
 	if( $uid > 0 && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
-		$topic_icon = "<a href='".XOOPS_URL."/modules/xhnewbb/viewallforum.php?flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder'>$topic_icon</a>" ;
+		$topic_icon = "<a href='".XOOPS_URL."/modules/xhnewbb/viewallforum.php?flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder&amp;start=$start'>$topic_icon</a>" ;
 	}
 
 	// topic_poster

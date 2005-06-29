@@ -50,6 +50,10 @@ if( $uid > 0 && ! empty( $_POST['update_mark'] ) && ! empty( $_POST['topic_ids']
 // updating topic_solved
 if( $uid > 0 && ! empty( $_GET['flip_solved'] ) && ! empty( $_GET['topic_id'] ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
 	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix("xhnewbb_topics")." SET topic_solved = ! topic_solved WHERE topic_id=".intval($_GET['topic_id']) ) ;
+	if( ! headers_sent() ) {
+		header( "Location: ".XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=".intval(@$_GET['forum'])."&solved=".@$_GET['solved']."&sortname=".@$_GET['sortname']."&sortorder=".@$_GET['sortorder']."&sortsince=".intval(@$_GET['sortsince'])."&start=".intval(@$_GET['start']) ) ;
+		exit ;
+	}
 }
 
 
@@ -301,7 +305,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	$topic_icon = '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$myrow['icon'].'" alt="" />';
 	// moderator can change solved
 	if( $uid > 0 && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
-		$topic_icon = "<a href='".XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder'>$topic_icon</a>" ;
+		$topic_icon = "<a href='".XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder&amp;start=$start'>$topic_icon</a>" ;
 	}
 
 	// topic_poster
@@ -347,7 +351,7 @@ if ( !$r = $xoopsDB->query($sql) ) {
 list($all_topics) = $xoopsDB->fetchRow($r);
 if ( $all_topics > $forumdata['topics_per_page'] ) {
 	include XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';
-	$nav = new XhXoopsPageNav( XOOPS_URL.'/modules/xhnewbb/viewallforum.php' , $all_topics, $forumdata['topics_per_page'], $start, "start", "solved=$solved&amp;sortname=$sortname&amp;sortorder=$sortorder&amp;sortsince=$sortsince" ) ;
+	$nav = new XhXoopsPageNav( XOOPS_URL.'/modules/xhnewbb/viewforum.php' , $all_topics, $forumdata['topics_per_page'], $start, "start", "forum=$forum&amp;solved=$solved&amp;sortname=$sortname&amp;sortorder=$sortorder&amp;sortsince=$sortsince" ) ;
 	$xoopsTpl->assign('forum_pagenav', $nav->renderNav(4));
 } else {
 	$xoopsTpl->assign('forum_pagenav', '');

@@ -2,6 +2,10 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_AM_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-06-29 17:19:30
+define('_AM_PI_TH_OPTIONS','Options (usually blank)');
+
 define( 'PICAL_AM_LOADED' , 1 ) ;
 
 

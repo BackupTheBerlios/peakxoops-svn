@@ -113,6 +113,7 @@ define( '_AM_FMT_CATDELCONFIRM' , 'Do you want to delete category %s ?' ) ;
 // Plugins
 define( '_AM_PI_UPDATED' , 'Plugins are updated' ) ;
 define( '_AM_PI_TH_TYPE' , 'Type' ) ;
+define( '_AM_PI_TH_OPTIONS' , 'Options (usually blank)' ) ;
 define( '_AM_PI_TH_TITLE' , 'Title' ) ;
 define( '_AM_PI_TH_DIRNAME' , 'Module\'s dirname' ) ;
 define( '_AM_PI_TH_FILE' , 'Plugin file' ) ;

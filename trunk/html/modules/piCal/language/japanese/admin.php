@@ -112,6 +112,7 @@ define( '_AM_FMT_CATDELCONFIRM' , 'カテゴリー名 %s を削除してよろしいですか？' )
 // Plugins
 define( '_AM_PI_UPDATED' , '更新されました' ) ;
 define( '_AM_PI_TH_TYPE' , '適用先' ) ;
+define( '_AM_PI_TH_OPTIONS' , 'オプション(通常は空欄)' ) ;
 define( '_AM_PI_TH_TITLE' , '表示名' ) ;
 define( '_AM_PI_TH_DIRNAME' , '対象モジュール' ) ;
 define( '_AM_PI_TH_FILE' , '利用プラグイン' ) ;

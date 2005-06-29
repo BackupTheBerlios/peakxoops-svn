@@ -14,7 +14,7 @@
 		$this->server_TZ : server's timezone (-2.5 etc)
 		$tzoffset_s2u : the offset from server to user
 		$now : the result of time()
-		$plugin = array('dirname'=>'dirname','name'=>'name','dotgif'=>'*.gif')
+		$plugin = array('dirname'=>'dirname','name'=>'name','dotgif'=>'*.gif','options'=>'options')
 		
 		$plugin_returns[ DATE ][]
 	*/
@@ -27,8 +27,17 @@
 	$range_start_s = mktime(0,0,0,$this->month,$this->date-1,$this->year) ;
 	$range_end_s = mktime(0,0,0,$this->month,$this->date+2,$this->year) ;
 
+	// options
+	$options = explode( '|' , $plugin['options'] ) ;
+	// options[0] : category extract
+	if( ! empty( $options[0] ) ) {
+		$whr_cid = '`cid` IN (' . addslashes( $options[0] ) . ')' ;
+	} else {
+		$whr_cid = '1' ;
+	}
+
 	// query (added 86400 second margin "begin" & "end")
-	$result = $db->query( "SELECT title,lid,`date` FROM ".$db->prefix("myalbum{$mydirnumber}_photos")." WHERE `date` >= $range_start_s AND `date` < $range_end_s AND status > 0" ) ;
+	$result = $db->query( "SELECT title,lid,`date` FROM ".$db->prefix("myalbum{$mydirnumber}_photos")." WHERE ($whr_cid) AND `date` >= $range_start_s AND `date` < $range_end_s AND status > 0" ) ;
 
 	while( list( $title , $id , $server_time ) = $db->fetchRow( $result ) ) {
 		$user_time = $server_time + $tzoffset_s2u ;

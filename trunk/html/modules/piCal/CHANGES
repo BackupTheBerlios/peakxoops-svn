@@ -1,6 +1,8 @@
 [xlang:en]
 
+v.080 release (2005-6-29)
 - fixed and modified usages of the plugin manager (thx tohokuaiki)
+- added plugin's options (for news & myalbum-p-photos)
 - added Canadian Holidays locale (thx sdmacint)
 - modified plugins
 -- weblog (thx tohokuaiki)
@@ -264,6 +266,13 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.080 release (2005-6-29)
+- プラグインマネージャの使い勝手改善およびバグ修正 (thx tohokuaiki)
+- プラグインのオプション解禁 (とりあえずnewsとmyalbum-p-photosのみ)
+- カナダの祝日ロケール追加 (thx sdmacint)
+- プラグイン修正
+-- weblog (thx tohokuaiki)
 
 v.080RC5 (2005-5-27)
 - myblocksadmin を0.29にアップデート

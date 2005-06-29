@@ -865,6 +865,7 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 	$myts =& MyTextSanitizer::getInstance() ;
 
 	$now = time() ;
+	$now_Ynj = date('Y-n-j') ;
 
 	// 当月の各日がイベントを持っているかどうかを取得
 	// $event_dates = $this->get_flags_date_has_events( mktime(0,0,0,$this->month,1,$this->year) , mktime(0,0,0,$this->month+1,1,$this->year) ) ;
@@ -975,6 +976,9 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 				$color = $this->weekday_color ;
 			}
 
+			// 選択日の背景色ハイライト処理
+			if( $link == $now_Ynj ) $bgcolor = $this->targetday_bgcolor ;
+
 			// プラグイン結果を引き渡す前処理（配列丸め）
 			$ex = empty( $plugin_returns[ $date ] ) ? array() : array_slice( $plugin_returns[ $date ] , 0 , $gifaday ) ;
 			// if( ! empty( $ex ) ) var_dump( $ex ) ;
@@ -1013,7 +1017,7 @@ function get_plugins( $type )
 
 	// plugins
 	$plugins = array() ;
-	$prs = $xoopsDB->query( "SELECT pi_title,pi_dirname AS dirname,pi_file AS file,pi_dotgif AS dotgif FROM ".$xoopsDB->prefix("pical_plugins")." WHERE pi_type='".addslashes($type)."' AND pi_enabled ORDER BY pi_weight" ) ;
+	$prs = $xoopsDB->query( "SELECT pi_title,pi_dirname AS dirname,pi_file AS file,pi_dotgif AS dotgif,pi_options AS options FROM ".$xoopsDB->prefix("pical_plugins")." WHERE pi_type='".addslashes($type)."' AND pi_enabled ORDER BY pi_weight" ) ;
 	while( $plugin = $xoopsDB->fetchArray( $prs ) ) {
 		$dirname4sql = addslashes( $plugin['dirname'] ) ;
 		$mrs = $xoopsDB->query( "SELECT mid,name FROM ".$xoopsDB->prefix("modules")." WHERE dirname='$dirname4sql'" ) ;

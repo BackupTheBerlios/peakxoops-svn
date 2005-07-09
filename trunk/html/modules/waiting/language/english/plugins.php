@@ -5,7 +5,7 @@
 // WEB		::	Ryu's Planning <http://ryus.biz/>
 //
 define("_PI_WAITING_WAITINGS","Waitings");
-define("_PI_WAITING_SUBMITTED","Sumbmitted");
+define("_PI_WAITING_SUBMITTED","Submitted");
 define("_PI_WAITING_INACTIVE_USERS","Inactive Users");
 define("_PI_WAITING_BROKENS","Brokens");
 define("_PI_WAITING_MODREQS","Modreqs");

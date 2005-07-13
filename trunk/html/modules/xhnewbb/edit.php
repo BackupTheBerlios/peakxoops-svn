@@ -113,6 +113,7 @@ if ( empty($forum) ) {
 	}
 	$subject=$forumpost->subject("Edit");
 	$message=$forumpost->text("Edit");
+	$solved=$forumpost->solved();
 	$hidden = "";
 	$myts =& MyTextSanitizer::getInstance();
 	$viewmode = $myts->htmlspecialchars($viewmode);

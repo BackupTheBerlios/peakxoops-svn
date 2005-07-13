@@ -141,7 +141,7 @@ class ForumPosts
 	}
 
 	function setSolved($value){
-		$this->solved=$value;
+		$this->solved = intval($value);
 	}
 
 	function setAttachsig($value){
@@ -211,10 +211,12 @@ class ForumPosts
 		}else{
 			if ( $this->istopic() ) {
 				$sql = "UPDATE ".$this->db->prefix("xhnewbb_topics")." SET topic_title = '$subject' , topic_solved = $this->solved WHERE topic_id = ".$this->topic_id."";
-			 	if ( !$result = $this->db->query($sql) ) {
-			 		return false;
-			 	}
+			} else {
+				$sql = "UPDATE ".$this->db->prefix("xhnewbb_topics")." SET topic_solved = $this->solved WHERE topic_id = ".$this->topic_id."";
 			}
+		 	if ( !$result = $this->db->query($sql) ) {
+		 		return false;
+		 	}
 			if ( !isset($this->nohtml) || $this->nohtml != 1 ) {
 				$this->nohtml = 0;
 			}
@@ -409,6 +411,10 @@ class ForumPosts
 
 	function icon(){
 		return $this->icon;
+	}
+
+	function solved(){
+		return $this->solved;
 	}
 
 	function forum(){

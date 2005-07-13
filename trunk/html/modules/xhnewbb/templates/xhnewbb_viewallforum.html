@@ -16,7 +16,9 @@
 <table class="outer" cellspacing="1">
   <tr class="head" align="left">
     <th width="4%" colspan="2" align="right">
-      <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
+      <{if $uid}>
+        <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
+      <{/if}>
     </th>
     <th>&nbsp;<b><a href="<{$h_forum_link}>"><{$lang_forum}></a></b></th>
     <th width="40%">&nbsp;<b><a href="<{$h_topic_link}>"><{$lang_topic}></a></b></th>
@@ -48,7 +50,9 @@
   <!-- end forum topic -->
   <tr class="foot">
     <td colspan="2" align="right">
-      <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
+      <{if $uid}>
+        <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
+      <{/if}>
     </td>
     <td></td>
     <td></td>

@@ -22,6 +22,7 @@ include(XOOPS_ROOT_PATH . '/header.php');
 // for All-time guest mode (backup uid & set as Guest)
 if( is_object( $xoopsUser ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) {
 	$backup_uid = $xoopsUser->getVar('uid') ;
+	$backup_userisadmin = $xoopsUserIsAdmin ;
 	$xoopsUser = '' ;
 	$xoopsUserIsAdmin = false ;
 	$xoopsTpl->assign(array('xoops_isuser' => false, 'xoops_userid' => 0, 'xoops_uname' => '', 'xoops_isadmin' => false));
@@ -33,7 +34,7 @@ $sitemap = sitemap_show();
 if( ! empty( $backup_uid ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) {
 	$member_handler =& xoops_gethandler('member');
 	$xoopsUser =& $member_handler->getUser( $backup_uid ) ;
-	$xoopsUserIsAdmin = $xoopsUser->isAdmin();
+	$xoopsUserIsAdmin = $backup_userisadmin ;
 }
 
 // PM受信数を得る by Ryuji

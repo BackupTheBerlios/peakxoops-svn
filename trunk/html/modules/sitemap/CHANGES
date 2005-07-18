@@ -1,7 +1,12 @@
+1.13 2005-07-19
+- modified alltime-guest-mode (thx dasdan)
+
+
 1.12 2005-06-20
 - modified xml_google.php as root controller (copy it to XOOPS_ROOT_PATH/)
 - added a plugin
 -- pbboard (thx karedokx)
+
 
 1.11 2005-06-15
 

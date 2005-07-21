@@ -7,7 +7,7 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-03-31 12:07:31
-define('_MI_PROTECTOR_PREFIXMANAGER','Prefix Manager');
+define('_MI_PROTECTOR_PREFIXMANAGER','Gestore dei prefissi');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-03-05 07:09:09
 define('_MI_PROTECTOR_GLOBAL_DISBL','Temporaneamente disabilitato');

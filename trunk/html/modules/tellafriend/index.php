@@ -179,7 +179,7 @@ if( ! is_object( $xoopsUser ) ) {
 	$contact_form->addElement($fromemail_text, true);
 }
 
-$contact_form->addElement($subject_text, true);
+$contact_form->addElement($subject_text);
 if( $xoopsModuleConfig['can_bodyedit'] ) {
 	$contact_form->addElement($comment_textarea, true);
 } else {

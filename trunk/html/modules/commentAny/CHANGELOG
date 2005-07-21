@@ -1,5 +1,8 @@
 [xlang:en]
 
+++ v0.11->v0.12
+* fixed a bug around approve (thx minahito)
+
 ++ v0.10->v0.11
 * modified for XOOPS >= 2.0.10 (using XoopsSecurity::createToken())
 
@@ -15,6 +18,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+++ v0.11->v0.12
+* コメントの承認を必要とすると、投稿画面が出ないバグを修正 (thx minahito)
 
 ++ v0.10->v0.11
 * XOOPS >= 2.0.10 への対応 (XoopsSecurity::createToken()を利用)

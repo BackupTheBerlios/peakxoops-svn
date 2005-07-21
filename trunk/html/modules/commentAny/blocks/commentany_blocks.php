@@ -30,10 +30,10 @@ function b_commentany_hook_execute($options)
 		case XOOPS_COMMENT_APPROVENONE:
 			return null;
 
-		case XOOPS_COMMENT_APPROVEUSER:
+/*		case XOOPS_COMMENT_APPROVEUSER:
 		case XOOPS_COMMENT_APPROVEADMIN:	// FIXME: ホント??
 			if(!is_object($xoopsUser))
-				return null;
+				return null; */
 	}
 
 	// パスを取り出す

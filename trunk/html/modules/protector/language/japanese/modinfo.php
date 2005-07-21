@@ -43,8 +43,8 @@ define('_MI_PROTECTOR_UNION_ACTION','UNIONが見つかった時の処理');
 define('_MI_PROTECTOR_UNION_ACTIONDSC','SQLインジェクション対策：<br />SQLのUNION構文を検出した時の処理を決めます。<br />無害化方法：UNION を uni-on とします<br />「無害化」がお勧めです');
 define('_MI_PROTECTOR_ID_INTVAL','ID風変数の強制変換');
 define('_MI_PROTECTOR_ID_INTVALDSC','変数名がidで終わるものを、数字だと強制認識させます。myLinks派生モジュールに特に有効で、XSSなども防げますが、一部のモジュールで動作不良の原因となる可能性があります。');
-define('_MI_PROTECTOR_FILE_DOTDOT','疑わしいファイル指定の禁止');
-define('_MI_PROTECTOR_FILE_DOTDOTDSC','ファイルを指定していると判断できるリクエスト文字列から、".." というパターンを取り除きます');
+define('_MI_PROTECTOR_FILE_DOTDOT','DirectoryTraversalの禁止');
+define('_MI_PROTECTOR_FILE_DOTDOTDSC','DirectoryTraversalを試みていると判断されたリクエスト文字列から、".." というパターンを取り除きます');
 
 define('_MI_PROTECTOR_DOS_EXPIRE','DoS等の監視時間 (秒)');
 define('_MI_PROTECTOR_DOS_EXPIREDSC','DoSや悪意あるクローラーのアクセス頻度を追うための監視単位時間');

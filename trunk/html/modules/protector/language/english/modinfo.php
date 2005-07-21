@@ -43,8 +43,8 @@ define('_MI_PROTECTOR_UNION_ACTION','Action if a UNION is found');
 define('_MI_PROTECTOR_UNION_ACTIONDSC','Anti SQL Injection:<br />Select the action when some syntax like UNION of SQL.<br />"Sanitizing" means changing "union" to "uni-on".<br />(recommended option is Sanitizing)');
 define('_MI_PROTECTOR_ID_INTVAL','Force intval to variables like id');
 define('_MI_PROTECTOR_ID_INTVALDSC','All requests named "*id" will be treated as integer.<br />This option protects you from some kind of XSS and SQL Injections.<br />Though I recommend to turn this option on, it can cause problems with some modules.');
-define('_MI_PROTECTOR_FILE_DOTDOT','Patch doubtful file specifications');
-define('_MI_PROTECTOR_FILE_DOTDOTDSC','It eliminates ".." from all requests looks like specifying files');
+define('_MI_PROTECTOR_FILE_DOTDOT','Protection from Directroy Traversals');
+define('_MI_PROTECTOR_FILE_DOTDOTDSC','It eliminates ".." from all requests looks like Directory Traversals');
 
 define('_MI_PROTECTOR_DOS_EXPIRE','Watch time for high loadings (sec)');
 define('_MI_PROTECTOR_DOS_EXPIREDSC','This value specifies the watch time for high-frequent reloading (F5 attack) and high loading crawlers.');

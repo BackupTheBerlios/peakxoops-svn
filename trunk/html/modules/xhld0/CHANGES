@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGES:
 
+v.2.99a 2005-7-21
+  - added italian language files (thx Gerry)
+  - modified french adding ISO-8859-15 (need iconv)
+
 v.2.99 2005-6-15
   - updated mymenu 0.14 & myblocksadmin 0.30
   - fixed a problem of multiple <link> again
@@ -203,6 +207,10 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.2.99a 2005-7-21
+  - イタリア語ファイル追加 (thx Gerry)
+  - フランス語ファイルに ISO-8859-15 の処理を追加 (但しiconv必須)
 
 v.2.99 2005-6-15
   - updated mymenu 0.14 & myblocksadmin 0.30

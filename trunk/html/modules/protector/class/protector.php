@@ -271,8 +271,8 @@ function eliminate_dotdot()
 	foreach( $_GET as $key => $val ) {
 		if( is_array( $_GET[ $key ] ) ) continue ;
 		if( substr( trim( $val ) , 0 , 3 ) == '../' || strstr( $val , '../../' ) ) {
-			$this->last_error_type = 'ParentDir' ;
-			$this->message .= "Doubtful file specification '$val' found.\n" ;
+			$this->last_error_type = 'DirTraversal' ;
+			$this->message .= "Directory Traversal '$val' found.\n" ;
 			$this->output_log( $this->last_error_type , 0 , false , 128 ) ;
 			$sanitized_val = str_replace( chr(0) , '' , $val ) ;
 			if( substr( $sanitized_val , -2 ) != ' .' ) $sanitized_val .= ' .' ;
@@ -623,25 +623,25 @@ function patch_2092()
 	// root controllers
 	if( ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) ) {
 
-		// zx 12/13 misc.php debug (file check)
+		// zx 2004/12/13 misc.php debug (file check)
 		if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'debug' || $_POST['type'] == 'debug' ) && ! preg_match( '/^dummy_[0-9]+\.html$/' , $_GET['file'] ) ) {
 			$this->output_log( 'misc debug' ) ;
 			exit ;
 		}
 	
-		// zx 12/13 misc.php smilies
+		// zx 2004/12/13 misc.php smilies
 		if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'smilies' || $_POST['type'] == 'smilies' ) && ! preg_match( '/^[0-9a-z_]*$/i' , $_GET['target'] ) ) {
 			$this->output_log( 'misc smilies' ) ;
 			exit ;
 		}
 	
-		// zx 1/5 edituser.php avatarchoose
+		// zx 2005/1/5 edituser.php avatarchoose
 		if( substr( $_SERVER['SCRIPT_NAME'] , -12 ) == 'edituser.php' && $_POST['op'] == 'avatarchoose' && strstr( $_POST['user_avatar'] , '..' ) ) {
 			$this->output_log( 'edituser avatarchoose' ) ;
 			exit ;
 		}
 	
-		// zx 1/5 disable xmlrpc.php
+		// zx 2005/1/5 disable xmlrpc.php
 		if( substr( $_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
 			$this->output_log( 'xmlrpc' ) ;
 			exit ;
@@ -649,7 +649,7 @@ function patch_2092()
 
 	}
 
-	// zx 1/4 findusers
+	// zx 2005/1/4 findusers
 	if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'findusers' || $_POST['fct'] == 'findusers' ) ) {
 		foreach( $_POST as $key => $val ) {
 			if( strstr( $key , "'" ) || strstr( $val , "'" ) ) {
@@ -659,7 +659,13 @@ function patch_2092()
 		}
 	}
 
-	// preview CSRF zx 12/14 
+	// security bug of class/criteria.php 2005/6/27
+	if( $_POST['uname'] === '0' || $_COOKIE['autologin_pass'] === '0' ) {
+		$this->output_log( 'CRITERIA' ) ;
+		exit ;
+	}
+
+	// preview CSRF zx 2004/12/14 
 	// news submit.php
 	if( substr( $_SERVER['SCRIPT_NAME'] , -23 ) == 'modules/news/submit.php' && isset( $_POST['preview'] ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/submit.php' ) !== 0 ) {
 		$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;

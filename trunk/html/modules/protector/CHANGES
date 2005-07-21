@@ -1,8 +1,11 @@
 [xlang:en]
 = CHANGES = 
 
-
+2.40 release (2005/7/21)
+ - added a protection from 'criteria attack' for xoops <= 2.0.10*
+ - modified Italian language files (thx Defkon1)
  - added Finnish language files (thx kokko)
+ - added Polish language files (thx Tomasz)
 
 2.40RC2 (2005/4/4)
  - modified the updating routine to delete old protector block (thx Dava_L)
@@ -140,6 +143,12 @@
 [/xlang:en][xlang:ja]
 
 ●変更履歴
+
+2.40 正式版 (2005/7/21)
+ - criteria attack への対策コード追加 (xoops <= 2.0.10*用)
+ - イタリア語ファイル更新 (thx Defkon1)
+ - フィンランド語ファイル更新 (thx kokko)
+ - ポーランド語ファイル更新 (thx Tomasz)
 
 2.40RC2 (2005/4/4)
  - モジュールアップデート時にブロックを削除するようにした (thx Dava_L)

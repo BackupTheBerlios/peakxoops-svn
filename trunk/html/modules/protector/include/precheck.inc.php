@@ -40,14 +40,23 @@ function protector_prepare()
 	// global enabled or disabled
 	if( ! empty( $conf['global_disabled'] ) ) return true ;
 
+	// reliable ips
+	$reliable_ips = unserialize( $conf['reliable_ips'] ) ;
+	$is_reliable = false ;
+	foreach( $reliable_ips as $reliable_ip ) {
+		if( ! empty( $reliable_ip ) && preg_match( '/'.$reliable_ip.'/' , $_SERVER['REMOTE_ADDR'] ) ) {
+			$is_reliable = true ;
+		}
+	}
+
 	// force intval variables whose name is *id
 	if( ! empty( $conf['id_forceintval'] ) ) $protector->intval_allrequestsendid() ;
 
 	// eliminate '..' from requests looks like file specifications
-	if( ! empty( $conf['file_dotdot'] ) ) $protector->eliminate_dotdot() ;
+	if( ! $is_reliable && ! empty( $conf['file_dotdot'] ) ) $protector->eliminate_dotdot() ;
 
 	// Check uploaded files
-	if( ! empty( $_FILES ) && ! empty( $conf['die_badext'] ) && ! defined( 'PROTECTOR_SKIP_FILESCHECKER' ) && ! $protector->check_uploaded_files() ) {
+	if( ! $is_reliable && ! empty( $_FILES ) && ! empty( $conf['die_badext'] ) && ! defined( 'PROTECTOR_SKIP_FILESCHECKER' ) && ! $protector->check_uploaded_files() ) {
 		$protector->output_log( $protector->last_error_type ) ;
 		$protector->purge() ;
 	}

@@ -9,7 +9,7 @@ else if( !isset($xoopsOption['nocommon']) ) die( 'Protector: postcheck.inc.php s
 
 function protector_postcommon()
 {
-	global $xoopsUser , $xoopsDB ;
+	global $xoopsUser , $xoopsDB , $xoopsModule ;
 
 	// Protector class
 	require_once( XOOPS_ROOT_PATH . '/modules/protector/class/protector.php' ) ;
@@ -19,11 +19,23 @@ function protector_postcommon()
 	// global enabled or disabled
 	if( ! empty( $conf['global_disabled'] ) ) return true ;
 
+	// reliable ips
+	$reliable_ips = unserialize( $conf['reliable_ips'] ) ;
+	foreach( $reliable_ips as $reliable_ip ) {
+		if( ! empty( $reliable_ip ) && preg_match( '/'.$reliable_ip.'/' , $_SERVER['REMOTE_ADDR'] ) ) {
+			return true ;
+		}
+	}
+
 	// user information (uid and can be banned)
-	if( is_object( $xoopsUser ) ) {
+	if( is_object( @$xoopsUser ) ) {
 		$uid = $xoopsUser->getVar('uid') ;
 		$can_ban = count( array_intersect( $xoopsUser->getGroups() , unserialize( $conf['bip_except'] ) ) ) ? false : true ;
 	} else {
+		// login failed check
+		if( ( ! empty( $_POST['uname'] ) && ! empty( $_POST['pass'] ) ) || ( ! empty( $_COOKIE['autologin_uname'] ) && ! empty( $_COOKIE['autologin_pass'] ) ) ) {
+			$protector->check_brute_force() ;
+		}
 		$uid = 0 ;
 		$can_ban = true ;
 	}
@@ -33,8 +45,15 @@ function protector_postcommon()
 		$protector->register_bad_ips() ;
 	}
 
+	// DOS/CRAWLER skipping based on 'dirname'
+	$skip_dirnames = explode( '|' , $conf['dos_skipmodules'] ) ;
+	if( ! is_array( $skip_dirnames ) ) $skip_dirnames = array() ;
+	if( is_object( @$xoopsModule ) && in_array( $xoopsModule->getVar('dirname') , $skip_dirnames ) ) {
+		$dos_skipping = true ;
+	}
+
 	// DoS Attack
-	if( ! $protector->check_dos_attack( $uid , $can_ban ) ) {
+	if( empty( $dos_skipping ) && ! $protector->check_dos_attack( $uid , $can_ban ) ) {
 		$protector->output_log( $protector->last_error_type , $uid , true , 16 ) ;
 	}
 

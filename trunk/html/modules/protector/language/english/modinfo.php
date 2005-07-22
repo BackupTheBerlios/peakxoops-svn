@@ -19,6 +19,8 @@ define("_MI_PROTECTOR_PREFIXMANAGER","Prefix Manager");
 // Configs
 define('_MI_PROTECTOR_GLOBAL_DISBL','Temporary disabled');
 define('_MI_PROTECTOR_GLOBAL_DISBLDSC','All protections are disabled in temporary.<br />Don\'t forget turn this off after shooting the trouble');
+define('_MI_PROTECTOR_RELIABLE_IPS','Reliable IPs');
+define('_MI_PROTECTOR_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ matches the head of string, $ matches the tail of string.');
 define('_MI_PROTECTOR_LOG_LEVEL','Logging level');
 define('_MI_PROTECTOR_LOG_LEVELDSC','');
 
@@ -45,6 +47,12 @@ define('_MI_PROTECTOR_ID_INTVAL','Force intval to variables like id');
 define('_MI_PROTECTOR_ID_INTVALDSC','All requests named "*id" will be treated as integer.<br />This option protects you from some kind of XSS and SQL Injections.<br />Though I recommend to turn this option on, it can cause problems with some modules.');
 define('_MI_PROTECTOR_FILE_DOTDOT','Protection from Directroy Traversals');
 define('_MI_PROTECTOR_FILE_DOTDOTDSC','It eliminates ".." from all requests looks like Directory Traversals');
+
+define('_MI_PROTECTOR_BF_COUNT','Anti Brute Force');
+define('_MI_PROTECTOR_BF_COUNTDSC','Set count you allow guest try to login within 10 minutes. If someone fails to login more than this number, her/his IP will be banned.');
+
+define('_MI_PROTECTOR_DOS_SKIPMODS','Modules out of DoS/Crawler checker');
+define('_MI_PROTECTOR_DOS_SKIPMODSDSC','set the dirnames of the modules separated with |. This option will be useful with chatting module etc.');
 
 define('_MI_PROTECTOR_DOS_EXPIRE','Watch time for high loadings (sec)');
 define('_MI_PROTECTOR_DOS_EXPIREDSC','This value specifies the watch time for high-frequent reloading (F5 attack) and high loading crawlers.');

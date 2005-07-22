@@ -613,6 +613,43 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 } */
 
 
+// 
+function check_brute_force()
+{
+	global $xoopsDB ;
+
+	$ip = $_SERVER['REMOTE_ADDR'] ;
+	$uri = $_SERVER['REQUEST_URI'] ;
+	$ip4sql = addslashes( $ip ) ;
+	$uri4sql = addslashes( $uri ) ;
+	if( empty( $ip ) || $ip == '' ) return true ;
+
+	$victim_uname = empty( $_COOKIE['autologin_uname'] ) ? $_POST['uname'] : $_COOKIE['autologin_uname'] ;
+	$mal4sql = addslashes( "BRUTE FORCE: $victim_uname" ) ;
+
+	// gargage collection
+	$result = $xoopsDB->queryF( "DELETE FROM ".$xoopsDB->prefix("protector_access")." WHERE expire < UNIX_TIMESTAMP()" ) ;
+
+	// sql for recording access log (INSERT should be placed after SELECT)
+	$sql4insertlog = "INSERT INTO ".$xoopsDB->prefix("protector_access")." SET ip='$ip4sql',request_uri='$uri4sql',malicious_actions='$mal4sql',expire=UNIX_TIMESTAMP()+600" ;
+
+	// count check
+	$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix("protector_access")." WHERE ip='$ip4sql' AND malicious_actions like 'BRUTE FORCE:%'" ) ;
+	list( $bf_count ) = $xoopsDB->fetchRow( $result ) ;
+	var_dump( $bf_count ) ;
+	if( $bf_count > $this->_conf['bf_count'] ) {
+		$this->register_bad_ips() ;
+		$this->last_error_type = 'BruteForce' ;
+		$this->message .= "Trying to login as '".addslashes($victim_uname)."' found.\n" ;
+		$this->output_log( 'BRUTE FORCE' , 0 , true ) ;
+		exit ;
+	}
+	// delayed insert
+	$xoopsDB->queryF( $sql4insertlog ) ;
+}
+
+
+
 function patch_2092()
 {
 	global $HTTP_POST_VARS , $HTTP_GET_VARS , $HTTP_COOKIE_VARS ;

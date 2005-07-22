@@ -19,6 +19,8 @@ define("_MI_PROTECTOR_PREFIXMANAGER","PREFIX マネージャ");
 // Configs
 define('_MI_PROTECTOR_GLOBAL_DISBL','動作の一時的中断');
 define('_MI_PROTECTOR_GLOBAL_DISBLDSC','あらゆる防御動作を一時的に無効化します。<br />問題が解決されたら無効化を解除することをお忘れなく');
+define('_MI_PROTECTOR_RELIABLE_IPS','信用できるIP');
+define('_MI_PROTECTOR_RELIABLE_IPSDSC','DoS等の攻撃検知を行わない生IPアドレスを、| で区切って記述します。^は先頭を、$は末尾を表します。');
 define('_MI_PROTECTOR_LOG_LEVEL','ログレベル');
 define('_MI_PROTECTOR_LOG_LEVELDSC','');
 
@@ -45,6 +47,12 @@ define('_MI_PROTECTOR_ID_INTVAL','ID風変数の強制変換');
 define('_MI_PROTECTOR_ID_INTVALDSC','変数名がidで終わるものを、数字だと強制認識させます。myLinks派生モジュールに特に有効で、XSSなども防げますが、一部のモジュールで動作不良の原因となる可能性があります。');
 define('_MI_PROTECTOR_FILE_DOTDOT','DirectoryTraversalの禁止');
 define('_MI_PROTECTOR_FILE_DOTDOTDSC','DirectoryTraversalを試みていると判断されたリクエスト文字列から、".." というパターンを取り除きます');
+
+define('_MI_PROTECTOR_BF_COUNT','Brute Force対策');
+define('_MI_PROTECTOR_BF_COUNTDSC','パスワード総当たりに対抗します。10分間中、ここで指定した回数以上、ログインに失敗すると、そのIPを拒否します。');
+
+define('_MI_PROTECTOR_DOS_SKIPMODS','DoS監視の対象から外すモジュール');
+define('_MI_PROTECTOR_DOS_SKIPMODSDSC','外したいモジュールのdirnameを|で区切って入力してください。チャット系モジュールなどに有効です');
 
 define('_MI_PROTECTOR_DOS_EXPIRE','DoS等の監視時間 (秒)');
 define('_MI_PROTECTOR_DOS_EXPIREDSC','DoSや悪意あるクローラーのアクセス頻度を追うための監視単位時間');

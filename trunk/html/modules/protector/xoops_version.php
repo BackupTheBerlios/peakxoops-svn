@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 $modversion['name'] = _MI_PROTECTOR_NAME;
-$modversion['version'] = '2.40';
+$modversion['version'] = '2.50';
 $modversion['description'] = _MI_PROTECTOR_DESC;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -63,6 +63,15 @@ $modversion['config'][] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'reliable_ips' ,
+	'title'			=> '_MI_PROTECTOR_RELIABLE_IPS' ,
+	'description'	=> '_MI_PROTECTOR_RELIABLE_IPSDSC' ,
+	'formtype'		=> 'textarea' ,
+	'valuetype'		=> 'array' ,
+	'default'		=> "^192.168.|127.0.0.1" ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
@@ -153,6 +162,24 @@ $modversion['config'][] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "1" ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'bf_count' ,
+	'title'			=> '_MI_PROTECTOR_BF_COUNT' ,
+	'description'	=> '_MI_PROTECTOR_BF_COUNTDSC' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "10" ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'dos_skipmodules' ,
+	'title'			=> '_MI_PROTECTOR_DOS_SKIPMODS' ,
+	'description'	=> '_MI_PROTECTOR_DOS_SKIPMODSDSC' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> "" ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(

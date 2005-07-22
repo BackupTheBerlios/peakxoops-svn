@@ -636,7 +636,6 @@ function check_brute_force()
 	// count check
 	$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix("protector_access")." WHERE ip='$ip4sql' AND malicious_actions like 'BRUTE FORCE:%'" ) ;
 	list( $bf_count ) = $xoopsDB->fetchRow( $result ) ;
-	var_dump( $bf_count ) ;
 	if( $bf_count > $this->_conf['bf_count'] ) {
 		$this->register_bad_ips() ;
 		$this->last_error_type = 'BruteForce' ;

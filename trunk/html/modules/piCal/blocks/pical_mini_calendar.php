@@ -36,24 +36,24 @@ function pical_mini_calendar_show( $options )
 		$use_cache = false ;
 	}
 
-	// 各種パスの設定
+	// setting physical & virtual paths
 	$mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 	$mod_url = XOOPS_URL."/modules/$mydirname" ;
 
-	// piCalクラスの定義
+	// defining class of piCal
 	if( ! class_exists( 'piCal_xoops' ) ) {
 		require_once( "$mod_path/class/piCal.php" ) ;
 		require_once( "$mod_path/class/piCal_xoops.php" ) ;
 	}
 
-	// オブジェクトの生成
+	// creating an instance of piCal 
 	$cal = new piCal_xoops( "" , $xoopsConfig['language'] , true ) ;
 
-	// cid による影響を受けないようにする
+	// ignoring cid from GET
 	$cal->now_cid = 0 ;
 
-	// 各プロパティの設定
-	$cal->conn = $xoopsDB->conn ;	// 本来はprivateメンバなので将来的にはダメ
+	// setting properties of piCal
+	$cal->conn = $xoopsDB->conn ;
 	include( "$mod_path/include/read_configs.php" ) ;
 	$cal->base_url = $mod_url ;
 	$cal->base_path = $mod_path ;

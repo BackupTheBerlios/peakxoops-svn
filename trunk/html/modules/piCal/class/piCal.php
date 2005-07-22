@@ -1,6 +1,6 @@
 <?php
 
-// スケジューラ付カレンダークラス piCal
+// The RFC2445 class   === piCal ===
 // piCal.php
 // by GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
 
@@ -14,7 +14,7 @@ define( 'PICAL_CAT_TABLE' , 'pical_cat' ) ;
 
 class piCal
 {
-	// 言語ファイルにて設定されるべき変数
+	// SKELTON (they will be defined in language files)
 	var $holidays = array() ;
 	var $date_short_names = array() ;
 	var $date_long_names = array() ;
@@ -28,11 +28,11 @@ class piCal
 	var $byday2langday_w = array() ;
 	var $byday2langday_m = array() ;
 
-	// ロケール
+	// LOCALES
 	var $locale = '' ;			// locale for piCal original
-	var $locale4system = '' ;	// locale for UNIX systems （将来的に消す方向）
+	var $locale4system = '' ;	// locale for UNIX systems (deprecated)
 
-	// カレンダー表示設定 public
+	// COLORS/STYLES  public
 	var $holiday_color = '#CC0000' ;
 	var $holiday_bgcolor = '#FFEEEE' ;
 	var $sunday_color = '#CC0000' ;
@@ -46,19 +46,19 @@ class piCal
 	var $calhead_bgcolor = '#CCFFCC' ;
 	var $frame_css = 'border:solid 1px green;' ;
 
-	// TimeZone関係
-	var $server_TZ = 9 ;			// サーバのTimezone Offset (単位:時間)
-	var $user_TZ = 9 ;				// ユーザのTimezone Offset (単位:時間)
-	var $use_server_TZ = false ;	// サーバローカルタイムでcaldateを生成したか
+	// TIMEZONES
+	var $server_TZ = 9 ;			// Server's  Timezone Offset (hour)
+	var $user_TZ = 9 ;				// User's Timezone Offset (hour)
+	var $use_server_TZ = false ;	// if 'caldate' is generated in Server's time
 
-	// 権限関係
-	var $insertable = true ;		// 新規イベントの登録権限
-	var $editable = true ;			// 既存イベントの変更権限
-	var $deletable = true ;			// 既存イベントの削除権限
-	var $user_id = -1 ;				// ユーザID
-	var $isadmin = false ;			// 管理者権限かどうか
+	// AUTHORITIES
+	var $insertable = true ;		// can insert a new event
+	var $editable = true ;			// can update an event he posted
+	var $deletable = true ;			// can delete an event he posted
+	var $user_id = -1 ;				// User's ID
+	var $isadmin = false ;			// Is admin or not
 
-	// その他 publicプロパティ
+	// ANOTHER public properties
 	var $conn ;					// MySQLとの接続ハンドル (予定取得をする時セット)
 	var $table = 'pical_event' ;	// イベントテーブル名
 	var $cat_table = 'pical_cat' ;	// カテゴリテーブル名
@@ -84,13 +84,13 @@ class piCal
 	var $plugins_path_weekly = 'plugins/weekly' ;
 	var $plugins_path_daily = 'plugins/daily' ;
 
-	// privateメンバ
+	// private members
 	var $year ;
 	var $month ;
 	var $date ;
-	var $day ;			// 0:日曜 〜 6:土曜
-	var $daytype ;		// 0:平日 1:土曜 2:日曜 3:祝日
-	var $caldate ;		// 常にY-n-j形式にしておく
+	var $day ;			// 0:Sunday ... 6:Saturday
+	var $daytype ;		// 0:weekdays 1:saturday 2:sunday 3:holiday
+	var $caldate ;		// everytime 'Y-n-j' formatted
 	var $unixtime ;
 	var $long_event_legends = array() ;
 	var $language = "japanese" ;
@@ -100,10 +100,10 @@ class piCal
 
 
 /*******************************************************************/
-/*        コンストラクタ等                                         */
+/*        CONSTRUCTOR etc.                                         */
 /*******************************************************************/
 
-// コンストラクタ
+// Constructor
 function piCal( $target_date = "" , $language = "japanese" , $reload = false )
 {
 	// 日付のセット
@@ -677,10 +677,10 @@ function get_yearly( $get_target = '' , $query_string = '' , $for_print = false 
 	$tmpl = new PatTemplate() ;
 	$tmpl->readTemplatesFromFile( "$this->images_path/yearly.tmpl.html" ) ;
 
-	// スキンフォルダのセット
+	// setting skin folder
 	$tmpl->addVar( "WholeBoard" , "SKINPATH" , $this->images_url ) ;
 
-	// コントローラ・ボタンなどの処理先
+	// Static parameter for the request
 	$tmpl->addVar( "WholeBoard" , "GET_TARGET" , $get_target ) ;
 	$tmpl->addVar( "WholeBoard" , "QUERY_STRING" , $query_string ) ;
 	$tmpl->addVar( "WholeBoard" , "PRINT_LINK" , "$this->base_url/print.php?cid=$this->now_cid&amp;smode=Yearly&amp;caldate=$this->caldate" ) ;
@@ -691,7 +691,7 @@ function get_yearly( $get_target = '' , $query_string = '' , $for_print = false 
 	$tmpl->addVar( "WholeBoard" , "CATEGORIES_SELFORM" , $this->get_categories_selform( $get_target ) ) ;
 	$tmpl->addVar( "WholeBoard" , "CID" , $this->now_cid ) ;
 
-	// カレンダーヘッダ部等に必要な情報を連想配列で返す
+	// Variables required in header part etc.
 	$tmpl->addVars( "WholeBoard" , $this->get_calendar_information( 'Y' ) ) ;
 
 	$tmpl->addVar( "WholeBoard" , "LANG_JUMP" , _PICAL_BTN_JUMP ) ;
@@ -709,7 +709,7 @@ function get_yearly( $get_target = '' , $query_string = '' , $for_print = false 
 	// $this->caldate のリストア
 	$this->set_date( $backuped_caldate ) ;
 
-	// 最後にpatTemplateでパースしたものを返す
+	// content generated from patTemplate
 	$ret = $tmpl->getParsedTemplate( "WholeBoard" ) ;
 
 	error_reporting( $original_level ) ;
@@ -730,10 +730,10 @@ function get_monthly( $get_target = '' , $query_string = '' , $for_print = false
 	$tmpl = new PatTemplate() ;
 	$tmpl->readTemplatesFromFile( "$this->images_path/monthly.tmpl.html" ) ;
 
-	// スキンフォルダのセット
+	// setting skin folder
 	$tmpl->addVar( "WholeBoard" , "SKINPATH" , $this->images_url ) ;
 
-	// コントローラ・ボタンなどの処理先
+	// Static parameter for the request
 	$tmpl->addVar( "WholeBoard" , "GET_TARGET" , $get_target ) ;
 	$tmpl->addVar( "WholeBoard" , "QUERY_STRING" , $query_string ) ;
 	$tmpl->addVar( "WholeBoard" , "YEAR_MONTH_TITLE" , sprintf( _PICAL_FMT_YEAR_MONTH , $this->year , $this->month_middle_names[ $this->month ] ) ) ;
@@ -745,15 +745,15 @@ function get_monthly( $get_target = '' , $query_string = '' , $for_print = false
 	$tmpl->addVar( "WholeBoard" , "CATEGORIES_SELFORM" , $this->get_categories_selform( $get_target ) ) ;
 	$tmpl->addVar( "WholeBoard" , "CID" , $this->now_cid ) ;
 
-	// カレンダーヘッダ部等に必要な情報を連想配列で返す
+	// Variables required in header part etc.
 	$tmpl->addVars( "WholeBoard" , $this->get_calendar_information( 'M' ) ) ;
 
 	$tmpl->addVar( "WholeBoard" , "LANG_JUMP" , _PICAL_BTN_JUMP ) ;
 
-	// カレンダー本体
+	// BODY of the calendar
 	$tmpl->addVar( "WholeBoard" , "CALENDAR_BODY" , $this->get_monthly_html( $get_target , $query_string ) ) ;
 
-	// 長期イベントの凡例
+	// legends of long events
 	foreach( $this->long_event_legends as $bit => $legend ) {
 		$tmpl->addVar( "LongEventLegends" , "BIT_MASK" , 1 << ( $bit - 1 ) ) ;
 		$tmpl->addVar( "LongEventLegends" , "LEGEND_ALT" , _PICAL_MB_ALLDAY_EVENT . " $bit" ) ;
@@ -774,7 +774,7 @@ function get_monthly( $get_target = '' , $query_string = '' , $for_print = false
 	// $this->caldate のリストア
 	$this->set_date( $backuped_caldate ) ;
 
-	// 最後にpatTemplateでパースしたものを返す
+	// content generated from patTemplate
 	$ret = $tmpl->getParsedTemplate( "WholeBoard" ) ;
 
 	error_reporting( $original_level ) ;
@@ -795,10 +795,10 @@ function get_weekly( $get_target = '' , $query_string = '' , $for_print = false 
 	$tmpl = new PatTemplate() ;
 	$tmpl->readTemplatesFromFile( "$this->images_path/weekly.tmpl.html" ) ;
 
-	// スキンフォルダのセット
+	// setting skin folder
 	$tmpl->addVar( "WholeBoard" , "SKINPATH" , $this->images_url ) ;
 
-	// コントローラ・ボタンなどの処理先
+	// Static parameter for the request
 	$tmpl->addVar( "WholeBoard" , "GET_TARGET" , $get_target ) ;
 	$tmpl->addVar( "WholeBoard" , "QUERY_STRING" , $query_string ) ;
 	$tmpl->addVar( "WholeBoard" , "PRINT_LINK" , "$this->base_url/print.php?cid=$this->now_cid&amp;smode=Weekly&amp;caldate=$this->caldate" ) ;
@@ -809,15 +809,15 @@ function get_weekly( $get_target = '' , $query_string = '' , $for_print = false 
 	$tmpl->addVar( "WholeBoard" , "CATEGORIES_SELFORM" , $this->get_categories_selform( $get_target ) ) ;
 	$tmpl->addVar( "WholeBoard" , "CID" , $this->now_cid ) ;
 
-	// カレンダーヘッダ部等に必要な情報を連想配列で返す
+	// Variables required in header part etc.
 	$tmpl->addVars( "WholeBoard" , $this->get_calendar_information( 'W' ) ) ;
 
 	$tmpl->addVar( "WholeBoard" , "LANG_JUMP" , _PICAL_BTN_JUMP ) ;
 
-	// カレンダー本体
+	// BODY of the calendar
 	$tmpl->addVar( "WholeBoard" , "CALENDAR_BODY" , $this->get_weekly_html( $get_target , $query_string ) ) ;
 
-	// 最後にpatTemplateでパースしたものを返す
+	// content generated from patTemplate
 	$ret = $tmpl->getParsedTemplate( "WholeBoard" ) ;
 
 	error_reporting( $original_level ) ;
@@ -838,10 +838,10 @@ function get_daily( $get_target = '' , $query_string = '' , $for_print = false )
 	$tmpl = new PatTemplate() ;
 	$tmpl->readTemplatesFromFile( "$this->images_path/daily.tmpl.html" ) ;
 
-	// スキンフォルダのセット
+	// setting skin folder
 	$tmpl->addVar( "WholeBoard" , "SKINPATH" , $this->images_url ) ;
 
-	// コントローラ・ボタンなどの処理先
+	// Static parameter for the request
 	$tmpl->addVar( "WholeBoard" , "GET_TARGET" , $get_target ) ;
 	$tmpl->addVar( "WholeBoard" , "QUERY_STRING" , $query_string ) ;
 	$tmpl->addVar( "WholeBoard" , "PRINT_LINK" , "$this->base_url/print.php?cid=$this->now_cid&amp;smode=Daily&amp;caldate=$this->caldate" ) ;
@@ -852,15 +852,15 @@ function get_daily( $get_target = '' , $query_string = '' , $for_print = false )
 	$tmpl->addVar( "WholeBoard" , "CATEGORIES_SELFORM" , $this->get_categories_selform( $get_target ) ) ;
 	$tmpl->addVar( "WholeBoard" , "CID" , $this->now_cid ) ;
 
-	// カレンダーヘッダ部等に必要な情報を連想配列で返す
+	// Variables required in header part etc.
 	$tmpl->addVars( "WholeBoard" , $this->get_calendar_information( 'D' ) ) ;
 
 	$tmpl->addVar( "WholeBoard" , "LANG_JUMP" , _PICAL_BTN_JUMP ) ;
 
-	// カレンダー本体
+	// BODY of the calendar
 	$tmpl->addVar( "WholeBoard" , "CALENDAR_BODY" , $this->get_daily_html( $get_target , $query_string ) ) ;
 
-	// 最後にpatTemplateでパースしたものを返す
+	// content generated from patTemplate
 	$ret = $tmpl->getParsedTemplate( "WholeBoard" ) ;
 
 	error_reporting( $original_level ) ;

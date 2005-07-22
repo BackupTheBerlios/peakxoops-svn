@@ -21,21 +21,21 @@ function pical_search_base( $mydirname , $keywords , $andor , $limit , $offset ,
 {
 	global $xoopsConfig , $xoopsDB , $xoopsUser ;
 
-	// 各種パスの設定
+	// setting physical & virtual paths
 	$mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 	$mod_url = XOOPS_URL."/modules/$mydirname" ;
 
-	// piCalクラスの定義
+	// defining class of piCal
 	if( ! class_exists( 'piCal_xoops' ) ) {
 		require_once( "$mod_path/class/piCal.php" ) ;
 		require_once( "$mod_path/class/piCal_xoops.php" ) ;
 	}
 
-	// オブジェクトの生成
+	// creating an instance of piCal 
 	$cal = new piCal_xoops( "" , $xoopsConfig["language"] , true ) ;
 	$cal->use_server_TZ = true ;
 
-	// 各プロパティの設定
+	// setting properties of piCal
 	$cal->conn = $xoopsDB->conn ;
 	include( "$mod_path/include/read_configs.php" ) ;
 	$cal->images_url = "$mod_url/images/$skin_folder" ;

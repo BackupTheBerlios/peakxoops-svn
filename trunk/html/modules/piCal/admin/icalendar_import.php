@@ -19,16 +19,16 @@ $num = isset( $_GET[ 'num' ] ) ? intval( $_GET[ 'num' ] ) : 20 ;
 $done = isset( $_GET[ 'done' ] ) ? $_GET[ 'done' ] : '' ;
 
 // MySQLへの接続
-$conn = $xoopsDB->conn ;	// 本来はprivateメンバなので将来的にはダメ
+$conn = $xoopsDB->conn ;
 
-// 各種パスの設定
+// setting physical & virtual paths
 $mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 $mod_url = XOOPS_URL."/modules/$mydirname" ;
 
-// オブジェクトの生成
+// creating an instance of piCal 
 $cal = new piCal_xoops( "" , $xoopsConfig['language'] , true ) ;
 
-// 各プロパティの設定
+// setting properties of piCal
 $cal->conn = $conn ;
 include( '../include/read_configs.php' ) ;
 $cal->base_url = $mod_url ;

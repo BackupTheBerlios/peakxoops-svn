@@ -33,9 +33,9 @@ if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirn
 $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 // MySQLへの接続
-$conn = $xoopsDB->conn ;	// 本来はprivateメンバなので将来的にはダメ
+$conn = $xoopsDB->conn ;
 
-// 各種パスの設定
+// setting physical & virtual paths
 $mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 $mod_url = XOOPS_URL."/modules/$mydirname" ;
 
@@ -45,10 +45,10 @@ if( ! class_exists( 'piCal_xoops' ) ) {
 	require_once( "$mod_path/class/piCal_xoops.php" ) ;
 }
 
-// オブジェクトの生成
+// creating an instance of piCal 
 $cal = new piCal_xoops( "" , $xoopsConfig['language'] , true ) ;
 
-// 各プロパティの設定
+// setting properties of piCal
 $cal->conn = $conn ;
 include( "$mod_path/include/read_configs.php" ) ;
 $cal->base_url = $mod_url ;

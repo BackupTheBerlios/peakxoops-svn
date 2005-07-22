@@ -1,8 +1,7 @@
 <?php
 
-// piCal xoops用ブロックモジュール
 // pical_minical_ex.php
-// カレンダーナビゲーションとして拡張可能なミニカレンダーの表示
+// extensible minicalendar
 // by GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
 
 if( ! defined( 'PICAL_BLOCK_MINICAL_EX' ) ) {
@@ -29,7 +28,8 @@ function pical_minical_ex_show( $options )
 	$gifaday = empty( $options[1] ) ? 2 : intval( $options[1] ) ;
 	$just1gif = empty( $options[2] ) ? 0 : 1 ;
 //	$plugins_tmp = empty( $options[3] ) ? array() : explode( ',' , $options[3] ) ;
-	// GETのURL展開（予想外のXSSを避けるためにintvalして同じになるものだけ）
+	// GET URL extraction
+	// Only integer values are valid (for preventing from XSS)
 	$additional_get = '' ;
 	foreach( $_GET as $g_key => $g_val ) {
 		if( $g_key == 'caldate' || $g_key == session_name() ) continue ;
@@ -85,24 +85,24 @@ function pical_minical_ex_show( $options )
 	// MyTextSanitizer
 	$myts =& MyTextSanitizer::getInstance();
 
-	// 各種パスの設定
+	// setting physical & virtual paths
 	$mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 	$mod_url = XOOPS_URL."/modules/$mydirname" ;
 
-	// piCalクラスの定義
+	// defining class of piCal
 	if( ! class_exists( 'piCal_xoops' ) ) {
 		require_once( "$mod_path/class/piCal.php" ) ;
 		require_once( "$mod_path/class/piCal_xoops.php" ) ;
 	}
 
-	// オブジェクトの生成
+	// creating an instance of piCal 
 	$cal = new piCal_xoops( "" , $xoopsConfig['language'] , true ) ;
 
-	// cid による影響を受けないようにする
+	// ignoring cid from GET
 	$cal->now_cid = 0 ;
 
-	// 各プロパティの設定
-	$cal->conn = $xoopsDB->conn ;	// 本来はprivateメンバなので将来的にはダメ
+	// setting properties of piCal
+	$cal->conn = $xoopsDB->conn ;
 	include( "$mod_path/include/read_configs.php" ) ;
 	$cal->base_url = $mod_url ;
 	$cal->base_path = $mod_path ;
@@ -141,20 +141,20 @@ function pical_minical_ex_edit( $options )
 	$just1gif_radio_no = empty( $options[2] ) ? 'checked="checked"' : '' ;
 	//$plugins4disp = empty( $options[3] ) ? '' : htmlspecialchars( str_replace( array( ' ' , "\t" , "\0" ) , '' ,  $options[3] ) , ENT_QUOTES ) ;
 
-	// 各種パスの設定
+	// setting physical & virtual paths
 	$mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 	$mod_url = XOOPS_URL."/modules/$mydirname" ;
 
-	// piCalクラスの定義
+	// defining class of piCal
 	require_once( "$mod_path/class/piCal.php" ) ;
 	require_once( "$mod_path/class/piCal_xoops.php" ) ;
 
-	// オブジェクトの生成
+	// creating an instance of piCal 
 	$cal = new piCal_xoops( date( 'Y-n-j' ) , $xoopsConfig['language'] , true ) ;
 	$cal->use_server_TZ = true ;
 
-	// 各プロパティの設定
-	$cal->conn = $xoopsDB->conn ;	// 本来はprivateメンバなので将来的にはダメ
+	// setting properties of piCal
+	$cal->conn = $xoopsDB->conn ;
 	include( "$mod_path/include/read_configs.php" ) ;
 	$cal->base_url = $mod_url ;
 	$cal->base_path = $mod_path ;

@@ -1,9 +1,8 @@
 <?php
 
-// 簡易スケジューラ付カレンダークラス piCal のXOOPS用サブクラス
+// piCal's inherited class for XOOPS
 // piCal_xoops.php
 // by GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
-// 前半部分は、Ryuji(http://ryus.biz/)さんのコードそのままだったりします
 
 
 if( ! class_exists( 'piCal_xoops' ) ) {
@@ -12,7 +11,7 @@ class piCal_xoops extends piCal {
 
 function textarea_sanitizer_for_sql( $data )
 {
-//	二重にaddslashesがかかるのを防ぐため、コメントアウト
+//	preventing double-addslashes()
 //	$myts =& MyTextSanitizer::getInstance();
 //	return $myts->makeTareaData4Save($data);
 	return $data ;
@@ -806,11 +805,11 @@ function assign_event_list( &$tpl , $get_target = '' )
 
 
 
-// allow_url_fopen 禁止環境のために、snoopyを使って一端ローカルに取得する
+// get public ICS via snoopy
 function import_ics_via_fopen( $uri , $force_http = true , $user_uri = '' )
 {
 	$user_uri = empty( $user_uri ) ? '' : $uri ;
-	// webcal://* も connection未指定も、すべて http://* に統一
+	// changing webcal://* to http://*
 	$uri = str_replace( "webcal://" , "http://" , $uri ) ;
 
 	if( $force_http ) {
@@ -820,7 +819,7 @@ function import_ics_via_fopen( $uri , $force_http = true , $user_uri = '' )
 	// temporary file for store ics via http
 	$ics_cache_file = XOOPS_CACHE_PATH . '/pical_getics_' . uniqid('') ;
 
-	// Snoopy によるhttp get
+	// http get via Snoopy
 	$error_level_stored = error_reporting() ;
 	error_reporting( $error_level_stored & ~ E_NOTICE ) ;
 	// includes Snoopy class for remote file access
@@ -858,19 +857,17 @@ function import_ics_via_fopen( $uri , $force_http = true , $user_uri = '' )
 
 
 
-// 拡張可能ミニカレンダーのブロックアサインを返す
+// returns assigned array for extensible mini calendar block
 function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 {
 	$db =& Database::getInstance() ;
 	$myts =& MyTextSanitizer::getInstance() ;
 
+	$tzoffset_s2u = intval( ( $this->user_TZ - $this->server_TZ ) * 3600 ) ;
 	$now = time() ;
-	$now_Ynj = date('Y-n-j') ;
+	$user_now_Ynj = date( 'Y-n-j' , $now + $tzoffset_s2u ) ;
 
-	// 当月の各日がイベントを持っているかどうかを取得
-	// $event_dates = $this->get_flags_date_has_events( mktime(0,0,0,$this->month,1,$this->year) , mktime(0,0,0,$this->month+1,1,$this->year) ) ;
-
-	// 前月は月末、翌月は月初とする
+	// prev_month points the tail, next_month points the head
 	$prev_month = date("Y-n-j", mktime(0,0,0,$this->month,0,$this->year));
 	$next_month = date("Y-n-j", mktime(0,0,0,$this->month+1,1,$this->year));
 
@@ -899,7 +896,7 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 	$date = ( - $first_date['wday'] + $this->week_start - 7 ) % 7 ;
 	$wday_end = 7 + $this->week_start ;
 
-	// 曜日名ループ
+	// Loop of weeknames
 	$daynames = array() ;
 	for( $wday = $this->week_start ; $wday < $wday_end ; $wday ++ ) {
 		if( $wday % 7 == 0 ) { 
@@ -916,7 +913,7 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 			$color = $this->weekday_color ;
 		}
 
-		// テンプレート用配列へのデータセット
+		// assigning weeknames
 		$daynames[] = array(
 			"bgcolor" => $bgcolor ,
 			"color" => $color ,
@@ -936,17 +933,17 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 		}
 	}
 
-	// 週 (row) ループ
+	// Loop of week (row)
 	$weeks = array() ;
 	for( $week = 0 ; $week < 6 ; $week ++ ) {
 		$days = array() ;
-		// 日 (col) ループ
+		// Loop of day (col)
 		for( $wday = $this->week_start ; $wday < $wday_end ; $wday ++ ) {
 			$date ++ ;
 
 			$time = mktime( 0 , 0 , 0 , $this->month , $date , $this->year ) ;
 
-			// 月の範囲外
+			// Out of the month
 			if( ! checkdate( $this->month , $date , $this->year ) ) {
 				$days[] = array(
 					"date" => date( 'j' , $time ) ,
@@ -957,7 +954,7 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 
 			$link = "$this->year-$this->month-$date" ;
 
-			// 曜日タイプによる描画色振り分け
+			// COLORS of days
 			if( isset( $this->holidays[$link] ) ) {
 				// Holiday
 				$bgcolor = $this->holiday_bgcolor ;
@@ -976,14 +973,14 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 				$color = $this->weekday_color ;
 			}
 
-			// 選択日の背景色ハイライト処理
-			if( $link == $now_Ynj ) $bgcolor = $this->targetday_bgcolor ;
+			// Hi-Lighting the SELECTED DATE
+			if( $link == $user_now_Ynj ) $bgcolor = $this->targetday_bgcolor ;
 
-			// プラグイン結果を引き渡す前処理（配列丸め）
+			// Preparing the returns from plugins
 			$ex = empty( $plugin_returns[ $date ] ) ? array() : array_slice( $plugin_returns[ $date ] , 0 , $gifaday ) ;
 			// if( ! empty( $ex ) ) var_dump( $ex ) ;
 
-			// テンプレート用配列へのデータセット
+			// Assigning attribs of the day
 			$days[] = array(
 				"bgcolor" => $bgcolor ,
 				"color" => $color ,

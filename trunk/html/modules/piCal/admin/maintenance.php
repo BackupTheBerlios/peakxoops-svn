@@ -26,7 +26,7 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 
-// 各種パスの設定
+// setting physical & virtual paths
 $mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
 $mod_url = XOOPS_URL."/modules/$mydirname" ;
 $php_self = "$mod_url/admin/maintenance.php" ;
@@ -35,10 +35,10 @@ $table_event = $xoopsDB->prefix( "pical{$mydirnumber}_event" ) ;
 $table_cat = $xoopsDB->prefix( "pical{$mydirnumber}_cat" ) ;
 $mid = $xoopsModule->mid() ;
 
-// オブジェクトの生成
+// creating an instance of piCal 
 $cal = new piCal_xoops( "" , $xoopsConfig['language'] , true ) ;
 
-// 各プロパティの設定
+// setting properties of piCal
 $conn = $xoopsDB->conn ;
 include( '../include/read_configs.php' ) ;
 $cal->base_url = $mod_url ;

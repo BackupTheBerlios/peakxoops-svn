@@ -1,28 +1,4 @@
-<?php// Module Info ( 繁體中文化：http://www.cyai.net/ UTF-8中文版請到本網站下載)
-
-
-
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-07-22 15:35:34
-define('_MI_PROTECTOR_RELIABLE_IPS','Reliable IPs');
-define('_MI_PROTECTOR_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ matches the head of string, $ matches the tail of string.');
-define('_MI_PROTECTOR_BF_COUNT','Anti Brute Force');
-define('_MI_PROTECTOR_BF_COUNTDSC','Set count you allow guest try to login within 10 minutes. If someone fails to login more than this number, her/his IP will be banned.');
-define('_MI_PROTECTOR_DOS_SKIPMODS','Modules out of DoS/Crawler checker');
-define('_MI_PROTECTOR_DOS_SKIPMODSDSC','set the dirnames of the modules separated with |. This option will be useful with chatting module etc.');
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-03-31 12:07:31
-define('_MI_PROTECTOR_PREFIXMANAGER','Prefix Manager');
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-03-05 07:09:09
-define('_MI_PROTECTOR_GLOBAL_DISBL','Temporary disabled');
-define('_MI_PROTECTOR_GLOBAL_DISBLDSC','All protections are disabled in temporary.<br />Don\'t forget turn this off after shooting the trouble');
-define('_MI_PROTECTOR_LOG_LEVEL','Logging level');
-define('_MI_PROTECTOR_LOG_LEVELDSC','');
-define('_MI_PROTECTOR_LOGLEVEL0','none');
-define('_MI_PROTECTOR_LOGLEVEL15','Quiet');
-define('_MI_PROTECTOR_LOGLEVEL63','quiet');
-define('_MI_PROTECTOR_LOGLEVEL255','full');
+<?php// 繁體中文化：http://www.cyai.net/ UTF-8中文版請到本網站下載
 
 // The name of this moduledefine("_MI_PROTECTOR_NAME","Xoops Protector");
 
@@ -30,15 +6,25 @@ define('_MI_PROTECTOR_LOGLEVEL255','full');
 define("_MI_PROTECTOR_DESC","這模組保護你的網站不受到(DoS attack)的攻擊，<br />主要以DoS,SQL Injection等變數感染的防護<br />要有效的利用此模組放置在會出現的左上方區塊，排序序號為最優先，並別忘記要開放訪客有讀取此區塊權力。");
 
 // Names of blocks for this module (Not all module has blocks)
-define("_MI_PROTECTOR_BNAME1","Protector");
-define("_MI_PROTECTOR_BDESC1","要有效的利用此模組放置在會出現的左上方區塊，排序序號為最優先 (0)");
+// define("_MI_PROTECTOR_BNAME1","Protector");
+// define("_MI_PROTECTOR_BDESC1","要有效的利用此模組放置在會出現的左上方區塊，排序序號為最優先 (0)");
 
 // Menu
 define("_MI_PROTECTOR_ADMININDEX","防護中心");
 define('_MI_PROTECTOR_ADVISORY','安全性隱私防護');
-define("_MI_PROTECTOR_MYBLOCKSADMIN","區塊及群組管理");
+define('_MI_PROTECTOR_PREFIXMANAGER','表單前置管理');
 
 // Configs
+define('_MI_PROTECTOR_GLOBAL_DISBL','臨時中斷防禦');
+define('_MI_PROTECTOR_GLOBAL_DISBLDSC','為了變更必須將防禦暫時停止<br />一旦問題解決後請不要忘記解除此項目，以免網站防護失效。');
+define('_MI_PROTECTOR_RELIABLE_IPS','可信用的IP');
+define('_MI_PROTECTOR_RELIABLE_IPSDSC','不做DoS攻擊檢測的IP群組，以 | 來區隔不同IP。 ^ 代表起頭， $ 代表末尾。');
+define('_MI_PROTECTOR_LOG_LEVEL','紀錄等級');
+define('_MI_PROTECTOR_LOG_LEVELDSC','選擇要保留紀錄(LOG)的等級，<br />選取全部的或較低等級必須注意資料庫被臨時塞太多資料而產生資料庫停止的問題。');
+define('_MI_PROTECTOR_LOGLEVEL0','完全不紀錄');
+define('_MI_PROTECTOR_LOGLEVEL15','僅結取危險性高的紀錄');
+define('_MI_PROTECTOR_LOGLEVEL63','不紀錄較無危險性的防護紀錄');
+define('_MI_PROTECTOR_LOGLEVEL255','全部紀錄');
 define('_MI_PROTECTOR_HIJACK_DENYGP','IP變動禁止群組');
 define('_MI_PROTECTOR_HIJACK_DENYGPDSC','防止session被劫取對策：<br />禁止與session中不同IP的擷取群組指定<br />（建議對管理群組開啟此項）');
 define('_MI_PROTECTOR_SAN_NULLBYTE','以空白替代無效之字串');
@@ -57,6 +43,11 @@ define('_MI_PROTECTOR_ID_INTVAL','ID變數強制變換');
 define('_MI_PROTECTOR_ID_INTVALDSC','注意！這個選項如果開啟可能會導致有部分模組無法正常運作');
 define('_MI_PROTECTOR_FILE_DOTDOT','可疑檔案指定的禁止');
 define('_MI_PROTECTOR_FILE_DOTDOTDSC','由檔案可以判斷的文字列裡將排除".."的形式種類。');
+
+define('_MI_PROTECTOR_BF_COUNT','暴力解密對策');
+define('_MI_PROTECTOR_BF_COUNTDSC','Brute Force Attack是一種利用所有字串解密的方式。在10分中之內如果超過這裡所設定的次數登入失敗的話，將會自動把該IP登記到禁止IP欄內。');
+define('_MI_PROTECTOR_DOS_SKIPMODS','解除DoS監視的模組');
+define('_MI_PROTECTOR_DOS_SKIPMODSDSC','可以設定不想要被監視的模組，以該模組資料夾名稱設定，利用 | 來區隔，這個項目是為了防止例如聊天模組之類，容易被誤偵測的模組使用');
 
 define('_MI_PROTECTOR_DOS_EXPIRE','DoS的監視時間 (秒)');
 define('_MI_PROTECTOR_DOS_EXPIREDSC','DoS重複更新頻率追蹤監視的時間設定');

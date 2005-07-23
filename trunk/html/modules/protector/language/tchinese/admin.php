@@ -1,5 +1,5 @@
 <?php
-
+// 繁體中文化：http://www.cyai.net/ UTF-8中文版請到本網站下載
 // index.php
 define("_AM_TH_DATETIME","日時");
 define("_AM_TH_USER","會員");

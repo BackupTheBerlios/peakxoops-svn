@@ -1,6 +1,9 @@
 [xlang:en]
 = CHANGES = 
 
+ - updated Traditional Chinese language files (thx Kikuchi)
+ - updated Brazilian Portuguese & Spanish language files (thx Yuji)
+
 2.50 beta1 (2005/7/22)
  - added an option "DOS/CRAWLER skip modules"
  - modified adding some indexes of tables which protector accesses

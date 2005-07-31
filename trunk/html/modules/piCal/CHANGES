@@ -1,5 +1,7 @@
 [xlang:en]
 
+- added robots mode into minicalex for reducing mass crawling
+
 v.080 release (2005-6-29)
 - fixed and modified usages of the plugin manager (thx tohokuaiki)
 - added plugin's options (for news & myalbum-p-photos)
@@ -266,6 +268,8 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+- ロボットがminicalexへアクセスした時は、矢印のリンク先をpiCalとするように変更
 
 v.080 release (2005-6-29)
 - プラグインマネージャの使い勝手改善およびバグ修正 (thx tohokuaiki)

@@ -28,10 +28,13 @@ function pical_minical_ex_show( $options )
 	$gifaday = empty( $options[1] ) ? 2 : intval( $options[1] ) ;
 	$just1gif = empty( $options[2] ) ? 0 : 1 ;
 //	$plugins_tmp = empty( $options[3] ) ? array() : explode( ',' , $options[3] ) ;
+	// robots mode (arrows in minicalex will point not a current page but piCal)
+	$robots_mode = preg_match( '/(msnbot|Googlebot|Yahoo! Slurp)/i' , $_SERVER['HTTP_USER_AGENT'] ) ;
+
 	// GET URL extraction
 	// Only integer values are valid (for preventing from XSS)
 	$additional_get = '' ;
-	foreach( $_GET as $g_key => $g_val ) {
+	if( ! $robots_mode ) foreach( $_GET as $g_key => $g_val ) {
 		if( $g_key == 'caldate' || $g_key == session_name() ) continue ;
 		if( intval( $g_val ) != $g_val ) {
 			$additional_get = '' ;
@@ -71,8 +74,14 @@ function pical_minical_ex_show( $options )
 				$prev_uid = intval( $cache_bodies[1] ) ;
 				if( $expire > time() && $prev_uid == $uid ) {
 					$block = unserialize( $cache_bodies[2] ) ;
-					$block['php_self'] = $_SERVER['PHP_SELF'] ;
-					$block['additional_get'] = $additional_get ;
+					if( $robots_mode ) {
+						$block['root_url'] = $block['mod_url'] ;
+						$block['php_self'] = '/' ;
+						$block['additional_get'] = '' ;
+					} else {
+						$block['php_self'] = $_SERVER['PHP_SELF'] ;
+						$block['additional_get'] = $additional_get ;
+					}
 					// speed check
 					//list($usec, $sec) = explode(" ",microtime());
 					//echo ((float)$sec + (float)$usec) - $GIJ_common_time ; 
@@ -124,7 +133,13 @@ function pical_minical_ex_show( $options )
 		fclose( $fp ) ;
 	}
 
-	$block['additional_get'] = $additional_get ;
+	if( $robots_mode ) {
+		$block['root_url'] = $block['mod_url'] ;
+		$block['php_self'] = '/' ;
+		$block['additional_get'] = '' ;
+	} else {
+		$block['additional_get'] = $additional_get ;
+	}
 
 	return $block ;
 }

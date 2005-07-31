@@ -876,6 +876,7 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 
 	$block = array(
 		"xoops_url" => XOOPS_URL ,
+		"mod_url" => $this->base_url ,
 		"root_url" => $root_url ,
 		"php_self" => $_SERVER['PHP_SELF'] ,
 

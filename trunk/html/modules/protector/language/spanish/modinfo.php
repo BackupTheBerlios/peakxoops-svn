@@ -2,6 +2,10 @@
 // Module Info
 
 // The name of this module
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:21
+define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
+
 define("_MI_PROTECTOR_NAME","Xoops Protector");
 
 // A brief description of this module

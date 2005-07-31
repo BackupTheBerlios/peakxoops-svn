@@ -69,6 +69,16 @@ $prs = $xoopsDB->query( "SELECT l.lid, l.uid, l.ip, l.agent, l.type, l.descripti
 $nav = new XoopsPageNav( $numrows , $num , $pos , 'pos' , "num=$num" ) ;
 $nav_html = $nav->renderNav( 10 ) ;
 
+// Number selection
+$num_options = '' ;
+$num_array = array( 20 , 100 , 500 , 2000 ) ;
+foreach( $num_array as $n ) {
+	if( $n == $num ) {
+		$num_options .= "<option value='$n' selected='selected'>$n</option>\n" ;
+	} else {
+		$num_options .= "<option value='$n'>$n</option>\n" ;
+	}
+}
 
 // beggining of Output
 xoops_cp_header();
@@ -125,8 +135,17 @@ echo "
 // header of log listing
 echo "
 <table width='95%' border='0' cellpadding='4' cellspacing='0'><tr><td>
-<form action='' method='GET' style='margin-bottom:0px;text-align:right'>
-  $nav_html &nbsp; 
+<form action='' method='GET' style='margin-bottom:0px;'>
+  <table width='95%' border='0' cellpadding='4' cellspacing='0'>
+    <tr>
+      <td align='left'>
+        <select name='num' onchange='submit();'>$num_options</select>
+      </td>
+      <td align='right'>
+        $nav_html
+      </td>
+    </tr>
+  </table>
 </form>
 <form name='MainForm' action='' method='POST' style='margin-top:0px;'>
 ".$xoopsGTicket->getTicketHtml(__LINE__)."

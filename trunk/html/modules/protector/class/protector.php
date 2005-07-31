@@ -649,86 +649,100 @@ function check_brute_force()
 
 
 
-function patch_2092()
+function disable_features()
 {
 	global $HTTP_POST_VARS , $HTTP_GET_VARS , $HTTP_COOKIE_VARS ;
+
 
 	// disable "Notice: Undefined index: ..."
 	$error_reporting_level = error_reporting( 0 ) ;
 
-	// root controllers
-	if( ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) ) {
 
-		// zx 2004/12/13 misc.php debug (file check)
-		if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'debug' || $_POST['type'] == 'debug' ) && ! preg_match( '/^dummy_[0-9]+\.html$/' , $_GET['file'] ) ) {
-			$this->output_log( 'misc debug' ) ;
-			exit ;
-		}
-	
-		// zx 2004/12/13 misc.php smilies
-		if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'smilies' || $_POST['type'] == 'smilies' ) && ! preg_match( '/^[0-9a-z_]*$/i' , $_GET['target'] ) ) {
-			$this->output_log( 'misc smilies' ) ;
-			exit ;
-		}
-	
-		// zx 2005/1/5 edituser.php avatarchoose
-		if( substr( $_SERVER['SCRIPT_NAME'] , -12 ) == 'edituser.php' && $_POST['op'] == 'avatarchoose' && strstr( $_POST['user_avatar'] , '..' ) ) {
-			$this->output_log( 'edituser avatarchoose' ) ;
-			exit ;
-		}
-	
-		// zx 2005/1/5 disable xmlrpc.php
-		if( substr( $_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
+	//
+	// bit 1 : disable XMLRPC , criteria bug
+	//
+	if( $this->_conf['disable_features'] & 1 ) {
+
+		// zx 2005/1/5 disable xmlrpc.php in root
+		if( ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) && substr( $_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
 			$this->output_log( 'xmlrpc' ) ;
 			exit ;
 		}
 
+		// security bug of class/criteria.php 2005/6/27
+		if( $_POST['uname'] === '0' || $_COOKIE['autologin_pass'] === '0' ) {
+			$this->output_log( 'CRITERIA' ) ;
+			exit ;
+		}
 	}
 
-	// zx 2005/1/4 findusers
-	if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'findusers' || $_POST['fct'] == 'findusers' ) ) {
-		foreach( $_POST as $key => $val ) {
-			if( strstr( $key , "'" ) || strstr( $val , "'" ) ) {
-				$this->output_log( 'findusers' ) ;
+
+	//
+	// bit 11 : XSS+CSRFs in XOOPS < 2.0.10
+	//
+	if( $this->_conf['disable_features'] & 1024 ) {
+
+		// root controllers
+		if( ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) ) {
+			// zx 2004/12/13 misc.php debug (file check)
+			if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'debug' || $_POST['type'] == 'debug' ) && ! preg_match( '/^dummy_[0-9]+\.html$/' , $_GET['file'] ) ) {
+				$this->output_log( 'misc debug' ) ;
+				exit ;
+			}
+		
+			// zx 2004/12/13 misc.php smilies
+			if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'smilies' || $_POST['type'] == 'smilies' ) && ! preg_match( '/^[0-9a-z_]*$/i' , $_GET['target'] ) ) {
+				$this->output_log( 'misc smilies' ) ;
+				exit ;
+			}
+		
+			// zx 2005/1/5 edituser.php avatarchoose
+			if( substr( $_SERVER['SCRIPT_NAME'] , -12 ) == 'edituser.php' && $_POST['op'] == 'avatarchoose' && strstr( $_POST['user_avatar'] , '..' ) ) {
+				$this->output_log( 'edituser avatarchoose' ) ;
 				exit ;
 			}
 		}
-	}
-
-	// security bug of class/criteria.php 2005/6/27
-	if( $_POST['uname'] === '0' || $_COOKIE['autologin_pass'] === '0' ) {
-		$this->output_log( 'CRITERIA' ) ;
-		exit ;
-	}
-
-	// preview CSRF zx 2004/12/14 
-	// news submit.php
-	if( substr( $_SERVER['SCRIPT_NAME'] , -23 ) == 'modules/news/submit.php' && isset( $_POST['preview'] ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/submit.php' ) !== 0 ) {
-		$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;
-	}
-	// news admin/index.php
-	if( substr( $_SERVER['SCRIPT_NAME'] , -28 ) == 'modules/news/admin/index.php' && ( $_POST['op'] == 'preview' || $_GET['op'] == 'preview' ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/admin/index.php' ) !== 0 ) {
-		$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;
-	}
-	// comment comment_post.php
-	if( isset( $_POST['com_dopreview'] ) && ! strstr( substr( $_SERVER['HTTP_REFERER'] , -16 ) , 'comment_post.php' ) ) {
-		$HTTP_POST_VARS['dohtml'] = $_POST['dohtml'] = 0 ;
-	}
-	// disable preview of system's blocksadmin
-	if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'blocksadmin' || $_POST['fct'] == 'blocksadmin') && isset( $_POST['previewblock'] ) /* && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/system/admin.php' ) !== 0 */ ) {
-		die( "Danger! don't use this preview. Use 'blocks admin module' instead.(by Protector)" ) ;
-	}
-	// tpl preview
-	if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'tplsets' || $_POST['fct'] == 'tplsets') ) {
-		if( $_POST['op'] == 'previewpopup' || $_GET['op'] == 'previewpopup' || isset( $_POST['previewtpl'] ) ) {
-			die( "Danger! don't use this preview.(by Protector)" ) ;
+	
+		// zx 2005/1/4 findusers
+		if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'findusers' || $_POST['fct'] == 'findusers' ) ) {
+			foreach( $_POST as $key => $val ) {
+				if( strstr( $key , "'" ) || strstr( $val , "'" ) ) {
+					$this->output_log( 'findusers' ) ;
+					exit ;
+				}
+			}
 		}
+	
+		// preview CSRF zx 2004/12/14 
+		// news submit.php
+		if( substr( $_SERVER['SCRIPT_NAME'] , -23 ) == 'modules/news/submit.php' && isset( $_POST['preview'] ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/submit.php' ) !== 0 ) {
+			$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;
+		}
+		// news admin/index.php
+		if( substr( $_SERVER['SCRIPT_NAME'] , -28 ) == 'modules/news/admin/index.php' && ( $_POST['op'] == 'preview' || $_GET['op'] == 'preview' ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/admin/index.php' ) !== 0 ) {
+			$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;
+		}
+		// comment comment_post.php
+		if( isset( $_POST['com_dopreview'] ) && ! strstr( substr( $_SERVER['HTTP_REFERER'] , -16 ) , 'comment_post.php' ) ) {
+			$HTTP_POST_VARS['dohtml'] = $_POST['dohtml'] = 0 ;
+		}
+		// disable preview of system's blocksadmin
+		if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'blocksadmin' || $_POST['fct'] == 'blocksadmin') && isset( $_POST['previewblock'] ) /* && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/system/admin.php' ) !== 0 */ ) {
+			die( "Danger! don't use this preview. Use 'blocks admin module' instead.(by Protector)" ) ;
+		}
+		// tpl preview
+		if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'tplsets' || $_POST['fct'] == 'tplsets') ) {
+			if( $_POST['op'] == 'previewpopup' || $_GET['op'] == 'previewpopup' || isset( $_POST['previewtpl'] ) ) {
+				die( "Danger! don't use this preview.(by Protector)" ) ;
+			}
+		}
+
 	}
+
 
 	// restore reporting level
 	error_reporting( $error_reporting_level ) ;
 }
-
 
 
 }

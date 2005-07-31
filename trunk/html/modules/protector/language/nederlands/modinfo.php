@@ -4,6 +4,10 @@
 // The name of this module
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:20
+define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-07-22 15:35:34
 define('_MI_PROTECTOR_RELIABLE_IPS','Reliable IPs');
 define('_MI_PROTECTOR_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ matches the head of string, $ matches the tail of string.');

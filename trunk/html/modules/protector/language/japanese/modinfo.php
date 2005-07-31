@@ -81,8 +81,8 @@ define('_MI_PROTECTOR_DOSOPT_HTA','.htaccessにDENY登録(試験的実装)');
 
 define('_MI_PROTECTOR_BIP_EXCEPT','拒否IP登録の保護グループ');
 define('_MI_PROTECTOR_BIP_EXCEPTDSC','ここで指定されたユーザーからのアクセスは、条件を満たしてしまっても、拒否IPとして登録されません。ただし、そのユーザーがログインしていないと意味がありませんので、ご注意下さい。');
-define('_MI_PROTECTOR_PATCH2092','Xoops 2.0.9.2以下に存在する穴へのパッチ');
+define('_MI_PROTECTOR_DISABLES','危険な機能の無効化');
 define('_MI_PROTECTOR_PASSWD_BIP','レスキューパスワード');
-define('_MI_PROTECTOR_PASSWD_BIPDSC','もし、何らかの理由で、あなた自身がXOOPSにIP拒否されてしまった場合の救済手段を提供します。<br /> XOOPS_URL/modules/protector/admin/rescue.php にアクセスして、ここで指定したパスワードを入力して下さい。<br />ここでパスワードが設定されていないと、レスキュー機能自体が無効になりますのでご注意下さい。<br />このパスワードは平文で保存されますので、万一覗かれても良いよう、あなたの重要なパスワードと同一にはしないで下さい。');
+define('_MI_PROTECTOR_PASSWD_BIPDSC','もし、何らかの理由で、あなた自身がXOOPSにIP拒否されてしまった場合の救済手段を提供します。<br /> XOOPS_URL/modules/protector/admin/rescue.php にアクセスして、ここで指定したパスワードを入力して下さい。<br />ここでパスワードが設定されていないと、レスキュー機能自体が無効になりますのでご注意下さい。');
 
 ?>

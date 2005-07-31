@@ -1,5 +1,9 @@
 <?php// 繁體中文化：http://www.cyai.net/ UTF-8中文版請到本網站下載
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:20
+define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
+
 // The name of this moduledefine("_MI_PROTECTOR_NAME","Xoops Protector");
 
 // A brief description of this module

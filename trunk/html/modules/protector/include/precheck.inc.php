@@ -76,7 +76,7 @@ function protector_prepare()
 	//	$protector->output_log( $protector->last_error_type , 0 , true ) ;
 	//}
 
-	if( ! empty( $conf['patch_2092'] ) ) $protector->patch_2092() ;
+	if( ! empty( $conf['disable_features'] ) ) $protector->disable_features() ;
 }
 
 ?>

@@ -246,13 +246,13 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
-	'name'			=> 'patch_2092' ,
-	'title'			=> '_MI_PROTECTOR_PATCH2092' ,
+	'name'			=> 'disable_features' ,
+	'title'			=> '_MI_PROTECTOR_DISABLES' ,
 	'description'	=> '' ,
-	'formtype'		=> 'yesno' ,
+	'formtype'		=> 'select' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 1 ,
-	'options'		=> array()
+	'options'		=> array('xmlrpc'=>1,'xmlrpc + 2.0.9.2 bugs'=>1025,'_NONE'=>0)
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'passwd_disabling_bip' ,

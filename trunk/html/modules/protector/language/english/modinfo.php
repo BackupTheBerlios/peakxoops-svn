@@ -81,8 +81,8 @@ define('_MI_PROTECTOR_DOSOPT_HTA','DENY by .htaccess(Experimental)');
 
 define('_MI_PROTECTOR_BIP_EXCEPT','Groups never registered as Bad IP');
 define('_MI_PROTECTOR_BIP_EXCEPTDSC','A user who belongs to the group specified here will never be banned.<br />(I recommend to turn Administrator on.)');
-define('_MI_PROTECTOR_PATCH2092','Specific patches against Xoops <= 2.0.9.2');
+define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
 define('_MI_PROTECTOR_PASSWD_BIP','Rescue password (disabling ban IP)');
-define('_MI_PROTECTOR_PASSWD_BIPDSC','If you are banned out from your own site, access XOOPS_URL/modules/protector/admin/rescue.php and input this password.<br />Don\'t forget setting the password before you are banned out by some mistakes.<br />If this option is blank, the script disabling ban IP will never work.<br />Since this password is stored plainly, don\'t set it same as your important password.');
+define('_MI_PROTECTOR_PASSWD_BIPDSC','If you are banned out from your own site, access XOOPS_URL/modules/protector/admin/rescue.php and input this password.<br />Don\'t forget setting the password before you are banned out by some mistakes.<br />If this option is blank, the script disabling ban IP will never work.');
 
 ?>

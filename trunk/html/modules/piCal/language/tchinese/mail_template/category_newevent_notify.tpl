@@ -1,23 +1,24 @@
-Hello {X_UNAME},
+{X_UNAME}您好！
 
-A new event "{EVENT_SUMMARY}" in category "{CATEGORY_TITLE}" has been created at {X_SITENAME}.
+在 {X_SITENAME} 裡有行事曆登記了新資料！
 
-Follow this link to view the event:
+名稱：{EVENT_SUMMARY}
+類別： {CATEGORY_TITLE}
+
+詳情請點選以下超連結前去觀看：
 {EVENT_URI}
 
 -----------
 
-You are receiving this message because you selected to be notified 
-when new events are added to our site.
+這個訊息是由XOOPS的自動通知所寄出，
 
-If this is an error or you wish not to receive further such notifications,
-please update your subscriptions by visiting the link below:
+如要停止此通知請參訪以下連結：
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+請勿直接回覆本訊息，謝謝！
 
 -----------
-
 {X_SITENAME} ({X_SITEURL}) 
-webmaster
+站務管理員　敬啟
 {X_ADMINMAIL}
+-----------

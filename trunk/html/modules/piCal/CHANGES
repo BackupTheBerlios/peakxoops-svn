@@ -1,6 +1,7 @@
 [xlang:en]
 
 - added robots mode into minicalex for reducing mass crawling
+- update tchinese files (thx Kikuchi)
 
 v.080 release (2005-6-29)
 - fixed and modified usages of the plugin manager (thx tohokuaiki)

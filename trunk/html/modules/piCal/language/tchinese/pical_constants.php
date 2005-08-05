@@ -3,35 +3,23 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_CNST_LOADED' ) ) {
 
 
+define('_PICAL_BTN_DELETE_ONE','單筆刪除');
 
-// Appended by Xoops Language Checker -GIJOE- in 2005-05-17 17:34:00
-define('_PICAL_BTN_DELETE_ONE','Remove just one');
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-05-03 05:31:13
-define('_PICAL_JS_CALENDAR','calendar-en.js');
-define('_PICAL_JSFMT_YMDN','%d %B %Y (%A)');
+define('_PICAL_JS_CALENDAR','calendar-big5.js');
+define('_PICAL_JSFMT_YMDN','%Y年 %B %d日 (%A)');
 define('_PICAL_DTFMT_MINUTE','i');
-define('_PICAL_FMT_YMDN','%3$s %2$s %1$s %4$s');
+define('_PICAL_FMT_YMDN','%1$s年 %2$s %3$s %4$s');
 define('_PICAL_FMT_DHI','%1$s %2$s:%3$s');
 define('_PICAL_FMT_HI','%1$s:%2$s');
-define('_PICAL_TH_TIMEZONE','Time Zone');
+define('_PICAL_TH_TIMEZONE','時區');
 
 define( 'PICAL_CNST_LOADED' , 1 ) ;
 
-
-// format for date()  see http://jp.php.net/date
-define('_PICAL_DTFMT_TIME','ag:i') ;
-
-// set your locale
-define('_PICAL_LOCALE','tw') ;
-// format for strftime()  see http://jp.php.net/strftime
-define('_PICAL_STRFFMT_DATE','%x') ;
-
 define('_PICAL_FMT_MD','%1$s%2$s') ;
-define('_PICAL_FMT_YMD','%1$s %2$s %3$s') ;
-define('_PICAL_FMT_YMW','%1$s %2$s %3$s ') ;
-define('_PICAL_FMT_YEAR_MONTH','%1$s %2$s') ;
-define('_PICAL_FMT_YEAR','%s<font size=""> 年</font>') ;
+define('_PICAL_FMT_YMD','%1$s年 %2$s %3$s') ;
+define('_PICAL_FMT_YMW','%1$s年 %2$s %3$s ') ;
+define('_PICAL_FMT_YEAR_MONTH','%1$s年 %2$s') ;
+define('_PICAL_FMT_YEAR','%s年') ;
 
 define('_PICAL_ICON_DAILY','日曆') ;
 define('_PICAL_ICON_WEEKLY','週曆') ;
@@ -55,56 +43,53 @@ define('_PICAL_MB_ADDEVENT','新增事件') ;
 define('_PICAL_MB_CONTINUING','(繼續)') ;
 define('_PICAL_MB_RESTEVENT_PRE','更多') ;
 define('_PICAL_MB_RESTEVENT_SUF','事件') ;
-define('_PICAL_MB_TIMESEPARATOR','--') ;
+define('_PICAL_MB_TIMESEPARATOR','～') ;
 
 define('_PICAL_MB_ALLDAY_EVENT','全天事件') ;
-define('_PICAL_MB_LONG_EVENT','條列狀顯示') ;
-define('_PICAL_MB_LONG_SPECIALDAY','週年紀念日等等') ;
+define('_PICAL_MB_LONG_EVENT','長期事件') ;
+define('_PICAL_MB_LONG_SPECIALDAY','週年紀念日‧假日等') ;
 
 define('_PICAL_MB_PUBLIC','公開事件') ;
-define('_PICAL_MB_PRIVATE','私人事件') ;
-define('_PICAL_MB_PRIVATETARGET',' -> 屬於： %s') ;
+define('_PICAL_MB_PRIVATE','不公開事件') ;
+define('_PICAL_MB_PRIVATETARGET','　　公開於： %s');
 
-define('_PICAL_MB_LINK_TO_RRULE1ST','跳至第一個事件') ;
-define('_PICAL_MB_RRULE1ST','這是第一個事件') ;
-
-define('_PICAL_MB_EVENT_NOTREGISTER','尚未審核通過') ;
-define('_PICAL_MB_EVENT_ADMITTED','審核') ;
-define('_PICAL_MB_EVENT_NEEDADMIT','等待審核通過') ;
+define('_PICAL_MB_EVENT_NOTREGISTER','尚未紀錄') ;
+define('_PICAL_MB_EVENT_ADMITTED','已審核') ;
+define('_PICAL_MB_EVENT_NEEDADMIT','審核中') ;
 
 define('_PICAL_MB_TITLE_EVENTINFO','行事曆') ;
 define('_PICAL_MB_SUBTITLE_EVENTDETAIL','觀看詳情') ;
-define('_PICAL_MB_SUBTITLE_EVENTEDIT','編輯事件') ;
+define('_PICAL_MB_SUBTITLE_EVENTEDIT','編輯') ;
 
-define('_PICAL_MB_HOUR_SUF',':') ;
-define('_PICAL_MB_MINUTE_SUF','') ;
+define('_PICAL_MB_HOUR_SUF','時') ;
+define('_PICAL_MB_MINUTE_SUF','分') ;
 
-define('_PICAL_TH_SUMMARY','行程摘要') ;
-define('_PICAL_TH_STARTDATETIME','開始之日期時間') ;
-define('_PICAL_TH_ENDDATETIME','結束之日期時間') ;
-define('_PICAL_TH_ALLDAYOPTIONS','全日選項') ;
-define('_PICAL_TH_LOCATION','地點') ;
-define('_PICAL_TH_CONTACT','聯絡人') ;
+define('_PICAL_TH_SUMMARY','事件名') ;
+define('_PICAL_TH_STARTDATETIME','開始日時') ;
+define('_PICAL_TH_ENDDATETIME','結束日時') ;
+define('_PICAL_TH_ALLDAYOPTIONS','全天選項') ;
+define('_PICAL_TH_LOCATION','相關場所') ;
+define('_PICAL_TH_CONTACT','相關人員') ;
 define('_PICAL_TH_CLASS','類別') ;
-define('_PICAL_TH_DESCRIPTION','行程內容描述') ;
-define('_PICAL_TH_RRULE','重複規則') ;
+define('_PICAL_TH_DESCRIPTION','詳細內容') ;
+define('_PICAL_TH_RRULE','重複選項') ;
 define('_PICAL_TH_ADMISSIONSTATUS','狀態') ;
 
-define('_PICAL_NTC_MONTHLYBYMONTHDAY',' (請輸入日期數字)') ;
-define('_PICAL_NTC_EXTRACTLIMIT','** 如果重複次數有設限時,事件展開上限數為 %s 項事件.') ;
-define('_PICAL_NTC_NUMBEROFNEEDADMIT','(有%s項事件等待審核)') ;
+define('_PICAL_NTC_MONTHLYBYMONTHDAY',' (請指定日期)') ;
+define('_PICAL_NTC_EXTRACTLIMIT','※重複上限 %s 項事件') ;
+define('_PICAL_NTC_NUMBEROFNEEDADMIT','(%s件尚未核可事件)') ;
 
 define('_PICAL_OPT_PRIVATEMYSELF','個人專屬') ;
-define('_PICAL_OPT_PRIVATEGROUP','群組 - %s') ;
+define('_PICAL_OPT_PRIVATEGROUP','群組：%s') ;
 define('_PICAL_OPT_PRIVATEINVALID','(無效的群組)') ;
 
-define('_PICAL_CNFM_SAVEAS_YN','您要儲存成另一筆紀錄嗎?') ;
-define('_PICAL_CNFM_DELETE_YN','您要刪除這筆紀錄嗎?') ;
+define('_PICAL_CNFM_SAVEAS_YN','您要儲存成另一筆紀錄嗎？') ;
+define('_PICAL_CNFM_DELETE_YN','您要刪除這筆紀錄嗎？') ;
 
-define('_PICAL_ERR_INVALID_EVENT_ID','錯誤: 沒有發現事件ID') ;
-define('_PICAL_ERR_NOPERM_TO_SHOW',"錯誤: 您沒有觀看的權限") ;
-define('_PICAL_ERR_NOPERM_TO_OUTPUTICS',"錯誤: 您沒有匯出至 iCalendar 的權限") ;
-define('_PICAL_ERR_LACKINDISPITEM','Item %s is blank.<br />Return by pushing button of browser') ;
+define('_PICAL_ERR_INVALID_EVENT_ID','錯誤：沒有發現事件ID') ;
+define('_PICAL_ERR_NOPERM_TO_SHOW',"錯誤：您沒有觀看的權限") ;
+define('_PICAL_ERR_NOPERM_TO_OUTPUTICS',"錯誤：您沒有匯出至 iCalendar 的權限") ;
+define('_PICAL_ERR_LACKINDISPITEM','還有 %s 尚未輸入。<br />請按回上一頁再輸入') ;
 
 define('_PICAL_BTN_JUMP','切換') ;
 define('_PICAL_BTN_NEWINSERTED','新增') ;
@@ -148,43 +133,35 @@ define('_PICAL_RR_R_USECOUNT_PRE','重複次數') ;
 define('_PICAL_RR_R_USECOUNT_SUF','次') ;
 define('_PICAL_RR_R_USEUNTIL','直到') ;
 
+define('_PICAL_TH_SUBMITTER','發表者');
 
-// Appended by Xoops Language Checker -GIJOE- in 2003-12-05 14:18:43
-define('_PICAL_TH_SUBMITTER','Submitter');
+define('_PICAL_FMT_YW','%1$s年 第%2$s週 ');
+define('_PICAL_FMT_WEEKNO','第%s週');
+define('_PICAL_ICON_LIST','顯示行事一覽表');
+define('_PICAL_MB_SHOWALLCAT','顯示全部類別');
+define('_PICAL_MB_ORDER_ASC','升羃');
+define('_PICAL_MB_ORDER_DESC','降羃');
+define('_PICAL_MB_SORTBY','排列順序：');
+define('_PICAL_MB_CURSORTEDBY','目前的排列方式：');
+define('_PICAL_TH_CATEGORIES','類別');
+define('_PICAL_TH_LASTMODIFIED','最後更新日');
+define('_PICAL_BTN_PRINT','列印');
 
-// Appended by Xoops Language Checker -GIJOE- in 2003-12-26 10:55:16
-define('_PICAL_STRFFMT_DATE_FOR_BLOCK','%d %b');
-define('_PICAL_STRFFMT_TIME','%H:%M');
-
-// Appended by Xoops Language Checker -GIJOE- in 2004-01-14 18:31:01
-define('_PICAL_FMT_YW','WEEK%2$s %1$s');
-define('_PICAL_FMT_WEEKNO','WEEK %s');
-define('_PICAL_ICON_LIST','List View');
-define('_PICAL_MB_SHOWALLCAT','All Categories');
-define('_PICAL_MB_ORDER_ASC','ascending');
-define('_PICAL_MB_ORDER_DESC','descending');
-define('_PICAL_MB_SORTBY','Sort by:');
-define('_PICAL_MB_CURSORTEDBY','Events currently sorted by:');
-define('_PICAL_TH_CATEGORIES','Categories');
-define('_PICAL_TH_LASTMODIFIED','Last Modified');
-define('_PICAL_BTN_PRINT','Print');
-
-// Appended by Xoops Language Checker -GIJOE- in 2004-01-17 18:09:08
-define('_PICAL_FMT_YMDO','%4$s%3$s%2$s%1$s');
-define('_PICAL_MB_LABEL_CHECKEDITEMS','Checked events are:');
-define('_PICAL_MB_LABEL_OUTPUTICS','to be exported in iCalendar');
-define('_PICAL_MB_ICALSELECTPLATFORM','Select platform');
-define('_PICAL_MB_OP_AFTER','After');
-define('_PICAL_MB_OP_BEFORE','Before');
-define('_PICAL_MB_OP_ON','On');
-define('_PICAL_MB_OP_ALL','All');
-define('_PICAL_BTN_IMPORT','Import!');
-define('_PICAL_BTN_UPLOAD','Upload!');
-define('_PICAL_BTN_EXPORT','Export!');
-define('_PICAL_BTN_EXTRACT','Extract');
-define('_PICAL_BTN_ADMIT','Admit');
-define('_PICAL_BTN_MOVE','Move');
-define('_PICAL_BTN_COPY','Copy');
+define('_PICAL_FMT_YMDO','%1$s%2$s%3$s%4$s');
+define('_PICAL_MB_LABEL_CHECKEDITEMS','將選取的事件：');
+define('_PICAL_MB_LABEL_OUTPUTICS','使用 iCalendar 匯出');
+define('_PICAL_MB_ICALSELECTPLATFORM','選擇平臺');
+define('_PICAL_MB_OP_AFTER','往後的事件');
+define('_PICAL_MB_OP_BEFORE','之前的事件');
+define('_PICAL_MB_OP_ON','於');
+define('_PICAL_MB_OP_ALL','全部');
+define('_PICAL_BTN_IMPORT','執行匯入');
+define('_PICAL_BTN_UPLOAD','執行更新');
+define('_PICAL_BTN_EXPORT','輸出');
+define('_PICAL_BTN_EXTRACT','擷取');
+define('_PICAL_BTN_ADMIT','核可');
+define('_PICAL_BTN_MOVE','移動');
+define('_PICAL_BTN_COPY','複製');
 
 }
 

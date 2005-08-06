@@ -53,7 +53,7 @@ $modversion['blocks'][1]['description'] = "Shows contents waiting for approval";
 $modversion['blocks'][1]['show_func'] = "b_waiting_waiting_show";
 $modversion['blocks'][1]['edit_func'] = "b_waiting_waiting_edit";
 $modversion['blocks'][1]['template'] = 'waiting_block_waiting.html';
-$modversion['blocks'][1]['options'] = '1';
+$modversion['blocks'][1]['options'] = '1|5';
 
 // On Update
 if( ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {

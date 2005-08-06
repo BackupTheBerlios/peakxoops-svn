@@ -1,16 +1,15 @@
 <{foreach item=module from=$block.modules}>
-<{$module.name}>
+<b><{$module.name}></b>
 <ul>
   <{foreach item=pending from=$module.pending}>
   <li>
-    <{if $pending.pendingnum}>
-      <span style='font-weight:bold;'>
-    <{else}>
-      <span style='font-weight:normal;'>
-    <{/if}>
+    <a href="<{$pending.adminlink}>"><{$pending.lang_linkname}></a>:
 
-      <a href="<{$pending.adminlink}>"><{$pending.lang_linkname}></a>:<{$pending.pendingnum}>
-    </span>
+    <{if $pending.pendingnum}>
+      <span style='font-weight:bold;color:#ff0000;'><{$pending.pendingnum}></span>
+    <{else}>
+      <{$pending.pendingnum}>
+    <{/if}>
   </li>
   <{/foreach}>
 </ul>

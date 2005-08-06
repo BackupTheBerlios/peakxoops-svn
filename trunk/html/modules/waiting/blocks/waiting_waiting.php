@@ -28,8 +28,8 @@
 // URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
-// プラグインで拡張可能な承認待ちブロック
-// 各プラグイン内でモジュールのインストール状況も確認する。
+
+// EXTENSIBLE "waiting block" by plugins in both waiting and modules
 
 function b_waiting_waiting_show($options)
 {
@@ -37,7 +37,19 @@ function b_waiting_waiting_show($options)
 
     $userlang = $xoopsConfig['language'] ;
 
-    // プラグイン用言語ファイルの読込
+	$sql_cache_min = empty( $options[1] ) ? 0 : intval( $options[1] ) ;
+	$sql_cache_file = XOOPS_CACHE_PATH.'/waiting_touch' ;
+
+	// SQL cache check (you have to use this cache with block's cache by system)
+	if( file_exists( $sql_cache_file ) ) {
+		$sql_cache_mtime = filemtime( $sql_cache_file ) ;
+		if( time() < $sql_cache_mtime + $sql_cache_min * 60 ) return array() ;
+		else {
+			unlink( $sql_cache_file ) ;
+		}
+	}
+
+    // read language files for plugins
     $lang_dir = XOOPS_ROOT_PATH . "/modules/waiting/language";
     if( file_exists( "$lang_dir/$userlang/plugins.php" ) ) {
         include_once( "$lang_dir/$userlang/plugins.php" ) ;
@@ -50,19 +62,19 @@ function b_waiting_waiting_show($options)
     $module_handler =& xoops_gethandler('module');
     $block = array();
 
-    //インストールされているモジュールリストを得る。
+    // get module's list installed
     $mod_lists = $module_handler->getList(new Criteria(1,1),true);
     //print_r($mod_lists);
     foreach ($mod_lists as $mod => $name){
-        //モジュールのプラグインがあれば、requireして、承認待ち情報を得る。
-        // モジュール側にプラグインが用意されているかチェック
+        // moudule's side plugin (prior than waiting side plugin)
+        // check whether the module has a plugin for waiting.
         //  plugin modules/DIRNAME/include/waiting.plugin.php
         //  lang   modules/DIRNAME/language/LANG/waiting.php
         $plugin_flag = false;
         $mod_plugin_file = XOOPS_ROOT_PATH."/modules/$mod/include/waiting.plugin.php";
         if(file_exists($mod_plugin_file)){
-            // 対象モジュール内プラグイン
-            // waiting用言語ファイルが対象モジュール内にあれば読み込む
+            // plugin found in the module
+            // language file needed by the module's side plugin
             $mod_plugin_lng = XOOPS_ROOT_PATH."/modules/$mod/language/$userlang/waiting.php";
             if(file_exists($mod_plugin_lng)){
                 include_once($mod_plugin_lng);
@@ -72,14 +84,14 @@ function b_waiting_waiting_show($options)
                     include_once($mod_plugin_lng);
                 }
             }
-            // 対象モジュール内プラグインを読み込む
+            // main of module's side plugin
             require_once($mod_plugin_file);
             $plugin_flag = true;
         }else{
             // search from waiting if there are no plugin in the module
             $plugin_file = "$plugins_path/{$mod}.php";
             // no language files will be read
-            // waiting内プラグインを読み込む
+            // main of waiting's side plugin
             if (file_exists($plugin_file)){
                 include_once($plugin_file);
                 $plugin_flag = true;
@@ -97,7 +109,8 @@ function b_waiting_waiting_show($options)
                     }
                     unset($_tmp);
                 }else{
-                    // lang_linknameが無ければ、複数返してる
+                    // Judging the plugin returns multiple items
+                    // if lang_linkname does not exist
                     foreach($_tmp as $_one){
                         if( @$_one["pendingnum"] > 0 || $options[0] > 0){
                             $block["modules"][$mod]["pending"][] = $_one;
@@ -107,7 +120,7 @@ function b_waiting_waiting_show($options)
             }
 
             // for older compatibilities
-            // Hacked by GIJOE （行き当たりバッタリのHackですみません）
+            // Hacked by GIJOE
             $i = 0 ;
             while( 1 ) {
                 $function_name = "b_waiting_{$mod}_$i" ;
@@ -126,13 +139,15 @@ function b_waiting_waiting_show($options)
                 $block["modules"][$mod]["name"] = $name;
             }
         }
-        //echo $mod."|".$name;
-        //プラグインを読み込む
-//         if (file_exists($mod_plugin_file)){
-//             require_once($mod_plugin_file);
-//         }
     }
     //print_r($block);
+
+	// SQL cache touch (you have to use this cache with block's cache by system)
+	if( empty( $block ) && $sql_cache_min > 0 ) {
+		$fp = fopen( $sql_cache_file , "w" ) ;
+		fclose( $fp ) ;
+	}
+
     return $block;
 }
 
@@ -140,7 +155,9 @@ function b_waiting_waiting_edit($options){
 
 	$mod_url = XOOPS_URL."/modules/waiting" ;
 
-    $form = _MB_WAITING_NOWAITING_DISPLAY."&nbsp;<input type='radio' name='options[0]' value='1'";
+	$sql_cache_min = empty( $options[1] ) ? 0 : intval( $options[1] ) ;
+
+    $form = _MB_WAITING_NOWAITING_DISPLAY.":&nbsp;<input type='radio' name='options[0]' value='1'";
     if ( $options[0] == 1 ) {
         $form .= " checked='checked'";
     }
@@ -148,7 +165,8 @@ function b_waiting_waiting_edit($options){
     if ( $options[0] == 0 ) {
         $form .= " checked='checked'";
     }
-    $form .=" />&nbsp;"._NO;
+    $form .=" />&nbsp;"._NO."<br />\n";
+    $form .= sprintf( _MINUTES , _MB_WAITING_SQL_CACHE.":&nbsp;<input type='text' name='options[1]' value='$sql_cache_min' size='2' />" ) ;
     $form .="<br />\n<br />\n<a href='$mod_url/admin/index.php'><img src='$mod_url/images/folder16.gif' />"._MB_WAITING_LINKTOPLUGINCHECK."</a>" ;
 
     return $form;

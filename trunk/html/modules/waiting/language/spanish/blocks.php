@@ -6,6 +6,10 @@
 //
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-06 18:37:26
+define('_MB_WAITING_SQL_CACHE','SQL cache');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-05 11:17:43
 define('_MB_WAITING_LINKTOPLUGINCHECK','check plugins');
 

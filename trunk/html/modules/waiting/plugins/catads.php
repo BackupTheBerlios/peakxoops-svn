@@ -1,15 +1,15 @@
 <?php
 function b_waiting_catads(){
-   $xoopsDB =& Database::getInstance();
-   $block = array();
+   	$block = array();
+	$ads_hnd =& xoops_getmodulehandler('ads', 'catads');
+	$criteria = new Criteria('waiting', '1', '=');
+	$nbads = $ads_hnd->getCount($criteria);
+   	if ( $nbads > 0 ) {
+       $block['adminlink'] = XOOPS_URL."/modules/catads/admin/index.php?action=waiting";
+       $block['pendingnum'] = $nbads;
+       $block['lang_linkname'] = _PI_WAITING_WAITINGS ;
 
-   $result = $xoopsDB->query("SELECT COUNT(*) FROM ".$xoopsDB->prefix("catads_ads")." WHERE published ='0'");
-   if ( $result ) {
-       $block['adminlink'] = XOOPS_URL."/modules/catads/admin/index.php";
-       list($block['pendingnum']) = $xoopsDB->fetchRow($result);
-       $block['lang_linkname'] = _PI_WAITING_SUBMITTED ;
-   }
-
+   	}
    return $block;
 }
 ?>

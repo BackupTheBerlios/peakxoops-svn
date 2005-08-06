@@ -94,7 +94,7 @@ array(
         "pendingnum"=>NUM,
         "lang_linkname"=>LINKNAME),
   array("adminlink"=>URL",
-        "pendingnum"=>NUM,
+        "pendingnum"=>NUM,a
         "lang_linkname"=>LINKNAME)
 )
 [/code]
@@ -158,10 +158,12 @@ PLUGINS:
 CHANGES:
 
 
-
+:ver 0.92|
+- add SQL cache
 - fixed some typos (thx karedokx)
-- 1 plugin modified
+- 2 plugin modified
 -- WF-Section (thx karedokx)
+-- catads (thx Alain01)
 - 2 plugins added
 -- WordBook (thx AgD)
 -- recette (thx karedokx)

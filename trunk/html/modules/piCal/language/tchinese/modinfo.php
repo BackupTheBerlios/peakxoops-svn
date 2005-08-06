@@ -9,9 +9,7 @@ define( 'PICAL_MI_LOADED' , 1 ) ;
 
 // The name of this module
 
-// Appended by Xoops Language Checker -GIJOE- in 2004-06-22 18:39:03
 define('_MI_PICAL_ADMENU_MYBLOCKSADMIN','區塊與群組管理');
-
 define("_MI_PICAL_NAME","piCal行事曆");
 
 // A brief description of this module
@@ -26,7 +24,7 @@ define("_MI_PICAL_BNAME_MONTHCAL","月曆");
 define("_MI_PICAL_BNAME_MONTHCAL_DESC","顯示完整的月曆");
 define("_MI_PICAL_BNAME_TODAYS","今日事件");
 define("_MI_PICAL_BNAME_TODAYS_DESC","顯示今天的事件");
-define("_MI_PICAL_BNAME_THEDAYS","今天的事件");
+define("_MI_PICAL_BNAME_THEDAYS","%s 的事件");
 define("_MI_PICAL_BNAME_THEDAYS_DESC","顯示指出日期的事件");
 define("_MI_PICAL_BNAME_COMING","近期事件");
 define("_MI_PICAL_BNAME_COMING_DESC","顯示近期的事件");

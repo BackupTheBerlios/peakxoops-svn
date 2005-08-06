@@ -6,7 +6,7 @@
 # Author                                                                 #
 # flying.tux     -   flying.tux@gmail.com                                #
 #                                                                        #
-# Last modified on 21.04.2005                                            #
+# Last modified on 06.08.2005                                            #
 /*************************************************************************/
 define('_AM_WAITING_MODNAME', 'Contenuti in Attesa Estendible');
 define('_AM_WAITING_STATUS', 'Stato');

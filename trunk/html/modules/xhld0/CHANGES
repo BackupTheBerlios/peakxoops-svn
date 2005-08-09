@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGES:
 
+v.3.00 2005-8-9
+  - added supporting XOOPS 2.1/2.2
+  - updated myblocksadmin 0.40
+
 v.2.99a 2005-7-21
   - added italian language files (thx Gerry)
   - modified french adding ISO-8859-15 (need iconv)
@@ -207,6 +211,10 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.00 2005-8-9
+  - XOOPS 2.1/2.2 への対応 （現時点では、myblocksadminのみ）
+  - myblocksadmin を 0.40 に更新
 
 v.2.99a 2005-7-21
   - イタリア語ファイル追加 (thx Gerry)

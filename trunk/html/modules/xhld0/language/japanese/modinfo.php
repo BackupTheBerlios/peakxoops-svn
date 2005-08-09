@@ -15,7 +15,9 @@ define("_MI_HEADLINES_DESC","RSS/XML形式のニュース記事をブロック内に表示します")
 
 // Names of blocks for this module (Not all module has blocks)
 define("_MI_HEADLINES_BNAME","ヘッドラインブロック");
+define("_MI_HEADLINES_BDESC","取得したヘッドラインをフィード毎に個別表示するブロック");
 define("_MI_HEADLINES_BNAME_MIXED","最新ヘッドラインブロック");
+define("_MI_HEADLINES_BDESC_MIXED","取得したヘッドラインをまとめて最新順に並び替えて表示するブロック");
 
 // Names of admin menu items
 define("_MI_HEADLINES_ADMENU1","フィード管理");

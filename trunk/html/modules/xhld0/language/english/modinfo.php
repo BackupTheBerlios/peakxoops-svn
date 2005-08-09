@@ -15,7 +15,9 @@ define("_MI_HEADLINES_DESC","Display RSS/XML Newsfeed from other sites");
 
 // Names of blocks for this module (Not all module has blocks)
 define("_MI_HEADLINES_BNAME","Headlines");
+define("_MI_HEADLINES_BDESC","Shows headline news via RSS/ATOM in separate cells");
 define("_MI_HEADLINES_BNAME_MIXED","Recent Headlines");
+define("_MI_HEADLINES_BDESC_MIXED","Shows headline news via RSS/ATOM in an aggregated view");
 
 // Names of admin menu items
 define("_MI_HEADLINES_ADMENU1","List Headlines");

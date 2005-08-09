@@ -31,7 +31,7 @@ if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirn
 $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 $modversion['name'] = _MI_HEADLINES_NAME.$mydirnumber;
-$modversion['version'] = 2.99;
+$modversion['version'] = 3.00;
 $modversion['description'] = _MI_HEADLINES_DESC;
 $modversion['author'] = "Kazumi Ono<br />( http://www.xoops.org/ http://jp.xoops.org/ http://www.myweb.ne.jp/ )<br />Modified by GIJOE<br />( http://www.peak.ne.jp/ )";
 $modversion['credits'] = "The XOOPS Project";
@@ -57,7 +57,7 @@ $modversion['adminmenu'] = "admin/menu.php";
 // Blocks
 $modversion['blocks'][1]['file'] = "headline.php";
 $modversion['blocks'][1]['name'] = _MI_HEADLINES_BNAME.$mydirnumber;
-$modversion['blocks'][1]['description'] = "Shows headline news via RDF/RSS news feed";
+$modversion['blocks'][1]['description'] = _MI_HEADLINES_BDESC ;
 $modversion['blocks'][1]['show_func'] = 'b_xhld_show';
 $modversion['blocks'][1]['edit_func'] = 'b_xhld_edit';
 $modversion['blocks'][1]['template'] = "xhld{$mydirnumber}_block_rss.html";
@@ -66,7 +66,7 @@ $modversion['blocks'][1]['options'] = "{$mydirname}|1|128|A";
 
 $modversion['blocks'][2]['file'] = "headline.php";
 $modversion['blocks'][2]['name'] = _MI_HEADLINES_BNAME_MIXED.$mydirnumber;
-$modversion['blocks'][2]['description'] = "Shows headline news via RDF/RSS news feed";
+$modversion['blocks'][2]['description'] = _MI_HEADLINES_BDESC_MIXED ;
 $modversion['blocks'][2]['show_func'] = 'b_xhld_mixed_show';
 $modversion['blocks'][2]['edit_func'] = 'b_xhld_mixed_edit';
 $modversion['blocks'][2]['template'] = "xhld{$mydirnumber}_block_mixed.html";

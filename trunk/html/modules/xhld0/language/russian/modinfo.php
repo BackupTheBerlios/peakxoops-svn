@@ -7,6 +7,11 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( '_MI_HEADLINES_NAME' ) ) {
 
 // DateTime format
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-09 17:42:00
+define('_MI_HEADLINES_BDESC','Shows headline news via RSS/ATOM in separate cells');
+define('_MI_HEADLINES_BDESC_MIXED','Shows headline news via RSS/ATOM in an aggregated view');
+
 define("_MI_DEFAULT_DTFMT_SHORT","d-m-Y H:i");
 
 // The name of this module

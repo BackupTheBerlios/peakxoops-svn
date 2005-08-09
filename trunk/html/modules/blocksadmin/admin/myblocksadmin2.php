@@ -64,11 +64,16 @@ if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_BLOCK, $xoopsUser
 
 // get blocks owned by the module (Imported from xoopsblock.php then modified)
 $db =& Database::getInstance();
-$sql = "SELECT bid,name FROM ".$db->prefix("newblocks")." WHERE mid='$target_mid'";
+$sql = "SELECT bid,name,show_func,func_file,template FROM ".$db->prefix("newblocks")." WHERE mid='$target_mid'";
 $result = $db->query($sql);
 $block_arr = array();
-while( list( $bid , $bname ) = $db->fetchRow( $result ) ) {
-	$block_arr[ $bid ] = $bname ;
+while( list( $bid , $bname , $show_func , $func_file , $template ) = $db->fetchRow( $result ) ) {
+	$block_arr[$bid] = array(
+		'name' => $bname ,
+		'show_func' => $show_func ,
+		'func_file' => $func_file ,
+		'template' => $template
+	) ;
 }
 
 
@@ -136,7 +141,7 @@ function list_blockinstances()
 		$title = $instances[$i]->getVar("title") ;
 		$bcachetime = $instances[$i]->getVar("bcachetime") ;
 		$bid = $instances[$i]->getVar("bid") ;
-		$name = $myts->makeTboxData4Edit( $block_arr[ $bid ] ) ;
+		$name = $myts->makeTboxData4Edit( $block_arr[$bid]['name'] ) ;
 
 		$visiblein = $instances[$i]->getVisibleIn();
 
@@ -251,11 +256,22 @@ function list_blockinstances()
 	}
 
 	// list block classes for add (not instances)
-	foreach( $block_arr as $bid => $bname ) {
+	foreach( $block_arr as $bid => $block ) {
+
+		$description4show = '' ;
+		foreach( $block_configs as $bconf ) {
+			if( $block['show_func'] == $bconf['show_func'] && $block['func_file'] == $bconf['file'] && ( empty( $bconf['template'] ) || $block['template'] == $bconf['template'] ) ) {
+				if( ! empty( $bconf['description'] ) ) $description4show = $myts->makeTboxData4Show( $bconf['description'] ) ;
+			}
+		}
+
 		echo "
 		<tr>
-			<td class='$class' align='left' colspan='5'>
-				".$myts->makeTboxData4Edit($bname)."
+			<td class='$class' align='left'>
+				".$myts->makeTboxData4Edit($block['name'])."
+			</td>
+			<td class='$class' align='left' colspan='4'>
+				$description4show
 			</td>
 			<td class='$class' align='center'>
 				<input type='submit' name='addblock[$bid]' value='"._ADD."' />

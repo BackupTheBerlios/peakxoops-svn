@@ -84,7 +84,8 @@ class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
             // convert entities.
             $text = str_replace("\t", "    ", $text);
             $text = "<html>\n$text\n</html>";
-            $text = htmlentities($text);
+            // $text = htmlentities($text); GIJ Patched
+            $text = htmlspecialchars($text,ENT_QUOTES);
             $text = "<pre$css><code$css_html>$text</code></pre>";
             
         } else {
@@ -92,7 +93,8 @@ class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
             // convert tabs to four spaces,
             // convert entities.
             $text = str_replace("\t", "    ", $text);
-            $text = htmlentities($text);
+            // $text = htmlentities($text); GIJ Patched
+            $text = htmlspecialchars($text,ENT_QUOTES);
             $text = "<pre$css><code$css_code>$text</code></pre>";
         }
         

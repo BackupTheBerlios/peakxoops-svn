@@ -158,6 +158,8 @@ PLUGINS:
 CHANGES:
 
 
+- updated Italian (thx flying.tux)
+
 :ver 0.92|
 - add SQL cache
 - fixed some typos (thx karedokx)
@@ -169,7 +171,7 @@ CHANGES:
 -- recette (thx karedokx)
 
 :ver 0.91|
-- updated Italian (thx flying.tux)1
+- updated Italian (thx flying.tux)
 
 :ver 0.90|
 - modified the structure of the directory for plugins

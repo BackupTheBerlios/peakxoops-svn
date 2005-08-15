@@ -49,6 +49,11 @@ class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
             $text = ob_get_contents();
             ob_end_clean();
             
+            // remove start of php in top and end of php GIJ
+            $text = preg_replace( '/\&lt;\?php/' , '' , $text , 1 ) ;
+            $text = substr( $text , 0 , -50 ) . str_replace( '?&gt;' , '' , substr( $text , -50 ) ) ;
+            // end of GIJ
+            
             // replace <br /> tags with simple newlines.
             // replace non-breaking space with simple spaces.
             // translate HTML <font> and color to XHTML <span> and style.

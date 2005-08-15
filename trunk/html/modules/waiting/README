@@ -136,6 +136,7 @@ PLUGINS:
 -popnupblog (by dashboard)
 -simpleblog (by kousuke)
 -smartfaq (by mariuss)
+-smartpartner (by mariuss)
 -smartsection (by flying.tux)
 -system -- comments (by GIJOE)
 -tutorials (by GIJOE)
@@ -157,8 +158,11 @@ PLUGINS:
 
 CHANGES:
 
+:ver 0.93|
 
 - updated Italian (thx flying.tux)
+- a plugin added
+-- SmartPartner (thx mariuss)
 
 :ver 0.92|
 - add SQL cache

@@ -44,7 +44,8 @@ function b_myalbum_topnews_show( $options )
 
 	$block = array() ;
 	$myts =& MyTextSanitizer::getInstance() ;
-	$result = $xoopsDB->query( "SELECT lid , cid , title , ext , res_x , res_y , submitter , status , date AS unixtime , hits , rating , votes , comments FROM $table_photos WHERE status>0 AND $whr_cat ORDER BY unixtime DESC" , $photos_num , 0 ) ;
+	$result = $xoopsDB->query( "SELECT lid , cid , title , ext , res_x , res_y , submitter , status , date AS unixtime , hits , rating , votes , comments FROM $table_photos WHERE status>0 AND $whr_cat GROUP BY cid ORDER BY unixtime DESC" , $photos_num , 0 ) ;
+//	$result = $xoopsDB->query( "SELECT l.lid , l.cid , l.title , l.ext , l.res_x , l.res_y , l.submitter , l.status , date AS l.unixtime , l.hits , l.rating , l.votes , l.comments FROM $table_photos l LEFT JOIN $table_cat c ON l.cid=c.cid WHERE l.status>0 ORDER BY l.unixtime DESC" , $photos_num , 0 ) ;
 	$count = 1 ;
 	while( $photo = $xoopsDB->fetchArray( $result ) ) {
 		$photo['title'] = $myts->makeTboxData4Show( $photo['title'] ) ;

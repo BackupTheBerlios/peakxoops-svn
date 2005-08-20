@@ -1,5 +1,6 @@
+#!/bin/sh
 if [ -z "$1" ]; then
-	echo 'usage: source mk_templates.sh modulesnumber'
+	echo 'usage: mk_templates.sh modulesnumber'
 else
 
 cp -a blocks/myalbum_block_rphoto.html blocks/myalbum$1_block_rphoto.html

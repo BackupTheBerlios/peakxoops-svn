@@ -41,6 +41,12 @@ $ - previous text (title / description)
 
 -------------
 
+catching up xcgal
+=slide show
+=E-card
+
+-------------
+
 =templatize submit.php and editphoto.php
 
 ------------ 
@@ -63,4 +69,18 @@ table_cat:
  -depth
  -description
  -allowed_ext
+
+
+
+
+xoops_pagetitle に色々アサインする
+更新時のイベント通知
+更新日を修正しないオプション
+アドミン画面絞り込み
+data.inc.php
+外部画像ファイルをレコードとする
+最新コメント順というソートを追加
+mbstring初期化
+イメージマネージャの権限
+複数インストール時に、xoops_module_install_myalbum*() が実行されない問題
 

@@ -44,6 +44,11 @@ $xoopsTpl->assign( 'lang_album_main' , _ALBM_MAIN ) ;
 
 if( $cid > 0 ) {
 
+	// GIJ TODO  append error check!
+	$rs = $xoopsDB->query( "SELECT title FROM $table_cat WHERE cid='$cid'" ) ;
+	list( $cat_title ) = $xoopsDB->fetchRow( $rs ) ;
+	$xoopsTpl->assign( 'xoops_pagetitle' , $cat_title ) ;
+
 	// Category Specified
 	$xoopsTpl->assign( 'category_id' , $cid ) ;
 	$xoopsTpl->assign( 'subcategories' , myalbum_get_sub_categories( $cid , $cattree ) ) ;	$xoopsTpl->assign( 'category_options' , myalbum_get_cat_options() ) ;
@@ -68,12 +73,14 @@ if( $cid > 0 ) {
 		$get_append = "uid=-1" ;
 		$xoopsTpl->assign( 'uid' , -1 ) ;
 		$xoopsTpl->assign( 'album_sub_title' , _ALBM_TEXT_SMNAME4 ) ;
+		$xoopsTpl->assign( 'xoops_pagetitle' , _ALBM_TEXT_SMNAME4 ) ;
 	// uid Specified
 	} else {
 		$where = "submitter=$uid" ;
 		$get_append = "uid=$uid" ;
 		$xoopsTpl->assign( 'uid' , $uid ) ;
 		$xoopsTpl->assign( 'album_sub_title' , "<img src='$mod_url/images/myphotos.gif' alt='' />" . myalbum_get_name_from_uid( $uid ) ) ;
+		$xoopsTpl->assign( 'xoops_pagetitle' , myalbum_get_name_from_uid( $uid ) ) ;
 	}
 	$join_append = "LEFT JOIN $table_cat c ON l.cid=c.cid" ;
 	$select_append = ', c.title AS cat_title' ;

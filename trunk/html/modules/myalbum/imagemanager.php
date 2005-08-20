@@ -22,6 +22,25 @@ include_once(XOOPS_ROOT_PATH."/class/xoopstree.php");
 include_once(XOOPS_ROOT_PATH.'/class/pagenav.php');
 include_once(XOOPS_ROOT_PATH.'/class/template.php');
 
+// checking isactive
+$module_handler =& xoops_gethandler('module');
+$xoopsModule =& $module_handler->getByDirname($mydirname);
+if ( empty($xoopsModule) || !$xoopsModule->getVar('isactive')) {
+	die( _MODULENOEXIST ) ;
+}
+// checking permission
+$moduleperm_handler =& xoops_gethandler('groupperm');
+if (is_object($xoopsUser)) {
+	if (!$moduleperm_handler->checkRight('module_read', $xoopsModule->getVar('mid'), $xoopsUser->getGroups())) {
+		die( _NOPERM ) ;
+	}
+} else {
+	if (!$moduleperm_handler->checkRight('module_read', $xoopsModule->getVar('mid'), XOOPS_GROUP_ANONYMOUS)) {
+		die( _NOPERM ) ;
+	}
+}
+
+
 $myts =& MyTextSanitizer::getInstance();	// MyTextSanitizer object
 $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 

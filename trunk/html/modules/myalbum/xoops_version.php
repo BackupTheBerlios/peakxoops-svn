@@ -70,6 +70,7 @@ $modversion['blocks'][1]['show_func'] = "b_myalbum_rphoto_show";
 $modversion['blocks'][1]['edit_func'] = "b_myalbum_rphoto_edit";
 $modversion['blocks'][1]['options'] = "$mydirname|140|1||1|60|1";
 $modversion['blocks'][1]['template'] = "{$mydirname}_block_rphoto.html" ;
+$modversion['blocks'][1]['can_clone'] = true ;
 
 $modversion['blocks'][2]['file'] = "myalbum_topnews.php";
 $modversion['blocks'][2]['name'] = _ALBM_BNAME_RECENT . $myalbum_number ;
@@ -102,14 +103,14 @@ $modversion['blocks'][5]['show_func'] = "b_myalbum_tophits_show";
 $modversion['blocks'][5]['edit_func'] = "b_myalbum_tophits_edit";
 $modversion['blocks'][5]['options'] = "$mydirname|5|20||1||1";
 $modversion['blocks'][5]['template'] = "{$mydirname}_block_tophits_p.html" ;
+$modversion['blocks'][5]['can_clone'] = true ;
 
 
 // Menu
-global $xoopsDB , $xoopsUser , $myalbum_catonsubmenu , $myalbum_mid , $table_cat ;
-
+global $xoopsDB , $xoopsUser , $myalbum_catonsubmenu , $table_cat ;
 $modversion['hasMain'] = 1 ;
 $subcount = 1 ;
-include( 'include/get_perms.php' ) ;
+include( dirname( __FILE__ ) . '/include/get_perms.php' ) ;
 if( $global_perms & 1 ) {	// GPERM_INSERTABLE
 	$modversion['sub'][$subcount]['name'] = _ALBM_TEXT_SMNAME1;
 	$modversion['sub'][$subcount++]['url'] = "submit.php";
@@ -239,7 +240,7 @@ $modversion['config'][] = array(
 	'description'	=> '_ALBM_CFG_DESCMAKETHUMB' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> '0' ,
+	'default'		=> '1' ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
@@ -469,5 +470,12 @@ $modversion['notification']['event'][2]['caption'] = _MI_MYALBUM_CATEGORY_NEWPHO
 $modversion['notification']['event'][2]['description'] = _MI_MYALBUM_CATEGORY_NEWPHOTO_NOTIFYDSC;
 $modversion['notification']['event'][2]['mail_template'] = 'category_newphoto_notify';
 $modversion['notification']['event'][2]['mail_subject'] = _MI_MYALBUM_CATEGORY_NEWPHOTO_NOTIFYSBJ;
+
+
+
+// On Update
+if( ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {
+	include dirname( __FILE__ ) . "/include/onupdate.inc.php" ;
+}
 
 ?>

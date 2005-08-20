@@ -13,7 +13,8 @@ if( is_object( $xoopsDB ) ) {
 		}
 		$whr_groupid = substr( $whr_groupid , 0 , -1 ) . ")" ;
 	}
-	$rs = $xoopsDB->query( "SELECT gperm_itemid FROM ".$xoopsDB->prefix("group_permission")." WHERE gperm_modid='$myalbum_mid' AND gperm_name='myalbum_global' AND ($whr_groupid)" ) ;
+//	$rs = $xoopsDB->query( "SELECT gperm_itemid FROM ".$xoopsDB->prefix("group_permission")." WHERE gperm_modid='$myalbum_mid' AND gperm_name='myalbum_global' AND ($whr_groupid)" ) ;
+	$rs = $xoopsDB->query( "SELECT gperm_itemid FROM ".$xoopsDB->prefix("group_permission")." LEFT JOIN ".$xoopsDB->prefix("modules")." m ON gperm_modid=m.mid WHERE m.dirname='$mydirname' AND gperm_name='myalbum_global' AND ($whr_groupid)" ) ;
 	while( list( $itemid ) = $xoopsDB->fetchRow( $rs ) ) {
 		$global_perms |= $itemid ;
 	}

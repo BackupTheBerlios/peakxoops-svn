@@ -19,11 +19,11 @@ list( $submitter ) = $xoopsDB->fetchRow( $result ) ;
 
 if( $global_perms & GPERM_EDITABLE ) {
 	if( $my_uid != $submitter && ! $isadmin ) {
-		redirect_header( $mod_url , 3 , _NOPERM ) ;
+		redirect_header( $mod_url.'/' , 3 , _NOPERM ) ;
 		exit ;
 	}
 } else {
-	redirect_header( $mod_url , 3 , _NOPERM ) ;
+	redirect_header( $mod_url.'/' , 3 , _NOPERM ) ;
 	exit ;
 }
 
@@ -32,7 +32,7 @@ if( $global_perms & GPERM_EDITABLE ) {
 if( ! empty( $_POST['do_delete'] ) ) {
 
 	if( ! ( $global_perms & GPERM_DELETABLE ) ) {
-		redirect_header( $mod_url , 3 , _NOPERM ) ;
+		redirect_header( $mod_url.'/' , 3 , _NOPERM ) ;
 		exit ;
 	}
 
@@ -47,7 +47,7 @@ if( ! empty( $_POST['do_delete'] ) ) {
 
 	myalbum_delete_photos( $whr ) ;
 
-	redirect_header( $mod_url , 3 , _ALBM_DELETINGPHOTO ) ;
+	redirect_header( $mod_url.'/' , 3 , _ALBM_DELETINGPHOTO ) ;
 	exit ;
 }
 
@@ -56,7 +56,7 @@ if( ! empty( $_POST['do_delete'] ) ) {
 if( ! empty( $_POST['conf_delete'] ) ) {
 
 	if( ! ( $global_perms & GPERM_DELETABLE ) ) {
-		redirect_header( $mod_url , 3 , _NOPERM ) ;
+		redirect_header( $mod_url.'/' , 3 , _NOPERM ) ;
 		exit ;
 	}
 

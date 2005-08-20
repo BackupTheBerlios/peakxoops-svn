@@ -13,7 +13,7 @@ $myts =& MyTextSanitizer::getInstance() ;
 
 // reject Not Admin
 if( ! $isadmin ) {
-	redirect_header( $mod_url , 2 , _ALBM_MUSTREGFIRST ) ;
+	redirect_header( $mod_url.'/' , 2 , _ALBM_MUSTREGFIRST ) ;
 	exit ;
 }
 

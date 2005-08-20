@@ -41,7 +41,7 @@ Example
   $maxfilewidth = 120;
   $maxfileheight = 120;
   $uploader = new XoopsMediaUploader('/home/xoops/uploads', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight, $allowed_exts);
-  if ($uploader->fetchMedia($HTTP_POST_VARS['uploade_file_name'])) {
+  if ($uploader->fetchMedia($_POST['uploade_file_name'])) {
     if (!$uploader->upload()) {
        echo $uploader->getErrors();
     } else {

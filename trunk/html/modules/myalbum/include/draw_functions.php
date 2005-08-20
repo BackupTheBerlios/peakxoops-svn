@@ -28,15 +28,14 @@ function myalbum_get_name_from_uid( $uid )
 	global $myalbum_nameoruname ;
 
 	if( $uid > 0 ) {
-		$member_handler =& xoops_gethandler('member');
+		$member_handler =& xoops_gethandler( 'member' ) ;
 		$poster =& $member_handler->getUser( $uid ) ;
 
 		if( is_object( $poster ) ) {
-			if( $myalbum_nameoruname == 'uname' ) {
-				$name = $poster->uname() ;
+			if( $myalbum_nameoruname == 'uname' || trim( $poster->name() ) == '' ) {
+				$name = htmlspecialchars( $poster->uname() , ENT_QUOTES ) ;
 			} else {
-				$name = htmlspecialchars( $poster->name() ) ;
-				if( $name == "" ) $name = $poster->uname() ;
+				$name = htmlspecialchars( $poster->name() , ENT_QUOTES ) ;
 			}
 		} else {
 			$name = _ALBM_CAPTION_GUESTNAME ;

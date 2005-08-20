@@ -28,7 +28,7 @@ $xoopsDB->queryF( "UPDATE $table_photos SET hits=hits+1 WHERE lid='$lid' AND sta
 $prs = $xoopsDB->query( "SELECT l.lid, l.cid, l.title, l.ext, l.res_x, l.res_y, l.status, l.date, l.hits, l.rating, l.votes, l.comments, l.submitter, t.description FROM $table_photos l LEFT JOIN $table_text t ON l.lid=t.lid WHERE l.lid=$lid AND status>0" ) ;
 $p = $xoopsDB->fetchArray( $prs ) ;
 if( $p == false ) {
-	redirect_header( $mod_url , 3 , _ALBM_NOMATCH ) ;
+	redirect_header( $mod_url.'/' , 3 , _ALBM_NOMATCH ) ;
 	exit ;
 }
 $photo = myalbum_get_array_for_photo_assign( $p ) ;

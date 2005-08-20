@@ -3,6 +3,7 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $mydirname = $_SESSION['myalbum_mydirname'] ;
+// TODO
 include_once XOOPS_ROOT_PATH."/modules/$mydirname/language/english/myalbum_constants.php" ;
 
 eval( '

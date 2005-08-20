@@ -89,7 +89,7 @@ define("_ALBM_MYALBUM_ADMENU0","投稿された画像の承認");
 define("_ALBM_MYALBUM_ADMENU1","画像管理");
 define("_ALBM_MYALBUM_ADMENU2","カテゴリ管理");
 define("_ALBM_MYALBUM_ADMENU_GPERM","各グループの権限");
-define("_ALBM_MYALBUM_ADMENU3","モジュールの状態チェック");
+define("_ALBM_MYALBUM_ADMENU3","動作チェッカー");
 define("_ALBM_MYALBUM_ADMENU4","画像一括登録");
 define("_ALBM_MYALBUM_ADMENU5","サムネイルの再構築");
 define("_ALBM_MYALBUM_ADMENU_IMPORT","画像インポート");

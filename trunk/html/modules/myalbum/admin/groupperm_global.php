@@ -1,6 +1,7 @@
 <?php
-include_once( '../../../include/cp_header.php' ) ;
-include_once( 'mygrouppermform.php' ) ;
+require_once( '../../../include/cp_header.php' ) ;
+require_once( '../include/gtickets.php' ) ;
+require_once( 'mygrouppermform.php' ) ;
 include_once( '../include/read_configs.php' ) ;
 
 // check $xoopsModule

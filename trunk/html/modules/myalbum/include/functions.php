@@ -399,11 +399,19 @@ function myalbum_modify_photo_by_imagick( $src_path , $dst_path )
 	if( ! is_readable( $dst_path ) ) {
 		// didn't exec convert, rename it.
 		@rename( $src_path , $dst_path ) ;
-		return 2 ;
+		$ret = 2 ;
 	} else {
 		@unlink( $src_path ) ;
-		return 1 ;
+		$ret = 1 ;
 	}
+
+	// water mark
+	$wmfile = dirname( dirname( __FILE__ ) ) . '/images/watermark.gif' ;
+	if( file_exists( $wmfile ) ) {
+		exec( "{$myalbum_imagickpath}composite -compose plus $wmfile $dst_path $dst_path" ) ;
+	}
+
+	return $ret ;
 }
 
 

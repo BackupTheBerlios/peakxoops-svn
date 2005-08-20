@@ -24,7 +24,7 @@ $desc4edit = isset( $_POST['desc'] ) ? $myts->makeTareaData4Edit( $_POST['desc']
 
 // reject Not Admin
 if( ! $isadmin ) {
-	redirect_header( $mod_url , 2 , _ALBM_MUSTREGFIRST ) ;
+	redirect_header( $mod_url.'/' , 2 , _ALBM_MUSTREGFIRST ) ;
 	exit ;
 }
 
@@ -84,7 +84,7 @@ if( isset( $_POST['submit'] ) && $_POST['submit'] != "" ) {
 
 		if( is_readable( $file_path ) && in_array( strtolower( $ext ) , $array_allowed_exts ) ) {
 			$lid = $xoopsDB->genId( $table_photos."_lid_seq" ) ;
-			if( ! in_array( strtolower( $ext ) , $myalbum_normal_exts ) ) {
+			if( in_array( strtolower( $ext ) , $myalbum_normal_exts ) ) {
 				list( $w , $h ) = getimagesize( $file_path ) ;
 			} else {
 				list( $w , $h ) = array( 0 , 0 ) ;

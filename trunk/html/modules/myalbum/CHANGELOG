@@ -1,3 +1,8 @@
+ - updated myblocksadmin into 0.40
+ - added polish language (thx kaper)
+ - updated french language (thx sebhtml)
+ - ... and a lots of modifications. I don't remember :-P
+
 2004-10-4 v2.84
  - modified ImageManagerIntegration can treat non-image files (AttachmentManager)
  - added an option which specifies the default listing order

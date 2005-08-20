@@ -1,6 +1,9 @@
 <?php
+// $Id$
 
-	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
+if( substr( XOOPS_VERSION , 6 , 3 ) < 2.1 ) {
 
 	// Keep Block option values when update (by nobunobu)
 	global $xoopsDB;
@@ -60,13 +63,13 @@
 			$local_msgs[] = "Non Defined Block <b>".$fblock['name']."</b> will be deleted";
 			$sql = "DELETE FROM ".$xoopsDB->prefix('newblocks')." WHERE bid='".$fblock['bid']."'";
 			$iret = $xoopsDB->query($sql);
-		}			
+		}
 		
 		for ($i = 1 ; $i <= $count ; $i++) {
 			$sql = "SELECT name,options FROM ".$xoopsDB->prefix('newblocks')." WHERE mid=".$mid." AND func_num=".$i." AND show_func='".addslashes($modversion['blocks'][$i]['show_func'])."' AND func_file='".addslashes($modversion['blocks'][$i]['file'])."'";
 			$fresult = $xoopsDB->query($sql);
 			$fblock = $xoopsDB->fetchArray($fresult);
-			if ($fblock['options']) {
+			if ( isset( $fblock['options'] ) ) {
 				$old_vals=explode("|",$fblock['options']);
 				$def_vals=explode("|",$modversion['blocks'][$i]['options']);
 				if (count($old_vals) == count($def_vals)) {
@@ -90,5 +93,7 @@
 		$msgs = array_merge( $msgs , $local_msgs ) ;
 		$myblocksadmin_parsed_updateblock = true ;
 	}
+
+}
 
 ?>

@@ -1,3 +1,8 @@
+myalbum-P 2.84 was translated in french by sebhtml <sebhtml@yahoo.ca>
+
+
+//------------------
+
 Traduction francaise de Olivier (de generationrealtv.net) pour le module myalbum-P 2.03 de www.Peaks.ne.jp
 
 Installation :

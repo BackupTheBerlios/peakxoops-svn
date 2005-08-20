@@ -1,3 +1,6 @@
+[mlimg]
+[xlang:en]
+
 HOW TO INSTALL:
 
 - Unzip in "modules" directory.
@@ -88,10 +91,8 @@ GIJ=CHECKMATE
 
 
 
-
----------------------------------------------------------------------------
-(For Japanese)
-
+[/xlang:en]
+[xlang:ja]
 
 ●インストール方法：
 
@@ -197,3 +198,4 @@ if (!isset($HTTP_GET_VARS['target']) && !isset($HTTP_POST_VARS['target'])) {
 modules/myalbum/ という部分を、 /modules/myalbum0 等と書き換えるだけで、４つのmyAlbum-Pのいずれもイメージマネージャとして利用可能となります。
 
 
+[/xlang:ja]

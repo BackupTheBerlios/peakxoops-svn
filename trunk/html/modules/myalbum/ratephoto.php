@@ -65,13 +65,23 @@ if( ! empty( $_POST['submit'] ) ) {
 	//All is well.  Calculate Score & Add to Summary (for quick retrieval & sorting) to DB.
 	myalbum_updaterating( $lid ) ;
 	$ratemessage = _ALBM_VOTEAPPRE."<br />".sprintf( _ALBM_THANKURATE , $xoopsConfig['sitename'] ) ;
-	redirect_header( "index.php" , 2 , $ratemessage ) ;
+	if( ! empty( $_SESSION["{$mydirname}_uri4return"] ) ) {
+		redirect_header( $_SESSION["{$mydirname}_uri4return"] , 2 , $ratemessage ) ;
+		unset( $_SESSION["{$mydirname}_uri4return"] ) ;
+	} else {
+		redirect_header( "index.php" , 2 , $ratemessage ) ;
+	}
 	exit ;
 
 } else {
 
 	$xoopsOption['template_main'] = "{$mydirname}_ratephoto.html" ;
 	include( XOOPS_ROOT_PATH."/header.php" ) ;
+
+	// store the referer
+	if( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+		$_SESSION["{$mydirname}_uri4return"] = $_SERVER['HTTP_REFERER'] ;
+	}
 
 	$rs = $xoopsDB->query( "SELECT l.lid, l.cid, l.title, l.ext, l.res_x, l.res_y, l.status, l.date, l.hits, l.rating, l.votes, l.comments, l.submitter, t.description FROM $table_photos l LEFT JOIN $table_text t ON l.lid=t.lid  WHERE l.lid='$lid' AND l.status>0") ;
 	if( $rs == false || $xoopsDB->getRowsNum( $rs ) <= 0 ) {

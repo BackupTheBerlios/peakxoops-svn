@@ -1,21 +1,21 @@
-Hello {X_UNAME},
+Bonjour {X_UNAME},
 
-A new photo "{PHOTO_TITLE}" has been added in category "{CATEGORY_TITLE}" at {X_SITENAME}.
+Une nouvelle photo "{PHOTO_TITLE}" a été ajoutée dans la catégorie "{CATEGORY_TITLE}" sur le site {X_SITENAME}.
 
-You can view this photo here:
+Vous pouvez voir cette photo ici:
 {PHOTO_URI}
 
 -----------
 
-You are receiving this message because you selected to be notified when new files are added in this category.
+Vous avez reçu ce message parce que vous avez choisi d'être alerté lors qu'une image est ajoutée dans cette catégorie.
 
-If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:
+Si ce message est une erreur ou si vous désirez ne plus recevoir d'autre message comme celui-ci, veuillez mettre à jour vos informations en visitant l'adresse suivante :
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+Veuillez ne pas répondre à ce message.
 
 -----------
 
 {X_SITENAME} ({X_SITEURL}) 
-webmaster
+Webmestre
 {X_ADMINMAIL}

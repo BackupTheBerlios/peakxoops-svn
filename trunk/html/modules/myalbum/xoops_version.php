@@ -36,7 +36,7 @@ if( preg_match( '/^myalbum(\d*)$/' , $mydirname , $regs ) ) {
 $_SESSION['myalbum_mydirname'] = $mydirname ;
 
 $modversion['name'] = _ALBM_MYALBUM_NAME . $myalbum_number ;
-$modversion['version'] = 2.84 ;
+$modversion['version'] = 2.85 ; // = 2.90 - 0.05 (alpha)
 $modversion['description'] = _ALBM_MYALBUM_DESC;
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['credits'] = "Original: Daniel Branco<br />(http://bluetopia.homeip.net)<br />Kazumi Ono<br />(http://www.mywebaddons.com/)<br />The XOOPS Project" ;
@@ -79,6 +79,7 @@ $modversion['blocks'][2]['show_func'] = "b_myalbum_topnews_show";
 $modversion['blocks'][2]['edit_func'] = "b_myalbum_topnews_edit";
 $modversion['blocks'][2]['options'] = "$mydirname|10|20||1||1";
 $modversion['blocks'][2]['template'] = "{$mydirname}_block_topnews.html" ;
+$modversion['blocks'][2]['can_clone'] = true ;
 
 $modversion['blocks'][3]['file'] = "myalbum_tophits.php";
 $modversion['blocks'][3]['name'] = _ALBM_BNAME_HITS . $myalbum_number ;
@@ -87,6 +88,7 @@ $modversion['blocks'][3]['show_func'] = "b_myalbum_tophits_show";
 $modversion['blocks'][3]['edit_func'] = "b_myalbum_tophits_edit";
 $modversion['blocks'][3]['options'] = "$mydirname|10|20||1||1";
 $modversion['blocks'][3]['template'] = "{$mydirname}_block_tophits.html" ;
+$modversion['blocks'][3]['can_clone'] = true ;
 
 $modversion['blocks'][4]['file'] = "myalbum_topnews.php";
 $modversion['blocks'][4]['name'] = _ALBM_BNAME_RECENT_P . $myalbum_number ;
@@ -95,6 +97,7 @@ $modversion['blocks'][4]['show_func'] = "b_myalbum_topnews_show";
 $modversion['blocks'][4]['edit_func'] = "b_myalbum_topnews_edit";
 $modversion['blocks'][4]['options'] = "$mydirname|5|20||1||1";
 $modversion['blocks'][4]['template'] = "{$mydirname}_block_topnews_p.html" ;
+$modversion['blocks'][4]['can_clone'] = true ;
 
 $modversion['blocks'][5]['file'] = "myalbum_tophits.php";
 $modversion['blocks'][5]['name'] = _ALBM_BNAME_HITS_P . $myalbum_number ;

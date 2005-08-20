@@ -15,7 +15,7 @@ define("_ALBM_TEXT_CATLIMITRECURSIVE","サブカテゴリも対象");
 define("_ALBM_TEXT_BLOCK_WIDTH","最大表示サイズ");
 define("_ALBM_TEXT_BLOCK_WIDTH_NOTES","（※ ここを0にした場合、サムネイル画像をそのままのサイズで表示します）");
 define("_ALBM_TEXT_RANDOMCYCLE","画像の切り替え周期（単位は秒）");
-define("_ALBM_TEXT_COLS","画像の行数");
+define("_ALBM_TEXT_COLS","画像の列数");
 
 }
 

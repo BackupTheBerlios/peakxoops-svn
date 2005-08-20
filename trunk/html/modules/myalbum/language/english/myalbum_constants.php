@@ -17,11 +17,11 @@ define( "GPERM_RATEVIEW" , 256 ) ;
 define( "GPERM_RATEVOTE" , 512 ) ;
 
 // Global Group Permission
-define( "_ALBM_GPERM_G_INSERTABLE" , "Post (need approve)" ) ;
+define( "_ALBM_GPERM_G_INSERTABLE" , "Post (need approval)" ) ;
 define( "_ALBM_GPERM_G_SUPERINSERT" , "Super Post" ) ;
-define( "_ALBM_GPERM_G_EDITABLE" , "Edit (need approve)" ) ;
+define( "_ALBM_GPERM_G_EDITABLE" , "Edit (need approval)" ) ;
 define( "_ALBM_GPERM_G_SUPEREDIT" , "Super Edit" ) ;
-define( "_ALBM_GPERM_G_DELETABLE" , "Delete (need approve)" ) ;
+define( "_ALBM_GPERM_G_DELETABLE" , "Delete (need approval)" ) ;
 define( "_ALBM_GPERM_G_SUPERDELETE" , "Super Delete" ) ;
 define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Touch photos posted by others" ) ;
 define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Super Touch others" ) ;

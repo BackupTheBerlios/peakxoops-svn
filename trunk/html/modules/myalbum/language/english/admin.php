@@ -21,8 +21,8 @@ define( "_AM_CAT_LINK_MAKETOPCAT" , "Create a new category on top" ) ;
 define( "_AM_CAT_LINK_ADDPHOTOS" , "Add a image into this category" ) ;
 define( "_AM_CAT_LINK_EDIT" , "Edit this category" ) ;
 define( "_AM_CAT_LINK_MAKESUBCAT" , "Create a new category under this category" ) ;
-define( "_AM_CAT_FMT_NEEDADMISSION" , "%s images are needed the admission" ) ;
-define( "_AM_CAT_FMT_CATDELCONFIRM" , "%s will be deleted with its sub-categories, images, comments. Are you OK?" ) ;
+define( "_AM_CAT_FMT_NEEDADMISSION" , "%s images are needed to be admitted" ) ;
+define( "_AM_CAT_FMT_CATDELCONFIRM" , "%s will be deleted with its sub-categories, images, comments. OK?" ) ;
 
 
 // Admission
@@ -69,13 +69,13 @@ define( "_AM_MB_DIRECTORYFORPHOTOS" , "Directory for Photos" ) ;
 define( "_AM_MB_DIRECTORYFORTHUMBS" , "Directory for Thumbnails" ) ;
 define( "_AM_ERR_LASTCHAR" , "Error: The last charactor should not be '/'" ) ;
 define( "_AM_ERR_FIRSTCHAR" , "Error: The first charactor should be '/'" ) ;
-define( "_AM_ERR_PERMISSION" , "Error: At first create and chmod 777 this directory by ftp or shell." ) ;
+define( "_AM_ERR_PERMISSION" , "Error: You first have to create and chmod 777 this directory by ftp or shell." ) ;
 define( "_AM_ERR_NOTDIRECTORY" , "Error: This is not a directory." ) ;
-define( "_AM_ERR_READORWRITE" , "Error: This directory is not writable nor readable. You should change the permission of the directory 777." ) ;
-define( "_AM_ERR_SAMEDIR" , "Error: Photos Path should not same as Thumbs Path" ) ;
-define( "_AM_LNK_CHECKGD2" , "Check 'GD2' work correctly under your GD bundled with PHP" ) ;
-define( "_AM_MB_CHECKGD2" , "If the page linked from here don't display correctly, you should give up working your GD as truecolor mode." ) ;
-define( "_AM_MB_GD2SUCCESS" , "Success!<br />Perhaps, you can use GD2 (truecolor) on this environment." ) ;
+define( "_AM_ERR_READORWRITE" , "Error: This directory is not writable nor readable. You should change the permission of the directory to 777." ) ;
+define( "_AM_ERR_SAMEDIR" , "Error: Photos Path should not be the same as Thumbs Path" ) ;
+define( "_AM_LNK_CHECKGD2" , "Check that 'GD2'is working correctly under your GD bundled with PHP" ) ;
+define( "_AM_MB_CHECKGD2" , "If the page linked to from here doesn't display correctly, you should not use your GD in truecolor mode." ) ;
+define( "_AM_MB_GD2SUCCESS" , "Success!<br />Perhaps, you can use GD2 (truecolor) in this environment." ) ;
 
 
 define( "_AM_H4_PHOTOLINK" , "Photos & Thumbs Link Check" ) ;
@@ -101,17 +101,17 @@ define( "_AM_MB_FAILEDREADING" , "failed reading." ) ;
 define( "_AM_MB_CREATEDTHUMBS" , "created a thumbnail." ) ;
 define( "_AM_MB_BIGTHUMBS" , "failed making a thumnail. copied." ) ;
 define( "_AM_MB_SKIPPED" , "skipped." ) ;
-define( "_AM_MB_SIZEREPAIRED" , "(repaired size fieleds of the record.)" ) ;
+define( "_AM_MB_SIZEREPAIRED" , "(repaired size fields of the record.)" ) ;
 define( "_AM_MB_RECREMOVED" , "this record has been removed." ) ;
 define( "_AM_MB_PHOTONOTEXISTS" , "main photo does not exist." ) ;
 define( "_AM_MB_PHOTORESIZED" , "main photo was resized." ) ;
 
 define( "_AM_TEXT_RECORDFORSTARTING" , "record's number starting with" ) ;
 define( "_AM_TEXT_NUMBERATATIME" , "number of records processed at a time" ) ;
-define( "_AM_LABEL_DESCNUMBERATATIME" , "Too large number may lead to server time out." ) ;
+define( "_AM_LABEL_DESCNUMBERATATIME" , "Too large a number may lead to server time out." ) ;
 
 define( "_AM_RADIO_FORCEREDO" , "force recreating even if a thumbnail exists" ) ;
-define( "_AM_RADIO_REMOVEREC" , "remove records don't link a main photo" ) ;
+define( "_AM_RADIO_REMOVEREC" , "remove records that don't link to a main photo" ) ;
 define( "_AM_RADIO_RESIZE" , "resize bigger photos than the pixels specified in current preferences" ) ;
 
 define( "_AM_MB_FINISHED" , "finished" ) ;
@@ -126,29 +126,29 @@ define( "_AM_H3_FMT_BATCHREGISTER" , "myAlbum-P batch register (%s)" ) ;
 
 // GroupPerm Global
 define( "_AM_ALBM_GROUPPERM_GLOBAL" , "Global Permissions" ) ;
-define( "_AM_ALBM_GROUPPERM_GLOBALDESC" , "Configure group's priviledges about whole of this module" ) ;
+define( "_AM_ALBM_GROUPPERM_GLOBALDESC" , "Configure group's priviledges for this module" ) ;
 define( "_AM_ALBM_GPERMUPDATED" , "Permissions have been changed successfully" ) ;
 
 
 // Import
-define( "_AM_H3_FMT_IMPORTTO" , 'Importing images from another modules to %s' ) ;
+define( "_AM_H3_FMT_IMPORTTO" , 'Importing images from another module to %s' ) ;
 define( "_AM_FMT_IMPORTFROMMYALBUMP" , 'Importing from "%s" as module type of myAlbum-P' ) ;
 define( "_AM_FMT_IMPORTFROMIMAGEMANAGER" , 'Importing from image manager in XOOPS' ) ;
 define( "_AM_CB_IMPORTRECURSIVELY" , 'Importing sub-categories recursively' ) ;
-define( "_AM_RADIO_IMPORTCOPY" , 'Copy images (comments will not be copied' ) ;
-define( "_AM_RADIO_IMPORTMOVE" , 'Move images (comments will be succeeded)' ) ;
-define( "_AM_MB_IMPORTCONFIRM" , 'Do import. OK?' ) ;
+define( "_AM_RADIO_IMPORTCOPY" , 'Copy images (comments will not be copied)' ) ;
+define( "_AM_RADIO_IMPORTMOVE" , 'Move images (comments will be copied)' ) ;
+define( "_AM_MB_IMPORTCONFIRM" , 'Confirm import. OK?' ) ;
 define( "_AM_FMT_IMPORTSUCCESS" , 'You have imported %s images' ) ;
 
 
 // Export
-define( "_AM_H3_FMT_EXPORTTO" , 'Exporting images from %s to another modules' ) ;
+define( "_AM_H3_FMT_EXPORTTO" , 'Exporting images from %s to another module' ) ;
 define( "_AM_FMT_EXPORTTOIMAGEMANAGER" , 'Exporting to image manager in XOOPS' ) ;
 define( "_AM_FMT_EXPORTIMSRCCAT" , 'Source' ) ;
 define( "_AM_FMT_EXPORTIMDSTCAT" , 'Destination' ) ;
-define( "_AM_CB_EXPORTRECURSIVELY" , 'with images in its subcategories' ) ;
+define( "_AM_CB_EXPORTRECURSIVELY" , 'with images in its sub-category' ) ;
 define( "_AM_CB_EXPORTTHUMB" , 'Export thumbnails instead of main images' ) ;
-define( "_AM_MB_EXPORTCONFIRM" , 'Do export. OK?' ) ;
+define( "_AM_MB_EXPORTCONFIRM" , 'Confirm export. OK?' ) ;
 define( "_AM_FMT_EXPORTSUCCESS" , 'You have exported %s images' ) ;
 
 

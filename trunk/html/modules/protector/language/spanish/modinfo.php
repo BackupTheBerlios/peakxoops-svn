@@ -2,10 +2,6 @@
 // Module Info
 
 // The name of this module
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:21
-define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
-
 define("_MI_PROTECTOR_NAME","Xoops Protector");
 
 // A brief description of this module
@@ -85,7 +81,7 @@ define("_MI_PROTECTOR_DOSOPT_HTA","Registro DENY a través de .htaccess (experime
 
 define("_MI_PROTECTOR_BIP_EXCEPT","Grupos libres de baneamiento por IP");
 define("_MI_PROTECTOR_BIP_EXCEPTDSC","Aunque se satisfaga la condición, los grupos de usuarios indicados en esta opción no serán agregadas a las IPs baneadas. Entretanto, si estos usuarios no se identifican, se anulará el efecto de esta opción. (Recomendado para Administradores)");
-define("_MI_PROTECTOR_PATCH2092","Parches contra vulnerabilidades de XOOPS &#8804; 2.0.9.2");
+define("_MI_PROTECTOR_DISABLES","Desactivar opciones inseguras");
 define("_MI_PROTECTOR_PASSWD_BIP","Contraseña de restauración");
 define("_MI_PROTECTOR_PASSWD_BIPDSC","Esta es la forma de restauración si, por alguna razón, se le agregue a las IPs baneadas de XOOPS.<br />Accede a XOOPS_URL/modules/protector/admin/rescue.php, e inserta la contraseña aquí definida.<br />Si usted no la define, se anulará el efecto de esta opción. ¡TEN CUIDADO!<br />Esta contraseña será guardada es, por lo que puede que alguien tenga acceso a ella. Así que nunca utilice contraseñas importantes.");
 ?>

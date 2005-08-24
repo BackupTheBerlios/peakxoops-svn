@@ -50,17 +50,11 @@ function Protector( $conn )
 
 	if( ! empty( $this->_conf['global_disabled'] ) ) return true ;
 
-	// PHP_SELF, PATH_INFO, PATH_TRANSLATED
-	global $HTTP_SERVER_VARS ;
-	$_SERVER['PHP_SELF'] = strtr( @$_SERVER['PHP_SELF'] , '<>\'"' , '    ' ) ;
-	$GLOBALS['PHP_SELF'] = $HTTP_SERVER_VARS['PHP_SELF'] = $_SERVER['PHP_SELF'] ;
-	if( ! empty( $_SERVER['PATH_INFO'] ) ) {
-		$_SERVER['PATH_INFO'] = strtr( $_SERVER['PATH_INFO'] , '<>\'"' , '    ' ) ;
-		$GLOBALS['PATH_INFO'] = $HTTP_SERVER_VARS['PATH_INFO'] = $_SERVER['PATH_INFO'] ;
-	}
-	if( ! empty( $_SERVER['PATH_TRANSLATED'] ) ) {
-		$_SERVER['PATH_TRANSLATED'] = strtr( @$_SERVER['PATH_TRANSLATED'] , '<>\'"' , '    ' ) ;
-		$GLOBALS['PATH_TRANSLATED'] = $HTTP_SERVER_VARS['PATH_TRANSLATED'] = $_SERVER['PATH_TRANSLATED'] ;
+	// against PHP_SELF XSS
+	if( preg_match( '/[<>\'";\n ]/' , @$_SERVER['PHP_SELF'] ) ) {
+		$this->message .= "Invalid PHP_SELF '{$_SERVER['PHP_SELF']}' found.\n" ;
+		$this->output_log( 'PHP_SELF XSS' ) ;
+		die( 'invalid PHP_SELF' ) ;
 	}
 
 	$this->_bad_globals = array( 'GLOBALS' , '_SESSION' , 'HTTP_SESSION_VARS' , '_GET' , 'HTTP_GET_VARS' , '_POST' , 'HTTP_POST_VARS' , '_COOKIE' , 'HTTP_COOKIE_VARS' , '_SERVER' , 'HTTP_SERVER_VARS' , '_REQUEST' , '_ENV' , '_FILES' , 'xoopsDB' , 'xoopsUser' , 'xoopsUserId' , 'xoopsUserGroups' , 'xoopsUserIsAdmin' , 'xoopsConfig' , 'xoopsOption' , 'xoopsModule' , 'xoopsModuleConfig' ) ;

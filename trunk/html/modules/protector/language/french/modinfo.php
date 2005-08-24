@@ -7,16 +7,21 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:34:09
+define('_MI_PROTECTOR_HIJACK_TOPBIT','Protected IP bits for the session');
+define('_MI_PROTECTOR_HIJACK_TOPBITDSC','Anti Session Hi-Jacking:<br />Default 32(bit). (All bits are protected)<br />When your IP is not stable, set the IP range by number of the bits.<br />(eg) If your IP can move in the range of 192.168.0.0-192.168.0.255, set 24(bit) here');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:21
-define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
+define('_MI_PROTECTOR_DISABLES','Neutralisez les dispositifs dangereux dans XOOPS');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-07-22 15:35:34
-define('_MI_PROTECTOR_RELIABLE_IPS','Reliable IPs');
-define('_MI_PROTECTOR_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ matches the head of string, $ matches the tail of string.');
+define('_MI_PROTECTOR_RELIABLE_IPS','IPs fiables');
+define('_MI_PROTECTOR_RELIABLE_IPSDSC','Mettre les IPs fiables séparées par | . ^ par l\'entête, $ par la fin.');
 define('_MI_PROTECTOR_BF_COUNT','Anti Brute Force');
-define('_MI_PROTECTOR_BF_COUNTDSC','Set count you allow guest try to login within 10 minutes. If someone fails to login more than this number, her/his IP will be banned.');
-define('_MI_PROTECTOR_DOS_SKIPMODS','Modules out of DoS/Crawler checker');
-define('_MI_PROTECTOR_DOS_SKIPMODSDSC','set the dirnames of the modules separated with |. This option will be useful with chatting module etc.');
+define('_MI_PROTECTOR_BF_COUNTDSC','Compte réglé pour permettre l\'essai d\'invité à l\'ouverture dans un délai de 10 minutes. Si quelqu\'un échoue à l\'ouverture davantage que ce nombre, l\'IP sera interdite.');
+define('_MI_PROTECTOR_DOS_SKIPMODS','Modules hors du contrôleur de DoS/Crawler');
+define('_MI_PROTECTOR_DOS_SKIPMODSDSC','Mettre les noms des modules séparés par |. Cette option sera utile avec le module de chat etc...');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-03-31 12:07:31
 define('_MI_PROTECTOR_PREFIXMANAGER','Prefix Manager');

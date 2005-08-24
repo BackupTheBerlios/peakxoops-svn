@@ -29,8 +29,10 @@ define('_MI_PROTECTOR_LOGLEVEL15','危険性の高いものだけログを取る');
 define('_MI_PROTECTOR_LOGLEVEL63','危険性の低いものはログしない');
 define('_MI_PROTECTOR_LOGLEVEL255','全種類のロギングを有効とする');
 
+define('_MI_PROTECTOR_HIJACK_TOPBIT','セッションを継続する保護ビット');
+define('_MI_PROTECTOR_HIJACK_TOPBITDSC','セッションハイジャック対策：<br />通常は32(bit)で、全ビットを保護します。<br />Proxyの利用などで、アクセス毎にIPアドレスが変わる場合には、変動しない最長のビット数を指定します。<br />例えば、192.168.0.0〜192.168.0.255で変動する可能性がある場合、ここには24(bit)と指定します。');
 define('_MI_PROTECTOR_HIJACK_DENYGP','IP変動を禁止するグループ');
-define('_MI_PROTECTOR_HIJACK_DENYGPDSC','セッションハイジャック対策：<br />セッション中に異なるIPアドレスからのアクセスを禁止するグループを指定します<br />（管理者についてONにすることをお勧めします）');
+define('_MI_PROTECTOR_HIJACK_DENYGPDSC','セッションハイジャック対策：<br />セッション中に異なるIPアドレス範囲（上にてビット数指定）からのアクセスを禁止するグループを指定します<br />（管理者についてONにすることをお勧めします）');
 define('_MI_PROTECTOR_SAN_NULLBYTE','ヌル文字列をスペースに変更する');
 define('_MI_PROTECTOR_SAN_NULLBYTEDSC','文字列終了キャラクターである "\\0" は、悪意ある攻撃に利用されます。<br />これを見つけた時点でスペースに書き換えます<br />（ONがお勧めです）');
 define('_MI_PROTECTOR_DIE_NULLBYTE','ヌル文字列を見つけた時点での強制終了');

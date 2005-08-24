@@ -1,6 +1,11 @@
 [xlang:en]
 = CHANGES = 
 
+2.51 (2005/8/24)
+ - added an option of IP mask bits against session hi-jacking
+ - added an advisory about session.use_trans_sid
+ - modified codes against PHP_SELF XSS
+
 2.50 release (2005/8/22)
  - added a protection against PHP_SELF XSS
  - updated Brazilian Portuguese & Spanish language files (thx Yuji)
@@ -159,6 +164,11 @@
 [/xlang:en][xlang:ja]
 
 ●変更履歴
+
+2.51 (2005/8/24)
+ - セッションハイジャック対策で、IPマスクを指定できるようにした
+ - session.use_trans_sid についての注意書き追加
+ - PHP_SELF XSS 対策コードの改善
 
 2.50 正式版 (2005/8/22)
  - PHP_SELF XSS 対策コード追加

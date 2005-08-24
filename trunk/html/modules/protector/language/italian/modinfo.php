@@ -8,6 +8,11 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:15:37
+define('_MI_PROTECTOR_HIJACK_TOPBIT','Protected IP bits for the session');
+define('_MI_PROTECTOR_HIJACK_TOPBITDSC','Anti Session Hi-Jacking:<br />Default 32(bit). (All bits are protected)<br />When your IP is not stable, set the IP range by number of the bits.<br />(eg) If your IP can move in the range of 192.168.0.0-192.168.0.255, set 24(bit) here');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:20
 define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
 

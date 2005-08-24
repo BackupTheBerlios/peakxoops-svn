@@ -1,6 +1,10 @@
 <?php
 
 // index.php
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:15:37
+define('_AM_ADV_USETRANSSID','Your Session ID will be diplayed in anchor tags etc.<br />For preventing from session hi-jacking, add a line into .htaccess in XOOPS_ROOT_PATH.<br /><b>php_flag session.use_trans_sid off</b>');
+
 define("_AM_TH_DATETIME","Tijd");
 define("_AM_TH_USER","Gebruiker");
 define("_AM_TH_IP","IP");

@@ -30,6 +30,7 @@ define("_AM_ADV_NOTSECURE","非推奨");
 
 define("_AM_ADV_REGISTERGLOBALS","この設定は、様々な変数汚染攻撃を招きます<br />もし、.htaccessを置けるサーバであれば、XOOPSインストールディレクトリの.htaccessを作るか編集するかして下さい");
 define("_AM_ADV_ALLOWURLFOPEN","この設定だと、外部の任意のスクリプトを実行される危険性があります<br />この設定変更にはサーバの管理者権限が必要です<br />ご自身で管理しているサーバであれば、php.iniやhttpd.confを編集して下さい<br />そうでない場合は、サーバ管理者にお願いしてみて下さい");
+define("_AM_ADV_USETRANSSID","セッションIDが自動的にリンクに表示される設定となっています。<br />セッションハイジャックを防ぐためにも、XOOPSインストールディレクトリに.htaccessを作るか編集するかして下さい<br /><b>php_flag session.use_trans_sid off</b>");
 define("_AM_ADV_DBPREFIX","DB接頭辞がデフォルトのxoopsのままなので、SQL Injectionに弱い状態です<br />「孤立コメントの無害化」など、SQL Injection対策の設定をONにすることをお忘れなく");
 define("_AM_ADV_LINK_TO_PREFIXMAN","PREFIXマネージャへ");
 define("_AM_ADV_MAINUNPATCHED","READMEに記述された通りに、mainfile.php にパッチを当てて下さい");

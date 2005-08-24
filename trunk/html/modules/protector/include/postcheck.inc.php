@@ -57,8 +57,14 @@ function protector_postcommon()
 		$protector->output_log( $protector->last_error_type , $uid , true , 16 ) ;
 	}
 
+
 	// check session hi-jacking
-	if( ! empty( $_SESSION['protector_last_ip'] ) && $_SESSION['protector_last_ip'] != $_SERVER['REMOTE_ADDR'] ) {
+	$ips = explode( '.' ,  $_SESSION['protector_last_ip'] ) ;
+	$protector_last_numip = @$ips[0] * 0x1000000 + @$ips[1] * 0x10000 + @$ips[2] * 0x100 + @$ips[3] ;
+	$ips = explode( '.' ,  $_SERVER['REMOTE_ADDR'] ) ;
+	$remote_numip = @$ips[0] * 0x1000000 + @$ips[1] * 0x10000 + @$ips[2] * 0x100 + @$ips[3] ;
+	$shift = 32 - @$conf['session_fixed_topbit'] ;
+	if( $shift < 32 && $shift >= 0 && ! empty( $_SESSION['protector_last_ip'] ) && $protector_last_numip >> $shift != $remote_numip >> $shift ) {
 		if( is_object( $xoopsUser ) && count( array_intersect( $xoopsUser->getGroups() , unserialize( $conf['groups_denyipmove'] ) ) ) ) {
 			$protector->purge( true ) ;
 		}

@@ -36,6 +36,18 @@ if( $safe ) {
 echo "</dl>\n" ;
 
 
+// session.use_trans_sid
+echo "<dl><dt>'session.use_trans_sid' : " ;
+$safe = ! ini_get( "session.use_trans_sid" ) ;
+if( $safe ) {
+	echo "off &nbsp; <span style='color:green;font-weight:bold;'>ok</span></dt>\n" ;
+} else {
+	echo "on  &nbsp; <span style='color:red;font-weight:bold;'>"._AM_ADV_NOTSECURE."</span></dt>\n" ;
+	echo "<dd>"._AM_ADV_USETRANSSID."</dd>" ;
+}
+echo "</dl>\n" ;
+
+
 // XOOPS_DB_PREFIX
 echo "<dl><dt>'XOOPS_DB_PREFIX' : " ;
 $safe = strtolower( XOOPS_DB_PREFIX ) != 'xoops' ;

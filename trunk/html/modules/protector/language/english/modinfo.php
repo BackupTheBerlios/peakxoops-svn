@@ -29,6 +29,8 @@ define('_MI_PROTECTOR_LOGLEVEL15','Quiet');
 define('_MI_PROTECTOR_LOGLEVEL63','quiet');
 define('_MI_PROTECTOR_LOGLEVEL255','full');
 
+define('_MI_PROTECTOR_HIJACK_TOPBIT','Protected IP bits for the session');
+define('_MI_PROTECTOR_HIJACK_TOPBITDSC','Anti Session Hi-Jacking:<br />Default 32(bit). (All bits are protected)<br />When your IP is not stable, set the IP range by number of the bits.<br />(eg) If your IP can move in the range of 192.168.0.0-192.168.0.255, set 24(bit) here');
 define('_MI_PROTECTOR_HIJACK_DENYGP','Groups disallowed IP moving in a session');
 define('_MI_PROTECTOR_HIJACK_DENYGPDSC','Anti Session Hi-Jacking:<br />Select groups which is disallowed to move their IP in a session.<br />(I recommend to turn Administrator on.)');
 define('_MI_PROTECTOR_SAN_NULLBYTE','Sanitizing null-bytes');

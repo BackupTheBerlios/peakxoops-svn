@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 $modversion['name'] = _MI_PROTECTOR_NAME;
-$modversion['version'] = '2.50';
+$modversion['version'] = '2.51';
 $modversion['description'] = _MI_PROTECTOR_DESC;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -82,6 +82,15 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'int' ,
 	'default'		=>  255 ,
 	'options'		=> array( '_MI_PROTECTOR_LOGLEVEL0' => 0 , '_MI_PROTECTOR_LOGLEVEL15' => 15 , '_MI_PROTECTOR_LOGLEVEL63' => 63 , '_MI_PROTECTOR_LOGLEVEL255' => 255 )
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'session_fixed_topbit' ,
+	'title'			=> '_MI_PROTECTOR_HIJACK_TOPBIT' ,
+	'description'	=> '_MI_PROTECTOR_HIJACK_TOPBITDSC' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 32 ,
+	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'groups_denyipmove' ,

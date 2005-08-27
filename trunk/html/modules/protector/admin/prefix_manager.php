@@ -156,7 +156,7 @@ foreach( $prefixes as $prefix ) {
 		<td class='odd' style='text-align:right;$style_append;'>$table_count</td>
 		<td class='odd' style='text-align:right;$style_append;'>{$prefix['updated']}</td>
 		<td class='odd' style='text-align:center;$style_append;' nowrap='nowrap'>
-			<form action='{$_SERVER['PHP_SELF']}' method='POST' style='margin:0px;'>
+			<form action='' method='POST' style='margin:0px;'>
 				$ticket_input
 				<input type='hidden' name='old_prefix' value='$prefix4disp' />
 				<input type='text' name='new_prefix' size='8' maxlength='16' />
@@ -164,7 +164,7 @@ foreach( $prefixes as $prefix ) {
 			</form>
 		</td>
 		<td class='odd' style='text-align:center;$style_append;'>
-			<form action='{$_SERVER['PHP_SELF']}' method='POST' style='margin:0px;'>
+			<form action='' method='POST' style='margin:0px;'>
 				$ticket_input
 				<input type='hidden' name='prefix' value='$prefix4disp' />
 				$del_button

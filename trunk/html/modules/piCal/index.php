@@ -120,11 +120,9 @@
 
 	// ページ表示関連の処理分け
 	if( $action == 'Edit' ) {
-		$jscalurl = XOOPS_URL . '/common/jscalendar' ;
-		if( ! is_dir( XOOPS_ROOT_PATH . '/common/jscalendar'  ) ) {
-			include_once XOOPS_ROOT_PATH.'/include/calendarjs.php' ;
-			$cal->jscalendar = 'xoops' ;
-		} else {
+		if( is_dir( XOOPS_ROOT_PATH . '/common/jscalendar' ) ) {
+			// jscalendar in common (recommend)
+			$jscalurl = XOOPS_URL . '/common/jscalendar' ;
 			$xoopsTpl->assign( 'xoops_module_header' , '
 				<link rel="stylesheet" type="text/css" media="all" href="'.$jscalurl.'/calendar-system.css" title="system" />
 				<script type="text/javascript" src="'.$jscalurl.'/calendar.js"></script>
@@ -132,6 +130,20 @@
 				<script type="text/javascript" src="'.$jscalurl.'/calendar-setup.js"></script>
 			' . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
 			$cal->jscalendar = 'jscalendar' ;
+		} else if( is_dir( XOOPS_ROOT_PATH . '/class/calendar' ) ) {
+			// jscalendar in XOOPS 2.2 core
+			$jscalurl = XOOPS_URL . '/class/calendar' ;
+			$xoopsTpl->assign( 'xoops_module_header' , '
+				<link rel="stylesheet" type="text/css" media="all" href="'.$jscalurl.'/CSS/calendar-blue.css" title="system" />
+				<script type="text/javascript" src="'.$jscalurl.'/calendar.js"></script>
+				<script type="text/javascript" src="'.$jscalurl.'/lang/'.$cal->jscalendar_lang_file.'"></script>
+				<script type="text/javascript" src="'.$jscalurl.'/calendar-setup.js"></script>
+			' . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+			$cal->jscalendar = 'jscalendar' ;
+		} else {
+			// older jscalendar in XOOPS 2.0.x core
+			include XOOPS_ROOT_PATH.'/include/calendarjs.php' ;
+			$cal->jscalendar = 'xoops' ;
 		}
 		echo $cal->get_schedule_edit_html( ) ;
 	} else if( $action == 'View' ) {

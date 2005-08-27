@@ -12,7 +12,6 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 // SERVER, GET 変数の取得
-$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
 $tz = isset( $_GET[ 'tz' ] ) ? $_GET[ 'tz' ] : "y" ;
 $pos = isset( $_GET[ 'pos' ] ) ? intval( $_GET[ 'pos' ] ) : 0 ;
 $num = isset( $_GET[ 'num' ] ) ? intval( $_GET[ 'num' ] ) : 20 ;
@@ -157,20 +156,20 @@ $xoopsGTicket->clear() ;
 echo "
 <h4>"._AM_ICALENDAR_IMPORT."</h4>
 <p><font color='blue'>".(isset($_GET['mes'])?htmlspecialchars($_GET['mes'],ENT_QUOTES):"")."</font></p>
-<form action='$PHP_SELF?tz=$tz&amp;num=$num' method='post'>
+<form action='?tz=$tz&amp;num=$num' method='post'>
   "._AM_LABEL_IMPORTFROMWEB."<br />
   <input type='text' name='import_uri' size='80'>
   <input type='submit' name='http_import' value='"._PICAL_BTN_IMPORT."'>
   ".$xoopsGTicket->getTicketHtml( __LINE__ )."
 </form>
-<form action='$PHP_SELF?tz=$tz&amp;num=$num' method='post' enctype='multipart/form-data'>
+<form action='?tz=$tz&amp;num=$num' method='post' enctype='multipart/form-data'>
   "._AM_LABEL_UPLOADFROMFILE."<br />
   <input type='hidden' name='MAX_FILE_SIZE' value='65536'>
   <input type='file' name='user_ics' size='72'>
   <input type='submit' name='local_import' value='"._PICAL_BTN_UPLOAD."'>
   ".$xoopsGTicket->getTicketHtml( __LINE__ )."
 </form>
-<form action='$PHP_SELF' method='get' style='margin-bottom:0px;text-align:left'>
+<form action='' method='get' style='margin-bottom:0px;text-align:left'>
   <select name='tz' onChange='submit();'>$tzoptions</select>
   <input type='hidden' name='num' value='$num' />
 </form>
@@ -180,7 +179,7 @@ echo "
       $nav_num_info
     </td>
     <td>
-      <form action='$PHP_SELF' method='get' style='margin-bottom:0px;text-align:right'>
+      <form action='' method='get' style='margin-bottom:0px;text-align:right'>
         $nav_html &nbsp; 
         <input type='hidden' name='num' value='$num' />
         <input type='hidden' name='tz' value='$tz' />
@@ -188,7 +187,7 @@ echo "
     </td>
   </tr>
 </table>
-<form name='MainForm' action='$PHP_SELF?tz=$tz&amp;num=$num' method='post' style='margin-top:0px;'>
+<form name='MainForm' action='?tz=$tz&amp;num=$num' method='post' style='margin-top:0px;'>
 ".$xoopsGTicket->getTicketHtml( __LINE__ )."
 <table width='100%' class='outer' cellpadding='4' cellspacing='1'>
   <tr valign='middle'>

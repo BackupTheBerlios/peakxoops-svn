@@ -9,6 +9,11 @@ if( ! defined( 'PICAL_BLOCK_AFTER_SCHEDULE_INCLUDED' ) ) {
 
 define( 'PICAL_BLOCK_AFTER_SCHEDULE_INCLUDED' , 1 ) ;
 
+// XOOPS 2.1/2.2
+if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	$GLOBALS['pical_blockinstance_object'] =& $this ;
+}
+
 function pical_after_schedule_show_tpl( $options )
 {
 	global $xoopsConfig , $xoopsDB ;
@@ -43,11 +48,16 @@ function pical_after_schedule_show_tpl( $options )
 	$cal->images_path = "$mod_path/images/$skin_folder" ;
 
 	// ブロック配列の自分自身を書き換える title に %s を含めること
-	global $block_arr , $i ;
-	if( is_object( $block_arr[$i] ) ) {
-		$title_fmt = $block_arr[$i]->getVar( 'title' ) ;
-		$title = sprintf( $title_fmt , sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ) ;
-		$block_arr[$i]->setVar( 'title' , $title ) ;
+	if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+		$title_fmt = $GLOBALS['pical_blockinstance_object']->getVar('title') ;
+		$GLOBALS['pical_blockinstance_object']->setVar('title',sprintf( $title_fmt , sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ) ) ;
+	} else {
+		global $block_arr , $i ;
+		if( is_object( $block_arr[$i] ) ) {
+			$title_fmt = $block_arr[$i]->getVar( 'title' ) ;
+			$title = sprintf( $title_fmt , sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ) ;
+			$block_arr[$i]->setVar( 'title' , $title ) ;
+		}
 	}
 
 	$block =& $cal->get_blockarray_coming_event( "$mod_url/index.php" , $maxitem , false , $untildays ) ;

@@ -1118,7 +1118,7 @@ function output_setsqls()
 
 		// Unique-ID (自動付加番号の場合は、それっぽく生成する)
 		if( ! $uid_valid ) {
-			$unique_id = 'pical060-' . md5( "{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}") . "-$uid" ;
+			$unique_id = 'pical060-' . md5( "{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}") . "-$uid" ;
 		} else $unique_id = $uid ;
 		$ret .= "unique_id='" . addslashes( $unique_id ) . "'," ;
 

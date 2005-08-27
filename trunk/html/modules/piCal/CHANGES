@@ -1,5 +1,10 @@
 [xlang:en]
 
+v.081 security update (2005-8-27)
+- fixed PHP_SELF XSS
+- added XOOPS 2.2 adaptation (minicalex, titles of blocks etc.)
+- updated myblocksadmin into 0.40
+- modified the theme compatibility with common's jscalendar
 - added robots mode into minicalex for reducing mass crawling
 - update tchinese files (thx Kikuchi)
 
@@ -270,7 +275,13 @@ v0.10 (2003-4-23)
 [/xlang:en]
 [xlang:ja]
 
+v.081 セキュリティアップデート (2005-8-27)
+- fixed PHP_SELF XSS
+- XOOPS 2.2 への対応 (minicalex, ブロックタイトル等)
+- myblocksadmin を 0.40 に更新
+- common内のjscalendarがいくつかのテーマと相性が悪かったのを調整
 - ロボットがminicalexへアクセスした時は、矢印のリンク先をpiCalとするように変更
+- tchineseファイルの更新 (thx Kikuchi)
 
 v.080 release (2005-6-29)
 - プラグインマネージャの使い勝手改善およびバグ修正 (thx tohokuaiki)

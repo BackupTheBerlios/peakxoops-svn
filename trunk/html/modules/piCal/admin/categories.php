@@ -5,7 +5,7 @@ function display_edit_form( $cat , $form_title , $action )
 	global $cattree ;
 
 	// Beggining of XoopsForm
-	$form = new XoopsThemeForm( $form_title , 'MainForm' , $_SERVER['PHP_SELF'] ) ;
+	$form = new XoopsThemeForm( $form_title , 'MainForm' , '' ) ;
 
 	// Hidden
 	$form->addElement( new XoopsFormHidden( 'action' , htmlspecialchars( $action , ENT_QUOTES ) ) ) ;
@@ -121,7 +121,6 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 // SERVER, GET 変数の取得
-$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
 $action = isset( $_POST[ 'action' ] ) ? $_POST[ 'action' ] : '' ;
 $done = isset( $_GET[ 'done' ] ) ? $_GET[ 'done' ] : '' ;
 $disp = isset( $_GET[ 'disp' ] ) ? $_GET[ 'disp' ] : '' ;
@@ -283,14 +282,14 @@ if( $disp == "edit" && $cid > 0 ) {
 
 	if( ! empty( $_GET['mes'] ) ) echo "<p><font color='blue'>".htmlspecialchars($_GET['mes'],ENT_QUOTES)."</font></p>" ;
 
-	echo "<p><a href='$PHP_SELF?disp=new&cid=0'>"._AM_MB_MAKETOPCAT."<img src='../images/cat_add.gif' width='18' height='15' alt='' /></a></p>\n" ;
+	echo "<p><a href='?disp=new&cid=0'>"._AM_MB_MAKETOPCAT."<img src='../images/cat_add.gif' width='18' height='15' alt='' /></a></p>\n" ;
 
 	// カテゴリーデータ取得
 	$cat_tree_array = $cattree->getChildTreeArray( 0 , 'weight ASC,cat_title' ) ;
 
 	// TH Part
 	echo "
-	<form name='MainForm' action='$PHP_SELF' method='post' style='margin:10px;'>
+	<form name='MainForm' action='' method='post' style='margin:10px;'>
 	".$xoopsGTicket->getTicketHtml( __LINE__ )."
 	<input type='hidden' name='delcat' value='' />
 	<table width='75%' class='outer' cellpadding='4' cellspacing='1'>
@@ -315,13 +314,13 @@ if( $disp == "edit" && $cid > 0 ) {
 		$del_confirm = 'confirm("' . sprintf( _AM_FMT_CATDELCONFIRM , $cat_title ) . '")' ;
 		echo "
 	  <tr>
-	    <td class='$oddeven' width='100%'><a href='$PHP_SELF?disp=edit&amp;cid=$cid'>$prefix&nbsp;$cat_title</a></td>
+	    <td class='$oddeven' width='100%'><a href='?disp=edit&amp;cid=$cid'>$prefix&nbsp;$cat_title</a></td>
 	    <td class='$oddeven' align='center' nowrap='nowrap'>
 	      <a href='$mod_url/index.php?action=Edit&amp;cid=$cid' target='_blank'><img src='$cal->images_url/addevent.gif' border='0' width='14' height='12' /></a>
 	      &nbsp;
-	      <a href='$PHP_SELF?disp=edit&amp;cid=$cid'><img src='../images/cat_edit.gif' width='18' height='15' alt='"._AM_MENU_CAT_EDIT."' title='"._AM_MENU_CAT_EDIT."' /></a>
+	      <a href='?disp=edit&amp;cid=$cid'><img src='../images/cat_edit.gif' width='18' height='15' alt='"._AM_MENU_CAT_EDIT."' title='"._AM_MENU_CAT_EDIT."' /></a>
 	      &nbsp;
-	      <a href='$PHP_SELF?disp=new&amp;cid=$cid'><img src='../images/cat_add.gif' width='18' height='15' alt='"._AM_MENU_CAT_NEW."' title='"._AM_MENU_CAT_NEW."' /></a>
+	      <a href='?disp=new&amp;cid=$cid'><img src='../images/cat_add.gif' width='18' height='15' alt='"._AM_MENU_CAT_NEW."' title='"._AM_MENU_CAT_NEW."' /></a>
 	      &nbsp;
 	      <input type='button' value='"._DELETE."'  onclick='if($del_confirm){document.MainForm.delcat.value=\"$cid\"; submit();}' />
 	    </td>

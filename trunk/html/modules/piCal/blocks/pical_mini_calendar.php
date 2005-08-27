@@ -79,7 +79,7 @@ function pical_mini_calendar_show( $options )
 			break ;
 		default :
 		case 'PHP_SELF' :
-			$get_target = $_SERVER[ 'PHP_SELF' ] ;
+			$get_target = '' ;
 			$query_string = "" ;
 			break ;
 	}

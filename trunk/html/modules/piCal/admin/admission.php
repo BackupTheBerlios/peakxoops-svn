@@ -13,7 +13,6 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 // SERVER, GET 変数の取得
-$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
 $tz = isset( $_GET[ 'tz' ] ) ? $_GET[ 'tz' ] : "y" ;
 $pos = isset( $_GET[ 'pos' ] ) ? intval( $_GET[ 'pos' ] ) : 0 ;
 $num = isset( $_GET[ 'num' ] ) ? intval( $_GET[ 'num' ] ) : 20 ;
@@ -164,7 +163,7 @@ include( './mymenu.php' ) ;
 
 echo "<h4>"._AM_ADMISSION."</h4>
 <p><font color='blue'>".(isset($_GET['mes'])?htmlspecialchars($_GET['mes'],ENT_QUOTES):"")."</font></p>
-<form action='$PHP_SELF' method='get' style='margin-bottom:0px;text-align:left'>
+<form action='' method='get' style='margin-bottom:0px;text-align:left'>
   <select name='tz' onChange='submit();'>$tzoptions</select>
   <input type='hidden' name='cid' value='$cid' />
   <input type='hidden' name='num' value='$num' />
@@ -176,7 +175,7 @@ echo "<h4>"._AM_ADMISSION."</h4>
       $nav_num_info
     </td>
     <td align='left'>
-      <form action='$PHP_SELF' method='get' style='margin-bottom:0px;text-align:right'>
+      <form action='' method='get' style='margin-bottom:0px;text-align:right'>
         $cat_selbox4extract
         <input type='text' name='txt' value='".htmlspecialchars($txt,ENT_QUOTES)."' />
         <input type='submit' value='"._AM_BUTTON_EXTRACT."' /> &nbsp; 
@@ -187,7 +186,7 @@ echo "<h4>"._AM_ADMISSION."</h4>
     </td>
   </tr>
 </table>
-<form name='MainForm' action='$PHP_SELF?tz=$tz&amp;num=$num&amp;cid=$cid' method='post' style='margin-top:0px;'>
+<form name='MainForm' action='?tz=$tz&amp;num=$num&amp;cid=$cid' method='post' style='margin-top:0px;'>
 <table width='100%' class='outer' cellpadding='4' cellspacing='1'>
   <tr valign='middle'>
     <th>"._AM_ADMIT_TH0."</th>

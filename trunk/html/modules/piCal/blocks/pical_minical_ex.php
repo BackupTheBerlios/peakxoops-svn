@@ -8,6 +8,11 @@ if( ! defined( 'PICAL_BLOCK_MINICAL_EX' ) ) {
 
 define( 'PICAL_BLOCK_MINICAL_EX' , 1 ) ;
 
+// XOOPS 2.1/2.2
+if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	$GLOBALS['pical_blockinstance_id'] = $this->getVar('instanceid') ;
+}
+
 function pical_minical_ex_show( $options )
 {
 	global $xoopsConfig , $xoopsDB , $xoopsUser ;
@@ -18,10 +23,18 @@ function pical_minical_ex_show( $options )
 	//echo ((float)$sec + (float)$usec) - $GIJ_common_time ; 
 
 	// get bid
-	if( is_object( $GLOBALS['block_arr'][$GLOBALS['i']] ) ) {
-		$bid = $GLOBALS['block_arr'][$GLOBALS['i']]->getVar('bid') ;
+	if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+		// XOOPS 2.1/2.2
+		// instanceid as bid from block_instance
+		$bid = @$GLOBALS['pical_blockinstance_id'] ;
 	} else {
-		return array() ;
+		// XOOPS 2.0.x
+		if( is_object( $GLOBALS['block_arr'][$GLOBALS['i']] ) ) {
+			// bid from newblocks
+			$bid = $GLOBALS['block_arr'][$GLOBALS['i']]->getVar('bid') ;
+		} else {
+			return array() ;
+		}
 	}
 
 	$mydirname = empty( $options[0] ) ? basename( dirname( dirname( __FILE__ ) ) ) : $options[0] ;
@@ -79,7 +92,7 @@ function pical_minical_ex_show( $options )
 						$block['php_self'] = '/' ;
 						$block['additional_get'] = '' ;
 					} else {
-						$block['php_self'] = $_SERVER['PHP_SELF'] ;
+						$block['php_self'] = $_SERVER['SCRIPT_NAME'] ;
 						$block['additional_get'] = $additional_get ;
 					}
 					// speed check

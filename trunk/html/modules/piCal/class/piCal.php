@@ -147,7 +147,7 @@ function piCal( $target_date = "" , $language = "japanese" , $reload = false )
 
 	// POSTでバラバラに日付を送信された場合、指定があればリロードを行う
 	if( ! empty( $caldate_posted ) && $reload && ! headers_sent() ) {
-		$reload_str = "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?caldate=$this->caldate&{$_SERVER['QUERY_STRING']}" ;
+		$reload_str = "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}?caldate=$this->caldate&{$_SERVER['QUERY_STRING']}" ;
 		$needed_post_vars = array( 'op' , 'order' , 'cid' , 'num' , 'txt' ) ;
 		foreach( $needed_post_vars as $post ) {
 			if( isset( $_POST[ $post ] ) ) $reload_str .= "&$post=".urlencode( $_POST[ $post ] ) ;
@@ -271,7 +271,7 @@ function get_daytype( $date )
 // $this->caldate日の予定 を返す
 function get_date_schedule( $get_target = '' )
 {
-	if( $get_target == '' ) $get_target = $_SERVER[ 'PHP_SELF' ] ;
+	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 
 	$ret = '' ;
 
@@ -341,7 +341,7 @@ function get_date_schedule( $get_target = '' )
 // $this->caldate以降の予定 を最大 $num 件返す
 function get_coming_schedule( $get_target = '' , $num = 5 )
 {
-	if( $get_target == '' ) $get_target = $_SERVER[ 'PHP_SELF' ] ;
+	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 
 	$ret = '' ;
 
@@ -497,7 +497,7 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 	// list( $usec , $sec ) = explode( " " , microtime() ) ;
 	// $picalstarttime = $sec + $usec ;
 
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
@@ -669,7 +669,7 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 // 年間カレンダー全体の表示（patTemplate使用)
 function get_yearly( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
@@ -722,7 +722,7 @@ function get_yearly( $get_target = '' , $query_string = '' , $for_print = false 
 // 月間カレンダー全体の表示（patTemplate使用)
 function get_monthly( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
@@ -787,7 +787,7 @@ function get_monthly( $get_target = '' , $query_string = '' , $for_print = false
 // 週間カレンダー全体の表示（patTemplate使用)
 function get_weekly( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
@@ -830,7 +830,7 @@ function get_weekly( $get_target = '' , $query_string = '' , $for_print = false 
 // 一日カレンダー全体の表示（patTemplate使用)
 function get_daily( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
@@ -980,7 +980,7 @@ function get_calendar_information( $mode = 'M' )
 // カレンダーの本体を返す（１ヶ月分）
 function get_monthly_html( $get_target = '' , $query_string = '' )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	// get the result of plugins
@@ -1211,7 +1211,7 @@ function get_monthly_html( $get_target = '' , $query_string = '' )
 // カレンダーの本体を返す（１週間分）
 function get_weekly_html( )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 
 	$ret = "
 	 <table border='0' cellspacing='0' cellpadding='0' width='100%' style='border-collapse:collapse;margin:0px;'>
@@ -1483,7 +1483,7 @@ function get_weekly_html( )
 // カレンダーの本体を返す（１日分）
 function get_daily_html( )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 
 	// get the result of plugins
 	$plugin_returns = array() ;
@@ -1646,7 +1646,7 @@ function get_daily_html( )
 // スケジュール詳細画面表示用文字列を返す
 function get_schedule_view_html( $for_print = false )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( isset( $_GET[ 'smode' ] ) ) $smode = $_GET[ 'smode' ] ;
 	else $smode = 'Monthly' ;
 	$editable = $this->editable ;
@@ -1725,16 +1725,8 @@ function get_schedule_view_html( $for_print = false )
 	// iCalendar 出力ボタン
 	if( $this->can_output_ics && ! $for_print ) {
 		$ics_output_button = "
-			<table border='0' cellspacing='0' cellpadding='0'>
-			<tr>
-			<td>
-				<a href='$PHP_SELF?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_win.gif' alt='"._PICAL_BTN_OUTPUTICS_WIN."' title='"._PICAL_BTN_OUTPUTICS_WIN."' /></a>
-			</td>
-			<td>
-				<a href='webcal://{$_SERVER['HTTP_HOST']}$PHP_SELF?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_mac.gif' alt='"._PICAL_BTN_OUTPUTICS_MAC."' title='"._PICAL_BTN_OUTPUTICS_MAC."' /></a>
-			</td>
-			</tr>
-			</table>\n" ;
+			<a href='$PHP_SELF?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_win.gif' alt='"._PICAL_BTN_OUTPUTICS_WIN."' title='"._PICAL_BTN_OUTPUTICS_WIN."' /></a>
+			<a href='webcal://{$_SERVER['HTTP_HOST']}$PHP_SELF?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_mac.gif' alt='"._PICAL_BTN_OUTPUTICS_MAC."' title='"._PICAL_BTN_OUTPUTICS_MAC."' /></a>\n" ;
 	} else $ics_output_button = "" ;
 
 	// 日付・時間表示の処理
@@ -1877,16 +1869,11 @@ function get_schedule_view_html( $for_print = false )
 		<td class='even'>$last_modified</td>
 	</tr>
 	<tr>
-		<td align='center' colspan='2'>
-			<table cellpadding='0' cellspacing='0' border='0'>
-				<tr>
-					<td>$edit_button</td>
-					<td> &nbsp; </td>
-					<td nowrap='nowrap'>$delete_button</td>
-					<td> &nbsp; </td>
-					<td>$ics_output_button</td>
-				</tr>
-			</table>
+		<td></td>
+		<td align='center'>
+			<div style='float:left; margin: 2px;'>$edit_button</div>
+			<div style='float:left; margin: 2px;'>$delete_button</div>
+			<div style='float:left; margin: 2px;'>$ics_output_button</div>
 		</td>
 	</tr>
 	<tr>
@@ -1905,7 +1892,7 @@ function get_schedule_view_html( $for_print = false )
 // スケジュール編集用画面表示用文字列を返す
 function get_schedule_edit_html( )
 {
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	$editable = $this->editable ;
 	$deletable = $this->deletable ;
 	$smode = isset( $_GET['smode'] ) ? $_GET['smode'] : '' ;
@@ -2213,7 +2200,7 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 //	error_reporting( 0 ) ;
 
 	// $_SERVER 変数の取得
-	$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
+	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 
 	// summaryのチェック（未記入ならその旨を追加）
 	if( $_POST[ 'summary' ] == "" ) $_POST[ 'summary' ] = _PICAL_MB_NOSUBJECT ;
@@ -2407,7 +2394,7 @@ function redirect( $query )
 {
 	// character white list and black list against 'javascript'
 	if( ! preg_match( '/^[a-z0-9=&_-]*$/i' , $query )  || stristr( $query , 'javascript' ) ) {
-		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}" ) ;
+		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}" ) ;
 		exit ;
 	}
 
@@ -2416,16 +2403,16 @@ function redirect( $query )
 			<html>
 			<head>
 			<title>redirection</title>
-			<meta http-equiv='Refresh' content='0; url={$_SERVER['PHP_SELF']}?$query' />
+			<meta http-equiv='Refresh' content='0; url={$_SERVER['SCRIPT_NAME']}?$query' />
 			</head>
 			<body>
 			<p>
-				<a href='$this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?$query'>push here if not redirected</a>
+				<a href='$this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}?$query'>push here if not redirected</a>
 			</p>
 			</body>
 			</html>";
 	} else {
-		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?$query" ) ;
+		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}?$query" ) ;
 	}
 	exit ;
 }

@@ -13,7 +13,6 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 // SERVER, GET 変数の取得
-$PHP_SELF = $_SERVER[ 'PHP_SELF' ] ;
 $action = isset( $_POST[ 'action' ] ) ? $_POST[ 'action' ] : '' ;
 $type = isset( $_GET[ 'type' ] ) ? trim( $_GET[ 'type' ] ) : 'monthly' ;
 
@@ -43,11 +42,16 @@ $myts =& MyTextSanitizer::getInstance();
 
 // get block instances of minicalex
 $mcx_blocks = array() ;
-$mcx_rs = $xoopsDB->query( "SELECT bid,title FROM ".$xoopsDB->prefix("newblocks")." WHERE mid='".$xoopsModule->getVar('mid')."' AND show_func='pical_minical_ex_show'" ) ;
+if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	// block instance of XOOPS 2.1/2.2
+	$mcx_rs = $xoopsDB->query( "SELECT i.instanceid,i.title FROM ".$xoopsDB->prefix("block_instance")." i LEFT JOIN ".$xoopsDB->prefix("newblocks")." b ON i.bid=b.bid WHERE b.mid='".$xoopsModule->getVar('mid')."' AND b.show_func='pical_minical_ex_show'" ) ;
+} else {
+	// newblocks of XOOPS 2.0.x
+	$mcx_rs = $xoopsDB->query( "SELECT bid,title FROM ".$xoopsDB->prefix("newblocks")." WHERE mid='".$xoopsModule->getVar('mid')."' AND show_func='pical_minical_ex_show'" ) ;
+}
 while( list( $bid , $title ) = $xoopsDB->fetchRow( $mcx_rs ) ) {
 	$mcx_blocks[ $bid ] = $title ;
 }
-
 
 
 // データベース更新などがからむ処理
@@ -192,7 +196,7 @@ include( './mymenu.php' ) ;
 
 	// TH Part
 	echo "
-	<form name='MainForm' action='$PHP_SELF' method='post' style='margin:10px;'>
+	<form name='MainForm' action='' method='post' style='margin:10px;'>
 	".$xoopsGTicket->getTicketHtml( __LINE__ )."
 	<table width='95%' class='outer' cellpadding='4' cellspacing='1'>
 	  <tr valign='middle'>

@@ -164,7 +164,7 @@ case 'editforum':
 		."<tr><td class=\"odd\">";
 		echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -328,7 +328,7 @@ case 'editforum':
 		."<tr><td class=\"odd\">";
 		echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -391,7 +391,7 @@ case 'editcat':
 		$cat_data = $xoopsDB->fetchArray($result);
 		$cat_title = $myts->makeTboxData4Edit($cat_data["cat_title"]);
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -424,7 +424,7 @@ case 'editcat':
 		."<tr><td class=\"odd\">";
 		echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -465,7 +465,7 @@ case 'remcat':
 		."<tr><td class=\"odd\">";
 		echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -523,7 +523,7 @@ case 'addcat':
 		."<tr><td class=\"odd\">";
 		echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -637,7 +637,7 @@ case 'addforum':
 			exit();
 		}
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+		<form action="" method='post'>
 		<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 		<table border="0" cellpadding="1" cellspacing="1" width="100%">
 		<tr class='bg3' align='left'>
@@ -791,7 +791,7 @@ case 'catorder':
 		}
 	}
 	?>
-	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method='post'>
+	<form action="" method='post'>
 	<table border="0" cellpadding="1" cellspacing="0" align='center' Valign="TOP" width="95%"><tr><td class='bg2'>
 	<table border="0" cellpadding="1" cellspacing="1" width="100%">
 	<tr class='bg3' align='left'>
@@ -809,7 +809,7 @@ case 'catorder':
 	}
 	while ( $m = $xoopsDB->fetchArray($r) ) {
 		echo "<!-- New Row -->\n";
-		echo "<form action=\"".$_SERVER['PHP_SELF']."\" METHOD=\"POST\">\n";
+		echo "<form action=\"\" METHOD=\"POST\">\n";
 		echo "<tr class='bg1' align='center'>\n";
 		echo "<td>".$myts->makeTboxData4Show($m['cat_title'])."</td>\n";
 		echo "<td><input type=\"hidden\" name=\"mode\" value=\"$mode\">\n";
@@ -847,7 +847,7 @@ case 'sync':
 		<td><?php echo _MD_XHNEWBB_A_CLICKBELOWSYNC;?></td>
 		</tr>
 		<tr class='bg1' align='center'>
-		<td><form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+		<td><form action="" method="post">
 		<input type="hidden" name="mode" value="<?php echo $mode?>"><input type="submit" name="submit" value="<?php echo _MD_XHNEWBB_A_SYNCFORUM;?>"></form></td>
 		</td>
 		</tr>

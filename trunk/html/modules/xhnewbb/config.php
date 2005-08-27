@@ -41,7 +41,7 @@ $bbUrl['smilies'] = $bbUrl['images']."smiles";
 $bbCookie['domain'] = "";
 
 // It should be safe to leave these alone as well.
-$bbCookie['path'] = str_replace(basename($_SERVER['PHP_SELF']),"",$_SERVER['PHP_SELF']);
+$bbCookie['path'] = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 $bbCookie['secure'] = false;
 
 /* -- You shouldn't have to change anything after this point */

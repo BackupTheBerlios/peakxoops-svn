@@ -144,7 +144,7 @@ if ( ! empty( $_POST['submit'] ) ) {
 		${$getint} = isset($_GET[$getint]) ? intval($_GET[$getint]) : 0;
 	}
 	$mode = $_GET['mode'];
-    echo "<form action='".$_SERVER['PHP_SELF']."' method='post'>
+    echo "<form action='' method='post'>
 	<table border='0' cellpadding='1' cellspacing='0' align='center' width='95%'><tr><td class='bg2'>
 	<table border='0' cellpadding='1' cellspacing='1' width='100%'>
 	<tr class='bg3' align='left'>";

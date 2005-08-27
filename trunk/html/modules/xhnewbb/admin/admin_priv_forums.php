@@ -41,7 +41,7 @@ $op_userid = !empty($_REQUEST['op_userid']) ? intval($_REQUEST['op_userid']) : 0
 		// No opcode passed. Show list of private forums.
 ?>
 
-	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+	<form action="" method="post">
 		<table border="0" cellpadding="1" cellspacing="0" align="center" width="95%">
 			<tr>
 				<td class='bg2'>
@@ -209,7 +209,7 @@ $op_userid = !empty($_REQUEST['op_userid']) ? intval($_REQUEST['op_userid']) : 0
 		     </tr>
 		     <tr>
 		     <td class='bg3' align='center' width='40%'>
-			<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+			<form action="" method="post">
 		         <b><?php echo _MD_XHNEWBB_A_UWOA;?></b>
 		     </td>
 		     <td class='bg3' align='center' width='20%'>
@@ -268,7 +268,7 @@ $op_userid = !empty($_REQUEST['op_userid']) ? intval($_REQUEST['op_userid']) : 0
 							<input type="submit" name="submit" value="<?php echo _MD_XHNEWBB_A_ADDUSERS;?>" />
 							</form><br />
 <?php
-							$link = $_SERVER['PHP_SELF']."?forum=".$forum."&amp;op=clearusers";
+							$link = "?forum=".$forum."&amp;op=clearusers";
 							echo myTextForm($link, _MD_XHNEWBB_A_CLEARALLUSERS);
 ?>
 						</td>
@@ -289,7 +289,7 @@ $op_userid = !empty($_REQUEST['op_userid']) ? intval($_REQUEST['op_userid']) : 0
 			{
 				$post_text = ($row['can_post']) ? "can" : "can't";
 				$post_text .= " post";
-				//$post_toggle_link = "<a href=\"".$_SERVER['PHP_SELF']."?forum=$forum&op_userid=".$row['uid']."&op=";
+				//$post_toggle_link = "<a href=\"?forum=$forum&op_userid=".$row['uid']."&op=";
 				$post_toggle_link = XOOPS_URL."/modules/xhnewbb/admin/admin_priv_forums.php?forum=$forum&op_userid=".$row['uid']."&op=";
 				if ($row['can_post'])
 				{

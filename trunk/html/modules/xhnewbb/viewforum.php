@@ -290,7 +290,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 		$pagination .= '&nbsp;&nbsp;&nbsp;<img src="'.XOOPS_URL.'/images/icons/posticon.gif" /> ';
 		for ( $i = 1; $i <= $totalpages; $i++ ) {
 
-			if ( $i > 3 && $i < $totalpages ) {
+			if ( $i > 3 && $i < 6 && $i < $totalpages ) {
 				$pagination .= "...";
 			} else {
 				$addlink = '&start='.(($i - 1) * $forumdata['posts_per_page']);

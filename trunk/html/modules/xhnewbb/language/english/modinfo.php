@@ -10,6 +10,7 @@ define("_MI_XHNEWBB_DESC","Forums module for XOOPS");
 
 // Names of blocks for this module (Not all module has blocks)
 define("_MI_XHNEWBB_BNAME1","Topics");
+define("_MI_XHNEWBB_BDESC1","This block can be used for multi-purpose. Of course, you can put it multiplly.");
 
 // Names of admin menu items
 define("_MI_XHNEWBB_ADMENU1","Add Forum");

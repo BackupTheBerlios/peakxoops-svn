@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 $modversion['name'] = _MI_PROTECTOR_NAME;
-$modversion['version'] = '2.51';
+$modversion['version'] = '2.52';
 $modversion['description'] = _MI_PROTECTOR_DESC;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

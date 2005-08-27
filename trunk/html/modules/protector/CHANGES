@@ -1,6 +1,9 @@
 [xlang:en]
 = CHANGES = 
 
+2.52 (2005/8/27)
+ - changed the feature of disabling xmlrpc.php in any path (wordpress etc.)
+ - modified the logging rule about xmlrpc.php
  - added Russian language files (thx Sergey)
 
 2.51 (2005/8/24)
@@ -168,6 +171,11 @@
 
 ●変更履歴
 
+ - ロシア語ファイル追加 (thx Sergey)
+
+2.52 (2005/8/27)
+ - WordPressモジュール等についても、xmlrpc.php機能を無効化するように仕様変更
+ - xmlrpc 攻撃についてのログが重複出力されないように仕様変更
  - ロシア語ファイル追加 (thx Sergey)
 
 2.51 (2005/8/24)

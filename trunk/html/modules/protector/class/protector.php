@@ -671,8 +671,8 @@ function disable_features()
 	if( $this->_conf['disable_features'] & 1 ) {
 
 		// zx 2005/1/5 disable xmlrpc.php in root
-		if( ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) && substr( $_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
-			$this->output_log( 'xmlrpc' ) ;
+		if( /* ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) && */ substr( $_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
+			$this->output_log( 'xmlrpc' , 0 , true ) ;
 			exit ;
 		}
 

@@ -1,0 +1,90 @@
+= ОБЗОР =
+
+Xoops Protector - модуль предназначеный для защиты XOOPS2 от различного вида атак.
+
+В число атак входят:
+
+- DoS
+- "Плохие" роботы (например работы собирающие e-mail адреса)
+- SQL Injection
+- XSS (несколько подвидов)
+- Подмена глобальных переменных XOOPS
+- Перехват сессий
+- Null-bytes
+- Неправильные пути в параметрах
+- Некоторые виды CSRF (фатально для XOOPS версии ниже 2.0.9.2)
+- Подбор пароля
+
+Информация об обнаруженых атаках записывается в лог. 
+
+Однако, конечно же, не все виды атак могут быть предупреждены... На протектор надейтесь, а сами не плошайте.
+
+Не смотря на это я (GIJOE) настоятельно рекомендую установить этот модуль на все сайты работающие под управлением XOOPS любой версии.
+
+
+
+= AntiDoS-P и Протектор =
+
+Предок Протектора - модуль AntiDoS-P.
+
+Ввиду того, что все функци модуля AntiDoS-P успешно выполняются протектором думается лучшим выходом было бы удалить AntiDoS-P во избежание дублирования функций.
+
+
+
+= Использование =
+
+1) Установите протектор как любой другой модуль следуя стандартной процедуре установки. 
+
+После установки Протектора отредактируйте ваш файл mainfile.php следующим образом:
+
+	define('XOOPS_GROUP_ADMIN', '1');
+	define('XOOPS_GROUP_USERS', '2');
+	define('XOOPS_GROUP_ANONYMOUS', '3');
+
+	
+	include( XOOPS_ROOT_PATH . '/modules/protector/include/precheck.inc.php' );
+	
+	if (!isset($xoopsOption['nocommon']) && XOOPS_ROOT_PATH != '' ) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+	}
+
+	include( XOOPS_ROOT_PATH . '/modules/protector/include/postcheck.inc.php' );
+
+Если строка 
+	if (!isset($xoopsOption['nocommon']) && XOOPS_ROOT_PATH != '' ) { 
+в вашей версии XOOPS выглядит несколько иначе - не меняйте её.
+
+Не забудьте добавить ОБЕ строки с кодом.
+
+В случае если вы, как администратор, случайно были добавлены в черный список, вы можете напрямую обратиться к адресу
+
+http://(your xoops)/modules/protector/admin/rescue.php
+
+для удаления вас из этого списка. Однако не забудьте установить Запасной пароль в настройках Протектора.
+
+
+Опция "Запрещать доступ используя файл .htaccess" добавлена в версии 2.34.
+Если вы используете эту опцию - установите права для чтения на файл XOOPS_ROOT_PATH/.htaccess
+Перед использованием убедитесь в оправданости риска такого поступка.
+
+
+= THANKS =
+ - Kikuchi  (Traditional Chinese language files)
+ - Marcelo Yuji Himoro (Brazilian Portuguese and Spanish language files)
+ - HMN (French language files)
+ - Defkon1 (Italian language files)
+ - Dirk Louwers (Dutch language files)
+ - Rene (German language files)
+ - kokko (Finnish language files)
+ - Tomasz (Polski language files)
+
+Moreover, I thank to JM2 and minahito -zx team- about having taught me kindly.
+You are very great programmers!
+
+
+GIJ=CHECKMATE <gij@peak.ne.jp>   aka GIJOE in jp.xoops.org
+2004,2005
+
+PEAK XOOPS  http://www.peak.ne.jp/xoops/
+
+Перевод на русский - sertes - http://www.sertes.ru

@@ -14,6 +14,8 @@ define("_MI_TINYCONTENT_DESC","手軽にコンテンツの作れるモジュール");
 // Name for Menu Block
 define("_MI_TC_BNAME1","TinyD%s メニュー");
 define("_MI_TC_BNAME2","TinyD%s 内容表示");
+define("_MI_TC_BDESC1","ナビゲーションメニュー");
+define("_MI_TC_BDESC2","各種コンテンツをブロックとして表示する [summary]タグ利用可能");
 
 // Admin Menu
 define("_TC_MD_ADMENU1","コンテンツの追加");

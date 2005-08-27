@@ -14,6 +14,8 @@ define("_MI_TINYCONTENT_DESC","Creating content made as easy as it can be.");
 // Name for Menu Block
 define("_MI_TC_BNAME1","TinyD %s Menu");
 define("_MI_TC_BNAME2","TinyD %s Content");
+define("_MI_TC_BDESC1","Builds the navigation");
+define("_MI_TC_BDESC2","Show a content as a block. [summary] tag valid");
 
 // Admin Menu
 define("_TC_MD_ADMENU1","Add Content");

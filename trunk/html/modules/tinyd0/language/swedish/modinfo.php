@@ -8,6 +8,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_MI_LOADED' ) 
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-27 16:00:20
+define('_MI_TC_BDESC1','Builds the navigation');
+define('_MI_TC_BDESC2','Show a content as a block. [summary] tag valid');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-11 05:12:34
 define('_MI_COMMON_HTMLHEADER','Common HTML headers');
 define('_MI_COMMON_HTMLHEADER_DESC','Check if xoops_module_header exists in your theme');

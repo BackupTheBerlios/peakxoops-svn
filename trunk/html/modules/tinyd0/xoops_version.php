@@ -36,7 +36,7 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 include_once( XOOPS_ROOT_PATH . "/modules/$mydirname/include/constants.inc.php" ) ;
 
 $modversion['name']		    = _MI_TINYCONTENT_NAME . $mydirnumber ;
-$modversion['version']		= 2.17;
+$modversion['version']		= 2.18;
 $modversion['author']       = 'Tobias Liegl (AKA CHAPI)';
 $modversion['description']	= _MI_TINYCONTENT_DESC;
 $modversion['credits']		= "The XOOPS Project";
@@ -108,15 +108,16 @@ $modversion['templates'][2]['description'] = "Layout for Printer";
 // Blocks
 $modversion['blocks'][1]['file'] = "tinycontent_navigation.php";
 $modversion['blocks'][1]['name'] = sprintf( _MI_TC_BNAME1 , $mydirnumber ) ;
-$modversion['blocks'][1]['description'] = "Builds the navigation";
+$modversion['blocks'][1]['description'] = _MI_TC_BDESC1 ;
 $modversion['blocks'][1]['show_func'] = "tinycontent{$mydirnumber}_block_nav";
-$modversion['blocks'][1]['template'] = "tinycontent{$mydirnumber}_nav_block.html";$modversion['blocks'][1]['can_clone'] = false ;
+$modversion['blocks'][1]['template'] = "tinycontent{$mydirnumber}_nav_block.html";
+$modversion['blocks'][1]['can_clone'] = false ;
 $modversion['blocks'][1]['options'] = "{$mydirname}";
 
 
 $modversion['blocks'][2]['file'] = "tinycontent_content.php";
 $modversion['blocks'][2]['name'] = sprintf( _MI_TC_BNAME2 , $mydirnumber ) ;
-$modversion['blocks'][2]['description'] = "Show content";
+$modversion['blocks'][2]['description'] = _MI_TC_BDESC2 ;
 $modversion['blocks'][2]['show_func'] = "b_tinycontent_content_show";
 $modversion['blocks'][2]['edit_func'] = "b_tinycontent_content_edit";
 $modversion['blocks'][2]['template'] = "";

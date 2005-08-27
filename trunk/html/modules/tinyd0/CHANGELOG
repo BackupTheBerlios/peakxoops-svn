@@ -1,6 +1,11 @@
 [xlang:en]
 CHANGELOG:
 
+2005-8-27 2.18
+- modified a compatibility with XOOPS 2.1/2.2
+- updated myblocksadmin into 0.40
+- modified Render/Xhtml/Code.php in PEAR Text_Wiki
+
 2005-5-31 2.17
 - modified common's SPAW can use with Windows server
 - updated gtickets.php
@@ -180,6 +185,11 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2005-8-27 2.18
+- XOOPS 2.1/2.2 との互換性改善 （動作確認)
+- myblocksadmin を 0.40 に上げた
+- PEAR Text_Wiki の code 処理がおかしかったのを勝手に修正
 
 2005-5-31 2.17
 - WindowsサーバでSPAWが使えなかったのを修正

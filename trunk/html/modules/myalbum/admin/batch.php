@@ -32,7 +32,7 @@ if( ! $isadmin ) {
 $result = $xoopsDB->query( "SELECT count(cid) as count FROM $table_cat" ) ;
 list( $count ) = $xoopsDB->fetchRow( $result ) ;
 if( $count < 1 ) {
-	redirect_header(XOOPS_URL."/modules/$mydirname/",2,_ALBM_MUSTADDCATFIRST);
+	redirect_header(XOOPS_URL."/modules/$mydirname/admin/index.php",2,_ALBM_MUSTADDCATFIRST);
 	exit();
 }
 

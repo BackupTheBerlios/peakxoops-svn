@@ -71,7 +71,12 @@
     <{/if}>
 
     <{* LAST UPDATED *}>
-    <img src='<{$mod_url}>/images/clock.gif' width='16' height='16' alt='<{$lang_lastupdatec}>' title='<{$lang_lastupdatec}>' /><{$photo.datetime}>
+    <img src='<{$mod_url}>/images/clock.gif' width='16' height='16' alt='<{$lang_lastupdatec}>' title='<{$lang_lastupdatec}>' /><{$photo.datetime}> &nbsp; &nbsp;
+
+    <{* TELL A FRIEND *}>
+    <{if $cantellafriend}>
+      <a href='<{$xoops_url}>/modules/tellafriend/index.php?target_uri=<{$mod_url|escape:"url"}>/photos.php%3Flid%3D<{$photo.lid}>&amp;subject=<{$lang_subject4taf|escape:"url"}>'><img src='<{$mod_url}>/images/tellafriend.gif' width='24' height='16' alt='<{$lang_tellafriend}>' title='<{$lang_tellafriend}>' /><{$lang_tellafriend}></a>
+    <{/if}>
 
     <br />
 
@@ -97,11 +102,6 @@
     <{if $canratevote}>
       <a href='<{$mod_url}>/ratephoto.php?lid=<{$photo.lid}>'><img src='<{$mod_url}>/images/vote.gif' alt='<{$lang_ratethisphoto}>' title='<{$lang_ratethisphoto}>' border='0' /><{$lang_ratethisphoto}></a>
     <{/if}>
-
-    <br />
-
-    <{* TELL A FRIEND (You have to install tellafriend module) *}>
-    <{* <a href='<{$xoops_url}>/modules/tellafriend/index.php?target_uri=<{$mod_url|escape:"url"}>/photos.php%3Flid%3D<{$photo.lid}>&amp;subject=a%20photo%20for%20you'>TELL A FRIEND</a> *}>
 
     <br />
 

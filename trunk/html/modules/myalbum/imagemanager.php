@@ -12,15 +12,15 @@ if( ! defined( 'XOOPS_ROOT_PATH' ) ) {
 } else {
 	// when this script is included by core's imagemanager.php
 	$mydirname = basename( dirname( __FILE__ ) ) ;
-	include(XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php");
+	include XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php" ;
 }
 
-include(XOOPS_ROOT_PATH."/modules/$mydirname/include/get_perms.php");
-include_once(XOOPS_ROOT_PATH."/modules/$mydirname/include/functions.php");
-include_once(XOOPS_ROOT_PATH."/modules/$mydirname/include/draw_functions.php");
-include_once(XOOPS_ROOT_PATH."/class/xoopstree.php");
-include_once(XOOPS_ROOT_PATH.'/class/pagenav.php');
-include_once(XOOPS_ROOT_PATH.'/class/template.php');
+include XOOPS_ROOT_PATH."/modules/$mydirname/include/get_perms.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/functions.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/draw_functions.php" ;
+include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
+include_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
+include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 
 // checking isactive
 $module_handler =& xoops_gethandler('module');
@@ -176,7 +176,7 @@ if( sizeof( $cats ) > 0 ) {
 	$xoopsTpl->assign('ysize', 180);
 }
 
-$xoopsTpl->display( "db:{$mydirname}_imagemanager.html" ) ;
+$xoopsTpl->display( "db:myalbum{$mydirnumber}_imagemanager.html" ) ;
 exit ;
 
 ?>

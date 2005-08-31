@@ -13,7 +13,7 @@ $myts =& MyAlbumTextSanitizer::getInstance() ;
 $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 
 // GET variables
-$caller = empty( $_GET['caller'] ) ? '' : $_GET['caller'] ;
+$caller = @$_GET['caller'] == 'imagemanager' ? 'imagemanager' : '' ;
 
 // POST variables
 $preview_name = empty( $_POST['preview_name'] ) ? '' : $_POST['preview_name'] ;
@@ -89,8 +89,10 @@ if( $myalbum_makethumb && ! is_writable( $thumbs_dir ) ) {
 
 if( ! empty( $_POST['submit'] ) ) {
 
-	// anti-CSRF
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	$submitter = $my_uid ;
 
@@ -284,7 +286,7 @@ if( $caller != 'imagemanager' && ! empty( $_POST['preview'] ) ) {
 	$tpl->assign( $myalbum_assign_globals ) ;
 	$tpl->assign( 'photo' , $photo_for_tpl ) ;
 	echo "<table class='outer' style='width:100%;'>" ;
-	$tpl->display( "db:{$mydirname}_photo_in_list.html" ) ;
+	$tpl->display( "db:myalbum{$mydirnumber}_photo_in_list.html" ) ;
 	echo "</table>\n" ;
 
 } else {
@@ -348,7 +350,7 @@ $submit_tray->addElement( $reset_button ) ;
 $form->addElement( $pixels_label ) ;
 $form->addElement( $size_label ) ;
 $form->addElement( $title_text ) ;
-$form->addElement( $desc_tarea ) ;
+if( $caller != 'imagemanager' ) $form->addElement( $desc_tarea ) ;
 $form->addElement( $cat_select ) ;
 $form->setRequired( $cat_select ) ;
 $form->addElement( $file_form ) ;
@@ -358,6 +360,10 @@ $form->addElement( $counter_hidden ) ;
 $form->addElement( $op_hidden ) ;
 $form->addElement( $submit_tray ) ;
 // $form->setRequired( $file_form ) ;
+
+// Ticket
+$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+
 $form->display() ;
 
 if( $caller == 'imagemanager' ) {

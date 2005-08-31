@@ -9,6 +9,8 @@ $myalbum_assign_globals = array(
 	'lang_latest_list' => _ALBM_LATESTLIST ,
 	'lang_descriptionc' => _ALBM_DESCRIPTIONC ,
 	'lang_lastupdatec' => _ALBM_LASTUPDATEC ,
+	'lang_tellafriend' => _ALBM_TELLAFRIEND ,
+	'lang_subject4taf' => _ALBM_SUBJECT4TAF ,
 	'lang_submitter' => _ALBM_SUBMITTER ,
 	'lang_hitsc' => _ALBM_HITSC ,
 	'lang_commentsc' => _ALBM_COMMENTSC ,
@@ -26,7 +28,8 @@ $myalbum_assign_globals = array(
 	'thumbsize' => $myalbum_thumbsize ,
 	'colsoftableview' => $myalbum_colsoftableview ,
 	'canrateview' => $global_perms & GPERM_RATEVIEW ,
-	'canratevote' => $global_perms & GPERM_RATEVOTE
+	'canratevote' => $global_perms & GPERM_RATEVOTE ,
+	'cantellafriend' => $global_perms & GPERM_TELLAFRIEND ,
 ) ;
 
 ?>

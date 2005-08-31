@@ -21,8 +21,10 @@ if( ! empty( $_POST['action'] ) && $_POST['action'] == 'delete' && isset( $_POST
 
 	// remove records
 
-	// Double check for anti-CSRF
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	foreach( $_POST['ids'] as $lid ) {
 		myalbum_delete_photos( "lid=".intval( $lid ) ) ;
@@ -34,8 +36,10 @@ if( ! empty( $_POST['action'] ) && $_POST['action'] == 'delete' && isset( $_POST
 
 	// batch update
 
-	// Double check for anti-CSRF
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// set clause for text table
 	if( ! empty( $_POST['new_desc_text'] ) ) {
@@ -175,6 +179,7 @@ echo "
   <a href='../submit.php?cid=$cid'><img src='../images/pictadd.gif' width='18' height='15' alt='"._AM_CAT_LINK_ADDPHOTOS."' title='"._AM_CAT_LINK_ADDPHOTOS."' /></a>
 </p>
 <form name='MainForm' action='?num=$num&cid=$cid' method='POST' style='margin-top:0px;'>
+".$xoopsGTicket->getTicketHtml( __LINE__ )."
 <table width='100%' border='0' cellspacing='0' cellpadding='4'>
 <tr>
 <td align='center' colspan='2'>

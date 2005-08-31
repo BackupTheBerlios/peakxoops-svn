@@ -3,6 +3,11 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_CNST_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-31 15:23:36
+define('GPERM_TELLAFRIEND','1024');
+define('_ALBM_GPERM_G_TELLAFRIEND','Tell a friend');
+
 // Appended by Xoops Language Checker -GIJOE- in 2004-05-05 15:14:38
 define('_ALBM_CAPTION_CATEGORY','Category');
 

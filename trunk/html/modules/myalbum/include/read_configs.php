@@ -3,18 +3,15 @@
 	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 	$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
-	if( preg_match( '/^myalbum(\d*)$/' , $mydirname , $regs ) ) {
-		$myalbum_number = $regs[1] ;
-	} else {
-		die( "invalid dirname of myalbum: " . htmlspecialchars( $mydirname ) ) ;
-	}
+	if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $mydirname ) ) ;
+	$mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 	global $xoopsConfig , $xoopsDB , $xoopsUser ;
 
 	// module information
 	$mod_url = XOOPS_URL . "/modules/$mydirname" ;
 	$mod_path = XOOPS_ROOT_PATH . "/modules/$mydirname" ;
-	$mod_copyright = "<a href='http://www.peak.ne.jp/xoops/'><b>myAlbum-P 2.8</b></a> &nbsp; <small>(<a href='http://bluetopia.homeip.net/'>original</a>)</small></div>" ;
+	$mod_copyright = "<a href='http://www.peak.ne.jp/xoops/'><b>myAlbum-P 2.9</b></a> &nbsp; <small>(<a href='http://bluetopia.homeip.net/'>original</a>)</small></div>" ;
 
 	// global langauge file
 	$language = $xoopsConfig['language'] ;
@@ -67,10 +64,10 @@
 	}
 
 	// DB table name
-	$table_photos = $xoopsDB->prefix( "{$mydirname}_photos" ) ;
-	$table_cat = $xoopsDB->prefix( "{$mydirname}_cat" ) ;
-	$table_text = $xoopsDB->prefix( "{$mydirname}_text" ) ;
-	$table_votedata = $xoopsDB->prefix( "{$mydirname}_votedata" ) ;
+	$table_photos = $xoopsDB->prefix( "myalbum{$mydirnumber}_photos" ) ;
+	$table_cat = $xoopsDB->prefix( "myalbum{$mydirnumber}_cat" ) ;
+	$table_text = $xoopsDB->prefix( "myalbum{$mydirnumber}_text" ) ;
+	$table_votedata = $xoopsDB->prefix( "myalbum{$mydirnumber}_votedata" ) ;
 	$table_comments = $xoopsDB->prefix( "xoopscomments" ) ;
 
 	// Pipe environment check

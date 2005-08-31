@@ -3,6 +3,12 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_MB_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-08-31 15:23:36
+define('_ALBM_STORETIMESTAMP','Don\'t touch timestamp');
+define('_ALBM_TELLAFRIEND','Tell a friend');
+define('_ALBM_SUBJECT4TAF','A photo for you!');
+
 // Appended by Xoops Language Checker -GIJOE- in 2004-10-04 16:06:34
 define('_ALBM_LIDASC','Record Number (Bigger is latter)');
 define('_ALBM_LIDDESC','Record Number (Smaller is latter)');

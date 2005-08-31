@@ -80,6 +80,8 @@ define("_ALBM_PHOTODEL","Delete photo?");
 define("_ALBM_DELETINGPHOTO","Deleting photo");
 define("_ALBM_MOVINGPHOTO","Moving photo");
 
+define("_ALBM_STORETIMESTAMP","Don't touch timestamp");
+
 define("_ALBM_POSTERC","Poster: ");
 define("_ALBM_DATEC","Date: ");
 define("_ALBM_EDITNOTALLOWED","You're not allowed to edit this comment!");
@@ -128,6 +130,8 @@ define("_ALBM_EMAILC","Email");
 define("_ALBM_CATEGORYC","Category");
 define("_ALBM_SUBCATEGORY","Sub-category");
 define("_ALBM_LASTUPDATEC","Last Update");
+define("_ALBM_TELLAFRIEND","Tell a friend");
+define("_ALBM_SUBJECT4TAF","A photo for you!");
 define("_ALBM_HITSC","Hits");
 define("_ALBM_RATINGC","Rating");
 define("_ALBM_ONEVOTE","1 vote");

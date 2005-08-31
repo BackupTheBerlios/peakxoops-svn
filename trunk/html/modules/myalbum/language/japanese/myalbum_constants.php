@@ -15,6 +15,7 @@ define( "GPERM_TOUCHOTHERS" , 64 ) ;
 define( "GPERM_SUPERTOUCHOTHERS" , 128 ) ;
 define( "GPERM_RATEVIEW" , 256 ) ;
 define( "GPERM_RATEVOTE" , 512 ) ;
+define( "GPERM_TELLAFRIEND" , 1024 ) ;
 
 // Global Group Permission
 define( "_ALBM_GPERM_G_INSERTABLE" , "Åê¹Æ²Ä¡ÊÍ×¾µÇ§¡Ë" ) ;
@@ -27,6 +28,7 @@ define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Â¾¥æ¡¼¥¶¤Î¥¤¥á¡¼¥¸¤òÊÔ½¸¡¦ºï½ü²Ä¡ÊÍ×¾µÇ§¡
 define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Â¾¥æ¡¼¥¶¤Î¥¤¥á¡¼¥¸¤òÊÔ½¸¡¦ºï½ü²Ä¡Ê¾µÇ§ÉÔÍ×¡Ë" ) ;
 define( "_ALBM_GPERM_G_RATEVIEW" , "ÅêÉ¼±ÜÍ÷²Ä" ) ;
 define( "_ALBM_GPERM_G_RATEVOTE" , "ÅêÉ¼²Ä" ) ;
+define( "_ALBM_GPERM_G_TELLAFRIEND" , "Í§¿Í¤ËÃÎ¤é¤»¤ë" ) ;
 
 // Caption
 define( "_ALBM_CAPTION_TOTAL" , "Total:" ) ;

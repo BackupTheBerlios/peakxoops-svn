@@ -38,6 +38,9 @@ function display_edit_form( $cat_array , $form_title , $action )
 	$button_tray->addElement( new XoopsFormButton( '' , 'reset' , _CANCEL, 'reset' ) ) ;
 	$form->addElement( $button_tray ) ;
 
+	// Ticket
+	$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+
 	// End of XoopsForm
 	$form->display();
 }
@@ -107,12 +110,12 @@ function mysql_get_sql_set( $cols )
 
 
 
-include("admin_header.php");
-require_once( XOOPS_ROOT_PATH . "/include/xoopscodes.php" ) ;
+include "admin_header.php" ;
+require_once XOOPS_ROOT_PATH . "/include/xoopscodes.php" ;
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 include_once XOOPS_ROOT_PATH."/class/xoopslists.php";
-include_once( XOOPS_ROOT_PATH."/class/xoopstree.php" ) ;
-include_once( XOOPS_ROOT_PATH."/class/xoopscomments.php" ) ;
+include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
+include_once XOOPS_ROOT_PATH."/class/xoopscomments.php" ;
 
 
 // GPCS vars
@@ -130,8 +133,10 @@ $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 //
 if( $action == "insert" ) {
 
-	// anti-CSRF (Double Check)
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// newly insert
 	$sql = "INSERT INTO $table_cat SET " ;
@@ -150,8 +155,10 @@ if( $action == "insert" ) {
 
 } else if( $action == "update" && ! empty( $_POST['cid'] ) ) {
 
-	// anti-CSRF (Double Check)
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	$cid = intval( $_POST['cid'] ) ;
 	$pid = intval( $_POST['pid'] ) ;
@@ -175,8 +182,10 @@ if( $action == "insert" ) {
 
 } else if( ! empty( $_POST['delcat'] ) ) {
 
-	// anti-CSRF (Double Check)
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// Delete
 	$cid = intval( $_POST['delcat'] ) ;
@@ -260,6 +269,7 @@ if( $disp == "edit" && $cid > 0 ) {
 	// TH
 	echo "
 	<form name='MainForm' action='' method='post' style='margin:10px;'>
+	".$xoopsGTicket->getTicketHtml( __LINE__ )."
 	<input type='hidden' name='delcat' value='' />
 	<table width='75%' class='outer' cellpadding='4' cellspacing='1'>
 	  <tr valign='middle'>

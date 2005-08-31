@@ -4,16 +4,16 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include("header.php");
+include "header.php" ;
 $myts =& MyTextSanitizer::getInstance() ; // MyTextSanitizer object
-include_once( XOOPS_ROOT_PATH . "/class/xoopstree.php" ) ;
+include_once XOOPS_ROOT_PATH . "/class/xoopstree.php" ;
 $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 
-$xoopsOption['template_main'] = "{$mydirname}_index.html" ;
+$xoopsOption['template_main'] = "myalbum{$mydirnumber}_index.html" ;
 
-include( XOOPS_ROOT_PATH . "/header.php" ) ;
+include XOOPS_ROOT_PATH . "/header.php" ;
 
-include( 'include/assign_globals.php' ) ;
+include 'include/assign_globals.php' ;
 $xoopsTpl->assign( $myalbum_assign_globals ) ;
 
 $xoopsTpl->assign( 'subcategories' , myalbum_get_sub_categories( 0 , $cattree ) ) ;

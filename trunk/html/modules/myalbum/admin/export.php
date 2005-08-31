@@ -4,8 +4,8 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include( "admin_header.php" ) ;
-include_once( XOOPS_ROOT_PATH . '/modules/system/constants.php' ) ;
+include "admin_header.php" ;
+include_once XOOPS_ROOT_PATH . '/modules/system/constants.php' ;
 
 // GPCS vars
 
@@ -30,8 +30,10 @@ else if( ! empty( $_POST['imagemanager_export'] ) && ! empty( $_POST['imgcat_id'
 	$sysperm_handler =& xoops_gethandler('groupperm');
 	if( ! $sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_IMAGE, $xoopsUser->getGroups() ) ) exit ;
 
-	// anti-CSRF 
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// get dst information
 	$dst_cid = intval( $_POST['imgcat_id'] ) ;
@@ -114,6 +116,7 @@ if( $sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_IMAGE, $xoopsUser-
 	echo "
 		<h4>"._AM_FMT_EXPORTTOIMAGEMANAGER."</h4>
 		<form name='ImageManager' action='export.php' method='POST'>
+		".$xoopsGTicket->getTicketHtml( __LINE__ )."
 		<select name='cid'>
 			$myalbum_cat_options
 		</select>

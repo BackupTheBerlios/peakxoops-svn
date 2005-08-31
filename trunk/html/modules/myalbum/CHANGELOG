@@ -1,8 +1,23 @@
+
+
+2005-8-31 v2.86 (2.90 alpha)
+ - added Duplicatable V2.1
+ - added a native plugin for "sitemap" module
+ - added a native plugin for "waiting" module
+ - added a native plugin for "search" module
+ - added a link to "tellafriend" module (check global permissions)
+ - added GTicket checks instead of another xoops_refcheck()
+ - added an option storing timestamps in editing photos.
+ - added assigning photo's name as xoops_pagetitle
+ - fixed batch registration did not fetch sizes of images (thx Tom_G3X)
+ - fixed the permission of imagemanager integration
+ - assigning $photo.cat_title in each block
  - updated myblocksadmin into 0.40
  - added polish language (thx kaper)
  - modified english language (thx Peter)
  - updated french language (thx sebhtml)
- - ... and a lots of modifications. I don't remember :-P
+
+2005-8-20 v2.85 (pre-alpha version)
 
 2004-10-4 v2.84
  - modified ImageManagerIntegration can treat non-image files (AttachmentManager)
@@ -315,12 +330,25 @@
 
 更新履歴:
 
- - sitemap対応
- - 本文検索対応
- - バッチ登録で画像サイズ取得ができていなかったのを修正 (thx Tom_G3X)
+2005-8-31 v2.86 (2.90 alpha)
+ - Duplicatable V2.1 実装 (=myalbum* というdirnameからの解放)
+ - sitemapプラグイン作成
+ - waitingプラグイン作成
+ - seachプラグイン作成 （本文検索対応）
+ - Tell a friend モジュールとの連携 (要インストール&全体的な権限のチェック)
+ - リファラチェックだった部分を、GTicketに置き換え (CSRF対策)
+ - 編集において「日付を更新しない」チェックボックスの追加 (管理者のみ)
+ - xoops_pagetitle にタイトルをアサイン
  - イメージマネージャ統合がモジュールアクセス権限・アクティブ属性を見ていなかったのを修正
- - Windows環境で、空白の含まれるファイルをexec()かける時の処理。（クオーティング）(Saintolaf2)
+ - バッチ登録で画像サイズ取得ができていなかったのを修正 (thx Tom_G3X)
+ - Windows環境で、空白の含まれるファイルをexec()かける時の処理。（クオーティング）(thx Saintolaf2)
+ - 各ブロックで、画像所属のカテゴリー名を引っ張れるようにした $photo.cat_title
+ - myblocksadmin を 0.40 に更新
+ - ポーランド語追加 (thx kaper)
+ - 英語のブラッシュアップ (thx Peter)
+ - フランス語更新 (thx sebhtml)
 
+2005-8-20 v2.85 (pre-alpha version)
 
 2004-10-4 v2.84
  - イメージマネージャ統合でも画像以外のファイルを扱えるようにした（簡易添付ファイルマネージャ機能）

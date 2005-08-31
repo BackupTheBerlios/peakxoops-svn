@@ -56,7 +56,7 @@ class MyAlbumTextSanitizer extends MyTextSanitizer {
 	{
 		$this->nbsp = $nbsp ;
 		$text = parent::displayTarea( $text , $html , $smiley , $xcode , $image , $br ) ;
-		return $this->postCodeDecode( $text ) ;
+		return $this->postCodeDecode( $text , $image ) ;
 /*		if ($html != 1) {
 			// html not allowed
 			$text =& $this->htmlSpecialChars($text);
@@ -89,7 +89,7 @@ class MyAlbumTextSanitizer extends MyTextSanitizer {
 	 * @param   string  $text
 	 * @return  string
 	 **/
-	function postCodeDecode( $text )
+	function postCodeDecode( $text , $image )
 	{
 		$removal_tags = array( '[summary]' , '[/summary]' , '[pagebreak]' ) ;
 		$text = str_replace( $removal_tags , '' , $text ) ;
@@ -98,10 +98,15 @@ class MyAlbumTextSanitizer extends MyTextSanitizer {
 		$replacements = array();
 
 		$patterns[] = "/\[siteimg align=(['\"]?)(left|center|right)\\1]([^\"\(\)\?\&'<>]*)\[\/siteimg\]/sU";
-		$replacements[] = '<img src="'.XOOPS_URL.'/\\3" align="\\2" alt="" />';
-
 		$patterns[] = "/\[siteimg]([^\"\(\)\?\&'<>]*)\[\/siteimg\]/sU";
-		$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
+		if( $image ) {
+			$replacements[] = '<img src="'.XOOPS_URL.'/\\3" align="\\2" alt="" />';
+	
+			$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
+		} else {
+			$replacements[] = '<a href"'.XOOPS_URL.'/\\3" target="_blank">'.XOOPS_URL.'/\\3</a>';
+			$replacements[] = '<a href"'.XOOPS_URL.'/\\1" target="_blank">'.XOOPS_URL.'/\\1</a>';
+		}
 
 		return preg_replace($patterns, $replacements, $text);
 	}

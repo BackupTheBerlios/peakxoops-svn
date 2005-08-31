@@ -8,21 +8,14 @@ function b_myalbum_topnews_show( $options )
 {
 	global $xoopsDB ;
 
-	// For myAlbum-P < 2.70
-	if( strncmp( $options[0] , 'myalbum' , 7 ) != 0 ) {
-		$title_max_length = intval( $options[1] ) ;
-		$photos_num = intval( $options[0] ) ;
-		$mydirname = 'myalbum' ;
-	} else {
-		$title_max_length = intval( $options[2] ) ;
-		$photos_num = intval( $options[1] ) ;
-		$mydirname = $options[0] ;
-	}
+	$mydirname = empty( $options[0] ) ? basename( dirname( dirname( __FILE__ ) ) ) : $options[0] ;
+	$photos_num = empty( $options[1] ) ? 5 : intval( $options[1] ) ;
+	$title_max_length = empty( $options[2] ) ? 20 : intval( $options[2] ) ;
 	$cat_limitation = empty( $options[3] ) ? 0 : intval( $options[3] ) ;
 	$cat_limit_recursive = empty( $options[4] ) ? 0 : 1 ;
 	$cols = empty( $options[6] ) ? 1 : intval( $options[6] ) ;
 
-	include( XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php" ) ;
+	include XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php" ;
 
 	// Category limitation
 	if( $cat_limitation ) {
@@ -30,13 +23,13 @@ function b_myalbum_topnews_show( $options )
 			include_once( XOOPS_ROOT_PATH."/class/xoopstree.php" ) ;
 			$cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 			$children = $cattree->getAllChildId( $cat_limitation ) ;
-			$whr_cat = "cid IN (" ;
+			$whr_cat = "l.cid IN (" ;
 			foreach( $children as $child ) {
 				$whr_cat .= "$child," ;
 			}
 			$whr_cat .= "$cat_limitation)" ;
 		} else {
-			$whr_cat = "cid='$cat_limitation'" ;
+			$whr_cat = "l.cid='$cat_limitation'" ;
 		}
 	} else {
 		$whr_cat = '1' ;
@@ -44,11 +37,11 @@ function b_myalbum_topnews_show( $options )
 
 	$block = array() ;
 	$myts =& MyTextSanitizer::getInstance() ;
-	$result = $xoopsDB->query( "SELECT lid , cid , title , ext , res_x , res_y , submitter , status , date AS unixtime , hits , rating , votes , comments FROM $table_photos WHERE status>0 AND $whr_cat GROUP BY cid ORDER BY unixtime DESC" , $photos_num , 0 ) ;
-//	$result = $xoopsDB->query( "SELECT l.lid , l.cid , l.title , l.ext , l.res_x , l.res_y , l.submitter , l.status , date AS l.unixtime , l.hits , l.rating , l.votes , l.comments FROM $table_photos l LEFT JOIN $table_cat c ON l.cid=c.cid WHERE l.status>0 ORDER BY l.unixtime DESC" , $photos_num , 0 ) ;
+	$result = $xoopsDB->query( "SELECT l.lid , l.cid , l.title , l.ext , l.res_x , l.res_y , l.submitter , l.status , l.date AS unixtime , l.hits , l.rating , l.votes , l.comments , c.title AS cat_title FROM $table_photos l LEFT JOIN $table_cat c ON l.cid=c.cid WHERE l.status>0 AND $whr_cat ORDER BY unixtime DESC" , $photos_num , 0 ) ;
 	$count = 1 ;
 	while( $photo = $xoopsDB->fetchArray( $result ) ) {
 		$photo['title'] = $myts->makeTboxData4Show( $photo['title'] ) ;
+		$photo['cat_title'] = $myts->makeTboxData4Show( $photo['cat_title'] ) ;
 		if( strlen( $photo['title'] ) >= $title_max_length ) {
 			if( ! XOOPS_USE_MULTIBYTES ) {
 				$photo['title'] = substr( $photo['title'] , 0 , $title_max_length - 1 ) . "..." ;
@@ -87,22 +80,19 @@ function b_myalbum_topnews_edit( $options )
 {
 	global $xoopsDB ;
 
-	// For myAlbum-P < 2.70
-	if( strncmp( $options[0] , 'myalbum' , 7 ) != 0 ) {
-		$title_max_length = intval( $options[1] ) ;
-		$photos_num = intval( $options[0] ) ;
-		$mydirname = 'myalbum' ;
-	} else {
-		$title_max_length = intval( $options[2] ) ;
-		$photos_num = intval( $options[1] ) ;
-		$mydirname = $options[0] ;
-	}
+	$mydirname = empty( $options[0] ) ? basename( dirname( dirname( __FILE__ ) ) ) : $options[0] ;
+	$photos_num = empty( $options[1] ) ? 5 : intval( $options[1] ) ;
+	$title_max_length = empty( $options[2] ) ? 20 : intval( $options[2] ) ;
 	$cat_limitation = empty( $options[3] ) ? 0 : intval( $options[3] ) ;
 	$cat_limit_recursive = empty( $options[4] ) ? 0 : 1 ;
 	$cols = empty( $options[6] ) ? 1 : intval( $options[6] ) ;
 
-	include_once( XOOPS_ROOT_PATH."/class/xoopstree.php" ) ;
-	$cattree = new XoopsTree( $xoopsDB->prefix( "{$mydirname}_cat" ) , "cid" , "pid" ) ;
+	include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
+
+	if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $mydirname ) ) ;
+	$mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
+
+	$cattree = new XoopsTree( $xoopsDB->prefix( "myalbum{$mydirnumber}_cat" ) , "cid" , "pid" ) ;
 
 	ob_start() ;
 	$cattree->makeMySelBox( "title" , "title" , $cat_limitation , 1 , 'options[3]' ) ;

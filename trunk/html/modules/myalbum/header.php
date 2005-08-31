@@ -22,10 +22,11 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 // ------------------------------------------------------------------------- //
-include("../../mainfile.php");
+include '../../mainfile.php' ;
 $mydirname = basename( dirname( __FILE__ ) ) ;
-include(XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php");
-include(XOOPS_ROOT_PATH."/modules/$mydirname/include/get_perms.php");
-include_once(XOOPS_ROOT_PATH."/modules/$mydirname/include/functions.php");
-include_once(XOOPS_ROOT_PATH."/modules/$mydirname/include/draw_functions.php");
+include XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php" ;
+include XOOPS_ROOT_PATH."/modules/$mydirname/include/get_perms.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/functions.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/draw_functions.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ;
 ?>

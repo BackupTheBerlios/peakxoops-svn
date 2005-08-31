@@ -4,8 +4,8 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include( "admin_header.php" ) ;
-include_once( XOOPS_ROOT_PATH . '/modules/system/constants.php' ) ;
+include "admin_header.php" ;
+include_once XOOPS_ROOT_PATH.'/modules/system/constants.php' ;
 
 // GPCS vars
 
@@ -26,14 +26,19 @@ if( ! $isadmin ) {
 // From myalbum*
 if( ! empty( $_POST['myalbum_import'] ) && ! empty( $_POST['cid'] ) ) {
 
-	// anti-CSRF 
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// get src module
 	$src_cid = intval( $_POST['cid'] ) ;
 	$src_dirname = empty( $_POST['src_dirname'] ) ? '' : $_POST['src_dirname'] ;
 	if( $mydirname == $src_dirname ) die( "source dirname is same as dest dirname: " . htmlspecialchars( $src_dirname ) )  ;
-	if( ! preg_match( '/^myalbum(\d*)$/' , $src_dirname , $regs ) ) die( "invalid dirname of myalbum: " . htmlspecialchars( $src_dirname ) ) ;
+
+	if( ! preg_match( '/^(\D+)(\d*)$/' , $src_dirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $src_dirname ) ) ;
+	$src_dirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
+
 	$module =& $module_handler->getByDirname( $src_dirname ) ;
 	if( ! is_object( $module ) ) die( "invalid module dirname:" . htmlspecialchars( $src_dirname ) )  ;
 	$src_mid = $module->getvar( 'mid' ) ;
@@ -49,10 +54,10 @@ if( ! empty( $_POST['myalbum_import'] ) && ! empty( $_POST['cid'] ) ) {
 	$src_photos_dir = XOOPS_ROOT_PATH . $src_configs['myalbum_photospath'] ;
 	$src_thumbs_dir = XOOPS_ROOT_PATH . $src_configs['myalbum_thumbspath'] ;
 	// src table names
-	$src_table_photos = $xoopsDB->prefix( "{$src_dirname}_photos" ) ;
-	$src_table_cat = $xoopsDB->prefix( "{$src_dirname}_cat" ) ;
-	$src_table_text = $xoopsDB->prefix( "{$src_dirname}_text" ) ;
-	$src_table_votedata = $xoopsDB->prefix( "{$src_dirname}_votedata" ) ;
+	$src_table_photos = $xoopsDB->prefix( "myalbum{$src_dirnumber}_photos" ) ;
+	$src_table_cat = $xoopsDB->prefix( "myalbum{$src_dirnumber}_cat" ) ;
+	$src_table_text = $xoopsDB->prefix( "myalbum{$src_dirnumber}_text" ) ;
+	$src_table_votedata = $xoopsDB->prefix( "myalbum{$src_dirnumber}_votedata" ) ;
 
 	if( isset( $_POST['copyormove'] ) && $_POST['copyormove'] == 'move' ) $move_mode = true ;
 	else $move_mode = false ;
@@ -113,8 +118,10 @@ else if( ! empty( $_POST['imagemanager_import'] ) && ! empty( $_POST['imgcat_id'
 	$sysperm_handler =& xoops_gethandler('groupperm');
 	if( ! $sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_IMAGE, $xoopsUser->getGroups() ) ) exit ;
 
-	// anti-CSRF 
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// get src information
 	$src_cid = intval( $_POST['imgcat_id'] ) ;
@@ -183,6 +190,8 @@ echo "<h3 style='text-align:left;'>".sprintf(_AM_H3_FMT_IMPORTTO,$xoopsModule->n
 
 // From myalbum*
 $mrs = $xoopsDB->query( "SELECT dirname FROM ".$xoopsDB->prefix("modules")." WHERE dirname like 'myalbum%'" ) ;
+// get all instances of TinyD using newblocks table
+$mrs = $xoopsDB->query( "SELECT distinct dirname FROM ".$xoopsDB->prefix("newblocks")." WHERE func_file='myalbum_rphoto.php'" ) ;
 while( list( $src_dirname ) = $xoopsDB->fetchRow( $mrs ) ) {
 	if( $mydirname == $src_dirname ) continue ;
 
@@ -191,12 +200,16 @@ while( list( $src_dirname ) = $xoopsDB->fetchRow( $mrs ) ) {
 
 	if( ! $xoopsUser->isAdmin( $module->getVar('mid') ) ) continue ;
 
-	$myalbum_cat_options = myalbum_get_cat_options( 'title' , 0 , '--' , '----' , $xoopsDB->prefix( "{$src_dirname}_cat" ) , $xoopsDB->prefix( "{$src_dirname}_photos" ) ) ;
+	if( ! preg_match( '/^(\D+)(\d*)$/' , $src_dirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $src_dirname ) ) ;
+	$src_dirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
+
+	$myalbum_cat_options = myalbum_get_cat_options( 'title' , 0 , '--' , '----' , $xoopsDB->prefix( "myalbum{$src_dirnumber}_cat" ) , $xoopsDB->prefix( "myalbum{$src_dirnumber}_photos" ) ) ;
 
 	myalbum_opentable() ;
 	echo "
 		<h4>".sprintf(_AM_FMT_IMPORTFROMMYALBUMP,$module->name())."</h4>
 		<form name='$src_dirname' action='import.php' method='POST'>
+		".$xoopsGTicket->getTicketHtml( __LINE__ )."
 		<input type='hidden' name='src_dirname' value='$src_dirname' />
 		<input type='radio' name='copyormove' value='copy' checked='checked' />"._AM_RADIO_IMPORTCOPY." &nbsp; 
 		<input type='radio' name='copyormove' value='move' />"._AM_RADIO_IMPORTMOVE."<br /><br />
@@ -224,6 +237,7 @@ if( $sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_IMAGE, $xoopsUser-
 	echo "
 		<h4>"._AM_FMT_IMPORTFROMIMAGEMANAGER."</h4>
 		<form name='ImageManager' action='import.php' method='POST'>
+		".$xoopsGTicket->getTicketHtml( __LINE__ )."
 		<select name='imgcat_id'>
 			$imgcat_options
 		</select>

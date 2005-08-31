@@ -3,10 +3,12 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
-if( ! preg_match( '/^myalbum\d*$/' , $mydirname ) ) die ( "invalid dirname of myalbum: " . htmlspecialchars( $mydirname ) ) ;
+if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $mydirname ) ) ;
+$mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
+
 
 eval( '
-function '.$mydirname.'_search( $keywords , $andor , $limit , $offset , $userid )
+function myalbum'.$mydirnumber.'_search( $keywords , $andor , $limit , $offset , $userid )
 {
 	return myalbum_search_base( "'.$mydirname.'" , $keywords , $andor , $limit , $offset , $userid ) ;
 }
@@ -18,13 +20,13 @@ function myalbum_search_base( $mydirname , $keywords , $andor , $limit , $offset
 {
 	global $xoopsDB ;
 
-	include( XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php" ) ;
+	include XOOPS_ROOT_PATH."/modules/$mydirname/include/read_configs.php" ;
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
 	$select4con = $showcontext ? "t.description" : "''" ;
 
-	$sql = "SELECT l.lid,l.cid,l.title,l.submitter,l.date,$showcontext FROM $table_photos l LEFT JOIN $table_text t ON t.lid=l.lid LEFT JOIN ".$xoopsDB->prefix("users")." u ON l.submitter=u.uid WHERE status>0" ;
+	$sql = "SELECT l.lid,l.cid,l.title,l.submitter,l.date,$select4con FROM $table_photos l LEFT JOIN $table_text t ON t.lid=l.lid LEFT JOIN ".$xoopsDB->prefix("users")." u ON l.submitter=u.uid WHERE status>0" ;
 
 	if( $userid > 0 ) {
 		$sql .= " AND l.submitter=".$userid." ";
@@ -57,12 +59,15 @@ function myalbum_search_base( $mydirname , $keywords , $andor , $limit , $offset
 	$result = $xoopsDB->query( $sql , $limit , $offset ) ;
 	$ret = array() ;
 	$context = '' ;
-	$myts =& MyTextSanitizer::getInstance();
+	include_once XOOPS_ROOT_PATH."/modules/$mydirname/class/myalbum.textsanitizer.php" ;
+	$myts =& MyAlbumTextSanitizer::getInstance();
 	while( $myrow = $xoopsDB->fetchArray($result) ) {
 
 		// get context for module "search"
 		if( function_exists( 'search_make_context' ) && $showcontext ) {
-			$context = search_make_context( strip_tags( $myts->displayTarea( $myrow['description'] , 0 , 1 , 1 , 1 , 1 ) ) , $keywords ) ;
+			$full_context = strip_tags( $myts->displayTarea( $myrow['description'] , 1 , 1 , 1 , 1 , 1 ) ) ;
+			if( function_exists( 'easiestml' ) ) $full_context = easiestml( $full_context ) ;
+			$context = search_make_context( $full_context , $keywords ) ;
 		}
 
 		$ret[] = array(

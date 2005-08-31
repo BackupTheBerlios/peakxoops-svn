@@ -4,10 +4,10 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include( 'header.php' ) ;
-include_once( XOOPS_ROOT_PATH . '/class/xoopstree.php' ) ;
-include_once( 'class/myuploader.php' ) ;
-include_once( 'class/myalbum.textsanitizer.php' ) ;
+include 'header.php' ;
+include_once XOOPS_ROOT_PATH . '/class/xoopstree.php' ;
+include_once 'class/myuploader.php' ;
+include_once 'class/myalbum.textsanitizer.php' ;
 
 $myts =& MyAlbumTextSanitizer::getInstance() ;
 $cattree = new XoopsTree( $table_cat , 'cid' , 'pid' ) ;
@@ -36,8 +36,10 @@ if( ! empty( $_POST['do_delete'] ) ) {
 		exit ;
 	}
 
-	// anti-CSRF
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	// get and check lid is valid
 	if( $lid < 1 ) die( "Invalid photo id." ) ;
@@ -74,6 +76,7 @@ if( ! empty( $_POST['conf_delete'] ) ) {
 		<img src='$thumbs_url/$lid.$ext' />
 		<br />
 		<form action='editphoto.php?lid=$lid' method='post'>
+			".$xoopsGTicket->getTicketHtml( __LINE__ )."
 			<input type='submit' name='do_delete' value='"._YES."' />
 			<input type='submit' name='cancel_delete' value="._NO." />
 		</form>
@@ -89,8 +92,10 @@ if( ! empty( $_POST['conf_delete'] ) ) {
 // Do Modify
 if( ! empty( $_POST['submit'] ) ) {
 
-	// anti-CSRF 
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	if( empty( $_POST['submitter'] ) ) {
 		$submitter = $my_uid ;
@@ -208,7 +213,7 @@ include( 'include/assign_globals.php' ) ;
 $tpl->assign( $myalbum_assign_globals ) ;
 $tpl->assign( 'photo' , $photo_for_tpl ) ;
 echo "<table class='outer' style='width:100%;'>" ;
-$tpl->display( "db:{$mydirname}_photo_in_list.html" ) ;
+$tpl->display( "db:myalbum{$mydirnumber}_photo_in_list.html" ) ;
 echo "</table>\n" ;
 
 // Show the form
@@ -250,6 +255,9 @@ $valid_or_not = empty( $photo['status'] ) ? 0 : 1 ;
 $valid_box = new XoopsFormCheckBox( _ALBM_VALIDPHOTO , "valid" , array( $valid_or_not ) ) ;
 $valid_box->addOption( '1' , '&nbsp;' ) ;
 
+$storets_box = new XoopsFormCheckBox( _ALBM_STORETIMESTAMP , "store_timestamp" , array( 0 ) ) ;
+$storets_box->addOption( '1' , '&nbsp;' ) ;
+
 $submit_button = new XoopsFormButton( "" , "submit" , _SUBMIT , "submit" ) ;
 $preview_button = new XoopsFormButton( "" , "preview" , _PREVIEW , "submit" ) ;
 $reset_button = new XoopsFormButton( "" , "reset" , _CANCEL , "reset" ) ;
@@ -271,9 +279,14 @@ $form->addElement( $counter_hidden ) ;
 $form->addElement( $op_hidden ) ;
 if( $isadmin ) {
 	$form->addElement( $valid_box ) ;
+	$form->addElement( $storets_box ) ;
 	$form->addElement( $status_hidden ) ;
 }
 $form->addElement( $submit_tray ) ;
+
+// Ticket
+$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+
 $form->display() ;
 CloseTable() ;
 myalbum_footer() ;

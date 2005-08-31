@@ -28,11 +28,12 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
-if( ! preg_match( '/^myalbum\d*$/' , $mydirname ) ) die ( "invalid dirname of myalbum: " . htmlspecialchars( $mydirname ) ) ;
+if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $mydirname ) ) ;
+$mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 eval( '
 
-function '.$mydirname.'_notify_iteminfo($not_category, $item_id)
+function myalbum'.$mydirnumber.'_notify_iteminfo($not_category, $item_id)
 {
 	global $xoopsModule, $xoopsModuleConfig, $xoopsConfig , $xoopsDB ;
 
@@ -52,14 +53,14 @@ function '.$mydirname.'_notify_iteminfo($not_category, $item_id)
 		$item["url"] = "";
 	} else if( $not_category == "category" ) {
 		// Assume we have a valid cid
-		$sql = "SELECT title FROM ".$xoopsDB->prefix("'.$mydirname.'_cat")." WHERE cid=\'$item_id\'";
+		$sql = "SELECT title FROM ".$xoopsDB->prefix("myalbum'.$mydirnumber.'_cat")." WHERE cid=\'$item_id\'";
 		$rs = $xoopsDB->query( $sql ) ;
 		list( $title ) = $xoopsDB->fetchRow( $rs ) ;
 		$item["name"] = $title ;
 		$item["url"] = "$mod_url/viewcat.php?cid=$item_id" ;
 	} else if( $not_category == "photo" ) {
 		// Assume we have a valid event_id
-		$sql = "SELECT title FROM ".$xoopsDB->prefix("'.$mydirname.'_photos")." WHERE lid=\'$item_id\'";
+		$sql = "SELECT title FROM ".$xoopsDB->prefix("myalbum'.$mydirnumber.'_photos")." WHERE lid=\'$item_id\'";
 		$rs = $xoopsDB->query( $sql ) ;
 		list( $title ) = $xoopsDB->fetchRow( $rs ) ;
 		$item["name"] = $title ;

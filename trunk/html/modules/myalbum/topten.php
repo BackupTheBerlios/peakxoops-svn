@@ -9,7 +9,7 @@ $myts =& MyTextSanitizer::getInstance() ; // MyTextSanitizer object
 include_once( XOOPS_ROOT_PATH."/class/xoopstree.php" ) ;
 $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 
-$xoopsOption['template_main'] = "{$mydirname}_topten.html" ;
+$xoopsOption['template_main'] = "myalbum{$mydirnumber}_topten.html" ;
 
 include( XOOPS_ROOT_PATH . "/header.php" ) ;
 

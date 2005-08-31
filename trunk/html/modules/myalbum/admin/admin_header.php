@@ -1,7 +1,8 @@
 <?php
-require_once( '../../../include/cp_header.php' ) ;
-include( "../include/read_configs.php" ) ;
-include_once( "../include/functions.php" ) ;
+require_once '../../../include/cp_header.php' ;
+include "../include/read_configs.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/functions.php" ;
+include_once XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ;
 
 global $xoopsDB ;
 if( isset( $_GET['lid'] ) ) {

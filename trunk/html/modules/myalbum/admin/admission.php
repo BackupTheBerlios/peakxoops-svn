@@ -4,10 +4,10 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include( "admin_header.php" ) ;
-include_once( XOOPS_ROOT_PATH.'/class/xoopstree.php' ) ;
-include_once( XOOPS_ROOT_PATH.'/class/pagenav.php' ) ;
-include_once( '../class/myalbum.textsanitizer.php' ) ;
+include "admin_header.php" ;
+include_once XOOPS_ROOT_PATH.'/class/xoopstree.php' ;
+include_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
+include_once '../class/myalbum.textsanitizer.php' ;
 
 
 // initialization of Xoops vars
@@ -49,8 +49,10 @@ if( ! empty( $_POST['action'] ) && $_POST['action'] == 'admit' && isset( $_POST[
 
 	// remove records
 
-	// Double check for anti-CSRF
-	if( ! xoops_refcheck() ) die( "XOOPS_URL is not included in your REFERER" ) ;
+	// Ticket Check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
 	foreach( $_POST['ids'] as $lid ) {
 		myalbum_delete_photos( "lid=".intval( $lid ) ) ;
@@ -97,6 +99,7 @@ echo "
   $nav_html &nbsp; 
 </form>
 <form name='MainForm' action='' method='POST' style='margin-top:0px;'>
+".$xoopsGTicket->getTicketHtml( __LINE__ )."
 <input type='hidden' name='action' value='' />
 <table width='95%' class='outer' cellpadding='4' cellspacing='1'>
   <tr valign='middle'>
@@ -114,7 +117,7 @@ $oddeven = 'odd' ;
 while( list( $lid , $cid , $title , $submitter , $ext , $description ) = $xoopsDB->fetchRow( $prs ) ) {
 	$oddeven = ( $oddeven == 'odd' ? 'even' : 'odd' ) ;
 	$title = $myts->makeTboxData4Show( $title ) ;
-	$description = $myts->displayTarea( $description , 0 , 1 , 1 , 1 , 1 , 1 ) ;
+	$description = $myts->displayTarea( $description , 0 , 1 , 1 , 0 , 1 , 1 ) ;
 	$cat = $cattree->getNicePathFromId( $cid , "title", "../viewcat.php?" ) ;
 	$editbutton = "<a href='".XOOPS_URL."/modules/$mydirname/editphoto.php?lid=$lid' target='_blank'><img src='".XOOPS_URL."/modules/$mydirname/images/editicon.gif' border='0' alt='"._ALBM_EDITTHISPHOTO."' title='"._ALBM_EDITTHISPHOTO."' /></a>  ";
 

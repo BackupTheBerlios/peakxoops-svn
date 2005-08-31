@@ -4,11 +4,11 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include( "header.php" ) ;
+include "header.php" ;
 $myts =& MyTextSanitizer::getInstance() ; // MyTextSanitizer object
-include_once( XOOPS_ROOT_PATH . "/class/xoopstree.php" ) ;
+include_once XOOPS_ROOT_PATH . "/class/xoopstree.php" ;
 $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
-include_once( XOOPS_ROOT_PATH . '/class/pagenav.php' ) ;
+include_once XOOPS_ROOT_PATH . '/class/pagenav.php' ;
 
 // GET variables
 $cid = empty( $_GET['cid'] ) ? 0 : intval( $_GET['cid'] ) ;
@@ -19,17 +19,17 @@ $pos = empty( $_GET['pos'] ) ? 0 : intval( $_GET['pos'] ) ;
 $view = empty( $_GET['view'] ) ? $myalbum_viewcattype : $_GET['view'] ;
 
 // Orders
-include( XOOPS_ROOT_PATH."/modules/$mydirname/include/photo_orders.php" ) ;
+include XOOPS_ROOT_PATH."/modules/$mydirname/include/photo_orders.php" ;
 if( isset( $_GET['orderby'] ) && isset( $myalbum_orders[ $_GET['orderby'] ] ) ) $orderby = $_GET['orderby'] ;
 else if( isset( $myalbum_orders[ $myalbum_defaultorder ] ) ) $orderby = $myalbum_defaultorder ;
 else $orderby = 'titleA' ;
 
 
 if( $view == 'table' ) {
-	$xoopsOption['template_main'] = "{$mydirname}_viewcat_table.html" ;
+	$xoopsOption['template_main'] = "myalbum{$mydirnumber}_viewcat_table.html" ;
 	$function_assigning = 'myalbum_get_array_for_photo_assign_light' ;
 } else {
-	$xoopsOption['template_main'] = "{$mydirname}_viewcat_list.html" ;
+	$xoopsOption['template_main'] = "myalbum{$mydirnumber}_viewcat_list.html" ;
 	$function_assigning = 'myalbum_get_array_for_photo_assign' ;
 }
 
@@ -47,7 +47,7 @@ if( $cid > 0 ) {
 	// GIJ TODO  append error check!
 	$rs = $xoopsDB->query( "SELECT title FROM $table_cat WHERE cid='$cid'" ) ;
 	list( $cat_title ) = $xoopsDB->fetchRow( $rs ) ;
-	$xoopsTpl->assign( 'xoops_pagetitle' , $cat_title ) ;
+	$xoopsTpl->assign( 'xoops_pagetitle' , $myts->makeTboxData4show( $cat_title ) ) ;
 
 	// Category Specified
 	$xoopsTpl->assign( 'category_id' , $cid ) ;

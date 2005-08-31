@@ -4,18 +4,18 @@
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
 
-include( "header.php" ) ;
+include "header.php" ;
 $myts =& MyTextSanitizer::getInstance() ; // MyTextSanitizer object
-include_once( XOOPS_ROOT_PATH."/class/xoopstree.php" ) ;
+include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
 $cattree = new XoopsTree( $table_cat , "cid" , "pid" ) ;
 
 // GET variables
 $lid = empty( $_GET['lid'] ) ? 0 : intval( $_GET['lid'] ) ;
 $cid = empty( $_GET['cid'] ) ? 0 : intval( $_GET['cid'] ) ;
 
-$xoopsOption['template_main'] = "{$mydirname}_photo.html" ;
+$xoopsOption['template_main'] = "myalbum{$mydirnumber}_photo.html" ;
 
-include( XOOPS_ROOT_PATH . "/header.php" ) ;
+include XOOPS_ROOT_PATH . "/header.php" ;
 
 if( $global_perms & GPERM_INSERTABLE ) $xoopsTpl->assign( 'lang_add_photo' , _ALBM_ADDPHOTO ) ;
 $xoopsTpl->assign( 'lang_album_main' , _ALBM_MAIN ) ;
@@ -32,6 +32,9 @@ if( $p == false ) {
 	exit ;
 }
 $photo = myalbum_get_array_for_photo_assign( $p ) ;
+
+// <title></title>
+$xoopsTpl->assign( 'xoops_pagetitle' , $photo['title'] ) ;
 
 // Middle size calculation
 $photo['width_height'] = '' ;
@@ -56,7 +59,7 @@ $sub_title = preg_replace( "/^(.+)folder16/" , '$1folder_open' , $sub_title ) ;
 $xoopsTpl->assign( 'album_sub_title' , $sub_title ) ;
 
 // Orders
-include( XOOPS_ROOT_PATH."/modules/$mydirname/include/photo_orders.php" ) ;
+include XOOPS_ROOT_PATH."/modules/$mydirname/include/photo_orders.php" ;
 if( isset( $_GET['orderby'] ) && isset( $myalbum_orders[ $_GET['orderby'] ] ) ) $orderby = $_GET['orderby'] ;
 else if( isset( $myalbum_orders[ $myalbum_defaultorder ] ) ) $orderby = $myalbum_defaultorder ;
 else $orderby = 'lidA' ;

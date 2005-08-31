@@ -49,7 +49,7 @@ define("_ALBM_REDOTHUMBS","¥µ¥à¥Í¥¤¥ë¤ÎºÆ¹½ÃÛ(<a href='redothumbs.php'>ºÆ¥¹¥¿¡¼¥
 define("_ALBM_REDOTHUMBS2","¥µ¥à¥Í¥¤¥ë¤ÎºÆ¹½ÃÛ");
 define("_ALBM_REDOTHUMBSINFO","Âç¤­¤Ê¿ôÃÍ¤òÆþÎÏ¤¹¤ë¤È¥µ¡¼¥Ð¡¼¥¿¥¤¥à¥¢¥¦¥È¤Î¸¶°ø¤Ë¤Ê¤ê¤Þ¤¹¡£");
 define("_ALBM_REDOTHUMBSNUMBER","°ìÅÙ¤Ë½èÍý¤¹¤ë¥µ¥à¥Í¡¼¥ë¤Î¿ô");
-define("_ALBM_REDOING","ºÆ¹½ÃÛÃæ: ");
+define("_ALBM_REDOING","ºÆ¹½ÃÛ¤·¤Þ¤·¤¿: ");
 define("_ALBM_BACK","Ìá¤ë");
 define("_ALBM_ADDPHOTO","²èÁü¤òÄÉ²Ã");
 
@@ -78,8 +78,10 @@ define("_ALBM_BATCHBLANK","¥¿¥¤¥È¥ëÉô¤ò¶õÍó¤Ë¤·¤¿¾ì¹ç¡¢¥Õ¥¡¥¤¥ëÌ¾¤ò¥¿¥¤¥È¥ë¤È¤·¤
 define("_ALBM_DELETEPHOTO","ºï½ü?");
 define("_ALBM_VALIDPHOTO","¾µÇ§");
 define("_ALBM_PHOTODEL","²èÁüºï½ü?");
-define("_ALBM_DELETINGPHOTO","ºï½üÃæ");
-define("_ALBM_MOVINGPHOTO","°ÜÆ°Ãæ");
+define("_ALBM_DELETINGPHOTO","ºï½ü¤·¤Þ¤·¤¿");
+define("_ALBM_MOVINGPHOTO","°ÜÆ°¤·¤Þ¤·¤¿");
+
+define("_ALBM_STORETIMESTAMP","Æü»þ¤òÊÑ¹¹¤·¤Ê¤¤");
 
 define("_ALBM_POSTERC","Åê¹Æ: ");
 define("_ALBM_DATEC","Æü»þ: ");
@@ -128,6 +130,8 @@ define("_ALBM_DESCRIPTIONC","ÀâÌÀ");
 define("_ALBM_EMAILC","Email");
 define("_ALBM_CATEGORYC","¥«¥Æ¥´¥ê");
 define("_ALBM_LASTUPDATEC","Á°²ó¹¹¿·");
+define("_ALBM_TELLAFRIEND","Í§¿Í¤ËÃÎ¤é¤»¤ë");
+define("_ALBM_SUBJECT4TAF","ÌÌÇò¤¤¼Ì¿¿¤ò¸«¤Ä¤±¤Þ¤·¤¿");
 define("_ALBM_HITSC","¥Ò¥Ã¥È¿ô");
 define("_ALBM_RATINGC","É¾²Á");
 define("_ALBM_ONEVOTE","ÅêÉ¼¿ô 1");

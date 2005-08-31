@@ -3,7 +3,7 @@
 //                      myAlbum-P - XOOPS photo album                        //
 //                        <http://www.peak.ne.jp/>                           //
 // ------------------------------------------------------------------------- //
-include( "header.php" ) ;
+include "header.php" ;
 $myts =& MyTextSanitizer::getInstance() ;
 
 if( ! ( $global_perms & GPERM_RATEVOTE ) ) {
@@ -75,7 +75,7 @@ if( ! empty( $_POST['submit'] ) ) {
 
 } else {
 
-	$xoopsOption['template_main'] = "{$mydirname}_ratephoto.html" ;
+	$xoopsOption['template_main'] = "myalbum{$mydirnumber}_ratephoto.html" ;
 	include( XOOPS_ROOT_PATH."/header.php" ) ;
 
 	// store the referer

@@ -580,7 +580,7 @@ function myalbum_update_photo( $lid , $cid , $title , $desc , $valid = null , $e
 	global $table_photos , $table_text , $table_cat , $mod_url , $isadmin ;
 
 	if( isset( $valid ) ) {
-		$set_status = "status='$valid'," ;
+		$set_status = ",status='$valid'" ;
 
 		// Trigger Notification
 		if( $valid == 1 ) {
@@ -598,15 +598,17 @@ function myalbum_update_photo( $lid , $cid , $title , $desc , $valid = null , $e
 		$set_status = '' ;
 	}
 
+	$set_date = empty( $_POST['store_timestamp'] ) ? ",date=UNIX_TIMESTAMP()" : "" ;
+
 	// not admin can only touch photos status>0
 	$whr_status = $isadmin ? '' : 'AND status>0' ;
 
 	if( $ext == "" ) {
 		// modify only text
-		$xoopsDB->query("UPDATE $table_photos SET cid='$cid',title='".addslashes($title)."', $set_status date=".time()." WHERE lid='$lid' $whr_status") ;
+		$xoopsDB->query("UPDATE $table_photos SET cid='$cid',title='".addslashes($title)."' $set_status $set_date WHERE lid='$lid' $whr_status") ;
 	} else {
 		// modify text and image
-		$xoopsDB->query("UPDATE $table_photos SET cid='$cid',title='".addslashes($title)."', $set_status date=".time().", ext='$ext',res_x='$x',res_y='$y' WHERE lid='$lid' $whr_status");
+		$xoopsDB->query("UPDATE $table_photos SET cid='$cid',title='".addslashes($title)."', ext='$ext',res_x='$x',res_y='$y' $set_status $set_date WHERE lid='$lid' $whr_status");
 	}
 
 	$xoopsDB->query("UPDATE $table_text SET description='".addslashes($desc)."' WHERE lid='$lid'");

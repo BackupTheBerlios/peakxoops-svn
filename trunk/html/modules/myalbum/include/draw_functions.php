@@ -3,22 +3,22 @@
 // for older files
 function myalbum_header()
 {
-	global $mod_url , $mydirname ;
+	global $mod_url , $mydirnumber ;
 
 	$tpl = new XoopsTpl() ;
 	$tpl->assign( array( 'mod_url' => $mod_url ) ) ;
-	$tpl->display( "db:{$mydirname}_header.html" ) ;
+	$tpl->display( "db:myalbum{$mydirnumber}_header.html" ) ;
 }
 
 
 // for older files
 function myalbum_footer()
 {
-	global $mod_copyright , $mydirname ;
+	global $mod_copyright , $mydirnumber ;
 
 	$tpl = new XoopsTpl() ;
 	$tpl->assign( array( 'mod_copyright' => $mod_copyright ) ) ;
-	$tpl->display( "db:{$mydirname}_footer.html" ) ;
+	$tpl->display( "db:myalbum{$mydirnumber}_footer.html" ) ;
 }
 
 

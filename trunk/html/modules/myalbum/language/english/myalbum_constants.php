@@ -15,6 +15,7 @@ define( "GPERM_TOUCHOTHERS" , 64 ) ;
 define( "GPERM_SUPERTOUCHOTHERS" , 128 ) ;
 define( "GPERM_RATEVIEW" , 256 ) ;
 define( "GPERM_RATEVOTE" , 512 ) ;
+define( "GPERM_TELLAFRIEND" , 1024 ) ;
 
 // Global Group Permission
 define( "_ALBM_GPERM_G_INSERTABLE" , "Post (need approval)" ) ;
@@ -27,6 +28,7 @@ define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Touch photos posted by others" ) ;
 define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Super Touch others" ) ;
 define( "_ALBM_GPERM_G_RATEVIEW" , "View Rate" ) ;
 define( "_ALBM_GPERM_G_RATEVOTE" , "Vote" ) ;
+define( "_ALBM_GPERM_G_TELLAFRIEND" , "Tell a friend" ) ;
 
 // Caption
 define( "_ALBM_CAPTION_TOTAL" , "Total:" ) ;

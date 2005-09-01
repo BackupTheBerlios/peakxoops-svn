@@ -51,8 +51,8 @@ define('_PICAL_MB_NEXT_YEAR','Next Year') ;
 define('_PICAL_MB_NOEVENT','No Events') ;
 define('_PICAL_MB_ADDEVENT','Add an Event') ;
 define('_PICAL_MB_CONTINUING','(continuing)') ;
-define('_PICAL_MB_RESTEVENT_PRE','more') ;
-define('_PICAL_MB_RESTEVENT_SUF','item(s)') ;
+define('_PICAL_MB_RESTEVENT_PRE','') ;
+define('_PICAL_MB_RESTEVENT_SUF','more item(s)') ;
 define('_PICAL_MB_TIMESEPARATOR','--') ;
 
 define('_PICAL_MB_ALLDAY_EVENT','Allday Event') ;

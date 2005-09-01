@@ -1,23 +1,22 @@
-Hello {X_UNAME},
+Hallo {X_UNAME},
 
-A new event "{EVENT_SUMMARY}" in category "{CATEGORY_TITLE}" has been created at {X_SITENAME}.
+Ein neuer Termin "{EVENT_SUMMARY}" in der Kategorie "{CATEGORY_TITLE}" wurde erstellt auf der Webseite {X_SITENAME}.
 
-Follow this link to view the event:
+Folgender Link führt direkt zu diesem Termin:
 {EVENT_URI}
 
 -----------
 
-You are receiving this message because you selected to be notified 
-when new events are added to our site.
+Diese Nachricht wurde gesendet, weil die automatische Benachrichtigung -
+wenn neue Termine auf unserer Seite eingetragen werden - ausgewählt worden ist.
 
-If this is an error or you wish not to receive further such notifications,
-please update your subscriptions by visiting the link below:
+Wenn dies ein Fehler ist oder keine weiteren Nachrichten dieser Art mehr ausgeschickt werden sollen, bitte folgenden Link aufrufen:
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+Bitte nicht auf diese Nachricht antworten.
 
 -----------
 
 {X_SITENAME} ({X_SITEURL}) 
-webmaster
+Webmaster
 {X_ADMINMAIL}

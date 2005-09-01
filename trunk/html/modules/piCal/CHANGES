@@ -1,12 +1,17 @@
 [xlang:en]
 
+v.082 bug fixes (2005-9-1)
+- fixed some bugs around PHP_SELF, SCRIPT_NAME etc.
+- modified displaying as 12/24hour system in editing view
+- updated german (thx Rene)
+
 v.081 security update (2005-8-27)
 - fixed PHP_SELF XSS
 - added XOOPS 2.2 adaptation (minicalex, titles of blocks etc.)
 - updated myblocksadmin into 0.40
 - modified the theme compatibility with common's jscalendar
 - added robots mode into minicalex for reducing mass crawling
-- update tchinese files (thx Kikuchi)
+- updated tchinese (thx Kikuchi)
 
 v.080 release (2005-6-29)
 - fixed and modified usages of the plugin manager (thx tohokuaiki)
@@ -274,6 +279,11 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.082 bug fixes (2005-9-1)
+- PHP_SELFのXSS対策で、SCRIPT_NAMEの誤用などを修正した
+- 編集画面でも、12時間/24時間の切替が効くようにした
+- ドイツ語ファイル更新 (thx Rene)
 
 v.081 セキュリティアップデート (2005-8-27)
 - fixed PHP_SELF XSS

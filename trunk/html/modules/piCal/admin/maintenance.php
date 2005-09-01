@@ -180,7 +180,7 @@ if( ! $is_040 ) {
 	echo _AM_ALRT_OLDTABLE ;
 	echo "
 		<br />(0.4x, 0.5x -> 0.6)
-		<form action='$php_self' method='post'>
+		<form action='' method='post'>
 			".$xoopsGTicket->getTicketHtml( __LINE__ )."
 			<input type='submit' name='do_04to06' value='"._GO."' />
 		</form>\n" ;
@@ -192,7 +192,7 @@ if( ! $is_040 ) {
 	echo _AM_ALRT_CATTABLENOTEXIST ;
 	echo "
 		<br />
-		<form action='$php_self' method='post'>
+		<form action='' method='post'>
 			".$xoopsGTicket->getTicketHtml( __LINE__ )."
 			<input type='submit' name='create_cat' value='"._GO."' />
 		</form>\n" ;
@@ -205,7 +205,7 @@ if( ! $is_040 ) {
 	OpenTable() ;
 	echo "
 		".sprintf(_AM_FMT_SERVER_TZ_ALL,date('Z',1104537600)/3600,date('Z',1120176000)/3600,date('T'),$xoopsConfig['server_TZ'],$cal->server_TZ)."
-		<form action='$php_self' method='post'>
+		<form action='' method='post'>
 		<table border='1'>
 			<tr>
 				<th>

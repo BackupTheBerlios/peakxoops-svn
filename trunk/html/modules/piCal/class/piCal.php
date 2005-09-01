@@ -147,7 +147,7 @@ function piCal( $target_date = "" , $language = "japanese" , $reload = false )
 
 	// POSTでバラバラに日付を送信された場合、指定があればリロードを行う
 	if( ! empty( $caldate_posted ) && $reload && ! headers_sent() ) {
-		$reload_str = "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}?caldate=$this->caldate&{$_SERVER['QUERY_STRING']}" ;
+		$reload_str = "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?caldate=$this->caldate&{$_SERVER['QUERY_STRING']}" ;
 		$needed_post_vars = array( 'op' , 'order' , 'cid' , 'num' , 'txt' ) ;
 		foreach( $needed_post_vars as $post ) {
 			if( isset( $_POST[ $post ] ) ) $reload_str .= "&$post=".urlencode( $_POST[ $post ] ) ;
@@ -271,7 +271,7 @@ function get_daytype( $date )
 // $this->caldate日の予定 を返す
 function get_date_schedule( $get_target = '' )
 {
-	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 
 	$ret = '' ;
 
@@ -341,7 +341,7 @@ function get_date_schedule( $get_target = '' )
 // $this->caldate以降の予定 を最大 $num 件返す
 function get_coming_schedule( $get_target = '' , $num = 5 )
 {
-	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 
 	$ret = '' ;
 
@@ -497,8 +497,8 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 	// list( $usec , $sec ) = explode( " " , microtime() ) ;
 	// $picalstarttime = $sec + $usec ;
 
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( $get_target == '' ) $get_target = $PHP_SELF ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
 	require_once( "$this->base_path/include/patTemplate.php" ) ;
@@ -531,7 +531,7 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 	$prev_month = date("Y-n-j", mktime(0,0,0,$this->month,0,$this->year));
 	$next_month = date("Y-n-j", mktime(0,0,0,$this->month+1,1,$this->year));
 
-	$tmpl->addVar( "WholeBoard" , "PHP_SELF" , $PHP_SELF ) ;
+	// $tmpl->addVar( "WholeBoard" , "PHP_SELF" , '' ) ;
 	$tmpl->addVar( "WholeBoard" , "GET_TARGET" , $get_target ) ;
 	$tmpl->addVar( "WholeBoard" , "QUERY_STRING" , $query_string ) ;
 
@@ -596,7 +596,6 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 			if( ! checkdate($this->month,$date,$this->year) ) {
 				// 月の範囲外
 				array_push( $rows , array(
-					"PHP_SELF" => $PHP_SELF ,
 					"GET_TARGET" => $get_target ,
 					"QUERY_STRING" => $query_string ,
 					"SKINPATH" => $this->images_url ,
@@ -632,7 +631,6 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 
 			// テンプレート用配列へのデータセット
 			array_push( $rows , array(
-				"PHP_SELF" => $PHP_SELF ,
 				"GET_TARGET" => $get_target ,
 				"QUERY_STRING" => $query_string ,
 
@@ -669,8 +667,8 @@ function get_mini_calendar_html( $get_target = '' , $query_string = '' , $mode =
 // 年間カレンダー全体の表示（patTemplate使用)
 function get_yearly( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( $get_target == '' ) $get_target = $PHP_SELF ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
 	require_once( "$this->base_path/include/patTemplate.php" ) ;
@@ -722,8 +720,8 @@ function get_yearly( $get_target = '' , $query_string = '' , $for_print = false 
 // 月間カレンダー全体の表示（patTemplate使用)
 function get_monthly( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( $get_target == '' ) $get_target = $PHP_SELF ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
 	require_once( "$this->base_path/include/patTemplate.php" ) ;
@@ -787,8 +785,8 @@ function get_monthly( $get_target = '' , $query_string = '' , $for_print = false
 // 週間カレンダー全体の表示（patTemplate使用)
 function get_weekly( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( $get_target == '' ) $get_target = $PHP_SELF ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
 	require_once( "$this->base_path/include/patTemplate.php" ) ;
@@ -830,8 +828,8 @@ function get_weekly( $get_target = '' , $query_string = '' , $for_print = false 
 // 一日カレンダー全体の表示（patTemplate使用)
 function get_daily( $get_target = '' , $query_string = '' , $for_print = false )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( $get_target == '' ) $get_target = $PHP_SELF ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
 	require_once( "$this->base_path/include/patTemplate.php" ) ;
@@ -980,8 +978,8 @@ function get_calendar_information( $mode = 'M' )
 // カレンダーの本体を返す（１ヶ月分）
 function get_monthly_html( $get_target = '' , $query_string = '' )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( $get_target == '' ) $get_target = $PHP_SELF ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $PHP_SELF ;
 
 	// get the result of plugins
 	$plugin_returns = array() ;
@@ -1211,7 +1209,7 @@ function get_monthly_html( $get_target = '' , $query_string = '' )
 // カレンダーの本体を返す（１週間分）
 function get_weekly_html( )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 
 	$ret = "
 	 <table border='0' cellspacing='0' cellpadding='0' width='100%' style='border-collapse:collapse;margin:0px;'>
@@ -1342,7 +1340,7 @@ function get_weekly_html( )
 			if( $event->allday ) {
 				if( $event->allday & 4 ) {
 					// 記念日フラグの立っているもの
-					$date_part_append .= "<font size='2'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Weekly&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='cal_summary_specialday'><font color='$this->holiday_color'>$summary</font></a></font><br />\n" ;
+					$date_part_append .= "<font size='2'><a href='?cid=$this->now_cid&amp;smode=Weekly&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='cal_summary_specialday'><font color='$this->holiday_color'>$summary</font></a></font><br />\n" ;
 					continue ;
 				} else {
 					// 通常の全日イベント
@@ -1361,7 +1359,7 @@ function get_weekly_html( )
 				      <pre style='margin:0px;'><font size='2'>$time_part</font></pre>
 				    </td>
 				    <td valign='top'>
-				      <font size='2'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Weekly&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'>$summary</a></font>
+				      <font size='2'><a href='?cid=$this->now_cid&amp;smode=Weekly&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'>$summary</a></font>
 				    </td>
 				  </tr>
 			\n" ;
@@ -1402,7 +1400,7 @@ function get_weekly_html( )
 					      <pre style='margin:0px;'><font size='2'>$time_part</font></pre>
 					    </td>
 					    <td valign='top'>
-					      <font size='2'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Weekly&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'><font color='#00FF00'>$summary ("._PICAL_MB_EVENT_NEEDADMIT.")</font></a></font>
+					      <font size='2'><a href='?cid=$this->now_cid&amp;smode=Weekly&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'><font color='#00FF00'>$summary ("._PICAL_MB_EVENT_NEEDADMIT.")</font></a></font>
 					    </td>
 					  </tr>
 				\n" ;
@@ -1426,7 +1424,7 @@ function get_weekly_html( )
 		if( $this->insertable ) $event_str .= "
 				  <tr>
 				    <td valign='bottom' colspan='2'>
-				      &nbsp; <font size='2'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Weekly&amp;action=Edit&amp;caldate=$link'><img src='$this->images_url/addevent.gif' border='0' width='14' height='12' />"._PICAL_MB_ADDEVENT."</a></font>
+				      &nbsp; <font size='2'><a href='?cid=$this->now_cid&amp;smode=Weekly&amp;action=Edit&amp;caldate=$link'><img src='$this->images_url/addevent.gif' border='0' width='14' height='12' />"._PICAL_MB_ADDEVENT."</a></font>
 				    </td>
 				  </tr>
 		\n" ;
@@ -1464,7 +1462,7 @@ function get_weekly_html( )
 	 <tr>
 	   <td><img src='$this->images_url/spacer.gif' alt='' width='10' height='80' /></td>
 	   <td bgcolor='$bgcolor' align='center' valign='middle' style='vertical-align:middle;text-align:center;$this->frame_css;background-color:$bgcolor'>
-	     <a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Daily&amp;caldate=$link' class='calbody'><font size='3' color='$color'><b><span class='calbody'>$disp</span></b></font></a><br />
+	     <a href='?cid=$this->now_cid&amp;smode=Daily&amp;caldate=$link' class='calbody'><font size='3' color='$color'><b><span class='calbody'>$disp</span></b></font></a><br />
 	     $date_part_append
 	   </td>
 	   <td valign='top' colspan='6' bgcolor='$body_bgcolor' style='$this->frame_css;background-color:$body_bgcolor'>
@@ -1483,7 +1481,7 @@ function get_weekly_html( )
 // カレンダーの本体を返す（１日分）
 function get_daily_html( )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 
 	// get the result of plugins
 	$plugin_returns = array() ;
@@ -1563,7 +1561,7 @@ function get_daily_html( )
 	           <pre style='margin:0px;'><font size='3'>$time_part</font></pre>
 	         </td>
 	         <td vlalign='top'>
-	           <font size='3'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Daily&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'>$summary</a></font><br />
+	           <font size='3'><a href='?cid=$this->now_cid&amp;smode=Daily&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'>$summary</a></font><br />
 	           <font size='2'>$description</font><br />
 	           &nbsp; 
 	         </td>
@@ -1596,7 +1594,7 @@ function get_daily_html( )
 	           <pre style='margin:0px;'><font size='3'>$time_part</font></pre>
 	         </td>
 	         <td vlalign='top'>
-	           <font size='3'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Daily&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'><font color='#00FF00'>$summary ("._PICAL_MB_EVENT_NEEDADMIT.")</font></a></font>
+	           <font size='3'><a href='?cid=$this->now_cid&amp;smode=Daily&amp;action=View&amp;event_id=$event->id&amp;caldate=$this->caldate' class='$summary_class'><font color='#00FF00'>$summary ("._PICAL_MB_EVENT_NEEDADMIT.")</font></a></font>
 	         </td>
 	       </tr>\n" ;
 	  }
@@ -1621,7 +1619,7 @@ function get_daily_html( )
 	if( $this->insertable ) $ret .= "
 	       <tr>
 	         <td valign='bottom' colspan='2'>
-	           &nbsp; <font size='2'><a href='$PHP_SELF?cid=$this->now_cid&amp;smode=Daily&amp;action=Edit&amp;caldate=$this->caldate'><img src='$this->images_url/addevent.gif' border='0' width='14' height='12' />"._PICAL_MB_ADDEVENT."</a></font>
+	           &nbsp; <font size='2'><a href='?cid=$this->now_cid&amp;smode=Daily&amp;action=Edit&amp;caldate=$this->caldate'><img src='$this->images_url/addevent.gif' border='0' width='14' height='12' />"._PICAL_MB_ADDEVENT."</a></font>
 	         </td>
 	       </tr>\n" ;
 
@@ -1646,7 +1644,7 @@ function get_daily_html( )
 // スケジュール詳細画面表示用文字列を返す
 function get_schedule_view_html( $for_print = false )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	if( isset( $_GET[ 'smode' ] ) ) $smode = $_GET[ 'smode' ] ;
 	else $smode = 'Monthly' ;
 	$editable = $this->editable ;
@@ -1697,7 +1695,7 @@ function get_schedule_view_html( $for_print = false )
 	// 編集ボタン
 	if( $editable && ! $for_print ) {
 		$edit_button = "
-			<form method='get' action='$PHP_SELF' style='margin:0px;'>
+			<form method='get' action='' style='margin:0px;'>
 				<input type='hidden' name='smode' value='$smode' />
 				<input type='hidden' name='action' value='Edit' />
 				<input type='hidden' name='event_id' value='$event->id' />
@@ -1709,7 +1707,7 @@ function get_schedule_view_html( $for_print = false )
 	// 削除ボタン
 	if( $deletable && ! $for_print ) {
 		$delete_button = "
-			<form method='post' action='$PHP_SELF' name='MainForm' style='margin:0px;'>
+			<form method='post' action='' name='MainForm' style='margin:0px;'>
 				<input type='hidden' name='smode' value='$smode' />
 				<input type='hidden' name='last_smode' value='$smode' />
 				<input type='hidden' name='event_id' value='$event->id' />
@@ -1724,9 +1722,10 @@ function get_schedule_view_html( $for_print = false )
 
 	// iCalendar 出力ボタン
 	if( $this->can_output_ics && ! $for_print ) {
+		$php_self4disp = strtr( @$_SERVER['PHP_SELF'] , '<>\'"' , '    ' ) ;
 		$ics_output_button = "
-			<a href='$PHP_SELF?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_win.gif' alt='"._PICAL_BTN_OUTPUTICS_WIN."' title='"._PICAL_BTN_OUTPUTICS_WIN."' /></a>
-			<a href='webcal://{$_SERVER['HTTP_HOST']}$PHP_SELF?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_mac.gif' alt='"._PICAL_BTN_OUTPUTICS_MAC."' title='"._PICAL_BTN_OUTPUTICS_MAC."' /></a>\n" ;
+			<a href='?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_win.gif' alt='"._PICAL_BTN_OUTPUTICS_WIN."' title='"._PICAL_BTN_OUTPUTICS_WIN."' /></a>
+			<a href='webcal://{$_SERVER['HTTP_HOST']}$php_self4disp?fmt=single&amp;event_id=$event->id&amp;output_ics=1' target='_blank'><img border='0' src='$this->images_url/output_ics_mac.gif' alt='"._PICAL_BTN_OUTPUTICS_MAC."' title='"._PICAL_BTN_OUTPUTICS_MAC."' /></a>\n" ;
 	} else $ics_output_button = "" ;
 
 	// 日付・時間表示の処理
@@ -1776,7 +1775,7 @@ function get_schedule_view_html( $for_print = false )
 			} else {
 				$parent_date_str = $this->get_long_ymdn( $parent_event->start + $tzoffset ) ;
 			}
-			$rrule .= "<br /><a href='$PHP_SELF?action=View&amp;event_id=$parent_event->id' target='_blank'>"._PICAL_MB_LINK_TO_RRULE1ST. " $parent_date_str</a>" ;
+			$rrule .= "<br /><a href='?action=View&amp;event_id=$parent_event->id' target='_blank'>"._PICAL_MB_LINK_TO_RRULE1ST. " $parent_date_str</a>" ;
 		} else {
 			$rrule .= '<br /> '._PICAL_MB_RRULE1ST ;
 		}
@@ -1892,7 +1891,7 @@ function get_schedule_view_html( $for_print = false )
 // スケジュール編集用画面表示用文字列を返す
 function get_schedule_edit_html( )
 {
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	$editable = $this->editable ;
 	$deletable = $this->deletable ;
 	$smode = isset( $_GET['smode'] ) ? $_GET['smode'] : '' ;
@@ -2017,18 +2016,15 @@ function get_schedule_edit_html( )
 		$poster_tz = $this->user_TZ ;
 	}
 
-	// 開始日
+	// Start Date
 	$textbox_start_date = $this->get_formtextdateselect( 'StartDate' , $start_ymd , $start_long_ymdn ) ;
 
-	// 開始時間
+	// Start Hour
 	$select_start_hour = "<select name='StartHour' $allday_select>\n" ;
-	for( $h = 0 ; $h < 24 ; $h ++ ) {
-		if( $h == $start_hour ) $select_start_hour .= "<option value='$h' selected='selected'>$h</option>\n" ;
-		else $select_start_hour .= "<option value='$h'>$h</option>\n" ;
-	}
+	$select_start_hour .= $this->get_options_for_hour( $start_hour ) ;
 	$select_start_hour .= "</select>" ;
 
-	// 開始分
+	// Start Minutes
 	$select_start_min = "<select name='StartMin' $allday_select>\n" ;
 	for( $m = 0 ; $m < 60 ; $m += 5 ) {
 		if( $m == $start_min ) $select_start_min .= "<option value='$m' selected='selected'>" . sprintf( "%02d" , $m ) . "</option>\n" ;
@@ -2036,18 +2032,15 @@ function get_schedule_edit_html( )
 	}
 	$select_start_min .= "</select>" ;
 
-	// 終了日
+	// End Date
 	$textbox_end_date = $this->get_formtextdateselect( 'EndDate' , $end_ymd , $end_long_ymdn ) ;
 
-	// 終了時間
+	// End Hour
 	$select_end_hour = "<select name='EndHour' $allday_select>\n" ;
-	for( $h = 0 ; $h < 24 ; $h ++ ) {
-		if( $h == $end_hour ) $select_end_hour .= "<option value='$h' selected='selected'>$h</option>\n" ;
-		else $select_end_hour .= "<option value='$h'>$h</option>\n" ;
-	}
+	$select_end_hour .= $this->get_options_for_hour( $end_hour ) ;
 	$select_end_hour .= "</select>" ;
 
-	// 終了分
+	// End Minutes
 	$select_end_min = "<select name='EndMin' $allday_select>\n" ;
 	for( $m = 0 ; $m < 60 ; $m += 5 ) {
 		if( $m == $end_min ) $select_end_min .= "<option value='$m' selected='selected'>" . sprintf( "%02d" , $m ) . "</option>\n" ;
@@ -2055,7 +2048,7 @@ function get_schedule_edit_html( )
 	}
 	$select_end_min .= "</select>" ;
 
-	// カテゴリ選択チェックボックス
+	// Checkbox for selecting Categories
 	$category_checkboxes = '' ;
 	foreach( $this->categories as $cid => $cat ) {
 		$cid4sql = sprintf( "%05d," , $cid ) ;
@@ -2067,7 +2060,7 @@ function get_schedule_edit_html( )
 	}
 	$category_checkboxes = substr( str_replace( '<div' , '</div><div' , $category_checkboxes ) , 6 ) . "</div>\n" ;
 
-	// class PRIVATE時の対象選択
+	// target for "class = PRIVATE"
 	$select_private = "<select name='groupid' $select_private_disabled>\n<option value='0'>"._PICAL_OPT_PRIVATEMYSELF."</option>\n" ;
 	foreach( $this->groups as $sys_gid => $gname ) {
 		$option_desc = sprintf( _PICAL_OPT_PRIVATEGROUP , $gname ) ;
@@ -2092,10 +2085,10 @@ function get_schedule_edit_html( )
 		$description_textarea = "<textarea name='description' cols='50' rows='6' wrap='soft'>$description</textarea>" ;
 	}
 
-	// 表示部
+	// FORM DISPLAY
 	$ret = "
 <h2>"._PICAL_MB_TITLE_EVENTINFO." <small>-"._PICAL_MB_SUBTITLE_EVENTEDIT."-</small></h2>
-<form action='$PHP_SELF' method='post' name='MainForm'>
+<form action='' method='post' name='MainForm'>
 	".$GLOBALS['xoopsGTicket']->getTicketHtml( __LINE__ )."
 	<input type='hidden' name='caldate' value='$this->caldate' />
 	<input type='hidden' name='event_id' value='$event_id' />
@@ -2115,7 +2108,7 @@ function get_schedule_edit_html( )
 		<td class='head'>"._PICAL_TH_STARTDATETIME."</td>
 		<td class='even'>
 			$textbox_start_date &nbsp;
-			{$select_start_hour}"._PICAL_MB_HOUR_SUF." {$select_start_min}"._PICAL_MB_MINUTE_SUF."
+			{$select_start_hour} {$select_start_min}"._PICAL_MB_MINUTE_SUF."
 </select>
 		</td>
 	</tr>
@@ -2123,7 +2116,7 @@ function get_schedule_edit_html( )
 		<td class='head'>"._PICAL_TH_ENDDATETIME."</td>
 		<td class='even'>
 			$textbox_end_date &nbsp; 
-			{$select_end_hour}"._PICAL_MB_HOUR_SUF." {$select_end_min}"._PICAL_MB_MINUTE_SUF."
+			{$select_end_hour} {$select_end_min}"._PICAL_MB_MINUTE_SUF."
 		</td>
 	</tr>
 	<tr>
@@ -2200,7 +2193,7 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 //	error_reporting( 0 ) ;
 
 	// $_SERVER 変数の取得
-	$PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
+	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 
 	// summaryのチェック（未記入ならその旨を追加）
 	if( $_POST[ 'summary' ] == "" ) $_POST[ 'summary' ] = _PICAL_MB_NOSUBJECT ;
@@ -2315,7 +2308,7 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 		if( ! mysql_query( $sql , $this->conn ) ) echo mysql_error() ;
 		// 親レコードへ unique_id,rrule_pid の計算と登録
 		$event_id = mysql_insert_id( $this->conn ) ;
-		$unique_id = 'pical060-' . md5( "{$_SERVER['HTTP_HOST']}$PHP_SELF$event_id") ;
+		$unique_id = 'pical060-' . md5( "{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}$event_id") ;
 		$rrule_pid = $rrule ? $event_id : 0 ;
 		mysql_query( "UPDATE $this->table SET unique_id='$unique_id',rrule_pid='$rrule_pid' WHERE id='$event_id'" , $this->conn ) ;
 
@@ -2394,7 +2387,7 @@ function redirect( $query )
 {
 	// character white list and black list against 'javascript'
 	if( ! preg_match( '/^[a-z0-9=&_-]*$/i' , $query )  || stristr( $query , 'javascript' ) ) {
-		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}" ) ;
+		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}" ) ;
 		exit ;
 	}
 
@@ -2403,16 +2396,16 @@ function redirect( $query )
 			<html>
 			<head>
 			<title>redirection</title>
-			<meta http-equiv='Refresh' content='0; url={$_SERVER['SCRIPT_NAME']}?$query' />
+			<meta http-equiv='Refresh' content='0; url=?$query' />
 			</head>
 			<body>
 			<p>
-				<a href='$this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}?$query'>push here if not redirected</a>
+				<a href='?$query'>push here if not redirected</a>
 			</p>
 			</body>
 			</html>";
 	} else {
-		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}?$query" ) ;
+		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?$query" ) ;
 	}
 	exit ;
 }
@@ -2463,7 +2456,7 @@ function get_timezone_desc( $tz )
 
 
 // カテゴリー選択文字ボックスをフォームごと作成する
-function get_categories_selform( $get_target , $smode = null )
+function get_categories_selform( $get_target = '' , $smode = null )
 {
 	if( empty( $this->categories ) ) return '' ;
 
@@ -2676,6 +2669,20 @@ function get_middle_hi( $time , $is_over24 = false )
 		$hour4disp , // H
 		date( _PICAL_DTFMT_MINUTE , $time ) // I
 	) ;
+}
+
+
+
+// Make <option>s for selecting "HOUR" (default_hour must be 0-23)
+function get_options_for_hour( $default_hour = 0 )
+{
+	$ret = '' ;
+	for( $h = 0 ; $h < 24 ; $h ++ ) {
+		$ret .= $h == $default_hour ? "<option value='$h' selected='selected'>" : "<option value='$h'>" ;
+		$ret .= $this->use24 ? $this->hour_names_24[ $h ] : $this->hour_names_12[ $h ] ;
+		$ret .= "</option>\n" ;
+	}
+	return $ret ;
 }
 
 

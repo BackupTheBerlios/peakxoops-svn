@@ -256,7 +256,7 @@ function notify_new_event( $event_id )
 // $this->caldate日の予定ブロック配列を返す
 function get_blockarray_date_event( $get_target = '' )
 {
-	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 
 	// 時差を計算しつつ、WHERE節の期間に関する条件生成
 	$tzoffset = intval( ( $this->user_TZ - $this->server_TZ ) * 3600 ) ;
@@ -355,7 +355,7 @@ function get_blockarray_date_event( $get_target = '' )
 // $this->caldate以降の予定ブロック配列を返す
 function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming = false , $untildays = 0 )
 {
-	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 	$now = $for_coming ? time() : $this->unixtime + $this->day_start ;
 
 	// 時差を計算しておく
@@ -484,7 +484,7 @@ function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming 
 // 新規に登録された予定ブロック配列を返す
 function get_blockarray_new_event( $get_target = '' , $num = 5 )
 {
-	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 
 	// tzoffset
 	$tzoffset = ( $this->user_TZ - $this->server_TZ ) * 3600 ;
@@ -552,7 +552,7 @@ function get_blockarray_new_event( $get_target = '' , $num = 5 )
 // XOOPSテンプレートに、イベントのリスト表示をアサインする
 function assign_event_list( &$tpl , $get_target = '' )
 {
-	if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
+	// if( $get_target == '' ) $get_target = $_SERVER['SCRIPT_NAME'] ;
 	$pos = isset( $_GET[ 'pos' ] ) ? intval( $_GET[ 'pos' ] ) : 0 ;
 	$num = isset( $_GET[ 'num' ] ) ? intval( $_GET[ 'num' ] ) : 20 ;
 
@@ -871,14 +871,10 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 	$prev_month = date("Y-n-j", mktime(0,0,0,$this->month,0,$this->year));
 	$next_month = date("Y-n-j", mktime(0,0,0,$this->month+1,1,$this->year));
 
-	$parsed_url = parse_url( XOOPS_URL ) ;
-	$root_url = "{$parsed_url['scheme']}://{$parsed_url['host']}" ;
-
 	$block = array(
 		"xoops_url" => XOOPS_URL ,
 		"mod_url" => $this->base_url ,
-		"root_url" => $root_url ,
-		"php_self" => $_SERVER['SCRIPT_NAME'] ,
+		"root_url" => '' ,
 
 		"skinpath" => $this->images_url ,
 		"frame_css" => $this->frame_css ,

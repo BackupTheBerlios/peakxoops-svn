@@ -7,38 +7,38 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_AM_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-06-29 17:19:32
-define('_AM_PI_TH_OPTIONS','Options (usually blank)');
+define('_AM_PI_TH_OPTIONS','Optionen (für gewöhnlich leer)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-24 19:05:03
-define('_AM_TZOPT_SERVER','As server timezone');
-define('_AM_TZOPT_GMT','As GMT');
-define('_AM_TZOPT_USER','As user\'s timezone');
+define('_AM_TZOPT_SERVER','Gleich wie Server-Zeitzone');
+define('_AM_TZOPT_GMT','Als GMT');
+define('_AM_TZOPT_USER','Gleich wie user\'s Zeitzone');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-06 18:03:58
-define('_AM_FMT_SERVER_TZ_ALL','Timezone of the server (winter): %+2.1f<br />Timezone of the server (summer): %+2.1f<br />Zonename of the server: %s<br />The value of XOOPS config: %+2.1f<br />The value of piCal using: %+2.1f<br />');
+define('_AM_FMT_SERVER_TZ_ALL','Zeitzone des Servers (im Winter): %+2.1f<br />Zeitzone des Servers (im Sommer): %+2.1f<br />Zeitzone des Servers: %s<br />The value of XOOPS config: %+2.1f<br />The value of piCal using: %+2.1f<br />');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-03 05:31:11
-define('_AM_FMT_SERVER_TZ_SYSTEM','Timezone in winter: %+2.1f');
+define('_AM_FMT_SERVER_TZ_SYSTEM','Zeitzone im Winter: %+2.1f');
 define('_AM_TH_SERVER_TZ_COUNT','Events');
-define('_AM_TH_SERVER_TZ_VALUE','Timezone');
+define('_AM_TH_SERVER_TZ_VALUE','Zeitzone');
 define('_AM_TH_SERVER_TZ_VALUE_TO','Changes (-14.0¡Á14.0)');
 define('_AM_JSALRT_SERVER_TZ','Don\'t forget backing-up events table before this operation');
 define('_AM_NOTICE_SERVER_TZ','If your server set the timezone area with summer time (=Day Light Saving) and some events were registerd in piCal 0.6x or 0.7x, dont\'t push this button.<br />eg) It is natural to display both -5.0 and -4.0 in EDT');
 define('_AM_MB_SUCCESSTZUPDATE','Events are modified with the timezone(s).');
-define('_AM_PI_UPDATED','Plugins are updated');
-define('_AM_PI_TH_TYPE','Type');
-define('_AM_PI_TH_TITLE','Title');
-define('_AM_PI_TH_DIRNAME','Module\'s dirname');
-define('_AM_PI_TH_FILE','Plugin file');
+define('_AM_PI_UPDATED','Plugins wurden updated');
+define('_AM_PI_TH_TYPE','Typ');
+define('_AM_PI_TH_TITLE','Titel');
+define('_AM_PI_TH_DIRNAME','Modul Verzeichnisname');
+define('_AM_PI_TH_FILE','Plugin Datei');
 define('_AM_PI_TH_DOTGIF','Dot GIF');
 define('_AM_PI_TH_OPERATION','Operation');
-define('_AM_PI_ENABLED','Enabled');
-define('_AM_PI_DELETE','Delete');
-define('_AM_PI_NEW','New');
-define('_AM_PI_VIEWYEARLY','Yearly View');
-define('_AM_PI_VIEWMONTHLY','Monthly View');
-define('_AM_PI_VIEWWEEKLY','Weekly View');
-define('_AM_PI_VIEWDAILY','Daily View');
+define('_AM_PI_ENABLED','Aktiv');
+define('_AM_PI_DELETE','Löschen');
+define('_AM_PI_NEW','Neu');
+define('_AM_PI_VIEWYEARLY','Jahresansicht');
+define('_AM_PI_VIEWMONTHLY','Monatsansicht');
+define('_AM_PI_VIEWWEEKLY','Wochenansicht');
+define('_AM_PI_VIEWDAILY','Tagesansicht');
 
 define( 'PICAL_AM_LOADED' , 1 ) ;
 

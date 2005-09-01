@@ -8,13 +8,13 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_CNST_LOADED' ) ) {
 define('_PICAL_BTN_DELETE_ONE','Remove just one');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-03 05:31:11
-define('_PICAL_JS_CALENDAR','calendar-en.js');
+define('_PICAL_JS_CALENDAR','calendar-de.js');
 define('_PICAL_JSFMT_YMDN','%d %B %Y (%A)');
 define('_PICAL_DTFMT_MINUTE','i');
 define('_PICAL_FMT_YMDN','%3$s %2$s %1$s %4$s');
 define('_PICAL_FMT_DHI','%1$s %2$s:%3$s');
 define('_PICAL_FMT_HI','%1$s:%2$s');
-define('_PICAL_TH_TIMEZONE','Time Zone');
+define('_PICAL_TH_TIMEZONE','Zeitzone');
 
 define( 'PICAL_CNST_LOADED' , 1 ) ;
 
@@ -122,7 +122,7 @@ define('_PICAL_ERR_NOPERM_TO_OUTPUTICS',"Fehler: Keine Berechtigung für die iCal
 define('_PICAL_ERR_LACKINDISPITEM','Eintrag %s ist leer.<br />Zurück-Button des Browsers drücken') ;
 
 define('_PICAL_BTN_JUMP','Zeigen') ;
-define('_PICAL_BTN_NEWINSERTED','Neuer Eintrag') ;
+define('_PICAL_BTN_NEWINSERTED','Jetzt Eintragen') ;
 define('_PICAL_BTN_SUBMITCHANGES',' Änderungen zuweisen ') ;
 define('_PICAL_BTN_SAVEAS','Speichern unter') ;
 define('_PICAL_BTN_DELETE','Löschen') ;

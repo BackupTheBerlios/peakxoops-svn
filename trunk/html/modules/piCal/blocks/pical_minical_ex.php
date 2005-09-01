@@ -88,11 +88,12 @@ function pical_minical_ex_show( $options )
 				if( $expire > time() && $prev_uid == $uid ) {
 					$block = unserialize( $cache_bodies[2] ) ;
 					if( $robots_mode ) {
-						$block['root_url'] = $block['mod_url'] ;
-						$block['php_self'] = '/' ;
+						$block['root_url'] = $block['mod_url'] . '/' ;
+						// $block['php_self'] = '/' ;
 						$block['additional_get'] = '' ;
 					} else {
-						$block['php_self'] = $_SERVER['SCRIPT_NAME'] ;
+						$block['root_url'] = '' ;
+						// $block['php_self'] = $_SERVER['SCRIPT_NAME'] ;
 						$block['additional_get'] = $additional_get ;
 					}
 					// speed check
@@ -147,10 +148,11 @@ function pical_minical_ex_show( $options )
 	}
 
 	if( $robots_mode ) {
-		$block['root_url'] = $block['mod_url'] ;
-		$block['php_self'] = '/' ;
+		$block['root_url'] = $block['mod_url'] . '/' ;
+		// $block['php_self'] = '/' ;
 		$block['additional_get'] = '' ;
 	} else {
+		$block['root_url'] = '' ;
 		$block['additional_get'] = $additional_get ;
 	}
 

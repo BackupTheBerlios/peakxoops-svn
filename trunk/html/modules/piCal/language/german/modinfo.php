@@ -7,14 +7,14 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_MI_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-06 18:03:58
-define('_MI_TIMEZONE_USING','Timezone of the server');
-define('_MI_OPT_TZ_USEXOOPS','value of XOOPS config');
-define('_MI_OPT_TZ_USEWINTER','value told from the server as winter time (recommended)');
-define('_MI_OPT_TZ_USESUMMER','value told from the server as summer time');
+define('_MI_TIMEZONE_USING','Zeitzone des Servers');
+define('_MI_OPT_TZ_USEXOOPS','W‰hle die XOOPS-Konfiguration');
+define('_MI_OPT_TZ_USEWINTER','W‰hle die Zeit des Servers als Winterzeit (empfohlen)');
+define('_MI_OPT_TZ_USESUMMER','W‰hle die Zeit des Servers als Sommerzeit');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-03 05:31:11
-define('_MI_USE24HOUR','24hours system (No means 12hours system)');
-define('_MI_PICAL_ADMENU_PLUGINS','Plugins Manager');
+define('_MI_USE24HOUR','24 Stunden-System (Nein heiﬂt, 12 Stunden-System)');
+define('_MI_PICAL_ADMENU_PLUGINS','Plugin Manager');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-22 12:02:00
 define('_MI_PICAL_BNAME_MINICALEX','MiniCalendarEx');

@@ -2,6 +2,12 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-09-03 06:21:32
+define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN','Blocks/Groups');
+define('_MI_SITEMAP_BLOCKNAME','Sitemap');
+define('_MI_SITEMAP_BLOCKDESC','Show sitemap as a block.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-12 11:31:59
 define('_MI_INVISIBLE_DIRNAMES','Directory names of hiding modules');
 define('_MI_INVISIBLE_DIRNAMESDSC','Specify the name of modules should be hidden.<br />Dirnames should be separated with comma.<br />eg) xoopsheadline,newbb');

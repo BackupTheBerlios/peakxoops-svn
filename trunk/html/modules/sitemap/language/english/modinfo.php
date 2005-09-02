@@ -3,6 +3,11 @@
 define('_MI_SITEMAP_NAME', 'Sitemap');
 define('_MI_SITEMAP_MESSAGE', 'Message');
 
+define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN', 'Blocks/Groups' ) ;
+
+define('_MI_SITEMAP_BLOCKNAME', 'Sitemap');
+define('_MI_SITEMAP_BLOCKDESC', 'Show sitemap as a block.');
+
 define('_MI_MESSAGE', 'Message');
 define('_MI_MESSAGEEDSC', '');
 

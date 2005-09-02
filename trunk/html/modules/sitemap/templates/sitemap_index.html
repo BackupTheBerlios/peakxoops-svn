@@ -42,7 +42,7 @@ behavior:url("images/pngbehavior.htc");
 <{if $smarty.foreach.i.iteration is div by 3}></tr><{if !$smarty.foreach.i.last}><tr><td colspan="3"><br /></td></tr><tr><{/if}><{/if}>
 <{/foreach}>
 
-<{if $xoops_isuser}>
+<{if $isuser}>
   <{if $smarty.foreach.i.total is div by 3}><tr><td colspan="3"><br /></td></tr><tr><{/if}>
   <td>
   <div><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/user.gif" /> <b><{$usermenu}></b></div>
@@ -51,7 +51,7 @@ behavior:url("images/pngbehavior.htc");
   <div><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/notifications.php"><{$lang.notifications}></a></div>
   <div><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/user.php?op=logout"><{$lang.logout}></a></div>
   <div><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/viewpmsg.php"><{$lang.inbox}></a></div>
-  <{if $xoops_isadmin}>
+  <{if $isadmin}>
     <div><img src="<{$xoops_url}>/modules/<{$this.mods}>/images/acp.gif" /> <a href="<{$xoops_url}>/admin.php"><{$lang.adminmenu}></a></div>
   <{/if}>
   </td>

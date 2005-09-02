@@ -3,6 +3,11 @@
 define('_MI_SITEMAP_NAME', 'サイトマップ');
 define('_MI_SITEMAP_MESSAGE', 'ここに案内文など、メッセージを表示できます。管理画面から編集してね♪');
 
+define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN', 'ブロック/グループ管理' ) ;
+
+define('_MI_SITEMAP_BLOCKNAME', 'サイトマップ');
+define('_MI_SITEMAP_BLOCKDESC', 'サイトマップをブロック表示する');
+
 define('_MI_MESSAGE', 'メッセージ');
 define('_MI_MESSAGEEDSC', '');
 // add by Ryuji

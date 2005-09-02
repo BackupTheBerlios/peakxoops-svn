@@ -25,7 +25,6 @@ if( is_object( $xoopsUser ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) 
 	$backup_userisadmin = $xoopsUserIsAdmin ;
 	$xoopsUser = '' ;
 	$xoopsUserIsAdmin = false ;
-	$xoopsTpl->assign(array('xoops_isuser' => false, 'xoops_userid' => 0, 'xoops_uname' => '', 'xoops_isadmin' => false));
 }
 
 $sitemap = sitemap_show();
@@ -80,6 +79,14 @@ $xoopsTpl->assign('usermenu', $myts->makeTboxData4Show($usermenu));
 $xoopsTpl->assign('sitemap', $sitemap);
 $xoopsTpl->assign('msgs', $myts->displayTarea($msgs,1));
 $xoopsTpl->assign('show_subcategoris', $xoopsModuleConfig["show_subcategoris"]);
+
+if( $xoopsModuleConfig['alltime_guest'] ) {
+	$xoopsTpl->assign( 'isuser' , 0 ) ;
+	$xoopsTpl->assign( 'isadmin' , 0 ) ;
+} else {
+	$xoopsTpl->assign( 'isuser' , is_object( $xoopsUser ) ) ;
+	$xoopsTpl->assign( 'isadmin' , $xoopsUserIsAdmin ) ;
+}
 
 $xoopsTpl->assign('this', array(
 	'mods' => $xoopsModule->getVar('dirname'),

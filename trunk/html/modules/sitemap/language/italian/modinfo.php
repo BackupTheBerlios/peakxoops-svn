@@ -8,6 +8,12 @@
 #                                                                        #
 # Last modified on 12.04.2005                                            #
 /*************************************************************************/
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-09-03 06:21:32
+define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN','Blocks/Groups');
+define('_MI_SITEMAP_BLOCKNAME','Sitemap');
+define('_MI_SITEMAP_BLOCKDESC','Show sitemap as a block.');
+
 define('_MI_SITEMAP_NAME', 'Mappa del sito');
 define('_MI_SITEMAP_MESSAGE', 'Messaggio');
 

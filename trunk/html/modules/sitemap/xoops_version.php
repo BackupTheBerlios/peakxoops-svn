@@ -1,7 +1,7 @@
 <?php
 
 $modversion['name'] = _MI_SITEMAP_NAME;
-$modversion['version'] = '1.13';
+$modversion['version'] = '1.20';
 $modversion['author'] = 'chanoir';
 $modversion['image'] = 'images/map_slogo.png';
 $modversion['dirname'] = 'sitemap';
@@ -17,6 +17,14 @@ $modversion['templates'][1]['description'] = '';
 
 $modversion['templates'][2]['file'] = 'sitemap_xml_google.html';
 $modversion['templates'][2]['description'] = '';
+
+$modversion['blocks'][1]['file'] = 'sitemap_blocks.php';
+$modversion['blocks'][1]['name'] = _MI_SITEMAP_BLOCKNAME ;
+$modversion['blocks'][1]['description'] = _MI_SITEMAP_BLOCKDESC ;
+$modversion['blocks'][1]['show_func'] = 'b_sitemap_show';
+$modversion['blocks'][1]['edit_func'] = 'b_sitemap_edit';
+$modversion['blocks'][1]['template'] = 'sitemap_block_show.html';
+$modversion['blocks'][1]['options'] = '1';
 
 $modversion['config'][1]['name'] = 'msgs';
 $modversion['config'][1]['title'] = '_MI_MESSAGE';

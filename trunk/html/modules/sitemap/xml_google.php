@@ -14,11 +14,13 @@ if( ! defined( 'SITEMAP_ROOT_CONTROLLER_LOADED' ) ) {
 	require '../../mainfile.php' ;
 }
 
+$sitemap_configs = $xoopsModuleConfig ;
+
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 
 $myts =& MyTextSanitizer::getInstance() ;
 
-$xoopsModuleConfig['with_lastmod'] = true ;
+$sitemap_configs['with_lastmod'] = true ;
 
 
 if (function_exists('mb_http_output')) {
@@ -43,7 +45,7 @@ include_once(XOOPS_ROOT_PATH . '/modules/sitemap/include/sitemap.php');
 $xoopsTpl = new XoopsTpl();
 
 // for All-time guest mode (backup uid & set as Guest)
-if( is_object( $xoopsUser ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) {
+if( is_object( $xoopsUser ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
 	$backup_uid = $xoopsUser->getVar('uid') ;
 	$xoopsUser = '' ;
 	$xoopsUserIsAdmin = false ;
@@ -53,7 +55,7 @@ if( is_object( $xoopsUser ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) 
 $sitemap = sitemap_show();
 
 // for All-time guest mode (restore $xoopsUser*)
-if( ! empty( $backup_uid ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) {
+if( ! empty( $backup_uid ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
 	$member_handler =& xoops_gethandler('member');
 	$xoopsUser =& $member_handler->getUser( $backup_uid ) ;
 	$xoopsUserIsAdmin = $xoopsUser->isAdmin();
@@ -86,14 +88,14 @@ list($usermenu) = $xoopsDB->fetchRow($result);
 
 $myts =& MyTextSanitizer::getInstance();
 
-$msgs = $xoopsModuleConfig['msgs'];
+$msgs = $sitemap_configs['msgs'];
 
 $xoopsTpl->assign('usermenu', $myts->makeTboxData4Show($usermenu)); */
 
 $xoopsTpl->assign('lastmod', gmdate( 'Y-m-d\TH:i:s\Z' ) ); // TODO
 $xoopsTpl->assign('sitemap', $sitemap);
 $xoopsTpl->assign('msgs', $myts->displayTarea($msgs,1));
-$xoopsTpl->assign('show_subcategoris', $xoopsModuleConfig["show_subcategoris"]);
+$xoopsTpl->assign('show_subcategoris', $sitemap_configs["show_subcategoris"]);
 
 $xoopsTpl->assign('this', array(
 	'mods' => $xoopsModule->getVar('dirname'),

@@ -5,12 +5,12 @@
 // WEB		::	Bluemoon inc. <http://www.bluemooninc.biz>
 //
 function b_sitemap_popnupblog(){
-    global $xoopsModuleConfig;
+    global $sitemap_configs;
     $db =& Database::getInstance();
     $myts =& MyTextSanitizer::getInstance();
     $sitemap = array();
     
-    if($xoopsModuleConfig["show_subcategoris"]){ // Execute with show sub categories by Yoshis
+    if($sitemap_configs["show_subcategoris"]){ // Execute with show sub categories by Yoshis
         // Get categories
         $sql = 'SELECT DISTINCT c.* FROM '.$db->prefix('popnupblog_categories').' c, '.$db->prefix("popnupblog_info").
         	' f WHERE f.cat_id=c.cat_id GROUP BY c.cat_id, c.cat_title, c.cat_order ORDER BY c.cat_order';
@@ -31,7 +31,7 @@ function b_sitemap_popnupblog(){
     $i=0;
     while($blog_row = $db->fetchArray($result)){
         //if(in_array($blog_row["cat_id"], $categories)){
-            if($xoopsModuleConfig["show_subcategoris"]){ // Execute with show sub categories
+            if($sitemap_configs["show_subcategoris"]){ // Execute with show sub categories
                 $j = $blog_row["cat_id"];
     			$sitemap['parent'][$j]['child'][$i]['id'] = $blog_row["blogid"];
     			$sitemap['parent'][$j]['child'][$i]['title'] = $myts->makeTboxData4Show($blog_row["title"]);

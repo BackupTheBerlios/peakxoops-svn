@@ -2,14 +2,13 @@
 
 function b_sitemap_show( $options )
 {
-	global $xoopsConfig, $xoopsModuleConfig, $xoopsDB, $xoopsUser, $xoopsUserIsAdmin;
-
-	$xoopsModuleConfigBackup = @$xoopsModuleConfig ;
+	global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsUserIsAdmin;
+	global $sitemap_configs ;
 
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->getByDirname('sitemap');
 	$config_handler =& xoops_gethandler('config');
-	$xoopsModuleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+	$sitemap_configs = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
 
 	$block = array();
 
@@ -28,7 +27,7 @@ function b_sitemap_show( $options )
 	include_once(XOOPS_ROOT_PATH . '/modules/sitemap/include/sitemap.php');
 
 	// for All-time guest mode (backup uid & set as Guest)
-	if( is_object( $xoopsUser ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) {
+	if( is_object( $xoopsUser ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
 		$backup_uid = $xoopsUser->getVar('uid') ;
 		$backup_userisadmin = $xoopsUserIsAdmin ;
 		$xoopsUser = '' ;
@@ -38,7 +37,7 @@ function b_sitemap_show( $options )
 	$sitemap = sitemap_show();
 
 	// for All-time guest mode (restore $xoopsUser*)
-	if( ! empty( $backup_uid ) && ! empty( $xoopsModuleConfig['alltime_guest'] ) ) {
+	if( ! empty( $backup_uid ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
 		$member_handler =& xoops_gethandler('member');
 		$xoopsUser =& $member_handler->getUser( $backup_uid ) ;
 		$xoopsUserIsAdmin = $backup_userisadmin ;
@@ -62,6 +61,7 @@ function b_sitemap_show( $options )
 		// 'messages' => $new_messages,
 		'inbox' => _MB_SYSTEM_INBOX,
 		'adminmenu' => _MB_SYSTEM_ADMENU,
+		'openclose' => _MB_SITEMAP_OPENCLOSE,
 	);
 
 	// ユーザメニューブロックのブロックタイトルを取得
@@ -69,7 +69,7 @@ function b_sitemap_show( $options )
 	$result = $xoopsDB->query($sql);
 	list($usermenu) = $xoopsDB->fetchRow($result);
 
-	$msgs = $xoopsModuleConfig['msgs'];
+	$msgs = $sitemap_configs['msgs'];
 
 	$block['this']['mods'] = 'sitemap';
 
@@ -78,9 +78,9 @@ function b_sitemap_show( $options )
 	$block['usermenu'] = $usermenu;
 	$block['sitemap'] = $sitemap;
 	$block['msgs'] = $msgs;
-	$block['show_subcategoris'] = $xoopsModuleConfig['show_subcategoris'];
+	$block['show_subcategoris'] = $sitemap_configs['show_subcategoris'];
 
-	if( $xoopsModuleConfig['alltime_guest'] ) {
+	if( $sitemap_configs['alltime_guest'] ) {
 		$block['isuser'] = 0 ;
 		$block['isadmin'] = 0 ;
 	} else {
@@ -88,7 +88,7 @@ function b_sitemap_show( $options )
 		$block['isadmin'] = $xoopsUserIsAdmin ;
 	}
 
-	$xoopsModuleConfig = @$xoopsModuleConfigBackup ;
+	$sitemap_configs = @$sitemap_configsBackup ;
 
 	return $block;
 }
@@ -99,7 +99,7 @@ function b_sitemap_show( $options )
 function b_sitemap_edit( $options )
 {
 	return '
-		Cols: <input type="text" size="2" maxlength="2" name="options[0]" value="'.intval($options[0]).'" />
+		'._MB_SITEMAP_COLS.': <input type="text" size="2" maxlength="2" name="options[0]" value="'.intval($options[0]).'" />
 	' ;
 }
 

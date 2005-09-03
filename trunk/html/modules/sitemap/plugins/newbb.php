@@ -7,7 +7,7 @@
 // NewBBversion/newbb2 plugin: D.J., http://xoops.org.cn
 
 function b_sitemap_newbb(){
-    global $xoopsModuleConfig;
+    global $sitemap_configs;
     $sitemap = array();
 
     // Get the NewBB version Info
@@ -44,7 +44,7 @@ function b_sitemap_newbb(){
 		}
 
 		// Why not enable subcategory?
-		if($xoopsModuleConfig["show_subcategoris"]){
+		if($sitemap_configs["show_subcategoris"]){
 			$category_handler =& xoops_getmodulehandler('category', 'newbb');
 			$categories = $category_handler->getAllCats('access');
 		    if(count($categories)>0) foreach ( $categories as $key=>$category ) {
@@ -85,7 +85,7 @@ function b_sitemap_newbb(){
 
     $db =& Database::getInstance();
     $myts =& MyTextSanitizer::getInstance();
-    if($xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
+    if($sitemap_configs["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
         // カテゴリを得る
         $sql = 'SELECT DISTINCT c.* FROM '.$db->prefix('bb_categories').' c, '.$db->prefix("bb_forums").' f WHERE f.cat_id=c.cat_id GROUP BY c.cat_id, c.cat_title, c.cat_order ORDER BY c.cat_order';
         $result = $db->query($sql);
@@ -106,7 +106,7 @@ function b_sitemap_newbb(){
     $i=0;
     while($forum_row = $db->fetchArray($result)){
         //if(in_array($forum_row["cat_id"], $categories)){
-            if($xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
+            if($sitemap_configs["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
                 $j = $forum_row["cat_id"];
     			$sitemap['parent'][$j]['child'][$i]['id'] = $forum_row["forum_id"];
     			$sitemap['parent'][$j]['child'][$i]['title'] = $myts->makeTboxData4Show($forum_row["forum_name"]);

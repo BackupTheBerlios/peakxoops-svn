@@ -1,10 +1,10 @@
 <?php
 function b_sitemap_bluesbb(){
-	global $xoopsModuleConfig,$xoopsUser,$member_handler;
+	global $sitemap_configs,$xoopsUser,$member_handler;
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
 	$sitemap = array();
-	if($xoopsModuleConfig["show_subcategoris"]){
+	if($sitemap_configs["show_subcategoris"]){
 		$query1='SELECT * FROM '.$db->prefix('bluesbb_categories').' ORDER BY cat_order';
 		if (!$result1 = $db->query($query1)) {
 			return false;
@@ -35,7 +35,7 @@ function b_sitemap_bluesbb(){
 	}
 	$i=0;
 	while ( $topic_row = $db->fetchArray($result) ) {
-		if($xoopsModuleConfig["show_subcategoris"]){
+		if($sitemap_configs["show_subcategoris"]){
 			$j = $topic_row['cat_id'];
 			$sitemap['parent'][$j]['child'][$i]['id'] = $topic_row['topic_id'];
 			$sitemap['parent'][$j]['child'][$i]['title'] = $myts->htmlSpecialChars($topic_row['topic_name']);

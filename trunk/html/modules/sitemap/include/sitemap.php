@@ -4,17 +4,17 @@ include_once(XOOPS_ROOT_PATH . '/class/xoopstree.php');
 // 本体
 function sitemap_show()
 {
-	global $xoopsUser, $xoopsConfig, $xoopsModuleConfig ;
-    $plugin_dir = XOOPS_ROOT_PATH . "/modules/sitemap/plugins/";
+	global $xoopsUser, $xoopsConfig, $sitemap_configs ;
+	$plugin_dir = XOOPS_ROOT_PATH . "/modules/sitemap/plugins/";
 
 	// invisible weights
 	$invisible_weights = array() ;
-	if( trim( @$xoopsModuleConfig['invisible_weights'] ) !== '' ) {
-		$invisible_weights = explode( ',' , $xoopsModuleConfig['invisible_weights'] ) ;
+	if( trim( @$sitemap_configs['invisible_weights'] ) !== '' ) {
+		$invisible_weights = explode( ',' , $sitemap_configs['invisible_weights'] ) ;
 	}
 
 	// invisible dirnames
-	$invisible_dirnames = empty( $xoopsModuleConfig['invisible_dirnames'] ) ? '' : str_replace( ' ' , '' , $xoopsModuleConfig['invisible_dirnames'] ) . ',' ;
+	$invisible_dirnames = empty( $sitemap_configs['invisible_dirnames'] ) ? '' : str_replace( ' ' , '' , $sitemap_configs['invisible_dirnames'] ) . ',' ;
 
 	$block = array();
 
@@ -102,7 +102,7 @@ function sitemap_show()
 
 // mylinksやnewsなどよくあるパターンのカテゴリリストを得るためのfunction
 function sitemap_get_categoires_map($table, $id_name, $pid_name, $title_name, $url, $order = ""){
-    global $xoopsModuleConfig;
+    global $sitemap_configs;
     $mytree = new XoopsTree($table, $id_name, $pid_name);
     $xoopsDB =& Database::getInstance();
     
@@ -124,7 +124,7 @@ function sitemap_get_categoires_map($table, $id_name, $pid_name, $title_name, $u
 		$sitemap['parent'][$i]['url'] = $url.$catid;
 
 		// 子の出力
-        if(@$xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
+        if(@$sitemap_configs["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
     		$j = 0;
     		$child_ary = $mytree->getChildTreeArray($catid, $order);
     		foreach ($child_ary as $child)

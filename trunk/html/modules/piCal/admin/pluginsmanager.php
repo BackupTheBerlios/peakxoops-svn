@@ -12,12 +12,15 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
-// SERVER, GET 変数の取得
+// fetch & sanitize from POST & GET
 $action = isset( $_POST[ 'action' ] ) ? $_POST[ 'action' ] : '' ;
 $type = isset( $_GET[ 'type' ] ) ? trim( $_GET[ 'type' ] ) : 'monthly' ;
 
+$limit_type = preg_replace( '/([^0-9A-Za-z_.-]+)/' , '' , @$_GET['limit_type'] ) ;
+$limit_dirname = preg_replace( '/([^0-9A-Za-z_.-]+)/' , '' , @$_GET['limit_dirname'] ) ;
+$limit_file = preg_replace( '/([^0-9A-Za-z_.-]+)/' , '' , @$_GET['limit_file'] ) ;
 
-// MySQLへの接続
+// connection to MySQL
 $conn = $xoopsDB->conn ;
 
 // setting physical & virtual paths
@@ -34,7 +37,6 @@ $cal->base_url = $mod_url ;
 $cal->base_path = $mod_path ;
 $cal->images_url = "$mod_url/images/$skin_folder" ;
 $cal->images_path = "$mod_path/images/$skin_folder" ;
-$pi_table = $xoopsDB->prefix( "pical_plugins" ) ;
 
 
 // XOOPS関連の初期化
@@ -82,7 +84,7 @@ if( ! empty( $_POST['update'] ) ) {
 
 		foreach( $types as $type ) {
 			$type4sql = addslashes( $type ) ;
-			if( ! mysql_query( "INSERT INTO $pi_table SET pi_type='$type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='1'" , $conn ) ) die( mysql_error() ) ;
+			if( ! mysql_query( "INSERT INTO $cal->plugin_table SET pi_type='$type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='1'" , $conn ) ) die( mysql_error() ) ;
 		}
 	}
 
@@ -90,7 +92,7 @@ if( ! empty( $_POST['update'] ) ) {
 	foreach( array_keys( $_POST['pi_titles'] ) as $pi_id ) {
 		if( $pi_id <= 0 ) continue ;
 		if( ! empty( $_POST['deletes'][$pi_id] ) ) {
-			if( ! mysql_query( "DELETE FROM $pi_table WHERE pi_id=$pi_id" , $conn ) ) die( mysql_error() ) ;
+			if( ! mysql_query( "DELETE FROM $cal->plugin_table WHERE pi_id=$pi_id" , $conn ) ) die( mysql_error() ) ;
 		} else {
 			$pi_type4sql = addslashes( $_POST['pi_types'][$pi_id] ) ;
 			$pi_options4sql = addslashes( $_POST['pi_options'][$pi_id] ) ;
@@ -102,7 +104,7 @@ if( ! empty( $_POST['update'] ) ) {
 			$pi_dotgif4sql = addslashes( $_POST['pi_dotgifs'][$pi_id] ) ;
 			$pi_enabled4sql = ! empty( $_POST['pi_enableds'][$pi_id] ) ? 1 : 0 ;
 	
-			if( ! mysql_query( "UPDATE $pi_table SET pi_type='$pi_type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='$pi_enabled4sql' WHERE pi_id=$pi_id" , $conn ) ) die( mysql_error() ) ;
+			if( ! mysql_query( "UPDATE $cal->plugin_table SET pi_type='$pi_type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='$pi_enabled4sql' WHERE pi_id=$pi_id" , $conn ) ) die( mysql_error() ) ;
 		}
 	}
 
@@ -116,11 +118,10 @@ if( ! empty( $_POST['update'] ) ) {
 	}
 
 	$mes = urlencode( sprintf( _AM_PI_UPDATED ) ) ;
-	$cal->redirect( "mes=$mes" ) ;
+	Header( "Location: $cal->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?mes=$mes&limit_type=$limit_type&limit_dirname=$limit_dirname&limit_file=$limit_file" ) ;
 	exit ;
 
 }
-
 
 
 // メイン出力部
@@ -188,22 +189,58 @@ include( './mymenu.php' ) ;
 	}
 
 	// ordering the records of plugins
-	$columns = array( 'pi_id' , 'pi_title' , 'pi_type' , 'pi_dirname' , 'pi_file' , 'pi_dotgif' , 'pi_options' , 'pi_enagled' , 'pi_weight' ) ;
+	$columns = array( 'pi_id' , 'pi_title' , 'pi_type' , 'pi_dirname' , 'pi_file' , 'pi_dotgif' , 'pi_options' , 'pi_enabled' , 'pi_weight' ) ;
 	$order = in_array( @$_GET['order'] , $columns ) ? $_GET['order'] : 'pi_type' ;
+	// type limitation
+	if( ! empty( $limit_type ) ) {
+		$whr_type = "pi_type='".addslashes($limit_type)."'" ;
+	} else {
+		$whr_type = '1' ;
+	}
+
+	// dirname limitation
+	if( ! empty( $limit_dirname ) ) {
+		$whr_dirname = "pi_dirname='".addslashes($limit_dirname)."'" ;
+	} else {
+		$whr_dirname = '1' ;
+	}
+
+	// file limitation
+	if( ! empty( $limit_file ) ) {
+		$whr_file = "pi_file='".addslashes($limit_file)."'" ;
+	} else {
+		$whr_file = '1' ;
+	}
+
+	// select forms for extracting
+	echo "
+	<form name='extraction' action='' method='get' style='margin:0px;'>
+		<select name='limit_type'>".make_selected($type_options,$limit_type)."</select>
+		<select name='limit_dirname'>".make_selected($dirname_options,$limit_dirname)."</select>
+		<select name='limit_file'>".make_selected($file_options,$limit_file)."</select>
+		<input type='submit' value='"._AM_BUTTON_EXTRACT."' />
+	</form>
+	" ;
+
 
 	// プラグインデータ取得
-	$prs = $xoopsDB->query( "SELECT * FROM $pi_table ORDER BY $order, pi_weight" ) ;
+	$prs = $xoopsDB->query( "SELECT * FROM $cal->plugin_table WHERE ($whr_type) AND ($whr_dirname) AND ($whr_file) ORDER BY $order, pi_weight" ) ;
 
 	// TH Part
 	echo "
-	<form name='MainForm' action='' method='post' style='margin:10px;'>
+	<form name='MainForm' action='?limit_type=$limit_type&amp;limit_dirname=$limit_dirname&amp;limit_file=$limit_file' method='post' style='margin:0px;'>
 	".$xoopsGTicket->getTicketHtml( __LINE__ )."
-	<table width='95%' class='outer' cellpadding='4' cellspacing='1'>
+	<table width='100%' class='outer' cellpadding='4' cellspacing='1'>
 	  <tr valign='middle'>
-	    <th><a href='?order=pi_type' style='color:white;'>"._AM_PI_TH_TYPE."</a><br /> &nbsp; <a href='?order=pi_options' style='color:white;'>"._AM_PI_TH_OPTIONS."</a></th>
-	    <th><a href='?order=pi_dirname' style='color:white;'>"._AM_PI_TH_DIRNAME."</a><br /> &nbsp; <a href='?order=pi_file' style='color:white;'>"._AM_PI_TH_FILE."</a></th>
-	    <th><a href='?order=pi_title' style='color:white;'>"._AM_PI_TH_TITLE."</a><br /> &nbsp <a href='?order=pi_dotgif' style='color:white;'>"._AM_PI_TH_DOTGIF."</a></th>
-	    <th colspan='3'>"._AM_PI_TH_OPERATION."</th>
+	    <th><a href='?order=pi_type' style='color:white;'>"._AM_PI_TH_TYPE."</a></th>
+	    <th><a href='?order=pi_dirname' style='color:white;'>"._AM_PI_TH_DIRNAME."</a></th>
+	    <th><a href='?order=pi_file' style='color:white;'>"._AM_PI_TH_FILE."</a></th>
+	    <th><a href='?order=pi_title' style='color:white;'>"._AM_PI_TH_TITLE."</a></th>
+	    <th><a href='?order=pi_dotgif' style='color:white;'>"._AM_PI_TH_DOTGIF."</a></th>
+	    <th><a href='?order=pi_options' style='color:white;'>"._AM_PI_TH_OPTIONS."</a></th>
+	    <th>&lt;-&gt;</th>
+	    <th>"._AM_PI_ENABLED."</th>
+	    <th>"._AM_PI_DELETE."</th>
 	  </tr>
 	" ;
 
@@ -219,37 +256,40 @@ include( './mymenu.php' ) ;
 		$pi_options4disp = htmlspecialchars( $plugin->pi_options , ENT_QUOTES ) ;
 		echo "
 	  <tr>
-	    <td class='$oddeven' align='right'>
+	    <td class='$oddeven'>
 	      <select name='pi_types[$pi_id]'>
 	        ".make_selected($type_options,$plugin->pi_type)."
 	      </select>
-	      &nbsp; <br />
-	      <input type='text' name='pi_options[$pi_id]' value='$pi_options4disp' size='15' />
 	    </td>
 	    <td class='$oddeven'>
 	      <select name='pi_dirnames[$pi_id]'>
 	        ".make_selected($dirname_options,$plugin->pi_dirname)."
 	      </select>
-	      <br /> &nbsp; 
+	    </td>
+	    <td class='$oddeven'>
 	      <select name='pi_files[$pi_id]'>
 	        ".make_selected($file_options,$plugin->pi_file)."
 	      </select>
 	    </td>
 	    <td class='$oddeven'>
-	      <input type='text' name='pi_titles[$pi_id]' value='$pi_title' size='12' />
-	      <br /> &nbsp; 
+	      <input type='text' name='pi_titles[$pi_id]' value='$pi_title' size='8' />
+	    </td>
+	    <td class='$oddeven'>
 	      <select name='pi_dotgifs[$pi_id]'>
 	        ".make_selected($dotgif_options,$plugin->pi_dotgif)."
 	      </select>
 	    </td>
 	    <td class='$oddeven'>
-	      <input type='text' name='pi_weight[$pi_id]' value='$plugin->pi_weight' size='3' style='text-align:right;' />
+	      <input type='text' name='pi_options[$pi_id]' value='$pi_options4disp' size='10' />
 	    </td>
 	    <td class='$oddeven'>
-	      <input type='checkbox' value='1' name='pi_enableds[$pi_id]' $enable_checked />"._AM_PI_ENABLED."
+	      <input type='text' name='pi_weight[$pi_id]' value='$plugin->pi_weight' size='2' style='text-align:right;' />
 	    </td>
 	    <td class='$oddeven'>
-	      <input type='checkbox' value='1' name='deletes[$pi_id]' />"._AM_PI_DELETE."
+	      <input type='checkbox' value='1' name='pi_enableds[$pi_id]' $enable_checked />
+	    </td>
+	    <td class='$oddeven'>
+	      <input type='checkbox' value='1' name='deletes[$pi_id]' />
 	    </td>
 	  </tr>
 		\n" ;
@@ -258,32 +298,35 @@ include( './mymenu.php' ) ;
 	// 新規入力部
 	echo "
 	  <tr>
-	    <td colspan='6'><br /></td>
+	    <td colspan='9'><br /></td>
 	  </tr>
 	  <tr>
-	    <td class='$oddeven' align='right'>
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
 	      <select name='pi_types[0]'>$type_options4new</select>
-	      &nbsp; <br />
-	      <input type='text' name='pi_options[0]' value='' size='15' />
 	    </td>
-	    <td class='$oddeven'>
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
 	      <select name='pi_dirnames[0]'>$dirname_options</select>
-	      <br /> &nbsp; 
+	    </td>
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
 	      <select name='pi_files[0]'>
 	        ".make_selected($file_options,"piCal.php")."
 	      </select>
 	    </td>
-	    <td class='$oddeven'>
-	      <input type='text' name='pi_titles[0]' value='' size='12' />
-	      <br /> &nbsp; 
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
+	      <input type='text' name='pi_titles[0]' value='' size='8' />
+	    </td>
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
 	      <select name='pi_dotgifs[0]'>
 	        ".make_selected($dotgif_options,"dot8x8blue.gif")."
 	      </select>
 	    </td>
-	    <td class='$oddeven'>
-	      <input type='text' name='pi_weight[0]' value='0' size='3' style='text-align:right;' />
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
+	      <input type='text' name='pi_options[0]' value='' size='10' />
 	    </td>
-	    <td class='$oddeven' colspan='2'>
+	    <td class='$oddeven' style='background-color:#FFCCCC;'>
+	      <input type='text' name='pi_weight[0]' value='0' size='2' style='text-align:right;' />
+	    </td>
+	    <td class='$oddeven' colspan='2' style='background-color:#FFCCCC;'>
 	      "._AM_PI_NEW."
 	    </td>
 	  </tr>
@@ -292,10 +335,10 @@ include( './mymenu.php' ) ;
 	// テーブルフッタ部
 	echo "
 	  <tr>
-	    <td colspan='6' align='right' class='head'><input type='submit' name='update' value='"._AM_BTN_UPDATE."' /></td>
+	    <td colspan='9' align='right' class='head'><input type='submit' name='update' value='"._AM_BTN_UPDATE."' /></td>
 	  </tr>
 	  <tr>
-	    <td colspan='6' align='right' valign='bottom' height='50'>".PICAL_COPYRIGHT."</td>
+	    <td colspan='9' align='right' valign='bottom' height='50'>".PICAL_COPYRIGHT."</td>
 	  </tr>
 	</table>
 	</form>

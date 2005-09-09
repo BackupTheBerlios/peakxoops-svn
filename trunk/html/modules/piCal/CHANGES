@@ -1,5 +1,14 @@
 [xlang:en]
 
+v.083 bug fix & modify plugins-system (2005-9-9)
+- modified the interface of Pulguin Manager
+- fixed a duplicatated module can't alter the table by the updating module
+- fixed some bug around "piCal plugin"
+- added cid limitation into "piCal plugin" (set options like 1,2,4)
+- added plugins
+-- membership-birthday (thx sophistry)
+-- hakusen-birthday
+
 v.082 bug fixes (2005-9-1)
 - fixed some bugs around PHP_SELF, SCRIPT_NAME etc.
 - modified displaying as 12/24hour system in editing view
@@ -280,7 +289,16 @@ v0.10 (2003-4-23)
 [/xlang:en]
 [xlang:ja]
 
-v.082 bug fixes (2005-9-1)
+v.083 バグ潰しおよびプラグイン関連の改良 (2005-9-9)
+- プラグインマネージャが思いっきり使いづらかったのを改善（できたかな？）
+- 複製モジュールが、モジュールアップデートでALTER TABLEされなかったバグを修正
+- プラグインマネージャの処理が複製モジュールであちこち間違っていたのを修正
+- piCalプラグインにcidによるオプション絞り込み機能追加
+- プラグイン追加
+-- membershipモジュールの誕生日 (thx sophistry)
+-- 白扇の誕生日 （あとは、ロウソク＆ケーキアイコンさえあれば… :-D）
+
+v.082 バグつぶしメイン (2005-9-1)
 - PHP_SELFのXSS対策で、SCRIPT_NAMEの誤用などを修正した
 - 編集画面でも、12時間/24時間の切替が効くようにした
 - ドイツ語ファイル更新 (thx Rene)

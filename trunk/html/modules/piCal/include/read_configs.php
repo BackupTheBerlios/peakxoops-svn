@@ -11,6 +11,7 @@
 	$mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 	$cal->table = $xoopsDB->prefix( "pical{$mydirnumber}_event" ) ;
 	$cal->cat_table = $xoopsDB->prefix( "pical{$mydirnumber}_cat" ) ;
+	$cal->plugin_table = $xoopsDB->prefix( "pical{$mydirnumber}_plugins" ) ;
 
 	global $xoopsDB , $xoopsUser , $xoopsConfig ;
 

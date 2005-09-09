@@ -3,6 +3,11 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_CNST_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2005-09-09 18:17:12
+define('_PICAL_MB_LINK_TO_RRULE1ST','Jump to the 1st Event ');
+define('_PICAL_MB_RRULE1ST','This is the 1st Event');
+
 define('_PICAL_BTN_DELETE_ONE','³æµ§§R°£');
 
 define('_PICAL_JS_CALENDAR','calendar-big5.js');

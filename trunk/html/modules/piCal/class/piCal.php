@@ -60,8 +60,9 @@ class piCal
 
 	// ANOTHER public properties
 	var $conn ;					// MySQLとの接続ハンドル (予定取得をする時セット)
-	var $table = 'pical_event' ;	// イベントテーブル名
-	var $cat_table = 'pical_cat' ;	// カテゴリテーブル名
+	var $table = 'pical_event' ;		// table name for events
+	var $cat_table = 'pical_cat' ;		// table name for categories
+	var $plugin_table = 'pical_plugin' ;	// table name for plugins
 	var $base_url = '' ;
 	var $base_path = '' ;
 	var $images_url = '/include/piCal/images' ;	// このフォルダに spacer.gif, arrow*.gif 等を置いておく

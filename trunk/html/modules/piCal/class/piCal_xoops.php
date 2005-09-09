@@ -599,7 +599,7 @@ function assign_event_list( &$tpl , $get_target = '' )
 	$toptime_of_day = $this->unixtime + $this->day_start ;
 	switch( $op ) {
 		case 'all' :
-			$whr_term = '' ;
+			$whr_term = '1' ;
 			break ;
 		case 'before' :
 			$whr_term = "(allday AND start<='$this->unixtime') OR ( ! allday AND start<='".( $toptime_of_day + 86400 - $tzoffset )."')" ;
@@ -1011,7 +1011,7 @@ function get_plugins( $type )
 
 	// plugins
 	$plugins = array() ;
-	$prs = $xoopsDB->query( "SELECT pi_title,pi_dirname AS dirname,pi_file AS file,pi_dotgif AS dotgif,pi_options AS options FROM ".$xoopsDB->prefix("pical_plugins")." WHERE pi_type='".addslashes($type)."' AND pi_enabled ORDER BY pi_weight" ) ;
+	$prs = $xoopsDB->query( "SELECT pi_title,pi_dirname AS dirname,pi_file AS file,pi_dotgif AS dotgif,pi_options AS options FROM $this->plugin_table WHERE pi_type='".addslashes($type)."' AND pi_enabled ORDER BY pi_weight" ) ;
 	while( $plugin = $xoopsDB->fetchArray( $prs ) ) {
 		$dirname4sql = addslashes( $plugin['dirname'] ) ;
 		$mrs = $xoopsDB->query( "SELECT mid,name FROM ".$xoopsDB->prefix("modules")." WHERE dirname='$dirname4sql'" ) ;

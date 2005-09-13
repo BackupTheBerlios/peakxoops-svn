@@ -16,6 +16,7 @@
  - added polish language (thx kaper)
  - modified english language (thx Peter)
  - updated french language (thx sebhtml)
+ - fixed a typo in "tell a friend" function (thx HMN) 2.86a
 
 2005-8-20 v2.85 (pre-alpha version)
 
@@ -334,7 +335,7 @@
  - Duplicatable V2.1 実装 (=myalbum* というdirnameからの解放)
  - sitemapプラグイン作成
  - waitingプラグイン作成
- - seachプラグイン作成 （本文検索対応）
+ - searchプラグイン作成 （本文検索対応）
  - Tell a friend モジュールとの連携 (要インストール&全体的な権限のチェック)
  - リファラチェックだった部分を、GTicketに置き換え (CSRF対策)
  - 編集において「日付を更新しない」チェックボックスの追加 (管理者のみ)
@@ -347,6 +348,7 @@
  - ポーランド語追加 (thx kaper)
  - 英語のブラッシュアップ (thx Peter)
  - フランス語更新 (thx sebhtml)
+ - Tell a friend連携機能におけるtypo修正 (thx HMN) 2.86a
 
 2005-8-20 v2.85 (pre-alpha version)
 

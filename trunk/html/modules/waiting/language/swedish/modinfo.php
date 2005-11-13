@@ -6,13 +6,13 @@
 //
 
 // The name of this module
-define("_MI_WAITING_NAME","Väntande Utökat Innehåll");
+define("_MI_WAITING_NAME","VçÏtande Ut‹Ìat InnehéÍl");
 
 // A brief description of this module
-define("_MI_WAITING_DESC","Visar ett block med väntande material för tredje parts moduler.");
+define("_MI_WAITING_DESC","Visar ett block med vçÏtande material f‹Ó tredje parts moduler.");
 
 // Names of blocks for this module (Not all module has blocks)
-define("_MI_WAITING_BNAME1", "Väntande Innehåll");
+define("_MI_WAITING_BNAME1", "VçÏtande InnehéÍl");
 
 
 ?>

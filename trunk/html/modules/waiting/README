@@ -149,6 +149,7 @@ PLUGINS:
 -xcGallery (by nao-pon)
 -xDirectory (by GIJOE)
 -xfguestbook (by karedokx)
+-xfsection (by Bezoops)
 -xyp4all (by flying.tux)
 -yomi search (by nao-pon)
 
@@ -157,6 +158,12 @@ PLUGINS:
 
 
 CHANGES:
+
+:ver 0.94|
+
+- removed CRs in some php files
+- a plugin added
+-- XFSection (thx Bezoops)
 
 :ver 0.93|
 

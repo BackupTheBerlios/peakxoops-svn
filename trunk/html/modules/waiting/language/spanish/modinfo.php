@@ -9,7 +9,7 @@
 define("_MI_WAITING_NAME","En espera Extendidos");
 
 // A brief description of this module
-define("_MI_WAITING_DESC","Muestra un bloque de contenidos en espera para módulos de terceros.");
+define("_MI_WAITING_DESC","Muestra un bloque de contenidos en espera para m…Åulos de terceros.");
 
 // Names of blocks for this module (Not all module has blocks)
 define("_MI_WAITING_BNAME1", "Contenidos en Espera Ext.");

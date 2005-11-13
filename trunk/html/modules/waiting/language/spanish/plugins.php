@@ -5,7 +5,7 @@ define("_PI_WAITING_WAITINGS","Esperando");
 define("_PI_WAITING_SUBMITTED","Pendientes");
 define("_PI_WAITING_BROKENS","Rotos");
 define("_PI_WAITING_MODREQS","Mods Solicitados");
-define("_PI_WAITING_REVIEWS","An·lisis");
+define("_PI_WAITING_REVIEWS","An·Õisis");
 define("_PI_WAITING_PREVIEWS","Previews");
 define("_PI_WAITING_COMMENTS","Comentarios");
 define("_PI_WAITING_LINKS","Enlaces");

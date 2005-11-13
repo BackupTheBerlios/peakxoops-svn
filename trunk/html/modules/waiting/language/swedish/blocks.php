@@ -13,7 +13,7 @@ define('_MB_WAITING_SQL_CACHE','SQL cache');
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-05 11:17:43
 define('_MB_WAITING_LINKTOPLUGINCHECK','check plugins');
 
-define("_MB_WAITING_NOWAITING_DISPLAY","Visa även om inget väntande innehåll finns:");
+define("_MB_WAITING_NOWAITING_DISPLAY","Visa ç×en om inget vçÏtande innehéÍl finns:");
 
 
 ?>

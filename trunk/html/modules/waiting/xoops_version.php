@@ -30,7 +30,7 @@
 // ------------------------------------------------------------------------- //
 
 $modversion['name'] = _MI_WAITING_NAME;
-$modversion['version'] = 0.93;
+$modversion['version'] = 0.94;
 $modversion['description'] = _MI_WAITING_DESC;
 $modversion['author'] = "";
 $modversion['credits'] = "Ryus";

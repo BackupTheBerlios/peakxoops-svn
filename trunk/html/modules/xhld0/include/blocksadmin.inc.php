@@ -110,7 +110,7 @@ if (isset($_POST['previewblock'])) {
   include dirname(__FILE__).'/../admin/myblockform.php'; //GIJ
   //echo '<a href="admin.php?fct=blocksadmin">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$block['form_title'].'<br /><br />';
   //include XOOPS_ROOT_PATH.'/modules/system/admin/blocksadmin/blockform.php';
-  $form->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ , 1800 , 'myblocksadmin' ) );//GIJ
+  $xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ , 1800 , 'myblocksadmin' ) ; //GIJ
   $form->display();
 
   $original_level = error_reporting( E_ALL ) ;
@@ -225,7 +225,7 @@ if ( $op == 'order2' ) {
 	}
 
 	$query4redirect = '?dirname=' . urlencode( strip_tags( substr( $_POST['query4redirect'] , 9 ) ) ) ;
-	redirect_header("myblocksadmin.php$query4redirect",1,_AM_DBUPDATED);
+	redirect_header("myblocksadmin.php$query4redirect",1,_MD_AM_DBUPDATED);
 	exit;
 }
 
@@ -341,7 +341,7 @@ if ( $op == 'edit' ) {
 
 		echo '<a href="myblocksadmin.php">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._AM_EDITBLOCK.'<br /><br />';
 		include dirname(__FILE__).'/../admin/myblockform.php'; //GIJ
-		$form->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ , 1800 , 'myblocksadmin' ) );//GIJ
+		$xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ , 1800 , 'myblocksadmin' ) ; //GIJ
 		$form->display();
   // end of edit_block() GIJ
   xoops_cp_footer();
@@ -364,7 +364,7 @@ if ($op == 'clone') {
 	$block = array('form_title' => _AM_CLONEBLOCK, 'name' => $myblock->getVar('name'), 'side' => $myblock->getVar('side'), 'weight' => $myblock->getVar('weight'), 'visible' => $myblock->getVar('visible'), 'content' => $myblock->getVar('content', 'N'), 'title' => $myblock->getVar('title','E'), 'modules' => $modules, 'is_custom' => $is_custom, 'ctype' => $myblock->getVar('c_type'), 'cachetime' => $myblock->getVar('bcachetime'), 'op' => 'clone_ok', 'bid' => $myblock->getVar('bid'), 'edit_form' => $myblock->getOptions(), 'template' => $myblock->getVar('template'), 'options' => $myblock->getVar('options'), 'submit_button' => _CLONE);
 	echo '<a href="myblocksadmin.php">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._AM_CLONEBLOCK.'<br /><br />';
 	include dirname(__FILE__).'/../admin/myblockform.php';
-	$form->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ , 1800 , 'myblocksadmin' ) );//GIJ
+	$xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ , 1800 , 'myblocksadmin' ) ; //GIJ
 	$form->display();
 	xoops_cp_footer();
 	exit();
@@ -565,7 +565,7 @@ if ($op == 'clone_ok') {
 				$pageid = $page[1];
 				$GLOBALS['xoopsDB']->query("INSERT INTO ".$GLOBALS['xoopsDB']->prefix('block_module_link')." VALUES (".$instance->getVar('instanceid').", ".intval($mid).", ".intval($pageid).")");
 			}
-			return _AM_DBUPDATED;
+			return _MD_AM_DBUPDATED;
 		}
 		return 'Failed update of block instance. ID:'.$id;
 

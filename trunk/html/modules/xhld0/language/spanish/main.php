@@ -11,11 +11,11 @@ define('_HL_LINKTOORIGINAL','GO TO THE ORIGINAL');
 
 define('_HL_LASTBUILD', 'Actualizado');
 define('_HL_LANGUAGE', 'Idioma');
-define('_HL_DESCRIPTION', 'Descripción');
+define('_HL_DESCRIPTION', 'Descripci…Ï');
 define('_HL_WEBMASTER', 'Webmaster');
-define('_HL_CATEGORY', 'Categoría');
+define('_HL_CATEGORY', 'CategorùÂ');
 define('_HL_GENERATOR', 'Generador');
-define('_HL_TITLE', 'Título');
+define('_HL_TITLE', 'TùÕulo');
 define('_HL_PUBDATE', 'Publicado');
 define('_HL_FAILGET', 'Fallo al acceder al RSS de %s');
 define('_HL_GOTOTOP', 'Ir al Tope');

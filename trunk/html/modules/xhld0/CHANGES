@@ -1,6 +1,11 @@
 [xlang:en]
 CHANGES:
 
+v.3.01 2005-11-14
+  - updated myblocksadmin 0.41 and mymenu
+  - remove CRs in some php files
+  - modified the compatibilities with PHP 5.0.5
+
 v.3.00 2005-8-9
   - added supporting XOOPS 2.1/2.2
   - updated myblocksadmin 0.40

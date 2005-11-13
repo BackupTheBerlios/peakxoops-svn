@@ -8,11 +8,11 @@ define('_MB_HEADLINES_DISPLAYF', "Afficher le logo du site");
 define('_MB_HEADLINES_MAXITEM', "Nombre maximal d'items pour chaque manchette");
 
 define('_MB_HEADLINES_COLS',"Nombre de colonnes");
-define('_MB_HEADLINES_MAXLEN',"Nombre maximal de caractères pour les titres");
-define('_MB_HEADLINES_MAXITEM_MIXED',"Nombre maximal de titres affichés");
-define('_MB_HEADLINES_MAXITEMAFEED_MIXED',"Nombre maximal d'items par manchette qui doit être affiché dans ce bloc");
+define('_MB_HEADLINES_MAXLEN',"Nombre maximal de caractïÓes pour les titres");
+define('_MB_HEADLINES_MAXITEM_MIXED',"Nombre maximal de titres affichñÔ");
+define('_MB_HEADLINES_MAXITEMAFEED_MIXED',"Nombre maximal d'items par manchette qui doit óÕre affiché dans ce bloc");
 
-define('_MB_HEADLINES_EXTRACT',"Sélectionnez") ;
+define('_MB_HEADLINES_EXTRACT',"SñÍectionnez") ;
 }
 
 ?>

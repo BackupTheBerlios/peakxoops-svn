@@ -11,14 +11,14 @@ define('_HL_LINKTOORIGINAL','GO TO THE ORIGINAL');
 
 define('_HL_LASTBUILD', 'Atualizado');
 define('_HL_LANGUAGE', 'Idioma');
-define('_HL_DESCRIPTION', 'Descrição');
+define('_HL_DESCRIPTION', 'Descriîåo');
 define('_HL_WEBMASTER', 'Webmaster');
 define('_HL_CATEGORY', 'Categoria');
 define('_HL_GENERATOR', 'Emissor');
-define('_HL_TITLE', 'Título');
+define('_HL_TITLE', 'TùÕulo');
 define('_HL_PUBDATE', 'Publicado');
-define('_HL_FAILGET', 'Impossível acessar RSS feed de %s, neste momento.');
-define('_HL_GOTOTOP', 'Voltar ao ínicio');
+define('_HL_FAILGET', 'Impossù×el acessar RSS feed de %s, neste momento.');
+define('_HL_GOTOTOP', 'Voltar ao ùÏicio');
 define('_HL_HEADLINES', 'Manchetes');
 define('_HL_LISTTITLE', 'Manchetes Recentes');
 

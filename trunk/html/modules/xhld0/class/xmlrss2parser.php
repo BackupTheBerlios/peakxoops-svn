@@ -171,7 +171,7 @@ class XhldRssTitleHandler extends XmlTagHandler
         return 'title';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -203,7 +203,7 @@ class XhldRssLinkHandler extends XmlTagHandler
         return 'link';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -235,7 +235,7 @@ class XhldRssDescriptionHandler extends XmlTagHandler
         return 'description';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -267,7 +267,7 @@ class XhldRssContentEncodedHandler extends XmlTagHandler
         return 'content:encoded';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -299,7 +299,7 @@ class XhldRssGeneratorHandler extends XmlTagHandler
         return 'generator';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -324,7 +324,7 @@ class XhldRssCopyrightHandler extends XmlTagHandler
         return 'copyright';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -349,7 +349,7 @@ class XhldRssNameHandler extends XmlTagHandler
         return 'name';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'textInput':
@@ -374,7 +374,7 @@ class XhldRssManagingEditorHandler extends XmlTagHandler
         return 'managingEditor';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -399,7 +399,7 @@ class XhldRssLanguageHandler extends XmlTagHandler
         return 'language';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -424,7 +424,7 @@ class XhldRssDcLanguageHandler extends XmlTagHandler
         return 'dc:language';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -449,7 +449,7 @@ class XhldRssWebMasterHandler extends XmlTagHandler
         return 'webMaster';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -474,7 +474,7 @@ class XhldRssDocsHandler extends XmlTagHandler
         return 'docs';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -499,7 +499,7 @@ class XhldRssTtlHandler extends XmlTagHandler
         return 'ttl';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -548,7 +548,7 @@ class XhldRssLastBuildDateHandler extends XmlTagHandler
         return 'lastBuildDate';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -586,7 +586,7 @@ class XhldRssUrlHandler extends XmlTagHandler
         return 'url';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'image') {
             $parser->setImageData('url', $data);
@@ -607,7 +607,7 @@ class XhldRssWidthHandler extends XmlTagHandler
         return 'width';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'image') {
             $parser->setImageData('width', $data);
@@ -627,7 +627,7 @@ class XhldRssHeightHandler extends XmlTagHandler
         return 'height';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'image') {
             $parser->setImageData('height', $data);
@@ -655,7 +655,8 @@ class XhldRssItemHandler extends XmlTagHandler
 
     function handleEndElement(&$parser)
     {
-        $parser->setItems($parser->getTempArr());
+        $temp_arr = $parser->getTempArr() ;
+        $parser->setItems( $temp_arr ) ;
     }
 }
 
@@ -672,7 +673,7 @@ class XhldRssCategoryHandler extends XmlTagHandler
         return 'category';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         switch ($parser->getParentTag()) {
         case 'channel':
@@ -699,7 +700,7 @@ class XhldRssCommentsHandler extends XmlTagHandler
         return 'comments';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'item') {
             $parser->setTempArr('comments', $data);
@@ -720,7 +721,7 @@ class XhldRssPubDateHandler extends XmlTagHandler
         return 'pubDate';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         $time = -1 ;
         while( $time == -1 && $data != "" ) {
@@ -755,7 +756,7 @@ class XhldRssDcDateHandler extends XmlTagHandler
        return 'dc:date';
    }
 
-   function handleCharacterData(&$parser, &$data)
+   function handleCharacterData(&$parser, $data)
    {
        $time = $this->dateW3cToUnix( $data ) ;
        if( $time <= 0 ) $time = time() ;
@@ -823,7 +824,7 @@ class XhldRssGuidHandler extends XmlTagHandler
         return 'guid';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'item') {
             $parser->setTempArr('guid', $data);
@@ -844,7 +845,7 @@ class XhldRssAuthorHandler extends XmlTagHandler
         return 'author';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'item') {
             $parser->setTempArr('author', $data);
@@ -865,7 +866,7 @@ class XhldRssDcCreatorHandler extends XmlTagHandler
         return 'dc:creator';
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'channel') {
            $parser->setChannelData('webmaster', $data);
@@ -886,14 +887,14 @@ class XhldRssSourceHandler extends XmlTagHandler
         return 'source';
     }
 
-    function handleBeginElement(&$parser, &$attributes)
+    function handleBeginElement(&$parser, $attributes)
     {
         if ($parser->getParentTag() == 'item') {
             $parser->setTempArr('source_url', $attributes['url']);
         }
     }
 
-    function handleCharacterData(&$parser, &$data)
+    function handleCharacterData(&$parser, $data)
     {
         if ($parser->getParentTag() == 'item') {
             $parser->setTempArr('source', $data);

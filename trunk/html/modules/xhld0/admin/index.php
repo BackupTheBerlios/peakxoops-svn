@@ -123,7 +123,7 @@ function xhld_get_hl_form( $hl , $action = 'new' )
 	$form->addElement( $button_tray ) ;
 
 	// Ticket
-	$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+	$GLOBALS['xoopsGTicket']->addTicketXoopsFormElement( $form , __LINE__ ) ;
 
 	return $form ;
 }

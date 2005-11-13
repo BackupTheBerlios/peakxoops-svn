@@ -2,7 +2,7 @@
 CHANGES:
 
 v.3.01 2005-11-14
-  - updated myblocksadmin 0.41 and mymenu
+  - updated myblocksadmin 0.41 and mymenu 0.15
   - remove CRs in some php files
   - modified the compatibilities with PHP 5.0.5
 
@@ -216,6 +216,11 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.01 2005-11-14
+  - myblocksadmin 0.41 および mymenu 0.15 へのアップデート
+  - 改行コードのLFへの統一
+  - PHP 5.0.5 との互換性改善
 
 v.3.00 2005-8-9
   - XOOPS 2.1/2.2 への対応 （現時点では、myblocksadminのみ）

@@ -39,35 +39,35 @@ define( 'TINYCONTENT_MI_LOADED' , 1 ) ;
 define("_MI_TINYCONTENT_NAME","TinyD");
 
 // A brief description of this module
-define("_MI_TINYCONTENT_DESC","Skapa innehåll så enkelt som möjligt.");
+define("_MI_TINYCONTENT_DESC","Skapa innehéÍl så enkelt som m‹Ëligt.");
 
 // Name for Menu Block
 define("_MI_TC_BNAME1","Tiny Content %s Meny");
 
 // Admin Menu
-define("_TC_MD_ADMENU1","Lägg till Innehåll");
-define("_TC_MD_ADMENU2","Länka HTML sida");
-define("_TC_MD_ADMENU3","Editera/Radera Innehåll");
+define("_TC_MD_ADMENU1","LçÈg till InnehéÍl");
+define("_TC_MD_ADMENU2","LçÏka HTML sida");
+define("_TC_MD_ADMENU3","Editera/Radera InnehéÍl");
 define("_TC_MD_ADMENU_MYBLOCKSADMIN","Block/Grupper");
 
 // WYSIWYG Defines for v1.4
-define('_MI_WYSIWYG','Använd Wysiwyg Editor?');
+define('_MI_WYSIWYG','AnvçÏd Wysiwyg Editor?');
 define('_MI_WYSIWYG_DESC','');
 define('_MI_TAREA_WIDTH','Bredd på textarea');
 define('_MI_TAREA_WIDTH_DESC','');
-define('_MI_TAREA_HEIGHT','Höjd på textarea');
+define('_MI_TAREA_HEIGHT','H‹Ëd på textarea');
 define('_MI_TAREA_HEIGHT_DESC','');
-define('_MI_FORCE_MOD_REWRITE','Använd mod_rewrite i hela denna modulen.');
-define('_MI_FORCE_MOD_REWRITE_DESC',"Glöm inte att aktivera mod_rewrite. eg) namnändra .htaccess.rewrite till .htaccess");
-define('_MI_DISPLAY_PRINT_ICON','Visa ikon för "Utskriftsvänlig sida"');
-define('_MI_DISPLAY_FRIEND_ICON','Visa ikon för "Tipsa en vän"');
+define('_MI_FORCE_MOD_REWRITE','AnvçÏd mod_rewrite i hela denna modulen.');
+define('_MI_FORCE_MOD_REWRITE_DESC',"Gl‹Î inte att aktivera mod_rewrite. eg) namnçÏdra .htaccess.rewrite till .htaccess");
+define('_MI_DISPLAY_PRINT_ICON','Visa ikon f‹Ó "UtskriftsvçÏlig sida"');
+define('_MI_DISPLAY_FRIEND_ICON','Visa ikon f‹Ó "Tipsa en vçÏ"');
 define('_MI_DISPLAY_PAGENAV','Sidnavigering');
 define('_MI_DISPLAY_PAGENAV_NONE','Visa inte');
-define('_MI_DISPLAY_PAGENAV_DISP','Allt synligt innehåll');
-define('_MI_DISPLAY_PAGENAV_SUB','Endast innehåll med undermeny');
-define('_MI_NAVBLOCK_TARGET','Innehåll i Tinycontent block');
-define('_MI_NAVBLOCK_TARGET_DISP','Titlar på allt synligt innehåll');
-define('_MI_NAVBLOCK_TARGET_SUB','Titlar på innehåll med undermeny');
+define('_MI_DISPLAY_PAGENAV_DISP','Allt synligt innehéÍl');
+define('_MI_DISPLAY_PAGENAV_SUB','Endast innehéÍl med undermeny');
+define('_MI_NAVBLOCK_TARGET','InnehéÍl i Tinycontent block');
+define('_MI_NAVBLOCK_TARGET_DISP','Titlar på allt synligt innehéÍl');
+define('_MI_NAVBLOCK_TARGET_SUB','Titlar på innehéÍl med undermeny');
 
 
 //***********************************************************************//

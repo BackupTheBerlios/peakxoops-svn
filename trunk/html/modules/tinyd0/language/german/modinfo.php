@@ -69,9 +69,9 @@ define("_MI_TINYCONTENT_DESC","Content pflegen auf die einfachste Art.");
 define("_MI_TC_BNAME1","Tiny Content Menü");
 
 // Admin Menu
-define("_TC_MD_ADMENU1","Neuen Content hinzufügen");
-define("_TC_MD_ADMENU2","Link hinzufügen");
-define("_TC_MD_ADMENU3","Content bearbeiten/löschen");
+define("_TC_MD_ADMENU1","Neuen Content hinzuf—Èen");
+define("_TC_MD_ADMENU2","Link hinzuf—Èen");
+define("_TC_MD_ADMENU3","Content bearbeiten/l‹Ôchen");
 
 // WYSIWYG Defines for v1.4
 define('_MI_WYSIWYG','Wysiwyg Editor benutzen?');

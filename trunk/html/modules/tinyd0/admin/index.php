@@ -508,7 +508,7 @@ case "edit" :
 	$form->addElement( new XoopsFormHidden( 'id' , $storyid ) ) ;
 	$form->addElement( new XoopsFormHidden( 'last_modified' , $last_modified ) ) ;
 	// Ticket
-	$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+	$GLOBALS['xoopsGTicket']->addTicketXoopsFormElement( $form , __LINE__ ) ;
 
 /*	echo '
 <!-- tinyMCE -->
@@ -707,7 +707,7 @@ case "elink" :
 	$form->addElement( new XoopsFormHidden( 'id' , $storyid ) ) ;
 	$form->addElement( new XoopsFormHidden( 'last_modified' , $last_modified ) ) ;
 	// Ticket
-	$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+	$GLOBALS['xoopsGTicket']->addTicketXoopsFormElement( $form , __LINE__ ) ;
 
 	// end of xoopsForm
 	$form->display() ;

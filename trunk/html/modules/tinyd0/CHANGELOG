@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGELOG:
 
+2005-11-14 2.19
+- modified the compatibilities with PHP 5.0.5
+- remove CRs in some php files
+
 2005-8-27 2.18
 - modified a compatibility with XOOPS 2.1/2.2
 - updated myblocksadmin into 0.40
@@ -185,6 +189,10 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2005-11-14 2.19
+- PHP 5.0.5 との相性問題改善
+- 改行コードがCR+LF となっていた部分をLFに統一
 
 2005-8-27 2.18
 - XOOPS 2.1/2.2 との互換性改善 （動作確認)

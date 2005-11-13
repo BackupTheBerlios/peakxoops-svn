@@ -59,12 +59,12 @@ define( 'TINYCONTENT_AM_LOADED' , 1 ) ;
 define("_TC_ADMINTITLE","Tiny Content");
 
 //Table Titles
-define("_TC_ADDCONTENT","Tilf¯j nyt indhold");
-define("_TC_EDITCONTENT","RedigÈr indhold");
-define("_TC_ADDLINK","Tilf¯j link");
-define("_TC_EDITLINK","RedigÈr link");
+define("_TC_ADDCONTENT","TilfèÀ nyt indhold");
+define("_TC_EDITCONTENT","RedigÒ” indhold");
+define("_TC_ADDLINK","TilfèÀ link");
+define("_TC_EDITLINK","RedigÒ” link");
 define("_TC_ULFILE","Upload fil");
-define("_TC_SFILE","S¯g");
+define("_TC_SFILE","Sè»");
 define("_TC_DELFILE","Slet fil");
 
 //Table Data
@@ -75,26 +75,26 @@ define("_TC_VISIBLE","Synlig");
 define("_TC_CONTENT","Indhold");
 define("_TC_YES","Ja");
 define("_TC_NO","Nej");
-define("_TC_URL","VÊlg fil");
+define("_TC_URL","VÎÕg fil");
 define("_TC_UPLOAD","Upload");
 
 define("_TC_LINKID","Link-ID");
 define("_TC_ACTION","Handling");
-define("_TC_EDIT","RedigÈr");
+define("_TC_EDIT","RedigÒ”");
 define("_TC_DELETE","Slet");
 
 define('_TC_DISABLECOM','Deaktiver kommentarer');
-define('_TC_DBUPDATED','∆ndringerne er gemt i databasen!');
+define('_TC_DBUPDATED','é∆ndringerne er gemt i databasen!');
 define('_TC_ERRORINSERT','Der opstod en fejl under skrivningen til databasen!');
 define('_TC_RUSUREDEL','Er du sikker pÂ at du vil slette dette indhold?');
 define('_TC_RUSUREDELF','Er du sikker pÂ at du vil slette denne fil?');
 define('_TC_UPLOADED','Filen er blevet sendt til serveren!');
 define('_TC_FDELETED','Filen er blevet slettet!');
-define('_TC_ERRORUPL','Overf¯rslen af filen til serveren fejlede!');
-define('_TC_PERMERROR','FEJL: Kan ikke skrive til fil mappen. Udf¯r venligst "chmod 777" pÂ mappen!');
+define('_TC_ERRORUPL','Overfè”slen af filen til serveren fejlede!');
+define('_TC_PERMERROR','FEJL: Kan ikke skrive til fil mappen. Udfè” venligst "chmod 777" pÂ mappen!');
 
 // Added in v1.4
-define('_TC_DISABLEBREAKS','Deaktiver konvertering af linieskift (Aktiver denne nnÂr der benyttes HTML)');
+define('_TC_DISABLEBREAKS','Deaktiver konvertering af linieskift (Aktiver denne nnÈ” der benyttes HTML)');
 define('_TC_SUBMENU','Under-menu');
 
 }

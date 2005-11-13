@@ -63,15 +63,15 @@ define( 'TINYCONTENT_MI_LOADED' , 1 ) ;
 define("_MI_TINYCONTENT_NAME","TinyD");
 
 // A brief description of this module
-define("_MI_TINYCONTENT_DESC","Den nemmeste mÂde at lave indhold.");
+define("_MI_TINYCONTENT_DESC","Den nemmeste mÈ≈e at lave indhold.");
 
 // Name for Menu Block
 define("_MI_TC_BNAME1","Tiny Content Menu");
 
 // Admin Menu
-define("_TC_MD_ADMENU1","Tilf¯j indhold");
-define("_TC_MD_ADMENU2","Tilf¯j ekstern side");
-define("_TC_MD_ADMENU3","RedigÈr/Slet Indhold");
+define("_TC_MD_ADMENU1","TilfèÀ indhold");
+define("_TC_MD_ADMENU2","TilfèÀ ekstern side");
+define("_TC_MD_ADMENU3","RedigÒ”/Slet Indhold");
 
 // WYSIWYG Defines for v1.4
 define('_MI_WYSIWYG',' Benyt Wysiwyg?');

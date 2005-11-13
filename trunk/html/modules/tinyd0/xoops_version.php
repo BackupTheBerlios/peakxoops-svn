@@ -36,7 +36,7 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 include_once( XOOPS_ROOT_PATH . "/modules/$mydirname/include/constants.inc.php" ) ;
 
 $modversion['name']		    = _MI_TINYCONTENT_NAME . $mydirnumber ;
-$modversion['version']		= 2.18;
+$modversion['version']		= 2.19;
 $modversion['author']       = 'Tobias Liegl (AKA CHAPI)';
 $modversion['description']	= _MI_TINYCONTENT_DESC;
 $modversion['credits']		= "The XOOPS Project";

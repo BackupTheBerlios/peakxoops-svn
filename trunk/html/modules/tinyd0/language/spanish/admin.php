@@ -77,7 +77,7 @@ define("_TC_NO","No");
 define("_TC_URL","URL");
 
 define("_TC_LINKID","Enlace-ID");
-define("_TC_ACTION","Acción");
+define("_TC_ACTION","Acci…Ï");
 define("_TC_EDIT","Editar");
 define("_TC_DELETE","Borrar");
 
@@ -85,17 +85,17 @@ define('_TC_DBUPDATED','Base de datos actualizada exitosamente!');
 define('_TC_ERRORINSERT','Error al actualizar la base de datos!');
 
 // Added in v1.4
-define('_TC_DISABLEBREAKS','Deshabilitar conversión de Linebreak (Activado cuando usas HTML)');
+define('_TC_DISABLEBREAKS','Deshabilitar conversi…Ï de Linebreak (Activado cuando usas HTML)');
 define('_TC_SUBMENU','Submenu');
 
 define("_TC_STORYID","ID");
 define("_TC_UPLOAD","Subir");
 define('_TC_DISABLECOM','Deshabilitar comentarios');
-define('_TC_RUSUREDEL','¿Estás seguro que quieres eliminar este contenido?');
-define('_TC_RUSUREDELF','¿Estás seguro que quieres eliminar este archivo?');
-define('_TC_UPLOADED','¡Archivo actualizado exitosamente!');
-define('_TC_FDELETED','¡Archivo eliminado exitosamente!');
-define('_TC_ERRORUPL','¡Error al subir archivo!');
+define('_TC_RUSUREDEL','Ž¿EstáÔ seguro que quieres eliminar este contenido?');
+define('_TC_RUSUREDELF','Ž¿EstáÔ seguro que quieres eliminar este archivo?');
+define('_TC_UPLOADED','Ž¡Archivo actualizado exitosamente!');
+define('_TC_FDELETED','Ž¡Archivo eliminado exitosamente!');
+define('_TC_ERRORUPL','Ž¡Error al subir archivo!');
 define('_TC_PERMERROR','ERROR: no se puede accesar al directorio. por favor cambia los permisos a 777!');
 
 }

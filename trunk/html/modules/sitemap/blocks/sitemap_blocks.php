@@ -43,7 +43,7 @@ function b_sitemap_show( $options )
 		$xoopsUserIsAdmin = $backup_userisadmin ;
 	}
 
-	// ƒ†[ƒUƒƒjƒ…—pŒ¾Œêƒtƒ@ƒCƒ‹‚ð“Ç‚Þ
+	// ¥æ¡¼¥¶¥á¥Ë¥åÍÑ¸À¸ì¥Õ¥¡¥¤¥ë¤òÆÉ¤à
 	if(!defined("_MB_SYSTEM_VACNT")){
 	    $lang_file = XOOPS_ROOT_PATH."/modules/system/language/".$xoopsConfig["language"]."/blocks.php";
 	    if(file_exists($lang_file)){
@@ -64,7 +64,7 @@ function b_sitemap_show( $options )
 		'openclose' => _MB_SITEMAP_OPENCLOSE,
 	);
 
-	// ƒ†[ƒUƒƒjƒ…[ƒuƒƒbƒN‚ÌƒuƒƒbƒNƒ^ƒCƒgƒ‹‚ðŽæ“¾
+	// ¥æ¡¼¥¶¥á¥Ë¥å¡¼¥Ö¥í¥Ã¥¯¤Î¥Ö¥í¥Ã¥¯¥¿¥¤¥È¥ë¤ò¼èÆÀ
 	$sql = "SELECT title FROM " . $xoopsDB->prefix("newblocks") . " WHERE show_func = 'b_system_user_show'" ;
 	$result = $xoopsDB->query($sql);
 	list($usermenu) = $xoopsDB->fetchRow($result);

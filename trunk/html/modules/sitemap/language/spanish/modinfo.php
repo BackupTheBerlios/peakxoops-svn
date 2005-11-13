@@ -19,11 +19,11 @@ define('_MI_INVISIBLE_WEIGHTS','Weights for hiding modules');
 define('_MI_INVISIBLE_WEIGHTSDSC','Modules which has this number as its order in ModulesAdmin will be invisible. The numbers should be separate by comma.<br />(Normally 0 or blank)');
 
 define("_MI_SITEMAP_NAME","Sitemap");
-define("_MI_SITEMAP_MESSAGE","Aquí ud. puede mostrar alguna información o mensaje. ¡Modificala en la administración!");
+define("_MI_SITEMAP_MESSAGE","Aquí ud. puede mostrar alguna informaci…Ï o mensaje. Ž¡Modificala en la administraci…Ï!");
 
 define("_MI_MESSAGE","Mensaje");
 define("_MI_MESSAGEEDSC","");
 // add by Ryuji
-define("_MI_SHOW_SUBCATEGORIES","¿Mostrar subcategorías?");
+define("_MI_SHOW_SUBCATEGORIES","Ž¿Mostrar subcategorùÂs?");
 define("_MI_SHOW_SUBCATEGORIESDSC","");
 ?>

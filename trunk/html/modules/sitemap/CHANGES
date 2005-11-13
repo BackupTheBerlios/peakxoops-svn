@@ -1,3 +1,13 @@
+1.22 2005-11-14
+- updated myblocksadmin and mymenu
+- remove CRs in some php files
+- added a language file
+-- polish (thx kurak_bu)
+- updated language files
+-- tchinese (thx Sheng-Hung, Huang)
+-- french (thx marco)
+
+
 1.21 2005-09-04
 - fixed configs are not reflected to the block (thx shige3)
 - modified to use $sitemap_configs instead of $xoopsModuleConfig directly

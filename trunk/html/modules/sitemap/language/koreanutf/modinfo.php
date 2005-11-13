@@ -18,13 +18,13 @@ define('_MI_ALLTIME_GUESTDSC','If you turn this module\'s cache on, set this opt
 define('_MI_INVISIBLE_WEIGHTS','Weights for hiding modules');
 define('_MI_INVISIBLE_WEIGHTSDSC','Modules which has this number as its order in ModulesAdmin will be invisible. The numbers should be separate by comma.<br />(Normally 0 or blank)');
 
-define('_MI_SITEMAP_NAME', 'ì‚¬ì´íŠ¸ë§µ');
-define('_MI_SITEMAP_MESSAGE', 'ì—¬ê¸°ì— ì•ˆë‚´ë¬¸ë“±ì˜ ë©”ì„¸ì§€ë¥¼ ì¶”ê°€í•˜ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. ê´€ë¦¬í™”ë©´ì—ì„œ íŽ¸ì§‘í•˜ì„¸ìš”!');
+define('_MI_SITEMAP_NAME', '÷âŽ¬÷ýŽ´ùêŽ¸ö©Žµ');
+define('_MI_SITEMAP_MESSAGE', '÷÷Ž¬ôºŽ°÷÷ ÷õ°í¤¶ö®Ž¸õóŽ±÷ý˜ ö«Èî¨ºø©€ö§Ž¼ ø¸ÈìŽ°€ùõÐî¶¦ ÷è˜ ÷þ°î´·õë°í¶¦. ô¶€ö¨Ž¬ùùÈíŽ©Ž´÷÷Àî§ü ùîŽ¸ø©ÂïÉø÷äŽ¸÷ú”!');
 
-define('_MI_MESSAGE', 'ë©”ì„¸ì§€');
+define('_MI_MESSAGE', 'ö«Èî¨ºø©€');
 define('_MI_MESSAGEEDSC', '');
 
-define('_MI_SHOW_SUBCATEGORIES', 'ì„œë¸Œì¹´í…Œê³ ë¦¬ë„ í‘œì‹œí•¨');
+define('_MI_SHOW_SUBCATEGORIES', '÷äØíŽ¸¸îŽ¹Ž´ùå¸ìŽ³Ž ö¨Ž¬õï„ ùñØîµüùõŽ¨');
 define('_MI_SHOW_SUBCATEGORIESDSC', '');
 
 ?>

@@ -118,7 +118,9 @@ if( ! empty( $_POST['update'] ) ) {
 	}
 
 	$mes = urlencode( sprintf( _AM_PI_UPDATED ) ) ;
-	Header( "Location: $cal->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?mes=$mes&limit_type=$limit_type&limit_dirname=$limit_dirname&limit_file=$limit_file" ) ;
+	$redirect_str4header = strtr( "Location: $cal->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?mes=$mes&limit_type=$limit_type&limit_dirname=$limit_dirname&limit_file=$limit_file" , "\r\n\0" , "   " ) ;
+
+	header( $redirect_str4header ) ;
 	exit ;
 
 }

@@ -48,7 +48,7 @@ define("_MI_PICAL_BNAME_TODAYS_DESC","Mostrar eventos de hoje");
 define("_MI_PICAL_BNAME_THEDAYS","Eventos deste %s");
 define("_MI_PICAL_BNAME_THEDAYS_DESC","Mostrar eventos do dia assinalado");
 define("_MI_PICAL_BNAME_COMING","Proximos eventos");
-define("_MI_PICAL_BNAME_COMING_DESC","Mostrar os próximos eventos");
+define("_MI_PICAL_BNAME_COMING_DESC","Mostrar os pr…Ùimos eventos");
 define("_MI_PICAL_BNAME_AFTER","Eventos depois %s");
 define("_MI_PICAL_BNAME_AFTER_DESC","Mostrar os eventos depois do dia asinalado");
 define("_MI_PICAL_BNAME_NEW","Eventos postados recentemente"); 
@@ -60,51 +60,51 @@ define("_MI_PICAL_SM_SUBMIT","Submeter");
 //define("_MI_PICAL_ADMENU1","");
 
 // Title of config items
-define("_MI_USERS_AUTHORITY", "Atribuições dos usuários");
-define("_MI_GUESTS_AUTHORITY", "Atribuições dos convidados");
+define("_MI_USERS_AUTHORITY", "Atribuiî÷es dos usuáÓios");
+define("_MI_GUESTS_AUTHORITY", "Atribuiî÷es dos convidados");
 define("_MI_DEFAULT_VIEW", "Vista preestabelecida no centro");
 define("_MI_MINICAL_TARGET", "Vista objetiva do mini calendario");
-define("_MI_COMING_NUMROWS", "Número de eventos mostrados em blocos de eventos seguintes");
+define("_MI_COMING_NUMROWS", "N“Îero de eventos mostrados em blocos de eventos seguintes");
 define("_MI_SKINFOLDER", "nome da pasta de skin");
 define("_MI_SUNDAYCOLOR", "cor do domingo");
 define("_MI_WEEKDAYCOLOR", "cor dos dias de semana");
-define("_MI_SATURDAYCOLOR", "Cor do sábado");
+define("_MI_SATURDAYCOLOR", "Cor do sáÃado");
 define("_MI_HOLIDAYCOLOR", "Cor do feriado");
 define("_MI_TARGETDAYCOLOR", "Cor do dia com evento");
 define("_MI_SUNDAYBGCOLOR", "Cor de fundo do domingo");
 define("_MI_WEEKDAYBGCOLOR", "Cor de fundo dos dias de semana");
-define("_MI_SATURDAYBGCOLOR", "Cor de fundo do sábado");
+define("_MI_SATURDAYBGCOLOR", "Cor de fundo do sáÃado");
 define("_MI_HOLIDAYBGCOLOR", "Cor de fundo do feriado");
 define("_MI_TARGETDAYBGCOLOR", "Cor de fundo do dia com evento");
 define("_MI_CALHEADCOLOR", "Cor da parte superior do calendario");
-define("_MI_CALHEADBGCOLOR", "Cor de fundo da parte superior do calendário");
-define("_MI_CALFRAMECSS", "Estilo da borda do calendário");
-define("_MI_CANOUTPUTICS", "Permissão para fazer os arquivos ics");
-define("_MI_MAXRRULEEXTRACT", "Limite máximo dos eventos extraídos pela regra.(CONTAR)");
+define("_MI_CALHEADBGCOLOR", "Cor de fundo da parte superior do calendáÓio");
+define("_MI_CALFRAMECSS", "Estilo da borda do calendáÓio");
+define("_MI_CANOUTPUTICS", "PermissåÐ para fazer os arquivos ics");
+define("_MI_MAXRRULEEXTRACT", "Limite máÙimo dos eventos extraùÅos pela regra.(CONTAR)");
 define("_MI_WEEKSTARTFROM", "Dia inicial da semana");
-define("_MI_WEEKNUMBERING", "Regra de numeração para as semanas");
-define("_MI_DAYSTARTFROM", "Hora de começo do dia");
+define("_MI_WEEKNUMBERING", "Regra de numeraîåo para as semanas");
+define("_MI_DAYSTARTFROM", "Hora de comeíÐ do dia");
 define("_MI_NAMEORUNAME" , "Nome do poster mostrado" ) ;
 define("_MI_DESCNAMEORUNAME" , "Selecionar o 'nome' mostrado" ) ;
 
 // Description of each config items
-define("_MI_EDITBYGUESTDSC", "Permissão de adicionar eventos para os visitantes");
+define("_MI_EDITBYGUESTDSC", "PermissåÐ de adicionar eventos para os visitantes");
 
 // Options of each config items
-define("_MI_OPT_AUTH_NONE", "não pode adicionar");
-define("_MI_OPT_AUTH_WAIT", "pode adicionar, mas necessita permissão");
-define("_MI_OPT_AUTH_POST", "pode adicionar sem permissão");
-define("_MI_OPT_AUTH_BYGROUP", "Especifcado em permissões dos Grupos");
-define("_MI_OPT_MINI_PHPSELF", "Página atual");
+define("_MI_OPT_AUTH_NONE", "nåÐ pode adicionar");
+define("_MI_OPT_AUTH_WAIT", "pode adicionar, mas necessita permissåÐ");
+define("_MI_OPT_AUTH_POST", "pode adicionar sem permissåÐ");
+define("_MI_OPT_AUTH_BYGROUP", "Especifcado em permiss‰Æs dos Grupos");
+define("_MI_OPT_MINI_PHPSELF", "PáÈina atual");
 define("_MI_OPT_MINI_MONTHLY", "calendario mensal");
 define("_MI_OPT_MINI_WEEKLY", "calendario semanal");
-define("_MI_OPT_MINI_DAILY", "calendario diário");
+define("_MI_OPT_MINI_DAILY", "calendario diáÓio");
 define("_MI_OPT_MINI_LIST", "lista de eventos");
 define("_MI_OPT_CANOUTPUTICS", "pode fazer");
-define("_MI_OPT_CANNOTOUTPUTICS", "não pode fazer");
+define("_MI_OPT_CANNOTOUTPUTICS", "nåÐ pode fazer");
 define("_MI_OPT_STARTFROMSUN", "Domingo");
 define("_MI_OPT_STARTFROMMON", "Segunda");
-define("_MI_OPT_WEEKNOEACHMONTH", "por cada mês");
+define("_MI_OPT_WEEKNOEACHMONTH", "por cada móÔ");
 define("_MI_OPT_WEEKNOWHOLEYEAR", "por todo o ano");
 define("_MI_OPT_USENAME" , "Nome" ) ;
 define("_MI_OPT_USEUNAME" , "Nome de Login" ) ;
@@ -113,28 +113,28 @@ define("_MI_OPT_USEUNAME" , "Nome de Login" ) ;
 define("_MI_PICAL_ADMENU0","Admitir Eventos");
 define("_MI_PICAL_ADMENU1","Administrador de eventos");
 define("_MI_PICAL_ADMENU_CAT","Administrador de Categorias");
-define("_MI_PICAL_ADMENU_CAT2GROUP","Permissões das Categorias");
-define("_MI_PICAL_ADMENU2","Permissões Globais");
-define("_MI_PICAL_ADMENU_TM","Tabela de Manutenção");
+define("_MI_PICAL_ADMENU_CAT2GROUP","Permiss‰Æs das Categorias");
+define("_MI_PICAL_ADMENU2","Permiss‰Æs Globais");
+define("_MI_PICAL_ADMENU_TM","Tabela de Manutenîåo");
 define("_MI_PICAL_ADMENU_ICAL","Importar iCalendar");
 
 // Text for notifications
 define('_MI_PICAL_GLOBAL_NOTIFY', 'Global');
-define('_MI_PICAL_GLOBAL_NOTIFYDSC', 'Opções globais de notificação de piCal.');
+define('_MI_PICAL_GLOBAL_NOTIFYDSC', 'Opî÷es globais de notificaîåo de piCal.');
 define('_MI_PICAL_CATEGORY_NOTIFY', 'Categoria');
-define('_MI_PICAL_CATEGORY_NOTIFYDSC', 'Opções de notificação que são aplicadas na categoria atual.');
+define('_MI_PICAL_CATEGORY_NOTIFYDSC', 'Opî÷es de notificaîåo que såÐ aplicadas na categoria atual.');
 define('_MI_PICAL_EVENT_NOTIFY', 'Evento');
-define('_MI_PICAL_EVENT_NOTIFYDSC', 'Opções de notificação que são aplicadas no atual evento.');
+define('_MI_PICAL_EVENT_NOTIFYDSC', 'Opî÷es de notificaîåo que såÐ aplicadas no atual evento.');
 
 define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFY', 'Novo Evento');
 define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYCAP', 'Notificar quando um novo evento for criado.');
-define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYDSC', 'Receber notificação quando um novo evento for criado.');
-define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} auto-notificação : Novo evento');
+define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYDSC', 'Receber notificaîåo quando um novo evento for criado.');
+define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} auto-notificaîåo : Novo evento');
 
 define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFY', 'Novo Event na Categoria');
 define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYCAP', 'Notificar quando um novo evento for criado na Categoria.');
-define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYDSC', 'Receber notificação quando um novo evento for criado na Categoria.');
-define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} auto-notificação : Novo evento em {CATEGORY_TITLE}');
+define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYDSC', 'Receber notificaîåo quando um novo evento for criado na Categoria.');
+define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} auto-notificaîåo : Novo evento em {CATEGORY_TITLE}');
 
 
 

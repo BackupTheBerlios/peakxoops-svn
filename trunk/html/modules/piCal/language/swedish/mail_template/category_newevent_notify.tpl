@@ -1,20 +1,20 @@
 Hej {X_UNAME},
 
-En ny händelse "{EVENT_SUMMARY}" i kategori "{CATEGORY_TITLE}" har skapats hos {X_SITENAME}.
+En ny hçÏdelse "{EVENT_SUMMARY}" i kategori "{CATEGORY_TITLE}" har skapats hos {X_SITENAME}.
 
-Klicka på denna länk för att läsa händelsen:
+Klicka på denna lçÏk f‹Ó att lçÔa hçÏdelsen:
 {EVENT_URI}
 
 -----------
 
-Ni får detta meddelande på grund av att Ni har valt att bli underrättade 
-när nya händelser har lagts till i vår kalender.
+Ni féÓ detta meddelande på grund av att Ni har valt att bli underrçÕtade 
+nçÓ nya hçÏdelser har lagts till i véÓ kalender.
 
-Om detta är fel eller om Ni inte önskar mottaga fler underrättelser, 
-vänligen uppdatera Era prenumerationer genom att besöka länken nedanför:
+Om detta çÓ fel eller om Ni inte ‹Ïskar mottaga fler underrçÕtelser, 
+vçÏligen uppdatera Era prenumerationer genom att bes‹Ìa lçÏken nedanf‹Ó:
 {X_UNSUBSCRIBE_URL}
 
-Var vänlig och svara inte på detta meddelande.
+Var vçÏlig och svara inte på detta meddelande.
 
 -----------
 

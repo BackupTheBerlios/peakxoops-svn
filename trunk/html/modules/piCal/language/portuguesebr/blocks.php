@@ -28,7 +28,7 @@ define('_MB_PICAL_JUMP','Pular');
 
 // for after the day's events block
 // %s means the indicated day
-define('_MB_PICAL_EVENTS_AFTER','Eventos após %s');
+define('_MB_PICAL_EVENTS_AFTER','Eventos ap…Ô %s');
 
 // for the day's events block
 // %s means the indicated day
@@ -36,7 +36,7 @@ define('_MB_PICAL_EVENTS_THEDAY','Eventos de %s');
 
 
 // for new events block
-define("_MB_PICAL_MAXNEWITEMS","Nº de eventos a mostrar");
+define("_MB_PICAL_MAXNEWITEMS","NŽº de eventos a mostrar");
 
 
 

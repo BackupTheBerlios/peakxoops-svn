@@ -40,7 +40,7 @@ define('_PICAL_FMT_YEAR','<font size="-1">ANO </font>%s') ;
 define('_PICAL_FMT_WEEKNO','SEMANA %s') ;
 
 define('_PICAL_ICON_LIST','Vista por lista') ;
-define('_PICAL_ICON_DAILY','Vista diária') ;
+define('_PICAL_ICON_DAILY','Vista diáÓia') ;
 define('_PICAL_ICON_WEEKLY','Vista semanal') ;
 define('_PICAL_ICON_MONTHLY','Vista mensal') ;
 define('_PICAL_ICON_YEARLY','Vista anual') ;
@@ -53,11 +53,11 @@ define('_PICAL_MB_NOSUBJECT','(Sem assunto)') ;
 define('_PICAL_MB_PREV_DATE','Amanhã') ;
 define('_PICAL_MB_NEXT_DATE','Ontem') ;
 define('_PICAL_MB_PREV_WEEK','Semana anterior') ;
-define('_PICAL_MB_NEXT_WEEK','Próxima Semana') ;
-define('_PICAL_MB_PREV_MONTH','Mês anterior') ;
-define('_PICAL_MB_NEXT_MONTH','Próximo Mês') ;
+define('_PICAL_MB_NEXT_WEEK','Pr…Ùima Semana') ;
+define('_PICAL_MB_PREV_MONTH','MóÔ anterior') ;
+define('_PICAL_MB_NEXT_MONTH','Pr…Ùimo MóÔ') ;
 define('_PICAL_MB_PREV_YEAR','Ano anterior') ;
-define('_PICAL_MB_NEXT_YEAR','Próximo Ano') ;
+define('_PICAL_MB_NEXT_YEAR','Pr…Ùimo Ano') ;
 
 define('_PICAL_MB_NOEVENT','Sem eventos') ;
 define('_PICAL_MB_ADDEVENT','Adicionar um evento') ;
@@ -68,22 +68,22 @@ define('_PICAL_MB_TIMESEPARATOR','--') ;
 
 define('_PICAL_MB_ALLDAY_EVENT','Evento de todo o dia') ;
 define('_PICAL_MB_LONG_EVENT','Mostrar como barra') ;
-define('_PICAL_MB_LONG_SPECIALDAY','Comemorações etc.') ;
+define('_PICAL_MB_LONG_SPECIALDAY','Comemoraî÷es etc.') ;
 
-define('_PICAL_MB_PUBLIC','Público') ;
+define('_PICAL_MB_PUBLIC','P“Ãlico') ;
 define('_PICAL_MB_PRIVATE','Privado') ;
 define('_PICAL_MB_PRIVATETARGET',' entre %s') ;
 
 define('_PICAL_MB_LINK_TO_RRULE1ST','Pular para primeiro Evento ') ;
 define('_PICAL_MB_RRULE1ST','Este é o primeiro Evento') ;
 
-define('_PICAL_MB_EVENT_NOTREGISTER','Não Registrado') ;
+define('_PICAL_MB_EVENT_NOTREGISTER','NåÐ Registrado') ;
 define('_PICAL_MB_EVENT_ADMITTED','Admitido') ;
-define('_PICAL_MB_EVENT_NEEDADMIT','Esperando admissão') ;
+define('_PICAL_MB_EVENT_NEEDADMIT','Esperando admissåÐ') ;
 
 define('_PICAL_MB_TITLE_EVENTINFO','Agenda') ;
 define('_PICAL_MB_SUBTITLE_EVENTDETAIL','Vista detalhada') ;
-define('_PICAL_MB_SUBTITLE_EVENTEDIT','Vista de edição') ;
+define('_PICAL_MB_SUBTITLE_EVENTEDIT','Vista de ediîåo') ;
 
 define('_PICAL_MB_HOUR_SUF',':') ;
 define('_PICAL_MB_MINUTE_SUF','') ;
@@ -93,45 +93,45 @@ define('_PICAL_MB_ORDER_DESC','descendente') ;
 define('_PICAL_MB_SORTBY','Ordenar por:') ;
 define('_PICAL_MB_CURSORTEDBY','Eventos atualmente ordenados por:') ;
 
-define("_PICAL_MB_LABEL_CHECKEDITEMS","Os eventos assinalados são:");
+define("_PICAL_MB_LABEL_CHECKEDITEMS","Os eventos assinalados såÐ:");
 define("_PICAL_MB_LABEL_OUTPUTICS","para ser exportados no iCalendar");
 
 define("_PICAL_MB_ICALSELECTPLATFORM","Selecionar plataforma");
 
-define('_PICAL_TH_SUMMARY','Título') ;
-define('_PICAL_TH_STARTDATETIME','Hora e data de início') ;
+define('_PICAL_TH_SUMMARY','TùÕulo') ;
+define('_PICAL_TH_STARTDATETIME','Hora e data de inùÄio') ;
 define('_PICAL_TH_ENDDATETIME','Hora e data de fim') ;
-define('_PICAL_TH_ALLDAYOPTIONS','Opcões do dia todo') ;
-define('_PICAL_TH_LOCATION','Localização') ;
+define('_PICAL_TH_ALLDAYOPTIONS','Opc‰Æs do dia todo') ;
+define('_PICAL_TH_LOCATION','Localizaîåo') ;
 define('_PICAL_TH_CONTACT','Contato') ;
 define('_PICAL_TH_CATEGORIES','Categorias') ;
 define('_PICAL_TH_SUBMITTER','Remetente') ;
 define('_PICAL_TH_CLASS','Classe') ;
-define('_PICAL_TH_DESCRIPTION','Descrição') ;
+define('_PICAL_TH_DESCRIPTION','Descriîåo') ;
 define('_PICAL_TH_RRULE','Repetir as regras') ;
 define('_PICAL_TH_ADMISSIONSTATUS','Estado') ;
-define('_PICAL_TH_LASTMODIFIED','Ultima modificação') ;
+define('_PICAL_TH_LASTMODIFIED','Ultima modificaîåo') ;
 
-define('_PICAL_NTC_MONTHLYBYMONTHDAY','(Número de entradas)') ;
-define('_PICAL_NTC_EXTRACTLIMIT','** Apenas %s eventos são extraídos como máximo') ;
+define('_PICAL_NTC_MONTHLYBYMONTHDAY','(N“Îero de entradas)') ;
+define('_PICAL_NTC_EXTRACTLIMIT','** Apenas %s eventos såÐ extraùÅos como máÙimo') ;
 define('_PICAL_NTC_NUMBEROFNEEDADMIT','(%s itens precisam ser admitidos)') ;
 
 define('_PICAL_OPT_PRIVATEMYSELF','Apenas eu') ;
 define('_PICAL_OPT_PRIVATEGROUP','grupo %s') ;
-define('_PICAL_OPT_PRIVATEINVALID','(grupo inválido)') ;
+define('_PICAL_OPT_PRIVATEINVALID','(grupo inváÍido)') ;
 
 define('_PICAL_MB_OP_AFTER','Depois') ;
 define('_PICAL_MB_OP_BEFORE','Antes') ;
 define('_PICAL_MB_OP_ON','Em') ;
 define('_PICAL_MB_OP_ALL','Todos') ;
 
-define('_PICAL_CNFM_SAVEAS_YN','Você têm certeza de salvar como outra entrada') ;
-define('_PICAL_CNFM_DELETE_YN','Você têm certeza de excluir esta entrada?') ;
+define('_PICAL_CNFM_SAVEAS_YN','Você tóÎ certeza de salvar como outra entrada') ;
+define('_PICAL_CNFM_DELETE_YN','Você tóÎ certeza de excluir esta entrada?') ;
 
-define('_PICAL_ERR_INVALID_EVENT_ID','Error: ID do evento não encontrada') ;
-define('_PICAL_ERR_NOPERM_TO_SHOW',"Error: Não têm permiso de ver o calendario") ;
-define('_PICAL_ERR_NOPERM_TO_OUTPUTICS',"Error: Não têm permiso de editar o calendario") ;
-define('_PICAL_ERR_LACKINDISPITEM','O item %s está vazio.<br />Clique o botão de voltar do seu navegador') ;
+define('_PICAL_ERR_INVALID_EVENT_ID','Error: ID do evento nåÐ encontrada') ;
+define('_PICAL_ERR_NOPERM_TO_SHOW',"Error: NåÐ tóÎ permiso de ver o calendario") ;
+define('_PICAL_ERR_NOPERM_TO_OUTPUTICS',"Error: NåÐ tóÎ permiso de editar o calendario") ;
+define('_PICAL_ERR_LACKINDISPITEM','O item %s está vazio.<br />Clique o botåÐ de voltar do seu navegador') ;
 
 define('_PICAL_BTN_JUMP','Pular') ;
 define('_PICAL_BTN_NEWINSERTED','Novo item') ;
@@ -153,7 +153,7 @@ define("_PICAL_BTN_COPY","Copiar");
 
 define('_PICAL_RR_EVERYDAY','Cada dia') ;
 define('_PICAL_RR_EVERYWEEK','Cada semana') ;
-define('_PICAL_RR_EVERYMONTH','Cada mês') ;
+define('_PICAL_RR_EVERYMONTH','Cada móÔ') ;
 define('_PICAL_RR_EVERYYEAR','Cada ano') ;
 define('_PICAL_RR_FREQDAILY','Diario') ;
 define('_PICAL_RR_FREQWEEKLY','Semanal') ;
@@ -165,7 +165,7 @@ define('_PICAL_RR_FREQMONTHLY_PRE','Cada') ;
 define('_PICAL_RR_FREQYEARLY_PRE','Cada') ;
 define('_PICAL_RR_FREQDAILY_SUF','dia(s)') ;
 define('_PICAL_RR_FREQWEEKLY_SUF','semana(s)') ;
-define('_PICAL_RR_FREQMONTHLY_SUF','mês(es)') ;
+define('_PICAL_RR_FREQMONTHLY_SUF','móÔ(es)') ;
 define('_PICAL_RR_FREQYEARLY_SUF','ano(s)') ;
 define('_PICAL_RR_PERDAY','cada %s dias') ;
 define('_PICAL_RR_PERWEEK','cada %s semanas') ;
@@ -173,12 +173,12 @@ define('_PICAL_RR_PERMONTH','cada %s meses') ;
 define('_PICAL_RR_PERYEAR','cada %s anos') ;
 define('_PICAL_RR_COUNT','<br />%s veces') ;
 define('_PICAL_RR_UNTIL','<br />até %s') ;
-define('_PICAL_RR_R_NORRULE','Não se repete') ;
-define('_PICAL_RR_R_YESRRULE','Repetição') ;
+define('_PICAL_RR_R_NORRULE','NåÐ se repete') ;
+define('_PICAL_RR_R_YESRRULE','Repetiîåo') ;
 define('_PICAL_RR_OR','or') ;
-define('_PICAL_RR_S_NOTSELECTED','-não selecionado-') ;
-define('_PICAL_RR_S_SAMEASBDATE','Igual que a data de início') ;
-define('_PICAL_RR_R_NOCOUNTUNTIL','Nenhuma condição de final') ;
+define('_PICAL_RR_S_NOTSELECTED','-nåÐ selecionado-') ;
+define('_PICAL_RR_S_SAMEASBDATE','Igual que a data de inùÄio') ;
+define('_PICAL_RR_R_NOCOUNTUNTIL','Nenhuma condiîåo de final') ;
 define('_PICAL_RR_R_USECOUNT_PRE','repetir') ;
 define('_PICAL_RR_R_USECOUNT_SUF','vezes') ;
 define('_PICAL_RR_R_USEUNTIL','até') ;

@@ -1,5 +1,11 @@
 [xlang:en]
 
+v.084 compatibity fix (2005-11-14)
+- updated myblocksadmin 0.41 and mymenu 0.15
+- modified the compatibilities with PHP5.0.5
+- fixed some possibilities be attacked by HTTP Response Splitting
+- removed CRs in some php files
+
 v.083 bug fix & modify plugins-system (2005-9-9)
 - modified the interface of Pulguin Manager
 - fixed a duplicatated module can't alter the table by the updating module
@@ -288,6 +294,12 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.084 互換性関連メインの修正 (2005-11-14)
+- updated myblocksadmin 0.41 and mymenu 0.15
+- PHP 5.0.5との相性問題の改善
+- HTTPレスポンス分割攻撃の可能性潰し（元のままでも大丈夫だったはずですが）
+- 改行コードのLFへの統一
 
 v.083 バグ潰しおよびプラグイン関連の改良 (2005-9-9)
 - プラグインマネージャが思いっきり使いづらかったのを改善（できたかな？）

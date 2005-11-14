@@ -46,7 +46,7 @@ function display_edit_form( $cat , $form_title , $action )
 	$form->addElement( $button_tray ) ;
 
 	// Ticket
-	$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) );
+	$GLOBALS['xoopsGTicket']->addTicketXoopsFormElement( $form , __LINE__ ) ;
 
 	// End of XoopsForm
 	$form->display();

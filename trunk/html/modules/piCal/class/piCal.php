@@ -153,7 +153,8 @@ function piCal( $target_date = "" , $language = "japanese" , $reload = false )
 		foreach( $needed_post_vars as $post ) {
 			if( isset( $_POST[ $post ] ) ) $reload_str .= "&$post=".urlencode( $_POST[ $post ] ) ;
 		}
-		Header( $reload_str ) ;
+		$reload_str4header = strtr( $reload_str , "\r\n\0" , "   " ) ;
+		header( $reload_str ) ;
 		exit ;
 	}
 
@@ -2388,7 +2389,7 @@ function redirect( $query )
 {
 	// character white list and black list against 'javascript'
 	if( ! preg_match( '/^[a-z0-9=&_-]*$/i' , $query )  || stristr( $query , 'javascript' ) ) {
-		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}" ) ;
+		header( strtr( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}" , "\r\n\0" , "   " ) ) ;
 		exit ;
 	}
 
@@ -2406,7 +2407,7 @@ function redirect( $query )
 			</body>
 			</html>";
 	} else {
-		Header( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?$query" ) ;
+		header( strtr( "Location: $this->connection://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}?$query" , "\r\n\0" , "   " ) ) ;
 	}
 	exit ;
 }

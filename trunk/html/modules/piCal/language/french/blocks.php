@@ -28,11 +28,11 @@ define('_MB_PICAL_JUMP','Saut');
 
 // for after the day's events block
 // %s means the indicated day
-define('_MB_PICAL_EVENTS_AFTER','Evènements après %s');
+define('_MB_PICAL_EVENTS_AFTER','EvïÏements aprïÔ %s');
 
 // for the day's events block
 // %s means the indicated day
-define('_MB_PICAL_EVENTS_THEDAY','Evènemenst pour %s');
+define('_MB_PICAL_EVENTS_THEDAY','EvïÏemenst pour %s');
 
 
 

@@ -8,13 +8,13 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_MI_LOADED' ) ) {
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-06 18:03:58
 define('_MI_TIMEZONE_USING','Timezone del servidor');
-define('_MI_OPT_TZ_USEXOOPS','valor de la configuraciÛn de XOOPS');
+define('_MI_OPT_TZ_USEXOOPS','valor de la configuraciÖœ de XOOPS');
 define('_MI_OPT_TZ_USEWINTER','valor indicado por el servidor para el horario de invierno (recomendado)');
 define('_MI_OPT_TZ_USESUMMER','valor indicado por el servidor para el horario de verano');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-03 05:31:11
 define('_MI_USE24HOUR','Sistema 24h (no existe formato 12h)');
-define('_MI_PICAL_ADMENU_PLUGINS','ConfiguraciÛn de Plugins');
+define('_MI_PICAL_ADMENU_PLUGINS','ConfiguraciÖœ de Plugins');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-22 12:02:00
 define('_MI_PICAL_BNAME_MINICALEX','MiniCalendarEx');
@@ -22,7 +22,7 @@ define('_MI_PICAL_BNAME_MINICALEX_DESC','miniCalendario Extensible con sistema d
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-01-08 04:36:48
 define('_MI_PICAL_DEFAULTLOCALE','');
-define('_MI_PICAL_LOCALE','Local (comprobaciÛn de los archivos locales/*.php)');
+define('_MI_PICAL_LOCALE','Local (comprobaciÖœ de los archivos locales/*.php)');
 
 define( 'PICAL_MI_LOADED' , 1 ) ;
 
@@ -38,7 +38,7 @@ define('_MI_PICAL_ADMENU_MYBLOCKSADMIN','Blocks&Groups Admin');
 define("_MI_PICAL_NAME","piCal");
 
 // A brief description of this module
-define("_MI_PICAL_DESC","MÛdulo de calendario con agenda de eventos");
+define("_MI_PICAL_DESC","MÖ≈ulo de calendario con agenda de eventos");
 
 // Names of blocks for this module (Not all module has blocks)
 define("_MI_PICAL_BNAME_MINICAL","Mini Calendario");
@@ -48,11 +48,11 @@ define("_MI_PICAL_BNAME_MONTHCAL_DESC","Muestra un calendario mensual completo")
 define("_MI_PICAL_BNAME_TODAYS","Eventos de hoy");
 define("_MI_PICAL_BNAME_TODAYS_DESC","Muestra los eventos de hoy");
 define("_MI_PICAL_BNAME_THEDAYS","Eventos del %s");
-define("_MI_PICAL_BNAME_THEDAYS_DESC","Muestra los eventos del dÌa indicado");
-define("_MI_PICAL_BNAME_COMING","PrÛximos eventos");
-define("_MI_PICAL_BNAME_COMING_DESC","Muestra los prÛximos eventos");
-define("_MI_PICAL_BNAME_AFTER","Eventos despuÈs %s");
-define("_MI_PICAL_BNAME_AFTER_DESC","Muestra eventos despuÈs del dÌa indicado");
+define("_MI_PICAL_BNAME_THEDAYS_DESC","Muestra los eventos del d˘¬ indicado");
+define("_MI_PICAL_BNAME_COMING","PrÖŸimos eventos");
+define("_MI_PICAL_BNAME_COMING_DESC","Muestra los prÖŸimos eventos");
+define("_MI_PICAL_BNAME_AFTER","Eventos despuÒ‘ %s");
+define("_MI_PICAL_BNAME_AFTER_DESC","Muestra eventos despuÒ‘ del d˘¬ indicado");
 
 // Names of submenu
 // define("_MI_PICAL_SMNAME1","");
@@ -62,25 +62,25 @@ define("_MI_PICAL_BNAME_AFTER_DESC","Muestra eventos despuÈs del dÌa indicado");
 // Title of config items
 define("_MI_USERS_AUTHORITY", "Autorizaciones de los usuarios");
 define("_MI_GUESTS_AUTHORITY", "Autorizaciones de los visitantes");
-define("_MI_MINICAL_TARGET", "Mostrar p·gina en el centro cuando se hace clic en la fecha del minicalendario");
-define("_MI_COMING_NUMROWS", "N˙mero de eventos que se muestran el el bloque de prÛximos eventos");
+define("_MI_MINICAL_TARGET", "Mostrar p·»ina en el centro cuando se hace clic en la fecha del minicalendario");
+define("_MI_COMING_NUMROWS", "NìŒero de eventos que se muestran el el bloque de prÖŸimos eventos");
 define("_MI_SKINFOLDER", "Nombre del folder de la piel(Skin)");
 define("_MI_SUNDAYCOLOR", "Color del Domingo");
-define("_MI_WEEKDAYCOLOR", "Color de los dÌas de la semana");
-define("_MI_SATURDAYCOLOR", "Color del S·bado");
-define("_MI_HOLIDAYCOLOR", "Color del dÌa festivo");
-define("_MI_TARGETDAYCOLOR", "Color del dÌa con evento");
+define("_MI_WEEKDAYCOLOR", "Color de los d˘¬s de la semana");
+define("_MI_SATURDAYCOLOR", "Color del S·√ado");
+define("_MI_HOLIDAYCOLOR", "Color del d˘¬ festivo");
+define("_MI_TARGETDAYCOLOR", "Color del d˘¬ con evento");
 define("_MI_SUNDAYBGCOLOR", "Color de fondo del Domingo");
-define("_MI_WEEKDAYBGCOLOR", "Color de fondo de los dÌas de la semana");
-define("_MI_SATURDAYBGCOLOR", "Color de fondo del S·bado");
-define("_MI_HOLIDAYBGCOLOR", "Color de fondo de los dÌas festivos");
-define("_MI_TARGETDAYBGCOLOR", "Color de fondo del dÌa con evento");
+define("_MI_WEEKDAYBGCOLOR", "Color de fondo de los d˘¬s de la semana");
+define("_MI_SATURDAYBGCOLOR", "Color de fondo del S·√ado");
+define("_MI_HOLIDAYBGCOLOR", "Color de fondo de los d˘¬s festivos");
+define("_MI_TARGETDAYBGCOLOR", "Color de fondo del d˘¬ con evento");
 define("_MI_CALHEADCOLOR", "Color del encabezado del calendario");
 define("_MI_CALHEADBGCOLOR", "Color de fondo del encabezado del calendario");
 define("_MI_CALFRAMECSS", "Estilo de la llama del calendario");
 define("_MI_CANOUTPUTICS", "Permisos de hacer archivos ics");
-define("_MI_MAXRRULEEXTRACT", "LÌmite superior de los eventos extraÌdos por regla.(CONT)");
-define("_MI_WEEKSTARTFROM", "DÌa que comienza de la semana");
+define("_MI_MAXRRULEEXTRACT", "L˘Œite superior de los eventos extra˘≈os por regla.(CONT)");
+define("_MI_WEEKSTARTFROM", "D˘¬ que comienza de la semana");
 
 // Description of each config items
 define("_MI_EDITBYGUESTDSC", "Permiso de agregar eventos a los visitantes");
@@ -88,12 +88,12 @@ define("_MI_EDITBYGUESTDSC", "Permiso de agregar eventos a los visitantes");
 // Options of each config items
 define("_MI_OPT_AUTH_NONE", "no pueden agregar");
 define("_MI_OPT_AUTH_WAIT", "no pueden agregar pero necesitan permiso");
-define("_MI_OPT_AUTH_POST", "no se pueden agregar sin admisiÛn");
+define("_MI_OPT_AUTH_POST", "no se pueden agregar sin admisiÖœ");
 define("_MI_OPT_AUTH_BYGROUP", "Especificado en los permisos del grupo");
-define("_MI_OPT_MINI_PHPSELF", "p·gina actual");
+define("_MI_OPT_MINI_PHPSELF", "p·»ina actual");
 define("_MI_OPT_MINI_MONTHLY", "Calendario mensual");
 define("_MI_OPT_MINI_WEEKLY", "Calendario semanal");
-define("_MI_OPT_MINI_DAILY", "Calendario por dÌa");
+define("_MI_OPT_MINI_DAILY", "Calendario por d˘¬");
 define("_MI_OPT_CANNOTOUTPUTICS", "puede hacer");
 define("_MI_OPT_CANOUTPUTICS", "no puede hacer");
 define("_MI_OPT_STARTFROMSUN", "Domingo");
@@ -114,34 +114,34 @@ define('_MI_OPT_USENAME','Usar Nombre');
 define('_MI_OPT_USEUNAME','Usar seudonimo');
 
 // Appended by Xoops Language Checker -GIJOE- in 2003-12-26 10:55:15
-define('_MI_DAYSTARTFROM','Linea del borde para separar los dÌas');
+define('_MI_DAYSTARTFROM','Linea del borde para separar los d˘¬s');
 define('_MI_PICAL_GLOBAL_NOTIFY','Global');
-define('_MI_PICAL_GLOBAL_NOTIFYDSC','Global piCal opciones de notificaciÛn.');
+define('_MI_PICAL_GLOBAL_NOTIFYDSC','Global piCal opciones de notificaciÖœ.');
 define('_MI_PICAL_CATEGORY_NOTIFY','Categoria');
-define('_MI_PICAL_CATEGORY_NOTIFYDSC','Opciones de NotificaciÛn que seran aplicadas a esta categorÌa.');
+define('_MI_PICAL_CATEGORY_NOTIFYDSC','Opciones de NotificaciÖœ que seran aplicadas a esta categor˘¬.');
 define('_MI_PICAL_EVENT_NOTIFY','Evento');
-define('_MI_PICAL_EVENT_NOTIFYDSC','Opciones de NotificaciÛn que seran aplicadas a este evento.');
+define('_MI_PICAL_EVENT_NOTIFYDSC','Opciones de NotificaciÖœ que seran aplicadas a este evento.');
 define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFY','Nuevo Evento');
-define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYCAP','Notificarme cuando se aÒada un evento.');
-define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYDSC','Recibir una notificaciÛn cuando un envento es aÒadido.');
-define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYSBJ','[{X_SITENAME}] {X_MODULE} auto-notificaciÛn : Nuevo evento');
+define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYCAP','Notificarme cuando se aÅ¬da un evento.');
+define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYDSC','Recibir una notificaciÖœ cuando un envento es aÅ¬dido.');
+define('_MI_PICAL_GLOBAL_NEWEVENT_NOTIFYSBJ','[{X_SITENAME}] {X_MODULE} auto-notificaciÖœ : Nuevo evento');
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-01-14 18:31:00
 define('_MI_PICAL_BNAME_NEW','Nuevos eventos publicados');
 define('_MI_PICAL_BNAME_NEW_DESC','Mostrar los eventos en orden el nuevo es el primero');
 define('_MI_PICAL_SM_SUBMIT','Aprobar');
 define('_MI_DEFAULT_VIEW','Vista predefinida en el centro');
-define('_MI_WEEKNUMBERING','N˙mero de divisiones por semanas');
+define('_MI_WEEKNUMBERING','NìŒero de divisiones por semanas');
 define('_MI_OPT_MINI_LIST','lista de eventos');
 define('_MI_OPT_WEEKNOEACHMONTH','por cada mes');
-define('_MI_OPT_WEEKNOWHOLEYEAR','por aÒos');
+define('_MI_OPT_WEEKNOWHOLEYEAR','por aÅ–s');
 define('_MI_PICAL_ADMENU_CAT','Editor de Categorias');
 define('_MI_PICAL_ADMENU_CAT2GROUP','Categoria\s Permisos');
 define('_MI_PICAL_ADMENU_TM','Mantenimiento de Tablas');
 define('_MI_PICAL_ADMENU_ICAL','Importar desde iCalendar');
 define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFY','Nuevo evento en esta categoria');
 define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYCAP','Notificarme cuando un nuevo evento se cree en esta categoria.');
-define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYDSC','Recibir una notificaciÛn cuando un evento haya sido creado en esta categorÌa.');
+define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYDSC','Recibir una notificaciÖœ cuando un evento haya sido creado en esta categor˘¬.');
 define('_MI_PICAL_CATEGORY_NEWEVENT_NOTIFYSBJ','[{X_SITENAME}] {X_MODULE} auto-notificar : Nuevo evento');
 
 }

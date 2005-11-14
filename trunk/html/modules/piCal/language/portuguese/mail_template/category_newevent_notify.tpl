@@ -7,12 +7,12 @@ Clique neste link para ver o evento:Follow this link to view the event:
 
 -----------
 
-Você esta recebendo esta mensagem pois selecionou a opcão para ser notificado quando novos eventos são adicionados no site.
+Você esta recebendo esta mensagem pois selecionou a opcåÐ para ser notificado quando novos eventos såÐ adicionados no site.
 
-Caso você não queira mais receber futuras notificações por favor atualize suas opções visitando o link abaixo:
+Caso você nåÐ queira mais receber futuras notificaî÷es por favor atualize suas opî÷es visitando o link abaixo:
 {X_UNSUBSCRIBE_URL}
 
-Por favor não responda a esta mensagem.
+Por favor nåÐ responda a esta mensagem.
 
 -----------
 

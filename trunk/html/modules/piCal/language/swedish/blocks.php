@@ -15,24 +15,24 @@ define('_MB_PICAL_PLUGINS_VALID','Giltiga Plugin moduler');
 define('_MB_PICAL_MAXITEMS','Visa');
 define('_MB_PICAL_CATSEL','Kategori');
 define('_MB_PICAL_CATSELSUB','Visa också underkategorier');
-define('_MB_PICAL_UNTILDAYS','Antal %s dagar (0 betyder oändligt)');
+define('_MB_PICAL_UNTILDAYS','Antal %s dagar (0 betyder oçÏdligt)');
 
 define( 'PICAL_BL_LOADED' , 1 ) ;
 
 // for monthly calendar block
-define('_MB_PICAL_PREV_MONTH','Förra');
-define('_MB_PICAL_NEXT_MONTH','Nästa');
-define('_MB_PICAL_YEAR','År');
-define('_MB_PICAL_MONTH','Månad');
+define('_MB_PICAL_PREV_MONTH','F‹Óra');
+define('_MB_PICAL_NEXT_MONTH','NçÔta');
+define('_MB_PICAL_YEAR','ŽÅr');
+define('_MB_PICAL_MONTH','MéÏad');
 define('_MB_PICAL_JUMP','Gå till');
 
 // for after the day's events block
 // %s means the indicated day
-define('_MB_PICAL_EVENTS_AFTER','Händelser efter %s');
+define('_MB_PICAL_EVENTS_AFTER','HçÏdelser efter %s');
 
 // for the day's events block
 // %s means the indicated day
-define('_MB_PICAL_EVENTS_THEDAY','Händelser den %s');
+define('_MB_PICAL_EVENTS_THEDAY','HçÏdelser den %s');
 
 
 

@@ -6,7 +6,7 @@ define( 'PICAL_MB_LOADED' , 1 ) ;
 
 // index.php
 define('_MB_PICAL_ERR_NOPERMTOUPDATE',"Usted no tiene permisos para cambiar eventos");
-define('_MB_PICAL_ERR_NOPERMTOINSERT',"Usted no tiene permisos para aÒadir eventos");
+define('_MB_PICAL_ERR_NOPERMTOINSERT',"Usted no tiene permisos para aÅ¬dir eventos");
 define('_MB_PICAL_ERR_NOPERMTODELETE',"Usted no tiene permisos para eliminar eventos");
 
 

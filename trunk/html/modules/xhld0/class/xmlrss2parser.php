@@ -73,10 +73,10 @@ class XhldXmlRss2Parser extends SaxParser
         $this->addTagHandler(new XhldRssTextInputHandler());
     }
 
-	function setChannelData($name, &$value)
+	function setChannelData($name, $value)
 	{
 		if (!isset($this->_channelData[$name])) {
-			$this->_channelData[$name] =& $value;
+			$this->_channelData[$name] = $value;
 		} else {
 			$this->_channelData[$name] .= $value;
 		}
@@ -93,9 +93,9 @@ class XhldXmlRss2Parser extends SaxParser
         return $this->_channelData;
     }
 
-    function setImageData($name, &$value)
+    function setImageData($name, $value)
     {
-        $this->_imageData[$name] =& $value;
+        $this->_imageData[$name] = $value;
     }
 
     function &getImageData($name = null)
@@ -109,9 +109,9 @@ class XhldXmlRss2Parser extends SaxParser
         return $this->_imageData;
     }
 
-    function setItems(&$itemarr)
+    function setItems($itemarr)
     {
-        $this->_items[] =& $itemarr;
+        $this->_items[] = $itemarr;
     }
 
     function &getItems()
@@ -119,10 +119,10 @@ class XhldXmlRss2Parser extends SaxParser
         return $this->_items;
     }
 
-    function setTempArr($name, &$value, $delim = '')
+    function setTempArr($name, $value, $delim = '')
     {
         if (!isset($this->_tempArr[$name])) {
-            $this->_tempArr[$name] =& $value;
+            $this->_tempArr[$name] = $value;
         } else if( $name == 'pubdate' ) {
             $this->_tempArr[$name] = $value;
         } else if( $name == 'link' && substr( $value , 0 , 4 ) == 'http' ) {
@@ -524,7 +524,7 @@ class XhldRssTextInputHandler extends XmlTagHandler
         return 'textInput';
     }
 
-    function handleBeginElement(&$parser, &$attributes)
+    function handleBeginElement(&$parser, $attributes)
     {
         $parser->resetTempArr();
     }
@@ -648,7 +648,7 @@ class XhldRssItemHandler extends XmlTagHandler
         return 'item';
     }
 
-    function handleBeginElement(&$parser, &$attributes)
+    function handleBeginElement(&$parser, $attributes)
     {
         $parser->resetTempArr();
     }

@@ -58,7 +58,7 @@ function pical_thedays_schedule_show_tpl( $options )
 		}
 	}
 
-	$block =& $cal->get_blockarray_date_event( "$mod_url/index.php" ) ;
+	$block = $cal->get_blockarray_date_event( "$mod_url/index.php" ) ;
 	return $block ;
 }
 

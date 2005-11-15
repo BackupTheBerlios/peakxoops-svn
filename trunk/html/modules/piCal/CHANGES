@@ -1,6 +1,10 @@
 [xlang:en]
 
-v.084 compatibity fix (2005-11-14)
+v.084a compatibility fix for PHP 4.4.x (2005-16)
+- changed passing in reference to in value (thx okuhiki)
+- fixed typo in a code for anti HTTP response splitting (thx okuhiki)
+
+v.084 compatibility fix (2005-11-14)
 - updated myblocksadmin 0.41 and mymenu 0.15
 - modified the compatibilities with PHP5.0.5
 - fixed some possibilities be attacked by HTTP Response Splitting
@@ -294,6 +298,10 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.084a 参照関連修正 (2005-16)
+- 不必要な参照を値渡しに修正 4.4.x 対策 (thx okuhiki)
+- 改行潰し部分のtypoを修正 (thx okuhiki)
 
 v.084 互換性関連メインの修正 (2005-11-14)
 - updated myblocksadmin 0.41 and mymenu 0.15

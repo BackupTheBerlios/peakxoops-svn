@@ -1007,7 +1007,7 @@ function get_plugins( $type )
 	// allowed modules
 	$moduleperm_handler =& xoops_gethandler('groupperm');
 	$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-	$allowed_mids =& $moduleperm_handler->getItemIds('module_read', $groups);
+	$allowed_mids = $moduleperm_handler->getItemIds('module_read', $groups);
 
 	// plugins
 	$plugins = array() ;

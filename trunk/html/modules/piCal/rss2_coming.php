@@ -33,7 +33,7 @@
 	$cal->images_url = "$mod_url/images/$skin_folder" ;
 	$cal->images_path = "$mod_path/images/$skin_folder" ;
 
-	$block =& $cal->get_blockarray_coming_event( "$mod_url/index.php" , 10 , true ) ;
+	$block = $cal->get_blockarray_coming_event( "$mod_url/index.php" , 10 , true ) ;
 
 
 //mb_http_output( 'UTF-8' ) ;

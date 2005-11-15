@@ -60,7 +60,7 @@ function pical_after_schedule_show_tpl( $options )
 		}
 	}
 
-	$block =& $cal->get_blockarray_coming_event( "$mod_url/index.php" , $maxitem , false , $untildays ) ;
+	$block = $cal->get_blockarray_coming_event( "$mod_url/index.php" , $maxitem , false , $untildays ) ;
 	return $block ;
 }
 

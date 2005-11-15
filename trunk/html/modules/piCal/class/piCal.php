@@ -154,7 +154,7 @@ function piCal( $target_date = "" , $language = "japanese" , $reload = false )
 			if( isset( $_POST[ $post ] ) ) $reload_str .= "&$post=".urlencode( $_POST[ $post ] ) ;
 		}
 		$reload_str4header = strtr( $reload_str , "\r\n\0" , "   " ) ;
-		header( $reload_str ) ;
+		header( $reload_str4header ) ;
 		exit ;
 	}
 

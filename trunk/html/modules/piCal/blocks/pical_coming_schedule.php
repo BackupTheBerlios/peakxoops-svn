@@ -43,7 +43,7 @@ function pical_coming_schedule_show_tpl( $options )
 	$cal->images_url = "$mod_url/images/$skin_folder" ;
 	$cal->images_path = "$mod_path/images/$skin_folder" ;
 
-	$block =& $cal->get_blockarray_coming_event( "$mod_url/index.php" , $maxitem , true , $untildays ) ;
+	$block = $cal->get_blockarray_coming_event( "$mod_url/index.php" , $maxitem , true , $untildays ) ;
 	return $block ;
 }
 

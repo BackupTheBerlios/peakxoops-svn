@@ -42,7 +42,7 @@ function pical_new_event_show_tpl( $options )
 	$cal->images_url = "$mod_url/images/$skin_folder" ;
 	$cal->images_path = "$mod_path/images/$skin_folder" ;
 
-	$block =& $cal->get_blockarray_new_event( "$mod_url/index.php" , $maxitem ) ;
+	$block = $cal->get_blockarray_new_event( "$mod_url/index.php" , $maxitem ) ;
 	return $block ;
 }
 

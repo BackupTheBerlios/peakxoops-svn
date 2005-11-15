@@ -159,14 +159,15 @@ PLUGINS:
 
 CHANGES:
 
-:ver 0.94|
+ver 0.94a|
+- fixed a typo in plugins/yomi.php (thx yshima)
 
+:ver 0.94|
 - removed CRs in some php files
 - a plugin added
 -- XFSection (thx Bezoops)
 
 :ver 0.93|
-
 - updated Italian (thx flying.tux)
 - a plugin added
 -- SmartPartner (thx mariuss)

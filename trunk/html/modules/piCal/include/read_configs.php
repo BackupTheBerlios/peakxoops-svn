@@ -61,7 +61,7 @@
 		$isadmin = $xoopsUser->isadmin( $mid ) ;
 
 		$member_handler =& xoops_gethandler('member');
-		$system_groups =& $member_handler->getGroupList() ;
+		$system_groups = $member_handler->getGroupList() ;
 
 		if( $isadmin ) {
 
@@ -87,7 +87,7 @@
 		} else {
 
 			// 一般ユーザは自分の所属するグループのみ
-			$my_group_ids =& $member_handler->getGroupsByUser( $user_id ) ;
+			$my_group_ids = $member_handler->getGroupsByUser( $user_id ) ;
 			$cal->groups = array() ;
 			$ids4sql = '(' ;
 			foreach( $my_group_ids as $id ) {

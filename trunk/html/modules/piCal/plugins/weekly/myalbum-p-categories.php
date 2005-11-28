@@ -29,7 +29,7 @@
 	$range_end_s = mktime(0,0,0,$this->month,$wtop_date+8,$this->year) ;
 
 	// query (added 86400 second margin "begin" & "end")
-	$result = $db->query( "SELECT cid,min(`date`) FROM ".$db->prefix("myalbum{$mydirnumber}_photos")." WHERE `date` >= $range_start_s AND `date` < $range_end_s AND status > 0 GROUP BY cid" ) ;
+	$result = $db->query( "SELECT cid,min(`date`) FROM ".$db->prefix("myalbum{$mydirnumber}_photos")." WHERE `date` >= $range_start_s AND `date` < $range_end_s AND `status` > 0 GROUP BY cid" ) ;
 
 	while( list( $cid , $server_time ) = $db->fetchRow( $result ) ) {
 		$user_time = $server_time + $tzoffset_s2u ;

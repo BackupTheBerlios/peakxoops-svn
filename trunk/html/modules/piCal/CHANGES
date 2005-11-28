@@ -1,6 +1,9 @@
 [xlang:en]
 
-v.084a compatibility fix for PHP 4.4.x (2005-16)
+- fixed bug about making conditions for the list view (thx tohokuaiki)
+- fixed bugs about `status` in plugins for mydownloads and mylinks
+
+v.084a compatibility fix for PHP 4.4.x (2005-11-16)
 - changed passing in reference to in value (thx okuhiki)
 - fixed typo in a code for anti HTTP response splitting (thx okuhiki)
 
@@ -299,7 +302,7 @@ v0.10 (2003-4-23)
 [/xlang:en]
 [xlang:ja]
 
-v.084a 参照関連修正 (2005-16)
+v.084a 参照関連修正 (2005-11-16)
 - 不必要な参照を値渡しに修正 4.4.x 対策 (thx okuhiki)
 - 改行潰し部分のtypoを修正 (thx okuhiki)
 

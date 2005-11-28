@@ -603,13 +603,13 @@ function assign_event_list( &$tpl , $get_target = '' )
 			break ;
 		case 'before' :
 			$whr_term = "(allday AND start<='$this->unixtime') OR ( ! allday AND start<='".( $toptime_of_day + 86400 - $tzoffset )."')" ;
-			$whr_term = "start<$this->unixtime" ;
+			//$whr_term = "start<$this->unixtime" ;
 			break ;
 		default :
 		case 'after' :
 			$op = 'after' ;
 			$whr_term = "(allday AND end>'$this->unixtime') OR ( ! allday AND end>'".( $toptime_of_day - $tzoffset )."')" ;
-			$whr_term = "end>$this->unixtime" ;
+			//$whr_term = "end>$this->unixtime" ;
 			break ;
 		case 'on' :
 			$whr_term = "(allday AND start<='$this->unixtime' AND end>'$this->unixtime') OR ( ! allday AND start<='".( $toptime_of_day + 86400 - $tzoffset )."' AND end>'".( $toptime_of_day - $tzoffset )."')" ;

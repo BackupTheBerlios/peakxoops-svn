@@ -1,6 +1,10 @@
 [xlang:en]
 = CHANGES = 
 
+ - updated and renamed Polish language files from polski (thx Tomasz)
+ - updated French language files (thx marco)
+ - updated Italian language files (thx Defkon1)
+
 2.52 (2005/8/27)
  - changed the feature of disabling xmlrpc.php in any path (wordpress etc.)
  - modified the logging rule about xmlrpc.php

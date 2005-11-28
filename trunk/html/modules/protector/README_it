@@ -46,7 +46,7 @@ Dopo che Xoops Protector è installato, modificate il mainfile.php in questo modo
 	define('XOOPS_GROUP_ANONYMOUS', '3');
 
 	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/precheck.inc.php' ) ;[/color]
-	if (!isset($xoopsOption['nocommon'])) {
+	if (!isset($xoopsOption['nocommon']) && XOOPS_ROOT_PATH !='') {
 		include XOOPS_ROOT_PATH."/include/common.php";
 	}
 	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/postcheck.inc.php' ) ;[/color]
@@ -66,6 +66,10 @@ Se doveste essere bannati per errore dal vostro sito, andate su
 http://(your xoops)/modules/protector/admin/rescue.php
 
 Prima di utilizzare questa feature, dovrete aver impostato la password opportuna nelle preferenze di XoopsProtector.
+
+Un opzione chiamata "Blocca da .htaccess" è stata aggiunta dalla versione 2.34.
+Se volete provarla, è necessario impostare scrivibile il file XOOPS_ROOT_PATH/.htaccess
+Prima di utilizzarla, dovreste riflettere sui rischi di sicurezza che comporta il rendere scrivibile questo file.
 
 
 = RINGRAZIAMENTI =

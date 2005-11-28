@@ -2,11 +2,6 @@
 // Module Info
 
 // The name of this module
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:15:38
-define('_MI_PROTECTOR_HIJACK_TOPBIT','Protected IP bits for the session');
-define('_MI_PROTECTOR_HIJACK_TOPBITDSC','Anti Session Hi-Jacking:<br />Default 32(bit). (All bits are protected)<br />When your IP is not stable, set the IP range by number of the bits.<br />(eg) If your IP can move in the range of 192.168.0.0-192.168.0.255, set 24(bit) here');
-
 define("_MI_PROTECTOR_NAME","Xoops Protector");
 
 // A brief description of this module
@@ -34,6 +29,8 @@ define("_MI_PROTECTOR_LOGLEVEL15","Generar log de elementos de alto riesgo apena
 define("_MI_PROTECTOR_LOGLEVEL63","No generar log de elementos de bajo riesgo");
 define("_MI_PROTECTOR_LOGLEVEL255","Generar log de todos los elementos");
 
+define("_MI_PROTECTOR_HIJACK_TOPBIT","Protección de IP bits contra renovación de sesión");
+define("_MI_PROTECTOR_HIJACK_TOPBITDSC","Prevención de robo de sesión (session hijacking):<br />Por defecto es 32(bit) y protege de todos los bits.<br />Si usted usa Proxy o su dirección IP cambia a cada acceso, define el intervalo de bits más largo posible a invariación.<br />Ex.: Cuando haya posibilidad de variacón dentro de 192.168.0.0~192.168.0.255, definir esta opción como 24(bit).");
 define("_MI_PROTECTOR_HIJACK_DENYGP","Grupos prohibidos de cambio de IP");
 define("_MI_PROTECTOR_HIJACK_DENYGPDSC","Prevención de robo de sesión (session hijacking):<br />Seleccione los grupos cuyos usuarios se banearán si durante una sesión se les cambie la dirección IP.<br />(Recomendado: \"Administradores\")");
 define("_MI_PROTECTOR_SAN_NULLBYTE","Sustituir caracteres nulos por espacios");

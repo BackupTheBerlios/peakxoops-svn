@@ -68,6 +68,14 @@ If you try this option, set writable XOOPS_ROOT_PATH/.htaccess
 Before installing this, you should compare it to the security risks which .htaccess is writable.
 
 
+= UPGRADE =
+
+- overwrite them
+- "upgrade" Protector in module's admin
+
+If you can't go to admin's area, edit mainfile.php to temporarily remove the precheck/postcheck. (After "update", add the precheck/postcheck again)
+
+
 
 = THANKS =
  - Kikuchi  (Traditional Chinese language files)
@@ -166,6 +174,18 @@ http://(your xoops)/modules/protector/admin/rescue.php
 ただし、あらかじめこのパスワードを設定していないと、このレスキュー機能も無効になりますので、ご注意下さい。
 
 2.34から、実験的に、.htaccessによるDoS防御というオプションを追加しました。これを利用する場合、XOOPS_ROOT_PATHにある.htaccessを書込可能とする必要があります。導入する際には、.htaccessファイルが書込可能である、というリスクと比較して下さい。
+
+
+●バージョンアップ
+
+まず、全ファイルを上書きアップロードします
+管理画面からモジュール管理に入って、Protectorモジュールをアップデートします
+
+つまり、基本的に、他のモジュールとまったく一緒です。
+
+ただ、アップグレードの状況によっては、モジュール管理画面に入れないこともあり得ます。もしそうなった場合には、mainfile.phpを編集して、precheckおよびpostcheckの行をいったんコメントアウトしてください。
+
+その場合、モジュール管理画面でアップデートを行った後に、再度、mainfile.phpを編集し、precheckおよびpostcheckを有効にする必要があります。
 
 
 ●謝辞

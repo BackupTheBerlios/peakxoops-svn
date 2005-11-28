@@ -1,10 +1,6 @@
 <?php /* Spanish Translation by Marcelo Yuji Himoro <http://yuji.ws> */
 
 // index.php
-
-// Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:15:38
-define('_AM_ADV_USETRANSSID','Your Session ID will be diplayed in anchor tags etc.<br />For preventing from session hi-jacking, add a line into .htaccess in XOOPS_ROOT_PATH.<br /><b>php_flag session.use_trans_sid off</b>');
-
 define("_AM_TH_DATETIME","Fecha");
 define("_AM_TH_USER","Usuario");
 define("_AM_TH_IP","IP");
@@ -34,6 +30,7 @@ define("_AM_ADV_NOTSECURE","INSEGURO");
 
 define("_AM_ADV_REGISTERGLOBALS","Esta configuración permite una gama de ataques por inyección.<br />Si su servidor soporta .htaccess, cree o modifíquelo en la carpeta en donde se encuentra instalado el XOOPS.");
 define("_AM_ADV_ALLOWURLFOPEN","Esta configuración permite que atacantes ejecuten scripts remotos libremente.<br />Para modificar esta opción, usted debe tener el permiso de administrador del servidor.<br />Si usted lo posee, modifique el php.ini o httpd.conf.<br /><b>Ejemplo de httpd.conf:<br /> &nbsp; php_admin_flag &nbsp; allow_url_fopen &nbsp; off</b><br />Si no, contacte el soporte de tu alojamiento web.");
+define("_AM_ADV_USETRANSSID","Sus configuraciones están definidas para mostrar la ID de sesión en los enlaces.<br />Para protegerse contra robo de sesión (session hijack), cree o modifíque un .htaccess en la carpeta en donde se encuentra instalado el XOOPS.<br /><b>php_flag session.use_trans_sid off</b>");
 define("_AM_ADV_DBPREFIX","El prefijo de tu base de datos es el defecto (\"xoops\"), lo que la hace vulnerable a inyección de SQL.<br />No se olvide de activar \"Limpieza en caso de detección de comentarios asolados\" y las protecciones a inyección de SQL.");
 define("_AM_ADV_LINK_TO_PREFIXMAN","Ir al Gestor de prefijos");
 define("_AM_ADV_MAINUNPATCHED","Edite su mainfile.php tal como indicado en el LEEME.");

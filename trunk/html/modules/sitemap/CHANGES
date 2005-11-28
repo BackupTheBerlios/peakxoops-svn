@@ -1,3 +1,6 @@
+- modified language files
+-- rename poski to polish (requested by Tomasz in Xoops.pl Support Team)
+
 1.22 2005-11-14
 - updated myblocksadmin and mymenu
 - remove CRs in some php files

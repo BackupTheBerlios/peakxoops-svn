@@ -159,6 +159,9 @@ PLUGINS:
 
 CHANGES:
 
+
+- modified the module icon (thx Argon)
+
 ver 0.94a|
 - fixed a typo in plugins/yomi.php (thx yshima)
 

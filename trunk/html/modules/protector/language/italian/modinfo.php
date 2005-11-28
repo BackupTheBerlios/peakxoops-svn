@@ -10,19 +10,19 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:15:37
-define('_MI_PROTECTOR_HIJACK_TOPBIT','Protected IP bits for the session');
-define('_MI_PROTECTOR_HIJACK_TOPBITDSC','Anti Session Hi-Jacking:<br />Default 32(bit). (All bits are protected)<br />When your IP is not stable, set the IP range by number of the bits.<br />(eg) If your IP can move in the range of 192.168.0.0-192.168.0.255, set 24(bit) here');
+define('_MI_PROTECTOR_HIJACK_TOPBIT','Bit protetti dell\'IP per la sessione');
+define('_MI_PROTECTOR_HIJACK_TOPBITDSC','Anti Hi-Jacking della sessione:<br />Valore di default 32(bit). (Tutti i bit sono protetti)<br />Se il tuo IP non è statico, imposta il range di IP mediante il numero di bit.<br />Ad esempio, se il tuo IP si muove nel range 192.168.0.0-192.168.0.255, imposta 24(bit)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-07-31 12:33:20
-define('_MI_PROTECTOR_DISABLES','Disable dangerous features in XOOPS');
+define('_MI_PROTECTOR_DISABLES','Disabilita le funzionalità pericolose di XOOPS');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-07-22 15:35:34
-define('_MI_PROTECTOR_RELIABLE_IPS','Reliable IPs');
-define('_MI_PROTECTOR_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ matches the head of string, $ matches the tail of string.');
-define('_MI_PROTECTOR_BF_COUNT','Anti Brute Force');
-define('_MI_PROTECTOR_BF_COUNTDSC','Set count you allow guest try to login within 10 minutes. If someone fails to login more than this number, her/his IP will be banned.');
-define('_MI_PROTECTOR_DOS_SKIPMODS','Modules out of DoS/Crawler checker');
-define('_MI_PROTECTOR_DOS_SKIPMODSDSC','set the dirnames of the modules separated with |. This option will be useful with chatting module etc.');
+define('_MI_PROTECTOR_RELIABLE_IPS','IP affidabili');
+define('_MI_PROTECTOR_RELIABLE_IPSDSC','imposta gli IP affidabili separandoli con | . Wildcard: ^ abbina la testa della stringa, $ abbina la coda della stringa.');
+define('_MI_PROTECTOR_BF_COUNT','Anti Forza bruta');
+define('_MI_PROTECTOR_BF_COUNTDSC','Impostare il numero di tentativi di login effettuabili dagli utenti anonimi nell\'arco di 10 minuti. Se qualcuno supera la soglia impostata, il suo IP viene bannato.');
+define('_MI_PROTECTOR_DOS_SKIPMODS','Moduli esclusi dai controlli DoS/Crawler');
+define('_MI_PROTECTOR_DOS_SKIPMODSDSC','Impostare i nomi delle directory dei moduli separandoli con |. Questa opzione è molto utile con i moduli di tipo chat, ecc.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-03-31 12:07:31
 define('_MI_PROTECTOR_PREFIXMANAGER','Gestore dei prefissi');

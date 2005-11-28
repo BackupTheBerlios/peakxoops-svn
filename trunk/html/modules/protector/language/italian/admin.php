@@ -4,7 +4,7 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-08-24 13:15:38
-define('_AM_ADV_USETRANSSID','Your Session ID will be diplayed in anchor tags etc.<br />For preventing from session hi-jacking, add a line into .htaccess in XOOPS_ROOT_PATH.<br /><b>php_flag session.use_trans_sid off</b>');
+define('_AM_ADV_USETRANSSID','Il tuo ID sesssione verrà mostrato nei tag di ancoraggio, ecc.<br />Al fine di prevenire l\'hi-jacking della sessione, aggiungere una linea nel file .htaccess contenuto nella XOOPS_ROOT_PATH.<br /><b>php_flag session.use_trans_sid off</b>');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-01-21 11:35:16
 define('_AM_H3_PREFIXMAN','Gestione Prefissi');

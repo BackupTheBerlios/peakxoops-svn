@@ -58,46 +58,46 @@ define( 'MYALBUM_AM_LOADED' , 1 ) ;
 // Module Checker
 define( "_AM_H3_FMT_MODULECHECKER" , "comprobador myAlbum-P" ) ;
 
-define( "_AM_H4_ENVIRONMENT" , "Comprobación de Entorno" ) ;
+define( "_AM_H4_ENVIRONMENT" , "Comprobaci…Ï de Entorno" ) ;
 define( "_AM_MB_PHPDIRECTIVE" , "Directivas PHP" ) ;
 define( "_AM_MB_BOTHOK" , "Ambos ok" ) ;
 define( "_AM_MB_NEEDON" , "necesarios" ) ;
 
 
-define( "_AM_H4_TABLE" , "Comprobación de Tablas" ) ;
+define( "_AM_H4_TABLE" , "Comprobaci…Ï de Tablas" ) ;
 define( "_AM_MB_PHOTOSTABLE" , "Tabla de Fotos" ) ;
 define( "_AM_MB_DESCRIPTIONTABLE" , "Tabla de Descripciones" ) ;
-define( "_AM_MB_CATEGORIESTABLE" , "Tabla de Categorías" ) ;
+define( "_AM_MB_CATEGORIESTABLE" , "Tabla de CategorùÂs" ) ;
 define( "_AM_MB_VOTEDATATABLE" , "Tabla de Votaciones" ) ;
 define( "_AM_MB_COMMENTSTABLE" , "Tabla de Comentarios" ) ;
-define( "_AM_MB_NUMBEROFPHOTOS" , "Número de Fotos" ) ;
-define( "_AM_MB_NUMBEROFDESCRIPTIONS" , "Número de Descripciones" ) ;
-define( "_AM_MB_NUMBEROFCATEGORIES" , "Número de Categorías" ) ;
-define( "_AM_MB_NUMBEROFVOTEDATA" , "Número de Votaciones" ) ;
-define( "_AM_MB_NUMBEROFCOMMENTS" , "Número de Comentarios" ) ;
+define( "_AM_MB_NUMBEROFPHOTOS" , "N“Îero de Fotos" ) ;
+define( "_AM_MB_NUMBEROFDESCRIPTIONS" , "N“Îero de Descripciones" ) ;
+define( "_AM_MB_NUMBEROFCATEGORIES" , "N“Îero de CategorùÂs" ) ;
+define( "_AM_MB_NUMBEROFVOTEDATA" , "N“Îero de Votaciones" ) ;
+define( "_AM_MB_NUMBEROFCOMMENTS" , "N“Îero de Comentarios" ) ;
 
 
-define( "_AM_H4_CONFIG" , "Comprobación de Configuración" ) ;
+define( "_AM_H4_CONFIG" , "Comprobaci…Ï de Configuraci…Ï" ) ;
 define( "_AM_MB_PIPEFORIMAGES" , "Fotos en Masa" ) ;
 define( "_AM_MB_DIRECTORYFORPHOTOS" , "Directorio de Fotos" ) ;
 define( "_AM_MB_DIRECTORYFORTHUMBS" , "Directorio de Miniaturas" ) ;
-define( "_AM_ERR_LASTCHAR" , "Error: El último caracter no debe ser '/'" ) ;
+define( "_AM_ERR_LASTCHAR" , "Error: El “Ítimo caracter no debe ser '/'" ) ;
 define( "_AM_ERR_FIRSTCHAR" , "Error: El primer caracter no debe ser '/'" ) ;
 define( "_AM_ERR_PERMISSION" , "Error: Primero crear y chmod 777 este directorio por ftp o shell." ) ;
 define( "_AM_ERR_NOTDIRECTORY" , "Error: No es un directorio." ) ;
 define( "_AM_ERR_READORWRITE" , "Error: El directorio no es escribible o no es legible. Debe cambiar los permisos del directorio a 777." ) ;
 define( "_AM_ERR_SAMEDIR" , "Error: El Directorio de las Fotos no puede ser el mismo que el de las Miniaturas" ) ;
-define( "_AM_LNK_CHECKGD2" , "Comprueba que 'GD2' trabaja correctamente bajo su configuración de GD y PHP" ) ;
-define( "_AM_MB_CHECKGD2" , "Si la página enlazada desde aquí no se muestra correctamente,, debería hacer que GD trabaje en modo truecolor." ) ;
-define( "_AM_MB_GD2SUCCESS" , "¡Conseguido!<br />No obstante, Vd. puede usar GD2 (truecolor) en este entorno." ) ;
+define( "_AM_LNK_CHECKGD2" , "Comprueba que 'GD2' trabaja correctamente bajo su configuraci…Ï de GD y PHP" ) ;
+define( "_AM_MB_CHECKGD2" , "Si la páÈina enlazada desde aquí no se muestra correctamente,, deberùÂ hacer que GD trabaje en modo truecolor." ) ;
+define( "_AM_MB_GD2SUCCESS" , "Ž¡Conseguido!<br />No obstante, Vd. puede usar GD2 (truecolor) en este entorno." ) ;
 
 
-define( "_AM_H4_PHOTOLINK" , "Comprobación de Enlaces de Fotos y Miniaturas" ) ;
+define( "_AM_H4_PHOTOLINK" , "Comprobaci…Ï de Enlaces de Fotos y Miniaturas" ) ;
 define( "_AM_MB_NOWCHECKING" , "Ahora, comprobando ." ) ;
 define( "_AM_FMT_PHOTONOTREADABLE" , "una foto principal (%s) no es legible." ) ;
 define( "_AM_FMT_THUMBNOTREADABLE" , "una miniatura (%s) no es legible." ) ;
 define( "_AM_FMT_NUMBEROFDEADPHOTOS" , "%s ficheros de foto sin enlace encontrados." ) ;
-define( "_AM_FMT_NUMBEROFDEADTHUMBS" , "%s minuaturas deberían reconstruirse." ) ;
+define( "_AM_FMT_NUMBEROFDEADTHUMBS" , "%s minuaturas deberùÂn reconstruirse." ) ;
 define( "_AM_FMT_NUMBEROFREMOVEDTMPS" , "%s garbage files have been removed." ) ;
 define( "_AM_LINK_REDOTHUMBS" , "reconstruir miniaturas" ) ;
 define( "_AM_LINK_TABLEMAINTENANCE" , "mantenimiento de tablas" ) ;
@@ -109,22 +109,22 @@ define( "_AM_H3_FMT_RECORDMAINTENANCE" , "Mantenimiento de Fotos myAlbum-P" ) ;
 
 define( "_AM_FMT_CHECKING" , "comprobando %s ..." ) ;
 
-define( "_AM_FORM_RECORDMAINTENANCE" , "mantenimiento de fotos, regeneración de miniaturas etc." ) ;
+define( "_AM_FORM_RECORDMAINTENANCE" , "mantenimiento de fotos, regeneraci…Ï de miniaturas etc." ) ;
 
 define( "_AM_MB_FAILEDREADING" , "lectura fallida." ) ;
 define( "_AM_MB_CREATEDTHUMBS" , "creada una miniatura." ) ;
-define( "_AM_MB_BIGTHUMBS" , "creación de miniatura fallida. copiada." ) ;
+define( "_AM_MB_BIGTHUMBS" , "creaci…Ï de miniatura fallida. copiada." ) ;
 define( "_AM_MB_SKIPPED" , "saltada." ) ;
-define( "_AM_MB_SIZEREPAIRED" , "(tamaño de campos del registro reparado.)" ) ;
+define( "_AM_MB_SIZEREPAIRED" , "(tamaÐ de campos del registro reparado.)" ) ;
 define( "_AM_MB_RECREMOVED" , "este registro se ha eliminado." ) ;
 define( "_AM_MB_PHOTONOTEXISTS" , "la foto principal no existe." ) ;
-define( "_AM_MB_PHOTORESIZED" , "la foto principal ha sido cambiada de tamaño." ) ;
+define( "_AM_MB_PHOTORESIZED" , "la foto principal ha sido cambiada de tamaÐ." ) ;
 
-define( "_AM_TEXT_RECORDFORSTARTING" , "números de registro comenzando por" ) ;
-define( "_AM_TEXT_NUMBERATATIME" , "número de registros procesados hasta ahora" ) ;
-define( "_AM_LABEL_DESCNUMBERATATIME" , "Un número demasiado grande puede hacer que el servidor tarde demasiado." ) ;
+define( "_AM_TEXT_RECORDFORSTARTING" , "n“Îeros de registro comenzando por" ) ;
+define( "_AM_TEXT_NUMBERATATIME" , "n“Îero de registros procesados hasta ahora" ) ;
+define( "_AM_LABEL_DESCNUMBERATATIME" , "Un n“Îero demasiado grande puede hacer que el servidor tarde demasiado." ) ;
 
-define( "_AM_RADIO_FORCEREDO" , "forzar recreación incluso si la miniatura existe" ) ;
+define( "_AM_RADIO_FORCEREDO" , "forzar recreaci…Ï incluso si la miniatura existe" ) ;
 define( "_AM_RADIO_REMOVEREC" , "eliminar registros que no enlacen a una foto principal" ) ;
 define( "_AM_RADIO_RESIZE" , "encojer fotos mayores que los pixels especificados en las preferencias actuales" ) ;
 
@@ -144,11 +144,11 @@ define('_ALBM_INDEX_BLOCKSADMIN','Administrador de bloques myAlbum-P');
 ?><?php
 // Appended by Xoops Language Checker -GIJOE- in 2004-01-27 15:37:02
 define('_AM_TH_SUBMITTER','Enviador');
-define('_AM_TH_TITLE','Título');
-define('_AM_TH_DESCRIPTION','Descripción');
-define('_AM_TH_CATEGORIES','Categoría');
+define('_AM_TH_TITLE','TùÕulo');
+define('_AM_TH_DESCRIPTION','Descripci…Ï');
+define('_AM_TH_CATEGORIES','CategorùÂ');
 define('_AM_ALBM_GROUPPERM_GLOBAL','Permisos Globales');
-define('_AM_ALBM_GROUPPERM_GLOBALDESC','Configurar privilegios de grupo sobre todo este módulo');
+define('_AM_ALBM_GROUPPERM_GLOBALDESC','Configurar privilegios de grupo sobre todo este m…Åulo');
 define('_AM_ALBM_GPERMUPDATED','Los permisos se han cambiado correctamente');
 
 }

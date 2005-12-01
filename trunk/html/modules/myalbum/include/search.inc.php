@@ -24,7 +24,7 @@ function myalbum_search_base( $mydirname , $keywords , $andor , $limit , $offset
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
-	$select4con = $showcontext ? "t.description" : "''" ;
+	$select4con = $showcontext ? "t.description" : "'' AS description" ;
 
 	$sql = "SELECT l.lid,l.cid,l.title,l.submitter,l.date,$select4con FROM $table_photos l LEFT JOIN $table_text t ON t.lid=l.lid LEFT JOIN ".$xoopsDB->prefix("users")." u ON l.submitter=u.uid WHERE status>0" ;
 

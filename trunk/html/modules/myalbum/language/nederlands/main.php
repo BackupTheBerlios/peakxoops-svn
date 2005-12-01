@@ -137,7 +137,7 @@ define("_ALBM_EDITTHISPHOTO","Foto bewerken");
 define("_ALBM_DESCRIPTIONC","Beschrijving: ");
 define("_ALBM_EMAILC","Email: ");
 define("_ALBM_CATEGORYC","Categorie: ");
-define("_ALBM_SUBCATEGORY","Subcategoriën: ");
+define("_ALBM_SUBCATEGORY","SubcategoriõÏ: ");
 define("_ALBM_LASTUPDATEC","Laatste update: ");
 define("_ALBM_HITSC","Hits: ");
 define("_ALBM_RATINGC","Score: ");
@@ -155,7 +155,7 @@ define("_ALBM_LATESTLIST","Meest recente foto's");
 
 define("_ALBM_VOTEAPPRE","Wij stellen uw beoordeling op prijs.");
 define("_ALBM_THANKURATE","Bedankt voor het beoordelen van een foto op %s.");
-define("_ALBM_VOTEONCE","Kies aub niet meer dan één keer voor dezelfde foto.");
+define("_ALBM_VOTEONCE","Kies aub niet meer dan òën keer voor dezelfde foto.");
 define("_ALBM_RATINGSCALE","De schaal is 1 - 10, 1 is slecht en 10 is uitstekend.");
 define("_ALBM_BEOBJECTIVE","Wees aub objektief, wanneer iedereen een 1 of een 10 ontvangt, zijn de beoordelingen niet erg waardevol.");
 define("_ALBM_DONOTVOTE","Kies aub niet voor uw eigen foto.");
@@ -181,22 +181,22 @@ define("_ALBM_PREVIOUS","Vorige");
 define("_ALBM_NEXT","Volgende");
 define("_ALBM_NOMATCH","Geen foto die aan uw criteria voldoet");
 
-define("_ALBM_CATEGORIES","Categoriën");
+define("_ALBM_CATEGORIES","CategoriõÏ");
 
 define("_ALBM_SUBMIT","Verstuur");
 define("_ALBM_CANCEL","Annuleren");
 
 define("_ALBM_MUSTREGFIRST","Sorry, je hebt geen bevoegdheid voor deze aktie.<br>Registreer eerst of login!");
-define("_ALBM_MUSTADDCATFIRST","Sorry, je hebt nog geen categoriën waaraan je foto's kunt toevoegen.<br>Maak eerst een categorie!");
+define("_ALBM_MUSTADDCATFIRST","Sorry, je hebt nog geen categoriõÏ waaraan je foto's kunt toevoegen.<br>Maak eerst een categorie!");
 define("_ALBM_NORATING","Geen notering geselekteerd.");
 define("_ALBM_CANTVOTEOWN","Je kunt niet stemmen op de foto die je hebt toegevoegd.<br>Alle stemmen worden bewaard en bekeken.");
-define("_ALBM_VOTEONCE2","Stem slechts éénmaal op een foto.<br>Alle stemmen worden bewaard en bekeken.");
+define("_ALBM_VOTEONCE2","Stem slechts òënmaal op een foto.<br>Alle stemmen worden bewaard en bekeken.");
 
 //%%%%%%	Module Name 'MyAlbum' (Admin)	  %%%%%
 
 define("_ALBM_PHOTOSWAITING","Wachtende foto's voor controle");
 define("_ALBM_PHOTOMANAGER","Foto Management");
-define("_ALBM_CATEDIT","Categoriën toevoegen, wijzigen of verwijderen");
+define("_ALBM_CATEDIT","CategoriõÏ toevoegen, wijzigen of verwijderen");
 define("_ALBM_GROUPPERM_GLOBAL","Globale permissies");
 define("_ALBM_CHECKCONFIGS","Check configuratie");
 define("_ALBM_BATCHUPLOAD","Batch registratie");
@@ -214,7 +214,7 @@ define("_ALBM_IN","in");
 define("_ALBM_MODCAT","Categorie wijzigen");
 define("_ALBM_DBUPDATED","Database succesvol ververst!");
 define("_ALBM_MODREQDELETED","Verzoek tot wijziging verwijderd.");
-define("_ALBM_IMGURLMAIN","Icoon URL (OPTIONEEL en alleen geldig voor hoofdcategoriën. Icoon hoogte wordt geschaald naar 50): ");
+define("_ALBM_IMGURLMAIN","Icoon URL (OPTIONEEL en alleen geldig voor hoofdcategoriõÏ. Icoon hoogte wordt geschaald naar 50): ");
 define("_ALBM_PARENT","Bovenliggende categorie:");
 define("_ALBM_SAVE","Wijzigingen opslaan");
 define("_ALBM_CATDELETED","Categorie verwijderd.");

@@ -49,7 +49,7 @@ define("_ALBM_BNAME_HITS_P","Top foto's met thumbnails");
 
 // Config Items
 define( "_ALBM_CFG_PHOTOSPATH" , "Pad naar de foto's" ) ;
-define( "_ALBM_CFG_DESCPHOTOSPATH" , "Pad vanuit de directory waar XOOPS geïnstalleerd is.<br />(Het eerste teken moet een '/' zijn. Het laatste teken mag geen '/' zijn.)<br />De permissies van deze directory zijn 777 of 707 in unix." ) ;
+define( "_ALBM_CFG_DESCPHOTOSPATH" , "Pad vanuit de directory waar XOOPS geýÏstalleerd is.<br />(Het eerste teken moet een '/' zijn. Het laatste teken mag geen '/' zijn.)<br />De permissies van deze directory zijn 777 of 707 in unix." ) ;
 define( "_ALBM_CFG_THUMBSPATH" , "Pad naar de thumbnails" ) ;
 define( "_ALBM_CFG_DESCTHUMBSPATH" , "Hetzelfde als 'Pad naar de foto's'." ) ;
 //define( "_ALBM_CFG_USEIMAGICK" , "Bewerk foto's met ImageMagick" ) ;
@@ -66,7 +66,7 @@ define( "_ALBM_CFG_POPULAR" , "Hits om populair te zijn" ) ;
 define( "_ALBM_CFG_NEWDAYS" , "Aantal dagen dat 'new' & 'update' pictogrammen getoond worden" ) ;
 define( "_ALBM_CFG_NEWPHOTOS" , "Aantal nieuwe foto's op hoofdpagina" ) ;
 define( "_ALBM_CFG_PERPAGE" , "Getoonde foto's per pagina" ) ;
-define( "_ALBM_CFG_MAKETHUMB" , "Creëer thumbnail" ) ;
+define( "_ALBM_CFG_MAKETHUMB" , "CreõÆr thumbnail" ) ;
 define( "_ALBM_CFG_DESCMAKETHUMB" , "Als u deze optie wijzigt, moet u de thumbnails herstellen." ) ;
 //define( "_ALBM_CFG_THUMBWIDTH" , "Thumbnail breedte" ) ;
 //define( "_ALBM_CFG_DESCTHUMBWIDTH" , "De hoogte van de thumbnails wordt automatisch afgeleid van de breedte." ) ;
@@ -82,7 +82,7 @@ define( "_ALBM_CFG_DESCFSIZE" , "De maximum grootte van het te uploaden bestand.
 define( "_ALBM_CFG_ADDPOSTS" , "Het getal 'User's posts' verhogen wanneer een foto wordt gepost" ) ;
 define( "_ALBM_CFG_DESCADDPOSTS" , "Normaal is dit 0 of 1." ) ;
 
-define( "_ALBM_CFG_CATONSUBMENU" , "Hoofdcategoriën registreren in submenu" ) ;
+define( "_ALBM_CFG_CATONSUBMENU" , "HoofdcategoriõÏ registreren in submenu" ) ;
 define( "_ALBM_CFG_NAMEORUNAME" , "Naam poster weergeven" ) ;
 define( "_ALBM_CFG_DESCNAMEORUNAME" , "Kies welke 'naam' wordt getoond" ) ;
 define( "_ALBM_CFG_VIEWCATTYPE" , "Weergave in categorie" ) ;
@@ -108,7 +108,7 @@ define("_ALBM_TEXT_SMNAME4","Mijn foto's");
 // Names of admin menu items
 define("_ALBM_MYALBUM_ADMENU0","Toegevoegde foto's");
 define("_ALBM_MYALBUM_ADMENU1","Foto management");
-define("_ALBM_MYALBUM_ADMENU2","Categoriën toevoegen/bewerken");
+define("_ALBM_MYALBUM_ADMENU2","CategoriõÏ toevoegen/bewerken");
 define("_ALBM_MYALBUM_ADMENU_GPERM","Globale permissies");
 define("_ALBM_MYALBUM_ADMENU3","Check Configuratie");
 define("_ALBM_MYALBUM_ADMENU4","Batch registratie");

@@ -26,20 +26,20 @@ define( "GPERM_RATEVIEW" , 256 ) ;
 define( "GPERM_RATEVOTE" , 512 ) ;
 
 // Global Group Permission
-define( "_ALBM_GPERM_G_INSERTABLE" , "Lägg till (godkännande krävs)" ) ;
-define( "_ALBM_GPERM_G_SUPERINSERT" , "Super lägg till" ) ;
-define( "_ALBM_GPERM_G_EDITABLE" , "Editera (godkännande krävs)" ) ;
+define( "_ALBM_GPERM_G_INSERTABLE" , "LçÈg till (godkçÏnande krç×s)" ) ;
+define( "_ALBM_GPERM_G_SUPERINSERT" , "Super lçÈg till" ) ;
+define( "_ALBM_GPERM_G_EDITABLE" , "Editera (godkçÏnande krç×s)" ) ;
 define( "_ALBM_GPERM_G_SUPEREDIT" , "Super Editera" ) ;
-define( "_ALBM_GPERM_G_DELETABLE" , "Radera (godkännande krävs)" ) ;
+define( "_ALBM_GPERM_G_DELETABLE" , "Radera (godkçÏnande krç×s)" ) ;
 define( "_ALBM_GPERM_G_SUPERDELETE" , "Super Radera" ) ;
-define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Rör andras foto" ) ;
-define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Super rör andras foto" ) ;
-define( "_ALBM_GPERM_G_RATEVIEW" , "Titta på Bedömning" ) ;
-define( "_ALBM_GPERM_G_RATEVOTE" , "Rösta" ) ;
+define( "_ALBM_GPERM_G_TOUCHOTHERS" , "R‹Ó andras foto" ) ;
+define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Super r‹Ó andras foto" ) ;
+define( "_ALBM_GPERM_G_RATEVIEW" , "Titta på Bed‹Îning" ) ;
+define( "_ALBM_GPERM_G_RATEVOTE" , "R‹Ôta" ) ;
 
 // Caption
 define( "_ALBM_CAPTION_TOTAL" , "Totalt:" ) ;
-define( "_ALBM_CAPTION_GUESTNAME" , "Gäst" ) ;
+define( "_ALBM_CAPTION_GUESTNAME" , "GçÔt" ) ;
 
 
 ?>

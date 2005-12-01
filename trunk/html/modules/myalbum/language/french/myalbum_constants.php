@@ -9,7 +9,7 @@ define('GPERM_TELLAFRIEND','1024');
 define('_ALBM_GPERM_G_TELLAFRIEND','Tell a friend');
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-05-05 15:14:39
-define('_ALBM_CAPTION_CATEGORY','Catégorie');
+define('_ALBM_CAPTION_CATEGORY','CatñÈorie');
 
 define( 'MYALBUM_CNST_LOADED' , 1 ) ;
 
@@ -28,12 +28,12 @@ define( "GPERM_RATEVOTE" , 512 ) ;
 // Global Group Permission
 define( "_ALBM_GPERM_G_INSERTABLE" , "Envoi (sous approbation)" ) ;
 define( "_ALBM_GPERM_G_SUPERINSERT" , "Super Envoi" ) ;
-define( "_ALBM_GPERM_G_EDITABLE" , "Édition (sous approbation)" ) ;
-define( "_ALBM_GPERM_G_SUPEREDIT" , "Super Édition" ) ;
+define( "_ALBM_GPERM_G_EDITABLE" , "ŽÉdition (sous approbation)" ) ;
+define( "_ALBM_GPERM_G_SUPEREDIT" , "Super ŽÉdition" ) ;
 define( "_ALBM_GPERM_G_DELETABLE" , "Suppression (sous approbation)" ) ;
 define( "_ALBM_GPERM_G_SUPERDELETE" , "Super Suppression" ) ;
-define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Toucher les photos envoyés par les autres (sous approbation)" ) ;
-define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Toucher les photos envoyés par les autres" ) ;
+define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Toucher les photos envoyñÔ par les autres (sous approbation)" ) ;
+define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Toucher les photos envoyñÔ par les autres" ) ;
 define( "_ALBM_GPERM_G_RATEVIEW" , "Voir la note" ) ;
 define( "_ALBM_GPERM_G_RATEVOTE" , "Voter" ) ;
 

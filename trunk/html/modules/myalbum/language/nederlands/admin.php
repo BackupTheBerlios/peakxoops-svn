@@ -75,12 +75,12 @@ define( "_AM_MB_NEEDON" , "moet aan" ) ;
 define( "_AM_H4_TABLE" , "Controle van tabellen" ) ;
 define( "_AM_MB_PHOTOSTABLE" , "Foto's tabel" ) ;
 define( "_AM_MB_DESCRIPTIONTABLE" , "Beschrijvingen tabel" ) ;
-define( "_AM_MB_CATEGORIESTABLE" , "Categoriën tabel" ) ;
+define( "_AM_MB_CATEGORIESTABLE" , "CategoriõÏ tabel" ) ;
 define( "_AM_MB_VOTEDATATABLE" , "Waarderings-data tabel" ) ;
 define( "_AM_MB_COMMENTSTABLE" , "Commentaar tabel" ) ;
 define( "_AM_MB_NUMBEROFPHOTOS" , "Aantal foto's" ) ;
 define( "_AM_MB_NUMBEROFDESCRIPTIONS" , "Aantal beschrijvingen" ) ;
-define( "_AM_MB_NUMBEROFCATEGORIES" , "Aantal categoriën" ) ;
+define( "_AM_MB_NUMBEROFCATEGORIES" , "Aantal categoriõÏ" ) ;
 define( "_AM_MB_NUMBEROFVOTEDATA" , "Aantal waarderingen" ) ;
 define( "_AM_MB_NUMBEROFCOMMENTS" , "Aantal commentaren" ) ;
 
@@ -121,7 +121,7 @@ define( "_AM_FORM_RECORDMAINTENANCE" , "onderhoud van foto's (zoals herstellen t
 
 define( "_AM_MB_FAILEDREADING" , "lezen mislukt." ) ;
 define( "_AM_MB_CREATEDTHUMBS" , "thumbnail gemaakt." ) ;
-define( "_AM_MB_BIGTHUMBS" , "thumbnail maken mislukt. gekopiëerd." ) ;
+define( "_AM_MB_BIGTHUMBS" , "thumbnail maken mislukt. gekopiõÆrd." ) ;
 define( "_AM_MB_SKIPPED" , "overgeslagen." ) ;
 define( "_AM_MB_SIZEREPAIRED" , "(afmetingen-gegevens in record hersteld.)" ) ;
 define( "_AM_MB_RECREMOVED" , "dit record is verwijderd." ) ;

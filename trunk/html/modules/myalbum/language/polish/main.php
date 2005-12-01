@@ -23,27 +23,27 @@ define( "_ALBM_REDOLOOPDONE" , "Done." ) ;
 
 define( "_ALBM_BTN_SELECTALL" , "Zaznacz wszystkie" ) ;
 define( "_ALBM_BTN_SELECTNONE" , "Kasuj zaznaczenia" ) ;
-define( "_ALBM_BTN_SELECTRVS" , "Odwróæ zaznaczenia" ) ;
+define( "_ALBM_BTN_SELECTRVS" , "Odwr†è zaznaczenia" ) ;
 
-define( "_ALBM_FMT_PHOTONUM" , "Zdjêæ na stronê: %s" ) ;
+define( "_ALBM_FMT_PHOTONUM" , "Zdjôè na stronê: %s" ) ;
 
 define( "_ALBM_AM_ADMISSION" , "Admit Photos" ) ;
 define( "_ALBM_AM_ADMITTING" , "Admitted photo(s)" ) ;
-define( "_ALBM_AM_LABEL_ADMIT" , "Zatwierd¼ zaznaczone zdjêcia " ) ;
-define( "_ALBM_AM_BUTTON_ADMIT" , "Zatwierd¼" ) ;
-define( "_ALBM_AM_BUTTON_EXTRACT" , "Znajd¼ wg numeru" ) ;
+define( "_ALBM_AM_LABEL_ADMIT" , "ZatwierdŽ¼ zaznaczone zdjóÄia " ) ;
+define( "_ALBM_AM_BUTTON_ADMIT" , "ZatwierdŽ¼" ) ;
+define( "_ALBM_AM_BUTTON_EXTRACT" , "ZnajdŽ¼ wg numeru" ) ;
 
 define( "_ALBM_AM_PHOTOMANAGER" , "Photo Manager" ) ;
-define( "_ALBM_AM_PHOTONAVINFO" , "Zdjêcia nr %s-%s (spo¶ród %s)" ) ;
+define( "_ALBM_AM_PHOTONAVINFO" , "ZdjóÄia nr %s-%s (spoŽ¶r…Å %s)" ) ;
 define( "_ALBM_AM_LABEL_REMOVE" , "" ) ;
 define( "_ALBM_AM_BUTTON_REMOVE" , "Usuñ zaznaczone" ) ;
-define( "_ALBM_AM_JS_REMOVECONFIRM" , "Zaznaczone zdjêcia zostan± usuniête." ) ;
+define( "_ALBM_AM_JS_REMOVECONFIRM" , "Zaznaczone zdjóÄia zostanŽ± usunióÕe." ) ;
 define( "_ALBM_AM_LABEL_MOVE" , "Change category the photos checked" ) ;
 define( "_ALBM_AM_BUTTON_MOVE" , "Move" ) ;
 define( "_ALBM_AM_BUTTON_UPDATE" , "Zmieñ" ) ;
 define( "_ALBM_AM_DEADLINKMAINPHOTO" , "The main image don't exist" ) ;
 
-define( "_ALBM_RADIO_ROTATETITLE" , "Obrócenie obrazu" ) ;
+define( "_ALBM_RADIO_ROTATETITLE" , "Obr…Äenie obrazu" ) ;
 define( "_ALBM_RADIO_ROTATE0" , "bez zmian" ) ;
 define( "_ALBM_RADIO_ROTATE90" , "90 st. w prawo" ) ;
 define( "_ALBM_RADIO_ROTATE180" , "180 stopni" ) ;
@@ -51,40 +51,40 @@ define( "_ALBM_RADIO_ROTATE270" , "90 st. w lewo" ) ;
 
 
 // New MyAlbum 1.0.1 (and 1.2.0)
-define("_ALBM_MOREPHOTOS","Wiêcej zdjêæ od %s");
+define("_ALBM_MOREPHOTOS","WióÄej zdjôè od %s");
 define("_ALBM_REDOTHUMBS","Redo Thumbnails (<a href='redothumbs.php'>re-start</a>)");
 define("_ALBM_REDOTHUMBSINFO","Too large number may lead to server time out.");
 define("_ALBM_REDOTHUMBSNUMBER","Number of thumbs at a time");
 define("_ALBM_REDOING","Redoing: ");
 define("_ALBM_BACK","Return");
-define("_ALBM_ADDPHOTO","Dodaj zdjêcie");
+define("_ALBM_ADDPHOTO","Dodaj zdjóÄie");
 
 
 // New MyAlbum 1.0.0
-define("_ALBM_PHOTOBATCHUPLOAD","Publikacja zdjêæ z katalogu na serwerze");
-define("_ALBM_PHOTOUPLOAD","Dodaj zdjêcie");
-define("_ALBM_PHOTOEDITUPLOAD","Edycja zdjêcia");
-define("_ALBM_MAXPIXEL","Dopuszczalna wielko¶æ zdjêcia (px)");
-define("_ALBM_MAXSIZE","Dopuszczalna wielko¶æ pliku");
-define("_ALBM_PHOTOTITLE","Tytu³");
-define("_ALBM_PHOTOPATH","¦cie¿ka");
-define("_ALBM_TEXT_DIRECTORY","Katalog ze zdjêciami");
-define("_ALBM_DESC_PHOTOPATH","¦cie¿ka do katalogu na serwerze");
-define("_ALBM_MES_INVALIDDIRECTORY","B³êdna ¶cie¿ka");
-define("_ALBM_MES_BATCHDONE","Opublikowano %s zdjêæ.");
-define("_ALBM_MES_BATCHNONE","Brak plików zdjêæ w katalogu");
+define("_ALBM_PHOTOBATCHUPLOAD","Publikacja zdjôè z katalogu na serwerze");
+define("_ALBM_PHOTOUPLOAD","Dodaj zdjóÄie");
+define("_ALBM_PHOTOEDITUPLOAD","Edycja zdjóÄia");
+define("_ALBM_MAXPIXEL","Dopuszczalna wielkoŽ¶æ zdjóÄia (px)");
+define("_ALBM_MAXSIZE","Dopuszczalna wielkoŽ¶æ pliku");
+define("_ALBM_PHOTOTITLE","TytuŽ³");
+define("_ALBM_PHOTOPATH","Ž¦cieŽ¿ka");
+define("_ALBM_TEXT_DIRECTORY","Katalog ze zdjóÄiami");
+define("_ALBM_DESC_PHOTOPATH","Ž¦cieŽ¿ka do katalogu na serwerze");
+define("_ALBM_MES_INVALIDDIRECTORY","BŽ³óÅna Ž¶cieŽ¿ka");
+define("_ALBM_MES_BATCHDONE","Opublikowano %s zdjôè.");
+define("_ALBM_MES_BATCHNONE","Brak plik…Ø zdjôè w katalogu");
 define("_ALBM_PHOTODESC","Opis");
 define("_ALBM_PHOTOCAT","Kategoria");
-define("_ALBM_SELECTFILE","Plik zdjêcia");
-define("_ALBM_NOIMAGESPECIFIED","B£¡D: nie wybrano pliku zdjêcia");
-define("_ALBM_FILEERROR","B£¡D: za du¿e zdjêcie");
-define("_ALBM_FILEREADERROR","B³±d odczytu pliku zdjêcia");
+define("_ALBM_SELECTFILE","Plik zdjóÄia");
+define("_ALBM_NOIMAGESPECIFIED","BŽ£Ž¡D: nie wybrano pliku zdjóÄia");
+define("_ALBM_FILEERROR","BŽ£Ž¡D: za duŽ¿e zdjóÄie");
+define("_ALBM_FILEREADERROR","BŽ³Ž±d odczytu pliku zdjóÄia");
 
-define("_ALBM_BATCHBLANK","Puste pole - nazwa pliku jako tytu³ <br>Tekst - tytu³ w postaci <b>tekst numer</b> (1, 2, ...)");
+define("_ALBM_BATCHBLANK","Puste pole - nazwa pliku jako tytuŽ³ <br>Tekst - tytuŽ³ w postaci <b>tekst numer</b> (1, 2, ...)");
 define("_ALBM_DELETEPHOTO","Delete?");
 define("_ALBM_VALIDPHOTO","Aktywne");
-define("_ALBM_PHOTODEL","Usun±æ zdjêcie?");
-define("_ALBM_DELETINGPHOTO","Usuniêto zdjêcie.");
+define("_ALBM_PHOTODEL","UsunŽ±æ zdjóÄie?");
+define("_ALBM_DELETINGPHOTO","UsunióÕo zdjóÄie.");
 define("_ALBM_MOVINGPHOTO","Moving photo");
 
 define("_ALBM_POSTERC","Poster: ");
@@ -110,20 +110,20 @@ define("_ALBM_ANY","ANY");
 define("_ALBM_NAME","Name");
 define("_ALBM_DESCRIPTION","Description");
 
-define("_ALBM_MAIN","Zdjêcia");
+define("_ALBM_MAIN","ZdjóÄia");
 define("_ALBM_NEW","Nowe");
 define("_ALBM_UPDATED","Zmienione");
 define("_ALBM_POPULAR","Popularne");
 define("_ALBM_TOPRATED","Najpopularniejsze");
 
-define("_ALBM_POPULARITYLTOM","Popularno¶æ (rosn±co)");
-define("_ALBM_POPULARITYMTOL","Popularno¶æ (malej±co)");
-define("_ALBM_TITLEATOZ","Tytu³ (A-Z)");
-define("_ALBM_TITLEZTOA","Tytu³ (Z-A)");
+define("_ALBM_POPULARITYLTOM","PopularnoŽ¶æ (rosnŽ±co)");
+define("_ALBM_POPULARITYMTOL","PopularnoŽ¶æ (malejŽ±co)");
+define("_ALBM_TITLEATOZ","TytuŽ³ (A-Z)");
+define("_ALBM_TITLEZTOA","TytuŽ³ (Z-A)");
 define("_ALBM_DATEOLD","Data (od najstarszych)");
 define("_ALBM_DATENEW","Data (od najnowszych)");
-define("_ALBM_RATINGLTOH","Ocena (od najni¿szych)");
-define("_ALBM_RATINGHTOL","Ocena (od najwy¿szych)");
+define("_ALBM_RATINGLTOH","Ocena (od najniŽ¿szych)");
+define("_ALBM_RATINGHTOL","Ocena (od najwyŽ¿szych)");
 define("_ALBM_LIDASC","Record Number (Bigger is latter)");
 define("_ALBM_LIDDESC","Record Number (Smaller is latter)");
 
@@ -135,10 +135,10 @@ define("_ALBM_EMAILC","Email: ");
 define("_ALBM_CATEGORYC","Kategoria: ");
 define("_ALBM_SUBCATEGORY","Podkategorie: ");
 define("_ALBM_LASTUPDATEC","Aktualizacja: ");
-define("_ALBM_HITSC","Ods³on: ");
+define("_ALBM_HITSC","OdsŽ³on: ");
 define("_ALBM_RATINGC","Ocena: ");
-define("_ALBM_ONEVOTE","1 g³os");
-define("_ALBM_NUMVOTES","%s g³osów");
+define("_ALBM_ONEVOTE","1 gŽ³os");
+define("_ALBM_NUMVOTES","%s gŽ³os…Ø");
 define("_ALBM_ONEPOST","1 post");
 define("_ALBM_NUMPOSTS","%s posts");
 define("_ALBM_COMMENTSC","Komentarzy: ");
@@ -146,37 +146,37 @@ define("_ALBM_RATETHISPHOTO","Oceñ");
 define("_ALBM_MODIFY","Modify");
 define("_ALBM_VSCOMMENTS","View/Send Comments");
 
-define("_ALBM_DIRECTCATSEL","WYBIERZ KATEGORIÊ");
-define("_ALBM_THEREARE","Wszystkich zdjêæ: <b>%s</b>");
-define("_ALBM_LATESTLIST","Najnowsze zdjêcia");
+define("_ALBM_DIRECTCATSEL","WYBIERZ KATEGORIŽÊ");
+define("_ALBM_THEREARE","Wszystkich zdjôè: <b>%s</b>");
+define("_ALBM_LATESTLIST","Najnowsze zdjóÄia");
 
-define("_ALBM_VOTEAPPRE","Dziêkujemy za oddany g³os!");
-define("_ALBM_THANKURATE","Twój g³os przyczynia siê do rozwoju serwisu %s.");
-define("_ALBM_VOTEONCE","Mo¿esz oddaæ jeden g³os na jedno zdjêcie");
-define("_ALBM_RATINGSCALE","Skala ocen: 1 - najni¿sza, 10 - najwy¿sza");
+define("_ALBM_VOTEAPPRE","DzióÌujemy za oddany gŽ³os!");
+define("_ALBM_THANKURATE","Tw…Ë gŽ³os przyczynia siê do rozwoju serwisu %s.");
+define("_ALBM_VOTEONCE","MoŽ¿esz oddaæ jeden gŽ³os na jedno zdjóÄie");
+define("_ALBM_RATINGSCALE","Skala ocen: 1 - najniŽ¿sza, 10 - najwyŽ¿sza");
 define("_ALBM_BEOBJECTIVE","Oceniaj rzetelnie i uczciwie");
-define("_ALBM_DONOTVOTE","Nie mo¿esz g³osowaæ na materia³ nades³any przez siebie.");
-define("_ALBM_RATEIT","G³osuj!");
+define("_ALBM_DONOTVOTE","Nie moŽ¿esz gŽ³osowaæ na materiaŽ³ nadesŽ³any przez siebie.");
+define("_ALBM_RATEIT","GŽ³osuj!");
 
-define("_ALBM_RECEIVED","Dziêkujemy za nades³ane zdjêcie!");
-define("_ALBM_ALLPENDING","Nades³any materia³ zosta³ przekazany do zatwierdzenia.");
+define("_ALBM_RECEIVED","DzióÌujemy za nadesŽ³ane zdjóÄie!");
+define("_ALBM_ALLPENDING","NadesŽ³any materiaŽ³ zostaŽ³ przekazany do zatwierdzenia.");
 
 define("_ALBM_RANK","L.P.");
 define("_ALBM_CATEGORY","Kategoria");
-define("_ALBM_HITS","Liczba ods³on");
+define("_ALBM_HITS","Liczba odsŽ³on");
 define("_ALBM_RATING","Ocena");
-define("_ALBM_VOTE","Liczba g³osów");
+define("_ALBM_VOTE","Liczba gŽ³os…Ø");
 define("_ALBM_TOP10","%s "); // %s is a photo category title
 
-define("_ALBM_SORTBY","Porz±dkuj wg:");
-define("_ALBM_TITLE","Tytu³");
+define("_ALBM_SORTBY","PorzŽ±dkuj wg:");
+define("_ALBM_TITLE","TytuŽ³");
 define("_ALBM_DATE","Data");
-define("_ALBM_POPULARITY","L. ods³on");
-define("_ALBM_CURSORTEDBY","Bie¿±ce uporz±dkowanie: %s");
+define("_ALBM_POPULARITY","L. odsŽ³on");
+define("_ALBM_CURSORTEDBY","BieŽ¿Ž±ce uporzŽ±dkowanie: %s");
 define("_ALBM_FOUNDIN","Found in:");
 define("_ALBM_PREVIOUS","Poprzednie");
-define("_ALBM_NEXT","Nastêpne");
-define("_ALBM_NOMATCH","Brak wskazanego zdjêcia.");
+define("_ALBM_NEXT","NastóÑne");
+define("_ALBM_NOMATCH","Brak wskazanego zdjóÄia.");
 
 define("_ALBM_CATEGORIES","Categories");
 
@@ -184,10 +184,10 @@ define("_ALBM_SUBMIT","Submit");
 define("_ALBM_CANCEL","Cancel");
 
 define("_ALBM_MUSTREGFIRST","Brak uprawnieñ. Zarejestruj / zaloguj siê!");
-define("_ALBM_MUSTADDCATFIRST","Brak kategorii.<br>Przed dodawaniem zdjêæ utwórz kategorie!");
+define("_ALBM_MUSTADDCATFIRST","Brak kategorii.<br>Przed dodawaniem zdjôè utw…Óz kategorie!");
 define("_ALBM_NORATING","Nie wskazano oceny!");
-define("_ALBM_CANTVOTEOWN","Nie mo¿esz g³osowaæ na w³asny materia³.");
-define("_ALBM_VOTEONCE2","Na ka¿de zdjêcie mo¿esz g³osowaæ tylko raz.");
+define("_ALBM_CANTVOTEOWN","Nie moŽ¿esz gŽ³osowaæ na wŽ³asny materiaŽ³.");
+define("_ALBM_VOTEONCE2","Na kaŽ¿de zdjóÄie moŽ¿esz gŽ³osowaæ tylko raz.");
 
 //%%%%%%	Module Name 'MyAlbum' (Admin)	  %%%%%
 
@@ -200,7 +200,7 @@ define("_ALBM_BATCHUPLOAD","Batch Register");
 define("_ALBM_GENERALSET","Preferences about myAlbum-P");
 define("_ALBM_REDOTHUMBS2","Rebuild Thumbnails");
 
-define("_ALBM_SUBMITTER","Nades³a³");
+define("_ALBM_SUBMITTER","NadesŽ³aŽ³");
 define("_ALBM_DELETE","Delete");
 define("_ALBM_NOSUBMITTED","No New Submitted Photos.");
 define("_ALBM_ADDMAIN","Add a MAIN Category");

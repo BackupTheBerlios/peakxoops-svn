@@ -20,11 +20,11 @@ define("_ALBM_BTITLE_TOPHIT","Las mejores fotos");
 define("_ALBM_BTITLE_RANDOM","Foto al azar");
 define("_ALBM_TEXT_DISP","Mostrar");
 define("_ALBM_TEXT_BLOCK_WIDTH","Anchura del bloque");
-define("_ALBM_TEXT_BLOCK_WIDTH_NOTES","(si pones 0, la miniatura se muestra en su tamaño original.)");
+define("_ALBM_TEXT_BLOCK_WIDTH_NOTES","(si pones 0, la miniatura se muestra en su tamaÐ original.)");
 
 ?><?php
 // Appended by Xoops Language Checker -GIJOE- in 2003-11-27 10:43:19
-define('_ALBM_TEXT_STRLENGTH','Longitud Máxima del Título de las Fotos');
+define('_ALBM_TEXT_STRLENGTH','Longitud MáÙima del TùÕulo de las Fotos');
 
 }
 

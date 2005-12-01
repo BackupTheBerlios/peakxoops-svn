@@ -26,11 +26,11 @@ define( "GPERM_RATEVIEW" , 256 ) ;
 define( "GPERM_RATEVOTE" , 512 ) ;
 
 // Global Group Permission
-define( "_ALBM_GPERM_G_INSERTABLE" , "EnvÌo (necesita aprobaciÛn)" ) ;
-define( "_ALBM_GPERM_G_SUPERINSERT" , "Super EnvÌo" ) ;
-define( "_ALBM_GPERM_G_EDITABLE" , "Editar (necesita aprobaciÛn)" ) ;
+define( "_ALBM_GPERM_G_INSERTABLE" , "Env˘– (necesita aprobaciÖœ)" ) ;
+define( "_ALBM_GPERM_G_SUPERINSERT" , "Super Env˘–" ) ;
+define( "_ALBM_GPERM_G_EDITABLE" , "Editar (necesita aprobaciÖœ)" ) ;
 define( "_ALBM_GPERM_G_SUPEREDIT" , "Super Editar" ) ;
-define( "_ALBM_GPERM_G_DELETABLE" , "Borrado (necesita aprobaciÛn)" ) ;
+define( "_ALBM_GPERM_G_DELETABLE" , "Borrado (necesita aprobaciÖœ)" ) ;
 define( "_ALBM_GPERM_G_SUPERDELETE" , "Super Borrado" ) ;
 define( "_ALBM_GPERM_G_TOUCHOTHERS" , "Tocar Fotos enviadas por otros" ) ;
 define( "_ALBM_GPERM_G_SUPERTOUCHOTHERS" , "Super Tocar Otros" ) ;
@@ -41,7 +41,7 @@ define( "_ALBM_GPERM_G_RATEVOTE" , "Votar" ) ;
 define( "_ALBM_CAPTION_TOTAL" , "Total:" ) ;
 define( "_ALBM_CAPTION_GUESTNAME" , "Invitado" ) ;
 define( "_ALBM_CAPTION_REFRESH" , "Refrescar" ) ;
-define( "_ALBM_CAPTION_IMAGEXYT" , "TamaÒo(Tipo)" ) ;
+define( "_ALBM_CAPTION_IMAGEXYT" , "TamaÅ–(Tipo)" ) ;
 
 }
 

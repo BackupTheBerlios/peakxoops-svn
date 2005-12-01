@@ -285,7 +285,7 @@ if( $isadmin ) {
 $form->addElement( $submit_tray ) ;
 
 // Ticket
-$form->addElement( $GLOBALS['xoopsGTicket']->getTicketXoopsForm( __LINE__ ) ) ;
+$GLOBALS['xoopsGTicket']->addTicketXoopsFormElement( $form , __LINE__ ) ;
 
 $form->display() ;
 CloseTable() ;

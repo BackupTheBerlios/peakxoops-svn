@@ -305,6 +305,12 @@ v0.10 (2003-4-23)
 [/xlang:en]
 [xlang:ja]
 
+v.084b 細かなバグ潰し (2005-12-1)
+- 祝日法改訂による祝日データの変更 (thx hashimoto)
+- PHP-5.0.5だと検索でfatal errorがでる問題の解決 (thx hoso)
+- リストビューの日付条件生成時のバグ修正 (thx tohokuaiki)
+- mylinks および mydownloads 用のプラグインが未承認でも表示してしまうバグの修正
+
 v.084a 参照関連修正 (2005-11-16)
 - 不必要な参照を値渡しに修正 4.4.x 対策 (thx okuhiki)
 - 改行潰し部分のtypoを修正 (thx okuhiki)

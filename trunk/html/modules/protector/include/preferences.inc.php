@@ -1,33 +1,4 @@
 <?php
-// $Id: main.php,v 1.23.20.1 2004/07/29 18:22:38 mithyt2 Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
-// Project: The XOOPS Project                                                //
-// ------------------------------------------------------------------------- //
 
 if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
   exit("Access Denied");
@@ -209,7 +180,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
       unset($hidden);
     }
     $form->addElement(new XoopsFormHidden('op', 'save'));
-    $form->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ ) );
+    $xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ ) ;
     $form->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
     xoops_cp_header();
     echo '<a href="admin.php?fct=preferences">'. _MD_AM_PREFMAIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.constant($confcat->getVar('confcat_name')).'<br /><br />';
@@ -327,7 +298,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
       unset($hidden);
     }
     $button_tray->addElement(new XoopsFormHidden('op', 'save'));
-    $button_tray->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ , 1800 , 'mymenu' ) );
+    $xoopsGTicket->addTicketXoopsFormElement( $button_tray , __LINE__ , 1800 , 'mymenu' ) ;
     $button_tray->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
     $form->addElement( $button_tray ) ;
     xoops_cp_header();
@@ -442,9 +413,9 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
         unset($new_value);
       }
     }
-    if (!empty($use_mysession) && $xoopsConfig['use_mysession'] == 0 && $session_name != '') {
-        setcookie($session_name, session_id(), time()+(60*intval($session_expire)), '/',  '', 0);
-    }
+    /* if (!empty($_POST['use_mysession']) && $xoopsConfig['use_mysession'] == 0 && $_POST['session_name'] != '') {
+        setcookie($_POST['session_name'], session_id(), time()+(60*intval($_POST['session_expire'])), '/',  '', 0);
+    } */
     if ( ! empty( $_POST['redirect'] ) ) {
       redirect_header($_POST['redirect'], 2, _MD_AM_DBUPDATED);
     } else {

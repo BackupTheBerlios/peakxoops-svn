@@ -8,7 +8,7 @@ define("_AM_TH_AGENT","AGENT");
 define("_AM_TH_TYPE","種別");
 define("_AM_TH_DESCRIPTION","詳細");
 
-define( "_AM_TH_BADIPS" , "拒否IPリスト" ) ;
+define( "_AM_TH_BADIPS" , '拒否IPリスト<br /><br /><span style="font-weight:normal;">生IPアドレスを、| で区切って記述します。^は先頭を、$は末尾を表します。</span>' ) ;
 define( "_AM_TH_ENABLEIPBANS" , "IPによる拒否を有効にする" ) ;
 
 define( "_AM_LABEL_REMOVE" , "チェックしたレコードを削除する:" ) ;

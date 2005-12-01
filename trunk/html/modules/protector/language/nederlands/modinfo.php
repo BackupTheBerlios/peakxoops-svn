@@ -54,7 +54,7 @@ define('_MI_PROTECTOR_SAN_NULLBYTE','Opschoning null-bytes');
 define('_MI_PROTECTOR_SAN_NULLBYTEDSC','Het afsluitend karakter "\\0" wordt vaak gebruikt bij kwaadaardige aanvallen.<br />een null-byte zal veranderd worden in een spatie.<br />(sterk aanbevolen dit Aan te zetten)');
 define('_MI_PROTECTOR_DIE_NULLBYTE','Sluit als null-bytes gevonden worden');
 define('_MI_PROTECTOR_DIE_NULLBYTEDSC','Het afsluitend karakter "\\0" wordt vaak gebruikt bij kwaadaardige aanvallen.<br />(sterk aanbevolen dit Aan te zetten)');
-define('_MI_PROTECTOR_DIE_BADEXT','Sluit als ongewenste bestanden worden geüpload');
+define('_MI_PROTECTOR_DIE_BADEXT','Sluit als ongewenste bestanden worden ge—Ñload');
 define('_MI_PROTECTOR_DIE_BADEXTDSC','Als iemand bestanden met een ongewenste extensie probeert te uploaden zoals .php , zal deze module XOOPS sluiten.<br />Als je vaak php bestanden bijsluit in B-Wiki of PukiWikiMod, is het beter dit Uit te zetten.');
 define('_MI_PROTECTOR_CONTAMI_ACTION','Handeling als een vervuiling gevonden is');
 define('_MI_PROTECTOR_CONTAMI_ACTIONDS','Selecteer de te verrichten handeling als iemand probeert system global variabelen te vervuilen op je XOOPS site.<br />(aanbevolen keuze is een blanco pagina weergeven)');

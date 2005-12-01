@@ -50,12 +50,16 @@ function Protector( $conn )
 
 	if( ! empty( $this->_conf['global_disabled'] ) ) return true ;
 
-	// against PHP_SELF XSS
-	if( preg_match( '/[<>\'";\n ]/' , @$_SERVER['PHP_SELF'] ) ) {
-		$this->message .= "Invalid PHP_SELF '{$_SERVER['PHP_SELF']}' found.\n" ;
-		$this->output_log( 'PHP_SELF XSS' ) ;
-		die( 'invalid PHP_SELF' ) ;
-	}
+	// die if PHP_SELF XSS found (disabled in 2.53)
+//	if( preg_match( '/[<>\'";\n ]/' , @$_SERVER['PHP_SELF'] ) ) {
+//		$this->message .= "Invalid PHP_SELF '{$_SERVER['PHP_SELF']}' found.\n" ;
+//		$this->output_log( 'PHP_SELF XSS' ) ;
+//		die( 'invalid PHP_SELF' ) ;
+//	}
+
+	// sanitize against PHP_SELF/PATH_INFO XSS (enabled in 2.53)
+	$_SERVER['PHP_SELF'] = strtr( @$_SERVER['PHP_SELF'] , array( '<' => '%3C' , '>' => '%3E' , "'" => '%27' , '"' => '%22' ) ) ;
+	if( ! empty( $_SERVER['PATH_INFO'] ) ) $_SERVER['PATH_INFO'] = strtr( @$_SERVER['PATH_INFO'] , array( '<' => '%3C' , '>' => '%3E' , "'" => '%27' , '"' => '%22' ) ) ;
 
 	$this->_bad_globals = array( 'GLOBALS' , '_SESSION' , 'HTTP_SESSION_VARS' , '_GET' , 'HTTP_GET_VARS' , '_POST' , 'HTTP_POST_VARS' , '_COOKIE' , 'HTTP_COOKIE_VARS' , '_SERVER' , 'HTTP_SERVER_VARS' , '_REQUEST' , '_ENV' , '_FILES' , 'xoopsDB' , 'xoopsUser' , 'xoopsUserId' , 'xoopsUserGroups' , 'xoopsUserIsAdmin' , 'xoopsConfig' , 'xoopsOption' , 'xoopsModule' , 'xoopsModuleConfig' ) ;
 
@@ -372,12 +376,32 @@ function check_uploaded_files()
 	if( $this->_done_badext ) return $this->_safe_badext ;
 	else $this->_done_badext = true ;
 
-	$bad_pattern = "/(\.php|\.phtml|\.phtm|\.php3|\.php4|\.cgi|\.pl|\.asp)$/i" ;
+	// extensions never uploaded
+	$bad_extensions = array( 'php' , 'phtml' , 'phtm' , 'php3' , 'php4' , 'cgi' , 'pl' , 'asp' ) ;
+	// extensions needed image check (anti-IE Content-Type XSS)
+	$image_extensions = array( 1 => 'gif', 2 => 'jpg', 3 => 'png', 4 => 'swf', 5 => 'psd', 6 => 'bmp', 7 => 'tif', 8 => 'tif', 9 => 'jpc', 10 => 'jp2', 11 => 'jpx', 12 => 'jb2', 13 => 'swc', 14 => 'iff', 15 => 'wbmp', 16 => 'xbm' ) ;
+
 	foreach( $_FILES as $_file ) {
-		if( ! empty( $_file['name'] ) && is_string( $_file['name'] ) && preg_match( $bad_pattern , $_file['name'] ) ) {
-			$this->message .= "Attempt to upload {$_file['name']}.\n" ;
-			$this->_safe_badext = false ;
-			$this->last_error_type = 'UPLOAD' ;
+		if( ! empty( $_file['error'] ) ) continue ;
+		if( ! empty( $_file['name'] ) && is_string( $_file['name'] ) ) {
+			$ext = strtolower( substr( strrchr( $_file['name'] , '.' ) , 1 ) ) ;
+			if( $ext == 'jpeg' ) $ext = 'jpg' ;
+			else if( $ext == 'tiff' ) $ext = 'tif' ;
+
+			if( in_array( $ext , $bad_extensions ) ) {
+				$this->message .= "Attempt to upload {$_file['name']}.\n" ;
+				$this->_safe_badext = false ;
+				$this->last_error_type = 'UPLOAD' ;
+			}
+
+			if( in_array( $ext , $image_extensions ) ) {
+				$image_attributes = getimagesize( $_file['tmp_name'] ) ;
+				if( $image_attributes === false || $image_extensions[ intval( $image_attributes[2] ) ] != $ext ) {
+					$this->message .= "Attempt to upload camouflaged image file {$_file['name']}.\n" ;
+					$this->_safe_badext = false ;
+					$this->last_error_type = 'UPLOAD' ;
+				}
+			}
 		}
 	}
 

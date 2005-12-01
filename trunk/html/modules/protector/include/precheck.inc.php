@@ -23,7 +23,8 @@ function protector_prepare()
 {
 	// Preferences (for performance, I dare to use an irregular method)
 	$conn = @mysql_connect( XOOPS_DB_HOST , XOOPS_DB_USER , XOOPS_DB_PASS ) ;
-	mysql_select_db( XOOPS_DB_NAME , $conn ) ;
+	if( ! $conn ) die( 'db connection failed.' ) ;
+	if( ! mysql_select_db( XOOPS_DB_NAME , $conn ) ) die( 'db selection failed.' ) ;
 
 	// Protector class
 	require_once( XOOPS_ROOT_PATH . '/modules/protector/class/protector.php' ) ;
@@ -41,7 +42,13 @@ function protector_prepare()
 	if( ! empty( $conf['global_disabled'] ) ) return true ;
 
 	// reliable ips
-	$reliable_ips = unserialize( $conf['reliable_ips'] ) ;
+	$conf['reliable_ips'] = 'a:1:{i:0;s:0:\"\";}';
+	$reliable_ips = @unserialize( $conf['reliable_ips'] ) ;
+	if( ! is_array( $reliable_ips ) ) {
+		// for the environment of (buggy core version && magic_quotes_gpc)
+		$reliable_ips = @unserialize( stripslashes( $conf['reliable_ips'] ) ) ;
+		if( ! is_array( $reliable_ips ) ) $reliable_ips = array() ;
+	}
 	$is_reliable = false ;
 	foreach( $reliable_ips as $reliable_ip ) {
 		if( ! empty( $reliable_ip ) && preg_match( '/'.$reliable_ip.'/' , $_SERVER['REMOTE_ADDR'] ) ) {

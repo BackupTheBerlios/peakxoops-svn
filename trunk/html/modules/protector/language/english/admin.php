@@ -8,7 +8,7 @@ define("_AM_TH_AGENT","AGENT");
 define("_AM_TH_TYPE","Type");
 define("_AM_TH_DESCRIPTION","Description");
 
-define( "_AM_TH_BADIPS" , "Bad IPs" ) ;
+define( "_AM_TH_BADIPS" , 'Bad IPs<br /><br /><span style="font-weight:normal;">Seperate each IP address with a "|" deliminator</span>' ) ;
 define( "_AM_TH_ENABLEIPBANS" , "Enable IP bans?" ) ;
 
 define( "_AM_LABEL_REMOVE" , "Remove the records checked:" ) ;

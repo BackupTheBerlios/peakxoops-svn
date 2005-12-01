@@ -1,6 +1,14 @@
 [xlang:en]
 = CHANGES = 
 
+2.53 (2005/11/30)
+ - added anti camouflaged image file upload (==IE Content-Type XSS)
+ - modified the action when DB is busy
+ - fixed some bugs cause Notices
+ - modified imcompatibities with XOOPS 2.2.3
+ - moved document files under docs/ (for hiding protector's version)
+ - updated mymenu into 0.15a
+ - modified the action against PHP_SELF/PATH_INFO XSS
  - modified the module icon (thx Argon)
  - updated and renamed Polish language files from polski (thx Tomasz)
  - updated French language files (thx marco)

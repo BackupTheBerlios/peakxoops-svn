@@ -28,13 +28,13 @@ if( ! empty( $_POST['action'] ) ) {
 		// update configs about ban IP
 		$config_handler =& xoops_gethandler('config');
 
-		$criteria = new CriteriaCompo(new Criteria('conf_modid', 0));
+		$criteria = new CriteriaCompo(new Criteria('conf_modid', 2, '<'));
 		$criteria->add(new Criteria('conf_name', 'bad_ips'));
 		list( $config ) = $config_handler->getConfigs( $criteria );
 		$config->setVar( 'conf_value' , serialize( explode( '|' , trim( $_POST['bad_ips'] ) ) ) ) ;
 		$config_handler->insertConfig( $config ) ;
 
-		$criteria = new CriteriaCompo(new Criteria('conf_modid', 0));
+		$criteria = new CriteriaCompo(new Criteria('conf_modid', 2, '<'));
 		$criteria->add(new Criteria('conf_name', 'enable_badips'));
 		list( $config ) = $config_handler->getConfigs( $criteria );
 		$config->setVar( 'conf_value' , empty( $_POST['enable_badips'] ) ? 0 : 1 ) ;

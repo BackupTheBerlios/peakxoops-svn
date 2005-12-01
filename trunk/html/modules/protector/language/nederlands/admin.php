@@ -18,7 +18,7 @@ define( "_AM_TH_ENABLEIPBANS" , "IP verbanning inschakelen?" ) ;
 define( "_AM_LABEL_REMOVE" , "Verwijder de geselecteerde items:" ) ;
 define( "_AM_BUTTON_REMOVE" , "Verwijder!" ) ;
 define( "_AM_JS_REMOVECONFIRM" , "Weet u zeker dat u deze item(s) wilt verwijderen?" ) ;
-define( "_AM_MSG_PRUPDATED" , "Voorkeuren met succes geüpdate!" ) ;
+define( "_AM_MSG_PRUPDATED" , "Voorkeuren met succes ge—Ñdate!" ) ;
 define( "_AM_MSG_REMOVED" , "Items zijn verwijderd" ) ;
 
 

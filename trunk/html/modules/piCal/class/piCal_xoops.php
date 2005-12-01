@@ -171,7 +171,7 @@ function get_xoops_search_result( $keywords , $andor , $limit , $offset , $uid )
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
-	$select4con = $showcontext ? "description" : "''" ;
+	$select4con = $showcontext ? "description" : "'' AS description" ;
 
 	// SQLÊ¸À¸À®
 	$sql = "SELECT id,uid,summary,UNIX_TIMESTAMP(dtstamp) AS udtstamp, start, end, allday, start_date, end_date, $select4con FROM $this->table WHERE admission>0 AND (rrule_pid=0 OR rrule_pid=id) AND ($whr_categories) AND ($whr_class) AND ($whr_text) AND ($whr_uid) ORDER BY dtstamp DESC LIMIT $offset,$limit" ;

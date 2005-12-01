@@ -184,7 +184,18 @@
 
 ●変更履歴
 
- - ロシア語ファイル追加 (thx Sergey)
+2.53 (2005/11/30)
+ - 偽装画像ファイルアップロードによるIEのXSS対策コードの追加
+ - データベースがbusy時にPath Disclosureとなっていた問題を改善
+ - Noticeを発生していたいくつかのミスを修正
+ - 管理画面が XOOPS 2.2.3 でエラーを起こしていた互換性問題の改善
+ - ドキュメントをdocsディレクトリに移動 (ドキュメントからのバージョン漏洩防止）
+ - updated mymenu into 0.15a
+ - PHP_SELF/PATH_INFO XSS対策をもう少し緩くした（強制終了からurlencode相当に）
+ - モジュールアイコンの変更 (thx Argon)
+ - ポーランド語ファイルの更新 (thx Tomasz)
+ - フランス語ファイルの更新 (thx marco)
+ - イタリア語ファイルの更新 (thx Defkon1)
 
 2.52 (2005/8/27)
  - WordPressモジュール等についても、xmlrpc.php機能を無効化するように仕様変更

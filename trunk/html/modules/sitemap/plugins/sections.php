@@ -11,7 +11,7 @@ function b_sitemap_sections(){
 		$ret["parent"][] = array(
 			"id" => $id,
 			"title" => $myts->makeTboxData4Show($name),
-			"url" => "index.php?op=listarticles&secid=$id"
+			"url" => "index.php?op=listarticles&amp;secid=$id"
 		);
 	}
 	

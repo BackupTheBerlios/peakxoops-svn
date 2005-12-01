@@ -1,6 +1,11 @@
+1.23 2005-12-2
+- fixed fatal errors in xml_google.php with some conditions (thx centurier)
 - modified the module icon (thx Argon)
 - modified language files
 -- rename poski to polish (requested by Tomasz in Xoops.pl Support Team)
+- fixed plugins
+-- myAds
+-- sections
 
 1.22 2005-11-14
 - updated myblocksadmin and mymenu

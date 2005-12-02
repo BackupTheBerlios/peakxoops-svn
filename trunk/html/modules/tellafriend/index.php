@@ -85,7 +85,7 @@ if( ! empty($_POST['submit']) ) {
 		unset( $_SESSION['usersSubject'] ) ;
 		// check if from_email is valid as an email address
 		if( ! preg_match( '/^[\w\-\.]+\@[\w\-]+\.[\w\-\.]+$/' , $users_email ) ) {
-			redirect_header( $redirect_uri , 3 , _MI_TELLAFRIEND_INVALIDFROM ) ;
+			redirect_header( $redirect_uri , 3 , _MI_TELLAFRIEND_INVALIDMAILFROM ) ;
 			exit ;
 		}
 		$uid = 0 ;
@@ -96,7 +96,7 @@ if( ! empty($_POST['submit']) ) {
 
 	// check if users_to is valid as an email address
 	if( ! preg_match( '/^[\w\-\.]+\@[\w\-]+\.[\w\-\.]+$/' , $users_to ) ) {
-		redirect_header( $redirect_uri , 3 , _MI_TELLAFRIEND_INVALIDTO ) ;
+		redirect_header( $redirect_uri , 3 , _MI_TELLAFRIEND_INVALIDMAILTO ) ;
 		exit ;
 	}
 

@@ -159,6 +159,10 @@ schinese
 
 CHANGES:
 
+v1.02 2005-12-03
+- updated myblocksadmin 0.41 & mymenu 0.15a
+- updated module icon (thx argon)
+
 v1.01 2005-07-21
 - fixed a bug in JavaScript (thx yamaichi)
 

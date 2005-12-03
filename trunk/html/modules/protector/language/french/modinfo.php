@@ -59,6 +59,7 @@ define('_MI_PROTECTOR_DOS_SKIPMODSDSC','Mettre les noms des r&eacute;pertoires d
 
 define("_MI_PROTECTOR_DOS_EXPIRE","D&eacute;lai, en secondes, de r&eacute;action aux rechargements fr&eacute;quents de page (attaque 'touche F5')");
 define("_MI_PROTECTOR_DOS_EXPIREDSC","Dur&eacute;e admise en sec. pour les tentatives par rechargement de page (attaque 'touche F5') et les aspirateurs.");
+
 define("_MI_PROTECTOR_DOS_F5COUNT","Nombre autoris&eacute; de tentatives F5 ");
 define('_MI_PROTECTOR_DOS_F5COUNTDSC','D&eacute;fense contre des attaques DoS :<br/>Cette valeur d&eacute;termine le nombre de rechargement au del&agrave; duquel la connexion est consid&eacute;r&eacute;e comme une attaque malicieuse.');
 define('_MI_PROTECTOR_DOS_F5ACTION','Action si une attaque F5 est d&eacute;tect&eacute;e');

@@ -8,10 +8,10 @@ define("_AM_TH_AGENT","AGENT");
 define("_AM_TH_TYPE","Type");
 define("_AM_TH_DESCRIPTION","Description");
 
-define( "_AM_TH_BADIPS","Liste des IP bannies" ) ;
+define( "_AM_TH_BADIPS",'Liste des IP bannies<br /><br /><span style="font-weight:normal";">S&eacute;parer chaque adresse IP par le d&eacute;limitateur "|" </span>' ) ;
 define( "_AM_TH_ENABLEIPBANS","Activer le bannissement bas&eacute; sur l'adresse IP ?" ) ;
 
-define("_AM_LABEL_REMOVE","Supprimer les enregistrements analys&eacute;s");
+define("_AM_LABEL_REMOVE","Supprimer les enregistrements analys&eacute;s  ");
 define("_AM_BUTTON_REMOVE","Effacer!");
 define("_AM_JS_REMOVECONFIRM","Etes vous certains de vouloir supprimer les objets s&eacute;l&eacute;ctionn&eacute;s?");
 define( "_AM_MSG_PRUPDATED","Les modifications ont &eacute;t&eacute; sauvegard&eacute;es avec succ&egrave;s." ) ;
@@ -19,10 +19,10 @@ define("_AM_MSG_REMOVED","Les enregistrements ont &eacute;t&eacute; effac&eacute
 
 
 // prefix_manager.php
-define( "_AM_H3_PREFIXMAN" , "Gestionnaire de pr&eacute;fix" ) ;
+define( "_AM_H3_PREFIXMAN" , "Gestionnaire de pr&eacute;fixe" ) ;
 define( "_AM_MSG_DBUPDATED" , "Base de donn&eacute;e mise &agrave; jour avec succ&egrave;s!" ) ;
 define( "_AM_CONFIRM_DELETE" , "Toutes les donn&eacute;es seront effac&eacute;es. OK?" ) ;
-define( "_AM_TXT_HOWTOCHANGEDB" , "Pour modifier le pr&eacute;fix,<br /> Editer %s/mainfile.php &agrave; la main.<br /><br />define('XOOPS_DB_PREFIX', '<b>%s</b>');" ) ;
+define( "_AM_TXT_HOWTOCHANGEDB" , "Pour modifier le pr&eacute;fixe,<br /> Editer le fichier %s/mainfile.php &agrave; la main.<br /><br />plus spécifiquement modifier ce Define : define('XOOPS_DB_PREFIX', '<b>%s</b>');" ) ;
 
 
 // advisory.php
@@ -39,7 +39,7 @@ define("_AM_ADV_RESCUEPASSWORDUNSET","Non D&eacute;fini !! (bannissement d'IP no
 define("_AM_ADV_RESCUEPASSWORDSHORT","Trop court.Utilisez des mots de passe d'un minimum de 6 caract&egrave;res.");
 
 define("_AM_ADV_SUBTITLECHECK","Contr&ocirc;le du correct fonctionnement de Protector");
-define("_AM_ADV_AT1STSETPASSWORD","Au d&eacute;but, vous devez d&eacute;finir un mot de passe de secours");
+define("_AM_ADV_AT1STSETPASSWORD","Pour commencer, vous devez d&eacute;finir un mot de passe de secours");
 define("_AM_ADV_CHECKCONTAMI","Attaques par contamination");
 define("_AM_ADV_CHECKISOCOM","Commentaires isol&eacute;s");
 ?>

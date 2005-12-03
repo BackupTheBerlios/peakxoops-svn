@@ -13,6 +13,7 @@
  - updated and renamed Polish language files from polski (thx Tomasz)
  - updated French language files (thx marco)
  - updated Italian language files (thx Defkon1)
+ - fixed packaging errors in zip files (thx Dave_L) 2.53a
 
 2.52 (2005/8/27)
  - changed the feature of disabling xmlrpc.php in any path (wordpress etc.)
@@ -196,6 +197,7 @@
  - ポーランド語ファイルの更新 (thx Tomasz)
  - フランス語ファイルの更新 (thx marco)
  - イタリア語ファイルの更新 (thx Defkon1)
+ - zipファイルのパッケージミスを修正 (thx Dave_L) 2.53a
 
 2.52 (2005/8/27)
  - WordPressモジュール等についても、xmlrpc.php機能を無効化するように仕様変更

@@ -388,12 +388,21 @@ function check_uploaded_files()
 			if( $ext == 'jpeg' ) $ext = 'jpg' ;
 			else if( $ext == 'tiff' ) $ext = 'tif' ;
 
+			// anti multiple dot file (Apache mod_mime.c)
+			if( count( explode( '.' , $_file['name'] ) ) > 2 ) {
+				$this->message .= "Attempt to multiple dot file {$_file['name']}.\n" ;
+				$this->_safe_badext = false ;
+				$this->last_error_type = 'UPLOAD' ;
+			}
+
+			// anti dangerous extensions
 			if( in_array( $ext , $bad_extensions ) ) {
 				$this->message .= "Attempt to upload {$_file['name']}.\n" ;
 				$this->_safe_badext = false ;
 				$this->last_error_type = 'UPLOAD' ;
 			}
 
+			// anti camouflaged image file
 			if( in_array( $ext , $image_extensions ) ) {
 				$image_attributes = getimagesize( $_file['tmp_name'] ) ;
 				if( $image_attributes === false || $image_extensions[ intval( $image_attributes[2] ) ] != $ext ) {

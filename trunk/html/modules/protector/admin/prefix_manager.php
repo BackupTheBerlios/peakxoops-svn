@@ -6,6 +6,8 @@ require_once( '../include/gtickets.php' ) ;
 // COPY TABLES
 if( ! empty( $_POST['copy'] ) && ! empty( $_POST['old_prefix'] ) ) {
 
+	if( preg_match( '/[^0-9A-Za-z_-]/' , $_POST['new_prefix'] ) ) die( 'wrong prefix' ) ;
+
 	// Ticket check
 	if ( ! $xoopsGTicket->check() ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
@@ -53,8 +55,89 @@ if( ! empty( $_POST['copy'] ) && ! empty( $_POST['old_prefix'] ) ) {
 	redirect_header( 'prefix_manager.php' , 1 , _AM_MSG_DBUPDATED ) ;
 	exit ;
 
+// DUMP INTO A LOCAL FILE
+} else if( ! empty( $_POST['backup'] ) && ! empty( $_POST['prefix'] ) ) {
+
+	if( preg_match( '/[^0-9A-Za-z_-]/' , $_POST['prefix'] ) ) die( 'wrong prefix' ) ;
+
+	// Ticket check
+	if ( ! $xoopsGTicket->check() ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
+	$prefix = $_POST['prefix'] ;
+
+	// get table list
+	$srs = $xoopsDB->queryF( 'SHOW TABLE STATUS FROM `'.XOOPS_DB_NAME.'`' ) ;
+	if( ! $xoopsDB->getRowsNum( $srs ) ) die( "You are not allowed to delete tables" ) ;
+
+	$export_string = '' ;
+
+	while( $row_table = $xoopsDB->fetchArray( $srs ) ) {
+		$table = $row_table['Name'] ;
+		if( substr( $table , 0 , strlen( $prefix ) + 1 ) !== $prefix . '_' ) continue ;
+		$drs = $xoopsDB->queryF( "SHOW CREATE TABLE `$table`" ) ;
+		$export_string .= "\nDROP TABLE IF EXISTS `$table`;\n".mysql_result($drs,0,1).";\n\n" ;
+		$result = mysql_query( "SELECT * FROM `$table`" ) ;
+		$fields_cnt = mysql_num_fields( $result ) ;
+		$fields_meta = mysql_fetch_field( $result ) ;
+		$field_flags = array();
+		for ($j = 0; $j < $fields_cnt; $j++) {
+			$field_flags[$j] = mysql_field_flags( $result , $j ) ;
+		}
+		$search = array("\x00", "\x0a", "\x0d", "\x1a");
+		$replace = array('\0', '\n', '\r', '\Z');
+		$current_row = 0;
+		while( $row = mysql_fetch_row($result) ) {
+			$current_row ++ ;
+			for( $j = 0 ; $j < $fields_cnt ; $j ++ ) {
+				// NULL
+				if (!isset($row[$j]) || is_null($row[$j])) {
+					$values[] = 'NULL';
+				// a number
+				// timestamp is numeric on some MySQL 4.1
+				} elseif ($fields_meta[$j]->numeric && $fields_meta[$j]->type != 'timestamp') {
+					$values[] = $row[$j];
+				// a binary field
+				// Note: with mysqli, under MySQL 4.1.3, we get the flag
+				// "binary" for those field types (I don't know why)
+				} else if (stristr($field_flags[$j], 'BINARY')
+						&& $fields_meta[$j]->type != 'datetime'
+						&& $fields_meta[$j]->type != 'date'
+						&& $fields_meta[$j]->type != 'time'
+						&& $fields_meta[$j]->type != 'timestamp'
+					   ) {
+					// empty blobs need to be different, but '0' is also empty :-(
+					if (empty($row[$j]) && $row[$j] != '0') {
+						$values[] = '\'\'';
+					} else {
+						$values[] = '0x' . bin2hex($row[$j]);
+					}
+				// something else -> treat as a string
+				} else {
+					$values[] = '\'' . str_replace($search, $replace, addslashes($row[$j])) . '\'';
+				} // end if
+			} // end for
+
+			$export_string .= "INSERT INTO `$table` VALUES (" . implode(', ', $values) . ");\n" ;
+			unset($values);
+
+		} // end while
+		mysql_free_result( $result ) ;
+
+	}
+
+	header('Content-Type: Application/octet-stream') ;
+	header('Content-Disposition: attachment; filename="'.$prefix.'_'.date('YmdHis').'.sql"') ;
+	header('Content-Length: '.strlen($export_string)) ;
+	set_time_limit( 0 ) ;
+	echo $export_string ;
+	exit ;
+
 // DROP TABLES
 } else if( ! empty( $_POST['delete'] ) && ! empty( $_POST['prefix'] ) ) {
+
+	if( preg_match( '/[^0-9A-Za-z_-]/' , $_POST['prefix'] ) ) die( 'wrong prefix' ) ;
 
 	// Ticket check
 	if ( ! $xoopsGTicket->check() ) {
@@ -122,7 +205,7 @@ echo "
 		<th>TABLES</th>
 		<th>UPDATED</th>
 		<th>COPY</th>
-		<th>DELETE</th>
+		<th>ACTIONS</th>
 	</tr>
 " ;
 
@@ -168,6 +251,7 @@ foreach( $prefixes as $prefix ) {
 				$ticket_input
 				<input type='hidden' name='prefix' value='$prefix4disp' />
 				$del_button
+				<input type='submit' name='backup' value='backup' onclick='this.form.target=\"_blank\"' />
 			</form>
 		</td>
 	</tr>\n" ;

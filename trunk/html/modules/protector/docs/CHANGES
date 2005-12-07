@@ -1,6 +1,11 @@
 [xlang:en]
 = CHANGES = 
 
+2.54 (2005/12/08)
+- added backup feature into prefix_manager (experimental)
+- added a check multiple dot file uploading (=multiple content-type for apache)
+- updated portuguesebr language files (thx Izzy)
+
 2.53 (2005/11/30)
  - added anti camouflaged image file upload (==IE Content-Type XSS)
  - modified the action when DB is busy
@@ -184,6 +189,11 @@
 [/xlang:en][xlang:ja]
 
 ●変更履歴
+
+2.54 (2005/12/08)
+- PREFIXマネージャにPREFIX毎のバックアップ機能をつけた (まだ実験段階です!)
+- 複数の.が存在するファイルをアップロード出来ないように変更 (Apacheの仕様対策)
+- ブラジルポルトガル語ファイルの更新 (thx Izzy)
 
 2.53 (2005/11/30)
  - 偽装画像ファイルアップロードによるIEのXSS対策コードの追加

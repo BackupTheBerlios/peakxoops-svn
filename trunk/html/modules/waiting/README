@@ -122,8 +122,10 @@ PLUGINS:
 -addresses (by gruessle)
 -Agenda-X (by GIJOE)
 -AMS (by karedokx)
+-articles (by twilo)
 -catads (by Alain01)
 -CBB (by gravies)
+-extcal (by alain01)
 -MyAds (by Tom_G3X)
 -myAlbum-P (by GIJOE) multiple
 -mydownloads (by GIJOE)
@@ -158,6 +160,8 @@ PLUGINS:
 
 
 CHANGES:
+
+- added portuguesebr
 
 ver 0.94b|
 - modified the module icon (thx Argon)

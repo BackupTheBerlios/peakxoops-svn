@@ -4,19 +4,20 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-09-03 06:21:32
-define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN','Blocks/Groups');
+define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN','Blocos/Groupos');
 define('_MI_SITEMAP_BLOCKNAME','Sitemap');
-define('_MI_SITEMAP_BLOCKDESC','Show sitemap as a block.');
+define('_MI_SITEMAP_BLOCKDESC','Mostre sitemap como um bloco.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-12 11:31:59
-define('_MI_INVISIBLE_DIRNAMES','Directory names of hiding modules');
-define('_MI_INVISIBLE_DIRNAMESDSC','Specify the name of modules should be hidden.<br />Dirnames should be separated with comma.<br />eg) xoopsheadline,newbb');
+define('_MI_INVISIBLE_DIRNAMES','Nome de diretórios para ocultar o módulo');
+define('_MI_INVISIBLE_DIRNAMESDSC','Especifique o nome de módulo deve ser oculto.<br / > O nome do diretório do módulo deve ser separado com vírgula.<br / > Ex.: xoopsheadline,newbb');
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-08 05:46:30
-define('_MI_ALLTIME_GUEST','All-time guest mode');
-define('_MI_ALLTIME_GUESTDSC','If you turn this module\'s cache on, set this option \'yes\'');
-define('_MI_INVISIBLE_WEIGHTS','Weights for hiding modules');
-define('_MI_INVISIBLE_WEIGHTSDSC','Modules which has this number as its order in ModulesAdmin will be invisible. The numbers should be separate by comma.<br />(Normally 0 or blank)');
+define('_MI_ALLTIME_GUEST','Modo habilitado para todos
+');
+define('_MI_ALLTIME_GUESTDSC','Colocar esse module\'s oculto, fixas esta opção \'yes\'');
+define('_MI_INVISIBLE_WEIGHTS','Ordem de ocultar o módulo');
+define('_MI_INVISIBLE_WEIGHTSDSC','Módulos que têm este número como sua ordem em ModulesAdmin serão invisíveis. Os números deveram estar separados através de vírgula.<br /> (Normalmente 0 ou em branco)');
 
 define("_MI_SITEMAP_NAME","Sitemap");
 define("_MI_SITEMAP_MESSAGE","Aqui você pode mostrar alguma informação ou mensagem. Edite-a na administração!");

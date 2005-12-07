@@ -1,3 +1,7 @@
+- updated language files
+-- french (thx marco)
+-- portuguesebr (thx yuji)
+
 1.23 2005-12-2
 - fixed fatal errors in xml_google.php with some conditions (thx centurier)
 - modified the module icon (thx Argon)

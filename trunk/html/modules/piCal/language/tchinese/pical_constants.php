@@ -5,12 +5,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_CNST_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2005-09-09 18:17:12
-define('_PICAL_MB_LINK_TO_RRULE1ST','Jump to the 1st Event ');
-define('_PICAL_MB_RRULE1ST','This is the 1st Event');
+define('_PICAL_MB_LINK_TO_RRULE1ST','最初設定的日期');
+define('_PICAL_MB_RRULE1ST','第一次發生的日期');
 
 define('_PICAL_BTN_DELETE_ONE','單筆刪除');
 
-define('_PICAL_JS_CALENDAR','calendar-big5.js');
+define('_PICAL_JS_CALENDAR','calendar-tw.js');
 define('_PICAL_JSFMT_YMDN','%Y年 %B %d日 (%A)');
 define('_PICAL_DTFMT_MINUTE','i');
 define('_PICAL_FMT_YMDN','%1$s年 %2$s %3$s %4$s');

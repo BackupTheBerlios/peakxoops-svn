@@ -1,5 +1,9 @@
 [xlang:en]
 
+- updated tchinese (thx chia)
+- added utf8-tw (thx chia)
+
+
 v.084b minor bug fixes (2005-12-1)
 - updated locales/japan.php (thx hashimoto)
 - fixed compatibility trouble with PHP 5.0.5 in the search function (thx hoso)

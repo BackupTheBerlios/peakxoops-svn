@@ -1,6 +1,9 @@
 [xlang:en]
 CHANGELOG:
 
+
+- added portuguesebr language files (thx Izzy)
+
 2005-11-14 2.19
 - modified the compatibilities with PHP 5.0.5
 - remove CRs in some php files

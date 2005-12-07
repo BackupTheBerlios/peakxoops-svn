@@ -68,7 +68,7 @@ function tinyd_search_base( $mydirname , $mydirnumber , $keywords , $andor , $li
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
-	$select4con = $showcontext ? "text" : "''" ;
+	$select4con = $showcontext ? "text" : "'' AS text" ;
 
 	$sql = "SELECT storyid,title,link,UNIX_TIMESTAMP(last_modified),$select4con FROM ".$db->prefix( "tinycontent$mydirnumber" )." WHERE visible" ;
 

@@ -30,15 +30,15 @@ function b_sitemap_show( $options )
 	if( is_object( $xoopsUser ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
 		$backup_uid = $xoopsUser->getVar('uid') ;
 		$backup_userisadmin = $xoopsUserIsAdmin ;
-		$xoopsUser = '' ;
+		$member_handler =& xoops_gethandler('member');
+		$xoopsUser =& $member_handler->getUser( 0 ) ;
 		$xoopsUserIsAdmin = false ;
 	}
 
 	$sitemap = sitemap_show();
 
 	// for All-time guest mode (restore $xoopsUser*)
-	if( ! empty( $backup_uid ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
-		$member_handler =& xoops_gethandler('member');
+	if( ! empty( $backup_uid ) ) {
 		$xoopsUser =& $member_handler->getUser( $backup_uid ) ;
 		$xoopsUserIsAdmin = $backup_userisadmin ;
 	}

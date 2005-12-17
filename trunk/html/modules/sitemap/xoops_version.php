@@ -1,7 +1,7 @@
 <?php
 
 $modversion['name'] = _MI_SITEMAP_NAME;
-$modversion['version'] = '1.23';
+$modversion['version'] = '1.24';
 $modversion['author'] = 'chanoir';
 $modversion['image'] = 'images/sitemap_slogo.png';
 $modversion['dirname'] = 'sitemap';

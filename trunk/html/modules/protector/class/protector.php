@@ -404,7 +404,15 @@ function check_uploaded_files()
 
 			// anti camouflaged image file
 			if( in_array( $ext , $image_extensions ) ) {
-				$image_attributes = getimagesize( $_file['tmp_name'] ) ;
+				$image_attributes = @getimagesize( $_file['tmp_name'] ) ;
+				if( $image_attributes === false && is_uploaded_file( $_file['tmp_name'] ) ) {
+					// open_basedir restriction
+					$temp_file = XOOPS_ROOT_PATH.'/uploads/protector_upload_temporary'.md5( time() ) ;
+					move_uploaded_file( $_file['tmp_name'] , $temp_file ) ;
+					$image_attributes = @getimagesize( $temp_file ) ;
+					@unlink( $temp_file ) ;
+				}
+
 				if( $image_attributes === false || $image_extensions[ intval( $image_attributes[2] ) ] != $ext ) {
 					$this->message .= "Attempt to upload camouflaged image file {$_file['name']}.\n" ;
 					$this->_safe_badext = false ;

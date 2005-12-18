@@ -67,7 +67,7 @@ $modversion['config'][] = array(
 	'description'	=> '_MI_PROTECTOR_HIJACK_TOPBITDSC' ,
 	'formtype'		=> 'text' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 32 ,
+	'default'		=> 24 ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
@@ -130,7 +130,7 @@ $modversion['config'][] = array(
 	'description'	=> '_MI_PROTECTOR_UNION_ACTIONDSC' ,
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 0 ,
+	'default'		=> 1 ,
 	'options'		=> array( '_MI_PROTECTOR_OPT_NONE' => 0 , '_MI_PROTECTOR_OPT_SAN' => 1 , '_MI_PROTECTOR_OPT_EXIT' => 3 , '_MI_PROTECTOR_OPT_BIP' => 7 )
 ) ;
 $modversion['config'][] = array(

@@ -1,0 +1,98 @@
+[mlimg][xlang:en]
+- Templates Admin Module -
+
+SUMMARY:
+
+A standalone module makes you easy to editing XOOPS templates.
+
+Rehabilitate DB template system!
+
+I have to say:
+"Edit default template set in DB. This is the right design for DB template system"
+
+
+DESCRIPTION:
+
+- you don't have to any hacks. (just install this)
+- you can understand templates status about each modules with ease.
+- you can see the diffs between the original file and your template.
+- you can copy templates by a module.
+- you can copy/delete any templates by checking the boxes.
+
+
+USAGE:
+
+Just install it like the other modules.
+That's all.
+
+
+
+[/xlang:en]
+[xlang:ja]
+
+●要旨
+
+モジュール毎のテンプレート管理を行うモジュール。
+
+せっかく使いやすくするために作られたはずのDBテンプレートが、ちょっとした設計ミスと実装不足でfileテンプレートよりも使いづらくなっているので、その本来の使いやすさを取り戻すために作りました。
+
+ここで言い切ってしまいましょう。
+「defaultテンプレートを編集できないなんて仕様は設計ミスです！」
+
+
+
+●特長
+
+- コアHack不要
+- 判りやすいモジュール毎のテンプレート状況表示
+- デフォルトテンプレートやベースファイルとの差分表示
+- モジュール別のテンプレートセットコピー
+- チェックボックス方式で個別に指定できるテンプレートコピー・削除
+
+
+●使い方
+
+ごくごく普通のモジュールとして、インストールしてください。
+それだけです。
+
+テンプレートセットの使い方で、私がお勧めするのは、defaultをカスタマイズする方法です。もちろん、一般設定のデフォルトテンプレートセットも、「default」とします。そして、必要に応じて、別のテンプレートセットにバックアップ（複製）を行ってください。
+
+こうすることで、モジュールアップデートとの相性がずっと良くなります。
+
+モジュールがテンプレートの仕様を大幅に変更した時にもおかしくなりませんし、それによってデフォルトに戻ってしまったのであれば、バックアップしたテンプレートセット側からコピーし戻せばよいのです。
+
+
+●個人的なメモ
+
+XOOPSのDBテンプレートには様々な設計ミスがありますが、比較的大きいのが、ブロックに置ける同一名テンプレートの扱いです。異なるブロックが同一のテンプレート名を参照していても、tplfileテーブルに登録されます。それも、refidというID風の値をblockidとして登録され、削除の際にも、そのrefidがキーとなります。
+しかし、実際の表示処理では、あくまでテンプレート名だけが利用されるため、片方のテンプレートを編集しても、反映されないことがしばしばあります。とりあえず、この問題を明確化するために、本モジュール内では、同一ファイル名のテンプレートについて、(2)などと表示しています。
+
+ついでにテンプレート関連のテーブル設計上のミスをここに列挙しておきます。
+・tpl_fileがUNIQUE KEYでない（参照時に名前のみがキーになるのだからUNIQUE必須。今は普通のINDEXすら作成していない）
+・tplfileテーブルとtplsourceテーブルの無意味な分離（XOOPS全体がそうですが）
+・tplsourceテーブルのtpl_idがPRIMARY KEYでない（必ずJOINするのに…）
+・tpl_refidフィールドの存在（繰り返しになるがファイル名だけをキーとすべき）
+・tpl_moduleにINDEXが作成されていない（こちらからの参照はほとんどないかも）
+・tplset_nameがUNIQUE KEYでない
+
+
+●TODO
+- アップロード・ダウンロード機能実装
+- プレビュー（必要か？）
+- Dream Weaver等との連携機能
+- テンプレート構造の修正
+- テンプレート関連テーブルのALTER TABLE
+- 関連が切れてしまったblockテンプレートとの連結機能
+
+
+[/xlang:ja]
+
+CHANGELOG:
+
+2005-12-21 0.10 the 1st implementation
+
+
+COPYRIGHT:
+
+I do not insist on the right of these codes, and don't guarantee.
+

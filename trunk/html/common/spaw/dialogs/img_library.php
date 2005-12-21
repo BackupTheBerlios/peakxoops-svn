@@ -256,13 +256,13 @@ function selectChange() {
 
 		if ($imagetype == "file") {
 			$result = $xoopsDB->query("SELECT image_name,image_nicename FROM ".$xoopsDB->prefix('image')." WHERE imgcat_id = ".intval($imgcat));
-			while($image = $xoopsDB->fetcharray($result)){
+			while($image = $xoopsDB->fetchArray($result)){
 
 				echo '<option value="'.$image["image_name"].'" '.($image["image_name"] == $img ? 'selected' : ''). '>'.$image["image_nicename"].'</option>' ;
 			}
 		} else {
 			$result = $xoopsDB->query("SELECT image_id, image_name,image_nicename FROM ".$xoopsDB->prefix('image')." WHERE imgcat_id ".intval($imgcat));
-			while($image = $xoopsDB->fetcharray($result)){
+			while($image = $xoopsDB->fetchArray($result)){
 		  
 				echo '<option value="'.$image["image_id"].'" '.($image["image_id"] == $img ? 'selected' : '').'>'.$image["image_nicename"].'</option>' ;
 			}
@@ -278,7 +278,7 @@ function selectChange() {
 		global $xoopsDB;
 //		$result = $xoopsDB->query("SELECT lid, title, ext FROM ".$xoopsDB->prefix("myalbum{$mydirnumber}_photos")." WHERE cid='".intval($imgcat)."' AND ext IN ('gif','png','jpg','jpeg') ORDER BY title" );
 		$result = $xoopsDB->query("SELECT lid, title, ext FROM ".$xoopsDB->prefix("myalbum{$mydirnumber}_photos")." WHERE cid='".intval($imgcat)."' AND status>0 ORDER BY title" ); // GIJ
-		while($image = $xoopsDB->fetcharray($result)){
+		while($image = $xoopsDB->fetchArray($result)){
 			$fname = trim($image["lid"]).".".$image["ext"];
 			if (file_exists($_root.$imglib."photos{$mydirnumber}/".$fname)) {
 				// GIJ start

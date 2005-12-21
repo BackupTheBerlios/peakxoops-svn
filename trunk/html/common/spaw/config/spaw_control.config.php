@@ -134,7 +134,7 @@ foreach ($modules as $module){
 		if( ! preg_match( '/^(\D+)(\d*)$/' , $mod , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $mod ) ) ;
 		$imnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 		$result = $xoopsDB->query('SELECT option_value FROM ' . $xoopsDB->prefix('wp'.$imnumber.'_options') . " WHERE option_name='fileupload_realpath'");
-		if ($option = $xoopsDB->fetcharray($result)){
+		if ($option = $xoopsDB->fetchArray($result)){
 			$spaw_imglibs[$i] = array(
 				'type'    =>  'Dir',
 				'value'   => ereg_replace(XOOPS_ROOT_PATH.'\/(.*)',"\\1",$option['option_value'])."/" ,
@@ -159,7 +159,7 @@ if( !strstr( $top_of_imagemanager , '$mydirname' ) &&
 
 	$result = $xoopsDB->query("SELECT imgcat_name, imgcat_id, imgcat_storetype FROM " . $xoopsDB->prefix('imagecategory') . " ORDER BY imgcat_name ASC");
 
-	while($imgcat = $xoopsDB->fetcharray($result)){
+	while($imgcat = $xoopsDB->fetchArray($result)){
 		$spaw_imglibs[$i]["type"]  = "XoopsImage";
 		$spaw_imglibs[$i]["value"] = 'uploads/';
 		$spaw_imglibs[$i]["text"] = $imgcat["imgcat_name"]."[Image Manager]";
@@ -182,7 +182,7 @@ foreach ($modules as $module){
 
 		$result = $xoopsDB->query("SELECT title, cid FROM ".$xoopsDB->prefix('myalbum'.$imnumber.'_cat')." ORDER BY title ASC");
 
-		while($imgcat = $xoopsDB->fetcharray($result)){
+		while($imgcat = $xoopsDB->fetchArray($result)){
 			$spaw_imglibs[$i]["type"]  = "myAlbum-P";
 			$spaw_imglibs[$i]["value"] = 'uploads/';
 			$spaw_imglibs[$i]["text"] = $imgcat["title"].'['.$module->getVar('name').']';

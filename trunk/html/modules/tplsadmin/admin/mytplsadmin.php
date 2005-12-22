@@ -87,7 +87,7 @@ if( ! empty( $_POST['clone_tplset_do'] ) && ! empty( $_POST['clone_tplset_from']
 }
 
 // DB to DB template copy (checked templates)
-foreach( $_POST['copy_do'] as $tplset_from_tmp => $val ) if( ! empty( $val ) ) {
+if( is_array( @$_POST['copy_do'] ) ) foreach( $_POST['copy_do'] as $tplset_from_tmp => $val ) if( ! empty( $val ) ) {
 	// Ticket Check
 	if ( ! $xoopsGTicket->check() ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
@@ -126,7 +126,7 @@ if( ! empty( $_POST['copyf2db_do'] ) ) {
 }
 
 // DB template remove (checked templates)
-foreach( $_POST['del_do'] as $tplset_from_tmp => $val ) if( ! empty( $val ) ) {
+if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tmp => $val ) if( ! empty( $val ) ) {
 	// Ticket Check
 	if ( ! $xoopsGTicket->check() ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());

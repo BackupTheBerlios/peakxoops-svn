@@ -142,6 +142,7 @@ if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tm
 			$tpl_id = intval( $tpl_id ) ;
 			$db->query( "DELETE FROM ".$db->prefix("tplfile")." WHERE tpl_id=$tpl_id" ) ;
 			$db->query( "DELETE FROM ".$db->prefix("tplsource")." WHERE tpl_id=$tpl_id" ) ;
+//			xoops_template_touch( $tpl_id ) ; // TODO
 		}
 	}
 	redirect_header( 'mytplsadmin.php?dirname='.$target_dirname , 1 , _MD_AM_DBUPDATED ) ;

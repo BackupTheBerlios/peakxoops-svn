@@ -5,14 +5,14 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( '_MB_HEADLINES_DISPLAYF' ) ) {
 
 define('_MB_HEADLINES_DISPLAYF', 'Mostrar el logotipo del sitio web');
-define('_MB_HEADLINES_MAXITEM', 'MáÙ n“Îero de elementos para cada titular');
+define('_MB_HEADLINES_MAXITEM', 'NÃºmero mÃ¡x. de elementos para cada titular');
 
-define('_MB_HEADLINES_COLS','N“Îero de columnas');
-define('_MB_HEADLINES_MAXLEN','MáÙ bytes de tùÕulo');
-define('_MB_HEADLINES_MAXITEM_MIXED','N“Îero MáÙ de titulares listados');
-define('_MB_HEADLINES_MAXITEMAFEED_MIXED','Max items a feed to be picked up in this block');
+define('_MB_HEADLINES_COLS', 'NÃºmero de columnas');
+define('_MB_HEADLINES_MAXLEN', 'Bytes mÃ¡x. de tÃ­tulo');
+define('_MB_HEADLINES_MAXITEM_MIXED', 'NÃºmero mÃ¡x. de titulares listados');
+define('_MB_HEADLINES_MAXITEMAFEED_MIXED', 'Elementos mÃ¡x. del feed que obtendrÃ¡ el boque');
 
-define('_MB_HEADLINES_EXTRACT','select') ;
+define('_MB_HEADLINES_EXTRACT', 'Elija');
 }
 
 ?>

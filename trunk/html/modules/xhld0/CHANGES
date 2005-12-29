@@ -1,10 +1,17 @@
 [xlang:en]
 CHANGES:
 
+  - updated language files
+  -- spanish (thx Jose Moya)
+  -- portuguesebr (thx Izzy)
+  -- french (thx marco)
+
+
 v.3.01 2005-11-14
   - updated myblocksadmin 0.41 and mymenu 0.15
   - remove CRs in some php files
   - modified the compatibilities with PHP 5.0.5
+  - modified the compatibilities with PHP 5.0.5 appendix (3.01a)
 
 v.3.00 2005-8-9
   - added supporting XOOPS 2.1/2.2
@@ -221,6 +228,7 @@ v.3.01 2005-11-14
   - myblocksadmin 0.41 および mymenu 0.15 へのアップデート
   - 改行コードのLFへの統一
   - PHP 5.0.5 との互換性改善
+  - PHP 5.0.5 との互換性改善続き (3.01a)
 
 v.3.00 2005-8-9
   - XOOPS 2.1/2.2 への対応 （現時点では、myblocksadminのみ）

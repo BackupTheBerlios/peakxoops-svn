@@ -28,8 +28,7 @@ HOW TO USE:
      admin/mytplsform.php
    into modules/(your module)/admin/
 
-2) copy 6 files of
-     include/tplsadmin.inc.php
+2) copy 5 files of
      include/gtickets.php
      include/Text_Diff.php
      include/Text_Diff_Renderer.php
@@ -44,11 +43,6 @@ HOW TO USE:
 	                      'link' => "admin/mytplsadmin.php" ) ;
 
 That's all !
-
-
-COPYRIGHT:
-
-I do not insist on the right of these codes, and don't guarantee.
 
 
 [/xlang:en]
@@ -88,10 +82,9 @@ XOOPSのブテンプレート管理はあまりにも使いづらいと思います。
      admin/mytplsadmin.php
      admin/mytplsform.php
 
-3) 以下の6ファイルを modules/(dirname)include にコピーしてください。
+3) 以下の5ファイルを modules/(dirname)include にコピーしてください。
    gtickets.php というファイルは、mymenu にも含まれますが、コンパチです。
 
-     include/tplsadmin.inc.php
      include/gtickets.php
      include/Text_Diff.php
      include/Text_Diff_Renderer.php

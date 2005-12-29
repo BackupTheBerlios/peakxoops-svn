@@ -26,6 +26,19 @@ Just install it like the other modules.
 That's all.
 
 
+COPYRIGHT:
+
+I do not insist on the right of these codes, and don't guarantee.
+
+I use PEAR::Text/Diff.
+The rights of this code is under license of PEAR, perhaps.
+
+Special thanks to the author - Geoffrey T. Dairiki -.
+
+
+
+
+
 
 [/xlang:en]
 [xlang:ja]
@@ -62,6 +75,15 @@ That's all.
 ¥â¥¸¥å¡¼¥ë¤¬¥Æ¥ó¥×¥ì¡¼¥È¤Î»ÅÍÍ¤òÂçÉý¤ËÊÑ¹¹¤·¤¿»þ¤Ë¤â¤ª¤«¤·¤¯¤Ê¤ê¤Þ¤»¤ó¤·¡¢¤½¤ì¤Ë¤è¤Ã¤Æ¥Ç¥Õ¥©¥ë¥È¤ËÌá¤Ã¤Æ¤·¤Þ¤Ã¤¿¤Î¤Ç¤¢¤ì¤Ð¡¢¥Ð¥Ã¥¯¥¢¥Ã¥×¤·¤¿¥Æ¥ó¥×¥ì¡¼¥È¥»¥Ã¥ÈÂ¦¤«¤é¥³¥Ô¡¼¤·Ìá¤»¤Ð¤è¤¤¤Î¤Ç¤¹¡£
 
 
+¡üÃøºî¸¢¤Ê¤É
+
+»ä¤Î¥³¡¼¥ÉÉôÊ¬¤Ë¤Ä¤¤¤Æ¤Ï¡¢ÆÃ¤Ë²¿¤â¼çÄ¥¤·¤Þ¤»¤ó¡£¤´¼«Í³¤Ë¤ª»È¤¤¤¯¤À¤µ¤¤¡£
+
+¤¿¤À¡¢PEAR::Text/Diff ¤òÍøÍÑ¤·¤Æ¤¤¤ë¤Î¤Ç¡¢¤³¤ÎÉôÊ¬¤Ë¤Ä¤¤¤Æ¤Ï¡¢PEAR¤Î¥é¥¤¥»¥ó¥¹¤¬Í­¸ú¤Ë¤Ê¤ë¤Ç¤·¤ç¤¦¡£¡Ê¤â¤·¤«¤¹¤ë¤È¥â¥¸¥å¡¼¥ëÁ´ÂÎ¤«¤â¤·¤ì¤Þ¤»¤ó¤¬¡Ë
+
+¤È¤â¤¢¤ì¡¢Text_Diff¥Ñ¥Ã¥±¡¼¥¸¤òºîÀ®¤·¤Æ¤¯¤ì¤¿ºî¼Ô Geoffrey T. Dairiki ¤µ¤ó¤Ë´¶¼Õ¤·¤Þ¤¹¡£
+
+
 ¡ü¸Ä¿ÍÅª¤Ê¥á¥â
 
 XOOPS¤ÎDB¥Æ¥ó¥×¥ì¡¼¥È¤Ë¤ÏÍÍ¡¹¤ÊÀß·×¥ß¥¹¤¬¤¢¤ê¤Þ¤¹¤¬¡¢Èæ³ÓÅªÂç¤­¤¤¤Î¤¬¡¢¥Ö¥í¥Ã¥¯¤ËÃÖ¤±¤ëÆ±°ìÌ¾¥Æ¥ó¥×¥ì¡¼¥È¤Î°·¤¤¤Ç¤¹¡£°Û¤Ê¤ë¥Ö¥í¥Ã¥¯¤¬Æ±°ì¤Î¥Æ¥ó¥×¥ì¡¼¥ÈÌ¾¤ò»²¾È¤·¤Æ¤¤¤Æ¤â¡¢tplfile¥Æ¡¼¥Ö¥ë¤ËÅÐÏ¿¤µ¤ì¤Þ¤¹¡£¤½¤ì¤â¡¢refid¤È¤¤¤¦IDÉ÷¤ÎÃÍ¤òblockid¤È¤·¤ÆÅÐÏ¿¤µ¤ì¡¢ºï½ü¤ÎºÝ¤Ë¤â¡¢¤½¤Îrefid¤¬¥­¡¼¤È¤Ê¤ê¤Þ¤¹¡£
@@ -83,18 +105,16 @@ XOOPS¤ÎDB¥Æ¥ó¥×¥ì¡¼¥È¤Ë¤ÏÍÍ¡¹¤ÊÀß·×¥ß¥¹¤¬¤¢¤ê¤Þ¤¹¤¬¡¢Èæ³ÓÅªÂç¤­¤¤¤Î¤¬¡¢¥Ö¥í¥Ã¥¯¤
 - ¥Æ¥ó¥×¥ì¡¼¥È¹½Â¤¤Î½¤Àµ
 - ¥Æ¥ó¥×¥ì¡¼¥È´ØÏ¢¥Æ¡¼¥Ö¥ë¤ÎALTER TABLE
 - ´ØÏ¢¤¬ÀÚ¤ì¤Æ¤·¤Þ¤Ã¤¿block¥Æ¥ó¥×¥ì¡¼¥È¤È¤ÎÏ¢·ëµ¡Ç½
+- ¥Æ¥ó¥×¥ì¡¼¥Èºï½ü»þ¤ÎÂÐ±þtemplates_cºï½ü
 
 
 [/xlang:ja]
 
 CHANGELOG:
 
+2005-12-30 0.13 added french language files (thx marco)
 2005-12-22 0.12 modified some wrong documents :-)
 2005-12-22 0.11 fixed some typos
 2005-12-21 0.10 the 1st implementation
 
-
-COPYRIGHT:
-
-I do not insist on the right of these codes, and don't guarantee.
 

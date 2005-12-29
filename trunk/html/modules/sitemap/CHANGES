@@ -1,3 +1,6 @@
+- added a plugin
+-- extcal
+
 1.24 2005-12-18
 - fixed a bug login block is always displayed by enabling sitemap block (thx okamoto)
 - updated language files

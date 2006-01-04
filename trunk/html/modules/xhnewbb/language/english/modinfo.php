@@ -22,6 +22,13 @@ define("_MI_XHNEWBB_ADMENU6","Edit Category");
 define("_MI_XHNEWBB_ADMENU7","Delete Category");
 define("_MI_XHNEWBB_ADMENU8","Re-order Category");
 define("_MI_XHNEWBB_ADMENU_MYBLOCKSADMIN","Blocks&Groups");
+define("_MI_XHNEWBB_ADMENU_MYTPLSADMIN","Templates");
+
+// configurations
+define('_MI_XHNEWBB_ALLOW_TEXTIMG','Allow to dipslay external images in the post');
+define('_MI_XHNEWBB_ALLOW_TEXTIMGDSC','If some attackers post an external image using [img], he can know IPs or User-Agents of users visited your site.');
+define('_MI_XHNEWBB_ALLOW_SIGIMG','Allow to display external images in the signature');
+define('_MI_XHNEWBB_ALLOW_SIGIMGDSC','If some attackers post an external image using [img], he can know IPs or User-Agents of users visited your site.');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

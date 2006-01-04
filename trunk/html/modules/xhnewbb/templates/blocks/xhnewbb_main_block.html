@@ -20,7 +20,12 @@
       <{if $topic.u2t_marked}>
         <img src="<{$xoops_url}>/modules/xhnewbb/images/marked.gif" />
       <{/if}>
-      <{$topic.last_subject}>
+      <{* displays the last post's subject or topic title *}>
+      <{if $block.disp_last_subject }>
+        <{$topic.last_subject}>
+      <{else}>
+        <{$topic.title}>
+      <{/if}>
       </a>
       <{if ! $topic.solved}>
         <img src="<{$xoops_url}>/modules/xhnewbb/images/unsolved.gif" />

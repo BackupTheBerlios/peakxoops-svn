@@ -41,6 +41,7 @@ function b_xhnewbb_main_show( $options )
 	$now_order = empty( $options[2] ) ? 'time' : trim( $options[2] ) ;
 	$now_class = empty( $options[3] ) ? 'public' : trim( $options[3] ) ;
 	$is_markup = empty( $options[4] ) ? false : true ;
+	$posttitle = empty( $options[5] ) ? false : true ;
 
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
@@ -83,6 +84,7 @@ function b_xhnewbb_main_show( $options )
 		return false;
 	}
 	$block['full_view'] = $show_fullsize ;
+	$block['disp_last_subject'] = $posttitle ;
 	$block['lang_forum'] = _MB_XHNEWBB_FORUM;
 	$block['lang_topic'] = _MB_XHNEWBB_TOPIC;
 	$block['lang_replies'] = _MB_XHNEWBB_RPLS;
@@ -128,6 +130,7 @@ function b_xhnewbb_main_edit( $options )
 	$now_order = empty( $options[2] ) ? 'time' : trim( $options[2] ) ;
 	$now_class = empty( $options[3] ) ? 'public' : trim( $options[3] ) ;
 	$is_markup = empty( $options[4] ) ? false : true ;
+	$posttitle = empty( $options[5] ) ? false : true ;
 
 	if( $show_fullsize ) {
 		$fullyes_checked = "checked='checked'" ;
@@ -143,6 +146,14 @@ function b_xhnewbb_main_edit( $options )
 	} else {
 		$markupno_checked = "checked='checked'" ;
 		$markupyes_checked = "" ;
+	}
+
+	if( $posttitle ) {
+		$posttitleyes_checked = "checked='checked'" ;
+		$posttitleno_checked = "" ;
+	} else {
+		$posttitleno_checked = "checked='checked'" ;
+		$posttitleyes_checked = "" ;
 	}
 
 	$orders = array( 'time' => _MB_XHNEWBB_ORDERTIMED , 'views' => _MB_XHNEWBB_ORDERVIEWSD , 'replies' => _MB_XHNEWBB_ORDERREPLIESD ) ;
@@ -176,6 +187,10 @@ function b_xhnewbb_main_edit( $options )
 		"._MB_XHNEWBB_MARKISUP."&nbsp;:
 		<input type='radio' name='options[4]' value='1' $markupyes_checked />"._YES."
 		<input type='radio' name='options[4]' value='0' $markupno_checked />"._NO."
+		<br />
+		"._MB_XHNEWBB_DISPLAYPOSTTITLE."&nbsp;:
+		<input type='radio' name='options[5]' value='1' $posttitleyes_checked />"._YES."
+		<input type='radio' name='options[5]' value='0' $posttitleno_checked />"._NO."
 	\n" ;
 
 	return $form;

@@ -1,5 +1,42 @@
+[mlimg]
+[xlang:en]
 
 1.14 (2006/01/05)
+- added an option selecting title of each topics in block
+- added one more the same block for editing templates
+- added mytplsadmin
+- updated mymenu and myblocksadmin
+- fixed some doubtful codes
+- added an option "allow img tag in body"(go to config of xhnewbb)
+- added an option "allow img tag in signature"(go to config of xhnewbb)
+- modified module's icon (thx argon)
+
+
+1.13 (2005/08/27)
+
+- fixed PHP_SELF XSS
+- modified the compatibilities with XOOPS 2.2
+- fixed some slight bugs
+
+
+1.12 (2005/07/13)
+
+- added "supporting" features
+- added "marking topics"
+- modified not to use cookie but to use DB for storing "already read" or not
+- fixed many bugs origined from newbb
+
+
+
+[/xlang:en]
+[xlang:ja]
+
+
+1.14 (2006/01/05)
+- 投稿ブロックに、表示タイトルを最終投稿タイトルとするかトピックタイトルにするかのオプションを追加（テンプレートも変更になっている）
+- テンプレートの使い分けを可能とするため、投稿ブロックの初期数を２にした。
+- mytplsadmin 導入
+- mymenu, myblocksadmin 更新
 - 穴っぽいコードの修正追加
 - 本文内画像の表示設定追加（デフォルトは不許可なので、許可する場合は一般設定で）
 - 署名内画像の表示設定追加（デフォルトは不許可なので、許可する場合は一般設定で）
@@ -28,3 +65,5 @@
 - myblocksadmin導入
 - ゲスト投稿時に、本文内に名前を挿入できる機能の追加
 - 穴につながりそうなコードの積極的な「潰し」
+
+[/xlang:ja]

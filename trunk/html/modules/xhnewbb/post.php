@@ -174,11 +174,13 @@ if ( empty($forum) ) {
 		}
 		$subject = xoops_trim(@$_POST['subject']);
 		$subject = ($subject == '') ? _NOTITLE : $subject;
+		$icon = preg_match( '/^icon[1-7]\.gif$/' , @$_POST['icon'] ) ? $_POST['icon'] : '' ;
+		$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
 		$forumpost->setSubject($subject);
 		$forumpost->setText(@$_POST['message']);
 		$forumpost->setNohtml(@$_POST['nohtml']);
 		$forumpost->setNosmiley(@$_POST['nosmiley']);
-		$forumpost->setIcon(@$_POST['icon']);
+		$forumpost->setIcon($icon);
 		$forumpost->setSolved(@$_POST['solved']);
 		$forumpost->setAttachsig(@$_POST['attachsig']);
 		if (!$postid = $forumpost->store()) {

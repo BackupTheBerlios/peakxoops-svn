@@ -47,4 +47,6 @@ $adminmenu[7]['title'] = _MI_XHNEWBB_ADMENU8;
 $adminmenu[7]['link'] = "admin/admin_forums.php?mode=catorder";
 $adminmenu[8]['title'] = _MI_XHNEWBB_ADMENU_MYBLOCKSADMIN; 
 $adminmenu[8]['link'] = "admin/myblocksadmin.php";
+$adminmenu[9]['title'] = _MI_XHNEWBB_ADMENU_MYTPLSADMIN; 
+$adminmenu[9]['link'] = "admin/mytplsadmin.php";
 ?>

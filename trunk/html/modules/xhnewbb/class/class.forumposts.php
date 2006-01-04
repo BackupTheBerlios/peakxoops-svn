@@ -355,7 +355,7 @@ class ForumPosts
 		}
 		switch ( $format ) {
 			case "Show":
-				$text = $myts->makeTareaData4Show($this->post_text,$html,$smiley,$bbcodes);
+				$text = $myts->displayTarea($this->post_text,$html,$smiley,$bbcodes,@$GLOBALS['xoopsModuleConfig']['xhnewbb_allow_textimg']);
 				break;
 			case "Edit":
 				$text = $myts->makeTareaData4Edit($this->post_text);

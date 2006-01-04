@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 
 $modversion['name'] = _MI_XHNEWBB_NAME;
-$modversion['version'] = 1.13;
+$modversion['version'] = 1.14;
 $modversion['description'] = _MI_XHNEWBB_DESC;
 $modversion['credits'] = "Kazumi Ono<br />( http://www.myweb.ne.jp/ )";
 $modversion['author'] = "Original admin section (phpBB 1.4.4) by<br />The phpBB Group<br />( http://www.phpbb.com/ )<br />";
@@ -89,6 +89,37 @@ $modversion['blocks'][1] = array(
 	'template' => 'xhnewbb_main_block.html' ,
 	'can_clone' => true
 	) ;
+$modversion['blocks'][1] = array(
+	'file' => "xhnewbb_blocks.php" ,
+	'name' => _MI_XHNEWBB_BNAME1 ,
+	'description' => _MI_XHNEWBB_BDESC1 ,
+	'show_func' => "b_xhnewbb_main_show" ,
+	'options' => "10|1|time|public|1" ,
+	'edit_func' => "b_xhnewbb_main_edit" ,
+	'template' => 'xhnewbb_main_block2.html' ,
+	'can_clone' => true
+	) ;
+
+// Configurations
+$modversion['config'][] = array(
+	'name'			=> 'xhnewbb_allow_textimg' ,
+	'title'			=> '_MI_XHNEWBB_ALLOW_TEXTIMG' ,
+	'description'	=> '_MI_XHNEWBB_ALLOW_TEXTIMGDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'xhnewbb_allow_sigimg' ,
+	'title'			=> '_MI_XHNEWBB_ALLOW_SIGIMG' ,
+	'description'	=> '_MI_XHNEWBB_ALLOW_SIGIMGDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "0" ,
+	'options'		=> array()
+) ;
 
 // Search
 $modversion['hasSearch'] = 1;

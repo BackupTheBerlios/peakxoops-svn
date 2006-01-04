@@ -20,6 +20,13 @@ define("_MI_XHNEWBB_ADMENU6","カテゴリの編集");
 define("_MI_XHNEWBB_ADMENU7","カテゴリーの削除");
 define("_MI_XHNEWBB_ADMENU8","カテゴリの配置変更");
 define("_MI_XHNEWBB_ADMENU_MYBLOCKSADMIN","ブロック・グループ管理");
+define("_MI_XHNEWBB_ADMENU_MYTPLSADMIN","テンプレート管理");
+
+// configurations
+define('_MI_XHNEWBB_ALLOW_TEXTIMG','投稿本文内の外部画像を許可する');
+define('_MI_XHNEWBB_ALLOW_TEXTIMGDSC','投稿本文に[img]タグで外部サイトの画像を表示させると、このサイトの訪問者のIPやUser-Agentを抜かれることにつながります');
+define('_MI_XHNEWBB_ALLOW_SIGIMG','署名内の外部画像を許可する');
+define('_MI_XHNEWBB_ALLOW_SIGIMGDSC','署名に[img]タグで外部サイトの画像を表示させると、このサイトの訪問者のIPやUser-Agentを抜かれることにつながります');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

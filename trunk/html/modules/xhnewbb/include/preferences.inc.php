@@ -209,7 +209,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
       unset($hidden);
     }
     $form->addElement(new XoopsFormHidden('op', 'save'));
-    $form->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ ) );
+    $xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ ) ;
     $form->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
     xoops_cp_header();
     echo '<a href="admin.php?fct=preferences">'. _MD_AM_PREFMAIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.constant($confcat->getVar('confcat_name')).'<br /><br />';
@@ -327,7 +327,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
       unset($hidden);
     }
     $button_tray->addElement(new XoopsFormHidden('op', 'save'));
-    $button_tray->addElement( $xoopsGTicket->getTicketXoopsForm( __LINE__ , 1800 , 'mymenu' ) );
+    $xoopsGTicket->addTicketXoopsFormElement( $button_tray , __LINE__ , 1800 , 'mymenu' ) ;
     $button_tray->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
     $form->addElement( $button_tray ) ;
     xoops_cp_header();
@@ -442,9 +442,9 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
         unset($new_value);
       }
     }
-    if (!empty($use_mysession) && $xoopsConfig['use_mysession'] == 0 && $session_name != '') {
-        setcookie($session_name, session_id(), time()+(60*intval($session_expire)), '/',  '', 0);
-    }
+    /* if (!empty($_POST['use_mysession']) && $xoopsConfig['use_mysession'] == 0 && $_POST['session_name'] != '') {
+        setcookie($_POST['session_name'], session_id(), time()+(60*intval($_POST['session_expire'])), '/',  '', 0);
+    } */
     if ( ! empty( $_POST['redirect'] ) ) {
       redirect_header($_POST['redirect'], 2, _MD_AM_DBUPDATED);
     } else {

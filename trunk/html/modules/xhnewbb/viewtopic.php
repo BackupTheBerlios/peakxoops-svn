@@ -282,7 +282,7 @@ if ( $viewmode == "thread" ) {
 					$posterarr =  array('poster_uid' => $eachposter->getVar('uid'), 'poster_uname' => '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$eachposter->getVar('uid').'">'.$eachposter->getVar('uname').'</a>', 'poster_avatar' => $eachposter->getVar('user_avatar'), 'poster_from' => $eachposter->getVar('user_from'), 'poster_regdate' => formatTimestamp($eachposter->getVar('user_regdate'), 's'), 'poster_postnum' => $eachposter->getVar('posts'), 'poster_sendpmtext' => sprintf(_SENDPMTO,$eachposter->getVar('uname')), 'poster_rank_title' => $poster_rank['title'], 'poster_rank_image' => @$poster_rank['image'], 'poster_status' => $poster_status);
 					if ( 1 == $forumdata['allow_sig'] && $eachpost->attachsig() == 1 && $eachposter->attachsig() == 1 ) {
 						$myts =& MytextSanitizer::getInstance();
-						$post_text .= "<p><br />----------------<br />". $myts->makeTareaData4Show($eachposter->getVar("user_sig", "N"), 0, 1, 1)."</p>";
+						$post_text .= "<p><br />----------------<br />". $myts->displayTarea($eachposter->getVar("user_sig", "N"), 0, 1, 1, $xoopsModuleConfig['xhnewbb_allow_sigimg'])."</p>";
 					}
 				} else {
 					$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
@@ -327,7 +327,7 @@ if ( $viewmode == "thread" ) {
 				$posterarr =  array('poster_uid' => $eachposter->getVar('uid'), 'poster_uname' => '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$eachposter->getVar('uid').'">'.$eachposter->getVar('uname').'</a>', 'poster_avatar' => $eachposter->getVar('user_avatar'), 'poster_from' => $eachposter->getVar('user_from'), 'poster_regdate' => formatTimestamp($eachposter->getVar('user_regdate'), 's'), 'poster_postnum' => $eachposter->getVar('posts'), 'poster_sendpmtext' => sprintf(_SENDPMTO,$eachposter->getVar('uname')), 'poster_rank_title' => $poster_rank['title'], 'poster_rank_image' => @$poster_rank['image'], 'poster_status' => $poster_status);
 				if ( 1 == $forumdata['allow_sig'] && $eachpost->attachsig() == 1 && $eachposter->attachsig() == 1 ) {
 					$myts =& MytextSanitizer::getInstance();
-					$post_text .= '<p><br />----------------<br />'. $myts->makeTareaData4Show($eachposter->getVar('user_sig', 'N'), 0, 1, 1).'</p>';
+					$post_text .= '<p><br />----------------<br />'. $myts->displayTarea($eachposter->getVar('user_sig', 'N'), 0, 1, 1, $xoopsModuleConfig['xhnewbb_allow_sigimg']).'</p>';
 				}
 			} else {
 				$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');

@@ -56,6 +56,7 @@ define("_MD_XHNEWBB_NOMATCH","検索条件に一致するデータは見つかりませんでした");
 define("_MD_XHNEWBB_POSTTIME","投稿日時");
 
 //viewforum.php
+define("_MD_XHNEWBB_LATESTPOST","最新");
 define("_MD_XHNEWBB_REPLIES","返信");
 define("_MD_XHNEWBB_POSTER","投稿者");
 define("_MD_XHNEWBB_VIEWS","閲覧");
@@ -91,6 +92,9 @@ define("_MD_XHNEWBB_TOP","トップ");
 define("_MD_XHNEWBB_PARENT","親トピック");
 define("_MD_XHNEWBB_PREVTOPIC","前のトピック");
 define("_MD_XHNEWBB_NEXTTOPIC","次のトピック");
+
+define("_MD_XHNEWBB_MARK_TURNON","このトピックをマークする");
+define("_MD_XHNEWBB_MARK_TURNOFF","このトピックのマークを外す");
 
 //forumform.inc
 define("_MD_XHNEWBB_ABOUTPOST","投稿に関して");

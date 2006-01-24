@@ -11,6 +11,8 @@ define("_MB_XHNEWBB_DISPLAY","表示件数 %s 件");
 define("_MB_XHNEWBB_DISPLAYF","フルサイズ表示する"); 
 define("_MB_XHNEWBB_MARKISUP","チェックしたトピックの優先表示"); 
 define("_MB_XHNEWBB_DISPLAYPOSTTITLE","トピックタイトルの代わりに最新投稿タイトルを表示する");
+define("_MB_XHNEWBB_CATLIMIT","カテゴリーを指定する");
+define("_MB_XHNEWBB_CATLIMITDSC","※表示するカテゴリー番号をカンマ(,)で区切る。空欄なら全カテゴリー");
 
 define("_MB_XHNEWBB_ORDERTIMED","新着降順"); 
 define("_MB_XHNEWBB_ORDERVIEWSD","ヒット数降順"); 

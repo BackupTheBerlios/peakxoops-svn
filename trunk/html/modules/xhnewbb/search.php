@@ -78,7 +78,7 @@ if ( !isset($_POST['submit']) ) {
 		}
 		$addquery .= "(pt.post_text LIKE '%$terms[0]%'";
 		$subquery .= "(t.topic_title LIKE '%$terms[0]%'";
-		if ( $_POST['addterms'] == "any" ) {					// AND/OR relates to the ANY or ALL on Search Page
+		if ( @$_POST['addterms'] == "any" ) {					// AND/OR relates to the ANY or ALL on Search Page
 			$andor = 'OR';
 		} else {
 			$andor = 'AND';
@@ -95,7 +95,7 @@ if ( !isset($_POST['submit']) ) {
 		$subquery .= ')';
 	}
 	if ($forum !='all' ) {
-		if ( isset($addquery) ) {
+		if ( ! empty($addquery) ) {
 			$addquery .= ' AND ';
 			$subquery .= ' AND ';
 		}
@@ -114,7 +114,7 @@ if ( !isset($_POST['submit']) ) {
 			redirect_header(XOOPS_URL."/modules/xhnewbb/search.php",1,_MD_XHNEWBB_USERNOEXIST);
 			exit();
 		}
-		if ( isset($addquery) ) {
+		if ( ! empty($addquery) ) {
 			$addquery .= " AND p.uid=".$row['uid']." AND u.uname='$search_username'";
 			$subquery .= " AND p.uid=".$row['uid']." AND u.uname='$search_username'";
 		} else {
@@ -123,7 +123,7 @@ if ( !isset($_POST['submit']) ) {
 		}
 	}
 	if ( isset($addquery) ) {
-		switch ( $_POST['searchboth'] ) {
+		switch ( @$_POST['searchboth'] ) {
 		case 'both':
 			$query .= " WHERE ( ($subquery) OR ($addquery) ) AND ";
 		    break;
@@ -140,7 +140,7 @@ if ( !isset($_POST['submit']) ) {
 	}
 	$query .= ' p.post_id = pt.post_id AND p.topic_id = t.topic_id AND p.forum_id = f.forum_id AND p.uid = u.uid AND f.forum_type != 1';
 	$allowed = array("t.topic_title", "t.topic_views", "t.topic_replies", "f.forum_name", "u.uname");
-	$sortby = (!in_array($_POST['sortby'], $allowed)) ? "u.uid" : $_POST['sortby'];
+	$sortby = (!in_array(@$_POST['sortby'], $allowed)) ? "u.uid" : $_POST['sortby'];
 	$query .= ' ORDER BY '.$sortby;
 	if ( !$result = $xoopsDB->query($query,100,0) ) {
 		exit("<big>"._MD_XHNEWBB_ERROROCCURED."</big><hr />"._MD_XHNEWBB_COULDNOTQUERY);

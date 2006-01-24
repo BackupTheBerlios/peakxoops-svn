@@ -42,12 +42,31 @@ function b_xhnewbb_main_show( $options )
 	$now_class = empty( $options[3] ) ? 'public' : trim( $options[3] ) ;
 	$is_markup = empty( $options[4] ) ? false : true ;
 	$posttitle = empty( $options[5] ) ? false : true ;
+	$categories = empty( $options[6] ) ? array() : explode(',',$options[6]) ;
 
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
 	$block = array();
 	$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname('xhnewbb');
+	$config_handler =& xoops_gethandler('config');
+	$configs = $config_handler->getConfigList( $module->mid() ) ;
+
+	// allow markup or not
+	if( empty( $configs['xhnewbb_allow_mark'] ) ) {
+		$is_markup = false ;
+	}
+
+	// use solved or not
+	if( empty( $configs['xhnewbb_use_solved'] ) ) {
+		$sel_solved = '1 AS topic_solved' ;
+	} else {
+		$sel_solved = 't.topic_solved' ;
+	}
+
+	// order
 	switch( $now_order ) {
 		case 'views':
 			$odr = 't.topic_views DESC';
@@ -61,6 +80,7 @@ function b_xhnewbb_main_show( $options )
 			break;
 	}
 
+	// private or public
 	switch( $now_class ) {
 		case 'both' :
 			$whr_class = "1" ;
@@ -74,10 +94,22 @@ function b_xhnewbb_main_show( $options )
 			break ;
 	}
 
-	if( $uid > 0 && $is_markup ) {
-		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, t.topic_solved, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, u2t.u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 LEFT JOIN ".$db->prefix("xhnewbb_users2topics")." u2t ON  u2t.topic_id=t.topic_id AND u2t.uid=$uid WHERE $whr_class ORDER BY u2t.u2t_marked<=>1 DESC , $odr" ;
+	// categories
+	if( empty( $categories ) ) {
+		$whr_categories = '1' ;
+		$block['categories'] = '' ;
 	} else {
-		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, t.topic_solved, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, 0 AS u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 WHERE $whr_class ORDER BY $odr" ;
+		for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
+			$categories[ $i ] = intval( $categories[ $i ] ) ;
+		}
+		$whr_categories = 'f.cat_id IN ('.implode(',',$categories).')' ;
+		$block['categories'] = implode(',',$categories) ;
+	}
+
+	if( $uid > 0 && $is_markup ) {
+		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, $sel_solved, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, u2t.u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 LEFT JOIN ".$db->prefix("xhnewbb_users2topics")." u2t ON  u2t.topic_id=t.topic_id AND u2t.uid=$uid WHERE $whr_class AND $whr_categories ORDER BY u2t.u2t_marked<=>1 DESC , $odr" ;
+	} else {
+		$query="SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.topic_time, t.topic_views, t.topic_replies, $sel_solved, t.forum_id, f.forum_name, p.post_id, p.uid, p.subject, 0 AS u2t_marked FROM ".$db->prefix("xhnewbb_topics")." t LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix("xhnewbb_posts")." p ON p.topic_id=t.topic_id AND p.post_time >= t.topic_time-2 WHERE $whr_class AND $whr_categories ORDER BY $odr" ;
 	}
 
 	if (!$result = $db->query($query,$max_topics,0)) {
@@ -112,6 +144,7 @@ function b_xhnewbb_main_show( $options )
 			// Ryuji_edit(2003-11-11) hack end
 //			}
 //		}
+
 		$topic['solved'] = $arr['topic_solved'];
 		$topic['u2t_marked'] = $arr['u2t_marked'];
 		$block['topics'][] =& $topic;
@@ -131,6 +164,7 @@ function b_xhnewbb_main_edit( $options )
 	$now_class = empty( $options[3] ) ? 'public' : trim( $options[3] ) ;
 	$is_markup = empty( $options[4] ) ? false : true ;
 	$posttitle = empty( $options[5] ) ? false : true ;
+	$categories = empty( $options[6] ) ? array() : explode(',',$options[6]) ;
 
 	if( $show_fullsize ) {
 		$fullyes_checked = "checked='checked'" ;
@@ -156,6 +190,10 @@ function b_xhnewbb_main_edit( $options )
 		$posttitleyes_checked = "" ;
 	}
 
+	for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
+		$categories[ $i ] = intval( $categories[ $i ] ) ;
+	}
+
 	$orders = array( 'time' => _MB_XHNEWBB_ORDERTIMED , 'views' => _MB_XHNEWBB_ORDERVIEWSD , 'replies' => _MB_XHNEWBB_ORDERREPLIESD ) ;
 	$order_options = '' ;
 	foreach( $orders as $order_value => $order_name ) {
@@ -170,11 +208,11 @@ function b_xhnewbb_main_edit( $options )
 		$class_options .= "<option value='$class_value' $selected>$class_name</option>\n" ;
 	}
 
-	$form = sprintf( _MB_XHNEWBB_DISPLAY , "<input type='text' size='4' name='options[0]' value='$max_topics' style='text-align:right;' />" ) ;
+	$form = "<label for='o0'>" . sprintf( _MB_XHNEWBB_DISPLAY , "</label><input type='text' size='4' name='options[0]' id='o0' value='$max_topics' style='text-align:right;' />" ) ;
 	$form .= "\n<br />
 		"._MB_XHNEWBB_DISPLAYF."&nbsp;:
-		<input type='radio' name='options[1]' value='1' $fullyes_checked />"._YES."
-		<input type='radio' name='options[1]' value='0' $fullno_checked />"._NO."
+		<input type='radio' name='options[1]' id='o11' value='1' $fullyes_checked /><label for='o11'>"._YES."</label>
+		<input type='radio' name='options[1]' id='o10' value='0' $fullno_checked /><label for='o10'>"._NO."</label>
 		<br />
 		<select name='options[2]'>
 			$order_options
@@ -185,12 +223,16 @@ function b_xhnewbb_main_edit( $options )
 		</select>
 		<br />
 		"._MB_XHNEWBB_MARKISUP."&nbsp;:
-		<input type='radio' name='options[4]' value='1' $markupyes_checked />"._YES."
-		<input type='radio' name='options[4]' value='0' $markupno_checked />"._NO."
+		<input type='radio' name='options[4]' id='o41' value='1' $markupyes_checked /><label for='o41'>"._YES."</label>
+		<input type='radio' name='options[4]' id='o40' value='0' $markupno_checked /><label for='o40'>"._NO."</label>
 		<br />
 		"._MB_XHNEWBB_DISPLAYPOSTTITLE."&nbsp;:
-		<input type='radio' name='options[5]' value='1' $posttitleyes_checked />"._YES."
-		<input type='radio' name='options[5]' value='0' $posttitleno_checked />"._NO."
+		<input type='radio' name='options[5]' id='o51' value='1' $posttitleyes_checked /><label for='o51'>"._YES."</label>
+		<input type='radio' name='options[5]' id='o50' value='0' $posttitleno_checked /><label for='o50'>"._NO."</label>
+		<br />
+		<label for='o6'>"._MB_XHNEWBB_CATLIMIT."</label>&nbsp;:
+		<input type='text' size='20' name='options[6]' id='o6' value='".implode(',',$categories)."' />"._MB_XHNEWBB_CATLIMITDSC."
+		<br />
 	\n" ;
 
 	return $form;

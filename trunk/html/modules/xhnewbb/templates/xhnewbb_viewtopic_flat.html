@@ -13,14 +13,16 @@
   <tr>
     <{if $uid > 0 }>
       <td style="width:19px;">
-        <{if $u2t_marked}>
-          <a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=off">
-            <img src="<{$mod_url}>/images/mark_on.gif" />
-          </a>
-        <{else}>
-          <a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=on">
-            <img src="<{$mod_url}>/images/mark_off.gif" />
-          </a>
+        <{if $allow_mark}>
+          <{if $u2t_marked}>
+            <a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=off">
+              <img src="<{$mod_url}>/images/mark_on.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" />
+            </a>
+          <{else}>
+            <a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=on">
+              <img src="<{$mod_url}>/images/mark_off.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" />
+            </a>
+          <{/if}>
         <{/if}>
       </td>
     <{/if}>

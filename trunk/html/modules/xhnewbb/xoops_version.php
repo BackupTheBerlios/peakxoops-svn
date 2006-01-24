@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 
 $modversion['name'] = _MI_XHNEWBB_NAME;
-$modversion['version'] = 1.14;
+$modversion['version'] = 1.15;
 $modversion['description'] = _MI_XHNEWBB_DESC;
 $modversion['credits'] = "Kazumi Ono<br />( http://www.myweb.ne.jp/ )";
 $modversion['author'] = "Original admin section (phpBB 1.4.4) by<br />The phpBB Group<br />( http://www.phpbb.com/ )<br />";
@@ -84,7 +84,7 @@ $modversion['blocks'][1] = array(
 	'name' => _MI_XHNEWBB_BNAME1 ,
 	'description' => _MI_XHNEWBB_BDESC1 ,
 	'show_func' => "b_xhnewbb_main_show" ,
-	'options' => "10|1|time|public|1|0" ,
+	'options' => "10|1|time|public|1|0|0" ,
 	'edit_func' => "b_xhnewbb_main_edit" ,
 	'template' => 'xhnewbb_main_block.html' ,
 	'can_clone' => true
@@ -94,7 +94,7 @@ $modversion['blocks'][] = array(
 	'name' => _MI_XHNEWBB_BNAME1 ,
 	'description' => _MI_XHNEWBB_BDESC1 ,
 	'show_func' => "b_xhnewbb_main_show" ,
-	'options' => "10|1|time|public|1|0" ,
+	'options' => "10|1|time|public|1|0|0" ,
 	'edit_func' => "b_xhnewbb_main_edit" ,
 	'template' => 'xhnewbb_main_block2.html' ,
 	'can_clone' => true
@@ -118,6 +118,36 @@ $modversion['config'][] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'xhnewbb_use_solved' ,
+	'title'			=> '_MI_XHNEWBB_USE_SOLVED' ,
+	'description'	=> '_MI_XHNEWBB_USE_SOLVEDDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'xhnewbb_allow_mark' ,
+	'title'			=> '_MI_XHNEWBB_ALLOW_MARK' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'xhnewbb_viewallbreak' ,
+	'title'			=> '_MI_XHNEWBB_VIEWALLBREAK' ,
+	'description'	=> '_MI_XHNEWBB_VIEWALLBREAKDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "10" ,
 	'options'		=> array()
 ) ;
 

@@ -1,6 +1,19 @@
 [mlimg]
 [xlang:en]
 
+1.15 (2006/1/25)
+- fixed the original bug in search.php
+- added a feature of category limitation into all topic view
+- added a feature of category limitation into the block
+- fixed a bug in post preview
+- modified some missing alt , title int <img>
+- modified the feature of solved can be turned off
+- modified the feature of marking can be turned off
+- fixed the original bug anyone can see private forum in index.php
+- modified the URI of links for posts in viewforum.php and viewallforum.php
+- added configuration of page break number for viewallforum.php
+
+
 1.14 (2006/01/05)
 - added an option selecting title of each topics in block
 - added one more the same block for editing templates
@@ -31,6 +44,17 @@
 [/xlang:en]
 [xlang:ja]
 
+1.15 (2006/1/25)
+- search.php で投稿者だけを指定するとSQLエラーになるオリジナルバグの修正
+- カテゴリー毎のトピック一覧機能
+- ブロックでのカテゴリー絞り込み機能
+- 外部画像禁止状態でもプレビューで画像表示されていたバグの修正
+- 一部の画像へのalt, title属性追記
+- 解決済機能のON/OFF設定追加
+- トピックマーク機能のON/OFF設定追加
+- index.phpで権限のないプライベートフォーラムが見えてしまうオリジナルバグの修正
+- 一覧画面等でのリンクをなるべくシンプルな形で統一し、最新投稿一覧とまったく同じ形式のURIも用意するようにした（ゲストの既読情報はブラウザにお任せする、という意味）
+- トピック一覧画面でのページブレイク数を指定できるようにした
 
 1.14 (2006/01/05)
 - 投稿ブロックに、表示タイトルを最終投稿タイトルとするかトピックタイトルにするかのオプションを追加（テンプレートも変更になっている）

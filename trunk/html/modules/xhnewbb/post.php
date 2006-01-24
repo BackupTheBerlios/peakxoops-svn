@@ -91,6 +91,8 @@ if ( empty($forum) ) {
 		echo"<table width='100%' border='0' cellspacing='1' class='outer'><tr><td>";
 		$myts =& MyTextSanitizer::getInstance();
 		$p_subject = $myts->makeTboxData4Preview($_POST['subject']);
+		$p_message = $myts->previewTarea( $_POST['message'] , intval( ! @$_POST['nohtml'] ) , intval( ! @$_POST['nosmiley'] ) , 1 , @$GLOBALS['xoopsModuleConfig']['xhnewbb_allow_textimg'] ) ; // GIJ
+		/*
 		$nosmiley = !empty($_POST['nosmiley']) ? 1 : 0;
 		$nohtml = !empty($_POST['nohtml']) ? 1 : 0;
 		if ( $nosmiley && $nohtml ) {
@@ -102,6 +104,7 @@ if ( empty($forum) ) {
 		} else {
 			$p_message = $myts->makeTareaData4Preview($_POST['message'],1,1,1);
 		}
+		*/
 		themecenterposts($p_subject,$p_message);
 		echo "<br />";
 		$subject = $myts->makeTboxData4PreviewInForm(@$_POST['subject']);
@@ -196,7 +199,7 @@ if ( empty($forum) ) {
 		// set u2t_marked
 		$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 		$topic_id = $forumpost->topic() ;
-		if( $uid > 0 ) {
+		if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && $uid > 0 ) {
 			$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("xhnewbb_users2topics")." SET u2t_marked=1 , u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
 			if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->query( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_marked=1 , u2t_time=".time() ) ;
 		}

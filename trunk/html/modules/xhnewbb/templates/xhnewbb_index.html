@@ -13,7 +13,14 @@
 <!-- start forum categories -->
 <{section name=category loop=$categories}>
 <table cellspacing="1" class="outer">
-  <tr align="left" valign="top"><th colspan="5"> <a href="<{$mod_url}>/index.php?cat=<{$categories[category].cat_id}>"><{$categories[category].cat_title}></a></th></tr>
+  <tr align="left" valign="top">
+    <th colspan="5">
+      <a href="<{$mod_url}>/index.php?cat=<{$categories[category].cat_id}>"><{$categories[category].cat_title}></a>
+      <a href="<{$mod_url}>/viewallforum.php?cat=<{$categories[category].cat_id}>"><{$smarty.const._MD_XHNEWBB_TOPICS}></a>
+    </th>
+  </tr>
+
+  <{if $categories[category].forums }>
   <tr class="head" align="center">
     <td>&nbsp;</td>
 	<td nowrap="nowrap" align="left"><{$lang_forum}></td>
@@ -21,6 +28,8 @@
 	<td nowrap="nowrap"><{$lang_posts}></td>
 	<td nowrap="nowrap"><{$lang_lastpost}></td>
   </tr>
+  <{/if}>
+
   <!-- start forums -->
   <{section name=forum loop=$categories[category].forums.forum_id}>
   <tr>

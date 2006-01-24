@@ -16,7 +16,7 @@
 <table class="outer" cellspacing="1">
   <tr class="head" align="left">
     <th width="4%" colspan="2" align="right">
-      <{if $uid}>
+      <{if $allow_mark && $uid}>
         <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
       <{/if}>
     </th>
@@ -33,7 +33,7 @@
     <td align="center"><img src="<{$topic.topic_folder}>" alt="/" /></td>
     <td align="center">
       <{$topic.topic_icon}>
-      <{if $uid}>
+      <{if $allow_mark && $uid}>
         <br />
         <input type="checkbox" name="marked[<{$topic.topic_id}>]" <{$topic.mark_checked}> />
         <input type="hidden" name="topic_ids[]" value="<{$topic.topic_id}>" />
@@ -50,7 +50,7 @@
   <!-- end forum topic -->
   <tr class="foot">
     <td colspan="2" align="right">
-      <{if $uid}>
+      <{if $allow_mark && $uid}>
         <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
       <{/if}>
     </td>

@@ -56,6 +56,7 @@ define("_MD_XHNEWBB_NOMATCH","No records match that query. Please broaden your s
 define("_MD_XHNEWBB_POSTTIME","Post Time");
 
 //viewforum.php
+define("_MD_XHNEWBB_LATESTPOST","latest");
 define("_MD_XHNEWBB_REPLIES","Replies");
 define("_MD_XHNEWBB_POSTER","Poster");
 define("_MD_XHNEWBB_VIEWS","Views");
@@ -93,6 +94,9 @@ define("_MD_XHNEWBB_TOP","Top");
 define("_MD_XHNEWBB_PARENT","Parent");
 define("_MD_XHNEWBB_PREVTOPIC","Previous Topic");
 define("_MD_XHNEWBB_NEXTTOPIC","Next Topic");
+
+define("_MD_XHNEWBB_MARK_TURNON","mark this topic");
+define("_MD_XHNEWBB_MARK_TURNOFF","unmark this topic");
 
 //forumform.inc
 define("_MD_XHNEWBB_ABOUTPOST","About Posting");

@@ -12,6 +12,8 @@ define("_MB_XHNEWBB_DISPLAY","Display %s posts");
 define("_MB_XHNEWBB_DISPLAYF","Display in full size");
 define("_MB_XHNEWBB_MARKISUP","Marked topics are upper"); 
 define("_MB_XHNEWBB_DISPLAYPOSTTITLE","Displays the title of the last post insteadof the topic title");
+define("_MB_XHNEWBB_CATLIMIT","Specify categories");
+define("_MB_XHNEWBB_CATLIMITDSC","Input category's id separated with comma. blank means all categories");
 
 define("_MB_XHNEWBB_ORDERTIMED","Newest is first"); 
 define("_MB_XHNEWBB_ORDERVIEWSD","Most viewed is first"); 

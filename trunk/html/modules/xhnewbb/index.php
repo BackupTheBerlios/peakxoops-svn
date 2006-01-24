@@ -53,23 +53,27 @@ if( empty( $last_visit ) ) $last_visit = time() ;
 
 $xoopsTpl->assign(array("lang_welcomemsg" => sprintf(_MD_XHNEWBB_WELCOME,$xoopsConfig['sitename']), "lang_tostart" => _MD_XHNEWBB_TOSTART, "lang_totaltopics" => _MD_XHNEWBB_TOTALTOPICSC, "lang_totalposts" => _MD_XHNEWBB_TOTALPOSTSC, "total_topics" => xhnewbb_get_total_topics(), "total_posts" => xhnewbb_get_total_posts(0, 'all'), "lang_lastvisit" => sprintf(_MD_XHNEWBB_LASTVISIT,formatTimestamp($last_visit,'m')), "lang_currenttime" => sprintf(_MD_XHNEWBB_TIMENOW,formatTimestamp(time(),"m")), "lang_forum" => _MD_XHNEWBB_FORUM, "lang_topics" => _MD_XHNEWBB_TOPICS, "lang_posts" => _MD_XHNEWBB_POSTS, "lang_lastpost" => _MD_XHNEWBB_LASTPOST, "lang_moderators" => _MD_XHNEWBB_MODERATOR));
 
+// category limitation
 $viewcat = (!empty($_GET['cat'])) ? intval($_GET['cat']) : 0;
+if ( $viewcat != 0 ) {
+	$whr_categories = 'f.cat_id='.$viewcat ;
+	$xoopsTpl->assign('forum_index_title', _MD_XHNEWBB_FORUMINDEX) ;
+} else {
+	$whr_categories = '1' ;
+	$xoopsTpl->assign('forum_index_title', '') ;
+}
+
 $categories = array();
 while ( $cat_row = $xoopsDB->fetchArray($result) ) {
 	$categories[] = $cat_row;
 }
 
 if( $uid > 0 ) {
-	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, u2t.u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = p.topic_id AND u2t.uid = '.$uid ;
+	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, u2t.u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics').' u2t ON  u2t.topic_id = p.topic_id AND u2t.uid = '.$uid.' WHERE '.$whr_categories ;
 } else {
-	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, 0 AS u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid' ;
+	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, 0 AS u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid'.' WHERE '.$whr_categories ;
 }
-if ( $viewcat != 0 ) {
-	$sql .= ' WHERE f.cat_id = '.$viewcat;
-	$xoopsTpl->assign('forum_index_title', _MD_XHNEWBB_FORUMINDEX);
-} else {
-	$xoopsTpl->assign('forum_index_title', '');
-}
+
 if ( !$result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_weight, f.forum_id') ) {
 	if ( !$result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_id') ) {
 		exit("Error");
@@ -77,8 +81,12 @@ if ( !$result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_weight, f.foru
 }
 $forums = array(); // RMV-FIX
 while ( $forum_data = $xoopsDB->fetchArray($result) ) {
-	$forums[] = $forum_data;
+	// private or public
+	if( $forum_data['forum_type'] == 0 || $uid > 0 && ( $xoopsUser->isAdmin( $xoopsModule->mid() ) || xhnewbb_check_priv_forum_auth( $uid , $forum_data['forum_id'] , false ) ) ) {
+		$forums[] = $forum_data;
+	}
 }
+
 $cat_count = count($categories);
 if ($cat_count > 0) {
 	for ( $i = 0; $i < $cat_count; $i++ ) {

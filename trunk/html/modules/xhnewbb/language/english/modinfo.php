@@ -29,6 +29,11 @@ define('_MI_XHNEWBB_ALLOW_TEXTIMG','Allow to dipslay external images in the post
 define('_MI_XHNEWBB_ALLOW_TEXTIMGDSC','If some attackers post an external image using [img], he can know IPs or User-Agents of users visited your site.');
 define('_MI_XHNEWBB_ALLOW_SIGIMG','Allow to display external images in the signature');
 define('_MI_XHNEWBB_ALLOW_SIGIMGDSC','If some attackers post an external image using [img], he can know IPs or User-Agents of users visited your site.');
+define('_MI_XHNEWBB_USE_SOLVED','use the feature of SOLVED');
+define('_MI_XHNEWBB_USE_SOLVEDDSC','You can find the topic is solved or unsolved by the color of message icons etc.');
+define('_MI_XHNEWBB_ALLOW_MARK','use the feature of MARKING');
+define('_MI_XHNEWBB_ALLOW_MARKDSC','Registered users can mark each topics');
+define('_MI_XHNEWBB_VIEWALLBREAK','page break number of viewallforum.php');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

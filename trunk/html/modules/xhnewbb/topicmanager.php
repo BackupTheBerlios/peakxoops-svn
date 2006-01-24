@@ -40,7 +40,7 @@ if ( ! empty( $_POST['submit'] ) ) {
 	foreach (array('forum', 'topic_id', 'newforum') as $getint) {
 	    ${$getint} = isset($_POST[$getint]) ? intval($_POST[$getint]) : 0;
     }
-	switch ($_POST['mode']) {
+	switch (@$_POST['mode']) {
 	case 'del':
 		// Update the users's post count, this might be slow on big topics but it makes other parts of the
 	    // forum faster so we win out in the long run.
@@ -143,7 +143,7 @@ if ( ! empty( $_POST['submit'] ) ) {
 	foreach (array('forum', 'topic_id') as $getint) {
 		${$getint} = isset($_GET[$getint]) ? intval($_GET[$getint]) : 0;
 	}
-	$mode = $_GET['mode'];
+	$mode = @$_GET['mode'];
     echo "<form action='' method='post'>
 	<table border='0' cellpadding='1' cellspacing='0' align='center' width='95%'><tr><td class='bg2'>
 	<table border='0' cellpadding='1' cellspacing='1' width='100%'>

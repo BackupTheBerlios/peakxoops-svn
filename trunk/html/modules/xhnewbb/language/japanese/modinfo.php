@@ -27,6 +27,11 @@ define('_MI_XHNEWBB_ALLOW_TEXTIMG','投稿本文内の外部画像を許可する');
 define('_MI_XHNEWBB_ALLOW_TEXTIMGDSC','投稿本文に[img]タグで外部サイトの画像を表示させると、このサイトの訪問者のIPやUser-Agentを抜かれることにつながります');
 define('_MI_XHNEWBB_ALLOW_SIGIMG','署名内の外部画像を許可する');
 define('_MI_XHNEWBB_ALLOW_SIGIMGDSC','署名に[img]タグで外部サイトの画像を表示させると、このサイトの訪問者のIPやUser-Agentを抜かれることにつながります');
+define('_MI_XHNEWBB_USE_SOLVED','解決済機能を利用する');
+define('_MI_XHNEWBB_USE_SOLVEDDSC','メッセージアイコンの色などで、トピックのテーマが「解決した」かどうかを区別する機能を使うかどうかを決定します');
+define('_MI_XHNEWBB_ALLOW_MARK','注目トピック機能を利用する');
+define('_MI_XHNEWBB_ALLOW_MARKDSC','ログインユーザが各自で、注目するトピックを設定できる機能を使うかどうかを決定します');
+define('_MI_XHNEWBB_VIEWALLBREAK','トピック一覧でのページ分割単位');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

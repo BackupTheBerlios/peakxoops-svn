@@ -159,20 +159,20 @@ if ( $xoopsUser ) {
 		// the forum is locked?
 		if ( $forumdata['topic_status'] != 1 ) {
 			// nope
-			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=lock&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['locktopic'].'" alt="'._MD_XHNEWBB_LOCKTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=lock&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['locktopic'].'" alt="'._MD_XHNEWBB_LOCKTOPIC.'" title="'._MD_XHNEWBB_LOCKTOPIC.'" /></a>');
 		} else {
 			// yup, it is..
-			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unlock&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['unlocktopic'].'" alt="'._MD_XHNEWBB_UNLOCKTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unlock&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['unlocktopic'].'" alt="'._MD_XHNEWBB_UNLOCKTOPIC.'" title="'._MD_XHNEWBB_UNLOCKTOPIC.'" /></a>');
 		}
-		$xoopsTpl->assign('topic_move_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=move&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['movetopic'].'" alt="'._MD_XHNEWBB_MOVETOPIC.'" /></a>');
-		$xoopsTpl->assign('topic_delete_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=del&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['deltopic'].'" alt="'._MD_XHNEWBB_DELETETOPIC.'" /></a>');
+		$xoopsTpl->assign('topic_move_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=move&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['movetopic'].'" alt="'._MD_XHNEWBB_MOVETOPIC.'" title="'._MD_XHNEWBB_MOVETOPIC.'" /></a>');
+		$xoopsTpl->assign('topic_delete_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=del&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['deltopic'].'" alt="'._MD_XHNEWBB_DELETETOPIC.'" title="'._MD_XHNEWBB_DELETETOPIC.'" /></a>');
 		// is the topic sticky?
 		if ( $forumdata['topic_sticky'] != 1 ) {
 			// nope, not yet..
-			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=sticky&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['sticky'].'" alt="'._MD_XHNEWBB_STICKYTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=sticky&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['sticky'].'" alt="'._MD_XHNEWBB_STICKYTOPIC.'" title="'._MD_XHNEWBB_STICKYTOPIC.'" /></a>');
 		} else {
 			// yup it is sticking..
-			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unsticky&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['unsticky'].'" alt="'._MD_XHNEWBB_UNSTICKYTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unsticky&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['unsticky'].'" alt="'._MD_XHNEWBB_UNSTICKYTOPIC.'" title="'._MD_XHNEWBB_UNSTICKYTOPIC.'" /></a>');
 		}
 		// need to set this also
 		$xoopsTpl->assign('viewer_is_admin', true);
@@ -251,7 +251,7 @@ if ($total_posts > 50) {
 }
 
 if ( $can_post == 1 ) {
-	$xoopsTpl->assign(array('viewer_can_post' => true, 'forum_post_or_register' => "<a href=\"newtopic.php?forum=".$forum."\"><img src=\"".$bbImage['post']."\" alt=\""._MD_XHNEWBB_POSTNEW."\" /></a>"));
+	$xoopsTpl->assign(array('viewer_can_post' => true, 'forum_post_or_register' => "<a href=\"newtopic.php?forum=".$forum."\"><img src=\"".$bbImage['post']."\" alt=\""._MD_XHNEWBB_POSTNEW."\" title=\""._MD_XHNEWBB_POSTNEW."\" /></a>"));
 } else {
 	$xoopsTpl->assign('viewer_can_post', false);
 	if ( $show_reg == 1 ) {
@@ -421,7 +421,7 @@ if( is_object( @$xoopsUser ) ) {
 
 		// u2t_marked on/off
 		$set_u2t_marked = '' ;
-		if( ! empty( $_GET['change_u2t_mark'] ) ) {
+		if( ! empty( $xoopsModuleConfig['xhnewbb_allow_mark'] ) && ! empty( $_GET['change_u2t_mark'] ) ) {
 			$u2t_marked = $_GET['change_u2t_mark'] == 'on' ? 1 : 0 ;
 			$set_u2t_marked = ",u2t_marked=$u2t_marked" ;
 		}
@@ -431,11 +431,14 @@ if( is_object( @$xoopsUser ) ) {
 	}
 } else {
 	$uid = 0 ;
+	$u2t_time = 0 ;
+	$u2t_marked = 0 ;
 }
 
 $xoopsTpl->assign( 'uid' , $uid ) ;
 $xoopsTpl->assign( 'u2t_time' , $u2t_time ) ;
 $xoopsTpl->assign( 'u2t_marked' , $u2t_marked ) ;
+$xoopsTpl->assign( 'allow_mark' , @$xoopsModuleConfig['xhnewbb_allow_mark'] ) ;
 
 
 // setcookie("xhnewbb_topic_lastread", $str4cookie , time()+365*24*3600, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);

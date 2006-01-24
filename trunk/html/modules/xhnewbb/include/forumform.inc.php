@@ -87,7 +87,7 @@ $subject_icons = XoopsLists::getSubjectsList();
 foreach ($subject_icons as $iconfile) {
 	$icons_radio->addOption($iconfile, '<img src="'.XOOPS_URL.'/images/subject/'.$iconfile.'" alt="" />');
 }
-if( is_object( @$xoopsUser ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $forum , $xoopsUser->getVar('uid') ) ) ) {
+if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && is_object( @$xoopsUser ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $forum , $xoopsUser->getVar('uid') ) ) ) {
 	$solved_checkbox = new XoopsFormCheckbox('', 'solved', $solved ) ;
 	$solved_checkbox->addOption( 1 , _MD_XHNEWBB_SOLVEDCHECKBOX ) ;
 } else {

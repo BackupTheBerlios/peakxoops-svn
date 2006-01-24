@@ -361,7 +361,8 @@ class ForumPosts
 				$text = $myts->makeTareaData4Edit($this->post_text);
 				break;
 			case "Preview":
-				$text = $myts->makeTareaData4Preview($this->post_text,$html,$smiley,$bbcodes);
+				exit ;
+				$text = $myts->previewTarea($this->post_text,$html,$smiley,$bbcodes,@$GLOBALS['xoopsModuleConfig']['xhnewbb_allow_textimg']);
 				break;
 			case "InForm":
 				$text = $myts->makeTareaData4PreviewInForm($this->post_text);

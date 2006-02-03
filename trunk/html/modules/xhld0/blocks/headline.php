@@ -69,7 +69,7 @@ function b_xhld_show( $options )
 		$block['feeds'][] = $renderer->getBlock();
 	}
 	$block['cols'] = $cols ;
-	$block['td_attr'] = 'width="'.(100/$cols).'%" valign="top" id="xhld"' ;
+	$block['td_attr'] = 'width="'.(100/$cols).'%" valign="top" class="xhld"' ;
 	$block['mod_url'] = XOOPS_URL.'/modules/'.$mydirname ;
 	return $block;
 }

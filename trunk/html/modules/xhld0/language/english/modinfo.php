@@ -21,6 +21,7 @@ define("_MI_HEADLINES_BDESC_MIXED","Shows headline news via RSS/ATOM in an aggre
 
 // Names of admin menu items
 define("_MI_HEADLINES_ADMENU1","List Headlines");
+define("_MI_HEADLINES_ADMENU_MYTPLSADMIN","Templates");
 define("_MI_HEADLINES_ADMENU_MYBLOCKSADMIN","Blocks/Groups");
 
 // Configs

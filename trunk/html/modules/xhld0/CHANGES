@@ -1,11 +1,14 @@
 [xlang:en]
 CHANGES:
 
+v.3.02 2006-02-03
+  - added mytplsadmin
+  - updated myblocksadmin
+  - modified templates
   - updated language files
   -- spanish (thx Jose Moya)
   -- portuguesebr (thx Izzy)
   -- french (thx marco)
-
 
 v.3.01 2005-11-14
   - updated myblocksadmin 0.41 and mymenu 0.15
@@ -223,6 +226,15 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.02 2006-02-03
+  - mytplsadmin の導入
+  - myblocksadmin の更新
+  - テンプレートのRSSデータ取り扱いでおかしかった部分を修正
+  - 言語ファイル更新
+  -- スペイン語 (thx Jose Moya)
+  -- ブラジルポルトガル語 (thx Izzy)
+  -- フランス語 (thx marco)
 
 v.3.01 2005-11-14
   - myblocksadmin 0.41 および mymenu 0.15 へのアップデート

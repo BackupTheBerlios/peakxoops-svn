@@ -21,6 +21,7 @@ define("_MI_HEADLINES_BDESC_MIXED","取得したヘッドラインをまとめて最新順に並び替
 
 // Names of admin menu items
 define("_MI_HEADLINES_ADMENU1","フィード管理");
+define("_MI_HEADLINES_ADMENU_MYTPLSADMIN","テンプレート管理");
 define("_MI_HEADLINES_ADMENU_MYBLOCKSADMIN","ブロック・グループ管理");
 
 // Configs

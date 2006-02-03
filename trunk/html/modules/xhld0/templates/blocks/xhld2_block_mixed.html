@@ -4,13 +4,13 @@
   <{if $block.items[i].title != ""}>
   <li>
     <{if $block.items[i].pubdate != "" }>
-      <script type="text/javascript">document.write(phpDate('<{$block.dtfmt_short}>', <{$block.items[i].pubdate}>));</script>
-      <noscript><{$block.items[i].date_short}></noscript>
+      <script type="text/javascript">document.write(phpDate('<{$block.dtfmt_short|escape}>', <{$block.items[i].pubdate|escape}>));</script>
+      <noscript><{$block.items[i].date_short|escape}></noscript>
       &nbsp; 
     <{/if}>
-    <a href="<{$block.items[i].link}>" target="_blank"><{$block.items[i].title}></a>
+    <a href="<{$block.items[i].link|escape}>" target="_blank"><{$block.items[i].title|escape}></a>
     &nbsp; 
-    <a href="<{$block.items[i].site_url}>" target="_blank">(<{$block.items[i].site_name}>)</a>
+    <a href="<{$block.items[i].site_url|escape}>" target="_blank">(<{$block.items[i].site_name|escape}>)</a>
   </li>
   <{/if}>
 <{/section}>

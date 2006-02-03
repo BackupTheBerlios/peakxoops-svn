@@ -31,7 +31,7 @@ if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirn
 $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 $modversion['name'] = _MI_HEADLINES_NAME.$mydirnumber;
-$modversion['version'] = 3.01;
+$modversion['version'] = 3.02;
 $modversion['description'] = _MI_HEADLINES_DESC;
 $modversion['author'] = "Kazumi Ono<br />( http://www.xoops.org/ http://jp.xoops.org/ http://www.myweb.ne.jp/ )<br />Modified by GIJOE<br />( http://www.peak.ne.jp/ )";
 $modversion['credits'] = "The XOOPS Project";
@@ -97,7 +97,7 @@ $modversion['config'][2] = array(
 ) ;
 
 // added by Tom
-$modversion['config'][] = array(
+$modversion['config'][3] = array(
 	'name'			=> "index_viewmode" ,
 	'title'			=> '_MI_HEADLINES_INDEX_VIEWMODE' ,
 	'description'	=> '_MI_HEADLINES_INDEX_VIEWMODED' ,
@@ -107,7 +107,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_HEADLINES_INDEX_VIEWMODE_MIXED' => 0 , '_MI_HEADLINES_INDEX_VIEWMODE_CLASSIC' => 1 )
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][4] = array(
 	'name'			=> "mixed_maxitem" ,
 	'title'			=> '_MI_HEADLINES_MIXED_MAXITEM' ,
 	'description'	=> '_MI_HEADLINES_MIXED_MAXITEMD' ,
@@ -117,7 +117,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][5] = array(
 	'name'			=> "mixed_maxlen" ,
 	'title'			=> '_MI_HEADLINES_MIXED_MAXLEN' ,
 	'description'	=> '_MI_HEADLINES_MIXED_MAXLEND' ,
@@ -127,7 +127,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][6] = array(
 	'name'			=> "proxy_host" ,
 	'title'			=> '_MI_HEADLINES_PROXY_HOST' ,
 	'description'	=> '_MI_HEADLINES_PROXY_HOSTD' ,
@@ -137,7 +137,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][7] = array(
 	'name'			=> "proxy_port" ,
 	'title'			=> '_MI_HEADLINES_PROXY_PORT' ,
 	'description'	=> '_MI_HEADLINES_PROXY_PORTD' ,
@@ -147,7 +147,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][8] = array(
 	'name'			=> "proxy_user" ,
 	'title'			=> '_MI_HEADLINES_PROXY_USER' ,
 	'description'	=> '_MI_HEADLINES_PROXY_USERD' ,
@@ -157,7 +157,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][9] = array(
 	'name'			=> "proxy_pass" ,
 	'title'			=> '_MI_HEADLINES_PROXY_PASS' ,
 	'description'	=> '_MI_HEADLINES_PROXY_PASSD' ,
@@ -167,7 +167,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][10] = array(
 	'name'			=> "dtfmt_short" ,
 	'title'			=> '_MI_HEADLINES_SHORTDTFMT' ,
 	'description'	=> '_MI_HEADLINES_SHORTDTFMTD' ,

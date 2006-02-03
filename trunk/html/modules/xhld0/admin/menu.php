@@ -26,6 +26,8 @@
 //  ------------------------------------------------------------------------ //
 $adminmenu[0]['title'] = _MI_HEADLINES_ADMENU1;
 $adminmenu[0]['link'] = "admin/index.php";
-$adminmenu[1]['title'] = _MI_HEADLINES_ADMENU_MYBLOCKSADMIN;
-$adminmenu[1]['link'] = "admin/myblocksadmin.php";
+$adminmenu[1]['title'] = _MI_HEADLINES_ADMENU_MYTPLSADMIN;
+$adminmenu[1]['link'] = "admin/mytplsadmin.php";
+$adminmenu[2]['title'] = _MI_HEADLINES_ADMENU_MYBLOCKSADMIN;
+$adminmenu[2]['link'] = "admin/myblocksadmin.php";
 ?>

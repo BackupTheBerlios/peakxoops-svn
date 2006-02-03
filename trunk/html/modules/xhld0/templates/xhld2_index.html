@@ -32,13 +32,13 @@
 
         <td nowrap="nowrap">
           <{if $mixlist.items[i].pubdate != ""}>
-            <script type="text/javascript">document.write(phpDate('<{$mixlist.dtfmt_short}>', <{$mixlist.items[i].pubdate}>));</script>
-            <noscript><{$mixlist.items[i].date_short}></noscript>
+            <script type="text/javascript">document.write(phpDate('<{$mixlist.dtfmt_short|escape}>', <{$mixlist.items[i].pubdate|escape}>));</script>
+            <noscript><{$mixlist.items[i].date_short|escape}></noscript>
           <{/if}>
         </td>
 
-        <td><a href="<{$mixlist.items[i].link}>" target="_blank"><b><{$mixlist.items[i].title}></b></a></td>
-        <td><a href="<{$mixlist.items[i].site_url}>" target="_blank"><{$mixlist.items[i].site_name}></a></td>
+        <td><a href="<{$mixlist.items[i].link|escape}>" target="_blank"><b><{$mixlist.items[i].title|escape}></b></a></td>
+        <td><a href="<{$mixlist.items[i].site_url|escape}>" target="_blank"><{$mixlist.items[i].site_name|escape}></a></td>
 
         </tr>
 

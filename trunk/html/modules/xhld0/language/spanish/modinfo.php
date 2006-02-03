@@ -6,6 +6,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( '_MI_HEADLINES_NAME' ) ) {
 
 // DateTime format
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-02-03 16:31:40
+define('_MI_HEADLINES_ADMENU_MYTPLSADMIN','Templates');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-12-30 06:53:29
 define('_MI_HEADLINES_BDESC','Shows headline news via RSS/ATOM in separate cells');
 define('_MI_HEADLINES_BDESC_MIXED','Shows headline news via RSS/ATOM in an aggregated view');

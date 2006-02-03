@@ -5,6 +5,10 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( '_MI_HEADLINES_NAME' ) ) {
 
 // DateTime format
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-02-03 16:31:39
+define('_MI_HEADLINES_ADMENU_MYTPLSADMIN','Templates');
+
 define("_MI_DEFAULT_DTFMT_SHORT","j M ah:i");
 
 // The name of this module

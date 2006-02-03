@@ -134,6 +134,10 @@ if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tm
 
 	$tplset_from = $myts->stripSlashesGPC( $tplset_from_tmp ) ;
 	if( $tplset_from == 'default' ) die( "You can't remove 'default' template." ) ;
+
+	$tpl = new XoopsTpl();
+	$tpl->force_compile = true;
+
 	foreach( $_POST["{$tplset_from}_check"] as $tplfile_tmp => $val ) {
 		if( empty( $val ) ) continue ;
 		$tplfile = $myts->stripSlashesGPC( $tplfile_tmp ) ;
@@ -142,8 +146,10 @@ if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tm
 			$tpl_id = intval( $tpl_id ) ;
 			$db->query( "DELETE FROM ".$db->prefix("tplfile")." WHERE tpl_id=$tpl_id" ) ;
 			$db->query( "DELETE FROM ".$db->prefix("tplsource")." WHERE tpl_id=$tpl_id" ) ;
-//			xoops_template_touch( $tpl_id ) ; // TODO
 		}
+		// remove templates_c
+		$tpl->clear_cache('db:'.$tplfile);
+		$tpl->clear_compiled_tpl('db:'.$tplfile);
 	}
 	redirect_header( 'mytplsadmin.php?dirname='.$target_dirname , 1 , _MD_AM_DBUPDATED ) ;
 	exit ;

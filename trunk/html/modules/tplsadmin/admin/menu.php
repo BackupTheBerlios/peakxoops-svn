@@ -4,17 +4,13 @@ if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $adminmenu = array() ;
 
-$module_handler4menu =& xoops_gethandler('module');
-$criteria4menu = new CriteriaCompo(new Criteria('isactive', 1));
-$criteria4menu->add(new Criteria('hasmain', 1));
-$criteria4menu->add(new Criteria('mid', '1', '>'));
-$modules4menu =& $module_handler4menu->getObjects($criteria4menu, true);
-array_unshift( $modules4menu , $module_handler4menu->get(1) ) ;
+$db =& Database::getInstance() ;
+$mrs = $db->query( "SELECT m.name,m.dirname FROM ".$db->prefix("modules")." m LEFT JOIN ".$db->prefix("tplfile")." t ON m.dirname=t.tpl_module WHERE m.isactive GROUP BY t.tpl_module ORDER BY m.weight" ) ;
 
-foreach( $modules4menu as $m4menu ) {
+while( list( $name , $dirname ) = $db->fetchRow( $mrs ) ) {
 	$adminmenu[] = array(
-		'title' => $m4menu->getVar('name') ,
-		'link' => "admin/mytplsadmin.php?dirname=".$m4menu->getVar('dirname')
+		'title' => htmlspecialchars( $name , ENT_QUOTES ) ,
+		'link' => "admin/mytplsadmin.php?dirname=".htmlspecialchars( $dirname , ENT_QUOTES )
 	) ;
 }
 ?>

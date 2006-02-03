@@ -97,6 +97,10 @@ XOOPSのブテンプレート管理はあまりにも使いづらいと思います。
 	                      'link' => "admin/mytplsadmin.php" ) ;
 
 
+また、blocksadminのブロック編集画面における「テンプレートを編集」から、tplsadminを呼び出すためには、myblocksadminに存在する myblockform.php をこのパッケージに含まれている myblockform.php にて上書きしてください。
+
+
+
 すべてのモジュール作者の方へ:
 
 「ぜひお試し下さい!!」

@@ -3,7 +3,7 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $modversion['name'] = _MI_PROTECTOR_NAME;
-$modversion['version'] = '2.54';
+$modversion['version'] = '2.55';
 $modversion['description'] = _MI_PROTECTOR_DESC;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

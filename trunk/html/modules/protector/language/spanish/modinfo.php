@@ -1,89 +1,109 @@
-<?php /* Spanish Translation by Marcelo Yuji Himoro <http://yuji.ws> */
+<?php /* Spanish Translation by Marcelo Yuji Himoro <http://yuji.ws> and Mel Bezos <http://www.bezoops.net> */
 // Module Info
 
 // The name of this module
 define("_MI_PROTECTOR_NAME","Xoops Protector");
 
 // A brief description of this module
-define("_MI_PROTECTOR_DESC","MÖ≈ulo para proteger el XOOPS de ataques intencionados, en especial: ataques de denegaciÖœ de servicio (DoS), inyecciÖœ de SQL y contaminaciones por variable.");
+define("_MI_PROTECTOR_DESC","M&oacute;dulo para proteger XOOPS de ataques malintencionados, como ataques de denegaci&oacute;n de servicio (DoS), inyecci&oacute;n de SQL y contaminaciones de variables.");
 
 // Names of blocks for this module (Not all module has blocks)
-//define("_MI_PROTECTOR_BNAME1","Protector");
-//define("_MI_PROTECTOR_BDESC1","Para utilizar este bloque correctamente, usted debe ponerlo en el tope de los bloques izquierdos (carga de menor valor) en todas las p·»inas.");
+//define("_MI_PROTECTOR_BNAME1","Protector"); //Ya no se usa
+//define("_MI_PROTECTOR_BDESC1","Para que este m&oacute;dulo funcione correctamente, debe ponerlo el primero en el orden de los bloques de la izquierda (peso u orden de menor valor) en todas las p&aacute;ginas."); //Ya no se usa
 
 // Menu
-define("_MI_PROTECTOR_ADMININDEX","Central de protecciÖœ");
-define("_MI_PROTECTOR_ADVISORY","Gu˘¬ de seguridad");
+define("_MI_PROTECTOR_ADMININDEX","Bloqueo de ataques");
+define("_MI_PROTECTOR_ADVISORY","Gu&iacute;a de seguridad");
 define("_MI_PROTECTOR_PREFIXMANAGER","Gestor de prefijos");
 
 // Configs
-define("_MI_PROTECTOR_GLOBAL_DISBL","InterrupciÖœ temporaria de funcionamiento");
-define("_MI_PROTECTOR_GLOBAL_DISBLDSC","Suspende temporalmente el funcionamiento de todas las protecciones.<br />Tras haber solucionado los problemas, no se olvide de desactivarla.");
-define("_MI_PROTECTOR_RELIABLE_IPS","IPs fiables");
-define("_MI_PROTECTOR_RELIABLE_IPSDSC","Indica las direcciones de IP que no ser·œ examinadas por ataque DoS, separados por |. ^ para prefijo, y $ para sufijo del string.");
-define("_MI_PROTECTOR_LOG_LEVEL","Nivel de logging");
-define("_MI_PROTECTOR_LOG_LEVELDSC","");
+define("_MI_PROTECTOR_GLOBAL_DISBL","Interrupci&oacute;n temporal de protecciones.");
+define("_MI_PROTECTOR_GLOBAL_DISBLDSC","Suspende temporalmente el funcionamiento de todas las protecciones.<br />Tras haber solucionado los problemas, no se olvide de volver a desactivarla, marcando [No]");
+define("_MI_PROTECTOR_RELIABLE_IPS","IPs de confianza");
+
+define("_MI_PROTECTOR_RELIABLE_IPSDSC","Direcciones IP (separados por |) que <b>no</b> ser&aacute;n examinadas cuando ocurra un ataque DoS, .<br />Comod&iacute;n \"incluye esta cadena\" <b>^</b> se pone al inicio y <b>$</b> al final (el resultado es el mismo). Ej: ^192.168. &oacute; 127.0.0.$'");
+define("_MI_PROTECTOR_LOG_LEVEL","Datos a grabar en registro de eventos (log)<br />situado en <a href='index.php#logprot'>[Bloqueo de Ataques]</a>, en el listado inferior");
+define("_MI_PROTECTOR_LOG_LEVELDSC","Datos a grabar para el registro de eventos, visible en <a href='index.php#logprot'>[Bloqueo de Ataques]</a>, en el listado inferior");
 
 define("_MI_PROTECTOR_LOGLEVEL0","No generar log");
-define("_MI_PROTECTOR_LOGLEVEL15","Generar log de elementos de alto riesgo apenas");
-define("_MI_PROTECTOR_LOGLEVEL63","No generar log de elementos de bajo riesgo");
-define("_MI_PROTECTOR_LOGLEVEL255","Generar log de todos los elementos");
+define("_MI_PROTECTOR_LOGLEVEL15","Solo Incluir elementos de alto riesgo");
+define("_MI_PROTECTOR_LOGLEVEL63","Solo Excluir elementos de bajo riesgo");
+define("_MI_PROTECTOR_LOGLEVEL255","Todos los elementos");
 
-define("_MI_PROTECTOR_HIJACK_TOPBIT","ProtecciÖœ de IP bits contra renovaciÖœ de sesiÖœ");
-define("_MI_PROTECTOR_HIJACK_TOPBITDSC","PrevenciÖœ de robo de sesiÖœ (session hijacking):<br />Por defecto es 32(bit) y protege de todos los bits.<br />Si usted usa Proxy o su direcciÖœ IP cambia a cada acceso, define el intervalo de bits m·‘ largo posible a invariaciÖœ.<br />Ex.: Cuando haya posibilidad de variacÖœ dentro de 192.168.0.0~192.168.0.255, definir esta opciÖœ como 24(bit).");
-define("_MI_PROTECTOR_HIJACK_DENYGP","Grupos prohibidos de cambio de IP");
-define("_MI_PROTECTOR_HIJACK_DENYGPDSC","PrevenciÖœ de robo de sesiÖœ (session hijacking):<br />Seleccione los grupos cuyos usuarios se banear·œ si durante una sesiÖœ se les cambie la direcciÖœ IP.<br />(Recomendado: \"Administradores\")");
-define("_MI_PROTECTOR_SAN_NULLBYTE","Sustituir caracteres nulos por espacios");
-define("_MI_PROTECTOR_SAN_NULLBYTEDSC","El car·ƒter \"\\0\" fatal es usado con frecuencia en ataques maliciosos.<br />Siempre que detectado, se sustituir· por un espacio.<br />(Recomendado)");
-define("_MI_PROTECTOR_DIE_NULLBYTE","Encierre forzado de sesiÖœ en caso de detecciÖœ de caracteres nulos");
-define("_MI_PROTECTOR_DIE_NULLBYTEDSC","El car·ƒter \"\\0\" fatal es usado con frecuencia en ataques maliciosos.<br />(Recomendado)");
-define("_MI_PROTECTOR_DIE_BADEXT","Encierre forzado de sesiÖœ en caso de subidas con extensiones prohibidas");
-define("_MI_PROTECTOR_DIE_BADEXTDSC","Siempre que se hagan subidas con extensiones como .php u otros archivos ejecutables en el servidor, se borrar· la sesiÖœ. (No recomendado si usted es un usuario de B-Wiki o PukiWikiMod y adjunta cÖ≈igos-fuente PHP.)");
-define("_MI_PROTECTOR_CONTAMI_ACTION","SoluciÖœ en caso de detecciÖœ de contaminaciones por variable");
-define("_MI_PROTECTOR_CONTAMI_ACTIONDS","Seleccione el tipo de soluciÖœ cuando se detecte un intento de alteraciÖœ de las globales de sistema de XOOPS.<br />(Defecto: \"Encierre forzado\")");
-define("_MI_PROTECTOR_ISOCOM_ACTION","SoluciÖœ en caso de detecciÖœ de comentarios asolados");
-define("_MI_PROTECTOR_ISOCOM_ACTIONDSC","PrevenciÖœ de inyecciÖœ de SQL:<br />Seleccione el tipo de soluciÖœ cuando se detecte un comentario asolado /* sin su par */.<br />Proceso de limpieza: se inserta un */ al final.<br />(Recomendado: \"Limpieza\")");
-define("_MI_PROTECTOR_UNION_ACTION","SoluciÖœ en caso de detecciÖœ de UNION");
-define("_MI_PROTECTOR_UNION_ACTIONDSC","PrevenciÖœ de inyecciÖœ de SQL:<br />Seleccione el tipo de soluciÖœ cuando se detecte una sintaxis UNION de SQL.<br />Proceso de limpieza: se cambia UNION a uni-on.<br />(Recomendado: \"Limpieza\")");
-define("_MI_PROTECTOR_ID_INTVAL","TransformaciÖœ forzada de variable ID");
-define("_MI_PROTECTOR_ID_INTVALDSC","Fuerza valores numÒ”icos en variables de nombre terminado en \"id\". Es eficaz especialmente con mÖ≈ulos derivados de myLinks. Protege tambiÒœ de algunos sitios de scripting cruzado (XSS) e inyecciÖœ de SQL. Entretanto, puede conflictar con algunos mÖ≈ulos.");
-define("_MI_PROTECTOR_FILE_DOTDOT","ProihibiciÖœ de DirectoryTraversal");
-define("_MI_PROTECTOR_FILE_DOTDOTDSC","En un intento de DirectoryTraversal, se analizar· el pedido, y se remover· la pattern \"..\".");
+define("_MI_PROTECTOR_HIJACK_TOPBIT","N&ordm; de bits de IP a proteger en sesiones");
+define("_MI_PROTECTOR_HIJACK_TOPBITDSC","Bits de direcci&oacute;n IP para proteger de Robo de Sesi&oacute;n:<br />Por defecto: 32 (bits), todo el rango de octetos protegido.");
 
-define("_MI_PROTECTOR_BF_COUNT","PrevenciÖœ a Brute Force");
-define("_MI_PROTECTOR_BF_COUNTDSC","Contra round-robin. Si, dentro de 10 minutos, se sobrepase el né∫ de intentos de ingreso incorrecto definido en esta opciÖœ, se banear· la IP.");
+define("_MI_PROTECTOR_HIJACK_DENYGP","Grupos prevenir cambio de IP durante una sesi&oacute;n");
+define("_MI_PROTECTOR_HIJACK_DENYGPDSC","Prevenci&oacute;n de robo de sesi&oacute;n (session hijacking):<br />Seleccione los grupos cuyos usuarios se bloquear&aacute;n (banear&aacute;n) si durante una sesi&oacute;n cambia su direcci&oacute;n IP. <br />* Recomendado: [Administradores]");
 
-define("_MI_PROTECTOR_DOS_SKIPMODS","MÖ≈ulos omitidos de esp˘¬ de alvo de DoS");
-define("_MI_PROTECTOR_DOS_SKIPMODSDSC","Defina los mÖ≈ulos que quieras omitir, separados por |. Activala para mÖ≈ulos de charla y similares.");
+define("_MI_PROTECTOR_SAN_NULLBYTE","Sanear car&aacute;cteres nulos");
+define("_MI_PROTECTOR_SAN_NULLBYTEDSC","Usar el car&aacute;cter nulo \"\\0\" incluido en una Url, se usa con frecuencia en ataques malintencionados.<br />Siempre que se detecte, se sustituir&aacute; por un espacio.<br />* Muy Recomendado: [Si]");
 
-define("_MI_PROTECTOR_DOS_EXPIRE","Tiempo de esp˘¬ de ataques de denegaciÖœ de servicio (DoS) (en segundos)");
-define("_MI_PROTECTOR_DOS_EXPIREDSC","Tiempo de esp˘¬ al acompaÅ¬r la frecuencia de accesos de denegaciÖœ de servicio (DoS) y robots indexadores maliciosos.");
+define("_MI_PROTECTOR_DIE_NULLBYTE","Cerrar la sesi&oacute;n al detectar caracteres nulos");
+define("_MI_PROTECTOR_DIE_NULLBYTEDSC","Cierre forzado de la sesi&oacute;n del usuario en caso de detecci&oacute;n de caracteres nulos \"\\0\" es peligroso ante ataques malintencionados.<br /><br />Activando esta opci&oacute;n, se cierra la sesi&oacute;n del usuario que lo haya intentado enviar, provocando que salga como registrado (logout)<br />* Recomendado: [Si]");
+define("_MI_PROTECTOR_DIE_BADEXT","Cierre forzado de sesi&oacute;n en caso de subidas (upload) al servidor de ficheros con extensiones prohibidas");
 
-define("_MI_PROTECTOR_DOS_F5COUNT","Né∫ de veces para que se reconozca un ataque F5");
-define("_MI_PROTECTOR_DOS_F5COUNTDSC","Defensa contra ataques de denegaciÖœ de servicio (DoS):<br />Cuando hayan muchos accesos a una ìœica URL dentro del tiempo de esp˘¬ arriba definido y el né∫ de veces definidas en esta opciÖœ, se reconocer· como un ataque.");
+define("_MI_PROTECTOR_DIE_BADEXTDSC","Si se suben ficheros ejecutables al servidor, con extensiones php, phtml, phtm, php3, php4, cgi, pl, o asp, se cerrar&aacute; la sesi&oacute;n de ese usuario (saldr&aacute; como registrado o logout).<br />* No recomendado si hay instalados m&oacute;dulos B-Wiki o PukiWikiMod y se adjuntan ficheros con c&oacute;digo fuente PHP.");
+define("_MI_PROTECTOR_CONTAMI_ACTION","Detecci&oacute;n de contaminaci&oacute;n de variables. El atacante intenta modificar una variable de Xoops (no de php)");
+define("_MI_PROTECTOR_CONTAMI_ACTIONDS","Tipo de acci&oacute;n cuando se detecte un intento de alteraci&oacute;n de las variables globales de sistema de XOOPS.<br />* Por defecto: [Cierre forzado]");
+
+define("_MI_PROTECTOR_ISOCOM_ACTION","Detecci&oacute;n de comentario php solitario");
+define("_MI_PROTECTOR_ISOCOM_ACTIONDSC","Prevenci&oacute;n de inyecci&oacute;n de SQL:<br />Seleccione el tipo de soluci&oacute;n cuando se detecte un comentario php /* sin su pareja de cierre *\.<br />M&eacute;todo Sanear: se inserta un *\ justo despu&eacute;s.<br />Recomendado: [Sanear]");
+
+define("_MI_PROTECTOR_UNION_ACTION","Detecci&oacute;n de instrucci&oacute;n SQL \"UNION\"");
+define("_MI_PROTECTOR_UNION_ACTIONDSC","Prevenci&oacute;n de inyecci&oacute;n de SQL:<br />Seleccione el tipo de soluci&oacute;n cuando se detecte una sintaxis UNION de SQL.<br />M&eacute;todo Sanear: se cambia UNION a uni-on.<br />* Recomendado: [Sanear]");
+
+define("_MI_PROTECTOR_ID_INTVAL","Transformar valor de variable ID en n&uacute;mero entero");
+define("_MI_PROTECTOR_ID_INTVALDSC","Cambia los valores num&eacute;ricos en variables de nombre terminado en \"id\" por n&uacute;meros enteros, osea, sin decimales ni sus comas o puntos. Eficaz especialmente para m&oacute;dulos de enlaces como mylinks. Protege de ataque cruzado (XSS) e inyecci&oacute;n de SQL. Sin embargo, puede ser incompatible con otros m&oacute;dulos que necesitan trabajar con esos decimales.");
+
+define("_MI_PROTECTOR_FILE_DOTDOT","Protecci&oacute;n de saltos de Directorio");
+define("_MI_PROTECTOR_FILE_DOTDOTDSC","Elimina \"..\" de todas las peticiones que parezca que solicitan un cambio de directorio. Puede llegar al root. Los usa un atacante para acceder ficheros que est&aacute;n situados en otro directorio y a los que no se puede acceder directamente escribiendo esa ruta.");
+
+define("_MI_PROTECTOR_BF_COUNT","Anti Fuerza Bruta");
+define("_MI_PROTECTOR_BF_COUNTDSC","N&uacute;mero de intentos de entrar/login un usuario an&oacute;nimo durante 10 minutos. Si no lo consigue en ese tiempo, su IP ser&aacute; bloqueada (baneada).");
+
+define("_MI_PROTECTOR_DOS_SKIPMODS","Modules excluidos de prevenci&oacute;n de DoS y Robots indexadores malintencionados");
+define("_MI_PROTECTOR_DOS_SKIPMODSDSC","Directorios de los m&oacute;dulos, separados con el car&aacute;cter | (teclado Alt Gr.+1). En esta opci&oacute;n es conveniente incluir los m&oacute;dulos de chat, etc.");
+
+define("_MI_PROTECTOR_DOS_EXPIRE","Maximo tiempo de espera para actuar (en segundos)");
+define("_MI_PROTECTOR_DOS_EXPIREDSC","Tiempo de espera para tomar medidas cuando se agoten los contadores de N&ordm; de recargas de F5 y de intentos de robots indexadores malintencionados (mas abajo).");
+
+define("_MI_PROTECTOR_DOS_F5COUNT","N&ordm; de veces para ser considerado un ataque F5");
+define("_MI_PROTECTOR_DOS_F5COUNTDSC","Defensa contra ataques de denegaci&oacute;n de servicio (DoS):<br />N&ordm; de intentos de recargar la p&aacute;gina (dejan pulsada la tecla F5) procedentes de la misma URL, para que sea considerado un ataque malintencionado, dentro del tiempo de espera arriba definido.");
 define("_MI_PROTECTOR_DOS_F5ACTION","Medidas contra ataques F5");
 
-define("_MI_PROTECTOR_DOS_CRCOUNT","Né∫ de veces para que se reconozca un robot indexador malicioso");
-define("_MI_PROTECTOR_DOS_CRCOUNTDSC","PrevenciÖœ de robots indexadores maliciosos (como bots cazadores de correos):<br />Cuando se realicen bì‘quedas internas dentro del tiempo de esp˘¬ arriba definido y el né∫ de veces definidas en esta opciÖœ, se reconocer· como robot indexador malicioso.");
-define("_MI_PROTECTOR_DOS_CRACTION","SoluciÖœ para robots indexadores maliciosos");
+define("_MI_PROTECTOR_DOS_CRCOUNT","N&ordm; de veces para ser considerado un robot indexador malintencionado");
+define("_MI_PROTECTOR_DOS_CRCOUNTDSC","Prevenci&oacute;n de buscadores con robots indexadores malintencionados :<br />N&ordm; de intentos de b&uacute;squedas internas por parte del robot, dentro del tiempo de espera arriba definido.");
+define("_MI_PROTECTOR_DOS_CRACTION","Medidas contra robots indexadores malintencionados");
 
-define("_MI_PROTECTOR_DOS_CRSAFE","User-Agent permitidos");
-define("_MI_PROTECTOR_DOS_CRSAFEDSC","Describe incondicionalmente los nombres de los robots indexadores m·‘ frecuentes con una perl regex pattern.<br />Ej.: /(msnbot|Googlebot|Yahoo! Slurp)/i");
+define("_MI_PROTECTOR_DOS_CRSAFE","Buscadores permitidos");
+define("_MI_PROTECTOR_DOS_CRSAFEDSC","Nombres de sitios con permiso para que sus robots buscadores indexen esta web.<br />Evita que buscadores malintencionados te agregen a su lista.<br />(Admite operadores Perl-Regex).<br />Ej.: /(Msnbot|Googlebot|Yahoo! Slurp|Teoma|Lycos_Spider|Inktomi Slurp)/i");
+/*
+// Lista completa http://www.pgts.com.au/pgtsj/pgtsj0208d.html
+// Msn: msnbot
+// Google: googlebot
+// Yahoo: Slurp
+// Asj Jeeves: Teoma
+// Inktomi: Inktomi slurp
+// Lycos: Lycos_Spider
+// Altavista: Usa el de yahoo
+// HotBot: Usa el de Inktomi
+*/
 
-define("_MI_PROTECTOR_OPT_NONE","Nada (generar log apenas)");
-define("_MI_PROTECTOR_OPT_SAN","Limpieza");
-define("_MI_PROTECTOR_OPT_EXIT","Encierre forzado de sesiÖœ");
-define("_MI_PROTECTOR_OPT_BIP","Baneamiento por IP");
+define("_MI_PROTECTOR_OPT_NONE","Nada");
+define("_MI_PROTECTOR_OPT_SAN","Sanear");
+define("_MI_PROTECTOR_OPT_EXIT","Cierre forzado de sesi&oacute;n");
+define("_MI_PROTECTOR_OPT_BIP","Bloqueo (baneamiento) de IP");
 
-define("_MI_PROTECTOR_DOSOPT_NONE","Nada (generar log apenas)");
-define("_MI_PROTECTOR_DOSOPT_SLEEP","Sleep");
-define("_MI_PROTECTOR_DOSOPT_EXIT","exit");
-define("_MI_PROTECTOR_DOSOPT_BIP","Baneamiento por IP");
-define("_MI_PROTECTOR_DOSOPT_HTA","Registro DENY a travÒ‘ de .htaccess (experimental)");
+define("_MI_PROTECTOR_DOSOPT_NONE","Nada");
+define("_MI_PROTECTOR_DOSOPT_SLEEP","Esperar");
+define("_MI_PROTECTOR_DOSOPT_EXIT","Salir y pantalla en blanco");
+define("_MI_PROTECTOR_DOSOPT_BIP","Bloquear (banear) esa IP");
+define("_MI_PROTECTOR_DOSOPT_HTA","Registro DENY a trav&eacute;s de .htaccess (experimental)");
 
-define("_MI_PROTECTOR_BIP_EXCEPT","Grupos libres de baneamiento por IP");
-define("_MI_PROTECTOR_BIP_EXCEPTDSC","Aunque se satisfaga la condiciÖœ, los grupos de usuarios indicados en esta opciÖœ no ser·œ agregadas a las IPs baneadas. Entretanto, si estos usuarios no se identifican, se anular· el efecto de esta opciÖœ. (Recomendado para Administradores)");
-define("_MI_PROTECTOR_DISABLES","Desactivar opciones inseguras");
-define("_MI_PROTECTOR_PASSWD_BIP","ContraseÅ¬ de restauraciÖœ");
-define("_MI_PROTECTOR_PASSWD_BIPDSC","Esta es la forma de restauraciÖœ si, por alguna razÖœ, se le agregue a las IPs baneadas de XOOPS.<br />Accede a XOOPS_URL/modules/protector/admin/rescue.php, e inserta la contraseÅ¬ aquÌ definida.<br />Si usted no la define, se anular· el efecto de esta opciÖœ. é°TEN CUIDADO!<br />Esta contraseÅ¬ ser· guardada es, por lo que puede que alguien tenga acceso a ella. AsÌ que nunca utilice contraseÅ¬s importantes.");
+define("_MI_PROTECTOR_BIP_EXCEPT","Grupos excluidos de bloqueo (baneamiento) de IP");
+define("_MI_PROTECTOR_BIP_EXCEPTDSC","Aunque haya condiciones que permitan activar el bloqueo (baneamiento) de una IP, los pertenecientes a estos grupos no ser&aacute;n agregados. Para que tenga efecto, han de entrar (login) en xoops como tales.<br />* Recomendado: [Administradores]");
+define("_MI_PROTECTOR_DISABLES","Parches contra vulnerabilidades de XOOPS &#8804; 2.0.9.2");
+define("_MI_PROTECTOR_PASSWD_BIP","<a name='clave'></a>Contrase&ntilde;a de restauraci&oacute;n de IP bloqueda");
+define("_MI_PROTECTOR_PASSWD_BIPDSC","Utilice &iexcl;ya! esta opci&oacute;n, antes de que ocurran errores y se le agregue a usted a las IPs bloqueadas (baneadas) de su propio sitio.<br />Si ha sucedido, acceda a XOOPS_URL/modules/protector/admin/rescue.php, y escriba esta contrase&ntilde;a.<br />Si no la define, esta opci&oacute;n de restauraci&oacute;n no podr&aacute; realizarse.<br />&iexcl;Tenga cuidado! donde guarda una copia de esta contrase&ntilde;a, para que no sea accesible a otros. Tampoco repita contrase&ntilde;as de otros sitios importantes.");
 ?>

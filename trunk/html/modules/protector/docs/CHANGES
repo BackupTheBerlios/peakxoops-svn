@@ -1,6 +1,11 @@
 [xlang:en]
 = CHANGES = 
 
+2.55 (2006/02/11)
+- fixed anti-multiple-content-type allows .tar.gz
+- updated mymenu for compatibility with XC2.1
+- updated Spanish language files (thx bezoops)
+
 2.54 (2005/12/08)
 - added backup feature into prefix_manager (experimental)
 - added a check multiple dot file uploading (=multiple content-type for apache)
@@ -191,6 +196,11 @@
 [/xlang:en][xlang:ja]
 
 ●変更履歴
+
+2.55 (2006/02/11)
+- 複数の.が存在するファイルでも、.tar.gzだけは通すように修正 (thx gusagi)
+- mymenuにおけるXoopsCube 2.1との互換性問題解消
+- スペイン語ファイル更新 (thx bezoops)
 
 2.54 (2005/12/08)
 - PREFIXマネージャにPREFIX毎のバックアップ機能をつけた (まだ実験段階です!)

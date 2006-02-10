@@ -91,6 +91,7 @@ If you can't go to admin's area, edit mainfile.php to temporarily remove the pre
  - kokko (Finnish language files)
  - Tomasz (Polski language files)
  - Sergey (Russian language files)
+ - Bezoops (Spanish language files)
 
 Moreover, I thank to JM2 and minahito -zx team- about having taught me kindly.
 You are very great programmers!
@@ -205,6 +206,7 @@ http://(your xoops)/modules/protector/admin/rescue.php
  - kokko (フィンランド語ファイル)
  - Tomasz (ポーランド語ファイル)
  - Sergey (ロシア語ファイル)
+ - Bezoops (スペイン語ファイル)
 
 また、このモジュール作成にあたり、様々なご指導・ご鞭撻をいただいた、zxチームの皆様、とりわけJM2さん、minahitoさんに、心より感謝いたします。
 

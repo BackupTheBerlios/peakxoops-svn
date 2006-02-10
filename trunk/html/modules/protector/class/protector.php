@@ -389,7 +389,7 @@ function check_uploaded_files()
 			else if( $ext == 'tiff' ) $ext = 'tif' ;
 
 			// anti multiple dot file (Apache mod_mime.c)
-			if( count( explode( '.' , $_file['name'] ) ) > 2 ) {
+			if( count( explode( '.' , str_replace( '.tar.gz' , '.tgz' , $_file['name'] ) ) ) > 2 ) {
 				$this->message .= "Attempt to multiple dot file {$_file['name']}.\n" ;
 				$this->_safe_badext = false ;
 				$this->last_error_type = 'UPLOAD' ;

@@ -34,7 +34,7 @@
 // check modulesless rewrite
 if( ! empty( $_SERVER['REQUEST_URI'] ) && ! stristr( $_SERVER['REQUEST_URI'] , 'modules' ) ) {
 	$tinyd_vmod_dir = $_SERVER['REQUEST_URI'] ;
-	$_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'] ;
+	$_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'] . '?' . $_SERVER['QUERY_STRING'] ;
 }
 
 /* echo "<pre>" ;

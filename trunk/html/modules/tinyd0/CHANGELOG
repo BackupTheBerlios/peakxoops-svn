@@ -2,6 +2,9 @@
 CHANGELOG:
 
 
+2006-02-13 2.20
+- updated mymenu (for the compatibility with XoopsCube 2.1)
+- modified the compatibility between "rewrite mode" and "fastest cache hack"
 - added portuguesebr language files (thx Izzy)
 
 2005-11-14 2.19
@@ -192,6 +195,11 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2006-02-13 2.20
+- mymenu更新 (XoopsCube 2.1との互換性)
+- rewriteモードとfastest cache hack との相性問題解消
+- ポルトガルブラジル語追加 (thx Izzy)
 
 2005-11-14 2.19
 - PHP 5.0.5 との相性問題改善

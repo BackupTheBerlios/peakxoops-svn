@@ -2,6 +2,10 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_MI_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-02-15 05:31:21
+define('_MI_PICAL_ADMENU_MYTPLSADMIN','Templates');
+
 define( 'PICAL_MI_LOADED' , 1 ) ;
 
 

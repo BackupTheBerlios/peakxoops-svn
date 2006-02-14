@@ -69,3 +69,16 @@ http://www.peak.ne.jp/xoops/modules/xhnewbb/viewtopic.php?viewmode=flat&topic_id
 maintenance の処理
 
 権限の種類追加 個人privateのみ 個人・グループprivateのみ
+
+ICSをRSSのように出力する機能（出来れば、カテゴリー絞り込みなどもアリ）
+
+ICSをOUTLOOKにインポートすると、表示がサーバタイムゾーンとなってしまうバグ修正
+
+hcalendarサポート
+http://www.microformats.org/wiki/hcalendar
+
+リストビューで、イベント毎のカテゴリー名アサイン
+
+カテゴリー絞り込みで、排除条件。-1 で、cid=-1 以外
+
+

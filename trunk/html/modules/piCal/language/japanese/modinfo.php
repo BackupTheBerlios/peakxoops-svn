@@ -104,6 +104,7 @@ define("_MI_PICAL_ADMENU2","グループの全体的な権限");
 define("_MI_PICAL_ADMENU_TM","テーブルメンテナンス");
 define("_MI_PICAL_ADMENU_PLUGINS","プラグイン管理");
 define("_MI_PICAL_ADMENU_ICAL","iCalendarのインポート");
+define('_MI_PICAL_ADMENU_MYTPLSADMIN','テンプレート管理');
 define('_MI_PICAL_ADMENU_MYBLOCKSADMIN','ブロック・グループ管理');
 
 

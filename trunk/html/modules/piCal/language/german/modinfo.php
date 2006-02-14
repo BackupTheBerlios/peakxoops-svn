@@ -6,6 +6,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_MI_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-02-15 05:31:21
+define('_MI_PICAL_ADMENU_MYTPLSADMIN','Templates');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-05-06 18:03:58
 define('_MI_TIMEZONE_USING','Zeitzone des Servers');
 define('_MI_OPT_TZ_USEXOOPS','Wähle die XOOPS-Konfiguration');

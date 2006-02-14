@@ -22,7 +22,7 @@ include_once( XOOPS_ROOT_PATH . "/modules/system/language/$language/admin.php" )
 if( ! empty( $_POST['submit'] ) ) {
 
 	// Ticket Check
-	if ( ! $xoopsGTicket->check() ) {
+	if ( ! $xoopsGTicket->check( true , 'myblocksadmin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 

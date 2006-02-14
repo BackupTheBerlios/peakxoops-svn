@@ -103,6 +103,7 @@ define("_MI_PICAL_ADMENU2","Global Permissions");
 define("_MI_PICAL_ADMENU_TM","Table Maintenance");
 define("_MI_PICAL_ADMENU_PLUGINS","Plugins Manager");
 define("_MI_PICAL_ADMENU_ICAL","Importing iCalendar");
+define('_MI_PICAL_ADMENU_MYTPLSADMIN','Templates');
 define("_MI_PICAL_ADMENU_MYBLOCKSADMIN","Blocks & Groups Admin");
 
 // Text for notifications

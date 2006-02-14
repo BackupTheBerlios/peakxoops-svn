@@ -88,11 +88,11 @@ if ( $block['is_custom'] ) {
 		$tplfile_handler =& xoops_gethandler('tplfile');
 		$btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
 		if (count($btemplate) > 0) {
-			$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="'.XOOPS_URL.'/modules/system/admin.php?fct=tplsets&op=edittpl&id='.$btemplate[0]->getVar('tpl_id').'">'._AM_EDITTPL.'</a>'));
+			$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="mytplsform.php?tpl_file='.$btemplate[0]->getVar('tpl_file').'&amp;tpl_tplset='.htmlspecialchars($GLOBALS['xoopsConfig']['template_set'],ENT_QUOTES).'">'._AM_EDITTPL.'</a>'));
 		} else {
 			$btemplate2 =& $tplfile_handler->find('default', 'block', $block['bid']);
 			if (count($btemplate2) > 0) {
-				$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="'.XOOPS_URL.'/modules/system/admin.php?fct=tplsets&op=edittpl&id='.$btemplate2[0]->getVar('tpl_id').'" target="_blank">'._AM_EDITTPL.'</a>'));
+				$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="mytplsform.php?tpl_file='.$btemplate2[0]->getVar('tpl_file').'&amp;tpl_tplset=default">'._AM_EDITTPL.'</a>'));
 			}
 		}
 	}

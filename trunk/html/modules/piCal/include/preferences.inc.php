@@ -29,6 +29,9 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 
+
+$config_handler =& xoops_gethandler('config');
+
 if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
   exit("Access Denied");
 } else {
@@ -219,7 +222,6 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
   } */
 
   if ($op == 'showmod') {
-    $config_handler =& xoops_gethandler('config');
     $mod = isset($_GET['mod']) ? intval($_GET['mod']) : 0;
     if (empty($mod)) {
       header('Location: admin.php?fct=preferences');

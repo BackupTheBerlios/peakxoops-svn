@@ -15,6 +15,8 @@ $adminmenu[6]['title'] = _MI_PICAL_ADMENU_TM;
 $adminmenu[6]['link'] = "admin/maintenance.php";
 $adminmenu[7]['title'] = _MI_PICAL_ADMENU_PLUGINS;
 $adminmenu[7]['link'] = "admin/pluginsmanager.php";
-$adminmenu[8]['title'] = _MI_PICAL_ADMENU_MYBLOCKSADMIN;
-$adminmenu[8]['link'] = "admin/myblocksadmin.php";
+$adminmenu[8]['title'] = _MI_PICAL_ADMENU_MYTPLSADMIN;
+$adminmenu[8]['link'] = "admin/mytplsadmin.php";
+$adminmenu[9]['title'] = _MI_PICAL_ADMENU_MYBLOCKSADMIN;
+$adminmenu[9]['link'] = "admin/myblocksadmin.php";
 ?>

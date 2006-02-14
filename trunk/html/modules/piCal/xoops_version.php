@@ -36,7 +36,7 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 
 $modversion['name'] = _MI_PICAL_NAME . $mydirnumber ;
-$modversion['version'] = 0.84;
+$modversion['version'] = 0.85;
 $modversion['description'] = _MI_PICAL_DESC;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -72,7 +72,7 @@ $modversion['blocks'][1] = array(
 	'options'		=> "{$mydirname}"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][2] = array(
 	'file'			=> 'pical_monthly_calendar.php' ,
 	'name'			=> _MI_PICAL_BNAME_MONTHCAL . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_MONTHCAL_DESC ,
@@ -82,7 +82,7 @@ $modversion['blocks'][] = array(
 	'options'		=> "{$mydirname}"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][3] = array(
 	'file'			=> 'pical_todays_schedule.php' ,
 	'name'			=> _MI_PICAL_BNAME_TODAYS . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_TODAYS_DESC ,
@@ -93,7 +93,7 @@ $modversion['blocks'][] = array(
 	'options'		=> "{$mydirname}|0"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][4] = array(
 	'file'			=> 'pical_thedays_schedule.php' ,
 	'name'			=> _MI_PICAL_BNAME_THEDAYS . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_THEDAYS_DESC ,
@@ -104,7 +104,7 @@ $modversion['blocks'][] = array(
 	'options'		=> "{$mydirname}|0"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][5] = array(
 	'file'			=> 'pical_coming_schedule.php' ,
 	'name'			=> _MI_PICAL_BNAME_COMING . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_COMING_DESC ,
@@ -115,7 +115,7 @@ $modversion['blocks'][] = array(
 	'options'		=> "{$mydirname}|5|0|0|0"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][6] = array(
 	'file'			=> 'pical_after_schedule.php' ,
 	'name'			=> _MI_PICAL_BNAME_AFTER . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_AFTER_DESC ,
@@ -126,7 +126,7 @@ $modversion['blocks'][] = array(
 	'options'		=> "{$mydirname}|5|0|0|0"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][7] = array(
 	'file'			=> 'pical_new_event.php' ,
 	'name'			=> _MI_PICAL_BNAME_NEW . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_NEW_DESC ,
@@ -137,7 +137,7 @@ $modversion['blocks'][] = array(
 	'options'		=> "{$mydirname}|5|0"
 ) ;
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][8] = array(
 	'file'			=> "pical_minical_ex.php" ,
 	'name'			=> _MI_PICAL_BNAME_MINICALEX . " ($mydirname)" ,
 	'description'	=> _MI_PICAL_BNAME_MINICALEX_DESC ,
@@ -182,7 +182,7 @@ $modversion['config'][1] = array(
 	'options'		=> array( '_MI_OPT_AUTH_NONE'=>0 , '_MI_OPT_AUTH_WAIT'=>1 , '_MI_OPT_AUTH_POST'=>3 , '_MI_OPT_AUTH_BYGROUP'=>256 )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][2] = array( 
 	'name'			=> 'guests_authority' ,
 	'title'			=> '_MI_GUESTS_AUTHORITY' ,
 	'description'	=> '' ,
@@ -192,7 +192,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_OPT_AUTH_NONE'=>0 , '_MI_OPT_AUTH_WAIT'=>1 , '_MI_OPT_AUTH_POST'=>3 )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][3] = array( 
 	'name'			=> 'default_view' ,
 	'title'			=> '_MI_DEFAULT_VIEW' ,
 	'description'	=> '' ,
@@ -202,7 +202,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_OPT_MINI_MONTHLY'=>'Monthly' , '_MI_OPT_MINI_WEEKLY'=>'Weekly' , '_MI_OPT_MINI_DAILY'=>'Daily' , '_MI_OPT_MINI_LIST'=>'List' )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][4] = array( 
 	'name'			=> 'mini_calendar_target' ,
 	'title'			=> '_MI_MINICAL_TARGET' ,
 	'description'	=> '' ,
@@ -212,7 +212,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_OPT_MINI_PHPSELF'=>'PHP_SELF' , '_MI_OPT_MINI_MONTHLY'=>'MONTHLY' , '_MI_OPT_MINI_WEEKLY'=>'WEEKLY' , '_MI_OPT_MINI_DAILY'=>'DAILY' , '_MI_OPT_MINI_LIST'=>'LIST' )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][5] = array( 
 	'name'			=> 'skin_folder' ,
 	'title'			=> '_MI_SKINFOLDER' ,
 	'description'	=> '' ,
@@ -224,7 +224,7 @@ $modversion['config'][] = array(
 
 
 // 'name' が 'pical_' から始まるものは、piCalオブジェクトのプロパティ
-$modversion['config'][] = array( 
+$modversion['config'][6] = array( 
 	'name'			=> 'pical_locale' ,
 	'title'			=> '_MI_PICAL_LOCALE' ,
 	'description'	=> '' ,
@@ -234,7 +234,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][7] = array( 
 	'name'			=> 'pical_sunday_color' ,
 	'title'			=> '_MI_SUNDAYCOLOR' ,
 	'description'	=> '' ,
@@ -244,7 +244,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][8] = array( 
 	'name'			=> 'pical_sunday_bgcolor' ,
 	'title'			=> '_MI_SUNDAYBGCOLOR' ,
 	'description'	=> '' ,
@@ -254,7 +254,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][9] = array( 
 	'name'			=> 'pical_weekday_color' ,
 	'title'			=> '_MI_WEEKDAYCOLOR' ,
 	'description'	=> '' ,
@@ -264,7 +264,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][10] = array( 
 	'name'			=> 'pical_weekday_bgcolor' ,
 	'title'			=> '_MI_WEEKDAYBGCOLOR' ,
 	'description'	=> '' ,
@@ -274,7 +274,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][11] = array( 
 	'name'			=> 'pical_saturday_color' ,
 	'title'			=> '_MI_SATURDAYCOLOR' ,
 	'description'	=> '' ,
@@ -284,7 +284,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][12] = array( 
 	'name'			=> 'pical_saturday_bgcolor' ,
 	'title'			=> '_MI_SATURDAYBGCOLOR' ,
 	'description'	=> '' ,
@@ -294,7 +294,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][13] = array( 
 	'name'			=> 'pical_holiday_color' ,
 	'title'			=> '_MI_HOLIDAYCOLOR' ,
 	'description'	=> '' ,
@@ -304,7 +304,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][14] = array( 
 	'name'			=> 'pical_holiday_bgcolor' ,
 	'title'			=> '_MI_HOLIDAYBGCOLOR' ,
 	'description'	=> '' ,
@@ -314,7 +314,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][15] = array( 
 	'name'			=> 'pical_targetday_bgcolor' ,
 	'title'			=> '_MI_TARGETDAYBGCOLOR' ,
 	'description'	=> '' ,
@@ -324,7 +324,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][16] = array( 
 	'name'			=> 'pical_calhead_color' ,
 	'title'			=> '_MI_CALHEADCOLOR' ,
 	'description'	=> '' ,
@@ -334,7 +334,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][17] = array( 
 	'name'			=> 'pical_calhead_bgcolor' ,
 	'title'			=> '_MI_CALHEADBGCOLOR' ,
 	'description'	=> '' ,
@@ -344,7 +344,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][18] = array( 
 	'name'			=> 'pical_frame_css' ,
 	'title'			=> '_MI_CALFRAMECSS' ,
 	'description'	=> '' ,
@@ -354,7 +354,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][19] = array( 
 	'name'			=> 'pical_can_output_ics' ,
 	'title'			=> '_MI_CANOUTPUTICS' ,
 	'description'	=> '' ,
@@ -364,7 +364,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_OPT_CANNOTOUTPUTICS'=>0 , '_MI_OPT_CANOUTPUTICS'=>1 )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][20] = array( 
 	'name'			=> 'pical_max_rrule_extract' ,
 	'title'			=> '_MI_MAXRRULEEXTRACT' ,
 	'description'	=> '' ,
@@ -374,7 +374,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][21] = array( 
 	'name'			=> 'pical_week_start' ,
 	'title'			=> '_MI_WEEKSTARTFROM' ,
 	'description'	=> '' ,
@@ -384,7 +384,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_OPT_STARTFROMSUN'=>0 , '_MI_OPT_STARTFROMMON'=>1 )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][22] = array( 
 	'name'			=> 'pical_week_numbering' ,
 	'title'			=> '_MI_WEEKNUMBERING' ,
 	'description'	=> '' ,
@@ -394,7 +394,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '_MI_OPT_WEEKNOEACHMONTH'=>0 , '_MI_OPT_WEEKNOWHOLEYEAR'=>1 )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][23] = array( 
 	'name'			=> 'pical_day_start' ,
 	'title'			=> '_MI_DAYSTARTFROM' ,
 	'description'	=> '' ,
@@ -404,7 +404,7 @@ $modversion['config'][] = array(
 	'options'		=> array( '0:00'=>0 , '1:00'=>3600 , '2:00'=>7200 , '3:00'=>10800 , '4:00'=>14400 , '5:00'=>18000 , '6:00'=>21600 )
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][24] = array( 
 	'name'			=> 'pical_use24' ,
 	'title'			=> '_MI_USE24HOUR' ,
 	'description'	=> '' ,
@@ -414,7 +414,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array( 
+$modversion['config'][25] = array( 
 	'name'			=> 'timezone_using' ,
 	'title'			=> '_MI_TIMEZONE_USING' ,
 	'description'	=> '' ,
@@ -424,7 +424,7 @@ $modversion['config'][] = array(
 	'options'		=> array('_MI_OPT_TZ_USEXOOPS'=>'xoops','_MI_OPT_TZ_USEWINTER'=>'winter','_MI_OPT_TZ_USESUMMER'=>'summer')
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][26] = array(
 	'name'			=> 'pical_nameoruname' ,
 	'title'			=> '_MI_NAMEORUNAME' ,
 	'description'	=> '_MI_DESCNAMEORUNAME' ,

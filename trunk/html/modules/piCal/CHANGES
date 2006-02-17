@@ -10,6 +10,7 @@ v.085 some compatibility fixes (2006-2-15)
 - updated french (thx marco)
 - updated tchinese (thx chia)
 - added utf8-tw (thx chia)
+- fixed a typo about operations of categories (thx dendeke) 0.85a
 
 v.084b minor bug fixes (2005-12-1)
 - updated locales/japan.php (thx hashimoto)
@@ -325,6 +326,7 @@ v.085 互換性問題の解消等 (2006-2-15)
 - フランス語更新 (thx marco)
 - 繁体中国語更新 (thx chia)
 - utf8-tw更新 (thx chia)
+- カテゴリー操作がおかしくなっていたバグを修正 (thx dendeke) 0.85a
 
 v.084b 細かなバグ潰し (2005-12-1)
 - 祝日法改訂による祝日データの変更 (thx hashimoto)

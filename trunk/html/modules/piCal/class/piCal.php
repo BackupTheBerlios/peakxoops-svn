@@ -2257,7 +2257,7 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 
 	// カテゴリーの処理
 	$_POST[ 'categories' ] = '' ;
-	$cids = is_object( @$_POST['cids'] ) ? $_POST['cids'] : array() ;
+	$cids = is_array( @$_POST['cids'] ) ? $_POST['cids'] : array() ;
 	foreach( $cids as $cid ) {
 		$cid = intval( $cid ) ;
 		while( isset( $this->categories[ $cid ] ) ) {

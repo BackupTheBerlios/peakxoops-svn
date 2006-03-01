@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
 <url>
-<loc><{$xoops_url}>/</loc>
+<loc><{$smarty.const.XOOPS_URL}>/</loc>
 <lastmod><{$lastmod}></lastmod>
 <priority>1.0</priority>
 </url>
@@ -11,20 +11,20 @@
 
   <{if $module.name}>
     <url>
-      <loc><{$xoops_url}>/modules/<{$module.directory}>/</loc>
+      <loc><{$smarty.const.XOOPS_URL}>/modules/<{$module.directory}>/</loc>
       <{if $module.lastmod}><lastmod><{$module.lastmod}></lastmod><{/if}>
     </url>
 
     <{foreach item=parent from=$module.parent}>
       <url>
-        <loc><{$xoops_url}>/modules/<{$module.directory}>/<{$parent.url}></loc>
+        <loc><{$smarty.const.XOOPS_URL}>/modules/<{$module.directory}>/<{$parent.url}></loc>
         <{if $parent.lastmod}><lastmod><{$parent.lastmod}></lastmod><{/if}>
       </url>
       
       <{if $show_subcategoris}>
       <{foreach item=child from=$parent.child}>
         <url>
-          <loc><{$xoops_url}>/modules/<{$module.directory}>/<{$child.url}></loc>
+          <loc><{$smarty.const.XOOPS_URL}>/modules/<{$module.directory}>/<{$child.url}></loc>
           <{if $child.lastmod}><lastmod><{$child.lastmod}></lastmod><{/if}>
         </url>
       <{/foreach}>

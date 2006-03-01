@@ -1,5 +1,8 @@
+1.25 2006-03-02
+- modified the compatibility between xml_google.php and XOOPS 2.2.4
+- modified the compatibility with PHP >= 4.4.1
 - added a plugin
--- extcal
+-- extcal (thx bonnaudet eric)
 
 1.24 2005-12-18
 - fixed a bug login block is always displayed by enabling sitemap block (thx okamoto)

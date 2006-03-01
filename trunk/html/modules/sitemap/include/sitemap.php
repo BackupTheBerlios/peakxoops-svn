@@ -26,7 +26,7 @@ function sitemap_show()
 	$modules =& $module_handler->getObjects($criteria, true);
 	$moduleperm_handler =& xoops_gethandler('groupperm');
 	$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-	$read_allowed =& $moduleperm_handler->getItemIds('module_read', $groups);
+	$read_allowed = $moduleperm_handler->getItemIds('module_read', $groups);
 	foreach (array_keys($modules) as $i) {
 		if (in_array($i, $read_allowed) && ! in_array($modules[$i]->getVar('weight'),$invisible_weights) && ! stristr( $invisible_dirnames , $modules[$i]->getVar('dirname').',' ) ) {
 			if ($modules[$i]->getVar('dirname') == 'sitemap') {
@@ -35,7 +35,10 @@ function sitemap_show()
 			$block['modules'][$i]['id'] = $i;
 			$block['modules'][$i]['name'] = $modules[$i]->getVar('name');
 			$block['modules'][$i]['directory'] = $modules[$i]->getVar('dirname');
+			$old_error_reporting = error_reporting() ;
+			error_reporting( $old_error_reporting & (~E_NOTICE) ) ;
 			$sublinks =& $modules[$i]->subLink();
+			error_reporting( $old_error_reporting ) ;
 			if (count($sublinks) > 0) {
 				foreach($sublinks as $sublink){
 					$block['modules'][$i]['sublinks'][] = array('name' => $sublink['name'], 'url' => XOOPS_URL.'/modules/'.$modules[$i]->getVar('dirname').'/'.$sublink['url']);

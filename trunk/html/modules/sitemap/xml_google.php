@@ -7,8 +7,9 @@ if( ! defined( 'SITEMAP_ROOT_CONTROLLER_LOADED' ) ) {
 		$_SERVER['REQUEST_URI'] = '/modules/sitemap/xml_google.php' ;
 	}
 	define( 'SITEMAP_ROOT_CONTROLLER_LOADED' , 1 ) ;
+	$real_xml_google_path = dirname(__FILE__).'/modules/sitemap/xml_google.php' ;
 	chdir( './modules/sitemap/' ) ;
-	require dirname(__FILE__).'/modules/sitemap/xml_google.php' ;
+	require $real_xml_google_path ;
 	exit ;
 } else {
 	require '../../mainfile.php' ;
@@ -95,7 +96,7 @@ $xoopsTpl->assign('usermenu', $myts->makeTboxData4Show($usermenu)); */
 
 $xoopsTpl->assign('lastmod', gmdate( 'Y-m-d\TH:i:s\Z' ) ); // TODO
 $xoopsTpl->assign('sitemap', $sitemap);
-$xoopsTpl->assign('msgs', $myts->displayTarea($msgs,1));
+//$xoopsTpl->assign('msgs', $myts->displayTarea($msgs,1));
 $xoopsTpl->assign('show_subcategoris', $sitemap_configs["show_subcategoris"]);
 
 $xoopsTpl->assign('this', array(

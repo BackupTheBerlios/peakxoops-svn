@@ -162,14 +162,18 @@ if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tm
 //************//
 
 // get tplsets
+$tplset_handler =& xoops_gethandler( 'tplset' ) ;
+$tplsets = array_keys( $tplset_handler->getList() ) ;
 $sql = "SELECT distinct tpl_tplset FROM ".$db->prefix("tplfile")." ORDER BY tpl_tplset='default' DESC,tpl_tplset" ;
 $srs = $db->query($sql);
-$tplsets = array() ;
+while( list( $tplset ) = $db->fetchRow( $srs ) ) {
+	if( ! in_array( $tplset , $tplsets ) ) $tplsets[] = $tplset ;
+}
+
 $tplsets_th4disp = '' ;
 $tplset_options = "<option value=''>----</option>\n" ;
-while( list( $tplset ) = $db->fetchRow( $srs ) ) {
+foreach( $tplsets as $tplset ) {
 	$tplset4disp = htmlspecialchars( $tplset , ENT_QUOTES ) ;
-	$tplsets[] = $tplset ;
 	$th_style = $tplset == $xoopsConfig['template_set'] ? "style='color:yellow;'" : "" ;
 	$tplsets_th4disp .= "<th $th_style><input type='checkbox' onclick=\"with(document.MainForm){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].name.indexOf('{$tplset4disp}_check')>=0){elements[i].checked=this.checked;}}}\" />DB-{$tplset4disp}</th>" ;
 	$tplset_options .= "<option value='$tplset4disp'>$tplset4disp</option>\n" ;

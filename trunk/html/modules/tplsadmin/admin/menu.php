@@ -13,4 +13,10 @@ while( list( $name , $dirname ) = $db->fetchRow( $mrs ) ) {
 		'link' => "admin/mytplsadmin.php?dirname=".htmlspecialchars( $dirname , ENT_QUOTES )
 	) ;
 }
+
+$adminmenu[] = array(
+	'title' => 'compile hook admin' ,
+	'link' => 'admin/compilehookadmin.php'
+) ;
+
 ?>

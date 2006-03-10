@@ -40,18 +40,26 @@ if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_TPLSET, $xoopsUse
 
 // tpl_file from $_GET
 $tpl_file = $myts->stripSlashesGPC( @$_GET['tpl_file'] ) ;
+$tpl_file = str_replace( 'db:' , '' , $tpl_file ) ;
 $tpl_file4sql = addslashes( $tpl_file ) ;
 
 // tpl_file from $_GET
 $tpl_tplset = $myts->stripSlashesGPC( @$_GET['tpl_tplset'] ) ;
+if( ! $tpl_tplset ) $tpl_tplset = $xoopsConfig['template_set'] ;
 $tpl_tplset4sql = addslashes( $tpl_tplset ) ;
 
 // get information from tplfile table
-$sql = "SELECT * FROM ".$db->prefix("tplfile")." f NATURAL LEFT JOIN ".$db->prefix("tplsource")." s WHERE f.tpl_file='$tpl_file4sql' AND f.tpl_tplset='$tpl_tplset4sql'" ;
+$sql = "SELECT * FROM ".$db->prefix("tplfile")." f NATURAL LEFT JOIN ".$db->prefix("tplsource")." s WHERE f.tpl_file='$tpl_file4sql' ORDER BY f.tpl_tplset='$tpl_tplset4sql' DESC,f.tpl_tplset='default' DESC" ;
 $tpl = $db->fetchArray( $db->query( $sql ) ) ;
-if( empty( $tpl ) ) die( 'Invalid tpl_file or tpl_tplset.' ) ;
 
-
+// error in specifying tpl_file
+if( empty( $tpl ) ) {
+	if( strncmp( $tpl_file , 'file:' , 5 ) === 0 ) {
+		die( 'Not DB template' ) ;
+	} else {
+		die( 'Invalid tpl_file.' ) ;
+	}
+}
 
 //************//
 // POST stage //
@@ -62,7 +70,7 @@ if( ! empty( $_POST['do_modify'] ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 
-	$result = $db->query( "SELECT tpl_id FROM ".$db->prefix("tplfile")." WHERE tpl_file='$tpl_file4sql' AND tpl_tplset='$tpl_tplset4sql'" ) ;
+	$result = $db->query( "SELECT tpl_id FROM ".$db->prefix("tplfile")." WHERE tpl_file='$tpl_file4sql' AND tpl_tplset='".addslashes($tpl['tpl_tplset'])."'" ) ;
 	while( list( $tpl_id ) = $db->fetchRow( $result ) ) {
 		$sql = "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($myts->stripSlashesGPC($_POST['tpl_source']))."' WHERE tpl_id=$tpl_id" ;
 		if( ! $db->query( $sql ) ) die( 'SQL Error' ) ;

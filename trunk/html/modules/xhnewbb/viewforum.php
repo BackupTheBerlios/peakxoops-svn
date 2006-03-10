@@ -362,7 +362,7 @@ if ( !$r = $xoopsDB->query($sql) ) {
 }
 list($all_topics) = $xoopsDB->fetchRow($r);
 if ( $all_topics > $forumdata['topics_per_page'] ) {
-	include XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';
+	include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';
 	$nav = new XhXoopsPageNav( XOOPS_URL.'/modules/xhnewbb/viewforum.php' , $all_topics, $forumdata['topics_per_page'], $start, "start", "forum=$forum&amp;solved=$solved&amp;sortname=$sortname&amp;sortorder=$sortorder&amp;sortsince=$sortsince" ) ;
 	$xoopsTpl->assign('forum_pagenav', $nav->renderNav(4));
 } else {

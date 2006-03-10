@@ -8,6 +8,12 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 	/* Module specific part */
 	global $xoopsDB ;
 
+	// newbb to xhnewbb
+	$result = $xoopsDB->query( "SELECT forum_weight FROM ".$xoopsDB->prefix("xhnewbb_forums")." LIMIT 1" ) ;
+	if( ! $result ) {
+		$xoopsDB->queryF( "ALTER TABLE ".$xoopsDB->prefix("xhnewbb_forums")." ADD forum_weight int(8) NOT NULL default '0' AFTER forum_last_post_id" ) ;
+	}
+
 	// 1.0 to 1.10
 	$result = $xoopsDB->query( "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_users2topics")." LIMIT 1" ) ;
 	if( ! $result ) {

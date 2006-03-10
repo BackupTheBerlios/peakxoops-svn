@@ -84,6 +84,7 @@ define("_MD_XHNEWBB_A_POSTPERPAGE","1ページ毎に表示する投稿数：");
 define("_MD_XHNEWBB_A_TITNOPPTTWBDPPOT","(1ページ毎に表示する投稿数を指定してください)");
 define("_MD_XHNEWBB_A_TOPICPERFORUM","１画面に表示するトピック数：");
 define("_MD_XHNEWBB_A_TITNOTPFTWBDPPOAF","(トピック一覧で１ページ毎に表示する表示するトピックの件数を指定してください)");
+define("_MD_XHNEWBB_A_WEIGHTOFFORUM","フォーラムの並び順:");
 define("_MD_XHNEWBB_A_SAVECHANGES","変更を保存");
 define("_MD_XHNEWBB_A_CLEAR","クリア");
 define("_MD_XHNEWBB_A_CLICKBELOWSYNC","フォーラムにおける投稿数の再集計を行います。投稿数が正しい数字を表していないと思われる場合に使用してください。");

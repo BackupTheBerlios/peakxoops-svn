@@ -315,7 +315,7 @@ case 'editforum':
 		<td><input type='text' name='ppp' size='3' maxlength='3' value='".$myrow['posts_per_page']."' /></td></tr>
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_TOPICPERFORUM ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOTPFTWBDPPOAF ."</i></span></td><td><input type='text' name='tpp' size='3' maxlength='3' value='". $myrow['topics_per_page'] ."' /></td></tr>
 		<tr class='bg1' align='left'>
-			<td><span class='fg2'>weight:</span></td>
+			<td><span class='fg2'>"._MD_XHNEWBB_A_WEIGHTOFFORUM."</span></td>
 			<td><input type='text' name='weight' size='3' maxlength='3' value='". $myrow['forum_weight'] ."' /></td>
 		</tr>\n";
 		echo "<tr class='bg3' align='left'><td align='center' colspan='2'><input type='hidden' name='mode' value='editforum' /><input type='hidden' name='forum' value='$forum' /><input type='submit' name='save' value='". _MD_XHNEWBB_A_SAVECHANGES ."' />&nbsp;&nbsp;<input type='reset' value='". _MD_XHNEWBB_A_CLEAR ."' /></td></tr>";
@@ -717,7 +717,7 @@ case 'addforum':
 		<td><input type='text' name='ppp' size='3' maxlength='3' value='10' /></td></tr>
 		<tr class='bg1' align='left'><td><span class='fg2'>". _MD_XHNEWBB_A_TOPICPERFORUM ."</span><br /><span class='fg2'><i>". _MD_XHNEWBB_A_TITNOTPFTWBDPPOAF ."</i></span></td><td><input type='text' name='tpp' size='3' maxlength='3' value='20' /></td></tr>
 		<tr class='bg1' align='left'>
-			<td><span class='fg2'>weight:</span></td>
+			<td><span class='fg2'>"._MD_XHNEWBB_A_WEIGHTOFFORUM."</span></td>
 			<td><input type='text' name='weight' size='3' maxlength='3' value='0' /></td>
 		</tr>\n";
 		?>

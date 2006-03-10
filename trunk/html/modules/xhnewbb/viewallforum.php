@@ -280,7 +280,7 @@ $xoopsTpl->assign("lang_advsearch", _MD_XHNEWBB_ADVSEARCH);
 $result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix("xhnewbb_topics")." t LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON t.forum_id=f.forum_id WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND f.forum_type = 0 AND (t.topic_time > $startdate OR t.topic_sticky = 1) " ) ;
 list( $all_topics ) = $xoopsDB->fetchRow( $result ) ;
 if ( $all_topics > 25 ) {
-	include XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';
+	include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';
 	$nav = new XhXoopsPageNav( XOOPS_URL.'/modules/xhnewbb/viewallforum.php' , $all_topics , 25 , $start , "start" , "solved=$solved&amp;cat=".implode(",",$categories)."&amp;sortname=$sortname&amp;sortorder=$sortorder&amp;sortsince=$sortsince" ) ;
 	$xoopsTpl->assign('forum_pagenav', $nav->renderNav(4));
 } else {

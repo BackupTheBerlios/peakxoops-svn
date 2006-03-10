@@ -1,6 +1,10 @@
 [mlimg]
 [xlang:en]
 
+1.16 (2006/3/11)
+- fixed a language constant (thx marco)
+- added ALTER TALBE on update if forum table was from newbb
+
 1.15 (2006/1/25)
 - fixed the original bug in search.php
 - added a feature of category limitation into all topic view
@@ -43,6 +47,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.16 (2006/3/11)
+- 直書き文字定数を一部修正 (thx marco)
+- newbbからデータを持ち込んだ時のALTER TABLE追加
 
 1.15 (2006/1/25)
 - search.php で投稿者だけを指定するとSQLエラーになるオリジナルバグの修正

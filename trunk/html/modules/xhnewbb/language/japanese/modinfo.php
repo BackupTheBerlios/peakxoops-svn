@@ -9,7 +9,7 @@ define("_MI_XHNEWBB_DESC","XOOPSフォーラムモジュール");
 
 // Names of blocks for this module (Not all module has blocks)
 define("_MI_XHNEWBB_BNAME1","投稿一覧");
-define("_MI_XHNEWBB_BDESC1","このブロックを「編集」することで、様々な用途に使えます。もちろん、いくつでも置けます。");
+define("_MI_XHNEWBB_BDESC1","汎用ブロック。「編集」で様々な機能を持たせることができます");
 
 define("_MI_XHNEWBB_ADMENU1","フォーラムの追加");
 define("_MI_XHNEWBB_ADMENU2","フォーラムの編集");

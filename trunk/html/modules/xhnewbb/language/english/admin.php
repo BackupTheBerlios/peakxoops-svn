@@ -81,6 +81,7 @@ define("_MD_XHNEWBB_A_POSTPERPAGE","Posts per Page:");
 define("_MD_XHNEWBB_A_TITNOPPTTWBDPPOT","(This is the number of posts per topic that will be displayed per page of a topic)");
 define("_MD_XHNEWBB_A_TOPICPERFORUM","Topics per Forum:");
 define("_MD_XHNEWBB_A_TITNOTPFTWBDPPOAF","(This is the number of topics per forum that will be displayed per page of a forum)");
+define("_MD_XHNEWBB_A_WEIGHTOFFORUM","weight:");
 define("_MD_XHNEWBB_A_SAVECHANGES","Save Changes");
 define("_MD_XHNEWBB_A_CLEAR","Clear");
 define("_MD_XHNEWBB_A_CLICKBELOWSYNC","Clicking the button below will sync up your forums and topics pages with the correct data from the database. Use this section whenever you notice flaws in the topics and forums lists.");

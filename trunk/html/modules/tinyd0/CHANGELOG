@@ -2,6 +2,8 @@
 CHANGELOG:
 
 
+- modified invalid xhtml in some templates (thx kimono)
+
 2006-02-13 2.20
 - updated mymenu (for the compatibility with XoopsCube 2.1)
 - modified the compatibility between "rewrite mode" and "fastest cache hack"

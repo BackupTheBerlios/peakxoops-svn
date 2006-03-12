@@ -19,28 +19,37 @@ $compile_hooks = array(
 	'enclosebycomment' => array(
 		'pre' => '<!-- begin tplsadmin %s -->' ,
 		'post' => '<!-- end tplsadmin %s -->' ,
-		'success_msg' => '%d個のコンパイルキャッシュを書き換えました' ,
+		'success_msg' => '%d 個のコンパイル済テンプレートキャッシュに、コメントを埋め込みました' ,
 		'dt' => 'テンプレート名をコメントとして埋め込む' ,
 		'dd' => '各テンプレートの開始点および終了点に、HTMLコメントの形でテンプレート名が埋め込まれます。デザイン的な影響も少ないので、HTMLのソースコードを読みこなせる方にお勧めです。' ,
-		'conf_msg' => '現在のコンパイル済キャッシュファイルにコメントを埋め込みますか？' ,
+		'conf_msg' => '現在のコンパイル済テンプレートキャッシュファイルにコメントを埋め込みますか？' ,
 	) ,
 
 	'enclosebybordereddiv' => array(
 		'pre' => '<div class="tplsadmin_frame" style="border:1px solid black;word-wrap:break-word;">' ,
 		'post' => '<br /><a href="'.XOOPS_URL.'/modules/tplsadmin/admin/mytplsform.php?tpl_file=%1$s" style="color:red;">Edit:<br />%1$s</a></div>' ,
-		'success_msg' => '%d個のコンパイルキャッシュを書き換えました' ,
+		'success_msg' => '%d 個のコンパイル済テンプレートキャッシュに、divタグを埋め込みました' ,
 		'dt' => 'テンプレートを枠で囲う' ,
 		'dd' => '各テンプレート全体をdiv枠で囲み、該当テンプレートの編集画面へのリンクを埋め込みます。デザインが崩れることもありますが、最も直感的な編集作業ができます。' ,
-		'conf_msg' => '現在のコンパイル済キャッシュファイルにdiv枠を埋め込みますか？' ,
+		'conf_msg' => '現在のコンパイル済テンプレートキャッシュファイルにdiv枠を埋め込みますか？' ,
 	) ,
 
 	'hooksavevars' => array(
 		'pre' => '<?php include_once "'.XOOPS_ROOT_PATH.'/modules/tplsadmin/include/compilehook.inc.php" ; tplsadmin_save_tplsvars(\'%s\',$this) ; ?>' ,
 		'post' => '' ,
-		'success_msg' => '%d個のコンパイルキャッシュを書き換えました' ,
+		'success_msg' => '%d 個のコンパイル済テンプレートキャッシュにテンプレート変数情報取得ロジックを埋め込みました' ,
 		'dt' => 'テンプレート変数情報取得ロジックの埋め込み' ,
-		'dd' => 'テンプレート変数情報一覧を取得するための前段階。コンパイル済キャッシュにロジックを埋め込んでから、各ページを表示することで、テンプレート変数情報が蓄積されていきます。適当なタイミングで、下のボタンから情報を取得してください。このロジックを外す際は、コンパイルキャッシュをクリアしてください。' ,
-		'conf_msg' => '現在のコンパイル済キャッシュファイルに、テンプレート変数情報取得ロジックを埋め込みますか？' ,
+		'dd' => 'テンプレート変数情報一覧を取得するための前段階。コンパイル済のテンプレートキャッシュにロジックを埋め込んでから、各ページを表示することで、テンプレート変数情報が蓄積されていきます。適当なタイミングで、下のボタンから情報を取得してください。このロジックを外す際は、コンパイルキャッシュをクリアしてください。' ,
+		'conf_msg' => '現在のコンパイル済テンプレートキャッシュファイルに、テンプレート変数情報取得ロジックを埋め込みますか？' ,
+	) ,
+
+	'removehooks' => array(
+		'pre' => '' ,
+		'post' => '' ,
+		'success_msg' => '%d個のコンパイル済テンプレートキャッシュを通常状態に戻しました' ,
+		'dt' => 'テンプレートキャッシュを通常状態に戻す' ,
+		'dd' => 'コンパイル済テンプレートキャッシュから、上の操作によって埋め込まれた部分を削除します。なんらかの不具合が出た場合は、キャッシュファイルを消してください。（自動的に再生成されます）' ,
+		'conf_msg' => '削除処理を実行しますか？' ,
 	) ,
 
 ) ;
@@ -158,12 +167,12 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 //
 
 // count template vars & compiled caches
-$compilecache_num = 0 ;
+$compiledcache_num = 0 ;
 $tplsvars_num = 0 ;
 if( $handler = opendir( XOOPS_COMPILE_PATH . '/' ) ) {
 	while( ( $file = readdir( $handler ) ) !== false ) {
 		if( strncmp( $file , 'tplsvars_' , 9 ) === 0 ) $tplsvars_num ++ ;
-		else if( substr( $file , -9 ) === '.html.php' ) $compilecache_num ++ ;
+		else if( substr( $file , -9 ) === '.html.php' ) $compiledcache_num ++ ;
 	}
 }
 
@@ -208,7 +217,7 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 
 echo "
 		<p>
-			compiled caches: $compilecache_num
+			compiled caches: $compiledcache_num
 			<input type='submit' name='clearcache' value='"._DELETE."' onclick='return confirm(\"削除してよろしいですか?\");' />
 
 		</p>

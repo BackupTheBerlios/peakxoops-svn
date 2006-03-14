@@ -104,15 +104,20 @@ if( $handler = opendir( XOOPS_COMPILE_PATH . '/' ) ) {
 		// skip files other than tplsvars_* files
 		if( substr( $file , 0 , 9 ) !== 'tplsvars_' ) continue ;
 
-		$tpl_name = substr( $file , 9 ) ;
-		if( ! preg_match( '/^[0-9A-Za-z._-]+$/' , $tpl_name ) ) continue ;
+		// 'tplsvars_'.(randomized 4byte).'_'.(tpl_file)
+		$tpl_name = substr( $file , 14 ) ;
+		if( ! preg_match( '/^[%0-9A-Za-z._-]+$/' , $tpl_name ) ) continue ;
 		$file_path = XOOPS_COMPILE_PATH . '/' . $file ;
 		$file_body = implode( '' , file( $file_path ) ) ;
 		$tplsvars = @unserialize( $file_body ) ;
 		if( ! is_array( $tplsvars ) ) $tplsvars = array() ;
 		$GLOBALS['tplsvarsinfo'] = array() ;
 		convert_array2info_recursive( '' , $tplsvars , 'tplsvarsinfo' ) ;
-		list( $mod_name ) = explode( '_' , $tpl_name ) ;
+		if( strstr( $tpl_name , '%' ) ) {
+			$mod_name = 'theme_etc' ;
+		} else {
+			list( $mod_name ) = explode( '_' , $tpl_name ) ;
+		}
 		$tplsvarsinfo_mod_tpl[$mod_name][$tpl_name] = $tplsvarsinfo ;
 		$tplsvarsinfo_total = array_merge( $tplsvarsinfo_total , $tplsvarsinfo ) ;
 	}
@@ -121,7 +126,7 @@ if( $handler = opendir( XOOPS_COMPILE_PATH . '/' ) ) {
 }
 
 if( empty( $tplsvarsinfo_total ) ) {
-	die( 'There are no tmplate vars caches' ) ;
+	die( _TPLSADMIN_ERR_NOTPLSVARSINFO ) ;
 }
 
 //

@@ -12,13 +12,14 @@ include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/include/tpls_functions.php' ;
 $db =& Database::getInstance() ;
 
 
-if( empty( $_FILES['tplset_archive']['tmp_name'] ) || ! is_uploaded_file( $_FILES['tplset_archive']['tmp_name'] ) ) die( 'No file was uploaded.' ) ;
+if( empty( $_FILES['tplset_archive']['tmp_name'] ) || ! is_uploaded_file( $_FILES['tplset_archive']['tmp_name'] ) ) die( _TPLSADMIN_ERR_NOTUPLOADED ) ;
 
 //
 // EXTRACT STAGE
 //
 
-if( substr( $_FILES['tplset_archive']['name'] , -4 ) == '.zip' ) {
+$orig_filename4check = strtolower( $_FILES['tplset_archive']['name'] ) ;
+if( strtolower( substr( $orig_filename4check , -4 ) ) == '.zip' ) {
 
 	// zip
 	include_once dirname(dirname(__FILE__)).'/include/Archive_Zip.php' ;
@@ -27,7 +28,7 @@ if( substr( $_FILES['tplset_archive']['name'] , -4 ) == '.zip' ) {
 	if( ! is_array( @$files ) ) die( $reader->errorName() ) ;
 	$do_upload = true ;
 
-} else if( substr( $_FILES['tplset_archive']['name'] , -4 ) == '.tgz' || substr( $_FILES['tplset_archive']['name'] , -7 ) == '.tar.gz' ) {
+} else if( substr( $orig_filename4check , -4 ) == '.tgz' || substr( $orig_filename4check , -7 ) == '.tar.gz' ) {
 
 	// tar.gz
 	include_once XOOPS_ROOT_PATH.'/class/class.tar.php' ;
@@ -41,11 +42,11 @@ if( substr( $_FILES['tplset_archive']['name'] , -4 ) == '.zip' ) {
 			'content' => $info['file'] ,
 		) ;
 	}
-	if( empty( $files ) ) die( 'Invalid archive' ) ;
+	if( empty( $files ) ) die( _TPLSADMIN_ERR_INVALIDARCHIVE ) ;
 	$do_upload = true ;
 }
 
-if( empty( $do_upload ) ) exit ;
+if( empty( $do_upload ) ) die( _TPLSADMIN_ERR_EXTENSION ) ;
 
 //
 // IMPORT STAGE
@@ -53,7 +54,7 @@ if( empty( $do_upload ) ) exit ;
 
 $tplset = @$_POST['tplset'] ;
 if( ! preg_match( '/^[0-9A-Za-z_-]{1,16}$/' , $tplset ) ) {
-	die( "Invalid tplset specified" ) ;
+	die( _TPLSADMIN_ERR_INVALIDTPLSET ) ;
 }
 
 $imported = 0 ;
@@ -67,7 +68,7 @@ foreach( $files as $file ) {
 
 }
 
-redirect_header( 'compilehookadmin.php' , 3 , $imported.'個のテンプレートをインポートしました' ) ;
+redirect_header( 'compilehookadmin.php' , 3 , sprintf( _TPLSADMIN_FMT_MSG_PUTTEMPLATES , $imported )  ) ;
 exit ;
 
 ?>

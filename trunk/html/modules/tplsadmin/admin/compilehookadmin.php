@@ -19,37 +19,37 @@ $compile_hooks = array(
 	'enclosebycomment' => array(
 		'pre' => '<!-- begin tplsadmin %s -->' ,
 		'post' => '<!-- end tplsadmin %s -->' ,
-		'success_msg' => '%d 個のコンパイル済テンプレートキャッシュに、コメントを埋め込みました' ,
-		'dt' => 'テンプレート名をコメントとして埋め込む' ,
-		'dd' => '各テンプレートの開始点および終了点に、HTMLコメントの形でテンプレート名が埋め込まれます。デザイン的な影響も少ないので、HTMLのソースコードを読みこなせる方にお勧めです。' ,
-		'conf_msg' => '現在のコンパイル済テンプレートキャッシュファイルにコメントを埋め込みますか？' ,
+		'success_msg' => _TPLSADMIN_FMT_MSG_ENCLOSEBYCOMMENT ,
+		'dt' => _TPLSADMIN_DT_ENCLOSEBYCOMMENT ,
+		'dd' => _TPLSADMIN_DD_ENCLOSEBYCOMMENT ,
+		'conf_msg' => _TPLSADMIN_CNF_ENCLOSEBYCOMMENT ,
 	) ,
 
 	'enclosebybordereddiv' => array(
 		'pre' => '<div class="tplsadmin_frame" style="border:1px solid black;word-wrap:break-word;">' ,
 		'post' => '<br /><a href="'.XOOPS_URL.'/modules/tplsadmin/admin/mytplsform.php?tpl_file=%1$s" style="color:red;">Edit:<br />%1$s</a></div>' ,
-		'success_msg' => '%d 個のコンパイル済テンプレートキャッシュに、divタグを埋め込みました' ,
-		'dt' => 'テンプレートを枠で囲う' ,
-		'dd' => '各テンプレート全体をdiv枠で囲み、該当テンプレートの編集画面へのリンクを埋め込みます。デザインが崩れることもありますが、最も直感的な編集作業ができます。' ,
-		'conf_msg' => '現在のコンパイル済テンプレートキャッシュファイルにdiv枠を埋め込みますか？' ,
+		'success_msg' => _TPLSADMIN_FMT_MSG_ENCLOSEBYBORDEREDDIV ,
+		'dt' => _TPLSADMIN_DT_ENCLOSEBYBORDEREDDIV ,
+		'dd' => _TPLSADMIN_DD_ENCLOSEBYBORDEREDDIV ,
+		'conf_msg' => _TPLSADMIN_CNF_ENCLOSEBYBORDEREDDIV ,
 	) ,
 
 	'hooksavevars' => array(
 		'pre' => '<?php include_once "'.XOOPS_ROOT_PATH.'/modules/tplsadmin/include/compilehook.inc.php" ; tplsadmin_save_tplsvars(\'%s\',$this) ; ?>' ,
 		'post' => '' ,
-		'success_msg' => '%d 個のコンパイル済テンプレートキャッシュにテンプレート変数情報取得ロジックを埋め込みました' ,
-		'dt' => 'テンプレート変数情報取得ロジックの埋め込み' ,
-		'dd' => 'テンプレート変数情報一覧を取得するための前段階。コンパイル済のテンプレートキャッシュにロジックを埋め込んでから、各ページを表示することで、テンプレート変数情報が蓄積されていきます。適当なタイミングで、下のボタンから情報を取得してください。このロジックを外す際は、コンパイルキャッシュをクリアしてください。' ,
-		'conf_msg' => '現在のコンパイル済テンプレートキャッシュファイルに、テンプレート変数情報取得ロジックを埋め込みますか？' ,
+		'success_msg' => _TPLSADMIN_FMT_MSG_HOOKSAVEVARS ,
+		'dt' => _TPLSADMIN_DT_HOOKSAVEVARS ,
+		'dd' => _TPLSADMIN_DD_HOOKSAVEVARS ,
+		'conf_msg' => _TPLSADMIN_CNF_HOOKSAVEVARS ,
 	) ,
 
 	'removehooks' => array(
 		'pre' => '' ,
 		'post' => '' ,
-		'success_msg' => '%d個のコンパイル済テンプレートキャッシュを通常状態に戻しました' ,
-		'dt' => 'テンプレートキャッシュを通常状態に戻す' ,
-		'dd' => 'コンパイル済テンプレートキャッシュから、上の操作によって埋め込まれた部分を削除します。なんらかの不具合が出た場合は、キャッシュファイルを消してください。（自動的に再生成されます）' ,
-		'conf_msg' => '削除処理を実行しますか？' ,
+		'success_msg' => _TPLSADMIN_FMT_MSG_REMOVEHOOKS ,
+		'dt' => _TPLSADMIN_DT_REMOVEHOOKS ,
+		'dd' => _TPLSADMIN_DD_REMOVEHOOKS ,
+		'conf_msg' => _TPLSADMIN_CNF_REMOVEHOOKS ,
 	) ,
 
 ) ;
@@ -80,7 +80,7 @@ if( ! empty( $_POST['clearcache'] ) || ! empty( $_POST['cleartplsvars'] ) ) {
 			$file_path = XOOPS_COMPILE_PATH . '/' . $file ;
 			@unlink( $file_path ) ;
 		}
-		redirect_header( 'compilehookadmin.php' , 1 , "キャッシュをクリアしました" ) ;
+		redirect_header( 'compilehookadmin.php' , 1 , _TPLSADMIN_MSG_CLEARCACHE ) ;
 		exit ;
 	} else {
 		die( 'XOOPS_COMPILE_PATH cannot be opened' ) ;
@@ -150,7 +150,7 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 				redirect_header( 'compilehookadmin.php' , 3 , sprintf( $compile_hook['success_msg'] , $file_count ) ) ;
 				exit ;
 			} else {
-				redirect_header( 'compilehookadmin.php' , 3 , "コンパイルキャッシュが生成されていません。先に、編集目的のページを一通り表示しコンパイルキャッシュが生成されてから、再度このコマンドを実行してください。" ) ;
+				redirect_header( 'compilehookadmin.php' , 3 , _TPLSADMIN_MSG_CREATECOMPILECACHEFIRST ) ;
 				exit ;
 			}
 
@@ -217,13 +217,13 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 
 echo "
 		<p>
-			compiled caches: $compiledcache_num
-			<input type='submit' name='clearcache' value='"._DELETE."' onclick='return confirm(\"削除してよろしいですか?\");' />
+			"._TPLSADMIN_NUMCAP_COMPILEDCACHES.": $compiledcache_num
+			<input type='submit' name='clearcache' value='"._DELETE."' onclick='return confirm(\""._TPLSADMIN_CNF_DELETEOK."\");' />
 
 		</p>
 		<p>
-			template vars: $tplsvars_num
-			<input type='submit' name='cleartplsvars' value='"._DELETE."' onclick='return confirm(\"削除してよろしいですか?\");' />
+			"._TPLSADMIN_NUMCAP_TPLSVARS.": $tplsvars_num
+			<input type='submit' name='cleartplsvars' value='"._DELETE."' onclick='return confirm(\""._TPLSADMIN_CNF_DELETEOK."\");' />
 
 		</p>
 		".$xoopsGTicket->getTicketHtml( __LINE__ )."
@@ -233,11 +233,11 @@ echo "
 		<p>
 			<dl>
 				<dt>
-					テンプレート変数情報をDreamWeaver用に取得する
+					"._TPLSADMIN_DT_GETTPLSVARSINFO_DW."
 				</dt>
 				<dd>
-					まずは Macromedia Extension Manager がインストールされていることを確認し、起動しておいてください。<br />
-					ダウンロードしたファイルを解凍して、拡張子mxiのファイルを実行することで、お使いのDreamWeaverにExtensionとしてインストールされます。DreamWeaver再起動後に、Snippetから利用できます。
+					"._TPLSADMIN_DD_GETTPLSVARSINFO_DW."
+					<br />
 					<input type='submit' name='as_dw_extension_zip' value='zip' />
 					<input type='submit' name='as_dw_extension_tgz' value='tar.gz' />
 				</dd>
@@ -249,9 +249,11 @@ echo "
 		<p>
 			<dl>
 				<dt>
-					テンプレートをダウンロードする
+					"._TPLSADMIN_DT_GETTEMPLATES."
 				</dt>
 				<dd>
+					"._TPLSADMIN_DD_GETTEMPLATES."
+					<br />
 					<select name='tplset'>$tplset_options</select>
 					<input type='submit' name='download_zip' value='zip' />
 					<input type='submit' name='download_tgz' value='tar.gz' />
@@ -264,13 +266,13 @@ echo "
 		<p>
 			<dl>
 				<dt>
-					テンプレートをアップロードする
+					"._TPLSADMIN_DT_PUTTEMPLATES."
 				</dt>
 				<dd>
-					テンプレートファイルをまとめたzipファイルでアップロードしてください。
+					"._TPLSADMIN_DD_PUTTEMPLATES."
 					<br />
 					<select name='tplset'>$tplset_options</select>
-					<input type='file' name='tplset_archive' />
+					<input type='file' name='tplset_archive' size='60' />
 					<input type='submit' value='"._SUBMIT."' />
 				</dd>
 			</dl>

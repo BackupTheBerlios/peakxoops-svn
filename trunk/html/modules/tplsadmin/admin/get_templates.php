@@ -22,10 +22,10 @@ if( empty( $do_download ) ) exit ;
 
 $tplset = @$_POST['tplset'] ;
 if( ! preg_match( '/^[0-9A-Za-z_-]{1,16}$/' , $tplset ) ) {
-	die( "Invalid tplset specified" ) ;
+	die( _TPLSADMIN_ERR_INVALIDTPLSET ) ;
 }
 $trs = $xoopsDB->query( "SELECT distinct tpl_file,tpl_source,tpl_lastmodified FROM ".$xoopsDB->prefix("tplfile")." NATURAL LEFT JOIN ".$xoopsDB->prefix("tplsource")." WHERE tpl_tplset='".addslashes($tplset)."' ORDER BY tpl_file" ) ;
-if( $xoopsDB->getRowsNum( $trs ) <= 0 ) die( "Invalid tplset specified" ) ;
+if( $xoopsDB->getRowsNum( $trs ) <= 0 ) die( _TPLSADMIN_ERR_INVALIDTPLSET ) ;
 
 
 while( list( $tpl_file , $tpl_source , $tpl_lastmodified ) = $xoopsDB->fetchRow( $trs ) ) {

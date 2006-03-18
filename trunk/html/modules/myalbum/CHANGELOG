@@ -20,6 +20,7 @@
  - fixed compatibility trouble with PHP 5.0.5 in the search function 2.86b
  - updated myblocksadmin 0.41 & mymenu 0.15                          2.86b
  - modified the compatibilities with PHP 5.0.5                       2.86b
+ - updated the status alpha to beta                                  2.86c
  - modified ordering by file names on batch register                 2.86c
 
 2005-8-20 v2.85 (pre-alpha version)
@@ -356,6 +357,7 @@
  - PHP 5.0.5だと検索でfatal errorがでる問題の解決   2.86b
  - updated myblocksadmin 0.41 & mymenu 0.15         2.86b
  - PHP 5.0.5 との互換性問題の解消                   2.86b
+ - β版にステータス変更                             2.86c
  - バッチ登録時にファイル名でソートされるように変更 2.86c
 
 2005-8-20 v2.85 (pre-alpha version)

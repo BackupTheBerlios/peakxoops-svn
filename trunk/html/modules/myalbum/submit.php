@@ -225,7 +225,7 @@ if( $caller == 'imagemanager' ) {
 	echo "<html><head>
 		<link rel='stylesheet' type='text/css' media='all' href='".XOOPS_URL."/xoops.css' />
 		<link rel='stylesheet' type='text/css' media='all' href='".XOOPS_URL."/modules/system/style.css' />
-		<meta http-equiv='content-type' content='text/html; charset='"._CHARSET."' />
+		<meta http-equiv='content-type' content='text/html; charset="._CHARSET." />
 		<meta http-equiv='content-language' content='"._LANGCODE."' />
 		</head><body>\n" ;
 } else {

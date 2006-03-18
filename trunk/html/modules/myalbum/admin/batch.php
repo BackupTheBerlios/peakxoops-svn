@@ -70,8 +70,15 @@ if( isset( $_POST['submit'] ) && $_POST['submit'] != "" ) {
 		redirect_header( 'batch.php' , 3 , _ALBM_MES_INVALIDDIRECTORY . "<br />$dir4edit" ) ;
 		exit ;
 	}
-	$filecount = 1 ;
+	// get all file_names from the directory.
+	$file_names = array() ;
 	while( $file_name = readdir( $dir_h ) ) {
+		$file_names[] = $file_name ;
+	}
+	sort( $file_names ) ;
+
+	$filecount = 1 ;
+	foreach( $file_names as $file_name ) {
 
 		// Skip '.' , '..' and hidden file
 		if( substr( $file_name , 0 , 1 ) == '.' ) continue ;

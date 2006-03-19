@@ -3,27 +3,79 @@
 
 SUMMARY:
 
-A standalone module makes you easy to editing XOOPS templates.
+A module should be replaced "template manager" in system module.
 
-Rehabilitate DB template system!
+I've made this module for recovering the features should be gifted in original DB template system.
 
-I have to say:
-"Edit default template set in DB. This is the right design for DB template system"
+I recommend tplsadmin module to all xoopsers with confidence.
+
 
 
 DESCRIPTION:
 
-- you don't have to any hacks. (just install this)
-- you can understand templates status about each modules with ease.
-- you can see the diffs between the original file and your template.
-- you can copy templates by a module.
-- you can copy/delete any templates by checking the boxes.
+- No hacks needed
+- Easy to see differences of templates wholely
+- Show "diff" from default or file
+- Easy to copy&delete from any DB-set/file to any DB-set
+- Easy to find the name of the target template (HTML comment or div border)
+- Easy to edit the template just click links named the template in front side
+- Generate specifications for template's variables dynamically as Dreamweaver Extension
+- You can preview the site just by edit the template files (mainfile patch needed)
+
 
 
 USAGE:
 
-Just install it like the other modules.
-That's all.
+Just install it.
+You can operate templates with no documents.
+
+- To know the name of the template
+-- go to "Cache Hookings" in tplsadmin
+-- push "Implant comments" or "Implant div tags"
+-- go to and display public pages of your site
+-- you can find the template name as a HTML comment or a link in bordered div
+
+- To get specifications for template's variables of your site
+-- go to "Cache Hookings" in tplsadmin
+-- push "Implant logics to collect template variables"
+-- go to front sides of your site
+-- go to and display public pages of your site
+-- you can find the number of specifications as "Template vars info files:"
+-- if enough, "Get info of template variables as DreamWeaver Extensions"
+-- don't forget pushing "Normalize compiled template caches" after outputting
+-- extract zip or tar.gz
+-- run Macromedia Extension Manager
+-- execute the files named (module_name).mxi
+-- install them
+-- you can see assigned names of template-variables as Dreamweaver's Snippets
+-- you can also see assigned data in the variables in right side of snippets
+
+- To download template set
+-- go to "Cache Hookings" in tplsadmin
+-- select DB-template set you want
+-- push zip or tar.gz
+
+- To upload templates into DB-template set
+-- create a zip/tar.gz archive including template files
+-- all files in any paths can be recognized
+-- go to "Cache Hookings" in tplsadmin
+-- select DB-template set you want
+-- specify the archive
+
+- To use the feature of "Edit and Preview"
+-- edit mainfile.php (insert a line just after common.php)
+[code]
+	if (!isset($xoopsOption['nocommon'])) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+		include XOOPS_ROOT_PATH."/modules/tplsadmin/include/autoupdate.inc.php" ;
+	}
+[/code]
+-- go to admin -> system -> preferences -> general setting
+-- turn "Update module template .html files ..." on
+-- put template files in the path of /themes/(your_theme)/templates/
+-- edit the template files in the path
+-- you can preview your local site with new templates.
+
 
 
 COPYRIGHT:
@@ -32,8 +84,11 @@ I do not insist on the right of these codes, and don't guarantee.
 
 I use PEAR::Text/Diff.
 The rights of this code is under license of PEAR, perhaps.
-
 Special thanks to the author - Geoffrey T. Dairiki -.
+
+I use PEAR::Archive/Zip.
+The rights of this code is under license of PEAR, perhaps.
+Special thanks to the author - Vincent Blavet -.
 
 
 
@@ -47,7 +102,7 @@ Special thanks to the author - Geoffrey T. Dairiki -.
 
 システムモジュールのテンプレート管理に取って代わるモジュール。
 
-せっかく使いやすくするために作られたはずのDBテンプレートが、実装の不備でアイデア倒れに終わっているので、本来備わっているべき機能や操作性を取り戻すために作ったモジュールです。
+せっかく使いやすくするために作られたはずのDBテンプレートが、実装の不備でアイデア倒れに終わっているので、本来備わっているべき機能や操作性を取り戻すために作りました。
 
 このモジュールを一番お勧めしたい人は、XOOPSのテンプレートシステムは使い物にならない、と早々に見限ってしまったデザイナーさんですが、モジュール作者でも一般ユーザでも、XOOPSを利用している人全員に対して、自信を持ってお勧めできます。
 

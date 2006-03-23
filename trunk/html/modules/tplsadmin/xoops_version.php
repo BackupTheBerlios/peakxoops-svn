@@ -1,6 +1,6 @@
 <?php
 $modversion['name'] = _MI_TPLSADMIN_MODULENAME ;
-$modversion['version'] = '1.00' ;
+$modversion['version'] = '1.01' ;
 $modversion['description'] = _MI_TPLSADMIN_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

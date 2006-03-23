@@ -23,6 +23,7 @@ $compile_hooks = array(
 		'dt' => _TPLSADMIN_DT_ENCLOSEBYCOMMENT ,
 		'dd' => _TPLSADMIN_DD_ENCLOSEBYCOMMENT ,
 		'conf_msg' => _TPLSADMIN_CNF_ENCLOSEBYCOMMENT ,
+		'skip_theme' => true ,
 	) ,
 
 	'enclosebybordereddiv' => array(
@@ -32,6 +33,7 @@ $compile_hooks = array(
 		'dt' => _TPLSADMIN_DT_ENCLOSEBYBORDEREDDIV ,
 		'dd' => _TPLSADMIN_DD_ENCLOSEBYBORDEREDDIV ,
 		'conf_msg' => _TPLSADMIN_CNF_ENCLOSEBYBORDEREDDIV ,
+		'skip_theme' => true ,
 	) ,
 
 	'hooksavevars' => array(
@@ -41,6 +43,7 @@ $compile_hooks = array(
 		'dt' => _TPLSADMIN_DT_HOOKSAVEVARS ,
 		'dd' => _TPLSADMIN_DD_HOOKSAVEVARS ,
 		'conf_msg' => _TPLSADMIN_CNF_HOOKSAVEVARS ,
+		'skip_theme' => false ,
 	) ,
 
 	'removehooks' => array(
@@ -50,6 +53,7 @@ $compile_hooks = array(
 		'dt' => _TPLSADMIN_DT_REMOVEHOOKS ,
 		'dd' => _TPLSADMIN_DD_REMOVEHOOKS ,
 		'conf_msg' => _TPLSADMIN_CNF_REMOVEHOOKS ,
+		'skip_theme' => false ,
 	) ,
 
 ) ;
@@ -105,6 +109,10 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 				// skip if the extension is not .php
 				if( substr( $file , -4 ) != '.php' ) continue ;
 
+				// skip theme.html when comment-mode or div-mode
+				if( $compile_hook['skip_theme'] && substr( $file , -15 ) == '%theme.html.php' ) $skip_mode = true ;
+				else $skip_mode = false ;
+
 				$file_path = XOOPS_COMPILE_PATH . '/' . $file ;
 				$file_bodies = file( $file_path ) ;
 
@@ -127,7 +135,7 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 				$fw = fopen( $file_path , 'w' ) ;
 		
 				// insert "pre" command before the compiled cache
-				if( $compile_hook['pre'] ) {
+				if( $compile_hook['pre'] && ! $skip_mode ) {
 					fwrite( $fw , sprintf( $compile_hook['pre'] , htmlspecialchars( $tpl_name , ENT_QUOTES ) ) . "\r\n" ) ;
 				}
 		
@@ -137,7 +145,7 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 				}
 
 				// insert "post" command after the compiled cache
-				if( $compile_hook['post'] ) {
+				if( $compile_hook['post'] && ! $skip_mode ) {
 					fwrite( $fw , "\r\n" . sprintf( $compile_hook['post'] , htmlspecialchars( $tpl_name , ENT_QUOTES ) ) ) ;
 				}
 		

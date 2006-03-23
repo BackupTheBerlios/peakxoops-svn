@@ -207,6 +207,8 @@ XOOPS¤ÎDB¥Æ¥ó¥×¥ì¡¼¥È¤Ë¤ÏÍÍ¡¹¤ÊÀß·×¥ß¥¹¤¬¤¢¤ê¤Þ¤¹¤¬¡¢Èæ³ÓÅªÂç¤­¤¤¤Î¤¬¡¢¥Ö¥í¥Ã¥¯¤
 
 CHANGELOG:
 
+
+2006-03-24 1.01 modified comment/div implantation skips theme.html
 2006-03-18 1.00 full model public release
                 added "auto update" templates from themes/(your_theme)/templates/
                 added downloading templates

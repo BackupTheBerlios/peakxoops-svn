@@ -41,8 +41,10 @@ function Protector( $conn )
 	$this->_conn = $conn ;
 
 	// Preferences (for performance, I dare to use an irregular method)
-	$result = mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '_MI_PROTECTOR%'" , $conn ) ;
-	if( mysql_num_rows( $result ) < 5 ) return false ;
+	$result = @mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '_MI_PROTECTOR%'" , $conn ) ;
+	if( ! $result || mysql_num_rows( $result ) < 5 ) {
+		die( 'DB connection failed, or wrong XOOPS_DB_PREFIX in mainfile.php, or broken config table, or broken Protector installation.' ) ;
+	}
 	$this->_conf = array() ;
 	while( list( $key , $val ) = mysql_fetch_row( $result ) ) {
 		$this->_conf[ $key ] = $val ;

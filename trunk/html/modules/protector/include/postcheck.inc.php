@@ -45,11 +45,20 @@ function protector_postcommon()
 		$protector->register_bad_ips() ;
 	}
 
-	// DOS/CRAWLER skipping based on 'dirname'
+	// DOS/CRAWLER skipping based on 'dirname' or getcwd()
 	$skip_dirnames = explode( '|' , $conf['dos_skipmodules'] ) ;
 	if( ! is_array( $skip_dirnames ) ) $skip_dirnames = array() ;
-	if( is_object( @$xoopsModule ) && in_array( $xoopsModule->getVar('dirname') , $skip_dirnames ) ) {
-		$dos_skipping = true ;
+	if( is_object( @$xoopsModule ) ) {
+		if( in_array( $xoopsModule->getVar('dirname') , $skip_dirnames ) ) {
+			$dos_skipping = true ;
+		}
+	} else {
+		foreach( $skip_dirnames as $skip_dirname ) {
+			if( strstr( getcwd() , $skip_dirname ) ) {
+				$dos_skipping = true ;
+				break ;
+			}
+		}
 	}
 
 	// DoS Attack

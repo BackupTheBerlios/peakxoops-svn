@@ -22,6 +22,11 @@ if( ! $check_result ) {
 
 }
 
+if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	$block_instance_title = defined( '_MI_PROTECTOR_BNAME1' ) ? _MI_PROTECTOR_BNAME1 : 'Protector' ;
+	$xoopsDB->query( "DELETE FROM ".$xoopsDB->prefix("block_instance")." WHERE title='".addslashes($block_instance_title)."'" ) ;
+}
+
 $xoopsDB->query( "DELETE FROM ".$xoopsDB->prefix("newblocks")." WHERE dirname='protector' AND func_file='protector_block.php' AND show_func='b_protector_show'" ) ;
 
 $xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("config")." ADD KEY (conf_title)" ) ;

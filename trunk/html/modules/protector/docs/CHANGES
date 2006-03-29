@@ -1,8 +1,12 @@
 [xlang:en]
 = CHANGES = 
 
+2.56 (2006/03/30)
+- modified error handling when config can't be received
+- modified DOS/CRAWLER skipping for nocommon=1 module (thx sleo577)
+
 2.55 (2006/02/11)
-- fixed anti-multiple-content-type allows .tar.gz
+- fixed anti-multiple-content-type allows .tar.gz (thx gusagi)
 - updated mymenu for compatibility with XC2.1
 - updated Spanish language files (thx bezoops)
 
@@ -196,6 +200,10 @@
 [/xlang:en][xlang:ja]
 
 ●変更履歴
+
+2.56 (2006/03/30)
+- コンフィグが取れないときのエラー処理を強制終了に変更した
+- common.phpを読み込まないモジュールについても、DOS/CRAWLER処理にかからない設定を有効にした
 
 2.55 (2006/02/11)
 - 複数の.が存在するファイルでも、.tar.gzだけは通すように修正 (thx gusagi)

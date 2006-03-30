@@ -54,7 +54,7 @@ function protector_postcommon()
 		}
 	} else {
 		foreach( $skip_dirnames as $skip_dirname ) {
-			if( strstr( getcwd() , $skip_dirname ) ) {
+			if( $skip_dirname && strstr( getcwd() , $skip_dirname ) ) {
 				$dos_skipping = true ;
 				break ;
 			}

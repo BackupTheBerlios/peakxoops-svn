@@ -1,6 +1,6 @@
 <?php
 $modversion['name'] = _MI_AVAMAN_MODULENAME ;
-$modversion['version'] = '1.01' ;
+$modversion['version'] = '0.10' ;
 $modversion['description'] = _MI_AVAMAN_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

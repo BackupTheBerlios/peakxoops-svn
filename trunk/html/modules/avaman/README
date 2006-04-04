@@ -1,19 +1,34 @@
-- AVAMAN - as an avatar manager
+- AVAMAN - as an avatar&smilies manager
 
 SUMMARY:
 
-A little module for managing System Avatars.
+A little module for managing System Avatars and Smilies.
 
 
 USAGE:
 
 Just install it.
-You can upload avatars via an archive of tar.gz or zip.
+You can upload avatars/smilies via an archive of tar.gz or zip.
+
+If you are a smilies creator and want to distribute it, name the file like this.
+
+(code).gif
+(code).jpg
+(code).png
+
+(code) will be urldeode.
+If you make a smile gif for :anotherpint:, name it like this:
+[code]%3Aanotherpint%3A.gif[/code]
+It will be imported as :anotherpint:
+
+Then archive all smile images as a zip file, and distribute it.
+It makes many xoopsers happy!
 
 
 
 CHANGELOG:
 
+2006-04-05 0.20 added smilies manager
 2006-04-05 0.11 modified language constants
                 added a column of users
                 fixed a bug used avatar can be deleted

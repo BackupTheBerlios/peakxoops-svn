@@ -6,7 +6,7 @@ $avaman_allowed_exts = array(
 	'jpeg' => 'image/jpeg' ,
 	'png' => 'image/png' ,
 ) ;
-$realmyname = 'index.php' ;
+$realmyname = 'smilies.php' ;
 
 
 include_once( '../../../include/cp_header.php' ) ;
@@ -20,47 +20,46 @@ $myts =& MyTextSanitizer::getInstance() ;
 // POST Stage
 //
 
-if( ! empty( $_POST['modify_avatars'] ) ) {
+if( ! empty( $_POST['modify_smilies'] ) ) {
 
 	// Ticket Check
 	if ( ! $xoopsGTicket->check() ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 
-	// rename
-	$avatar_ids = array() ;
-	if( is_array( @$_POST['avatar_names'] ) ) {
-		foreach( $_POST['avatar_names'] as $avatar_id => $avatar_name ) {
-			$avatar_id = intval( $avatar_id ) ;
-			$db->query( "UPDATE ".$db->prefix("avatar")." SET avatar_name='".$myts->addSlashes($avatar_name)."' WHERE avatar_id=".intval($avatar_id) ) ;
-			$avatar_ids[] = $avatar_id ;
+	// rename emotion
+	$smiles_ids = array() ;
+	if( is_array( @$_POST['emotions'] ) ) {
+		foreach( $_POST['emotions'] as $smiles_id => $emotion ) {
+			$smiles_id = intval( $smiles_id ) ;
+			$db->query( "UPDATE ".$db->prefix("smiles")." SET emotion='".$myts->addSlashes($emotion)."' WHERE id=".intval($smiles_id) ) ;
+			$smiles_ids[] = $smiles_id ;
 		}
+	}
+
+	// code
+	foreach( $smiles_ids as $smiles_id ) {
+		$db->query( "UPDATE ".$db->prefix("smiles")." SET code='".$myts->addSlashes(@$_POST['codes'][$smiles_id])."' WHERE id=$smiles_id" ) ;
 	}
 
 	// display
-	foreach( $avatar_ids as $avatar_id ) {
-		if( empty( $_POST['avatar_displays'][$avatar_id] ) ) {
-			$db->query( "UPDATE ".$db->prefix("avatar")." SET avatar_display=0 WHERE avatar_id=$avatar_id" ) ;
+	foreach( $smiles_ids as $smiles_id ) {
+		if( empty( $_POST['displays'][$smiles_id] ) ) {
+			$db->query( "UPDATE ".$db->prefix("smiles")." SET display=0 WHERE id=$smiles_id" ) ;
 		} else {
-			$db->query( "UPDATE ".$db->prefix("avatar")." SET avatar_display=1 WHERE avatar_id=$avatar_id" ) ;
+			$db->query( "UPDATE ".$db->prefix("smiles")." SET display=1 WHERE id=$smiles_id" ) ;
 		}
 	}
 
-	// weight
-	foreach( $avatar_ids as $avatar_id ) {
-		$db->query( "UPDATE ".$db->prefix("avatar")." SET avatar_weight='".intval(@$_POST['avatar_weights'][$avatar_id])."' WHERE avatar_id=$avatar_id" ) ;
-	}
-
 	// delete
-	foreach( $avatar_ids as $avatar_id ) {
-		if( ! empty( $_POST['avatar_deletes'][$avatar_id] ) ) {
-			$result = $db->query( "SELECT a.avatar_file,COUNT(l.user_id) FROM ".$db->prefix("avatar")." a NATURAL LEFT JOIN ".$db->prefix("avatar_user_link")." l WHERE a.avatar_id=$avatar_id GROUP BY a.avatar_id" ) ;
+	foreach( $smiles_ids as $smiles_id ) {
+		if( ! empty( $_POST['deletes'][$smiles_id] ) ) {
+			$result = $db->query( "SELECT smile_url FROM ".$db->prefix("smiles")." WHERE id=$smiles_id" ) ;
 			if( $result ) {
-				list( $file , $users ) = $db->fetchRow( $result ) ;
-				if( $users > 0 ) continue ;
+				list( $file ) = $db->fetchRow( $result ) ;
 				if( strstr( $file , '..' ) ) die( '.. found.' ) ;
 				@unlink( XOOPS_UPLOAD_PATH . '/' . $file ) ;
-				$db->query( "DELETE FROM ".$db->prefix("avatar")." WHERE avatar_id=$avatar_id" ) ;
+				$db->query( "DELETE FROM ".$db->prefix("smiles")." WHERE id=$smiles_id" ) ;
 			}
 		}
 	}
@@ -125,12 +124,12 @@ if( ! empty( $_FILES['upload_archive']['tmp_name'] ) && is_uploaded_file( $_FILE
 		$ext = strtolower( substr( $file_name , $ext_pos + 1 ) ) ;
 		if( empty( $avaman_allowed_exts[$ext] ) ) continue ;
 		$file_node = substr( $file_name , 0 , $ext_pos ) ;
-		$save_file_name = uniqid( 'savt' ) . '.' . $ext ;
+		$save_file_name = uniqid( 'smil' ) . '.' . $ext ;
 		$fw = fopen( XOOPS_UPLOAD_PATH.'/'.$save_file_name , "w" ) ;
 		if( ! $fw ) continue ;
 		@fwrite( $fw , $file['content'] ) ;
 		@fclose( $fw ) ;
-		$db->query( "INSERT INTO ".$db->prefix("avatar")." SET avatar_file='".addslashes($save_file_name)."', avatar_name='".addslashes($file_node)."', avatar_mimetype='".addslashes(@$avaman_allowed_exts[$ext])."', avatar_created=UNIX_TIMESTAMP(), avatar_display=1, avatar_weight=0, avatar_type='S'" ) ;
+		$db->query( "INSERT INTO ".$db->prefix("smiles")." SET smile_url='".addslashes($save_file_name)."', code='".addslashes(rawurldecode($file_node))."', display=0, emotion=''" ) ;
 
 		$imported ++ ;
 	}
@@ -155,7 +154,7 @@ if( ! empty( $_FILES['upload_archive']['tmp_name'] ) && is_uploaded_file( $_FILE
 xoops_cp_header() ;
 include(dirname(__FILE__).'/mymenu.php');
 
-$sql = "SELECT a.avatar_id , a.avatar_file , a.avatar_name , a.avatar_created , a.avatar_display , a.avatar_weight , COUNT(l.user_id) FROM ".$db->prefix("avatar")." a NATURAL LEFT JOIN ".$db->prefix("avatar_user_link")." l WHERE a.avatar_type='S' GROUP BY a.avatar_id ORDER BY a.avatar_weight,a.avatar_id" ;
+$sql = "SELECT id , code , smile_url , emotion , display FROM ".$db->prefix("smiles")." ORDER BY id" ;
 $result = $db->query( $sql ) ;
 
 echo "
@@ -170,33 +169,28 @@ echo "
 	<tr>
 		<th>"._AM_AVAMAN_TH_ID."</th>
 		<th>"._AM_AVAMAN_TH_FILE."</th>
-		<th>"._AM_AVAMAN_TH_AVATARNAME."</th>
-		<th>"._AM_AVAMAN_TH_CREATED."</th>
-		<th>"._AM_AVAMAN_TH_DISPLAY."</th>
-		<th>"._AM_AVAMAN_TH_WEIGHT."</th>
-		<th>"._AM_AVAMAN_TH_USERS."</th>
+		<th>"._AM_AVAMAN_TH_CODE."</th>
+		<th>"._AM_AVAMAN_TH_EMOTION."</th>
+		<th>"._AM_AVAMAN_TH_SMILEDISPLAY."</th>
 		<th>"._AM_AVAMAN_TH_DELETE."</th>
 	</tr>\n" ;
 
-while( list( $avatar_id , $avatar_file , $avatar_name , $avatar_created , $avatar_display , $avatar_weight , $avatar_users ) = $db->fetchRow( $result ) ) {
+while( list( $smiles_id , $code , $file , $emotion , $display ) = $db->fetchRow( $result ) ) {
 	$evenodd = @$evenodd == 'even' ? 'odd' : 'even' ;
-	$delete_disabled = $avatar_users > 0 ? "disabled='disabled'" : "" ;
 
 	echo "
 	<tr>
-		<td class='$evenodd'>$avatar_id</td>
-		<td class='$evenodd'><img src='".XOOPS_UPLOAD_URL.'/'.urlencode($avatar_file)."' alt='' /></td>
-		<td class='$evenodd'><input type='text' size='24' name='avatar_names[$avatar_id]' value='".htmlspecialchars($avatar_name,ENT_QUOTES)."' /></td>
-		<td class='$evenodd'> ".formatTimestamp($avatar_created)."</td>
-		<td class='$evenodd'><input type='checkbox' name='avatar_displays[$avatar_id]' ".($avatar_display?"checked='checked'":"")." /></td>
-		<td class='$evenodd'><input type='text' size='4' name='avatar_weights[$avatar_id]' value='$avatar_weight' style='text-align:right;' /></td>
-		<td class='$evenodd' style='text-align:right;'>".intval($avatar_users)."</td>
-		<td class='$evenodd'><input type='checkbox' name='avatar_deletes[$avatar_id]' $delete_disabled /></td>
+		<td class='$evenodd'>$smiles_id</td>
+		<td class='$evenodd'><img src='".XOOPS_UPLOAD_URL.'/'.urlencode($file)."' alt='' /></td>
+		<td class='$evenodd'><input type='text' size='12' name='codes[$smiles_id]' value='".htmlspecialchars($code,ENT_QUOTES)."' /></td>
+		<td class='$evenodd'><input type='text' size='24' name='emotions[$smiles_id]' value='".htmlspecialchars($emotion,ENT_QUOTES)."' /></td>
+		<td class='$evenodd'><input type='checkbox' name='displays[$smiles_id]' ".($display?"checked='checked'":"")." /></td>
+		<td class='$evenodd'><input type='checkbox' name='deletes[$smiles_id]' /></td>
 	</tr>\n" ;
 }
 echo "
 </table>
-<input type='submit' name='modify_avatars' value='"._SUBMIT."' />
+<input type='submit' name='modify_smilies' value='"._SUBMIT."' />
 ".$xoopsGTicket->getTicketHtml( __LINE__ )."
 </form>
 " ;

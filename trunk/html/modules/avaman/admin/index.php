@@ -53,9 +53,10 @@ if( ! empty( $_POST['modify_avatars'] ) ) {
 	// delete
 	foreach( $avatar_ids as $avatar_id ) {
 		if( ! empty( $_POST['avatar_deletes'][$avatar_id] ) ) {
-			$result = $db->query( "SELECT avatar_file FROM ".$db->prefix("avatar")." WHERE avatar_id=$avatar_id" ) ;
+			$result = $db->query( "SELECT a.avatar_file,COUNT(l.user_id) FROM ".$db->prefix("avatar")." a NATURAL LEFT JOIN ".$db->prefix("avatar_user_link")." l WHERE a.avatar_id=$avatar_id GROUP BY a.avatar_id" ) ;
 			if( $result ) {
-				list( $file ) = $db->fetchRow( $result ) ;
+				list( $file , $users ) = $db->fetchRow( $result ) ;
+				if( $users > 0 ) continue ;
 				if( strstr( $file , '..' ) ) die( '.. found.' ) ;
 				@unlink( XOOPS_UPLOAD_PATH . '/' . $file ) ;
 				$db->query( "DELETE FROM ".$db->prefix("avatar")." WHERE avatar_id=$avatar_id" ) ;
@@ -152,7 +153,7 @@ if( ! empty( $_FILES['upload_archive']['tmp_name'] ) && is_uploaded_file( $_FILE
 
 xoops_cp_header() ;
 
-$sql = "SELECT avatar_id , avatar_file , avatar_name , avatar_created , avatar_display , avatar_weight  FROM ".$db->prefix("avatar")." WHERE avatar_type='S' ORDER BY avatar_weight,avatar_id" ;
+$sql = "SELECT a.avatar_id , a.avatar_file , a.avatar_name , a.avatar_created , a.avatar_display , a.avatar_weight , COUNT(l.user_id) FROM ".$db->prefix("avatar")." a NATURAL LEFT JOIN ".$db->prefix("avatar_user_link")." l WHERE a.avatar_type='S' GROUP BY a.avatar_id ORDER BY a.avatar_weight,a.avatar_id" ;
 $result = $db->query( $sql ) ;
 
 echo "
@@ -165,11 +166,20 @@ echo "
 <form action='' id='avaman_list' method='post'>
 <table class='outer' id='avaman_main'>
 	<tr>
-		<th>id </th><th>file</th><th>name</th><th>created</th><th>display</th><th>weight</th><th>delete</th>
+		<th>"._AM_AVAMAN_TH_ID."</th>
+		<th>"._AM_AVAMAN_TH_FILE."</th>
+		<th>"._AM_AVAMAN_TH_NAME."</th>
+		<th>"._AM_AVAMAN_TH_CREATED."</th>
+		<th>"._AM_AVAMAN_TH_DISPLAY."</th>
+		<th>"._AM_AVAMAN_TH_WEIGHT."</th>
+		<th>"._AM_AVAMAN_TH_USERS."</th>
+		<th>"._AM_AVAMAN_TH_DELETE."</th>
 	</tr>\n" ;
 
-while( list( $avatar_id , $avatar_file , $avatar_name , $avatar_created , $avatar_display , $avatar_weight ) = $db->fetchRow( $result ) ) {
+while( list( $avatar_id , $avatar_file , $avatar_name , $avatar_created , $avatar_display , $avatar_weight , $avatar_users ) = $db->fetchRow( $result ) ) {
 	$evenodd = @$evenodd == 'even' ? 'odd' : 'even' ;
+	$delete_disabled = $avatar_users > 0 ? "disabled='disabled'" : "" ;
+
 	echo "
 	<tr>
 		<td class='$evenodd'>$avatar_id</td>
@@ -177,8 +187,9 @@ while( list( $avatar_id , $avatar_file , $avatar_name , $avatar_created , $avata
 		<td class='$evenodd'><input type='text' size='24' name='avatar_names[$avatar_id]' value='".htmlspecialchars($avatar_name,ENT_QUOTES)."' /></td>
 		<td class='$evenodd'> ".formatTimestamp($avatar_created)."</td>
 		<td class='$evenodd'><input type='checkbox' name='avatar_displays[$avatar_id]' ".($avatar_display?"checked='checked'":"")." /></td>
-		<td class='$evenodd'><input type='text' size='4' name='avatar_weights[$avatar_id]' value='$avatar_weight' /></td>
-		<td class='$evenodd'><input type='checkbox' name='avatar_deletes[$avatar_id]' /></td>
+		<td class='$evenodd'><input type='text' size='4' name='avatar_weights[$avatar_id]' value='$avatar_weight' style='text-align:right;' /></td>
+		<td class='$evenodd' style='text-align:right;'>".intval($avatar_users)."</td>
+		<td class='$evenodd'><input type='checkbox' name='avatar_deletes[$avatar_id]' $delete_disabled /></td>
 	</tr>\n" ;
 }
 echo "

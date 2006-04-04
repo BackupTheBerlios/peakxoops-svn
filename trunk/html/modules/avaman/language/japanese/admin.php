@@ -6,4 +6,13 @@ define( "_AM_AVAMAN_UPLOAD" , "¥¢¥Ð¥¿¡¼¤ò¥¢¥Ã¥×¥í¡¼¥É(¥¢¡¼¥«¥¤¥Ö¤Î¾ì¹ç¤Ï¡¢zip¤Þ¤
 define( "_AM_AVAMAN_ERR_INVALIDARCHIVE" , "¤³¤Î¥¢¡¼¥«¥¤¥Ö¤Ï²òÅà¤Ç¤­¤Þ¤»¤ó" ) ;
 define( "_AM_AVAMAN_INVALIDEXT" , "¤³¤Î¥Õ¥¡¥¤¥ë¤Ï°·¤¨¤Þ¤»¤ó" ) ;
 
+define( "_AM_AVAMAN_TH_ID" , "ID" ) ;
+define( "_AM_AVAMAN_TH_FILE" , "¥Õ¥¡¥¤¥ëÌ¾" ) ;
+define( "_AM_AVAMAN_TH_NAME" , "¥¢¥Ð¥¿¡¼Ì¾" ) ;
+define( "_AM_AVAMAN_TH_CREATED" , "ºîÀ®Æü»þ" ) ;
+define( "_AM_AVAMAN_TH_DISPLAY" , "É½¼¨" ) ;
+define( "_AM_AVAMAN_TH_WEIGHT" , "ÊÂ¤Ó½ç" ) ;
+define( "_AM_AVAMAN_TH_USERS" , "ÍøÍÑ¼Ô¿ô" ) ;
+define( "_AM_AVAMAN_TH_DELETE" , "ºï½ü" ) ;
+
 ?>

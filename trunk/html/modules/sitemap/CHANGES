@@ -3,6 +3,8 @@
 - modified the compatibility with PHP >= 4.4.1
 - added a plugin
 -- extcal (thx bonnaudet eric)
+- added language files
+-- german (thx rene) 1.25a
 
 1.24 2005-12-18
 - fixed a bug login block is always displayed by enabling sitemap block (thx okamoto)

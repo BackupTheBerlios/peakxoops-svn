@@ -35,7 +35,7 @@ define("_MI_PICAL_BNAME_COMING_DESC", "Affiche les &eacute;v&egrave;nnements &ag
 define("_MI_PICAL_BNAME_AFTER", "Ev&egrave;nements apr&egrave;s le %s");
 define("_MI_PICAL_BNAME_AFTER_DESC", "Affiche les &eacute;v&egrave;nements apr&egrave;s la date indiqu&eacute;e");
 define("_MI_PICAL_BNAME_NEW", "Ev&egrave;nements nouvellement post&eacute;s");
-define("_MI_PICAL_BNAME_NEW_DESC", "Affiche les &eacute;v&egrave;nements tri&eacute;s de façon &agrave; ce que les plus r&eacute;cent soient en premier");
+define("_MI_PICAL_BNAME_NEW_DESC", "Affiche les «±v«²nements tri«±s de fa«®on, plus r«±cent en premier");
 
 // Names of submenu
 define("_MI_PICAL_SM_SUBMIT","Soumettre");

@@ -164,7 +164,7 @@ echo "
 	<input type='file' id='upload_archive' name='upload_archive' size='60' />
 	<input type='submit' value='"._SUBMIT."' />
 </form>
-<form action='$realmyname' id='avaman_list' method='post'>
+<form action='$realmyname' name='avaman_list' id='avaman_list' method='post'>
 <table class='outer' id='avaman_main'>
 	<tr>
 		<th>"._AM_AVAMAN_TH_ID."</th>
@@ -172,7 +172,7 @@ echo "
 		<th>"._AM_AVAMAN_TH_CODE."</th>
 		<th>"._AM_AVAMAN_TH_EMOTION."</th>
 		<th>"._AM_AVAMAN_TH_SMILEDISPLAY."</th>
-		<th>"._AM_AVAMAN_TH_DELETE."</th>
+		<th>"._AM_AVAMAN_TH_DELETE."<input type='checkbox' name='selectall' onclick=\"with(document.avaman_list){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].disabled==false&&elements[i].name.indexOf('deletes')>=0){elements[i].checked=this.checked;}}}\" title='"._AM_AVAMAN_CB_SELECTALL."' /></th>
 	</tr>\n" ;
 
 while( list( $smiles_id , $code , $file , $emotion , $display ) = $db->fetchRow( $result ) ) {

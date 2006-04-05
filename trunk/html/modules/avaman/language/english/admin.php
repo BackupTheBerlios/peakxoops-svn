@@ -14,6 +14,7 @@ define( "_AM_AVAMAN_TH_DISPLAY" , "display" ) ;
 define( "_AM_AVAMAN_TH_WEIGHT" , "weight" ) ;
 define( "_AM_AVAMAN_TH_USERS" , "users" ) ;
 define( "_AM_AVAMAN_TH_DELETE" , "delete" ) ;
+define( "_AM_AVAMAN_CB_SELECTALL" , "select/deselect all" ) ;
 
 define( "_AM_AVAMAN_TH_CODE" , "code" ) ;
 define( "_AM_AVAMAN_TH_EMOTION" , "emotion" ) ;

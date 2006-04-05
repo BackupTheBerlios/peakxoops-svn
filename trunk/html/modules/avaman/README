@@ -28,6 +28,7 @@ It makes many xoopsers happy!
 
 CHANGELOG:
 
+2006-04-06 0.21 added select/deselect all
 2006-04-05 0.20 added smilies manager
 2006-04-05 0.11 modified language constants
                 added a column of users

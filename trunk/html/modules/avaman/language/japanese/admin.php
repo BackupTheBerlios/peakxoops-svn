@@ -14,6 +14,7 @@ define( "_AM_AVAMAN_TH_DISPLAY" , "表示" ) ;
 define( "_AM_AVAMAN_TH_WEIGHT" , "並び順" ) ;
 define( "_AM_AVAMAN_TH_USERS" , "利用者数" ) ;
 define( "_AM_AVAMAN_TH_DELETE" , "削除" ) ;
+define( "_AM_AVAMAN_CB_SELECTALL" , "全選択/全解除" ) ;
 
 define( "_AM_AVAMAN_TH_CODE" , "表示コード" ) ;
 define( "_AM_AVAMAN_TH_EMOTION" , "意味" ) ;

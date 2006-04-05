@@ -12,6 +12,7 @@ v.085 some compatibility fixes (2006-2-15)
 - added utf8-tw (thx chia)
 - fixed a typo about operations of categories (thx dendeke) 0.85a
 - added polish (thx kurak_bu) 0.85b
+- updated locale/france (thx Phillipe) 0.85b
 
 v.084b minor bug fixes (2005-12-1)
 - updated locales/japan.php (thx hashimoto)

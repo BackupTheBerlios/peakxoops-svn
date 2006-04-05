@@ -16,10 +16,10 @@ If you are a smilies creator and want to distribute it, name the file like this.
 (code).jpg
 (code).png
 
-(code) will be urldeode.
+(code) should be urlencoded. (eg '*'=>'%2A', '<'=>%3C, '|'=>%7C)
 If you make a smile gif for :anotherpint:, name it like this:
 [code]%3Aanotherpint%3A.gif[/code]
-It will be imported as :anotherpint:
+It will be imported as a smile with its code :anotherpint:
 
 Then archive all smile images as a zip file, and distribute it.
 It makes many xoopsers happy!
@@ -29,6 +29,7 @@ It makes many xoopsers happy!
 CHANGELOG:
 
 2006-04-06 0.21 added select/deselect all
+                added polish (thx kurakbu) 0.21a
 2006-04-05 0.20 added smilies manager
 2006-04-05 0.11 modified language constants
                 added a column of users

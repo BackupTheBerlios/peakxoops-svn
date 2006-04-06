@@ -2,7 +2,7 @@
 
 define( "_AM_AVAMAN_DBUPDATED" , "Updated successfully" ) ;
 define( "_AM_AVAMAN_FILEUPLOADED" , "%s files are registered successfully" ) ;
-define( "_AM_AVAMAN_UPLOAD" , "Uploading image files (You can also upload files multiplly with zip or tar.gz archive)" ) ;
+define( "_AM_AVAMAN_UPLOAD" , "Uploading image files (You can also upload files multiply with zip or tar.gz archive)" ) ;
 define( "_AM_AVAMAN_ERR_INVALIDARCHIVE" , "The archive can't be extracted" ) ;
 define( "_AM_AVAMAN_INVALIDEXT" , "Invalid file type" ) ;
 

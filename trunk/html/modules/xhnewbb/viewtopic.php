@@ -345,7 +345,7 @@ if ( $viewmode == "thread" ) {
 		unset($eachposter);
 	}
 	if ( $total_posts > $forumdata['posts_per_page'] ) {
-		include XOOPS_ROOT_PATH.'/class/pagenav.php';
+		include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 		$nav = new XoopsPageNav($total_posts, $forumdata['posts_per_page'], $start, "start", 'topic_id='.$topic_id.'&amp;forum='.$forum.'&amp;viewmode='.$viewmode.'&amp;order='.$order);
 		$xoopsTpl->assign('forum_page_nav', $nav->renderNav(4));
 	} else {

@@ -4,6 +4,7 @@
 1.16 (2006/3/11)
 - fixed a language constant (thx marco)
 - added ALTER TALBE on update if forum table was from newbb
+- fixed missing "once" with including pagenav (thx hananoko) 1.16a
 
 1.15 (2006/1/25)
 - fixed the original bug in search.php

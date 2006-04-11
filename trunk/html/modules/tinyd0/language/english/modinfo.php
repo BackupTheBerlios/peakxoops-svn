@@ -22,6 +22,7 @@ define("_TC_MD_ADMENU1","Add Content");
 define("_TC_MD_ADMENU2","Add PageWrap");
 define("_TC_MD_ADMENU3","Edit/Delete Content");
 define("_TC_MD_ADMENU_MYBLOCKSADMIN","Blocks/Groups");
+define("_TC_MD_ADMENU_MYTPLSADMIN","Templates");
 
 // WYSIWYG Defines for v1.4
 //define('_MI_WYSIWYG','Use Wysiwyg Editor?');

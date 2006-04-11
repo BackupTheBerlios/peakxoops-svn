@@ -9,6 +9,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_MI_LOADED' ) 
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-04-11 11:14:42
+define('_TC_MD_ADMENU_MYTPLSADMIN','Templates');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-08-27 16:00:20
 define('_MI_TC_BDESC1','Builds the navigation');
 define('_MI_TC_BDESC2','Show a content as a block. [summary] tag valid');

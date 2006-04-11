@@ -18,6 +18,7 @@ define("_TC_EDITLINK","ページラップの変更");
 define("_TC_ULFILE","ファイルのアップロード");
 define("_TC_SFILE","ローカルファイルの選択");
 define("_TC_DELFILE","ファイルの削除");
+define("_TC_UPDATE_WRAP_CONTENTS","ページラップ検索語の更新");
 
 //Table Data
 define("_TC_HOMEPAGE","HP");

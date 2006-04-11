@@ -22,6 +22,7 @@ define("_TC_MD_ADMENU1","コンテンツの追加");
 define("_TC_MD_ADMENU2","ページラップの追加");
 define("_TC_MD_ADMENU3","コンテンツ管理");
 define("_TC_MD_ADMENU_MYBLOCKSADMIN","ブロック・アクセス権限");
+define("_TC_MD_ADMENU_MYTPLSADMIN","テンプレート管理");
 
 // WYSIWYG Defines for v1.4
 //define('_MI_WYSIWYG','WYSIWYGエディタ(SPAW)を使用する');

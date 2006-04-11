@@ -1,8 +1,10 @@
 [xlang:en]
 CHANGELOG:
 
-
+2006-04-11 2.21
+- added a feature of update wrapped contents for searching
 - modified invalid xhtml in some templates (thx kimono)
+- added mytplsadmin
 
 2006-02-13 2.20
 - updated mymenu (for the compatibility with XoopsCube 2.1)
@@ -197,6 +199,11 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2006-04-11 2.21
+- ラップコンテンツの検索用本文を手動で一括更新する機能をつけた
+- テンプレート内にいくつかあった、xhtml invalid なHTMLを修正 (thx kimono)
+- mytplsadmin導入
 
 2006-02-13 2.20
 - mymenu更新 (XoopsCube 2.1との互換性)

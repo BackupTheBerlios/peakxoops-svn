@@ -7,6 +7,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_AM_LOADED' ) 
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-04-11 11:14:42
+define('_TC_UPDATE_WRAP_CONTENTS','Update wrapped contents for searching');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-04-13 05:53:24
 define('_TC_HTML_HEADER','HTML header');
 define('_TC_CHECKED_ITEMS_ARE','Checked records are:');

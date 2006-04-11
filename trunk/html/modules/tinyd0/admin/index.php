@@ -43,6 +43,8 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 include_once '../class/tinyd.textsanitizer.php';
 include_once '../include/gtickets.php';
 
+// page wrap search
+$page_wrap_search_allowed_exts = array( 'html','htm','phtml','php','php3','php4','txt' ) ;
 
 // also reading language files of modinfo & main
 if ( file_exists( "../language/{$xoopsConfig['language']}/modinfo.php" ) ) {
@@ -52,7 +54,6 @@ if ( file_exists( "../language/{$xoopsConfig['language']}/modinfo.php" ) ) {
 	include( "../language/english/modinfo.php" ) ;
 	include( "../language/english/main.php" ) ;
 }
-
 
 // emulates mb functions
 if( ! function_exists( 'mb_convert_encoding' ) ) {
@@ -264,6 +265,13 @@ case "show":
 		<table border='0' cellpadding='0' cellspacing='1' class='outer'>
 		<tr>
 			<td class='even'><a href='?op=nlink'>"._TC_ADDLINK."</a></td>
+		</tr>
+		</table>
+	</td>
+	<td>
+		<table border='0' cellpadding='0' cellspacing='1' class='outer'>
+		<tr>
+			<td class='odd'><a href='?op=update_wrap_contents'>"._TC_UPDATE_WRAP_CONTENTS."</a></td>
 		</tr>
 		</table>
 	</td>\n" ;
@@ -745,8 +753,7 @@ case "linkeditit" :
 	// fetch text for search from wrapped page
 	$wrapped_file = "$wrap_path/{$_POST['address']}" ;
 	$ext = strtolower( substr( strrchr( $wrapped_file , '.' ) , 1 ) ) ;
-	$allowed_exts = array( 'html','htm','phtml','php','php3','php4','txt' ) ;
-	if( in_array( $ext , $allowed_exts ) ) {
+	if( in_array( $ext , $page_wrap_search_allowed_exts ) ) {
 		$fp = fopen( $wrapped_file , 'r' ) ;
 		if( ! $fp ) {
 			redirect_header( "index.php?op=nlink" , 2 , _TC_FILENOTFOUND ) ;
@@ -777,6 +784,33 @@ case "linkeditit" :
 	redirect_header( "index.php?op=show" , 2 , _TC_DBUPDATED ) ;
 	exit ;
 	break;
+
+// ------------------------------------------------------------------------- //
+// Upload File                                                //
+// ------------------------------------------------------------------------- //
+case "update_wrap_contents" :
+
+	$result = $xoopsDB->query( "SELECT storyid,link,address FROM $mytablename WHERE link>0" ) ;
+	while( list( $id , $link , $address ) = $xoopsDB->fetchRow( $result ) ) {
+		if( stristr( $address , '..' ) ) exit ;
+		$wrapped_file = $wrap_path.'/'.$address ;
+		$ext = strtolower( substr( strrchr( $wrapped_file , '.' ) , 1 ) ) ;
+		if( in_array( $ext , $page_wrap_search_allowed_exts ) ) {
+			$fp = fopen( $wrapped_file , 'r' ) ;
+			if( ! $fp ) {
+				continue ;
+			}
+			$text4sql = addslashes( tc_convert_wrap_to_ie( strip_tags( fread( $fp , 65536 * 2 ) ) ) ) ;
+			fclose( $fp ) ;
+		} else {
+			$text4sql = '' ;
+		}
+		$xoopsDB->queryF( "UPDATE $mytablename SET text='$text4sql' WHERE storyid=".intval($id) ) ;
+	}
+
+	redirect_header( "index.php?op=show" , 2 , _TC_DBUPDATED ) ;
+	exit ;
+	break ;
 
 // ------------------------------------------------------------------------- //
 // Upload File                                                //

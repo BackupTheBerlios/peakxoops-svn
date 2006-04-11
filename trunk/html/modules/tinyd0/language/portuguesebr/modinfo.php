@@ -3,6 +3,10 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_MI_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-04-11 11:14:42
+define('_TC_MD_ADMENU_MYTPLSADMIN','Templates');
+
 define( 'TINYCONTENT_MI_LOADED' , 1 ) ;
 
 // The name of this module

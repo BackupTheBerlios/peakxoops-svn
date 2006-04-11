@@ -18,6 +18,7 @@ define("_TC_EDITLINK","Modify PageWrap");
 define("_TC_ULFILE","Upload File");
 define("_TC_SFILE","Search");
 define("_TC_DELFILE","Delete File");
+define("_TC_UPDATE_WRAP_CONTENTS","Update wrapped contents for searching");
 
 //Table Data
 define("_TC_HOMEPAGE","Home");

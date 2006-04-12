@@ -1,0 +1,64 @@
+<?php
+
+// <--- LANG PROPERTY --->
+define ( '_MD_PLZXOO_LANG_CATEGORY','Category' );
+define ( '_MD_PLZXOO_LANG_TITLE','Title' );
+define ( '_MD_PLZXOO_LANG_BODY','Contents of the question' );
+define ( '_MD_PLZXOO_LANG_PRIORITY','Priority' );
+define ( '_MD_PLZXOO_LANG_CONTROL','Control' );
+define ( '_MD_PLZXOO_LANG_SUBMIT','Submit' );
+define ( '_MD_PLZXOO_LANG_STATUS','Status' );
+define ( '_MD_PLZXOO_LANG_STATUS_OPEN','Open' );
+define ( '_MD_PLZXOO_LANG_STATUS_CLOSE','Closed' );
+define ( '_MD_PLZXOO_LANG_STATUS_DEACTIVE','Deactivated' );
+define ( '_MD_PLZXOO_LANG_ANSWER_BODY','Contents of the answer' );
+define ( '_MD_PLZXOO_LANG_QUESTION','question' );
+define ( '_MD_PLZXOO_LANG_ANSWER','answer' );
+define ( '_MD_PLZXOO_LANG_QUESTION_POSTER','questioner' );
+define ( '_MD_PLZXOO_LANG_ANSWER_POSTER','answerer' );
+define ( '_MD_PLZXOO_LANG_POINT','point' );
+define ( '_MD_PLZXOO_LANG_CONFIRM','confirm' );
+define ( '_MD_PLZXOO_LANG_EXECUTE','execute' );
+define ( '_MD_PLZXOO_LANG_INPUT_DATE','date' );
+define ( '_MD_PLZXOO_LANG_POST_QUESTION','post a question' );
+define ( '_MD_PLZXOO_LANG_PLZXOO','plzXoo' );
+define ( '_MD_PLZXOO_LANG_POINT_TO_THIS','Add point to the answer' );
+define ( '_MD_PLZXOO_LANG_RESPONSE_TO_THIS','Add a comment to the answer' );
+define ( '_MD_PLZXOO_LANG_RESPONSE','RESPONSE' );
+define ( '_MD_PLZXOO_LANG_COMMENT','COMMENT' );
+define ( '_MD_PLZXOO_LANG_RESET','RESET' );
+define ( '_MD_PLZXOO_LANG_GO_BACK','GO BACK' );
+define ( '_MD_PLZXOO_LANG_POINT_SUFFIX','pts' );
+define ( '_MD_PLZXOO_LANG_SUBJECT','Subject' );
+define ( '_MD_PLZXOO_LANG_EDIT','EDIT' );
+define ( '_MD_PLZXOO_LANG_DELETE','DELETE' );
+define ( '_MD_PLZXOO_LANG_DELETE_CONFIRM','DELETE CONFIRM' );
+define ( '_MD_PLZXOO_LANG_QID','ID of the question' );
+define ( '_MD_PLZXOO_LANG_SIZE','size' );
+define ( '_MD_PLZXOO_LANG_AID','ID of the answer' );
+
+// <--- MESSAGE PROPERTY --->
+define ( '_MD_PLZXOO_MESSAGE_CLOSE_THIS_QUESTION','Close the question' );
+define ( '_MD_PLZXOO_MESSAGE_ANSWER_THIS_QUESTION','Post an answer' );
+define ( '_MD_PLZXOO_MESSAGE_SUCCESS','DB updated successfully' );
+define ( '_MD_PLZXOO_MESSAGE_FAIL','Failed' );
+define ( '_MD_PLZXOO_MESSAGE_CLOSE_QUESTION_CONFIRM','Are you ok closing the question' );
+define ( '_MD_PLZXOO_MESSAGE_IS_POINT_OK','Are you ok of the points? You cannot edit points of the answers after this operation.' );
+
+// <--- ERROR PROPERTY --->
+define ( '_MD_PLZXOO_ERROR_TICKET','Ticket Error' );
+define ( '_MD_PLZXOO_ERROR_QUESTION_NOT_EXISTS','Invalid qid' );
+define ( '_MD_PLZXOO_ERROR_QUESTION_CLOSED','Closed question' );
+define ( '_MD_PLZXOO_ERROR_PERMISSION','Permission error' );
+define ( '_MD_PLZXOO_ERROR_ANSWER_NOT_EXISTS','Invalid aid' );
+define ( '_MD_PLZXOO_ERROR_POINT_RULE','Point rule error' );
+define ( '_MD_PLZXOO_ERROR_CID_INJURY','cid injury' );
+define ( '_MD_PLZXOO_ERROR_SUBJECT_REQUIRED','There are no subject' );
+define ( '_MD_PLZXOO_ERROR_BODY_REQUIRED','There are no contents' );
+
+// <--- FORMAT PROPERTY --->
+define ( '_MD_PLZXOO_FORMAT_ANSWERS_COUNT','%d answers' );
+define ( '_MD_PLZXOO_FORMAT_POINT_OF_ANSWER_NOLIMIT','%d pts (no limit)' );
+define ( '_MD_PLZXOO_FORMAT_POINT_OF_ANSWER','%d pts (max %d items)' );
+
+?>

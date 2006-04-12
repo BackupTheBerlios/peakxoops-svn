@@ -1,0 +1,52 @@
+<h1 align='center'><{$smarty.const._MD_PLZXOO_LANG_PLZXOO}></h1>
+
+<{if $enable_post_question }>
+	<p>
+		[ <a href="index.php?action=editques"><{$smarty.const._MD_PLZXOO_LANG_POST_QUESTION}></a> ]
+	</p>
+<{/if}>
+
+<div align='center'><{$listController.navi}></div>
+
+<table class='outer'>
+	<tr class='head'>
+		<td width='20%'>
+			<{$smarty.const._MD_PLZXOO_LANG_INPUT_DATE}>
+		</td>
+		<td>
+			<{$smarty.const._MD_PLZXOO_LANG_SUBJECT}>
+		</td>
+		<td width='10%'>
+			<{$smarty.const._MD_PLZXOO_LANG_PRIORITY}>/<{$smarty.const._MD_PLZXOO_LANG_QUESTION_POSTER}>
+		</td>
+		<td width='15%'>
+			<{$smarty.const._MD_PLZXOO_LANG_CATEGORY}>
+		</td>
+		<td width='15%'>
+			<{$smarty.const._MD_PLZXOO_LANG_STATUS}>
+		</td>
+	</tr>
+<{foreach item=i from=$questions}>
+	<tr class='<{cycle values="odd,even"}>'>
+		<td>
+			<{$i.input_date|date_format:"%Y/%m/%d %H:%M"}>
+		</td>
+		<td>
+			<a href="index.php?action=detail&amp;qid=<{$i.qid}>"><{$i.subject}></a>
+		</td>
+		<td align='center'>
+			<{$i.priority}><br/>
+			<a href="<{$smarty.const.XOOPS_URL}>/userinfo.php?uid=<{$i.uid}>"><{$i.user.uname}><a/>
+		</td>
+		<td align='center'>
+			<a href="index.php?cid=<{$i.cid}>"><{$i.category.name}></a>
+		</td>
+		<td align='right'>
+			<{$i.status_str}><br/>
+			<{$i.size_str}>
+		</td>
+	</tr>
+<{/foreach}>
+</table>
+
+<div align='center'><{$listController.navi}></div>

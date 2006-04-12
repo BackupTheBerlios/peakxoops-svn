@@ -1,0 +1,18 @@
+<table class="outer">
+	<tr>
+		<th><{$smarty.const._MB_PLZXOO_INPUT_DATE}></th>
+		<th><{$smarty.const._MB_PLZXOO_SUBJECT}></th>
+		<th><{$smarty.const._MB_PLZXOO_UNAME}></th>
+		<th><{$smarty.const._MB_PLZXOO_CATEGORY_NAME}></th>
+		<th><{$smarty.const._MB_PLZXOO_ANSWER_NUM}></th>
+	</th>
+	<{foreach item=question from=$block.questions}>
+		<tr>
+			<td class="odd"><{$question.input_date|date_format:"%Y/%m/%d %H:%M"}></td>
+			<td class="odd"><a href="<{$xoops_url}>/modules/plzXoo/index.php?action=detail&qid=<{$question.qid}>"><{$question.subject}></a></td>
+			<td class="odd"><{$question.uname}></td>
+			<td class="odd"><a href="<{$xoops_url}>/modules/plzXoo/index.php?cid=<{$question.cid}>"><{$question.category_name}></a></td>
+			<td class="odd"><{$question.answer_num}></td>
+		</tr>
+	<{/foreach }>
+</table>

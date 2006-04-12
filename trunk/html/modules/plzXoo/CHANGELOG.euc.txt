@@ -1,4 +1,23 @@
--=v0.10 --> v0.20=-
+[xlang:en]
+
+-=v0.10 --> v0.20alt=-
+* starting alternative (by GIJOE)
+* plzXoo's point -> user's posts
+* points setting
+* changed timing of assigning points
+* added a list block
+* mymenu
+* myblocksadmin
+* mytplsadmin
+* modified perm admin
+* english language files
+* added a perm of answering myself
+* etc.
+
+
+[/xlang:en]
+[xlang:ja]
+-=v0.10 --> v0.20alt=-
 * 勝手な改変版 (by GIJOE)
 * ポイントを投稿数に反映する機能
 * ポイントの自由な設定機能
@@ -9,7 +28,7 @@
 * mytplsadmin
 * 権限設定画面を変更
 * 英語ファイル
-* スペルミスの修正
+* 自作自演回答についての権限追加
 * その他もろもろ
 
 
@@ -20,3 +39,4 @@
 * answer オブジェクトの権限判定で else 判定漏れがあったのを修正 (thanks to hama!)
 * ステータスの「質問受付中」を「回答受付中」に変更 (thanks to Ryuji!)
 * メッセージへの回答権限がない場合は、回答へのリンクを出さないように修正
+[/xlang:ja]

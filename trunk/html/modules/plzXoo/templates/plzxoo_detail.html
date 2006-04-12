@@ -83,6 +83,8 @@
 	</tr>
 	<{/if}>
 </table>
-[ <a href="index.php?action=response&amp;aid=<{$answer.aid}>"><{$smarty.const._MD_PLZXOO_LANG_RESPONSE_TO_THIS}></a> ]
+<{if $question.uid==$xoops_userid }>
+	[ <a href="index.php?action=response&amp;aid=<{$answer.aid}>"><{$smarty.const._MD_PLZXOO_LANG_RESPONSE_TO_THIS}></a> ]
+<{/if}>
 </p>
 <{/foreach}>

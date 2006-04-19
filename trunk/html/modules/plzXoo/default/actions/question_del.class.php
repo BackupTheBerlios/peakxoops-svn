@@ -33,11 +33,17 @@ class default_Question_delAction extends mojaLE_AbstractAction
    
 		if($editform->init(get_class($this))==ACTIONFORM_POST_SUCCESS) {
 			$editform->release();
+			$cid = $question->getVar('cid') ;
 			if($handler->delete($question)) {
 				$editform->release();
-				// 回答も消す
+				// remove answer also
 				$handler=&plzXoo::getHandler('answer');
 				$handler->deletes(new Criteria('qid',$question->getVar('qid')));
+				// update size of category
+				$category_handler =& plzXoo::getHandler('category');
+				$category =& $category_handler->get( $cid ) ;
+				$category->updateSize();
+				$category_handler->insert( $category ) ;
 				return VIEW_SUCCESS;
 			}
 			else

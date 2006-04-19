@@ -1,5 +1,18 @@
 [xlang:en]
 
+-=v0.20alt --> v0.90(RC)alt=- (update this module essentially!)
+* RC release as my alternative version :-)
+* hierarchy of categories
+* ask to the category
+* breadcrumb
+* search in bodies of answers also
+* extraction
+* two extra block options (status & category)
+* block duplication
+* admin can edit status directly
+* modified point display
+* etc.
+
 -=v0.10 --> v0.20alt=-
 * starting alternative (by GIJOE)
 * plzXoo's point -> user's posts
@@ -17,6 +30,20 @@
 
 [/xlang:en]
 [xlang:ja]
+-=v0.20alt --> v0.90alt=- （モジュールアップデート必須！）
+* AlternativeとしてのRC版（要するに「もう機能は足さないよ」という宣言:-)）
+* カテゴリーの階層構造実装
+* カテゴリ内質問
+* パンくず
+* 回答内容も検索にヒット
+* 簡単な絞り込み
+* ブロックオプション追加（ステータスとカテゴリー絞り込み）
+* ブロック複製
+* 管理者用はステータスを直接いじれる
+* ポイント表示をそれっぽく
+* その他もろもろfix
+
+
 -=v0.10 --> v0.20alt=-
 * 勝手な改変版 (by GIJOE)
 * ポイントを投稿数に反映する機能

@@ -15,9 +15,11 @@ class default_DetailAction extends mojaLE_AbstractAction
 		if(!is_object($question))
 			return VIEW_ERROR;
 
-		// ステータスが1,2と異なるものはキック
-		if(!($question->getVar('status')>=1 && $question->getVar('status')<=2))
-			return VIEW_ERROR;
+		// ステータスが1,2と異なるものは管理者以外キック
+		if( ! in_array( $question->getVar('status') , array(1,2) ) ) {
+			if( ! is_object( $GLOBALS['xoopsUser'] ) || ! $GLOBALS['xoopsUser']->isAdmin() )
+				return VIEW_ERROR;
+		}
 
 		$handler=&plzXoo::getHandler('answer');
 		$criteria = new Criteria('qid',$id);

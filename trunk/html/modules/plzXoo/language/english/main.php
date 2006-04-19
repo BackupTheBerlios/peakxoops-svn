@@ -20,7 +20,8 @@ define ( '_MD_PLZXOO_LANG_POINT','point' );
 define ( '_MD_PLZXOO_LANG_CONFIRM','confirm' );
 define ( '_MD_PLZXOO_LANG_EXECUTE','execute' );
 define ( '_MD_PLZXOO_LANG_INPUT_DATE','date' );
-define ( '_MD_PLZXOO_LANG_POST_QUESTION','post a question' );
+define ( '_MD_PLZXOO_LANG_POST_QUESTION','post a new question' );
+define ( '_MD_PLZXOO_LANG_POST_QUESTION_CID','ask in this category' );
 define ( '_MD_PLZXOO_LANG_PLZXOO','plzXoo' );
 define ( '_MD_PLZXOO_LANG_POINT_TO_THIS','Add point to the answer' );
 define ( '_MD_PLZXOO_LANG_RESPONSE_TO_THIS','Add a comment to the answer' );
@@ -28,7 +29,6 @@ define ( '_MD_PLZXOO_LANG_RESPONSE','RESPONSE' );
 define ( '_MD_PLZXOO_LANG_COMMENT','COMMENT' );
 define ( '_MD_PLZXOO_LANG_RESET','RESET' );
 define ( '_MD_PLZXOO_LANG_GO_BACK','GO BACK' );
-define ( '_MD_PLZXOO_LANG_POINT_SUFFIX','pts' );
 define ( '_MD_PLZXOO_LANG_SUBJECT','Subject' );
 define ( '_MD_PLZXOO_LANG_EDIT','EDIT' );
 define ( '_MD_PLZXOO_LANG_DELETE','DELETE' );
@@ -36,6 +36,17 @@ define ( '_MD_PLZXOO_LANG_DELETE_CONFIRM','DELETE CONFIRM' );
 define ( '_MD_PLZXOO_LANG_QID','ID of the question' );
 define ( '_MD_PLZXOO_LANG_SIZE','size' );
 define ( '_MD_PLZXOO_LANG_AID','ID of the answer' );
+define ( '_MD_PLZXOO_LANG_LABEL_EXTRACTION','Search:' );
+define ( '_MD_PLZXOO_LANG_GO_EXTRACTION','Go' );
+define ( '_MD_PLZXOO_LANG_RESULT_EXTRACTION','Result' );
+define ( '_MD_PLZXOO_LANG_TITLE_NEW_QUESTION','New Question' );
+define ( '_MD_PLZXOO_LANG_TITLE_EDIT_QUESTION','Edit Question' );
+define ( '_MD_PLZXOO_LANG_TITLE_NEW_ANSWER','New Answer' );
+define ( '_MD_PLZXOO_LANG_TITLE_EDIT_ANSWER','Edit Answer' );
+
+// <--- BREAD CRUMB --->
+define ( '_MD_PLZXOO_BRCR_HOME','HOME' );
+define ( '_MD_PLZXOO_BRCR_CATEGORY','Category' );
 
 // <--- MESSAGE PROPERTY --->
 define ( '_MD_PLZXOO_MESSAGE_CLOSE_THIS_QUESTION','Close the question' );
@@ -54,11 +65,18 @@ define ( '_MD_PLZXOO_ERROR_ANSWER_NOT_EXISTS','Invalid aid' );
 define ( '_MD_PLZXOO_ERROR_POINT_RULE','Point rule error' );
 define ( '_MD_PLZXOO_ERROR_CID_INJURY','cid injury' );
 define ( '_MD_PLZXOO_ERROR_SUBJECT_REQUIRED','There are no subject' );
+define ( '_MD_PLZXOO_ERROR_SUBJECT_SIZEOVER','Too long subject' );
 define ( '_MD_PLZXOO_ERROR_BODY_REQUIRED','There are no contents' );
+define ( '_MD_PLZXOO_ERROR_PRIORITY_RANGEOVER','Priority range over' );
+define ( '_MD_PLZXOO_ERROR_STATUS_RANGEOVER','Status range over' );
 
 // <--- FORMAT PROPERTY --->
 define ( '_MD_PLZXOO_FORMAT_ANSWERS_COUNT','%d answers' );
 define ( '_MD_PLZXOO_FORMAT_POINT_OF_ANSWER_NOLIMIT','%d pts (no limit)' );
 define ( '_MD_PLZXOO_FORMAT_POINT_OF_ANSWER','%d pts (max %d items)' );
+
+define ( '_MD_PLZXOO_FORMAT_POINT_RESULT_GENERAL','%d pts.' );
+define ( '_MD_PLZXOO_FORMAT_POINT_RESULT_RANK1','%d pts! Superb!' );
+define ( '_MD_PLZXOO_FORMAT_POINT_RESULT_RANK2','%d pts. Useful' );
 
 ?>

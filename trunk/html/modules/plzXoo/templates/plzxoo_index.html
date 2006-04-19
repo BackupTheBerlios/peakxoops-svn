@@ -1,9 +1,7 @@
-<h1 align='center'><{$smarty.const._MD_PLZXOO_LANG_PLZXOO}></h1>
-
-<{if $enable_post_question }>
-	<p>
-		[ <a href="index.php?action=editques"><{$smarty.const._MD_PLZXOO_LANG_POST_QUESTION}></a> ]
-	</p>
+<{if $category.cid }>
+	<{include file="db:plzxoo_header_category.html"}>
+<{else}>
+	<{include file="db:plzxoo_header_nocategory.html"}>
 <{/if}>
 
 <div align='center'><{$listController.navi}></div>

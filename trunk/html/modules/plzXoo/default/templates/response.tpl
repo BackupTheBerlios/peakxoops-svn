@@ -4,7 +4,7 @@
 
 <table class='outer'>
 	<tr class='head'>
-		<td colspan='2'><?php echo  _MD_PLZXOO_LANG_ANSWER ?></td>
+		<td colspan='2'><?php echo _MD_PLZXOO_LANG_ANSWER ?></td>
 	</tr>
 	<tr class='even'>
 		<td width='20%'><?php echo  _MD_PLZXOO_LANG_QUESTION_POSTER ?>:<a href="<?php echo  XOOPS_URL ?>/userinfo.php?uid=<?php echo  $template['answer']['uid'] ?>"><?php echo  $template['answer']['user']['uname'] ?></a></td>
@@ -15,6 +15,6 @@
 	</tr>
 </table>
 
-<h2 align='center'><?php echo  _MD_PLZXOO_LANG_RESPONSE ?></h2>
+<h2 align='center'><?php echo _MD_PLZXOO_LANG_RESPONSE ?></h2>
 
 <?php echo  $template['xoopsform']->render() ?>

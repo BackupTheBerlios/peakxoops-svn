@@ -13,7 +13,7 @@ class default_EditquesAction extends mojaLE_AbstractAction
         $id = isset($_REQUEST['qid']) ? intval($_REQUEST['qid']) : 0;
         $handler=&plzXoo::getHandler('question');
         $obj=null;
-    
+
         if($id)
             $obj=&$handler->get($id);
         if(!is_object($obj)) {
@@ -21,18 +21,32 @@ class default_EditquesAction extends mojaLE_AbstractAction
             $obj->setVar('uid',$user->uid());
         }
         else {
-    		// 権限の確認
+    		// 編集権限の確認
     		if(!$obj->isEnableEdit($user)) {
     			$request->setAttribute('message',_MD_PLZXOO_ERROR_PERMISSION);
     			return VIEW_ERROR;
     		}
+
+			// ステータスが1,2と異なるものは管理者以外キック
+			if( ! in_array( $obj->getVar('status') , array(1,2) ) ) {
+				if( ! is_object( $GLOBALS['xoopsUser'] ) || ! $GLOBALS['xoopsUser']->isAdmin() )
+					return VIEW_ERROR;
+			}
         }
 
         $editform =& new EditQuestionForm();
         if($editform->init($obj)==ACTIONFORM_POST_SUCCESS) {
             $editform->update($obj); // 入力内容をオブジェクトに受け取る
-            return $handler->insert($obj) ?
-                VIEW_SUCCESS : VIEW_ERROR;
+            if( $handler->insert($obj) ) {
+				// update size of category
+				$category_handler =& plzXoo::getHandler('category');
+				$category =& $category_handler->get( $obj->getVar('cid') ) ;
+				$category->updateSize();
+				$category_handler->insert( $category ) ;
+                return VIEW_SUCCESS ;
+            } else {
+                return VIEW_ERROR ;
+            }
         }
 
 		// カテゴリ一覧を取得

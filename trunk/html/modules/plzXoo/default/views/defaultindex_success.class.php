@@ -19,9 +19,21 @@ class default_DefaultindexView_success
 		$renderer->setTemplate('plzxoo_index.html');
 		$renderer->setAttribute('questions',$questions);
 		$renderer->setAttribute('listController',$listController->getStructure());
-		
 		exFrame::init(EXFRAME_PERM);
 		$renderer->setAttribute('enable_post_question',exPerm::isPerm('post_question'));
+
+		$cat_handler =& plzXoo::getHandler('category');
+		$cat_obj =& $cat_handler->get( @$_GET['cid'] ) ;
+		if( is_object( $cat_obj ) ) {
+			$renderer->setAttribute('category',$cat_obj->getStructure());
+		} else {
+			$renderer->setAttribute('category' , array( 'children' => plzXooCategoryObject::getChildren(0) , 'cid' => 0 ) ) ;
+			$renderer->setAttribute('searchtxt4disp' , htmlspecialchars( $listController->filter_->txt_ , ENT_QUOTES ) ) ;
+		}
+		/*
+		echo "<pre>" ;
+		var_dump( $cat_obj->getStructure() ) ;
+		exit ;*/
 
 		return $renderer;
 	}

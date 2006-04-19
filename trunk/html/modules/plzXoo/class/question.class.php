@@ -22,6 +22,7 @@ class plzXooQuestionObject extends exXoopsObject {
 		$this->initVar('priority', XOBJ_DTYPE_INT, 3, true);
 		$this->initVar('status', XOBJ_DTYPE_INT, 1, true);
 		$this->initVar('size', XOBJ_DTYPE_INT, 0, true);
+		$this->initVar('for_search', XOBJ_DTYPE_TXTAREA, null, false, null);
 
 		if ( is_array ( $id ) )
 			$this->assignVars ( $id );
@@ -61,8 +62,16 @@ class plzXooQuestionObject extends exXoopsObject {
 	function updateSize()
 	{
 		$handler=&plzXoo::getHandler('answer');
-		$size=$handler->getCount(new Criteria('qid',$this->getVar('qid')));
+		$answers=&$handler->getObjects(new Criteria('qid',$this->getVar('qid')));
+		$size=sizeof($answers);
 		$this->setVar('size',$size);
+
+		// ついでに検索用フィールドも更新する
+		$for_search = '' ;
+		foreach( $answers as $answer ) {
+			$for_search .= $answer->getVar('body') . ' ' ;
+		}
+		$this->setVar('for_search',$for_search);
 	}
 
 	/**

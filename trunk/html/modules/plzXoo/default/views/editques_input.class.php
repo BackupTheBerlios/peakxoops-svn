@@ -16,15 +16,25 @@ class default_EditquesView_input
 		//Ticket
 		$form->addElement(new XoopsFormHidden($editform->ticket_->name_,$editform->ticket_->value_));
 
-		//¥«¥Æ¥´¥ê
+		//Category
 		$categories=&$request->getAttribute('categories');
 		if(count($categories)) {
-			$select = new XoopsFormSelect(_MD_PLZXOO_LANG_CATEGORY,'cid',$editform->cid_);
+
+			include_once XOOPS_ROOT_PATH.'/class/xoopstree.php' ;
+			$db =& Database::getInstance() ;
+			$tree =& new XoopsTree( $db->prefix('plzxoo_category') , 'cid' , 'pid' ) ;
+			ob_start() ;
+			$tree->makeMySelBox('name','name',$editform->cid_?$editform->cid_:intval(@$_GET['cid']),0,'cid');
+			$cid_select = ob_get_contents() ;
+			ob_end_clean() ;
+			$form->addElement(new XoopsFormLabel(_MD_PLZXOO_LANG_CATEGORY,$cid_select));
+
+/*			$select = new XoopsFormSelect(_MD_PLZXOO_LANG_CATEGORY,'cid',$editform->cid_);
 			foreach($categories as $category) {
 				$select->addOption($category->getVar('cid'),$category->getVar('name'));
 			}
 			$form->addElement($select);
-			unset($select);
+			unset($select);*/
 		}
 		else {
 			$form->addElement(new XoopsFormHidden('cid',$editform->cid_));
@@ -37,8 +47,17 @@ class default_EditquesView_input
 
 		$form->addElement($select);
 
+		//Status (only admin can edit status directly)
+		if( is_object( $GLOBALS['xoopsUser'] ) && $GLOBALS['xoopsUser']->isAdmin() ) {
+			$select_status = new XoopsFormSelect(_MD_PLZXOO_LANG_STATUS,'status',$editform->status_);
+			foreach( $GLOBALS['plzxoo_status_mapping'] as $st => $label ) {
+				$select_status->addOption( $st , $label ) ;
+			}
+			$form->addElement( $select_status ) ;
+		}
+
 		//-------------------------
-		// Tray & Button
+		// Tray & Buttons
 		//-------------------------
 		$tray = new XoopsFormElementTray(_MD_PLZXOO_LANG_CONTROL);
 

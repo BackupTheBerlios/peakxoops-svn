@@ -7,11 +7,27 @@ class default_DetailView_success
 		$question=&$request->getAttribute('question');
 		$answers_obj=&$request->getAttribute('answers');
 
+		// prepare for points decoration
+		$points = explode( '|' , @$GLOBALS['xoopsModuleConfig']['points'] ) ;
+		rsort( $points , SORT_NUMERIC ) ;
+		$point_decorations = array() ;
+		$rank = 0 ;
+		foreach( $points as $point ) {
+			$point = intval( $point ) ;
+			$rank ++ ;
+			if( defined( '_MD_PLZXOO_FORMAT_POINT_RESULT_RANK'.$rank ) ) {
+				$point_decorations[$point] = sprintf( constant( '_MD_PLZXOO_FORMAT_POINT_RESULT_RANK'.$rank ) , $point ) ;
+			} else {
+				$point_decorations[$point] = sprintf( _MD_PLZXOO_FORMAT_POINT_RESULT_GENERAL , $point ) ;
+			}
+		}
+
 		$answers=array();
 		foreach($answers_obj as $answer) {
 			$ret = $answer->getStructure();
     		$ret['enable_edit']=$answer->isEnableEdit($user);
     		$ret['enable_delete']=$answer->isEnableDelete($user);
+    		$ret['point_decorated']= empty( $point_decorations[ $ret['point'] ] ) ? $ret['point'] : $point_decorations[ $ret['point'] ] ;
     		$answers[]=&$ret;
     		unset($ret);
 		}
@@ -30,6 +46,17 @@ class default_DetailView_success
 		$renderer->setAttribute('question',$question_arr);
 		$renderer->setAttribute('answers',$answers);
 		$renderer->setAttribute('enable_post_answer',exPerm::isPerm('post_answer')&& $question->getVar('uid') != $user->uid() | exPerm::isPerm('post_answer_myself') ) ; // GIJ
+
+		$renderer->setAttribute('is_detail',true);
+
+		$cat_handler =& plzXoo::getHandler('category');
+		$cat_obj =& $cat_handler->get( $question->getVar('cid') ) ;
+		if( is_object( $cat_obj ) ) {
+			$renderer->setAttribute('category',$cat_obj->getStructure());
+		} else {
+			$renderer->setAttribute('category',array());
+		}
+
 		return $renderer;
 	}
 }

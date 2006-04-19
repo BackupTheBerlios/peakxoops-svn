@@ -24,6 +24,7 @@ class plzXooXoopsSearchService extends SimpleXoopsSearchService {
 		// 渡された文字列は、 title フィールド body フィールドの検索に用います
 		$this->info_->addQueryField("subject");
 		$this->info_->addQueryField("body");
+		$this->info_->addQueryField("for_search");
 
 		// 渡された uid は uid フィールドの検索に用います
 		$this->info_->setUidField("uid");

@@ -12,6 +12,7 @@ class EditQuestionForm extends exActionFormEx
 	var $body_;
 	var $input_date_;
 	var $priority_;
+	var $status_;
 
 	var $ticket_;
 
@@ -25,7 +26,7 @@ class EditQuestionForm extends exActionFormEx
 		else
 			exOnetimeTicket::unsetSession($this);
 
-		$this->subject_ = trim($_POST['subject']);
+		$this->subject_ = trim(@$_POST['subject']);
 		if(!$this->subject_) {
 			$this->addError(_MD_PLZXOO_ERROR_SUBJECT_REQUIRED);
 		}
@@ -34,16 +35,22 @@ class EditQuestionForm extends exActionFormEx
 		}
 		
 		// 指定されたカテゴリが存在するか確認
-		$this->cid_=intval($_POST['cid']);
+		$this->cid_=intval(@$_POST['cid']);
 		$handler=&plzXoo::getHandler('category');
 		if(!is_object($handler->get($this->cid_)))
 			$this->addError(_MD_PLZXOO_ERROR_CID_INJURY);
 
-		$this->priority_=intval($_POST['priority']);
+		$this->priority_=intval(@$_POST['priority']);
 		if(!$this->validateInRange($this->priority_,1,5))
 			$this->addError(_MD_PLZXOO_ERROR_PRIORITY_RANGEOVER);
 
-		$this->body_ = $_POST['body'];
+		if( is_object( $GLOBALS['xoopsUser'] ) && $GLOBALS['xoopsUser']->isAdmin() ) {
+			$this->status_=intval(@$_POST['status']);
+			if(!$this->validateInRange($this->status_,1,3))
+				$this->addError(_MD_PLZXOO_ERROR_STATUS_RANGEOVER);
+		}
+
+		$this->body_ = @$_POST['body'];
 		if(!$this->body_) {
 			$this->addError(_MD_PLZXOO_ERROR_BODY_REQUIRED);
 		}
@@ -57,6 +64,7 @@ class EditQuestionForm extends exActionFormEx
 		$this->body_ = $master->getVar ( 'body', 'e' );
 		$this->input_date_ = $master->getVar ( 'input_date', 'e' );
 		$this->priority_ = $master->getVar ( 'priority', 'e' );
+		$this->status_ = $master->getVar ( 'status', 'e' );
 
 		$this->ticket_=new exOnetimeTicket(get_class($this),3600);
 		$this->ticket_->setSession();
@@ -67,6 +75,7 @@ class EditQuestionForm extends exActionFormEx
 		$master->setVar ( 'subject', $this->subject_ );
 		$master->setVar ( 'body', $this->body_ );
 		$master->setVar ( 'priority', $this->priority_ );
+		$master->setVar ( 'status', $this->status_ );
 	}
 }
 

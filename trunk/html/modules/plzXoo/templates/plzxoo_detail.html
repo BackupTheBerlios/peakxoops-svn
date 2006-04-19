@@ -1,3 +1,5 @@
+<{include file="db:plzxoo_header_category.html"}>
+
 <table class='outer'>
 	<tr class='head'>
 		<td colspan='2'>
@@ -79,7 +81,7 @@
 	<{if $answer.point}>
 	<tr>
 		<td class='head'><{$smarty.const._MD_PLZXOO_LANG_POINT}></td>
-		<td class='odd'><{$answer.point}><{$smarty.const._MD_PLZXOO_LANG_POINT_SUFFIX}></td>
+		<td class='odd'><{$answer.point_decorated}></td>
 	</tr>
 	<{/if}>
 </table>

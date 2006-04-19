@@ -1,4 +1,4 @@
-<h2 align="center"><?php echo  _MD_PLZXOO_LANG_DELETE_CONFIRM ?></h2>
+<h2 align="center"><?php echo _MD_PLZXOO_LANG_DELETE_CONFIRM ?></h2>
 
 <form method='post'>
 <?php echo  $template['editform']->ticket_->makeHTMLhidden() ?>

@@ -8,7 +8,11 @@ require_once "../class/global.class.php";
 exFrame::init ( EXFRAME_MOJALE );	// mojaLE を使用
 
 $module = "default";	// 決め打ち
-$action = isset($_REQUEST['action']) ? trim($_REQUEST['action']) : "";
+if( isset($_REQUEST['action']) ) {
+	$action = trim($_REQUEST['action']) ;
+} else {
+	$action = $_REQUEST['action'] = 'category_list' ;
+}
 
 $controller=new SimpleFrontController($module,$action,XOOPS_ROOT_PATH."/modules/plzXoo/admin");
 $controller->setVarbose();

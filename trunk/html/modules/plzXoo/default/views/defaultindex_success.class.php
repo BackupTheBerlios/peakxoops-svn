@@ -23,7 +23,7 @@ class default_DefaultindexView_success
 		$renderer->setAttribute('enable_post_question',exPerm::isPerm('post_question'));
 
 		$cat_handler =& plzXoo::getHandler('category');
-		$cat_obj =& $cat_handler->get( @$_GET['cid'] ) ;
+		$cat_obj =& $cat_handler->get( intval( @$_GET['cid'] ) ) ;
 		if( is_object( $cat_obj ) ) {
 			$renderer->setAttribute('category',$cat_obj->getStructure());
 		} else {

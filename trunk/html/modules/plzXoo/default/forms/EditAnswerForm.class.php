@@ -10,10 +10,10 @@ class EditAnswerForm extends exActionFormEx
 
 	function fetch(&$master) {
 		// チケットチェック
-		if(!exOnetimeTicket::inquiry(get_class($this))) {
+		if(!exOnetimeTicket::inquiry(strtolower(get_class($this)))) {
 			$this->addError(_MD_PLZXOO_ERROR_TICKET);
 			// 再発行
-			$this->ticket_=new exOnetimeTicket(get_class($this),3600);
+			$this->ticket_=new exOnetimeTicket(strtolower(get_class($this)),3600);
 			$this->ticket_->setSession();
 		}
 		else
@@ -30,7 +30,7 @@ class EditAnswerForm extends exActionFormEx
 		$this->qid_ = $master->getVar ( 'qid', 'e' );
 		$this->body_ = $master->getVar ( 'body', 'e' );
 		
-		$this->ticket_=new exOnetimeTicket(get_class($this),3600);
+		$this->ticket_=new exOnetimeTicket(strtolower(get_class($this)),3600);
 		$this->ticket_->setSession();
 	}
 

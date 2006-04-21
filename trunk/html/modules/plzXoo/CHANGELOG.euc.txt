@@ -1,5 +1,15 @@
 [xlang:en]
 
+-=v0.90alt --> v0.91alt=- (update the module)
+* fixed mysql.sql
+* added initialization of the category
+* added table indexes
+* modified compatibilities with PHP5
+* fixed include_path problem
+* modified compatibilities with XOOPS2.2.x
+* modified some templates
+* removed strftime() entirely
+
 -=v0.20alt --> v0.90(RC)alt=- (update this module essentially!)
 * RC release as my alternative version :-)
 * hierarchy of categories
@@ -30,6 +40,16 @@
 
 [/xlang:en]
 [xlang:ja]
+-=v0.90alt --> v0.91alt=- （モジュールアップデート必須！）
+* mysql.sql の記述忘れを修正
+* 初期状態でカテゴリーが存在するように変更
+* テーブルインデックスを追加
+* PHP5でいろいろ挙動がおかしかったのを修正
+* include_path問題を修正
+* 本家版XOOPS2.2での挙動がおかしかったのを修正
+* 一部テンプレートミスを修正
+* strftime() 依存部分を排除
+
 -=v0.20alt --> v0.90alt=- （モジュールアップデート必須！）
 * AlternativeとしてのRC版（要するに「もう機能は足さないよ」という宣言:-)）
 * カテゴリーの階層構造実装

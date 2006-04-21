@@ -21,6 +21,8 @@ function plzxoo_block_list_show( $options )
 			'qid' => intval( $qid ) ,
 			'cid' => intval( $cid ) ,
 			'input_date' => intval( $input_date ) ,
+			'input_date_formatted' => formatTimestamp( $input_date , 'm' ) ,
+			'input_date_utime' => xoops_getUserTimestamp( $input_date ) ,
 			'category_name' => htmlspecialchars( $category_name , ENT_QUOTES ) ,
 			'uid' => intval( $uid ) ,
 			'uname' => htmlspecialchars( $uname , ENT_QUOTES ) ,

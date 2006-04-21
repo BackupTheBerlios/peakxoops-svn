@@ -31,7 +31,7 @@ class default_Question_delAction extends mojaLE_AbstractAction
 		$editform = new exConfirmTicketForm();
 		$editform->setErrorMessage(_MD_PLZXOO_ERROR_TICKET);
    
-		if($editform->init(get_class($this))==ACTIONFORM_POST_SUCCESS) {
+		if($editform->init(strtolower(get_class($this)))==ACTIONFORM_POST_SUCCESS) {
 			$editform->release();
 			$cid = $question->getVar('cid') ;
 			if($handler->delete($question)) {

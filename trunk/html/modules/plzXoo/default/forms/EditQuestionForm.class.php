@@ -17,10 +17,10 @@ class EditQuestionForm extends exActionFormEx
 	var $ticket_;
 
 	function fetch(&$master) {
-		if(!exOnetimeTicket::inquiry(get_class($this))) {
+		if(!exOnetimeTicket::inquiry(strtolower(get_class($this)))) {
 			$this->addError(_MD_PLZXOO_ERROR_TICKET);
 			// ºÆÈ¯¹Ô
-			$this->ticket_=new exOnetimeTicket(get_class($this),3600);
+			$this->ticket_=new exOnetimeTicket(strtolower(get_class($this)),3600);
 			$this->ticket_->setSession();
 		}
 		else
@@ -66,7 +66,7 @@ class EditQuestionForm extends exActionFormEx
 		$this->priority_ = $master->getVar ( 'priority', 'e' );
 		$this->status_ = $master->getVar ( 'status', 'e' );
 
-		$this->ticket_=new exOnetimeTicket(get_class($this),3600);
+		$this->ticket_=new exOnetimeTicket(strtolower(get_class($this)),3600);
 		$this->ticket_->setSession();
 	}
 

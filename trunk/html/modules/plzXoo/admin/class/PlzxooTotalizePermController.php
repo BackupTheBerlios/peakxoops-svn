@@ -12,7 +12,7 @@ require_once "exForm/PermForm.php";
 // コンポーネント
 require_once "exComponent/Input.php";
 //require_once "exComponent/input/render/PermInputRender.php";
-require_once "class/PlzxooPermInputRender.php"; // GIJ
+require_once XOOPS_ROOT_PATH."/modules/plzXoo/admin/class/PlzxooPermInputRender.php"; // GIJ
 
 // Form を読み込む
 require_once "exComponent/Preview.php";
@@ -24,7 +24,7 @@ require_once XOOPS_ROOT_PATH."/kernel/group.php";
 // 使用するコンポーネント
 require_once "exComponent/confirm/TypicalConfirm.php";	// コンポーネント本体
 //require_once "exComponent/confirm/render/PermConfirmModelRender.php";	// Perm 用レンダー
-require_once "class/PlzxooPermConfirmModelRender.php";	// Perm 用レンダー // GIJ
+require_once XOOPS_ROOT_PATH."/modules/plzXoo/admin/class/PlzxooPermConfirmModelRender.php";	// Perm 用レンダー // GIJ
 require_once "exComponent/confirm/processor/PermTypicalConfirmUpdateProcessor.php";	// Perm 用プロセッサー
 
 // フォワードコンフィグ

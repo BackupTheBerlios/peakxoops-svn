@@ -31,12 +31,12 @@
 
 <{* EXTRACTION FORM AND LINK TO POST *}>
 
-<{if $enable_post_question }>
-	<form action='index.php' method='get' id='plzxoo_top_extraction'>
-		<label for="filter_txt"><{$smarty.const._MD_PLZXOO_LANG_LABEL_EXTRACTION}></label>
-		<input type="text" name="txt" value="<{$searchtxt4disp}>" id="filter_txt" />
-		<input type="submit" value="<{$smarty.const._MD_PLZXOO_LANG_GO_EXTRACTION}>" />
-		&nbsp;
+<form action='index.php' method='get' id='plzxoo_top_extraction'>
+	<label for="filter_txt"><{$smarty.const._MD_PLZXOO_LANG_LABEL_EXTRACTION}></label>
+	<input type="text" name="txt" value="<{$searchtxt4disp}>" id="filter_txt" />
+	<input type="submit" value="<{$smarty.const._MD_PLZXOO_LANG_GO_EXTRACTION}>" />
+	&nbsp;
+	<{if $enable_post_question }>
 		[ <a href="index.php?action=editques"><{$smarty.const._MD_PLZXOO_LANG_POST_QUESTION}></a> ]
-	</form>
-<{/if}>
+	<{/if}>
+</form>

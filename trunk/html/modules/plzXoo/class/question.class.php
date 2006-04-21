@@ -37,6 +37,8 @@ class plzXooQuestionObject extends exXoopsObject {
    		$ret['user']=$user->getArray($type);
 
 		$ret['status_str'] = $GLOBALS['plzxoo_status_mapping'][$this->getVar('status')];
+		$ret['input_date_formatted'] = formatTimestamp( $ret['input_date'] , 'm' ) ;
+		$ret['input_date_utime'] = xoops_getUserTimestamp( $ret['input_date'] ) ;
 
 		// ¥«¥Æ¥´¥ê
 		if($ret['cid']) {

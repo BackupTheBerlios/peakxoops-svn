@@ -22,9 +22,11 @@ class plzXooAnswerObject extends exXoopsObject {
 	{
 		$ret =& parent::getStructure($type);
 
-   		$uHandler=&xoops_gethandler('user');
-   		$user = new exXoopsUserObject($uHandler->get($this->getVar('uid')));
-   		$ret['user']=$user->getArray($type);
+		$uHandler=&xoops_gethandler('user');
+		$user = new exXoopsUserObject($uHandler->get($this->getVar('uid')));
+		$ret['user']=$user->getArray($type);
+		$ret['input_date_formatted'] = formatTimestamp( $ret['input_date'] , 'm' ) ;
+		$ret['input_date_utime'] = xoops_getUserTimestamp( $ret['input_date'] ) ;
 
 		return $ret;
 	}

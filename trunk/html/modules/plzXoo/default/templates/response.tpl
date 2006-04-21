@@ -11,7 +11,7 @@
 		<td rowspan='2'><?php echo  $template['answer']['body'] ?></td>
 	</tr>
 	<tr class='odd'>
-		<td width='20%'><?php echo  strftime("%Y/%m/%d %H:%M",$template['answer']['input_date']) ?></td>
+		<td width='20%'><?php echo formatTimestamp($template['answer']['input_date'],'m') ?></td>
 	</tr>
 </table>
 

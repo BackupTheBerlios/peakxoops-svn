@@ -27,7 +27,7 @@
 <{foreach item=i from=$questions}>
 	<tr class='<{cycle values="odd,even"}>'>
 		<td>
-			<{$i.input_date|date_format:"%Y/%m/%d %H:%M"}>
+			<{$i.input_date_formatted}>
 		</td>
 		<td>
 			<a href="index.php?action=detail&amp;qid=<{$i.qid}>"><{$i.subject}></a>

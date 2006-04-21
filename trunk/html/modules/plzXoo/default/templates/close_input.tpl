@@ -30,7 +30,7 @@
 			<td rowspan='2'><?php echo $template['question']['body'] ?></td>
 		</tr>
 		<tr class='odd'>
-			<td width='20%'><?php echo  strftime("%Y/%m/%d %H:%M",$template['question']['input_date']) ?></td>
+			<td width='20%'><?php echo  formatTimestamp($template['question']['input_date'],'m') ?></td>
 		</tr>
 	</table>
 	
@@ -49,7 +49,7 @@
 			</td>
 		</tr>
 		<tr class='even'>
-			<td width='20%'><?php echo formatTimestamp( $answer['input_date'] ) ; ?></td>
+			<td width='20%'><?php echo formatTimestamp( $answer['input_date'] , 'm' ) ; ?></td>
 		</tr>
 		<tr class='even'>
 			<td width='20%'>

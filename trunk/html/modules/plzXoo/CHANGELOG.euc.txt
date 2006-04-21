@@ -1,5 +1,8 @@
 [xlang:en]
 
+-=v0.91alt --> v0.92alt=-
+* fixed fatal error in guest's detail view (thx biroron)
+
 -=v0.90alt --> v0.91alt=- (update the module)
 * fixed mysql.sql
 * added initialization of the category
@@ -40,6 +43,11 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.91alt --> v0.92alt=-
+* ゲストだと詳細が見られないバグを修正 (thx biroron)
+* ドキュメントをちょっと追加
+
 -=v0.90alt --> v0.91alt=- （モジュールアップデート必須！）
 * mysql.sql の記述忘れを修正
 * 初期状態でカテゴリーが存在するように変更

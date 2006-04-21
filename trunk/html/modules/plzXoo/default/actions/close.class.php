@@ -21,6 +21,10 @@ class default_CloseAction extends mojaLE_AbstractAction
     			$request->setAttribute('error_message',_MD_PLZXOO_ERROR_QUESTION_CLOSED);
     			return VIEW_ERROR;
     		}
+    		elseif( ! is_object( $user ) ) {
+    			$request->setAttribute('error_message',_MD_PLZXOO_ERROR_PERMISSION);
+    			return VIEW_ERROR;
+    		}
 
 			// ここで権限を確認
 			if($question->getVar('uid')!=$user->uid() && !$user->isAdmin()) {

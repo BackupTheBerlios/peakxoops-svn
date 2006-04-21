@@ -22,7 +22,7 @@ class default_AnswerAction extends mojaLE_AbstractAction
 			$request->setAttribute('error_message',_MD_PLZXOO_ERROR_QUESTION_CLOSED);
 			return VIEW_ERROR;
 		}
-		elseif($question->getVar('uid')==$user->uid()) {
+		elseif(is_object($user) && $question->getVar('uid')==$user->uid()) {
 			exPerm::GuardRedirect('post_answer_myself','index.php',_MD_PLZXOO_ERROR_PERMISSION); // GIJ
 		} 
 

@@ -45,7 +45,7 @@ class default_DetailView_success
 		$renderer->setTemplate('plzxoo_detail.html');
 		$renderer->setAttribute('question',$question_arr);
 		$renderer->setAttribute('answers',$answers);
-		$renderer->setAttribute('enable_post_answer',exPerm::isPerm('post_answer')&& $question->getVar('uid') != $user->uid() | exPerm::isPerm('post_answer_myself') ) ; // GIJ
+		$renderer->setAttribute('enable_post_answer',exPerm::isPerm('post_answer')&& is_object( $user ) && $question->getVar('uid') != $user->uid() | exPerm::isPerm('post_answer_myself') ) ; // GIJ
 
 		$renderer->setAttribute('is_detail',true);
 

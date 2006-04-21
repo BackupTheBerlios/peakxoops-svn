@@ -180,27 +180,33 @@ $xoopsTpl->assign( 'last_modified' , $last_modified ) ;
 include( XOOPS_ROOT_PATH.'/include/comment_view.php' ) ;
 
 
-$php_self_ab = $mod_url . ($link == TC_WRAPTYPE_CONTENTBASE ? '/content' : '' ) . '/index.php' ;
+if( ! empty( $xoopsModuleConfig['tc_force_mod_rewrite'] ) || $link == TC_WRAPTYPE_USEREWRITE ) {
+	$mod_url_rewrite = $mod_url . '/' . substr( $tc_rewrite_dir , 0, -1 ) ;
+} else {
+	$mod_url_rewrite = $mod_url ;
+}
+
+$php_self_ab = $mod_url_rewrite . ($link == TC_WRAPTYPE_CONTENTBASE ? '/content' : '' ) . '/index.php' ;
 
 // relative link to absolut link of comment_links
 $commentsnav = $xoopsTpl->get_template_vars( "commentsnav" ) ;
 $commentsnav = str_replace( 'action="index.php"' , 'action="'.$php_self_ab.'"' , $commentsnav ) ;
-$commentsnav = str_replace( "href='comment_new.php" , "href='$mod_url/comment_new.php" , $commentsnav ) ;
+$commentsnav = str_replace( "href='comment_new.php" , "href='$mod_url_rewrite/comment_new.php" , $commentsnav ) ;
 $xoopsTpl->assign( 'commentsnav' , $commentsnav ) ;
 
 $editcomment_link = $xoopsTpl->get_template_vars( "editcomment_link" ) ;
 if( substr( $editcomment_link , 0 , 8 ) == 'comment_' ) {
-	$xoopsTpl->assign( 'editcomment_link' , "$mod_url/$editcomment_link" ) ;
+	$xoopsTpl->assign( 'editcomment_link' , "$mod_url_rewrite/$editcomment_link" ) ;
 }
 
 $deletecomment_link = $xoopsTpl->get_template_vars( "deletecomment_link" ) ;
 if( substr( $deletecomment_link , 0 , 8 ) == 'comment_' ) {
-	$xoopsTpl->assign( 'deletecomment_link' , "$mod_url/$deletecomment_link" ) ;
+	$xoopsTpl->assign( 'deletecomment_link' , "$mod_url_rewrite/$deletecomment_link" ) ;
 }
 
 $replycomment_link = $xoopsTpl->get_template_vars( "replycomment_link" ) ;
 if( substr( $replycomment_link , 0 , 8 ) == 'comment_' ) {
-	$xoopsTpl->assign( 'replycomment_link' , "$mod_url/$replycomment_link" ) ;
+	$xoopsTpl->assign( 'replycomment_link' , "$mod_url_rewrite/$replycomment_link" ) ;
 }
 
 include( XOOPS_ROOT_PATH.'/footer.php' ) ;

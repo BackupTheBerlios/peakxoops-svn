@@ -43,6 +43,8 @@ define ( '_MD_PLZXOO_LANG_TITLE_NEW_QUESTION','新規質問投稿' );
 define ( '_MD_PLZXOO_LANG_TITLE_EDIT_QUESTION','質問の編集' );
 define ( '_MD_PLZXOO_LANG_TITLE_NEW_ANSWER','新規回答投稿' );
 define ( '_MD_PLZXOO_LANG_TITLE_EDIT_ANSWER','回答の編集' );
+define ( '_MD_PLZXOO_LANG_STATUS_NEW','新規' );
+define ( '_MD_PLZXOO_LANG_STATUS_MODIFY','変更' );
 
 
 // <--- BREAD CRUMB --->

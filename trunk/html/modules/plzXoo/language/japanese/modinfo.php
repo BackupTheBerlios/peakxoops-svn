@@ -23,5 +23,26 @@ define ( '_MI_PLZXOO_POINTS_DESC','選択可能なポイント（半角数字）を|で区切って入
 define ( '_MI_PLZXOO_POINTS2POSTS','ポイントを投稿数に反映する' );
 define ( '_MI_PLZXOO_POINTS2POSTS_DESC','ポイント確定時に、回答を投稿した人の投稿数が、ポイント分だけ増えます。' );
 
+// <--- NOTIFICATIONS PROPERTY --->
+define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'モジュール全体' ) ;
+define( '_MI_PLZXOO_GLOBAL_NOTIFYDSC' , '教えて!Xooモジュール全体における通知オプション' ) ;
+define( '_MI_PLZXOO_CATEGORY_NOTIFY' , 'カテゴリー' ) ;
+define( '_MI_PLZXOO_CATEGORY_NOTIFYDSC' , '選択中のカテゴリーに対する通知オプション' ) ;
+define( '_MI_PLZXOO_QUESTION_NOTIFY' , '質問' ) ;
+define( '_MI_PLZXOO_QUESTION_NOTIFYDSC' , 'この質問に対する通知オプション' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFY' , '新規質問' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYCAP' , '新規に質問が登録された時に通知する' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYDSC' , '新規に質問が登録された時に通知する' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 質問更新' ) ;
+define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFY' , '新規質問' ) ;
+define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYCAP' , 'このカテゴリに新規に質問が登録された時に通知する' ) ;
+define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYDSC' , 'このカテゴリに新規に質問が登録された時に通知する' ) ;
+define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: カテゴリー内質問更新' ) ;
+define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFY' , '新規回答' ) ;
+define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYCAP' , 'この質問に回答が投稿された時に通知する' ) ;
+define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYDSC' , 'この質問に回答が投稿された時に通知する' ) ;
+define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 回答更新' ) ;
+
+
 
 ?>

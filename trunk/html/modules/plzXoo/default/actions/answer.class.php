@@ -34,8 +34,10 @@ class default_AnswerAction extends mojaLE_AbstractAction
             $obj=&$handler->create();
             $obj->setVar('uid',$user->uid());
             $obj->setVar('qid',$qid);
+            $answer_status4notify = _MD_PLZXOO_LANG_STATUS_NEW ;
         }
         else {
+            $answer_status4notify = _MD_PLZXOO_LANG_STATUS_MODIFY ;
     		// 権限の確認
     		if(!$obj->isEnableEdit($user)) {
     			$request->setAttribute('error_message',_MD_PLZXOO_ERROR_PERMISSION);
@@ -48,9 +50,15 @@ class default_AnswerAction extends mojaLE_AbstractAction
             $editform->update($obj); // 入力内容をオブジェクトに受け取る
 			$request->setAttribute('question',$question);
 			if($handler->insert($obj)) {
-				// 回答件数を増加させる
+
+				// 回答件数を更新する（増加ではなく、再カウント）
 				$question->updateSize();
 				$qHandler->insert($question);
+
+				// 回答追加イベントをトリガー
+				$notification_handler =& xoops_gethandler( 'notification' ) ;
+				$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'newa' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'ANSWER_UNAME' => $user->getVar('uname') , 'ANSWER_STATUS' => $answer_status4notify , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+
 				return VIEW_SUCCESS;
 			}
 			else

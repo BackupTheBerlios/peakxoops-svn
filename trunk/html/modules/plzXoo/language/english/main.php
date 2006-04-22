@@ -43,6 +43,8 @@ define ( '_MD_PLZXOO_LANG_TITLE_NEW_QUESTION','New Question' );
 define ( '_MD_PLZXOO_LANG_TITLE_EDIT_QUESTION','Edit Question' );
 define ( '_MD_PLZXOO_LANG_TITLE_NEW_ANSWER','New Answer' );
 define ( '_MD_PLZXOO_LANG_TITLE_EDIT_ANSWER','Edit Answer' );
+define ( '_MD_PLZXOO_LANG_STATUS_NEW','Created' );
+define ( '_MD_PLZXOO_LANG_STATUS_MODIFY','Modified' );
 
 // <--- BREAD CRUMB --->
 define ( '_MD_PLZXOO_BRCR_HOME','HOME' );

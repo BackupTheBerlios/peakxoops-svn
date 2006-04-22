@@ -1,5 +1,8 @@
 [xlang:en]
 
+-=v0.92alt --> v0.93alt=-
+* added 3 type of notifications
+
 -=v0.91alt --> v0.92alt=-
 * fixed fatal error in guest's detail view (thx biroron)
 
@@ -43,6 +46,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.92alt --> v0.93alt=-
+* 3パターンのイベント通知を実装
 
 -=v0.91alt --> v0.92alt=-
 * ゲストだと詳細が見られないバグを修正 (thx biroron)

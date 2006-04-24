@@ -15,7 +15,8 @@ define('_MI_PLZXOO_ADMENU_MYBLOCKSADMIN','Blocks');
 define('_MI_PLZXOO_ADMENU_MYTPLSADMIN','Templates');
 
 // <--- BLOCKS PROPERTY --->
-define('_MI_PLZXOO_BNAME1','Question List');
+define('_MI_PLZXOO_BNAME1','Questions List');
+define('_MI_PLZXOO_BNAME2','Answers List');
 
 // <--- CONFIGS PROPERTY --->
 define ( '_MI_PLZXOO_POINTS','Points' );

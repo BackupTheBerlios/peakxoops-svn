@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.93;
+$modversion['version'] = 0.94;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";
@@ -22,6 +22,18 @@ $modversion['templates'][2]['file'] = 'plzxoo_header_category.html';
 $modversion['templates'][2]['description'] = '';
 $modversion['templates'][3]['file'] = 'plzxoo_header_nocategory.html';
 $modversion['templates'][3]['description'] = '';
+$modversion['templates'][4]['file'] = 'plzxoo_question_delete.html';
+$modversion['templates'][4]['description'] = '';
+$modversion['templates'][5]['file'] = 'plzxoo_question_close.html';
+$modversion['templates'][5]['description'] = '';
+$modversion['templates'][6]['file'] = 'plzxoo_question_edit.html';
+$modversion['templates'][6]['description'] = '';
+$modversion['templates'][7]['file'] = 'plzxoo_answer_delete.html';
+$modversion['templates'][7]['description'] = '';
+$modversion['templates'][8]['file'] = 'plzxoo_answer_edit.html';
+$modversion['templates'][8]['description'] = '';
+$modversion['templates'][9]['file'] = 'plzxoo_answer_response.html';
+$modversion['templates'][9]['description'] = '';
 
 // <--- BLOCK PROPERTY --->
 $modversion['blocks'][1]['file'] = 'plzxoo_block_list.php';
@@ -31,6 +43,13 @@ $modversion['blocks'][1]['edit_func'] = 'plzxoo_block_list_edit';
 $modversion['blocks'][1]['template'] = 'plzxoo_block_list.html';
 $modversion['blocks'][1]['options'] = 'plzXoo|5|50|0|0';
 $modversion['blocks'][1]['can_clone'] = 'true';
+$modversion['blocks'][2]['file'] = 'plzxoo_block_answers.php';
+$modversion['blocks'][2]['name'] = _MI_PLZXOO_BNAME2 ;
+$modversion['blocks'][2]['show_func'] = 'plzxoo_block_answers_show';
+$modversion['blocks'][2]['edit_func'] = 'plzxoo_block_answers_edit';
+$modversion['blocks'][2]['template'] = 'plzxoo_block_answers.html';
+$modversion['blocks'][2]['options'] = 'plzXoo|5|50|0|0';
+$modversion['blocks'][2]['can_clone'] = 'true';
 
 // <--- SQL PROPERTY --->
 $modversion['sqlfile']['mysql']='sql/mysql.sql';

@@ -98,6 +98,10 @@ class default_CloseAction extends mojaLE_AbstractAction
 			$answers=&$handler->getObjects($criteria);
 			$request->setAttribute('answers',$answers);
 
+			$handler=&plzXoo::getHandler('category');
+			$category=&$handler->get($question->getVar('cid'));
+			$request->setAttribute('category',$category);
+
             return VIEW_INPUT;
 	}
 	

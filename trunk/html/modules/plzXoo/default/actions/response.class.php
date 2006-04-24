@@ -25,6 +25,9 @@ class default_ResponseAction extends mojaLE_AbstractAction
 		$q_handler=&plzXoo::getHandler('question');
 		$question=&$q_handler->get($obj->getVar('qid'));
 
+		$c_handler=&plzXoo::getHandler('category');
+		$category=&$c_handler->get($question->getVar('cid'));
+
 		// この質問がアクティブなのか確認
 		if(!is_object($question))
 			return VIEW_ERROR;
@@ -53,6 +56,7 @@ class default_ResponseAction extends mojaLE_AbstractAction
 		$request->setAttribute('editform',$editform);
 		$request->setAttribute('answer',$obj);
 		$request->setAttribute('question',$question);
+		$request->setAttribute('category',$category);
 
 		return VIEW_INPUT;
 	}

@@ -65,7 +65,11 @@ class default_AnswerAction extends mojaLE_AbstractAction
 				return VIEW_ERROR;
         }
 
+        $handler=&plzXoo::getHandler('category');
+        $category=&$handler->get($question->getVar('cid'));
+
         $request->setAttribute('editform',$editform);
+        $request->setAttribute('category',$category);
         $request->setAttribute('question',$question);
         $request->setAttribute('answer',$obj);
         return VIEW_INPUT;

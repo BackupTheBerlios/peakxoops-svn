@@ -10,7 +10,7 @@ class default_ResponseView_error
 		$answer=&$request->getAttribute('answer');
 		$message = $request->getAttribute('message');
 		if(!$message) $message = _MD_PLZXOO_MESSAGE_FAIL;
-		redirect_header('index.php?action=detail&qid='.$answer->getVar('qid'), 3, $message);
+		redirect_header('index.php' , 3, $message ) ;
 
 		$renderer = new mojaLE_NoneRenderer($controller,$request,$user);
 		return $renderer;

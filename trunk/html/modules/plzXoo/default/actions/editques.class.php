@@ -65,6 +65,7 @@ class default_EditquesAction extends mojaLE_AbstractAction
 		$categories=&$cHandler->getObjects();
 
         $request->setAttribute('editform',$editform);
+        $request->setAttribute('question',$obj);
         $request->setAttribute('categories',$categories);
         return VIEW_INPUT;
 	}

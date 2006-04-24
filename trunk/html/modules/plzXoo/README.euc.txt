@@ -75,4 +75,13 @@ http://cvs.sourceforge.jp/cgi-bin/viewcvs.cgi/exmodules/exFrame/exFrame.tar.gz?t
 そのため、「詳細を閲覧できる」以外の権限を与えても無視されます。
 
 
+0.94以降、公開側でのXoopsFormの利用を全面的にやめています。
+
+質問や回答の本文入力に、従来のリッチフォームを利用したい場合は、以下の２つのテンプレートを編集してください。（そのサンプルは、コメントアウトした状態で用意してあります）
+plzxoo_question_edit.html
+plzxoo_answer_edit.html
+
+これを利用する場合、先に、Smartyプラグインを用意しておく必要があります。
+このアーカイブのclass/extras/function.xoopsdhtmltarea.php を、class/smarty/plugins にコピーしてください。このプラグインをすでに利用中の場合は、この作業は特に必要ありません。
+
 [/xlang:ja]

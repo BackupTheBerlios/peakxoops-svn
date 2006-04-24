@@ -45,8 +45,15 @@ class default_Answer_delAction extends mojaLE_AbstractAction
 			return VIEW_ERROR;
 		}
 
+		$handler=&plzXoo::getHandler('question');
+		$question=&$handler->get($obj->getVar('qid'));
+		$handler=&plzXoo::getHandler('category');
+		$category=&$handler->get($question->getVar('cid'));
+
 		$request->setAttribute('editform',$editform);
 		$request->setAttribute('obj',$obj);
+		$request->setAttribute('question',$question);
+		$request->setAttribute('category',$category);
 
 		return VIEW_INPUT;
 	}

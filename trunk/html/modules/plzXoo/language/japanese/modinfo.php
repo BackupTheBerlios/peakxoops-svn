@@ -16,6 +16,7 @@ define('_MI_PLZXOO_ADMENU_MYTPLSADMIN','テンプレート管理');
 
 // <--- BLOCKS PROPERTY --->
 define('_MI_PLZXOO_BNAME1','質問一覧');
+define('_MI_PLZXOO_BNAME2','回答一覧');
 
 // <--- CONFIGS PROPERTY --->
 define ( '_MI_PLZXOO_POINTS','ポイント選択肢' );

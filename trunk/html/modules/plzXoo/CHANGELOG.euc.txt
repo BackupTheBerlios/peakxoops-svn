@@ -1,5 +1,9 @@
 [xlang:en]
 
+-=v0.93alt --> v0.94alt=- (update the module)
+* changed renderer from mojaLE to XoopsTpl
+* added answers list block
+
 -=v0.92alt --> v0.93alt=-
 * added 3 type of notifications
 
@@ -46,6 +50,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.93alt --> v0.94alt=- （モジュールアップデート必須！）
+* 公開側画面を全面的にXoopsTpl利用に変更
+* 回答一覧ブロックの追加
 
 -=v0.92alt --> v0.93alt=-
 * 3パターンのイベント通知を実装

@@ -23,6 +23,11 @@ define ( '_MI_PLZXOO_POINTS','Points' );
 define ( '_MI_PLZXOO_POINTS_DESC','Set points separated with "|".<br />":" means maximum items of the point<br />eg) 0|10:5|20:1 means that 20pts can be added into just an answer, 10pts can be added into max 5 answers. rest of answers will be 0pt' );
 define ( '_MI_PLZXOO_POINTS2POSTS','Add plzXoo\'s points into users\'s posts' );
 define ( '_MI_PLZXOO_POINTS2POSTS_DESC','' );
+define ( '_MI_PLZXOO_INDEXODRDEF','Default order in list view' );
+define ( '_MI_PLZXOO_INDEXODR_INPUTDSC','added date desc' );
+define ( '_MI_PLZXOO_INDEXODR_MODIFIEDDSC','modified date desc' );
+define ( '_MI_PLZXOO_INDEXODR_ST_INPUTDSC','added date desc (Actives are upper)' );
+define ( '_MI_PLZXOO_INDEXODR_ST_MODIFIEDDSC','modified date desc¡ÊActives are upper¡Ë' );
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'Global' ) ;

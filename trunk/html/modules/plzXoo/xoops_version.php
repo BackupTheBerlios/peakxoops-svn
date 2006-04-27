@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.94;
+$modversion['version'] = 0.95;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";
@@ -41,14 +41,14 @@ $modversion['blocks'][1]['name'] = _MI_PLZXOO_BNAME1 ;
 $modversion['blocks'][1]['show_func'] = 'plzxoo_block_list_show';
 $modversion['blocks'][1]['edit_func'] = 'plzxoo_block_list_edit';
 $modversion['blocks'][1]['template'] = 'plzxoo_block_list.html';
-$modversion['blocks'][1]['options'] = 'plzXoo|5|50|0|0';
+$modversion['blocks'][1]['options'] = 'plzXoo|5|50|0|0|0';
 $modversion['blocks'][1]['can_clone'] = 'true';
 $modversion['blocks'][2]['file'] = 'plzxoo_block_answers.php';
 $modversion['blocks'][2]['name'] = _MI_PLZXOO_BNAME2 ;
 $modversion['blocks'][2]['show_func'] = 'plzxoo_block_answers_show';
 $modversion['blocks'][2]['edit_func'] = 'plzxoo_block_answers_edit';
 $modversion['blocks'][2]['template'] = 'plzxoo_block_answers.html';
-$modversion['blocks'][2]['options'] = 'plzXoo|5|50|0|0';
+$modversion['blocks'][2]['options'] = 'plzXoo|5|50|0|0|0';
 $modversion['blocks'][2]['can_clone'] = 'true';
 
 // <--- SQL PROPERTY --->
@@ -84,6 +84,14 @@ $modversion['config'][2]['description']='_MI_PLZXOO_POINTS2POSTS_DESC';
 $modversion['config'][2]['formtype']='yesno';
 $modversion['config'][2]['valuetype']='int';
 $modversion['config'][2]['default']=1 ;
+
+$modversion['config'][3]['name']='index_order_default';
+$modversion['config'][3]['title']='_MI_PLZXOO_INDEXODRDEF';
+$modversion['config'][3]['description']='';
+$modversion['config'][3]['formtype']='select';
+$modversion['config'][3]['valuetype']='int';
+$modversion['config'][3]['default']=0 ;
+$modversion['config'][3]['options']=array('_MI_PLZXOO_INDEXODR_INPUTDSC'=>0,'_MI_PLZXOO_INDEXODR_ST_INPUTDSC'=>2,'_MI_PLZXOO_INDEXODR_MODIFIEDDSC'=>4,'_MI_PLZXOO_INDEXODR_ST_MODIFIEDDSC'=>6) ;
 
 // <--- NOTIFICATION PROPERTY --->
 $modversion['hasNotification'] = 1;

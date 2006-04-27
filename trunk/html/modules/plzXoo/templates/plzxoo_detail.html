@@ -1,5 +1,9 @@
 <{include file="db:plzxoo_header_category.html"}>
 
+<div align='right'>
+	<{$smarty.const._MD_PLZXOO_LANG_MODIFIED_DATE}>:<{$question.modified_date_formatted}>
+</div>
+
 <table class='outer'>
 	<tr class='head'>
 		<td colspan='2'>
@@ -70,7 +74,12 @@
 		</td>
 	</tr>
 	<tr class='even'>
-		<td width='20%'><{$answer.input_date_formatted}></td>
+		<td width='20%'>
+			<{$answer.input_date_formatted}>
+			<{if $answer.input_date < $answer.modified_date}>
+				(<{$answer.modified_date_formatted}>)
+			<{/if}>
+		</td>
 	</tr>
 	<{if $answer.comment}>
 	<tr>
@@ -86,7 +95,13 @@
 	<{/if}>
 </table>
 <{if $question.uid==$xoops_userid }>
-	[ <a href="index.php?action=response&amp;aid=<{$answer.aid}>"><{$smarty.const._MD_PLZXOO_LANG_RESPONSE_TO_THIS}></a> ]
+	[ <a href="index.php?action=response&amp;aid=<{$answer.aid}>">
+		<{if $answer.comment}>
+			<{$smarty.const._MD_PLZXOO_LANG_EDIT_RESPONSE}>
+		<{else}>
+			<{$smarty.const._MD_PLZXOO_LANG_NEW_RESPONSE}>
+		<{/if}>
+	</a> ]
 <{/if}>
 </p>
 <{/foreach}>

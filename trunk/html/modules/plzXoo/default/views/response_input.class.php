@@ -65,7 +65,10 @@ class default_ResponseView_input
 		$renderer->setAttribute('error_html',$editform->getHtmlErrors());
 		$renderer->setAttribute('category',$category->getStructure());
 		$renderer->setAttribute('question',$question->getStructure());
-		$renderer->setAttribute('answer',$answer->getStructure());
+
+		$answer_structure = $answer->getStructure() ;
+		$answer_structure['comment4edit'] = $answer->getVar('comment','e') ;
+		$renderer->setAttribute('answer',$answer_structure);
 
 		return $renderer;
 	}

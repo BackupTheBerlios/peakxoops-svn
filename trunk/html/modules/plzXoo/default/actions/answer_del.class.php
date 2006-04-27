@@ -39,6 +39,7 @@ class default_Answer_delAction extends mojaLE_AbstractAction
 				$qHandler=&plzXoo::getHandler('question');
 				$question=&$qHandler->get($obj->getVar('qid'));
 				$question->updateSize();
+				$question->setVar('modified_date',time());
 				$qHandler->insert($question);
 				return VIEW_SUCCESS;
 			}

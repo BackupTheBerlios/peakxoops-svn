@@ -5,6 +5,7 @@ CREATE TABLE plzxoo_question (
 	`subject` varchar(255) NOT NULL default '',
 	`body` text NOT NULL default '',
 	`input_date` int(10) NOT NULL default 0,
+	`modified_date` int(10) NOT NULL default 0,
 	`priority` tinyint(3) NOT NULL default 0,
 	`status` tinyint(1) NOT NULL default 1,
 	`size` mediumint(5) NOT NULL default 0,
@@ -14,6 +15,7 @@ CREATE TABLE plzxoo_question (
 	KEY (`uid`) ,
 	KEY (`status`) ,
 	KEY (`input_date`)
+	KEY (`modified_date`)
 ) TYPE=MyISAM;
 
 CREATE TABLE plzxoo_answer ( 
@@ -21,6 +23,7 @@ CREATE TABLE plzxoo_answer (
 	`qid` int(10) NOT NULL default 0,
 	`uid` mediumint(5) NOT NULL default 0,
 	`input_date` int(10) NOT NULL default 0,
+	`modified_date` int(10) NOT NULL default 0,
 	`body` text NOT NULL default '',
 	`comment` varchar(255) NOT NULL default '',
 	`point` tinyint(3) NOT NULL default 0,
@@ -28,6 +31,7 @@ CREATE TABLE plzxoo_answer (
 	KEY (`qid`) ,
 	KEY (`uid`) ,
 	KEY (`input_date`)
+	KEY (`modified_date`)
 ) TYPE=MyISAM;
 
 CREATE TABLE plzxoo_category ( 

@@ -6,7 +6,7 @@ class default_Category_deleteView_input
 	{
 		$editform=&$request->getAttribute('editform');
 		$obj=&$request->getAttribute('obj');
-		
+
 		$renderer = new mojaLE_Renderer($controller,$request,$user);
 		$renderer->setTemplate('category_delete.tpl');
 

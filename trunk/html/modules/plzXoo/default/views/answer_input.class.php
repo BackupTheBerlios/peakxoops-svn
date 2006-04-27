@@ -48,7 +48,7 @@ class default_AnswerView_input
 		$renderer->setAttribute('error_html',$editform->getHtmlErrors());
 		$renderer->setAttribute('category',$category->getStructure());
 		$renderer->setAttribute('question',$question->getStructure());
-		$renderer->setAttribute('answer',$answer->getStructure());
+		$renderer->setAttribute('answer',$answer->getStructure('e'));
 		return $renderer;
 	}
 }

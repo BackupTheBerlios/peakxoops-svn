@@ -19,6 +19,7 @@ class plzXooQuestionObject extends exXoopsObject {
 		$this->initVar('subject', XOBJ_DTYPE_TXTBOX, null, true, 255);
 		$this->initVar('body', XOBJ_DTYPE_TXTAREA, null, true, null);
 		$this->initVar('input_date', XOBJ_DTYPE_INT, time(), false);
+		$this->initVar('modified_date', XOBJ_DTYPE_INT, time(), false);
 		$this->initVar('priority', XOBJ_DTYPE_INT, 3, true);
 		$this->initVar('status', XOBJ_DTYPE_INT, 1, true);
 		$this->initVar('size', XOBJ_DTYPE_INT, 0, true);
@@ -39,6 +40,8 @@ class plzXooQuestionObject extends exXoopsObject {
 		$ret['status_str'] = $GLOBALS['plzxoo_status_mapping'][$this->getVar('status')];
 		$ret['input_date_formatted'] = formatTimestamp( $ret['input_date'] , 'm' ) ;
 		$ret['input_date_utime'] = xoops_getUserTimestamp( $ret['input_date'] ) ;
+		$ret['modified_date_formatted'] = formatTimestamp( $ret['modified_date'] , 'm' ) ;
+		$ret['modified_date_utime'] = xoops_getUserTimestamp( $ret['modified_date'] ) ;
 
 		// ¥«¥Æ¥´¥ê
 		if($ret['cid']) {

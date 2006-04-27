@@ -71,6 +71,5 @@ class plzXooCategoryObject extends exXoopsObject {
 	}
 
 
-
 }
 ?>

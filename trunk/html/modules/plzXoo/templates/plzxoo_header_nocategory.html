@@ -22,7 +22,7 @@
 <{foreach item=child from=$category.children}>
 	<{foreach item=title key=cid from=$child}>
 		<div class="plzxoo_subcategories" style="float:left; margin:2px;">
-			<a href="index.php?cid=<{$cid}>"><img src="images/folder16.gif" border="0" /><{$title|escape}></a> &nbsp;
+			<a href="index.php?cid=<{$cid}>"><img src="images/folder16.gif" border="0" alt="folder16" /><{$title|escape}></a> &nbsp;
 		</div>
 	<{/foreach}>
 <{/foreach}>

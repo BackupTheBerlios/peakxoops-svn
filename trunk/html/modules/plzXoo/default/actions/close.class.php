@@ -71,6 +71,7 @@ class default_CloseAction extends mojaLE_AbstractAction
 		    		}
 		    		// answerテーブルにポイント保存
 	            	$answer->setVar('point',$point);
+					$answer->setVar('modified_date',time());
 		            $answer_handler->insert($answer);
 		            $user =& $member_handler->getUser( $answer->getVar('uid') ) ;
 
@@ -84,6 +85,7 @@ class default_CloseAction extends mojaLE_AbstractAction
             	$editform->sessionClear();	// セッションクリア
             	$question->setVar('status',2);
 	            $request->setAttribute('question',$question);
+	            $question->setVar('modified_date',time());
                 return $handler->insert($question) ?
                     VIEW_SUCCESS : VIEW_ERROR;
             }

@@ -23,6 +23,11 @@ define ( '_MI_PLZXOO_POINTS','ポイント選択肢' );
 define ( '_MI_PLZXOO_POINTS_DESC','選択可能なポイント（半角数字）を|で区切って入力します。<br />制限したいポイントについては、「ポイント:最大回答数」と記述します。<br />0|10:5|20:1 の場合、20ptが１件だけ、10ptが５件まで、0ptは無制限となります。' );
 define ( '_MI_PLZXOO_POINTS2POSTS','ポイントを投稿数に反映する' );
 define ( '_MI_PLZXOO_POINTS2POSTS_DESC','ポイント確定時に、回答を投稿した人の投稿数が、ポイント分だけ増えます。' );
+define ( '_MI_PLZXOO_INDEXODRDEF','質問一覧表示でのデフォルト順' );
+define ( '_MI_PLZXOO_INDEXODR_INPUTDSC','登録日降順' );
+define ( '_MI_PLZXOO_INDEXODR_MODIFIEDDSC','更新日降順' );
+define ( '_MI_PLZXOO_INDEXODR_ST_INPUTDSC','登録日降順（受付中優先）' );
+define ( '_MI_PLZXOO_INDEXODR_ST_MODIFIEDDSC','更新日降順（受付中優先）' );
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'モジュール全体' ) ;

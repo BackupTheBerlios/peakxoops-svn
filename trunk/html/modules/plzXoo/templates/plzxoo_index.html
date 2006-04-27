@@ -10,17 +10,21 @@
 	<tr class='head'>
 		<td width='20%'>
 			<{$smarty.const._MD_PLZXOO_LANG_INPUT_DATE}>
+			<br />
+			<{$smarty.const._MD_PLZXOO_LANG_MODIFIED_DATE}>
 		</td>
 		<td>
 			<{$smarty.const._MD_PLZXOO_LANG_SUBJECT}>
 		</td>
-		<td width='10%'>
-			<{$smarty.const._MD_PLZXOO_LANG_PRIORITY}>/<{$smarty.const._MD_PLZXOO_LANG_QUESTION_POSTER}>
+		<td width='10%' align='center'>
+			<{$smarty.const._MD_PLZXOO_LANG_PRIORITY}>
+			<br />
+			<{$smarty.const._MD_PLZXOO_LANG_QUESTION_POSTER}>
 		</td>
-		<td width='15%'>
+		<td width='15%' align='center'>
 			<{$smarty.const._MD_PLZXOO_LANG_CATEGORY}>
 		</td>
-		<td width='15%'>
+		<td width='15%' align='right'>
 			<{$smarty.const._MD_PLZXOO_LANG_STATUS}>
 		</td>
 	</tr>
@@ -28,6 +32,8 @@
 	<tr class='<{cycle values="odd,even"}>'>
 		<td>
 			<{$i.input_date_formatted}>
+			<br />
+			(<{$i.modified_date_formatted}>)
 		</td>
 		<td>
 			<a href="index.php?action=detail&amp;qid=<{$i.qid}>"><{$i.subject}></a>

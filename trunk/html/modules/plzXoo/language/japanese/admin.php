@@ -10,6 +10,7 @@ define ( '_MD_A_PLZXOO_LANG_SUBMIT','送信' );
 define ( '_MD_A_PLZXOO_LANG_CONTROL','操作' );
 define ( '_MD_A_PLZXOO_LANG_RESET','リセット' );
 define ( '_MD_A_PLZXOO_LANG_DESCRIPTION','概要' );
+define ( '_MD_A_PLZXOO_LANG_SIZE','質問数' );
 define ( '_MD_A_PLZXOO_LANG_TOP','トップ' );
 define ( '_MD_A_PLZXOO_LANG_EDIT_CATEGORY','カテゴリの編集' );
 define ( '_MD_A_PLZXOO_LANG_EDIT','編集' );
@@ -23,7 +24,7 @@ define ( '_MD_A_PLZXOO_LANG_PERMISSION_SETTING','パーミッションの設定' );
 define ( '_MD_A_PLZXOO_MESSAGE_CONFIRM_DELETE','このデータを本当に削除しますか？' );
 define ( '_MD_A_PLZXOO_MESSAGE_DBUPDATE_FAIL','データーベースの更新に失敗しました' );
 define ( '_MD_A_PLZXOO_MESSAGE_DBUPDATE_SUCCESS','データーベースの更新に成功しました' );
-define ( '_MD_A_PLZXOO_MESSAGE_DELETE_CATEGORY','　このカテゴリの下にある子カテゴリは、トップ位置へ移動します。<br/>　また、このカテゴリの下にあるデータはすべてトップカテゴリへ移動させます' );
+define ( '_MD_A_PLZXOO_MESSAGE_DELETE_CATEGORY','子カテゴリのあるカテゴリは削除できません。<br/>また、このカテゴリ内の質問・回答はすべて削除されます' );
 
 // <--- ERROR PROPERTY --->
 define ( '_MD_A_PLZXOO_ERROR_PID_INJURY','親カテゴリの指定が不正です' );

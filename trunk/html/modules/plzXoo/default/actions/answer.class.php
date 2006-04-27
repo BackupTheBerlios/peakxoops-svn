@@ -49,10 +49,12 @@ class default_AnswerAction extends mojaLE_AbstractAction
         if($editform->init($obj)==ACTIONFORM_POST_SUCCESS) {
             $editform->update($obj); // 入力内容をオブジェクトに受け取る
 			$request->setAttribute('question',$question);
+			$obj->setVar('modified_date',time());
 			if($handler->insert($obj)) {
 
 				// 回答件数を更新する（増加ではなく、再カウント）
 				$question->updateSize();
+				$question->setVar('modified_date',time());
 				$qHandler->insert($question);
 
 				// 回答追加イベントをトリガー

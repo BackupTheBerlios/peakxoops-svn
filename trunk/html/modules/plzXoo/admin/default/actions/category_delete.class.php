@@ -33,8 +33,28 @@ class default_Category_deleteAction extends mojaLE_AbstractAction
 			$editform->release();
 
 			// ----------------------------------------------
-			// ぶら下がっている記事をトップへ移動させる必要がある
+			// 子カテゴリーがあったらエラー
 			// ----------------------------------------------
+			$cid =  $obj->getVar('cid') ;
+			$child_handler =& plzXoo::getHandler('category');
+			$children =& $child_handler->getObjects( new Criteria('pid',$cid) ) ;
+			if( ! empty( $children ) ) return VIEW_ERROR ;
+
+			// ----------------------------------------------
+			// ぶら下がっている質問・回答をすべて削除
+			// ----------------------------------------------
+			$question_handler =& plzXoo::getHandler('question');
+			$answer_handler =& plzXoo::getHandler('answer');
+			$questions =& $question_handler->getObjects( new Criteria('cid',$cid) ) ;
+			foreach( $questions as $question ) {
+				$qid = $question->getVar('qid') ;
+				$answers =& $answer_handler->getObjects( new Criteria('qid',$qid) ) ;
+				foreach( $answers as $answer ) {
+					$answer_handler->delete( $answer ) ;
+				}
+
+				$question_handler->delete( $question ) ;
+			}
 
 			return $handler->delete($obj) ?
 				VIEW_SUCCESS : VIEW_ERROR;

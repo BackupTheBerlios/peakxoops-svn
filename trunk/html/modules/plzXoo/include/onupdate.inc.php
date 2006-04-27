@@ -8,10 +8,19 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 	/* Module specific part */
 
 	global $xoopsDB ;
-	// add column 'for_search'
+	// add column 'for_search' into question table
 	$result = $xoopsDB->query( "SELECT COUNT(`for_search`) FROM ".$xoopsDB->prefix("plzxoo_question") ) ;
 	if( $result === false ) {
 		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_question")." ADD `for_search` mediumtext NOT NULL default '' AFTER `size`" ) ;
+	}
+
+	// add column 'modified_date' into question&answer table
+	$result = $xoopsDB->query( "SELECT COUNT(`modified_date`) FROM ".$xoopsDB->prefix("plzxoo_question") ) ;
+	if( $result === false ) {
+		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_question")." ADD `modified_date` int(10) NOT NULL default 0 AFTER `input_date`" ) ;
+		$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("plzxoo_question")." SET `modified_date`=`input_date`" ) ;
+		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_answer")." ADD `modified_date` int(10) NOT NULL default 0 AFTER `input_date`" ) ;
+		$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("plzxoo_answer")." SET `modified_date`=`input_date`" ) ;
 	}
 
 	/* General part */

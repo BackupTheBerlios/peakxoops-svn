@@ -10,6 +10,7 @@ define ( '_MD_A_PLZXOO_LANG_SUBMIT','Submit' );
 define ( '_MD_A_PLZXOO_LANG_CONTROL','Control' );
 define ( '_MD_A_PLZXOO_LANG_RESET','reset' );
 define ( '_MD_A_PLZXOO_LANG_DESCRIPTION','Description' );
+define ( '_MD_A_PLZXOO_LANG_SIZE','questions' );
 define ( '_MD_A_PLZXOO_LANG_TOP','top' );
 define ( '_MD_A_PLZXOO_LANG_EDIT_CATEGORY','Edit the category' );
 define ( '_MD_A_PLZXOO_LANG_EDIT','EDIT' );
@@ -23,7 +24,7 @@ define ( '_MD_A_PLZXOO_LANG_PERMISSION_SETTING','PERMISSION SETTING' );
 define ( '_MD_A_PLZXOO_MESSAGE_CONFIRM_DELETE','DELETE OK?' );
 define ( '_MD_A_PLZXOO_MESSAGE_DBUPDATE_FAIL','Failed' );
 define ( '_MD_A_PLZXOO_MESSAGE_DBUPDATE_SUCCESS','Database updated successfully' );
-define ( '_MD_A_PLZXOO_MESSAGE_DELETE_CATEGORY','Are you OK deleting the category?' );
+define ( '_MD_A_PLZXOO_MESSAGE_DELETE_CATEGORY','Are you OK deleting the category?<br />parent category cannot be removed.<br />all questions and answers under the category will be removed.' );
 
 // <--- ERROR PROPERTY --->
 define ( '_MD_A_PLZXOO_ERROR_PID_INJURY','Invalid pid of the category' );

@@ -39,6 +39,7 @@ class default_EditquesAction extends mojaLE_AbstractAction
         $editform =& new EditQuestionForm();
         if($editform->init($obj)==ACTIONFORM_POST_SUCCESS) {
             $editform->update($obj); // 入力内容をオブジェクトに受け取る
+			$obj->setVar('modified_date',time());
             if( $handler->insert($obj) ) {
 
 				// update size of category

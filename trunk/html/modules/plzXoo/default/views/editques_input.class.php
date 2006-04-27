@@ -90,7 +90,7 @@ class default_EditquesView_input
 //		$renderer->setAttribute('xoopsform',$form);
 		$renderer->setAttribute('editform',$editform);
 		$renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
-		$renderer->setAttribute('question',$question->getStructure());
+		$renderer->setAttribute('question',$question->getStructure('e'));
 		$renderer->setAttribute('select_cid',@$select_cid);
 		$renderer->setAttribute('select_priority',@$select_priority);
 		$renderer->setAttribute('select_status',@$select_status);

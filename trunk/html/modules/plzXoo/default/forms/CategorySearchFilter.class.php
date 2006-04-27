@@ -7,7 +7,7 @@ class CategorySearchFilter extends exAbstractFilterForm
 	var $cid_=0;
 	var $status_=0;
 	var $txt_=0;
-	var $sort_=array("cid","input_date","priority","status","size");
+	var $sort_=array("cid","input_date","modified_date","priority","status","size");
 
 	var $action_;	// for mojaLE.
 
@@ -67,8 +67,25 @@ class CategorySearchFilter extends exAbstractFilterForm
 		// このメソッドがフィルタがデフォルトで持っているソート条件などを返すようにします
 
 		$criteria =& parent::getDefaultCriteria($start,$limit);
-		$criteria->setSort('input_date');
-		$criteria->setOrder('DESC');
+		switch( @$GLOBALS['xoopsModuleConfig']['index_order_default'] ) {
+			case 0 :
+			default :
+				$criteria->setSort('input_date');
+				$criteria->setOrder('DESC');
+				break ;
+			case 2 :
+				$criteria->setSort('status,input_date');
+				$criteria->setOrder('DESC');
+				break ;
+			case 4 :
+				$criteria->setSort('modified_date');
+				$criteria->setOrder('DESC');
+				break ;
+			case 6 :
+				$criteria->setSort('status,modified_date');
+				$criteria->setOrder('DESC');
+				break ;
+		}
 
 		return $criteria;
 	}

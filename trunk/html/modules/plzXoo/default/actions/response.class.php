@@ -49,6 +49,7 @@ class default_ResponseAction extends mojaLE_AbstractAction
 			$editform->update($obj);
 
 			$request->setAttribute('answer',$obj);
+			$obj->setVar('modified_date',time());
 			return $handler->insert($obj) ?
 				VIEW_SUCCESS : VIEW_ERROR;
 		}

@@ -1,5 +1,13 @@
 [xlang:en]
 
+-=v0.94alt --> v0.95alt=- (update the module)
+* added modified columns into tables of question and answer
+* fixed editing in textarea (thx biroron)
+* added order into main list view
+* added order into blocks as block's option
+* fixed missing commitment (^^;
+* fixed deleting categories
+
 -=v0.93alt --> v0.94alt=- (update the module)
 * changed renderer from mojaLE to XoopsTpl
 * added answers list block
@@ -50,6 +58,14 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.94alt --> v0.95alt=- （モジュールアップデート必須！）
+* 更新日時カラムの導入(questionおよびanswerテーブル)
+* textareaの編集がおかしかったバグを修正 (thx biroron)
+* 質問一覧画面のソート方法追加
+* 各ブロックオプションにソート方法追加
+* （コミット忘れてました）
+* カテゴリー削除処理の修正
 
 -=v0.93alt --> v0.94alt=- （モジュールアップデート必須！）
 * 公開側画面を全面的にXoopsTpl利用に変更

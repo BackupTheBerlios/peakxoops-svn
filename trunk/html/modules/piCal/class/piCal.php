@@ -3579,9 +3579,9 @@ function rrule_from_post( $start , $allday_flag )
 				$ret_term = '' ;
 			} else {
 				if( ! $allday_flag ) {
-					// 全日イベントでなければ UTC へ時差計算
+					// 全日イベントでなければ同日の23:59:59を終了時刻と見なして、 UTC へ時差計算する
 					$event_tz = isset( $_POST['event_tz'] ) ? $_POST['event_tz'] : $this->user_TZ ;
-					$until -= intval( $event_tz * 3600 ) ;
+					$until = $until - intval( $event_tz * 3600 ) + 86400 - 1 ;
 				}
 				$ret_term = ';UNTIL=' . date( 'Ymd\THis\Z' , $until ) ;
 			}

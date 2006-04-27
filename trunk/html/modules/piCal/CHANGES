@@ -15,6 +15,7 @@ v.085 some compatibility fixes (2006-2-15)
 - updated locale/france (thx Phillipe) 0.85b
 - added locale/nz (newzealand) (thx Daryl) 0.85c
 - added plugin for bulletin module 0.85c
+- modified interpretation of until with time (thx minora) 0.85d
 
 v.084b minor bug fixes (2005-12-1)
 - updated locales/japan.php (thx hashimoto)
@@ -335,6 +336,7 @@ v.085 互換性問題の解消等 (2006-2-15)
 - フランスのロケール追加 (thx Phillipe) 0.85b
 - ニュージーランドのロケール追加 (newzealand) (thx Daryl) 0.85c
 - bulletin用のプラグイン追加 0.85c
+- 時間指定のある終了日指定の解釈をより一般的に改善した (thx minora) 0.85d
 
 v.084b 細かなバグ潰し (2005-12-1)
 - 祝日法改訂による祝日データの変更 (thx hashimoto)

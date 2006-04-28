@@ -1647,8 +1647,7 @@ function get_daily_html( )
 function get_schedule_view_html( $for_print = false )
 {
 	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
-	if( isset( $_GET[ 'smode' ] ) ) $smode = $_GET[ 'smode' ] ;
-	else $smode = 'Monthly' ;
+	$smode = empty( $_GET['smode'] ) ? 'Monthly' : preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['smode']) ;
 	$editable = $this->editable ;
 	$deletable = $this->deletable ;
 
@@ -1896,10 +1895,10 @@ function get_schedule_edit_html( )
 	// $PHP_SELF = $_SERVER['SCRIPT_NAME'] ;
 	$editable = $this->editable ;
 	$deletable = $this->deletable ;
-	$smode = isset( $_GET['smode'] ) ? $_GET['smode'] : '' ;
+	$smode = empty( $_GET['smode'] ) ? 'Monthly' : preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['smode']) ;
 
 	// 変更の場合、登録済スケジュール情報取得
-	if( isset( $_GET[ 'event_id' ] ) ) {
+	if( ! empty( $_GET[ 'event_id' ] ) ) {
 
 		if( ! $this->editable ) die( "Not allowed" ) ;
 
@@ -2226,7 +2225,7 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 		}
 		$set_sql_date = "start='$start', end='$end', allday='$allday' $date_append" ;
 		$allday_flag = true ;
-	} else if( isset( $_POST[ 'allday' ] ) && $_POST[ 'allday' ] ) {
+	} else if( ! empty( $_POST[ 'allday' ] ) ) {
 		// 全日イベント（時差計算なし）
 		if( $start > $end ) list( $start , $end ) = array( $end , $start ) ;
 		$end += 86400 ;		// 終了時間は、終了した翌日0:00を指す
@@ -2301,7 +2300,9 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 		}
 
 		// すべてを更新後、元の日付のカレンダーをリロード
-		$this->redirect( "smode={$_POST['last_smode']}&caldate={$_POST['last_caldate']}" ) ;
+		$last_smode = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_smode'] ) ;
+		$last_caldate = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_caldate'] ) ;
+		$this->redirect( "smode=$last_smode&caldate=$last_caldate" ) ;
 
 	} else {
 		// 新規登録処理
@@ -2323,7 +2324,9 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 		if( isset( $notify_callback ) ) $this->$notify_callback( $event_id ) ;
 
 		// すべてを登録後、start日 のカレンダーをリロード
-		$this->redirect( "smode={$_POST['last_smode']}&caldate=".date('Y-n-j',$start) ) ;
+		$last_smode = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_smode'] ) ;
+		$last_caldate = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_caldate'] ) ;
+		$this->redirect( "smode=$last_smode&caldate=$last_caldate" ) ;
 
 	}
 }
@@ -2361,7 +2364,9 @@ function delete_schedule( $whr_sql_append = '' , $eval_after = null )
 		}
 
 	}
-	$this->redirect( "smode={$_POST['last_smode']}&caldate={$_POST['last_caldate']}" ) ;
+	$last_smode = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_smode'] ) ;
+	$last_caldate = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_caldate'] ) ;
+	$this->redirect( "smode=$last_smode&caldate=$last_caldate" ) ;
 }
 
 
@@ -2376,7 +2381,9 @@ function delete_schedule_one( $whr_sql_append = '' )
 		if( ! mysql_query( "DELETE FROM $this->table WHERE id='$event_id' AND rrule_pid <> id $whr_sql_append" , $this->conn ) ) echo mysql_error() ;
 
 	}
-	$this->redirect( "smode={$_POST['last_smode']}&caldate={$_POST['last_caldate']}" ) ;
+	$last_smode = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_smode'] ) ;
+	$last_caldate = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_caldate'] ) ;
+	$this->redirect( "smode=$last_smode&caldate=$last_caldate" ) ;
 }
 
 
@@ -2464,7 +2471,9 @@ function get_categories_selform( $get_target = '' , $smode = null )
 	if( empty( $this->categories ) ) return '' ;
 
 	if( empty( $smode ) ) $smode = isset( $_GET['smode'] ) ? $_GET['smode'] : '' ;
-	$op = isset( $_GET['op'] ) ? $_GET['op'] : '' ;
+	$smode = preg_replace('/[^a-zA-Z0-9_-]/','',$smode) ;
+
+	$op = empty( $_GET['op'] ) ? '' : preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['op']) ;
 
 	$ret = "<form action='$get_target' method='GET' style='margin:0px;'>\n" ;
 	$ret .= "<input type='hidden' name='caldate' value='$this->caldate' />\n" ;
@@ -2980,7 +2989,7 @@ function output_ics_confirm( $post_target , $target = '_self' )
 function output_ics( )
 {
 	// $event_id が指定されていなければ終了
-	if( empty( $_GET[ 'event_id' ] ) AND empty( $_POST[ 'event_ids' ] ) ) die( _PICAL_ERR_INVALID_EVENT_ID ) ;
+	if( empty( $_GET[ 'event_id' ] ) && empty( $_POST[ 'event_ids' ] ) ) die( _PICAL_ERR_INVALID_EVENT_ID ) ;
 
 	// iCalendar出力許可がなければ終了
 	if( ! $this->can_output_ics ) die( _PICAL_ERR_NOPERM_TO_OUTPUTICS ) ;

@@ -13,8 +13,8 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 // fetch & sanitize from POST & GET
-$action = isset( $_POST[ 'action' ] ) ? $_POST[ 'action' ] : '' ;
-$type = isset( $_GET[ 'type' ] ) ? trim( $_GET[ 'type' ] ) : 'monthly' ;
+$action = empty( $_POST[ 'action' ] ) ? '' : preg_replace( '/[a-zA-Z0-9_-]/' , '' , $_POST[ 'type' ] ) ;
+$type = empty( $_GET[ 'type' ] ) ? 'monthly' : preg_replace( '/[a-zA-Z0-9_-]/' , '' , $_GET[ 'type' ] ) ;
 
 $limit_type = preg_replace( '/([^0-9A-Za-z_.-]+)/' , '' , @$_GET['limit_type'] ) ;
 $limit_dirname = preg_replace( '/([^0-9A-Za-z_.-]+)/' , '' , @$_GET['limit_dirname'] ) ;

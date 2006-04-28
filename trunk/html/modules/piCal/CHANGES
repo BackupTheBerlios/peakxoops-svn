@@ -1,5 +1,7 @@
 [xlang:en]
 
+v.086 XSS vulnerability fixed (2006-4-28)
+- fixed many XSS (thx tohokuaiki)
 
 v.085 some compatibility fixes (2006-2-15)
 - fixed wrong areas for the gticket class on changing permissions
@@ -321,6 +323,9 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.086 XSS修正 (2006-4-28)
+- あまた存在するXSSを一通り潰した（と思う） (thx tohokuaiki)
 
 v.085 互換性問題の解消等 (2006-2-15)
 - 権限設定画面で、チケット用areaの指定ミスがあったのを修正

@@ -594,7 +594,7 @@ function assign_event_list( &$tpl , $get_target = '' )
 	) ;
 
 	// 時差を計算しつつ、WHERE節の期間に関する条件生成
-	$op = ! empty( $_GET['op'] ) ? $_GET['op'] : '' ;
+	$op = empty( $_GET['op'] ) ? '' : preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['op'] ) ;
 	$tzoffset = intval( ( $this->user_TZ - $this->server_TZ ) * 3600 ) ;
 	$toptime_of_day = $this->unixtime + $this->day_start ;
 	switch( $op ) {

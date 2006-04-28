@@ -121,9 +121,9 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 // SERVER, GET 変数の取得
-$action = isset( $_POST[ 'action' ] ) ? $_POST[ 'action' ] : '' ;
-$done = isset( $_GET[ 'done' ] ) ? $_GET[ 'done' ] : '' ;
-$disp = isset( $_GET[ 'disp' ] ) ? $_GET[ 'disp' ] : '' ;
+$action = isset( $_POST[ 'action' ] ) ? preg_replace( '/[a-zA-Z0-9_-]/' , '' $_POST[ 'action' ] ) : '' ;
+$done = isset( $_GET[ 'done' ] ) ? preg_replace( '/[a-zA-Z0-9_-]/' , '' , $_GET[ 'done' ] ) : '' ;
+$disp = isset( $_GET[ 'disp' ] ) ? preg_replace( '/[a-zA-Z0-9_-]/' , '' , $_GET[ 'disp' ] ) : '' ;
 $cid = isset( $_GET[ 'cid' ] ) ? intval( $_GET[ 'cid' ] ) : 0 ;
 
 
@@ -241,6 +241,7 @@ if( $action == "insert" ) {
 	$affected = 0 ;
 	foreach( $_POST['weights'] as $cid => $weight ) {
 		$weight = intval( $weight ) ;
+		$cid = intval( $cid ) ;
 		$enabled = ! empty( $_POST['enabled'][$cid] ) ? 1 : 0 ;
 		if( ! mysql_query( "UPDATE $cal->cat_table SET weight='$weight', enabled='$enabled' WHERE cid=$cid" , $conn ) ) die( mysql_error() ) ;
 		$affected += mysql_affected_rows() ;

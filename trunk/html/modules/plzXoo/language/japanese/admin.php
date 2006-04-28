@@ -11,6 +11,7 @@ define ( '_MD_A_PLZXOO_LANG_CONTROL','操作' );
 define ( '_MD_A_PLZXOO_LANG_RESET','リセット' );
 define ( '_MD_A_PLZXOO_LANG_DESCRIPTION','概要' );
 define ( '_MD_A_PLZXOO_LANG_SIZE','質問数' );
+define ( '_MD_A_PLZXOO_LANG_WEIGHT','weight' );
 define ( '_MD_A_PLZXOO_LANG_TOP','トップ' );
 define ( '_MD_A_PLZXOO_LANG_EDIT_CATEGORY','カテゴリの編集' );
 define ( '_MD_A_PLZXOO_LANG_EDIT','編集' );

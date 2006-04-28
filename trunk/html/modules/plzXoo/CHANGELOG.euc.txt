@@ -1,5 +1,14 @@
 [xlang:en]
 
+-=v0.95alt --> v0.96alt=- (update the module)
+* added a type of notify "question modifications"
+* added a config questioner will be set notify in posted answers
+* added a config answerer will be set notify in modification of the question
+* fixed new installation fails
+* added weight into category
+* fixed fatal error with missing inputs
+* fixed the isolation of notifications with removing category or question
+
 -=v0.94alt --> v0.95alt=- (update the module)
 * added modified columns into tables of question and answer
 * fixed editing in textarea (thx biroron)
@@ -58,6 +67,15 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.95alt --> v0.96alt=- （モジュールアップデート必須！）
+* 質問変更についての通知イベント追加
+* 質問者に自動的に回答通知ONとなる設定
+* 回答者に自動的に質問更新通知ONとなる設定
+* 新規インストールできなかったバグをFix
+* カテゴリにweight新設
+* 必要項目未入力時にfatal errorになっていたバグをfix
+* カテゴリ・質問削除時にnotificationが残るバグの修正
 
 -=v0.94alt --> v0.95alt=- （モジュールアップデート必須！）
 * 更新日時カラムの導入(questionおよびanswerテーブル)

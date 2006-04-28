@@ -73,15 +73,20 @@ class default_CloseAction extends mojaLE_AbstractAction
 	            	$answer->setVar('point',$point);
 					$answer->setVar('modified_date',time());
 		            $answer_handler->insert($answer);
-		            $user =& $member_handler->getUser( $answer->getVar('uid') ) ;
+		            $answerer =& $member_handler->getUser( $answer->getVar('uid') ) ;
 
 		            // 投稿数も増やす（設定points2postsでON/OFF）
-		            if( ! empty( $GLOBALS['xoopsModuleConfig']['points2posts'] ) && is_object( $user ) ) {
+		            if( ! empty( $GLOBALS['xoopsModuleConfig']['points2posts'] ) && is_object( $answerer ) ) {
 						for( $i = 0 ; $i < $point ; $i ++ ) {
-							$user->incrementPost() ;
+							$answerer->incrementPost() ;
 						}
 					}
 				}
+
+				// trigger notification of question:updt
+				$notification_handler =& xoops_gethandler( 'notification' ) ;
+				$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'updt' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_CLOSE , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+
             	$editform->sessionClear();	// セッションクリア
             	$question->setVar('status',2);
 	            $request->setAttribute('question',$question);

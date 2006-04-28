@@ -17,12 +17,11 @@ class default_EditquesAction extends mojaLE_AbstractAction
         if($id)
             $obj=&$handler->get($id);
         if(!is_object($obj)) {
+			$is_new = true ;
             $obj=&$handler->create();
             $obj->setVar('uid',$user->uid());
-            $question_status4notify = _MD_PLZXOO_LANG_STATUS_NEW ;
-        }
-        else {
-            $question_status4notify = _MD_PLZXOO_LANG_STATUS_MODIFY ;
+        } else {
+        	$is_new = false ;
     		// 編集権限の確認
     		if(!$obj->isEnableEdit($user)) {
     			$request->setAttribute('message',_MD_PLZXOO_ERROR_PERMISSION);
@@ -48,12 +47,22 @@ class default_EditquesAction extends mojaLE_AbstractAction
 				$category->updateSize();
 				$category_handler->insert( $category ) ;
 
-				// trigger notification of global:newq
+				// notifications
 				$notification_handler =& xoops_gethandler( 'notification' ) ;
-				$notification_handler->triggerEvent( 'global' , 0 , 'newq' , array( 'QUESTION_SUBJECT' => $obj->getVar('subject') , 'QUESTION_UNAME' => $user->getVar('uname') , 'QUESTION_STATUS' => $question_status4notify , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$obj->getVar('qid') ) ) ;
-				// trigger notification of category:newq
-				$notification_handler =& xoops_gethandler( 'notification' ) ;
-				$notification_handler->triggerEvent( 'category' , $obj->getVar('cid') , 'newq' , array( 'QUESTION_SUBJECT' => $obj->getVar('subject') , 'QUESTION_UNAME' => $user->getVar('uname') , 'QUESTION_STATUS' => $question_status4notify , 'CATEGORY_NAME' => $category->getVar('name') , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$obj->getVar('qid') ) ) ;
+				if( $is_new ) {
+					// trigger notification of global:newq
+					$notification_handler->triggerEvent( 'global' , 0 , 'newq' , array( 'QUESTION_SUBJECT' => $obj->getVar('subject') , 'QUESTION_UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_NEWQ , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$obj->getVar('qid') ) ) ;
+					// trigger notification of category:newq
+					$notification_handler->triggerEvent( 'category' , $obj->getVar('cid') , 'newq' , array( 'QUESTION_SUBJECT' => $obj->getVar('subject') , 'QUESTION_UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_NEWQ , 'CATEGORY_NAME' => $category->getVar('name') , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$obj->getVar('qid') ) ) ;
+
+					// auto register a notification question:newa into questioner
+					if( ! empty( $GLOBALS['xoopsModuleConfig']['autonotify_questioner'] ) ) $notification_handler->subscribe( 'question' , $obj->getVar('qid') , 'newa' ) ;
+
+				} else {
+
+					// trigger notification of question:updt
+					$notification_handler->triggerEvent( 'question' , $obj->getVar('qid') , 'updt' , array( 'QUESTION_SUBJECT' => $obj->getVar('subject') , 'UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_MODQ , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$obj->getVar('qid') ) ) ;
+				}
 
                 return VIEW_SUCCESS ;
             } else {

@@ -12,7 +12,7 @@ class default_Question_delView_input
 		$renderer->setTemplate('plzxoo_question_delete.html');
 
 		$renderer->setAttribute('editform',$editform);
-		$renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
+		if( is_object( @$editform->ticket_ ) ) $renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
 		$renderer->setAttribute('category',$category->getStructure());
 		$renderer->setAttribute('question',$question->getStructure());
 

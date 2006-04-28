@@ -32,7 +32,7 @@ class default_CloseView_input
 //		$renderer = new mojaLE_Renderer($controller,$request,$user);
 //		$renderer->setTemplate('close_input.tpl');
 		$renderer->setAttribute('editform',$editform);
-		$renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
+		if( is_object( @$editform->ticket_ ) ) $renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
 		$renderer->setAttribute('is_error',$editform->isError());
 		$renderer->setAttribute('error_html',$editform->getHtmlErrors());
 		$renderer->setAttribute('category',$category->getStructure());

@@ -48,8 +48,14 @@ class default_ResponseAction extends mojaLE_AbstractAction
 		if($editform->init($obj)==ACTIONFORM_POST_SUCCESS) {
 			$editform->update($obj);
 
+			// update answer
 			$request->setAttribute('answer',$obj);
 			$obj->setVar('modified_date',time());
+
+			// trigger notification of question:updt
+			$notification_handler =& xoops_gethandler( 'notification' ) ;
+			$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'updt' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_MODC , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+
 			return $handler->insert($obj) ?
 				VIEW_SUCCESS : VIEW_ERROR;
 		}

@@ -14,7 +14,7 @@ CREATE TABLE plzxoo_question (
 	KEY (`cid`) ,
 	KEY (`uid`) ,
 	KEY (`status`) ,
-	KEY (`input_date`)
+	KEY (`input_date`) ,
 	KEY (`modified_date`)
 ) TYPE=MyISAM;
 
@@ -30,7 +30,7 @@ CREATE TABLE plzxoo_answer (
 	PRIMARY KEY (`aid`) ,
 	KEY (`qid`) ,
 	KEY (`uid`) ,
-	KEY (`input_date`)
+	KEY (`input_date`) ,
 	KEY (`modified_date`)
 ) TYPE=MyISAM;
 
@@ -40,7 +40,9 @@ CREATE TABLE plzxoo_category (
 	`name` varchar(255) NOT NULL default '',
 	`description` text NOT NULL default '',
 	`size` mediumint(5) NOT NULL default 0,
+	`weight` mediumint(5) NOT NULL default 0,
 	PRIMARY KEY (`cid`) ,
+	KEY (`weight`) ,
 	KEY (`pid`)
 ) TYPE=MyISAM;
 

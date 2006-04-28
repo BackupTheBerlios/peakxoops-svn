@@ -25,7 +25,7 @@ class default_EditquesView_input
 			$db =& Database::getInstance() ;
 			$tree =& new XoopsTree( $db->prefix('plzxoo_category') , 'cid' , 'pid' ) ;
 			ob_start() ;
-			$tree->makeMySelBox('name','name',$editform->cid_?$editform->cid_:intval(@$_GET['cid']),0,'cid');
+			$tree->makeMySelBox('name','weight',$editform->cid_?$editform->cid_:intval(@$_GET['cid']),0,'cid');
 			$select_cid = ob_get_contents() ;
 			ob_end_clean() ;
 		}
@@ -89,7 +89,9 @@ class default_EditquesView_input
 //		$renderer->setTemplate('edit_question.tpl');
 //		$renderer->setAttribute('xoopsform',$form);
 		$renderer->setAttribute('editform',$editform);
-		$renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
+		if( is_object( @$editform->ticket_ ) ) $renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
+		$renderer->setAttribute('is_error',$editform->isError());
+		$renderer->setAttribute('error_html',$editform->getHtmlErrors());
 		$renderer->setAttribute('question',$question->getStructure('e'));
 		$renderer->setAttribute('select_cid',@$select_cid);
 		$renderer->setAttribute('select_priority',@$select_priority);

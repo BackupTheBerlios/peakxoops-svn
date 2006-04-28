@@ -28,6 +28,10 @@ define ( '_MI_PLZXOO_INDEXODR_INPUTDSC','added date desc' );
 define ( '_MI_PLZXOO_INDEXODR_MODIFIEDDSC','modified date desc' );
 define ( '_MI_PLZXOO_INDEXODR_ST_INPUTDSC','added date desc (Actives are upper)' );
 define ( '_MI_PLZXOO_INDEXODR_ST_MODIFIEDDSC','modified date desc¡ÊActives are upper¡Ë' );
+define ( '_MI_PLZXOO_AUTONOTIFYQ','Auto notify for questioner' ) ;
+define ( '_MI_PLZXOO_AUTONOTIFYQ_DESC','A notification of "New answer" will be set when he/she post a question' ) ;
+define ( '_MI_PLZXOO_AUTONOTIFYA','Auto notify for answerer' ) ;
+define ( '_MI_PLZXOO_AUTONOTIFYA_DESC','A notification of "Modified question" will be set when he/she post a question' ) ;
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'Global' ) ;
@@ -48,6 +52,10 @@ define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFY' , 'New Answer' ) ;
 define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYCAP' , 'Notify an answer for this question is posted or modified' ) ;
 define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYDSC' , 'Notify an answer for this question is posted or modified' ) ;
 define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: Updated answer' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFY' , 'Modified Question' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYCAP' , 'Notify some kind of modifications about the question' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYDSC' , 'Notify some kind of modifications about the question' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: {CONDITION}' ) ;
 
 
 

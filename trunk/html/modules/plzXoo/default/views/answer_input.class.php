@@ -43,7 +43,7 @@ class default_AnswerView_input
 //		$renderer->setTemplate('edit_answer.tpl');
 //		$renderer->setAttribute('xoopsform',$form);
 		$renderer->setAttribute('editform',$editform);
-		$renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
+		if( is_object( @$editform->ticket_ ) ) $renderer->setAttribute('hidden_ticket',$editform->ticket_->makeHTMLhidden());
 		$renderer->setAttribute('is_error',$editform->isError());
 		$renderer->setAttribute('error_html',$editform->getHtmlErrors());
 		$renderer->setAttribute('category',$category->getStructure());

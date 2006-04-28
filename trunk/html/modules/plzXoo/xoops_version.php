@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.95;
+$modversion['version'] = 0.96;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";
@@ -93,6 +93,20 @@ $modversion['config'][3]['valuetype']='int';
 $modversion['config'][3]['default']=0 ;
 $modversion['config'][3]['options']=array('_MI_PLZXOO_INDEXODR_INPUTDSC'=>0,'_MI_PLZXOO_INDEXODR_ST_INPUTDSC'=>2,'_MI_PLZXOO_INDEXODR_MODIFIEDDSC'=>4,'_MI_PLZXOO_INDEXODR_ST_MODIFIEDDSC'=>6) ;
 
+$modversion['config'][4]['name']='autonotify_questioner';
+$modversion['config'][4]['title']='_MI_PLZXOO_AUTONOTIFYQ';
+$modversion['config'][4]['description']='_MI_PLZXOO_AUTONOTIFYQ_DESC';
+$modversion['config'][4]['formtype']='yesno';
+$modversion['config'][4]['valuetype']='int';
+$modversion['config'][4]['default']=1 ;
+
+$modversion['config'][5]['name']='autonotify_answerer';
+$modversion['config'][5]['title']='_MI_PLZXOO_AUTONOTIFYA';
+$modversion['config'][5]['description']='_MI_PLZXOO_AUTONOTIFYA_DESC';
+$modversion['config'][5]['formtype']='yesno';
+$modversion['config'][5]['valuetype']='int';
+$modversion['config'][5]['default']=1 ;
+
 // <--- NOTIFICATION PROPERTY --->
 $modversion['hasNotification'] = 1;
 $modversion['notification']['lookup_file'] = 'include/notification.inc.php' ;
@@ -139,6 +153,14 @@ $modversion['notification']['event'][3]['caption'] = _MI_PLZXOO_QUESTION_NEWA_NO
 $modversion['notification']['event'][3]['description'] = _MI_PLZXOO_QUESTION_NEWA_NOTIFYDSC;
 $modversion['notification']['event'][3]['mail_template'] = 'question_newa_notify';
 $modversion['notification']['event'][3]['mail_subject'] = _MI_PLZXOO_QUESTION_NEWA_NOTIFYSBJ;
+
+$modversion['notification']['event'][4]['name'] = 'updt';
+$modversion['notification']['event'][4]['category'] = 'question';
+$modversion['notification']['event'][4]['title'] = _MI_PLZXOO_QUESTION_UPDT_NOTIFY;
+$modversion['notification']['event'][4]['caption'] = _MI_PLZXOO_QUESTION_UPDT_NOTIFYCAP;
+$modversion['notification']['event'][4]['description'] = _MI_PLZXOO_QUESTION_UPDT_NOTIFYDSC;
+$modversion['notification']['event'][4]['mail_template'] = 'question_updt_notify';
+$modversion['notification']['event'][4]['mail_subject'] = _MI_PLZXOO_QUESTION_UPDT_NOTIFYSBJ;
 
 
 // Keep the values of block's options when module is updated (by nobunobu)

@@ -20,7 +20,7 @@ class CategoryListTableComponent extends exListTableComponent
 
 class CategoryTableModel extends exListTableModel
 {
-	var $_column_ = array ( "CID","PID","NAME","DESCRIPTION","SIZE", "ACTION" );
+	var $_column_ = array ( "CID","PID","NAME","DESCRIPTION","SIZE","WEIGHT","ACTION" );
 
 	function CategoryTableModel($component=null)
 	{

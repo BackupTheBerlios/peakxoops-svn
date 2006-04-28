@@ -29,6 +29,8 @@ class default_CategoryView_input
 
 		$form->addElement(new XoopsFormDhtmlTextArea(_MD_A_PLZXOO_LANG_DESCRIPTION,'description',$editform->description_,6, 50));
 
+		$form->addElement(new XoopsFormText(_MD_A_PLZXOO_LANG_WEIGHT,'weight',10,10,intval($editform->weight_)));
+
 		$tray = new XoopsFormElementTray(_MD_A_PLZXOO_LANG_CONTROL);
 		$tray->addElement( new XoopsFormButton ( '', 'submit', _MD_A_PLZXOO_LANG_SUBMIT, 'submit' ) );
 		$tray->addElement( new XoopsFormButton ( '', 'reset', _MD_A_PLZXOO_LANG_RESET, 'reset' ) );

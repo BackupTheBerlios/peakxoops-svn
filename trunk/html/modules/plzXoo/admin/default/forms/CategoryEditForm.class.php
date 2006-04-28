@@ -30,18 +30,21 @@ class CategoryEditForm extends exActionFormEx
 
 		$this->description_ = $_POST['description'];
 
+		$this->weight_ = intval( $_POST['weight'] ) ;
 	}
 
 	function load(&$master) {
 		$this->cid_ = $master->getVar ( 'cid', 'e' );
 		$this->pid_ = $master->getVar ( 'pid', 'e' );
 		$this->name_ = $master->getVar ( 'name', 'e' );
+		$this->weight_ = $master->getVar ( 'weight', 'e' );
 		$this->description_ = $master->getVar ( 'description', 'e' );
 	}
 
 	function update(&$master) {
 		$master->setVar ( 'pid', $this->pid_ );
 		$master->setVar ( 'name', $this->name_ );
+		$master->setVar ( 'weight', $this->weight_ );
 		$master->setVar ( 'description', $this->description_ );
 	}
 }

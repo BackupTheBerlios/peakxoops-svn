@@ -4,7 +4,7 @@ A question has been added or modified at {X_SITENAME}.
 
 Subject: {QUESTION_SUBJECT}
 Poster:  {QUESTION_UNAME}
-Status:  {QUESTION_STATUS}
+Status:  {CONDITION}
 
 You can view this question here:
 {QUESTION_URI}

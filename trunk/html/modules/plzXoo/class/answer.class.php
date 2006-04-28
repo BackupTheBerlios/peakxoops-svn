@@ -89,4 +89,29 @@ class plzXooAnswerObject extends exXoopsObject {
 		return true;
 	}
 }
+
+
+class plzXooAnswerObjectHandler extends exXoopsObjectHandler {
+
+	function delete(&$obj,$force=false)
+	{
+		// get parent (question)
+		$qHandler=&plzXoo::getHandler('question');
+		$question=&$qHandler->get($obj->getVar('qid'));
+
+		// notification delete
+
+		$ret =  parent::delete($obj,$force);
+
+		// update parent (question)
+		$question->updateSize();
+		$question->setVar('modified_date',time());
+		$qHandler->insert($question);
+
+		return $ret ;
+	}
+
+}
+
+
 ?>

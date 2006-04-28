@@ -10,6 +10,7 @@ class plzXooCategoryObject extends exXoopsObject {
 		$this->initVar('name', XOBJ_DTYPE_TXTBOX, null, true, 255);
 		$this->initVar('description', XOBJ_DTYPE_TXTAREA, null, false, null);
 		$this->initVar('size', XOBJ_DTYPE_INT, 0, false);
+		$this->initVar('weight', XOBJ_DTYPE_INT, 0, false);
 
 		if ( is_array ( $id ) )
 			$this->assignVars ( $id );
@@ -60,7 +61,7 @@ class plzXooCategoryObject extends exXoopsObject {
 	function getChildren( $cid )
 	{
 		$db =& Database::getInstance() ;
-		$sql = "SELECT `cid`,`name` FROM ".$db->prefix('plzxoo_category')." WHERE `pid`=".intval($cid)." ORDER BY `name`" ;
+		$sql = "SELECT `cid`,`name` FROM ".$db->prefix('plzxoo_category')." WHERE `pid`=".intval($cid)." ORDER BY `weight`" ;
 		$result = $db->query( $sql ) ;
 		$ret = array() ;
 		while( list( $cid , $name ) = $db->fetchRow( $result ) ) {
@@ -69,7 +70,51 @@ class plzXooCategoryObject extends exXoopsObject {
 
 		return $ret ;
 	}
+}
 
+
+class plzXooCategoryObjectHandler extends exXoopsObjectHandler {
+
+	function delete(&$obj,$force=false)
+	{
+		// handlers
+		$module_handler =& xoops_gethandler('module') ;
+		$notification_handler =& xoops_gethandler('notification') ;
+		$question_handler =& plzXoo::getHandler('question');
+		$answer_handler =& plzXoo::getHandler('answer');
+
+		// get this module
+		$module =& $module_handler->getByDirname('plzXoo') ;
+		$module_id = $module->getVar('mid') ;
+
+		// ----------------------------------------------
+		// 子カテゴリーがあったらエラー
+		// ----------------------------------------------
+		$cid =  $obj->getVar('cid') ;
+		$child_handler =& plzXoo::getHandler('category');
+		$children =& $child_handler->getObjects( new Criteria('pid',$cid) ) ;
+		if( ! empty( $children ) ) return false ;
+
+		// ----------------------------------------------
+		// ぶら下がっている質問・回答をすべて削除
+		// ----------------------------------------------
+		$questions =& $question_handler->getObjects( new Criteria('cid',$cid) ) ;
+		foreach( $questions as $question ) {
+			$qid = $question->getVar('qid') ;
+			$answers =& $answer_handler->getObjects( new Criteria('qid',$qid) ) ;
+			foreach( $answers as $answer ) {
+				$answer_handler->delete( $answer ) ;
+			}
+
+			$question_handler->delete( $question ) ;
+		}
+
+		// delete notifications about this category
+		$notification_handler->unsubscribeByItem( $module_id, 'category' , $obj->getVar('cid') ) ;
+
+		return parent::delete($obj,$force);
+	}
 
 }
+
 ?>

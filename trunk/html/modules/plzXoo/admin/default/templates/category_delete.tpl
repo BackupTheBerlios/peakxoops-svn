@@ -23,6 +23,10 @@
 		<td class='odd'><?php echo  $template['obj']->getVar('size') ?></td>
 	</tr>
 	<tr>
+		<td class='head'><?php echo  _MD_A_PLZXOO_LANG_WEIGHT ?></td>
+		<td class='odd'><?php echo  $template['obj']->getVar('weight') ?></td>
+	</tr>
+	<tr>
 		<td class='head'><?php echo  _MD_A_PLZXOO_LANG_CONTROL ?></td>
 		<td class='even'><input type='submit' value='<?php echo  _MD_A_PLZXOO_LANG_EXECUTE ?>'></td>
 	</tr>

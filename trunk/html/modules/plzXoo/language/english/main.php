@@ -45,8 +45,12 @@ define ( '_MD_PLZXOO_LANG_TITLE_NEW_QUESTION','New Question' );
 define ( '_MD_PLZXOO_LANG_TITLE_EDIT_QUESTION','Edit Question' );
 define ( '_MD_PLZXOO_LANG_TITLE_NEW_ANSWER','New Answer' );
 define ( '_MD_PLZXOO_LANG_TITLE_EDIT_ANSWER','Edit Answer' );
-define ( '_MD_PLZXOO_LANG_STATUS_NEW','Created' );
-define ( '_MD_PLZXOO_LANG_STATUS_MODIFY','Modified' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_NEWQ','New question' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_MODQ','Modified question' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_NEWA','New answer' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_MODA','Modified question' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_MODC','New or Modified comments' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_CLOSE','Closed' );
 
 // <--- BREAD CRUMB --->
 define ( '_MD_PLZXOO_BRCR_HOME','HOME' );

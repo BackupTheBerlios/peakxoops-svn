@@ -4,7 +4,7 @@
 
 タイトル: {QUESTION_SUBJECT}
 投稿者名： {QUESTION_UNAME}
-更新状況： {QUESTION_STATUS}
+更新状況： {CONDITION}
 
 詳しくは下記URLにアクセスしてください：
 {QUESTION_URI}

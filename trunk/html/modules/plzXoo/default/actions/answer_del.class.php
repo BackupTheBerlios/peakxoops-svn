@@ -34,16 +34,9 @@ class default_Answer_delAction extends mojaLE_AbstractAction
    
 		if($editform->init(strtolower(get_class($this)))==ACTIONFORM_POST_SUCCESS) {
 			$editform->release();
-			if($handler->delete($obj)==VIEW_SUCCESS) {
-				$request->setAttribute('obj',$obj);
-				$qHandler=&plzXoo::getHandler('question');
-				$question=&$qHandler->get($obj->getVar('qid'));
-				$question->updateSize();
-				$question->setVar('modified_date',time());
-				$qHandler->insert($question);
-				return VIEW_SUCCESS;
-			}
-			return VIEW_ERROR;
+			$request->setAttribute('obj',$obj);
+			return $handler->delete($obj) ?
+				VIEW_SUCCESS : VIEW_ERROR;
 		}
 
 		$handler=&plzXoo::getHandler('question');

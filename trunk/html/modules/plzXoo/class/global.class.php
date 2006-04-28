@@ -20,7 +20,7 @@ class plzXoo
 
 			$handler_class = $class."Handler";
 			if(class_exists($handler_class)) {
-				$__cache__[$name] = new $handler_class($xoopsDB);
+				$__cache__[$name] = new $handler_class($xoopsDB,$class);
 			}
 			else { // 一回だけ読み込む
 				$__cache__[$name] = new exXoopsObjectHandler($xoopsDB,$class);

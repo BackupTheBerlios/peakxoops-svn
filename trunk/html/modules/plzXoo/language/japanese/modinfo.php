@@ -28,6 +28,10 @@ define ( '_MI_PLZXOO_INDEXODR_INPUTDSC','登録日降順' );
 define ( '_MI_PLZXOO_INDEXODR_MODIFIEDDSC','更新日降順' );
 define ( '_MI_PLZXOO_INDEXODR_ST_INPUTDSC','登録日降順（受付中優先）' );
 define ( '_MI_PLZXOO_INDEXODR_ST_MODIFIEDDSC','更新日降順（受付中優先）' );
+define ( '_MI_PLZXOO_AUTONOTIFYQ','質問者への回答自動通知' ) ;
+define ( '_MI_PLZXOO_AUTONOTIFYQ_DESC','質問を登録した人に、自動的に「回答が投稿された時に通知する」オプションが設定される' ) ;
+define ( '_MI_PLZXOO_AUTONOTIFYA','回答者への質問変更自動通知' ) ;
+define ( '_MI_PLZXOO_AUTONOTIFYA_DESC','回答を登録した人に、自動的に「質問になんらかの動きがあった時に通知する」オプションが設定される' ) ;
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'モジュール全体' ) ;
@@ -39,15 +43,19 @@ define( '_MI_PLZXOO_QUESTION_NOTIFYDSC' , 'この質問に対する通知オプション' ) ;
 define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFY' , '新規質問' ) ;
 define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYCAP' , '新規に質問が登録された時に通知する' ) ;
 define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYDSC' , '新規に質問が登録された時に通知する' ) ;
-define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 質問更新' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWQ_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 新規質問' ) ;
 define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFY' , '新規質問' ) ;
 define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYCAP' , 'このカテゴリに新規に質問が登録された時に通知する' ) ;
 define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYDSC' , 'このカテゴリに新規に質問が登録された時に通知する' ) ;
-define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: カテゴリー内質問更新' ) ;
+define( '_MI_PLZXOO_CATEGORY_NEWQ_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: カテゴリー内新規質問' ) ;
 define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFY' , '新規回答' ) ;
 define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYCAP' , 'この質問に回答が投稿された時に通知する' ) ;
 define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYDSC' , 'この質問に回答が投稿された時に通知する' ) ;
-define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 回答更新' ) ;
+define( '_MI_PLZXOO_QUESTION_NEWA_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 新規回答' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFY' , '質問更新' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYCAP' , 'この質問になんらかの動きがあった時に通知する' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYDSC' , 'この質問になんらかの動きがあった時に通知する' ) ;
+define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: {CONDITION}' ) ;
 
 
 

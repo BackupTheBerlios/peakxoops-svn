@@ -8,6 +8,7 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 	/* Module specific part */
 
 	global $xoopsDB ;
+
 	// add column 'for_search' into question table
 	$result = $xoopsDB->query( "SELECT COUNT(`for_search`) FROM ".$xoopsDB->prefix("plzxoo_question") ) ;
 	if( $result === false ) {
@@ -22,6 +23,13 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_answer")." ADD `modified_date` int(10) NOT NULL default 0 AFTER `input_date`" ) ;
 		$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("plzxoo_answer")." SET `modified_date`=`input_date`" ) ;
 	}
+
+	// add column 'weight' into category table
+	$result = $xoopsDB->query( "SELECT COUNT(`weight`) FROM ".$xoopsDB->prefix("plzxoo_category") ) ;
+	if( $result === false ) {
+		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_category")." ADD `weight` mediumint(5) NOT NULL default 0 AFTER `size`" ) ;
+	}
+
 
 	/* General part */
 

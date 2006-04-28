@@ -3,6 +3,12 @@
 require_once "xoops/object.php";
 require_once "xoops/user.php";
 
+if( file_exists( XOOPS_ROOT_PATH.'/modules/plzXoo/language/'.$GLOBALS['xoopsConfig']['language'].'/main.php' ) ) {
+	include_once XOOPS_ROOT_PATH.'/modules/plzXoo/language/'.$GLOBALS['xoopsConfig']['language'].'/main.php' ;
+} else {
+	@include_once XOOPS_ROOT_PATH.'/modules/plzXoo/language/english/main.php' ;
+}
+
 /// ステータス値をステータス文字列に割り当てる配列
 $GLOBALS['plzxoo_status_mapping'] = array (
 	1 => _MD_PLZXOO_LANG_STATUS_OPEN,
@@ -107,4 +113,42 @@ class plzXooQuestionObject extends exXoopsObject {
 		}
 	}
 }
+
+
+class plzXooQuestionObjectHandler extends exXoopsObjectHandler {
+
+	function delete(&$obj,$force=false)
+	{
+		// remove children (answer)
+		$handler=&plzXoo::getHandler('answer');
+		$answers =& $handler->getObjects(new Criteria('qid',$obj->getVar('qid')));
+		foreach( $answers as $answer ) {
+			$handler->delete( $answer ) ;
+		}
+
+		// get parent (category)
+		$handler=&plzXoo::getHandler('category');
+		$category=&$handler->get($obj->getVar('cid'));
+
+		// delete notifications
+		$module_handler =& xoops_gethandler('module') ;
+		$module =& $module_handler->getByDirname('plzXoo') ;
+		$module_id = $module->getVar('mid') ;
+		$notification_handler =& xoops_gethandler('notification') ;
+		$notification_handler->unsubscribeByItem( $module_id, 'question' , $obj->getVar('qid') ) ;
+
+		$ret =  parent::delete($obj,$force);
+
+		// update parent (category)
+		$category->updateSize();
+		// $category->setVar('modified_date',time());
+		$handler->insert($category);
+
+		return $ret ;
+	}
+}
+
+
+
+
 ?>

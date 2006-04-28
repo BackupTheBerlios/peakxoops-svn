@@ -31,13 +31,13 @@ class default_AnswerAction extends mojaLE_AbstractAction
 
         $obj=&$handler->get($id);
         if(!is_object($obj)) {
+			$is_new = true ;
             $obj=&$handler->create();
             $obj->setVar('uid',$user->uid());
             $obj->setVar('qid',$qid);
-            $answer_status4notify = _MD_PLZXOO_LANG_STATUS_NEW ;
         }
         else {
-            $answer_status4notify = _MD_PLZXOO_LANG_STATUS_MODIFY ;
+			$is_new = false ;
     		// 権限の確認
     		if(!$obj->isEnableEdit($user)) {
     			$request->setAttribute('error_message',_MD_PLZXOO_ERROR_PERMISSION);
@@ -52,14 +52,29 @@ class default_AnswerAction extends mojaLE_AbstractAction
 			$obj->setVar('modified_date',time());
 			if($handler->insert($obj)) {
 
-				// 回答件数を更新する（増加ではなく、再カウント）
+				// update size of question
 				$question->updateSize();
 				$question->setVar('modified_date',time());
 				$qHandler->insert($question);
 
-				// 回答追加イベントをトリガー
+				// notifications
 				$notification_handler =& xoops_gethandler( 'notification' ) ;
-				$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'newa' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'ANSWER_UNAME' => $user->getVar('uname') , 'ANSWER_STATUS' => $answer_status4notify , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+				if( $is_new ) {
+					// trigger notification of question:newa
+					$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'newa' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'ANSWER_UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_NEWA , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+
+					// trigger notification of question:updt
+					$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'updt' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_NEWA , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+
+					// auto register a notification question:updt into answerer
+					if( ! empty( $GLOBALS['xoopsModuleConfig']['autonotify_answerer'] ) ) $notification_handler->subscribe( 'question' , $question->getVar('qid') , 'updt' ) ;
+
+				} else {
+
+					// trigger notification of question:updt
+					$notification_handler->triggerEvent( 'question' , $question->getVar('qid') , 'updt' , array( 'QUESTION_SUBJECT' => $question->getVar('subject') , 'UNAME' => $user->getVar('uname') , 'CONDITION' => _MD_PLZXOO_LANG_NOTIFY_MODA , 'QUESTION_URI' => XOOPS_URL."/modules/plzXoo/index.php?action=detail&amp;qid=".$question->getVar('qid') ) ) ;
+
+				}
 
 				return VIEW_SUCCESS;
 			}

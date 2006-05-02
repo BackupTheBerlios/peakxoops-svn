@@ -46,6 +46,12 @@ define("_MI_HEADLINES_SHORTDTFMTD","Describe it as the first parameter of PHP fu
 define("_MI_HEADLINES_MIXPICKUP","Don't pick up an item as recent if its feed is over-numbered than max items");
 define("_MI_HEADLINES_MIXPICKUPD","If you set this to No, the setting of 'Max items' of each feed is ignored.");
 
+define('_MI_HEADLINES_FETCHMETHOD','method to fetch RSS/ATOM') ;
+define('_MI_HEADLINES_FETCHMETHOD_DSC','use Snoopy if possible. fopen() can work "allow_url_fopen on" in php.ini') ;
+define('_MI_HEADLINES_FM_SNOOPY','snoopy');
+define('_MI_HEADLINES_FM_FOPEN','fopen()');
+define('_MI_HEADLINES_FM_SSC','stream_socket_client() (PHP5)');
+
 
 }
 

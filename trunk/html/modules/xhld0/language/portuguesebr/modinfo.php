@@ -6,6 +6,14 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( '_MI_HEADLINES_NAME' ) ) {
 
 // DateTime format
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-05-02 13:15:22
+define('_MI_HEADLINES_FETCHMETHOD','method to fetch RSS/ATOM');
+define('_MI_HEADLINES_FETCHMETHOD_DSC','use Snoopy if possible. fopen() can work "allow_url_fopen on" in php.ini');
+define('_MI_HEADLINES_FM_SNOOPY','snoopy');
+define('_MI_HEADLINES_FM_FOPEN','fopen()');
+define('_MI_HEADLINES_FM_SSC','stream_socket_client() (PHP5)');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-02-03 16:31:40
 define('_MI_HEADLINES_ADMENU_MYTPLSADMIN','Templates');
 

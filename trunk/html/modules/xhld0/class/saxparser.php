@@ -132,9 +132,13 @@ class SaxParser
     function parse()
     {
         if (!is_resource($this->input)) {
+			$this->input = preg_replace( '/encoding=[^\s?]+/' , '' , substr( $this->input , 0 , 64 ) ) . substr( $this->input , 64 ) ;
+
             if (!xml_parse($this->parser, $this->input)) {
                 $this->setErrors($this->getXmlError());
-                return false;
+                $ret = false;
+            } else {
+                $ret = true ;
             }
             //if (!$fp = fopen($this->input, 'r')) {
             //    $this->setErrors('Could not open file: '.$this->input);
@@ -145,12 +149,14 @@ class SaxParser
                 if (!xml_parse($this->parser, str_replace("'", "&apos;", $data), feof($this->input))) {
                     $this->setErrors($this->getXmlError());
                     fclose($this->input);
-                    return false;
+                    $ret = false;
+                } else {
+                    $ret = true ;
                 }
             }
             fclose($this->input);
         }
-        return true;
+        return $ret ;
     }
 
     /****************************************************************************
@@ -350,7 +356,7 @@ class SaxParser
 	 * @param	$ashtml	bool	return as html?
 	 * @return	mixed
 	 */
-    function &getErrors($ashtml = true)
+    function getErrors($ashtml = true)
     {
         if (!$ashtml) {
             return $this->errors;

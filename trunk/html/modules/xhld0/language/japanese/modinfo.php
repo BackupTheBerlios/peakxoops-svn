@@ -46,6 +46,14 @@ define("_MI_HEADLINES_SHORTDTFMTD","PHPのdate()関数のフォーマットで記述します。<
 define("_MI_HEADLINES_MIXPICKUP","新着一覧には各フィードの取得上限しか載らない");
 define("_MI_HEADLINES_MIXPICKUPD","「いいえ」の場合、各フィードで設定されたメインページやブロックの最大表示件数は無視され、純粋に新しい記事から順に並びます");
 
+define('_MI_HEADLINES_FETCHMETHOD','RSS/ATOMの取得方法') ;
+define('_MI_HEADLINES_FETCHMETHOD_DSC','通常はSnoopyを利用してください。それだとどうしてもうまく行かない時にだけ、fopen()を試してください。fopen()はPHPの設定においてallow_url_fopenを許可していないと動作しません。（そして許可する設定はあまりお勧めできません）') ;
+define('_MI_HEADLINES_FM_SNOOPY','snoopy');
+define('_MI_HEADLINES_FM_FOPEN','fopen()');
+define('_MI_HEADLINES_FM_SSC','stream_socket_client() (PHP5のみ)');
+
+
+
 }
 
 ?>

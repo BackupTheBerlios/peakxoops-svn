@@ -8,10 +8,12 @@ function &xhld_getrenderer(&$headline,$mydirname)
 	if (file_exists( XOOPS_ROOT_PATH."/modules/$mydirname/language/".$GLOBALS['xoopsConfig']['language'].'/headlinerenderer.php')) {
 		include_once XOOPS_ROOT_PATH."/modules/$mydirname/language/".$GLOBALS['xoopsConfig']['language'].'/headlinerenderer.php';
 		if (class_exists('XhldRendererLocal')) {
-			return new XhldRendererLocal($headline,$mydirname);
+			$ret =& new XhldRendererLocal($headline,$mydirname);
+			return $ret ;
 		}
 	}
-	return new XhldRenderer($headline,$mydirname);
+	$ret =& new XhldRenderer($headline,$mydirname);
+	return $ret ;
 }
 
 }

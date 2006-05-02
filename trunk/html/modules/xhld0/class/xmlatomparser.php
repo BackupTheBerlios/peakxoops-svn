@@ -32,7 +32,7 @@ class XhldXmlAtomParser
 		xml_set_end_namespace_decl_handler($this->parser, "atom_ns_end");
 	}
 
-	function &getChannelData()
+	function getChannelData()
 	{
 		// emulating from ATOM to RSS
 		$error_level_stored = error_reporting() ;
@@ -50,12 +50,12 @@ class XhldXmlAtomParser
 		return $channel ;
 	}
 
-	function &getImageData()
+	function getImageData()
 	{
 		return array() ;
 	}
 
-	function &getItems()
+	function getItems()
 	{
 		// emulating from ATOM to RSS
 		$error_level_stored = error_reporting() ;
@@ -163,7 +163,7 @@ class XhldXmlAtomParser
 	 * @param	$ashtml	bool	return as html?
 	 * @return	mixed
 	 */
-    function &getErrors($ashtml = true)
+    function getErrors($ashtml = true)
     {
         if (!$ashtml) {
             return $this->errors;

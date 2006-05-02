@@ -75,29 +75,90 @@ class XhldRenderer
 
 	function updateCache( $is_admin = false )
 	{
-		// start of snoopy
-		$error_level_stored = error_reporting() ;
-		error_reporting( $error_level_stored & ~ E_NOTICE ) ;
-		// includes Snoopy class for remote file access
-		require_once(XOOPS_ROOT_PATH."/class/snoopy.php");
-		$snoopy = new Snoopy;
-		// TIMEOUT from config
-		// $snoopy->read_timeout = $this->config['snoopy_timeout'] ;
-		$snoopy->read_timeout = $this->_hl->getVar( 'headline_timeout' ) ;
-		$snoopy->_fp_timout = $this->_hl->getVar( 'headline_timeout' ) ;
-		// Set proxy if needed
-		if( trim( $this->config['proxy_host'] ) != '' ) {
-			$snoopy->proxy_host = $this->config['proxy_host'] ;
-			$snoopy->proxy_port = $this->config['proxy_port'] > 0 ? intval( $this->config['proxy_port'] ) : 8080 ;
-			$snoopy->user = $this->config['proxy_user'] ;
-			$snoopy->pass = $this->config['proxy_pass'] ;
+		if( empty( $this->config['fetch_method'] ) ) {
+
+			// snoopy (0)
+			$error_level_stored = error_reporting() ;
+			error_reporting( $error_level_stored & ~ E_NOTICE ) ;
+			// includes Snoopy class for remote file access
+			require_once(XOOPS_ROOT_PATH."/class/snoopy.php");
+			$snoopy = new Snoopy;
+			// TIMEOUT from config
+			// $snoopy->read_timeout = $this->config['snoopy_timeout'] ;
+			$snoopy->read_timeout = $this->_hl->getVar( 'headline_timeout' ) ;
+			$snoopy->_fp_timout = $this->_hl->getVar( 'headline_timeout' ) ;
+			// Set proxy if needed
+			if( trim( $this->config['proxy_host'] ) != '' ) {
+				$snoopy->proxy_host = $this->config['proxy_host'] ;
+				$snoopy->proxy_port = $this->config['proxy_port'] > 0 ? intval( $this->config['proxy_port'] ) : 8080 ;
+				$snoopy->user = $this->config['proxy_user'] ;
+				$snoopy->pass = $this->config['proxy_pass'] ;
+			}
+			//URL fetch
+			if( ! $snoopy->fetch( $this->_hl->getVar( 'headline_rssurl' ) ) || ! $snoopy->results ) {
+				// set errors
+				$this->_setErrors( 'Could not open file: '.htmlspecialchars( $this->_hl->getVar('headline_rssurl') ) ) ;
+				if( ! empty( $snoopy->error ) ) $this->_setErrors( "Snoopy status=" . htmlspecialchars( $snoopy->error ) ) ;
+				if( $snoopy->timed_out ) $this->_setErrors( "Timed out" ) ;
+				$is_fetch_error = true ;
+			} else {
+				$http_content = $snoopy->results ;
+			}
+			error_reporting( $error_level_stored ) ;
+
+		} else if( $this->config['fetch_method'] == 2 ) {
+
+			die( 'xhld fetch method not implemented' ) ;
+			// stream_socket_client (2)
+/*			$url_elements = parse_url( $this->_hl->getVar('headline_rssurl') ) ;
+			if( @$url_elements['scheme'] == 'http' ) {
+				$socket = 'tcp://' . $url_elements['host'] . ':80' ;
+			} else if( @$url_elements['scheme'] == 'https' ) {
+				$socket = 'tcp://' . $url_elements['host'] . ':443' ;
+			} else {
+				$socket = $url_elements['scheme'] . '://' . $url_elements['host'] . ':' . $url_elements['port'] ;
+			}
+			$fp = stream_socket_client( $socket , $errno , $errstr , $this->_hl->getVar( 'headline_timeout' ) ) ;
+			if( empty( $url_elements['path'] ) ) $url_elements['path'] = '/' ;
+			$fp = fopen( $this->_hl->getVar( 'headline_rssurl' ) , 'rb' ) ;
+			if( ! $fp ) {
+				$this->_setErrors( "stream_socket_client error ($errono) ".htmlspecialchars( $errstr ) ) ;
+			} else {
+				fputs ($fp, "GET ".$url_elements['path']." HTTP/1.1\r\nHost: ".$url_elements['host']."\r\nAccept: *"."/"."*\r\n\r\n");
+				$http_header = '' ;
+				$http_content = '' ;
+				while( ! feof( $fp ) ) {
+					$line = fgets( $fp , 65536 ) ;
+					$http_header .= $line ;
+					if( in_array( $line , array( "\n" , "\r\n" , "\r" ) ) ) break ;
+				}
+				while( ! feof( $fp ) ) {
+					$line = fgets( $fp , 65536 ) ;
+					$http_content .= $line ;
+				}
+				fclose( $fp ) ;
+			} */
+
+		} else {
+
+			// fopen (1 or fallback)
+			$fp = @fopen( $this->_hl->getVar( 'headline_rssurl' ) , 'rb' ) ;
+			if( ! $fp ) {
+				$this->_setErrors( 'Could not open file: '.htmlspecialchars( $this->_hl->getVar('headline_rssurl') ) ) ;
+				$is_fetch_error = true ;
+			} else {
+				$http_content = '' ;
+				while( ! feof( $fp ) ) {
+					$line = fgets( $fp , 65536 ) ;
+					$http_content .= $line ;
+				}
+				fclose( $fp ) ;
+			}
+
 		}
-		//URL fetch
-		if( ! $snoopy->fetch( $this->_hl->getVar( 'headline_rssurl' ) ) || ! $snoopy->results ) {
-			// set errors
-			$this->_setErrors( 'Could not open file: '.htmlspecialchars( $this->_hl->getVar('headline_rssurl') ) ) ;
-			if( ! empty( $snoopy->error ) ) $this->_setErrors( "Snoopy status=" . htmlspecialchars( $snoopy->error ) ) ;
-			if( $snoopy->timed_out ) $this->_setErrors( "Timed out" ) ;
+
+		// error in fetch
+		if( ! empty( $is_fetch_error ) ) {
 			if( $is_admin ) {
 				return false ;
 			} else {
@@ -107,9 +168,8 @@ class XhldRenderer
 				return $headline_handler->insert($this->_hl);
 			}
 		}
-		$xml_utf8 = trim( $this->convertToUtf8( $snoopy->results ) ) ;
-		error_reporting( $error_level_stored ) ;
-		// end of snoopy
+
+		$xml_utf8 = trim( $this->convertToUtf8( $http_content ) ) ;
 
 		// $xml_utf8 = str_replace( $xml_utf8 , chr(0) , '' ) ;
 
@@ -124,14 +184,14 @@ class XhldRenderer
 			}
 		}
 
-		$channel_data =& $this->_parser->getChannelData();
+		$channel_data = $this->_parser->getChannelData();
 		array_walk( $channel_data , array( $this , 'convertFromUtf8' ) ) ;
 
-		$image_data =& $this->_parser->getImageData();
+		$image_data = $this->_parser->getImageData();
 		array_walk( $image_data , array( $this , 'convertFromUtf8' ) ) ;
 
 		$no_pubdate = false ;
-		$items =& $this->_parser->getItems() ;
+		$items = $this->_parser->getItems() ;
 		$items_extracted = array() ;
 		$title_pattern = $this->_hl->getVar('headline_titlepattern') ;
 		$title_exclude = $this->_hl->getVar('headline_titleexclude') ;
@@ -149,8 +209,11 @@ class XhldRenderer
 			if( $link_exclude && preg_match( $link_exclude , $items[$i]['link'] ) ) continue ;
 			// sanitize (strip tags if html is not allowed)
 			if( ! $this->_hl->getVar('headline_allowhtml' ) ) {
+				$items[$i]['description'] = htmlspecialchars( @$items[$i]['description'] , ENT_QUOTES ) ;
+				$items[$i]['content'] = htmlspecialchars( @$items[$i]['content'] , ENT_QUOTES ) ;
 				array_walk( $items[$i] , array( $this , 'stripTags' ) ) ;
 				$items[$i]['description'] = nl2br( preg_replace( '/(\n{2,})/s' , "\n" , @$items[$i]['description'] ) ) ;
+				$items[$i]['content'] = nl2br( preg_replace( '/(\n{2,})/s' , "\n" , @$items[$i]['content'] ) ) ;
 			}
 			$items_extracted[] = $items[$i] ;
 		}
@@ -207,7 +270,7 @@ class XhldRenderer
 		}
 
 		$this->_tpl->assign(array('lang_lastbuild' => _HL_LASTBUILD, 'lang_language' => _HL_LANGUAGE, 'lang_description' => _HL_DESCRIPTION, 'lang_webmaster' => _HL_WEBMASTER, 'lang_category' => _HL_CATEGORY, 'lang_generator' => _HL_GENERATOR, 'lang_title' => _HL_TITLE, 'lang_pubdate' => _HL_PUBDATE, 'lang_description' => _HL_DESCRIPTION, 'lang_more' => _MORE, 'dtfmt_long' => _DATESTRING));
-		$this->_feed =& $this->_tpl->fetch("db:xhld{$this->_mydirnumber}_feed.html");
+		$this->_feed = $this->_tpl->fetch("db:xhld{$this->_mydirnumber}_feed.html");
 		return true;
 	}
 
@@ -256,7 +319,7 @@ class XhldRenderer
 		}
 
 		$this->_tpl->assign(array('mod_url' => XOOPS_URL.'/modules/'.$this->_mydirname, 'site_name' => $this->_hl->getVar('headline_name'), 'site_url' => $this->_hl->getVar('headline_url'), 'site_id' => $this->_hl->getVar('headline_id'), 'dtfmt_long' => _DATESTRING, 'dtfmt_short' => $dtfmt_short));
-		$this->_block =& $this->_tpl->fetch("db:xhld{$this->_mydirnumber}_block.html");
+		$this->_block = $this->_tpl->fetch("db:xhld{$this->_mydirnumber}_block.html");
 		return true;
 	}
 
@@ -301,7 +364,7 @@ class XhldRenderer
 	}
 
 
-	function &_parse( $xml )
+	function _parse( $xml )
 	{
 		if (isset($this->_parser)) {
 			return true;
@@ -353,12 +416,12 @@ class XhldRenderer
 		return true;
 	}
 
-	function &getFeed()
+	function getFeed()
 	{
 		return $this->_feed;
 	}
 
-	function &getBlock()
+	function getBlock()
 	{
 		return $this->_block;
 	}
@@ -374,7 +437,7 @@ class XhldRenderer
 		}
 	}
 
-	function &getErrors($ashtml = true)
+	function getErrors($ashtml = true)
 	{
 		if (!$ashtml) {
 			return $this->_errors;
@@ -409,7 +472,7 @@ class XhldRenderer
 	// abstract
 	// overide this method in /language/your_language/headlinerenderer.php
 	// return string
-	function &convertToUtf8(&$xmlfile)
+	function convertToUtf8(&$xmlfile)
 	{
 		$encoding = $this->_hl->getVar('headline_encoding') ;
 

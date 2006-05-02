@@ -1,6 +1,15 @@
 [xlang:en]
 CHANGES:
 
+v.3.03 2006-05-02
+  - modified compatibility with PHP5
+  - added a configuration using fopen() for specific environments
+  - fixed some typo in references
+  - changed displaying tags in description/content
+  - modified content same as description
+  - modified the module icons (thx argon)
+  - updated mytplsadmin
+
 v.3.02 2006-02-03
   - added mytplsadmin
   - updated myblocksadmin
@@ -226,6 +235,15 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.03 2006-05-02
+  - PHP5との相性問題を少し解消
+  - fsockopenが禁止された環境用に、fopen() 経由で取得する設定を追加
+  - 参照渡し関連のミスを修正・オブジェクト以外は参照で渡さないように統一
+  - HTML禁止フィードでもdescriptionやcontent内に含まれているタグをエスケープして表示するように変更
+  - contentの扱いをdescriptionと同じにした
+  - モジュールアイコンを変更 (thx argon)
+  - mytplsadmin更新
 
 v.3.02 2006-02-03
   - mytplsadmin の導入

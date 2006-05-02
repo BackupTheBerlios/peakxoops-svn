@@ -82,7 +82,7 @@ class XhldXmlRss2Parser extends SaxParser
 		}
 	}
 
-    function &getChannelData($name = null)
+    function getChannelData($name = null)
     {
         if (isset($name)) {
             if (isset($this->_channelData[$name])) {
@@ -98,7 +98,7 @@ class XhldXmlRss2Parser extends SaxParser
         $this->_imageData[$name] = $value;
     }
 
-    function &getImageData($name = null)
+    function getImageData($name = null)
     {
         if (isset($name)) {
             if (isset($this->_imageData[$name])) {
@@ -114,7 +114,7 @@ class XhldXmlRss2Parser extends SaxParser
         $this->_items[] = $itemarr;
     }
 
-    function &getItems()
+    function getItems()
     {
         return $this->_items;
     }

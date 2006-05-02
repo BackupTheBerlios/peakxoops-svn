@@ -48,7 +48,7 @@ if (function_exists('mb_convert_encoding') && ! class_exists( 'XhldRendererLocal
 			}
 		}
 
-		function &convertToUtf8(&$xmlfile)
+		function convertToUtf8(&$xmlfile)
 		{
 			$encoding = $this->_hl->getVar('headline_encoding') ;
 

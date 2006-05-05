@@ -3,7 +3,7 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $adminmenu[0]['title'] = _BLOCKS_ADMIN_CUSTOM ;
-$adminmenu[0]['link'] = "admin/myblocksadmin.php?mid=0";
+$adminmenu[0]['link'] = "admin/myblocksadmin.php?dirname=__CustomBlocks__";
 
 $module_handler4menu =& xoops_gethandler('module');
 $criteria4menu = new CriteriaCompo(new Criteria('isactive', 1));

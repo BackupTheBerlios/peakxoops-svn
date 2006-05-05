@@ -278,6 +278,16 @@ class XoopsGTicket {
 // end of class
 }
 
+function GTicket_ErrorHandler4FindOutput($errNo, $errStr, $errFile, $errLine)
+{
+	if( preg_match( '?'.preg_quote(XOOPS_ROOT_PATH).'([^:]+)\:(\d+)?' , $errStr , $regs ) ) {
+		echo "Irregular output! check the file ".htmlspecialchars($regs[1])." line ".htmlspecialchars($regs[2]) ;
+	} else {
+		echo "Irregular output! check language files etc." ;
+	}
+	return ;
+}
+
 // create a instance in global scope
 $GLOBALS['xoopsGTicket'] = new XoopsGTicket() ;
 
@@ -299,17 +309,6 @@ function admin_refcheck($chkref = "") {
 }
 
 }
-
-function GTicket_ErrorHandler4FindOutput($errNo, $errStr, $errFile, $errLine)
-{
-	if( preg_match( '?'.preg_quote(XOOPS_ROOT_PATH).'([^:]+)\:(\d+)?' , $errStr , $regs ) ) {
-		echo "Irregular output! check the file ".htmlspecialchars($regs[1])." line ".htmlspecialchars($regs[2]) ;
-	} else {
-		echo "Irregular output! check language files etc." ;
-	}
-	return ;
-}
-
 
 
 ?>

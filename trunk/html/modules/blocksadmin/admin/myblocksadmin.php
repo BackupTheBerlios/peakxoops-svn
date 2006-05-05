@@ -39,27 +39,25 @@ foreach( $group_defs as $def ) {
 // check $xoopsModule
 if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
 
-// set target_module if specified by $_GET['dirname']
+// set target_module if specified by $_GET['dirname'] && this is 'blocksadmin'
 $module_handler =& xoops_gethandler('module');
-if( ! empty( $_GET['dirname'] ) ) {
+if( $xoopsModule->getVar('dirname') == 'blocksadmin' && ! empty( $_GET['dirname'] ) ) {
 	$target_module =& $module_handler->getByDirname($_GET['dirname']);
-}/* else if( ! empty( $_GET['mid'] ) ) {
-	$target_module =& $module_handler->get( intval( $_GET['mid'] ) );
-}*/
+}
 
 if( ! empty( $target_module ) && is_object( $target_module ) ) {
 	// specified by dirname
 	$target_mid = $target_module->getVar( 'mid' ) ;
 	$target_mname = $target_module->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $target_module->getVar('version') / 100.0 ) ;
-	$query4redirect = '?dirname='.urlencode(strip_tags($_GET['dirname'])) ;
-} else if( isset( $_GET['mid'] ) && $_GET['mid'] == 0 || $xoopsModule->getVar('dirname') == 'blocksadmin' ) {
+	$target_dirname = $target_module->getVar( 'dirname' ) ;
+} else if( $xoopsModule->getVar('dirname') == 'blocksadmin' ) {
 	$target_mid = 0 ;
 	$target_mname = '' ;
-	$query4redirect = '?mid=0' ;
+	$target_dirname = '__CustomBlocks__' ;
 } else {
 	$target_mid = $xoopsModule->getVar( 'mid' ) ;
 	$target_mname = $xoopsModule->getVar( 'name' ) ;
-	$query4redirect = '' ;
+	$target_dirname = '' ;
 }
 
 // check access right (needs system_admin of BLOCK)
@@ -78,14 +76,14 @@ while( $myrow = $db->fetchArray($result) ) {
 
 function list_blocks()
 {
-	global $query4redirect , $block_arr , $xoopsGTicket ;
+	global $target_dirname , $block_arr , $xoopsGTicket ;
 
 	// cachetime options
 	$cachetimes = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK, '2592000' => _MONTH);
 
 	// displaying TH
 	echo "
-	<form action='admin.php' name='blockadmin' method='post'>
+	<form action='admin.php?dirname=$target_dirname' name='blockadmin' method='post'>
 		<table width='95%' class='outer' cellpadding='4' cellspacing='1'>
 		<tr valign='middle'>
 			<th>"._AM_TITLE."</th>
@@ -172,7 +170,7 @@ function list_blocks()
 
 		// delete link if it is cloned block
 		if( $block_arr[$i]->getVar("block_type") == 'D' || $block_arr[$i]->getVar("block_type") == 'C' ) {
-			$delete_link = "<br /><a href='admin.php?fct=blocksadmin&amp;op=delete&amp;bid=$bid'>"._DELETE."</a>" ;
+			$delete_link = "<br /><a href='admin.php?fct=blocksadmin&amp;op=delete&amp;bid=$bid&amp;dirname=$target_dirname'>"._DELETE."</a>" ;
 		} else {
 			$delete_link = '' ;
 		}
@@ -190,7 +188,7 @@ function list_blocks()
 			}
 		}
 		if( $can_clone ) {
-			$clone_link = "<br /><a href='admin.php?fct=blocksadmin&amp;op=clone&amp;bid=$bid'>"._CLONE."</a>" ;
+			$clone_link = "<br /><a href='admin.php?fct=blocksadmin&amp;op=clone&amp;bid=$bid&amp;dirname=$target_dirname'>"._CLONE."</a>" ;
 		} else {
 			$clone_link = '' ;
 		}
@@ -243,7 +241,7 @@ function list_blocks()
 				</select>
 			</td>
 			<td class='$class' align='right'>
-				<a href='admin.php?fct=blocksadmin&amp;op=edit&amp;bid=$bid'>"._EDIT."</a>{$delete_link}{$clone_link}
+				<a href='admin.php?fct=blocksadmin&amp;op=edit&amp;bid=$bid&amp;dirname=$target_dirname'>"._EDIT."</a>{$delete_link}{$clone_link}
 				<input type='hidden' name='bid[$bid]' value='$bid' />
 			</td>
 		</tr>\n" ;
@@ -254,7 +252,6 @@ function list_blocks()
 	echo "
 		<tr>
 			<td class='foot' align='center' colspan='6'>
-				<input type='hidden' name='query4redirect' value='$query4redirect' />
 				<input type='hidden' name='fct' value='blocksadmin' />
 				<input type='hidden' name='op' value='order' />
 				".$xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'myblocksadmin' )."
@@ -308,7 +305,7 @@ if( ! empty( $_POST['submit'] ) ) {
 	}
 
 	include( "mygroupperm.php" ) ;
-	redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php$query4redirect" , 1 , _MD_AM_DBUPDATED );
+	redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php?dirname=$target_dirname" , 1 , _MD_AM_DBUPDATED );
 }
 
 xoops_cp_header() ;

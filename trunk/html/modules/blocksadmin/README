@@ -56,6 +56,7 @@ With GTicket2, user can repost even if he/she got Invalid session error.
 
 CHANGELOG:
 
+2006-05-06 0.40 changed transaction about dirname radically
 2006-05-03 0.33 updated gticket2
 2006-02-10 0.32 fixed compatibility problem with XoopsCube2.1alpha (thx nobunobu)
                 modified cloning function as a module (thx nobunobu)

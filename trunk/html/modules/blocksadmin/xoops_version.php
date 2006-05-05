@@ -1,6 +1,6 @@
 <?php
 $modversion['name'] = 'blocksadmin' ;
-$modversion['version'] = '0.33' ;
+$modversion['version'] = '0.40' ;
 $modversion['description'] = '' ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -11,7 +11,7 @@ $modversion['dirname'] = "blocksadmin";
 
 // Admin things
 $modversion['hasAdmin'] = 1;
-$modversion['adminindex'] = "admin/myblocksadmin.php?mid=0";
+$modversion['adminindex'] = "admin/myblocksadmin.php?dirname=__CustomBlocks__";
 $modversion['adminmenu'] = "admin/menu.php";
 
 // Menu

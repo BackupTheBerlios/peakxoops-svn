@@ -32,6 +32,7 @@ define ( '_MI_PLZXOO_AUTONOTIFYQ','Auto notify for questioner' ) ;
 define ( '_MI_PLZXOO_AUTONOTIFYQ_DESC','A notification of "New answer" will be set when he/she post a question' ) ;
 define ( '_MI_PLZXOO_AUTONOTIFYA','Auto notify for answerer' ) ;
 define ( '_MI_PLZXOO_AUTONOTIFYA_DESC','A notification of "Modified question" will be set when he/she post a question' ) ;
+define ( '_MI_PLZXOO_LISTVIEWPPG','Questions per page in list views' ) ;
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'Global' ) ;

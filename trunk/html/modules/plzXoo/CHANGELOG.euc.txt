@@ -1,6 +1,7 @@
 [xlang:en]
 
 -=v0.96alt --> v0.97alt=-
+* added a config 'questions per page in list views'
 * fixed some minor bugs
 * changed answer's comment from varchar(255) to text
 
@@ -73,6 +74,7 @@
 [xlang:ja]
 
 -=v0.96alt --> v0.97alt=-
+* １ページあたりの表示質問数の設定追加
 * 細かなバグ潰し
 * コメントをvarchar(255)からtextに変更
 

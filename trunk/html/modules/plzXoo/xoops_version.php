@@ -107,6 +107,13 @@ $modversion['config'][5]['formtype']='yesno';
 $modversion['config'][5]['valuetype']='int';
 $modversion['config'][5]['default']=1 ;
 
+$modversion['config'][6]['name']='listview_per_page';
+$modversion['config'][6]['title']='_MI_PLZXOO_LISTVIEWPPG';
+$modversion['config'][6]['description']='';
+$modversion['config'][6]['formtype']='text';
+$modversion['config'][6]['valuetype']='int';
+$modversion['config'][6]['default']=20 ;
+
 // <--- NOTIFICATION PROPERTY --->
 $modversion['hasNotification'] = 1;
 $modversion['notification']['lookup_file'] = 'include/notification.inc.php' ;

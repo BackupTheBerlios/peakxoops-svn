@@ -13,7 +13,10 @@ class default_DefaultIndexAction extends mojaLE_AbstractAction
 		$listController->filter_=new CategorySearchFilter();
 		$listController->filter_->fetch();
 		
-		$listController->fetch($handler->getCount($listController->filter_->getCriteria()),20);
+		$per_page = intval( @$GLOBALS['xoopsModuleConfig']['listview_per_page'] ) ;
+		if( $per_page <= 0 ) $per_page = 20 ;
+		
+		$listController->fetch($handler->getCount($listController->filter_->getCriteria()),$per_page);
 		$criteria=$listController->getCriteria();
 
 		// ผ่ฦภ

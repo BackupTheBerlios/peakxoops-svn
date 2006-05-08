@@ -30,6 +30,9 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_category")." ADD `weight` mediumint(5) NOT NULL default 0 AFTER `size`" ) ;
 	}
 
+	// TODO
+	$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_answer")." MODIFY `comment` text NOT NULL default ''" ) ;
+
 
 	/* General part */
 

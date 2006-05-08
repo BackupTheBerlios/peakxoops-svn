@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.96;
+$modversion['version'] = 0.97;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";

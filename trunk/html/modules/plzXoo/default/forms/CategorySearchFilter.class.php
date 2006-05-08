@@ -26,7 +26,7 @@ class CategorySearchFilter extends exAbstractFilterForm
 
 	function &getCriteria($start=0,$limit=0,$sort=0)
 	{
-		$criteria=&$this->getSortCriteria($start,$limit,$sort);
+		$criteria=$this->getSortCriteria($start,$limit,$sort);
 
 		include_once XOOPS_ROOT_PATH.'/class/xoopstree.php' ;
 		$db =& Database::getInstance() ;
@@ -66,7 +66,7 @@ class CategorySearchFilter extends exAbstractFilterForm
 		// --- INSERT DEFAULT SORT CONDITION ----
 		// このメソッドがフィルタがデフォルトで持っているソート条件などを返すようにします
 
-		$criteria =& parent::getDefaultCriteria($start,$limit);
+		$criteria = parent::getDefaultCriteria($start,$limit);
 		switch( @$GLOBALS['xoopsModuleConfig']['index_order_default'] ) {
 			case 0 :
 			default :

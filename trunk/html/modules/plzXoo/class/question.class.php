@@ -62,7 +62,7 @@ class plzXooQuestionObject extends exXoopsObject {
 	/// Database Connect Model
 	function &getTableInfo()
 	{
-		$tinfo = new exTableInfomation('plzxoo_question','qid');
+		$tinfo =& new exTableInfomation('plzxoo_question','qid');
 		return ($tinfo);
 	}
 

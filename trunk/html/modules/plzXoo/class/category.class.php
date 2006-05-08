@@ -19,7 +19,7 @@ class plzXooCategoryObject extends exXoopsObject {
 	/// Database Connect Model
 	function &getTableInfo()
 	{
-		$tinfo = new exTableInfomation('plzxoo_category','cid');
+		$tinfo =& new exTableInfomation('plzxoo_category','cid');
 		return ($tinfo);
 	}
 

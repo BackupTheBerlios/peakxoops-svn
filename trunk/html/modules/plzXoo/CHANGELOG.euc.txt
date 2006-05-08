@@ -1,5 +1,9 @@
 [xlang:en]
 
+-=v0.96alt --> v0.97alt=-
+* fixed some minor bugs
+* changed answer's comment from varchar(255) to text
+
 -=v0.95alt --> v0.96alt=- (update the module)
 * added a type of notify "question modifications"
 * added a config questioner will be set notify in posted answers
@@ -67,6 +71,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.96alt --> v0.97alt=-
+* 細かなバグ潰し
+* コメントをvarchar(255)からtextに変更
 
 -=v0.95alt --> v0.96alt=- （モジュールアップデート必須！）
 * 質問変更についての通知イベント追加

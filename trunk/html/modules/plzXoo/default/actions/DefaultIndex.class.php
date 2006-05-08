@@ -14,7 +14,7 @@ class default_DefaultIndexAction extends mojaLE_AbstractAction
 		$listController->filter_->fetch();
 		
 		$listController->fetch($handler->getCount($listController->filter_->getCriteria()),20);
-		$criteria=&$listController->getCriteria();
+		$criteria=$listController->getCriteria();
 
 		// ผ่ฦภ
 		$objs=&$handler->getObjects($criteria);

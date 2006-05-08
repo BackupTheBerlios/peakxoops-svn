@@ -16,7 +16,7 @@ class CategoryFilter extends exAbstractFilterForm
 
 	function &getCriteria($start=0,$limit=0,$sort=0)
 	{
-		$criteria=&$this->getSortCriteria($start,$limit,$sort);
+		$criteria=$this->getSortCriteria($start,$limit,$sort);
 		return $criteria;
 	}
 
@@ -25,7 +25,7 @@ class CategoryFilter extends exAbstractFilterForm
 		// --- INSERT DEFAULT SORT CONDITION ----
 		// このメソッドがフィルタがデフォルトで持っているソート条件などを返すようにします
 
-		$criteria =& parent::getDefaultCriteria($start,$limit);
+		$criteria = parent::getDefaultCriteria($start,$limit);
 		$criteria->setSort('cid');
 
 		return $criteria;

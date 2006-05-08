@@ -25,7 +25,7 @@ CREATE TABLE plzxoo_answer (
 	`input_date` int(10) NOT NULL default 0,
 	`modified_date` int(10) NOT NULL default 0,
 	`body` text NOT NULL default '',
-	`comment` varchar(255) NOT NULL default '',
+	`comment` text NOT NULL default '',
 	`point` tinyint(3) NOT NULL default 0,
 	PRIMARY KEY (`aid`) ,
 	KEY (`qid`) ,

@@ -20,9 +20,9 @@ class AnswerResponseEditForm extends exActionFormEx
 			exOnetimeTicket::unsetSession($this);
 
 		$this->comment_ = trim($_POST['comment']);
-		if(!$this->validateMaxLength($this->comment_, 255)) {
-			$this->addError(_MD_PLZXOO_ERROR_COMMENT_SIZEOVER);
-		}
+		//if(!$this->validateMaxLength($this->comment_, 255)) {
+		//	$this->addError(_MD_PLZXOO_ERROR_COMMENT_SIZEOVER);
+		//}
 	}
 
 	function load(&$master) {

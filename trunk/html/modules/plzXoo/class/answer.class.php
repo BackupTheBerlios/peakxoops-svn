@@ -12,7 +12,7 @@ class plzXooAnswerObject extends exXoopsObject {
 		$this->initVar('input_date', XOBJ_DTYPE_INT, time(), false);
 		$this->initVar('modified_date', XOBJ_DTYPE_INT, time(), false);
 		$this->initVar('body', XOBJ_DTYPE_TXTAREA, null, true, null);
-		$this->initVar('comment', XOBJ_DTYPE_TXTAREA, null, false, 255);
+		$this->initVar('comment', XOBJ_DTYPE_TXTAREA, null, false, null);
 		$this->initVar('point', XOBJ_DTYPE_INT, 0, false);
 
 		if ( is_array ( $id ) )
@@ -37,7 +37,7 @@ class plzXooAnswerObject extends exXoopsObject {
 	/// Database Connect Model
 	function &getTableInfo()
 	{
-		$tinfo = new exTableInfomation('plzxoo_answer','aid');
+		$tinfo =& new exTableInfomation('plzxoo_answer','aid');
 		return ($tinfo);
 	}
 

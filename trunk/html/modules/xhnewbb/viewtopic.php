@@ -30,22 +30,12 @@
 // ------------------------------------------------------------------------- //
 
 include 'header.php';
-$forum = isset($_GET['forum']) ? intval($_GET['forum']) : 0;
-$topic_id = isset($_GET['topic_id']) ? intval($_GET['topic_id']) : 0;
 
 if( empty( $topic_id ) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERRORTOPIC);
-	exit;
+	die(_MD_XHNEWBB_ERRORTOPIC);
 }
-
 if( empty( $forum ) ) {
-	$result = $xoopsDB->query( "SELECT forum_id FROM ".$xoopsDB->prefix("xhnewbb_topics")." WHERE topic_id = $topic_id" ) ;
-	list( $forum ) = $xoopsDB->fetchRow( $result ) ;
-	$_GET['forum'] = $forum ;
-	if( empty( $forum ) ) {
-		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERRORFORUM);
-		exit ;
-	}
+	die(_MD_XHNEWBB_ERRORFORUM);
 }
 
 $topic_time = (isset($_GET['topic_time'])) ? intval($_GET['topic_time']) : 0;
@@ -53,24 +43,14 @@ $post_id = !empty($_GET['post_id']) ? intval($_GET['post_id']) : 0;
 
 //use users preferences
 if (is_object($xoopsUser)) {
-	$viewmode = $xoopsUser->getVar('umode');
-	$order = ($xoopsUser->getVar('uorder') == 1) ? 'DESC' : 'ASC';
-} else {
-	$viewmode = 'flat';
-	$order = 'ASC';
+	$viewmode = $viewmode ? $viewmode : $xoopsUser->getVar('umode') ;
+	$uorder = $xoopsUser->getVar('uorder') == 1 ? 'DESC' : 'ASC' ;
+	$order = $order ? $order : $uorder ;
 }
 
 // newbb does not have nested mode
 if ($viewmode == 'nest') {
 	$viewmode = 'thread';
-}
-
-// override mode/order if any requested
-if (isset($_GET['viewmode']) && ($_GET['viewmode'] == 'flat' || $_GET['viewmode'] == 'thread')) {
-	$viewmode = $_GET['viewmode'];
-}
-if (isset($_GET['order']) && ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC')) {
-	$order = $_GET['order'];
 }
 
 if ($viewmode != 'flat') {
@@ -91,20 +71,29 @@ if ( isset($_GET['move']) && 'next' == $_GET['move'] ) {
 }
 
 if ( !$result = $xoopsDB->query($sql) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum",2,_MD_XHNEWBB_ERROROCCURED);
-	exit();
+	die(_MD_XHNEWBB_ERROROCCURED);
 }
 
 if ( !$forumdata = $xoopsDB->fetchArray($result) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum",2,_MD_XHNEWBB_FORUMNOEXIST);
-	exit();
+	die(_MD_XHNEWBB_FORUMNOEXIST);
 }
+
+
 $xoopsTpl->assign('topic_id', $forumdata['topic_id']);
 $topic_id = $forumdata['topic_id'];
 $xoopsTpl->assign('forum_id', $forumdata['forum_id']);
 $forum = $forumdata['forum_id'];
 $can_post = 0;
 $show_reg = 0;
+
+// ADMIN FLAG
+if( is_object( @$xoopsUser ) && ( $xoopsUser->isAdmin($xoopsModule->mid()) || xhnewbb_is_moderator( $forum , $xoopsUser->getVar('uid') ) ) ) {
+	$isadminormod = true ;
+} else {
+	$isadminormod = false ;
+}
+
+// CHECK PRIVILEGES FOR VIEW
 if ( $forumdata['forum_type'] == 1 ) {
 	// this is a private forum.
 	$accesserror = 0;
@@ -113,15 +102,12 @@ if ( $forumdata['forum_type'] == 1 ) {
 			if ( !xhnewbb_check_priv_forum_auth($xoopsUser->getVar('uid'), $forum, false) ) {
 				$accesserror = 1;
 			}
-		} else {
-			$isadminormod = 1;
 		}
 	} else {
 		$accesserror = 1;
 	}
 	if ( $accesserror == 1 ) {
-		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_NORIGHTTOACCESS);
-		exit();
+		die(_MD_XHNEWBB_NORIGHTTOACCESS);
 	}
 	$can_post = 1;
 	$show_reg = 1;
@@ -139,40 +125,39 @@ if ( $forumdata['forum_type'] == 1 ) {
 		$can_post = 1;
 	} else {
 		// this is an admin/moderator only forum
-		if ( $xoopsUser ) {
-			if ( $xoopsUser->isAdmin($xoopsModule->mid()) || xhnewbb_is_moderator($forum, $xoopsUser->getVar('uid')) ) {
-				$can_post = 1;
-				$isadminormod = 1;
-			}
+		if ( $isadminormod ) {
+			$can_post = 1;
 		}
 	}
 }
 $myts =& MyTextSanitizer::getInstance();
-$forumdata['topic_title'] = $myts->makeTboxData4Show($forumdata['topic_title']);$forumdata['forum_name'] = $myts->makeTboxData4Show($forumdata['forum_name']);
-$xoopsTpl->assign(array('topic_title' => '<a href="'.$bbUrl['root'].'viewtopic.php?viewmode='.$viewmode.'&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'">'.$forumdata['topic_title'].'</a>', 'forum_name' => $forumdata['forum_name'], 'topic_time' => $forumdata['topic_time'], 'lang_nexttopic' => _MD_XHNEWBB_NEXTTOPIC, 'lang_prevtopic' => _MD_XHNEWBB_PREVTOPIC));
+$forumdata['topic_title'] = $myts->makeTboxData4Show($forumdata['topic_title']);
+$forumdata['forum_name'] = $myts->makeTboxData4Show($forumdata['forum_name']);
+
+$xoopsTpl->assign(array('topic_title' => '<a href="'.$bbUrl['root'].'viewtopic.php?topic_id='.$topic_id.'&amp;viewmode='.$viewmode.'">'.$forumdata['topic_title'].'</a>', 'forum_name' => $forumdata['forum_name'], 'topic_time' => $forumdata['topic_time'], 'lang_nexttopic' => _MD_XHNEWBB_NEXTTOPIC, 'lang_prevtopic' => _MD_XHNEWBB_PREVTOPIC));
 
 // add image links to admin page if the user viewing this page is a forum admin
 if ( $xoopsUser ) {
 	$xoopsTpl->assign('viewer_userid', $xoopsUser->getVar('uid'));
-	if ( !empty($isadminormod) || $xoopsUser->isAdmin($xoopsModule->mid()) || xhnewbb_is_moderator( $forum, $xoopsUser->getVar('uid')) ) {
+	if ( $isadminormod ) {
 		// yup, the user is admin
 		// the forum is locked?
 		if ( $forumdata['topic_status'] != 1 ) {
 			// nope
-			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=lock&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['locktopic'].'" alt="'._MD_XHNEWBB_LOCKTOPIC.'" title="'._MD_XHNEWBB_LOCKTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=lock&amp;topic_id='.$topic_id.'"><img src="'.$bbImage['locktopic'].'" alt="'._MD_XHNEWBB_LOCKTOPIC.'" title="'._MD_XHNEWBB_LOCKTOPIC.'" /></a>');
 		} else {
 			// yup, it is..
-			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unlock&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['unlocktopic'].'" alt="'._MD_XHNEWBB_UNLOCKTOPIC.'" title="'._MD_XHNEWBB_UNLOCKTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_lock_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unlock&amp;topic_id='.$topic_id.'"><img src="'.$bbImage['unlocktopic'].'" alt="'._MD_XHNEWBB_UNLOCKTOPIC.'" title="'._MD_XHNEWBB_UNLOCKTOPIC.'" /></a>');
 		}
-		$xoopsTpl->assign('topic_move_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=move&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['movetopic'].'" alt="'._MD_XHNEWBB_MOVETOPIC.'" title="'._MD_XHNEWBB_MOVETOPIC.'" /></a>');
-		$xoopsTpl->assign('topic_delete_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=del&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['deltopic'].'" alt="'._MD_XHNEWBB_DELETETOPIC.'" title="'._MD_XHNEWBB_DELETETOPIC.'" /></a>');
+		$xoopsTpl->assign('topic_move_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=move&amp;topic_id='.$topic_id.'"><img src="'.$bbImage['movetopic'].'" alt="'._MD_XHNEWBB_MOVETOPIC.'" title="'._MD_XHNEWBB_MOVETOPIC.'" /></a>');
+		$xoopsTpl->assign('topic_delete_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=del&amp;topic_id='.$topic_id.'"><img src="'.$bbImage['deltopic'].'" alt="'._MD_XHNEWBB_DELETETOPIC.'" title="'._MD_XHNEWBB_DELETETOPIC.'" /></a>');
 		// is the topic sticky?
 		if ( $forumdata['topic_sticky'] != 1 ) {
 			// nope, not yet..
-			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=sticky&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['sticky'].'" alt="'._MD_XHNEWBB_STICKYTOPIC.'" title="'._MD_XHNEWBB_STICKYTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=sticky&amp;topic_id='.$topic_id.'"><img src="'.$bbImage['sticky'].'" alt="'._MD_XHNEWBB_STICKYTOPIC.'" title="'._MD_XHNEWBB_STICKYTOPIC.'" /></a>');
 		} else {
 			// yup it is sticking..
-			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unsticky&amp;topic_id='.$topic_id.'&amp;forum='.$forum.'"><img src="'.$bbImage['unsticky'].'" alt="'._MD_XHNEWBB_UNSTICKYTOPIC.'" title="'._MD_XHNEWBB_UNSTICKYTOPIC.'" /></a>');
+			$xoopsTpl->assign('topic_sticky_image', '<a href="'.$bbUrl['root'].'topicmanager.php?mode=unsticky&amp;topic_id='.$topic_id.'"><img src="'.$bbImage['unsticky'].'" alt="'._MD_XHNEWBB_UNSTICKYTOPIC.'" title="'._MD_XHNEWBB_UNSTICKYTOPIC.'" /></a>');
 		}
 		// need to set this also
 		$xoopsTpl->assign('viewer_is_admin', true);
@@ -214,7 +199,7 @@ function xhnewbb_show_tree(&$arr, $current=0, $key=0, $prefix='', $foundusers=ar
 			$post_image =  '<img src="'.XOOPS_URL.'/images/icons/no_posticon.gif" alt="" />';
 		}
 		if ($current != $key) {
-			$subject = '<a href="viewtopic.php?viewmode=thread&amp;topic_id='.$arr[$key]['obj']->topic().'&amp;forum='.$arr[$key]['obj']->forum().'&amp;post_id='.$arr[$key]['obj']->postid().'#'.$arr[$key]['obj']->postid().'">'.$arr[$key]['obj']->subject().'</a>';
+			$subject = '<a href="viewtopic.php?topic_id='.$arr[$key]['obj']->topic().'&amp;post_id='.$arr[$key]['obj']->postid().'&amp;viewmode=thread#forumpost'.$arr[$key]['obj']->postid().'">'.$arr[$key]['obj']->subject().'</a>';
 			$GLOBALS['xoopsTpl']->append("topic_trees", array_merge($posterarr, array("post_id" => $arr[$key]['obj']->postid(), "post_parent_id" => $arr[$key]['obj']->parent(), "post_date" => formatTimestamp($arr[$key]['obj']->posttime(), "m"), "post_image" => $post_image, "post_title" => $subject, "post_prefix" => $prefix)));
 		} else {
 			$subject = '<b>'.$arr[$key]['obj']->subject().'</b>';
@@ -262,15 +247,18 @@ if ( $can_post == 1 ) {
 }
 
 if ( $viewmode == "thread" ) {
+	// THREAD (TREE) MODE
 	$start = 0 ;
 	$postsArray = ForumPosts::getAllPosts($topic_id, "ASC", $total_posts, $start);
 	$xoopsTpl->assign('topic_viewmode', 'thread');
+	$xoopsTpl->assign('topic_order', $order);
 
 	$newObjArr = array();
 	foreach ( $postsArray as $eachpost ) {
 		$key1 = $eachpost->postid();
 		if ( (!empty($post_id) && $post_id == $key1) || ( empty($post_id) && $eachpost->parent() == 0 ) ) {
 			$post_text = $eachpost->text();
+			$posterarr = array() ;
 			if ( 0 != $eachpost->uid() ) {
 				$eachposter = new XoopsUser($eachpost->uid());
 				$poster_rank = $eachposter->rank();
@@ -284,19 +272,37 @@ if ( $viewmode == "thread" ) {
 						$myts =& MytextSanitizer::getInstance();
 						$post_text .= "<p><br />----------------<br />". $myts->displayTarea($eachposter->getVar("user_sig", "N"), 0, 1, 1, $xoopsModuleConfig['xhnewbb_allow_sigimg'])."</p>";
 					}
-				} else {
-					$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
+					if( is_object( @$xoopsUser ) ) {
+						$can_edit = ( $isadminormod || $eachpost->uid() == $xoopsUser->getVar('uid') ) ? true : false ;
+						$can_delete = $isadminormod ? true : false ;
+					} else {
+						$can_edit = $can_delete = false ;
+					}
+					$can_reply = $can_post ;
 				}
-			} else {
-				$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
 			}
+
+			// this is a post from guests or quitted users
+			if( empty( $posterarr ) ) {
+				$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
+				$can_edit = $isadminormod ? true : false ;
+				$can_delete = $isadminormod ? true : false ;
+				$can_reply = $can_post ;
+			}
+
+			// locked topic
+			if( $forumdata['topic_status'] == 1 ) {
+				$can_edit = false ;
+				$can_reply = false ;
+			}
+			
 			$posticon = $eachpost->icon();
 			if ( isset($posticon) && $posticon != '' ) {
 				$post_image = '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/subject/'.$eachpost->icon().'" alt="" /></a>';
 			} else {
 				$post_image =  '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/icons/posticon.gif" alt="" /></a>';
 			}
-			$xoopsTpl->append('topic_posts', array_merge($posterarr, array('post_id' => $eachpost->postid(), 'post_parent_id' => $eachpost->parent(), 'post_date' => formatTimestamp($eachpost->posttime(), 'm'), 'post_poster_ip'=> $eachpost->posterip(), 'post_image' => $post_image, 'post_title' => $eachpost->subject(), 'post_text' => $post_text)));
+			$xoopsTpl->append('topic_posts', array_merge($posterarr, array('post_id' => $eachpost->postid(), 'post_parent_id' => $eachpost->parent(), 'post_date' => formatTimestamp($eachpost->posttime(), 'm'), 'post_poster_ip'=> $eachpost->posterip(), 'post_image' => $post_image, 'post_title' => $eachpost->subject(), 'post_text' => $post_text, 'can_edit' => @$can_edit, 'can_delete' => @$can_delete, 'can_reply' => @$can_reply)));
 		}
 		$newObjArr[$key1]['obj'] = $eachpost;
 		$key2 = $eachpost->parent();
@@ -305,12 +311,16 @@ if ( $viewmode == "thread" ) {
 	}
 	xhnewbb_show_tree($newObjArr, $post_id);
 	$xoopsTpl->assign(array('lang_subject' => _MD_XHNEWBB_SUBJECT, 'lang_date' => _MD_XHNEWBB_DATE));
+
 } else {
-	$xoopsTpl->assign(array('topic_viewmode' => 'flat', 'lang_top' => _MD_XHNEWBB_TOP, 'lang_subject' => _MD_XHNEWBB_SUBJECT, 'lang_bottom' => _MD_XHNEWBB_BOTTOM));
+	// FLAT MODE
+	$xoopsTpl->assign(array('topic_viewmode' => 'flat', 'lang_top' => _MD_XHNEWBB_TOP, 'lang_subject' => _MD_XHNEWBB_SUBJECT, 'lang_bottom' => _MD_XHNEWBB_BOTTOM));	$xoopsTpl->assign('topic_order', $order);
+
 	$postsArray = ForumPosts::getAllPosts($topic_id, $order, $forumdata['posts_per_page'], $start, $post_id);
 	$foundusers = array();
 	foreach ( $postsArray as $eachpost ) {
 		$post_text = $eachpost->text();
+		$posterarr = array() ;
 		if ( 0 != $eachpost->uid() ) {
 			if (!isset($foundusers['user'.$eachpost->uid()])) {
 				$eachposter = new XoopsUser($eachpost->uid());
@@ -329,24 +339,42 @@ if ( $viewmode == "thread" ) {
 					$myts =& MytextSanitizer::getInstance();
 					$post_text .= '<p><br />----------------<br />'. $myts->displayTarea($eachposter->getVar('user_sig', 'N'), 0, 1, 1, $xoopsModuleConfig['xhnewbb_allow_sigimg']).'</p>';
 				}
-			} else {
-				$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
+				if( is_object( @$xoopsUser ) ) {
+					$can_edit = ( $isadminormod || $eachpost->uid() == $xoopsUser->getVar('uid') ) ? true : false ;
+					$can_delete = $isadminormod ? true : false ;
+				} else {
+					$can_edit = $can_delete = false ;
+				}
+				$can_reply = $can_post ;
 			}
-		} else {
-			$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
 		}
+
+		// this is a post from guests or quitted users
+		if( empty( $posterarr ) ) {
+			$posterarr = array('poster_uid' =>0, 'poster_uname' => $xoopsConfig['anonymous'], 'poster_avatar' => '', 'poster_from' => '', 'poster_regdate' => '', 'poster_postnum' => '', 'poster_sendpmtext' => '', 'poster_rank_title' => '', 'poster_rank_image' => '');
+			$can_edit = $isadminormod ? true : false ;
+			$can_delete = $isadminormod ? true : false ;
+			$can_reply = $can_post ;
+		}
+
+		// locked topic
+		if( $forumdata['topic_status'] == 1 ) {
+			$can_edit = false ;
+			$can_reply = false ;
+		}
+		
 		$posticon = $eachpost->icon();
 		if ( isset($posticon) && $posticon != '' ) {
 			$post_image = '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/subject/'.$eachpost->icon().'" alt="" /></a>';
 		} else {
 			$post_image =  '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/icons/no_posticon.gif" alt="" /></a>';
 		}
-		$xoopsTpl->append('topic_posts', array_merge($posterarr, array('post_id' => $eachpost->postid(), 'post_parent_id' => $eachpost->parent(), 'post_date' => formatTimestamp($eachpost->posttime(), 'm'), 'post_poster_ip'=> $eachpost->posterip(), 'post_image' => $post_image, 'post_title' => $eachpost->subject(), 'post_text' => $post_text)));
+		$xoopsTpl->append('topic_posts', array_merge($posterarr, array('post_id' => $eachpost->postid(), 'post_parent_id' => $eachpost->parent(), 'post_date' => formatTimestamp($eachpost->posttime(), 'm'), 'post_poster_ip'=> $eachpost->posterip(), 'post_image' => $post_image, 'post_title' => $eachpost->subject(), 'post_text' => $post_text, 'can_edit' => @$can_edit, 'can_delete' => @$can_delete, 'can_reply' => @$can_reply)));
 		unset($eachposter);
 	}
 	if ( $total_posts > $forumdata['posts_per_page'] ) {
 		include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
-		$nav = new XoopsPageNav($total_posts, $forumdata['posts_per_page'], $start, "start", 'topic_id='.$topic_id.'&amp;forum='.$forum.'&amp;viewmode='.$viewmode.'&amp;order='.$order);
+		$nav = new XoopsPageNav($total_posts, $forumdata['posts_per_page'], $start, "start", 'topic_id='.$topic_id.'&amp;viewmode='.$viewmode.'&amp;order='.$order);
 		$xoopsTpl->assign('forum_page_nav', $nav->renderNav(4));
 	} else {
 		$xoopsTpl->assign('forum_page_nav', '');

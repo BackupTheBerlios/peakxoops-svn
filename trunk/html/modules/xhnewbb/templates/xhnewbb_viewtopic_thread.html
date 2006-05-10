@@ -13,19 +13,21 @@
   <tr>
     <{if $uid > 0 }>
       <td style="width:19px;">
-        <{if $u2t_marked}>
-          <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=off">
-            <img src="<{$mod_url}>/images/mark_on.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" />
-          </a>
-        <{else}>
-          <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;change_u2t_mark=on">
-            <img src="<{$mod_url}>/images/mark_off.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" />
-          </a>
+        <{if $allow_mark}>
+          <{if $u2t_marked}>
+            <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;order=<{$order_current}>&amp;change_u2t_mark=off">
+              <img src="<{$mod_url}>/images/mark_on.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" />
+            </a>
+          <{else}>
+            <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;order=<{$order_current}>&amp;change_u2t_mark=on">
+              <img src="<{$mod_url}>/images/mark_off.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" />
+            </a>
+          <{/if}>
         <{/if}>
       </td>
     <{/if}>
-    <td align="left"><a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
-    <td align="right"><a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
+    <td align="left"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat"><{$lang_flat}></a></td>
+    <td align="right"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
   </tr>
 </table>
 <table cellspacing="1" class="outer">
@@ -40,8 +42,8 @@
 
 <table cellpadding="4" width="100%">
   <tr>
-    <td align="left"><a href="<{$mod_url}>/viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
-    <td align="right"><a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
+    <td align="left"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>viewmode=flat&amp;order=<{$order_current}>&amp;"><{$lang_flat}></a></td>
+    <td align="right"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
   </tr>
 </table>
 

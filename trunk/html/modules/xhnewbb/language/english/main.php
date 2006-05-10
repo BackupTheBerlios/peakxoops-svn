@@ -131,6 +131,7 @@ define("_MD_XHNEWBB_EDITNOTALLOWED","You're not allowed to edit this post!");
 define("_MD_XHNEWBB_EDITEDBY","Edited by");
 define("_MD_XHNEWBB_ANONNOTALLOWED","Anonymous user not allowed to post.<br>Please register.");
 define("_MD_XHNEWBB_THANKSSUBMIT","Thanks for your submission!");
+define("_MD_XHNEWBB_THANKSEDIT","The post is modified");
 define("_MD_XHNEWBB_REPLYPOSTED","A reply to your topic has been posted.");
 define("_MD_XHNEWBB_HELLO","Hello %s,");
 define("_MD_XHNEWBB_URRECEIVING","You are receiving this email because a message you posted on %s forums has been replied to."); // %s is your site name

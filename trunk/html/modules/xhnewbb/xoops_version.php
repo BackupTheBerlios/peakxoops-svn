@@ -25,8 +25,10 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
 $modversion['name'] = _MI_XHNEWBB_NAME;
-$modversion['version'] = 1.16;
+$modversion['version'] = 1.17;
 $modversion['description'] = _MI_XHNEWBB_DESC;
 $modversion['credits'] = "Kazumi Ono<br />( http://www.myweb.ne.jp/ )";
 $modversion['author'] = "Original admin section (phpBB 1.4.4) by<br />The phpBB Group<br />( http://www.phpbb.com/ )<br />";
@@ -82,17 +84,18 @@ $modversion['templates'][8]['description'] = '';
 $modversion['blocks'][1] = array(
 	'file' => "xhnewbb_blocks.php" ,
 	'name' => _MI_XHNEWBB_BNAME1 ,
-	'description' => _MI_XHNEWBB_BDESC1 ,
+	'description' => '' , // _MI_XHNEWBB_BDESC1 deprecated
 	'show_func' => "b_xhnewbb_main_show" ,
 	'options' => "10|1|time|public|1|0|0" ,
 	'edit_func' => "b_xhnewbb_main_edit" ,
 	'template' => 'xhnewbb_main_block.html' ,
 	'can_clone' => true
 	) ;
-$modversion['blocks'][] = array(
+
+$modversion['blocks'][2] = array(
 	'file' => "xhnewbb_blocks.php" ,
 	'name' => _MI_XHNEWBB_BNAME1 ,
-	'description' => _MI_XHNEWBB_BDESC1 ,
+	'description' => '' , // _MI_XHNEWBB_BDESC1 deprecated
 	'show_func' => "b_xhnewbb_main_show" ,
 	'options' => "10|1|time|public|1|0|0" ,
 	'edit_func' => "b_xhnewbb_main_edit" ,

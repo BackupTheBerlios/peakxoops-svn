@@ -22,29 +22,21 @@
         <tr>
           <td class="even"></td>
 
-          <{if $xoops_isadmin == true}>
-
           <td class="even" align="right">
-            <a href="<{$mod_url}>/edit.php?forum=<{$forum_id}>&amp;post_id=<{$topic_post.post_id}>&amp;topic_id=<{$topic_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"><img src="<{$xoops_url}>/images/icons/edit.gif" alt="<{$lang_edit}>" /></a><a href='<{$mod_url}>/delete.php?forum=<{$forum_id}>&amp;topic_id=<{$topic_id}>&amp;post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>'><img src="<{$xoops_url}>/images/icons/delete.gif" alt="<{$lang_delete}>" /></a><a href='<{$mod_url}>/reply.php?forum=<{$forum_id}>&amp;post_id=<{$topic_post.post_id}>&amp;topic_id=<{$topic_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>'><img src="<{$xoops_url}>/images/icons/reply.gif" alt="<{$lang_reply}>" /></a>
+
+            <{if $topic_post.can_edit}>
+              <a href="<{$mod_url}>/edit.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"><img src="<{$xoops_url}>/images/icons/edit.gif" alt="<{$lang_edit}>" /></a>
+            <{/if}>
+
+            <{if $topic_post.can_delete}>
+              <a href='<{$mod_url}>/delete.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>'><img src="<{$xoops_url}>/images/icons/delete.gif" alt="<{$lang_delete}>" /></a>
+            <{/if}>
+
+            <{if $topic_post.can_reply}>
+              <a href='<{$mod_url}>/reply.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>'><img src="<{$xoops_url}>/images/icons/reply.gif" alt="<{$lang_reply}>" /></a>
+            <{/if}>
+
           </td>
-
-          <{elseif $xoops_isuser == true && $xoops_userid == $topic_post.poster_uid}>
-
-          <td class="even" align="right">
-            <a href="<{$mod_url}>/edit.php?forum=<{$forum_id}>&amp;post_id=<{$topic_post.post_id}>&amp;topic_id=<{$topic_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"><img src="<{$xoops_url}>/images/icons/edit.gif" alt="<{$lang_edit}>" /></a><a href='<{$mod_url}>/reply.php?forum=<{$forum_id}>&amp;post_id=<{$topic_post.post_id}>&amp;topic_id=<{$topic_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>'><img src="<{$xoops_url}>/images/icons/reply.gif" alt="<{$lang_reply}>" /></a>
-          </td>
-
-          <{elseif $viewer_can_post == true}>
-
-          <td class="even" align="right">
-            <a href='<{$mod_url}>/reply.php?forum=<{$forum_id}>&amp;post_id=<{$topic_post.post_id}>&amp;topic_id=<{$topic_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>'><img src="<{$xoops_url}>/images/icons/reply.gif" alt="<{$lang_reply}>" /></a>
-          </td>
-
-          <{else}>
-
-          <td class="even"> </td>
-
-          <{/if}>
 
         </tr>
 <!-- end comment post -->

@@ -1,6 +1,14 @@
 [mlimg]
 [xlang:en]
 
+1.17 (2006/5/10)
+- added french language file (thx marco)
+- fixed small typos added as xhnewbb
+- fixed newbb origined large and many bugs :-)
+-- a moderator can moderate any forums
+-- anyone can post into any locked topics
+-- anyone can read any posts in the private forums
+
 1.16 (2006/3/11)
 - fixed a language constant (thx marco)
 - added ALTER TALBE on update if forum table was from newbb
@@ -49,9 +57,18 @@
 [/xlang:en]
 [xlang:ja]
 
+1.17 (2006/5/10)
+- フランス語ファイル追加 (thx marco)
+- xhnewbb追加部分の細かなtypo修正
+- newbb由来の多数のバグの大改修（以下はその一部に過ぎません:-)）
+-- あるモデレータが、全フォーラムを編集できてしまう
+-- ロックトピックでも自由に投稿できてしまう
+-- プライベートフォーラムの中身をメンバー以外が自由に閲覧できてしまう
+
 1.16 (2006/3/11)
 - 直書き文字定数を一部修正 (thx marco)
 - newbbからデータを持ち込んだ時のALTER TABLE追加
+- pagenav読込部分をinclude_onceに修正 (thx hananoko) 1.16a
 
 1.15 (2006/1/25)
 - search.php で投稿者だけを指定するとSQLエラーになるオリジナルバグの修正

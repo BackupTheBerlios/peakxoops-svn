@@ -46,8 +46,7 @@ $post_id = empty( $post_id ) ? 0 : $post_id ;
 $formTitle = empty( $formTitle ) ? "" : $formTitle ;
 $guestName = empty( $guestName ) ? "" : $guestName ;
 
-//$forum_form = new XoopsTableForm("", "forumform", 'post.php');
-$forum_form = new XoopsThemeForm($formTitle, "forumform", 'post.php');
+$forum_form = new XoopsThemeForm($formTitle, "forumform", "post.php?viewmode=$viewmode&order=$order");
 if ( $forumdata['forum_type'] == 1 ) {
 	$type = _MD_XHNEWBB_PRIVATE;
 }else{
@@ -65,7 +64,7 @@ if ( $forumdata['forum_type'] == 1 ) {
 }
 $forum_form->addElement(new XoopsFormLabel(_MD_XHNEWBB_ABOUTPOST,$type));
 
-$forum_form->addElement(new XoopsFormText(_MD_XHNEWBB_SUBJECTC , 'subject', 60, 100, $subject), true);
+$forum_form->addElement(new XoopsFormText(_MD_XHNEWBB_SUBJECTC , 'subject', 60, 255, $subject), true);
 
 if($post_id > 0){
 	// edit (Alert "not reply but edit")
@@ -129,7 +128,7 @@ $option_tray->addElement($smiley_checkbox);
 
 //html
 if ( $forumdata['allow_html'] ) {
-	$html_checkbox = new XoopsFormCheckBox('', 'nohtml', $nohtml);
+	$html_checkbox = new XoopsFormCheckBox('', 'nohtml', !empty($nohtml));
 	$html_checkbox->addOption(1, _MD_XHNEWBB_DISABLEHTML);
 	$option_tray->addElement($html_checkbox);
 } else {
@@ -175,15 +174,12 @@ $forum_form->addElement($option_tray);
 
 $post_id = isset($post_id) ? intval($post_id) : '';
 $topic_id = isset($topic_id) ? intval($topic_id) : '';
-$order = isset($order) ? intval($order) : '';
 $pid = isset($pid) ? intval($pid) : 0;
 
 $forum_form->addElement(new XoopsFormHidden('pid', intval($pid)));
 $forum_form->addElement(new XoopsFormHidden('post_id', $post_id));
 $forum_form->addElement(new XoopsFormHidden('topic_id', $topic_id));
 $forum_form->addElement(new XoopsFormHidden('forum', intval($forum)));
-$forum_form->addElement(new XoopsFormHidden('viewmode', $viewmode));
-$forum_form->addElement(new XoopsFormHidden('order', $order));
 
 $button_tray = new XoopsFormElementTray('' ,'');
 $button_tray->addElement(new XoopsFormButton('', 'contents_preview', _PREVIEW, 'submit'));
@@ -191,7 +187,7 @@ $button_tray->addElement(new XoopsFormButton('', 'contents_submit', _SUBMIT, 'su
 $cancel_button = new XoopsFormButton('', 'contents_submit', _MD_XHNEWBB_CANCELPOST, 'button');
 $cancel_script = "onclick='location=\"";
 if ( isset($topic_id) && $topic_id != "" ) {
-	$cancel_script .= "viewtopic.php?topic_id=".intval($topic_id)."&amp;forum=".intval($forum)."\"'";
+	$cancel_script .= "viewtopic.php?topic_id=".intval($topic_id)."\"'";
 } else {
 	$cancel_script .= "viewforum.php?forum=".intval($forum)."\"'";
 }

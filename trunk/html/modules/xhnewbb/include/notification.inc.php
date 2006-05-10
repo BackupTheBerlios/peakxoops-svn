@@ -53,7 +53,7 @@ function xhnewbb_notify_iteminfo($category, $item_id)
 		$result = $xoopsDB->query($sql); // TODO: error check
 		$result_array = $xoopsDB->fetchArray($result);
 		$item['name'] = $result_array['topic_title'];
-		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/viewtopic.php?forum=' . $result_array['forum_id'] . '&topic_id=' . $item_id;
+		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/viewtopic.php?topic_id=' . $item_id;
 		return $item;
 	}
 
@@ -63,7 +63,7 @@ function xhnewbb_notify_iteminfo($category, $item_id)
 		$result = $xoopsDB->query($sql);
 		$result_array = $xoopsDB->fetchArray($result);
 		$item['name'] = $result_array['subject'];
-		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/viewtopic.php?forum= ' . $result_array['forum_id'] . '&amp;topic_id=' . $result_array['topic_id'] . '#forumpost' . $item_id;
+		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/viewtopic.php?topic_id=' . $result_array['topic_id'] . '#forumpost' . $item_id;
 		return $item;
 	}
 }

@@ -270,7 +270,7 @@ case 'editforum':
 		?>
 		</tr>
 		<tr class='bg1' align='left'>
-		<td><span class='fg2'>Access Level:</span></td>
+		<td><span class='fg2'><?php echo _MD_XHNEWBB_A_ACCESSLEVEL;?></span></td>
 		<td><select name='forum_access'>
 		<option value="2" <?php echo $access2?>><?php echo _MD_XHNEWBB_A_ANONYMOUSPOST;?></option>
 		<option value="1" <?php echo $access1?>><?php echo _MD_XHNEWBB_A_REGISTERUSERONLY;?></option>

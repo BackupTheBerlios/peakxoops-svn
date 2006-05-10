@@ -19,6 +19,14 @@
  *
  ***************************************************************************/
 include "header.php";
+
+if( empty( $topic_id ) ) {
+	die(_MD_XHNEWBB_ERRORTOPIC);
+}
+if( empty( $forum ) ) {
+	die(_MD_XHNEWBB_ERRORFORUM);
+}
+
 $accesserror = 0;
 if ( $xoopsUser ) {
 	if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
@@ -30,16 +38,13 @@ if ( $xoopsUser ) {
 	$accesserror = 1;
 }
 if ( $accesserror == 1 ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;post_id=$post_id&amp;order=$order&amp;viewmode=$viewmode&amp;pid=$pid&amp;forum=$forum",3,_MD_XHNEWBB_YANTMOTFTYCPTF);
-	exit();
+	die(_MD_XHNEWBB_YANTMOTFTYCPTF);
 }
 
 include XOOPS_ROOT_PATH.'/header.php';
 OpenTable();
 if ( ! empty( $_POST['submit'] ) ) {
-	foreach (array('forum', 'topic_id', 'newforum') as $getint) {
-	    ${$getint} = isset($_POST[$getint]) ? intval($_POST[$getint]) : 0;
-    }
+	$newforum = isset( $_POST['newforum'] ) ? intval($_POST['newforum']) : 0 ;
 	switch (@$_POST['mode']) {
 	case 'del':
 		// Update the users's post count, this might be slow on big topics but it makes other parts of the
@@ -97,6 +102,10 @@ if ( ! empty( $_POST['submit'] ) ) {
 		break;
 	case 'move':
 		if ($newforum > 0) {
+			$sql = "SELECT * FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id=$newforum" ;
+			if ( ! ( $r = $xoopsDB->query($sql) ) || $xoopsDB->getRowsNum($r)!=1 ) {
+				exit(_MD_XHNEWBB_EPGBATA);
+			}
 			$sql = sprintf("UPDATE %s SET forum_id = %u WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $newforum, $topic_id);
 	    	if ( !$r = $xoopsDB->query($sql) ) {
 				exit(_MD_XHNEWBB_EPGBATA);
@@ -108,43 +117,40 @@ if ( ! empty( $_POST['submit'] ) ) {
 			xhnewbb_sync($newforum, 'forum');
 			xhnewbb_sync($forum, 'forum');
 		}
-		echo _MD_XHNEWBB_TTHBM."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$newforum'>"._MD_XHNEWBB_VTUT."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBM."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id'>"._MD_XHNEWBB_VTUT."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'lock':
 		$sql = sprintf("UPDATE %s SET topic_status = 1 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit(_MD_XHNEWBB_EPGBATA);
 		}
-		echo _MD_XHNEWBB_TTHBL."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBL."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'unlock':
 		$sql = sprintf("UPDATE %s SET topic_status = 0 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit("Error - Could not unlock the selected topic. Please go back and try again.");
 		}
-		echo _MD_XHNEWBB_TTHBU."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBU."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'sticky':
 		$sql = sprintf("UPDATE %s SET topic_sticky = 1 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit("Error - Could not sticky the selected topic. Please go back and try again.");
 		}
-		echo _MD_XHNEWBB_TTHBS."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBS."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	case 'unsticky':
 		$sql = sprintf("UPDATE %s SET topic_sticky = 0 WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $topic_id);
 	    if ( !$r = $xoopsDB->query($sql) ) {
 			exit("Error - Could not unsticky the selected topic. Please go back and try again.");
 		}
-		echo _MD_XHNEWBB_TTHBUS."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
+		echo _MD_XHNEWBB_TTHBUS."<p><a href='".XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id'>"._MD_XHNEWBB_VIEWTHETOPIC."</a></p><p><a href='".XOOPS_URL."/modules/xhnewbb/index.php'>"._MD_XHNEWBB_RTTFI."</a></p>";
 		break;
 	}
 } else {  // No submit
-	foreach (array('forum', 'topic_id') as $getint) {
-		${$getint} = isset($_GET[$getint]) ? intval($_GET[$getint]) : 0;
-	}
 	$mode = @$_GET['mode'];
-    echo "<form action='' method='post'>
+    echo "<form action='?topic_id=$topic_id' method='post'>
 	<table border='0' cellpadding='1' cellspacing='0' align='center' width='95%'><tr><td class='bg2'>
 	<table border='0' cellpadding='1' cellspacing='1' width='100%'>
 	<tr class='bg3' align='left'>";
@@ -194,38 +200,26 @@ if ( ! empty( $_POST['submit'] ) ) {
 	switch ( $mode ) {
 	case 'del':
 		echo '<input type="hidden" name="mode" value="del" />
-		<input type="hidden" name="topic_id" value="'.$topic_id.'" />
-		<input type="hidden" name="forum" value="'.$forum.'" />
 		<input type="submit" name="submit" value="'._MD_XHNEWBB_DELTOPIC.'" />';
 		break;
 	case 'move':
 		echo '<input type="hidden" name="mode" value="move" />
-		<input type="hidden" name="topic_id" value="'.$topic_id.'" />
-		<input type="hidden" name="forum" value="'.$forum.'" />
 		<input type="submit" name="submit" value="'._MD_XHNEWBB_MOVETOPIC.'" />';
 		break;
 	case 'lock':
 		echo '<input type="hidden" name="mode" value="lock" />
-		<input type="hidden" name="topic_id" value="'.$topic_id.'" />
-		<input type="hidden" name="forum" value="'.$forum.'" />
 		<input type="submit" name="submit" value="'._MD_XHNEWBB_LOCKTOPIC.'" />';
 		break;
 	case 'unlock':
 		echo '<input type="hidden" name="mode" value="unlock" />
-		<input type="hidden" name="topic_id" value="'.$topic_id.'" />
-		<input type="hidden" name="forum" value="'.$forum.'" />
 		<input type="submit" name="submit" value="'._MD_XHNEWBB_UNLOCKTOPIC.'" />';
 		break;
 	case 'sticky':
 		echo "<input type='hidden' name='mode' value='sticky' />
-		<input type='hidden' name='topic_id' value='$topic_id' />
-		<input type='hidden' name='forum' value='$forum' />
 		<input type='submit' name='submit' value='"._MD_XHNEWBB_STICKYTOPIC."' />";
 		break;
 	case 'unsticky':
 		echo "<input type='hidden' name='mode' value='unsticky' />
-		<input type='hidden' name='topic_id' value='$topic_id' />
-		<input type='hidden' name='forum' value='$forum' />
 		<input type='submit' name='submit' value='". _MD_XHNEWBB_UNSTICKYTOPIC."' />";
 		break;
 	}

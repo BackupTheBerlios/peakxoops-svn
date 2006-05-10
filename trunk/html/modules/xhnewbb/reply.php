@@ -28,99 +28,99 @@
 // URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
+
 include 'header.php';
-foreach (array('forum', 'topic_id', 'post_id', 'order', 'pid') as $getint) {
-	${$getint} = isset($_GET[$getint]) ? intval($_GET[$getint]) : 0;
+include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
+
+$forumpost = new ForumPosts( intval( @$_GET['post_id'] ) ) ;
+$post_id = $forumpost->postid() ;
+if( empty( $post_id ) ) {
+	die(_MD_XHNEWBB_ERRORPOST);
 }
-$viewmode = (isset($_GET['viewmode']) && $_GET['viewmode'] != 'flat') ? 'thread' : 'flat';
-if ( empty($forum) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORFORUM);
-	exit();
-} elseif ( empty($topic_id) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum", 2, _MD_XHNEWBB_ERRORTOPIC);
-	exit();
-} elseif ( empty($post_id) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum", 2, _MD_XHNEWBB_ERRORPOST);
-	exit();
+$topic_id = $forumpost->topic() ;
+$forum = $forumpost->forum() ;
+
+// parent id
+$pid = isset( $_GET['pid'] ) ? intval( $_GET['pid'] ) : 0 ;
+
+// lock check
+if ( xhnewbb_is_locked($topic_id) ) {
+	die(_MD_XHNEWBB_TOPICLOCKED);
+}
+
+$sql = "SELECT forum_type, forum_name, forum_access, allow_html, allow_sig, posts_per_page, hot_threshold, topics_per_page FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id = $forum";
+if ( !$result = $xoopsDB->query($sql) ) {
+	die(_MD_XHNEWBB_ERROROCCURED);
+}
+$forumdata = $xoopsDB->fetchArray($result);
+$myts =& MyTextSanitizer::getInstance();
+
+// CHECK ACCESS RIGHTS BY FORUM TYPE 
+if ( $forumdata['forum_type'] == 1 ) {
+	// To get here, we have a logged-in user. So, check whether that user is allowed to post in
+	// this private forum.
+	$accesserror = 0; //initialize
+	if ( $xoopsUser ) {
+		if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
+			if ( !xhnewbb_check_priv_forum_auth($xoopsUser->uid(), $forum, true) ) {
+				$accesserror = 1;
+			}
+		}
+	} else {
+		$accesserror = 1;
+	}
+	if ( $accesserror == 1 ) {
+		die(_MD_XHNEWBB_NORIGHTTOPOST);
+	}
+	// Ok, looks like we're good.
 } else {
-	if ( xhnewbb_is_locked($topic_id) ) {
-		redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum", 2, _MD_XHNEWBB_TOPICLOCKED);
-		exit();
-	}
-	$sql = "SELECT forum_type, forum_name, forum_access, allow_html, allow_sig, posts_per_page, hot_threshold, topics_per_page FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id = $forum";
-	if ( !$result = $xoopsDB->query($sql) ) {
-		redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",1,_MD_XHNEWBB_ERROROCCURED);
-		exit();
-	}
-	$forumdata = $xoopsDB->fetchArray($result);
-	$myts =& MyTextSanitizer::getInstance();
-	if ( $forumdata['forum_type'] == 1 ) {
-		// To get here, we have a logged-in user. So, check whether that user is allowed to post in
-		// this private forum.
-		$accesserror = 0; //initialize
+	$accesserror = 0;
+	if ( $forumdata['forum_access'] == 3 ) {
 		if ( $xoopsUser ) {
 			if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
-				if ( !xhnewbb_check_priv_forum_auth($xoopsUser->uid(), $forum, true) ) {
+				if ( !xhnewbb_is_moderator($forum, $xoopsUser->uid()) ) {
 					$accesserror = 1;
 				}
 			}
 		} else {
 			$accesserror = 1;
 		}
-		if ( $accesserror == 1 ) {
-			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
-			exit();
-		}
-		// Ok, looks like we're good.
-	} else {
-		$accesserror = 0;
-		if ( $forumdata['forum_access'] == 3 ) {
-			if ( $xoopsUser ) {
-				if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
-					if ( !xhnewbb_is_moderator($forum, $xoopsUser->uid()) ) {
-						$accesserror = 1;
-					}
-				}
-			} else {
-				$accesserror = 1;
-			}
-		} elseif ( $forumdata['forum_access'] == 1 && !$xoopsUser ) {
-			$accesserror = 1;
-		}
-		if ( $accesserror == 1 ) {
-			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&post_id=$post_id&order=$order&viewmode=$viewmode&pid=$pid&forum=$forum",2,_MD_XHNEWBB_NORIGHTTOPOST);
-			exit();
-		}
-    }
-	include XOOPS_ROOT_PATH.'/header.php';
-	include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
-	$forumpost = new ForumPosts($post_id);
-	$r_message = $forumpost->text();
-	$r_date = formatTimestamp($forumpost->posttime());
-	$r_name = ($forumpost->uid() != 0) ? XoopsUser::getUnameFromId($forumpost->uid()) : $xoopsConfig['anonymous'];
-	$r_content = _MD_XHNEWBB_BY." ".$r_name." "._MD_XHNEWBB_ON." ".$r_date."<br /><br />";
-	$r_content .= $r_message;
-	$r_subject=$forumpost->subject();
-	if (!preg_match("/^Re:/i",$r_subject)) {
-		$subject = 'Re: '.$myts->htmlSpecialChars($r_subject);
-	} else {
-		$subject = $myts->htmlSpecialChars($r_subject);
+	} elseif ( $forumdata['forum_access'] == 1 && !$xoopsUser ) {
+		$accesserror = 1;
 	}
-	$q_message = $forumpost->text("Quotes");
-	$hidden = "[quote]\n";
-	$hidden .= sprintf(_MD_XHNEWBB_USERWROTE,$r_name);
-	$hidden .= "\n".$q_message."[/quote]";
-	$message = "";
-	themecenterposts($r_subject,$r_content);
-	echo "<br />";
-	$pid=$post_id;
-	unset($post_id);
-	$topic_id=$forumpost->topic();
-	$forum=$forumpost->forum();
-	$isreply =1;
-	$istopic = 0;
-	$formTitle = _MD_XHNEWBB_REPLY ;
-	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
-	include XOOPS_ROOT_PATH.'/footer.php';
+	if ( $accesserror == 1 ) {
+		die(_MD_XHNEWBB_NORIGHTTOPOST);
+	}
 }
+
+
+include XOOPS_ROOT_PATH.'/header.php';
+$r_message = $forumpost->text();
+$r_date = formatTimestamp($forumpost->posttime());
+$r_name = ($forumpost->uid() != 0) ? XoopsUser::getUnameFromId($forumpost->uid()) : $xoopsConfig['anonymous'];
+$r_content = _MD_XHNEWBB_BY." ".$r_name." "._MD_XHNEWBB_ON." ".$r_date."<br /><br />";
+$r_content .= $r_message;
+$r_subject=$forumpost->subject();
+if (!preg_match("/^Re:/i",$r_subject)) {
+	$subject = 'Re: '.$myts->htmlSpecialChars($r_subject);
+} else {
+	$subject = $myts->htmlSpecialChars($r_subject);
+}
+$q_message = $forumpost->text("Quotes");
+$hidden = "[quote]\n";
+$hidden .= sprintf(_MD_XHNEWBB_USERWROTE,$r_name);
+$hidden .= "\n".$q_message."[/quote]";
+$message = "";
+themecenterposts($r_subject,$r_content);
+echo "<br />";
+$pid=$post_id;
+unset($post_id);
+$topic_id=$forumpost->topic();
+$forum=$forumpost->forum();
+$isreply =1;
+$istopic = 0;
+$formTitle = _MD_XHNEWBB_REPLY ;
+include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
+include XOOPS_ROOT_PATH.'/footer.php';
+
 ?>

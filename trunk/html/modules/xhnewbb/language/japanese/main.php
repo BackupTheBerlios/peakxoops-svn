@@ -130,6 +130,7 @@ define("_MD_XHNEWBB_EDITNOTALLOWED","投稿文を編集することはできません。");
 define("_MD_XHNEWBB_EDITEDBY","編集ログ：");
 define("_MD_XHNEWBB_ANONNOTALLOWED","ゲスト訪問者の方による投稿は許可されていません。<br>投稿をご希望の方はメンバー登録をして下さい。");
 define("_MD_XHNEWBB_THANKSSUBMIT","投稿ありがとうございました。");
+define("_MD_XHNEWBB_THANKSEDIT","変更を登録しました。");
 define("_MD_XHNEWBB_REPLYPOSTED","返信が投稿されました。");
 define("_MD_XHNEWBB_HELLO","こんにちは %s さん、");
 define("_MD_XHNEWBB_URRECEIVING","%s フォーラムへ投稿したメッセージに対し返信がありましたのでお知らせします。"); // %s はあなたのサイト名

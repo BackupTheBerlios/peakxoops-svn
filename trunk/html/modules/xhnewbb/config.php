@@ -25,6 +25,8 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
 // You shouldn't have to change any of these
 $bbUrl['root'] = XOOPS_URL."/modules/xhnewbb/";
 $bbUrl['admin'] = $bbUrl['root']."admin";

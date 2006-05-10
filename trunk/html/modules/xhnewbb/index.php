@@ -114,7 +114,7 @@ if ($cat_count > 0) {
 				if ($forum_row['post_time']) {
 					//$forum_row['subject'] = $myts->makeTboxData4Show($forum_row['subject']);
 					$categories[$i]['forums']['forum_lastpost_time'][] = formatTimestamp($forum_row['post_time'],'m');
-					$last_post_icon = '<a href="'.XOOPS_URL.'/modules/xhnewbb/viewtopic.php?post_id='.$forum_row['forum_last_post_id'].'&amp;topic_id='.$forum_row['topic_id'].'&amp;forum='.$forum_row['forum_id'].'#forumpost'.$forum_row['forum_last_post_id'].'">';
+					$last_post_icon = '<a href="'.XOOPS_URL.'/modules/xhnewbb/viewtopic.php?post_id='.$forum_row['forum_last_post_id'].'&amp;topic_id='.$forum_row['topic_id'].'#forumpost'.$forum_row['forum_last_post_id'].'">';
 					if ( $forum_row['icon'] ) {
 						$last_post_icon .= '<img src="'.XOOPS_URL.'/images/subject/'.$forum_row['icon'].'" border="0" alt="" />';
 					} else {

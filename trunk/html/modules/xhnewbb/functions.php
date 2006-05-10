@@ -235,6 +235,7 @@ function xhnewbb_make_jumpbox($selected=0)
 function xhnewbb_sync($id, $type)
 {
 	global $xoopsDB;
+	$id = intval( $id ) ;
 	switch ( $type ) {
 	case 'forum':
 		$sql = "SELECT MAX(post_id) AS last_post FROM ".$xoopsDB->prefix("xhnewbb_posts")." WHERE forum_id = $id";
@@ -267,23 +268,20 @@ function xhnewbb_sync($id, $type)
    		}
 		break;
 	case 'topic':
-		$sql = "SELECT max(post_id) AS last_post FROM ".$xoopsDB->prefix("xhnewbb_posts")." WHERE topic_id = $id";
+		$sql = "SELECT MAX(post_id),COUNT(post_id) FROM ".$xoopsDB->prefix("xhnewbb_posts")." WHERE topic_id = $id";
    		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("Could not get post ID");
 		}
-		if ( $row = $xoopsDB->fetchArray($result) ) {
-			$last_post = $row['last_post'];
-		}
-   		if ( $last_post > 0 ) {
-			$sql = "SELECT COUNT(post_id) AS total FROM ".$xoopsDB->prefix("xhnewbb_posts")." WHERE topic_id = $id";
-   			if ( !$result = $xoopsDB->query($sql) ) {
-				exit("Could not get post count");
-   			}
-   			if ( $row = $xoopsDB->fetchArray($result) ) {
-				$total_posts = $row['total'];
-   			}
-   			$total_posts -= 1;
-			$sql = sprintf("UPDATE %s SET topic_replies = %u, topic_last_post_id = %u WHERE topic_id = %u", $xoopsDB->prefix("xhnewbb_topics"), $total_posts, $last_post, $id);
+		list( $last_post_id , $total_posts ) = $xoopsDB->fetchRow($result) ;
+
+   		if ( $last_post_id > 0 ) {
+			$sql = "SELECT post_time FROM ".$xoopsDB->prefix("xhnewbb_posts")." WHERE post_id = $last_post_id";
+	   		if ( !$result = $xoopsDB->query($sql) ) {
+				exit("Could not get post ID");
+			}
+			list( $topic_time ) = $xoopsDB->fetchRow($result) ;
+
+			$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_topics")." SET topic_replies = ".($total_posts-1).", topic_last_post_id = $last_post_id, topic_time=$topic_time WHERE topic_id = $id" ;
    			if ( !$result = $xoopsDB->queryF($sql) ) {
 				exit("Could not update topic $id");
    			}

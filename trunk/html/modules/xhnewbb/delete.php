@@ -30,51 +30,48 @@
 // ------------------------------------------------------------------------- //
 
 include 'header.php';
+include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
 
-$forum = isset($_REQUEST['forum']) ? intval($_REQUEST['forum']) : 0;
-$post_id = isset($_REQUEST['post_id']) ? intval($_REQUEST['post_id']) : 0;
-$topic_id = isset($_REQUEST['topic_id']) ? intval($_REQUEST['topic_id']) : 0;
-$order = isset($_REQUEST['order']) ? intval($_REQUEST['order']) : 0;
-$viewmode = @$_REQUEST['viewmode'] != 'flat' ? 'thread' : 'flat';
-if ( empty($forum) ) {
-	redirect_header( XOOPS_URL."/modules/xhnewbb/index.php", 2, _MD_XHNEWBB_ERRORFORUM);
-	exit();
-} elseif ( empty($post_id) ) {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum", 2, _MD_XHNEWBB_ERRORPOST);
-	exit();
+$post = new ForumPosts( intval( @$_GET['post_id'] ) ) ;
+$post_id = $post->postid() ;
+if( empty( $post_id ) ) {
+	die(_MD_XHNEWBB_ERRORPOST);
 }
+
+$topic_id = $post->topic() ;
+$forum = $post->forum() ;
+
+$viewmode = in_array( @$_GET['viewmode'] , array( 'flat' , 'thread' ) ) ? $_GET['viewmode'] : '' ;
+$order = in_array( @$_GET['order'] , array( 'ASC' , 'DESC' ) ) ? $_GET['order'] : '' ;
+
 
 if ( $xoopsUser ) {
 	if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
 		if ( !xhnewbb_is_moderator($forum, $xoopsUser->uid()) ) {
-			redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&order=$order&viewmode=$viewmode&forum=$forum", 2, _MD_XHNEWBB_DELNOTALLOWED);
+			die(_MD_XHNEWBB_DELNOTALLOWED);
 			exit();
 		}
 	}
 } else {
-	redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&order=$order&viewmode=$viewmode&forum=$forum", 2, _MD_XHNEWBB_DELNOTALLOWED);
-	exit();
+	die(_MD_XHNEWBB_DELNOTALLOWED);
 }
 
-include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/class.forumposts.php';
 
 if ( !empty($_POST['ok']) ) {
-	if ( !empty($post_id) ) {
-		$post = new ForumPosts($post_id);
-		$post->delete();
-		xhnewbb_sync($post->forum(), "forum");
-		xhnewbb_sync($post->topic(), "topic");
-	}
+	$post->delete();
+	xhnewbb_sync($post->forum(), "forum");
+	xhnewbb_sync($post->topic(), "topic");
+
 	if ( $post->istopic() ) {
 		redirect_header(XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum", 2, _MD_XHNEWBB_POSTSDELETED);
-		exit();
+		exit ;
 	} else {
-		redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&order=$order&viewmode=$viewmode&forum=$forum", 2, _MD_XHNEWBB_POSTSDELETED);
-		exit();
+		redirect_header(XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&viewmode=$viewmode&order=$order", 2, _MD_XHNEWBB_POSTSDELETED);
+		exit ;
 	}
 } else {
 	include XOOPS_ROOT_PATH."/header.php";
-	xoops_confirm(array('post_id' => $post_id, 'viewmode' => $viewmode, 'order' => $order, 'forum' => $forum, 'topic_id' => $topic_id, 'ok' => 1), XOOPS_URL."/modules/xhnewbb/delete.php", _MD_XHNEWBB_AREUSUREDEL);
+	xoops_confirm(array('ok' => 1), "?post_id=$post_id&viewmode=$viewmode&order=$order", _MD_XHNEWBB_AREUSUREDEL);
+	include XOOPS_ROOT_PATH.'/footer.php';
 }
-include XOOPS_ROOT_PATH.'/footer.php';
 ?>

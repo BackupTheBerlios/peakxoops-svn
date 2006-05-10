@@ -3,6 +3,3 @@
 
 ダメダメな管理画面を少しでもましにする:-P
 
-post削除の際に、topicsテーブルのtopic_time,topic_replies,topic_last_post_idを更新
-
-

@@ -41,8 +41,9 @@ if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _
 
 // set target_module if specified by $_GET['dirname'] && this is 'blocksadmin'
 $module_handler =& xoops_gethandler('module');
-if( $xoopsModule->getVar('dirname') == 'blocksadmin' && ! empty( $_GET['dirname'] ) ) {
-	$target_module =& $module_handler->getByDirname($_GET['dirname']);
+if( ! empty( $_GET['dirname'] ) ) {
+	$dirname = strtr( $_GET['dirname'] , "\'\"\0<>" , '     ' ) ;
+	$target_module =& $module_handler->getByDirname( $dirname ) ;
 }
 
 if( ! empty( $target_module ) && is_object( $target_module ) ) {

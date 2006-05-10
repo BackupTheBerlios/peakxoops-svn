@@ -2,7 +2,9 @@
 [xlang:en]
 
 1.17 (2006/5/10)
+- fixed typo in viewtopic.php for guest access (thx fabi) 1.17a
 - added french language file (thx marco)
+- changed error handling from redirect_header() to die()
 - fixed small typos added as xhnewbb
 - fixed newbb origined large and many bugs :-)
 -- a moderator can moderate any forums
@@ -58,7 +60,9 @@
 [xlang:ja]
 
 1.17 (2006/5/10)
+- ゲストアクセスでトピック表示がおかしかったのを修正 (thx fabi) 1.17a
 - フランス語ファイル追加 (thx marco)
+- エラー処理のredirect_header()の多くをdie()に変更
 - xhnewbb追加部分の細かなtypo修正
 - newbb由来の多数のバグの大改修（以下はその一部に過ぎません:-)）
 -- あるモデレータが、全フォーラムを編集できてしまう

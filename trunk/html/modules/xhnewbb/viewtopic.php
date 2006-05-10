@@ -53,6 +53,12 @@ if ($viewmode == 'nest') {
 	$viewmode = 'thread';
 }
 
+// check $viewmode and $order again, and force to set if blank
+$viewmode = in_array( $viewmode , array( 'flat' , 'thread' ) ) ? $viewmode : 'flat' ;
+$order = in_array( $order , array( 'ASC' , 'DESC' ) ) ? $order : 'ASC' ;
+
+
+
 if ($viewmode != 'flat') {
 	$xoopsOption['template_main'] =  'xhnewbb_viewtopic_thread.html';
 } else {

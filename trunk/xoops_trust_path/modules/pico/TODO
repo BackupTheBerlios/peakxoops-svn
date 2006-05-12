@@ -1,0 +1,10 @@
+block      install, update, uninstall
+config     install, update, uninstall
+notification
+comment
+
+mytplsadmin
+myblocksadmin
+mymenu
+
+icon distinction

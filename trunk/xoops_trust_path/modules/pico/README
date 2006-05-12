@@ -1,0 +1,77 @@
+[mlimg]
+[xlang:en]
+====  pico prototype  ===
+
+A prototype module based on Duplicatable V3.
+needs XOOPS_TRUST_PATH.
+
+
+[b]USAGE:[/b]
+
+(1) copy html/modules/pico into your moduels/.
+
+(2) name the directory name as you like.
+
+(3) make a new folder out of DocumentRoot  eg) /home/yourhome/xoops/
+
+(4) insert a line into just after defining XOOPS_URL in mainfile.php. (Edit '/ho
+me/yourhome/xoops')
+[code]
+        define('XOOPS_TRUST_PATH','/home/yourhome/xoops');
+[/code]
+(The step of (3)/(4) is the same as fastestcache hack)
+
+(5) make a directory 'modules' under the directory. (XOOPS_TRUST_PATH/modules/)
+
+(6) make a directory 'wraps' under the directory. (XOOPS_TRUST_PATH/wraps/)
+
+(7) copy xoops_trust_path/modules/pico into XOOPS_TRUST_PATH/modules/
+
+(8) make a directory which has same name as (2) under XOOPS_TRUST_PATH/wraps/
+
+(9) copy any htmls,images into XOOPS_TRUST_PATH/wraps/(2)/
+
+(10) install it in XOOPS modulesadmin
+
+
+[/xlang:en]
+[xlang:ja]
+====  pico プロトタイプ版  ===
+
+Duplicatable V3技術を応用したモジュールpicoのプロトタイプ版です。
+
+Duplicatable V3技術の優位性についてはまた後で書きます。
+
+XOOPS_TRUST_PATH についての設定も必要です。
+
+
+
+[b]USAGE:[/b]
+
+(1) アーカイブを展開して、html/modules/pico を moduels の下にコピー
+
+(2) ディレクトリ名は好きにつけてください。
+
+(3) DocumentRootの外に専用のディレクトリを作ります  例) /home/yourhome/xoops/
+
+(4) そのディレクトリのフルパスをmainfile.phpに記述します。場所はXOOPS_URL定義行の直後が良いでしょう。
+[code]
+        define('XOOPS_TRUST_PATH','/home/yourhome/xoops');
+[/code]
+（このステップ(3)と(4)は、最速キャッシュハックと同じです）
+
+(5) XOOPS_TRUST_PATHの下にmodulesディレクトリを作ります (XOOPS_TRUST_PATH/modules/)
+
+(6) XOOPS_TRUST_PATHの下にwrapsディレクトリを作ります (XOOPS_TRUST_PATH/wraps/)
+
+(7) アーカイブのxoops_trust_path/modules/picoをXOOPS_TRUST_PATH/modules/にコピーします
+
+(8) XOOPS_TRUST_PATH/wraps/ の下に(2)と同じ名前のディレクトリを作ります
+
+(9) そのディレクトリにラップ用ファイルを好きに突っ込んでください (XOOPS_TRUST_PATH/wraps/(2)/)
+
+(10) XOOPSモジュールとしてインストールしてください。
+
+
+[/xlang:ja]
+

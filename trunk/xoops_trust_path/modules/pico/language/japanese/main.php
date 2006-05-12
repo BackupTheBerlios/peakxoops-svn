@@ -1,5 +1,5 @@
 <?php
 
-define('test','test') ;
+// define('','') ;
 
 ?>

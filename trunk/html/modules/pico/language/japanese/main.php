@@ -1,5 +1,0 @@
-<?php
-
-define('test','test') ;
-
-?>

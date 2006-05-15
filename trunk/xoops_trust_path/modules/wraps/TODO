@@ -1,0 +1,4 @@
+mod_rewrite
+
+path_info -> request_uri
+

@@ -11,21 +11,21 @@ if( ! empty( $_POST['submit'] ) ) {
 			if( substr( $file , 0 , 1 ) == '.' ) continue ;
 			$file_path = $wrap_base_path . '/' . $file ;
 			if( is_file( $file_path ) && in_array( strrchr( $file , '.' ) , array( '.html' , '.htm' , '.txt' ) ) ) {
-				$body = file_get_contents( $file_path ) ;
 				$mtime = intval( @filemtime( $file_path ) ) ;
-				if( preg_match( '/\<title\>([^<>]+)\<\/title\>/ie' , $body , $regs ) ) {
+				$body = file_get_contents( $file_path ) ;
+				if( preg_match( '/\<title\>([^<>]+)\<\/title\>/is' , $body , $regs ) ) {
 					$title = $regs[1] ;
 				} else {
 					$title = $file ;
 				}
 
-				$result = $db->query( "INSERT INTO ".$db->prefix($mydirname."_indexes")." SET `filename`='".addslashes($file)."', `title`='".addslashes($title)."', `mtime`='$mtime', `body`='".addslashes($body)."'" ) ;
+				$result = $db->query( "INSERT INTO ".$db->prefix($mydirname."_indexes")." SET `filename`='".addslashes($file)."', `title`='".addslashes($title)."', `mtime`='$mtime', `body`='".addslashes(strip_tags($body))."'" ) ;
 				if( $result ) $imported_count ++ ;
 			}
 		}
 	}
 
-	redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/index.php?mode=admin&amp;page=index' , 3 , 'Imported: '.$imported_count ) ;
+	redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/index.php?mode=admin&amp;page=index' , 3 , sprintf( _MD_A_WRAPS_FMT_UPDATED_INDEXES , $imported_count ) ) ;
 	exit ;
 }
 

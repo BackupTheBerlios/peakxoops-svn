@@ -21,26 +21,30 @@ if( file_exists( "$mydirpath/language/$language/modinfo.php" ) ) {
 
 include './admin_menu.php' ; // fixme or TODO :-)
 
-// mytplsadmin (TODO check if this module has tplfile)
 if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mytplsadmin.php' ) ) {
+	// mytplsadmin (TODO check if this module has tplfile)
 	$title = defined( '_MD_A_MYMENU_MYTPLSADMIN' ) ? _MD_A_MYMENU_MYTPLSADMIN : 'tplsadmin' ;
 	array_push( $adminmenu , array( 'title' => $title , 'link' => 'index.php?mode=admin&lib=altsys&page=mytplsadmin' ) ) ;
 }
 
-// myblocksadmin
 if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/myblocksadmin.php' ) ) {
+	// myblocksadmin
 	$title = defined( '_MD_A_MYMENU_MYBLOCKSADMIN' ) ? _MD_A_MYMENU_MYBLOCKSADMIN : 'blocksadmin' ;
 	array_push( $adminmenu , array( 'title' => $title , 'link' => 'index.php?mode=admin&lib=altsys&page=myblocksadmin' ) ) ;
 }
 
-// mypreferences
-if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mypreferences.php' ) && $module->getvar('hasconfig') ) {
-	$title = defined( '_MD_A_MYMENU_MYPREFERENCES' ) ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES ;
-	array_push( $adminmenu , array( 'title' => $title , 'link' => 'index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
-} else {
-	array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$module->mid() ) ) ;
+// preferences
+$config_handler =& xoops_gethandler('config');
+if( count( $config_handler->getConfigs( new Criteria( 'conf_modid' , $module->mid() ) ) ) > 0 ) {
+	if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mypreferences.php' ) ) {
+		// mypreferences
+		$title = defined( '_MD_A_MYMENU_MYPREFERENCES' ) ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES ;
+		array_push( $adminmenu , array( 'title' => $title , 'link' => 'index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
+	} else {
+		// system->preferences
+		array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$module->mid() ) ) ;
+	}
 }
-
 
 $mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;
 $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;

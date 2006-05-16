@@ -50,7 +50,7 @@ $modversion['blocks'] = array() ;
 $modversion['hasComments'] = 0 ;
 
 // Configs
-$modversion['config'] = false ;
+$modversion['config'] = array() ;
 
 // Notification
 $modversion['hasNotification'] = 0 ;

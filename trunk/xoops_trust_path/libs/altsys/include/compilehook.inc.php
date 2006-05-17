@@ -3,7 +3,7 @@
 /* tplsadmin compiled cache hookings */
 
 // save assigned variables for the template
-function tplsadmin_save_tplsvars( $file , $smarty )
+function altsys_save_tplsvars( $file , $smarty )
 {
 	$tplsvars_file = 'tplsvars_' ;
 	$tplsvars_file .= substr( md5( substr( XOOPS_DB_PASS , 0 , 4 ) ) , 0 , 4 ) . '_' ;

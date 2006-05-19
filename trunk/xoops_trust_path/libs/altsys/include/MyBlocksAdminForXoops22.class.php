@@ -11,6 +11,13 @@ function MyBlocksAadminForXoops22()
 function &getInstance()
 {
 	static $instance;
+
+	// language file
+	$system_path = XOOPS_ROOT_PATH . '/modules/system' ;
+	$language = $GLOBALS['xoopsConfig']['language'] ;
+	if( ! file_exists("$system_path/language/$language/admin/blocksadmin.php") ) $language = 'english' ;
+	include_once "$system_path/language/$language/admin/blocksadmin.php" ;
+
 	if (!isset($instance)) {
 		$instance = new MyBlocksAdminForXoops22();
 	}
@@ -27,7 +34,13 @@ function list_blocks( $target_mid , $target_dirname )
 
 	// main query
 	$db =& Database::getInstance();
-	$sql = "SELECT bid,name,show_func,func_file,template FROM ".$db->prefix("newblocks")." WHERE mid='$target_mid'";
+	if( $target_mid ) {
+		// normal
+		$sql = "SELECT bid,name,show_func,func_file,template FROM ".$db->prefix("newblocks")." WHERE mid='$target_mid'";
+	} else {
+		// custom blocks
+		$sql = "SELECT bid,name,show_func,func_file,template FROM ".$db->prefix("newblocks")." WHERE show_func='b_system_custom_show'";
+	}
 	$result = $db->query($sql);
 	$block_arr = array();
 	while( list( $bid , $bname , $show_func , $func_file , $template ) = $db->fetchRow( $result ) ) {
@@ -38,6 +51,7 @@ function list_blocks( $target_mid , $target_dirname )
 			'template' => $template
 		) ;
 	}
+	if( empty( $block_arr ) ) return ;
 
 	// cachetime options
 	$cachetimes = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK, '2592000' => _MONTH);
@@ -64,27 +78,7 @@ function list_blocks( $target_mid , $target_dirname )
 	$instances =& $instance_handler->getObjects($criteria, true, true);
 
 	//Get modules and pages for visible in
-	$module_list[_AM_SYSTEMLEVEL]["0-2"] = _AM_ADMINBLOCK;
-	$module_list[_AM_SYSTEMLEVEL]["0-1"] = _AM_TOPPAGE;
-	$module_list[_AM_SYSTEMLEVEL]["0-0"] = _AM_ALLPAGES;
-	$criteria = new CriteriaCompo(new Criteria('hasmain', 1));
-	$criteria->add(new Criteria('isactive', 1));
-	$module_handler =& xoops_gethandler('module');
-	$module_main =& $module_handler->getObjects($criteria, true, true);
-	if (count($module_main) > 0) {
-		foreach (array_keys($module_main) as $mid) {
-			$module_list[$module_main[$mid]->getVar('name')][$mid."-0"] = _AM_ALLMODULEPAGES;
-			$pages = $module_main[$mid]->getInfo("pages");
-			if ($pages == false) {
-				$pages = $module_main[$mid]->getInfo("sub");
-			}
-			if (is_array($pages) && $pages != array()) {
-				foreach ($pages as $id => $pageinfo) {
-					$module_list[$module_main[$mid]->getVar('name')][$mid."-".$id] = $pageinfo['name'];
-				}
-			}
-		}
-	}
+	$modules_pages_list = $this->get_modules_pages_list() ;
 
 	// blocks displaying loop
 	$class = 'even' ;
@@ -140,7 +134,7 @@ function list_blocks( $target_mid , $target_dirname )
 		}
 
 		$module_options = '' ;
-		foreach( $module_list as $mname => $module ) {
+		foreach( $modules_pages_list as $mname => $module ) {
 			$module_options .= "<optgroup label='$mname'>\n" ;
 			foreach( $module as $mkey => $mval ) {
 				if( in_array( $mkey , $visiblein ) ) {
@@ -153,7 +147,7 @@ function list_blocks( $target_mid , $target_dirname )
 		}
 
 		// delete link if it is cloned block
-		$delete_link = "<br /><a href='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;op=delete&amp;bid=$bid'>"._DELETE."</a>" ;
+		$delete_link = "<br /><a href='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;op=delete&amp;bid=$i'>"._DELETE."</a>" ;
 
 		// displaying part
 		echo "
@@ -203,7 +197,7 @@ function list_blocks( $target_mid , $target_dirname )
 				</select>
 			</td>
 			<td class='$class' align='right'>
-				<a href='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;op=edit&amp;bid=$bid'>"._EDIT."</a>{$delete_link}
+				<a href='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;op=edit&amp;bid=".$instances[$i]->getVar("instanceid")."'>"._EDIT."</a>{$delete_link}
 				<input type='hidden' name='id[$i]' value='$i' />
 			</td>
 		</tr>\n" ;
@@ -211,7 +205,29 @@ function list_blocks( $target_mid , $target_dirname )
 		$class = ( $class == 'even' ) ? 'odd' : 'even' ;
 	}
 
+	echo "
+		<tr>
+			<td class='foot' align='center' colspan='6'>
+				<input type='hidden' name='op' value='order' />
+				".$xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'myblocksadmin' )."
+				<input type='submit' name='submit' value='"._SUBMIT."' />
+			</td>
+		</tr>
+		</table>
+	</form>\n" ;
+
 	// list block classes for add (not instances)
+	echo "
+	<form action='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname' name='blockadmin' method='post'>
+	<input type='hidden' name='op' value='order' />
+	".$xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'myblocksadmin' )."
+	<table width='95%' class='outer' cellpadding='4' cellspacing='1'>
+		<tr valign='middle'>
+			<th>"._MD_A_MYBLOCKSADMIN_NAME."</th>
+			<th align='center'>"._MD_A_MYBLOCKSADMIN_DESCRIPTION."</th>
+			<th align='center'>"._MD_A_MYBLOCKSADMIN_ACTION."</th>
+		</tr>\n" ;
+
 	foreach( $block_arr as $bid => $block ) {
 
 		$description4show = '' ;
@@ -226,26 +242,17 @@ function list_blocks( $target_mid , $target_dirname )
 			<td class='$class' align='left'>
 				".$myts->makeTboxData4Edit($block['name'])."
 			</td>
-			<td class='$class' align='left' colspan='4'>
+			<td class='$class' align='left'>
 				$description4show
 			</td>
 			<td class='$class' align='center'>
 				<input type='submit' name='addblock[$bid]' value='"._ADD."' />
 			</td>
-		</tr>
-		\n" ;
+		</tr>\n" ;
 		$class = ( $class == 'even' ) ? 'odd' : 'even' ;
 	}
 
 	echo "
-		<tr>
-			<td class='foot' align='center' colspan='6'>
-				<input type='hidden' name='fct' value='blocksadmin' />
-				<input type='hidden' name='op' value='order' />
-				".$xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'myblocksadmin' )."
-				<input type='submit' name='submit' value='"._SUBMIT."' />
-			</td>
-		</tr>
 		</table>
 	</form>\n" ;
 }
@@ -257,7 +264,13 @@ function list_groups( $target_mid , $target_dirname , $target_mname )
 {
 	// query for getting blocks
 	$db =& Database::getInstance();
-	$sql = "SELECT i.instanceid,i.title FROM ".$db->prefix("block_instance")." i LEFT JOIN ".$db->prefix("newblocks")." b ON i.bid=b.bid WHERE b.mid='$target_mid'" ;
+	if( $target_mid ) {
+		// normal
+		$sql = "SELECT i.instanceid,i.title FROM ".$db->prefix("block_instance")." i LEFT JOIN ".$db->prefix("newblocks")." b ON i.bid=b.bid WHERE b.mid='$target_mid'" ;
+	} else {
+		// custom blocks
+		$sql = "SELECT i.instanceid,i.title FROM ".$db->prefix("block_instance")." i LEFT JOIN ".$db->prefix("newblocks")." b ON i.bid=b.bid WHERE b.show_func='b_system_custom_show'" ;
+	}
 	$result = $db->query( $sql ) ;
 
 	$item_list = array() ;
@@ -308,7 +321,7 @@ function update_blockinstance($id, $bside, $bweight, $bvisible, $btitle, $bconte
 	// if( isset( $bctype ) ) $instance->setVar('c_type', $bctype);
 	$instance->setVar('bcachetime', $bcachetime);
 
-	if ($instance_handler->insert($instance)) {
+	if ($instance_handler->insert($instance) && $bmodules !== -1) {
 		$GLOBALS['xoopsDB']->query("DELETE FROM ".$GLOBALS['xoopsDB']->prefix('block_module_link')." WHERE block_id=".$instance->getVar('instanceid'));
 		foreach ($bmodules as $mid) {
 			$page = explode('-', $mid);
@@ -325,7 +338,7 @@ function update_blockinstance($id, $bside, $bweight, $bvisible, $btitle, $bconte
 
 function do_order()
 {
-	if( isset( $_POST['addblock'] ) && is_array( $_POST['addblock'] ) ) {
+	if( is_array( @$_POST['addblock'] ) ) {
 
 		// addblock
 		foreach( $_POST['addblock'] as $bid => $val ) {
@@ -356,6 +369,172 @@ function do_order()
 	}
 
 	return _MD_A_MYBLOCKSADMIN_DBUPDATED ;
+}
+
+
+function form_delete( $bid )
+{
+	global $target_dirname ;
+
+	$bid = intval( $bid ) ;
+
+	$bi_handler =& xoops_gethandler('blockinstance') ;
+	$bi =& $bi_handler->get( $bid ) ;
+	if( ! is_object( $bi ) ) die( 'Invalid instanceid' ) ;
+
+	xoops_confirm( array( 'op' => 'delete_ok' ) + $GLOBALS['xoopsGTicket']->getTicketArray( __LINE__ , 1800 , 'myblocksadmin' ) , "?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;bid=$bid" , sprintf( _MD_A_MYBLOCKSADMIN_FMT_REMOVEBLOCK , $bi->getVar('title') ) ) ;
+}
+
+
+function do_delete( $bid )
+{
+	$bid = intval( $bid ) ;
+
+	$bi_handler =& xoops_gethandler('blockinstance') ;
+	$bi =& $bi_handler->get( $bid ) ;
+	if( ! is_object( $bi ) ) die( 'Invalid instanceid' ) ;
+
+	$bi_handler->delete( $bi ) ;
+	return _MD_A_MYBLOCKSADMIN_DBUPDATED ;
+}
+
+
+
+function do_edit( $bid )
+{
+	$bid = intval( $bid ) ;
+
+	if( $bid <= 0 ) {
+		$db =& Database::getInstance() ;
+		$result = $db->query( "SELECT bid FROM ".$db->prefix("newblocks")." WHERE show_func='b_system_custom_show'" ) ;
+		list( $blockbase_id ) = $db->fetchRow( $result ) ;
+
+		$bi_handler =& xoops_gethandler('blockinstance') ;
+		$instance =& $bi_handler->create();
+		$instance->setVar( 'bid' , $blockbase_id ) ;
+		$block_handler =& xoops_gethandler('block') ;
+		$blockbase = $block_handler->get( $blockbase_id ) ;
+		$instance->setVar('options', $blockbase->getVar("options") );
+		$instance->setVar('title', $blockbase->getVar("name") );
+		$bi_handler->insert( $instance ) ;
+		$bid = $instance->getVar('instanceid') ;
+	}
+
+	$bcachetime = intval( @$_POST['bcachetime'] ) ;
+	$options = isset($_POST['options']) ? $_POST['options'] : array();
+	$bcontent = isset($_POST['bcontent']) ? $_POST['bcontent'] : '';
+	$bctype = isset($_POST['bctype']) ? $_POST['bctype'] : '';
+//	$bmodules = (isset($_POST['bmodules']) && is_array($_POST['bmodules'])) ? $_POST['bmodules'] : array(-1) ; // TODO
+	return $this->update_blockinstance( $bid , intval(@$_POST['bside']) , intval(@$_POST['bweight']) , intval(@$_POST['bvisible']) , @$_POST['btitle'] , $bcontent , $bctype , $bcachetime , -1 , $options ) ;
+}
+
+
+
+function form_edit( $bid , $mode = 'edit' )
+{
+	$bid = intval( $bid ) ;
+
+	$bi_handler =& xoops_gethandler('blockinstance') ;
+	$bi =& $bi_handler->get( $bid ) ;
+
+	if( ! $bi->getVar('instanceid') ) {
+		// create new custom block
+		$mode = 'new' ;
+		$db =& Database::getInstance() ;
+		$result = $db->query( "SELECT bid FROM ".$db->prefix("newblocks")." WHERE show_func='b_system_custom_show'" ) ;
+		list( $blockbase_id ) = $db->fetchRow( $result ) ;
+		$bi->setVar( 'bid' , $blockbase_id ) ;
+		$bi->setVar( 'options' , array( '' , 'S' ) ) ;
+	}
+
+	$block_handler =& xoops_gethandler( 'block' ) ;
+	$blockbase =& $block_handler->get( $bi->getVar('bid') ) ;
+	$bi->setBlock( $blockbase ) ;
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$module =& $module_handler->get( $blockbase->getVar('mid') ) ;
+
+	$action_base_url4disp = "?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=".($blockbase->getVar('show_func')=='b_system_custom_show'?"__CustomBlocks__":$module->getVar('dirname'))."&amp;bid=$bid" ;
+
+
+	switch( $mode ) {
+//		case 'clone' :
+//			$form_title = _MD_A_MYBLOCKSADMIN_CLONEFORM ;
+//			$button_value = _MD_A_MYBLOCKSADMIN_BTN_CLONE ;
+//			$next_op = 'clone_ok' ;
+//			break ;
+		case 'new' :
+			$form_title = _MD_A_MYBLOCKSADMIN_NEWFORM ;
+			$button_value = _MD_A_MYBLOCKSADMIN_BTN_NEW ;
+			$next_op = 'new_ok' ;
+			break ;
+		case 'edit' :
+		default :
+			$form_title = _MD_A_MYBLOCKSADMIN_EDITFORM ;
+			$button_value = _MD_A_MYBLOCKSADMIN_BTN_EDIT ;
+			$next_op = 'edit_ok' ;
+			break ;
+	}
+
+	// TODO
+	// $modules = $this->get_modules_pages_list() ;
+
+	$block = array(
+		'bid' => $bid ,
+		'form_action' => $action_base_url4disp ,
+//		'title' => $bi->getVar('name') ,
+		'side' => $bi->getVar('side') ,
+		'weight' => $bi->getVar('weight') ,
+		'visible' => $bi->getVar('visible') ,
+//		'content' => $bi->getVar('content', 'N') ,
+		'title' => $bi->getVar('title','E') ,
+//		'modules' => $modules ,
+		'modules' => -1 ,
+		'is_custom' => false ,
+//		'ctype' => $bi->getVar('c_type') ,
+		'cachetime' => $bi->getVar('bcachetime') ,
+		'edit_form' => $bi->getOptions() ,
+		'template' => $blockbase->getVar('template') ,
+		'options' => $bi->getVar('options') ,
+		'op' => $next_op ,
+		'form_title' => $form_title ,
+		'submit_button' => $button_value ,
+	) ;
+
+	echo '<a href="'.$action_base_url4disp.'">'. _MD_A_MYBLOCKSADMIN_BLOCKADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$form_title.'<br /><br />';
+	include dirname(__FILE__).'/myblockform.php' ;
+	$GLOBALS['xoopsGTicket']->addTicketXoopsFormElement( $form , __LINE__ , 1800 , 'myblocksadmin' ) ;
+	$form->display();
+
+}
+
+
+function get_modules_pages_list()
+{
+	$module_list = array() ;
+
+	$module_list[_AM_SYSTEMLEVEL]["0-2"] = _AM_ADMINBLOCK;
+	$module_list[_AM_SYSTEMLEVEL]["0-1"] = _AM_TOPPAGE;
+	$module_list[_AM_SYSTEMLEVEL]["0-0"] = _AM_ALLPAGES;
+	$criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+	$criteria->add(new Criteria('isactive', 1));
+	$module_handler =& xoops_gethandler('module');
+	$module_main =& $module_handler->getObjects($criteria, true, true);
+	if (count($module_main) > 0) {
+		foreach (array_keys($module_main) as $mid) {
+			$module_list[$module_main[$mid]->getVar('name')][$mid."-0"] = _AM_ALLMODULEPAGES;
+			$pages = $module_main[$mid]->getInfo("pages");
+			if ($pages == false) {
+				$pages = $module_main[$mid]->getInfo("sub");
+			}
+			if (is_array($pages) && $pages != array()) {
+				foreach ($pages as $id => $pageinfo) {
+					$module_list[$module_main[$mid]->getVar('name')][$mid."-".$id] = $pageinfo['name'];
+				}
+			}
+		}
+	}
+
+	return $module_list ;
 }
 
 

@@ -8,7 +8,9 @@ require_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 $form = new XoopsThemeForm( $block['form_title'] , 'blockform' , $block['form_action'] ) ;
 
 // name (label)
-$form->addElement( new XoopsFormLabel( _MD_A_MYBLOCKSADMIN_NAME , htmlspecialchars( @$block['name'] , ENT_QUOTES ) ) ) ;
+if( ! empty( $block['name'] ) ) {
+	$form->addElement( new XoopsFormLabel( _MD_A_MYBLOCKSADMIN_NAME , htmlspecialchars( $block['name'] , ENT_QUOTES ) ) ) ;
+}
 
 // side (select)
 $side_select = new XoopsFormSelect( _MD_A_MYBLOCKSADMIN_SIDE , 'bside' , intval( $block['side'] ) ) ;
@@ -22,22 +24,24 @@ $form->addElement( new XoopsFormText( _MD_A_MYBLOCKSADMIN_WEIGHT , 'bweight' , 2
 $form->addElement( new XoopsFormRadioYN( _MD_A_MYBLOCKSADMIN_VISIBLE , 'bvisible' , intval( $block['visible'] ) ) ) ;
 
 // module (multi-select)
-$mod_select = new XoopsFormSelect( _MD_A_MYBLOCKSADMIN_VISIBLEIN , 'bmodules' , $block['modules'] , 10 , true ) ;
-$module_handler =& xoops_gethandler( 'module' ) ;
-$criteria = new CriteriaCompo( new Criteria( 'hasmain' , 1 ) ) ;
-$criteria->add( new Criteria( 'isactive' , 1 ) ) ;
-$module_list =& $module_handler->getList( $criteria ) ;
-$module_list[-1] = _MD_A_MYBLOCKSADMIN_TOPPAGE ;
-$module_list[0] = _MD_A_MYBLOCKSADMIN_ALLPAGES ;
-ksort( $module_list ) ;
-$mod_select->addOptionArray( $module_list ) ;
-$form->addElement( $mod_select ) ;
+if( $block['modules'] !== -1 ) {
+	$mod_select = new XoopsFormSelect( _MD_A_MYBLOCKSADMIN_VISIBLEIN , 'bmodules' , $block['modules'] , 10 , true ) ;
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$criteria = new CriteriaCompo( new Criteria( 'hasmain' , 1 ) ) ;
+	$criteria->add( new Criteria( 'isactive' , 1 ) ) ;
+	$module_list = $module_handler->getList( $criteria ) ;
+	$module_list[-1] = _MD_A_MYBLOCKSADMIN_TOPPAGE ;
+	$module_list[0] = _MD_A_MYBLOCKSADMIN_ALLPAGES ;
+	ksort( $module_list ) ;
+	$mod_select->addOptionArray( $module_list ) ;
+	$form->addElement( $mod_select ) ;
+}
 
 // title (textbox)
 $form->addElement( new XoopsFormText( _MD_A_MYBLOCKSADMIN_TITLE , 'btitle' , 50 , 255 , htmlspecialchars( $block['title'] , ENT_QUOTES ) ) , false ) ;
 
 
-// Only custom blocks
+// Only custom blocks in XOOPS 2.0.x
 if ( $block['is_custom'] ) {
 	// content (textarea)
 	$notice_for_tags = '<span style="font-size:x-small;font-weight:bold;">'._MD_A_MYBLOCKSADMIN_CAPT_USABLETAGS.'</span><br /><span style="font-size:x-small;font-weight:normal;">'.htmlspecialchars(sprintf( _MD_A_MYBLOCKSADMIN_FMT_TAGRULE , '{X_SITEURL}', XOOPS_URL.'/'),ENT_QUOTES).'</span>' ;
@@ -76,11 +80,11 @@ if ( $block['is_custom'] ) {
 	// link for editing template
 	if ($block['template'] != '' && ! defined('XOOPS_ORETEKI') ) {
 		$tplfile_handler =& xoops_gethandler('tplfile');
-		$btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
+		$btemplate = $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', null , null, $block['template']);
 		if (count($btemplate) > 0) {
 			$form->addElement( new XoopsFormLabel( _MD_A_MYBLOCKSADMIN_CONTENT , '<a href="?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file='.$btemplate[0]->getVar('tpl_file').'&amp;tpl_tplset='.htmlspecialchars($GLOBALS['xoopsConfig']['template_set'],ENT_QUOTES).'">'._MD_A_MYBLOCKSADMIN_EDITTPL.'</a>'));
 		} else {
-			$btemplate2 =& $tplfile_handler->find('default', 'block', $block['bid']);
+			$btemplate2 =& $tplfile_handler->find('default', 'block', null , null , $block['template']);
 			if (count($btemplate2) > 0) {
 				$form->addElement(new XoopsFormLabel(_MD_A_MYBLOCKSADMIN_CONTENT, '<a href="?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file='.$btemplate2[0]->getVar('tpl_file').'&amp;tpl_tplset=default">'._MD_A_MYBLOCKSADMIN_EDITTPL.'</a>'));
 			}

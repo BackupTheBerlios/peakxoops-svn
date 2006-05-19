@@ -1,11 +1,16 @@
 x myblocksadmin 処理の一通り
-myblocksadmin2 の処理
+x xoops 2.2 の対応
 x パーミッション確認 (特にget_ put_ compilehookあたり)
 x カスタムブロックのメニュー化
 x autoupdate_from_module.inc.php の実装
 x 言語定数のチェック
 x systemモジュールの文字列を持ってくる
 x optionsの処理チェック
+
+2.2 におけるmyblocksadmin edit Visible In実装
+2.2 におけるカスタムブロックプレビュー
+importing avaman
+argonさんにちゃんとしたアイコンを作ってもらう:-)
 
 
 = Premissions =

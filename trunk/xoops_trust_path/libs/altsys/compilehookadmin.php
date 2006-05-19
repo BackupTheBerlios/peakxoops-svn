@@ -1,13 +1,24 @@
 <?php
 // ------------------------------------------------------------------------- //
-//                          compilehookadmin.php                             //
+//                       compilehookadmin.php (altsys)                       //
 //                    - XOOPS templates admin module -                       //
-//                          GIJOE <http://www.peak.ne.jp/>                   //
+//                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
-include_once( '../../../include/cp_header.php' ) ;
+include_once dirname(__FILE__).'/include/gtickets.php' ;
+include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
-include_once "../include/gtickets.php" ;
+
+// this page can be called only from altsys
+if( $xoopsModule->getVar('dirname') != 'altsys' ) die( 'this page can be called only from altsys' ) ;
+
+
+// language file
+if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['language'].'/compilehookadmin.php' ) ) {
+	include_once XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['language'].'/compilehookadmin.php' ;
+} else if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/english/compilehookadmin.php' ) ) {
+	include_once XOOPS_ROOT_PATH.'/modules/altsys/language/english/compilehookadmin.php' ;
+}
 
 
 //
@@ -28,7 +39,7 @@ $compile_hooks = array(
 
 	'enclosebybordereddiv' => array(
 		'pre' => '<div class="tplsadmin_frame" style="border:1px solid black;word-wrap:break-word;">' ,
-		'post' => '<br /><a href="'.XOOPS_URL.'/modules/tplsadmin/admin/mytplsform.php?tpl_file=%1$s" style="color:red;">Edit:<br />%1$s</a></div>' ,
+		'post' => '<br /><a href="'.XOOPS_URL.'/modules/altsys/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=%1$s" style="color:red;">Edit:<br />%1$s</a></div>' ,
 		'success_msg' => _TPLSADMIN_FMT_MSG_ENCLOSEBYBORDEREDDIV ,
 		'dt' => _TPLSADMIN_DT_ENCLOSEBYBORDEREDDIV ,
 		'dd' => _TPLSADMIN_DD_ENCLOSEBYBORDEREDDIV ,
@@ -37,7 +48,7 @@ $compile_hooks = array(
 	) ,
 
 	'hooksavevars' => array(
-		'pre' => '<?php include_once "'.XOOPS_ROOT_PATH.'/modules/tplsadmin/include/compilehook.inc.php" ; tplsadmin_save_tplsvars(\'%s\',$this) ; ?>' ,
+		'pre' => '<?php include_once "'.XOOPS_TRUST_PATH.'/libs/altsys/include/compilehook.inc.php" ; tplsadmin_save_tplsvars(\'%s\',$this) ; ?>' ,
 		'post' => '' ,
 		'success_msg' => _TPLSADMIN_FMT_MSG_HOOKSAVEVARS ,
 		'dt' => _TPLSADMIN_DT_HOOKSAVEVARS ,
@@ -84,7 +95,7 @@ if( ! empty( $_POST['clearcache'] ) || ! empty( $_POST['cleartplsvars'] ) ) {
 			$file_path = XOOPS_COMPILE_PATH . '/' . $file ;
 			@unlink( $file_path ) ;
 		}
-		redirect_header( 'compilehookadmin.php' , 1 , _TPLSADMIN_MSG_CLEARCACHE ) ;
+		redirect_header( '?mode=admin&lib=altsys&page=compilehookadmin' , 1 , _TPLSADMIN_MSG_CLEARCACHE ) ;
 		exit ;
 	} else {
 		die( 'XOOPS_COMPILE_PATH cannot be opened' ) ;
@@ -155,10 +166,10 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 			}
 
 			if( $file_count > 0 ) {
-				redirect_header( 'compilehookadmin.php' , 3 , sprintf( $compile_hook['success_msg'] , $file_count ) ) ;
+				redirect_header( '?mode=admin&lib=altsys&page=compilehookadmin' , 3 , sprintf( $compile_hook['success_msg'] , $file_count ) ) ;
 				exit ;
 			} else {
-				redirect_header( 'compilehookadmin.php' , 3 , _TPLSADMIN_MSG_CREATECOMPILECACHEFIRST ) ;
+				redirect_header( '?mode=admin&lib=altsys&page=compilehookadmin' , 3 , _TPLSADMIN_MSG_CREATECOMPILECACHEFIRST ) ;
 				exit ;
 			}
 
@@ -201,10 +212,10 @@ while( list( $tplset , $tpl_count ) = $xoopsDB->fetchRow( $srs ) ) {
 //
 
 xoops_cp_header() ;
-include( './mymenu.php' ) ;
+altsys_include_mymenu() ;
 
 echo "
-	<form action='' method='post' class='odd' style='margin: 40px;'>
+	<form action='?mode=admin&amp;lib=altsys&amp;page=compilehookadmin' method='post' class='odd' style='margin: 40px;'>
 \n" ;
 
 foreach( $compile_hooks as $command => $compile_hook ) {
@@ -237,7 +248,7 @@ echo "
 		".$xoopsGTicket->getTicketHtml( __LINE__ )."
 	</form>
 
-	<form action='get_tplsvarsinfo.php' method='post' class='odd' style='margin: 40px;' target='_blank'>
+	<form action='?mode=admin&amp;lib=altsys&amp;page=get_tplsvarsinfo' method='post' class='odd' style='margin: 40px;' target='_blank'>
 		<p>
 			<dl>
 				<dt>
@@ -253,7 +264,7 @@ echo "
 		</p>
 	</form>
 
-	<form action='get_templates.php' method='post' class='odd' style='margin: 40px;' target='_blank'>
+	<form action='?mode=admin&amp;lib=altsys&amp;page=get_templates' method='post' class='odd' style='margin: 40px;' target='_blank'>
 		<p>
 			<dl>
 				<dt>
@@ -270,7 +281,7 @@ echo "
 		</p>
 	</form>
 
-	<form action='put_templates.php' method='post' enctype='multipart/form-data' class='odd' style='margin: 40px;'>
+	<form action='?mode=admin&amp;lib=altsys&amp;page=put_templates' method='post' enctype='multipart/form-data' class='odd' style='margin: 40px;'>
 		<p>
 			<dl>
 				<dt>

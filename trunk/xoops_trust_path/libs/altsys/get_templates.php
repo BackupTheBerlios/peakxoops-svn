@@ -1,11 +1,24 @@
 <?php
 // ------------------------------------------------------------------------- //
-//                          get_tplsvarsinfo.php                             //
+//                        get_templates.php  (altsys)                        //
 //                    - XOOPS templates admin module -                       //
-//                          GIJOE <http://www.peak.ne.jp/>                   //
+//                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
-include_once( '../../../include/cp_header.php' ) ;
+include_once dirname(__FILE__).'/include/gtickets.php' ;
+include_once dirname(__FILE__).'/include/altsys_functions.php' ;
+
+
+// this page can be called only from altsys
+if( $xoopsModule->getVar('dirname') != 'altsys' ) die( 'this page can be called only from altsys' ) ;
+
+
+// language file
+if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['language'].'/compilehookadmin.php' ) ) {
+	include_once XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['language'].'/compilehookadmin.php' ;
+} else if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/english/compilehookadmin.php' ) ) {
+	include_once XOOPS_ROOT_PATH.'/modules/altsys/language/english/compilehookadmin.php' ;
+}
 
 
 if( ! empty( $_POST['download_zip'] ) ) {

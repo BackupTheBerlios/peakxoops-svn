@@ -1,41 +1,54 @@
 <?php
 // ------------------------------------------------------------------------- //
-//                              mytplsform.php                               //
+//                          mytplsform.php (altsys)                          //
 //               - XOOPS templates admin for each modules -                  //
-//                          GIJOE <http://www.peak.ne.jp/>                   //
+//                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
 include_once dirname(__FILE__)."/include/gtickets.php" ;
-include_once XOOPS_ROOT_PATH.'/class/template.php';
-
+include_once dirname(__FILE__).'/include/altsys_functions.php' ;
+include_once dirname(__FILE__)."/include/tpls_functions.php" ;
 include_once dirname(__FILE__).'/include/Text_Diff.php' ;
 include_once dirname(__FILE__).'/include/Text_Diff_Renderer.php' ;
 include_once dirname(__FILE__).'/include/Text_Diff_Renderer_unified.php' ;
 
-$xoops_system_path = XOOPS_ROOT_PATH . '/modules/system' ;
+
+// only groups have 'module_admin' of 'altsys' can do that.
+$module_handler =& xoops_gethandler( 'module' ) ;
+$module =& $module_handler->getByDirname( 'altsys' ) ;
+$moduleperm_handler =& xoops_gethandler( 'groupperm' ) ;
+if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_admin' , $module->getVar( 'mid' ) , $xoopsUser->getGroups() ) ) die( 'only admin of altsys can access this area' ) ;
+
+//$xoops_system_path = XOOPS_ROOT_PATH . '/modules/system' ;
 
 // initials
 $db =& Database::getInstance();
 $myts =& MyTextSanitizer::getInstance() ;
 
-// determine language
+// language file
+$altsys_path = XOOPS_ROOT_PATH . '/modules/altsys' ;
 $language = $xoopsConfig['language'] ;
-if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
+if( ! file_exists("$altsys_path/language/$language/mytplsform.php") ) $language = 'english' ;
+include_once "$altsys_path/language/$language/mytplsform.php" ;
+
+// determine language
+//$language = $xoopsConfig['language'] ;
+//if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
 
 // load language constants
 // to prevent from notice that constants already defined
-$error_reporting_level = error_reporting( 0 ) ;
-include_once( "$xoops_system_path/constants.php" ) ;
-include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-include_once( "$xoops_system_path/language/$language/admin/tplsets.php" ) ;
-error_reporting( $error_reporting_level ) ;
+//$error_reporting_level = error_reporting( 0 ) ;
+//include_once( "$xoops_system_path/constants.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin/tplsets.php" ) ;
+//error_reporting( $error_reporting_level ) ;
 
 // check $xoopsModule
 if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
 
 // check access right (needs system_admin of tplset)
-$sysperm_handler =& xoops_gethandler('groupperm');
-if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_TPLSET, $xoopsUser->getGroups())) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
+//$sysperm_handler =& xoops_gethandler('groupperm');
+//if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_TPLSET, $xoopsUser->getGroups())) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
 
 // tpl_file from $_GET
 $tpl_file = $myts->stripSlashesGPC( @$_GET['tpl_file'] ) ;
@@ -76,20 +89,20 @@ if( ! empty( $_POST['do_modify'] ) ) {
 		$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_lastmodified=UNIX_TIMESTAMP() WHERE tpl_id=$tpl_id" ) ;
 		xoops_template_touch( $tpl_id ) ;
 	}
-	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$tpl['tpl_module'] , 1 , _MD_AM_DBUPDATED ) ;
+	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$tpl['tpl_module'] , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
 	exit ;
 }
 
 
 xoops_cp_header() ;
 $mymenu_fake_uri = 'index.php?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$mydirname ;
-if( file_exists( $mytrustdirpath.'/admin/mymenu.php' ) ) include( $mytrustdirpath.'/admin/mymenu.php' ) ;
+altsys_include_mymenu() ;
 
-echo "<h3 style='text-align:left;'>"._MD_AM_TPLSETS." : ".htmlspecialchars($tpl['tpl_type'],ENT_QUOTES)." : ".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)." (".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES).")</h3>\n" ;
+echo "<h3 style='text-align:left;'>"._MD_A_MYTPLSFORM_EDIT." : ".htmlspecialchars($tpl['tpl_type'],ENT_QUOTES)." : ".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)." (".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES).")</h3>\n" ;
 
 
 // diff from file to selected DB template
-$basefilepath = XOOPS_ROOT_PATH.'/modules/'.$tpl['tpl_module'].'/templates/'.($tpl['tpl_type']=='block'?'blocks/':'').$tpl['tpl_file'] ;
+$basefilepath = tplsadmin_get_basefilepath( $tpl['tpl_module'] , $tpl['tpl_type'] , $tpl['tpl_file'] ) ;
 $diff_from_file4disp = '' ;
 if( file_exists( $basefilepath ) ) {
 	$diff =& new Text_Diff( file( $basefilepath ) , explode("\n",$tpl['tpl_source']) ) ;

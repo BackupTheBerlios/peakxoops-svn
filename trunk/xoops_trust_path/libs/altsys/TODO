@@ -1,0 +1,16 @@
+x myblocksadmin 処理の一通り
+myblocksadmin2 の処理
+x パーミッション確認 (特にget_ put_ compilehookあたり)
+x カスタムブロックのメニュー化
+x autoupdate_from_module.inc.php の実装
+x 言語定数のチェック
+x systemモジュールの文字列を持ってくる
+x optionsの処理チェック
+
+
+= Premissions =
+mypreferences -> module_admin of the module
+myblocksadmin -> module_admin of altsys  (old XOOPS_SYSTEM_BLOCK)
+mytplsadmin,mytplsform -> module_admin of altsys  (old XOOPS_SYSTEM_TPLSET)
+compilehookadmin,get_*,put_* -> module_admin of altsys
+

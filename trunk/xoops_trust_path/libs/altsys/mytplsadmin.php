@@ -6,38 +6,49 @@
 // ------------------------------------------------------------------------- //
 
 include_once dirname(__FILE__)."/include/gtickets.php" ;
-include_once XOOPS_ROOT_PATH.'/class/template.php';
+include_once dirname(__FILE__).'/include/altsys_functions.php' ;
+include_once dirname(__FILE__)."/include/tpls_functions.php" ;
+
+
+// only groups have 'module_admin' of 'altsys' can do that.
+$module_handler =& xoops_gethandler( 'module' ) ;
+$module =& $module_handler->getByDirname( 'altsys' ) ;
+$moduleperm_handler =& xoops_gethandler( 'groupperm' ) ;
+if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_admin' , $module->getVar( 'mid' ) , $xoopsUser->getGroups() ) ) die( 'only admin of altsys can access this area' ) ;
+
 
 // searching a language file "mytplsadmin.php"
 // (in module instance)->(in module class)->(in this lib)->(fallbacked english)
-if( file_exists( $mydirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
-	include_once $mydirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
-} else if( file_exists( $mytrustdirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
-	include_once $mytrustdirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
-} else if( file_exists( XOOPS_ROOT_PATH.'/modules/tplsadmin/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
-	include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
-} else {
-	include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/language/english/mytplsadmin.php' ;
-}
+//if( file_exists( $mydirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
+//	include_once $mydirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
+//} else if( file_exists( XOOPS_ROOT_PATH.'/modules/tplsadmin/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
+//	include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
+//} else {
+//	include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/language/english/mytplsadmin.php' ;
+//}
 
 
 // initials
-$xoops_system_path = XOOPS_ROOT_PATH . '/modules/system' ;
 $db =& Database::getInstance();
 $myts =& MyTextSanitizer::getInstance() ;
 
+// language file
+$altsys_path = XOOPS_ROOT_PATH . '/modules/altsys' ;
+$language = $xoopsConfig['language'] ;
+if( ! file_exists("$altsys_path/language/$language/mytplsadmin.php") ) $language = 'english' ;
+include_once "$altsys_path/language/$language/mytplsadmin.php" ;
 
 // determine language
-$language = $xoopsConfig['language'] ;
-if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
+//$language = $xoopsConfig['language'] ;
+//if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
 
 // load language constants
 // to prevent from notice that constants already defined
-$error_reporting_level = error_reporting( 0 ) ;
-include_once( "$xoops_system_path/constants.php" ) ;
-include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-include_once( "$xoops_system_path/language/$language/admin/tplsets.php" ) ;
-error_reporting( $error_reporting_level ) ;
+//$error_reporting_level = error_reporting( 0 ) ;
+//include_once( "$xoops_system_path/constants.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin/tplsets.php" ) ;
+//error_reporting( $error_reporting_level ) ;
 
 // check $xoopsModule
 if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
@@ -66,8 +77,8 @@ if( ! empty( $target_module ) && is_object( $target_module ) ) {
 }
 
 // check access right (needs system_admin of tplset)
-$sysperm_handler =& xoops_gethandler('groupperm');
-if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_TPLSET, $xoopsUser->getGroups())) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
+//$sysperm_handler =& xoops_gethandler('groupperm');
+//if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_TPLSET, $xoopsUser->getGroups())) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
 
 
 //**************//
@@ -92,8 +103,8 @@ if( ! empty( $_POST['clone_tplset_do'] ) && ! empty( $_POST['clone_tplset_from']
 	if( $is_exist ) die( _MYTPLSADMIN_ERR_DUPLICATEDSETNAME ) ;
 	// insert tplset table
 	$db->query( "INSERT INTO ".$db->prefix("tplset")." SET tplset_name='".addslashes($tplset_to)."', tplset_desc='Created by tplsadmin', tplset_created=UNIX_TIMESTAMP()" ) ;
-	copy_templates_db2db( $tplset_from , $tplset_to , "tpl_module='$target_dirname4sql'" ) ;
-	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MD_AM_DBUPDATED ) ;
+	tplsadmin_copy_templates_db2db( $tplset_from , $tplset_to , "tpl_module='$target_dirname4sql'" ) ;
+	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MYTPLSADMIN_DBUPDATED ) ;
 	exit ;
 }
 
@@ -111,9 +122,9 @@ if( is_array( @$_POST['copy_do'] ) ) foreach( $_POST['copy_do'] as $tplset_from_
 	foreach( $_POST["{$tplset_from}_check"] as $tplfile_tmp => $val ) {
 		if( empty( $val ) ) continue ;
 		$tplfile = $myts->stripSlashesGPC( $tplfile_tmp ) ;
-		copy_templates_db2db( $tplset_from , $tplset_to , "tpl_file='".addslashes($tplfile)."'" ) ;
+		tplsadmin_copy_templates_db2db( $tplset_from , $tplset_to , "tpl_file='".addslashes($tplfile)."'" ) ;
 	}
-	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MD_AM_DBUPDATED ) ;
+	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MYTPLSADMIN_DBUPDATED ) ;
 	exit ;
 }
 
@@ -130,9 +141,9 @@ if( ! empty( $_POST['copyf2db_do'] ) ) {
 	foreach( $_POST['basecheck'] as $tplfile_tmp => $val ) {
 		if( empty( $val ) ) continue ;
 		$tplfile = $myts->stripSlashesGPC( $tplfile_tmp ) ;
-		copy_templates_f2db( $tplset_to , "tpl_file='".addslashes($tplfile)."'" ) ;
+		tplsadmin_copy_templates_f2db( $tplset_to , "tpl_file='".addslashes($tplfile)."'" ) ;
 	}
-	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MD_AM_DBUPDATED ) ;
+	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MYTPLSADMIN_DBUPDATED ) ;
 	exit ;
 }
 
@@ -163,7 +174,7 @@ if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tm
 		$tpl->clear_cache('db:'.$tplfile);
 		$tpl->clear_compiled_tpl('db:'.$tplfile);
 	}
-	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MD_AM_DBUPDATED ) ;
+	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$target_dirname , 1 , _MYTPLSADMIN_DBUPDATED ) ;
 	exit ;
 }
 
@@ -196,18 +207,20 @@ $sql = "SELECT tpl_file,tpl_desc,tpl_type,COUNT(tpl_id) FROM ".$db->prefix("tplf
 $frs = $db->query($sql);
 
 xoops_cp_header() ;
-if( file_exists( $mytrustdirpath.'/admin/mymenu.php' ) ) include( $mytrustdirpath.'/admin/mymenu.php' ) ;
 
-echo "<h3 style='text-align:left;'>"._MD_AM_TPLSETS." : $target_mname</h3>\n" ;
+// mymenu
+altsys_include_mymenu() ;
+
+echo "<h3 style='text-align:left;'>"._MYTPLSADMIN_H3_MODULE." : $target_mname</h3>\n" ;
 
 
 // beggining of table & form
 echo "
-	<form name='MainForm' action='?dirname=".htmlspecialchars($target_dirname,ENT_QUOTES)."' method='post'>
+	<form name='MainForm' action='?mode=admin&amp;lib=altsys&amp;page=mytplsadmin&amp;dirname=".htmlspecialchars($target_dirname,ENT_QUOTES)."' method='post'>
 	".$xoopsGTicket->getTicketHtml( __LINE__ )."
 	<table class='outer'>
 		<tr>
-			<th>"._MD_FILENAME."</th>
+			<th>"._MYTPLSADMIN_TH_NAME."</th>
 			<th>"._MYTPLSADMIN_TH_TYPE."</th>
 			<th><input type='checkbox' title="._MYTPLSADMIN_TITLE_CHECKALL." onclick=\"with(document.MainForm){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].name.indexOf('basecheck')>=0){elements[i].checked=this.checked;}}}\" />"._MYTPLSADMIN_TH_FILE."</th>
 			$tplsets_th4disp
@@ -234,9 +247,10 @@ while( list( $tpl_file , $tpl_desc , $type , $count ) = $db->fetchRow( $frs ) ) 
 			<td class='$evenodd'>".$type."<br />(".$count.")</td>\n" ;
 
 	// the base file template column
-	$basefilepath = XOOPS_ROOT_PATH.'/modules/'.$target_dirname.'/templates/'.($type=='block'?'blocks/':'').$tpl_file ;
+	$basefilepath = tplsadmin_get_basefilepath( $target_dirname , $type , $tpl_file ) ;
+
 	if( file_exists( $basefilepath ) ) {
-		$fingerprint = get_fingerprint( file( $basefilepath ) ) ;
+		$fingerprint = tplsadmin_get_fingerprint( file( $basefilepath ) ) ;
 		$fingerprints[ $fingerprint ] = 1 ;
 		echo "<td class='$evenodd'>".formatTimestamp(filemtime($basefilepath),'m').'<br />'.substr($fingerprint,0,16)."<br /><input type='checkbox' name='basecheck[$tpl_file]' value='1' /></td>\n" ;
 	} else {
@@ -254,7 +268,7 @@ while( list( $tpl_file , $tpl_desc , $type , $count ) = $db->fetchRow( $frs ) ) 
 		if( empty( $tpl['tpl_id'] ) ) {
 			echo "<td class='$evenodd'>($numrows)</td>\n" ;
 		} else {
-			$fingerprint = get_fingerprint( explode( "\n" , $tpl['tpl_source'] ) ) ;
+			$fingerprint = tplsadmin_get_fingerprint( explode( "\n" , $tpl['tpl_source'] ) ) ;
 			if( isset( $fingerprints[ $fingerprint ] ) ) {
 				$style = $fingerprints[ $fingerprint ] ;
 			} else {
@@ -280,7 +294,7 @@ echo "
 				<option value='_blank_'>"._MYTPLSADMIN_OPT_BLANKSET."</option>
 			</select>
 			<br />
-			"._MYTPLSADMIN_CAPTION_SETNAME.": <input type='text' name='clone_tplset_to' size='8' maxlength='16' /> <input type='submit' name='clone_tplset_do' value='"._MD_GENERATE."' />
+			"._MYTPLSADMIN_CAPTION_SETNAME.": <input type='text' name='clone_tplset_to' size='8' maxlength='16' /> <input type='submit' name='clone_tplset_do' value='"._MYTPLSADMIN_BTN_NEWTPLSET."' />
 		</td>
 		<td class='head'></td>
 		<td class='head'>
@@ -311,88 +325,6 @@ echo "</table></form>" ;
 // end of table & form
 
 xoops_cp_footer() ;
-
-
-
-
-function get_fingerprint( $lines )
-{
-	$str = '' ;
-	foreach( $lines as $line ) {
-		if( trim( $line ) ) {
-			$str .= md5( trim( $line ) ) ;
-		}
-	}
-	return md5( $str ) ;
-}
-
-function copy_templates_db2db( $tplset_from , $tplset_to , $whr_append = '1' )
-{
-	global $db ;
-
-	// get tplfile and tplsource
-	$result = $db->query( "SELECT tpl_refid,tpl_module,'".addslashes($tplset_to)."',tpl_file,tpl_desc,tpl_lastmodified,tpl_lastimported,tpl_type,tpl_source FROM ".$db->prefix("tplfile")." NATURAL LEFT JOIN ".$db->prefix("tplsource")." WHERE tpl_tplset='".addslashes($tplset_from)."' AND ($whr_append)" ) ;
-
-	while( $row = $db->fetchArray( $result ) ) {
-		$tpl_source = array_pop( $row ) ;
-
-		$drs = $db->query( "SELECT tpl_id FROM ".$db->prefix("tplfile")." WHERE tpl_tplset='".addslashes($tplset_to)."' AND ($whr_append) AND tpl_file='".addslashes($row['tpl_file'])."' AND tpl_refid='".addslashes($row['tpl_refid'])."'" ) ;
-
-		if( ! $db->getRowsNum( $drs ) ) {
-			// INSERT mode
-			$sql = "INSERT INTO ".$db->prefix("tplfile")." (tpl_refid,tpl_module,tpl_tplset,tpl_file,tpl_desc,tpl_lastmodified,tpl_lastimported,tpl_type) VALUES (" ;
-			foreach( $row as $colval ) {
-				$sql .= "'".addslashes($colval)."'," ;
-			}
-			$db->query( substr( $sql , 0 , -1 ) . ')' ) ;
-			$tpl_id = $db->getInsertId() ;
-			$db->query( "INSERT INTO ".$db->prefix("tplsource")." SET tpl_id='$tpl_id', tpl_source='".addslashes($tpl_source)."'" ) ;
-			xoops_template_touch( $tpl_id ) ;
-		} else {
-			while( list( $tpl_id ) = $db->fetchRow( $drs ) ) {
-				// UPDATE mode
-				$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_refid='".addslashes($row['tpl_refid'])."',tpl_desc='".addslashes($row['tpl_desc'])."',tpl_lastmodified='".addslashes($row['tpl_lastmodified'])."',tpl_lastimported='".addslashes($row['tpl_lastimported'])."',tpl_type='".addslashes($row['tpl_type'])."' WHERE tpl_id='$tpl_id'" ) ;
-				$db->query( "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($tpl_source)."' WHERE tpl_id='$tpl_id'" ) ;
-				xoops_template_touch( $tpl_id ) ;
-			}
-		}
-	}
-}
-
-
-function copy_templates_f2db( $tplset_to , $whr_append = '1' )
-{
-	global $db ;
-
-	// get tplsource
-	$result = $db->query( "SELECT * FROM ".$db->prefix("tplfile")."  WHERE tpl_tplset='default' AND ($whr_append)" ) ;
-
-	while( $row = $db->fetchArray( $result ) ) {
-
-		$basefilepath = XOOPS_ROOT_PATH.'/modules/'.$row['tpl_module'].'/templates/'.($row['tpl_type']=='block'?'blocks/':'').$row['tpl_file'] ;
-
-		$tpl_source = rtrim( implode( "" , file( $basefilepath ) ) ) ;
-		$lastmodified = filemtime( $basefilepath ) ;
-
-		$drs = $db->query( "SELECT tpl_id FROM ".$db->prefix("tplfile")." WHERE tpl_tplset='".addslashes($tplset_to)."' AND ($whr_append) AND tpl_file='".addslashes($row['tpl_file'])."' AND tpl_refid='".addslashes($row['tpl_refid'])."'" ) ;
-
-		if( ! $db->getRowsNum( $drs ) ) {
-			// INSERT mode
-			$sql = "INSERT INTO ".$db->prefix("tplfile")." SET tpl_refid='".addslashes($row['tpl_refid'])."',tpl_desc='".addslashes($row['tpl_desc'])."',tpl_lastmodified='".addslashes($lastmodified)."',tpl_type='".addslashes($row['tpl_type'])."',tpl_tplset='".addslashes($tplset_to)."',tpl_file='".addslashes($row['tpl_file'])."',tpl_module='".addslashes($row['tpl_module'])."'" ;
-			$db->query( $sql ) ;
-			$tpl_id = $db->getInsertId() ;
-			$db->query( "INSERT INTO ".$db->prefix("tplsource")." SET tpl_id='$tpl_id', tpl_source='".addslashes($tpl_source)."'" ) ;
-			xoops_template_touch( $tpl_id ) ;
-		} else {
-			while( list( $tpl_id ) = $db->fetchRow( $drs ) ) {
-				// UPDATE mode
-				$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_lastmodified='".addslashes($lastmodified)."' WHERE tpl_id='$tpl_id'" ) ;
-				$db->query( "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($tpl_source)."' WHERE tpl_id='$tpl_id'" ) ;
-				xoops_template_touch( $tpl_id ) ;
-			}
-		}
-	}
-}
 
 
 ?>

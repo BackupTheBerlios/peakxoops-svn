@@ -2,7 +2,7 @@
 
 include_once XOOPS_ROOT_PATH.'/class/template.php';
 
-function altsys_import_data( $tplset , $tpl_file , $tpl_source , $lastmodified = 0 )
+function tplsadmin_import_data( $tplset , $tpl_file , $tpl_source , $lastmodified = 0 )
 {
 	$db =& Database::getInstance() ;
 
@@ -39,7 +39,7 @@ function altsys_import_data( $tplset , $tpl_file , $tpl_source , $lastmodified =
 
 
 
-function altsys_get_fingerprint( $lines )
+function tplsadmin_get_fingerprint( $lines )
 {
 	$str = '' ;
 	foreach( $lines as $line ) {
@@ -52,7 +52,7 @@ function altsys_get_fingerprint( $lines )
 
 
 
-function altsys_copy_templates_db2db( $tplset_from , $tplset_to , $whr_append = '1' )
+function tplsadmin_copy_templates_db2db( $tplset_from , $tplset_to , $whr_append = '1' )
 {
 	global $db ;
 
@@ -87,7 +87,7 @@ function altsys_copy_templates_db2db( $tplset_from , $tplset_to , $whr_append = 
 
 
 
-function altsys_copy_templates_f2db( $tplset_to , $whr_append = '1' )
+function tplsadmin_copy_templates_f2db( $tplset_to , $whr_append = '1' )
 {
 	global $db ;
 
@@ -96,7 +96,7 @@ function altsys_copy_templates_f2db( $tplset_to , $whr_append = '1' )
 
 	while( $row = $db->fetchArray( $result ) ) {
 
-		$basefilepath = altsys_get_basefilepath( $row['tpl_module'] , $row['tpl_type'] , $row['tpl_file'] ) ;
+		$basefilepath = tplsadmin_get_basefilepath( $row['tpl_module'] , $row['tpl_type'] , $row['tpl_file'] ) ;
 		$tpl_source = rtrim( implode( "" , file( $basefilepath ) ) ) ;
 		$lastmodified = filemtime( $basefilepath ) ;
 
@@ -122,7 +122,7 @@ function altsys_copy_templates_f2db( $tplset_to , $whr_append = '1' )
 
 
 
-function altsys_get_basefilepath( $dirname , $type , $tpl_file )
+function tplsadmin_get_basefilepath( $dirname , $type , $tpl_file )
 {
 	// module instance
 	$path = $basefilepath = XOOPS_ROOT_PATH.'/modules/'.$dirname.'/templates/'.($type=='block'?'blocks/':'').$tpl_file ;

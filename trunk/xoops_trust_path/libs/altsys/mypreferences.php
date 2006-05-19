@@ -6,28 +6,42 @@
 // ------------------------------------------------------------------------- //
 
 include_once dirname(__FILE__).'/include/gtickets.php' ;
+include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
-// check access right (needs system_admin of BLOCK)
+// check access right (needs module_admin of this module)
 if( ! is_object( $xoopsUser ) || ! is_object( $xoopsModule ) || ! $xoopsUser->isAdmin( $xoopsModule->mid() ) ) {
 	die( 'Access Denied' ) ;
 }
 
+
 // initials
-$xoops_system_path = XOOPS_ROOT_PATH . '/modules/system' ;
 $db =& Database::getInstance();
 $myts =& MyTextSanitizer::getInstance() ;
 
-// determine language
+// language file
+$altsys_path = XOOPS_ROOT_PATH . '/modules/altsys' ;
 $language = $xoopsConfig['language'] ;
-if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
+if( ! file_exists("$altsys_path/language/$language/mypreferences.php") ) $language = 'english' ;
+include_once "$altsys_path/language/$language/mypreferences.php" ;
 
 // load language constants
 // to prevent from notice that constants already defined
-$error_reporting_level = error_reporting( 0 ) ;
-include_once( "$xoops_system_path/constants.php" ) ;
-include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-include_once( "$xoops_system_path/language/$language/admin/preferences.php" ) ;
-error_reporting( $error_reporting_level ) ;
+//$error_reporting_level = error_reporting( 0 ) ;
+//include_once( "$xoops_system_path/constants.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
+
+
+// determine language
+//$language = $xoopsConfig['language'] ;
+//if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
+
+// load language constants
+// to prevent from notice that constants already defined
+//$error_reporting_level = error_reporting( 0 ) ;
+//include_once( "$xoops_system_path/constants.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
+//include_once( "$xoops_system_path/language/$language/admin/preferences.php" ) ;
+//error_reporting( $error_reporting_level ) ;
 
 
 $op = empty( $_GET['op'] ) ? 'showmod' : preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['op'] ) ;
@@ -41,7 +55,7 @@ if ($op == 'showmod') {
 		die( 'no configs' ) ;
 	}
 	include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-	$form = new XoopsThemeForm(_MD_AM_MODCONFIG, 'pref_form', 'index.php?mode=admin&lib=altsys&page=mypreferences&op=save');
+	$form = new XoopsThemeForm( _MD_A_MYPREFERENCES_FORMTITLE , 'pref_form', 'index.php?mode=admin&lib=altsys&page=mypreferences&op=save');
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->get($mod);
 
@@ -153,7 +167,7 @@ if ($op == 'showmod') {
 	xoops_cp_header();
 
 	// GIJ patch start
-	if( file_exists( $mytrustdirpath.'/admin/mymenu.php' ) ) include( $mytrustdirpath.'/admin/mymenu.php' ) ;
+	altsys_include_mymenu() ;
 	echo "<h3 style='text-align:left;'>".$module->getvar('name').' &nbsp; '._PREFERENCES."</h3>\n" ;
 	// GIJ patch end
 
@@ -265,7 +279,7 @@ if ($op == 'save') {
 		}
 	}
 
-	redirect_header( 'index.php?mode=admin&lib=altsys&page=mypreferences' , 2 , _MD_AM_DBUPDATED ) ;
+	redirect_header( 'index.php?mode=admin&lib=altsys&page=mypreferences' , 2 , _MD_A_MYPREFERENCES_UPDATED ) ;
 }
 
 ?>

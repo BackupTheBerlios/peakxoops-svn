@@ -1,0 +1,169 @@
+[mlimg]
+[xlang:en]
+== ALTSYS == alternative system module & library
+
+[b]SUMMARY:[/b]
+
+The unified module of blocksadmin, tplsadmin, etc.
+
+Just a alpha version.
+I'm appreciated your bug reports :-)
+
+I'll maintain this module instead of blocksadmin, tplsadmin, avaman etc.
+
+
+[b]INSTALL (as a module):[/b]
+
+- set XOOPS_TRUST_PATH into mailfile.php
+- copy xoops_trus_path/libs/ in the archive into XOOPS_TRUST_PATH/
+- copy html/modules/altsys in the archive into XOOPS_ROOT_PATH/modules/
+- install it
+
+With this procedure, you are ready to use a library of altsys.
+
+
+[b]INSTALL (as a library for D3 modules):[/b]
+
+- comfirm XOOPS_TRUST_PATH is written in mailfile.php correctly.
+- copy xoops_trus_path/libs/ in the archive into XOOPS_TRUST_PATH/
+
+Duplicatable V3 (D3) module recognize this library automatically.
+You will get blocks,templates menu in your D3 module.
+Since mypreferences is automatically enabled too, you will be easy to operate module's prefences.
+
+
+[b]USAGE:[/b]
+
+refer blocksadmin about operating 'blocks'.
+refer tplsadmin about operating 'templates'.
+
+The new feature as altsys:
+
+(1) myblocksadmin is ready for XOOPS 2.2.x
+(2) auto updating feature of templates from not only under /themes/(your theme)/templates but also under /modules/(your module)/templates
+
+If you want auto-update feature from /themes/(your theme)/templates, insert a line into mainfile.php
+(A feature for site managers or designers)
+[code]
+	if (!isset($xoopsOption['nocommon'])) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+		include XOOPS_TRUST_PATH."/libs/altsys/include/autoupdate_from_theme.inc.php" ;
+
+	}
+[/code]
+
+これはテーマとテンプレートを一緒に開発する、いわゆるサイト構築時に威力を発揮する利用方法です。
+
+これに対して、モジュール開発時に役立つようにと用意したのが、上述した(2)です。
+If you want auto-update feature from /modules/(dirname of your module)/templates, insert two lines into mainfile.php
+(A feature for programmers or module developpers)
+[code]
+	if (!isset($xoopsOption['nocommon'])) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+		$tplsadmin_autoupdate_dirnames = array( '(dirname of your module)' ) ;
+		include XOOPS_TRUST_PATH."/libs/altsys/include/autoupdate_from_module.inc.php" ;
+	}
+[/code]
+
+
+[b]CHANGES:[/b]
+
+v0.10 (2006-05-19)
+- 1st release as altsys
+- myblocksadmin
+- mytplsadmin
+- mypreferences
+- compilehookadmin
+- fixed escaping rule of & (myblocksadmin)
+- XOOPS 2.2 ready (myblocksadmin)
+
+
+
+[/xlang:en]
+[xlang:ja]
+== ALTSYS == 代替システムモジュール＆ライブラリ
+
+●要旨
+
+使いづらいシステムモジュールの代わりとして作ってきたblocksadminやtplsadminといったコアに関する操作を統合したモジュールです。
+
+Duplicatable V3モジュールから、ライブラリとして利用できる形にしたため、構造から大きく見直しています。
+
+現在はα版です。何よりバグ報告を歓迎します。
+
+今後は、avamanも吸収し、私自身のメンテナンスを楽にしたいと思います。
+
+
+●インストール（モジュールとして）
+
+- mailfile.php にて XOOPS_TRUST_PATH を設定してください
+- アーカイブのxoops_trus_path/内を、XOOPS_TRUST_PATHに展開してください
+- アーカイブのhtml/内を、XOOPS_ROOT_PATHに展開してください
+- モジュールとしてインストールしてください
+
+この場合、以下のライブラリとしてのインストールも同時に完了します。
+
+
+●インストール（Duplicatable V3モジュール用のライブラリとして）
+
+- mailfile.php に XOOPS_TRUST_PATH が設定されていることを確認してください
+- アーカイブのxoops_trus_path/内を、XOOPS_TRUST_PATHに展開してください
+
+D3モジュールであれば、これで自動的にライブラリを認識して、ブロック管理やテンプレート管理がメニューに追加されます。一般設定についても、従来のmymenu相当--モジュール内部で一般設定が完結するもの--に置き換わります（この部分はmypreferencesと呼びます）。
+
+
+●使い方
+
+ブロック管理関係はblocksadminと同じです。
+テンプレート管理関係はtplsadminと同じです。
+
+altsysとしての新機能は以下のようなものです。
+
+(1) myblocksadmin の XOOPS 2.2.x対応
+(2) モジュール内テンプレートファイルの自動反映機能
+
+もともとtplsadminには、mainfile.phpのcommon.php読込直後に、
+[code]
+	if (!isset($xoopsOption['nocommon'])) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+		include XOOPS_ROOT_PATH."/modules/tplsadmins/include/autoupdate.inc.php" ;
+	}
+[/code]
+と書くことで、テーマ内のtemplates/フォルダ内に置かれたテンプレートを自動的に読み込む機能をつけていましたが、この機能はaltsysでも引き継がれています。
+[code]
+	if (!isset($xoopsOption['nocommon'])) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+		include XOOPS_TRUST_PATH."/libs/altsys/include/autoupdate_from_theme.inc.php" ;
+
+	}
+[/code]
+ファイル名の最後に、"_from_theme" という文字列が追加されていることに注意してください。
+
+これはテーマとテンプレートを一緒に開発する、いわゆるサイト構築時に威力を発揮する利用方法です。
+
+これに対して、モジュール開発時に役立つようにと用意したのが、上述した(2)です。
+[code]
+	if (!isset($xoopsOption['nocommon'])) {
+		include XOOPS_ROOT_PATH."/include/common.php";
+		$tplsadmin_autoupdate_dirnames = array( 'piCal' ) ;
+		include XOOPS_TRUST_PATH."/libs/altsys/include/autoupdate_from_module.inc.php" ;
+	}
+[/code]
+このように記述することで、piCalモジュールのテンプレートの元ファイルを編集するだけで、即時にデータベースに反映されます。includeする前に、$tplsadmin_autoupdate_dirnamesarray に配列をセットしておくことが重要で、もちろん複数のモジュールを同時指定することも可能です。
+
+効率的なモジュール開発にお役立てください。
+
+
+●更新履歴
+
+v0.10 (2006-05-19)
+- 最初のリリース
+- myblocksadmin
+- mytplsadmin
+- mypreferences
+- compilehookadmin
+- & の扱いを修正 (myblocksadmin)
+- XOOPS 2.2対応 (myblocksadmin)
+
+
+[/xlang:ja]

@@ -1,7 +1,13 @@
 [mlimg]
 [xlang:en]
 
-1.17 (2006/5/10)
+1.20 (2006/05/23) UPDATE MODULE ESSENTIALLY
+- added a kind of privileges between private forums and grous
+- modified private topics can be hit in globa search (not yet xhnewbb/search.php)
+- modified blocks displaying private forums's title (Don't enable block cache with such purposes)
+- fixed typo in xhnewbb_main_block.html (thx chika3)
+
+1.17 (2006/05/10)
 - fixed typo in viewtopic.php for guest access (thx fabi) 1.17a
 - added french language file (thx marco)
 - changed error handling from redirect_header() to die()
@@ -58,6 +64,12 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.20 (2006/05/23) モジュールアップデート必須
+- プライベートフォーラムに、グループ毎の権限設定を追加
+- XOOPSのグローバル検索機能で権限があればプライベートフォーラムの内容にヒットするように改善（newbb本来の検索機能については未実装）
+- 投稿一覧ブロックで、プライベートフォーラムが権限通りに表示されるように修正。ただし、プライベートフォーラムもブロックに載せる場合はブロックキャッシュを有効にしないこと。
+- xhnewbb_main_block.html内のtypo修正 (thx chika3)
 
 1.17 (2006/5/10)
 - ゲストアクセスでトピック表示がおかしかったのを修正 (thx fabi) 1.17a

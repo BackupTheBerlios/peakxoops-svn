@@ -2,6 +2,16 @@
 // $Id: admin.php,v 1.1.1.1 2003/11/26 05:17:35 ryuji_amano Exp $
 //%%%%%%	File Name  index.php   	%%%%%
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-05-23 05:19:25
+define('_MD_XHNEWBB_A_GROUPPERMS','Permissions per groups:');
+define('_MD_XHNEWBB_A_TH_CAN_READ','View');
+define('_MD_XHNEWBB_A_TH_CAN_POST','Post');
+define('_MD_XHNEWBB_A_TH_UID','uid');
+define('_MD_XHNEWBB_A_TH_UNAME','uname');
+define('_MD_XHNEWBB_A_TH_GROUPNAME','Group');
+define('_MD_XHNEWBB_A_NOTICE_ADDUSERS','It is necessary to input either uid (as number) or user name (uname) if you want to add a user.<br />Unchecking \'View\' and \'Vost\' hides the user\'s name in the list');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-05-10 12:17:01
 define('_MD_XHNEWBB_A_WEIGHTOFFORUM','weight:');
 

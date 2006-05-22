@@ -165,33 +165,36 @@ function xhnewbb_is_locked($topic)
 	return $ret;
 }
 
-/**
- * Checks if the given userid is allowed to log into the given (private) forumid.
- * If the "is_posting" flag is true, checks if the user is allowed to post to that forum.
- */
-function xhnewbb_check_priv_forum_auth($userid, $forumid, $is_posting)
+function xhnewbb_check_priv_forum_read( $userid , $forumid )
 {
-	global $xoopsDB;
-	$sql = "SELECT count(*) AS user_count FROM ".$xoopsDB->prefix("xhnewbb_forum_access")." WHERE (user_id = $userid) AND (forum_id = $forumid) ";
+	$userid = intval( $userid ) ;
+	$db =& Database::getInstance() ;
 
-	if ( $is_posting ) {
-		$sql .= "AND (can_post = 1)";
-	}
+	$member_handler =& xoops_gethandler( 'member' ) ;
+	$groups = $member_handler->getGroupsByUser( intval( $userid ) ) ;
 
-	if ( !$result = $xoopsDB->query($sql) ) {
-		// no good..
-		return false;
-	}
+	$sql = "SELECT count(*) FROM ".$db->prefix("xhnewbb_forum_access")." WHERE (`user_id`=$userid || `groupid` IN (".implode(",",$groups).") ) AND `forum_id`=$forumid";
 
-	if ( !$row = $xoopsDB->fetchArray($result) ) {
-		return false;
-	}
+	@list( $count ) = $db->fetchRow( $db->query( $sql ) ) ;
 
-  	if ( $row['user_count'] <= 0 ) {
-  		return false;
-  	}
+	if( empty( $count ) ) return false ;
+	else return true ;
+}
 
-  	return true;
+function xhnewbb_check_priv_forum_post( $userid , $forumid )
+{
+	$userid = intval( $userid ) ;
+	$db =& Database::getInstance() ;
+
+	$member_handler =& xoops_gethandler( 'member' ) ;
+	$groups = $member_handler->getGroupsByUser( intval( $userid ) ) ;
+
+	$sql = "SELECT count(*) FROM ".$db->prefix("xhnewbb_forum_access")." WHERE (`user_id`=$userid || `groupid` IN (".implode(",",$groups).") ) AND `forum_id`=$forumid AND can_post=1";
+
+	@list( $count ) = $db->fetchRow( $db->query( $sql ) ) ;
+
+	if( empty( $count ) ) return false ;
+	else return true ;
 }
 
 function xhnewbb_make_jumpbox($selected=0)

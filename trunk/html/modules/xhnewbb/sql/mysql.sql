@@ -23,9 +23,15 @@ CREATE TABLE xhnewbb_categories (
 
 CREATE TABLE xhnewbb_forum_access (
   forum_id int(4) unsigned NOT NULL default '0',
-  user_id int(5) unsigned NOT NULL default '0',
+  user_id int(5) default NULL,
+  groupid smallint(5) default NULL,
   can_post tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (forum_id,user_id)
+  UNIQUE KEY  (forum_id,user_id),
+  UNIQUE KEY  (forum_id,groupid),
+  KEY  (forum_id),
+  KEY  (user_id),
+  KEY  (groupid),
+  KEY  (can_post)
 ) TYPE=MyISAM;
 # --------------------------------------------------------
 

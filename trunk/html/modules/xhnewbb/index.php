@@ -82,7 +82,7 @@ if ( !$result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_weight, f.foru
 $forums = array(); // RMV-FIX
 while ( $forum_data = $xoopsDB->fetchArray($result) ) {
 	// private or public
-	if( $forum_data['forum_type'] == 0 || $uid > 0 && ( $xoopsUser->isAdmin( $xoopsModule->mid() ) || xhnewbb_check_priv_forum_auth( $uid , $forum_data['forum_id'] , false ) ) ) {
+	if( $forum_data['forum_type'] == 0 || $uid > 0 && ( $xoopsUser->isAdmin( $xoopsModule->mid() ) || xhnewbb_check_priv_forum_read( $uid , $forum_data['forum_id'] ) ) ) {
 		$forums[] = $forum_data;
 	}
 }

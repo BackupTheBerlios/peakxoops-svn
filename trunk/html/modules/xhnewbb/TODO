@@ -3,3 +3,6 @@
 
 ダメダメな管理画面を少しでもましにする:-P
 
+・プライベートの処理 $forumdata['page_type'] == 1
+- search.php
+

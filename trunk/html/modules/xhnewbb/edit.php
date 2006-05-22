@@ -59,7 +59,7 @@ if ( $forumdata['forum_type'] == 1 ) {
 	$accesserror = 0; //initialize
 	if ( $xoopsUser ) {
 		if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
-			if ( !xhnewbb_check_priv_forum_auth($xoopsUser->uid(), $forum, true) ) {
+			if ( !xhnewbb_check_priv_forum_post($xoopsUser->uid(), $forum) ) {
 				$accesserror = 1;
 			}
 		}

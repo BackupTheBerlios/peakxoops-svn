@@ -1,331 +1,199 @@
 <?php
-/***************************************************************************
-                          admin_priv_forums.php  -  description
-                             -------------------
-    begin                : Thu 12 Jan 2001
-    copyright            : (C) 2001 The phpBB Group
-    email                : support@phpbb.com
 
-    $Id: admin_priv_forums.php,v 1.3 2004/12/20 04:23:18 gij Exp $
- ***************************************************************************/
+include '../../../include/cp_header.php' ;
+include dirname(dirname(__FILE__)).'/functions.php' ;
+include dirname(dirname(__FILE__)).'/config.php' ;
+$myts =& MyTextSanitizer::getInstance() ;
+$db =& Database::getInstance() ;
 
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-include '../../../include/cp_header.php';
-include '../functions.php';
-include '../config.php';
-$myts =& MyTextSanitizer::getInstance();
-xoops_cp_header();
-include( './mymenu.php' ) ;
-echo"<table width='100%' border='0' cellspacing='1' class='outer'>"
-."<tr><td class=\"odd\">";
-echo "<a href='./index.php'><h4>"._MD_XHNEWBB_A_FORUMCONF."</h4></a>";
-$op = '';
-if (!empty($_POST['op'])) {
-    $op = $_POST['op'];
-} elseif (!empty($_GET['op'])) {
-    $op = $_GET['op'];
+
+// get $forum
+$forum = intval( @$_GET['forum'] ) ;
+list( $forum_type ) = $db->fetchRow( $db->query( "SELECT forum_type FROM ".$db->prefix("xhnewbb_forums")." WHERE forum_id=$forum" ) ) ;
+if( $forum_type != 1 ) {
+	list( $forum ) = $db->fetchRow( $db->query( "SELECT MIN(forum_id) FROM ".$db->prefix("xhnewbb_forums")." WHERE forum_type=1" ) ) ;
+	if( empty( $forum ) ) die( _MD_XHNEWBB_A_NFID . ' (no private)'  ) ;
 }
 
-$forum = !empty($_REQUEST['forum']) ? intval($_REQUEST['forum']) : 0;
-$op_userid = !empty($_REQUEST['op_userid']) ? intval($_REQUEST['op_userid']) : 0;
+//
+// transaction stage
+//
 
-	if ( empty( $op ) )
-	{
-		// No opcode passed. Show list of private forums.
-?>
-
-	<form action="" method="post">
-		<table border="0" cellpadding="1" cellspacing="0" align="center" width="95%">
-			<tr>
-				<td class='bg2'>
-					<table border="0" cellpadding="1" cellspacing="1" width="100%">
-						<tr class='bg3' align='left'>
-							<td align="center" colspan="2">
-								<span class='fg2'>
-									<b><?php _MD_XHNEWBB_A_SAFTE;?></b>
-								</span>
-							</td>
-						</tr>
-						<tr class='bg1' align='left'>
-							<td align="center" colspan="2">
-								<select name="forum" size="0">
-	<?php
-
-		$sql = "SELECT forum_name, forum_id FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_type = 1 ORDER BY forum_id";
-		if(!$result = $xoopsDB->query($sql))
-		{
-			echo"</td></tr></table>";
-			xoops_cp_footer();
-			exit();
+// group update
+if( ! empty( $_POST['group_update'] ) ) {
+	$db->query( "DELETE FROM ".$db->prefix("xhnewbb_forum_access")." WHERE forum_id=$forum AND groupid>0" ) ;
+	$result = $db->query( "SELECT groupid FROM ".$db->prefix("groups")." WHERE groupid <> ".intval(XOOPS_GROUP_ANONYMOUS) ) ;
+	while( list( $gid ) = $db->fetchRow( $result ) ) {
+		if( ! empty( $_POST['can_posts'][$gid] ) ) {
+			$db->query( "INSERT INTO ".$db->prefix("xhnewbb_forum_access")." SET forum_id=$forum, groupid=$gid, can_post=1" ) ;
+		} else if( ! empty( $_POST['can_reads'][$gid] ) ) {
+			$db->query( "INSERT INTO ".$db->prefix("xhnewbb_forum_access")." SET forum_id=$forum, groupid=$gid, can_post=0" ) ;
 		}
-
-		if($myrow = $xoopsDB->fetchArray($result))
-		{
-			do
-			{
-				$name = $myts->makeTboxData4Show($myrow['forum_name']);
-				echo "<option value=\"".$myrow['forum_id']."\">$name</option>\n";
-			}
-			while($myrow = $xoopsDB->fetchArray($result));
-		}
-		else
-		{
-			echo "<option value=\"-1\">"._MD_XHNEWBB_A_NFID."</option>\n";
-		}
-
-?>
-								</select>
-							</td>
-						</tr>
-						<tr class='bg3' Align="left">
-							<td align="center" colspan="2">
-								<input type="hidden" name="op" value="showform" />
-								<input type="submit" name="submit" value="<?php echo _MD_XHNEWBB_A_EDIT;?>" />&nbsp;&nbsp;
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-
-
-<?php
-
 	}
-	else
-	{
-		// Opcode exists. See what it is, do stuff.
+	redirect_header( 'admin_priv_forums.php?forum='.$forum , 3 , _MD_XHNEWBB_A_FORUMUPDATED ) ;
+	exit ;
+}
 
+// user update
+if( ! empty( $_POST['user_update'] ) ) {
+	$db->query( "DELETE FROM ".$db->prefix("xhnewbb_forum_access")." WHERE forum_id=$forum AND user_id>0" ) ;
+	$can_posts = is_array( @$_POST['can_posts'] ) ? $_POST['can_posts'] : array() ;
+	$can_reads = is_array( @$_POST['can_reads'] ) ? $_POST['can_reads'] + $can_posts : $can_posts ;
 
-		if ($op == "adduser")
-		{
-			// Add user(s) to the list for this forum.
-			if (!empty($_POST['userids']))
-			{
-				while(list($null, $curr_userid) = each($_POST["userids"]))
-				{
-					$sql = "INSERT INTO ".$xoopsDB->prefix("xhnewbb_forum_access")." (forum_id, user_id, can_post) VALUES ($forum, $curr_userid, 0)";
-					if (!$result = $xoopsDB->query($sql))
-					{
-						echo"</td></tr></table>";
-						xoops_cp_footer();
-						exit();
-					}
-				}
-			}
-			$op = "showform";
-
+	foreach( $can_reads as $uid => $val ) {
+		$uid = intval( $uid ) ;
+		if( ! empty( $can_posts[ $uid ] ) ) {
+			$db->query( "INSERT INTO ".$db->prefix("xhnewbb_forum_access")." SET forum_id=$forum, user_id=$uid, can_post=1" ) ;
+		} else if( $val ) {
+			$db->query( "INSERT INTO ".$db->prefix("xhnewbb_forum_access")." SET forum_id=$forum, user_id=$uid, can_post=0" ) ;
 		}
-		else if ($op == "deluser")
-		{
-			// Remove a user from the list for this forum.
-			$sql = sprintf("DELETE FROM %s WHERE forum_id = %u AND user_id = %u", $xoopsDB->prefix("xhnewbb_forum_access"), $forum, $op_userid);
-			if (!$result = $xoopsDB->query($sql))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
-
-			$op = "showform";
-
+	}
+	
+	$member_hander =& xoops_gethandler( 'member' ) ;
+	if( is_array( @$_POST['new_uids'] ) ) foreach( $_POST['new_uids'] as $i => $uid ) {
+		$can_post = empty( $_POST['new_posts'][$i] ) ? 0 : 1 ;
+		if( empty( $uid ) ) {
+			$criteria =& new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
+			@list( $user ) = $member_handler->getUsers( $criteria ) ;
+		} else {
+			$user =& $member_handler->getUser( intval( $uid ) ) ;
 		}
-		else if ($op == "clearusers")
-		{
-			// Remove all users from the list for this forum.
-			$sql = sprintf("DELETE FROM %s WHERE forum_id = %u", $xoopsDB->prefix("xhnewbb_forum_access"), $forum);
-			if (!$result = $xoopsDB->query($sql))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
-
-			$op = "showform";
+		if( is_object( $user ) ) {
+			$db->query( "INSERT INTO ".$db->prefix("xhnewbb_forum_access")." SET forum_id=$forum, user_id=".$user->getVar('uid').", can_post=$can_post" ) ;
 		}
-		else if ($op == "grantuserpost")
-		{
-			// Add posting rights for this user in this forum.
-			$sql = sprintf("UPDATE %s SET can_post=1 WHERE forum_id = %u AND user_id = %u", $xoopsDB->prefix("xhnewbb_forum_access"), $forum, $op_userid);
-			if (!$result = $xoopsDB->query($sql))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
+	}
+	
+	redirect_header( 'admin_priv_forums.php?forum='.$forum , 3 , _MD_XHNEWBB_A_FORUMUPDATED ) ;
+	exit ;
+}
 
-			$op = "showform";
 
-		}
-		else if ($op == "revokeuserpost")
-		{
-			// Revoke posting rights for this user in this forum.
-			$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_forum_access")." SET can_post=0 WHERE forum_id = $forum AND user_id = $op_userid";
-			if (!$result = $xoopsDB->query($sql))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
 
-			$op = "showform";
+//
+// form stage
+//
 
-		}
+// forum selection
+$result = $db->query( "SELECT forum_id,forum_name FROM ".$db->prefix("xhnewbb_forums")." WHERE forum_type=1" ) ;
+$forum_options = '' ;
+while( list( $id , $name ) = $db->fetchRow( $result ) ) {
+	$selected = $id == $forum ? "selected='selected'" : "" ;
+	$forum_options .= "<option value='$id' $selected>".htmlspecialchars( $name )."</option>\n" ;
+}
 
-		// We want this one to be available even after one of the above blocks has executed.
-		// The above blocks will set $op to "showform" on success, so it goes right back to the form.
-		// Neato. This is really slick.
-		if ($op == "showform")
-		{
-			// Show the form for the given forum.
+// create group form
+$group_handler =& xoops_gethandler( 'group' ) ;
+$groups =& $group_handler->getObjects() ;
+$group_trs = '' ;
+foreach( $groups as $group ) {
+	$gid = $group->getVar('groupid') ;
 
-			$sql = "SELECT forum_name FROM ".$xoopsDB->prefix("xhnewbb_forums")." WHERE forum_id = $forum";
-			if ((!$result = $xoopsDB->query($sql)) || ($forum == -1))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
-			$forum_name = "";
-			if ($row = $xoopsDB->fetchArray($result))
-			{
-				$forum_name = $myts->makeTboxData4Show($row['forum_name']);
-			}
-?>
-     <br />&nbsp;
-	 <table border="0" cellpadding="1" cellspacing="1" align="center" width="95%">
+	// skip guest access
+	if( $gid == XOOPS_GROUP_ANONYMOUS ) continue ;
+
+	$fars = $db->query( "SELECT can_post FROM ".$db->prefix("xhnewbb_forum_access")." WHERE groupid=".$group->getVar('groupid')." AND forum_id=$forum" ) ;
+	if( $db->getRowsNum( $fars ) > 0 ) {
+		$can_read = true ;
+		list( $can_post ) = $db->fetchRow( $fars ) ;
+	} else {
+		$can_post = $can_read = false ;
+	}
+
+	$can_read_checked = $can_read ? "checked='checked'" : "" ;
+	$can_post_checked = $can_post ? "checked='checked'" : "" ;
+	$group_trs .= "
 		<tr>
-			<td class='bg2'>
-				<table border="0" cellpadding="3" cellspacing="0" width="100%">
-					<tr class='bg3' align="left">
-		     <td colspan="3" align="center"><?php printf(_MD_XHNEWBB_A_EFPF,$forum_name);?></td>
-		     </tr>
-		     <tr>
-		     <td class='bg3' align='center' width='40%'>
-			<form action="" method="post">
-		         <b><?php echo _MD_XHNEWBB_A_UWOA;?></b>
-		     </td>
-		     <td class='bg3' align='center' width='20%'>
-		        &nbsp;
-		     </td>
-		     <td class='bg3' align='center'>
-		        <b><?php echo _MD_XHNEWBB_A_UWA;?></b>
-		     </td>
-		     </tr>
-
-		     <tr>
-		      <td valign="top" class='bg1' align='center' width='40%'>
-		     <select name="userids[]" size="10" multiple='multiple' style="width: 100px;">
-<?php
-			$sql = "SELECT u.uid FROM ".$xoopsDB->prefix("users")." u, ".$xoopsDB->prefix("xhnewbb_forum_access")." f WHERE u.uid = f.user_id AND f.forum_id = $forum";
-			if (!$result = $xoopsDB->query($sql))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
-
-			$current_users = Array();
-
-			while ($row = $xoopsDB->fetchArray($result))
-			{
-				$current_users[] = $row[uid];
-			}
-
-			$sql = "SELECT uid, uname FROM ".$xoopsDB->prefix("users")." WHERE (uid > 0 AND level > 0)";
-			while(list($null, $curr_userid) = each($current_users))
-			{
-	 			$sql .= "AND (uid != $curr_userid) ";
-      	}
-      	$sql .= "ORDER BY uname ASC";
-
-      	if (!$result = $xoopsDB->query($sql))
-      	{
-		echo"</td></tr></table>";
-		xoops_cp_footer();
-		exit();
-      	}
-      	while ($row = $xoopsDB->fetchArray($result))
-      	{
-?>
-	     <option value="<?php echo $row['uid'] ?>"> <?php echo $row['uname'] ?> </option>
-<?php
-      	}
-?>
-							</select>
-						</td>
-						<td class='bg1' align='center' valign="top">
-
-							<input type="hidden" name="op" value="adduser" />
-							<input type="hidden" name="forum" value="<?php echo $forum ?>" />
-							<input type="submit" name="submit" value="<?php echo _MD_XHNEWBB_A_ADDUSERS;?>" />
-							</form><br />
-<?php
-							$link = "?forum=".$forum."&amp;op=clearusers";
-							echo myTextForm($link, _MD_XHNEWBB_A_CLEARALLUSERS);
-?>
-						</td>
-						<td valign="top" class='bg1' align='center'>
-<?php
-			$sql = "SELECT u.uname, u.uid, f.can_post FROM ".$xoopsDB->prefix("users")." u, ".$xoopsDB->prefix("xhnewbb_forum_access")." f WHERE u.uid = f.user_id AND f.forum_id = $forum ORDER BY u.uid ASC";
-			if (!$result = $xoopsDB->query($sql))
-			{
-				echo"</td></tr></table>";
-				xoops_cp_footer();
-				exit();
-			}
-?>
-							<table border="0" cellpadding="10" cellspacing="0">
-
-<?php
-			while ($row = $xoopsDB->fetchArray($result))
-			{
-				$post_text = ($row['can_post']) ? "can" : "can't";
-				$post_text .= " post";
-				//$post_toggle_link = "<a href=\"?forum=$forum&op_userid=".$row['uid']."&op=";
-				$post_toggle_link = XOOPS_URL."/modules/xhnewbb/admin/admin_priv_forums.php?forum=$forum&op_userid=".$row['uid']."&op=";
-				if ($row['can_post'])
-				{
-					$post_toggle_link .= "revokeuserpost";
-					$post_toggle_link = myTextForm($post_toggle_link,_MD_XHNEWBB_A_REVOKEPOSTING);
-				}
-				else
-				{
-					$post_toggle_link .= "grantuserpost";
-					$post_toggle_link = myTextForm($post_toggle_link,_MD_XHNEWBB_A_GRANTPOSTING);
-				}
-				$remove_link = myTextForm(XOOPS_URL."/modules/xhnewbb/admin/admin_priv_forums.php?forum=$forum&amp;op=deluser&amp;op_userid=".$row['uid'], _MD_XHNEWBB_A_REMOVE);
-?>
-								<tr>
-								<td><b><?php echo $row['uname']?></b>
-                                (<?php echo $post_text ?>)
-                                <?php echo $post_toggle_link ?>
-								<?php echo $remove_link ?></td>
-								</tr>
-<?php
-			}
-?>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</form>
-			</td></tr></table>
-<?php
-		} // end of big opcode if/else block.
+			<td class='even'>".$group->getVar('name')."</td>
+			<td class='even'><input type='checkbox' name='can_reads[$gid]' value='1' $can_read_checked /></td>
+			<td class='even'><input type='checkbox' name='can_posts[$gid]' value='1' $can_post_checked /></td>
+		</tr>\n" ;
+}
 
 
-	}
+// create user form
+$fars = $db->query( "SELECT u.uid,u.uname,fa.can_post FROM ".$db->prefix("xhnewbb_forum_access")." fa LEFT JOIN ".$db->prefix("users")." u ON fa.user_id=u.uid WHERE fa.forum_id=$forum AND fa.groupid IS NULL ORDER BY u.uid ASC" ) ;
+$user_trs = '' ;
+while( list( $uid , $uname , $can_post ) = $db->fetchRow( $fars ) ) {
 
-//}
+	$uid = intval( $uid ) ;
+	$uname4disp = htmlspecialchars( $uname , ENT_QUOTES ) ;
 
-echo"</td></tr></table>";
+	$can_post_checked = $can_post ? "checked='checked'" : "" ;
+	$user_trs .= "
+		<tr>
+			<td class='even'>$uid</td>
+			<td class='even'>$uname4disp</td>
+			<td class='even'><input type='checkbox' name='can_reads[$uid]' value='1' checked='checked' /></td>
+			<td class='even'><input type='checkbox' name='can_posts[$uid]' value='1' $can_post_checked /></td>
+		</tr>\n" ;
+}
+
+
+// create new user form
+$newuser_trs = '' ;
+for( $i = 0 ; $i < 5 ; $i ++ ) {
+	$newuser_trs .= "
+		<tr>
+			<td class='head'><input type='text' size='4' name='new_uids[$i]' value='' /></th>
+			<td class='head'><input type='text' size='12' name='new_unames[$i]' value='' /></th>
+			<td class='head'><input type='checkbox' name='new_reads[$i]' checked='checked' disabled='disabled' /></th>
+			<td class='head'><input type='checkbox' name='new_posts[$i]' /></th>
+		</tr>
+	\n" ;
+}
+
+
+//
+// display stage
+//
+
+xoops_cp_header();
+include dirname(__FILE__).'/mymenu.php' ;
+
+// forum selection
+echo "
+	<form action='' method='get' style='margin: 20px 0px'>
+		"._MD_XHNEWBB_A_SAFTE.":
+		<select name='forum'>$forum_options</select>
+		<input type='submit' value='"._SUBMIT."' />
+	</form>
+" ;
+
+// show group form
+echo "
+	<form action='?forum=$forum' method='post' style='margin:20px 0px'>
+	"._MD_XHNEWBB_A_TH_GROUPNAME."
+	<table class='outer'>
+		<tr>
+			<th>group</th>
+			<th>"._MD_XHNEWBB_A_TH_CAN_READ."</th>
+			<th>"._MD_XHNEWBB_A_TH_CAN_POST."</th>
+		</tr>
+		$group_trs
+	</table>
+	<input type='submit' name='group_update' value='"._SUBMIT."' />
+	</form>
+" ;
+
+// show user form
+echo "
+	<form action='?forum=$forum' method='post' style='margin:20px 0px'>
+	"._MD_XHNEWBB_A_UWA."
+	<table class='outer'>
+		<tr>
+			<th>"._MD_XHNEWBB_A_TH_UID."</th>
+			<th>"._MD_XHNEWBB_A_TH_UNAME."</th>
+			<th>"._MD_XHNEWBB_A_TH_CAN_READ."</th>
+			<th>"._MD_XHNEWBB_A_TH_CAN_POST."</th>
+		</tr>
+		$user_trs
+		$newuser_trs
+	</table>
+	<input type='submit' name='user_update' value='"._SUBMIT."' />
+	<br />
+	"._MD_XHNEWBB_A_NOTICE_ADDUSERS."
+	</form>
+" ;
+
 xoops_cp_footer();
 ?>

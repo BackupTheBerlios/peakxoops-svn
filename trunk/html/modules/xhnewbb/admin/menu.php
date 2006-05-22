@@ -34,7 +34,7 @@ $adminmenu[0]['link'] = "admin/admin_forums.php?mode=addforum";
 $adminmenu[1]['title'] = _MI_XHNEWBB_ADMENU2;
 $adminmenu[1]['link'] = "admin/admin_forums.php?mode=editforum";
 $adminmenu[2]['title'] = _MI_XHNEWBB_ADMENU3;
-$adminmenu[2]['link'] = "admin/admin_priv_forums.php?mode=editforum";
+$adminmenu[2]['link'] = "admin/admin_priv_forums.php";
 $adminmenu[3]['title'] = _MI_XHNEWBB_ADMENU4;
 $adminmenu[3]['link'] = "admin/admin_forums.php?mode=sync";
 $adminmenu[4]['title'] = _MI_XHNEWBB_ADMENU5;

@@ -30,10 +30,22 @@
 // ------------------------------------------------------------------------- //
 
 function xhnewbb_search($queryarray, $andor, $limit, $offset, $userid){
-	global $xoopsDB;
-	$sql = "SELECT p.post_id,p.topic_id,p.forum_id,p.post_time,p.uid,p.subject FROM ".$xoopsDB->prefix("xhnewbb_posts")." p LEFT JOIN ".$xoopsDB->prefix("xhnewbb_posts_text")." t ON t.post_id=p.post_id LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON f.forum_id=p.forum_id WHERE f.forum_type=0";
+	global $xoopsDB, $xoopsUser ;
+
+	$userid = intval( $userid ) ;
+
+	if( is_object( $xoopsUser ) ) {
+		$uid = intval( $xoopsUser->getVar('uid') ) ;
+		$member_handler =& xoops_gethandler( 'member' ) ;
+		$groups = $member_handler->getGroupsByUser( intval( $uid ) ) ;
+		$whr_private = "f.forum_type=0 || fa.`user_id`=$uid || fa.`groupid` IN (".implode(",",$groups).")" ;
+	} else {
+		$whr_private = "f.forum_type=0" ;
+	}
+
+	$sql = "SELECT p.post_id,p.topic_id,p.forum_id,p.post_time,p.uid,p.subject FROM ".$xoopsDB->prefix("xhnewbb_posts")." p LEFT JOIN ".$xoopsDB->prefix("xhnewbb_posts_text")." t ON t.post_id=p.post_id LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON f.forum_id=p.forum_id LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forum_access")." fa ON fa.forum_id=p.forum_id WHERE ($whr_private) " ;
 	if ( $userid != 0 ) {
-		$sql .= " AND p.uid=".$userid." ";
+		$sql .= " AND p.uid=$userid ";
 	}
 	// because count() returns 1 even if a supplied variable
 	// is not an array, we must check if $querryarray is really an array

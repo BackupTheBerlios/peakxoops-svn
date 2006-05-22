@@ -50,7 +50,7 @@ if ( $forumdata['forum_type'] == 1 ) {
 	if ( $xoopsUser ) {
 		//check if the user has forum admin right
 		if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
-			if ( !xhnewbb_check_priv_forum_auth($xoopsUser->uid(), $forum, true) ) {
+			if ( !xhnewbb_check_priv_forum_post($xoopsUser->uid(), $forum ) ) {
 				$accesserror = 1;
 			}
 		}

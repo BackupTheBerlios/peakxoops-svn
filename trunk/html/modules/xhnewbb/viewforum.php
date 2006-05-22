@@ -83,7 +83,7 @@ if ( $forumdata['forum_type'] == 1 ) {
 	$accesserror = 0;
 	if ( $xoopsUser ) {
 		if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
-			if ( !xhnewbb_check_priv_forum_auth($xoopsUser->getVar("uid"), $forum, false) ) {
+			if ( !xhnewbb_check_priv_forum_post($xoopsUser->getVar("uid"), $forum) ) {
 				$accesserror = 1;
 			}
 		}

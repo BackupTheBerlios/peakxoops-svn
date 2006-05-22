@@ -50,8 +50,7 @@
   <{foreach item=topic from=$block.topics}>
   <tr class="<{cycle values="even,odd"}>">
     <td><a href="<{$xoops_url}>/modules/xhnewbb/viewtopic.php?topic_id=<{$topic.id}>"><{$topic.title}></a></td>
-    <{* <td align="center"><{$topic.replies}></td> *}>
-    <{* <td align="center"><{$topic.views}></td> *}>
+    <td align="center"><{$topic.replies}></td>
     <td align="right" nowrap="nowrap"><{$topic.date}></td>
   </tr>
   <{/foreach}>

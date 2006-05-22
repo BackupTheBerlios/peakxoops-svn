@@ -162,10 +162,10 @@ echo "
 // show group form
 echo "
 	<form action='?forum=$forum' method='post' style='margin:20px 0px'>
-	"._MD_XHNEWBB_A_TH_GROUPNAME."
+	"._MD_XHNEWBB_A_GROUPPERMS."
 	<table class='outer'>
 		<tr>
-			<th>group</th>
+			<th>"._MD_XHNEWBB_A_TH_GROUPNAME."</th>
 			<th>"._MD_XHNEWBB_A_TH_CAN_READ."</th>
 			<th>"._MD_XHNEWBB_A_TH_CAN_POST."</th>
 		</tr>

@@ -42,8 +42,8 @@ define("_MD_XHNEWBB_REGTOPOST","投稿するにはまず登録を");
 
 //search.php
 define("_MD_XHNEWBB_KEYWORDS","キーワード:");
-define("_MD_XHNEWBB_SEARCHANY","指定したいくつかの条件で検索（デフォルト）");
-define("_MD_XHNEWBB_SEARCHALL","指定した全ての条件で検索");
+define("_MD_XHNEWBB_SEARCHANY","いずれかのワードを含む");
+define("_MD_XHNEWBB_SEARCHALL","すべてのワードを含む");
 define("_MD_XHNEWBB_SEARCHALLFORUMS","全てのフォーラムを検索");
 define("_MD_XHNEWBB_FORUMC","フォーラム：");
 define("_MD_XHNEWBB_SORTBY","ソート順:");
@@ -205,5 +205,9 @@ define("_MD_XHNEWBB_FROM","居住地");
 define("_MD_XHNEWBB_JOINED","登録日");
 define("_MD_XHNEWBB_ONLINE","オンライン");
 define("_MD_XHNEWBB_BOTTOM","下へ");
+
+// multi-byte spaces separated by ,
+// (don't define for single space languages)
+define('_MD_XHNEWBB_MULTIBYTESPACES','　') ;
 
 ?>

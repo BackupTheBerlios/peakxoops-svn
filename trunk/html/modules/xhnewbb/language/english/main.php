@@ -42,7 +42,7 @@ define("_MD_XHNEWBB_REGTOPOST","Register To Post");
 
 //search.php
 define("_MD_XHNEWBB_KEYWORDS","Keywords:");
-define("_MD_XHNEWBB_SEARCHANY","Search for ANY of the terms (Default)");
+define("_MD_XHNEWBB_SEARCHANY","Search for ANY of the terms");
 define("_MD_XHNEWBB_SEARCHALL","Search for ALL of the terms");
 define("_MD_XHNEWBB_SEARCHALLFORUMS","Search All Forums");
 define("_MD_XHNEWBB_FORUMC","Forum");

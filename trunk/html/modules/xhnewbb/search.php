@@ -1,58 +1,18 @@
 <?php
-// $Id: search.php,v 1.2 2004/12/20 04:23:18 gij Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
-// Project: The XOOPS Project                                                //
-// ------------------------------------------------------------------------- //
 
-include 'header.php';
+include 'header.php' ;
+$myts =& MyTextSanitizer::getInstance() ;
 
-if ( !isset($_POST['submit']) ) {
+if ( ! isset( $_POST['submit'] ) ) {
 	$xoopsOption['template_main']= 'xhnewbb_search.html';
 	include XOOPS_ROOT_PATH.'/header.php';
-	$xoopsTpl->assign("lang_keywords", _MD_XHNEWBB_KEYWORDS);
-	$xoopsTpl->assign("lang_searchany", _MD_XHNEWBB_SEARCHANY);
-	$xoopsTpl->assign("lang_searchall", _MD_XHNEWBB_SEARCHALL);
-	$xoopsTpl->assign("lang_forumc", _MD_XHNEWBB_FORUMC);
-	$xoopsTpl->assign("lang_searchallforums", _MD_XHNEWBB_SEARCHALLFORUMS);
-	$xoopsTpl->assign("lang_sortby", _MD_XHNEWBB_SORTBY);
-	$xoopsTpl->assign("lang_date", _MD_XHNEWBB_DATE);
-	$xoopsTpl->assign("lang_topic", _MD_XHNEWBB_TOPIC);
-	$xoopsTpl->assign("lang_forum", _MD_XHNEWBB_FORUM);
-	$xoopsTpl->assign("lang_username", _MD_XHNEWBB_USERNAME);
-	$xoopsTpl->assign("lang_searchin", _MD_XHNEWBB_SEARCHIN);
-	$xoopsTpl->assign("lang_subject", _MD_XHNEWBB_SUBJECT);
-	$xoopsTpl->assign("lang_body", _MD_XHNEWBB_BODY);
 
-	$query = 'SELECT forum_name,forum_id FROM '.$xoopsDB->prefix('xhnewbb_forums').' WHERE forum_type != 1';
-	if ( !$result = $xoopsDB->query($query) ) {
+	// It avoids to display names of private forums.
+	$sql = 'SELECT forum_name,forum_id FROM '.$xoopsDB->prefix('xhnewbb_forums').' WHERE forum_type=0' ;
+	if( ! $result = $xoopsDB->query( $sql ) ) {
 		exit("<big>"._MD_XHNEWBB_ERROROCCURED."</big><hr />"._MD_XHNEWBB_COULDNOTQUERY);
 	}
-	$select = '<select name="forum">';
+	$select = '<select name="forum"><option value="">----</option>';
 	while ( $row = $xoopsDB->fetchArray($result) ) {
 		$select .= '<option value="'.$row['forum_id'].'">'.$row['forum_name'].'</option>
 		';
@@ -61,98 +21,105 @@ if ( !isset($_POST['submit']) ) {
 	$xoopsTpl->assign("forum_selection_box", $select);
 
 } else {
-	$xoopsOption['template_main']= 'xhnewbb_searchresults.html';
-	include XOOPS_ROOT_PATH."/header.php";
-	$forum = (isset($_POST['forum']) && $_POST['forum'] != 'all') ? intval($_POST['forum']) : 'all';
-	$xoopsTpl->assign("lang_keywords", _MD_XHNEWBB_KEYWORDS);
-	$xoopsTpl->assign("lang_searchany", _MD_XHNEWBB_SEARCHANY);
-	$xoopsTpl->assign("lang_searchall", _MD_XHNEWBB_SEARCHALL);
-	$addquery = '';
-	$subquery = '';
-	$query = 'SELECT u.uid,f.forum_id, p.topic_id, u.uname, p.post_time,t.topic_title,t.topic_views,t.topic_replies,f.forum_name FROM '.$xoopsDB->prefix('xhnewbb_posts').' p, '.$xoopsDB->prefix('xhnewbb_posts_text').' pt, '.$xoopsDB->prefix('users').' u, '.$xoopsDB->prefix('xhnewbb_forums').' f,'.$xoopsDB->prefix('xhnewbb_topics').' t';
-	$myts = MyTextSanitizer::getInstance();
-	if ( isset($_POST['term']) && trim($_POST['term']) != "" ) {
-		$terms = split(' ', $myts->oopsAddSlashes($_POST['term']));		// Get all the words into an array
-		if ( strlen($terms[0]) < 4 ) {
 
-		}
-		$addquery .= "(pt.post_text LIKE '%$terms[0]%'";
-		$subquery .= "(t.topic_title LIKE '%$terms[0]%'";
-		if ( @$_POST['addterms'] == "any" ) {					// AND/OR relates to the ANY or ALL on Search Page
-			$andor = 'OR';
-		} else {
-			$andor = 'AND';
-		}
-		$size = count($terms);
-		for ( $i = 1; $i < $size; $i++ ) {
-			if ( strlen($terms[$i]) < 4 ) {
+	$xoopsOption['template_main'] = 'xhnewbb_searchresults.html' ;
+	include XOOPS_ROOT_PATH."/header.php" ;
 
+	if( ! empty( $_POST['term'] ) ) {
+		$term = $myts->stripSlashesGPC( $_POST['term'] ) ;
+		$term4disp = htmlspecialchars( $term , ENT_QUOTES ) ;
+		$term4sql = addslashes( $term ) ;
+		if( defined( '_MD_XHNEWBB_MULTIBYTESPACES' ) ) {
+			$term4sql = str_replace( explode( ',' , _MD_XHNEWBB_MULTIBYTESPACES ) , ' ' , $term4sql ) ;
+		}
+		$words = explode( ' ' , $term4sql ) ;
+		$andor = @$_POST['addterms'] == "any" ? 'OR ' : 'AND' ;
+		$whr_term = '' ;
+		foreach( $words as $word4sql ) {
+			switch( @$_POST['searchboth'] ) {
+				case 'both':
+					$whr_term .= " (p.subject LIKE '%$word4sql%' OR pt.post_text LIKE '%$word4sql%') $andor";
+					break;
+				case 'title':
+					$whr_term .= " (p.subject LIKE '%$word4sql%') $andor";
+					break;
+				case 'text':
+				default:
+					$whr_term .= " (pt.post_text LIKE '%$word4sql%') $andor";
+					break;
 			}
-			$addquery .= " $andor pt.post_text LIKE '%$terms[$i]%'";
-			$subquery .= " $andor t.topic_title LIKE '%$terms[$i]%'";
 		}
-		$addquery .= ')';
-		$subquery .= ')';
-	}
-	if ($forum !='all' ) {
-		if ( ! empty($addquery) ) {
-			$addquery .= ' AND ';
-			$subquery .= ' AND ';
-		}
-		$forum = intval($_POST['forum']);
-		$addquery .= ' p.forum_id='.$forum;
-		$subquery .= ' p.forum_id='.$forum;
-	}
-	if ( isset($_POST['search_username']) && trim($_POST['search_username']) != "" ) {
-		$search_username = $myts->oopsAddSlashes(trim($_POST['search_username']));
-		if ( !$result = $xoopsDB->query("SELECT uid FROM ".$xoopsDB->prefix("users")." WHERE uname='$search_username'") ) {
-			redirect_header(XOOPS_URL."/modules/xhnewbb/search.php",1,_MD_XHNEWBB_ERROROCCURED);
-			exit();
-		}
-		$row = $xoopsDB->fetchArray($result);
-		if ( !$row ) {
-			redirect_header(XOOPS_URL."/modules/xhnewbb/search.php",1,_MD_XHNEWBB_USERNOEXIST);
-			exit();
-		}
-		if ( ! empty($addquery) ) {
-			$addquery .= " AND p.uid=".$row['uid']." AND u.uname='$search_username'";
-			$subquery .= " AND p.uid=".$row['uid']." AND u.uname='$search_username'";
-		} else {
-			$addquery .= " p.uid=".$row['uid']." AND u.uname='$search_username'";
-			$subquery .= " p.uid=".$row['uid']." AND u.uname='$search_username'";
-		}
-	}
-	if ( isset($addquery) ) {
-		switch ( @$_POST['searchboth'] ) {
-		case 'both':
-			$query .= " WHERE ( ($subquery) OR ($addquery) ) AND ";
-		    break;
-		case 'title':
-			$query .= " WHERE ( $subquery ) AND ";
-			break;
-		case 'text':
-		default:
-			$query .= " WHERE ( $addquery ) AND ";
-			break;
-		}
+		$whr_term = substr( $whr_term , 0 , -3 ) ;
 	} else {
-		$query .= ' WHERE ';
+		$whr_term = '1' ;
+		$term4disp = '' ;
 	}
-	$query .= ' p.post_id = pt.post_id AND p.topic_id = t.topic_id AND p.forum_id = f.forum_id AND p.uid = u.uid AND f.forum_type != 1';
-	$allowed = array("t.topic_title", "t.topic_views", "t.topic_replies", "f.forum_name", "u.uname");
-	$sortby = (!in_array(@$_POST['sortby'], $allowed)) ? "u.uid" : $_POST['sortby'];
-	$query .= ' ORDER BY '.$sortby;
-	if ( !$result = $xoopsDB->query($query,100,0) ) {
+
+	// forum_id
+	require_once dirname(__FILE__).'/include/perm_functions.php' ;
+	$whr_forum = "p.forum_id IN (".implode(",",xhnewbb_get_forums_can_read()).")" ;	$forum = intval( @$_POST['forum'] ) ;
+	if( ! empty( $forum ) ) {
+		$whr_forum .= "AND p.forum_id=$forum" ;
+	}
+
+	// uname
+	if( ! empty( $_POST['search_username'] ) ) {
+		$uname = $myts->stripSlashesGPC( $_POST['search_username'] ) ;
+		$uname4disp = htmlspecialchars( $uname , ENT_QUOTES ) ;
+		$uname4sql = addslashes( $uname ) ;
+		$whr_uname = "u.uname='$uname4sql'" ;
+	} else {
+		$whr_uname = '1' ;
+		$uname4disp = '' ;
+	}
+
+	$allowed_sortbys = array(
+		"p.post_time" ,
+		"p.post_time desc" ,
+		"t.topic_title" ,
+		"t.topic_title desc" ,
+		"t.topic_views" ,
+		"t.topic_views desc" ,
+		"t.topic_replies" ,
+		"t.topic_replies desc" ,
+		"f.forum_name",
+		"f.forum_name desc",
+		"u.uname" ,
+		"u.uname desc" ,
+	) ;
+	$sortby = in_array( @$_POST['sortby'] , $allowed_sortbys ) ? $_POST['sortby'] : "p.post_time desc" ;
+
+	$sql = 'SELECT u.uid,f.forum_id, p.topic_id, u.uname, p.post_time,t.topic_title,t.topic_views,t.topic_replies,f.forum_name FROM '.$xoopsDB->prefix('xhnewbb_posts').' p LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts_text').' pt ON p.post_id = pt.post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON p.uid=u.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_forums').' f ON p.forum_id = f.forum_id LEFT JOIN '.$xoopsDB->prefix('xhnewbb_topics')." t ON p.topic_id = t.topic_id WHERE ($whr_term) AND ($whr_forum) AND ($whr_uname) ORDER BY $sortby" ;
+
+	// TODO
+	if( ! $result = $xoopsDB->query( $sql , 100 , 0 ) ) {
 		exit("<big>"._MD_XHNEWBB_ERROROCCURED."</big><hr />"._MD_XHNEWBB_COULDNOTQUERY);
 	}
-	if ( !$row = $xoopsDB->getRowsNum($result) ) {
+	if( ! $row = $xoopsDB->getRowsNum( $result ) ) {
 		$xoopsTpl->assign("lang_nomatch", _MD_XHNEWBB_NOMATCH);
 	} else {
 		while ( $row = $xoopsDB->fetchArray($result) ) {
-			$xoopsTpl->append('results', array('forum_name' => $myts->makeTboxData4Show($row['forum_name']), 'forum_id' => $row['forum_id'], 'topic_id' => $row['topic_id'], 'topic_title' => $myts->makeTboxData4Show($row['topic_title']), 'topic_replies' => $row['topic_replies'], 'topic_views' => $row['topic_views'], 'user_id' => $row['uid'], 'user_name' => $myts->makeTboxData4Show($row['uname']), 'post_time' => formatTimestamp($row['post_time'], "m")));
+			$xoopsTpl->append( 'results' , array('forum_name' => $myts->makeTboxData4Show($row['forum_name']), 'forum_id' => $row['forum_id'], 'topic_id' => $row['topic_id'], 'topic_title' => $myts->makeTboxData4Show($row['topic_title']), 'topic_replies' => $row['topic_replies'], 'topic_views' => $row['topic_views'], 'user_id' => $row['uid'], 'user_name' => $myts->makeTboxData4Show($row['uname']), 'post_time' => formatTimestamp($row['post_time'], "m")));
 		}
 	}
+
+	$xoopsTpl->assign( "prev_term", $term4disp ) ;
+	$xoopsTpl->assign( "prev_uname" , $uname4disp ) ;
 }
+
+
+$xoopsTpl->assign("lang_keywords", _MD_XHNEWBB_KEYWORDS);
+$xoopsTpl->assign("lang_searchany", _MD_XHNEWBB_SEARCHANY);
+$xoopsTpl->assign("lang_searchall", _MD_XHNEWBB_SEARCHALL);
+$xoopsTpl->assign("lang_forumc", _MD_XHNEWBB_FORUMC);
+$xoopsTpl->assign("lang_searchallforums", _MD_XHNEWBB_SEARCHALLFORUMS);
+$xoopsTpl->assign("lang_sortby", _MD_XHNEWBB_SORTBY);
+$xoopsTpl->assign("lang_date", _MD_XHNEWBB_DATE);
+$xoopsTpl->assign("lang_username", _MD_XHNEWBB_USERNAME);
+$xoopsTpl->assign("lang_searchin", _MD_XHNEWBB_SEARCHIN);
+$xoopsTpl->assign("lang_subject", _MD_XHNEWBB_SUBJECT);
+$xoopsTpl->assign("lang_body", _MD_XHNEWBB_BODY);
+
 $xoopsTpl->assign("lang_forumindex",_MD_XHNEWBB_FORUMINDEX);
 $xoopsTpl->assign("lang_alltopicsindex",_MD_XHNEWBB_ALLTOPICSINDEX);
 $xoopsTpl->assign("mod_url" , XOOPS_URL.'/modules/xhnewbb' ) ;

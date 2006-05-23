@@ -1,6 +1,11 @@
 [mlimg]
 [xlang:en]
 
+1.21 (2006/05/24)
+- rewrote search.php fully (templates are modified radically)
+- modified private topics can be hit in xhnewbb/search.php 
+- modified performance of queries with private topics
+
 1.20 (2006/05/23) UPDATE MODULE ESSENTIALLY
 - added a kind of privileges between private forums and grous
 - modified private topics can be hit in globa search (not yet xhnewbb/search.php)
@@ -64,6 +69,11 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.21 (2006/05/24)
+- search.php まるまる書き直し（テンプレートも大きく修正）
+- search.php プライベートフォーラム対応
+- プライベートフォーラム関連クエリの高速化
 
 1.20 (2006/05/23) モジュールアップデート必須
 - プライベートフォーラムに、グループ毎の権限設定を追加

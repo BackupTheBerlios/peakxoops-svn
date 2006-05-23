@@ -34,16 +34,10 @@ function xhnewbb_search($queryarray, $andor, $limit, $offset, $userid){
 
 	$userid = intval( $userid ) ;
 
-	if( is_object( $xoopsUser ) ) {
-		$uid = intval( $xoopsUser->getVar('uid') ) ;
-		$member_handler =& xoops_gethandler( 'member' ) ;
-		$groups = $member_handler->getGroupsByUser( intval( $uid ) ) ;
-		$whr_private = "f.forum_type=0 || fa.`user_id`=$uid || fa.`groupid` IN (".implode(",",$groups).")" ;
-	} else {
-		$whr_private = "f.forum_type=0" ;
-	}
+	require_once dirname(__FILE__).'/perm_functions.php' ;
+	$whr_forum = "p.forum_id IN (".implode(",",xhnewbb_get_forums_can_read()).")" ;
 
-	$sql = "SELECT p.post_id,p.topic_id,p.forum_id,p.post_time,p.uid,p.subject FROM ".$xoopsDB->prefix("xhnewbb_posts")." p LEFT JOIN ".$xoopsDB->prefix("xhnewbb_posts_text")." t ON t.post_id=p.post_id LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON f.forum_id=p.forum_id LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forum_access")." fa ON fa.forum_id=p.forum_id WHERE ($whr_private) " ;
+	$sql = "SELECT p.post_id,p.topic_id,p.forum_id,p.post_time,p.uid,p.subject FROM ".$xoopsDB->prefix("xhnewbb_posts")." p LEFT JOIN ".$xoopsDB->prefix("xhnewbb_posts_text")." t ON t.post_id=p.post_id LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON f.forum_id=p.forum_id WHERE ($whr_forum) " ;
 	if ( $userid != 0 ) {
 		$sql .= " AND p.uid=$userid ";
 	}

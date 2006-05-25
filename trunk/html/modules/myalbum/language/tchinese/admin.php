@@ -6,52 +6,52 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_AM_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-05-17 18:42:55
-define('_AM_TH_DATE','Last update');
-define('_AM_TH_BATCHUPDATE','Update checked photos collectively');
-define('_AM_OPT_NOCHANGE','- NO CHANGE -');
-define('_AM_JS_UPDATECONFIRM','The checked items will be updated. OK?');
+define('_AM_TH_DATE','最後更新時間');
+define('_AM_TH_BATCHUPDATE','更新您所勾選的相片');
+define('_AM_OPT_NOCHANGE','- 不更改 -');
+define('_AM_JS_UPDATECONFIRM','確定這些檢查的項目將被更新？');
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-05-05 15:14:38
-define('_AM_H3_FMT_CATEGORIES','Categories Manager (%s)');
-define('_AM_CAT_TH_TITLE','Name');
-define('_AM_CAT_TH_PHOTOS','Images');
-define('_AM_CAT_TH_OPERATION','Operation');
-define('_AM_CAT_TH_IMAGE','Banner');
-define('_AM_CAT_TH_PARENT','Parent');
-define('_AM_CAT_TH_IMGURL','URL of Banner');
-define('_AM_CAT_MENU_NEW','Creating a category');
-define('_AM_CAT_MENU_EDIT','Editing a category');
-define('_AM_CAT_INSERTED','A category is added');
-define('_AM_CAT_UPDATED','The category is modified');
+define('_AM_H3_FMT_CATEGORIES','分類管理員 (%s)');
+define('_AM_CAT_TH_TITLE','分類名稱');
+define('_AM_CAT_TH_PHOTOS','相片數');
+define('_AM_CAT_TH_OPERATION','編修/新增/刪除');
+define('_AM_CAT_TH_IMAGE','橫幅');
+define('_AM_CAT_TH_PARENT','上層分類');
+define('_AM_CAT_TH_IMGURL','橫幅捷徑');
+define('_AM_CAT_MENU_NEW','新增分類');
+define('_AM_CAT_MENU_EDIT','編修分類');
+define('_AM_CAT_INSERTED','一個分類已被新增');
+define('_AM_CAT_UPDATED','此分類已被變更');
 define('_AM_CAT_BTN_BATCH','Apply');
-define('_AM_CAT_LINK_MAKETOPCAT','Create a new category on top');
-define('_AM_CAT_LINK_ADDPHOTOS','Add a image into this category');
-define('_AM_CAT_LINK_EDIT','Edit this category');
-define('_AM_CAT_LINK_MAKESUBCAT','Create a new category under this category');
-define('_AM_CAT_FMT_NEEDADMISSION','%s images are needed the admission');
-define('_AM_CAT_FMT_CATDELCONFIRM','%s will be deleted with its sub-categories, images, comments. Are you OK?');
-define('_AM_H3_FMT_ADMISSION','Admitting images (%s)');
-define('_AM_H3_FMT_PHOTOMANAGER','Photo Manager (%s)');
-define('_AM_H3_FMT_IMPORTTO','Importing images from another modules to %s');
-define('_AM_H3_FMT_EXPORTTO','Exporting images from %s to another modules');
-define('_AM_FMT_EXPORTTOIMAGEMANAGER','Exporting to image manager in XOOPS');
-define('_AM_FMT_EXPORTIMSRCCAT','Source');
-define('_AM_FMT_EXPORTIMDSTCAT','Destination');
-define('_AM_CB_EXPORTRECURSIVELY','with images in its subcategories');
-define('_AM_CB_EXPORTTHUMB','Export thumbnails instead of main images');
-define('_AM_MB_EXPORTCONFIRM','Do export. OK?');
-define('_AM_FMT_EXPORTSUCCESS','You have exported %s images');
+define('_AM_CAT_LINK_MAKETOPCAT','新增主分類');
+define('_AM_CAT_LINK_ADDPHOTOS','新增相片到此分類');
+define('_AM_CAT_LINK_EDIT','編修此分類');
+define('_AM_CAT_LINK_MAKESUBCAT','在此分類下，新增次分類');
+define('_AM_CAT_FMT_NEEDADMISSION','%s 相片需要通過審核');
+define('_AM_CAT_FMT_CATDELCONFIRM','%s 中的次分類、相片、評論將都會被刪除，您確定嗎？');
+define('_AM_H3_FMT_ADMISSION','審核上傳相片 (%s)');
+define('_AM_H3_FMT_PHOTOMANAGER','相片管理員 (%s)');
+define('_AM_H3_FMT_IMPORTTO','從其他模組匯入相片到 %s');
+define('_AM_H3_FMT_EXPORTTO','從 %s 匯出相片到其他模組');
+define('_AM_FMT_EXPORTTOIMAGEMANAGER','匯出到 XOOPS 的圖檔管理員');
+define('_AM_FMT_EXPORTIMSRCCAT','來源');
+define('_AM_FMT_EXPORTIMDSTCAT','目的');
+define('_AM_CB_EXPORTRECURSIVELY','和在次分類下的相片');
+define('_AM_CB_EXPORTTHUMB','匯出縮圖代替主相片');
+define('_AM_MB_EXPORTCONFIRM','確定要匯出嗎？');
+define('_AM_FMT_EXPORTSUCCESS','您已經匯出 %s 張相片');
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-04-07 15:04:25
-define('_AM_ALBM_IMPORT','Importing images from another modules');
-define('_AM_FMT_IMPORTTO','Import into %s ');
-define('_AM_FMT_IMPORTFROMMYALBUMP','Importing from "%s" as module type of myAlbum-P');
-define('_AM_FMT_IMPORTFROMIMAGEMANAGER','Importing from image manager in XOOPS');
-define('_AM_CB_IMPORTRECURSIVELY','Importing sub-categories recursively');
-define('_AM_RADIO_IMPORTCOPY','Copy images (comments will not be copied');
-define('_AM_RADIO_IMPORTMOVE','Move images (comments will be succeeded)');
-define('_AM_MB_IMPORTCONFIRM','Do import ?');
-define('_AM_FMT_IMPORTSUCCESS','You have imported %s images');
+define('_AM_ALBM_IMPORT','從其他模組匯入相片');
+define('_AM_FMT_IMPORTTO','匯入到 %s ');
+define('_AM_FMT_IMPORTFROMMYALBUMP','依照 myAlbum-P 模組格式從 "%s" 匯入');
+define('_AM_FMT_IMPORTFROMIMAGEMANAGER','從 XOOPS 的圖檔管理員匯入相片');
+define('_AM_CB_IMPORTRECURSIVELY','匯入所層級的次分類');
+define('_AM_RADIO_IMPORTCOPY','複製相片 (不會複製評論)');
+define('_AM_RADIO_IMPORTMOVE','搬移相片 (也會搬移評論)');
+define('_AM_MB_IMPORTCONFIRM','確定要匯入 ?');
+define('_AM_FMT_IMPORTSUCCESS','您已經匯入了 %s 張相片');
 
 define( 'MYALBUM_AM_LOADED' , 1 ) ;
 
@@ -60,8 +60,8 @@ define( "_AM_H3_FMT_MODULECHECKER" , "myAlbum-P 系統測試員" ) ;
 
 define( "_AM_H4_ENVIRONMENT" , "使用環境測試" ) ;
 define( "_AM_MB_PHPDIRECTIVE" , "PHP 指令" ) ;
-define( "_AM_MB_BOTHOK" , "both ok" ) ;
-define( "_AM_MB_NEEDON" , "need on" ) ;
+define( "_AM_MB_BOTHOK" , "on 或 off 都可以" ) ;
+define( "_AM_MB_NEEDON" , "必須是 on" ) ;
 
 define( "_AM_H4_TABLE" , "相片資料表檢視" ) ;
 define( "_AM_MB_PHOTOSTABLE" , "相片資料表" ) ;
@@ -85,7 +85,7 @@ define( "_AM_ERR_PERMISSION" , "錯誤：首先建立並設定 ftp 目錄存取權限為 777." ) 
 define( "_AM_ERR_NOTDIRECTORY" , "錯誤：這並不是目錄." ) ;
 define( "_AM_ERR_READORWRITE" , "錯誤：目錄存取權限為限制存取. 請開放目錄權限為 777." ) ;
 define( "_AM_ERR_SAMEDIR" , "錯誤：相片路徑與縮圖路徑不可以同名" ) ;
-define( "_AM_LNK_CHECKGD2" , "檢測附帶於PHP的縮圖程式 'GD2' 在此環境下是否可以正確執行" ) ;
+define( "_AM_LNK_CHECKGD2" , "檢測附帶於 PHP 的縮圖程式 'GD2' 在此環境下是否可以正確執行" ) ;
 define( "_AM_MB_CHECKGD2" , "假如連結頁面顯示不正確，您應該放棄使用 GD2 縮圖程式的 truecolor 模式." ) ;
 define( "_AM_MB_GD2SUCCESS" , "成功！<br />在此環境下，也許您可以使用 GD2 縮圖程式（truecolor）." ) ;
 
@@ -93,9 +93,9 @@ define( "_AM_H4_PHOTOLINK" , "相片 & 縮圖連結測試" ) ;
 define( "_AM_MB_NOWCHECKING" , "現在，測試中..." ) ;
 define( "_AM_FMT_PHOTONOTREADABLE" , "主相片檔 (%s) 無法讀取." ) ;
 define( "_AM_FMT_THUMBNOTREADABLE" , "縮圖相片檔 (%s) 無法讀取." ) ;
-define( "_AM_FMT_NUMBEROFDEADPHOTOS" , "發現 %s 無效相片檔影." ) ;
+define( "_AM_FMT_NUMBEROFDEADPHOTOS" , "發現 %s 無效相片檔案." ) ;
 define( "_AM_FMT_NUMBEROFDEADTHUMBS" , "%s 縮圖需要再次重建." ) ;
-define( "_AM_FMT_NUMBEROFREMOVEDTMPS" , "%s garbage files have been removed." ) ;
+define( "_AM_FMT_NUMBEROFREMOVEDTMPS" , "%s 已經移除無法連結縮圖的相片." ) ;
 define( "_AM_LINK_REDOTHUMBS" , "重建縮圖" ) ;
 define( "_AM_LINK_TABLEMAINTENANCE" , "資料表維護" ) ;
 
@@ -131,18 +131,17 @@ define( "_AM_SUBMIT_NEXT" , "執行" ) ;
 define( "_AM_H3_FMT_BATCHREGISTER" , "myAlbum-P 相片批次上傳作業" ) ;
 
 
-?><?php
 // Appended by Xoops Language Checker -GIJOE- in 2003-12-03 15:27:10
-define('_ALBM_INDEX_BLOCKSADMIN','myAlbum-P blocks admin');
-?><?php
+define('_ALBM_INDEX_BLOCKSADMIN','myAlbum-P 區塊管理');
+
 // Appended by Xoops Language Checker -GIJOE- in 2004-01-27 15:37:03
-define('_AM_TH_SUBMITTER','Submitter');
-define('_AM_TH_TITLE','Title');
-define('_AM_TH_DESCRIPTION','Description');
-define('_AM_TH_CATEGORIES','Category');
-define('_AM_ALBM_GROUPPERM_GLOBAL','Global Permissions');
-define('_AM_ALBM_GROUPPERM_GLOBALDESC','Configure group\'s priviledges about whole of this module');
-define('_AM_ALBM_GPERMUPDATED','Permissions have been changed successfully');
+define('_AM_TH_SUBMITTER','張貼者');
+define('_AM_TH_TITLE','主題');
+define('_AM_TH_DESCRIPTION','描述');
+define('_AM_TH_CATEGORIES','分類');
+define('_AM_ALBM_GROUPPERM_GLOBAL','全域權限');
+define('_AM_ALBM_GROUPPERM_GLOBALDESC','設定整個模組的群組權限');
+define('_AM_ALBM_GPERMUPDATED','權限修改成功.');
 
 }
 

@@ -6,7 +6,7 @@ if( is_object( $xoopsDB ) ) {
 	if( ! is_object( $xoopsUser ) ) {
 		$whr_groupid = "gperm_groupid=".XOOPS_GROUP_ANONYMOUS ;
 	} else {
-		$groups =& $xoopsUser->getGroups() ;
+		$groups = $xoopsUser->getGroups() ;
 		$whr_groupid = "gperm_groupid IN (" ;
 		foreach( $groups as $groupid ) {
 			$whr_groupid .= "$groupid," ;

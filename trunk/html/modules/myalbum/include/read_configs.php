@@ -11,7 +11,7 @@
 	// module information
 	$mod_url = XOOPS_URL . "/modules/$mydirname" ;
 	$mod_path = XOOPS_ROOT_PATH . "/modules/$mydirname" ;
-	$mod_copyright = "<a href='http://www.peak.ne.jp/xoops/'><b>myAlbum-P 2.9</b></a> &nbsp; <small>(<a href='http://bluetopia.homeip.net/'>original</a>)</small></div>" ;
+	$mod_copyright = "<a href='http://www.peak.ne.jp/xoops/'><strong>myAlbum-P 2.9</strong></a> &nbsp; <span style='font-size:0.8em;'>(<a href='http://bluetopia.homeip.net/'>original</a>)</span>" ;
 
 	// global langauge file
 	$language = $xoopsConfig['language'] ;

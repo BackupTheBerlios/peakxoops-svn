@@ -5,24 +5,24 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_MB_LOADED' ) ) {
 
 
 
-// Appended by Xoops Language Checker -GIJOE- in 2005-08-31 15:23:36
+// Appended by Xoops Language Checker -GIJOE- in 2006-05-26 05:38:00
 define('_ALBM_STORETIMESTAMP','Don\'t touch timestamp');
 define('_ALBM_TELLAFRIEND','Tell a friend');
 define('_ALBM_SUBJECT4TAF','A photo for you!');
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-10-04 16:06:32
-define('_ALBM_LIDASC','Record Number (Bigger is latter)');
-define('_ALBM_LIDDESC','Record Number (Smaller is latter)');
+define('_ALBM_LIDASC','紀錄編號 (比較大的在後面)');
+define('_ALBM_LIDDESC','紀錄編號 (比較小的在後面)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2004-05-17 18:42:55
-define('_ALBM_BTN_SELECTALL','Select All');
-define('_ALBM_BTN_SELECTNONE','Select None');
-define('_ALBM_BTN_SELECTRVS','Select Reverse');
-define('_ALBM_FMT_PHOTONUM','%s every a page');
-define('_ALBM_AM_BUTTON_UPDATE','Modify');
-define('_ALBM_NOIMAGESPECIFIED','Error: No photo is uploaded');
-define('_ALBM_FILEREADERROR','Error: Photos are not readable.');
-define('_ALBM_DIRECTCATSEL','SELECT A CATEGORY');
+define('_ALBM_BTN_SELECTALL','全選');
+define('_ALBM_BTN_SELECTNONE','全不選');
+define('_ALBM_BTN_SELECTRVS','反向選取');
+define('_ALBM_FMT_PHOTONUM','每頁 %s 張');
+define('_ALBM_AM_BUTTON_UPDATE','變更');
+define('_ALBM_NOIMAGESPECIFIED','錯誤: 沒有照片被上傳');
+define('_ALBM_FILEREADERROR','錯誤: 照片無法讀取');
+define('_ALBM_DIRECTCATSEL','選擇分類');
 
 define( 'MYALBUM_MB_LOADED' , 1 ) ;
 
@@ -54,7 +54,7 @@ define( "_ALBM_AM_DEADLINKMAINPHOTO" , "主圖檔並不存在" ) ;
 define( "_ALBM_RADIO_ROTATETITLE" , "旋轉圖片" ) ;
 define( "_ALBM_RADIO_ROTATE0" , "不旋轉" ) ;
 define( "_ALBM_RADIO_ROTATE90" , "向右轉" ) ;
-define( "_ALBM_RADIO_ROTATE180" , "旋轉180度" ) ;
+define( "_ALBM_RADIO_ROTATE180" , "旋轉 180 度" ) ;
 define( "_ALBM_RADIO_ROTATE270" , "向左轉" ) ;
 
 
@@ -72,8 +72,8 @@ define("_ALBM_ADDPHOTO","新增相片");
 define("_ALBM_PHOTOBATCHUPLOAD","登錄已上傳到伺服器中的照片");
 define("_ALBM_PHOTOUPLOAD","上傳相片");
 define("_ALBM_PHOTOEDITUPLOAD","編修相片並重新上傳");
-define("_ALBM_MAXPIXEL","最大尺寸 (單位:pixel)");
-define("_ALBM_MAXSIZE","最大檔案大小");
+define("_ALBM_MAXPIXEL","最大尺寸 (單位：pixel)");
+define("_ALBM_MAXSIZE","最大檔案大小 (單位：byte)<br />1048576 byte = 1 MB");
 define("_ALBM_PHOTOTITLE","主題");
 define("_ALBM_PHOTOPATH","路徑");
 define("_ALBM_TEXT_DIRECTORY","目錄");
@@ -154,20 +154,20 @@ define("_ALBM_LATESTLIST","新進相片列表");
 define("_ALBM_VOTEAPPRE","感謝您的評分。");
 define("_ALBM_THANKURATE","感謝您花費寶貴的時間在%s 為本相片評分。");
 define("_ALBM_VOTEONCE","請勿針對同一相片重複評分。");
-define("_ALBM_RATINGSCALE","評分標準由1-10，數字愈高代表愈好。");
+define("_ALBM_RATINGSCALE","評分標準由 1-10 ，數字愈高代表愈好。");
 define("_ALBM_BEOBJECTIVE","請客觀評分，同一相片得到最低及最高分時，評分就沒有意義了。");
-define("_ALBM_DONOTVOTE","請不要針對自己所發佈的相片評分。");
+define("_ALBM_DONOTVOTE","請不要針對自己所發布的相片評分。");
 define("_ALBM_RATEIT","送出評分");
 
 define("_ALBM_RECEIVED","我們已經收到您上傳的相片，感謝您！");
 define("_ALBM_ALLPENDING","所有相片與評論均需經過審核後才會被張貼出來。");
 
-define("_ALBM_RANK","等級");
+define("_ALBM_RANK","排名");
 define("_ALBM_CATEGORY","分類");
 define("_ALBM_HITS","點閱數");
 define("_ALBM_RATING","評分");
 define("_ALBM_VOTE","給予評分");
-define("_ALBM_TOP10","%s Top 10"); // %s is a photo category title
+define("_ALBM_TOP10","%s 前十名熱門相片"); // %s is a photo category title
 
 define("_ALBM_SORTBY","排序方式：");
 define("_ALBM_TITLE","主題");
@@ -187,18 +187,16 @@ define("_ALBM_CANCEL","取消");
 define("_ALBM_MUSTREGFIRST","對不起！訪客沒有執行本項目的權力。<br>請先註冊或登入！");
 define("_ALBM_MUSTADDCATFIRST","對不起！您並未建立任何分類。<br>請先建立分類！");
 define("_ALBM_NORATING","尚未選取任何評分。");
-define("_ALBM_CANTVOTEOWN","您不能針對自己所發佈的相片評分。<br>所有評分將被記錄和確認。");
+define("_ALBM_CANTVOTEOWN","您不能針對自己所發布的相片評分。<br>所有評分將被記錄和確認。");
 define("_ALBM_VOTEONCE2","所有相片只能被評分一次。<br>所有評分將被記錄和確認。");
 
 //%%%%%%	Module Name 'MyAlbum' (Admin)	  %%%%%
-
 define("_ALBM_PHOTOSWAITING","待審相片");
 define("_ALBM_PHOTOMANAGER","相片管理/刪除");
 define("_ALBM_CATEDIT","新增/修改/刪除 相片分類");
 define("_ALBM_CHECKCONFIGS","查核相片模組資料庫");
 define("_ALBM_BATCHUPLOAD","相片批次上傳");
 define("_ALBM_GENERALSET","電子相簿一般設定");
-
 define("_ALBM_SUBMITTER","張貼者：");
 define("_ALBM_DELETE","刪除");
 define("_ALBM_MODCAT","修改分類");
@@ -221,18 +219,17 @@ define("_ALBM_NO","否");
 define("_ALBM_ERROREXIST","錯誤！您發表的相片已經存在於資料庫中！");
 define("_ALBM_ERRORTITLE","錯誤！您必須輸入主題！");
 define("_ALBM_ERRORDESC","錯誤！您必須輸入描述！");
-define("_ALBM_WEAPPROVED","我們已認可您發佈相片所連結的資料庫。");
+define("_ALBM_WEAPPROVED","我們已認可您發布相片所連結的資料庫。");
 define("_ALBM_THANKSSUBMIT","感謝您的發表！");
 define("_ALBM_CONFUPDATED","分類新增完成！");
-?>
-<?php
+
 // Appended by Xoops Language Checker -GIJOE- in 2003-10-21 17:48:33
 define('_ALBM_NEWCATADDED','新的分類已經新增成功!');
-?><?php
+
 // Appended by Xoops Language Checker -GIJOE- in 2004-01-27 15:37:02
-define('_ALBM_NEW','New');
-define('_ALBM_UPDATED','Updated');
-define('_ALBM_GROUPPERM_GLOBAL','Global Permissions');
+define('_ALBM_NEW','新進相片');
+define('_ALBM_UPDATED','最近更新');
+define('_ALBM_GROUPPERM_GLOBAL','整體權限');
 
 }
 

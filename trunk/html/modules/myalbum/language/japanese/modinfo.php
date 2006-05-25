@@ -95,7 +95,7 @@ define("_ALBM_MYALBUM_ADMENU5","サムネイルの再構築");
 define("_ALBM_MYALBUM_ADMENU_IMPORT","画像インポート");
 define("_ALBM_MYALBUM_ADMENU_EXPORT","画像エクスポート");
 define("_ALBM_MYALBUM_ADMENU_MYBLOCKSADMIN","ブロック・アクセス権限");
-
+define("_ALBM_MYALBUM_ADMENU_MYTPLSADMIN","テンプレート管理");
 
 // Text for notifications
 define('_MI_MYALBUM_GLOBAL_NOTIFY', 'モジュール全体');

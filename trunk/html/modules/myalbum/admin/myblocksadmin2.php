@@ -38,24 +38,23 @@ if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _
 // set target_module if specified by $_GET['dirname']
 $module_handler =& xoops_gethandler('module');
 if( ! empty( $_GET['dirname'] ) ) {
-	$target_module =& $module_handler->getByDirname($_GET['dirname']);
-}/* else if( ! empty( $_GET['mid'] ) ) {
-	$target_module =& $module_handler->get( intval( $_GET['mid'] ) );
-}*/
+	$dirname = strtr( $_GET['dirname'] , "\'\"\0<>" , '     ' ) ;
+	$target_module =& $module_handler->getByDirname( $dirname ) ;
+}
 
 if( ! empty( $target_module ) && is_object( $target_module ) ) {
 	// specified by dirname
 	$target_mid = $target_module->getVar( 'mid' ) ;
 	$target_mname = $target_module->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $target_module->getVar('version') / 100.0 ) ;
-	$query4redirect = '?dirname='.urlencode(strip_tags($_GET['dirname'])) ;
-} else if( isset( $_GET['mid'] ) && $_GET['mid'] == 0 || $xoopsModule->getVar('dirname') == 'blocksadmin' ) {
+	$target_dirname = $target_module->getVar( 'dirname' ) ;
+} else if( $xoopsModule->getVar('dirname') == 'blocksadmin' ) {
 	$target_mid = 0 ;
 	$target_mname = '' ;
-	$query4redirect = '?mid=0' ;
+	$target_dirname = '__CustomBlocks__' ;
 } else {
 	$target_mid = $xoopsModule->getVar( 'mid' ) ;
 	$target_mname = $xoopsModule->getVar( 'name' ) ;
-	$query4redirect = '' ;
+	$target_dirname = '' ;
 }
 
 // check access right (needs system_admin of BLOCK)
@@ -80,7 +79,7 @@ while( list( $bid , $bname , $show_func , $func_file , $template ) = $db->fetchR
 // for 2.2
 function list_blockinstances()
 {
-	global $query4redirect , $block_arr , $xoopsGTicket ;
+	global $target_dirname , $block_arr , $xoopsGTicket ;
 
 	$myts =& MyTextSanitizer::getInstance() ;
 
@@ -197,7 +196,7 @@ function list_blockinstances()
 		}
 
 		// delete link if it is cloned block
-		$delete_link = "<br /><a href='".XOOPS_URL."/modules/system/admin.php?fct=blocksadmin&amp;op=delete&amp;id=$i&amp;selmod=$mid'>"._DELETE."</a>" ;
+		$delete_link = "<br /><a href='".XOOPS_URL."/modules/system/admin.php?fct=blocksadmin&amp;op=delete&amp;id=$i&amp;selmod=$mid&amp;dirname=$target_dirname'>"._DELETE."</a>" ;
 
 		// displaying part
 		echo "
@@ -247,7 +246,7 @@ function list_blockinstances()
 				</select>
 			</td>
 			<td class='$class' align='right'>
-				<a href='".XOOPS_URL."/modules/system/admin.php?fct=blocksadmin&amp;op=edit&amp;id=$i'>"._EDIT."</a>{$delete_link}
+				<a href='".XOOPS_URL."/modules/system/admin.php?fct=blocksadmin&amp;op=edit&amp;id=$i&amp;dirname=$target_dirname'>"._EDIT."</a>{$delete_link}
 				<input type='hidden' name='id[$i]' value='$i' />
 			</td>
 		</tr>\n" ;
@@ -284,7 +283,6 @@ function list_blockinstances()
 	echo "
 		<tr>
 			<td class='foot' align='center' colspan='6'>
-				<input type='hidden' name='query4redirect' value='$query4redirect' />
 				<input type='hidden' name='fct' value='blocksadmin' />
 				<input type='hidden' name='op' value='order2' />
 				".$xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'myblocksadmin' )."
@@ -327,7 +325,7 @@ if( ! empty( $_POST['submit'] ) ) {
 	}
 
 	include( "mygroupperm.php" ) ;
-	redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php$query4redirect" , 1 , _MD_AM_DBUPDATED );
+	redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php?dirname=$target_dirname" , 1 , _MD_AM_DBUPDATED );
 }
 
 xoops_cp_header() ;

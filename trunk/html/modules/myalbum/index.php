@@ -47,7 +47,7 @@ if( $photo_num_total > $num ) {
 // Assign Latest Photos
 $prs = $xoopsDB->query( "SELECT l.lid, l.cid, l.title, l.ext, l.res_x, l.res_y, l.status, l.date, l.hits, l.rating, l.votes, l.comments, l.submitter, t.description,c.title AS cat_title FROM $table_photos l LEFT JOIN $table_text t ON l.lid=t.lid LEFT JOIN $table_cat c ON l.cid=c.cid WHERE l.status>0 ORDER BY date DESC" , $num , $pos ) ;
 while( $fetched_result_array = $xoopsDB->fetchArray( $prs ) ) {
-	$xoopsTpl->append_by_ref( 'photos' , myalbum_get_array_for_photo_assign( $fetched_result_array , true ) ) ;
+	$xoopsTpl->append( 'photos' , myalbum_get_array_for_photo_assign( $fetched_result_array , true ) ) ;
 }
 
 include( XOOPS_ROOT_PATH . "/footer.php" ) ;

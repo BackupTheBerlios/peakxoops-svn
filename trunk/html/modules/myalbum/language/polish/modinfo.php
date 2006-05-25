@@ -5,6 +5,10 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_MI_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-05-26 06:00:53
+define('_ALBM_MYALBUM_ADMENU_MYTPLSADMIN','Templates');
+
 define( 'MYALBUM_MI_LOADED' , 1 ) ;
 
 // The name of this module

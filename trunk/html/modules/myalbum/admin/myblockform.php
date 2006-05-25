@@ -31,7 +31,7 @@ $usespaw = empty( $_GET['usespaw'] ) ? 0 : 1 ;
 
 require_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 //$form = new XoopsThemeForm($block['form_title'], 'blockform', XOOPS_URL."/modules/blocksadmin/admin/admin.php" ) ;
-$form = new XoopsThemeForm($block['form_title'], 'blockform', "admin.php" ) ;
+$form = new XoopsThemeForm($block['form_title'], 'blockform', "admin.php?dirname=".preg_replace('[^a-zA-Z0-9_.-]','',@$_GET['dirname'])) ;
 if (isset($block['name'])) {
 	$form->addElement(new XoopsFormLabel(_AM_NAME, $block['name']));
 }
@@ -88,11 +88,11 @@ if ( $block['is_custom'] ) {
 		$tplfile_handler =& xoops_gethandler('tplfile');
 		$btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
 		if (count($btemplate) > 0) {
-			$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="'.XOOPS_URL.'/modules/system/admin.php?fct=tplsets&op=edittpl&id='.$btemplate[0]->getVar('tpl_id').'">'._AM_EDITTPL.'</a>'));
+			$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="mytplsform.php?tpl_file='.$btemplate[0]->getVar('tpl_file').'&amp;tpl_tplset='.htmlspecialchars($GLOBALS['xoopsConfig']['template_set'],ENT_QUOTES).'">'._AM_EDITTPL.'</a>'));
 		} else {
 			$btemplate2 =& $tplfile_handler->find('default', 'block', $block['bid']);
 			if (count($btemplate2) > 0) {
-				$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="'.XOOPS_URL.'/modules/system/admin.php?fct=tplsets&op=edittpl&id='.$btemplate2[0]->getVar('tpl_id').'" target="_blank">'._AM_EDITTPL.'</a>'));
+				$form->addElement(new XoopsFormLabel(_AM_CONTENT, '<a href="mytplsform.php?tpl_file='.$btemplate2[0]->getVar('tpl_file').'&amp;tpl_tplset=default">'._AM_EDITTPL.'</a>'));
 			}
 		}
 	}

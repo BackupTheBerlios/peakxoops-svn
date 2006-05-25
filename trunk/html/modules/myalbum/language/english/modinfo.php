@@ -96,6 +96,7 @@ define("_ALBM_MYALBUM_ADMENU5","Rebuild Thumbnails");
 define("_ALBM_MYALBUM_ADMENU_IMPORT","Import Images");
 define("_ALBM_MYALBUM_ADMENU_EXPORT","Export Images");
 define("_ALBM_MYALBUM_ADMENU_MYBLOCKSADMIN","Blocks & Groups Admin");
+define("_ALBM_MYALBUM_ADMENU_MYTPLSADMIN","Templates");
 
 
 // Text for notifications

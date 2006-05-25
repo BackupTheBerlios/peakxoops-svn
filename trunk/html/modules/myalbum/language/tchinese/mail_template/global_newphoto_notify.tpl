@@ -1,21 +1,23 @@
-Hello {X_UNAME},
+{X_UNAME} 您好,
 
-A new photo "{PHOTO_TITLE}" has been added at {X_SITENAME}.
+在 {X_SITENAME} 中已經增加一張 "{PHOTO_TITLE}" 的新相片。
 
-You can view this photo here:
+您可以點選以下連結來觀看相片：
 {PHOTO_URI}
 
 -----------
 
-You are receiving this message because you selected to be notified when new files are added in this category.
+您會收到這封信是因為您選擇有新相片張貼時通知我。
 
-If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:
+如果這是個錯誤或者您不希望以後收到這類的通知，請點選以下連結來更新您的提醒通知選
+項。
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+請不要回覆這封信。
 
 -----------
 
-{X_SITENAME} ({X_SITEURL}) 
-webmaster
+{X_SITENAME} ({X_SITEURL})
+站長
 {X_ADMINMAIL}
+

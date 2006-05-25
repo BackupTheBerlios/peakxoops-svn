@@ -32,7 +32,7 @@ if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirn
 $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 $modversion['name'] = _ALBM_MYALBUM_NAME . $mydirnumber ;
-$modversion['version'] = 2.86 ; // = 2.90 - 0.04 (still alpha)
+$modversion['version'] = 2.87 ; // = 2.90 - 0.03 (beta1)
 $modversion['description'] = _ALBM_MYALBUM_DESC;
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['credits'] = "Original: Daniel Branco<br />(http://bluetopia.homeip.net)<br />Kazumi Ono<br />(http://www.mywebaddons.com/)<br />The XOOPS Project" ;

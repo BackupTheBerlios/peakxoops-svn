@@ -5,6 +5,7 @@
 - rewrote search.php fully (templates are modified radically)
 - modified private topics can be hit in xhnewbb/search.php 
 - modified performance of queries with private topics
+- fixed a typo in viewtopic_*.html (thx jidaikobo) 1.21a
 
 1.20 (2006/05/23) UPDATE MODULE ESSENTIALLY
 - added a kind of privileges between private forums and grous
@@ -74,6 +75,7 @@
 - search.php まるまる書き直し（テンプレートも大きく修正）
 - search.php プライベートフォーラム対応
 - プライベートフォーラム関連クエリの高速化
+- テンプレートのURLエンバグ修正 (thx jidaikobo) 1.21a
 
 1.20 (2006/05/23) モジュールアップデート必須
 - プライベートフォーラムに、グループ毎の権限設定を追加

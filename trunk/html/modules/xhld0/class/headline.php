@@ -98,7 +98,8 @@ class XhldHeadlineHandler
 
 	function &create()
 	{
-		return new XhldHeadline();
+		$obj =& new XhldHeadline();
+		return $obj ;
 	}
 
 	function &get($id)

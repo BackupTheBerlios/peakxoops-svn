@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGES:
 
+v.3.04 2006-05-28
+  - fixed some reference notices
+  - changed snoopy including this archive (for 2.0.14-JP)
+
 v.3.03 2006-05-02
   - modified compatibility with PHP5
   - added a configuration using fopen() for specific environments
@@ -235,6 +239,10 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.04 2006-05-28
+  - 参照渡しの関連のミスをさらに修正
+  - Snoopyを同梱するように変更 (2.0.14-JP対策)
 
 v.3.03 2006-05-02
   - PHP5との相性問題を少し解消

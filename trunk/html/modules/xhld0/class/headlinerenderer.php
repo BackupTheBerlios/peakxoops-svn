@@ -81,7 +81,7 @@ class XhldRenderer
 			$error_level_stored = error_reporting() ;
 			error_reporting( $error_level_stored & ~ E_NOTICE ) ;
 			// includes Snoopy class for remote file access
-			require_once(XOOPS_ROOT_PATH."/class/snoopy.php");
+			require_once dirname(__FILE__).'/snoopy.php' ;
 			$snoopy = new Snoopy;
 			// TIMEOUT from config
 			// $snoopy->read_timeout = $this->config['snoopy_timeout'] ;

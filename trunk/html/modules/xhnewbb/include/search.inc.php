@@ -19,7 +19,8 @@ function xhnewbb_search( $keywords , $andor , $limit , $offset , $userid )
 
 	$whr_query = $andor == 'OR' ? '0' : '1' ;
 	if( is_array( $keywords ) ) foreach( $keywords as $word ) {
-		$word4sql = addslashes( $word ) ;
+		// I know this is not a right escaping, but I can't believe $keywords :-)
+		$word4sql = addslashes( stripslashes( $word ) ) ;
 		$whr_query .= $andor == 'EXACT' ? ' AND' : ' '.$andor ;
 		$whr_query .= " (p.subject LIKE '%$word4sql%' OR t.post_text LIKE '%$word4sql%')" ;
 	}

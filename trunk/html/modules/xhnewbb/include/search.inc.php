@@ -18,9 +18,10 @@ function xhnewbb_search( $keywords , $andor , $limit , $offset , $userid )
 	$whr_uid = $userid > 0 ? "p.uid=$userid" : "1" ;
 
 	$whr_query = $andor == 'OR' ? '0' : '1' ;
-	if( is_array( $keywords ) ) foreach( $keywords as $query ) {
+	if( is_array( $keywords ) ) foreach( $keywords as $word ) {
+		$word4sql = addslashes( $word ) ;
 		$whr_query .= $andor == 'EXACT' ? ' AND' : ' '.$andor ;
-		$whr_query .= " (p.subject LIKE '%$query%' OR t.post_text LIKE '%$query%')" ;
+		$whr_query .= " (p.subject LIKE '%$word4sql%' OR t.post_text LIKE '%$word4sql%')" ;
 	}
 
 	$sql = "SELECT p.post_id,p.topic_id,p.post_time,p.uid,p.subject,$select4con FROM ".$db->prefix("xhnewbb_posts")." p LEFT JOIN ".$db->prefix("xhnewbb_posts_text")." t ON t.post_id=p.post_id LEFT JOIN ".$db->prefix("xhnewbb_forums")." f ON f.forum_id=p.forum_id WHERE ($whr_forum) AND ($whr_uid) AND ($whr_query) ORDER BY p.post_time DESC" ;

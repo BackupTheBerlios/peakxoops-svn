@@ -1,6 +1,10 @@
 [mlimg]
 [xlang:en]
 
+1.22 (2006/06/01)
+- added show context for "xoops search"
+- rewrote search.inc.php fully
+
 1.21 (2006/05/24)
 - rewrote search.php fully (templates are modified radically)
 - modified private topics can be hit in xhnewbb/search.php 
@@ -70,6 +74,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.22 (2006/06/01)
+- XOOPS検索モジュールの本文表示対応
+- search.inc.php まるまる書き直し
 
 1.21 (2006/05/24)
 - search.php まるまる書き直し（テンプレートも大きく修正）

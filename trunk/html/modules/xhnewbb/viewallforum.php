@@ -157,10 +157,15 @@ $start = !empty($_GET['start']) ? intval($_GET['start']) : 0;
 // sort by ut2_marked or not
 $odr_mark = empty( $xoopsModuleConfig['xhnewbb_allow_mark'] ) ? '' : 'u2t.u2t_marked<=>1 DESC ,' ;
 
+// forums can be read by current viewer
+require_once dirname(__FILE__).'/include/perm_functions.php' ;
+$whr_forum = "t.forum_id IN (".implode(",",xhnewbb_get_forums_can_read()).")" ;
+
+
 if( $uid > 0 ) {
-	$sql = 'SELECT f.forum_id, f.forum_name, t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time, u2t.u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix("xhnewbb_forums").' f ON t.forum_id=f.forum_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics')." u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = $uid WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND f.forum_type = 0 AND (p.post_time > $startdate OR t.topic_sticky=1) ORDER BY $odr_mark /* t.topic_sticky DESC ,*/ $sortname $sortorder" ;
+	$sql = 'SELECT f.forum_id, f.forum_name, t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, u2t.u2t_time, u2t.u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix("xhnewbb_forums").' f ON t.forum_id=f.forum_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u2 ON  u2.uid = p.uid LEFT JOIN '.$xoopsDB->prefix('xhnewbb_users2topics')." u2t ON  u2t.topic_id = t.topic_id AND u2t.uid = $uid WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND ($whr_forum) AND (p.post_time > $startdate OR t.topic_sticky=1) ORDER BY $odr_mark /* t.topic_sticky DESC ,*/ $sortname $sortorder" ;
 } else {
-	$sql = 'SELECT f.forum_id, f.forum_name, t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, 0 AS u2t_time, 0 AS u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix("xhnewbb_forums").' f ON t.forum_id=f.forum_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users')." u2 ON  u2.uid = p.uid WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND f.forum_type = 0 AND (p.post_time > $startdate OR t.topic_sticky=1) ORDER BY /*t.topic_sticky DESC,*/ $sortname $sortorder" ;
+	$sql = 'SELECT f.forum_id, f.forum_name, t.*, u.uname, u2.uname as last_poster, p.post_time as last_post_time, p.icon, 0 AS u2t_time, 0 AS u2t_marked FROM '.$xoopsDB->prefix("xhnewbb_topics").' t LEFT JOIN '.$xoopsDB->prefix("xhnewbb_forums").' f ON t.forum_id=f.forum_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = t.topic_poster LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = t.topic_last_post_id LEFT JOIN '.$xoopsDB->prefix('users')." u2 ON  u2.uid = p.uid WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND ($whr_forum) AND (p.post_time > $startdate OR t.topic_sticky=1) ORDER BY /*t.topic_sticky DESC,*/ $sortname $sortorder" ;
 }
 if ( !$result = $xoopsDB->query($sql,25,$start) ) {
 	redirect_header(XOOPS_URL."/modules/xhnewbb/index.php",2,_MD_XHNEWBB_ERROROCCURED);
@@ -277,7 +282,7 @@ $xoopsTpl->assign('lang_topicsticky', _MD_XHNEWBB_TOPICSTICKY);
 $xoopsTpl->assign("lang_search", _MD_XHNEWBB_SEARCH);
 $xoopsTpl->assign("lang_advsearch", _MD_XHNEWBB_ADVSEARCH);
 
-$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix("xhnewbb_topics")." t LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON t.forum_id=f.forum_id WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND f.forum_type = 0 AND (t.topic_time > $startdate OR t.topic_sticky = 1) " ) ;
+$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix("xhnewbb_topics")." t LEFT JOIN ".$xoopsDB->prefix("xhnewbb_forums")." f ON t.forum_id=f.forum_id WHERE ({$whr_solved_array[$solved]}) AND $whr_categories AND f.forum_access > 0 AND ($whr_forum) AND (t.topic_time > $startdate OR t.topic_sticky = 1) " ) ;
 list( $all_topics ) = $xoopsDB->fetchRow( $result ) ;
 if ( $all_topics > 25 ) {
 	include_once XOOPS_ROOT_PATH.'/modules/xhnewbb/class/xhpagenav.php';

@@ -1,5 +1,8 @@
 [xlang:en]
 
+++ v0.12->v0.13
+* fixed a bug around com_anonpost
+
 ++ v0.11->v0.12
 * fixed a bug around approve (thx minahito)
 
@@ -18,6 +21,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+++ v0.12->v0.13
+* 「匿名によるコメント投稿」の設定を見るように修正
 
 ++ v0.11->v0.12
 * コメントの承認を必要とすると、投稿画面が出ないバグを修正 (thx minahito)

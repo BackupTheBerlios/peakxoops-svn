@@ -68,6 +68,9 @@ function b_commentany_hook_execute($options)
 				break;
 		}
 
+		// check com_itemid
+		if( ! is_object( $xoopsUser ) && empty( $xoopsModuleConfig['com_anonpost'] ) ) $arr['com_itemid'] = 0 ;
+
 		$icons=XoopsLists::getSubjectsList();
 		foreach($icons as $k=>$v) {
 			$arr['com_icon'][] = $v;
@@ -81,7 +84,6 @@ function b_commentany_hook_execute($options)
 		}
 
 		$xoopsTpl->assign("commentany",$arr);
-		
 	}
 	return null;
 }

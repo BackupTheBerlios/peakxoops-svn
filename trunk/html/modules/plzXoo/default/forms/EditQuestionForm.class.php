@@ -44,9 +44,11 @@ class EditQuestionForm extends exActionFormEx
 		if(!$this->validateInRange($this->priority_,1,5))
 			$this->addError(_MD_PLZXOO_ERROR_PRIORITY_RANGEOVER);
 
+		// 管理者だけがstatusの直接変更権限を持つ
 		if( is_object( $GLOBALS['xoopsUser'] ) && $GLOBALS['xoopsUser']->isAdmin() ) {
 			$this->status_=intval(@$_POST['status']);
-			if(!$this->validateInRange($this->status_,1,3))
+			$status_keys = array_keys( $GLOBALS['plzxoo_status_mapping'] ) ;
+			if(!$this->validateInRange($this->status_,min($status_keys),max($status_keys)))
 				$this->addError(_MD_PLZXOO_ERROR_STATUS_RANGEOVER);
 		}
 

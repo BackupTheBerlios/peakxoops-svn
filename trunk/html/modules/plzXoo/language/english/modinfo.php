@@ -57,6 +57,10 @@ define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFY' , 'Modified Question' ) ;
 define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYCAP' , 'Notify some kind of modifications about the question' ) ;
 define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYDSC' , 'Notify some kind of modifications about the question' ) ;
 define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: {CONDITION}' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFY' , 'New Waiting' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFYCAP' , 'Notify a waiting question is posted ' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFYDSC' , 'Notify a waiting question is posted (for admin only)' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: Submitted question' ) ;
 
 
 

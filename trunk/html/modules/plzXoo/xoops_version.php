@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.97;
+$modversion['version'] = 0.98;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";
@@ -168,6 +168,17 @@ $modversion['notification']['event'][4]['caption'] = _MI_PLZXOO_QUESTION_UPDT_NO
 $modversion['notification']['event'][4]['description'] = _MI_PLZXOO_QUESTION_UPDT_NOTIFYDSC;
 $modversion['notification']['event'][4]['mail_template'] = 'question_updt_notify';
 $modversion['notification']['event'][4]['mail_subject'] = _MI_PLZXOO_QUESTION_UPDT_NOTIFYSBJ;
+
+$modversion['notification']['event'][5]['name'] = 'neww';
+$modversion['notification']['event'][5]['category'] = 'global';
+$modversion['notification']['event'][5]['admin_only'] = 1;
+$modversion['notification']['event'][5]['title'] = _MI_PLZXOO_GLOBAL_NEWW_NOTIFY;
+$modversion['notification']['event'][5]['caption'] = _MI_PLZXOO_GLOBAL_NEWW_NOTIFYCAP;
+$modversion['notification']['event'][5]['description'] = _MI_PLZXOO_GLOBAL_NEWW_NOTIFYDSC;
+$modversion['notification']['event'][5]['mail_template'] = 'global_neww_notify';
+$modversion['notification']['event'][5]['mail_subject'] = _MI_PLZXOO_GLOBAL_NEWW_NOTIFYSBJ;
+
+
 
 
 // Keep the values of block's options when module is updated (by nobunobu)

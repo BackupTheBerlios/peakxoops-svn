@@ -24,22 +24,20 @@
 	</tr>
 	<tr>
 		<td  class='even' width='20%'><{$smarty.const._MD_PLZXOO_LANG_QUESTION_POSTER}>:<a href="<{$smarty.const.XOOPS_URL}>/userinfo.php?uid=<{$question.uid}>"><{$question.user.uname}></a></td>
-		<{if $question.cid}>
-			<td class='odd' rowspan='3'>
-		<{else}>
-			<td class='odd' rowspan='2'>
-		<{/if}>
+		<td class='odd' rowspan='3'>
 			<{$question.body}>
 		</td>
 	</tr>
 	<tr>
-		<td class='even' width='20%'><{$question.input_date_formatted}></td>
+		<td class='even' width='20%'>
+			<{$question.input_date_formatted}>
+			<br />
+			<strong><{$question.status_str}></strong>
+		</td>
 	</tr>
-	<{if $question.cid}>
-		<tr>
-			<td class='even' width='20%'><a href="index.php?cid=<{$question.cid}>"><{$question.category.name}></a></td>
-		</tr>
-	<{/if}>
+	<tr>
+		<td class='even' width='20%'><a href="index.php?cid=<{$question.cid}>"><{$question.category.name}></a></td>
+	</tr>
 </table>
 
 <p>

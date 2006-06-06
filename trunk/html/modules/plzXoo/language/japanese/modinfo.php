@@ -57,6 +57,10 @@ define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFY' , '質問更新' ) ;
 define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYCAP' , 'この質問になんらかの動きがあった時に通知する' ) ;
 define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYDSC' , 'この質問になんらかの動きがあった時に通知する' ) ;
 define( '_MI_PLZXOO_QUESTION_UPDT_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: {CONDITION}' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFY' , '新規承認待ち' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFYCAP' , '新規に承認待ちの質問が登録された時に通知する' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFYDSC' , '新規に承認待ちの質問が登録された時に通知する（管理者専用）' ) ;
+define( '_MI_PLZXOO_GLOBAL_NEWW_NOTIFYSBJ' , '[{X_SITENAME}] {X_MODULE}: 新規承認待ち' ) ;
 
 
 

@@ -13,7 +13,8 @@ if( file_exists( XOOPS_ROOT_PATH.'/modules/plzXoo/language/'.$GLOBALS['xoopsConf
 $GLOBALS['plzxoo_status_mapping'] = array (
 	1 => _MD_PLZXOO_LANG_STATUS_OPEN,
 	2 => _MD_PLZXOO_LANG_STATUS_CLOSE,
-	3 => _MD_PLZXOO_LANG_STATUS_DEACTIVE
+	3 => _MD_PLZXOO_LANG_STATUS_DEACTIVE,
+	4 => _MD_PLZXOO_LANG_STATUS_WAITING,
 );
 
 class plzXooQuestionObject extends exXoopsObject {
@@ -39,9 +40,9 @@ class plzXooQuestionObject extends exXoopsObject {
 	{
 		$ret =& parent::getStructure($type);
 
-   		$uHandler=&xoops_gethandler('user');
-   		$user = new exXoopsUserObject($uHandler->get($this->getVar('uid')));
-   		$ret['user']=$user->getArray($type);
+		$uHandler=&xoops_gethandler('user');
+		$user = new exXoopsUserObject($uHandler->get($this->getVar('uid')));
+		$ret['user']=$user->getArray($type);
 
 		$ret['status_str'] = $GLOBALS['plzxoo_status_mapping'][$this->getVar('status')];
 		$ret['input_date_formatted'] = formatTimestamp( $ret['input_date'] , 'm' ) ;

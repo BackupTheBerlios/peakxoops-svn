@@ -35,6 +35,7 @@ define ( '_MD_A_PLZXOO_ERROR_TICKET','有効なワンタイムチケットが確認できませんで
 
 // <--- PERMDESC PROPERTY --->
 define ( '_MD_A_PLZXOO_PERMDESC_POST_QUESTION','質問を投函できる' );
+define ( '_MD_A_PLZXOO_PERMDESC_POST_QUESTION_AUTO_APPROVE','質問が自動的に承認される' );
 define ( '_MD_A_PLZXOO_PERMDESC_POST_ANSWER','回答を投函できる' );
 define ( '_MD_A_PLZXOO_PERMDESC_POST_ANSWER_MYSELF','自分の質問に回答できる' );
 define ( '_MD_A_PLZXOO_PERMDESC_VIEW_DETAIL','詳細を閲覧できる' );

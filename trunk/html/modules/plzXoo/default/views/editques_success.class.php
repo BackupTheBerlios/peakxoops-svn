@@ -4,7 +4,7 @@ class default_EditquesView_success
 {
 	function &execute (&$controller, &$request, &$user)
 	{
-		redirect_header("index.php",1,_MD_PLZXOO_MESSAGE_SUCCESS);
+		redirect_header("index.php",1,$request->getAttribute('success_message'));
 
 		$renderer = new mojaLE_NoneRenderer($controller,$request,$user);
 		$renderer->setTemplate('');

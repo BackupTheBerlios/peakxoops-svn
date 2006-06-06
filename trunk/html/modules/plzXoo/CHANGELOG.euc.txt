@@ -1,5 +1,12 @@
 [xlang:en]
 
+-=v0.97alt --> v0.98alt=-
+* added context display for XOOPS search module
+* added approval system
+* added plugin for waiting module
+* added an admin-only notification as "waiting approval"
+* fixed a type in user's list view of notifications
+
 -=v0.96alt --> v0.97alt=-
 * added a config 'questions per page in list views'
 * fixed some minor bugs
@@ -72,6 +79,13 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.97alt --> v0.98alt=-
+* XOOPS検索の本文表示対応
+* 質問に対して承認制追加（今まで通り自動登録が希望ならパーミッション設定で「質問が自動的に承認される」にチェックを入れること）
+* waitingプラグイン作成
+* 管理者専用イベント通知追加（新規承認待ち）
+* イベント通知一覧でのURLがバグっていたのを潰した
 
 -=v0.96alt --> v0.97alt=-
 * １ページあたりの表示質問数の設定追加

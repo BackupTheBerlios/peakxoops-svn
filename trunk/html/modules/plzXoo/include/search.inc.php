@@ -31,6 +31,7 @@ class plzXooXoopsSearchService extends SimpleXoopsSearchService {
 
 		// ほか qid を取得してください
 		$this->info_->addExtra("qid");
+		$this->info_->addExtra("for_search");
 
 		// 新しく入力されたものから取得します
 		$this->info_->setSort("input_date");
@@ -40,6 +41,14 @@ class plzXooXoopsSearchService extends SimpleXoopsSearchService {
 	function getResultArray(&$row) {
 		// 追加で取得して貰ったフィールド qid を使ってリンク URL を作成します
 		$row['link']="index.php?action=detail&amp;qid=".$row['qid'];
+
+		// get context for module "search"
+		if( function_exists( 'search_make_context' ) && ! empty( $_GET['showcontext'] ) ) {
+			$text = $row['for_search'] ;
+			if( function_exists( 'easiestml' ) ) $text = easiestml( $text ) ;
+			$row['context'] = search_make_context( $text , $this->filter_->querys_ ) ;
+		}
+
 		return $row;
 	}
 }

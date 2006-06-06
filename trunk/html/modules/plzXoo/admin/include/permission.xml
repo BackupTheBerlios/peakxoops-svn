@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <permission-config>
 	<permission name="post_question" desc="_MD_A_PLZXOO_PERMDESC_POST_QUESTION" />
+	<permission name="post_question_auto_approve" desc="_MD_A_PLZXOO_PERMDESC_POST_QUESTION_AUTO_APPROVE" />
 	<permission name="post_answer" desc="_MD_A_PLZXOO_PERMDESC_POST_ANSWER" />
 	<permission name="post_answer_myself" desc="_MD_A_PLZXOO_PERMDESC_POST_ANSWER_MYSELF" />
 	<permission name="view_detail" desc="_MD_A_PLZXOO_PERMDESC_VIEW_DETAIL" />

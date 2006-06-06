@@ -1,6 +1,6 @@
 Hello {X_UNAME},
 
-A question has been added at {X_SITENAME}.
+A question has been waiting for your approval at {X_SITENAME}.
 
 Subject: {QUESTION_SUBJECT}
 Poster:  {QUESTION_UNAME}

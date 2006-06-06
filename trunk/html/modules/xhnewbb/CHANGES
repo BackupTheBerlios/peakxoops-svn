@@ -7,6 +7,9 @@
 - modified treating $queryarray for security 1.22a
 - modified viewallforum.php displaying appropriate private topics 1.22b
 - fixed typo about permission in viewforum.php 1.22b
+- added language files 1.22c
+-- tchinese (thx chia)
+-- utf8_tw (thx chia)
 
 1.21 (2006/05/24)
 - rewrote search.php fully (templates are modified radically)
@@ -84,6 +87,9 @@
 - 検索文字列の扱いを修正（正しさよりも安全性を重視） 1.22a
 - トピック一覧でもプライベートフォーラムの中身を適切に表示するように修正 1.22b
 - viewforum.php の権限チェックミスを修正 1.22b
+- 言語ファイル追加 1.22c
+-- tchinese (thx chia)
+-- utf8_tw (thx chia)
 
 1.21 (2006/05/24)
 - search.php まるまる書き直し（テンプレートも大きく修正）

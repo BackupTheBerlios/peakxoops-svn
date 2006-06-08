@@ -63,8 +63,9 @@ foreach( $block['events'] as $event ) {
       <title>$start {$event['summary']}</title>
       <link>$mod_url/?event_id={$event['id']}</link>
       <description>{$event['description']}</description>
-      <pubDate>".formatTimestamp($event['start'],'r')."</pubDate>
     </item>\n" ;
+
+//      <pubDate>".formatTimestamp($event['start'],'r')."</pubDate>
 
 }
 

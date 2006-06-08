@@ -1,5 +1,16 @@
 [xlang:en]
 
+v.087 some fixes (2006-6-9)
+- removed timestamp from rss feed for ordering
+- fixed comment permission check
+- modified plugins
+-- plzXoo-question
+- added plugins
+-- smartsection (thx PinMaster)
+-- eguide2 (thx nobu)
+- added a locale
+-- hongkong (thx danielh2o)
+
 v.086 XSS vulnerability fixed (2006-4-28)
 - fixed many XSS (thx tohokuaiki)
 
@@ -323,6 +334,17 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.087 多少のバグ潰し (2006-6-9)
+- rss2_*.php でのpubDate出力をやめた。（xhldで受ければそのままcomingになるはず）
+- 未承認イベントにコメントがつけられてしまうバグの修正
+- プラグイン更新
+-- plzXoo-question
+- プラグイン追加
+-- smartsection (thx PinMaster)
+-- eguide2 (thx nobu)
+- ロケール追加
+-- hongkong (thx danielh2o)
 
 v.086 XSS修正 (2006-4-28)
 - あまた存在するXSSを一通り潰した（と思う） (thx tohokuaiki)

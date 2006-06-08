@@ -26,5 +26,21 @@
 //  ------------------------------------------------------------------------ //
 include '../../mainfile.php';
 include 'include/read_configs.php';
-include XOOPS_ROOT_PATH.'/include/comment_post.php';
+
+$event_id = empty( $_POST['com_itemid'] ) ? 0 : intval( $_POST['com_itemid'] ) ;
+if( $event_id > 0 ) {
+	$rs = $xoopsDB->query( "SELECT summary,rrule_pid FROM $cal->table WHERE id=$event_id AND admission>0" ) ;
+	@list( $title , $rrule_pid ) = $xoopsDB->fetchRow( $rs ) ;
+	// check valid id
+	if( empty( $title ) ) die( "Invalid event_id" ) ;
+
+	// RRULE events
+	if( $rrule_pid != 0 ) {
+		$_GET['com_itemid'] = $rrule_pid ;
+		$HTTP_GET_VARS['com_itemid'] = $rrule_pid ;
+	}
+
+	include XOOPS_ROOT_PATH.'/include/comment_post.php';
+}
+
 ?>

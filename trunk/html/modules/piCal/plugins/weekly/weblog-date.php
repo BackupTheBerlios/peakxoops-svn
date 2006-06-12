@@ -31,13 +31,16 @@
     $group_by = " group by left(from_unixtime(created)+0,8) " ;  // show by daily 
 
     if( ! defined('_WEBLOG_COMMON_FUNCTIONS') )
+		$original_mydirname = @$mydirname ;
+		$mydirname = $plugin['dirname'] ;
         include_once sprintf('%s/modules/%s/config.php',XOOPS_ROOT_PATH,$plugin['dirname']) ;
+		$mydirname = @$original_mydirname ;
     if( function_exists('weblog_create_permissionsql') ){
         $mod_handler =& xoops_gethandler('module');
         $weblogmodule_config_handler =& xoops_gethandler('config');
         $mod_weblog =& $mod_handler->getByDirname($plugin['dirname']); 
         $weblog_config = $weblogmodule_config_handler->getConfigList($mod_weblog->mid());
-        list( $bl_contents_field , $add_whr ) = weblog_create_permissionsql($weblog_config) ;
+        list( $bl_contents_field , $add_whr ) = weblog_create_permissionsql($weblog_config,$plugin['dirname']) ;
     }else{
         $add_whr = "" ;
     }

@@ -27,4 +27,26 @@ function xhnewbb_get_forums_can_read()
 }
 
 
+function get_users_can_read_forum( $forum )
+{
+	$db =& Database::getInstance() ;
+	$forumid = intval( $forum ) ;
+	$uids = array() ;
+
+	$sql = "SELECT `user_id` FROM ".$db->prefix("xhnewbb_forum_access")." WHERE `forum_id`=$forumid AND `user_id` IS NOT NULL" ;
+	$result = $db->query( $sql ) ;
+	while( list( $uid ) = $db->fetchRow( $result ) ) {
+		$uids[] = $uid ;
+	}
+
+	$sql = "SELECT distinct g.uid FROM ".$db->prefix("xhnewbb_forum_access")." x , ".$db->prefix("groups_users_link")." g WHERE x.groupid=g.groupid AND x.`forum_id`=$forumid AND x.`groupid` IS NOT NULL" ;
+	$result = $db->query( $sql ) ;
+	while( list( $uid ) = $db->fetchRow( $result ) ) {
+		$uids[] = $uid ;
+	}
+
+	return array_unique( $uids ) ;
+}
+
+
 ?>

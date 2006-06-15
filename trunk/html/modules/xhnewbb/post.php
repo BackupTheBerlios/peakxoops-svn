@@ -107,6 +107,11 @@ if ( $forumdata['forum_type'] == 1 ) {
 	if ( $accesserror == 1 ) {
 		die(_MD_XHNEWBB_NORIGHTTOPOST);
 	}
+
+	require_once dirname(__FILE__).'/include/perm_functions.php' ;
+	$users2notify = get_users_can_read_forum( $forum ) ;
+	if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
+
 } else {
 	$accesserror = 0;
 	if ( $forumdata['forum_access'] == 3 ) {
@@ -125,6 +130,8 @@ if ( $forumdata['forum_type'] == 1 ) {
 	if ( $accesserror == 1 ) {
 		die(_MD_XHNEWBB_NORIGHTTOPOST);
 	}
+
+	$users2notify = array() ;
 }
 
 
@@ -238,17 +245,17 @@ if ( !empty($_POST['contents_preview']) ) {
 	if (!empty($isnew)) {
 		if (empty($isreply)) {
 			// Notify of new thread
-			$notification_handler->triggerEvent('forum', $forum, 'new_thread', $tags);
+			$notification_handler->triggerEvent('forum', $forum, 'new_thread', $tags , $users2notify );
 		} else {
 			// Notify of new post
-			$notification_handler->triggerEvent('thread', $topic_id, 'new_post', $tags);
+			$notification_handler->triggerEvent('thread', $topic_id, 'new_post', $tags , $users2notify );
 		}
-		$notification_handler->triggerEvent('global', 0, 'new_post', $tags);
-		$notification_handler->triggerEvent('forum', $forum, 'new_post', $tags);
+		$notification_handler->triggerEvent('global', 0, 'new_post', $tags , $users2notify );
+		$notification_handler->triggerEvent('forum', $forum, 'new_post', $tags , $users2notify );
 		$myts =& MyTextSanitizer::getInstance();
 		$tags['POST_CONTENT'] = $myts->stripSlashesGPC($_POST['message']);
 		$tags['POST_NAME'] = $myts->stripSlashesGPC($_POST['subject']);
-		$notification_handler->triggerEvent('global', 0, 'new_fullpost', $tags);
+		$notification_handler->triggerEvent('global', 0, 'new_fullpost', $tags , $users2notify );
 	}
 
 	// If user checked notification box, subscribe them to the

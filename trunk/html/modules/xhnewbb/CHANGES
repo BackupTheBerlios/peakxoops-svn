@@ -1,6 +1,9 @@
 [mlimg]
 [xlang:en]
 
+1.23 (2006/06/16)
+- fixed a bug private posts are notified into unauthorized users (thx ayumi)
+
 1.22 (2006/06/01)
 - added show context for "xoops search"
 - rewrote search.inc.php fully
@@ -80,6 +83,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.23 (2006/06/16)
+- プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)
 
 1.22 (2006/06/01)
 - XOOPS検索モジュールの本文表示対応

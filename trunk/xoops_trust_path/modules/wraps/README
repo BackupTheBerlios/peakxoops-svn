@@ -72,20 +72,6 @@ A) Check it:
 
 
 
-[b]CHANGES:[/b]
-
-1.00 (2006/05/16)
-- 1st release
-- page wrapping
-- global search (for suin's search module) .html, .htm, .txt
-- rewrite mode
-- mymenu (altsys friendly)
-- XOOPS_TRUST_PATH
-- Duplicatable V3
-- dynamic module icon
-
-
-
 [/xlang:en]
 [xlang:ja]
 ====  ページラップモジュール WRAPS  ===
@@ -157,22 +143,6 @@ A) 以下をチェックしてください
 - モジュールディレクトリ名とラップ用ディレクトリ名は同じになっていますか？
 --- XOOPS_ROOT_PATH/modules/(dir) と XOOPS_TRUST_PATH/wraps/(dir) です。
 - ラップ用ディレクトリ内にindex.htmlはちゃんと存在していますか？ 存在していない場合は、そのファイル名を明示的に指定する必要があります。
-
-
-
-[b]更新履歴:[/b]
-
-1.00 (2006/05/16)
-- 最初のリリース
-- ページラップ機能
-- 検索機能 (suinさんのXOOPS検索対応) .html .htm .txt のみ
-- rewrite モード
-- mymenu (altsys 対応)
-- XOOPS_TRUST_PATH
-- Duplicatable V3
-- 動的生成モジュールアイコン
-
-
 
 
 [/xlang:ja]

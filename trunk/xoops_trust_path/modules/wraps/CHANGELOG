@@ -1,0 +1,42 @@
+[mlimg]
+[xlang:en]
+
+[b]CHANGES:[/b]
+
+1.01 (2006/06/18)
+- applied to XOOPS 2.2.x
+- fixed typo in admin_menu (thx kenchi)
+
+1.00 (2006/05/16)
+- 1st release
+- page wrapping
+- global search (for suin's search module) .html, .htm, .txt
+- rewrite mode
+- mymenu (altsys friendly)
+- XOOPS_TRUST_PATH
+- Duplicatable V3
+- dynamic module icon
+
+[/xlang:en]
+[xlang:ja]
+
+[b]更新履歴:[/b]
+
+
+- XOOPS 2.2.x への対応
+
+1.01 (2006/06/18)
+- XOOPS 2.2.x への対応
+- menuにおけるlanguage typoの修正 (thx kenchi)
+
+1.00 (2006/05/16)
+- 最初のリリース
+- ページラップ機能
+- 検索機能 (suinさんのXOOPS検索対応) .html .htm .txt のみ
+- rewrite モード
+- mymenu (altsys 対応)
+- XOOPS_TRUST_PATH
+- Duplicatable V3
+- 動的生成モジュールアイコン
+
+[/xlang:ja]

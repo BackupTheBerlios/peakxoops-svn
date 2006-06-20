@@ -1,0 +1,35 @@
+[mlimg]
+[xlang:en]
+
+v0.11 (2006-06-21)
+- fixed uri of spaw in myblocksadmin (thx nico)
+- modified icon (thx argon)
+
+v0.10 (2006-05-19)
+- 1st release as altsys
+- myblocksadmin
+- mytplsadmin
+- mypreferences
+- compilehookadmin
+- fixed escaping rule of & (myblocksadmin)
+- XOOPS 2.2 ready (myblocksadmin)
+
+
+[/xlang:en]
+[xlang:ja]
+
+v0.11 (2006-06-21)
+- myblocksadmin上のspawリンクがおかしかったのを修正 (thx nico)
+- アイコン更新 (thx argon)
+
+v0.10 (2006-05-19)
+- 最初のリリース
+- myblocksadmin
+- mytplsadmin
+- mypreferences
+- compilehookadmin
+- & の扱いを修正 (myblocksadmin)
+- XOOPS 2.2対応 (myblocksadmin)
+
+
+[/xlang:ja]

@@ -46,11 +46,32 @@ if ( $block['is_custom'] ) {
 	// content (textarea)
 	$notice_for_tags = '<span style="font-size:x-small;font-weight:bold;">'._MD_A_MYBLOCKSADMIN_CAPT_USABLETAGS.'</span><br /><span style="font-size:x-small;font-weight:normal;">'.htmlspecialchars(sprintf( _MD_A_MYBLOCKSADMIN_FMT_TAGRULE , '{X_SITEURL}', XOOPS_URL.'/'),ENT_QUOTES).'</span>' ;
 	$current_op = @$_GET['op'] == 'clone' ? 'clone' : 'edit' ;
-	$uri_to_myself = XOOPS_URL . "/modules/blocksadmin/admin/admin.php?fct=blocksadmin&amp;op=$current_op&amp;bid={$block['bid']}" ;
+	//$uri_to_myself = XOOPS_URL . "/modules/blocksadmin/admin/admin.php?fct=blocksadmin&amp;op=$current_op&amp;bid={$block['bid']}" ;
+	$uri_to_myself = "?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=__CustomBlocks__&amp;op=$current_op&amp;bid={$block['bid']}" ;
 	// $can_use_spaw = check_browser_can_use_spaw() ;
 	$can_use_spaw = true ;
 	if( $usespaw && $can_use_spaw ) {
 		// SPAW Config
+		global $spaw_dir;
+		global $spaw_root;
+		global $spaw_base_url;
+		global $spaw_default_toolbars;
+		global $spaw_default_theme;
+		global $spaw_default_lang;
+		global $spaw_default_css_stylesheet;
+		global $spaw_inline_js;
+		global $spaw_dropdown_data ;
+		global $spaw_wysiwyg_instCount;
+		global $spaw_active_toolbar;
+		global $spaw_internal_link_script;
+		global $spaw_img_popup_url;
+		global $spaw_valid_imgs;
+		global $spaw_upload_allowed;
+		global $spaw_img_delete_allowed;
+		global $spaw_a_targets;
+		global $spaw_internal_link_script;
+		global $spaw_disable_style_controls;
+		global $spaw_imglibs;
 		include XOOPS_ROOT_PATH.'/common/spaw/spaw_control.class.php' ;
 		ob_start() ;
 		$sw = new SPAW_Wysiwyg( 'bcontent' , $block['content'] ) ;
@@ -67,7 +88,7 @@ if ( $block['is_custom'] ) {
 			$textarea->setDescription( $notice_for_tags ) ;
 		}
 	}
-	$form->addElement( $textarea , true ) ;
+	$form->addElement( $textarea ) ;
 
 	// custom type (select)
 	$ctype_select = new XoopsFormSelect( _MD_A_MYBLOCKSADMIN_CTYPE , 'bctype' , $block['ctype'] ) ;

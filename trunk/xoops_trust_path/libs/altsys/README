@@ -14,7 +14,7 @@ I'll maintain this module instead of blocksadmin, tplsadmin, avaman etc.
 
 [b]INSTALL (as a module):[/b]
 
-- set XOOPS_TRUST_PATH into mailfile.php
+- set XOOPS_TRUST_PATH into mainfile.php
 - copy xoops_trus_path/libs/ in the archive into XOOPS_TRUST_PATH/
 - copy html/modules/altsys in the archive into XOOPS_ROOT_PATH/modules/
 - install it
@@ -24,7 +24,7 @@ With this procedure, you are ready to use a library of altsys.
 
 [b]INSTALL (as a library for D3 modules):[/b]
 
-- comfirm XOOPS_TRUST_PATH is written in mailfile.php correctly.
+- comfirm XOOPS_TRUST_PATH is written in mainfile.php correctly.
 - copy xoops_trus_path/libs/ in the archive into XOOPS_TRUST_PATH/
 
 Duplicatable V3 (D3) module recognize this library automatically.
@@ -52,9 +52,6 @@ If you want auto-update feature from /themes/(your theme)/templates, insert a li
 	}
 [/code]
 
-¤³¤ì¤Ï¥Æ¡¼¥Þ¤È¥Æ¥ó¥×¥ì¡¼¥È¤ò°ì½ï¤Ë³«È¯¤¹¤ë¡¢¤¤¤ï¤æ¤ë¥µ¥¤¥È¹½ÃÛ»þ¤Ë°ÒÎÏ¤òÈ¯´ø¤¹¤ëÍøÍÑÊýË¡¤Ç¤¹¡£
-
-¤³¤ì¤ËÂÐ¤·¤Æ¡¢¥â¥¸¥å¡¼¥ë³«È¯»þ¤ËÌòÎ©¤Ä¤è¤¦¤Ë¤ÈÍÑ°Õ¤·¤¿¤Î¤¬¡¢¾å½Ò¤·¤¿(2)¤Ç¤¹¡£
 If you want auto-update feature from /modules/(dirname of your module)/templates, insert two lines into mainfile.php
 (A feature for programmers or module developpers)
 [code]
@@ -64,18 +61,6 @@ If you want auto-update feature from /modules/(dirname of your module)/templates
 		include XOOPS_TRUST_PATH."/libs/altsys/include/autoupdate_from_module.inc.php" ;
 	}
 [/code]
-
-
-[b]CHANGES:[/b]
-
-v0.10 (2006-05-19)
-- 1st release as altsys
-- myblocksadmin
-- mytplsadmin
-- mypreferences
-- compilehookadmin
-- fixed escaping rule of & (myblocksadmin)
-- XOOPS 2.2 ready (myblocksadmin)
 
 
 
@@ -96,7 +81,7 @@ Duplicatable V3¥â¥¸¥å¡¼¥ë¤«¤é¡¢¥é¥¤¥Ö¥é¥ê¤È¤·¤ÆÍøÍÑ¤Ç¤­¤ë·Á¤Ë¤·¤¿¤¿¤á¡¢¹½Â¤¤«¤éÂ
 
 ¡ü¥¤¥ó¥¹¥È¡¼¥ë¡Ê¥â¥¸¥å¡¼¥ë¤È¤·¤Æ¡Ë
 
-- mailfile.php ¤Ë¤Æ XOOPS_TRUST_PATH ¤òÀßÄê¤·¤Æ¤¯¤À¤µ¤¤
+- mainfile.php ¤Ë¤Æ XOOPS_TRUST_PATH ¤òÀßÄê¤·¤Æ¤¯¤À¤µ¤¤
 - ¥¢¡¼¥«¥¤¥Ö¤Îxoops_trus_path/Æâ¤ò¡¢XOOPS_TRUST_PATH¤ËÅ¸³«¤·¤Æ¤¯¤À¤µ¤¤
 - ¥¢¡¼¥«¥¤¥Ö¤Îhtml/Æâ¤ò¡¢XOOPS_ROOT_PATH¤ËÅ¸³«¤·¤Æ¤¯¤À¤µ¤¤
 - ¥â¥¸¥å¡¼¥ë¤È¤·¤Æ¥¤¥ó¥¹¥È¡¼¥ë¤·¤Æ¤¯¤À¤µ¤¤
@@ -106,7 +91,7 @@ Duplicatable V3¥â¥¸¥å¡¼¥ë¤«¤é¡¢¥é¥¤¥Ö¥é¥ê¤È¤·¤ÆÍøÍÑ¤Ç¤­¤ë·Á¤Ë¤·¤¿¤¿¤á¡¢¹½Â¤¤«¤éÂ
 
 ¡ü¥¤¥ó¥¹¥È¡¼¥ë¡ÊDuplicatable V3¥â¥¸¥å¡¼¥ëÍÑ¤Î¥é¥¤¥Ö¥é¥ê¤È¤·¤Æ¡Ë
 
-- mailfile.php ¤Ë XOOPS_TRUST_PATH ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ë¤³¤È¤ò³ÎÇ§¤·¤Æ¤¯¤À¤µ¤¤
+- mainfile.php ¤Ë XOOPS_TRUST_PATH ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ë¤³¤È¤ò³ÎÇ§¤·¤Æ¤¯¤À¤µ¤¤
 - ¥¢¡¼¥«¥¤¥Ö¤Îxoops_trus_path/Æâ¤ò¡¢XOOPS_TRUST_PATH¤ËÅ¸³«¤·¤Æ¤¯¤À¤µ¤¤
 
 D3¥â¥¸¥å¡¼¥ë¤Ç¤¢¤ì¤Ð¡¢¤³¤ì¤Ç¼«Æ°Åª¤Ë¥é¥¤¥Ö¥é¥ê¤òÇ§¼±¤·¤Æ¡¢¥Ö¥í¥Ã¥¯´ÉÍý¤ä¥Æ¥ó¥×¥ì¡¼¥È´ÉÍý¤¬¥á¥Ë¥å¡¼¤ËÄÉ²Ã¤µ¤ì¤Þ¤¹¡£°ìÈÌÀßÄê¤Ë¤Ä¤¤¤Æ¤â¡¢½¾Íè¤ÎmymenuÁêÅö--¥â¥¸¥å¡¼¥ëÆâÉô¤Ç°ìÈÌÀßÄê¤¬´°·ë¤¹¤ë¤â¤Î--¤ËÃÖ¤­´¹¤ï¤ê¤Þ¤¹¡Ê¤³¤ÎÉôÊ¬¤Ïmypreferences¤È¸Æ¤Ó¤Þ¤¹¡Ë¡£
@@ -152,18 +137,6 @@ altsys¤È¤·¤Æ¤Î¿·µ¡Ç½¤Ï°Ê²¼¤Î¤è¤¦¤Ê¤â¤Î¤Ç¤¹¡£
 ¤³¤Î¤è¤¦¤Ëµ­½Ò¤¹¤ë¤³¤È¤Ç¡¢piCal¥â¥¸¥å¡¼¥ë¤Î¥Æ¥ó¥×¥ì¡¼¥È¤Î¸µ¥Õ¥¡¥¤¥ë¤òÊÔ½¸¤¹¤ë¤À¤±¤Ç¡¢Â¨»þ¤Ë¥Ç¡¼¥¿¥Ù¡¼¥¹¤ËÈ¿±Ç¤µ¤ì¤Þ¤¹¡£include¤¹¤ëÁ°¤Ë¡¢$tplsadmin_autoupdate_dirnamesarray ¤ËÇÛÎó¤ò¥»¥Ã¥È¤·¤Æ¤ª¤¯¤³¤È¤¬½ÅÍ×¤Ç¡¢¤â¤Á¤í¤óÊ£¿ô¤Î¥â¥¸¥å¡¼¥ë¤òÆ±»þ»ØÄê¤¹¤ë¤³¤È¤â²ÄÇ½¤Ç¤¹¡£
 
 ¸úÎ¨Åª¤Ê¥â¥¸¥å¡¼¥ë³«È¯¤Ë¤ªÌòÎ©¤Æ¤¯¤À¤µ¤¤¡£
-
-
-¡ü¹¹¿·ÍúÎò
-
-v0.10 (2006-05-19)
-- ºÇ½é¤Î¥ê¥ê¡¼¥¹
-- myblocksadmin
-- mytplsadmin
-- mypreferences
-- compilehookadmin
-- & ¤Î°·¤¤¤ò½¤Àµ (myblocksadmin)
-- XOOPS 2.2ÂÐ±þ (myblocksadmin)
 
 
 [/xlang:ja]

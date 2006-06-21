@@ -40,12 +40,28 @@ switch( $ext ) {
 		include XOOPS_ROOT_PATH.'/footer.php' ;
 		exit ;
 	default :
+		// remove output bufferings
+		while( ob_get_level() ) {
+			ob_end_clean() ;
+		}
+
+		// can headers be sent?
+		if( headers_sent() ) {
+			restore_error_handler() ;
+			die( "Can't send headers. check language files etc." ) ;
+		}
+
 		if( ! empty( $mimes[ $ext ] ) ) {
 			header( 'Content-Type: '.$mimes[ $ext ] ) ;
 		} else {
 			header( 'Content-Type: application/octet-stream' ) ;
 		}
-		readfile( $wrap_full_path ) ;
+		set_time_limit( 0 ) ;
+//		readfile( $wrap_full_path ) ;
+		$fp = fopen( $wrap_full_path , "rb" ) ;
+		while( ! feof( $fp ) ) {
+			echo fread( $fp , 65536 ) ;
+		}
 		exit ;
 }
 

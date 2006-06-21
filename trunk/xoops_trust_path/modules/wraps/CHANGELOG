@@ -3,6 +3,10 @@
 
 [b]CHANGES:[/b]
 
+1.02 (2006/06/22)
+- modified handling big files
+- modified handling ob filter
+
 1.01 (2006/06/18)
 - applied to XOOPS 2.2.x
 - fixed typo in admin_menu (thx kenchi)
@@ -23,7 +27,9 @@
 [b]更新履歴:[/b]
 
 
-- XOOPS 2.2.x への対応
+1.02 (2006/06/22)
+- 大きなファイルへの対応
+- 出力バッファリングによる影響の除去
 
 1.01 (2006/06/18)
 - XOOPS 2.2.x への対応

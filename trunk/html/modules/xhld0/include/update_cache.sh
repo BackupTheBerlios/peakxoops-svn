@@ -6,6 +6,7 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 // dummy variables
 $_SERVER['REMOTE_ADDR'] = '192.168.0.1' ;
+$_SERVER['REQUEST_URI'] = '/modules/'.$mydirname.'/' ;
 
 //$xoopsOption['nocommon'] = true ;
 require '../../../mainfile.php';

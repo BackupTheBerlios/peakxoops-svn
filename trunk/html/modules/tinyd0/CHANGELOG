@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGELOG:
 
+2006-06-27 2.23
+- fixed PHP contents displayed as is in search module (thx suin)
+- changed calling Text_Wiki with htmlspecialchars() (thx sunaoka)
+
 2006-04-22 2.22
 - fixed the compatibility among mod_rewrite and xoops comment (thx t_yamo)
 
@@ -202,6 +206,10 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2006-06-27 2.23
+- XOOPS検索モジュールで、PHPコンテンツがコードごと表示されてしまうのを修正 (thx suin)
+- Text_Wiki の呼び出しで本来あるべきエンティティ化が欠けていたのを修正 (thx sunaoka)
 
 2006-04-22 2.22
 - rewriteモードおよびWRAP3でコメント処理がおかしかったのを修正 (thx t_yamo)

@@ -46,6 +46,8 @@ if ( isset($_GET['op']) ) {
     $bid = isset($_GET['bid']) ? intval($_GET['bid']) : 0;
   }
 }
+$dirname4disp = preg_replace( '[^a-zA-Z0-9_.-]' , '' , @$_GET['dirname'] ) ;
+
 
 if (isset($_POST['previewblock'])) {
   //if ( !admin_refcheck("/modules/$admin_mydirname/admin/") ) {
@@ -106,7 +108,7 @@ if (isset($_POST['previewblock'])) {
   $block['ctype'] = isset($bctype) ? $bctype : $myblock->getVar('c_type');
   $block['is_custom'] = true;
   $block['cachetime'] = intval($bcachetime);
-  echo '<a href="myblocksadmin.php">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$block['form_title'].'<br /><br />';
+  echo '<a href="myblocksadmin.php?dirname='.$dirname4disp.'">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$block['form_title'].'<br /><br />';
   include dirname(__FILE__).'/../admin/myblockform.php'; //GIJ
   //echo '<a href="admin.php?fct=blocksadmin">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$block['form_title'].'<br /><br />';
   //include XOOPS_ROOT_PATH.'/modules/system/admin/blocksadmin/blockform.php';
@@ -182,8 +184,7 @@ if ( $op == 'order' ) {
 //    if ( $oldweight[$i] != $weight[$i] || $oldvisible[$i] != $visible[$i] || $oldside[$i] != $side[$i] )
 //    order_block($bid[$i], $weight[$i], $visible[$i], $side[$i]);
   }
-  $query4redirect = '?dirname=' . urlencode( strip_tags( substr( $_POST['query4redirect'] , 9 ) ) ) ;
-  redirect_header("myblocksadmin.php$query4redirect",1,_AM_DBUPDATED);
+  redirect_header("myblocksadmin.php?dirname=$dirname4disp",1,_AM_DBUPDATED);
   // GIJ end
   exit();
 }
@@ -224,8 +225,7 @@ if ( $op == 'order2' ) {
 		}
 	}
 
-	$query4redirect = '?dirname=' . urlencode( strip_tags( substr( $_POST['query4redirect'] , 9 ) ) ) ;
-	redirect_header("myblocksadmin.php$query4redirect",1,_MD_AM_DBUPDATED);
+	redirect_header("myblocksadmin.php?dirname=$dirname4disp",1,_MD_AM_DBUPDATED);
 	exit;
 }
 
@@ -272,7 +272,7 @@ if ( $op == 'update' ) {
 	$bctype = isset($_POST['bctype']) ? $_POST['bctype'] : '';
 	$bmodule = (isset($_POST['bmodule']) && is_array($_POST['bmodule'])) ? $_POST['bmodule'] : array(-1) ; // GIJ +
 	$msg = myblocksadmin_update_block($_POST['bid'], $_POST['bside'], $_POST['bweight'], $_POST['bvisible'], $_POST['btitle'], $bcontent, $bctype, $bcachetime, $bmodule, $options); // GIJ !
-	redirect_header('myblocksadmin.php',1,$msg);
+	redirect_header("myblocksadmin.php?dirname=$dirname4disp",1,$msg);
 }
 
 
@@ -297,7 +297,7 @@ if ( $op == 'delete_ok' ) {
 				$tplman->delete($btemplate[0]);
 			}
 		}
-		redirect_header('myblocksadmin.php',1,_AM_DBUPDATED);
+		redirect_header("myblocksadmin.php?dirname=$dirname4disp",1,_AM_DBUPDATED);
 		exit();
   // end of delete_block_ok() GIJ
   exit();
@@ -316,7 +316,7 @@ if ( $op == 'delete' ) {
 			redirect_header('admin.php?fct=blocksadmin',4,$message);
 			exit();
 		} else {
-			xoops_confirm(array('fct' => 'blocksadmin', 'op' => 'delete_ok', 'bid' => $myblock->getVar('bid')) + $xoopsGTicket->getTicketArray( __LINE__ , 1800 , 'myblocksadmin' ) , 'admin.php', sprintf(_AM_RUSUREDEL,$myblock->getVar('title')));
+			xoops_confirm(array('fct' => 'blocksadmin', 'op' => 'delete_ok', 'bid' => $myblock->getVar('bid')) + $xoopsGTicket->getTicketArray( __LINE__ , 1800 , 'myblocksadmin' ) , "admin.php?dirname=$dirname4disp", sprintf(_AM_RUSUREDEL,$myblock->getVar('title')));
 		}
   // end of delete_block() GIJ
   xoops_cp_footer();
@@ -339,7 +339,7 @@ if ( $op == 'edit' ) {
 		$is_custom = ($myblock->getVar('block_type') == 'C' || $myblock->getVar('block_type') == 'E') ? true : false;
 		$block = array('form_title' => _AM_EDITBLOCK, 'name' => $myblock->getVar('name'), 'side' => $myblock->getVar('side'), 'weight' => $myblock->getVar('weight'), 'visible' => $myblock->getVar('visible'), 'title' => $myblock->getVar('title','E'), 'content' => $myblock->getVar('content','n'), 'modules' => $modules, 'is_custom' => $is_custom, 'ctype' => $myblock->getVar('c_type'), 'cachetime' => $myblock->getVar('bcachetime'), 'op' => 'update', 'bid' => $myblock->getVar('bid'), 'edit_form' => $myblock->getOptions(), 'template' => $myblock->getVar('template'), 'options' => $myblock->getVar('options'), 'submit_button' => _SUBMIT);
 
-		echo '<a href="myblocksadmin.php">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._AM_EDITBLOCK.'<br /><br />';
+		echo '<a href="myblocksadmin.php?dirname='.$dirname4disp.'">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._AM_EDITBLOCK.'<br /><br />';
 		include dirname(__FILE__).'/../admin/myblockform.php'; //GIJ
 		$xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ , 1800 , 'myblocksadmin' ) ; //GIJ
 		$form->display();
@@ -362,7 +362,7 @@ if ($op == 'clone') {
 	}
 	$is_custom = ($myblock->getVar('block_type') == 'C' || $myblock->getVar('block_type') == 'E') ? true : false;
 	$block = array('form_title' => _AM_CLONEBLOCK, 'name' => $myblock->getVar('name'), 'side' => $myblock->getVar('side'), 'weight' => $myblock->getVar('weight'), 'visible' => $myblock->getVar('visible'), 'content' => $myblock->getVar('content', 'N'), 'title' => $myblock->getVar('title','E'), 'modules' => $modules, 'is_custom' => $is_custom, 'ctype' => $myblock->getVar('c_type'), 'cachetime' => $myblock->getVar('bcachetime'), 'op' => 'clone_ok', 'bid' => $myblock->getVar('bid'), 'edit_form' => $myblock->getOptions(), 'template' => $myblock->getVar('template'), 'options' => $myblock->getVar('options'), 'submit_button' => _CLONE);
-	echo '<a href="myblocksadmin.php">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._AM_CLONEBLOCK.'<br /><br />';
+	echo '<a href="myblocksadmin.php?dirname='.$dirname4disp.'">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._AM_CLONEBLOCK.'<br /><br />';
 	include dirname(__FILE__).'/../admin/myblockform.php';
 	$xoopsGTicket->addTicketXoopsFormElement( $form , __LINE__ , 1800 , 'myblocksadmin' ) ; //GIJ
 	$form->display();
@@ -452,7 +452,7 @@ if ($op == 'clone_ok') {
 		$db->query($sql);
 	}
 
-	redirect_header('myblocksadmin.php',1,_AM_DBUPDATED);
+	redirect_header("myblocksadmin.php?dirname=$dirname4disp",1,_AM_DBUPDATED);
 }
 
 	// import from modules/system/admin/blocksadmin/blocksadmin.php

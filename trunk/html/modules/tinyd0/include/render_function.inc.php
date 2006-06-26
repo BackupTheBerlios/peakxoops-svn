@@ -46,7 +46,7 @@ function tc_content_render( $text , $nohtml , $nosmiley , $nobreaks , $nbsp = 0 
 
 		// Configuration
 		$wiki->deleteRule( 'Wikilink' ); // remove a rule for auto-linking
-		$wiki->setFormatConf( 'Xhtml' , 'translate' , false ) ; // remove HTML_ENTITIES
+		$wiki->setFormatConf( 'Xhtml' , 'translate' , HTML_SPECIALCHARS ) ; // HTML_ENTITIES -> HTML_SPECIALCHARS
 
 		// $wiki = new sunday_Text_Wiki(); // create instance
 		//$text = str_replace ( "\r\n", "\n", $text );

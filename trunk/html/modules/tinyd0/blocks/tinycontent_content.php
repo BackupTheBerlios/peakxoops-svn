@@ -104,7 +104,7 @@ function b_tinycontent_content_show( $options )
 			'title' => $myts->makeTboxData4Show( $title ) ,
 			'content' => $content
 		) ) ;
-		$block['content'] =& $tpl->fetch( "file:$mymodpath/templates/blocks/tinycontent_content_block.html" ) ;
+		$block['content'] = $tpl->fetch( "file:$mymodpath/templates/blocks/tinycontent_content_block.html" ) ;
 
 	} else {
 

@@ -72,6 +72,7 @@ if ( $block['is_custom'] ) {
 		global $spaw_internal_link_script;
 		global $spaw_disable_style_controls;
 		global $spaw_imglibs;
+		global $xoopsDB;
 		include XOOPS_ROOT_PATH.'/common/spaw/spaw_control.class.php' ;
 		ob_start() ;
 		$sw = new SPAW_Wysiwyg( 'bcontent' , $block['content'] ) ;

@@ -16,7 +16,12 @@
 	</tr>
 	<tr valign="top" align="left">
 		<td class="head"><{$smarty.const._US_EMAIL}></td>
-		<td class="even"><{$email|escape}><br /><input type="checkbox" name="user_viewemail" value="1" /><{$smarty.const._US_ALLOWVIEWEMAIL}></td>
+		<td class="even">
+			<{$email|escape}>
+			<br />
+			<input type="checkbox" name="user_viewemail" id="user_viewemail" value="1" <{if $user_viewemail}>checked="checked"<{/if}> />
+			<label for="user_viewemail"><{$smarty.const._US_ALLOWVIEWEMAIL}></label>
+		</td>
 	</tr>
 	<tr valign="top" align="left">
 		<td class="head"><{$smarty.const._US_WEBSITE}></td>

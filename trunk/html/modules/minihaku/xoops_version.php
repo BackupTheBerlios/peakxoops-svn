@@ -7,7 +7,7 @@ $modversion['author'] = "GIJOE";
 $modversion['credits'] = "PEAK Corp.";
 $modversion['license'] = "";
 $modversion['official'] =  0;
-$modversion['image'] = "images/minihaku_slogo.png";
+$modversion['image'] = "minihaku_slogo.png";
 $modversion['dirname'] = "minihaku";
 
 $modversion['sqlfile']['mysql'] = '' ;

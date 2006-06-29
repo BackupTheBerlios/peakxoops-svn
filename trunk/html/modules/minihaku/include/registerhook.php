@@ -52,8 +52,8 @@ foreach( $allowed_requests as $key => $val ) {
 }
 
 
-$email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : $email ;
-$vpass = $allow_blank_vpass ? $pass : $vpass ;
+$email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : @$email ;
+$vpass = $allow_blank_vpass ? @$pass : @$vpass ;
 
 if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $email4check , $pass , $vpass ) ) ) {
 

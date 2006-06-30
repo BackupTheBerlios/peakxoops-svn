@@ -1,8 +1,6 @@
 <?php
 
-/********* begin configuratin *********/
-
-// allowed requests (you can hack it)
+// allowed requests
 $allowed_requests = array(
 	'uname' => '' ,
 	'email' => '' ,
@@ -13,17 +11,12 @@ $allowed_requests = array(
 	'user_viewemail' => 0 ,
 	'user_mailok' => 0 ,
 	'agree_disc' => 0 ,
-	// 'sex' => 0 , // tinyint
-	// 'birth' => '2000-01-01' , // date
 ) ;
 
-$auto_belong_groups = array( XOOPS_GROUP_USERS ) ; // default (2)
-$allow_blank_email = false ;
-$allow_blank_vpass = false ;
-
-/********* end configuratin *********/
-
-
+// rename config.dist.php -> config.php
+if( file_exists( dirname(__FILE__).'/config.php' ) ) {
+	include dirname(__FILE__).'/config.php' ;
+}
 
 include_once XOOPS_ROOT_PATH."/class/xoopslists.php";
 
@@ -39,44 +32,46 @@ foreach( $allowed_requests as $key => $val ) {
 	if( ! isset( $_POST[$key] ) ) continue ;
 	switch( strtolower( gettype( $val ) ) ) {
 		case 'double' :
-			$$key = doubleval( $_POST[$key] ) ;
+			$allowed_requests[$key] = doubleval( $_POST[$key] ) ;
 			break ;
 		case 'integer' :
-			$$key = intval( $_POST[$key] ) ;
+			$allowed_requests[$key] = intval( $_POST[$key] ) ;
 			break ;
 		case 'string' :
-			$$key = get_magic_quotes_gpc() ? stripslashes( $_POST[$key] ) : $_POST[$key] ;
+			$allowed_requests[$key] = get_magic_quotes_gpc() ? stripslashes( $_POST[$key] ) : $_POST[$key] ;
 			break ;
 	}
-	$allowed_requests[$key] = $$key ;
 }
 
 
-$email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : @$email ;
-$vpass = $allow_blank_vpass ? @$pass : @$vpass ;
+$email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : $allowed_requests['email'] ;
+$allowed_requests['vpass'] = $allow_blank_vpass ? $allowed_requests['pass'] : $allowed_requests['vpass'] ;
 
-if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $email4check , $pass , $vpass ) ) ) {
+if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $allowed_requests['uname'] , $email4check , $allowed_requests['pass'] , $allowed_requests['vpass'] ) ) ) {
 
-	if( empty( $agree_disc ) ) die( _US_UNEEDAGREE ) ;
+	if( empty( $allowed_requests['agree_disc'] ) ) die( _US_UNEEDAGREE ) ;
 
 	include XOOPS_ROOT_PATH.'/header.php';
 	$member_handler =& xoops_gethandler('member');
 	$newuser =& $member_handler->createUser();
-	$newuser->setVar('user_viewemail',$user_viewemail, true);
-	$newuser->setVar('uname', $uname, true);
-	$newuser->setVar('email', $email, true);
-	if ($url != '') {
-		$newuser->setVar('url', formatURL($url), true);
+
+	if( $allow_blank_email ) {
+		$newuser->initVar('email', XOBJ_DTYPE_TXTBOX, null, false, 60);
 	}
+
+	$newuser->setVar('user_viewemail',$allowed_requests['user_viewemail'], true);
+	$newuser->setVar('uname', $allowed_requests['uname'], true);
+	$newuser->setVar('email', $allowed_requests['email'], true);
+	$newuser->setVar('url', formatURL($allowed_requests['url']), true);
 	$newuser->setVar('user_avatar','blank.gif', true);
 	$actkey = substr(md5(uniqid(mt_rand(), 1)), 0, 8);
 	$newuser->setVar('actkey', $actkey, true);
-	$newuser->setVar('pass', md5($pass), true);
-	$newuser->setVar('timezone_offset', $timezone_offset, true);
+	$newuser->setVar('pass', md5($allowed_requests['pass']), true);
+	$newuser->setVar('timezone_offset', $allowed_requests['timezone_offset'], true);
 	$newuser->setVar('user_regdate', time(), true);
 	$newuser->setVar('uorder',$xoopsConfig['com_order'], true);
 	$newuser->setVar('umode',$xoopsConfig['com_mode'], true);
-	$newuser->setVar('user_mailok',$user_mailok, true);
+	$newuser->setVar('user_mailok',$allowed_requests['user_mailok'], true);
 	if ($xoopsConfigUser['activation_type'] == 1) {
 		$newuser->setVar('level', 1, true);
 	}
@@ -87,6 +82,14 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $
 	}
 
 	$newid = $newuser->getVar('uid') ;
+
+	// extra fields
+	if( ! empty( $extra_fields ) ) {
+		$db =& Database::getInstance() ;
+		foreach( array_keys( $extra_fields ) as $field ) {
+			$db->query( "UPDATE ".$db->prefix("users")." SET $field='".addslashes(@$allowed_requests[$field])."' WHERE uid=".$xoopsUser->getVar("uid") ) ;
+		}
+	}
 
 	// groups
 	foreach( $auto_belong_groups as $group ) {
@@ -109,7 +112,7 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $
 		$xoopsMailer->setToUsers(new XoopsUser($newid));
 		$xoopsMailer->setFromEmail($xoopsConfig['adminmail']);
 		$xoopsMailer->setFromName($xoopsConfig['sitename']);
-		$xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $uname));
+		$xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $allowed_requests['uname']));
 		if ( !$xoopsMailer->send() ) {
 			$xoopsTpl->assign( 'message' , _US_YOURREGMAILNG ) ;
 		} else {
@@ -119,8 +122,8 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $
 		$xoopsMailer =& getMailer();
 		$xoopsMailer->useMail();
 		$xoopsMailer->setTemplate('adminactivate.tpl');
-		$xoopsMailer->assign('USERNAME', $uname);
-		$xoopsMailer->assign('USEREMAIL', $email);
+		$xoopsMailer->assign('USERNAME', $allowed_requests['uname']);
+		$xoopsMailer->assign('USEREMAIL', $allowed_requests['email']);
 		$xoopsMailer->assign('USERACTLINK', XOOPS_URL.'/user.php?op=actv&id='.$newid.'&actkey='.$actkey);
 		$xoopsMailer->assign('SITENAME', $xoopsConfig['sitename']);
 		$xoopsMailer->assign('ADMINMAIL', $xoopsConfig['adminmail']);
@@ -129,7 +132,7 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $
 		$xoopsMailer->setToGroups($member_handler->getGroup($xoopsConfigUser['activation_group']));
 		$xoopsMailer->setFromEmail($xoopsConfig['adminmail']);
 		$xoopsMailer->setFromName($xoopsConfig['sitename']);
-		$xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $uname));
+		$xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $allowed_requests['uname']));
 		if ( !$xoopsMailer->send() ) {
 			$xoopsTpl->assign( 'message' , _US_YOURREGMAILNG ) ;
 		} else {
@@ -145,7 +148,7 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $
 		$xoopsMailer->setFromEmail($xoopsConfig['adminmail']);
 		$xoopsMailer->setFromName($xoopsConfig['sitename']);
 		$xoopsMailer->setSubject(sprintf(_US_NEWUSERREGAT,$xoopsConfig['sitename']));
-		$xoopsMailer->setBody(sprintf(_US_HASJUSTREG, $uname));
+		$xoopsMailer->setBody(sprintf(_US_HASJUSTREG, $allowed_requests['uname']));
 		$xoopsMailer->send();
 	}
 	include XOOPS_ROOT_PATH.'/footer.php';
@@ -163,6 +166,14 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $uname , $
 		)
 	) ;
 	$xoopsTpl->assign( $allowed_requests ) ;
+	// extra field which has options
+	if( ! empty( $extra_fields ) ) {
+		foreach( $extra_fields as $key => $attribs ) {
+			if( ! empty( $attribs['options'] ) ) {
+				$xoopsTpl->assign( $key.'_options' , $attribs['options'] ) ;
+			}
+		}
+	}
 	include XOOPS_ROOT_PATH.'/footer.php' ;
 	exit ;
 

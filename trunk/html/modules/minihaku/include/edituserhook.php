@@ -1,8 +1,6 @@
 <?php
 
-/********* begin configuratin *********/
-
-// allowed requests (you can hack it)
+// allowed requests
 $allowed_requests = array(
 	'uname' => $xoopsUser->getVar('uname','n') ,
 	'name' => $xoopsUser->getVar('name','n') ,
@@ -26,14 +24,13 @@ $allowed_requests = array(
 	'notify_mode' => intval( $xoopsUser->getVar('notify_mode','n') ) ,
 	'user_mailok' => intval( $xoopsUser->getVar('user_mailok','n') ) ,
 	'bio' => $xoopsUser->getVar('bio','n') ,
-	// 'sex' => intval( $xoopsUser->getVar('sex','n') ) ,
-	// 'birth' => $xoopsUser->getVar('birth','n') ,
 ) ;
 
-$allow_blank_vpass = false ;
-
-/********* end configuratin *********/
-
+// rename config.dist.php -> config.php
+$minihaku_uid4whr = $xoopsUser->getVar('uid') ;
+if( file_exists( dirname(__FILE__).'/config.php' ) ) {
+	include dirname(__FILE__).'/config.php' ;
+}
 
 include_once XOOPS_ROOT_PATH."/class/xoopslists.php";
 include_once XOOPS_ROOT_PATH . "/language/" . $xoopsConfig['language'] . '/notification.php';
@@ -54,16 +51,15 @@ foreach( $allowed_requests as $key => $val ) {
 	if( ! isset( $_POST[$key] ) ) continue ;
 	switch( strtolower( gettype( $val ) ) ) {
 		case 'double' :
-			$$key = doubleval( $_POST[$key] ) ;
+			$allowed_requests[$key] = doubleval( $_POST[$key] ) ;
 			break ;
 		case 'integer' :
-			$$key = intval( $_POST[$key] ) ;
+			$allowed_requests[$key] = intval( $_POST[$key] ) ;
 			break ;
 		case 'string' :
-			$$key = get_magic_quotes_gpc() ? stripslashes( $_POST[$key] ) : $_POST[$key] ;
+			$allowed_requests[$key] = get_magic_quotes_gpc() ? stripslashes( $_POST[$key] ) : $_POST[$key] ;
 			break ;
 	}
-	$allowed_requests[$key] = $$key ;
 }
 
 
@@ -76,20 +72,11 @@ if ($op == 'saveuser') {
 	}*/
 	$uid = $xoopsUser->getVar('uid');
 	$myts =& MyTextSanitizer::getInstance();
-	if ($xoopsConfigUser['allow_chgmail'] == 1) {
-		$email = '';
-		if (!empty($email)) {
-			$email = $myts->stripSlashesGPC(trim($email));
-		}
-		if ($email == '' || !checkEmail($email)) {
-			$errors[] = _US_INVALIDMAIL;
-		}
-	}
-	if ($pass != '') {
-		if (strlen($pass) < $xoopsConfigUser['minpass']) {
+	if ($allowed_requests['pass'] != '') {
+		if (strlen($allowed_requests['pass']) < $xoopsConfigUser['minpass']) {
 			$errors[] = sprintf(_US_PWDTOOSHORT,$xoopsConfigUser['minpass']);
 		}
-		if ( empty( $allow_blank_vpass ) && $pass != $vpass ) {
+		if ( empty( $allow_blank_vpass ) && $allowed_requests['pass'] != $allowed_requests['vpass'] ) {
 			$errors[] = _US_PASSNOTSAME;
 		}
 	}
@@ -98,38 +85,52 @@ if ($op == 'saveuser') {
 	} else {
 		$member_handler =& xoops_gethandler('member');
 		$edituser =& $member_handler->getUser($uid);
-		$edituser->setVar('name', $name, true);
+
+		if( $allow_blank_email ) {
+			$edituser->initVar('email', XOBJ_DTYPE_TXTBOX, null, false, 60);
+		}
+
+		$edituser->setVar('name', $allowed_requests['name'], true);
 		if ($xoopsConfigUser['allow_chgmail'] == 1) {
-			$edituser->setVar('email', $email, true);
+			$edituser->setVar('email', $allowed_requests['email'], true);
 		}
-		$edituser->setVar('url', $url, true);
-		$edituser->setVar('user_icq', $user_icq, true);
-		$edituser->setVar('user_from', $user_from, true);
-		$edituser->setVar('user_sig', xoops_substr($user_sig, 0, 255), true);
-		$user_viewemail = (!empty($user_viewemail)) ? 1 : 0;
-		$edituser->setVar('user_viewemail', $user_viewemail,true);
-		$edituser->setVar('user_aim', $user_aim, true);
-		$edituser->setVar('user_yim', $user_yim, true);
-		$edituser->setVar('user_msnm', $user_msnm, true);
-		if ($pass != '') {
-			$edituser->setVar('pass', md5($pass), true);
+		$edituser->setVar('url', $allowed_requests['url'], true);
+		$edituser->setVar('user_icq', $allowed_requests['user_icq'], true);
+		$edituser->setVar('user_from', $allowed_requests['user_from'], true);
+		$edituser->setVar('user_sig', xoops_substr($allowed_requests['user_sig'], 0, 255), true);
+		$user_viewemail = (!empty($allowed_requests['user_viewemail'])) ? 1 : 0;
+		$edituser->setVar('user_viewemail', $allowed_requests['user_viewemail'],true);
+		$edituser->setVar('user_aim', $allowed_requests['user_aim'], true);
+		$edituser->setVar('user_yim', $allowed_requests['user_yim'], true);
+		$edituser->setVar('user_msnm', $allowed_requests['user_msnm'], true);
+		if ($allowed_requests['pass'] != '') {
+			$edituser->setVar('pass', md5($allowed_requests['pass']), true);
 		}
-		$attachsig = !empty($attachsig) ? 1 : 0;
+		$attachsig = !empty($allowed_requests['attachsig']) ? 1 : 0;
 		$edituser->setVar('attachsig', $attachsig, true);
-		$edituser->setVar('timezone_offset', $timezone_offset, true);
-		$edituser->setVar('uorder', $uorder, true);
-		$edituser->setVar('umode', $umode, true);
-		$edituser->setVar('notify_method', $notify_method,true);
-		$edituser->setVar('notify_mode', $notify_mode, true);
-		$edituser->setVar('bio', xoops_substr($bio, 0, 255), true);
-		$edituser->setVar('user_occ', $user_occ, true);
-		$edituser->setVar('user_intrest', $user_intrest, true);
-		$edituser->setVar('user_mailok', $user_mailok,true);
+		$edituser->setVar('timezone_offset', $allowed_requests['timezone_offset'], true);
+		$edituser->setVar('uorder', $allowed_requests['uorder'], true);
+		$edituser->setVar('umode', $allowed_requests['umode'], true);
+		$edituser->setVar('notify_method', $allowed_requests['notify_method'],true);
+		$edituser->setVar('notify_mode', $allowed_requests['notify_mode'], true);
+		$edituser->setVar('bio', xoops_substr($allowed_requests['bio'], 0, 255), true);
+		$edituser->setVar('user_occ', $allowed_requests['user_occ'], true);
+		$edituser->setVar('user_intrest', $allowed_requests['user_intrest'], true);
+		$edituser->setVar('user_mailok', $allowed_requests['user_mailok'],true);
 		if (!empty($_POST['usecookie'])) {
 			setcookie($xoopsConfig['usercookie'], $xoopsUser->getVar('uname'), time()+ 31536000);
 		} else {
 			setcookie($xoopsConfig['usercookie']);
 		}
+
+		// extra fields
+		if( ! empty( $extra_fields ) ) {
+			$db =& Database::getInstance() ;
+			foreach( array_keys( $extra_fields ) as $field ) {
+				$db->query( "UPDATE ".$db->prefix("users")." SET $field='".addslashes(@$allowed_requests[$field])."' WHERE uid=".$xoopsUser->getVar("uid") ) ;
+			}
+		}
+
 		if (!$member_handler->insertUser($edituser)) {
 			include XOOPS_ROOT_PATH.'/header.php';
 			echo $edituser->getHtmlErrors();
@@ -157,6 +158,14 @@ if ($op == 'editprofile') {
 		)
 	) ;
 	$xoopsTpl->assign( $allowed_requests ) ;
+	// extra field which has options
+	if( ! empty( $extra_fields ) ) {
+		foreach( $extra_fields as $key => $attribs ) {
+			if( ! empty( $attribs['options'] ) ) {
+				$xoopsTpl->assign( $key.'_options' , $attribs['options'] ) ;
+			}
+		}
+	}
 	include XOOPS_ROOT_PATH.'/footer.php';
 	exit ;
 }

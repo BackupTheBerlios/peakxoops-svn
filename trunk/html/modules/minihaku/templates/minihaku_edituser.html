@@ -117,6 +117,22 @@
 			<{html_radios name="user_mailok" options=$yn_options selected=$user_mailok}>
 		</td>
 	</tr>
+
+	<{* sample
+	<tr valign="top" align="left">
+		<td class="head">sex</td>
+		<td class="even">
+			<{html_radios name="sex" options=$sex_options selected=$sex}>
+		</td>
+	</tr>
+	<tr valign="top" align="left">
+		<td class="head">birth</td>
+		<td class="even">
+			<{html_select_date field_order="YMD" month_format="%m" day_format="%02d" start_year="-100" end_year="-1" time=$birth }>
+		</td>
+	</tr>
+	*}>
+
 	<tr valign="top" align="left">
 		<td class="head"></td>
 		<td class="even"><input type="submit" class="formButton" name="do_register"  id="do_register" value="<{$smarty.const._US_SUBMIT}>" /></td>

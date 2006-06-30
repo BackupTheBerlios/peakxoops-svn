@@ -48,7 +48,7 @@
 		</td>
 	</tr>
 
-	<{* sample
+	<{* sample of extra fields of sex and birth
 	<tr valign="top" align="left">
 		<td class="head">sex</td>
 		<td class="even">
@@ -59,6 +59,15 @@
 		<td class="head">birth</td>
 		<td class="even">
 			<{html_select_date field_order="YMD" month_format="%m" day_format="%02d" start_year="-100" end_year="-1" time=$birth }>
+		</td>
+	</tr>
+	*}>
+
+	<{* sample of regkey for auto belonging system into a specific group
+	<tr valign="top" align="left">
+		<td class="head">regkey (if you have)</td>
+		<td class="even">
+			<input type="text" name="regkey" id="regkey" size="25" maxlength="25" value="<{$regkey|escape}>" />
 		</td>
 	</tr>
 	*}>

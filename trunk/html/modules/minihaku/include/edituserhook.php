@@ -117,8 +117,8 @@ if ($op == 'saveuser') {
 		$edituser->setVar('user_occ', $allowed_requests['user_occ'], true);
 		$edituser->setVar('user_intrest', $allowed_requests['user_intrest'], true);
 		$edituser->setVar('user_mailok', $allowed_requests['user_mailok'],true);
-		if (!empty($_POST['usecookie'])) {
-			setcookie($xoopsConfig['usercookie'], $xoopsUser->getVar('uname'), time()+ 31536000);
+		if (!empty($_POST['usercookie'])) {
+			setcookie($xoopsConfig['usercookie'], $edituser->getVar('uname'), time()+ 31536000);
 		} else {
 			setcookie($xoopsConfig['usercookie']);
 		}
@@ -154,7 +154,7 @@ if ($op == 'editprofile') {
 			'notify_method_options' => $notify_method_options ,
 			'notify_mode_options' => $notify_mode_options ,
 			'yn_options' => array( 1 => _YES , 0 => _NO ) ,
-			'usercookie' => intval( empty($_COOKIE[$xoopsConfig['usercookie']]) ) ,
+			'usercookie' => intval( ! empty($_COOKIE[$xoopsConfig['usercookie']]) ) ,
 		)
 	) ;
 	$xoopsTpl->assign( $allowed_requests ) ;

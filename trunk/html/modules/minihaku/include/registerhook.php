@@ -87,7 +87,7 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $allowed_r
 	if( ! empty( $extra_fields ) ) {
 		$db =& Database::getInstance() ;
 		foreach( array_keys( $extra_fields ) as $field ) {
-			$db->query( "UPDATE ".$db->prefix("users")." SET $field='".addslashes(@$allowed_requests[$field])."' WHERE uid=".$xoopsUser->getVar("uid") ) ;
+			$db->query( "UPDATE ".$db->prefix("users")." SET $field='".addslashes(@$allowed_requests[$field])."' WHERE uid=".$newid ) ;
 		}
 	}
 

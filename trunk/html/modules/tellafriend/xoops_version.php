@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 
 $modversion['name'] = _MI_TELLAFRIEND_MODNAME ;
-$modversion['version'] = 1.02;
+$modversion['version'] = 1.03;
 $modversion['description'] = _MI_TELLAFRIEND_MODDESC ;
 $modversion['credits'] = "PEAK Corp. http://www.peak.ne.jp/";
 $modversion['author'] = "GIJOE";
@@ -48,7 +48,7 @@ $modversion['adminindex'] = "admin/index.php";
 $modversion['adminmenu'] = "admin/menu.php";
 
 // Menu
-$modversion['hasMain'] = 0;
+$modversion['hasMain'] = 1;
 
 // Config Settings
 $modversion['hasconfig'] = 1;

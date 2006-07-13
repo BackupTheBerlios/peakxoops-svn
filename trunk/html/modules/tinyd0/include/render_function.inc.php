@@ -82,10 +82,11 @@ function tc_content_render( $text , $nohtml , $nosmiley , $nobreaks , $nbsp = 0 
 				$content = $myts->displayTarea( $text , 0 , ! $nosmiley , 1 , 1 , ! $nobreaks , $nbsp ) ;
 				break ;
 			case 2 : // HTML without BB
-				$content = '<pre>'.$text.'</pre>' ;
+				$content = $text ;
 				break ;
 			case 3 : // Text without BB
-				$content = $myts->makeTboxData4Show( $text ) ;
+				$content = htmlspecialchars( $text , ENT_QUOTES ) ;
+				if( ! $nobreaks ) $content = nl2br( $content ) ;
 				break ;
 		}
 

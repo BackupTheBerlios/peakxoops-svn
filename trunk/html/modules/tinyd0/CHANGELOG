@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGELOG:
 
+2006-07-14 2.24
+- changed the spec of "Text without BB" from $myts to htmlspecialchars()
+- remove <pre></pre> from "HTML without HTML"
+
 2006-06-27 2.23
 - fixed PHP contents displayed as is in search module (thx suin)
 - changed calling Text_Wiki with htmlspecialchars() (thx sunaoka)
@@ -206,6 +210,10 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2006-07-14 2.24
+- テキスト(BB無効)の仕様を変更 （htmlspecialchars()に戻し、改行処理も対応）
+- HTML(BB無効)に、なぜか<pre>がついてしまっているのを修正 (thx gandalf)
 
 2006-06-27 2.23
 - XOOPS検索モジュールで、PHPコンテンツがコードごと表示されてしまうのを修正 (thx suin)

@@ -31,8 +31,8 @@ if (function_exists('mb_convert_encoding') && ! class_exists( 'XhldRendererLocal
 		function XhldRendererLocal( &$headline , $mydirname='xhld0' )
 		{
 			parent::XhldRenderer( $headline , $mydirname ) ;
-			if( ! preg_match( '/(EUC-JP|UTF-8|SJIS)/i' , mb_internal_encoding() ) ) {
-				mb_internal_encoding( 'EUC-JP' ) ;
+			if( ! preg_match( '/(UTF-8|SJIS)/i' , mb_internal_encoding() ) ) {
+				mb_internal_encoding( 'eucJP-win' ) ;
 			}
 		}
 

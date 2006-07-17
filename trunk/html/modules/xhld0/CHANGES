@@ -4,6 +4,7 @@ CHANGES:
 v.3.04 2006-05-28
   - fixed some reference notices
   - changed snoopy including this archive (for 2.0.14-JP)
+  - changed default internal_encoding from EUC-JP to eucJP-win for Japanese (3.04a)
 
 v.3.03 2006-05-02
   - modified compatibility with PHP5
@@ -243,6 +244,8 @@ v2.00 2004-7-9
 v.3.04 2006-05-28
   - 参照渡しの関連のミスをさらに修正
   - Snoopyを同梱するように変更 (2.0.14-JP対策)
+  - 日本語のデフォルトinternal_encodingをEUC-JPからeucJP-winに変更 (3.04a)
+
 
 v.3.03 2006-05-02
   - PHP5との相性問題を少し解消

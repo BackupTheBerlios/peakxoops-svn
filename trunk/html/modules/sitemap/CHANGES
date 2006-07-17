@@ -1,3 +1,8 @@
+1.26 2006-07-17
+- added plugin-system for D3 modules (eg. bulletin)
+- updated language files
+-- spanish (thx David)
+
 1.25 2006-03-02
 - modified the compatibility between xml_google.php and XOOPS 2.2.4
 - modified the compatibility with PHP >= 4.4.1

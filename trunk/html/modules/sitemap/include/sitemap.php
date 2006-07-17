@@ -52,9 +52,23 @@ function sitemap_show()
             //  plugin modules/DIRNAME/include/sitemap.plugin.php
             //  lang   modules/DIRNAME/language/LANG/sitemap.php
             $mod = $modules[$i]->getVar("dirname");
+            $mydirname = $mod ;
             $plugin_flag = false;
+
+            // for D3 modules
+            if( defined( 'XOOPS_TRUST_PATH' ) ) {
+	            $mytrustdirname = '' ;
+	            @include XOOPS_ROOT_PATH."/modules/".$mydirname."/mytrustdirname.php" ;
+	            $mod_trust_plugin_file = XOOPS_TRUST_PATH."/modules/".$mytrustdirname."/include/sitemap.plugin.php";
+	            if( ! file_exists( $mod_trust_plugin_file ) ) {
+	            	$mod_trust_plugin_file = '' ;
+	            }
+	        }
+
             $mod_plugin_file = XOOPS_ROOT_PATH."/modules/".$mod."/include/sitemap.plugin.php";
+
             if(file_exists($mod_plugin_file)){
+                // module side plugin under xoops_root_path (1st priority)
                 $mod_plugin_lng = XOOPS_ROOT_PATH."/modules/".$mod."/language/".$xoopsConfig['language']."/sitemap.php";
                 if(file_exists($mod_plugin_lng)){
                     include_once($mod_plugin_lng);
@@ -66,8 +80,22 @@ function sitemap_show()
                 }
                 require_once($mod_plugin_file);
                 $plugin_flag = true;
-            }else{
-                // モジュール側になければ、sitemap内で探す。
+            } else if( ! empty( $mod_trust_plugin_file ) ){
+                // module side plugin under xoops_trust_path (2nd priority)
+                $mod_plugin_lng = XOOPS_TRUST_PATH."/modules/".$mytrustdirname."/language/".$xoopsConfig['language']."/sitemap.php";
+                if(file_exists($mod_plugin_lng)){
+                    include_once($mod_plugin_lng);
+                }else{
+                    $mod_plugin_lng = XOOPS_ROOT_PATH."/modules/".$mod."/language/english/sitemap.php";
+                    if(file_exists($mod_plugin_lng)){
+                        include_once($mod_plugin_lng);
+                    }
+                }
+                $mod = $mytrustdirname ;
+                require_once $mod_trust_plugin_file ;
+                $plugin_flag = true ;
+            } else {
+                // sitemap built-in plugin (last priority)
                 $mod_plugin_dir = $plugin_dir ;
                 $mod_plugin_file = $mod_plugin_dir . $mod . ".php";
                 $mod_plugin_lng = $mod_plugin_dir . $xoopsConfig['language'] . ".lng.php";
@@ -91,7 +119,7 @@ function sitemap_show()
             if($plugin_flag){
                 if (function_exists("b_sitemap_" . $mod)){
                     //カテゴリリストを得る。
-                    $_tmp = call_user_func("b_sitemap_" . $mod);
+                    $_tmp = call_user_func("b_sitemap_" . $mod , $mydirname );
                     //$block['modules'][$i]['path'] = $_tmp["path"];
                     if (isset($_tmp["parent"])) {
                         $block['modules'][$i]['parent'] = $_tmp["parent"];

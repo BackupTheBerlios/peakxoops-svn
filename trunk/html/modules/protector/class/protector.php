@@ -155,8 +155,8 @@ function output_log( $type = 'UNKNOWN' , $uid = 0 , $unique_check = false , $lev
 
 	if( empty( $this->_conn ) ) return false ;
 
-	$ip = $_SERVER['REMOTE_ADDR'] ;
-	$agent = $_SERVER['HTTP_USER_AGENT'] ;
+	$ip = @$_SERVER['REMOTE_ADDR'] ;
+	$agent = @$_SERVER['HTTP_USER_AGENT'] ;
 
 	if( $unique_check ) {
 		$result = mysql_query( "SELECT ip,type FROM ".XOOPS_DB_PREFIX."_protector_log ORDER BY timestamp DESC LIMIT 1" , $this->_conn ) ;
@@ -175,7 +175,7 @@ function output_log( $type = 'UNKNOWN' , $uid = 0 , $unique_check = false , $lev
 
 function register_bad_ips( $ip = null )
 {
-	if( empty( $ip ) ) $ip = $_SERVER['REMOTE_ADDR'] ;
+	if( empty( $ip ) ) $ip = @$_SERVER['REMOTE_ADDR'] ;
 	if( empty( $ip ) ) return false ;
 
 	$db = Database::getInstance() ;
@@ -193,7 +193,7 @@ function register_bad_ips( $ip = null )
 
 function deny_by_htaccess( $ip = null )
 {
-	if( empty( $ip ) ) $ip = $_SERVER['REMOTE_ADDR'] ;
+	if( empty( $ip ) ) $ip = @$_SERVER['REMOTE_ADDR'] ;
 	if( empty( $ip ) ) return false ;
 	if( ! function_exists( 'file_get_contents' ) ) return false ;
 
@@ -491,8 +491,8 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 
 	if( $this->_done_dos ) return true ;
 
-	$ip = $_SERVER['REMOTE_ADDR'] ;
-	$uri = $_SERVER['REQUEST_URI'] ;
+	$ip = @$_SERVER['REMOTE_ADDR'] ;
+	$uri = @$_SERVER['REQUEST_URI'] ;
 	$ip4sql = addslashes( $ip ) ;
 	$uri4sql = addslashes( $uri ) ;
 	if( empty( $ip ) || $ip == '' ) return true ;
@@ -542,7 +542,7 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 	}
 
 	// Check its Agent
-	if( preg_match( $this->_conf['dos_crsafe'] , $_SERVER['HTTP_USER_AGENT'] ) ) {
+	if( trim( $this->_conf['dos_crsafe'] ) != '' && preg_match( $this->_conf['dos_crsafe'] , @$_SERVER['HTTP_USER_AGENT'] ) ) {
 		// welcomed crawler
 		$this->_done_dos = true ;
 		return true ;
@@ -668,8 +668,8 @@ function check_brute_force()
 {
 	global $xoopsDB ;
 
-	$ip = $_SERVER['REMOTE_ADDR'] ;
-	$uri = $_SERVER['REQUEST_URI'] ;
+	$ip = @$_SERVER['REMOTE_ADDR'] ;
+	$uri = @$_SERVER['REQUEST_URI'] ;
 	$ip4sql = addslashes( $ip ) ;
 	$uri4sql = addslashes( $uri ) ;
 	if( empty( $ip ) || $ip == '' ) return true ;
@@ -714,7 +714,7 @@ function disable_features()
 	if( $this->_conf['disable_features'] & 1 ) {
 
 		// zx 2005/1/5 disable xmlrpc.php in root
-		if( /* ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) && */ substr( $_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
+		if( /* ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) && */ substr( @$_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
 			$this->output_log( 'xmlrpc' , 0 , true ) ;
 			exit ;
 		}
@@ -733,28 +733,28 @@ function disable_features()
 	if( $this->_conf['disable_features'] & 1024 ) {
 
 		// root controllers
-		if( ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) ) {
+		if( ! stristr( @$_SERVER['SCRIPT_NAME'] , 'modules' ) ) {
 			// zx 2004/12/13 misc.php debug (file check)
-			if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'debug' || $_POST['type'] == 'debug' ) && ! preg_match( '/^dummy_[0-9]+\.html$/' , $_GET['file'] ) ) {
+			if( substr( @$_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'debug' || $_POST['type'] == 'debug' ) && ! preg_match( '/^dummy_[0-9]+\.html$/' , $_GET['file'] ) ) {
 				$this->output_log( 'misc debug' ) ;
 				exit ;
 			}
 		
 			// zx 2004/12/13 misc.php smilies
-			if( substr( $_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'smilies' || $_POST['type'] == 'smilies' ) && ! preg_match( '/^[0-9a-z_]*$/i' , $_GET['target'] ) ) {
+			if( substr( @$_SERVER['SCRIPT_NAME'] , -8 ) == 'misc.php' && ( $_GET['type'] == 'smilies' || $_POST['type'] == 'smilies' ) && ! preg_match( '/^[0-9a-z_]*$/i' , $_GET['target'] ) ) {
 				$this->output_log( 'misc smilies' ) ;
 				exit ;
 			}
 		
 			// zx 2005/1/5 edituser.php avatarchoose
-			if( substr( $_SERVER['SCRIPT_NAME'] , -12 ) == 'edituser.php' && $_POST['op'] == 'avatarchoose' && strstr( $_POST['user_avatar'] , '..' ) ) {
+			if( substr( @$_SERVER['SCRIPT_NAME'] , -12 ) == 'edituser.php' && $_POST['op'] == 'avatarchoose' && strstr( $_POST['user_avatar'] , '..' ) ) {
 				$this->output_log( 'edituser avatarchoose' ) ;
 				exit ;
 			}
 		}
 	
 		// zx 2005/1/4 findusers
-		if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'findusers' || $_POST['fct'] == 'findusers' ) ) {
+		if( substr( @$_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'findusers' || $_POST['fct'] == 'findusers' ) ) {
 			foreach( $_POST as $key => $val ) {
 				if( strstr( $key , "'" ) || strstr( $val , "'" ) ) {
 					$this->output_log( 'findusers' ) ;
@@ -765,23 +765,23 @@ function disable_features()
 	
 		// preview CSRF zx 2004/12/14 
 		// news submit.php
-		if( substr( $_SERVER['SCRIPT_NAME'] , -23 ) == 'modules/news/submit.php' && isset( $_POST['preview'] ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/submit.php' ) !== 0 ) {
+		if( substr( @$_SERVER['SCRIPT_NAME'] , -23 ) == 'modules/news/submit.php' && isset( $_POST['preview'] ) && strpos( @$_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/submit.php' ) !== 0 ) {
 			$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;
 		}
 		// news admin/index.php
-		if( substr( $_SERVER['SCRIPT_NAME'] , -28 ) == 'modules/news/admin/index.php' && ( $_POST['op'] == 'preview' || $_GET['op'] == 'preview' ) && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/admin/index.php' ) !== 0 ) {
+		if( substr( @$_SERVER['SCRIPT_NAME'] , -28 ) == 'modules/news/admin/index.php' && ( $_POST['op'] == 'preview' || $_GET['op'] == 'preview' ) && strpos( @$_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/news/admin/index.php' ) !== 0 ) {
 			$HTTP_POST_VARS['nohtml'] = $_POST['nohtml'] = 1 ;
 		}
 		// comment comment_post.php
-		if( isset( $_POST['com_dopreview'] ) && ! strstr( substr( $_SERVER['HTTP_REFERER'] , -16 ) , 'comment_post.php' ) ) {
+		if( isset( $_POST['com_dopreview'] ) && ! strstr( substr( @$_SERVER['HTTP_REFERER'] , -16 ) , 'comment_post.php' ) ) {
 			$HTTP_POST_VARS['dohtml'] = $_POST['dohtml'] = 0 ;
 		}
 		// disable preview of system's blocksadmin
-		if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'blocksadmin' || $_POST['fct'] == 'blocksadmin') && isset( $_POST['previewblock'] ) /* && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/system/admin.php' ) !== 0 */ ) {
+		if( substr( @$_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'blocksadmin' || $_POST['fct'] == 'blocksadmin') && isset( $_POST['previewblock'] ) /* && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/system/admin.php' ) !== 0 */ ) {
 			die( "Danger! don't use this preview. Use 'blocks admin module' instead.(by Protector)" ) ;
 		}
 		// tpl preview
-		if( substr( $_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'tplsets' || $_POST['fct'] == 'tplsets') ) {
+		if( substr( @$_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'tplsets' || $_POST['fct'] == 'tplsets') ) {
 			if( $_POST['op'] == 'previewpopup' || $_GET['op'] == 'previewpopup' || isset( $_POST['previewtpl'] ) ) {
 				die( "Danger! don't use this preview.(by Protector)" ) ;
 			}

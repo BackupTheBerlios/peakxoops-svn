@@ -80,7 +80,6 @@ if( ! empty( $_POST['copy'] ) && ! empty( $_POST['old_prefix'] ) ) {
 		$export_string .= "\nDROP TABLE IF EXISTS `$table`;\n".mysql_result($drs,0,1).";\n\n" ;
 		$result = mysql_query( "SELECT * FROM `$table`" ) ;
 		$fields_cnt = mysql_num_fields( $result ) ;
-		$fields_meta = mysql_fetch_field( $result ) ;
 		$field_flags = array();
 		for ($j = 0; $j < $fields_cnt; $j++) {
 			$field_flags[$j] = mysql_field_flags( $result , $j ) ;
@@ -91,21 +90,22 @@ if( ! empty( $_POST['copy'] ) && ! empty( $_POST['old_prefix'] ) ) {
 		while( $row = mysql_fetch_row($result) ) {
 			$current_row ++ ;
 			for( $j = 0 ; $j < $fields_cnt ; $j ++ ) {
+				$fields_meta = mysql_fetch_field( $result , $j ) ;
 				// NULL
 				if (!isset($row[$j]) || is_null($row[$j])) {
 					$values[] = 'NULL';
 				// a number
 				// timestamp is numeric on some MySQL 4.1
-				} elseif ($fields_meta[$j]->numeric && $fields_meta[$j]->type != 'timestamp') {
+				} elseif ($fields_meta->numeric && $fields_meta->type != 'timestamp') {
 					$values[] = $row[$j];
 				// a binary field
 				// Note: with mysqli, under MySQL 4.1.3, we get the flag
 				// "binary" for those field types (I don't know why)
 				} else if (stristr($field_flags[$j], 'BINARY')
-						&& $fields_meta[$j]->type != 'datetime'
-						&& $fields_meta[$j]->type != 'date'
-						&& $fields_meta[$j]->type != 'time'
-						&& $fields_meta[$j]->type != 'timestamp'
+						&& $fields_meta->type != 'datetime'
+						&& $fields_meta->type != 'date'
+						&& $fields_meta->type != 'time'
+						&& $fields_meta->type != 'timestamp'
 					   ) {
 					// empty blobs need to be different, but '0' is also empty :-(
 					if (empty($row[$j]) && $row[$j] != '0') {

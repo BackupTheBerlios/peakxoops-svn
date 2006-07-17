@@ -9,11 +9,12 @@ else if( !isset($xoopsOption['nocommon']) ) die( 'Protector: postcheck.inc.php s
 
 function protector_postcommon()
 {
-	global $xoopsUser , $xoopsDB , $xoopsModule ;
+	global $xoopsUser , $xoopsModule ;
 
 	// Protector class
 	require_once( XOOPS_ROOT_PATH . '/modules/protector/class/protector.php' ) ;
-	$protector =& Protector::getInstance( $xoopsDB->conn ) ;
+	$db =& Database::getInstance() ;
+	$protector =& Protector::getInstance( $db->conn ) ;
 	$conf = $protector->getConf() ;
 
 	// global enabled or disabled

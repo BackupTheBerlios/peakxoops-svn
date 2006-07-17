@@ -130,10 +130,13 @@ if ($cat_count > 0) {
 					// $forum_lastread = !empty($topic_lastread[$forum_row['topic_id']]) ? $topic_lastread[$forum_row['topic_id']] * 60 : false;
 					if ( $forum_row['forum_type'] == 1 ) {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['locked_forum'];
+						$categories[$i]['forums']['forum_type'][] = 'private' ;
 					} elseif ( $forum_row['post_time'] > $forum_row['u2t_time'] && !empty($forum_row['topic_id'])) {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['newposts_forum'];
+						$categories[$i]['forums']['forum_type'][] = 'newposts' ;
 					} else {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['folder_forum'];
+						$categories[$i]['forums']['forum_type'][] = 'nonewposts' ;
 					}
 				} else {
 					// no forums, so put empty values
@@ -142,8 +145,10 @@ if ($cat_count > 0) {
 					$categories[$i]['forums']['forum_lastpost_user'][] = "";
 					if ( $forum_row['forum_type'] == 1 ) {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['locked_forum'];
+						$categories[$i]['forums']['forum_type'][] = 'private' ;
 					} else {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['folder_forum'];
+						$categories[$i]['forums']['forum_type'][] = 'nonewposts' ;
 					}
 				}
 				$categories[$i]['forums']['forum_id'][] = $forum_row['forum_id'];

@@ -1,6 +1,9 @@
 [mlimg]
 [xlang:en]
 
+1.30beta
+- rebuilding templates fundamentally now ...
+
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
 
@@ -83,6 +86,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.30beta
+- テンプレートをフルスクラッチ中...
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

@@ -1,6 +1,6 @@
 <?php
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.10' ;
+$modversion['version'] = '0.12' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

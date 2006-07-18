@@ -10,7 +10,8 @@ $criteria4menu = new CriteriaCompo(new Criteria('isactive', 1));
 //$criteria4menu->add(new Criteria('hasmain', 1));
 $criteria4menu->add(new Criteria('mid', '1', '>'));
 $modules4menu =& $module_handler4menu->getObjects($criteria4menu, true);
-array_unshift( $modules4menu , $module_handler4menu->get(1) ) ;
+$system_module =& $module_handler4menu->get(1) ;
+if( is_object( $system_module ) ) array_unshift( $modules4menu , $system_module ) ;
 
 $adminmenu = array() ;
 foreach( $modules4menu as $m4menu ) {

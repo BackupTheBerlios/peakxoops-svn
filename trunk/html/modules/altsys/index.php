@@ -17,7 +17,11 @@ $page = preg_replace( '[^a-zA-Z0-9_-]' , '' , @$_GET['page'] ) ;
 
 
 // half measure ... (TODO)
-if( empty( $_GET['dirname'] ) ) $_GET['dirname'] = 'system' ;
+if( empty( $_GET['dirname'] ) ) {
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	list( $top_module ) = $module_handler->getObjects( new Criteria('isactive', 1) ) ;
+	$_GET['dirname'] = $top_module->getVar('dirname') ;
+}
 
 
 // language file

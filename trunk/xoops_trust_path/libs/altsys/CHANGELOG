@@ -1,6 +1,9 @@
 [mlimg]
 [xlang:en]
 
+v0.12 (2006-07-18)
+- modified compatibility with Cube 2.1 alpha3 without system module
+
 v0.11 (2006-06-21)
 - fixed uri of spaw in myblocksadmin (thx nico)
 - modified icon (thx argon)
@@ -17,6 +20,9 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.12 (2006-07-18)
+- Cube 2.1 alpha3 でsystemモジュールが存在しない場合への対応を追加
 
 v0.11 (2006-06-21)
 - myblocksadmin上のspawリンクがおかしかったのを修正 (thx nico)

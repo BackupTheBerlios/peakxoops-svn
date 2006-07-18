@@ -3,6 +3,9 @@
 
 [b]CHANGES:[/b]
 
+1.03 (2006/07/18)
+- modified compatibility with Cube 2.1
+
 1.02 (2006/06/22)
 - modified handling big files
 - modified handling ob filter
@@ -26,6 +29,9 @@
 
 [b]更新履歴:[/b]
 
+
+1.03 (2006/07/18)
+- Cube 2.1 との相性問題改善
 
 1.02 (2006/06/22)
 - 大きなファイルへの対応

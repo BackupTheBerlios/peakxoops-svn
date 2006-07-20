@@ -17,7 +17,11 @@
 	<tr valign="top" align="left">
 		<td class="head"><{$smarty.const._US_EMAIL}></td>
 		<td class="even">
-			<{$email|escape}>
+			<{if $allow_chgmail == 1}>
+				<input type="text" name="email" id="email" size="60" value="<{$email|escape}>" />
+			<{else}>
+				<{$email|escape}>
+			<{/if}>
 			<br />
 			<input type="checkbox" name="user_viewemail" id="user_viewemail" value="1" <{if $user_viewemail}>checked="checked"<{/if}> />
 			<label for="user_viewemail"><{$smarty.const._US_ALLOWVIEWEMAIL}></label>

@@ -17,7 +17,7 @@ $allowed_requests = array(
 	'user_sig' => $xoopsUser->getVar('user_sig','n') ,
 	'url' => $xoopsUser->getVar('url','n') ,
 	'timezone_offset' => doubleval( $xoopsUser->getVar('timezone_offset','n') ) ,
-	'user_viewemail' => $xoopsUser->getVar('user_viewemail','n') ,
+	'user_viewemail' => (boolean)$xoopsUser->getVar('user_viewemail','n') ,
 	'umode' => $xoopsUser->getVar('umode','n') ,
 	'uorder' => intval( $xoopsUser->getVar('uorder','n') ) ,
 	'notify_method' => intval( $xoopsUser->getVar('notify_method','n') ) ,
@@ -48,13 +48,16 @@ $config_handler =& xoops_gethandler('config');
 $xoopsConfigUser =& $config_handler->getConfigsByCat(XOOPS_CONF_USER);
 
 foreach( $allowed_requests as $key => $val ) {
-	if( ! isset( $_POST[$key] ) ) continue ;
+	if( ! isset( $_POST[$key] ) && gettype( $val ) != 'boolean' ) continue ;
 	switch( strtolower( gettype( $val ) ) ) {
 		case 'double' :
 			$allowed_requests[$key] = doubleval( $_POST[$key] ) ;
 			break ;
 		case 'integer' :
 			$allowed_requests[$key] = intval( $_POST[$key] ) ;
+			break ;
+		case 'boolean' :
+			$allowed_requests[$key] = (boolean)( @$_POST[$key] ) ;
 			break ;
 		case 'string' :
 			$allowed_requests[$key] = get_magic_quotes_gpc() ? stripslashes( $_POST[$key] ) : $_POST[$key] ;
@@ -86,7 +89,7 @@ if ($op == 'saveuser') {
 		$member_handler =& xoops_gethandler('member');
 		$edituser =& $member_handler->getUser($uid);
 
-		if( $allow_blank_email ) {
+		if( ! empty( $allow_blank_email ) ) {
 			$edituser->initVar('email', XOBJ_DTYPE_TXTBOX, null, false, 60);
 		}
 
@@ -98,8 +101,8 @@ if ($op == 'saveuser') {
 		$edituser->setVar('user_icq', $allowed_requests['user_icq'], true);
 		$edituser->setVar('user_from', $allowed_requests['user_from'], true);
 		$edituser->setVar('user_sig', xoops_substr($allowed_requests['user_sig'], 0, 255), true);
-		$user_viewemail = (!empty($allowed_requests['user_viewemail'])) ? 1 : 0;
-		$edituser->setVar('user_viewemail', $allowed_requests['user_viewemail'],true);
+		$user_viewemail = !empty($allowed_requests['user_viewemail']) ? 1 : 0;
+		$edituser->setVar('user_viewemail', $user_viewemail,true);
 		$edituser->setVar('user_aim', $allowed_requests['user_aim'], true);
 		$edituser->setVar('user_yim', $allowed_requests['user_yim'], true);
 		$edituser->setVar('user_msnm', $allowed_requests['user_msnm'], true);
@@ -155,6 +158,7 @@ if ($op == 'editprofile') {
 			'notify_mode_options' => $notify_mode_options ,
 			'yn_options' => array( 1 => _YES , 0 => _NO ) ,
 			'usercookie' => intval( ! empty($_COOKIE[$xoopsConfig['usercookie']]) ) ,
+			'allow_chgmail' => $xoopsConfigUser['allow_chgmail'] ,
 		)
 	) ;
 	$xoopsTpl->assign( $allowed_requests ) ;

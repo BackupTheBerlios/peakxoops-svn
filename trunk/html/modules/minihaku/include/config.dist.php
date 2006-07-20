@@ -20,6 +20,7 @@ alter table (prefix)_users add birth date not null default '1950-01-01' ;
 */
 
 // fields definition
+// if you want to add checkbox, set initval as boolean
 $extra_fields = array(
 	'sex' => array(
 		'initval' => -1 ,

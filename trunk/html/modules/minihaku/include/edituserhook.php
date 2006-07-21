@@ -47,7 +47,7 @@ $op = empty( $_REQUEST['op'] ) ? 'editprofile' : $_REQUEST['op'] ;
 $config_handler =& xoops_gethandler('config');
 $xoopsConfigUser =& $config_handler->getConfigsByCat(XOOPS_CONF_USER);
 
-foreach( $allowed_requests as $key => $val ) {
+if ($op == 'saveuser') foreach( $allowed_requests as $key => $val ) {
 	if( ! isset( $_POST[$key] ) && gettype( $val ) != 'boolean' ) continue ;
 	switch( strtolower( gettype( $val ) ) ) {
 		case 'double' :

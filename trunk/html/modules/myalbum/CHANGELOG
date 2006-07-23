@@ -8,6 +8,8 @@
  -- french (thx marco)
  - added language files
  -- portuguesebr (thx Izzy)
+ - modified compatibility with XOOPS2.2/3  2.87a
+ - fixed random block template makes invalid html (thx HMN)  2.87a
 
 2005-08-31 v2.86 (2.90 alpha)
  - added Duplicatable V2.1
@@ -355,6 +357,8 @@
  -- フランス語 (thx marco)
  - 言語ファイル追加
  -- ブラジルポルトガル語 (thx Izzy)
+ - XOOPS2.2/3 で投稿数カウントアップに失敗しているのを修正 2.87a
+ - ランダム画像ブロックがInvalidなhtmlを生成しているのを修正 (thx HMN)  2.87a
 
 2005-08-31 v2.86 (2.90 alpha)
  - Duplicatable V2.1 実装 (=myalbum* というdirnameからの解放)

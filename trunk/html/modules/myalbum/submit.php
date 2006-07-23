@@ -193,7 +193,11 @@ if( ! empty( $_POST['submit'] ) ) {
 	$xoopsDB->query( "INSERT INTO $table_text (lid, description) VALUES ($newid, '".addslashes($desc_text)."')") or die( "DB error: INSERT text table" ) ;
 
 	// Update User's Posts (Should be modified when need admission.)
-	$xoopsDB->query( "UPDATE ".$xoopsDB->prefix('users')." SET posts=posts+'$myalbum_addposts' WHERE uid='$submitter'" ) ;
+	$user_handler =& xoops_gethandler('user') ;
+	$submitter_obj =& $user_handler->get( $submitter ) ;
+	for( $i = 0 ; $i < $myalbum_addposts ; $i ++ ) {
+		$submitter_obj->incrementPost() ;
+	}
 
 	// Trigger Notification
 	if( $status ) {

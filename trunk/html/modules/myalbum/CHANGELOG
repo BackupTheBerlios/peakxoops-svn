@@ -8,8 +8,14 @@
  -- french (thx marco)
  - added language files
  -- portuguesebr (thx Izzy)
+
  - modified compatibility with XOOPS2.2/3  2.87a
  - fixed random block template makes invalid html (thx HMN)  2.87a
+
+ -- modified tchinese (thx threesecond) 2.87b
+ -- added utf8_tw (thx threesecond) 2.87b
+ -- modified template myalbum_categories.html (thx red_Slider) 2.87b
+
 
 2005-08-31 v2.86 (2.90 alpha)
  - added Duplicatable V2.1
@@ -357,8 +363,13 @@
  -- フランス語 (thx marco)
  - 言語ファイル追加
  -- ブラジルポルトガル語 (thx Izzy)
+
  - XOOPS2.2/3 で投稿数カウントアップに失敗しているのを修正 2.87a
  - ランダム画像ブロックがInvalidなhtmlを生成しているのを修正 (thx HMN)  2.87a
+
+ -- 繁体中国語入れ替え (thx threesecond) 2.87b
+ -- utf8_tw追加 (thx threesecond) 2.87b
+ -- テンプレートmyalbum_categories.html の修正 (thx red_Slider) 2.87b
 
 2005-08-31 v2.86 (2.90 alpha)
  - Duplicatable V2.1 実装 (=myalbum* というdirnameからの解放)

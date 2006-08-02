@@ -1,6 +1,6 @@
 <?php
 
-	// a plugin for news 1.1
+	// a plugin for bulletin 2.0
 
 	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -33,7 +33,7 @@
 	}
 
 	// query (added 86400 second margin "begin" & "end")
-	$result = $db->query( "SELECT title,storyid,published FROM ".$db->prefix("bulletin_stories")." WHERE ($whr_topic) AND published < UNIX_TIMESTAMP() AND published >= $range_start_s AND published < $range_end_s AND (expired = 0 OR expired > '$now')" ) ;
+	$result = $db->query( "SELECT title,storyid,published FROM ".$db->prefix($plugin['dirname']."_stories")." WHERE ($whr_topic) AND published < UNIX_TIMESTAMP() AND published >= $range_start_s AND published < $range_end_s AND type=1 AND (expired = 0 OR expired > '$now')" ) ;
 
 	while( list( $title , $id , $server_time ) = $db->fetchRow( $result ) ) {
 		$user_time = $server_time + $tzoffset_s2u ;
@@ -42,7 +42,7 @@
 		$tmp_array = array(
 			'dotgif' => $plugin['dotgif'] ,
 			'dirname' => $plugin['dirname'] ,
-			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/article.php?storyid=$id&amp;caldate={$this->year}-{$this->month}-$target_date" ,
+			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/index.php?page=article&amp;storyid=$id&amp;caldate={$this->year}-{$this->month}-$target_date" ,
 			'id' => $id ,
 			'server_time' => $server_time ,
 			'user_time' => $user_time ,

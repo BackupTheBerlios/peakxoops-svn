@@ -1,8 +1,3 @@
-#
-# Table structure for table 'pical_event'
-#
-# uid:ユーザID  (iCalenderにおける UniqueID とは異なる)
-
 
 CREATE TABLE pical1_event (
   id int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,

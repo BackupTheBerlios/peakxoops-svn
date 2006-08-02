@@ -377,12 +377,20 @@ function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming 
 	// CLASS関連のWHERE条件取得
 	$whr_class = $this->get_where_about_class() ;
 
+	// untildays
+	if( $untildays > 0 ) {
+		$until = $this->unixtime + $untildays * 86400 ;
+		$whr_until = "start < $until" ;
+	} else {
+		$whr_until = '1' ;
+	}
+
 	// 件数の取得
-	$yrs = mysql_query( "SELECT COUNT(*) FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class)" , $this->conn ) ;
+	$yrs = mysql_query( "SELECT COUNT(*) FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) AND ($whr_until)" , $this->conn ) ;
 	$num_rows = mysql_result( $yrs , 0 , 0 ) ;
 
 	// 本クエリ
-	$yrs = mysql_query( "SELECT start,end,summary,id,uid,allday,location,contact,description FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) ORDER BY start LIMIT $num" , $this->conn ) ;
+	$yrs = mysql_query( "SELECT start,end,summary,id,uid,allday,location,contact,description FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) AND ($whr_until) ORDER BY start LIMIT $num" , $this->conn ) ;
 
 	$block = array(
 		'insertable' => $this->insertable ,
@@ -398,16 +406,7 @@ function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming 
 		'lang_PICAL_MB_ALLDAY_EVENT' => _PICAL_MB_ALLDAY_EVENT
 	) ;
 
-	$count = 0 ;
 	while( $event = mysql_fetch_object( $yrs ) ) {
-
-		if( ++ $count > $num ) break ;
-
-		// 開始日が$untildaysより先であれば、そこで打ち切り
-		if( $untildays > 0 && $event->start > $this->unixtime + $untildays * 86400 ) {
-			$num_rows = $count ;
-			break ;
-		}
 
 		// $event->start,end はサーバ時間  $start,$end はユーザ時間
 		if( $event->allday ) {
@@ -473,9 +472,10 @@ function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming 
 			'dot_gif' => $dot ,
 			'distance' => $distance
 		) ;
+
 	}
 
-	$block['num_rows_rest'] = $num_rows - $count ;
+	$block['num_rows_rest'] = $num_rows - $num ;
 
 	return $block ;
 }

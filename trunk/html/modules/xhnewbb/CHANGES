@@ -3,6 +3,7 @@
 
 1.30beta
 - rebuilding templates fundamentally now ...
+- changed cat_order from varchar into smallint (thx Ujiki.oO)
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -89,6 +90,7 @@
 
 1.30beta
 - テンプレートをフルスクラッチ中...
+- cat_order がなぜか varchar となっていたのを smallint に変更 (thx Ujiki.oO)
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

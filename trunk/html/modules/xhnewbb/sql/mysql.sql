@@ -1,25 +1,11 @@
-# phpMyAdmin MySQL-Dump
-# version 2.2.2
-# http://phpwizard.net/phpMyAdmin/
-# http://phpmyadmin.sourceforge.net/ (download page)
-#
-# --------------------------------------------------------
-
-#
-# Table structure for table `bb_categories`
-#
-
 CREATE TABLE xhnewbb_categories (
   cat_id smallint(3) unsigned NOT NULL auto_increment,
   cat_title varchar(100) NOT NULL default '',
-  cat_order varchar(10) default NULL,
-  PRIMARY KEY  (cat_id)
+  cat_order smallint(5) NOT NULL default 0,
+  KEY (cat_order),
+  PRIMARY KEY (cat_id)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `bb_forum_access`
-#
 
 CREATE TABLE xhnewbb_forum_access (
   forum_id int(4) unsigned NOT NULL default '0',
@@ -33,22 +19,14 @@ CREATE TABLE xhnewbb_forum_access (
   KEY  (groupid),
   KEY  (can_post)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `bb_forum_mods`
-#
 
 CREATE TABLE xhnewbb_forum_mods (
   forum_id int(4) unsigned NOT NULL default '0',
   user_id int(5) unsigned NOT NULL default '0',
   KEY forum_user_id (forum_id,user_id)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `bb_forums`
-#
 
 CREATE TABLE xhnewbb_forums (
   forum_id int(4) unsigned NOT NULL auto_increment,
@@ -71,11 +49,7 @@ CREATE TABLE xhnewbb_forums (
   KEY forum_last_post_id (forum_last_post_id),
   KEY cat_id (cat_id)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `bb_posts`
-#
 
 CREATE TABLE xhnewbb_posts (
   post_id int(8) unsigned NOT NULL auto_increment,
@@ -100,11 +74,7 @@ CREATE TABLE xhnewbb_posts (
   KEY topicid_postid_pid (topic_id, post_id, pid),
   FULLTEXT KEY search (subject)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `bb_posts_text`
-#
 
 CREATE TABLE xhnewbb_posts_text (
   post_id int(8) unsigned NOT NULL auto_increment,
@@ -112,11 +82,7 @@ CREATE TABLE xhnewbb_posts_text (
   PRIMARY KEY  (post_id),
   FULLTEXT KEY search (post_text)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `bb_topics`
-#
 
 CREATE TABLE xhnewbb_topics (
   topic_id int(8) unsigned NOT NULL auto_increment,
@@ -139,11 +105,7 @@ CREATE TABLE xhnewbb_topics (
   KEY topic_forum (topic_id,forum_id),
   KEY topic_sticky (topic_sticky)
 ) TYPE=MyISAM;
-# --------------------------------------------------------
 
-#
-# Table structure for table `users2topics`
-#
 
 CREATE TABLE xhnewbb_users2topics (
   uid mediumint(8) unsigned NOT NULL default 0,

@@ -44,6 +44,9 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 		$xoopsDB->queryF( "ALTER TABLE ".$xoopsDB->prefix("xhnewbb_forum_access")." DROP PRIMARY KEY, MODIFY `user_id` mediumint(8) default NULL, ADD `groupid` smallint(5) default NULL AFTER `user_id`, ADD UNIQUE KEY (forum_id,user_id), ADD UNIQUE KEY (forum_id,groupid), ADD KEY  (forum_id), ADD KEY (user_id), ADD KEY  (groupid), ADD KEY (can_post)" ) ;
 	}
 
+	// 1.2 -> 1.3
+	$result = $xoopsDB->queryF( "ALTER TABLE ".$xoopsDB->prefix("xhnewbb_categories")." MODIFY `cat_order` smallint(5) NOT NULL default 0, ADD KEY `cat_order` (cat_order)" ) ;
+
 	/* General part */
 
 	// Keep the values of block's options when module is updated (by nobunobu)

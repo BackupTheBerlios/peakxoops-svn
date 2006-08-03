@@ -127,7 +127,7 @@ define("_AM_H3_FMT_BATCHREGISTER","myAlbum-P 相片批次上傳作業 (%s)");
 // GroupPerm Global
 define("_AM_ALBM_GROUPPERM_GLOBAL","全域權限");
 define("_AM_ALBM_GROUPPERM_GLOBALDESC","設定整個模組的群組權限");
-define("_AM_ALBM_GPERMUPDATED","權限修改成功");
+define("_AM_ALBM_GPERMUPDATED","權限修改成功 ");
 
 
 // Import

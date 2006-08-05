@@ -273,6 +273,8 @@ if ( !empty($_POST['contents_preview']) ) {
 	redirect_header( XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=".$forumpost->topic()."&amp;post_id=".$forumpost->postid()."&amp;viewmode=$viewmode&amp;order=$order#forumpost".$forumpost->postid() , 2 , empty( $isedit ) ? _MD_XHNEWBB_THANKSSUBMIT : _MD_XHNEWBB_THANKSEDIT ) ;
 	exit ;
 }
-include XOOPS_ROOT_PATH.'/footer.php';
 
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
+include XOOPS_ROOT_PATH.'/footer.php';
 ?>

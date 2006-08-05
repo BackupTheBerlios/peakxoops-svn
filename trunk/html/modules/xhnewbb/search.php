@@ -132,5 +132,8 @@ $xoopsTpl->assign('lang_views', _MD_XHNEWBB_VIEWS);
 $xoopsTpl->assign("lang_possttime", _MD_XHNEWBB_POSTTIME);
 $xoopsTpl->assign("lang_searchresults", _MD_XHNEWBB_SEARCHRESULTS);
 $xoopsTpl->assign("img_folder", $bbImage['folder_topic']);
+
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
 include XOOPS_ROOT_PATH.'/footer.php';
 ?>

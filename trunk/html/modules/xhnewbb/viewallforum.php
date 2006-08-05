@@ -197,22 +197,28 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	}
 	if ( $myrow['topic_sticky'] == 1 ) {
 		$image = $bbImage['folder_sticky'];
+		$topic_desc = _MD_XHNEWBB_TOPICSTICKY ;
 	} elseif ( $myrow['topic_status'] == 1 ) {
 		$image = $bbImage['locked_topic'];
+		$topic_desc = _MD_XHNEWBB_TOPICLOCKED ;
 	} else {
 		if ( $myrow['topic_replies'] >= 100 ) {
 //			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
 			if ( $myrow['u2t_time'] < $myrow['last_post_time'] ) {
 				$image = $bbImage['hot_newposts_topic'];
+				$topic_desc = _MD_XHNEWBB_NEWPOSTS ;
 			} else {
 				$image = $bbImage['hot_folder_topic'];
+				$topic_desc = _MD_XHNEWBB_NONEWPOSTS ;
 			}
 		} else {
 //			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
 			if ( $myrow['u2t_time'] < $myrow['last_post_time'] ) {
 				$image = $bbImage['newposts_topic'];
+				$topic_desc = _MD_XHNEWBB_NEWPOSTS ;
 			} else {
 				$image = $bbImage['folder_topic'];
+				$topic_desc = _MD_XHNEWBB_NONEWPOSTS ;
 			}
 		}
 	}
@@ -256,7 +262,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	// marked
 	$mark_checked = $myrow['u2t_marked'] ? 'checked="checked"' : '' ;
 
-	$xoopsTpl->append('topics', array('forum_id'=>$myrow['forum_id'],'forum_name'=>$myts->makeTboxData4Show($myrow['forum_name']),'topic_id'=>$myrow['topic_id'], 'topic_icon'=>$topic_icon, 'topic_folder'=>$image, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time'],'m'), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster']), 'u2t_time' => $myrow['u2t_time'], 'mark_checked' => $mark_checked ));
+	$xoopsTpl->append('topics', array('forum_id'=>$myrow['forum_id'],'forum_name'=>$myts->makeTboxData4Show($myrow['forum_name']),'topic_id'=>$myrow['topic_id'], 'topic_icon'=>$topic_icon, 'topic_folder'=>$image, 'topic_desc'=>$topic_desc, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time'],'m'), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster']), 'u2t_time' => $myrow['u2t_time'], 'mark_checked' => $mark_checked ));
 }
 
 $xoopsTpl->assign("mod_url" , XOOPS_URL.'/modules/xhnewbb' ) ;
@@ -265,6 +271,9 @@ $xoopsTpl->assign('uid', $uid);
 $xoopsTpl->assign('allow_mark', @$xoopsModuleConfig['xhnewbb_allow_mark'] );
 
 $xoopsTpl->assign('lang_by', _MD_XHNEWBB_BY);
+
+$xoopsTpl->assign('forum_index_title', _MD_XHNEWBB_FORUMINDEX); //jidaikobo
+$xoopsTpl->assign("lang_alltopicsindex", _MD_XHNEWBB_ALLTOPICSINDEX) ; //jidaikobo
 
 $xoopsTpl->assign('img_newposts', $bbImage['newposts_topic']);
 $xoopsTpl->assign('img_hotnewposts', $bbImage['hot_newposts_topic']);
@@ -292,5 +301,8 @@ if ( $all_topics > 25 ) {
 	$xoopsTpl->assign('forum_pagenav', '');
 }
 $xoopsTpl->assign('forum_jumpbox', xhnewbb_make_jumpbox(0));
+
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
 include XOOPS_ROOT_PATH."/footer.php";
 ?>

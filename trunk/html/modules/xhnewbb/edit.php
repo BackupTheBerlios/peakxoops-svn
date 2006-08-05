@@ -109,6 +109,8 @@ $myts =& MyTextSanitizer::getInstance();
 $viewmode = $myts->htmlspecialchars($viewmode);
 $formTitle = _MD_XHNEWBB_EDITMODEC ;
 include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
-include XOOPS_ROOT_PATH.'/footer.php';
 
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
+include XOOPS_ROOT_PATH.'/footer.php';
 ?>

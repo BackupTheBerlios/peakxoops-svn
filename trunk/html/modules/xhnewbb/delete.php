@@ -72,6 +72,9 @@ if ( !empty($_POST['ok']) ) {
 } else {
 	include XOOPS_ROOT_PATH."/header.php";
 	xoops_confirm(array('ok' => 1), "?post_id=$post_id&viewmode=$viewmode&order=$order", _MD_XHNEWBB_AREUSUREDEL);
+
+	$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
 	include XOOPS_ROOT_PATH.'/footer.php';
 }
 ?>

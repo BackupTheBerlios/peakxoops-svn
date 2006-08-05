@@ -242,7 +242,7 @@ if ($total_posts > 50) {
 }
 
 if ( $can_post == 1 ) {
-	$xoopsTpl->assign(array('viewer_can_post' => true, 'forum_post_or_register' => "<a href=\"newtopic.php?forum=".$forum."\"><img src=\"".$bbImage['post']."\" alt=\""._MD_XHNEWBB_POSTNEW."\" title=\""._MD_XHNEWBB_POSTNEW."\" /></a>"));
+	$xoopsTpl->assign(array('viewer_can_post' => true, 'forum_post_or_register' => "<a href=\"newtopic.php?forum=".$forum."\">"._MD_XHNEWBB_POSTNEW."</a>")); //jidaikobo
 } else {
 	$xoopsTpl->assign('viewer_can_post', false);
 	if ( $show_reg == 1 ) {
@@ -474,8 +474,13 @@ $xoopsTpl->assign( 'u2t_time' , $u2t_time ) ;
 $xoopsTpl->assign( 'u2t_marked' , $u2t_marked ) ;
 $xoopsTpl->assign( 'allow_mark' , @$xoopsModuleConfig['xhnewbb_allow_mark'] ) ;
 
+$xoopsTpl->assign('upper_topic', _MD_XHNEWBB_UPPERTOPIC); //jidaikobo
+$xoopsTpl->assign('lower_topic', _MD_XHNEWBB_LOWERTOPIC); //jidaikobo
+
 
 // setcookie("xhnewbb_topic_lastread", $str4cookie , time()+365*24*3600, $bbCookie['path'], $bbCookie['domain'], $bbCookie['secure']);
+
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';
 ?>

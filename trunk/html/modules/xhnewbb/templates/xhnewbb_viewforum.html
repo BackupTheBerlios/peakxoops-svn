@@ -1,78 +1,85 @@
 <!-- start module contents -->
-<table border="0" width="100%" cellpadding="5" align="center">
-  <tr>
-    <td align="left"><img src="<{$forum_image_folder}>" alt="/" />&nbsp;&nbsp;<a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$forum_index_title}></a> &nbsp; - &nbsp; <a href="<{$mod_url}>/viewallforum.php"><{$lang_alltopicsindex}></a><br />&nbsp;&nbsp;&nbsp;<img src="<{$forum_image_folder}>" alt="/" />&nbsp;&nbsp;<b><{$forum_name}></b><br />(<{$lang_moderatedby}>:<{$forum_moderators}>)</td>
-    <td align="right"><{$forum_post_or_register}></td>
-  </tr>
-</table>
+<div class="xhnewbb">
+<h1><{$forum_name}></h1>
 
-<form action="<{$php_self_abs}>" method="get">
-<table align="center" border="0" width="100%">
-  <tr>
-    <td align="left">
-      <{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_solved}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
-    </td>
-    <td align="right"><{$forum_pagenav}></td>
-  </tr>
-</table>
+<div class="breadcrumbs"><a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$forum_index_title}></a>&nbsp;-&nbsp;<a href="<{$mod_url}>/viewallforum.php"><{$lang_alltopicsindex}></a>&nbsp;&gt;&nbsp;<{$forum_name}>&nbsp;(<{$lang_moderatedby}>:<{$forum_moderators}>)</div>
+
+<ul class="bbsctrl post">
+	<li><{$forum_post_or_register}></li>
+</ul>
+
+<form action="<{$php_self_abs}>" method="get" class="bbsviewctrl">
+<{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_solved}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
 </form>
+
+<div class="pagenav"><{$forum_pagenav}></div>
 
 <!-- start forum main table -->
 <form action="<{$php_self_abs}>" method="post">
 <input type="hidden" name="forum" value="<{$forum_id}>" />
-<table class="outer" cellspacing="1">
-  <tr class="head" align="left">
-    <th width="4%" colspan="2" align="right">
-      <{if $allow_mark && $uid}>
-        <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
-      <{/if}>
-    </th>
-    <th width="40%">&nbsp;<b><a href="<{$h_topic_link}>"><{$lang_topic}></a></b></th>
-    <th width="9%" align="center" nowrap="nowrap"><b><a href="<{$h_reply_link}>"><{$lang_replies}></a></b><br />(<b><a href="<{$h_views_link}>"><{$lang_views}></a></b>)</th>
-    <th width="10%" align="center" nowrap="nowrap"><b><a href="<{$h_poster_link}>"><{$lang_poster}></a></b></th>
-    <th width="15%" align="center" nowrap="nowrap"><b><a href="<{$h_date_link}>"><{$lang_date}></a></b></th>
-  </tr>
-  <!-- start forum topic -->
-  <{foreach item=topic from=$topics}>
-  <tr class="<{cycle values="even,odd"}>">
-    <{strip}>
-    <td align="center"><img src="<{$topic.topic_folder}>" alt="/" /></td>
-    <td align="center">
-      <{$topic.topic_icon}>
-      <{if $allow_mark && $uid}>
-        <br />
-        <input type="checkbox" name="marked[<{$topic.topic_id}>]" <{$topic.mark_checked}> />
-        <input type="hidden" name="topic_ids[]" value="<{$topic.topic_id}>" />
-      <{/if}>
-    </td>
-    <td>&nbsp;<a href="<{$topic.topic_link}>"><{$topic.topic_title}></a><{$topic.topic_page_jump}></td>
-    <td align="center" valign="middle"><{$topic.topic_replies}><br />(<{$topic.topic_views}>)</td>
-    <td align="center" valign="middle"><{$topic.topic_poster}></td>
-    <td align="right" valign="middle"><{$topic.topic_last_posttime}><br /><{$lang_by}> <{$topic.topic_last_poster}></td>
-    <{/strip}>
-  </tr>
-  <{/foreach}>
-  <!-- end forum topic -->
-  <tr class="foot">
-    <td colspan="2" align="right">
-      <{if $allow_mark && $uid}>
-        <input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
-      <{/if}>
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+<table class="outer">
+<thead>
+<tr class="head">
+	<th colspan="2">
+	<{if $allow_mark && $uid}>
+	<input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
+	<{/if}>
+	</th>
+	<th><a href="<{$h_topic_link}>"><{$lang_topic}></a></th>
+	<th><a href="<{$h_reply_link}>"><{$lang_replies}></a><br />(<b><a href="<{$h_views_link}>"><{$lang_views}></a></b>)</th>
+	<th><a href="<{$h_poster_link}>"><{$lang_poster}></a></th>
+	<th><a href="<{$h_date_link}>"><{$lang_date}></a></th>
+</tr>
+</thead>
+<!-- start forum topic -->
+<{foreach item=topic from=$topics}>
+<tr class="<{cycle values="even,odd"}>">
+<{strip}>
+	<td class="status"><img src="<{$topic.topic_folder}>" alt="<{$topic.topic_desc}>" title="<{$topic.topic_desc}>" /></td>
+	<td class="type">
+	<{$topic.topic_icon}>
+	<{if $allow_mark && $uid}>
+	<br />
+	<input type="checkbox" name="marked[<{$topic.topic_id}>]" <{$topic.mark_checked}> />
+	<input type="hidden" name="topic_ids[]" value="<{$topic.topic_id}>" />
+	<{/if}></td>
+	<td><a href="<{$topic.topic_link}>"><{$topic.topic_title}></a><{$topic.topic_page_jump}></td>
+	<td class="replies"><{$topic.topic_replies}><br />(<{$topic.topic_views}>)</td>
+	<td class="poster"><{$topic.topic_poster}></td>
+	<td class="latestpost"><{$topic.topic_last_posttime}><br /><{$lang_by}> <{$topic.topic_last_poster}></td>
+<{/strip}>
+</tr>
+<{/foreach}>
+<!-- end forum topic -->
+<tfoot>
+<tr class="foot">
+	<td colspan="2">
+	<{if $allow_mark && $uid}>
+	<input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
+	<{/if}>
+	</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tfoot>
 </table>
 </form>
 <!-- end forum main table -->
 
-<table align="center" border="0" width="100%">
-  <tr>
-    <td align="left" valign="top"><img src="<{$img_newposts}>" alt="/" /> = <{$lang_newposts}> (<img src="<{$img_hotnewposts}>" alt="/" /> = <{$lang_hotnewposts}>)<br /><img src="<{$img_folder}>" alt="/" /> = <{$lang_nonewposts}> (<img src="<{$img_hotfolder}>" alt="/" /> = <{$lang_hotnonewposts}>)<br /><img src="<{$img_locked}>" alt="/" /> = <{$lang_topiclocked}><br /><img src="<{$img_sticky}>" alt="/" /> = <{$lang_topicsticky}></td>
-    <td align="right" valign="top"><{$forum_pagenav}><br /><{$forum_jumpbox}></td>
-  </tr>
-</table>
+<div class="bbsjumpctrl"><{$forum_jumpbox}></div>
+<div class="pagenav"><{$forum_pagenav}></div>
+
+<ul class="iconexp">
+	<li><img src="<{$img_newposts}>" alt="" /> = <{$lang_newposts}> (<img src="<{$img_hotnewposts}>" alt="" /> = <{$lang_hotnewposts}>)</li>
+	<li><img src="<{$img_folder}>" alt="" /> = <{$lang_nonewposts}> (<img src="<{$img_hotfolder}>" alt="" /> = <{$lang_hotnonewposts}>)</li>
+	<li><img src="<{$img_locked}>" alt="" /> = <{$lang_topiclocked}></li>
+	<li><img src="<{$img_sticky}>" alt="" /> = <{$lang_topicsticky}></li>
+</ul>
+
+<hr class="notification" />
+</div>
+
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->

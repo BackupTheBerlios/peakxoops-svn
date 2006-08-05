@@ -177,5 +177,8 @@ if ($cat_count > 0) {
 	$xoopsTpl->append("categories", array());
 }
 $xoopsTpl->assign(array('mod_url' => XOOPS_URL.'/modules/xhnewbb',"img_hotfolder" => $bbImage['newposts_forum'], "img_folder" => $bbImage['folder_forum'], "img_locked" => $bbImage['locked_forum'], "lang_newposts" => _MD_XHNEWBB_NEWPOSTS, "lang_private" => _MD_XHNEWBB_PRIVATEFORUM, "lang_nonewposts" => _MD_XHNEWBB_NONEWPOSTS, "lang_search" => _MD_XHNEWBB_SEARCH, "lang_advsearch" => _MD_XHNEWBB_ADVSEARCH));
-include_once XOOPS_ROOT_PATH.'/footer.php';
+
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
+include XOOPS_ROOT_PATH.'/footer.php';
 ?>

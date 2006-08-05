@@ -2,7 +2,7 @@
 [xlang:en]
 
 1.30beta
-- rebuilding templates fundamentally now ...
+- rebuilding templates fundamentally now ... (special thx jidaikobo!)
 - changed cat_order from varchar into smallint (thx Ujiki.oO)
 
 1.23 (2006/06/16)
@@ -89,7 +89,7 @@
 [xlang:ja]
 
 1.30beta
-- テンプレートをフルスクラッチ中...
+- テンプレートをフルスクラッチ中... (special thx jidaikobo!)
 - cat_order がなぜか varchar となっていたのを smallint に変更 (thx Ujiki.oO)
 
 1.23 (2006/06/16)

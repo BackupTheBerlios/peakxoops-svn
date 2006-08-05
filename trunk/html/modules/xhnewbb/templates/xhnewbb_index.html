@@ -1,6 +1,5 @@
-<div class="xhnewbb">
-
 <!-- start module contents -->
+<div class="xhnewbb">
 <h1><{$lang_welcomemsg}></h1>
 <p class="welcome"><{$lang_tostart}></p>
 
@@ -16,11 +15,14 @@
 	<li><{$lang_lastvisit}></li>
 </ul>
 
+<{if $forum_index_title == true}>
+<div class="breadcrumbs"><a href="<{$mod_url}>/index.php"><{$forum_index_title}></a></div>
+<{/if}>
+
 <!-- start forum categories -->
 <{section name=category loop=$categories}>
 <h2><{$categories[category].cat_title}></h2>
-<ul class="bbsctrl"><{if $forum_index_title == true}>
-	<li><a href="<{$mod_url}>/index.php"><{$forum_index_title}></a></li><{/if}>
+<ul class="bbsctrl">
 	<li><a href="<{$mod_url}>/index.php?cat=<{$categories[category].cat_id}>"><{$categories[category].cat_title}></a></li>
 	<li><a href="<{$mod_url}>/viewallforum.php?cat=<{$categories[category].cat_id}>"><{$smarty.const._MD_XHNEWBB_TOPICS}></a></li>
 </ul>
@@ -29,8 +31,7 @@
 <table class="outer">
 <thead>
 <tr>
-	<th></th>
-	<th class="forumtitle"><{$lang_forum}></th>
+	<th colspan="2" class="forumtitle"><{$lang_forum}></th>
 	<th><{$smarty.const._MD_XHNEWBB_TOPICS}></th>
 	<th><{$lang_posts}></th>
 	<th><{$lang_lastpost}></th>
@@ -40,7 +41,7 @@
 <!-- start forums -->
 <{section name=forum loop=$categories[category].forums.forum_id}>
 <tr>
-	<td class="even status">
+<td class="even status">
 		<{if $categories[category].forums.forum_type[forum] == 'private'}>
 			<img src="<{$categories[category].forums.forum_folder[forum]}>" alt="<{$lang_private}>" title="<{$lang_private}>" />
 		<{elseif $categories[category].forums.forum_type[forum] == 'newposts'}>
@@ -49,9 +50,9 @@
 			<img src="<{$categories[category].forums.forum_folder[forum]}>" alt="<{$lang_nonewposts}>" title="<{$lang_nonewposts}>" />
 		<{/if}>
 	</td>
-	<td class="odd forumname" onclick="window.location='<{$mod_url}>/viewforum.php?forum=<{$categories[category].forums.forum_id[forum]}>'"><a href="<{$mod_url}>/viewforum.php?forum=<{$categories[category].forums.forum_id[forum]}>">
+	<td class="odd forumname" onclick="window.location='<{$mod_url}>/viewforum.php?forum=<{$categories[category].forums.forum_id[forum]}>'">
 	<dl>
-	<dt><{$categories[category].forums.forum_name[forum]}></a></dt>
+	<dt><a href="<{$mod_url}>/viewforum.php?forum=<{$categories[category].forums.forum_id[forum]}>"><{$categories[category].forums.forum_name[forum]}></a></dt>
 		<dd><{$categories[category].forums.forum_desc[forum]}></dd>
 		<dd class="moderator"><{$lang_moderators}>&nbsp;<{$categories[category].forums.forum_moderators[forum]}></dd>
 	</dl></td>
@@ -66,6 +67,9 @@
 
 <{/section}>
 <!-- end forum categories -->
+<form name="search" action="<{$mod_url}>/search.php" method="post" class="search">
+	<label for="search" class="searchinbbs"><{$lang_search}></label>&nbsp;<input name="term" type="text" size="20" id="search" /><input type="hidden" name="forum" value="all" /><input type="hidden" name="sortby" value="p.post_time desc" /><input type="hidden" name="searchboth" value="both" /><input type="hidden" name="submit" value="<{$lang_search}>" />&nbsp;[<a href="<{$mod_url}>/search.php"><{$lang_advsearch}></a>]
+</form>
 
 <ul class="iconexp">
 	<li><img src="<{$img_hotfolder}>" alt="" /> = <{$lang_newposts}></li>
@@ -73,12 +77,8 @@
 	<li><img src="<{$img_locked}>" alt="" /> = <{$lang_private}></li>
 </ul>
 
-<form name="search" action="<{$mod_url}>/search.php" method="post" class="search">
-	<label for="search" class="searchinbbs"><{$lang_search}></label>&nbsp;<input name="term" type="text" size="20" id="search" /><input type="hidden" name="forum" value="all" /><input type="hidden" name="sortby" value="p.post_time desc" /><input type="hidden" name="searchboth" value="both" /><input type="hidden" name="submit" value="<{$lang_search}>" />&nbsp;[<a href="<{$mod_url}>/search.php"><{$lang_advsearch}></a>]
-</form>
-
 <hr class="notification" />
+</div>
+
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->
-
-</div>

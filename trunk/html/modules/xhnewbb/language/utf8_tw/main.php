@@ -2,6 +2,11 @@
 
 //%%%%%%		Module Name phpBB  		%%%%%
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-08-06 06:01:43
+define('_MD_XHNEWBB_UPPERTOPIC','top of the topics');
+define('_MD_XHNEWBB_LOWERTOPIC','bottom of the topics');
+
 define("_MD_XHNEWBB_UPDATE","更新");
 define("_MD_XHNEWBB_UPDATED","已更新了");
 

@@ -3,6 +3,11 @@
 //%%%%%%		Module Name phpBB  		%%%%%
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-08-06 06:01:42
+define('_MD_XHNEWBB_UPPERTOPIC','top of the topics');
+define('_MD_XHNEWBB_LOWERTOPIC','bottom of the topics');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-05-10 12:17:01
 define('_MD_XHNEWBB_LATESTPOST','latest');
 define('_MD_XHNEWBB_MARK_TURNON','mark this topic');

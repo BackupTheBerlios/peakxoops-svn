@@ -228,5 +228,8 @@ if ( ! empty( $_POST['submit'] ) ) {
 	</table></td></tr></table>';
 }
 CloseTable();
+
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+
 include XOOPS_ROOT_PATH.'/footer.php';
 ?>

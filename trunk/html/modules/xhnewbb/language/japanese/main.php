@@ -37,7 +37,7 @@ define("_MD_XHNEWBB_SEARCH","検索");
 define("_MD_XHNEWBB_SEARCHRESULTS","検索結果");
 define("_MD_XHNEWBB_FORUMINDEX","フォーラム一覧");
 define("_MD_XHNEWBB_ALLTOPICSINDEX","トピック一覧");
-define("_MD_XHNEWBB_POSTNEW","新規トピック作成画面へ");
+define("_MD_XHNEWBB_POSTNEW","新規投稿する");
 define("_MD_XHNEWBB_REGTOPOST","投稿するにはまず登録を");
 
 //search.php
@@ -95,6 +95,10 @@ define("_MD_XHNEWBB_NEXTTOPIC","次のトピック");
 
 define("_MD_XHNEWBB_MARK_TURNON","このトピックをマークする");
 define("_MD_XHNEWBB_MARK_TURNOFF","このトピックのマークを外す");
+
+define("_MD_XHNEWBB_UPPERTOPIC","トピック一覧の上部です"); //jidaikobo
+define("_MD_XHNEWBB_LOWERTOPIC","トピック一覧の下部です"); //jidaikobo
+
 
 //forumform.inc
 define("_MD_XHNEWBB_ABOUTPOST","投稿に関して");
@@ -186,13 +190,13 @@ define("_MD_XHNEWBB_MOVETOPICTO","移動するトピック:");
 define("_MD_XHNEWBB_NOFORUMINDB","データベースにフォーラムはありません");
 define("_MD_XHNEWBB_DATABASEERROR","データベースエラー");
 define("_MD_XHNEWBB_DELTOPIC","トピックを削除する");
-define("_MD_XHNEWBB_TOPICSTICKY","このトピックは固定されています");
-define("_MD_XHNEWBB_STICKYTOPIC","このトピックを固定する");
-define("_MD_XHNEWBB_UNSTICKYTOPIC","このトピックの固定を解除する");
-define("_MD_XHNEWBB_TTHBS","トピックを固定しました");
-define("_MD_XHNEWBB_TTHBUS","トピックの固定を解除しました");
-define("_MD_XHNEWBB_OYPTSBATBOTFTTY","トピック固定ボタンを押すと、選択したトピックを固定します（常にフォーラム最上部に表示）。トピックの固定はいつでも解除することができます。");
-define("_MD_XHNEWBB_OYPTTBATBOTFTTY","トピック固定ボタンを押すと、選択したトピックの固定を解除します。トピックはいつでも再度固定することができます。");
+define("_MD_XHNEWBB_TOPICSTICKY","このトピックは特別扱いされています");
+define("_MD_XHNEWBB_STICKYTOPIC","このトピックを特別扱いする");
+define("_MD_XHNEWBB_UNSTICKYTOPIC","このトピックの特別扱いを解除する");
+define("_MD_XHNEWBB_TTHBS","トピックを特別扱いに変更しました");
+define("_MD_XHNEWBB_TTHBUS","トピックの特別扱いを解除しました");
+define("_MD_XHNEWBB_OYPTSBATBOTFTTY","トピック固定ボタンを押すと、選択したトピックを特別扱いされます（常にフォーラム最上部に表示）。トピックの特別扱いはいつでも解除することができます。");
+define("_MD_XHNEWBB_OYPTTBATBOTFTTY","トピック固定ボタンを押すと、選択したトピックの特別扱いを解除します。トピックはいつでも再度特別扱いすることができます。");
 
 // delete.php
 define("_MD_XHNEWBB_DELNOTALLOWED","この投稿を削除する権限がありません。");

@@ -98,6 +98,10 @@ define("_MD_XHNEWBB_NEXTTOPIC","Next Topic");
 define("_MD_XHNEWBB_MARK_TURNON","mark this topic");
 define("_MD_XHNEWBB_MARK_TURNOFF","unmark this topic");
 
+define("_MD_XHNEWBB_UPPERTOPIC","top of the topics"); //jidaikobo
+define("_MD_XHNEWBB_LOWERTOPIC","bottom of the topics"); //jidaikobo
+
+
 //forumform.inc
 define("_MD_XHNEWBB_ABOUTPOST","About Posting");
 define("_MD_XHNEWBB_ANONCANPOST","<b>Anonymous</b> users can post new topics and replies to this forum");

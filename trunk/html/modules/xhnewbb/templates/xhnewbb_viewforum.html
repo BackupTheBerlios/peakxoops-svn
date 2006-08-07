@@ -37,7 +37,11 @@
 <{strip}>
 	<td class="status"><img src="<{$topic.topic_folder}>" alt="<{$topic.topic_desc}>" title="<{$topic.topic_desc}>" /></td>
 	<td class="type">
-	<{$topic.topic_icon}>
+	<{if $topic.can_flip_solved}>
+	<a href="<{$topic.flip_uri}>"><img src="<{$xoops_url}>/modules/xhnewbb/images/<{$topic.icon}>" alt="<{$topic.icon_alt}>" title="<{$topic.icon_alt}>" /></a>
+	<{else}>
+	<img src="<{$xoops_url}>/modules/xhnewbb/images/<{$topic.icon}>" alt="<{$topic.icon_alt}>" title="<{$topic.icon_alt}>" />
+	<{/if}>
 	<{if $allow_mark && $uid}>
 	<br />
 	<input type="checkbox" name="marked[<{$topic.topic_id}>]" <{$topic.mark_checked}> />

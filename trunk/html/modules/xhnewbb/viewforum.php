@@ -316,14 +316,32 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	}
 	if( $myrow['topic_replies'] > 0 ) $pagination .= '[<a href="'.$topiclink.'&amp;post_id='.$myrow['topic_last_post_id'].'#forumpost'.$myrow['topic_last_post_id'].'">'._MD_XHNEWBB_LATESTPOST.'</a>]' ;
 
-	// icon
-	if( ! preg_match( '/^icon[1-7]\.gif$/' , $myrow['icon'] ) ) $myrow['icon'] = 'icon1.gif' ;
-	if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && ! $myrow['topic_solved'] ) $myrow['icon'] = substr( $myrow['icon'] , 0 , 5 ) . '_r.gif' ;
-	$topic_icon = '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$myrow['icon'].'" alt="" />';
-	// moderator can change solved
-	if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && $uid > 0 && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ) {
-		$topic_icon = "<a href='".XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder&amp;start=$start'>$topic_icon</a>" ;
+	// icon  (icon[1-7].gif)
+	if( ! preg_match( '/^icon([1-7])\.gif$/' , $myrow['icon'] , $regs ) ) {
+		$myrow['icon'] = 'icon1.gif' ;
+		$icon_num = 1 ;
+	} else {
+		$icon_num = intval( $regs[1] ) ;
 	}
+	$myrow['icon_alt'] = defined( '_MD_XHNEWBB_ALT_ICON' . $icon_num ) ? constant( '_MD_XHNEWBB_ALT_ICON' . $icon_num ) : '' ;
+
+	if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) ) {
+		if( $myrow['topic_solved'] ) {
+			$myrow['icon_alt'] .= _MD_XHNEWBB_ALT_SOLVED ;
+			$myrow['solved'] = true ;
+		} else {
+			$myrow['icon'] = substr( $myrow['icon'] , 0 , 5 ) . '_r.gif' ;
+			$myrow['icon_alt'] .= _MD_XHNEWBB_ALT_UNSOLVED ;
+			$myrow['solved'] = false ;
+		}
+	} else {
+		$myrow['solved'] = true ;
+	}
+
+	// moderator can change solved
+	$myrow['can_flip_solved'] = ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && $uid > 0 && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $myrow['forum_id'] , $uid ) ) ;
+
+	$myrow['flip_uri'] = XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum&amp;flip_solved=1&amp;topic_id={$myrow['topic_id']}&amp;solved=$solved&amp;sortname=$sortname&amp;sortsince=$sortsince&amp;sortorder=$sortorder&amp;start=$start" ;
 
 	// topic_poster
 	if ( $myrow['topic_poster'] != 0 && $myrow['uname'] ) {
@@ -335,7 +353,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	// marked
 	$mark_checked = $myrow['u2t_marked'] ? 'checked="checked"' : '' ;
 
-	$xoopsTpl->append('topics', array('topic_id'=>$myrow['topic_id'], 'topic_icon'=>$topic_icon, 'topic_folder'=>$image, 'topic_desc'=>$topic_desc, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time'],'m'), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster']), 'u2t_time' => $myrow['u2t_time'], 'mark_checked' => $mark_checked ));
+	$xoopsTpl->append('topics', array('topic_id'=>$myrow['topic_id'], 'icon'=>$myrow['icon'], 'icon_alt'=>$myrow['icon_alt'], 'solved'=>$myrow['solved'], 'can_flip_solved'=>$myrow['can_flip_solved'], 'flip_uri'=>$myrow['flip_uri'], 'topic_folder'=>$image, 'topic_desc'=>$topic_desc, 'topic_title'=>$myts->makeTboxData4Show($myrow['topic_title']), 'topic_link'=>$topiclink, 'topic_page_jump'=>$pagination, 'topic_replies'=>$myrow['topic_replies'], 'topic_poster'=>$topic_poster, 'topic_views'=>$myrow['topic_views'], 'topic_last_posttime'=>formatTimestamp($myrow['last_post_time'],'m'), 'topic_last_poster'=>$myts->makeTboxData4Show($myrow['last_poster']), 'u2t_time' => $myrow['u2t_time'], 'mark_checked' => $mark_checked ));
 }
 
 $xoopsTpl->assign("mod_url" , XOOPS_URL.'/modules/xhnewbb' ) ;

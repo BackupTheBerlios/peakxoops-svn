@@ -4,6 +4,8 @@
 1.30beta
 - rebuilding templates fundamentally now ... (special thx jidaikobo!)
 - changed cat_order from varchar into smallint (thx Ujiki.oO)
+- modified behaviors of the marking feature
+- added names into topic_icons
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -91,6 +93,8 @@
 1.30beta
 - テンプレートをフルスクラッチ中... (special thx jidaikobo!)
 - cat_order がなぜか varchar となっていたのを smallint に変更 (thx Ujiki.oO)
+- 注目トピック機能の動作修正
+- トピックアイコンに名前をつけた
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

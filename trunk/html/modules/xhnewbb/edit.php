@@ -104,6 +104,7 @@ if ( $forumpost->istopic() ) {
 $subject=$forumpost->subject("Edit");
 $message=$forumpost->text("Edit");
 $solved=$forumpost->solved();
+$u2t_marked=$forumpost->u2t_marked();
 $hidden = "";
 $myts =& MyTextSanitizer::getInstance();
 $viewmode = $myts->htmlspecialchars($viewmode);

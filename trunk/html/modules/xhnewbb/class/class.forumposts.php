@@ -47,6 +47,7 @@ class ForumPosts
 	var $uid;
 	var $icon;
 	var $solved = 0 ;
+	var $u2t_marked = 0 ;
 	var $attachsig;
 	var $prefix;
 	var $db;
@@ -416,6 +417,19 @@ class ForumPosts
 
 	function solved(){
 		return $this->solved;
+	}
+
+	function u2t_marked(){
+		if( is_object( $GLOBALS['xoopsUser'] ) ) {
+			$uid = $GLOBALS['xoopsUser']->getVar('uid') ;
+			$result = $this->db->query( 'SELECT u2t_marked FROM '.$this->db->prefix('xhnewbb_users2topics')." WHERE uid='$uid' AND topic_id='$this->topic_id'" ) ;
+			if( $this->db->getRowsNum( $result ) ) {
+				list( $u2t_marked ) = $this->db->fetchRow( $result ) ;
+			} else {
+				$u2t_marked = 0 ;
+			}
+		}
+		return intval( $u2t_marked ) ;
 	}
 
 	function forum(){

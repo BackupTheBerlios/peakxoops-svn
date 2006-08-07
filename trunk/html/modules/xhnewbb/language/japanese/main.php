@@ -214,4 +214,16 @@ define("_MD_XHNEWBB_BOTTOM","下へ");
 // (don't define for single space languages)
 define('_MD_XHNEWBB_MULTIBYTESPACES','　') ;
 
+// icon meanings
+define('_MD_XHNEWBB_ALT_ICON1','一般') ;
+define('_MD_XHNEWBB_ALT_ICON2','不満') ;
+define('_MD_XHNEWBB_ALT_ICON3','満足') ;
+define('_MD_XHNEWBB_ALT_ICON4','下げ') ;
+define('_MD_XHNEWBB_ALT_ICON5','上げ') ;
+define('_MD_XHNEWBB_ALT_ICON6','報告') ;
+define('_MD_XHNEWBB_ALT_ICON7','質問') ;
+define('_MD_XHNEWBB_ALT_SOLVED','（解決済）') ;
+define('_MD_XHNEWBB_ALT_UNSOLVED','（未解決）') ;
+
+
 ?>

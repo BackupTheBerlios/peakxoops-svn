@@ -167,6 +167,7 @@ if ( !empty($_POST['contents_preview']) ) {
 	$attachsig = !empty($_POST['attachsig']) ? 1 : 0;
 	$icon = preg_match( '/^icon[1-7]\.gif$/' , @$_POST['icon'] ) ? $_POST['icon'] : '' ;
 	$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
+	$u2t_marked = empty( $_POST['u2t_marked'] ) ? 0 : 1 ;
 	$formTitle = _MD_XHNEWBB_FORMTITLEINPREVIEW ;
 	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 	echo"</td></tr></table>";
@@ -226,9 +227,10 @@ if ( !empty($_POST['contents_preview']) ) {
 	// set u2t_marked
 	$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	$topic_id = $forumpost->topic() ;
-	if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && $uid > 0 ) {
-		$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("xhnewbb_users2topics")." SET u2t_marked=1 , u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
-		if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->query( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_marked=1 , u2t_time=".time() ) ;
+	$u2t_marked = empty( $_POST['u2t_marked'] ) ? 0 : 1 ;
+	if( ! empty( $xoopsModuleConfig['xhnewbb_allow_mark'] ) && $uid > 0 ) {
+		$xoopsDB->query( "UPDATE ".$xoopsDB->prefix("xhnewbb_users2topics")." SET u2t_marked=$u2t_marked , u2t_time=".time()." WHERE uid='$uid' AND topic_id='$topic_id'" ) ;
+		if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->query( 'INSERT INTO '.$xoopsDB->prefix('xhnewbb_users2topics')." SET uid='$uid',topic_id='$topic_id',u2t_marked=$u2t_marked , u2t_time=".time() ) ;
 	}
 
 	// RMV-NOTIFY

@@ -180,6 +180,7 @@ $forum_form->addElement(new XoopsFormHidden('pid', intval($pid)));
 $forum_form->addElement(new XoopsFormHidden('post_id', $post_id));
 $forum_form->addElement(new XoopsFormHidden('topic_id', $topic_id));
 $forum_form->addElement(new XoopsFormHidden('forum', intval($forum)));
+$forum_form->addElement(new XoopsFormHidden('u2t_marked', intval(@$u2t_marked)));
 
 $button_tray = new XoopsFormElementTray('' ,'');
 $button_tray->addElement(new XoopsFormButton('', 'contents_preview', _PREVIEW, 'submit'));

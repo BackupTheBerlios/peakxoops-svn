@@ -117,6 +117,7 @@ $pid=$post_id;
 unset($post_id);
 $topic_id=$forumpost->topic();
 $forum=$forumpost->forum();
+$u2t_marked=$forumpost->u2t_marked();
 $isreply =1;
 $istopic = 0;
 $formTitle = _MD_XHNEWBB_REPLY ;

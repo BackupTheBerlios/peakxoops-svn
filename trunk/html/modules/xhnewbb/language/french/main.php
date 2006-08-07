@@ -4,6 +4,18 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-08-07 17:50:20
+define('_MD_XHNEWBB_ALT_ICON1','normal');
+define('_MD_XHNEWBB_ALT_ICON2','unhappy');
+define('_MD_XHNEWBB_ALT_ICON3','happy');
+define('_MD_XHNEWBB_ALT_ICON4','raise it');
+define('_MD_XHNEWBB_ALT_ICON5','lower it');
+define('_MD_XHNEWBB_ALT_ICON6','report');
+define('_MD_XHNEWBB_ALT_ICON7','question');
+define('_MD_XHNEWBB_ALT_SOLVED','(solved)');
+define('_MD_XHNEWBB_ALT_UNSOLVED','(unsolved)');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-08-06 06:01:42
 define('_MD_XHNEWBB_UPPERTOPIC','top of the topics');
 define('_MD_XHNEWBB_LOWERTOPIC','bottom of the topics');

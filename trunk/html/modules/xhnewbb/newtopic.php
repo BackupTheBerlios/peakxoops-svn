@@ -89,6 +89,7 @@ $myts =& MyTextSanitizer::getInstance();
 $hidden = "";
 $post_id = 0;
 $topic_id = 0;
+$u2t_marked = 1;
 $formTitle = _MD_XHNEWBB_POST ;
 include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 

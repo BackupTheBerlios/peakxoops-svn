@@ -68,12 +68,12 @@
 	height			:2em;}
 .xhnewbb .post a{
 	display			:block;
-	background-image	:url(_img_xhnewbb/post.gif);
+	background-image	:url(images/post.gif);
 	width			:60px;
 	height			:22px;
 	text-indent		:-9000px !important;}
 .xhnewbb .post a:hover{
-	background-image	:url(_img_xhnewbb/post_ro.gif);}
+	background-image	:url(images/post_ro.gif);}
 
 /* footctrl */
 
@@ -97,15 +97,15 @@
 	margin-left		:3px;
 	float			:right;
 	display			:block;
-	width			:60px;
-	height			:22px;
+	width			:53px;
+	height			:17px;
 	text-indent		:-9000px !important;}
-.xhnewbb .editctrl a.edit{	background-image	:url(_img_xhnewbb/edit.gif);}
-.xhnewbb .editctrl a.reply{	background-image	:url(_img_xhnewbb/reply.gif);}
-.xhnewbb .editctrl a.delete{	background-image	:url(_img_xhnewbb/delete.gif);}
-.xhnewbb .editctrl a.edit:hover{	background-image	:url(_img_xhnewbb/edit_ro.gif);}
-.xhnewbb .editctrl a.reply:hover{	background-image	:url(_img_xhnewbb/reply_ro.gif);}
-.xhnewbb .editctrl a.delete:hover{	background-image	:url(_img_xhnewbb/delete_ro.gif);}
+.xhnewbb .editctrl a.edit{	background-image	:url(images/edit.gif);}
+.xhnewbb .editctrl a.reply{	background-image	:url(images/reply.gif);}
+.xhnewbb .editctrl a.delete{	background-image	:url(images/delete.gif);}
+.xhnewbb .editctrl a.edit:hover{	background-image	:url(images/edit_ro.gif);}
+.xhnewbb .editctrl a.reply:hover{	background-image	:url(images/reply_ro.gif);}
+.xhnewbb .editctrl a.delete:hover{	background-image	:url(images/delete_ro.gif);}
 
 /* mark */
 

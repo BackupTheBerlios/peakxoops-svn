@@ -12,8 +12,14 @@ function wraps_oninstall_base( $module , $mydirname )
 	// for Cube 2.1
 	if( class_exists( 'XCube_Root' ) ) {
 		$isCube = true ;
-		$root =& XCube_Root::getSingleton();
-		$root->mEventManager->add("Module.Legacy.ModuleInstall.Success", new XCube_Delegate( 'wraps_message_append_oninstall' ) ) ;
+		/* $root =& XCube_Root::getSingleton();
+		$root->mDelegateManager->add('Legacy.Admin.Event.ModuleInstall.' . ucfirst($mydirname) . '.Success' , 'wraps_message_append_oninstall' ) ; */
+
+		$buffer = ob_get_contents() ;
+		ob_start( 'wraps_oninstall_ob_filter' ) ;
+		ob_start() ;
+		echo buffer ;
+
 		$ret = array() ;
 	} else {
 		$isCube = false ;
@@ -105,13 +111,29 @@ function wraps_oninstall_base( $module , $mydirname )
 	return true ;
 }
 
-function wraps_message_append_oninstall( &$controller , &$eventArgs )
+/* function wraps_message_append_oninstall( &$controller )
 {
+	return ;
+
 	if( is_array( @$GLOBALS['ret'] ) ) {
 		foreach( $GLOBALS['ret'] as $message ) {
 			$controller->mLog->add( $message ) ;
 		}
 	}
+} */
+
+function wraps_oninstall_ob_filter( $s )
+{
+	if( is_array( @$GLOBALS['ret'] ) ) {
+		foreach( $GLOBALS['ret'] as $message ) {
+			$replaces .= '<li>'.$message.'</li>' ;
+		}
+		//error_log( $replaces , 3 , '/tmp/error_log' ) ;
+		$s = preg_replace( '/\<div id\=\"contentBody\"\>/' , '<div id="contentBody"><ul>'.$replaces.'</ul>' , $s , 1 ) ;
+	}
+
+	return $s ;
 }
+
 
 ?>

@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGELOG:
 
+2006-08-09 2.25
+- fixed compatibility with Cube 2.1 (thx minahito)
+- modified templates of tinycontent*_index.html (thx jidaikobo)
+
 2006-07-14 2.24
 - changed the spec of "Text without BB" from $myts to htmlspecialchars()
 - remove <pre></pre> from "HTML without HTML"
@@ -210,6 +214,10 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2006-08-09 2.25
+- Cube 2.1 で動かなかったのを修正 (thx minahito)
+- tinycontent*_index.htmlのテンプレートを改善 (thx jidaikobo)
 
 2006-07-14 2.24
 - テキスト(BB無効)の仕様を変更 （htmlspecialchars()に戻し、改行処理も対応）

@@ -7,39 +7,36 @@
 <{* <{if $xoops_isadmin == 1 }><a href="<{$mod_url}>/admin/index.php?op=edit&amp;id=<{$id}>">[Edit]</a><{/if}> *}>
 <{* If you turn this on, disable this module's cache *}>
 
-<div style="padding: 5px; text-align: right; margin-right:3px;">
-  <{if $is_display_print_icon }>
-    <a href="<{$mod_url}>/print.php?id=<{$id}>"><img src="<{$mod_url}>/images/print.gif" border="0" alt="<{$lang_printerpage}>" /></a>
-  <{/if}>
-  <{if $is_display_friend_icon }>
-    <a href="<{$mail_link}>" target="_top"><img src="<{$mod_url}>/images/friend.gif" border="0" alt="<{$lang_sendstory}>" /></a>
-  <{/if}>
-  <{if $is_display_pagenav }>
-    <hr align="left" width="100%" />
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="33%" align="left" valign="top">
-          <{if $prev_link }>
-            <a href="<{$vmod_url}>/<{$prev_link}>" accesskey="P"><{$lang_prevpage}></a>
-            <br />
-            <{$prev_title}>
-          <{/if}>
-        </td>
-        <td width="34%" align="center" valign="top">
-          <a href="<{$vmod_url}>/<{$top_link}>" accesskey="H"><{$lang_topofcontents}></a>
-        </td>
-        <td width="33%" align="right" valign="top">
-          <{if $next_link }>
-            <a href="<{$vmod_url}>/<{$next_link}>" accesskey="N"><{$lang_nextpage}></a>
-            <br />
-            <{$next_title}>
-          <{/if}>
-        </td>
-      </tr>
-    </table>
-  <{/if}>
-</div>
+<{if $is_display_print_icon }>
+	<div style="float:right;width:40px;height:40px;"><a href="<{$mod_url}>/print.php?id=<{$id}>"><img src="<{$mod_url}>/images/print.gif" border="0" alt="<{$lang_printerpage}>" /></a></div>
+<{/if}>
+<{if $is_display_friend_icon }>
+	<div style="float:right;width:40px;height:40px;"><a href="<{$mail_link}>" target="_top"><img src="<{$mod_url}>/images/friend.gif" border="0" alt="<{$lang_sendstory}>" /></a></div>
+<{/if}>
 
+<{if $is_display_pagenav }>
+<hr style="clear:right;" />
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="33%" align="left" valign="top">
+	<{if $prev_link }>
+		<a href="<{$vmod_url}>/<{$prev_link}>" accesskey="P"><{$lang_prevpage}></a><br />
+	<{$prev_title}>
+	<{/if}>
+	</td>
+	<td width="34%" align="center" valign="top">
+		<a href="<{$vmod_url}>/<{$top_link}>" accesskey="H"><{$lang_topofcontents}></a>
+	</td>
+	<td width="33%" align="right" valign="top">
+	<{if $next_link }>
+		<a href="<{$vmod_url}>/<{$next_link}>" accesskey="N"><{$lang_nextpage}></a><br />
+	<{$next_title}>
+	<{/if}>
+	</td>
+</tr>
+</table>
+<{/if}>
 
 
 <{if $nocomments == 0}>

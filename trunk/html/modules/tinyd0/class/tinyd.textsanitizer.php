@@ -21,7 +21,7 @@ class TinyDTextSanitizer extends MyTextSanitizer {
 	*/
 	function TinyDTextSanitizer()
 	{
-
+		parent::MyTextSanitizer() ;
 	}
 
 	/**

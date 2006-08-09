@@ -12,14 +12,8 @@ function wraps_onuninstall_base( $module , $mydirname )
 	// for Cube 2.1
 	if( class_exists( 'XCube_Root' ) ) {
 		$isCube = true ;
-		/* $root =& XCube_Root::getSingleton();
-		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleInstall.' . ucfirst($mydirname) . '.Success' , 'wraps_message_append_onuninstall' ) ; */
-
-		$buffer = ob_get_contents() ;
-		ob_start( 'wraps_onuninstall_ob_filter' ) ;
-		ob_start() ;
-		echo buffer ;
-
+		$root =& XCube_Root::getSingleton();
+		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleUninstall.' . ucfirst($mydirname) . '.Success' , 'wraps_message_append_onuninstall' ) ;
 		$ret = array() ;
 	} else {
 		$isCube = false ;
@@ -67,28 +61,16 @@ function wraps_onuninstall_base( $module , $mydirname )
 	return true ;
 }
 
-/* function wraps_message_append_onuninstall( &$controller , &$eventArgs )
+function wraps_message_append_onuninstall( &$module )
 {
-	return ;
+	$root =& XCube_Root::getSingleton() ;
+	$action =& $root->mController->mActionStrategy->mAction ;
 
 	if( is_array( @$GLOBALS['ret'] ) ) {
 		foreach( $GLOBALS['ret'] as $message ) {
-			$controller->mLog->add( $message ) ;
+			$action->mLog->add( strip_tags( $message ) ) ;
 		}
 	}
-} */
-
-function wraps_onuninstall_ob_filter( $s )
-{
-	if( is_array( @$GLOBALS['ret'] ) ) {
-		foreach( $GLOBALS['ret'] as $message ) {
-			$replaces .= '<li>'.$message.'</li>' ;
-		}
-		//error_log( $replaces , 3 , '/tmp/error_log' ) ;
-		$s = preg_replace( '/\<div id\=\"contentBody\"\>/' , '<div id="contentBody"><ul>'.$replaces.'</ul>' , $s , 1 ) ;
-	}
-
-	return $s ;
 }
 
 

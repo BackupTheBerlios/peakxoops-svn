@@ -12,14 +12,8 @@ function wraps_onupdate_base( $module , $mydirname )
 	// for Cube 2.1
 	if( class_exists( 'XCube_Root' ) ) {
 		$isCube = true ;
-		/* $root =& XCube_Root::getSingleton();
-		$root->mEventManager->add("Module.Legacy.ModuleUpdate.Success", new XCube_Delegate( 'wraps_message_append_onupdate' ) ) ; */
-
-		$buffer = ob_get_contents() ;
-		ob_start( 'wraps_onupdate_ob_filter' ) ;
-		ob_start() ;
-		echo buffer ;
-
+		$root =& XCube_Root::getSingleton();
+		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleUpdate.' . ucfirst($mydirname) . '.Success', 'wraps_message_append_onupdate' ) ;
 		$msgs = array() ;
 	} else {
 		$isCube = false ;
@@ -76,26 +70,18 @@ function wraps_onupdate_base( $module , $mydirname )
 	return true ;
 }
 
-/* function wraps_message_append_onupdate( &$controller , &$eventArgs )
+function wraps_message_append_onupdate( &$module_obj )
 {
+	$root =& XCube_Root::getSingleton() ;
+	$action =& $root->mController->mActionStrategy->mAction ;
+
 	if( is_array( @$GLOBALS['msgs'] ) ) {
 		foreach( $GLOBALS['msgs'] as $message ) {
-			$controller->mLog->add( $message ) ;
+			$action->mLog->add( strip_tags( $message ) ) ;
 		}
 	}
-} */
 
-function wraps_onupdate_ob_filter( $s )
-{
-	if( is_array( @$GLOBALS['msgs'] ) ) {
-		foreach( $GLOBALS['msgs'] as $message ) {
-			$replaces .= '<li>'.$message.'</li>' ;
-		}
-		//error_log( $replaces , 3 , '/tmp/error_log' ) ;
-		$s = preg_replace( '/\<div id\=\"contentBody\"\>/' , '<div id="contentBody"><ul>'.$replaces.'</ul>' , $s , 1 ) ;
-	}
-
-	return $s ;
+	// use mLog->addWarning() or mLog->addError() if necessary
 }
 
 

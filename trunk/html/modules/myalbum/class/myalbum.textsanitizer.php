@@ -21,7 +21,7 @@ class MyAlbumTextSanitizer extends MyTextSanitizer {
 	*/
 	function MyAlbumTextSanitizer()
 	{
-
+		parent::MyTextSanitizer() ;
 	}
 
 	/**

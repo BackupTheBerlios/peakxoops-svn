@@ -16,6 +16,7 @@
  -- added utf8_tw (thx threesecond) 2.87b
  -- modified template myalbum_categories.html (thx red_Slider) 2.87b
 
+ - modified compatiblitiy with Cube 2.1 2.87c
 
 2005-08-31 v2.86 (2.90 alpha)
  - added Duplicatable V2.1
@@ -370,6 +371,8 @@
  -- 繁体中国語入れ替え (thx threesecond) 2.87b
  -- utf8_tw追加 (thx threesecond) 2.87b
  -- テンプレートmyalbum_categories.html の修正 (thx red_Slider) 2.87b
+
+ - Cube 2.1との互換性問題を修正 2.87c
 
 2005-08-31 v2.86 (2.90 alpha)
  - Duplicatable V2.1 実装 (=myalbum* というdirnameからの解放)

@@ -17,8 +17,8 @@ define('_MD_XHNEWBB_ALT_SOLVED','(solved)');
 define('_MD_XHNEWBB_ALT_UNSOLVED','(unsolved)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2006-08-06 06:01:42
-define('_MD_XHNEWBB_UPPERTOPIC','top of the topics');
-define('_MD_XHNEWBB_LOWERTOPIC','bottom of the topics');
+define('_MD_XHNEWBB_UPPERTOPIC','top of the posts');
+define('_MD_XHNEWBB_LOWERTOPIC','bottom of the posts');
 
 // Appended by Xoops Language Checker -GIJOE- in 2006-05-10 12:17:01
 define('_MD_XHNEWBB_LATESTPOST','latest');

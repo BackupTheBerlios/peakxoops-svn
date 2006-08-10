@@ -32,16 +32,16 @@
 
 	<td class="even editctrl">
 
-	<{if $topic_post.can_edit}>
-	<a href="<{$mod_url}>/edit.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"  class="edit"><{$lang_edit}></a>
+	<{if $topic_post.can_reply}>
+	<a href='<{$mod_url}>/reply.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='reply'><{$lang_reply}></a>
 	<{/if}>
 
 	<{if $topic_post.can_delete}>
 	<a href='<{$mod_url}>/delete.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='delete'><{$lang_delete}></a>
 	<{/if}>
 
-	<{if $topic_post.can_reply}>
-	<a href='<{$mod_url}>/reply.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='reply'><{$lang_reply}></a>
+	<{if $topic_post.can_edit}>
+	<a href="<{$mod_url}>/edit.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"  class="edit"><{$lang_edit}></a>
 	<{/if}>
 
 	</td>

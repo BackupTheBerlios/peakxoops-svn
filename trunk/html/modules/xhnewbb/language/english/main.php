@@ -98,8 +98,8 @@ define("_MD_XHNEWBB_NEXTTOPIC","Next Topic");
 define("_MD_XHNEWBB_MARK_TURNON","mark this topic");
 define("_MD_XHNEWBB_MARK_TURNOFF","unmark this topic");
 
-define("_MD_XHNEWBB_UPPERTOPIC","top of the topics"); //jidaikobo
-define("_MD_XHNEWBB_LOWERTOPIC","bottom of the topics"); //jidaikobo
+define("_MD_XHNEWBB_UPPERTOPIC","top of the posts"); //jidaikobo
+define("_MD_XHNEWBB_LOWERTOPIC","bottom of the posts"); //jidaikobo
 
 
 //forumform.inc

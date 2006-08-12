@@ -209,15 +209,22 @@ if( $txt != "" ) {
 	$whr_txt = '1' ;
 }
 
+// Pre query for rrule events
+$prs = mysql_query( "SELECT distinct rrule_pid FROM $cal->table WHERE $whr_cid AND $whr_txt AND $whr_pf AND rrule_pid>0" , $conn ) ;
+$pids = array() ;
+while( list( $pid ) = mysql_fetch_row( $prs ) ) {
+	$pids[] = $pid ;
+}
 
-$whr = "$whr_cid AND $whr_txt AND $whr_pf AND rrule_pid=0 OR $whr_cid AND $whr_txt AND rrule_pid=id" ;
+// UNION "not recur events" and "recur events"
+$whr = "$whr_cid AND $whr_txt AND $whr_pf AND rrule_pid=0 OR id IN (".implode(",",$pids).")" ;
 
-// クエリ
+// Main query
 $rs = mysql_query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" , $conn ) ;
 $numrows = mysql_result( $rs , 0 , 0 ) ;
 $rs = mysql_query( "SELECT * FROM $cal->table WHERE $whr ORDER BY start,end LIMIT $pos,$num" , $conn ) ;
 
-// ページ分割処理
+// Page Navigation
 include XOOPS_ROOT_PATH.'/class/pagenav.php';
 $nav = new XoopsPageNav( $numrows , $num , $pos , 'pos' , "cid=$cid&amp;tz=$tz&amp;num=$num&amp;pf=$pf&amp;txt=" . urlencode($txt) ) ;
 $nav_html = $nav->renderNav( 10 ) ;

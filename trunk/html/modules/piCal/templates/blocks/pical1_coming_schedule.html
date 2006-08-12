@@ -1,6 +1,6 @@
 <{if $block.num_rows == 0}>
   <{$block.lang_PICAL_MB_NOEVENT}>
-<{/if}>
+<{else}>
 
   <dl>
     <{foreach item=event from=$block.events}>
@@ -36,3 +36,4 @@
       </dt>
     </dl>
   <{/if}>
+<{/if}>

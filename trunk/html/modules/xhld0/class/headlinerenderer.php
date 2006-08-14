@@ -94,6 +94,12 @@ class XhldRenderer
 				$snoopy->user = $this->config['proxy_user'] ;
 				$snoopy->pass = $this->config['proxy_pass'] ;
 			}
+			// set curl_path for SSL access
+			if( file_exists( '/usr/bin/curl' ) ) {
+				$snoopy->curl_path = '/usr/bin/curl' ;
+			} else {
+				$snoopy->curl_path = '/usr/local/bin/curl' ;
+			}
 			//URL fetch
 			if( ! $snoopy->fetch( $this->_hl->getVar( 'headline_rssurl' ) ) || ! $snoopy->results ) {
 				// set errors

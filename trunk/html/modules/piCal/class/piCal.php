@@ -2575,8 +2575,8 @@ function get_sql_set( $cols )
 
 		// 未定義なら''と見なす
 		if( ! isset( $_POST[ $col ] ) ) $data = '' ;
-		else if( get_magic_quotes_gpc() ) $data = $_POST[ $col ] ;
-		else $data = addslashes( $_POST[ $col ] ) ;
+		else if( get_magic_quotes_gpc() ) $data = stripslashes( $_POST[ $col ] ) ;
+		else $data = $_POST[ $col ] ;
 
 		// 必須フィールドのチェック
 		if( $essential && $data === '' ) {
@@ -2599,8 +2599,7 @@ function get_sql_set( $cols )
 		// フィールドの型による処理
 		switch( $field ) {
 			case 'A' :	// textarea
-				$data = $this->textarea_sanitizer_for_sql( $data ) ;
-				$ret .= "$col='$data'," ;
+				$ret .= "$col='".addslashes($data)."'," ;
 				break ;
 			case 'I' :	// integer
 				$data = intval( $data ) ;
@@ -2611,10 +2610,9 @@ function get_sql_set( $cols )
 				$ret .= "$col='$data'," ;
 				break ;
 			default :	// varchar(デフォルト)は数値による文字数指定
-				$data = $this->text_sanitizer_for_sql( $data ) ;
 				if( $field < 1 ) $field = 255 ;
 				$data = mb_strcut( $data , 0 , $field ) ;
-				$ret .= "$col='$data'," ;
+				$ret .= "$col='".addslashes($data)."'," ;
 		}
 	}
 
@@ -2900,25 +2898,6 @@ function mb_convert_kana( $str , $option )
 /*******************************************************************/
 /*   サニタイズ関連の関数 (サブクラスを作成する時のOverride対象)   */
 /*******************************************************************/
-
-function textarea_sanitizer_for_sql( $data )
-{
-	// 単純に全タグを無効とするsanitize
-	$data = strip_tags( $data ) ;
-	/* この機能はpiCalでは使わない
-	if( isset( $_POST[ 'flg_nl2br' ] ) && $_POST[ 'flg_nl2br' ] ) {
-		$data = nl2br( $data ) ;
-		$data = str_replace( '<br /><br />' , '<br>' , $data ) ;
-		$data = str_replace( '<br />' , '<br>' , $data ) ;
-	} */
-	return $data ;
-}
-
-function text_sanitizer_for_sql( $data )
-{
-	// 単純に全タグを無効とするsanitize
-	return strip_tags( $data ) ;
-}
 
 function textarea_sanitizer_for_show( $data )
 {

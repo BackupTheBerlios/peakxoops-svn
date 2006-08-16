@@ -9,18 +9,10 @@ if( ! class_exists( 'piCal_xoops' ) ) {
 
 class piCal_xoops extends piCal {
 
-function textarea_sanitizer_for_sql( $data )
-{
-//	preventing double-addslashes()
-//	$myts =& MyTextSanitizer::getInstance();
-//	return $myts->makeTareaData4Save($data);
-	return $data ;
-}
-
 function textarea_sanitizer_for_show( $data )
 {
 	$myts =& MyTextSanitizer::getInstance();
-	return $myts->makeTareaData4Show($data);
+	return $myts->displayTarea($data,0,1,1,1,1);
 }
 
 function textarea_sanitizer_for_edit( $data )
@@ -32,7 +24,7 @@ function textarea_sanitizer_for_edit( $data )
 function textarea_sanitizer_for_export_ics( $data )
 {
 	$myts =& MyTextSanitizer::getInstance();
-	return $myts->makeTareaData4Show($data);
+	return $myts->displayTarea($data,0,1,1,1,1);
 }
 
 function text_sanitizer_for_show( $data )

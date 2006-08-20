@@ -1,25 +1,19 @@
 <script type="text/javascript" src="<{$mod_url}>/phpdate.js"></script>
 <h4 style="text-align:left;"><{$lang_headlines}></h4>
 <div style='padding: 1px; text-align: left;'>
-<table width="100%">
-  <tr>
-    <!-- start site loop -->
-    <{foreach item=site from=$feed_sites}>
-      <td>
-        <{if $site.syndication == 'ATOM' }>
-          <img src="images/atom.gif" />&nbsp;
-        <{else}>
-          <img src="images/rss.gif" />&nbsp;
-        <{/if}>
-        <a href="<{$mod_url}>/index.php?id=<{$site.id}>"><{$site.name}></a>
-      <{cycle values="</td>,</td></tr><tr>"}>
-    <{/foreach}>
-    <!-- end site loop -->
-  </tr>
-</table>
+  <{foreach item=site from=$feed_sites}>
+    <div style="float:left; margin: 8px;">
+      <{if $site.syndication == 'ATOM' }>
+        <img src="images/atom.gif" />
+      <{else}>
+        <img src="images/rss.gif" />
+      <{/if}>
+      <a href="<{$mod_url}>/index.php?id=<{$site.id}>"><{$site.name}></a>
+    </div>
+  <{/foreach}>
 </div>
 
-<hr>
+<hr style="clear: left;" />
 
 <{if $headline}>
   <{$headline}>

@@ -3,6 +3,7 @@ CHANGES:
 
 v.3.05 2006-08-15
   - modified SSL access by snoopy (thx mario)
+  - modified templates for xhld valid (thx dpicella) 3.05a
 
 v.3.04 2006-05-28
   - fixed some reference notices
@@ -246,6 +247,7 @@ v2.00 2004-7-9
 
 v.3.05 2006-08-15
   - SnoopyでのSSL利用時のcurl_path設定を行うようにした (thx mario)
+  - 一部のテンプレートがxhld invalidだったのを修正 (thx dpicella) 3.05a
 
 v.3.04 2006-05-28
   - 参照渡しの関連のミスをさらに修正

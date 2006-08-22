@@ -25,12 +25,20 @@
 	$range_end_s = mktime(0,0,0,$this->month,$this->date+2,$this->year) ;
 
 	// query
-	$result = $db->query( "SELECT title,e.eid,exid,IF(exdate,exdate,edate),summary, IF(x.reserved,x.reserved,o.reserved)/persons*100, closetime, style FROM ".
+        $cond = isset($_GET['eid'])?" AND e.eid=".intval($_GET['eid']):"";
+	$result = $db->query( "SELECT title,e.eid,exid,
+IF(exdate,exdate,edate) edate,summary, 
+IF(x.reserved,x.reserved,o.reserved)/persons*100, closetime, style FROM ".
 			      $db->prefix("eguide")." e LEFT JOIN ".
 			      $db->prefix("eguide_opt")." o ON e.eid=o.eid LEFT JOIN ".
-			      $db->prefix("eguide_extent")." x ON e.eid=eidref WHERE ((edate BETWEEN $range_start_s AND $range_end_s AND exdate IS NULL) OR exdate BETWEEN $range_start_s AND $range_end_s) AND IF(exdate,exdate,edate) BETWEEN $range_start_s AND $range_end_s ORDER BY exdate,edate" ) ;
+			      $db->prefix("eguide_extent")." x ON e.eid=eidref 
+WHERE ((edate BETWEEN $range_start_s AND $range_end_s AND exdate IS NULL) 
+  OR exdate BETWEEN $range_start_s AND $range_end_s) 
+AND IF(exdate,exdate,edate) BETWEEN $range_start_s AND $range_end_s 
+AND status=0 $cond ORDER BY edate" ) ;
 
 
+if (!function_exists("eguide_marker")) {
 function eguide_marker($full) {
     global $marker;
     if (empty($marker)) {
@@ -46,15 +54,17 @@ function eguide_marker($full) {
     }
     return '';
 }
+}
 
 	while( list( $title , $id , $sub, $edate , $description , $full, $close, $style) = $db->fetchRow( $result ) ) {
 		if (($edate-$close)<$now) $full = -1;
 		$mark = eguide_marker($full);
-		$server_time = empty($exdate)?$edate:$exdate;
+		$server_time = $edate;
 
 		$user_time = $server_time + $tzoffset_s2u ;
 		if( date( 'j' , $user_time ) != $this->date ) continue ;
 		$target_date = date('j',$user_time) ;
+		$mark .= ' '.date('H:i',$user_time) ; // show time
 		$param ="eid=$id".(empty($sub)?'':"&amp;sub=$sub");
 		$br = 0;
 		$html = 1;

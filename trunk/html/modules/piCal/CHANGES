@@ -4,6 +4,9 @@ v.088 spec changes about specialchars (2006-08-17)
 - changed disallow HTML in description
 - changed allow specialchars can be input into varchars
 - updated gticket2
+- updated a plugin
+-- eguide 2.0 (thx nobu) 0.88a
+- fixed SQL error in event manager (thx akaba) 0.88a
 
 v.087 some fixes (2006-6-9)
 - removed timestamp from rss feed for ordering
@@ -351,6 +354,9 @@ v.088 特殊キャラクターの扱いの仕様変更 (2006-08-17)
 - 詳細の表示で、htmlspecialcharsをかけるようにした
 - 詳細以外のテキスト受け取りで、最初にstrip_tags()をかけていたのをやめた
 - 内蔵gticketをバージョン2に更新
+- プラグイン更新
+-- eguide 2.0 (thx nobu) 0.88a
+- イベント管理でSQLエラーが発生していたのを修正 (thx akaba) 0.88a
 
 v.087 多少のバグ潰し (2006-6-9)
 - rss2_*.php でのpubDate出力をやめた。（xhldで受ければそのままcomingになるはず）

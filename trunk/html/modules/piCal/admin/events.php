@@ -217,7 +217,8 @@ while( list( $pid ) = mysql_fetch_row( $prs ) ) {
 }
 
 // UNION "not recur events" and "recur events"
-$whr = "$whr_cid AND $whr_txt AND $whr_pf AND rrule_pid=0 OR id IN (".implode(",",$pids).")" ;
+$whr = "$whr_cid AND $whr_txt AND $whr_pf AND rrule_pid=0" ;
+if( ! empty( $pids ) ) $whr .= " OR id IN (".implode(",",$pids).")" ;
 
 // Main query
 $rs = mysql_query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" , $conn ) ;

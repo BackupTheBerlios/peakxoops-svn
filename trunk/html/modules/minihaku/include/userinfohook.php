@@ -8,7 +8,7 @@
 // 
 // <tr>
 // <td class="head">sex</td>
-// <td align="center" class="odd"><{$user_uid|minihaku_userinfo:"sex"}></td>
+// <td align="center" class="odd"><{$user_uid|minihaku_userinfo:"sex":"uid"}></td>
 // </tr>
 
 ?>

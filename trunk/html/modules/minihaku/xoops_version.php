@@ -1,7 +1,7 @@
 <?php
 
 $modversion['name'] = 'minihaku';
-$modversion['version'] = 1.05;
+$modversion['version'] = 1.06;
 $modversion['description'] = 'simple subset of hakusen';
 $modversion['author'] = "GIJOE";
 $modversion['credits'] = "PEAK Corp.";

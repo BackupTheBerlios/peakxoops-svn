@@ -20,7 +20,7 @@ Usage:
 If you want to display extra fields into userinfo, describe it into system_userinfo.html
 eg)
 [code]
-<{$user_uid|minihaku_userinfo:"sex"}>
+<{$user_uid|minihaku_userinfo:"sex":"uid"}>
 [/code]
 
 
@@ -45,14 +45,18 @@ eg)
 あとは、必要に応じて、テンプレートをaltsysもしくはtplsadminで編集してください。
 edituserとregisterについては、minihaku内にテンプレートがありますが、userinfoはsystemのをそのまま利用する、というあたりがつまづきやすいポイントでしょうか。
 
-system_userinfo.html において、追加したフィールドの値を表示したい場合は、Smartyのフィルタプラグイン minihaku_userinfo を利用します。
+system_userinfo.html において、追加したフィールドの値を表示したい場合は、Smartyのフィルタプラグイン minihaku_userinfo を利用します。（実のところ、userinfo.htmlには、管理者以外にはuidが渡ってこないことが判明したため、$_GET["uid"]から拾っています。そういう意味では、フィルタプラグインとしての利用ではないのですが…）
 例) 性別を表示する
 [code]
-<{$user_uid|minihaku_userinfo:"sex"}>
+<{$user_uid|minihaku_userinfo:"sex":"uid"}>
 [/code]
 
 usersテーブルにフィールドを増やすこと自体は、DBに対して、ALTER TABLEを直接発行してください。判らなければ、phpMyAdminを利用するのも手でしょう。
 
 いわゆるコントローラっぽいものは一切用意していません。つまり、判る人にだけ判ればいいや、てな作りになってますが、基本的に、テンプレートとincldue/config.phpだけをいじれば良いはずです。特定のキーが入力された時だけ、あるグループに所属させる、なんてことも簡単にできるようにはしてあります。
 
+1.06 2006-08-26
+- userinfo.html に user_uid がアサインされていないのでプラグインを変更 (thx nico)
+
 [/xlang:ja]
+

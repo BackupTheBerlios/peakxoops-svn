@@ -6,6 +6,7 @@
 1.05 (2006/09/05)
 - modified compatibility with Cube 2.1 alpha4-c
 - modified global search can find recursively
+- added preload/ for future features
 
 1.04 (2006/08/09)
 - modified compatibility with Cube 2.1 alpha4
@@ -40,6 +41,7 @@
 1.05 (2006/09/05)
 - Cube 2.1 alpha4-c により沿ったコードに書き換えた
 - 検索機能がサブフォルダー内のHTML等にも対応
+- 将来のためにpreloadをroot_path側に持たせておいた
 
 1.04 (2006/08/09)
 - Cube 2.1 alpha4 との相性問題改善

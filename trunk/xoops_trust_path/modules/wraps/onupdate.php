@@ -10,13 +10,11 @@ function wraps_onupdate_base( $module , $mydirname )
 	global $msgs ; // TODO :-D
 
 	// for Cube 2.1
-	if( class_exists( 'XCube_Root' ) ) {
-		$isCube = true ;
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 		$root =& XCube_Root::getSingleton();
 		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleUpdate.' . ucfirst($mydirname) . '.Success', 'wraps_message_append_onupdate' ) ;
 		$msgs = array() ;
 	} else {
-		$isCube = false ;
 		if( ! is_array( $msgs ) ) $msgs = array() ;
 	}
 
@@ -52,7 +50,7 @@ function wraps_onupdate_base( $module , $mydirname )
 					$msgs[] = 'Template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b> added to the database. (ID: <b>'.$tplid.'</b>)';
 					// generate compiled file
 					include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php' ;
-					include_once XOOPS_ROOT_PATH.'/class/template.php';
+					include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 					if( ! xoops_template_touch( $tplid ) ) {
 						$msgs[] = '<span style="color:#ff0000;">ERROR: Failed compiling template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b>.</span>';
 					} else {
@@ -70,14 +68,11 @@ function wraps_onupdate_base( $module , $mydirname )
 	return true ;
 }
 
-function wraps_message_append_onupdate( &$module_obj )
+function wraps_message_append_onupdate( &$module_obj , &$log )
 {
-	$root =& XCube_Root::getSingleton() ;
-	$action =& $root->mController->mActionStrategy->mAction ;
-
 	if( is_array( @$GLOBALS['msgs'] ) ) {
 		foreach( $GLOBALS['msgs'] as $message ) {
-			$action->mLog->add( strip_tags( $message ) ) ;
+			$log->add( strip_tags( $message ) ) ;
 		}
 	}
 

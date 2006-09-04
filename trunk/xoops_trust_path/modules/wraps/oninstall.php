@@ -10,13 +10,11 @@ function wraps_oninstall_base( $module , $mydirname )
 	global $ret ; // TODO :-D
 
 	// for Cube 2.1
-	if( class_exists( 'XCube_Root' ) ) {
-		$isCube = true ;
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 		$root =& XCube_Root::getSingleton();
-		$root->mDelegateManager->add('Legacy.Admin.Event.ModuleInstall.' . ucfirst($mydirname) . '.Success' , 'wraps_message_append_oninstall' ) ;
+		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleInstall.' . ucfirst($mydirname) . '.Success' , 'wraps_message_append_oninstall' ) ;
 		$ret = array() ;
 	} else {
-		$isCube = false ;
 		if( ! is_array( $ret ) ) $ret = array() ;
 	}
 
@@ -105,14 +103,11 @@ function wraps_oninstall_base( $module , $mydirname )
 	return true ;
 }
 
-function wraps_message_append_oninstall( &$module_obj )
+function wraps_message_append_oninstall( &$module_obj , &$log )
 {
-	$root =& XCube_Root::getSingleton() ;
-	$action =& $root->mController->mActionStrategy->mAction ;
-
 	if( is_array( @$GLOBALS['ret'] ) ) {
 		foreach( $GLOBALS['ret'] as $message ) {
-			$action->mLog->add( strip_tags( $message ) ) ;
+			$log->add( strip_tags( $message ) ) ;
 		}
 	}
 

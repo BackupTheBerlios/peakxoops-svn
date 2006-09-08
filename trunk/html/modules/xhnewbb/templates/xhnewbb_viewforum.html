@@ -4,15 +4,16 @@
 
 <div class="breadcrumbs"><a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$forum_index_title}></a>&nbsp;-&nbsp;<a href="<{$mod_url}>/viewallforum.php"><{$lang_alltopicsindex}></a>&nbsp;&gt;&nbsp;<{$forum_name}>&nbsp;(<{$lang_moderatedby}>:<{$forum_moderators}>)</div>
 
-<ul class="bbsctrl post">
+<ul class="post">
 	<li><{$forum_post_or_register}></li>
 </ul>
 
-<form action="<{$php_self_abs}>" method="get" class="bbsviewctrl">
-<{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_solved}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
-</form>
-
-<div class="pagenav"><{$forum_pagenav}></div>
+<div class="bbsviewctrl">
+	<form action="<{$php_self_abs}>" method="get">
+	<{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_solved}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
+	</form>
+	<{$forum_pagenav}>
+</div>
 
 <!-- start forum main table -->
 <form action="<{$php_self_abs}>" method="post">
@@ -55,25 +56,25 @@
 </tr>
 <{/foreach}>
 <!-- end forum topic -->
-<tfoot>
+<{if $allow_mark && $uid}>
 <tr class="foot">
-	<td colspan="2">
-	<{if $allow_mark && $uid}>
+	<td colspan="2" class="type">
 	<input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
-	<{/if}>
 	</td>
 	<td></td>
 	<td></td>
 	<td></td>
 	<td></td>
 </tr>
-</tfoot>
+<{/if}>
 </table>
 </form>
 <!-- end forum main table -->
 
-<div class="bbsjumpctrl"><{$forum_jumpbox}></div>
-<div class="pagenav"><{$forum_pagenav}></div>
+<div class="bbsviewctrl">
+	<div class="bbsjumpctrl"><{$forum_jumpbox}></div>
+	<{$forum_pagenav}>
+</div>
 
 <ul class="iconexp">
 	<li><img src="<{$img_newposts}>" alt="" /> = <{$lang_newposts}> (<img src="<{$img_hotnewposts}>" alt="" /> = <{$lang_hotnewposts}>)</li>

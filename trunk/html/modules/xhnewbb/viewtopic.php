@@ -84,8 +84,10 @@ if ( !$forumdata = $xoopsDB->fetchArray($result) ) {
 	die(_MD_XHNEWBB_FORUMNOEXIST);
 }
 
+$myts =& MyTextSanitizer::getInstance();
 
 $xoopsTpl->assign('topic_id', $forumdata['topic_id']);
+$xoopsTpl->assign( 'xoops_pagetitle' , $myts->makeTboxData4Show($forumdata['topic_title'] ) ) ;
 $topic_id = $forumdata['topic_id'];
 $xoopsTpl->assign('forum_id', $forumdata['forum_id']);
 $forum = $forumdata['forum_id'];
@@ -136,7 +138,6 @@ if ( $forumdata['forum_type'] == 1 ) {
 		}
 	}
 }
-$myts =& MyTextSanitizer::getInstance();
 $forumdata['topic_title'] = $myts->makeTboxData4Show($forumdata['topic_title']);
 $forumdata['forum_name'] = $myts->makeTboxData4Show($forumdata['forum_name']);
 

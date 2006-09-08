@@ -1,30 +1,33 @@
+<!-- start module contents -->
 <div class="xhnewbb">
 <h1><{$lang_alltopicsindex}></h1>
 
-<div class="breadcrumbs"><a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$forum_index_title}></a>&nbsp;>&nbsp;<a href="<{$mod_url}>/viewallforum.php"><{$lang_alltopicsindex}></a></div>
+<div class="breadcrumbs"><a href="<{$xoops_url}>/modules/xhnewbb/index.php"><{$forum_index_title}></a>&nbsp;&gt;&nbsp;<a href="<{$mod_url}>/viewallforum.php"><{$lang_alltopicsindex}></a></div>
 
-<!-- start module contents -->
-<form action="<{$php_self_abs}>" method="get" class="bbsviewctrl">
-<{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_solved}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
-</form>
-<div class="pagenav"><{$forum_pagenav}></div>
+<div class="bbsviewctrl">
+	<form action="<{$php_self_abs}>" method="get">
+	<{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_solved}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
+	</form>
+	<{$forum_pagenav}>
+</div>
 
 <!-- start forum main table -->
 <form action="<{$php_self_abs}>" method="post">
 <input type="hidden" name="forum" value="<{$forum_id}>" />
+
 <table class="outer">
 <thead>
 <tr class="head">
-	<th width="4%" colspan="2" align="right">
+	<th colspan="2">
 	<{if $allow_mark && $uid}>
 	<input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
 	<{/if}>
 	</th>
 	<th><a href="<{$h_forum_link}>"><{$lang_forum}></a></th>
-	<th width="40%"><a href="<{$h_topic_link}>"><{$lang_topic}></a></th>
-	<th width="9%" align="center" nowrap="nowrap"><a href="<{$h_reply_link}>"><{$lang_replies}></a><br />(<a href="<{$h_views_link}>"><{$lang_views}></a>)</th>
-	<th width="10%" align="center" nowrap="nowrap"><a href="<{$h_poster_link}>"><{$lang_poster}></a></th>
-	<th width="15%" align="center" nowrap="nowrap"><a href="<{$h_date_link}>"><{$lang_date}></a></th>
+	<th><a href="<{$h_topic_link}>"><{$lang_topic}></a></th>
+	<th><a href="<{$h_reply_link}>"><{$lang_replies}></a><br />(<a href="<{$h_views_link}>"><{$lang_views}></a>)</th>
+	<th><a href="<{$h_poster_link}>"><{$lang_poster}></a></th>
+	<th><a href="<{$h_date_link}>"><{$lang_date}></a></th>
 </tr>
 </thead>
 <!-- start forum topic -->
@@ -34,14 +37,14 @@
 	<td class="status"><img src="<{$topic.topic_folder}>" alt="<{$topic.topic_desc}>" title="<{$topic.topic_desc}>" /></td>
 	<td class="type">
 	<{if $topic.can_flip_solved}>
-	<a href="<{$topic.flip_uri}>"><img src="<{$xoops_url}>/modules/xhnewbb/images/<{$topic.icon}>" alt="<{$topic.icon_alt}>" title="<{$topic.icon_alt}>" /></a>
-	<{else}>
-	<img src="<{$xoops_url}>/modules/xhnewbb/images/<{$topic.icon}>" alt="<{$topic.icon_alt}>" title="<{$topic.icon_alt}>" />
+		<a href="<{$topic.flip_uri}>"><img src="<{$xoops_url}>/modules/xhnewbb/images/<{$topic.icon}>" alt="<{$topic.icon_alt}>" title="<{$topic.icon_alt}>" /></a>
+		<{else}>
+		<img src="<{$xoops_url}>/modules/xhnewbb/images/<{$topic.icon}>" alt="<{$topic.icon_alt}>" title="<{$topic.icon_alt}>" />
 	<{/if}>
 	<{if $allow_mark && $uid}>
-	<br />
-	<input type="checkbox" name="marked[<{$topic.topic_id}>]" <{$topic.mark_checked}> />
-	<input type="hidden" name="topic_ids[]" value="<{$topic.topic_id}>" />
+		<br />
+		<input type="checkbox" name="marked[<{$topic.topic_id}>]" <{$topic.mark_checked}> />
+		<input type="hidden" name="topic_ids[]" value="<{$topic.topic_id}>" />
 	<{/if}>
 	</td>
 	<td class="forums"><a href="<{$mod_url}>/viewforum.php?forum=<{$topic.forum_id}>"><{$topic.forum_name}></a></td>
@@ -53,27 +56,24 @@
 </tr>
 <{/foreach}>
 <!-- end forum topic -->
-<tfoot>
+<{if $allow_mark && $uid}>
 <tr class="foot">
-	<td colspan="2">
-	<{if $allow_mark && $uid}>
+	<td colspan="2" class="type">
 	<input type="submit" name="update_mark" value="<{$smarty.const._MD_XHNEWBB_UPDATE}>" />
-	<{/if}>
 	</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
+	<td colspan="5"></td>
 </tr>
-</tfoot>
+<{/if}>
 </table>
 </form>
 <!-- end forum main table -->
 
-<div class="bbsjumpctrl"><{$forum_jumpbox}></div>
-<div class="pagenav"><{$forum_pagenav}></div>
+<div class="bbsviewctrl">
+	<div class="bbsjumpctrl"><{$forum_jumpbox}></div>
+	<{$forum_pagenav}>
+</div>
 
+<hr class="notification" />
 </div>
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->

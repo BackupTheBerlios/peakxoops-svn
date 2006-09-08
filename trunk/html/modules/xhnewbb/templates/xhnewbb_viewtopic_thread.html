@@ -3,31 +3,32 @@
 <h1><{$forum_name}>&nbsp;:&nbsp;<{$topic_title}></h1>
 <div class="breadcrumbs"><a href='<{$mod_url}>/index.php'><{$lang_forum_index}></a>&nbsp;-&nbsp;<a href="<{$mod_url}>/viewallforum.php"><{$lang_alltopicsindex}></a>&nbsp;&gt;&nbsp;<a href='<{$mod_url}>/viewforum.php?forum=<{$forum_id}>'><{$forum_name}></a>&nbsp;&gt;&nbsp;<{$topic_title}></div>
 
-<ul class="bbsctrl post">
+<ul class="post">
 	<li><{$forum_post_or_register}></li>
 </ul>
 
 <!-- start topic thread -->
-<div class="ctrl">
-<{if $uid > 0 }>
-<{if $allow_mark}>
-	<span class="mark"><{if $u2t_marked}>
-	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;change_u2t_mark=off">
-	<img src="<{$mod_url}>/images/mark_on.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" /></a>
-	<{else}>
-	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;change_u2t_mark=on">
-	<img src="<{$mod_url}>/images/mark_off.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" /></a>
-	<{/if}></span>
-<{/if}>
-<{/if}>
-<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread"><{$lang_threaded}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_other}>"><{$lang_order_other}></a></div>
+<div class="topicviewctrl">
+	<div class="topicorderctrl"><{if $uid > 0 }>
+	<{if $allow_mark}>
+		<{if $u2t_marked}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;change_u2t_mark=off">
+		<img src="<{$mod_url}>/images/mark_on.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNOFF}>" /></a>
+		<{else}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;change_u2t_mark=on">
+		<img src="<{$mod_url}>/images/mark_off.gif" alt="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" title="<{$smarty.const._MD_XHNEWBB_MARK_TURNON}>" /></a>
+		<{/if}>
+	<{/if}>
+	<{/if}>
+	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat"><{$lang_flat}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_other}>"><{$lang_order_other}></a></div>
 
-<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
+	<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
+</div>
 
 <table class="outer">
 <thead>
 <tr align='left'>
-	<th width='20%'><{$lang_poster}></th>
+	<th class="poster"><{$lang_poster}></th>
 	<th><{$lang_thread}></th>
 </tr>
 </thead>
@@ -36,40 +37,37 @@
 <{/foreach}>
 </table>
 
-<div class="ctrl">
-<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat"><{$lang_flat}></a></div>
-<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
-<hr class="threadview" />
-<!-- start topic tree -->
-<table class="outer thread">
-<tr align='left'>
-	<th><{$lang_subject}></th>
-	<th><{$lang_poster}></th>
-	<th><{$lang_date}></th>
-</tr>
-<{foreach item=topic_tree from=$topic_trees}>
-<tr class="<{cycle values="even,odd"}>">
-	<td><{$topic_tree.post_prefix}> <{$topic_tree.post_image}> <{$topic_tree.post_title}></td>
-	<td class="poster"><{$topic_tree.poster_uname}></td>
-	<td class="date"><{$topic_tree.post_date}></td>
-</tr>
-<{/foreach}>
-</table>
-<!-- end topic tree -->
-<!-- end topic thread -->
-
-<br />
-
-<div class="footctrl">
-<div class="jumpbox"><{$forum_jumpbox}></div>
-<ul class="post">
-	<li><{$forum_post_or_register}></li>
-</ul>
-<{if $viewer_is_admin == true}>
-<div class="adminctrl">&nbsp;<{$topic_lock_image}>&nbsp;<{$topic_move_image}>&nbsp;<{$topic_delete_image}>&nbsp;<{$topic_sticky_image}>&nbsp;</div>
-<{/if}>
+<div class="topicviewctrl">
+	<div class="topicorderctrl">
+	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat"><{$lang_flat}></a></div>
+	<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
 </div>
 
+<hr class="threadview" />
+<!-- start topic tree -->
+
+<h2><{$lang_threaded}></h2>
+<ul class="threaded">
+<{foreach item=topic_tree from=$topic_trees}>
+	<li><{$topic_tree.post_prefix}> <{$topic_tree.post_image}> <{$topic_tree.post_title}> (<{$topic_tree.poster_uname}>, <{$topic_tree.post_date}>)</li>
+<{/foreach}>
+</ul>
+
+<!-- end topic tree -->
+<!-- end topic thread -->
+<hr class="threadview" />
+
+<div class="outer even footctrl">
+	<div class="bbsjumpctrl"><{$forum_jumpbox}></div>
+	<ul class="footpost">
+		<li><{$forum_post_or_register}></li>
+	</ul>
+	<{if $viewer_is_admin == true}>
+	<div class="adminctrl">&nbsp;<{$topic_lock_image}>&nbsp;<{$topic_move_image}>&nbsp;<{$topic_delete_image}>&nbsp;<{$topic_sticky_image}>&nbsp;</div>
+	<{/if}>
+</div>
+
+<hr class="notification" />
 </div>
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->

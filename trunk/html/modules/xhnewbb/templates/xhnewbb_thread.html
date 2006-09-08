@@ -1,24 +1,26 @@
 <!-- start comment post -->
 <tr>
 	<td class="head"><a id="forumpost<{$topic_post.post_id}>"></a> <{$topic_post.poster_uname}></td>
-	<td class="head"><div class="comDate"><span class="comDateCaption"><{$lang_postedon}></span><{$topic_post.post_date}></div></td>
+	<td class="head postdate"><{$lang_postedon}><{$topic_post.post_date}></td>
 </tr>
 <tr>
-
 <{if $topic_post.poster_uid != 0}>
-
-	<td class="odd"><div class="comUserRank"><div class="comUserRankText"><{$topic_post.poster_rank_title}></div><{$topic_post.poster_rank_image}></div><img class="comUserImg" src="<{$xoops_upload_url}>/<{$topic_post.poster_avatar}>" alt="" />
-	<div class="comUserStat">
-	<span class="comUserStatCaption"><{$lang_joined}>:</span> <{$topic_post.poster_regdate}></div>
-	<div class="comUserStat"><span class="comUserStatCaption"><{$lang_from}>:</span> <{$topic_post.poster_from}></div>
-	<div class="comUserStat"><span class="comUserStatCaption"><{$lang_posts}>:</span> <{$topic_post.poster_postnum}></div>
-	<div class="comUserStatus"><{$topic_post.poster_status}></div></td>
-
-	<{else}>
-
+	<td class="odd">
+	<dl>
+	<dt><{$topic_post.poster_rank_title}></dt>
+		<dd><{$topic_post.poster_rank_image}></dd>
+	</dl>
+	<img class="comUserImg" src="<{$xoops_upload_url}>/<{$topic_post.poster_avatar}>" alt="" />
+	<ul class="userstatus">
+		<li><{$lang_joined}>: <{$topic_post.poster_regdate}></li>
+		<li><{$lang_from}>: <{$topic_post.poster_from}></li>
+		<li><{$lang_posts}>: <{$topic_post.poster_postnum}></li>
+		<{if $topic_post.poster_status}><li><{$topic_post.poster_status}></li><{/if}>
+	</ul>
+	</td>
+<{else}>
 	<td class="odd"></td>
-
-	<{/if}>
+<{/if}>
 
 	<td class="odd combody">
 	<dl>
@@ -28,23 +30,21 @@
 	</td>
 </tr>
 <tr>
-	<td class="even"></td>
-
-	<td class="even editctrl">
-
-	<{if $topic_post.can_reply}>
-	<a href='<{$mod_url}>/reply.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='reply'><{$lang_reply}></a>
+	<td class="even" colspan="2">
+	<div class="editctrl">
+	<{if $topic_post.can_edit}>
+	<a href="<{$mod_url}>/edit.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"  class="edit"><{$lang_edit}></a>
 	<{/if}>
 
 	<{if $topic_post.can_delete}>
 	<a href='<{$mod_url}>/delete.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='delete'><{$lang_delete}></a>
 	<{/if}>
 
-	<{if $topic_post.can_edit}>
-	<a href="<{$mod_url}>/edit.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"  class="edit"><{$lang_edit}></a>
+	<{if $topic_post.can_reply}>
+	<a href='<{$mod_url}>/reply.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='reply'><{$lang_reply}></a>
 	<{/if}>
+	</div>
 
 	</td>
-
 </tr>
 <!-- end comment post -->

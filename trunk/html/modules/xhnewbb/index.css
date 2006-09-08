@@ -12,12 +12,8 @@
 	font-weight		:bold;
 	font-size			:100%;
 	clear			:both;
-	color			:#fff;
-	background-color	:#2f5376;
 	padding			:2px 5px;
 	margin			:10px 0 3px;}
-.xhnewbb h2 a{		color	:#fff;}
-.xhnewbb h2 a:hover{	color	:#f60;}
 
 /* breadcrumbs */
 
@@ -120,16 +116,7 @@
 .xhnewbb .outer thead th,
 .xhnewbb .outer thead td{
 	white-space		:nowrap;
-	text-align			:center;
-	color			:#000;
-	background-color	:#c2cdd6;}
-.xhnewbb .outer thead tr.head th{
-	color			:#fff;
-	background-color	:#2f5376;}
-.xhnewbb .outer thead tr.head th a{
-	color			:#fff;}
-.xhnewbb .outer thead tr.head th a:hover{
-	color			:#900;}
+	text-align			:center;}
 .xhnewbb .outer thead th.forumtitle{
 	text-align			:left;}
 
@@ -146,10 +133,6 @@
 
 /* outer - cell */
 
-.xhnewbb .outer td.even{
-	background-color	:#dee3e7;}
-.xhnewbb .outer td.odd{
-	background-color	:#e9e9e9;}
 .xhnewbb .outer td.even,.xhnewbb .outer td.odd{
 	vertical-align		:middle;}
 
@@ -184,8 +167,7 @@
 /* xhnewbb_viewtopic_flat.html - footctrl */
 
 .xhnewbb .footctrl{
-	padding			:3px 5px;
-	background-color	:#c2cdd6}
+	padding			:3px 5px;}
 .xhnewbb .footctrl .bbsjumpctrl form *{
 	vertical-align		:middle;}
 .xhnewbb .footctrl .bbsjumpctrl form{
@@ -296,6 +278,7 @@
 
 /* coloring */
 
+/*
 .xhnewbb h2{			background-color	:#2f5376;}
 .xhnewbb h2 a{		color	:#fff;}
 .xhnewbb h2 a:hover{	color	:#f60;}
@@ -323,3 +306,4 @@ xhnewbb .outer thead tr.head th{
 .xhnewbb .userstatus li{
 	background-color	:#fff;
 	border			:1px #c0c0c0 solid;}
+*/

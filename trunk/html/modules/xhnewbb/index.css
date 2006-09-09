@@ -135,6 +135,8 @@
 
 .xhnewbb .outer td.even,.xhnewbb .outer td.odd{
 	vertical-align		:middle;}
+.xhnewbb .outer td.posterinfo{
+	vertical-align		:top;}
 
 .xhnewbb .outer td.status,
 .xhnewbb .outer td.numbersoftopics,

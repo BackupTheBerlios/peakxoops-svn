@@ -1,0 +1,121 @@
+<{if $mode == "reply"}>
+<div id="forum_reference" class="outer">
+	<div class="head"><{$reference_subject}></div>
+	<div class="even"><{$smarty.const._MD_XHNEWBB_BY}> <{$reference_name}> <{$smarty.const._MD_XHNEWBB_ON}> <{$reference_date}></div>
+	<div class="odd"><{$reference_message}></div>
+</div>
+<{elseif $mode == "preview"}>
+<div id="forum_reference" class="outer">
+	<div class="head"><{$reference_subject}></div>
+	<div class="odd"><{$reference_message}></div>
+</div>
+<{/if}>
+
+<form name="forumform" id="forumform" action="post.php?viewmode=<{$viewmode}>&order=<{$order}>" method="post" onsubmit="return xoopsFormValidate_forumform();">
+
+	<input type="hidden" name="pid" id="pid" value="<{$pid}>" />
+	<input type="hidden" name="post_id" id="post_id" value="<{$post_id}>" />
+	<input type="hidden" name="topic_id" id="topic_id" value="<{$topic_id}>" />
+	<input type="hidden" name="forum" id="forum" value="<{$forum}>" />
+	<input type="hidden" name="reference_quote" id="reference_quote" value="<{$reference_quote}>" />
+	<input type="hidden" name="u2t_marked" id="u2t_marked" value="1" />
+
+	<table width="100%" class="outer" cellspacing="1">
+		<tr>
+			<th colspan="2" <{if $mode == "edit"}>style="background-color:#FF0000;"<{/if}>><{$formtitle}></th>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_XHNEWBB_ABOUTPOST}></td>
+			<td class="even"><{$message_about_post}></td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_XHNEWBB_SUBJECTC}></td>
+			<td class="even">
+				<input type="text" name="subject" id="subject" size="60" maxlength="255" value="<{$subject}>" />
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_XHNEWBB_UNAMEC}></td>
+			<td class="even">
+				<{if $uid}>
+					<{$uname|string_format:$smarty.const._MD_XHNEWBB_FMT_UNAME}>
+				<{else}>
+					<input type="text" name="guestName" id="guestName" value="<{$uname}>" size="30" maxlength="100" />
+				<{/if}>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_XHNEWBB_MESSAGEICON}></td>
+			<td class="even">
+				<{foreach from=$icons item=icon}>
+					<input type="radio" name="icon" id="icon_<{$icon}>" value="icon1.gif" /><label for="icon_<{$icon}>"><img src="<{$xoops_url}>/images/subject/<{$icon}>" alt="" /></label>
+				<{/foreach}>
+				&nbsp; &nbsp;
+				<{if $can_change_solved}>
+					<input type="checkbox" name="solved" id="solved" <{$solved_checked}> />
+				<{else}>
+					<input type="hidden" name="solved" id="solved" value="<{$solved}>" />
+				<{/if}>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_XHNEWBB_MESSAGEC}></td>
+			<td class="even">
+				<{xoopsdhtmltarea name=message cols=60 rows=15 value=$message}>
+				<br />
+				<{if $mode == "reply"}>
+				<input type="button" name="quote" id="quote" onclick="xhnewbb_quote_message();" value="<{$smarty.const._MD_XHNEWBB_QUOTE}>" />
+				<{/if}>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_XHNEWBB_OPTIONS}></td>
+			<td class="even">
+
+				<!-- smiley -->
+				<input type="checkbox" name="nosmiley" id="nosmiley" value="1" <{$nosmiley_checked}> /><label for="nosmiley"><{$smarty.const._MD_XHNEWBB_DISABLESMILEY}></label>
+				<br />
+
+				<!-- nohtml -->
+				<{if $allow_html}>
+				<input type="checkbox" name="nohtml" id="nohtml" value="1" <{$nohtml_checked}> /><label for="nohtml"><{$smarty.const._MD_XHNEWBB_DISABLEHTML}></label>
+				<br />
+				<{/if}>
+
+				<!-- signature -->
+				<{if $allow_sig}>
+				<input type="checkbox" name="attachsig" id="attachsig" value="1" <{$attachsig_checked}> /><label for="attachsig"><{$smarty.const._MD_XHNEWBB_ATTACHSIG}></label>
+				<br />
+				<{/if}>
+
+				<!-- notification thread-new_post -->
+				<{if $allow_notify}>
+				<input type="checkbox" name="notify" id="notify" value="1" <{$notify_checked}> /><label for="notify"><{$smarty.const._MD_XHNEWBB_NEWPOSTNOTIFY}></label>
+				<{/if}>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"></td>
+			<td class="even">
+				<input type="submit" class="formButton" name="contents_preview"  id="contents_preview" value="<{$smarty.const._PREVIEW}>" />
+				<input type="submit" class="formButton" name="contents_submit"  id="contents_submit" value="<{$smarty.const._SUBMIT}>" />
+			</td>
+		</tr>
+	</table>
+</form>
+
+<!-- Start Form Vaidation JavaScript //-->
+<script type="text/javascript">
+<!--//
+function xoopsFormValidate_forumform() {
+	myform = window.document.forumform;
+	if ( myform.subject.value == "" ) { window.alert("<{$smarty.const._MD_XHNEWBB_SUBJECTC|string_format:$smarty.const._FORM_ENTER}>"); myform.subject.focus(); return false; }
+	return true;
+}
+function xhnewbb_quote_message() {
+	xoopsGetElementById("message").value = xoopsGetElementById("message").value + xoopsGetElementById("reference_quote").value ;
+}
+
+
+//--></script>
+<!-- End Form Vaidation JavaScript //-->

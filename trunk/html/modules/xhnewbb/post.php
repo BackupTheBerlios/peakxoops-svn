@@ -140,11 +140,11 @@ if ( !empty($_POST['contents_preview']) ) {
 	include XOOPS_ROOT_PATH."/header.php";
 	echo"<table width='100%' border='0' cellspacing='1' class='outer'><tr><td>";
 	$myts =& MyTextSanitizer::getInstance();
-	$p_subject = $myts->makeTboxData4Preview($_POST['subject']);
-	$p_message = $myts->previewTarea( $_POST['message'] , intval( ! @$_POST['nohtml'] ) , intval( ! @$_POST['nosmiley'] ) , 1 , @$GLOBALS['xoopsModuleConfig']['xhnewbb_allow_textimg'] ) ; // GIJ
+	$reference_subject4html = $myts->makeTboxData4Preview($_POST['subject']);
+	$reference_message4html = $myts->previewTarea( $_POST['message'] , intval( ! @$_POST['nohtml'] ) , intval( ! @$_POST['nosmiley'] ) , 1 , @$GLOBALS['xoopsModuleConfig']['xhnewbb_allow_textimg'] ) ;
+	$nosmiley = empty( $_POST['nosmiley'] ) ? 0 : 1 ;
+	$nohtml = empty( $_POST['nohtml'] ) ? 0 : 1 ;
 	/*
-	$nosmiley = !empty($_POST['nosmiley']) ? 1 : 0;
-	$nohtml = !empty($_POST['nohtml']) ? 1 : 0;
 	if ( $nosmiley && $nohtml ) {
 		$p_message = $myts->makeTareaData4Preview($_POST['message'],0,0,1);
 	} elseif ( $nohtml ) {
@@ -155,11 +155,11 @@ if ( !empty($_POST['contents_preview']) ) {
 		$p_message = $myts->makeTareaData4Preview($_POST['message'],1,1,1);
 	}
 	*/
-	themecenterposts($p_subject,$p_message);
-	echo "<br />";
-	$subject = $myts->makeTboxData4PreviewInForm(@$_POST['subject']);
-	$message = $myts->makeTareaData4PreviewInForm(@$_POST['message']);
-	$hidden = $myts->makeTboxData4PreviewInForm(@$_POST['hidden']);
+	//themecenterposts($p_subject,$p_message);
+	//echo "<br />";
+	$subject4html = $myts->makeTboxData4PreviewInForm(@$_POST['subject']);
+	$message4html = $myts->makeTareaData4PreviewInForm(@$_POST['message']);
+	$hidden4html = $myts->makeTboxData4PreviewInForm(@$_POST['hidden']);
 	$notify = !empty($_POST['notify']) ? 1 : 0;
 
 	$guestName = $myts->makeTboxData4PreviewInForm(@$_POST['guestName']); // Ryuji_edit(2003-05-06)
@@ -169,27 +169,28 @@ if ( !empty($_POST['contents_preview']) ) {
 	$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
 	$u2t_marked = empty( $_POST['u2t_marked'] ) ? 0 : 1 ;
 	$formTitle = _MD_XHNEWBB_FORMTITLEINPREVIEW ;
+	$mode = 'preview' ;
+
 	include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
-	echo"</td></tr></table>";
+	//echo"</td></tr></table>";
 
 } else {
 
-	//Ryuji_edit(2003-05-06)
-	if((isset($_POST['message']))&&(!empty ($_POST['guestName']))){
-		$_POST['message'] = sprintf(_MD_XHNEWBB_FMT_GUESTSPOSTHEADER,$_POST['guestName']).$_POST['message'];
-	}
-	
 	if( ! is_object( @$forumpost ) ) {
 		$isreply = 0;
 		$isnew = 1;
-		if ( $xoopsUser && empty($_POST['noname']) ) {
+		if( is_object( @$xoopsUser ) ) {
+			// user's post
 			$uid = $xoopsUser->getVar("uid");
-		} else {
-			if ( $forumdata['forum_access'] == 2 ) {
-				$uid = 0;
-			} else {
-				die(_MD_XHNEWBB_ANONNOTALLOWED);
+		} else if ( $forumdata['forum_access'] == 2 ) {
+			// guest's post
+			$uid = 0;
+			// Insert guest name into the top of message (origined Ryuji)
+			if( ! empty( $_POST['guestName'] ) ) {
+				$_POST['message'] = sprintf( _MD_XHNEWBB_FMT_GUESTSPOSTHEADER , $_POST['guestName'] ) . @$_POST['message'] ;
 			}
+		} else {
+			die(_MD_XHNEWBB_ANONNOTALLOWED);
 		}
 		$forumpost = new ForumPosts();
 		$forumpost->setForum($forum);
@@ -213,7 +214,11 @@ if ( !empty($_POST['contents_preview']) ) {
 	$forumpost->setNosmiley(@$_POST['nosmiley']);
 	$forumpost->setIcon($icon);
 	$forumpost->setSolved(@$_POST['solved']);
-	$forumpost->setAttachsig(@$_POST['attachsig']);
+	if( $forumdata['allow_sig'] ) {
+		$forumpost->setAttachsig( @$_POST['attachsig'] ) ;
+	} else {
+		$forumpost->setAttachsig( 0 ) ;
+	}
 	if (!$postid = $forumpost->store()) {
 		include_once(XOOPS_ROOT_PATH.'/header.php');
 		xoops_error('Could not insert forum post');
@@ -262,8 +267,7 @@ if ( !empty($_POST['contents_preview']) ) {
 
 	// If user checked notification box, subscribe them to the
 	// appropriate event; if unchecked, then unsubscribe
-
-	if (!empty($xoopsUser) && !empty($xoopsModuleConfig['notification_enabled'])) {
+	if( ! empty( $xoopsUser ) && ! empty( $xoopsModuleConfig['notification_enabled']) && in_array( 'thread-new_post' , @$xoopsModuleConfig['notification_events'] ) ) {
 		if (!empty($_POST['notify'])) {
 			$notification_handler->subscribe('thread', $forumpost->getTopicId(), 'new_post');
 		} else {

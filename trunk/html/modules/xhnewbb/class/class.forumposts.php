@@ -429,7 +429,7 @@ class ForumPosts
 				$u2t_marked = 0 ;
 			}
 		}
-		return intval( $u2t_marked ) ;
+		return intval( @$u2t_marked ) ;
 	}
 
 	function forum(){

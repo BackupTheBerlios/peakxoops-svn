@@ -143,21 +143,17 @@ define("_MD_XHNEWBB_CLICKBELOW","Click on the link below to view the thread:");
 define("_MD_XHNEWBB_FMT_GUESTSPOSTHEADER","Post from %s as a guest\n---\n\n");
 
 //forumform.inc
-define("_MD_XHNEWBB_YOURNAME","Your Name:");
+define("_MD_XHNEWBB_YOURNAME","Your Name");
 define("_MD_XHNEWBB_LOGOUT","Logout");
 define("_MD_XHNEWBB_REGISTER","Register");
-define("_MD_XHNEWBB_SUBJECTC","Subject:");
-define("_MD_XHNEWBB_EDITMODEC","Mode:");
-define("_MD_XHNEWBB_ALERTEDIT","<div style='background:#FE0000;color:#FFFFFF;font-size:120%;font-weight:bold;padding:3px;'>You are now editing your topic</div>");
-define("_MD_XHNEWBB_GUESTNAMEC","Your Name:");
-define("_MD_XHNEWBB_UNAMEC","User:");
+define("_MD_XHNEWBB_SUBJECTC","Subject");
+define("_MD_XHNEWBB_EDITMODEC","Mode");
+define("_MD_XHNEWBB_UNAMEC","Poster");
 define("_MD_XHNEWBB_FMT_UNAME","%s");
-define("_MD_XHNEWBB_MESSAGEICON","Message Icon:");
+define("_MD_XHNEWBB_MESSAGEICON","Message Icon");
 define("_MD_XHNEWBB_SOLVEDCHECKBOX","Solved");
-define("_MD_XHNEWBB_MESSAGEC","Message:");
-define("_MD_XHNEWBB_ALLOWEDHTML","Allowed HTML:");
-define("_MD_XHNEWBB_OPTIONS","Options:");
-define("_MD_XHNEWBB_POSTANONLY","Post Anonymously");
+define("_MD_XHNEWBB_MESSAGEC","Message");
+define("_MD_XHNEWBB_OPTIONS","Options");
 define("_MD_XHNEWBB_DISABLESMILEY","Disable Smiley");
 define("_MD_XHNEWBB_DISABLEHTML","Disable html");
 define("_MD_XHNEWBB_NEWPOSTNOTIFY", "Notify me of new posts in this thread");

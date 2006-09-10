@@ -91,24 +91,22 @@ if ( $forumdata['forum_type'] == 1 ) {
 
 
 include XOOPS_ROOT_PATH."/header.php";
+
 $nohtml = $forumpost->nohtml();
 $nosmiley = $forumpost->nosmiley();
 $icon = $forumpost->icon();
 $attachsig = $forumpost->attachsig();
-$topic_id=$forumpost->topic();
-if ( $forumpost->istopic() ) {
-	$istopic = 1;
-} else {
-	$istopic = 0;
-}
-$subject=$forumpost->subject("Edit");
-$message=$forumpost->text("Edit");
-$solved=$forumpost->solved();
-$u2t_marked=$forumpost->u2t_marked();
-$hidden = "";
+$topic_id = $forumpost->topic() ;
+$subject4html = $forumpost->subject("Edit") ;
+$message4html = $forumpost->text("Edit") ;
+$solved = $forumpost->solved() ;
+$u2t_marked = $forumpost->u2t_marked() ;
+$hidden4html = '' ;
 $myts =& MyTextSanitizer::getInstance();
-$viewmode = $myts->htmlspecialchars($viewmode);
+$viewmode = $myts->htmlspecialchars( $viewmode ) ;
 $formTitle = _MD_XHNEWBB_EDITMODEC ;
+$mode = 'edit' ;
+
 include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 
 $xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;

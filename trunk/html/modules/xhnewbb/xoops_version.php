@@ -79,6 +79,8 @@ $modversion['templates'][7]['file'] = 'xhnewbb_viewtopic_thread.html';
 $modversion['templates'][7]['description'] = '';
 $modversion['templates'][8]['file'] = 'xhnewbb_viewallforum.html';
 $modversion['templates'][8]['description'] = '';
+$modversion['templates'][9]['file'] = 'xhnewbb_post_form.html';
+$modversion['templates'][9]['description'] = '';
 
 // Blocks
 $modversion['blocks'][1] = array(

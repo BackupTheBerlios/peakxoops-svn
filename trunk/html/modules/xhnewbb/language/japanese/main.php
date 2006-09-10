@@ -143,21 +143,17 @@ define("_MD_XHNEWBB_CLICKBELOW","Åê¹Æ¤ò¸«¤ë¤Ë¤Ï²¼µ­¥ê¥ó¥¯¤ò¥¯¥ê¥Ã¥¯¤·¤Æ¤¯¤À¤µ¤¤¡
 define("_MD_XHNEWBB_FMT_GUESTSPOSTHEADER","¥²¥¹¥È¤Î¡Ö%s¡×¤µ¤ó¤«¤é¤ÎÅê¹Æ¤Ç¤¹¡£\n---\n\n");
 
 //forumform.inc
-define("_MD_XHNEWBB_YOURNAME","¥æ¡¼¥¶Ì¾:");
+define("_MD_XHNEWBB_YOURNAME","¥æ¡¼¥¶Ì¾");
 define("_MD_XHNEWBB_LOGOUT","¥í¥°¥¢¥¦¥È");
 define("_MD_XHNEWBB_REGISTER","ÅÐÏ¿");
-define("_MD_XHNEWBB_SUBJECTC","ÂêÌ¾¡§");
-define("_MD_XHNEWBB_EDITMODEC","ÊÔ½¸¥â¡¼¥É:");
-define("_MD_XHNEWBB_ALERTEDIT","<div style='background:#FE0000;color:#FFFFFF;font-size:150%;font-weight:bold;padding:3px;'>È¯¸À¤òÊÔ½¸¤·¤è¤¦¤È¤·¤Æ¤¤¤Þ¤¹</div>");
-define("_MD_XHNEWBB_GUESTNAMEC","¥²¥¹¥ÈÌ¾:");
-define("_MD_XHNEWBB_UNAMEC","¥æ¡¼¥¶Ì¾:");
+define("_MD_XHNEWBB_SUBJECTC","ÂêÌ¾");
+define("_MD_XHNEWBB_EDITMODEC","ÊÔ½¸¥â¡¼¥É");
+define("_MD_XHNEWBB_UNAMEC","Åê¹Æ¼ÔÌ¾");
 define("_MD_XHNEWBB_FMT_UNAME","%s ¤µ¤ó");
-define("_MD_XHNEWBB_MESSAGEICON","¥á¥Ã¥»¡¼¥¸¥¢¥¤¥³¥ó:");
+define("_MD_XHNEWBB_MESSAGEICON","¥á¥Ã¥»¡¼¥¸¥¢¥¤¥³¥ó");
 define("_MD_XHNEWBB_SOLVEDCHECKBOX","²ò·èºÑ");
-define("_MD_XHNEWBB_MESSAGEC","¥á¥Ã¥»¡¼¥¸:");
-define("_MD_XHNEWBB_ALLOWEDHTML","»ÈÍÑ²ÄÇ½¤ÊHTML¥¿¥° :");
-define("_MD_XHNEWBB_OPTIONS","¥ª¥×¥·¥ç¥ó:");
-define("_MD_XHNEWBB_POSTANONLY","Æ¿Ì¾¤ÇÅê¹Æ¤¹¤ë");
+define("_MD_XHNEWBB_MESSAGEC","¥á¥Ã¥»¡¼¥¸");
+define("_MD_XHNEWBB_OPTIONS","¥ª¥×¥·¥ç¥ó");
 define("_MD_XHNEWBB_DISABLESMILEY","´é¥¢¥¤¥³¥ó¤òÌµ¸ú¤Ë¤¹¤ë");
 define("_MD_XHNEWBB_DISABLEHTML","HTML¥¿¥°¤òÌµ¸ú¤Ë¤¹¤ë");
 define("_MD_XHNEWBB_NEWPOSTNOTIFY", "¤³¤Î¥È¥Ô¥Ã¥¯¤Ë¤ª¤¤¤Æ¿·µ¬Åê¹Æ¤¬¤¢¤Ã¤¿¾ì¹ç¤ËÄÌÃÎ¤¹¤ë");

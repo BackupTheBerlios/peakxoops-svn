@@ -80,17 +80,18 @@ if ( $forumdata['forum_type'] == 1 ) {
 		die(_MD_XHNEWBB_NORIGHTTOPOST);
 	}
 }
-include XOOPS_ROOT_PATH.'/header.php';
-$istopic = 1;
-$pid=0;
-$subject = "";
-$message = "";
-$myts =& MyTextSanitizer::getInstance();
-$hidden = "";
-$post_id = 0;
-$topic_id = 0;
-$u2t_marked = 1;
+
+include XOOPS_ROOT_PATH.'/header.php' ;
+$pid = 0 ;
+$subject4html = '' ;
+$message4html = '' ;
+$hidden4html = '' ;
+$post_id = 0 ;
+$topic_id = 0 ;
+$u2t_marked = 1 ;
 $formTitle = _MD_XHNEWBB_POST ;
+$mode = 'newtopic' ;
+
 include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 
 $xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;

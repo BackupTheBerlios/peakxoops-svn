@@ -95,32 +95,32 @@ if ( $forumdata['forum_type'] == 1 ) {
 
 
 include XOOPS_ROOT_PATH.'/header.php';
-$r_message = $forumpost->text();
-$r_date = formatTimestamp($forumpost->posttime());
-$r_name = ($forumpost->uid() != 0) ? XoopsUser::getUnameFromId($forumpost->uid()) : $xoopsConfig['anonymous'];
-$r_content = _MD_XHNEWBB_BY." ".$r_name." "._MD_XHNEWBB_ON." ".$r_date."<br /><br />";
-$r_content .= $r_message;
-$r_subject=$forumpost->subject();
-if (!preg_match("/^Re:/i",$r_subject)) {
-	$subject = 'Re: '.$myts->htmlSpecialChars($r_subject);
+
+$reference_message4html = $forumpost->text('Show');
+$reference_date4html = formatTimestamp( $forumpost->posttime() ) ;
+$reference_name4html = $forumpost->uid() ? XoopsUser::getUnameFromId( $forumpost->uid() ) : $xoopsConfig['anonymous'] ;
+//$r_content = _MD_XHNEWBB_BY." ".$r_name." "._MD_XHNEWBB_ON." ".$r_date."<br /><br />"; */
+
+$reference_subject4html = $forumpost->subject('Show');
+
+if( ! preg_match( '/^Re:/i' , $reference_subject4html ) ) {
+	$subject4html = 'Re: '. $reference_subject4html ;
 } else {
-	$subject = $myts->htmlSpecialChars($r_subject);
+	$subject4html = $reference_subject4html ;
 }
-$q_message = $forumpost->text("Quotes");
-$hidden = "[quote]\n";
-$hidden .= sprintf(_MD_XHNEWBB_USERWROTE,$r_name);
-$hidden .= "\n".$q_message."[/quote]";
-$message = "";
-themecenterposts($r_subject,$r_content);
-echo "<br />";
-$pid=$post_id;
-unset($post_id);
-$topic_id=$forumpost->topic();
-$forum=$forumpost->forum();
-$u2t_marked=$forumpost->u2t_marked();
-$isreply =1;
-$istopic = 0;
+$message4html = "" ;
+$quote4html = "[quote]\n".sprintf(_MD_XHNEWBB_USERWROTE,$reference_name4html)."\n".$forumpost->text("Quotes")."[/quote]";
+// themecenterposts($r_subject,$r_content);
+//echo "<br />";
+$pid = $post_id ;
+$post_id = 0 ;
+$topic_id = $forumpost->topic() ;
+$forum = $forumpost->forum() ;
+$u2t_marked = $forumpost->u2t_marked() ;
+$isreply =1 ;
 $formTitle = _MD_XHNEWBB_REPLY ;
+$mode = 'reply' ;
+
 include XOOPS_ROOT_PATH.'/modules/xhnewbb/include/forumform.inc.php';
 
 $xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;

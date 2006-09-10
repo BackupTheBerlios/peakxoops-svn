@@ -280,7 +280,7 @@ if ( !empty($_POST['contents_preview']) ) {
 	exit ;
 }
 
-$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+$xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) , "xoops_pagetitle" => $formTitle ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';
 ?>

@@ -11,6 +11,7 @@
 - fixed original bug dobule htmlspecialchars with subject
 - modified posting form from xoopsform into a template
 - removed a doubltful option "post anonymously"
+- added identical string into xoops_pagetitle 
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -105,6 +106,7 @@
 - 題名にhtmlspecialcharsが２重にかかっていたオリジナルバグを修正
 - 投稿画面をテンプレート化した（大きく手を入れたのでエンバグしてそう）
 - 「ゲストとして投稿する」という怪しげなオプションを削除:-P
+- xoops_pagetitle に可能な限り意味のある文字列をアサインするようにした
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

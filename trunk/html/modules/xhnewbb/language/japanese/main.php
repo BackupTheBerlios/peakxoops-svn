@@ -164,7 +164,7 @@ define("_MD_XHNEWBB_CANCELPOST","投稿中止");
 
 // forumuserpost.php
 define("_MD_XHNEWBB_ADD","追加");
-define("_MD_XHNEWBB_REPLY","この投稿に返信する");
+define("_MD_XHNEWBB_REPLY","返信する");
 
 // topicmanager.php
 define("_MD_XHNEWBB_YANTMOTFTYCPTF","この機能を使用できるのはモデレータ／管理者のみです。");

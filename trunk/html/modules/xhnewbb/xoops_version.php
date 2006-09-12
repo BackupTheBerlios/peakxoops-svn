@@ -56,8 +56,10 @@ $modversion['templates'][8]['file'] = 'xhnewbb_viewallforum.html';
 $modversion['templates'][8]['description'] = '';
 $modversion['templates'][9]['file'] = 'xhnewbb_post_form.html';
 $modversion['templates'][9]['description'] = '';
-$modversion['templates'][10]['file'] = 'xhnewbb_custpasteposts.html';
+$modversion['templates'][10]['file'] = 'xhnewbb_cutpasteposts.html';
 $modversion['templates'][10]['description'] = '';
+$modversion['templates'][11]['file'] = 'xhnewbb_delete.html';
+$modversion['templates'][11]['description'] = '';
 
 // Blocks
 $modversion['blocks'][1] = array(

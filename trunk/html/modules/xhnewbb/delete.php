@@ -2,29 +2,27 @@
 
 include dirname(__FILE__).'/include/common_prepend.php';
 
-$post = new ForumPosts( intval( @$_GET['post_id'] ) ) ;
-$post_id = $post->postid() ;
-if( empty( $post_id ) ) {
-	die( _MD_XHNEWBB_ERRORPOST ) ;
-}
+// process and check by $_GET['post_id']
+include dirname(__FILE__).'/include/process_postid2forum.inc.php' ;
 
-$topic_id = $post->topic() ;
-$forum = $post->forum() ;
-$uid = $xoopsUser->getVar('uid') ;
+// process and check by $forum
+include dirname(__FILE__).'/include/process_forum2postperm.inc.php' ;
 
 // count children
 include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
 $mytree = new XoopsTree( $xoopsDB->prefix("xhnewbb_posts") , "post_id" , "pid" ) ;
-$children_count = count( $mytree->getAllChild( $post_id ) ) ;
+$children = $mytree->getAllChildId( $post_id ) ;
 
+// special permission check for delete
 if( ! is_object( @$xoopsUser ) ) die( _MD_XHNEWBB_DELNOTALLOWED ) ;
+$uid = $xoopsUser->getVar('uid') ;
 
-if( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $forum , $uid ) ) {
-	// moderator delelete
-	$isadminormod = true ;
-} else if( $uid == $post->uid() && $xoopsModuleConfig['xhnewbb_selfdellimit'] > 0 ) {
+if( $isadminormod ) {
+	// admin delete
+	// ok
+} else if( $uid == $forumpost->uid() && $xoopsModuleConfig['xhnewbb_selfdellimit'] > 0 ) {
 	// self delete
-	if( time() < $post->posttime() + intval( $xoopsModuleConfig['xhnewbb_selfdellimit'] ) ) {
+	if( time() < $forumpost->posttime() + intval( $xoopsModuleConfig['xhnewbb_selfdellimit'] ) ) {
 		// before time limit
 		include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
 		$mytree = new XoopsTree( $xoopsDB->prefix("xhnewbb_posts") , "post_id" , "pid" ) ;
@@ -47,24 +45,44 @@ if( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $forum , $uid ) ) {
 }
 
 
-if( ! empty( $_POST['ok'] ) ) {
-	$post->delete() ;
-	xhnewbb_sync( $post->forum() , "forum" ) ;
-	xhnewbb_sync( $post->topic() , "topic" ) ;
+if( ! empty( $_POST['deletepostsok'] ) ) {
+	// TRANSACTION PART
+	$forumpost->delete() ;
+	xhnewbb_sync( $forumpost->forum() , "forum" ) ;
+	xhnewbb_sync( $forumpost->topic() , "topic" ) ;
 
-	if( $post->istopic() ) {
+	if( $forumpost->istopic() ) {
 		redirect_header( XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum" , 2 , _MD_XHNEWBB_POSTSDELETED ) ;
 		exit ;
 	} else {
 		redirect_header( XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&viewmode=$viewmode&order=$order" , 2 , _MD_XHNEWBB_POSTSDELETED ) ;
 		exit ;
 	}
+
 } else {
+	// FORM PART
 	include XOOPS_ROOT_PATH."/header.php";
-	xoops_confirm( array( 'ok' => 1 ) , "?post_id=$post_id&viewmode=$viewmode&order=$order" , $children_count ? _MD_XHNEWBB_AREUSUREDEL : _MD_XHNEWBB_AREUSUREDELONE ) ;
+	$xoopsOption['template_main'] = 'xhnewbb_delete.html' ;
+
+	// references to confirm the post will be deleted
+	$reference_message4html = $forumpost->text('Show');
+	$reference_date4html = formatTimestamp( $forumpost->posttime() ) ;
+	$reference_name4html = $forumpost->uid() ? XoopsUser::getUnameFromId( $forumpost->uid() ) : $xoopsConfig['anonymous'] ;
+	$reference_subject4html = $forumpost->subject('Show');
+
+	$xoopsTpl->assign( array(
+		'post_id' => $post_id ,
+		'topic_id' => $topic_id ,
+		'forum' => $forum ,
+		'forumdata' => $forumdata ,
+		'reference_subject' => @$reference_subject4html ,
+		'reference_message' => @$reference_message4html ,
+		'reference_name' => @$reference_name4html ,
+		'reference_date' => @$reference_date4html ,
+		'children_count' => count( $children ) ,
+	) ) ;
 
 	$xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) , "xoops_pagetitle" => _DELETE ) ) ;
-
 
 	include XOOPS_ROOT_PATH.'/footer.php';
 }

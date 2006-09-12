@@ -13,7 +13,7 @@ include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
 $mytree = new XoopsTree( $xoopsDB->prefix("xhnewbb_posts") , "post_id" , "pid" ) ;
 $children = $mytree->getAllChildId( $post_id ) ;
 
-// special permission check for custpasteposts
+// special permission check for cutpasteposts
 if( ! $isadminormod ) die( _NOPERM ) ;
 
 if( ! empty( $_POST['cutpastepostsok'] ) ) {
@@ -58,9 +58,9 @@ if( ! empty( $_POST['cutpastepostsok'] ) ) {
 } else {
 	// FORM PART
 	include XOOPS_ROOT_PATH."/header.php";
-	$xoopsOption['template_main'] = 'xhnewbb_custpasteposts.html' ;
+	$xoopsOption['template_main'] = 'xhnewbb_cutpasteposts.html' ;
 
-	// references to post reply
+	// references to confirm the post will be cut/paste
 	$reference_message4html = $forumpost->text('Show');
 	$reference_date4html = formatTimestamp( $forumpost->posttime() ) ;
 	$reference_name4html = $forumpost->uid() ? XoopsUser::getUnameFromId( $forumpost->uid() ) : $xoopsConfig['anonymous'] ;

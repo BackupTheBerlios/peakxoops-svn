@@ -49,7 +49,7 @@
 <h2 class="head"><{$lang_threaded}></h2>
 <ul class="threaded">
 <{foreach item=topic_tree from=$topic_trees}>
-	<li><{$topic_tree.post_prefix}> <{$topic_tree.post_image}> <{$topic_tree.post_title}> (<{$topic_tree.poster_uname}>, <{$topic_tree.post_date}>)</li>
+	<li><{$topic_tree.post_prefix}> <{$topic_tree.post_image}> <{$topic_tree.post_title}> (<{$topic_tree.poster_uname}>, <{$topic_tree.post_date}>) <{if $isadminormod}><a href="cutpasteposts.php?post_id=<{$topic_tree.post_id}>"><{$smarty.const._MD_XHNEWBB_CUTPASTEPOSTS}></a><{/if}></li>
 <{/foreach}>
 </ul>
 

@@ -32,6 +32,12 @@ define('_MI_XHNEWBB_USE_SOLVEDDSC','メッセージアイコンの色などで、トピックのテー
 define('_MI_XHNEWBB_ALLOW_MARK','注目トピック機能を利用する');
 define('_MI_XHNEWBB_ALLOW_MARKDSC','ログインユーザが各自で、注目するトピックを設定できる機能を使うかどうかを決定します');
 define('_MI_XHNEWBB_VIEWALLBREAK','トピック一覧でのページ分割単位');
+define('_MI_XHNEWBB_SELFEDITLIMIT','自己編集タイムリミット(秒)');
+define('_MI_XHNEWBB_SELFEDITLIMITDSC','一般ユーザが自分の投稿を編集する場合、投稿してから何秒まで内容の変更を許可するか。一般ユーザによる自己編集を禁止する場合は0を指定');
+define('_MI_XHNEWBB_SELFDELLIMIT','自己削除タイムリミット(秒)');
+define('_MI_XHNEWBB_SELFDELLIMITDSC','一般ユーザが自分の投稿を削除する場合、投稿してから何秒まで削除を許可するか。ただし、一般ユーザは、その下にレスポンスのついてしまった投稿は削除できません。一般ユーザによる自己削除を禁止する場合は0を指定');
+define('_MI_XHNEWBB_CSS_URI','モジュール用CSSのURI');
+define('_MI_XHNEWBB_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトはindex.cssです。');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

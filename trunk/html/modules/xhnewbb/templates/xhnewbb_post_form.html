@@ -4,10 +4,12 @@
 	<div class="even"><{$smarty.const._MD_XHNEWBB_BY}> <{$reference_name}> <{$smarty.const._MD_XHNEWBB_ON}> <{$reference_date}></div>
 	<div class="odd"><{$reference_message}></div>
 </div>
-<{elseif $mode == "preview"}>
-<div id="forum_reference" class="outer">
-	<div class="head"><{$reference_subject}></div>
-	<div class="odd"><{$reference_message}></div>
+<{/if}>
+
+<{if $ispreview}>
+<div id="forum_preview" class="outer">
+	<div class="head"><{$preview_subject}></div>
+	<div class="odd"><{$preview_message}></div>
 </div>
 <{/if}>
 
@@ -18,7 +20,6 @@
 	<input type="hidden" name="topic_id" id="topic_id" value="<{$topic_id}>" />
 	<input type="hidden" name="forum" id="forum" value="<{$forum}>" />
 	<input type="hidden" name="reference_quote" id="reference_quote" value="<{$reference_quote}>" />
-	<input type="hidden" name="u2t_marked" id="u2t_marked" value="1" />
 
 	<table width="100%" class="outer" cellspacing="1">
 		<tr>
@@ -40,7 +41,7 @@
 				<{if $uid}>
 					<{$uname|string_format:$smarty.const._MD_XHNEWBB_FMT_UNAME}>
 				<{else}>
-					<input type="text" name="guestName" id="guestName" value="<{$uname}>" size="30" maxlength="100" />
+					<input type="text" name="guestname" id="guestname" value="<{$uname}>" size="30" maxlength="100" />
 				<{/if}>
 			</td>
 		</tr>
@@ -48,7 +49,7 @@
 			<td class="head"><{$smarty.const._MD_XHNEWBB_MESSAGEICON}></td>
 			<td class="even">
 				<{foreach from=$icons item=icon}>
-					<input type="radio" name="icon" id="icon_<{$icon}>" value="icon1.gif" /><label for="icon_<{$icon}>"><img src="<{$xoops_url}>/images/subject/<{$icon}>" alt="" /></label>
+					<input type="radio" name="icon" id="icon_<{$icon}>" value="<{$icon}>" <{if $icon_selected == $icon}>checked="checked"<{/if}> /><label for="icon_<{$icon}>"><img src="<{$xoops_url}>/images/subject/<{$icon}>" alt="" /></label>
 				<{/foreach}>
 				&nbsp; &nbsp;
 				<{if $can_change_solved}>
@@ -63,7 +64,7 @@
 			<td class="even">
 				<{xoopsdhtmltarea name=message cols=60 rows=15 value=$message}>
 				<br />
-				<{if $mode == "reply"}>
+				<{if $reference_quote}>
 				<input type="button" name="quote" id="quote" onclick="xhnewbb_quote_message();" value="<{$smarty.const._MD_XHNEWBB_QUOTE}>" />
 				<{/if}>
 			</td>
@@ -72,11 +73,23 @@
 			<td class="head"><{$smarty.const._MD_XHNEWBB_OPTIONS}></td>
 			<td class="even">
 
+				<!-- solve or not -->
+				<{if $can_change_solved}>
+				<input type="checkbox" name="solved" id="solved" value="1" <{$solved_checked}> /><label for="solved"><{$smarty.const._MD_XHNEWBB_SOLVEDYES}></label>
+				<br />
+				<{/if}>
+
+				<!-- mark -->
+				<{if $allow_mark}>
+				<input type="checkbox" name="u2t_marked" id="u2t_marked" value="1" <{$u2t_marked_checked}> /><label for="u2t_marked"><{$smarty.const._MD_XHNEWBB_MARK_TURNON}></label>
+				<br />
+				<{/if}>
+
 				<!-- smiley -->
 				<input type="checkbox" name="nosmiley" id="nosmiley" value="1" <{$nosmiley_checked}> /><label for="nosmiley"><{$smarty.const._MD_XHNEWBB_DISABLESMILEY}></label>
 				<br />
 
-				<!-- nohtml -->
+				<!-- html -->
 				<{if $allow_html}>
 				<input type="checkbox" name="nohtml" id="nohtml" value="1" <{$nohtml_checked}> /><label for="nohtml"><{$smarty.const._MD_XHNEWBB_DISABLEHTML}></label>
 				<br />

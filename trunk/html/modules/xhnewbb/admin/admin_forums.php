@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 include '../../../include/cp_header.php';
-include '../functions.php';
-include '../config.php';
+include dirname(dirname(__FILE__)).'/include/functions.php' ;
+include dirname(dirname(__FILE__)).'/include/config.php' ;
 
 if (!empty($_GET['mode'])){
 	$mode = $_GET['mode'];

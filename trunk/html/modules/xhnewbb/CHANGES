@@ -12,6 +12,13 @@
 - modified posting form from xoopsform into a template
 - removed a doubltful option "post anonymously"
 - added identical string into xoops_pagetitle 
+- rebuilt almost all codes about posting
+- modified reply features can be used even in preview
+- moved mark and solved into posting options.
+- added configuration of self edition allow/disallow and time limitation
+- added configuration of self deletion allow/disallow and time limitation
+- added configuration URI of module's CSS
+- added cut&paste posts (only for admins or moderators)
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -107,6 +114,13 @@
 - 投稿画面をテンプレート化した（大きく手を入れたのでエンバグしてそう）
 - 「ゲストとして投稿する」という怪しげなオプションを削除:-P
 - xoops_pagetitle に可能な限り意味のある文字列をアサインするようにした
+- 投稿関連をほぼフルスクラッチ
+- previewでもreplyモードが有効になるように変更
+- 注目トピックおよび解決済機能を投稿オプションに変更
+- モジュール単位での自己編集ON/OFFおよび時間制限
+- モジュール単位での自己削除ON/OFFおよび時間制限
+- CSSファイルの位置(URI)指定追加
+- 投稿の切り貼り機能実装（管理者／モデレータ専用）
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

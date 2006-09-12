@@ -1,8 +1,8 @@
 <?php
 
 include '../../../include/cp_header.php' ;
-include dirname(dirname(__FILE__)).'/functions.php' ;
-include dirname(dirname(__FILE__)).'/config.php' ;
+include dirname(dirname(__FILE__)).'/include/functions.php' ;
+include dirname(dirname(__FILE__)).'/include/config.php' ;
 $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 

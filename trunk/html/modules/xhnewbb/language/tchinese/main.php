@@ -4,6 +4,18 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-09-12 17:51:40
+define('_MD_XHNEWBB_DELTIMELIMITED','Sorry, it has been expired to delete this post');
+define('_MD_XHNEWBB_DELCHILDEXISTS','Sorry, any parent posts cannot be removed.');
+define('_MD_XHNEWBB_AREUSUREDELONE','Are you sure you want to delete this post?');
+define('_MD_XHNEWBB_CUTPASTEPOSTS','Cut and paste posts');
+define('_MD_XHNEWBB_ERROR_PIDLOOP','parent/child loop error');
+define('_MD_XHNEWBB_CHILDREN_COUNT','child posts');
+define('_MD_XHNEWBB_CUTPASTEPOSTS_DEST','destination post_id');
+define('_MD_XHNEWBB_CUTPASTEPOSTSDSC','Specify post_id to be parent of this post. 0 means creating a new topic.');
+define('_MD_XHNEWBB_CUTPASTESUCCESS','The post has been cut and/or pasted successfully');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-08-07 17:50:20
 define('_MD_XHNEWBB_ALT_ICON1','normal');
 define('_MD_XHNEWBB_ALT_ICON2','unhappy');

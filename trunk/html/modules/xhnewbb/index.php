@@ -1,46 +1,14 @@
 <?php
-// $Id: index.php,v 1.6 2005/02/10 19:04:21 gij Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
-// Project: The XOOPS Project                                                //
-// ------------------------------------------------------------------------- //
 
-include "header.php";
-// this page uses smarty template
-// this must be set before including main header.php
+include dirname(__FILE__).'/include/common_prepend.php' ;
+
 $xoopsOption['template_main']= 'xhnewbb_index.html';
 include XOOPS_ROOT_PATH."/header.php";
 
-$myts =& MyTextSanitizer::getInstance();
-
 $sql = 'SELECT c.* FROM '.$xoopsDB->prefix('xhnewbb_categories').' c, '.$xoopsDB->prefix("xhnewbb_forums").' f WHERE f.cat_id=c.cat_id GROUP BY c.cat_id, c.cat_title, c.cat_order ORDER BY c.cat_order';
-if ( !$result = $xoopsDB->query($sql) ) {
-	redirect_header(XOOPS_URL.'/',1,_MD_XHNEWBB_ERROROCCURED);
-	exit();
+if( ! $result = $xoopsDB->query( $sql ) ) {
+	redirect_header( XOOPS_URL.'/' , 1 , _MD_XHNEWBB_ERROROCCURED ) ;
+	exit ;
 }
 
 $uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
@@ -74,13 +42,13 @@ if( $uid > 0 ) {
 	$sql = 'SELECT f.*, u.uname, u.uid, p.topic_id, p.post_time, p.subject, p.icon, 0 AS u2t_time FROM '.$xoopsDB->prefix('xhnewbb_forums').' f LEFT JOIN '.$xoopsDB->prefix('xhnewbb_posts').' p ON p.post_id = f.forum_last_post_id LEFT JOIN '.$xoopsDB->prefix('users').' u ON u.uid = p.uid'.' WHERE '.$whr_categories ;
 }
 
-if ( !$result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_weight, f.forum_id') ) {
+if( ! $result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_weight, f.forum_id') ) {
 	if ( !$result = $xoopsDB->query($sql.' ORDER BY f.cat_id, f.forum_id') ) {
-		exit("Error");
+		die( 'Error' ) ;
 	}
 }
-$forums = array(); // RMV-FIX
-while ( $forum_data = $xoopsDB->fetchArray($result) ) {
+$forums = array() ;
+while ( $forum_data = $xoopsDB->fetchArray( $result ) ) {
 	// private or public
 	if( $forum_data['forum_type'] == 0 || $uid > 0 && ( $xoopsUser->isAdmin( $xoopsModule->mid() ) || xhnewbb_check_priv_forum_read( $uid , $forum_data['forum_id'] ) ) ) {
 		$forums[] = $forum_data;
@@ -95,24 +63,11 @@ if ($cat_count > 0) {
 			$xoopsTpl->append("categories", $categories[$i]);
 			continue;
 		}
-		// Read 'lastread' cookie, if exists
-		// GIJ start
-		/* if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
-		else {
-			$topic_lastreadtmp = explode( ',' , $_COOKIE['xhnewbb_topic_lastread'] ) ;
-			foreach( $topic_lastreadtmp as $tmp ) {
-				$idmin = explode( '|' , $tmp ) ;
-				$id = empty( $idmin[0] ) ? 0 : intval( $idmin[0] ) ;
-				$min = empty( $idmin[1] ) ? 0 : intval( $idmin[1] ) ;
-				$topic_lastread[ $id ] = $min ;
-			}
-		} */
-		// GIJ end
+
 		foreach ( $forums as $forum_row ) {
 			unset($last_post);
 			if ( $forum_row['cat_id'] == $categories[$i]['cat_id'] ) {
 				if ($forum_row['post_time']) {
-					//$forum_row['subject'] = $myts->makeTboxData4Show($forum_row['subject']);
 					$categories[$i]['forums']['forum_lastpost_time'][] = formatTimestamp($forum_row['post_time'],'m');
 					$last_post_icon = '<a href="'.XOOPS_URL.'/modules/xhnewbb/viewtopic.php?post_id='.$forum_row['forum_last_post_id'].'&amp;topic_id='.$forum_row['topic_id'].'#forumpost'.$forum_row['forum_last_post_id'].'">';
 					if ( $forum_row['icon'] ) {
@@ -127,7 +82,6 @@ if ($cat_count > 0) {
 					} else {
 						$categories[$i]['forums']['forum_lastpost_user'][] = $xoopsConfig['anonymous'];
 					}
-					// $forum_lastread = !empty($topic_lastread[$forum_row['topic_id']]) ? $topic_lastread[$forum_row['topic_id']] * 60 : false;
 					if ( $forum_row['forum_type'] == 1 ) {
 						$categories[$i]['forums']['forum_folder'][] = $bbImage['locked_forum'];
 						$categories[$i]['forums']['forum_type'][] = 'private' ;
@@ -176,9 +130,11 @@ if ($cat_count > 0) {
 } else {
 	$xoopsTpl->append("categories", array());
 }
+
 $xoopsTpl->assign(array('mod_url' => XOOPS_URL.'/modules/xhnewbb',"img_hotfolder" => $bbImage['newposts_forum'], "img_folder" => $bbImage['folder_forum'], "img_locked" => $bbImage['locked_forum'], "lang_newposts" => _MD_XHNEWBB_NEWPOSTS, "lang_private" => _MD_XHNEWBB_PRIVATEFORUM, "lang_nonewposts" => _MD_XHNEWBB_NONEWPOSTS, "lang_search" => _MD_XHNEWBB_SEARCH, "lang_advsearch" => _MD_XHNEWBB_ADVSEARCH));
 
-$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';
+
 ?>

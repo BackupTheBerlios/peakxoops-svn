@@ -18,7 +18,7 @@
  *   (at your option) any later version.
  *
  ***************************************************************************/
-include "header.php";
+include "include/common_prepend.php";
 
 if( empty( $topic_id ) ) {
 	die(_MD_XHNEWBB_ERRORTOPIC);
@@ -229,7 +229,7 @@ if ( ! empty( $_POST['submit'] ) ) {
 }
 CloseTable();
 
-$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+$xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';
 ?>

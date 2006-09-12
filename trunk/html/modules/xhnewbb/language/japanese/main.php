@@ -161,8 +161,6 @@ define("_MD_XHNEWBB_ATTACHSIG","署名を付ける");
 define("_MD_XHNEWBB_POST","投稿する");
 define("_MD_XHNEWBB_SUBMIT","確定");
 define("_MD_XHNEWBB_CANCELPOST","投稿中止");
-
-// forumuserpost.php
 define("_MD_XHNEWBB_ADD","追加");
 define("_MD_XHNEWBB_REPLY","返信する");
 
@@ -196,7 +194,10 @@ define("_MD_XHNEWBB_OYPTTBATBOTFTTY","トピック固定ボタンを押すと、選択したトピッ
 
 // delete.php
 define("_MD_XHNEWBB_DELNOTALLOWED","この投稿を削除する権限がありません。");
+define("_MD_XHNEWBB_DELTIMELIMITED","削除可能期限を過ぎています。");
+define("_MD_XHNEWBB_DELCHILDEXISTS","すでにこの投稿への返信が登録されています。");
 define("_MD_XHNEWBB_AREUSUREDEL","この投稿およびこの投稿に対する返信を全て削除してもいいですか？");
+define("_MD_XHNEWBB_AREUSUREDELONE","この投稿を削除してもいいですか？");
 define("_MD_XHNEWBB_POSTSDELETED","選択した投稿を削除しました。");
 
 // definitions moved from global.
@@ -209,6 +210,14 @@ define("_MD_XHNEWBB_BOTTOM","下へ");
 // multi-byte spaces separated by ,
 // (don't define for single space languages)
 define('_MD_XHNEWBB_MULTIBYTESPACES','　') ;
+
+// cut&paste posts
+define('_MD_XHNEWBB_CUTPASTEPOSTS','投稿の切り貼り') ;
+define('_MD_XHNEWBB_ERROR_PIDLOOP','親ノードを子ノードの下に移動することはできません') ;
+define('_MD_XHNEWBB_CHILDREN_COUNT','子ノード数') ;
+define('_MD_XHNEWBB_CUTPASTEPOSTS_DEST','移動先投稿番号') ;
+define('_MD_XHNEWBB_CUTPASTEPOSTSDSC','この投稿の親となる投稿番号(post_id)を指定してください。0なら、このフォーラム内の新規トピックとなります。異なるフォーラムへ移動したい場合は、さらにそのトピックを移動してください。') ;
+define('_MD_XHNEWBB_CUTPASTESUCCESS','投稿の切り貼りを完了しました') ;
 
 // icon meanings
 define('_MD_XHNEWBB_ALT_ICON1','一般') ;

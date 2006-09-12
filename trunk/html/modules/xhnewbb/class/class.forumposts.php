@@ -29,8 +29,6 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 
-include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
-
 class ForumPosts
 {
 	var $post_id;
@@ -151,8 +149,8 @@ class ForumPosts
 
 	function store() {
 		$myts =& MyTextSanitizer::getInstance();
-		$subject =$myts->censorString($this->subject);
-		$post_text =$myts->censorString($this->post_text);
+		$subject = $myts->censorString($this->subject);
+		$post_text = $myts->censorString($this->post_text);
 		$subject = $myts->makeTboxData4Save($subject);
 		$post_text = $myts->makeTareaData4Save($post_text);
 		if ( empty($this->post_id) ) {
@@ -297,6 +295,7 @@ class ForumPosts
 			$this->db->query( "DELETE FROM ".$this->db->prefix("xhnewbb_users2topics")." WHERE topic_id = $this->topic_id" ) ;
 			// end of u2t table
 		}
+		include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 		$mytree = new XoopsTree($this->db->prefix("xhnewbb_posts"), "post_id", "pid");
 		$arr = $mytree->getAllChild($this->post_id);
 		$size = count($arr);

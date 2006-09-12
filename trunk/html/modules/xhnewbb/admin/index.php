@@ -29,8 +29,8 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 include '../../../include/cp_header.php';
-include '../functions.php';
-include '../config.php';
+include dirname(dirname(__FILE__)).'/include/functions.php' ;
+include dirname(dirname(__FILE__)).'/include/config.php' ;
 xoops_cp_header();
 if( file_exists( './mymenu.php' ) ) include( './mymenu.php' ) ;
 echo"<table width='100%' border='0' cellspacing='1' class='outer'>"

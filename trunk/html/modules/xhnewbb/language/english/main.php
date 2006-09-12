@@ -192,7 +192,10 @@ define("_MD_XHNEWBB_DELTOPIC","Delete Topic");
 
 // delete.php
 define("_MD_XHNEWBB_DELNOTALLOWED","Sorry, but you're not allowed to delete this post.");
+define("_MD_XHNEWBB_DELTIMELIMITED","Sorry, it has been expired to delete this post");
+define("_MD_XHNEWBB_DELCHILDEXISTS","Sorry, any parent posts cannot be removed.");
 define("_MD_XHNEWBB_AREUSUREDEL","Are you sure you want to delete this post and all its child posts?");
+define("_MD_XHNEWBB_AREUSUREDELONE","Are you sure you want to delete this post?");
 define("_MD_XHNEWBB_POSTSDELETED","Selected post and all its child posts deleted.");
 
 // definitions moved from global.
@@ -201,6 +204,14 @@ define("_MD_XHNEWBB_FROM","From");
 define("_MD_XHNEWBB_JOINED","Joined");
 define("_MD_XHNEWBB_ONLINE","Online");
 define("_MD_XHNEWBB_BOTTOM","Bottom");
+
+// cut&paste posts
+define('_MD_XHNEWBB_CUTPASTEPOSTS','Cut and paste posts') ;
+define('_MD_XHNEWBB_ERROR_PIDLOOP','parent/child loop error') ;
+define('_MD_XHNEWBB_CHILDREN_COUNT','child posts') ;
+define('_MD_XHNEWBB_CUTPASTEPOSTS_DEST','destination post_id') ;
+define('_MD_XHNEWBB_CUTPASTEPOSTSDSC','Specify post_id to be parent of this post. 0 means creating a new topic.') ;
+define('_MD_XHNEWBB_CUTPASTESUCCESS','The post has been cut and/or pasted successfully') ;
 
 // icon meanings
 define('_MD_XHNEWBB_ALT_ICON1','normal') ;

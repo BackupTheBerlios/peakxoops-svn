@@ -1,5 +1,49 @@
 <?php
 
+function xhnewbb_can_user_post_forum( $forumdata , $user = null , $isadminormod = false )
+{
+	if( ! isset( $user ) ) $user = @$GLOBALS['xoopsUser'] ;
+
+	if( $forumdata['forum_type'] == 1 ) {
+		// PRIVATE FORUM
+		if( ! is_object( @$user ) || ! $isadminormod || ! xhnewbb_check_priv_forum_post( $user->getVar('uid') , $forum ) ) {
+			return false ;
+		}
+	} else if( $forumdata['forum_access'] == 3 ) {
+		// only admin or moderator can post
+		if( ! isadminormod ) return false ;
+	} else if( $forumdata['forum_access'] == 1 ) {
+		// users can post (guest cannot)
+		if( ! is_object( @$user ) ) return false ;
+	} else if( $forumdata['forum_access'] == 2 ) {
+		// all users/guests can post
+	} else {
+		// Invalid forum_type
+		return false ;
+	}
+	return true ;
+}
+
+
+function xhnewbb_get_message_for_post_perm( $forumdata ) 
+{
+	// message for each forum types
+	if( $forumdata['forum_type'] == 1 ) {
+		return _MD_XHNEWBB_PRIVATE;
+	} else {
+		switch( $forumdata['forum_access'] ) {
+		  case 1 :
+			return _MD_XHNEWBB_REGCANPOST ;
+		  case 2 :
+			return _MD_XHNEWBB_ANONCANPOST ;
+		  case 3 :
+			return _MD_XHNEWBB_MODSCANPOST ;
+		}
+	}
+	return '' ;
+}
+
+
 function xhnewbb_get_forums_can_read()
 {
 	global $xoopsUser ;

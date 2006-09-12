@@ -34,6 +34,12 @@ define('_MI_XHNEWBB_USE_SOLVEDDSC','You can find the topic is solved or unsolved
 define('_MI_XHNEWBB_ALLOW_MARK','use the feature of MARKING');
 define('_MI_XHNEWBB_ALLOW_MARKDSC','Registered users can mark each topics');
 define('_MI_XHNEWBB_VIEWALLBREAK','page break number of viewallforum.php');
+define('_MI_XHNEWBB_SELFEDITLIMIT','Time limit for users edit (sec)');
+define('_MI_XHNEWBB_SELFEDITLIMITDSC','To allow normal users can edit his/her posts, set plus value as seconds. To disallow normal users can edit it, set 0.');
+define('_MI_XHNEWBB_SELFDELLIMIT','Time limit for users delete (sec)');
+define('_MI_XHNEWBB_SELFDELLIMITDSC','To allow normal users can delete his/her posts, set plus value as seconds. To disallow normal users can delete it, set 0. Anyway any parent posts cannot be removed.');
+define('_MI_XHNEWBB_CSS_URI','URI of CSS file for this module');
+define('_MI_XHNEWBB_CSS_URIDSC','relative or absolute path can be set. default: index.css');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

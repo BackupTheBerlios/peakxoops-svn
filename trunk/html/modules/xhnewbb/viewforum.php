@@ -1,35 +1,6 @@
 <?php
-// $Id: viewforum.php,v 1.8 2005/02/10 19:04:21 gij Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
-// Project: The XOOPS Project                                                //
-// ------------------------------------------------------------------------- //
 
-include "header.php";
+include dirname(__FILE__).'/include/common_prepend.php' ;
 
 $uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 
@@ -45,6 +16,7 @@ if( ! empty( $xoopsModuleConfig['xhnewbb_allow_mark'] ) && $uid > 0 && ! empty( 
 	$forum = intval( @$_POST['forum'] ) ;
 
 	redirect_header( XOOPS_URL."/modules/xhnewbb/viewforum.php?forum=$forum" , 0 , _MD_XHNEWBB_UPDATED ) ;
+	exit ;
 }
 
 // updating topic_solved
@@ -246,21 +218,6 @@ if ( !$result = $xoopsDB->query($sql,$forumdata['topics_per_page'],$start) ) {
 	exit();
 }
 
-// Read topic 'lastread' times from cookie, if exists
-// GIJ start
-/* if( empty( $_COOKIE['xhnewbb_topic_lastread'] ) ) $topic_lastread = array();
-else {
-	$topic_lastreadtmp = explode( ',' , $_COOKIE['xhnewbb_topic_lastread'] ) ;
-	foreach( $topic_lastreadtmp as $tmp ) {
-		$idmin = explode( '|' , $tmp ) ;
-		$id = empty( $idmin[0] ) ? 0 : intval( $idmin[0] ) ;
-		$min = empty( $idmin[1] ) ? 0 : intval( $idmin[1] ) ;
-		$topic_lastread[ $id ] = $min ;
-	}
-} */
-// GIJ end
-
-
 
 
 
@@ -277,7 +234,6 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 		$topic_desc = _MD_XHNEWBB_TOPICLOCKED ;
 	} else {
 		if ( $myrow['topic_replies'] >= $forumdata['hot_threshold'] ) {
-//			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
 			if ( $myrow['u2t_time'] < $myrow['last_post_time'] ) {
 				$image = $bbImage['hot_newposts_topic'];
 				$topic_desc = _MD_XHNEWBB_NEWPOSTS ;
@@ -286,7 +242,6 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 				$topic_desc = _MD_XHNEWBB_NONEWPOSTS ;
 			}
 		} else {
-//			if ( empty($topic_lastread[$myrow['topic_id']]) || ($topic_lastread[$myrow['topic_id']] * 60 < $myrow['last_post_time'] )) {
 			if ( $myrow['u2t_time'] < $myrow['last_post_time'] ) {
 				$image = $bbImage['newposts_topic'];
 				$topic_desc = _MD_XHNEWBB_NEWPOSTS ;
@@ -394,7 +349,8 @@ if ( $all_topics > $forumdata['topics_per_page'] ) {
 }
 $xoopsTpl->assign('forum_jumpbox', xhnewbb_make_jumpbox($forum));
 
-$xoopsTpl->assign( "xoops_module_header" , "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".XOOPS_URL."/modules/xhnewbb/index.css\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
+$xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) , "xoops_pagetitle" => $myts->makeTboxData4Show($forumdata['forum_name']) ) ) ;
 
 include XOOPS_ROOT_PATH."/footer.php";
+
 ?>

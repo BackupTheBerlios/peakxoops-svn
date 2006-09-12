@@ -10,8 +10,8 @@ $pid = empty( $pid ) ? 0 : intval( $pid ) ;
 $post_id = empty( $post_id ) ? 0 : intval( $post_id ) ;
 $topic_id = empty( $topic_id ) ? 0 : intval( $topic_id ) ;
 $forum = empty( $forum ) ? 0 : intval( $forum ) ;
-$formTitle = empty( $formTitle ) ? "" : $formTitle ;
-$guestName = empty( $guestName ) ? "" : $guestName ;
+$formTitle = empty( $formTitle ) ? '' : $formTitle ;
+$guestname4html = empty( $guestname4html ) ? '' : $guestname4html ;
 $mode = ! in_array( @$mode , array('newtopic','edit','reply','preview') ) ? 'newtopic' : $mode ;
 $allow_html = $forumdata['allow_html'] ;
 $nohtml = isset( $nohtml ) ? intval( $nohtml ) : 1 ;
@@ -45,40 +45,28 @@ if( is_object( @$xoopsUser ) ) {
 	$notify = 0 ;
 }
 
-$xoopsOption['template_main'] = 'xhnewbb_post_form.html' ;
-
-// message for each forum types
-if ( $forumdata['forum_type'] == 1 ) {
-	$type = _MD_XHNEWBB_PRIVATE;
-} else {
-	switch( $forumdata['forum_access'] ) {
-	  case 1:
-		$type = _MD_XHNEWBB_REGCANPOST;
-		break;
-	  case 2:
-		$type = _MD_XHNEWBB_ANONCANPOST;
-		break;
-	  case 3:
-		$type = _MD_XHNEWBB_MODSCANPOST;
-		break;
-	}
-}
-
 // solved changeable?
-if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && is_object( @$xoopsUser ) && ( $xoopsUser->isAdmin() || xhnewbb_is_moderator( $forum , $xoopsUser->getVar('uid') ) ) ) {
+if( ! empty( $xoopsModuleConfig['xhnewbb_use_solved'] ) && $isadminormod ) {
 	$can_change_solved = true ;
 } else {
 	$can_change_solved = false ;
 }
 
+
+// dare to set 'template_main' after header.php (for disabling cache)
+include XOOPS_ROOT_PATH.'/header.php' ;
+$xoopsOption['template_main'] = 'xhnewbb_post_form.html' ;
+
 $xoopsTpl->assign( array(
+	'forumdata' => $forumdata ,
 	'mode' => $mode ,
+	'ispreview' => intval( @$ispreview ) ,
 	'formtitle' => $formTitle ,
 	'viewmode' => $viewmode ,
 	'order' => $order ,
-	'message_about_post' => $type ,
+	'message_about_post' => xhnewbb_get_message_for_post_perm( $forumdata ) ,
 	'uid' => $uid ,
-	'uname' => $uid ? $xoopsUser->getVar('uname') : $guestName ,
+	'uname' => $uid ? $xoopsUser->getVar('uname') : $guestname4html ,
 	'subject' => @$subject4html ,
 	'message' => @$message4html ,
 	'reference_quote' => @$quote4html ,
@@ -86,6 +74,8 @@ $xoopsTpl->assign( array(
 	'reference_message' => @$reference_message4html ,
 	'reference_name' => @$reference_name4html ,
 	'reference_date' => @$reference_date4html ,
+	'preview_subject' => @$reference_subject4html ,
+	'preview_message' => @$reference_message4html ,
 	'icons' => array(
 		'icon1.gif' ,
 		'icon2.gif' ,
@@ -95,14 +85,17 @@ $xoopsTpl->assign( array(
 		'icon6.gif' ,
 		'icon7.gif' ,
 		) ,
-	'solved' => $solved ,
-	'solved_checked' => $solved ? 'checked="checked"' : '' ,
-	'can_change_solved' => $can_change_solved ,
+	'icon_selected' => $icon ,
 	'pid' => $pid ,
 	'post_id' => $post_id ,
 	'topic_id' => $topic_id ,
 	'forum' => $forum ,
+	'can_change_solved' => $can_change_solved ,
+	'solved' => $solved ,
+	'solved_checked' => $solved ? 'checked="checked"' : '' ,
+	'allow_mark' => @$xoopsModuleConfig['xhnewbb_allow_mark'] ,
 	'u2t_marked' => intval( @$u2t_marked ) ,
+	'u2t_marked_checked' => $u2t_marked ? 'checked="checked"' : '' ,
 	'nosmiley' => $nosmiley ,
 	'nosmiley_checked' => $nosmiley ? 'checked="checked"' : '' ,
 	'allow_sig' => $allow_sig ,
@@ -115,5 +108,9 @@ $xoopsTpl->assign( array(
 	'nohtml' => $nohtml ,
 	'nohtml_checked' => $nohtml ? 'checked="checked"' : '' ,
 ) ) ;
+
+$xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) , "xoops_pagetitle" => $formTitle ) ) ;
+
+include XOOPS_ROOT_PATH.'/footer.php' ;
 
 ?>

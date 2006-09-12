@@ -1,29 +1,4 @@
 <?php
-// $Id: xoops_version.php,v 1.4 2005/02/10 19:04:21 gij Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
 
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -81,6 +56,8 @@ $modversion['templates'][8]['file'] = 'xhnewbb_viewallforum.html';
 $modversion['templates'][8]['description'] = '';
 $modversion['templates'][9]['file'] = 'xhnewbb_post_form.html';
 $modversion['templates'][9]['description'] = '';
+$modversion['templates'][10]['file'] = 'xhnewbb_custpasteposts.html';
+$modversion['templates'][10]['description'] = '';
 
 // Blocks
 $modversion['blocks'][1] = array(
@@ -106,7 +83,7 @@ $modversion['blocks'][2] = array(
 	) ;
 
 // Configurations
-$modversion['config'][] = array(
+$modversion['config'][1] = array(
 	'name'			=> 'xhnewbb_allow_textimg' ,
 	'title'			=> '_MI_XHNEWBB_ALLOW_TEXTIMG' ,
 	'description'	=> '_MI_XHNEWBB_ALLOW_TEXTIMGDSC' ,
@@ -116,7 +93,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][2] = array(
 	'name'			=> 'xhnewbb_allow_sigimg' ,
 	'title'			=> '_MI_XHNEWBB_ALLOW_SIGIMG' ,
 	'description'	=> '_MI_XHNEWBB_ALLOW_SIGIMGDSC' ,
@@ -126,7 +103,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][3] = array(
 	'name'			=> 'xhnewbb_use_solved' ,
 	'title'			=> '_MI_XHNEWBB_USE_SOLVED' ,
 	'description'	=> '_MI_XHNEWBB_USE_SOLVEDDSC' ,
@@ -136,7 +113,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][4] = array(
 	'name'			=> 'xhnewbb_allow_mark' ,
 	'title'			=> '_MI_XHNEWBB_ALLOW_MARK' ,
 	'description'	=> '' ,
@@ -146,13 +123,43 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+$modversion['config'][5] = array(
 	'name'			=> 'xhnewbb_viewallbreak' ,
 	'title'			=> '_MI_XHNEWBB_VIEWALLBREAK' ,
 	'description'	=> '_MI_XHNEWBB_VIEWALLBREAKDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "10" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][6] = array(
+	'name'			=> 'xhnewbb_selfeditlimit' ,
+	'title'			=> '_MI_XHNEWBB_SELFEDITLIMIT' ,
+	'description'	=> '_MI_XHNEWBB_SELFEDITLIMITDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "31536000" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][7] = array(
+	'name'			=> 'xhnewbb_selfdellimit' ,
+	'title'			=> '_MI_XHNEWBB_SELFDELLIMIT' ,
+	'description'	=> '_MI_XHNEWBB_SELFDELLIMITDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][8] = array(
+	'name'			=> 'xhnewbb_css_uri' ,
+	'title'			=> '_MI_XHNEWBB_CSS_URI' ,
+	'description'	=> '_MI_XHNEWBB_CSS_URIDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'index.css' ,
 	'options'		=> array()
 ) ;
 

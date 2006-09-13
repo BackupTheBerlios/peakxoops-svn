@@ -1,6 +1,9 @@
 1.27 2006-09-05
 - modified compatibility with 2.0.15 (xoops.org) xml_google fatal error
 - modified compatibility with 2.0.14 (xoops.org) xml_google with debug mode (thx DuGris)
+- added plugins
+-- formulaire (thx philou) 1.27a
+-- pages (thx philou) 1.27a
 
 1.26 2006-07-17
 - added plugin-system for D3 modules (eg. bulletin)

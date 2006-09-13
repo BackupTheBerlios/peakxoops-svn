@@ -3,6 +3,8 @@
 eval( ' function xoops_module_update_'.$mydirname.'( $module ) { return wraps_onupdate_base( $module , "'.$mydirname.'" ) ; } ' ) ;
 
 
+if( ! function_exists( 'wraps_onupdate_base' ) ) {
+
 function wraps_onupdate_base( $module , $mydirname )
 {
 	// transations on module update
@@ -79,5 +81,6 @@ function wraps_message_append_onupdate( &$module_obj , &$log )
 	// use mLog->addWarning() or mLog->addError() if necessary
 }
 
+}
 
 ?>

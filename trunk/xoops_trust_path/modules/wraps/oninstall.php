@@ -3,6 +3,8 @@
 eval( ' function xoops_module_install_'.$mydirname.'( $module ) { return wraps_oninstall_base( $module , "'.$mydirname.'" ) ; } ' ) ;
 
 
+if( ! function_exists( 'wraps_oninstall_base' ) ) {
+
 function wraps_oninstall_base( $module , $mydirname )
 {
 	// transations on module install
@@ -112,6 +114,8 @@ function wraps_message_append_oninstall( &$module_obj , &$log )
 	}
 
 	// use mLog->addWarning() or mLog->addError() if necessary
+}
+
 }
 
 ?>

@@ -3,6 +3,8 @@
 eval( ' function xoops_module_uninstall_'.$mydirname.'( $module ) { return wraps_onuninstall_base( $module , "'.$mydirname.'" ) ; } ' ) ;
 
 
+if( ! function_exists( 'wraps_onuninstall_base' ) ) {
+
 function wraps_onuninstall_base( $module , $mydirname )
 {
 	// transations on module uninstall
@@ -70,5 +72,6 @@ function wraps_message_append_onuninstall( &$module_obj , &$log )
 	// use mLog->addWarning() or mLog->addError() if necessary
 }
 
+}
 
 ?>

@@ -3,6 +3,10 @@
 
 [b]CHANGES:[/b]
 
+1.06 (2006/09/14)
+- modified compatibility with Cube 2.1 on installing multiply
+- changed module's icon (thx argon)
+
 1.05 (2006/09/05)
 - modified compatibility with Cube 2.1 alpha4-c
 - modified global search can find recursively
@@ -37,6 +41,10 @@
 
 [b]更新履歴:[/b]
 
+
+1.06 (2006/09/14)
+- Cube 2.1 での一括インストールでfatalを出していたのを修正
+- モジュールアイコン差し替え (thx argon)
 
 1.05 (2006/09/05)
 - Cube 2.1 alpha4-c により沿ったコードに書き換えた

@@ -1,14 +1,14 @@
 [mlimg]
 [xlang:en]
 
-1.30beta
+1.30beta (2006/09/13)
 - rebuilding templates fundamentally now ... (special thx jidaikobo!)
 - changed cat_order from varchar into smallint (thx Ujiki.oO)
 - modified behaviors of the marking feature
 - added names into topic_icons
 - fixed original bug notification on post
 - fixed original bug signature can be turned on always
-- fixed original bug dobule htmlspecialchars with subject
+- fixed original bug double htmlspecialchars with subject
 - modified posting form from xoopsform into a template
 - removed a doubltful option "post anonymously"
 - added identical string into xoops_pagetitle 
@@ -19,6 +19,7 @@
 - added configuration of self deletion allow/disallow and time limitation
 - added configuration URI of module's CSS
 - added cut&paste posts (only for admins or moderators)
+- modified delete.php using template
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -103,7 +104,7 @@
 [/xlang:en]
 [xlang:ja]
 
-1.30beta
+1.30beta (2006/09/13)
 - テンプレートをフルスクラッチ中... (special thx jidaikobo!)
 - cat_order がなぜか varchar となっていたのを smallint に変更 (thx Ujiki.oO)
 - 注目トピック機能の動作修正

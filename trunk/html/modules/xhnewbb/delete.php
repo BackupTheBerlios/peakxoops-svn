@@ -26,7 +26,7 @@ if( $isadminormod ) {
 		// before time limit
 		include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
 		$mytree = new XoopsTree( $xoopsDB->prefix("xhnewbb_posts") , "post_id" , "pid" ) ;
-		if( $children_count ) {
+		if( count( $children ) > 0 ) {
 			// child(ren) exist(s)
 			redirect_header( XOOPS_URL."/modules/xhnewbb/viewtopic.php?topic_id=$topic_id&viewmode=$viewmode&order=$order" , 2 , _MD_XHNEWBB_DELCHILDEXISTS ) ;
 			exit ;

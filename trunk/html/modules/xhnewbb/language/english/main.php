@@ -147,7 +147,7 @@ define("_MD_XHNEWBB_YOURNAME","Your Name");
 define("_MD_XHNEWBB_LOGOUT","Logout");
 define("_MD_XHNEWBB_REGISTER","Register");
 define("_MD_XHNEWBB_SUBJECTC","Subject");
-define("_MD_XHNEWBB_EDITMODEC","Mode");
+define("_MD_XHNEWBB_EDITMODEC","Edit Mode");
 define("_MD_XHNEWBB_UNAMEC","Poster");
 define("_MD_XHNEWBB_FMT_UNAME","%s");
 define("_MD_XHNEWBB_MESSAGEICON","Message Icon");

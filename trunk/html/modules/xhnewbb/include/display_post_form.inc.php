@@ -74,8 +74,8 @@ $xoopsTpl->assign( array(
 	'reference_message' => @$reference_message4html ,
 	'reference_name' => @$reference_name4html ,
 	'reference_date' => @$reference_date4html ,
-	'preview_subject' => @$reference_subject4html ,
-	'preview_message' => @$reference_message4html ,
+	'preview_subject' => @$preview_subject4html ,
+	'preview_message' => @$preview_message4html ,
 	'icons' => array(
 		'icon1.gif' ,
 		'icon2.gif' ,

@@ -4,14 +4,16 @@ function xhnewbb_can_user_post_forum( $forumdata , $user = null , $isadminormod 
 {
 	if( ! isset( $user ) ) $user = @$GLOBALS['xoopsUser'] ;
 
+	if( $isadminormod ) return true ;
+
 	if( $forumdata['forum_type'] == 1 ) {
 		// PRIVATE FORUM
-		if( ! is_object( @$user ) || ! $isadminormod || ! xhnewbb_check_priv_forum_post( $user->getVar('uid') , $forum ) ) {
+		if( ! is_object( @$user ) || ! xhnewbb_check_priv_forum_post( $user->getVar('uid') , $forumdata['forum_id'] ) ) {
 			return false ;
 		}
 	} else if( $forumdata['forum_access'] == 3 ) {
 		// only admin or moderator can post
-		if( ! isadminormod ) return false ;
+		return false ;
 	} else if( $forumdata['forum_access'] == 1 ) {
 		// users can post (guest cannot)
 		if( ! is_object( @$user ) ) return false ;

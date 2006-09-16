@@ -4,6 +4,10 @@
 - added plugins
 -- formulaire (thx philou) 1.27a
 -- pages (thx philou) 1.27a
+- added and modified languages
+-- catalan (thx yuji) 1.27b
+-- portuguesebr (thx yuji) 1.27b
+-- spanish (thx yuji) 1.27b
 
 1.26 2006-07-17
 - added plugin-system for D3 modules (eg. bulletin)

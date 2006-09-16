@@ -1,7 +1,7 @@
-<?php
+<?php /* Spanish Translation by Marcelo Yuji Himoro <http://yuji.ws> */
 
-define('_MB_SITEMAP_OPENCLOSE', 'Haga Click Aqu&iacute; Para ver el Mapa del Sitio');
-define('_MB_SITEMAP_COLS', 'Cols');
+define('_MB_SITEMAP_OPENCLOSE', 'Pulse aquí para mostrar/ocultar');
+define('_MB_SITEMAP_COLS', 'Columnas');
 
 
 ?>

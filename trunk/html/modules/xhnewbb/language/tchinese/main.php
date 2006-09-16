@@ -2,35 +2,6 @@
 
 //%%%%%%		Module Name phpBB  		%%%%%
 
-
-
-
-// Appended by Xoops Language Checker -GIJOE- in 2006-09-12 17:51:40
-define('_MD_XHNEWBB_DELTIMELIMITED','Sorry, it has been expired to delete this post');
-define('_MD_XHNEWBB_DELCHILDEXISTS','Sorry, any parent posts cannot be removed.');
-define('_MD_XHNEWBB_AREUSUREDELONE','Are you sure you want to delete this post?');
-define('_MD_XHNEWBB_CUTPASTEPOSTS','Cut and paste posts');
-define('_MD_XHNEWBB_ERROR_PIDLOOP','parent/child loop error');
-define('_MD_XHNEWBB_CHILDREN_COUNT','child posts');
-define('_MD_XHNEWBB_CUTPASTEPOSTS_DEST','destination post_id');
-define('_MD_XHNEWBB_CUTPASTEPOSTSDSC','Specify post_id to be parent of this post. 0 means creating a new topic.');
-define('_MD_XHNEWBB_CUTPASTESUCCESS','The post has been cut and/or pasted successfully');
-
-// Appended by Xoops Language Checker -GIJOE- in 2006-08-07 17:50:20
-define('_MD_XHNEWBB_ALT_ICON1','normal');
-define('_MD_XHNEWBB_ALT_ICON2','unhappy');
-define('_MD_XHNEWBB_ALT_ICON3','happy');
-define('_MD_XHNEWBB_ALT_ICON4','raise it');
-define('_MD_XHNEWBB_ALT_ICON5','lower it');
-define('_MD_XHNEWBB_ALT_ICON6','report');
-define('_MD_XHNEWBB_ALT_ICON7','question');
-define('_MD_XHNEWBB_ALT_SOLVED','(solved)');
-define('_MD_XHNEWBB_ALT_UNSOLVED','(unsolved)');
-
-// Appended by Xoops Language Checker -GIJOE- in 2006-08-06 06:01:43
-define('_MD_XHNEWBB_UPPERTOPIC','top of the posts');
-define('_MD_XHNEWBB_LOWERTOPIC','bottom of the posts');
-
 define("_MD_XHNEWBB_UPDATE","更新");
 define("_MD_XHNEWBB_UPDATED","已更新了");
 
@@ -74,25 +45,25 @@ define("_MD_XHNEWBB_KEYWORDS","關鍵字:");
 define("_MD_XHNEWBB_SEARCHANY","任一條件符合 (預設值)");
 define("_MD_XHNEWBB_SEARCHALL","全部條件符合");
 define("_MD_XHNEWBB_SEARCHALLFORUMS","搜尋所有討論區");
-define("_MD_XHNEWBB_FORUMC","討論版:");
-define("_MD_XHNEWBB_SORTBY","排序:");
+define("_MD_XHNEWBB_FORUMC","討論版：");
+define("_MD_XHNEWBB_SORTBY","排序：");
 define("_MD_XHNEWBB_DATE","日期");
 define("_MD_XHNEWBB_TOPIC","主題");
 define("_MD_XHNEWBB_USERNAME","帳號");
-define("_MD_XHNEWBB_SEARCHIN","搜尋於:");
+define("_MD_XHNEWBB_SEARCHIN","搜尋於：");
 define("_MD_XHNEWBB_BODY","內容");
-define("_MD_XHNEWBB_NOMATCH","沒有符合的，請再換個條件試試.");
+define("_MD_XHNEWBB_NOMATCH","找不到符合條件，請再換個條件試試！");
 define("_MD_XHNEWBB_POSTTIME","發表時間");
 
 //viewforum.php
 define("_MD_XHNEWBB_LATESTPOST","最新");
 define("_MD_XHNEWBB_REPLIES","回應");
 define("_MD_XHNEWBB_POSTER","發表者");
-define("_MD_XHNEWBB_VIEWS","閱\覽");
+define("_MD_XHNEWBB_VIEWS","閱覽");
 define("_MD_XHNEWBB_MORETHAN","最新熱門文章");
 define("_MD_XHNEWBB_MORETHAN2","最新熱門文章");
 define("_MD_XHNEWBB_TOPICLOCKED","本主題已經鎖定，停止回應");
-define("_MD_XHNEWBB_LEGEND","Legend");
+define("_MD_XHNEWBB_LEGEND","Legend"); //[MADA]
 define("_MD_XHNEWBB_NEXTPAGE","下一頁");
 define("_MD_XHNEWBB_SORTEDBY","排序：");
 define("_MD_XHNEWBB_FORUMNAME","討論區名");
@@ -125,6 +96,10 @@ define("_MD_XHNEWBB_NEXTTOPIC","下一個主題");
 define("_MD_XHNEWBB_MARK_TURNON","將這個主題標示起來");
 define("_MD_XHNEWBB_MARK_TURNOFF","取消這個主題的標示");
 
+define("_MD_XHNEWBB_UPPERTOPIC","主題一覽的上方"); //jidaikobo
+define("_MD_XHNEWBB_LOWERTOPIC","主題一覽的下方"); //jidaikobo
+
+
 //forumform.inc
 define("_MD_XHNEWBB_ABOUTPOST","發表限制");
 define("_MD_XHNEWBB_ANONCANPOST","<b>非會員</b> 可以發表");
@@ -138,7 +113,7 @@ define("_MD_XHNEWBB_QUOTE","引文");
 define("_MD_XHNEWBB_ERRORFORUM","錯誤！未選擇討論區");
 define("_MD_XHNEWBB_ERRORPOST","錯誤！未無選擇文章");
 define("_MD_XHNEWBB_NORIGHTTOPOST","你無權在本區張貼文章。");
-define("_MD_XHNEWBB_NORIGHTTOACCESS","您沒有權限進入本討論區.");
+define("_MD_XHNEWBB_NORIGHTTOACCESS","您並無進入此討論區的權限。");
 define("_MD_XHNEWBB_ERRORTOPIC","錯誤！未選擇主題");
 define("_MD_XHNEWBB_ERRORCONNECT","錯誤！無法聯結到討論區資料庫");
 define("_MD_XHNEWBB_ERROREXIST","錯誤！你所選擇的討論版並不存在，請再試一次。");
@@ -162,41 +137,35 @@ define("_MD_XHNEWBB_THANKSSUBMIT","謝謝您的發表！");
 define("_MD_XHNEWBB_THANKSEDIT","內容已經更新完畢。");
 define("_MD_XHNEWBB_REPLYPOSTED","您發表的文章有人回應了。");
 define("_MD_XHNEWBB_HELLO"," %s 您好，");
-define("_MD_XHNEWBB_URRECEIVING","您會收到本封mail是因為您在 %s 的討論區發表的文章有人回應了。");
+define("_MD_XHNEWBB_URRECEIVING","您會收到本封 Mail 是因為您在 %s 的討論區發表的文章有人回應了。");
 
 define("_MD_XHNEWBB_CLICKBELOW","按以下連結觀看文章：");
 define("_MD_XHNEWBB_FMT_GUESTSPOSTHEADER","由訪客「%s」所發表的文章。\n---\n\n");
 
 //forumform.inc
-define("_MD_XHNEWBB_YOURNAME","您的名稱：");
+define("_MD_XHNEWBB_YOURNAME","帳號名稱");
 define("_MD_XHNEWBB_LOGOUT","登出");
-define("_MD_XHNEWBB_REGISTER","註冊或登入");
-define("_MD_XHNEWBB_SUBJECTC","標題：");
-define("_MD_XHNEWBB_EDITMODEC","編輯模式：");
-define("_MD_XHNEWBB_ALERTEDIT","<div style='background:#FE0000;color:#FFFFFF;font-size:150%;font-weight:bold;padding:3px;'>正在編輯發表文章內容</div>");
-define("_MD_XHNEWBB_GUESTNAMEC","訪客稱呼：");
-define("_MD_XHNEWBB_UNAMEC","會員名稱：");
-define("_MD_XHNEWBB_FMT_UNAME"," %s ");
-define("_MD_XHNEWBB_MESSAGEICON","文章圖示：");
+define("_MD_XHNEWBB_REGISTER","登入");
+define("_MD_XHNEWBB_SUBJECTC","標題");
+define("_MD_XHNEWBB_EDITMODEC","編輯模式");
+define("_MD_XHNEWBB_UNAMEC","發表者名");
+define("_MD_XHNEWBB_FMT_UNAME","%s "); // 需再確認實際用途
+define("_MD_XHNEWBB_MESSAGEICON","內容圖示");
 define("_MD_XHNEWBB_SOLVEDCHECKBOX","已解決");
-define("_MD_XHNEWBB_MESSAGEC","內容：");
-define("_MD_XHNEWBB_ALLOWEDHTML","可使用的HTML標籤：");
-define("_MD_XHNEWBB_OPTIONS","附加選項：");
-define("_MD_XHNEWBB_POSTANONLY","匿名發表");
-define("_MD_XHNEWBB_DISABLESMILEY","不使用表情圖");
-define("_MD_XHNEWBB_DISABLEHTML","不使用 html 標籤");
-define("_MD_XHNEWBB_NEWPOSTNOTIFY","本討論串有發表時通知我");
-define("_MD_XHNEWBB_ATTACHSIG","附加簽名");
+define("_MD_XHNEWBB_MESSAGEC","內容");
+define("_MD_XHNEWBB_OPTIONS","選項");
+define("_MD_XHNEWBB_DISABLESMILEY","不使用表情圖示");
+define("_MD_XHNEWBB_DISABLEHTML","不使用 HTML 標籤");
+define("_MD_XHNEWBB_NEWPOSTNOTIFY", "在這個主題中有新的發表時請通知我");
+define("_MD_XHNEWBB_ATTACHSIG","附加簽名檔");
 define("_MD_XHNEWBB_POST","發表");
-define("_MD_XHNEWBB_SUBMIT","確定");
+define("_MD_XHNEWBB_SUBMIT","確定發表");
 define("_MD_XHNEWBB_CANCELPOST","取消");
-
-// forumuserpost.php
-define("_MD_XHNEWBB_ADD","增加");
+define("_MD_XHNEWBB_ADD","新增");
 define("_MD_XHNEWBB_REPLY","對這文章發表回應");
 
 // topicmanager.php
-define("_MD_XHNEWBB_YANTMOTFTYCPTF","你並非本區版主所以並不能使用此功\能。");
+define("_MD_XHNEWBB_YANTMOTFTYCPTF","你並非本區版主所以並不能使用此功能。");
 define("_MD_XHNEWBB_TTHBRFTD","這主題已經被移除了。");
 define("_MD_XHNEWBB_RETURNTOTHEFORUM","回到討論版列表");
 define("_MD_XHNEWBB_RTTFI","回討論區主頁");
@@ -220,12 +189,15 @@ define("_MD_XHNEWBB_STICKYTOPIC","固定本主題於本版頂端");
 define("_MD_XHNEWBB_UNSTICKYTOPIC","解除固定主題");
 define("_MD_XHNEWBB_TTHBS","這個主題已經固定在頂端。");
 define("_MD_XHNEWBB_TTHBUS","這個主題已經解除固定！");
-define("_MD_XHNEWBB_OYPTSBATBOTFTTY","當您按下按鈕可以固定主題在頂端.");
-define("_MD_XHNEWBB_OYPTTBATBOTFTTY","當您按下按鈕可以解除固定主題.");
+define("_MD_XHNEWBB_OYPTSBATBOTFTTY","當您按下按鈕可以固定主題在頂端。");
+define("_MD_XHNEWBB_OYPTTBATBOTFTTY","當您按下按鈕可以解除固定主題。");
 
 // delete.php
 define("_MD_XHNEWBB_DELNOTALLOWED","抱歉！您並沒有權限刪除本篇文章！");
+define("_MD_XHNEWBB_DELTIMELIMITED","已經過了可以刪除的期限。");
+define("_MD_XHNEWBB_DELCHILDEXISTS","已經有人針對這個主題回應了。");
 define("_MD_XHNEWBB_AREUSUREDEL","您確定要刪除本篇文章及以下的回應？");
+define("_MD_XHNEWBB_AREUSUREDELONE","確定要刪除這個主題嗎？");
 define("_MD_XHNEWBB_POSTSDELETED","選擇本篇及其以下文章一起刪除。");
 
 // definitions moved from global.
@@ -238,5 +210,25 @@ define("_MD_XHNEWBB_BOTTOM","頁尾");
 // multi-byte spaces separated by ,
 // (don't define for single space languages)
 define('_MD_XHNEWBB_MULTIBYTESPACES','　') ;
+
+// cut&paste posts
+define('_MD_XHNEWBB_CUTPASTEPOSTS','文章切割') ;
+define('_MD_XHNEWBB_ERROR_PIDLOOP','主內容無法轉移到子內容之下') ;
+define('_MD_XHNEWBB_CHILDREN_COUNT','子內容數') ;
+define('_MD_XHNEWBB_CUTPASTEPOSTS_DEST','要轉移的文章編號') ;
+define('_MD_XHNEWBB_CUTPASTEPOSTSDSC','請指定要成為這些文章的主內容文章編號(post_id)。如果設定為 0 將會另外成立一個新的主題。如要轉移到其他討論區，還需要移動到該類別中。') ;
+define('_MD_XHNEWBB_CUTPASTESUCCESS','文章切割已完成') ;
+
+// icon meanings
+define('_MD_XHNEWBB_ALT_ICON1','一般') ;
+define('_MD_XHNEWBB_ALT_ICON2','不滿') ;
+define('_MD_XHNEWBB_ALT_ICON3','滿足') ;
+define('_MD_XHNEWBB_ALT_ICON4','下降') ;
+define('_MD_XHNEWBB_ALT_ICON5','提升') ;
+define('_MD_XHNEWBB_ALT_ICON6','回報') ;
+define('_MD_XHNEWBB_ALT_ICON7','詢問') ;
+define('_MD_XHNEWBB_ALT_SOLVED','（已解決）') ;
+define('_MD_XHNEWBB_ALT_UNSOLVED','（未解決）') ;
+
 
 ?>

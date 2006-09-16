@@ -2,15 +2,6 @@
 // Module Info
 
 // The name of this module
-
-// Appended by Xoops Language Checker -GIJOE- in 2006-09-12 17:51:40
-define('_MI_XHNEWBB_SELFEDITLIMIT','Time limit for users edit (sec)');
-define('_MI_XHNEWBB_SELFEDITLIMITDSC','To allow normal users can edit his/her posts, set plus value as seconds. To disallow normal users can edit it, set 0.');
-define('_MI_XHNEWBB_SELFDELLIMIT','Time limit for users delete (sec)');
-define('_MI_XHNEWBB_SELFDELLIMITDSC','To allow normal users can delete his/her posts, set plus value as seconds. To disallow normal users can delete it, set 0. Anyway any parent posts cannot be removed.');
-define('_MI_XHNEWBB_CSS_URI','URI of CSS file for this module');
-define('_MI_XHNEWBB_CSS_URIDSC','relative or absolute path can be set. default: index.css');
-
 define("_MI_XHNEWBB_NAME","討論區");
 
 // A brief description of this module
@@ -32,15 +23,21 @@ define("_MI_XHNEWBB_ADMENU_MYBLOCKSADMIN","區塊&#12539;群組管理");
 define("_MI_XHNEWBB_ADMENU_MYTPLSADMIN","樣版管理");
 
 // configurations
-define('_MI_XHNEWBB_ALLOW_TEXTIMG','允許\在發表內容中連結外部的圖檔');
-define('_MI_XHNEWBB_ALLOW_TEXTIMGDSC','如果允許\[img]標籤來連結外部的圖像，將有可能被擷取觀覽者的IP或是User-Agent等資訊。');
-define('_MI_XHNEWBB_ALLOW_SIGIMG','允許\在簽名檔中連結外部圖檔');
-define('_MI_XHNEWBB_ALLOW_SIGIMGDSC','如果允許\[img]標籤來連結外部的圖像，將有可能被擷取觀覽者的IP或是User-Agent等資訊。');
-define('_MI_XHNEWBB_USE_SOLVED','使用問題解決功\能');
-define('_MI_XHNEWBB_USE_SOLVEDDSC','可以利用這個項目設定使用不同的圖檔來區分「已解決」的功\能。');
-define('_MI_XHNEWBB_ALLOW_MARK','使用話題追蹤功\能');
-define('_MI_XHNEWBB_ALLOW_MARKDSC','決定是否要開放登入會員自己可以設定注意的話題討論，追蹤後續情報的功\能');
+define('_MI_XHNEWBB_ALLOW_TEXTIMG','允許在發表內容中連結外部的圖檔');
+define('_MI_XHNEWBB_ALLOW_TEXTIMGDSC','如果允許[img]標籤來連結外部的圖像，將有可能被擷取觀覽者的IP或是User-Agent等資訊。');
+define('_MI_XHNEWBB_ALLOW_SIGIMG','允許在簽名檔中連結外部圖檔');
+define('_MI_XHNEWBB_ALLOW_SIGIMGDSC','如果允許[img]標籤來連結外部的圖像，將有可能被擷取觀覽者的IP或是User-Agent等資訊。');
+define('_MI_XHNEWBB_USE_SOLVED','使用問題解決功能');
+define('_MI_XHNEWBB_USE_SOLVEDDSC','可以利用這個項目設定使用不同的圖檔來區分「已解決」的功能。');
+define('_MI_XHNEWBB_ALLOW_MARK','使用話題追蹤功能');
+define('_MI_XHNEWBB_ALLOW_MARKDSC','決定是否要開放登入會員自己可以設定注意的話題討論，追蹤後續情報的功能');
 define('_MI_XHNEWBB_VIEWALLBREAK','標題一覽的標題數');
+define('_MI_XHNEWBB_SELFEDITLIMIT','允許發表者可以重複編輯的時間(秒)');
+define('_MI_XHNEWBB_SELFEDITLIMITDSC','設定會員要編輯自己曾經發表的文章時的許可時間，超過這個設定時間就無法再度編輯內容。如果一開始就不允許編輯請設定為 0 ');
+define('_MI_XHNEWBB_SELFDELLIMIT','允許發表者可以刪除的時間(秒)');
+define('_MI_XHNEWBB_SELFDELLIMITDSC','設定會員要刪除自己曾經發表的文章時的許可時間。不過一旦此文章之下有了回應，就無法刪除。如果一開始就不允許刪除請設定為 0 ');
+define('_MI_XHNEWBB_CSS_URI','模組專用的CSS樣式表網址');
+define('_MI_XHNEWBB_CSS_URIDSC','可以指定給予這個模組專屬的樣式表，網址允許相對路徑(模組資料夾內的CSS名稱)和絕對路徑(完整網址)。預設為 index.css 。');
 
 // RMV-NOTIFY
 // Notification event descriptions and mail templates

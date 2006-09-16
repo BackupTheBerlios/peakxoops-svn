@@ -51,12 +51,6 @@
 				<{foreach from=$icons item=icon}>
 					<input type="radio" name="icon" id="icon_<{$icon}>" value="<{$icon}>" <{if $icon_selected == $icon}>checked="checked"<{/if}> /><label for="icon_<{$icon}>"><img src="<{$xoops_url}>/images/subject/<{$icon}>" alt="" /></label>
 				<{/foreach}>
-				&nbsp; &nbsp;
-				<{if $can_change_solved}>
-					<input type="checkbox" name="solved" id="solved" <{$solved_checked}> />
-				<{else}>
-					<input type="hidden" name="solved" id="solved" value="<{$solved}>" />
-				<{/if}>
 			</td>
 		</tr>
 		<tr valign="top" align="left">

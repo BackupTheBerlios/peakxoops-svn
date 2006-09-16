@@ -20,6 +20,9 @@
 - added configuration URI of module's CSS
 - added cut&paste posts (only for admins or moderators)
 - modified delete.php using template
+- modified languages
+-- tchinese (thx chia)
+-- utf8_tw (thx chia)
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -123,6 +126,9 @@
 - CSSファイルの位置(URI)指定追加
 - 投稿の切り貼り機能実装（管理者／モデレータ専用）
 - 削除画面のテンプレート化
+- 言語ファイル更新
+-- tchinese (thx chia)
+-- utf8_tw (thx chia)
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

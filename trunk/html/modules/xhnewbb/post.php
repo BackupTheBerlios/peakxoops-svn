@@ -136,7 +136,7 @@ if( !empty($_POST['contents_preview']) ) {
 	if( ! $post_id = $forumpost->store() ) die( 'Could not insert forum post' ) ;
 
 	// increment post
-	if( is_object( @$xoopsUser ) && mode != 'edit' ) {
+	if( is_object( @$xoopsUser ) && $mode != 'edit' ) {
 		$xoopsUser->incrementPost() ;
 	}
 

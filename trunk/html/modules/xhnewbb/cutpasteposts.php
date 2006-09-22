@@ -19,6 +19,7 @@ if( ! $isadminormod ) die( _NOPERM ) ;
 if( ! empty( $_POST['cutpastepostsok'] ) ) {
 	// TRANSACTION PART
 	$pid = intval( @$_POST['pid'] ) ;
+	$children[] = $post_id ;
 
 	if( $pid == 0 ) {
 		// create a new topic
@@ -40,7 +41,6 @@ if( ! empty( $_POST['cutpastepostsok'] ) ) {
 		$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_posts")." SET pid=$pid WHERE post_id=$post_id" ;
 		if( ! $xoopsDB->query( $sql ) ) die( _MD_XHNEWBB_DATABASEERROR ) ;
 	}
-	$children[] = $post_id ;
 	foreach( $children as $child_post_id ) {
 		$child_post_id = intval( $child_post_id ) ;
 		$sql = "UPDATE ".$xoopsDB->prefix("xhnewbb_posts")." SET topic_id=$new_topic_id,forum_id=$new_forum WHERE post_id=$child_post_id" ;

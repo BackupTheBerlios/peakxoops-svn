@@ -24,6 +24,7 @@
 -- tchinese (thx chia)
 -- utf8_tw (thx chia)
 - fixed typo in post.php (thx OneOfTen)
+- fixed post icons inconsistency
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -130,7 +131,8 @@
 - 言語ファイル更新
 -- tchinese (thx chia)
 -- utf8_tw (thx chia)
-- 編集でも投稿数が上がってしまうバグを修正 (thx OneOfTen)
+- 編集でも投稿数が上がってしまうエンバグを修正 (thx OneOfTen)
+- 投稿アイコンの画像参照先がバラバラだったのを修正
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

@@ -171,7 +171,7 @@ function xhnewbb_show_tree(&$arr, $current=0, $key=0, $prefix='', $foundusers=ar
 		}
 		$posticon = $arr[$key]['obj']->icon();
 		if ( isset($posticon) && $posticon != '' ) {
-			$post_image = '<img src="'.XOOPS_URL.'/images/subject/'.$posticon.'" alt="" />';
+			$post_image = '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$posticon.'" alt="" />';
 		} else {
 			$post_image =  '<img src="'.XOOPS_URL.'/images/icons/no_posticon.gif" alt="" />';
 		}
@@ -275,7 +275,7 @@ if ( $viewmode == "thread" ) {
 			
 			$posticon = $eachpost->icon();
 			if ( isset($posticon) && $posticon != '' ) {
-				$post_image = '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/subject/'.$eachpost->icon().'" alt="" /></a>';
+				$post_image = '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$eachpost->icon().'" alt="" /></a>';
 			} else {
 				$post_image =  '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/icons/posticon.gif" alt="" /></a>';
 			}
@@ -342,7 +342,7 @@ if ( $viewmode == "thread" ) {
 		
 		$posticon = $eachpost->icon();
 		if ( isset($posticon) && $posticon != '' ) {
-			$post_image = '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/subject/'.$eachpost->icon().'" alt="" /></a>';
+			$post_image = '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$eachpost->icon().'" alt="" /></a>';
 		} else {
 			$post_image =  '<a name="'.$eachpost->postid().'"><img src="'.XOOPS_URL.'/images/icons/no_posticon.gif" alt="" /></a>';
 		}

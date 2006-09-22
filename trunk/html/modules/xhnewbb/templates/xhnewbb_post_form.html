@@ -49,7 +49,7 @@
 			<td class="head"><{$smarty.const._MD_XHNEWBB_MESSAGEICON}></td>
 			<td class="even">
 				<{foreach from=$icons item=icon}>
-					<input type="radio" name="icon" id="icon_<{$icon}>" value="<{$icon}>" <{if $icon_selected == $icon}>checked="checked"<{/if}> /><label for="icon_<{$icon}>"><img src="<{$xoops_url}>/images/subject/<{$icon}>" alt="" /></label>
+					<input type="radio" name="icon" id="icon_<{$icon}>" value="<{$icon}>" <{if $icon_selected == $icon}>checked="checked"<{/if}> /><label for="icon_<{$icon}>"><img src="<{$xoops_url}>/modules/xhnewbb/images/<{$icon}>" alt="" /></label>
 				<{/foreach}>
 			</td>
 		</tr>

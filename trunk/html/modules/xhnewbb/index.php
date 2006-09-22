@@ -71,9 +71,9 @@ if ($cat_count > 0) {
 					$categories[$i]['forums']['forum_lastpost_time'][] = formatTimestamp($forum_row['post_time'],'m');
 					$last_post_icon = '<a href="'.XOOPS_URL.'/modules/xhnewbb/viewtopic.php?post_id='.$forum_row['forum_last_post_id'].'&amp;topic_id='.$forum_row['topic_id'].'#forumpost'.$forum_row['forum_last_post_id'].'">';
 					if ( $forum_row['icon'] ) {
-						$last_post_icon .= '<img src="'.XOOPS_URL.'/images/subject/'.$forum_row['icon'].'" border="0" alt="" />';
+						$last_post_icon .= '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/'.$forum_row['icon'].'" border="0" alt="" />';
 					} else {
-						$last_post_icon .= '<img src="'.XOOPS_URL.'/images/subject/icon1.gif" width="15" height="15" border="0" alt="" />';
+						$last_post_icon .= '<img src="'.XOOPS_URL.'/modules/xhnewbb/images/icon1.gif" width="15" height="15" border="0" alt="" />';
 					}
 					$last_post_icon .= '</a>';
 					$categories[$i]['forums']['forum_lastpost_icon'][] = $last_post_icon;

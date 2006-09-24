@@ -1,7 +1,7 @@
 <?php
 
 $modversion['name'] = 'minihaku';
-$modversion['version'] = 1.06;
+$modversion['version'] = 1.07;
 $modversion['description'] = 'simple subset of hakusen';
 $modversion['author'] = "GIJOE";
 $modversion['credits'] = "PEAK Corp.";
@@ -10,7 +10,7 @@ $modversion['official'] =  0;
 $modversion['image'] = "minihaku_slogo.png";
 $modversion['dirname'] = "minihaku";
 
-$modversion['sqlfile']['mysql'] = '' ;
+$modversion['sqlfile'] = false ;
 
 $modversion['tables'] = array() ;
 

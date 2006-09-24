@@ -48,8 +48,13 @@ if( empty( $minihaku_uid4whr ) ) {
 }
 
 // request maintenances
+if( isset( $_POST['sex'] ) ) {
+	if( $_POST['sex'] < 0 || $_POST['sex'] > 1 ) {
+		die( "invalid sex value" ) ;
+	}
+}
 if( ! empty( $_POST['Date_Year'] ) ) {
-	$allowed_requests['birth'] = intval( $_POST['Date_Year'] ) . '-' . intval( $_POST['Date_Month'] ) . '-' . intval( $_POST['Date_Day'] ) ;
+	$_POST['birth'] = intval( $_POST['Date_Year'] ) . '-' . intval( $_POST['Date_Month'] ) . '-' . intval( $_POST['Date_Day'] ) ;
 }
 
 ?>

@@ -29,13 +29,16 @@ if (empty($xoopsConfigUser['allow_register'])) {
 }
 
 foreach( $allowed_requests as $key => $val ) {
-	if( ! isset( $_POST[$key] ) ) continue ;
+	if( ! isset( $_POST[$key] ) && gettype( $val ) != 'boolean' ) continue ;
 	switch( strtolower( gettype( $val ) ) ) {
 		case 'double' :
 			$allowed_requests[$key] = doubleval( $_POST[$key] ) ;
 			break ;
 		case 'integer' :
 			$allowed_requests[$key] = intval( $_POST[$key] ) ;
+			break ;
+		case 'boolean' :
+			$allowed_requests[$key] = (boolean)( @$_POST[$key] ) ;
 			break ;
 		case 'string' :
 			$allowed_requests[$key] = get_magic_quotes_gpc() ? stripslashes( $_POST[$key] ) : $_POST[$key] ;

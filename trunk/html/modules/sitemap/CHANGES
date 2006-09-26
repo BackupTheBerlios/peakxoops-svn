@@ -1,3 +1,6 @@
+1.28 2006-09-26
+- modified compatibility with D3 module system.
+
 1.27 2006-09-05
 - modified compatibility with 2.0.15 (xoops.org) xml_google fatal error
 - modified compatibility with 2.0.14 (xoops.org) xml_google with debug mode (thx DuGris)

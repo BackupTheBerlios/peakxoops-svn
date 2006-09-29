@@ -1,6 +1,10 @@
 [xlang:en]
 CHANGES:
 
+v.3.06 2006-09-30
+  - fixed proxy_user, proxy_pass can't be passed correctly
+  - modified error handling for some environment without eucJP-win
+
 v.3.05 2006-08-15
   - modified SSL access by snoopy (thx mario)
   - modified templates for xhld valid (thx dpicella) 3.05a
@@ -244,6 +248,10 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.06 2006-09-30
+  - proxy_userとproxy_passが正しく渡されていなかったバグを修正 (thx dj_okamoto)
+  - eucJP-winが存在しない環境への対応
 
 v.3.05 2006-08-15
   - SnoopyでのSSL利用時のcurl_path設定を行うようにした (thx mario)

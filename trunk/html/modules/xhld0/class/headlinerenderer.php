@@ -91,8 +91,8 @@ class XhldRenderer
 			if( trim( $this->config['proxy_host'] ) != '' ) {
 				$snoopy->proxy_host = $this->config['proxy_host'] ;
 				$snoopy->proxy_port = $this->config['proxy_port'] > 0 ? intval( $this->config['proxy_port'] ) : 8080 ;
-				$snoopy->user = $this->config['proxy_user'] ;
-				$snoopy->pass = $this->config['proxy_pass'] ;
+				$snoopy->proxy_user = $this->config['proxy_user'] ;
+				$snoopy->proxy_pass = $this->config['proxy_pass'] ;
 			}
 			// set curl_path for SSL access
 			if( file_exists( '/usr/bin/curl' ) ) {

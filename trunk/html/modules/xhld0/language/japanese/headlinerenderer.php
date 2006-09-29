@@ -32,7 +32,9 @@ if (function_exists('mb_convert_encoding') && ! class_exists( 'XhldRendererLocal
 		{
 			parent::XhldRenderer( $headline , $mydirname ) ;
 			if( ! preg_match( '/(UTF-8|SJIS)/i' , mb_internal_encoding() ) ) {
-				mb_internal_encoding( 'eucJP-win' ) ;
+				if( ! @mb_internal_encoding( 'eucJP-win' ) ) {
+					mb_internal_encoding( 'EUC-JP' ) ;
+				}
 			}
 		}
 

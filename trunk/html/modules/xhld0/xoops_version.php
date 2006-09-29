@@ -31,7 +31,7 @@ if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirn
 $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 $modversion['name'] = _MI_HEADLINES_NAME.$mydirnumber;
-$modversion['version'] = 3.05;
+$modversion['version'] = 3.06;
 $modversion['description'] = _MI_HEADLINES_DESC;
 $modversion['author'] = "Kazumi Ono<br />( http://www.xoops.org/ http://jp.xoops.org/ http://www.myweb.ne.jp/ )<br />Modified by GIJOE<br />( http://www.peak.ne.jp/ )";
 $modversion['credits'] = "The XOOPS Project";

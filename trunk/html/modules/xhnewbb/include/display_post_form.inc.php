@@ -77,13 +77,13 @@ $xoopsTpl->assign( array(
 	'preview_subject' => @$preview_subject4html ,
 	'preview_message' => @$preview_message4html ,
 	'icons' => array(
-		'icon1.gif' ,
-		'icon2.gif' ,
-		'icon3.gif' ,
-		'icon4.gif' ,
-		'icon5.gif' ,
-		'icon6.gif' ,
-		'icon7.gif' ,
+		'icon1.gif' => _MD_XHNEWBB_ALT_ICON1 ,
+		'icon2.gif' => _MD_XHNEWBB_ALT_ICON2 ,
+		'icon3.gif' => _MD_XHNEWBB_ALT_ICON3 ,
+		'icon4.gif' => _MD_XHNEWBB_ALT_ICON4 ,
+		'icon5.gif' => _MD_XHNEWBB_ALT_ICON5 ,
+		'icon6.gif' => _MD_XHNEWBB_ALT_ICON6 ,
+		'icon7.gif' => _MD_XHNEWBB_ALT_ICON7 ,
 		) ,
 	'icon_selected' => $icon ,
 	'pid' => $pid ,
@@ -107,6 +107,10 @@ $xoopsTpl->assign( array(
 	'allow_html' => $allow_html ,
 	'nohtml' => $nohtml ,
 	'nohtml_checked' => $nohtml ? 'checked="checked"' : '' ,
+	'forum_index_title' => _MD_XHNEWBB_FORUMINDEX ,
+	'lang_alltopicsindex' => _MD_XHNEWBB_ALLTOPICSINDEX ,
+	'mod_url' => XOOPS_URL.'/modules/xhnewbb' ,
+	'img_hotfolder' => $bbImage['newposts_forum'] ,
 ) ) ;
 
 $xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) , "xoops_pagetitle" => $formTitle ) ) ;

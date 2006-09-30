@@ -135,6 +135,7 @@
 
 .xhnewbb .outer td.even,.xhnewbb .outer td.odd{
 	vertical-align		:middle;}
+.xhnewbb .outer td.status,
 .xhnewbb .outer td.posterinfo{
 	vertical-align		:top;}
 
@@ -169,6 +170,7 @@
 /* xhnewbb_viewtopic_flat.html - footctrl */
 
 .xhnewbb .footctrl{
+	overflow			:auto;
 	padding			:3px 5px;}
 .xhnewbb .footctrl .bbsjumpctrl form *{
 	vertical-align		:middle;}
@@ -277,6 +279,16 @@
 	height			:1em;
 	padding			:5px 0;}
 
+/* xhnewbb_post_form.html */
+
+.xhnewbb .attention{
+	background-color	:#f00;
+	color			:#fff;
+	padding			:3px 5px;
+	line-height		:100%;}
+
+.xhnewbb #forum_reference{
+	margin			:10px 0 15px;}
 
 /* coloring */
 

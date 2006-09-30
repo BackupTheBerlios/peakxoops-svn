@@ -35,7 +35,8 @@ http://snoopy.sourceforge.net/
 
 *************************************************/
 
-class Snoopy
+// class Snoopy
+class XhldSnoopy
 {
 	/**** Public variables ****/
 	

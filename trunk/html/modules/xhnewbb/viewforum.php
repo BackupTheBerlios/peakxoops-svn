@@ -302,7 +302,7 @@ while ( $myrow = $xoopsDB->fetchArray($result) ) {
 	if ( $myrow['topic_poster'] != 0 && $myrow['uname'] ) {
 		$topic_poster = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$myrow['topic_poster'].'">'.$myrow['uname'].'</a>';
 	} else {
-		$topic_poster = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$myrow['topic_poster'].'">'.$xoopsConfig['anonymous'].'</a>';
+		$topic_poster = $xoopsConfig['anonymous'] ;
 	}
 
 	// marked

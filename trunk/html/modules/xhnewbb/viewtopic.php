@@ -113,6 +113,19 @@ $forumdata['forum_name'] = $myts->makeTboxData4Show($forumdata['forum_name']);
 
 $xoopsTpl->assign(array('topic_title' => '<a href="'.$bbUrl['root'].'viewtopic.php?topic_id='.$topic_id.'&amp;viewmode='.$viewmode.'">'.$forumdata['topic_title'].'</a>', 'forum_name' => $forumdata['forum_name'], 'topic_time' => $forumdata['topic_time'], 'lang_nexttopic' => _MD_XHNEWBB_NEXTTOPIC, 'lang_prevtopic' => _MD_XHNEWBB_PREVTOPIC));
 
+// Next link
+$sql = 'SELECT t.topic_id FROM '.$xoopsDB->prefix('xhnewbb_topics').' t WHERE t.topic_time > '.intval($forumdata['topic_time']).' AND t.forum_id='.$forum.' ORDER BY t.topic_time ASC LIMIT 1';
+if( ! $result = $xoopsDB->query( $sql ) ) die(_MD_XHNEWBB_ERROROCCURED.__LINE__);
+@list( $next_topic_id ) = $xoopsDB->fetchRow( $result ) ;
+$xoopsTpl->assign( 'next_topic_id' , @$next_topic_id ) ;
+
+// Prev link
+$sql = 'SELECT t.topic_id FROM '.$xoopsDB->prefix('xhnewbb_topics').' t WHERE t.topic_time < '.intval($forumdata['topic_time']).' AND t.forum_id='.$forum.' ORDER BY t.topic_time DESC LIMIT 1';
+if( ! $result = $xoopsDB->query( $sql ) ) die(_MD_XHNEWBB_ERROROCCURED.__LINE__);
+@list( $prev_topic_id ) = $xoopsDB->fetchRow( $result ) ;
+$xoopsTpl->assign( 'prev_topic_id' , @$prev_topic_id ) ;
+
+
 // add image links to admin page if the user viewing this page is a forum admin
 if ( $xoopsUser ) {
 	$xoopsTpl->assign('viewer_userid', $xoopsUser->getVar('uid'));

@@ -25,6 +25,8 @@
 -- utf8_tw (thx chia)
 - fixed typo in post.php (thx OneOfTen)
 - fixed post icons inconsistency
+- modified strange spec of "move" (thx Foxy)
+- fixed wrong link to userinfo from guest's name
 
 1.23 (2006/06/16)
 - fixed a bug private posts are notified into unauthorized users (thx ayumi)
@@ -133,6 +135,8 @@
 -- utf8_tw (thx chia)
 - 編集でも投稿数が上がってしまうエンバグを修正 (thx OneOfTen)
 - 投稿アイコンの画像参照先がバラバラだったのを修正
+- 前のトピック・次のトピックが時間指定でされるおかしな仕様を修正 (thx Foxy)
+- トピック一覧画面でゲストにもuserinfoへのリンクが生成されるバグを修正
 
 1.23 (2006/06/16)
 - プライベートフォーラムへの投稿がイベント通知されてしまうバグの修正 (thx ayumi)

@@ -24,7 +24,15 @@
 	<{/if}>
 	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread"><{$lang_threaded}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_other}>"><{$lang_order_other}></a></div>
 
-	<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a> | <a href="#threadbottom"><{$lang_bottom}></a></div>
+	<div class="topicctrl">
+		<{if $prev_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$prev_topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>"><{$lang_prevtopic}></a> |
+		<{/if}>
+		<{if $next_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$next_topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>"><{$lang_nexttopic}></a> |
+		<{/if}>
+		<a href="#threadbottom"><{$lang_bottom}></a>
+	</div>
 </div>
 
 <div class="hd"><a name="threadtop" id="threadtop"><{$upper_topic}></a></div>
@@ -55,8 +63,17 @@
 
 <div class="topicviewctrl">
 	<div class="topicorderctrl">
-	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread"><{$lang_threaded}></a></div>
-	<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread"><{$lang_threaded}></a>
+	</div>
+	<div class="topicctrl">
+		<{if $prev_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$prev_topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>"><{$lang_prevtopic}></a> |
+		<{/if}>
+		<{if $next_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$next_topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>"><{$lang_nexttopic}></a> |
+		<{/if}>
+		<a href="#threadtop"><{$lang_top}></a>
+	</div>
 </div>
 
 <hr class="threadview" />

@@ -22,7 +22,14 @@
 	<{/if}>
 	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat"><{$lang_flat}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_other}>"><{$lang_order_other}></a></div>
 
-	<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat&amp;order=<{$order_current}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
+	<div class="topicctrl">
+		<{if $prev_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$prev_topic_id}>&amp;viewmode=thread&amp;order=<{$order_current}>"><{$lang_prevtopic}></a> |
+		<{/if}>
+		<{if $next_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$next_topic_id}>&amp;viewmode=thread&amp;order=<{$order_current}>"><{$lang_nexttopic}></a> |
+		<{/if}>
+	</div>
 </div>
 
 <table class="outer">
@@ -40,7 +47,14 @@
 <div class="topicviewctrl">
 	<div class="topicorderctrl">
 	<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=flat"><{$lang_flat}></a></div>
-	<div class="topicctrl"><a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="<{$mod_url}>/viewtopic.php?topic_id=<{$topic_id}>&amp;viewmode=thread&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></div>
+	<div class="topicctrl">
+		<{if $prev_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$prev_topic_id}>&amp;viewmode=thread&amp;order=<{$order_current}>"><{$lang_prevtopic}></a> |
+		<{/if}>
+		<{if $next_topic_id}>
+		<a href="<{$mod_url}>/viewtopic.php?topic_id=<{$next_topic_id}>&amp;viewmode=thread&amp;order=<{$order_current}>"><{$lang_nexttopic}></a> |
+		<{/if}>
+	</div>
 </div>
 
 <hr class="threadview" />

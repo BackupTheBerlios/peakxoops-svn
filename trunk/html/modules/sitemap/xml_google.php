@@ -1,6 +1,9 @@
 <?php
 
 if( ! defined( 'SITEMAP_ROOT_CONTROLLER_LOADED' ) ) {
+	if( ! file_exists( dirname(__FILE__).'/modules/sitemap/xml_google.php' ) ) {
+		die( "Don't call this file directly" ) ;
+	}
 	if( ! empty( $_SERVER['REQUEST_URI'] ) ) {
 		$_SERVER['REQUEST_URI'] = str_replace( 'xml_google.php' , 'modules/sitemap/xml_google.php' , $_SERVER['REQUEST_URI'] ) ;
 	} else {

@@ -1,5 +1,7 @@
 1.29 2006-10-01
 - modified the action when xml_google.php is directly accessed 1.29
+- added plugins
+-- liaise (thx monsuke) 1.29a
 
 1.28 2006-09-26
 - modified compatibility with D3 module system.

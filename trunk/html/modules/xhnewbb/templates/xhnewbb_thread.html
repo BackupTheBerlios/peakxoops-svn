@@ -32,6 +32,7 @@
 <tr>
 	<td class="even" colspan="2">
 	<div class="editctrl">
+
 	<{if $topic_post.can_edit}>
 	<a href="<{$mod_url}>/edit.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>"  class="edit"><{$lang_edit}></a>
 	<{/if}>
@@ -44,6 +45,8 @@
 	<a href='<{$mod_url}>/reply.php?post_id=<{$topic_post.post_id}>&amp;viewmode=<{$topic_viewmode}>&amp;order=<{$topic_order}>' class='reply'><{$lang_reply}></a>
 	<{/if}>
 	</div>
+
+	<{if $isadminormod}><a href="cutpasteposts.php?post_id=<{$topic_post.post_id}>"><img src="<{$mod_url}>/images/adminicon_cutpaste.gif" alt="<{$smarty.const._MD_XHNEWBB_CUTPASTEPOSTS}>" /></a><{/if}>
 
 	</td>
 </tr>

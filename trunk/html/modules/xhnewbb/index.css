@@ -287,8 +287,15 @@
 	padding			:3px 5px;
 	line-height		:100%;}
 
-.xhnewbb #forum_reference{
+.xhnewbb #forumform{
 	margin			:10px 0 15px;}
+
+
+/* blockquote */
+
+.xoopsQuote blockquote{
+	margin			:0;
+	padding			:8px 5px 5px;}
 
 /* coloring */
 

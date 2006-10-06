@@ -1,6 +1,10 @@
 [mlimg]
 [xlang:en]
 
+1.30 (2006/10/06)
+- released as a stable version
+- modified templates from 1.30beta09 (thx jidaikobo)
+
 1.30beta (2006/09/13)
 - rebuilding templates fundamentally now ... (special thx jidaikobo!)
 - changed cat_order from varchar into smallint (thx Ujiki.oO)
@@ -110,6 +114,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+1.30 (2006/10/06)
+- 安定版としてのリリース
+- 1.30betaよりテンプレートの微調整 (thx jidaikobo)
 
 1.30beta (2006/09/13)
 - テンプレートをフルスクラッチ中... (special thx jidaikobo!)

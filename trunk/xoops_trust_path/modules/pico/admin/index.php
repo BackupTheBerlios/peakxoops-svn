@@ -31,10 +31,12 @@ if( ! empty( $_POST['submit'] ) ) {
 
 
 xoops_cp_header() ;
+$mymenu_fake_uri = 'index.php?mode=admin&page=index' ;
+include dirname(__FILE__).'/mymenu.php' ;
 
 echo "
 <form action='?mode=admin&amp;page=index' method='post'>
-	<input type='submit' name='submit' value='update search database' />
+	<input type='submit' name='submit' value='"._MD_A_PICO_BTN_UPDATE_INDEXES."' />
 </form>" ;
 
 xoops_cp_footer() ;

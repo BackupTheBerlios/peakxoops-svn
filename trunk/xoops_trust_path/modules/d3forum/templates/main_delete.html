@@ -1,0 +1,28 @@
+<!-- start module contents -->
+<div class="d3forum">
+
+<h1><{$smarty.const._DELETE}></h1>
+
+<div id="forum_reference" class="outer">
+	<div class="head"><{$reference_subject}></div>
+	<div class="even"><{$smarty.const._MD_D3FORUM_BY}>: <{$reference_name}> <{$smarty.const._MD_D3FORUM_ON}>: <{$reference_time_formatted}></div>
+	<div class="odd"><{$reference_message}></div>
+	<div class="even"><{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}> : <{$children_count}></div>
+</div>
+
+<form name="deleteposts" id="deleteposts" action="<{$mod_url}>/index.php?page=delete&amp;post_id=<{$post_id}>" method="post">
+
+	<{$gticket_hidden}>
+
+	<{if $children_count}>
+		<{$smarty.const._MD_D3FORUM_CONFIRM_AREUSUREDEL}>
+	<{else}>
+		<{$smarty.const._MD_D3FORUM_CONFIRM_AREUSUREDELONE}>
+	<{/if}>
+	<br />
+	<input type="submit" name="deletepostsok" id="deletepostsok" value="<{$smarty.const._DELETE}>" />
+
+</form>
+
+</div>
+<!-- end module contents -->

@@ -1,0 +1,53 @@
+<!-- start module contents -->
+<div class="d3forum">
+<h1><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" alt="<{$icon_meanings[$post.icon]}>" /><{$post.subject}></h1>
+
+<div class="breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
+	&nbsp;&gt;&nbsp;
+	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
+		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
+		&nbsp;&gt;&nbsp;
+	<{/foreach}>
+	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
+	&nbsp;&gt;&nbsp;
+	<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>
+	&nbsp;&gt;&nbsp;
+	<{$post.subject}>
+</div>
+
+
+<hr class="postmain" />
+
+<{include file="db:`$mydirname`_inc_eachpost.html"}>
+
+<hr class="posttree" />
+
+<!-- start post tree -->
+<h2 class="head"><{$smarty.const._MD_D3FORUM_POSTSTREE}></h2>
+<{foreach from=$posts item=eachpost}>
+	<{$eachpost.ul_out}>
+	<{$eachpost.ul_in}>
+		<li class="eachbranch">
+			<{if $eachpost.id == $post.id}>
+				<strong>&raquo;</strong>
+			<{else}>
+				<strong>&nbsp;</strong>
+			<{/if}>
+			<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.tree_address}></a> <{$eachpost.subject}></a>
+			(<{$eachpost.poster_uname}>, <{$eachpost.post_time_formatted}>)
+			<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/adminicon_cutpaste.gif" alt="<{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}>" /></a><{/if}>
+		
+		</li>
+<{/foreach}>
+<{$posts_ul_out_last}>
+<!-- end topic tree -->
+
+<hr class="topicbar" />
+
+<{include file="db:`$mydirname`_inc_topicbar.html"}>
+
+<hr class="notification" />
+</div>
+<{include file='db:system_notification_select.html'}>
+<!-- end module contents -->

@@ -1,0 +1,89 @@
+<!-- start module contents -->
+<div class="d3forum">
+<h1><{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></h1>
+
+<div class="breadcrumbs"><a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>&nbsp;&gt;&nbsp;<{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></div>
+
+<form name="Search" action="<{$mod_url}>/index.php" method="get">
+<input type="hidden" name="page" value="search" />
+<table class="outer search">
+	<tr>
+		<th><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
+		<td class="even">
+			<input type="text" name="keyword" id="keywords" size="48" value="<{$keyword}>" />
+			<fieldset>
+				<legend><{$smarty.const._MD_D3FORUM_LEGEND_WORDSMEANING}></legend>
+				<{html_radios name="andor" options=$andor_options selected=$andor_selected}>
+			</fieldset>
+
+			<fieldset>
+				<legend><{$smarty.const._MD_D3FORUM_LEGEND_SEARCHIN}></legend>
+				<{html_radios name="target" options=$target_options selected=$target_selected}>
+			</fieldset>
+
+		</td>
+	</tr>
+	<tr>
+		<th><{$smarty.const._MD_D3FORUM_FORUM}></th>
+		<td class="even">
+			<select name="forum_id">
+				<option value="">-<{$smarty.const._MD_D3FORUM_WHOLE}>-</option>
+				<{$forum_jumpbox_options}>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th><label for="searchin_poster"><{$smarty.const._MD_D3FORUM_POSTER}></label></th>
+		<td class="even"><input type="text" name="search_username" id="searchin_poster" value="<{$uname}>" /></td>
+	</tr>
+	<tr>
+		<th><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
+		<td class="even"><{html_radios name="sortby" options=$sortby_options selected=$sortby_selected}></td>
+	</tr>
+	<tr>
+		<td class="head" colspan="2" align="center"><input type="submit" name="submit" value="<{$smarty.const._MD_D3FORUM_BTN_SEARCH}>" /></td>
+	</tr>
+</table>
+</form>
+
+<{if $show_results}>
+
+<h2 class="head"><{$smarty.const._MD_D3FORUM_TITLE_SEARCHRESULTS}></h2>
+
+<{if $results}>
+
+<{$hits_count|string_format:$smarty.const._MD_D3FORUM_FMT_SEARCHHITS}>
+
+<table class="outer searchresult">
+<tr>
+	<th><{$smarty.const._MD_D3FORUM_FORUM}></th>
+	<th><{$smarty.const._MD_D3FORUM_SUBJECT}></th>
+	<th><{$smarty.const._MD_D3FORUM_POSTER}></th>
+	<th><{$smarty.const._MD_D3FORUM_VIEWS}></th>
+	<th><{$smarty.const._MD_D3FORUM_ON}></th>
+</tr>
+
+<!-- start search results -->
+<{foreach from=$results item=post}>
+<tr>
+	<td class="even"><a href="<{$mod_url}>/index.php?forum_id=<{$post.forum_id}>"><{$post.forum_title}></a></td>
+	<td class="odd topics"><a href="<{$mod_url}>/index.php?post_id=<{$post.post_id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" /><{$post.subject}></a> <{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}></td>
+	<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{$post.poster_uname}></a></td>
+	<td class="odd"><{$post.topic_views}></td>
+	<td class="even"><{$post.post_time_formatted}></td>
+</tr>
+<{/foreach}>
+<!-- end search results -->
+</table>
+
+<{else}>
+
+<{* no hit *}>
+<{$smarty.const._MD_D3FORUM_MSG_NOMATCH}>
+
+<{/if}>
+
+<{/if}>
+
+</div>
+<!-- end module contents -->

@@ -1,0 +1,19 @@
+<h2 class="head"><{$smarty.const._MD_A_D3FORUM_H2_SYNCALLTABLES}></h2>
+<form name="syncalltables" action="<{$mod_url}>/index.php?mode=admin&amp;page=advanced_admin" method="post">
+	<input type="submit" name="do_sycalltables" value="<{$smarty.const._MD_A_D3FORUM_BTN_SYNCALLTABLES}>" />
+	<br />
+	<{$smarty.const._MD_A_D3FORUM_HELP_SYNCALLTABLES}>
+</form>
+
+<h2 class="head"><{$smarty.const._MD_A_D3FORUM_H2_IMPORTFROM}></h2>
+<form name="importfrom" action="<{$mod_url}>/index.php?mode=admin&amp;page=advanced_admin" method="post">
+	<{$gticket_hidden}>
+	<label for="import_mid"><{$smarty.const._MD_A_D3FORUM_LABEL_SELECTMODULE}></label>
+	<select name="import_mid" id="import_mid"><{html_options options=$import_from_options}></select>
+	<br />
+	<input type="submit" name="do_import" value="<{$smarty.const._MD_A_D3FORUM_BTN_DOIMPORT}>" />
+	<br />
+	<{$smarty.const._MD_A_D3FORUM_HELP_IMPORTFROM}>
+</form>
+
+

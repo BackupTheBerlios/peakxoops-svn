@@ -1,0 +1,91 @@
+<!-- start module contents -->
+<div class="d3forum">
+
+<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &gt; <{$smarty.const._MD_D3FORUM_FORUMMANAGER}>
+
+<form name="forumform" id="forumform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;cat_id=<{$category.id}>&amp;forum_id=<{$forum.id}>" method="post" onsubmit="return xoopsFormValidate_forumform();">
+
+	<{$gticket_hidden}>
+
+	<table width="100%" class="outer" cellspacing="1">
+
+		<tr>
+			<th colspan="2"><{$formtitle}></th>
+		</tr>
+
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_TH_FORUMTITLE}></td>
+			<td class="even">
+				<input type="text" name="title" id="forum_title" size="60" maxlength="255" value="<{$forum.title}>" />
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_TH_FORUMDESC}></td>
+			<td class="even">
+				<textarea name="desc" id="forum_desc" cols="50" rows="10"><{$forum.desc}></textarea>
+			</td>
+		</tr>
+
+		<{if $xoops_isadmin}>
+
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_CATEGORY}></td>
+			<td class="even">
+				<{if $cat_jumpbox_options}>
+				<select name="cat_id" id="cat_id">
+					<{$cat_jumpbox_options}>
+				</select>
+				<{else}>
+				<{$category.title}>
+				<input type="hidden" name="cat_id" value="<{$category.id}>" />
+				<{/if}>
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_TH_FORUMWEIGHT}></td>
+			<td class="even">
+				<input type="text" name="weight" id="forum_weight" size="4" maxlength="4" value="<{$forum.weight}>" />
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
+			<td class="head">
+				<{$smarty.const._MD_D3FORUM_TH_FORUMOPTIONS}>
+				<br />
+				<span class="forumoptiondesc"><{$forum.option_desc}></span>
+			</td>
+			<td class="even">
+				<textarea name="options" id="forum_options" cols="50" rows="15"><{$forum.options}></textarea>
+			</td>
+		</tr>
+
+		<{/if}>
+
+		<tr valign="top" align="left">
+			<td class="head"></td>
+			<td class="even">
+				<input type="submit" name="forumman_post" value="<{$smarty.const._SUBMIT}>" />
+				<{if $page == 'forummanager' }>
+				<input type="submit" name="forumman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE}>')" />
+				<{/if}>
+			</td>
+		</tr>
+
+	</table>
+</form>
+
+<!-- Start Form Vaidation JavaScript //-->
+<script type="text/javascript">
+<!--//
+function xoopsFormValidate_forumform() {
+	myform = window.document.forumform;
+	if ( myform.title.value == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_TH_FORUMTITLE|string_format:$smarty.const._FORM_ENTER}>"); myform.title.focus(); return false; }
+	return true;
+}
+//--></script>
+<!-- End Form Vaidation JavaScript //-->
+
+</div>
+<!-- end module contents -->

@@ -1,0 +1,36 @@
+<!-- start module contents -->
+<div class="d3forum">
+<h1><img src="<{$mod_imageurl}>/topic_00.gif" alt="" /><{$topic.title}></h1>
+
+<div class="breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
+	&nbsp;&gt;&nbsp;
+	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
+		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
+		&nbsp;&gt;&nbsp;
+	<{/foreach}>
+	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
+	&nbsp;&gt;&nbsp;
+	<{$topic.title}>
+</div>
+
+<hr class="postsmain" />
+
+<!-- top of posts -->
+<div class="hd"><a name="topictop" id="topictop"><{$smarty.const._MD_D3FORUM_A_TOPOFTHETOPIC}></a></div>
+
+<{foreach item=post from=$posts}>
+	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post}>
+<{/foreach}>
+
+<div class="hd"><a name="topicbottom" id="topicbottom"><{$smarty.const._MD_D3FORUM_A_BOTTOMOFTHETOPIC}></a></div>
+<!-- bottom of posts -->
+
+<hr class="topicbar" />
+
+<{include file="db:`$mydirname`_inc_topicbar.html"}>
+
+<hr class="notification" />
+</div>
+<{include file='db:system_notification_select.html'}>
+<!-- end module contents -->

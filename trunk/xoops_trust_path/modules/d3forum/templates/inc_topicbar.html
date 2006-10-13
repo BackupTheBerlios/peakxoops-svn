@@ -1,0 +1,54 @@
+<div class="outer even topicbar">
+
+	<div align="center">
+	<{if $forum.can_post}>
+		<span><a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a></span>
+	<{elseif $forum.forum_users_post}>
+		<span><a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a></span>
+	<{/if}>
+
+	<{if $uid && $mod_config.allow_mark}>
+		|<span>
+			<a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
+		</span>
+	<{/if}>
+
+	<{if $forum.isadminormod && $mod_config.use_solved}>
+		|<span>
+			<a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
+		</span>
+	<{/if}>
+
+	<{if $forum.isadminormod}>
+		|<span>
+			<a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
+		</span>
+	<{/if}>
+	</div>
+
+	<table>
+		<tr>
+			<td align="left" width="33%">
+			<{if $prev_topic.id}>
+				<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicprev.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}>" /></a><br /><{$prev_topic.title}>
+			<{/if}>
+			</td>
+		
+			<td align="center" nowrap="nowrap">
+				<{if $page=="viewpost"}>
+					<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><img src="<{$mod_imageurl}>/navicon_uptotopic.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTPOSTS}>" /></a><br /><{$topic.title}>
+				<{else}>
+					<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/navicon_uptoforum.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTTOPICS}>" /></a><br /><{$forum.title}>
+				<{/if}>
+				<div class="bbsjumpctrl"><form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get"><select name="forum_id" onchange="submit();"><{$forum_jumpbox_options}></select><input type="image" src="<{$mod_imageurl}>/navicon_forumjumpto.gif" alt="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></form></div>
+			</td>
+		
+			<td align="right" width="33%">
+			<{if $next_topic.id}>
+				<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicnext.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_NEXTTOPIC}>" /></a><br /><{$next_topic.title}>
+			<{/if}>
+			</td>
+		</tr>
+	</table>
+
+</div>

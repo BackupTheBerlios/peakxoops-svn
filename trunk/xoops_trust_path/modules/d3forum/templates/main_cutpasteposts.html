@@ -1,0 +1,38 @@
+<!-- start module contents -->
+<div class="d3forum">
+<h1><{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}></h1>
+
+<div id="forum_reference" class="outer">
+	<div class="head"><{$reference_subject}></div>
+	<div class="even"><{$smarty.const._MD_D3FORUM_BY}>: <{$reference_name}> <{$smarty.const._MD_D3FORUM_ON}>: <{$reference_date}></div>
+	<div class="odd"><{$reference_message}></div>
+	<div class="even"><{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}> : <{$children_count}><br /><{$smarty.const._MD_D3FORUM_PARENT_POSTID}> : <{$post.pid}></div>
+</div>
+
+<form name="cutpastebypostid" id="cutpastebypostid" action="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$post_id}>" method="post">
+
+	<h2 class="head"><{$smarty.const._MD_D3FORUM_CUTPASTEBYPOSTIDSBJ}></h2>
+	<p><{$smarty.const._MD_D3FORUM_CUTPASTEBYPOSTIDDSC}></p>
+	<label for="pid"><{$smarty.const._MD_D3FORUM_CUTPASTEBYPOSTID_DEST}></label>
+	<input type="text" name="pid" id="pid" size="12" maxlength="12" value="" style="ime-mode:disabled;text-align:right;" />
+	<input type="submit" name="cutpastepostsok" id="cutpastepostsok" value="<{$smarty.const._SUBMIT}>" />
+
+</form>
+
+<form name="cutpastebyforumid" id="cutpastebyforumid" action="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$post_id}>" method="post">
+
+	<{if $post.pid}>
+		<h2 class="head"><{$smarty.const._MD_D3FORUM_CUTPASTETOPICDIVSBJ}></h2>
+		<p><{$smarty.const._MD_D3FORUM_CUTPASTETOPICDIVDSC}></p>
+	<{else}>
+		<h2 class="head"><{$smarty.const._MD_D3FORUM_CUTPASTEBYFORUMIDSBJ}></h2>
+		<p><{$smarty.const._MD_D3FORUM_CUTPASTEBYFORUMIDDSC}></p>
+	<{/if}>
+
+	<label for="forum_id"><{$smarty.const._MD_D3FORUM_CUTPASTEBYFORUMID_DEST}></label>
+	<select name="forum_id"><{$forum_jumpbox_options}></select>
+	<input type="submit" name="cutpastepostsok" id="cutpastepostsok" value="<{$smarty.const._SUBMIT}>" />
+
+</form>
+</div>
+<!-- end module contents -->

@@ -27,10 +27,10 @@ $adminmenu = array(
 		'title' => _MI_ALTSYS_MENU_MYAVATAR ,
 		'link' => 'index.php?mode=admin&lib=altsys&page=myavatar' ,
 	) ,*/
-	array(
+/*	array(
 		'title' => _MI_ALTSYS_MENU_MYSMILEY ,
 		'link' => 'index.php?mode=admin&lib=altsys&page=mysmiley' ,
-	) ,
+	) ,*/
 ) ;
 
 ?>

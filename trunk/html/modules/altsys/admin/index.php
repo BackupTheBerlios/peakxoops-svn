@@ -1,11 +1,11 @@
 <?php
 
 $xoopsOption['pagetype'] = 'admin' ;
-require '../../mainfile.php' ;
+require '../../../mainfile.php' ;
 if( ! defined( 'XOOPS_TRUST_PATH' ) ) die( 'set XOOPS_TRUST_PATH in mainfile.php' ) ;
 
-$mydirname = basename( dirname( __FILE__ ) ) ;
-$mydirpath = dirname( __FILE__ ) ;
+$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+$mydirpath = dirname( dirname( __FILE__ ) ) ;
 
 
 // check permission of 'module_admin' of this module

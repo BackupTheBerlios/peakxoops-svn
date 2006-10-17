@@ -1,5 +1,7 @@
 <?php
 
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
 $adminmenu = array(
 	array(
 		'title' => _MI_ALTSYS_MENU_CUSTOMBLOCKS ,
@@ -24,11 +26,11 @@ $adminmenu = array(
 /*	array(
 		'title' => _MI_ALTSYS_MENU_MYAVATAR ,
 		'link' => 'index.php?mode=admin&lib=altsys&page=myavatar' ,
-	) ,
+	) ,*/
 	array(
 		'title' => _MI_ALTSYS_MENU_MYSMILEY ,
 		'link' => 'index.php?mode=admin&lib=altsys&page=mysmiley' ,
-	) ,*/
+	) ,
 ) ;
 
 ?>

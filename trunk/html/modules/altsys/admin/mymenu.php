@@ -1,5 +1,7 @@
 <?php
 
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
 // Skip for ORETEKI XOOPS
 if( defined( 'XOOPS_ORETEKI' ) ) return ;
 
@@ -20,8 +22,6 @@ include dirname(__FILE__).'/admin_menu.php' ;
 
 $mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;
 $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
-
-
 
 // highlight (you can customize the colors)
 foreach( array_keys( $adminmenu ) as $i ) {

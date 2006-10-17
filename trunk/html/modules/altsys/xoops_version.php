@@ -1,6 +1,9 @@
 <?php
+
+if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
+
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.12' ;
+$modversion['version'] = '0.20' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -11,8 +14,8 @@ $modversion['dirname'] = "altsys";
 
 // Admin things
 $modversion['hasAdmin'] = 1;
-$modversion['adminindex'] = "index.php?mode=admin&lib=altsys&page=myblocksadmin" ;
-$modversion['adminmenu'] = "admin_menu.php";
+$modversion['adminindex'] = "admin/index.php?lib=altsys&page=myblocksadmin" ;
+$modversion['adminmenu'] = "admin/admin_menu.php";
 
 // Menu
 $modversion['hasMain'] = 0;

@@ -53,7 +53,7 @@ function list_blocks( $target_mid , $target_dirname )
 	$block_configs = $this->get_block_configs() ;
 	foreach( array_keys( $block_arr ) as $i ) {
 		$sseln = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = "";
-		$scoln = $scol0 = $scol1 = $scol2 = $scol3 = $scol4 = "#FFFFFF";
+		$scoln = $scol0 = $scol1 = $scol2 = $scol3 = $scol4 = "unselected";
 
 		$weight = $block_arr[$i]->getVar("weight") ;
 		$title = htmlspecialchars($block_arr[$i]->getVar("title",'n'),ENT_QUOTES) ;
@@ -64,28 +64,28 @@ function list_blocks( $target_mid , $target_dirname )
 		// visible and side
 		if ( $block_arr[$i]->getVar("visible") != 1 ) {
 			$sseln = " checked='checked'";
-			$scoln = "#FF0000";
+			$scoln = "disabled";
 		} else switch( $block_arr[$i]->getVar("side") ) {
 			default :
 			case XOOPS_SIDEBLOCK_LEFT :
 				$ssel0 = " checked='checked'";
-				$scol0 = "#00FF00";
+				$scol0 = "selected";
 				break ;
 			case XOOPS_SIDEBLOCK_RIGHT :
 				$ssel1 = " checked='checked'";
-				$scol1 = "#00FF00";
+				$scol1 = "selected";
 				break ;
 			case XOOPS_CENTERBLOCK_LEFT :
 				$ssel2 = " checked='checked'";
-				$scol2 = "#00FF00";
+				$scol2 = "selected";
 				break ;
 			case XOOPS_CENTERBLOCK_RIGHT :
 				$ssel4 = " checked='checked'";
-				$scol4 = "#00FF00";
+				$scol4 = "selected";
 				break ;
 			case XOOPS_CENTERBLOCK_CENTER :
 				$ssel3 = " checked='checked'";
-				$scol3 = "#00FF00";
+				$scol3 = "selected";
 				break ;
 		}
 
@@ -135,7 +135,7 @@ function list_blocks( $target_mid , $target_dirname )
 		} else {
 			$can_clone = false ;
 			foreach( $block_configs as $bconf ) {
-				if( $block_arr[$i]->getVar("show_func") == $bconf['show_func'] && $block_arr[$i]->getVar("func_file") == $bconf['file'] && ( empty( $bconf['template'] ) || $block_arr[$i]->getVar("template") == $bconf['template'] ) ) {
+				if( $block_arr[$i]->getVar("show_func") == @$bconf['show_func'] && $block_arr[$i]->getVar("func_file") == @$bconf['file'] && ( empty( $bconf['template'] ) || $block_arr[$i]->getVar("template") == @$bconf['template'] ) ) {
 					if( ! empty( $bconf['can_clone'] ) ) $can_clone = true ;
 				}
 			}
@@ -148,35 +148,42 @@ function list_blocks( $target_mid , $target_dirname )
 
 		// displaying part
 		echo "
+		<style>
+			td.blockposition	{width:135px;white-space:nowrap;}
+			div.blockposition	{float:left;border:solid 1px #333333;padding:1px;}			div.unselected		{background-color:#FFFFFF;}
+			div.selected		{background-color:#00FF00;}
+			div.disabled		{background-color:#FF0000;}
+			input[type='radio'] {margin:2px;}
+		</style>
 		<tr valign='middle'>
 			<td class='$class'>
 				$name
 				<br />
 				<input type='text' name='titles[$bid]' value='$title' size='20' />
 			</td>
-			<td class='$class' align='center' nowrap='nowrap' width='125px'>
-				<div style='float:left;background-color:$scol0;'>
-					<input type='radio' name='sides[$bid]' value='".XOOPS_SIDEBLOCK_LEFT."' style='background-color:$scol0;' $ssel0 />
+			<td class='$class blockposition' align='center'>
+				<div class='blockposition $scol0'>
+					<input type='radio' name='sides[$bid]' value='".XOOPS_SIDEBLOCK_LEFT."' class='blockposition' $ssel0 />
 				</div>
 				<div style='float:left;'>-</div>
-				<div style='float:left;background-color:$scol2;'>
-					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_LEFT."' style='background-color:$scol2;' $ssel2 />
+				<div class='blockposition $scol2'>
+					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_LEFT."' class='blockposition' $ssel2 />
 				</div>
-				<div style='float:left;background-color:$scol3;'>
-					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_CENTER."' style='background-color:$scol3;' $ssel3 />
+				<div class='blockposition $scol3'>
+					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_CENTER."' class='blockposition' $ssel3 />
 				</div>
-				<div style='float:left;background-color:$scol4;'>
-					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_RIGHT."' style='background-color:$scol4;' $ssel4 />
+				<div class='blockposition $scol4'>
+					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_RIGHT."' class='blockposition' $ssel4 />
 				</div>
 				<div style='float:left;'>-</div>
-				<div style='float:left;background-color:$scol1;'>
-					<input type='radio' name='sides[$bid]' value='".XOOPS_SIDEBLOCK_RIGHT."' style='background-color:$scol1;' $ssel1 />
+				<div class='blockposition $scol1'>
+					<input type='radio' name='sides[$bid]' value='".XOOPS_SIDEBLOCK_RIGHT."' class='blockposition' $ssel1 />
 				</div>
 				<br />
 				<br />
 				<div style='float:left;width:40px;'>&nbsp;</div>
-				<div style='float:left;background-color:$scoln;'>
-					<input type='radio' name='sides[$bid]' value='-1' style='background-color:$scoln;' $sseln />
+				<div class='blockposition $scoln'>
+					<input type='radio' name='sides[$bid]' value='-1' class='blockposition' $sseln />
 				</div>
 				<div style='float:left;'>"._NONE."</div>
 			</td>

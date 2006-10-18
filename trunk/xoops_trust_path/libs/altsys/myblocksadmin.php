@@ -11,7 +11,6 @@ include_once dirname(__FILE__).'/include/MyBlocksAdmin.class.php' ;
 include_once dirname(__FILE__).'/include/mygrouppermform.php' ;
 include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php' ;
 
-
 // only groups have 'module_admin' of 'altsys' can do that.
 $module_handler =& xoops_gethandler( 'module' ) ;
 $module =& $module_handler->getByDirname( 'altsys' ) ;

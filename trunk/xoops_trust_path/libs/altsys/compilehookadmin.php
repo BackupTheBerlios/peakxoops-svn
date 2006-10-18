@@ -28,8 +28,8 @@ if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['langu
 $compile_hooks = array(
 
 	'enclosebycomment' => array(
-		'pre' => '<!-- begin tplsadmin %s -->' ,
-		'post' => '<!-- end tplsadmin %s -->' ,
+		'pre' => '<!-- begin altsys_tplsadmin %s -->' ,
+		'post' => '<!-- end altsys_tplsadmin %s -->' ,
 		'success_msg' => _TPLSADMIN_FMT_MSG_ENCLOSEBYCOMMENT ,
 		'dt' => _TPLSADMIN_DT_ENCLOSEBYCOMMENT ,
 		'dd' => _TPLSADMIN_DD_ENCLOSEBYCOMMENT ,
@@ -38,7 +38,7 @@ $compile_hooks = array(
 	) ,
 
 	'enclosebybordereddiv' => array(
-		'pre' => '<div class="tplsadmin_frame" style="border:1px solid black;word-wrap:break-word;">' ,
+		'pre' => '<div class="altsys_tplsadmin_frame" style="border:1px solid black;word-wrap:break-word;">' ,
 		'post' => '<br /><a href="'.XOOPS_URL.'/modules/altsys/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=%1$s" style="color:red;">Edit:<br />%1$s</a></div>' ,
 		'success_msg' => _TPLSADMIN_FMT_MSG_ENCLOSEBYBORDEREDDIV ,
 		'dt' => _TPLSADMIN_DT_ENCLOSEBYBORDEREDDIV ,
@@ -128,10 +128,10 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 				$file_bodies = file( $file_path ) ;
 
 				// remove lines inserted by compilehookadmin
-				if( strstr( $file_bodies[0] , 'tplsadmin' ) ) {
+				if( strstr( $file_bodies[0] , 'altsys' ) ) {
 					array_shift( $file_bodies ) ;
 				}
-				if( strstr( $file_bodies[count($file_bodies)-1] , 'tplsadmin' ) ) {
+				if( strstr( $file_bodies[count($file_bodies)-1] , 'altsys' ) ) {
 					array_pop( $file_bodies ) ;
 					$file_bodies[count($file_bodies)-1] = rtrim( $file_bodies[count($file_bodies)-1] ) ;
 				}
@@ -215,6 +215,12 @@ xoops_cp_header() ;
 altsys_include_mymenu() ;
 
 echo "
+	<style>
+		dl	{ margin: 10px; }
+		dt	{ margin-bottom:5px; }
+		dd	{ margin-left:20px; }
+		
+	</style>
 	<form action='?mode=admin&amp;lib=altsys&amp;page=compilehookadmin' method='post' class='odd' style='margin: 40px;'>
 \n" ;
 
@@ -235,13 +241,13 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 }
 
 echo "
-		<p>
-			"._TPLSADMIN_NUMCAP_COMPILEDCACHES.": $compiledcache_num
+		<p style='margin:10px;'>
+			"._TPLSADMIN_NUMCAP_COMPILEDCACHES.": <strong>$compiledcache_num</strong>
 			<input type='submit' name='clearcache' value='"._DELETE."' onclick='return confirm(\""._TPLSADMIN_CNF_DELETEOK."\");' />
 
 		</p>
-		<p>
-			"._TPLSADMIN_NUMCAP_TPLSVARS.": $tplsvars_num
+		<p style='margin:10px;'>
+			"._TPLSADMIN_NUMCAP_TPLSVARS.": <strong>$tplsvars_num</strong>
 			<input type='submit' name='cleartplsvars' value='"._DELETE."' onclick='return confirm(\""._TPLSADMIN_CNF_DELETEOK."\");' />
 
 		</p>

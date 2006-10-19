@@ -3,6 +3,7 @@
 
 v0.20 (2006-10-18)
 - modified compatibility with Cube 2.1 beta
+- fixed wrong links of admin menu (thx usagiya) 0.20a
 
 v0.12 (2006-07-18)
 - modified compatibility with Cube 2.1 alpha3 without system module
@@ -26,6 +27,7 @@ v0.10 (2006-05-19)
 
 v0.20 (2006-10-18)
 - Cube 2.1 beta で動くようにした
+- メニューがおかしかったのを修正 (thx usagiya) 0.20a
 
 v0.12 (2006-07-18)
 - Cube 2.1 alpha3 でsystemモジュールが存在しない場合への対応を追加

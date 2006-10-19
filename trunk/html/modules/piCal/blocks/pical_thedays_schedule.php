@@ -10,7 +10,7 @@ if( ! defined( 'PICAL_BLOCK_THEDAYS_SCHEDULE_INCLUDED' ) ) {
 define( 'PICAL_BLOCK_THEDAYS_SCHEDULE_INCLUDED' , 1 ) ;
 
 // XOOPS 2.1/2.2
-if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
 	$GLOBALS['pical_blockinstance_object'] =& $this ;
 }
 
@@ -46,7 +46,9 @@ function pical_thedays_schedule_show_tpl( $options )
 	$cal->images_path = "$mod_path/images/$skin_folder" ;
 
 	// ブロック配列の自分自身を書き換える title に %s を含めること
-	if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
+		$GLOBALS['pical_thedays_schedule_title_parameter']  = sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ;
+	} else if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
 		$title_fmt = $GLOBALS['pical_blockinstance_object']->getVar('title') ;
 		$GLOBALS['pical_blockinstance_object']->setVar('title',sprintf( $title_fmt , sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ) ) ;
 	} else {
@@ -103,7 +105,6 @@ function pical_thedays_schedule_edit( $options )
 		$ret .= "\t<option value='$cid' $selected>$depth_desc $cat_title4show</option>\n" ;
 	}
 	$ret .= "</select>\n" ;
-
 	return $ret ;
 }
 

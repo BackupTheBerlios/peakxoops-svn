@@ -9,7 +9,7 @@ if( ! defined( 'PICAL_BLOCK_MINICAL_EX' ) ) {
 define( 'PICAL_BLOCK_MINICAL_EX' , 1 ) ;
 
 // XOOPS 2.1/2.2
-if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
 	$GLOBALS['pical_blockinstance_id'] = $this->getVar('instanceid') ;
 }
 
@@ -23,7 +23,10 @@ function pical_minical_ex_show( $options )
 	//echo ((float)$sec + (float)$usec) - $GIJ_common_time ; 
 
 	// get bid
-	if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
+		// XoopsCube 2.1
+		$bid = $options[ sizeof( $options ) - 1 ] ;
+	} else if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
 		// XOOPS 2.1/2.2
 		// instanceid as bid from block_instance
 		$bid = @$GLOBALS['pical_blockinstance_id'] ;

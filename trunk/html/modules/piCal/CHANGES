@@ -1,5 +1,9 @@
 [xlang:en]
 
+v.089 compatibility with Cube 2.1beta (2006-10-19)
+- modified title %s of some blocks in Cube 2.1 (thx minahito)
+- modified minical_ex can be displayed in Cube 2.1 (thx minahito)
+
 v.088 spec changes about specialchars (2006-08-17)
 - changed disallow HTML in description
 - changed allow specialchars can be input into varchars
@@ -349,6 +353,10 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.089 Cube 2.1betaとの互換性問題解消 (2006-10-19)
+- Cube2.1でブロックタイトルの%sが解釈されないのを修正 (thx minahito)
+- Cube2.1で拡張ミニカレンダーが表示されないのを修正 (thx minahito)
 
 v.088 特殊キャラクターの扱いの仕様変更 (2006-08-17)
 - 詳細の表示で、htmlspecialcharsをかけるようにした

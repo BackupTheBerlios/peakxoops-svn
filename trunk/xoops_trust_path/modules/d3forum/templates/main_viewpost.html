@@ -27,7 +27,7 @@
 <{else}>
 <{$eachpost.ul_in|replace:"<ul>":"<ul type='none' class='d3f_eachbranch'>"|replace:"<li>":"<li class='d3f_eachbranchitem' style='padding-left:`$eachpost.depth_in_tree`0px;'>"}>
 <{/if}>
-	<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.tree_address}> <{$eachpost.subject}></a>
+	<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.unique_path}> <{$eachpost.subject}></a>
 	(<{$eachpost.poster_uname}>, <{$eachpost.post_time_formatted}>)
 	<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}></a><{/if}>
 <{$eachpost.ul_out}>
@@ -68,7 +68,7 @@
 <{$eachpost.ul_in}>
 	<li class="d3f_eachbranchitem<{if $eachpost.id == $post.id}> d3f_currenttopic<{/if}>" style="padding-left:<{$eachpost.depth_in_tree}>0px;">
 		<{if $eachpost.id == $post.id}><strong><{/if}>
-		<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.tree_address}> <{$eachpost.subject}></a>
+		<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.unique_path}> <{$eachpost.subject}></a>
 		(<{$eachpost.poster_uname}>, <{$eachpost.post_time_formatted}>)
 		<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}></a><{/if}>
 		<{if $eachpost.id == $post.id}></strong><{/if}>

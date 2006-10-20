@@ -3,7 +3,7 @@
 
 <div class="d3f_msgtitle">
 	<h2 class="head"><a id="post_id<{$post.id}>" name="post_id<{$post.id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" alt="<{$icon_meanings[$post.icon]}>" /></a> <{if $caller == "listposts"}><a href="<{$mod_url}>/index.php?post_id=<{$post.id}>"><{/if}><{$post.subject}><{if $caller == "listposts"}></a><{/if}></h2>
-	<div class="d3f_msginfo"><{$smarty.const._MD_D3FORUM_UNIQUEPATHPREFIX}> <{$post.tree_address}>
+	<div class="d3f_msginfo"><{$smarty.const._MD_D3FORUM_UNIQUEPATHPREFIX}> <{$post.unique_path}>
 	
 	<{if $caller == "listposts"}>|
 	

@@ -1,297 +1,326 @@
-/* made by jidaikobo */
+/* general */
 
-/* h1 */
+div.breadcrumbs{
+	font-size				:95%;
+	padding				:5px 2px;}
 
-.d3forum h1{
-	margin			:0;
-	font-size			:120%;}
+h1.d3f_title{
+	font-size				:130%;
+	margin				:0;}
+h1.d3f_title img{
+	vertical-align		:middle;
+	margin-right			:5px;}
+h2.d3f_head{
+	color				:#fff;
+	line-height			:100%;
+	font-size				:120%;
+	margin				:15px 0 0;
+	padding				:5px 10px;
+	background-color		:#336;}
+h2.d3f_head img{
+	vertical-align		:middle;
+	margin-right			:5px;}
+.d3f_pagenav{
+	text-align			:right;
+	padding				:3px;}
 
-/* h2 */
+div.d3f_msg blockquote{
+	margin				:0;
+	padding				:5px;}
+div.d3f_msg .xoopsQuote{
+	margin				:0;
+	padding				:0;}
 
-.d3forum h2{
-	font-weight		:bold;
-	font-size			:100%;
-	clear			:both;
-	padding			:2px 5px;
-	margin			:10px 0 3px;}
+/* d3f_bbsviewctrl */
 
-/* breadcrumbs */
+div.d3f_bbsviewctrl{
+	line-height			:100%;
+	float				:left;
+	padding-bottom		:3px;}
+div.d3f_bbsviewctrl form{
+	margin				:0;
+	padding				:0;}
+div.d3f_bbsviewctrl form *{
+	vertical-align		:middle;
+	margin				:0;
+	padding				:0;}
 
-.d3forum .breadcrumbs{
-	clear			:both;
-	font-size			:95%;
-	border-top		:1px #333 solid;
-	margin-top		:3px;
-	padding			:3px 0;}
+/* d3f_iconexp */
 
-/* d3forum_index.html */
+ul.d3f_iconexp{
+	padding-bottom		:15px;}
 
-.d3forum p.welcome{
-	margin			:0 0 5px;
-	padding			:0 0 5px;
-	border-bottom	:1px #333 solid;}
-.d3forum dl.bbsinfo{
+ul.d3f_iconexp li{
+	list-style			:none outside;
+	padding				:3px 0;}
+
+ul.d3f_iconexp li img{
+	vertical-align		:middle;
+	margin-right			:3px;}
+
+/* table.d3f_table */
+
+table.d3f_table{
+	clear				:both;}
+table.d3f_table thead th{
+	text-align			:center;
+	padding				:5px;}
+table.d3f_table caption{
+	text-align			:left;
+	padding				:0 2px 2px;}
+
+table.d3f_table td img{
+	vertical-align		:middle;
+	margin-right			:3px;}
+table.d3f_table td{
+	padding				:2px 5px;
+	vertical-align		:middle;}
+td.d3f_td_topicinfo{
+	font-size				:90%;}
+td.d3f_mainicon{
+	text-align			:center;}
+table.d3f_table td dl{
+	margin				:0 -5px;
+	padding				:0;}
+table.d3f_table td dt{
+	margin				:0;
+	padding				:3px 3px 5px;}
+table.d3f_table td dd{
+	margin				:0;
+	padding				:0 3px 5px;}
+table.d3f_table td dd.d3f_td_topicinfo{
+	margin				:0;
+	padding				:3px 3px 1px;
+	border-top			:1px #777 dashed;
+	font-size				:90%;}
+
+/*  */
+
+dl.d3f_bbsinfo{
 	font-size			:90%;
 	margin			:0;
 	float				:left;}
-.d3forum dl.bbsinfo dt,.d3forum dl.bbsinfo dd{
+dl.d3f_bbsinfo dt,dl.d3f_bbsinfo dd{
 	display			:inline;
 	margin			:0;}
-.d3forum dl.bbsinfo dd{
+dl.d3f_bbsinfo dd{
 	margin			:0 5px 0 0;}
-.d3forum dl.timeinfo{
+dl.d3f_timeinfo{
 	font-size			:90%;
 	margin			:0;
 	float				:left;}
-.d3forum dl.timeinfo dt,.d3forum dl.timeinfo dd{
+dl.d3f_timeinfo dt,dl.d3f_timeinfo dd{
 	display			:inline;
 	margin			:0;}
-.d3forum dl.timeinfo dd{
+dl.d3f_timeinfo dd{
 	margin			:0 5px 0 0;}
-.d3forum .bbsctrl{
-	clear			:both;
-	margin			:0;
-	padding			:0;}
-.d3forum .bbsctrl li{
-	float				:right;
-	margin			:0 0 0 10px;
-	padding			:0;
-	display			:inline;}
 
-/* post */
 
-.d3forum .post{
-	clear			:both;
-	margin			:0;
-	padding			:0;}
-.d3forum .post li{
-	list-style			:none;
-	float				:right;
-	margin			:0;
-	padding			:0;}
-.d3forum .post a{
-	display			:block;
-	background-image	:url(images/button_post.gif);
-	width			:60px;
-	height			:22px;
-	text-indent		:-9000px !important;}
-.d3forum .post a:hover{
-	background-image	:url(images/button_post_ro.gif);}
+/* main_listforums */
 
-/* bbsviewctrl */
+ul.d3f_subcategories li{
+	list-style			:none outside;}
 
-.d3forum div.bbsviewctrl{
-	line-height		:100%;
-	clear			:both;
-	padding			:15px 0;
-	text-align			:right;}
-.d3forum div.bbsviewctrl form{
+/* main_listcategories.html */
+
+div.d3f_categoryhead{
+	margin-top			:15px;
+	padding				:8px 5px;
+	clear				:both;
+	background-color		:#555;}
+div.d3f_categoryhead h2 a,.d3f_categoryhead p{
+	color				:#fff;}
+div.d3f_categoryhead h2 a:hover{
+	color				:#f4b343;}
+div.d3f_categoryhead h2{
+	font-size				:120%;
+	margin				:0;
+	padding				:0 0 2px;
+	line-height			:100%;}
+div.d3f_categoryhead p{
+	font-size				:90%;
+	font-weight			:normal;
+	margin				:0;
+	padding				:0;
+	line-height			:100%;}
+div.d3f_categoryhead img{
 	float				:left;
-	display			:inline;}
-.d3forum div.bbsviewctrl form *{
-	vertical-align		:middle;}
+	margin-right			:5px;}
+ul.d3f_listforums li{
+	list-style			:none outside;}
 
-/* topicviewctrl */
+/* inc_topicbar.html */
 
-.d3forum div.topicviewctrl{
-	line-height		:100%;
-	clear			:both;
-	padding			:7px 0;
-	text-align			:right;}
-.d3forum div.topicviewctrl *{
-	vertical-align		:middle;}
-.d3forum div.topicviewctrl .topicorderctrl{
-	float				:left;
-	display			:inline;}
-
-/* BBS table - outer -  */
-
-.d3forum .outer{
-	clear			:both;}
-.d3forum .outer td,.d3forum .outer th{
-	padding			:2px;}
-
-/* outer - th */
-
-.d3forum .outer thead th,
-.d3forum .outer thead td{
-	white-space		:nowrap;
-	text-align			:center;}
-.d3forum .outer thead th.forumtitle{
-	text-align			:left;}
-.d3forum .outer th.postsubject a{
-	color						:#fff;}
-.d3forum .outer th.postsubject a:hover{
-	color						:#f00;}
-
-/* outer - topics at viewforum */
-
-.d3forum .outer td.odd dl,
-.d3forum .outer td.odd dl dd{
-	margin			:0;
-	padding			:0;}
-.d3forum .outer td.odd dl dd.moderator{
-	padding-top		:1px;
-	font-size			:smaller;
-	font-weight		:bold;}
-
-/* outer - cell */
-
-.d3forum .outer td.even,.d3forum .outer td.odd{
-	vertical-align		:middle;}
-.d3forum .outer td.posterinfo{
-	vertical-align		:top;}
-
-.d3forum .outer td.status,
-.d3forum .outer td.numbersoftopics,
-.d3forum .outer td.numbersofposts,
-.d3forum .outer td.type,
-.d3forum .outer td.replies,
-.d3forum .outer td.views,
-.d3forum .outer td.poster{
-	width			:120px;
-	text-align:center;}
-.d3forum .outer td.date{
-	white-space		:nowrap;}
-.d3forum .outer td.latestpost{
+div.d3f_ctrl{
+	background-color		:#eee;
+	padding				:10px;
+	margin				:0 0 15px;}
+div.d3f_shtcut{
+	background-color		:#eee;
+	padding				:10px;
+	margin				:0;
 	text-align			:center;
-	width			:20%;}
-.d3forum .outer td.forumname{
-	text-align			:left;}
-.d3forum .thread{
-	clear			:both;
-	padding-top		:25px !important:}
+	border-bottom			:1px #333 dashed;}
 
-/* d3forum_viewtopic_flat.html - outer - cell */
-
-.d3forum .outer th.poster{
-	text-align			:center;
-	width			:20%;}
-.d3forum .outer td.pagenav{
-	text-align			:center;}
-
-/* d3forum_viewtopic_flat.html - topicbar */
-
-.bbsjumpctrl form *{
+div.d3f_jump_box{
+	text-align			:left;
+	border-bottom			:none;
+	margin-bottom			:15px;}
+div.d3f_jump_box form *{
 	vertical-align		:middle;}
-bbsjumpctrl form{
-	float				:left;}
+form.d3f_search{
+	padding				:0;
+	margin				:10px 0 0;}
 
 
-/* icon-explanation */
+/* d3f_msg */
 
-.d3forum .iconexp{
-	padding-top		:10px;
-	clear			:both;}
+div.d3f_msg{
+	width				:auto;
+	margin				:0;
+	padding				:2px 2px 0;
+	border				:1px #aaa solid;
+	/*background-image		:url(images/msg_bg.gif);*/
+	/*background-repeat		:repeat-y;*/
+	/*background-position	:100px;*/}
 
-.d3forum .iconexp li{
-	list-style			:none;}
-.d3forum .iconexp li img{
+/* d3f_msgtitle */
+
+div.d3f_msgtitle{
+	margin-top			:15px;
+	padding				:2px;
+	width				:auto;
+	border-top			:1px #aaa solid;
+	border-left			:1px #aaa solid;
+	border-right			:1px #aaa solid;}
+
+div.d3f_msgtitle h2{
+	color				:#fff;
+	line-height			:100%;
+	font-size				:120%;
+	margin				:0;
+	padding				:5px 10px;
+	background-color		:#336;}
+div.d3f_msgtitle h2 img{
 	vertical-align		:middle;}
+div.d3f_msgtitle h2 a{
+	color				:#fff;}
+div.d3f_msgtitle h2 a:hover{
+	color				:#f4b343;}
 
-/* notification threadview */
+/* d3f_msginfo */
 
-.d3forum .notification,.d3forum .threadview{
-	margin			:10px 0;
-	visibility			:hidden;
-	clear			:both;}
+div.d3f_msginfo{
+	margin				:2px 0 0;
+	padding				:3px 10px;
 
-/* hidden */
+	background-color		:#eee;}
 
-.d3forum .hd{
-	position			:absolute;
-	left				:-9000px;}
+/* d3f_posterinfo */
 
-/* d3forum_thread.html - indiviual infomation */
-
-.d3forum .userstatus, .d3forum .gueststatus{
-	margin			:0;
-	padding			:0;}
-.d3forum .userstatus li, .d3forum .gueststatus li{
-	font-size			:80%;
-	line-height		:100%;
-	margin			:2px 0;
-	padding			:2px;
-	list-style			:none;
-	background-color	:#fff;
-	border			:1px #c0c0c0 solid;}
-.d3forum .combody{
-	vertical-align		:top !important;}
-.d3forum .postdate{
-	font-size			:80%;
-	line-height		:100%;
-	vertical-align		:middle;}
-
-/* d3forum_thread.html */
-
-.d3forum .editctrl{
-	float				:right;}
-/*
-.d3forum .editctrl a{
-	margin-left		:3px;
+dl.d3f_posterinfo{
 	float				:left;
-	display			:block;
-	width			:53px;
-	height			:17px;
-	text-indent		:-9000px !important;}
-.d3forum .editctrl a.edit{	background-image	:url(images/button_edit.gif);}
-.d3forum .editctrl a.reply{	background-image	:url(images/button_reply.gif);}
-.d3forum .editctrl a.delete{	background-image	:url(images/button_delete.gif);}
-.d3forum .editctrl a.edit:hover{	background-image	:url(images/button_edit_ro.gif);}
-.d3forum .editctrl a.reply:hover{	background-image	:url(images/button_reply_ro.gif);}
-.d3forum .editctrl a.delete:hover{	background-image	:url(images/button_delete_ro.gif);}*/
+	padding				:5px;
+	margin				:0;
+	width				:80px;}
+dl.d3f_posterinfo dt{
+	margin				:0;
+	padding				:0;}
+dl.d3f_posterinfo dd{
+	margin				:10px 0;
+	padding				:0;}
+dl.d3f_posterinfo dd ul.d3f_userstatus,
+dl.d3f_posterinfo dd ul.d3f_gueststatus{
+	margin				:0;
+	padding				:0;}
+dl.d3f_posterinfo dd ul.d3f_userstatus li,
+dl.d3f_posterinfo dd ul.d3f_gueststatus li{
+	font-size				:90%;
+	list-style			:none outside;
+	margin				:0;
+	padding				:0;}
 
-.d3forum .eachbranch ul{
-	margin-left			:10px;}
-.d3forum .eachbranch li{
-	list-style			:none;}
+/* d3f_msgfld */
 
-/* searchinbbs */
+div.d3f_msgfld{
+	margin				:0 0 0 100px;
+	padding				:5px;
+	line-height			:140%;}
 
-.d3forum .search,.d3forum .searchresult{
-	margin-top		:10px;}
-.d3forum .searchresult td{
-	text-align			:center;}
-.d3forum .searchresult td.topics{
-	text-align			:left;}
-.d3forum .searchinbbs{
-	font-weight		:bold;}
+/* d3f_postctrl */
 
-/* blocks */
+div.d3f_postctrl{
+	text-align			:right;
+	border-top			:1px #aaa dotted;
+	padding				:5px 10px;
+	clear				:both;
+	background-color		:#fff;}
 
-.d3forum .blocks{
-	font-size			:95%;
-	height			:1em;
-	padding			:5px 0;}
+/* d3f_avatar */
 
-/* coloring */
+.d3f_avatar{
+	background-repeat		:no-repeat;
+	background-position	:bottom left;}
 
-/*
-.d3forum h2{			background-color	:#2f5376;}
-.d3forum h2 a{		color	:#fff;}
-.d3forum h2 a:hover{	color	:#f60;}
+/* d3forum_main_viewpost.html */
+/* eachbranch */
 
-.d3forum .outer thead th,
-.d3forum .outer thead td{
-	color			:#000;
-	background-color	:#c2cdd6;}
-d3forum .outer thead tr.head th{
-	color			:#fff;
-	background-color	:#2f5376;}
-.d3forum .outer thead tr.head th a{
-	color			:#fff;}
-.d3forum .outer thead tr.head th a:hover{
-	color			:#900;}
+ul.d3f_eachbranch{
+	margin				:0;
+	padding				:0;}
+ul.d3f_eachbranch li{
+	list-style			:none outside;
+	margin				:0;
+	padding				:1px 0;}
+ul.d3f_eachbranch li img{
+	vertical-align		:middle;}
 
-.d3forum .outer td.even{
-	background-color	:#dee3e7;}
-.d3forum .outer td.odd{
-	background-color	:#e9e9e9;}
+/* d3f_currenttopic */
 
-.d3forum .topicbar{
-	background-color	:#c2cdd6}
+li.d3f_eachbranchitem{
+	background-color		:#eee;}
+li.d3f_currenttopic{
+	background-color		:#fff;}
 
-.d3forum .userstatus li{
-	background-color	:#fff;
-	border			:1px #c0c0c0 solid;}
-*/
+/* d3f_tree */
+
+div.d3f_tree h2{
+	margin-bottom			:4px;}
+
+
+
+/* adjust width as avatar's */
+
+dl.d3f_posterinfo{
+	padding				:5px;
+	width				:100px;}
+div.d3f_msg{
+	background-position	:110px;}
+div.d3f_msgfld{
+	margin				:0 0 0 110px;}
+
+/* edit colors */
+/* titles */
+
+div.d3f_msgtitle h2{
+	background-color		:#555;}
+div.d3f_msgtitle h2 a{
+	color				:#fff;}
+div.d3f_msgtitle h2 a:hover{
+	color				:#f4b343;}
+
+h2.d3f_head{
+	color				:#fff;
+	background-color		:#555;}
+h2.d3f_head a{
+	color				:#fff;}
+h2.d3f_head a:hover{
+	color				:#f4b343;}
+
+.d3f_table thead th{
+	text-align			:left !important;
+	background-color		:#555 !important;}
+.d3f_table tr.even td{
+	background-color		:#dfdfdd !important;}
+.d3f_table tr.odd td{
+	background-color		:#f3f3f3 !important;}

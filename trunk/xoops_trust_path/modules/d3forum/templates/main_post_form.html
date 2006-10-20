@@ -1,10 +1,15 @@
 <!-- start module contents -->
-<div class="d3forum">
 
-<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &gt;
-<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a> &gt;
-<{if $topic.id}><a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a> &gt; <{/if}>
-<{$formtitle}>
+<div class="breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
+	&nbsp;&gt;&nbsp;
+	<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &nbsp;&gt;&nbsp;
+	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>&nbsp;&gt;&nbsp;
+	<{if $topic.id}><a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>&nbsp;&gt;&nbsp;<{/if}>
+	<{$formtitle}>
+</div>
+
+<h1><{$formtitle}>: <{$forum.title}></h1>
 
 <{if $mode == "reply"}>
 <div id="forum_reference" class="outer">
@@ -21,6 +26,9 @@
 </div>
 <{/if}>
 
+
+<h2<{if $mode == "edit"}> class="attn"<{/if}>><strong><{$formtitle}></strong></h2>
+
 <form name="forumform" id="forumform" action="<{$mod_url}>/index.php?page=post" method="post" onsubmit="return xoopsFormValidate_forumform();">
 
 	<input type="hidden" name="pid" id="pid" value="<{$pid}>" />
@@ -29,10 +37,7 @@
 	<input type="hidden" name="forum_id" id="forum_id" value="<{$forum.id}>" />
 	<input type="hidden" name="reference_quote" id="reference_quote" value="<{$reference_quote}>" />
 
-	<table width="100%" class="outer" cellspacing="1">
-		<tr>
-			<th colspan="2" <{if $mode == "edit"}>style="background-color:#FF0000;"<{/if}>><{$formtitle}></th>
-		</tr>
+	<table width="100%" class="outer" cellspacing="1"<{if $mode == "edit"}> class="attn"<{/if}>>
 		<tr valign="top" align="left">
 			<td class="head"><{$smarty.const._MD_D3FORUM_SUBJECT}></td>
 			<td class="even">
@@ -111,7 +116,7 @@
 
 				<!-- solve or not -->
 				<{if $can_change_solved}>
-				<input type="checkbox" name="solved" id="solved" value="1" <{$solved_checked}> /><label for="solved"><{$smarty.const._MD_D3FORUM_SOLVEDYES}></label>
+				<input type="checkbox" name="solved" id="solved" value="1" <{$solved_checked}> /><label for="solved"><{$smarty.const._MD_D3FORUM_TH_SOLVED}></label>
 				<br />
 				<{/if}>
 

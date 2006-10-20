@@ -14,7 +14,7 @@ if( empty( $cat_id ) ) {
 	$invalid_cat_id = true ;
 	list( $cat_id ) = $db->fetchRow( $db->query( "SELECT MIN(cat_id) FROM ".$db->prefix($mydirname."_categories") ) ) ;
 	if( empty( $cat_id ) ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin" , 5 , _MD_D3FORUM_ERR_EXISTSCATEGORY ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php" , 5 , _MD_D3FORUM_ERR_EXISTSCATEGORY ) ;
 		exit ;
 	}
 }
@@ -43,7 +43,7 @@ if( ! empty( $_POST['group_update'] ) && empty( $invaild_cat_id ) ) {
 			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_access")." SET cat_id=$cat_id, groupid=$gid, can_post=$can_post, can_edit=$can_edit, can_delete=$can_delete, post_auto_approved=$post_auto_approved, is_moderator=$is_moderator, can_makeforum=$can_makeforum" ) ;
 		}
 	}
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin&page=category_access&amp;cat_id=$cat_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
 	exit ;
 }
 
@@ -89,7 +89,7 @@ if( ! empty( $_POST['user_update'] ) && empty( $invaild_cat_id ) ) {
 		}
 	}
 	
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin&page=category_access&amp;cat_id=$cat_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
 	exit ;
 }
 

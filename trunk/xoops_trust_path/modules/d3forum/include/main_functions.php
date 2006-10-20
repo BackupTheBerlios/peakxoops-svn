@@ -3,6 +3,42 @@
 // this file can be included only from main or admin (not from blocks)
 
 
+// add fields for tree structure into $posts or $categories
+function d3forum_make_treeinformations( $data )
+{
+	$previous_depth = -1 ;
+
+	for( $i = 0 ; $i < sizeof( $data ) ; $i ++ ) {
+		$depth_diff = $data[$i]['depth_in_tree'] - @$previous_depth ;
+		$previous_depth = $data[$i]['depth_in_tree'] ;
+		$data[$i]['ul_in'] = '' ;
+		$data[$i]['ul_out'] = '' ;
+		if( $depth_diff > 0 ) {
+			if( $i > 0 ) {
+				$data[$i-1]['first_child_id'] = $data[$i]['id'] ;
+			}
+			for( $j = 0 ; $j < $depth_diff ; $j ++ ) {
+				$data[$i]['ul_in'] .= '<ul><li>' ;
+			}
+		} else if( $depth_diff < 0 ) {
+			for( $j = 0 ; $j < - $depth_diff ; $j ++ ) {
+				$data[$i-1]['ul_out'] .= '</li></ul>' ;
+			}
+		} else {
+			$data[$i-1]['ul_out'] .= '</li>' ;
+			$data[$i]['ul_in'] = '<li>' ;
+		}
+		if( $i > 0 ) {
+			$data[$i-1]['next_id'] = $data[$i]['id'] ;
+			$data[$i]['prev_id'] = $data[$i-1]['id'] ;
+		}
+	}
+	$data[ sizeof( $data ) - 1 ]['ul_out'] = str_repeat( '</li></ul>' , $previous_depth + 1 ) ;
+
+	return $data ;
+}
+
+
 // check done
 function d3forum_get_forum_permissions_of_current_user( $mydirname )
 {

@@ -18,7 +18,7 @@ if( ! $isadmin ) die( _MD_D3FORUM_ERR_CREATECATEGORY ) ;
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( ! empty( $_POST['categoryman_post'] ) ) {
+if( isset( $_POST['categoryman_post'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'd3forum' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
@@ -26,7 +26,7 @@ if( ! empty( $_POST['categoryman_post'] ) ) {
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=$cat_id" , 2 , _MD_D3FORUM_MSG_CATEGORYUPDATED ) ;
 	exit ;
 }
-if( ! empty( $_POST['categoryman_delete'] ) && count( $children ) == 0 ) {
+if( isset( $_POST['categoryman_delete'] ) && count( $children ) == 0 ) {
 	if ( ! $xoopsGTicket->check( true , 'd3forum' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}

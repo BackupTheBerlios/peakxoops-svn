@@ -59,7 +59,7 @@ if( ! empty( $_POST['do_sycalltables'] ) ) {
 	// rebuild category's tree
 	d3forum_sync_cattree( $mydirname ) ;
 
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin&page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_SYNCALLTABLESDONE ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_SYNCALLTABLESDONE ) ;
 	exit ;
 }
 
@@ -86,7 +86,7 @@ if( ! empty( $_POST['do_import'] ) && ! empty( $_POST['import_mid'] ) ) {
 			break ;
 	}
 
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin&page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_IMPORTDONE ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_IMPORTDONE ) ;
 	exit ;
 }
 

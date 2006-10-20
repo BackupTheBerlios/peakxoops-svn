@@ -23,7 +23,18 @@ function d3forum_onupdate_base( $module , $mydirname )
 	$db =& Database::getInstance() ;
 	$mid = $module->getVar('mid') ;
 
+
+
 	// TABLES (write here ALTER TABLE etc. if necessary)
+
+	// 0.10 -> 0.20
+	$check_sql = "SELECT cat_unique_path FROM ".$db->prefix($mydirname."_categories") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD cat_unique_path text NOT NULL default '' AFTER cat_path_in_tree" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_forums")." ADD forum_external_link_format varchar(255) NOT NULL default '' AFTER cat_id" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_topics")." ADD topic_external_link_id int(10) unsigned NOT NULL default 0 AFTER forum_id, ADD KEY (`topic_external_link_id`)" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_posts")." ADD path_in_tree text NOT NULL default '' AFTER order_in_tree , ADD unique_path text NOT NULL default '' AFTER order_in_tree" ) ;
+	}
 
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)

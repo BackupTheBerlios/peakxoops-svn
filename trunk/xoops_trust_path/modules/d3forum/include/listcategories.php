@@ -54,20 +54,21 @@ while( $cat_row = $xoopsDB->fetchArray( $crs ) ) {
 		) ;
 	}
 
-	// tree structure of this category (ul & tree_address)
+	// tree structure of this category (ul)
 	$depth_diff = $cat_row['cat_depth_in_tree'] - @$previous_depth ;
 	$previous_depth = $cat_row['cat_depth_in_tree'] ;
 	$ul_in = $ul_out = '' ;
 	if( $depth_diff > 0 ) {
 		for( $i = 0 ; $i < $depth_diff ; $i ++ ) {
-			$ul_in .= '<ul type="none" class="eachbranch">' ;
+			$ul_in .= '<ul><li>' ;
+		}
+	} else if( $depth_diff < 0 ) {
+		for( $i = 0 ; $i < - $depth_diff ; $i ++ ) {
+			$ul_out .= '</li></ul>' ;
 		}
 	} else {
-		if( $depth_diff < 0 ) {
-			for( $i = 0 ; $i < - $depth_diff ; $i ++ ) {
-				$ul_out .= '</ul>' ;
-			}
-		}
+		$ul_in = '<li>' ;
+		$ul_out .= '</li>' ;
 	}
 
 	// categories array
@@ -106,7 +107,7 @@ $xoopsTpl->assign(
 		'currenttime' => time() ,
 		'currenttime_formatted' => formatTimestamp( time() , 'm' ) ,
 		'categories' => $categories ,
-		'categories_ul_out_last' => str_repeat( '</ul>' , $previous_depth + 1 ) ,
+		'categories_ul_out_last' => str_repeat( '</li></ul>' , $previous_depth + 1 ) ,
 		'page' => 'listcategories' ,
 	)
 ) ;

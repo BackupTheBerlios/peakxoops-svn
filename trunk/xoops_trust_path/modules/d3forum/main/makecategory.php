@@ -16,7 +16,7 @@ if( ! $isadmin ) die( _MD_D3FORUM_ERR_CREATECATEGORY ) ;
 // TRANSACTION PART
 // permissions will be set same as the parent category. (also moderator)
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( ! empty( $_POST['categoryman_post'] ) ) {
+if( isset( $_POST['categoryman_post'] ) ) {
 	// create a record for category and category_access
 	$new_cat_id = d3forum_makecategory( $mydirname , $cat_id ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=$cat_id" , 2 , _MD_D3FORUM_MSG_FORUMMADE ) ;
@@ -38,7 +38,7 @@ $category4assign = array(
 	'title' => '' ,
 	'weight' => 0 ,
 	'desc' => '' ,
-	'options' => $options4html ,
+	'options' => '' , //$options4html ,
 	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $d3forum_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
 ) ;
 

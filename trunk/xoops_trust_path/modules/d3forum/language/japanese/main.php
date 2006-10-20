@@ -21,6 +21,7 @@ define('_MD_D3FORUM_POST','投稿');
 define('_MD_D3FORUM_TOPIC','トピック');
 define('_MD_D3FORUM_FORUM','フォーラム');
 define('_MD_D3FORUM_CATEGORY','カテゴリー');
+define('_MD_D3FORUM_SUBCATEGORIES','サブカテゴリー');
 define('_MD_D3FORUM_FIRSTPOST','トピック開始');
 define('_MD_D3FORUM_LASTPOST','最新投稿');
 define('_MD_D3FORUM_MODERATOR','モデレータ');
@@ -37,6 +38,8 @@ define('_MD_D3FORUM_ALT_INVISIBLE','（不可視）');
 define('_MD_D3FORUM_ALT_UNAPPROVAL','（未承認）');
 define('_MD_D3FORUM_LINK_NEXTTOPIC','次のトピック');
 define('_MD_D3FORUM_LINK_PREVTOPIC','前のトピック');
+define('_MD_D3FORUM_LINK_NEXTPOST','次の投稿');
+define('_MD_D3FORUM_LINK_PREVPOST','前の投稿');
 define('_MD_D3FORUM_LINK_LISTPOSTS','トピック内投稿一覧へ');
 define('_MD_D3FORUM_LINK_LISTTOPICS','フォーラム内トピック一覧へ');
 define('_MD_D3FORUM_FMT_TOPICHITS','%s件ヒットしました');
@@ -62,6 +65,18 @@ define('_MD_D3FORUM_SOLVED_TURNON','解決済とする');
 define('_MD_D3FORUM_SOLVED_TURNOFF','未解決とする');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','投稿一覧の最上部です'); //jidaikobo
 define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','投稿一覧の最下部です'); //jidaikobo
+
+// topic,forum,category controller
+define('_MD_D3FORUM_SHORTCUT','ショートカット');
+define('_MD_D3FORUM_CONTROLLER_WHOLE','コントローラ');
+define('_MD_D3FORUM_CONTROLLER_CATEGORY','カテゴリーコントローラ');
+define('_MD_D3FORUM_CONTROLLER_FORUM','フォーラムコントローラ');
+define('_MD_D3FORUM_CONTROLLER_TOPIC','トピックコントローラ');
+
+// inc_eachpost.html
+define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
+define('_MD_D3FORUM_PARENTPOST','親記事');
+define('_MD_D3FORUM_FIRSTCHILDPOST','子記事');
 
 // order options
 define('_MD_D3FORUM_ODR_LASTPOSTDSC','最終投稿日降順');

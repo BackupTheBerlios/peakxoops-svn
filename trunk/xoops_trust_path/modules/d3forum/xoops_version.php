@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.10 ;
+$modversion['version'] = 0.20 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -26,8 +26,8 @@ $modversion['tables'] = array() ;
 
 // Admin things
 $modversion['hasAdmin'] = 1 ;
-$modversion['adminindex'] = 'index.php?mode=admin' ;
-$modversion['adminmenu'] = 'admin_menu.php' ;
+$modversion['adminindex'] = 'admin/index.php' ;
+$modversion['adminmenu'] = 'admin/admin_menu.php' ;
 
 // Search
 $modversion['hasSearch'] = 1 ;
@@ -215,7 +215,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_ANONYMOUS_NAMEDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> '' ,
+	'default'		=> _GUESTS ,
 	'options'		=> array()
 ) ;
 

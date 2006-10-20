@@ -1,4 +1,4 @@
-<?php
+a<?php
 
 define('_MD_D3FORUM_ON','Posted on');
 define('_MD_D3FORUM_LASTMODIFIED','Last modified');
@@ -21,6 +21,7 @@ define('_MD_D3FORUM_POST','Post');
 define('_MD_D3FORUM_TOPIC','Topic');
 define('_MD_D3FORUM_FORUM','Forum');
 define('_MD_D3FORUM_CATEGORY','Category');
+define('_MD_D3FORUM_SUBCATEGORIES','Subcategories');
 define('_MD_D3FORUM_FIRSTPOST','First post');
 define('_MD_D3FORUM_LASTPOST','Latest post');
 define('_MD_D3FORUM_MODERATOR','Moderator');
@@ -37,6 +38,8 @@ define('_MD_D3FORUM_ALT_INVISIBLE','(invisible)');
 define('_MD_D3FORUM_ALT_UNAPPROVAL','(not approved)');
 define('_MD_D3FORUM_LINK_NEXTTOPIC','Next topic');
 define('_MD_D3FORUM_LINK_PREVTOPIC','Previous topic');
+define('_MD_D3FORUM_LINK_NEXTPOST','Next post');
+define('_MD_D3FORUM_LINK_PREVPOST','Previous post');
 define('_MD_D3FORUM_LINK_LISTPOSTS','List posts in the topic');
 define('_MD_D3FORUM_LINK_LISTTOPICS','List topics in the forum');
 define('_MD_D3FORUM_FMT_TOPICHITS','hits %s items');
@@ -62,6 +65,18 @@ define('_MD_D3FORUM_SOLVED_TURNON','Turn solved on');
 define('_MD_D3FORUM_SOLVED_TURNOFF','Turn solved off');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','Top of the posts'); //jidaikobo
 define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','Bottom of the posts'); //jidaikobo
+
+// topic,forum,category controller
+define('_MD_D3FORUM_SHORTCUT','Short cut');
+define('_MD_D3FORUM_CONTROLLER_WHOLE','Controller');
+define('_MD_D3FORUM_CONTROLLER_CATEGORY','Category controller');
+define('_MD_D3FORUM_CONTROLLER_FORUM','Forum controller');
+define('_MD_D3FORUM_CONTROLLER_TOPIC','Topic controller');
+
+// inc_eachpost.html
+define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
+define('_MD_D3FORUM_PARENTPOST','Parent');
+define('_MD_D3FORUM_FIRSTCHILDPOST','Child');
 
 // order options
 define('_MD_D3FORUM_ODR_LASTPOSTDSC','Last posted desc');
@@ -185,7 +200,7 @@ define('_MD_D3FORUM_ERR_NOSPECIFICID','post_id or forum_id should be specified.'
 define('_MD_D3FORUM_ERR_PIDNOTEXIST','Specified post_id does not exist') ;
 define('_MD_D3FORUM_ERR_CUTPASTENOTADMINOFDESTINATION','You are not moderator of destinated forum') ;
 define('_MD_D3FORUM_ERR_PIDLOOP','parent/child loop error') ;
-define('_MD_D3FORUM_CHILDREN_COUNT','child posts') ;
+define('_MD_D3FORUM_CHILDREN_COUNT','children') ;
 define('_MD_D3FORUM_PARENT_POSTID','Parent post_id') ;
 define('_MD_D3FORUM_CUTPASTEBYPOSTID_DEST','destination post_id') ;
 define('_MD_D3FORUM_CUTPASTEBYPOSTIDSBJ','Move into a post') ;

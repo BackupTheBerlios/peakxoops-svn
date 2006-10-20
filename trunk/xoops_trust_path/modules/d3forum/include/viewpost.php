@@ -23,8 +23,6 @@ include dirname(__FILE__).'/process_this_post.inc.php' ;
 
 // posts loop
 $posts = array() ;
-$tree_addresses = array() ;
-$previous_depth = -1 ;
 $sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY order_in_tree,post_id" ; // TODO
 if( ! $prs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
@@ -47,7 +45,7 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 		'poster_rank_title' => $poster_rank_title4disp ,
 		'poster_rank_image' => $poster_rank_image4disp ,
 		'poster_is_online' => $poster_is_online ,
-		'poster_avatar' => $poster_avatar4disp ,
+		'poster_avatar' => $poster_avatar ,
 		'poster_posts_count' => $poster_posts_count ,
 		'poster_regdate' => $poster_regdate ,
 		'poster_regdate_formatted' => formatTimestamp( $poster_regdate , 's' ) ,
@@ -64,14 +62,11 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 		'hide_uid' => intval( $post_row['hide_uid'] ) ,
 		'depth_in_tree' => intval( $post_row['depth_in_tree'] ) ,
 		'order_in_tree' => intval( $post_row['order_in_tree'] ) ,
-		'ul_in' => $ul_in ,
-		'ul_out' => $ul_out ,
-		'tree_address' => implode( ',' , @$tree_addresses ) ,
+		'tree_address' => htmlspecialchars( substr( $post_row['unique_path'] , 1 ) , ENT_QUOTES ) ,
 		'votes_count' => intval( $post_row['votes_count'] ) ,
 		'votes_sum' => intval( $post_row['votes_sum'] ) ,
 		'votes_avg' => round( $post_row['votes_sum'] / ( $post_row['votes_count'] - 0.0000001 ) , 2 ) ,
 		'past_vote' => -1 , // TODO
-		'depth_diff' => $depth_diff ,
 		'guest_name' => $myts->makeTboxData4Show( $post_row['guest_name'] ) ,
 		'guest_email' => $myts->makeTboxData4Show( $post_row['guest_email'] ) ,
 		'guest_url' => $myts->makeTboxData4Show( $post_row['guest_url'] ) ,
@@ -84,6 +79,9 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 		'can_vote' => $can_vote ,
 	) ;
 }
+
+// rebuild tree informations
+$posts = d3forum_make_treeinformations( $posts ) ;
 
 // for notification...
 $_GET['topic_id'] = $topic_id ;
@@ -100,7 +98,7 @@ $xoopsTpl->assign(
 		'prev_topic' => $prev_topic4assign ,
 		'post' => $post4assign ,
 		'posts' => $posts ,
-		'posts_ul_out_last' => str_repeat( '</ul>' , $previous_depth + 1 ) ,
+//		'posts_ul_out_last' => str_repeat( '</li></ul>' , $previous_depth + 1 ) ,
 		'page' => 'viewpost' ,
 		'xoops_pagetitle' => $post4assign['subject'] ,
 	)

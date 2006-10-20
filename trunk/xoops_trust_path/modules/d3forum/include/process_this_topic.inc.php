@@ -79,4 +79,8 @@ if( $uid && @$topic_row['u2t_time'] <= $topic_row['topic_last_post_time'] ) {
 	if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->queryF( "INSERT INTO ".$xoopsDB->prefix($mydirname."_users2topics")." SET uid=$uid,topic_id=$topic_id,u2t_time=UNIX_TIMESTAMP(),u2t_marked=0" ) ;
 }
 
+// for debug
+// require_once dirname(__FILE__).'/transact_functions.php' ;
+// d3forum_sync_topic( $mydirname , $topic_id ) ;
+
 ?>

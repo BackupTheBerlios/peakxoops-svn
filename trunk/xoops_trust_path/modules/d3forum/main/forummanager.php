@@ -16,15 +16,22 @@ if( ! $isadminormod ) die( _MD_D3FORUM_ERR_MODERATEFORUM ) ;
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( ! empty( $_POST['forumman_post'] ) ) {
+if( isset( $_POST['forumman_post'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'd3forum' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
+
+	// options and weight can be modified only by admin
+	if( ! $isadmin ) {
+		$_POST['options'] = '' ;
+		$_POST['weight'] = 0 ;
+	}
+
 	d3forum_updateforum( $mydirname , $forum_id , $isadmin ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" , 2 , _MD_D3FORUM_MSG_FORUMUPDATED ) ;
 	exit ;
 }
-if( ! empty( $_POST['forumman_delete'] ) ) {
+if( isset( $_POST['forumman_delete'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'd3forum' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}

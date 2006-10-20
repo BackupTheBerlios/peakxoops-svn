@@ -1,7 +1,4 @@
 <!-- start module contents -->
-<div class="d3forum">
-<h1><{$category.title}></h1>
-
 <div class="breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
@@ -15,117 +12,58 @@
 	<{/foreach}>
 </div>
 
-<p class="welcome"><{$category.desc}></p>
+<h1 class="d3f_title"><{$category.title}></h1>
+<p class="d3f_welcome"><{$category.desc}></p>
 
-<dl class="bbsinfo">
-<dt><{$smarty.const._MD_D3FORUM_TOTALTOPICSCOUNT}>:</dt>
-	<dd><{$total_topics_count}></dd>
-<dt><{$smarty.const._MD_D3FORUM_TOTALPOSTSCOUNT}>:</dt>
-	<dd><{$total_posts_count}></dd>
-</dl>
+<{if $subcategories}><h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h2><{/if}>
 
-<dl class="timeinfo">
-<dt><{$smarty.const._MD_D3FORUM_TIMENOW}>:</dt>
-	<dd><{$currenttime_formatted}></dd>
-<dt><{$smarty.const._MD_D3FORUM_LASTVISIT}>:</dt>
-	<dd><{$lastvisit_formatted}></dd>
-</dl>
-
-<form class="topcategories" style="clear:both;">
-	<{foreach item=top_cat from=$top_categories}>
-	<li style="float:left;list-style:none;text-align:center;margin-right:5px;">
-		<a href="<{$mod_url}>/index.php?cat_id=<{$top_cat.id}>">
-			<img src="<{$mod_imageurl}>/category_0.gif" alt="<{$top_cat.title}>" />
-			<br />
-			<{$top_cat.title}>
-		</a>
-	</li>
-	<{/foreach}>
-</ul>
-
-<div class="bbsjumpctrl">
-	<form name="category_jump_box" action="<{$mod_url}>/index.php" method="get">
-		<select name="cat_id" onchange="submit();">
-			<option value="">(<{$smarty.const._MD_D3FORUM_TOP}>)</option>
-			<{$cat_jumpbox_options}>
-		</select>
-		<input type="image" src="<{$mod_imageurl}>/navicon_categoryjumpto.gif" alt="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
-	</form>
-</div>
-
-<ul type="none" class="subcategories">
+<ul class="d3f_subcategories">
 <{foreach item=subcategory from=$subcategories}>
-	<li class="subcategories">
-		<a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>">
-			<img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" />
-			<{$subcategory.title}>
-		</a>
-		<{$subcategory.topics_count}>(<{$subcategory.posts_count}>)
-	</li>
+	<li><a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>" title="<{$subcategory.desc}>"><img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" /> <{$subcategory.title}></a> (<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$subcategory.topics_count}>, <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$subcategory.posts_count}>)</li>
 <{/foreach}>
 </ul>
 
-<table class="outer">
-<thead>
-<tr>
-	<th colspan="2" class="forumtitle"><{$smarty.const._MD_D3FORUM_FORUM}></th>
-	<th><{$smarty.const._MD_D3FORUM_TOPICSCOUNT}></th>
-	<th><{$smarty.const._MD_D3FORUM_POSTSCOUNT}></th>
-	<th><{$smarty.const._MD_D3FORUM_LASTPOST}></th>
-</tr>
-</thead>
+<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_FORUM}></h2>
 
-<!-- make forum -->
-<{if $category.can_makeforum || $xoops_isadmin}>
-<tr>
-	<td class="even status"><img src="<{$mod_imageurl}>/forum_new.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}>" /></td>
-	<td class="odd forumname" colspan="4">
-	<a href="<{$mod_url}>/index.php?page=makeforum&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}></a>
-	<{if $xoops_isadmin}>
-		- <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a>
-	<{/if}>
-	</td>
-<{/if}>
-
+<table class="outer d3f_table">
 <!-- start forums -->
 <{foreach item=forum from=$forums}>
-<tr>
-	<td class="even status">
+<tr class="<{cycle values="even,odd"}>">
+<{strip}>
+	<td class="d3f_mainicon">
 		<img src="<{$mod_imageurl}>/forum_<{$forum.bit_new}>.gif" alt="<{$forum.title}>" />
 	</td>
-	<td class="odd forumname">
+	<td>
 	<dl>
-	<dt>
-		<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
-		<{if $forum.isadminormod}>
-		<a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/icon_pencil16.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}>" /></a>
-		<{/if}>
-	</dt>
+	<dt><a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
+	&nbsp;<{if $forum.isadminormod}> [<a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a>]<{/if}></dt>
 		<dd><{$forum.desc}></dd>
-		<dd class="moderator"><{$smarty.const._MD_D3FORUM_MODERATOR}>
+		<dd class="d3f_td_topicinfo"><{$smarty.const._MD_D3FORUM_MODERATOR}>&nbsp;
 			<{foreach from=$forum.moderate_groups item=moderator}>
 				<{$moderator.gname}>
 			<{/foreach}>
 			<{foreach from=$forum.moderate_users item=moderator}>
 				<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
 			<{/foreach}>
+			&nbsp;<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$forum.topics_count}> <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$forum.posts_count}>
+			<{if $forum.can_post}><a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a><{/if}>
+		&nbsp;<{$smarty.const._MD_D3FORUM_LASTPOST}>: <{if $forum.last_post_time}><{$forum.last_post_time_formatted}> <a href="<{$xoops_url}>/userinfo.php?uid=<{$forum.last_post_uid}>"><{$forum.last_post_uname}></a> <a href="<{$mod_url}>/index.php?post_id=<{$forum.last_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$forum.last_post_icon}>.gif" alt="<{$forum.last_post_subject}>" title="<{$forum.last_post_subject}>" /></a><{/if}>
 		</dd>
 	</dl></td>
-	<td class="even numbersoftopics"><{$forum.topics_count}></td>
-	<td class="odd numbersofposts"><{$forum.posts_count}></td>
-	<td class="even latestpost"><{if $forum.last_post_time}><{$forum.last_post_time_formatted}><br /><a href="<{$xoops_url}>/userinfo.php?uid=<{$forum.last_post_uid}>"><{$forum.last_post_uname}></a> <a href="<{$mod_url}>/index.php?post_id=<{$forum.last_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$forum.last_post_icon}>.gif" alt="<{$forum.last_post_subject}>" title="<{$forum.last_post_subject}>" /></a><{/if}></td>
+<{/strip}>
 </tr>
 <{/foreach}>
 <!-- end forums -->
 </table>
 
-<ul class="iconexp">
+<ul class="d3f_iconexp">
 	<li><img src="<{$mod_imageurl}>/forum_1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_NEWPOSTS}></li>
 	<li><img src="<{$mod_imageurl}>/forum_0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_NONEWPOSTS}></li>
 </ul>
 
+<{include file="db:`$mydirname`_inc_topicbar.html" caller="listforums"}>
+
 <hr class="notification" />
-</div>
 
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->

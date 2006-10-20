@@ -27,8 +27,19 @@
 		$poster_rank_title4disp = htmlspecialchars( @$poster_rank['title'] , ENT_QUOTES ) ;
 		$poster_rank_image4disp = htmlspecialchars( @$poster_rank['image'] , ENT_QUOTES ) ;
 		$poster_is_online = $poster_obj->isOnline() ;
-		$poster_avatar4disp = htmlspecialchars( $poster_obj->getVar( 'user_avatar' ) , ENT_QUOTES ) ;
 		$poster_posts_count = intval( $poster_obj->getVar( 'posts' ) ) ;
+
+		// avatar
+		if( file_exists( XOOPS_UPLOAD_PATH.'/'.$poster_obj->getVar( 'user_avatar' ) ) ) {
+			list( $avatar_width , $avatar_height , $avatar_type , $avatar_attr ) = getimagesize( XOOPS_UPLOAD_PATH.'/'.$poster_obj->getVar( 'user_avatar' ) ) ;
+			$poster_avatar = array(
+				'path' => htmlspecialchars( $poster_obj->getVar( 'user_avatar' ) , ENT_QUOTES ) ,
+				'width' => $avatar_width ,
+				'height' => $avatar_height ,
+				'type' => $avatar_type ,
+				'attr' => $avatar_attr ,
+			) ;
+		}
 
 		// signature
 		if( $xoopsModuleConfig['allow_sig'] && $post_row['attachsig'] ) {
@@ -58,7 +69,7 @@
 		$poster_rank_title4disp = '' ;
 		$poster_rank_image4disp = '' ;
 		$poster_is_online = false ;
-		$poster_avatar4disp = '' ;
+		$poster_avatar = array() ;
 		$poster_posts_count = 0 ;
 
 		// signature
@@ -73,25 +84,6 @@
 			$can_edit = false ;
 			$can_delete = false ;
 		}
-	}
-
-	// tree structure (ul & tree_address)
-	$depth_diff = $post_row['depth_in_tree'] - @$previous_depth ;
-	$previous_depth = $post_row['depth_in_tree'] ;
-	$ul_in = $ul_out = '' ;
-	if( $depth_diff > 0 ) {
-		for( $i = 0 ; $i < $depth_diff ; $i ++ ) {
-			$ul_in .= '<ul type="none" class="eachbranch">' ;
-			$tree_addresses[] = 1 ;
-		}
-	} else {
-		if( $depth_diff < 0 ) {
-			for( $i = 0 ; $i < - $depth_diff ; $i ++ ) {
-				$ul_out .= '</ul>' ;
-				array_pop( $tree_addresses ) ;
-			}
-		}
-		@$tree_addresses[ sizeof( $tree_addresses ) - 1 ] ++ ;
 	}
 
 ?>

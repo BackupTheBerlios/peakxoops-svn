@@ -125,7 +125,7 @@ if( !empty($_POST['contents_preview']) ) {
 
 	// user's post data
 	$preview_subject4html = $myts->makeTboxData4Show( $subject , $number_entity , $special_entity ) ;
-	$preview_message4html = $myts->displayTarea( $message , $html , $smiley , $xcode , @$GLOBALS['xoopsModuleConfig']['allow_textimg'] , $br , 0 , $number_entity , $special_entity ) ;
+	$preview_message4html = $myts->displayTarea( $message , $html , $smiley , $xcode , @$xoopsModuleConfig['allow_textimg'] , $br , 0 , $number_entity , $special_entity ) ;
 	$subject4html = $myts->makeTboxData4Edit( $subject , $number_entity ) ;
 	$message4html = $myts->makeTareaData4Edit( $message , $number_entity ) ;
 	$guest_name4html = $myts->makeTboxData4Edit( $guest_name ) ;

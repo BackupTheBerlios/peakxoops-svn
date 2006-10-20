@@ -14,7 +14,7 @@ if( empty( $forum_id ) ) {
 	$invalid_forum_id = true ;
 	list( $forum_id ) = $db->fetchRow( $db->query( "SELECT MIN(forum_id) FROM ".$db->prefix($mydirname."_forums") ) ) ;
 	if( empty( $forum_id ) ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin" , 5 , _MD_D3FORUM_ERR_EXISTSFORUM ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php" , 5 , _MD_D3FORUM_ERR_EXISTSFORUM ) ;
 		exit ;
 	}
 }
@@ -42,7 +42,7 @@ if( ! empty( $_POST['group_update'] ) && empty( $invaild_forum_id ) ) {
 			$db->query( "INSERT INTO ".$db->prefix($mydirname."_forum_access")." SET forum_id=$forum_id, groupid=$gid, can_post=$can_post, can_edit=$can_edit, can_delete=$can_delete, post_auto_approved=$post_auto_approved, is_moderator=$is_moderator" ) ;
 		}
 	}
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin&page=forum_access&amp;forum_id=$forum_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=forum_access&amp;forum_id=$forum_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
 	exit ;
 }
 
@@ -86,7 +86,7 @@ if( ! empty( $_POST['user_update'] ) && empty( $invaild_forum_id ) ) {
 		}
 	}
 	
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?mode=admin&page=forum_access&amp;forum_id=$forum_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=forum_access&amp;forum_id=$forum_id" , 3 , _MD_D3FORUM_MSG_UPDATED ) ;
 	exit ;
 }
 

@@ -1,7 +1,4 @@
 <!-- start module contents -->
-<div class="d3forum">
-<h1><img src="<{$mod_imageurl}>/topic_00.gif" alt="" /><{$topic.title}></h1>
-
 <div class="breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
@@ -14,23 +11,18 @@
 	<{$topic.title}>
 </div>
 
-<hr class="postsmain" />
+<h1 class="d3f_title"><{$topic.title}></h1>
 
 <!-- top of posts -->
-<div class="hd"><a name="topictop" id="topictop"><{$smarty.const._MD_D3FORUM_A_TOPOFTHETOPIC}></a></div>
 
 <{foreach item=post from=$posts}>
-	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post}>
+	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post caller="listposts"}>
 <{/foreach}>
 
-<div class="hd"><a name="topicbottom" id="topicbottom"><{$smarty.const._MD_D3FORUM_A_BOTTOMOFTHETOPIC}></a></div>
 <!-- bottom of posts -->
 
-<hr class="topicbar" />
-
-<{include file="db:`$mydirname`_inc_topicbar.html"}>
+<{include file="db:`$mydirname`_inc_topicbar.html" caller="listposts"}>
 
 <hr class="notification" />
-</div>
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->

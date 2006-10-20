@@ -13,13 +13,20 @@ if( ! $isadmin && ! @$category_permissions[ $cat_id ]['can_makeforum'] && ! @$ca
 // TRANSACTION PART
 // permissions will be set same as the parent category. (also moderator)
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( ! empty( $_POST['forumman_post'] ) ) {
+if( isset( $_POST['forumman_post'] ) ) {
+
+	// options and weight can be modified only by admin
+	if( ! $isadmin ) {
+		$_POST['options'] = '' ;
+		$_POST['weight'] = 0 ;
+	}
+
 	// create a record for forum and forum_access
-	$forum_id = d3forum_makeforum( $mydirname , $cat_id , $isadmin ) ;
+	list( $forum_id , $forum_title ) = d3forum_makeforum( $mydirname , $cat_id , $isadmin ) ;
 
 	// Define tags for notification message
 	$tags = array(
-		'FORUM_TITLE' => $forum_row['forum_title'] ,
+		'FORUM_TITLE' => $forum_title ,
 		'FORUM_URL' => XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" ,
 		'CAT_TITLE' => $cat_row['cat_title'] ,
 		'CAT_URL' => XOOPS_URL."/modules/$mydirname/index.php?cat_id=$cat_id" ,
@@ -50,7 +57,7 @@ $forum4assign = array(
 	'title' => '' ,
 	'weight' => 0 ,
 	'desc' => '' ,
-	'options' => $options4html ,
+	'options' => '' , //$options4html ,
 	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $d3forum_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
 ) ;
 
@@ -68,6 +75,7 @@ $xoopsTpl->assign( array(
 	'forum' => $forum4assign ,
 	'page' => 'makeforum' ,
 	'formtitle' => _MD_D3FORUM_LINK_MAKEFORUM ,
+	'cat_jumpbox_options' => d3forum_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => _MD_D3FORUM_FORUMMANAGER ,
 ) ) ;

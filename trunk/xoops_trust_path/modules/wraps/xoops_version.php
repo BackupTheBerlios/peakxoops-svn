@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 
 $modversion['name'] = $mydirname ;
-$modversion['version'] = 1.06 ;
+$modversion['version'] = 1.10 ;
 $modversion['description'] = constant($constpref.'_MODULE_DESCRIPTION') ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -26,8 +26,8 @@ $modversion['tables'] = array() ;
 
 // Admin things
 $modversion['hasAdmin'] = 1 ;
-$modversion['adminindex'] = 'index.php?mode=admin' ;
-$modversion['adminmenu'] = 'admin_menu.php' ;
+$modversion['adminindex'] = 'admin/index.php' ;
+$modversion['adminmenu'] = 'admin/admin_menu.php' ;
 
 // Search
 $modversion['hasSearch'] = 1 ;

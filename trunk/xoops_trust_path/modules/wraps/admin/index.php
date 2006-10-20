@@ -33,17 +33,17 @@ if( ! empty( $_POST['submit'] ) ) {
 	$imported_count = 0 ;
 	wraps_register_searchable_files_recursive( XOOPS_TRUST_PATH.'/wraps/'.$mydirname , '' ) ;
 
-	redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/index.php?mode=admin&amp;page=index' , 3 , sprintf( _MD_A_WRAPS_FMT_UPDATED_INDEXES , $imported_count ) ) ;
+	redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/admin/index.php?page=index' , 3 , sprintf( _MD_A_WRAPS_FMT_UPDATED_INDEXES , $imported_count ) ) ;
 	exit ;
 }
 
 
 xoops_cp_header() ;
-$mymenu_fake_uri = 'index.php?mode=admin&page=index' ;
+$mymenu_fake_uri = 'admin/index.php?page=index' ;
 include dirname(__FILE__).'/mymenu.php' ;
 
 echo "
-<form action='?mode=admin&amp;page=index' method='post'>
+<form action='?page=index' method='post'>
 	<input type='submit' name='submit' value='"._MD_A_WRAPS_BTN_UPDATE_INDEXES."' />
 </form>" ;
 

@@ -1,88 +1,70 @@
 <div class="d3f_bottomctrl">
-<{if $forum.can_post or $category.can_makeforum}>
-<h2 class="head d3f_head"><{if $caller == "listcategories"}><{$smarty.const._MD_D3FORUM_CONTROLLER_WHOLE}><{elseif $caller == "listforums"}><{$smarty.const._MD_D3FORUM_CONTROLLER_CATEGORY}><{elseif $caller == "listtopics"}><{$smarty.const._MD_D3FORUM_CONTROLLER_FORUM}><{else}><{$smarty.const._MD_D3FORUM_CONTROLLER_TOPIC}><{/if}></h2>
 
-<div class="d3f_ctrl">
-<{if $xoops_isadmin and $caller == "listcategories"}>
-	<a href="<{$mod_url}>/index.php?page=makecategory"><{$smarty.const._MD_D3FORUM_LINK_MAKECATEGORY}></a>
-<{/if}>
-
-<{if $forum.can_post}>
-	<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
-<{elseif $forum.forum_users_post}>
-	<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
-<{/if}>
-
-<{if $xoops_isadmin and $caller == "listtopics"}>
-	| <a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a>
-<{/if}>
-
-<{if $category.can_makeforum and $xoops_isadmin and $caller == "listforums"}>
-	<a href="<{$mod_url}>/index.php?page=makeforum&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}></a>
-	<{if $xoops_isadmin}>
-		| <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a>
-		| <a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYMANAGER}></a>
-	<{/if}>
-<{/if}>
-
-<{if $uid && $mod_config.allow_mark && $post.id}>
-	| <a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
+	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CONTROLLER_TOPIC}></h2>
 	
-<{/if}>
-
-<{if $forum.isadminormod && $mod_config.use_solved and $caller != "listtopics" and $caller != "listforums"}>
-	| <a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
+	<div class="d3f_ctrl">
 	
-<{/if}>
-
-<{if $forum.isadminormod and $caller != "listtopics" and $caller != "listforums"}>
-	| <a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
+		<{if $forum.can_post}>
+			<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
+		<{elseif $forum.forum_users_post}>
+			<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
+		<{/if}>
+		
+		<{if $uid && $mod_config.allow_mark}>
+			| <a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
+		<{/if}>
+		
+		<{if $forum.isadminormod && $mod_config.use_solved}>
+			| <a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
+		<{/if}>
+		
+		<{if $forum.isadminormod}>
+			| <a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
+		<{/if}>
 	
-<{/if}>
-</div>
-<{/if}>
+	</div>
 
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
+	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
 
-<{if $caller != "listtopics" and $caller != "listforums" and $caller != "listcategories"}>
-<div class="d3f_shtcut">
-<{if $prev_topic.id}>
-	<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><{$prev_topic.title}></a>
-<{/if}>
-<{if $page=="viewpost"}>
-	<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>
-<{else}>
-	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
-<{/if}>
-<{if $next_topic.id}>
-	<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><{$next_topic.title}></a>
-<{/if}>
-</div>
-<{/if}>
+	<div class="d3f_shtcut">
+		<table>
+			<tr>
+				<td align="left" style="width:33%;">
+					<{if $prev_topic.id}>
+						<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicprev.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}>" /></a><br /><{$prev_topic.title}>
+					<{/if}>
+				</td>
+				<td align="center" style="width:34%;">
+					<{if $page=="viewpost"}>
+						<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><img src="<{$mod_imageurl}>/navicon_uptotopic.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTPOSTS}>" /></a><br /><{$topic.title}>
+					<{else}>
+						<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/navicon_uptoforum.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTTOPICS}>" /></a><br /><{$forum.title}>
+					<{/if}>
+				</td>
+				<td align="right" style="width:33%;">
+					<{if $next_topic.id}>
+						<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicnext.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_NEXTTOPIC}>" /></a><br /><{$next_topic.title}>
+					<{/if}>
+				</td>
+			</tr>
+		</table>
+	</div>
 
-<div class="d3f_shtcut d3f_jump_box">
-<{if $caller == "listtopics" or $caller == "listposts" or $caller == "listcategories" or $caller == "viewpost"}>
-	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
-	<select name="forum_id"><{$forum_jumpbox_options}></select>
-	<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
-	</form>
-<{else}>
-	<form name="category_jump_box" action="<{$mod_url}>/index.php" method="get">
-	<select name="cat_id" onchange="submit();">
-		<option value="">(<{$smarty.const._MD_D3FORUM_TOP}>)</option>
-		<{$cat_jumpbox_options}>
-	</select>
-	<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOCATEGORY}>" />
-	</form>
-<{/if}>
-	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
-		<label for="d3f_search" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
-		<input name="keyword" type="text" id="d3f_search" size="30" id="kerywords" />
-		<input type="hidden" name="page" value="search" />
-		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
-		&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]
-	</form>
-</div>
+	<div class="d3f_shtcut d3f_jump_box">
+	
+		<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
+			<select name="forum_id"><{$forum_jumpbox_options}></select>
+			<input type="image" src="<{$mod_imageurl}>/navicon_forumjumpto.gif" alt="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
+		</form>
+	
+		<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
+			<label for="d3f_search" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
+			<input name="keyword" type="text" id="d3f_search" size="30" id="kerywords" />
+			<input type="hidden" name="page" value="search" />
+			<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
+			&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]
+		</form>
 
+	</div>
 
 </div>

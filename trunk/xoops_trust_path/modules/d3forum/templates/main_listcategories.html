@@ -64,7 +64,35 @@
 	<li><img src="<{$mod_imageurl}>/forum_0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_NONEWPOSTS}></li>
 </ul>
 
-<{include file="db:`$mydirname`_inc_topicbar.html" caller="listcategories"}>
+<!-- top controller -->
+<{if $xoops_isadmin}>
+<h2 class="head d3f_head">
+  <{$smarty.const._MD_D3FORUM_CONTROLLER_WHOLE}>
+</h2>
+
+<div class="d3f_ctrl">
+	<a href="<{$mod_url}>/index.php?page=makecategory"><{$smarty.const._MD_D3FORUM_LINK_MAKECATEGORY}></a>
+</div>
+<{/if}>
+
+<!-- short cut -->
+<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
+<div class="d3f_shtcut d3f_jump_box">
+	<!-- forum jumpbox -->
+	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
+		<select name="forum_id"><{$forum_jumpbox_options}></select>
+		<input type="image" src="<{$mod_imageurl}>/navicon_forumjumpto.gif" alt="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
+	</form>
+	
+	<!-- search -->
+	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
+		<label for="d3f_search" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
+		<input name="keyword" type="text" id="d3f_search" size="30" id="kerywords" />
+		<input type="hidden" name="page" value="search" />
+		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
+		&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]
+	</form>
+</div>
 
 <hr class="notification" />
 

@@ -3,6 +3,7 @@ CHANGES:
 
 v.3.07 2006-10-01
   - fixed class Snoopy redeclaration
+  - modified assigning xoops_pagetitle as each feed (3.07a)
 
 v.3.06 2006-09-30
   - fixed proxy_user, proxy_pass can't be passed correctly
@@ -254,6 +255,7 @@ v2.00 2004-7-9
 
 v.3.07 2006-10-01
   - モジュール内に取り込んだSnoopyが二重定義エラーになってしまっていたバグを修正
+  - 個別ページのxoops_pagetitleに各フィード名をアサインするようにした (3.07a)
 
 v.3.06 2006-09-30
   - proxy_userとproxy_passが正しく渡されていなかったバグを修正 (thx dj_okamoto)

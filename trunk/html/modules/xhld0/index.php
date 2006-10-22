@@ -114,6 +114,7 @@ if ($hlid > 0) {
 		} else {
 			$xoopsTpl->assign('headline', $renderer->getFeed());
 		}
+		$xoopsTpl->assign( 'xoops_pagetitle' , $headline->getVar('headline_name') ) ;
 	}
 }
 include XOOPS_ROOT_PATH.'/footer.php';

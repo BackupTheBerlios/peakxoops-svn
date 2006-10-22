@@ -83,6 +83,16 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 // rebuild tree informations
 $posts = d3forum_make_treeinformations( $posts ) ;
 
+// copy some tree informations from $posts into $post
+foreach( $posts as $eachpost ) {
+	if( $eachpost['id'] == $post_id ) {
+		$post4assign['next_id'] = @$eachpost['next_id'] ;
+		$post4assign['prev_id'] = @$eachpost['prev_id'] ;
+		$post4assign['first_child_id'] = @$eachpost['first_child_id'] ;
+		break ;
+	}
+}
+
 // for notification...
 $_GET['topic_id'] = $topic_id ;
 
@@ -98,8 +108,9 @@ $xoopsTpl->assign(
 		'prev_topic' => $prev_topic4assign ,
 		'post' => $post4assign ,
 		'posts' => $posts ,
-//		'posts_ul_out_last' => str_repeat( '</li></ul>' , $previous_depth + 1 ) ,
 		'page' => 'viewpost' ,
+		'ret_id' => 'post_id' ,
+		'ret_val' => $post_id ,
 		'xoops_pagetitle' => $post4assign['subject'] ,
 	)
 ) ;

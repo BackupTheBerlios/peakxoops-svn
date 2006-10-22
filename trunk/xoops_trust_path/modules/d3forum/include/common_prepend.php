@@ -10,6 +10,9 @@ $db =& Database::getInstance() ;
 $uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 $isadmin = $uid > 0 ? $xoopsUser->isAdmin() : false ;
 
+// post orders
+$postorder = intval( @$_COOKIE[$mydirname.'_postorder'] ) ;
+
 // icon meanings
 $d3forum_icon_meanings = explode( '|' , $xoopsModuleConfig['icon_meanings'] ) ;
 

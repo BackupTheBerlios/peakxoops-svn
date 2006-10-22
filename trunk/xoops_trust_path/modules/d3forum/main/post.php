@@ -2,7 +2,7 @@
 
 include dirname(dirname(__FILE__)).'/include/common_prepend.php' ;
 
-if( ! empty( $_POST['post_id'] ) ) {
+if( @$_POST['mode'] == 'edit' && ! empty( $_POST['post_id'] ) ) {
 
 	// EDIT
 	$post_id = intval( $_POST['post_id'] ) ;
@@ -20,7 +20,7 @@ if( ! empty( $_POST['post_id'] ) ) {
 	$pid = 0 ;
 	$mode = 'edit' ;
 
-} else if( ! empty( $_POST['pid'] ) ) {
+} else if( @$_POST['mode'] == 'reply' && ! empty( $_POST['pid'] ) ) {
 
 	// REPLY
 	$post_id = intval( $_POST['pid'] ) ;

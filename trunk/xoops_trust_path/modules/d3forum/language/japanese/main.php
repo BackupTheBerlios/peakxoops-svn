@@ -72,6 +72,10 @@ define('_MD_D3FORUM_CONTROLLER_WHOLE','コントローラ');
 define('_MD_D3FORUM_CONTROLLER_CATEGORY','カテゴリーコントローラ');
 define('_MD_D3FORUM_CONTROLLER_FORUM','フォーラムコントローラ');
 define('_MD_D3FORUM_CONTROLLER_TOPIC','トピックコントローラ');
+define('_MD_D3FORUM_LINK_POSTORDERTREEASC','ツリー構造順で表示');
+define('_MD_D3FORUM_LINK_POSTORDERTREEDESC','ツリー構造逆順で表示');
+define('_MD_D3FORUM_LINK_POSTORDERTIMEASC','投稿の古いものから');
+define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','投稿の新しいものから');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
@@ -147,6 +151,7 @@ define('_MD_D3FORUM_ERR_CREATEFORUM','フォーラムの作成権限がありません');
 define('_MD_D3FORUM_ERR_CREATECATEGORY','カテゴリーの作成権限がありません');
 
 // postforum (done)
+define('_MD_D3FORUM_REFERENCEPOST','参照');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','プレビューからの再投稿');
 define('_MD_D3FORUM_MSG_THANKSPOST','投稿ありがとうございました。');
 define('_MD_D3FORUM_MSG_THANKSEDIT','変更を登録しました。');

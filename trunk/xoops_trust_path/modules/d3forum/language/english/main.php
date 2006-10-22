@@ -1,4 +1,4 @@
-a<?php
+<?php
 
 define('_MD_D3FORUM_ON','Posted on');
 define('_MD_D3FORUM_LASTMODIFIED','Last modified');
@@ -72,6 +72,10 @@ define('_MD_D3FORUM_CONTROLLER_WHOLE','Controller');
 define('_MD_D3FORUM_CONTROLLER_CATEGORY','Category controller');
 define('_MD_D3FORUM_CONTROLLER_FORUM','Forum controller');
 define('_MD_D3FORUM_CONTROLLER_TOPIC','Topic controller');
+define('_MD_D3FORUM_LINK_POSTORDERTREEASC','Tree order');
+define('_MD_D3FORUM_LINK_POSTORDERTREEDESC','Tree order reversal');
+define('_MD_D3FORUM_LINK_POSTORDERTIMEASC','Older is upper');
+define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','Newer is upper');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
@@ -147,6 +151,7 @@ define('_MD_D3FORUM_ERR_CREATEFORUM','You cannot create a new forum');
 define('_MD_D3FORUM_ERR_CREATECATEGORY','You cannot create a new category');
 
 // postforum (done)
+define('_MD_D3FORUM_REFERENCEPOST','Reference');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','Post from preview');
 define('_MD_D3FORUM_MSG_THANKSPOST','Thanks for your submission!');
 define('_MD_D3FORUM_MSG_THANKSEDIT','Modified successfully');

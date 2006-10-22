@@ -24,6 +24,8 @@ function d3forum_make_treeinformations( $data )
 			for( $j = 0 ; $j < - $depth_diff ; $j ++ ) {
 				$data[$i-1]['ul_out'] .= '</li></ul>' ;
 			}
+			$data[$i-1]['ul_out'] .= '</li>' ;
+			$data[$i]['ul_in'] = '<li>' ;
 		} else {
 			$data[$i-1]['ul_out'] .= '</li>' ;
 			$data[$i]['ul_in'] = '<li>' ;

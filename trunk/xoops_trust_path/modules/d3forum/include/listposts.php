@@ -11,9 +11,26 @@ include dirname(__FILE__).'/process_this_forum.inc.php' ;
 // get&check this category ($category4assign, $category_row), override options
 include dirname(__FILE__).'/process_this_category.inc.php' ;
 
+// post order
+switch( $postorder ) {
+	case 3 :
+		$postorder4sql = 'post_id DESC' ;
+		break ;
+	case 2 :
+		$postorder4sql = 'post_id' ;
+		break ;
+	case 1 :
+		$postorder4sql = 'order_in_tree DESC,post_id DESC' ;
+		break ;
+	case 0 :
+	default :
+		$postorder4sql = 'order_in_tree,post_id' ;
+		break ;
+}
+
 // posts loop
 $posts = array() ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY order_in_tree,post_id DESC LIMIT 20" ; // TODO
+$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY $postorder4sql" ;
 if( ! $prs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 
@@ -84,8 +101,9 @@ $xoopsTpl->assign(
 		'next_topic' => $next_topic4assign ,
 		'prev_topic' => $prev_topic4assign ,
 		'posts' => $posts ,
-//		'posts_ul_out_last' => str_repeat( '</li></ul>' , $previous_depth + 1 ) ,
 		'page' => 'listposts' ,
+		'ret_id' => 'topic_id' ,
+		'ret_val' => $topic_id ,
 		'xoops_pagetitle' => $topic4assign['title'] ,
 	)
 ) ;

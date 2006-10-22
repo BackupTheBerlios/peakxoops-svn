@@ -4,20 +4,35 @@
 	
 	<div class="d3f_ctrl">
 	
+		<!-- new topic -->
 		<{if $forum.can_post}>
 			<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
 		<{elseif $forum.forum_users_post}>
 			<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
 		<{/if}>
 		
+		<!-- post orders -->
+		<{if $postorder != 0}>
+			| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_id=<{$ret_id}>&amp;ret_val=<{$ret_val}>&amp;postorder=0"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}></a>
+		<{/if}>
+		<{if $postorder != 2}>
+			| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_id=<{$ret_id}>&amp;ret_val=<{$ret_val}>&amp;postorder=2"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}></a>
+		<{/if}>
+		<{if $postorder != 3}>
+			| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_id=<{$ret_id}>&amp;ret_val=<{$ret_val}>&amp;postorder=3"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}></a>
+		<{/if}>
+
+		<!-- mark -->
 		<{if $uid && $mod_config.allow_mark}>
-			| <a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
+			| <a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_id=<{$ret_id}>&amp;ret_val=<{$ret_val}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
 		<{/if}>
 		
+		<!-- solved -->
 		<{if $forum.isadminormod && $mod_config.use_solved}>
-			| <a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_id=post_id&amp;ret_val=<{$post.id}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
+			| <a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_id=<{$ret_id}>&amp;ret_val=<{$ret_val}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
 		<{/if}>
 		
+		<!-- topic manager -->
 		<{if $forum.isadminormod}>
 			| <a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
 		<{/if}>

@@ -101,7 +101,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 		}
 
 		// [quote sitecite=]
-		$patterns[] = "/\[quote sitecite=([^\"'<>]*)\]/sU";
+		$patterns[] = "/\[quote sitecite=([^\"'<>]*)\](\<br \/\>)?/sU";
 		$replacements[] = _QUOTEC.'<div class="xoopsQuote"><blockquote cite="'.XOOPS_URL.'/\\1">';
 
 		// [quote cite=] (TODO)

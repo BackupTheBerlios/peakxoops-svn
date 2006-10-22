@@ -187,7 +187,7 @@ div.d3f_msg{
 /* d3f_msgtitle */
 
 div.d3f_msgtitle{
-	margin-top			:15px;
+	margin-top			:0px;
 	padding				:2px;
 	width				:auto;
 	border-top			:1px #aaa solid;
@@ -324,3 +324,7 @@ h2.d3f_head a:hover{
 	background-color		:#dfdfdd !important;}
 .d3f_table tr.odd td{
 	background-color		:#f3f3f3 !important;}
+
+.attn {
+	background-color			:#f00;}
+

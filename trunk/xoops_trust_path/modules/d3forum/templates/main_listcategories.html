@@ -7,9 +7,8 @@
 	<dd><{$total_topics_count}></dd>
 <dt><{$smarty.const._MD_D3FORUM_TOTALPOSTSCOUNT}>:</dt>
 	<dd><{$total_posts_count}></dd>
+	<dd><a href="<{$mod_url}>/index.php?cat_ids=0"><{$smarty.const._MD_D3FORUM_LISTALLTOPICS}></a></dd>
 </dl>
-
-<br />
 
 <dl class="d3f_timeinfo">
 <dt><{$smarty.const._MD_D3FORUM_TIMENOW}>:</dt>
@@ -17,33 +16,42 @@
 <dt><{$smarty.const._MD_D3FORUM_LASTVISIT}>:</dt>
 	<dd><{$lastvisit_formatted}></dd>
 </dl>
-<hr style="visibility:hidden;clear:both;" />
+<hr class="d3f_divide" />
 
 <!-- start categories -->
 <{foreach item=category from=$categories}>
-<div class="head d3f_categoryhead">
-	<h2><a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><img src="<{$mod_imageurl}>/category_<{$category.bit_new}>.gif" alt="<{$category.title}>" /><{$category.title}></a></h2>
-	<p><{$smarty.const._MD_D3FORUM_MODERATOR}>:
+<h2 class="head d3f_head"><a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><img src="<{$mod_imageurl}>/category_<{$category.bit_new}>.gif" alt="<{$category.title}>" /><{$category.title}></a></h2>
+<p><{$smarty.const._MD_D3FORUM_MODERATOR}>:
 	<{foreach from=$category.moderate_groups item=moderator}>
 	<{$moderator.gname}>
 	<{/foreach}>
 	<{foreach from=$category.moderate_users item=moderator}>
 	<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
 	<{/foreach}> 
-	<{$smarty.const._MD_D3FORUM_REPLIES}>: <{$category.topics_count}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$category.posts_count}> 
+	<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$category.topics_count}> <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$category.posts_count}> 
+	<a href="<{$mod_url}>/index.php?cat_ids=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LISTTOPICSINCATEGORY}></a>
 	<{if $category.last_post_time}><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$category.last_post_time_formatted}><{/if}></p>
-</div>
-
 <p><{$category.desc}></p>
-<p><{if $xoops_isadmin}>
-	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYMANAGER}></a>
+
+<{if $subcategories}><h3><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h3><{/if}>
+
+<{if $subcategories}>
+<ul class="d3f_subcategories">
+<{foreach item=subcategory from=$subcategories}>
+	<li><a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>" title="<{$subcategory.desc}>"><img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" /> <{$subcategory.title}></a> (<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$subcategory.topics_count}>, <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$subcategory.posts_count}>)</li>
+<{/foreach}>
+</ul>
+<{/if}>
+
+<{if $xoops_isadmin}>
+	<p><a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYMANAGER}></a>
 <{/if}>
 <{if $category.can_makeforum}>
 	- <a href="<{$mod_url}>/index.php?page=makeforum&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}></a>
 <{/if}>
 <{if $xoops_isadmin}>
-	- <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a>
-<{/if}></p>
+	- <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a></p>
+<{/if}>
 
 <ul class="d3f_listforums">
 <{foreach item=forum from=$category.forums}>
@@ -59,10 +67,14 @@
 <{/foreach}>
 <!-- end categories -->
 
+<div class="d3f_iconexps">
 <ul class="d3f_iconexp">
 	<li><img src="<{$mod_imageurl}>/forum_1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_NEWPOSTS}></li>
+</ul>
+<ul class="d3f_iconexp">
 	<li><img src="<{$mod_imageurl}>/forum_0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_NONEWPOSTS}></li>
 </ul>
+</div>
 
 <!-- top controller -->
 <{if $xoops_isadmin}>
@@ -81,7 +93,7 @@
 	<!-- forum jumpbox -->
 	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
 		<select name="forum_id"><{$forum_jumpbox_options}></select>
-		<input type="image" src="<{$mod_imageurl}>/navicon_forumjumpto.gif" alt="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
+		<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
 	</form>
 	
 	<!-- search -->

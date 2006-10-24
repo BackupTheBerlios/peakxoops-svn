@@ -15,6 +15,8 @@
 
 <!-- top of posts -->
 
+<p class="d3f_topicinfo"><{$smarty.const._MD_D3FORUM_REPLIES}>: <{$topic.replies}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$topic.views}> <{$smarty.const._MD_D3FORUM_VOTECOUNT}>: <{$topic.votes_count}> <{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>: <{$topic.votes_avg|string_format:"%.2f"}><br /><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$topic.last_post_time_formatted}><a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>"><{$topic.last_post_subject}></a><{$topic.last_post_uname}></p>
+
 <{foreach item=post from=$posts}>
 	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post caller="listposts"}>
 <{/foreach}>

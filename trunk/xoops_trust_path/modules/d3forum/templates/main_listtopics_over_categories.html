@@ -6,25 +6,15 @@
 		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
 		&nbsp;&gt;&nbsp;
 	<{/foreach}>
-	<{$forum.title}>
-	&nbsp;
-	(<{$smarty.const._MD_D3FORUM_MODERATOR}>:
-	<{foreach from=$forum.moderate_groups item=moderator}>
-		<{$moderator.gname}>
-	<{/foreach}>
-	<{foreach from=$forum.moderate_users item=moderator}>
-		<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
-	<{/foreach}>
-	)
+	<{$pagetitle}>
 </div>
 
-<h1 class="d3f_title"><{$forum.title}></h1>
-<p class="d3f_welcome"><{$forum.desc}></p>
+<h1 class="d3f_title"><{$pagetitle}></h1>
 
 <div class="d3f_bbsviewctrl">
 	<form action="<{$mod_url}>/index.php" method="get">
 	<{$forum_selection_sort}>
-		<input type="hidden" name="forum_id" value="<{$forum.id}>" />
+		<input type="hidden" name="cat_ids" value="<{$cat_ids}>" />
 		<input type="text" size="12" name="txt" value="<{$query.txt}>" />
 		<{if $mod_config.use_solved}>
 		<select name="solved">
@@ -45,6 +35,7 @@
 <thead>
 <tr class="head">
 	<th colspan="2" abbr="<{$smarty.const._MD_D3FORUM_TOPIC}>"><{$topic_hits|string_format:$smarty.const._MD_D3FORUM_FMT_TOPICHITS}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_FORUM}>"><{$smarty.const._MD_D3FORUM_FORUM}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_REPLIES}>"><{$smarty.const._MD_D3FORUM_REPLIES}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{$smarty.const._MD_D3FORUM_VIEWS}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_VOTECOUNT}>"><{$smarty.const._MD_D3FORUM_VOTECOUNT}></th>
@@ -81,6 +72,7 @@
 		<a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_id=forum_id&amp;ret_val=<{$forum.id}>" title="<{$smarty.const._MD_D3FORUM_MARK_TURNOFF}>"><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="<{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}>" /></a>
 	<{/if}>
 	<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a><{$topic.topic_page_jump}></td>
+	<td><a href="<{$mod_url}>/index.php?forum_id=<{$topic.forum_id}>"><{$topic.forum_title}></a></td>
 	<td><{$topic.replies}></td>
 	<td><{$topic.views}></td>
 	<td><{$topic.votes_count}></td>
@@ -109,23 +101,6 @@
 	<li><img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}></li>
 	<li><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}></li>
 </ul>
-</div>
-
-<!-- forum controller -->
-
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CONTROLLER_FORUM}></h2>
-<div class="d3f_ctrl">
-	<{if $forum.can_post}>
-		<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
-	<{elseif ! $xoops_isuser}>
-		<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
-	<{else}>
-		<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
-	<{/if}>
-
-	<{if $forum.isadminormod}>
-		| <a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a>
-	<{/if}>
 </div>
 
 <!-- short cut -->

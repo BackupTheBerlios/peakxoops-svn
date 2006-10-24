@@ -137,7 +137,7 @@ if( !empty($_POST['contents_preview']) ) {
 	$notify = empty( $_POST['notify'] ) ? 0 : 1 ;
 	$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
 	$u2t_marked = empty( $_POST['u2t_marked'] ) ? 0 : 1 ;
-	$approval = empty( $_POST['approval'] ) ? 0 : 1 ;
+	$approval = @$_POST['approval'] || @$post_row['approval'] ;
 
 	$formTitle = _MD_D3FORUM_FORMTITLEINPREVIEW ;
 	switch( $mode ) {

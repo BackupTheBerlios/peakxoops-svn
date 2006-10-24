@@ -1,22 +1,47 @@
 <?php
 
-$forum_id = intval( @$_GET['forum_id'] ) ;
+$cat_ids = array() ;
+foreach( explode( ',' , $_GET['cat_ids'] ) as $cat_id ) {
+	if( $cat_id > 0 ) {
+		$cat_ids[] = intval( $cat_id ) ;
+	}
+}
 
-// get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(__FILE__).'/process_this_forum.inc.php' ;
-
-// get&check this category ($category4assign, $category_row), override options
-include dirname(__FILE__).'/process_this_category.inc.php' ;
+if( empty( $cat_ids ) ) {
+	// all topics in the module
+	$pagetitle = _MD_D3FORUM_LISTALLTOPICS ;
+	$category4assign = array() ;
+	$cat_ids4param = '0' ;
+	$whr_cat_ids = '1' ;
+	$isadminorcatmod = $isadmin ;
+} else if( sizeof( $cat_ids ) == 1 ) {
+	// topics under the specified category
+	$pagetitle = _MD_D3FORUM_LISTTOPICSINCATEGORY ;
+	$cat_id = $cat_ids[0] ;
+	$_GET['cat_id'] = $cat_id ; // for notification
+	$cat_ids4param = $cat_id ;
+	$whr_cat_ids = 'c.cat_id='.$cat_id ;
+	// get&check this category ($category4assign, $category_row), override options
+	include dirname(__FILE__).'/process_this_category.inc.php' ;
+} else {
+	// topics under categories separated with commma
+	sort( $cat_ids ) ;
+	$pagetitle = _MD_D3FORUM_LISTTOPICSINCATEGORIES ;
+	$category4assign = array() ;
+	$cat_ids4param = implode( ',' , $cat_ids ) ;
+	$whr_cat_ids = 'c.cat_id IN ('.$cat_ids4param.')' ;
+	$isadminorcatmod = $isadmin ;
+}
 
 // get $odr_options, $solved_options, $query4assign
-$query4nav = "forum_id=$forum_id" ;
+$query4nav = 'cat_ids='.$cat_ids4param ;
 include dirname(__FILE__).'/process_query4topics.inc.php' ;
 
 // INVISIBLE
-$whr_invisible = $isadminormod ? '1' : '! t.topic_invisible' ;
+$whr_invisible = $isadminorcatmod ? '1' : '! t.topic_invisible' ;
 
 // number query
-$sql = "SELECT COUNT(t.topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." t LEFT JOIN ".$xoopsDB->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND ($whr_solved) AND ($whr_txt)" ;
+$sql = "SELECT COUNT(t.topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." t LEFT JOIN ".$xoopsDB->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_categories")." c ON c.cat_id=f.cat_id WHERE ($whr_invisible) AND ($whr_solved) AND ($whr_txt) AND ($whr_read4forum) AND ($whr_read4cat) AND ($whr_cat_ids)" ;
 if( ! $trs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 list( $topic_hits ) = $xoopsDB->fetchRow( $trs ) ;
 
@@ -28,7 +53,7 @@ if( $topic_hits > $num ) {
 }
 
 // main query
-$sql = "SELECT t.*, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv FROM ".$xoopsDB->prefix($mydirname."_topics")." t LEFT JOIN ".$xoopsDB->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND ($whr_solved) AND ($whr_txt) ORDER BY $odr_query LIMIT $pos,$num" ;
+$sql = "SELECT t.*, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv, c.cat_id, c.cat_title,f.forum_id, f.forum_title FROM ".$xoopsDB->prefix($mydirname."_topics")." t LEFT JOIN ".$xoopsDB->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$xoopsDB->prefix($mydirname."_categories")." c ON c.cat_id=f.cat_id WHERE ($whr_invisible) AND ($whr_solved) AND ($whr_txt) AND ($whr_read4forum) AND ($whr_read4cat) AND ($whr_cat_ids) ORDER BY $odr_query LIMIT $pos,$num" ;
 if( ! $trs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 
 // topics loop
@@ -48,6 +73,10 @@ while( $topic_row = $xoopsDB->fetchArray( $trs ) ) {
 	$topics[] = array(
 		'id' => $topic_row['topic_id'] ,
 		'title' => $myts->makeTboxData4Show( $topic_row['topic_title'] , $topic_row['fp_number_entity'] , $topic_row['fp_special_entity'] ) ,
+		'forum_id' => $topic_row['forum_id'] ,
+		'forum_title' => $myts->makeTboxData4Show( $topic_row['forum_title'] ) ,
+		'cat_id' => $topic_row['cat_id'] ,
+		'cat_title' => $myts->makeTboxData4Show( $topic_row['cat_title'] ) ,
 		'replies' => intval( $topic_row['topic_posts_count'] ) - 1 ,
 		'views' => intval( $topic_row['topic_views'] ) ,
 		'last_post_time' => intval( $topic_row['topic_last_post_time'] ) ,
@@ -78,27 +107,24 @@ while( $topic_row = $xoopsDB->fetchArray( $trs ) ) {
 	) ;
 }
 
-$xoopsOption['template_main'] = $mydirname.'_main_listtopics.html' ;
+$xoopsOption['template_main'] = $mydirname.'_main_listtopics_over_categories.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;
 
 $xoopsTpl->assign(
 	array(
 		'category' => $category4assign ,
-		'forum' => $forum4assign ,
 		'topics' => $topics ,
 		'topic_hits' => intval( $topic_hits ) ,
 		'odr_options' => $odr_options ,
 		'solved_options' => $solved_options ,
 		'query' => $query4assign ,
+		'cat_ids' => $cat_ids4param ,
 		'pagenav' => @$pagenav ,
-		'page' => 'listtopics' ,
-		'xoops_pagetitle' => $forum4assign['title'] ,
+		'page' => 'listtopics_over_categories' ,
+		'pagetitle' => $pagetitle ,
+		'xoops_pagetitle' => $pagetitle ,
 	)
 ) ;
 
-
-// TODO
-// ページ分割処理
-// u2t_marked をソート順に含める
 
 ?>

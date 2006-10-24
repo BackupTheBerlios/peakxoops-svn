@@ -56,15 +56,15 @@
 			</td>
 		</tr>
 		<!-- end edit USER's post -->
-		<{elseif $uid && ! $post.guest_name}>
-		<!-- begin USER's new post -->
+		<{elseif $uid && ! $post.id}>
+		<!-- begin post by USER newly -->
 		<tr valign="top" align="left">
 			<td class="head"><{$smarty.const._MD_D3FORUM_TH_UNAME}></td>
 			<td class="even">
 				<{$uname|string_format:$smarty.const._MD_D3FORUM_FMT_UNAME}>
 			</td>
 		</tr>
-		<!-- end USER's new post -->
+		<!-- end post by USER newly -->
 		<{else}>
 		<!-- begin GUEST's new post or edit GUEST's post by somebody -->
 		<tr valign="top" align="left">

@@ -25,13 +25,13 @@ $category4assign = array(
 ) ;
 
 // $xoopsModuleConfig override (module -> cat -> forum)
-$cat_configs = @unserialize( $cat_row['cat_options'] ) ;
+$cat_configs = @unserialize( @$cat_row['cat_options'] ) ;
 if( is_array( $cat_configs ) ) foreach( $cat_configs as $key => $val ) {
 	if( isset( $xoopsModuleConfig[ $key ] ) ) {
 		$xoopsModuleConfig[ $key ] = $val ;
 	}
 }
-$forum_configs = @unserialize( $forum_row['forum_options'] ) ;
+$forum_configs = @unserialize( @$forum_row['forum_options'] ) ;
 if( is_array( $forum_configs ) ) foreach( $forum_configs as $key => $val ) {
 	if( isset( $xoopsModuleConfig[ $key ] ) ) {
 		$xoopsModuleConfig[ $key ] = $val ;

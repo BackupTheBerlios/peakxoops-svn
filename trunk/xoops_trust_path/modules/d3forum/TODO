@@ -1,10 +1,14 @@
 ゲスト編集 (guest_md5_pass check)
 ゲスト削除 (guest_md5_pass check)
-全トピック一覧コントローラ
+ゲスト投稿のcapchaみたいなの
 waitingプラグイン
 cust&paste で消えたtopicの残滓処理のチェック
 solved, marked の再チェック
 post.php のリファイン
+invisible なpostのsubjectが表示されないか
+hide_uid なpostのuid,unameが表示されないか
+全トピック一覧で、サブカテゴリー内のトピックも含む（必要か？）
+
 
 
 ※テーブル構造を変えたときには、必ず、include/import_functions.php も書き換える

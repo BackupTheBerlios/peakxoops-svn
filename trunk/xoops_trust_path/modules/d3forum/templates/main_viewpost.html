@@ -23,13 +23,14 @@
 
 <{foreach from=$posts item=eachpost}>
 <{if $eachpost.id == $post.id}>
-<{$eachpost.ul_in|replace:"<ul>":"<ul type='none' class='d3f_eachbranch'>"|replace:"<li>":"<li class='d3f_eachbranchitem d3f_currenttopic' style='padding-left:`$eachpost.depth_in_tree`0px;'>"}>
+<{$eachpost.ul_in|replace:"<ul>":"<ul type='none' class='d3f_eachbranch'>"|replace:"<li>":"<li class='d3f_eachbranchitem d3f_currenttopic'><span style='padding-left:`$eachpost.depth_in_tree`0px;'>"}>
 <{else}>
-<{$eachpost.ul_in|replace:"<ul>":"<ul type='none' class='d3f_eachbranch'>"|replace:"<li>":"<li class='d3f_eachbranchitem' style='padding-left:`$eachpost.depth_in_tree`0px;'>"}>
+<{$eachpost.ul_in|replace:"<ul>":"<ul type='none' class='d3f_eachbranch'>"|replace:"<li>":"<li class='d3f_eachbranchitem'><span style='padding-left:`$eachpost.depth_in_tree`0px;'>"}>
 <{/if}>
+	<a id="post_path<{$eachpost.unique_path}>" name="post_path<{$eachpost.unique_path}>">
 	<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.unique_path}> <{$eachpost.subject}></a>
 	(<{$eachpost.poster_uname}>, <{$eachpost.post_time_formatted}>)
-	<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/adminicon_cutpaste.gif" alt="<{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}>" /></a><{/if}>
+	<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/adminicon_cutpaste.gif" alt="<{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}>" /></a></span><{/if}>
 <{$eachpost.ul_out}>
 <{/foreach}>
 </div>

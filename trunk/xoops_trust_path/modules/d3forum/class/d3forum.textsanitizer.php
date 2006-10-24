@@ -100,6 +100,10 @@ class D3forumTextSanitizer extends MyTextSanitizer
 			$replacements[] = '<a href"'.XOOPS_URL.'/\\1" target="_blank">'.XOOPS_URL.'/\\1</a>';
 		}
 
+		// [1.1.3.1] etc.
+		$patterns[] = '/\[((\d+\.)+\d+)]/' ;
+		$replacements[] = '<a href="#post_path\\1">\\0</a>' ;
+
 		// [quote sitecite=]
 		$patterns[] = "/\[quote sitecite=([^\"'<>]*)\]/sU";
 		$replacements[] = _QUOTEC.'<div class="xoopsQuote"><blockquote cite="'.XOOPS_URL.'/\\1">';

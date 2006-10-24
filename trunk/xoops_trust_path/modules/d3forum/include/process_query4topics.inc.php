@@ -1,7 +1,6 @@
 <?php
 
 	$query4assign = array() ;
-	$query4nav = "forum_id=$forum_id" ;
 
 	// TXT
 	if( ! empty( $_GET['txt'] ) ) {

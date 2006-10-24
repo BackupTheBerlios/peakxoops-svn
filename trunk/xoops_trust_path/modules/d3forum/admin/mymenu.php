@@ -69,11 +69,17 @@ if( empty( $adminmenu_hilighted ) ) {
 	}
 }
 
+// link conversion from relative to absolute
+foreach( array_keys( $adminmenu ) as $i ) {
+	if( stristr( $adminmenu[$i]['link'] , XOOPS_URL ) === false ) {
+		$adminmenu[$i]['link'] = XOOPS_URL."/modules/$mydirname/" . $adminmenu[$i]['link'] ;
+	}
+}
 
 // display (you can customize htmls)
 echo "<div style='text-align:left;width:98%;'>" ;
 foreach( $adminmenu as $menuitem ) {
-	echo "<div style='float:left;height:1.5em;'><nobr><a href='".XOOPS_URL."/modules/$mydirname/".htmlspecialchars($menuitem['link'],ENT_QUOTES)."' style='background-color:{$menuitem['color']};font:normal normal bold 9pt/12pt;'>".htmlspecialchars($menuitem['title'],ENT_QUOTES)."</a> | </nobr></div>\n" ;
+	echo "<div style='float:left;height:1.5em;'><nobr><a href='".htmlspecialchars($menuitem['link'],ENT_QUOTES)."' style='background-color:{$menuitem['color']};font:normal normal bold 9pt/12pt;'>".htmlspecialchars($menuitem['title'],ENT_QUOTES)."</a> | </nobr></div>\n" ;
 }
 echo "</div>\n<hr style='clear:left;display:block;' />\n" ;
 

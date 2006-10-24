@@ -29,6 +29,8 @@ switch( $postorder ) {
 }
 
 // posts loop
+$max_post_time = 0 ;
+$last_post_offset = 0 ;
 $posts = array() ;
 $sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY $postorder4sql" ;
 if( ! $prs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
@@ -36,6 +38,9 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 
 	// get poster's information ($poster_*), $can_reply, $can_edit, $can_delete
 	include dirname(__FILE__).'/process_eachpost.inc.php' ;
+
+	// get row of last_post
+	if( $post_row['post_time'] > $max_post_time ) $last_post_offset = sizeof( $posts ) ;
 
 	// posts array
 	$posts[] = array(
@@ -85,11 +90,14 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 		'can_reply' => $can_reply ,
 		'can_vote' => $can_vote ,
 	) ;
-
 }
 
 // rebuild tree informations
 $posts = d3forum_make_treeinformations( $posts ) ;
+
+// reassign last_post informations
+$topic4assign['last_post_subject'] = @$posts[ $last_post_offset ]['subject'] ;
+$topic4assign['last_post_uname'] = @$posts[ $last_post_offset ]['poster_uname'] ;
 
 $xoopsOption['template_main'] = $mydirname.'_main_listposts.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;

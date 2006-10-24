@@ -63,7 +63,7 @@ while( $forum_row = $xoopsDB->fetchArray( $frs ) ) {
 	if( is_object( $last_poster_obj ) ) {
 		$last_post_uname = $last_poster_obj->getVar( 'uname' ) ;
 	} else {
-		$last_post_uname = '' ;
+		$last_post_uname = $xoopsConfig['anonymous'] ;
 	}
 
 	// forums array

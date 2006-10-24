@@ -7,8 +7,10 @@
 		<!-- new topic -->
 		<{if $forum.can_post}>
 			<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
-		<{elseif $forum.forum_users_post}>
+		<{elseif ! $xoops_isuser}>
 			<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
+		<{else}>
+			<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
 		<{/if}>
 		
 		<!-- post orders -->
@@ -69,7 +71,7 @@
 	
 		<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
 			<select name="forum_id"><{$forum_jumpbox_options}></select>
-			<input type="image" src="<{$mod_imageurl}>/navicon_forumjumpto.gif" alt="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
+			<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
 		</form>
 	
 		<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">

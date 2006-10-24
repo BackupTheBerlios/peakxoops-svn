@@ -3,6 +3,9 @@
 div.breadcrumbs{
 	font-size				:95%;
 	padding				:5px 2px;}
+hr.d3f_divide{
+	visibility			:hidden;
+	clear				:both;}
 
 h1.d3f_title{
 	font-size				:130%;
@@ -11,6 +14,7 @@ h1.d3f_title img{
 	vertical-align		:middle;
 	margin-right			:5px;}
 h2.d3f_head{
+	clear				:both;
 	color				:#fff;
 	line-height			:100%;
 	font-size				:120%;
@@ -47,6 +51,10 @@ div.d3f_bbsviewctrl form *{
 
 /* d3f_iconexp */
 
+div.d3f_iconexps ul.d3f_iconexp{
+	width				:45%;
+	float				:left;}
+
 ul.d3f_iconexp{
 	padding-bottom		:15px;}
 
@@ -62,25 +70,24 @@ ul.d3f_iconexp li img{
 
 table.d3f_table{
 	clear				:both;}
-table.d3f_table thead th{
-	text-align			:center;
-	padding				:5px;}
-table.d3f_table caption{
-	text-align			:left;
-	padding				:0 2px 2px;}
+table.d3f_table thead th,
+table.d3f_table td{
+	text-align			:center !important;
+	padding				:3px;
+	vertical-align		:middle;}
+table.d3f_table td.d3f_topictitle,
+table.d3f_table td.d3f_posters{
+	text-align			:left !important;}
+table.d3f_table td.d3f_mainicon{
+	padding				:0;}
 
 table.d3f_table td img{
 	vertical-align		:middle;
 	margin-right			:3px;}
-table.d3f_table td{
-	padding				:2px 5px;
-	vertical-align		:middle;}
-td.d3f_td_topicinfo{
-	font-size				:90%;}
-td.d3f_mainicon{
-	text-align			:center;}
+
 table.d3f_table td dl{
-	margin				:0 -5px;
+	text-align			:left;
+	margin				:0 -3px;
 	padding				:0;}
 table.d3f_table td dt{
 	margin				:0;
@@ -106,15 +113,19 @@ dl.d3f_bbsinfo dt,dl.d3f_bbsinfo dd{
 dl.d3f_bbsinfo dd{
 	margin			:0 5px 0 0;}
 dl.d3f_timeinfo{
+	clear			:both;
 	font-size			:90%;
 	margin			:0;
-	float				:left;}
+	float			:left;}
 dl.d3f_timeinfo dt,dl.d3f_timeinfo dd{
 	display			:inline;
 	margin			:0;}
 dl.d3f_timeinfo dd{
 	margin			:0 5px 0 0;}
-
+p.d3f_topicinfo{
+	margin			:15px 0 0;
+	padding			:5px;
+	border-bottom		:1px #aaa solid;}
 
 /* main_listforums */
 
@@ -151,6 +162,9 @@ ul.d3f_listforums li{
 
 /* inc_topicbar.html */
 
+div.d3f_bottomctrl{
+	clear				:both;}
+
 div.d3f_ctrl{
 	background-color		:#eee;
 	padding				:10px;
@@ -181,16 +195,14 @@ div.d3f_msg{
 	padding				:2px 2px 0;
 	border				:1px #aaa solid;
 	/*background-image		:url(images/msg_bg.gif);*/
-	/*background-repeat		:repeat-y;*/
+	/*background-repeat	:repeat-y;*/
 	/*background-position	:100px;*/}
 
 /* d3f_msgtitle */
 
 div.d3f_msgtitle{
-	margin-top			:0px;
 	padding				:2px;
 	width				:auto;
-	border-top			:1px #aaa solid;
 	border-left			:1px #aaa solid;
 	border-right			:1px #aaa solid;}
 
@@ -277,9 +289,9 @@ ul.d3f_eachbranch li img{
 
 /* d3f_currenttopic */
 
-li.d3f_eachbranchitem{
+.d3f_eachbranch li.d3f_eachbranchitem{
 	background-color		:#eee;}
-li.d3f_currenttopic{
+.d3f_eachbranch li.d3f_currenttopic{
 	background-color		:#fff;}
 
 /* d3f_tree */
@@ -287,6 +299,18 @@ li.d3f_currenttopic{
 div.d3f_tree h2{
 	margin-bottom			:4px;}
 
+/* deleteposts */
+
+#deleteposts ul,#deleteposts ul li,
+#cutpastebypostid ul,#cutpastebypostid ul li,
+#cutpastebyforumid ul,#cutpastebyforumid ul li{
+	list-style			:none outside;
+	margin				:0;
+	padding				:0;}
+#deleteposts ul li *,
+#cutpastebypostid ul li *,
+#cutpastebyforumid ul li *{
+	vertical-align		:middle;}
 
 
 /* adjust width as avatar's */

@@ -3,7 +3,7 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.20' ;
+$modversion['version'] = '0.21' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

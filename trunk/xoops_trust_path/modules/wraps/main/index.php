@@ -15,9 +15,15 @@ if( ! empty( $_GET['path_info'] ) ) {
 	// try PHP_SELF & SCRIPT_NAME third
 	$path_info = str_replace( '..' , '' , preg_replace( '?[^a-zA-Z0-9_./-]?' , '' , substr( $_SERVER['PHP_SELF'] , strlen( $_SERVER['SCRIPT_NAME'] ) + 1 ) ) ) ;
 } else {
-	// TODO hmmm. how can I avoid to redirect infinitely...
-	header( 'Location: '.XOOPS_URL.'/modules/'.$mydirname.'/index.php/index.html' ) ;
-	exit ;
+	// module top
+	$path_info = empty( $xoopsModuleConfig['index_file'] ) ? 'index.html' : $xoopsModuleConfig['index_file'] ;
+	$wrap_full_path = XOOPS_TRUST_PATH.'/wraps/'.$mydirname.'/'.$path_info ;
+	if( ! file_exists( $wrap_full_path ) ) {
+		die( _MD_WRAPS_NO_INDEX_FILE ) ;
+	} else {
+		header( 'Location: '.XOOPS_URL.'/modules/'.$mydirname.'/index.php/'.$path_info ) ;
+		exit ;
+	}
 }
 
 

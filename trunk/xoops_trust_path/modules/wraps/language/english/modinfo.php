@@ -12,6 +12,11 @@ define( $constpref.'_MODULE_DESCRIPTION' , 'A little module for wrapping' ) ;
 
 define( $constpref.'_UPDATE_SEARCH_INDEX' , 'Update indexes for searching' ) ;
 
+// configs
+define( $constpref.'_INDEX_FILE' , 'Top page' ) ;
+define( $constpref.'_INDEX_FILEDSC' , 'specify the file should be wrapped when the top of this module is accessed' ) ;
+
+
 }
 
 

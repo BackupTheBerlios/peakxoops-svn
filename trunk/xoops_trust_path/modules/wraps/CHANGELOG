@@ -3,6 +3,9 @@
 
 [b]CHANGES:[/b]
 
+1.11 (2006/10/27) update the module
+- added configuration to specify module top page
+
 1.10 (2006/10/20) overwrite XOOPS_ROOT_PATH side also. (update the modules)
 - modified compatibility with Cube 2.1 beta
 
@@ -43,6 +46,9 @@
 [xlang:ja]
 
 [b]更新履歴:[/b]
+
+1.11 (2006/10/27) ※要モジュールアップデート
+- モジュールトップページ指定を追加
 
 1.10 (2006/10/20) XOOPS_ROOT_PATH側も上書きする必要があります（要アップデート）
 - Cube 2.1 beta で管理画面が動かないことに対応

@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 
 $modversion['name'] = $mydirname ;
-$modversion['version'] = 1.10 ;
+$modversion['version'] = 1.11 ;
 $modversion['description'] = constant($constpref.'_MODULE_DESCRIPTION') ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -50,7 +50,16 @@ $modversion['blocks'] = array() ;
 $modversion['hasComments'] = 0 ;
 
 // Configs
-$modversion['config'] = array() ;
+$modversion['config'][1] = array(
+	'name'			=> 'index_file' ,
+	'title'			=> $constpref.'_INDEX_FILE' ,
+	'description'	=> $constpref.'_INDEX_FILEDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'index.html' ,
+	'options'		=> array()
+) ;
+
 
 // Notification
 $modversion['hasNotification'] = 0 ;

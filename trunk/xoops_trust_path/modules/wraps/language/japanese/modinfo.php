@@ -12,6 +12,11 @@ define( $constpref.'_MODULE_DESCRIPTION' , 'ページラップ専用モジュール' ) ;
 
 define( $constpref.'_UPDATE_SEARCH_INDEX' , '検索用インデックスの更新' ) ;
 
+// configs
+define( $constpref.'_INDEX_FILE' , 'トップページ' ) ;
+define( $constpref.'_INDEX_FILEDSC' , 'モジュールトップにアクセスされた時にラップするファイルを指定します' ) ;
+
+
 }
 
 

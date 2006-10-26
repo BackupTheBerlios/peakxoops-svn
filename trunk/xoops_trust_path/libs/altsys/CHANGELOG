@@ -1,6 +1,10 @@
 [mlimg]
 [xlang:en]
 
+v0.21 (2006-10-27)
+- fixed wrong link from templates (thx makimaki)
+- added language persian (thx voltan)
+
 v0.20 (2006-10-18)
 - modified compatibility with Cube 2.1 beta
 - fixed wrong links of admin menu (thx usagiya) 0.20a
@@ -24,6 +28,10 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.21 (2006-10-27)
+- テンプレートへの埋め込みでリンク先がおかしかったのを修正 (thx makimaki)
+- トルコ語追加 (thx voltan)
 
 v0.20 (2006-10-18)
 - Cube 2.1 beta で動くようにした

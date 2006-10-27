@@ -9,6 +9,10 @@
 # Last modified on 12.04.2005                                            #
 /*************************************************************************/
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-10-28 05:37:02
+define('_MI_SITEMAP_ADMENU_TOP','TOP');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-09-03 06:21:32
 define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN','Blocks/Groups');
 define('_MI_SITEMAP_BLOCKNAME','Sitemap');

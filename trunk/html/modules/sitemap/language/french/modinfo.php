@@ -1,5 +1,9 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-10-28 05:37:02
+define('_MI_SITEMAP_ADMENU_TOP','TOP');
+
 define('_MI_SITEMAP_NAME', 'Plan du site');
 define('_MI_SITEMAP_MESSAGE', 'Message');
 

@@ -1,6 +1,10 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-10-28 05:37:02
+define('_MI_SITEMAP_ADMENU_TOP','TOP');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-11-14 05:22:20
 define('_MI_SITEMAP_ADMENU_MYBLOCKSADMIN','Blocks/Groups');
 define('_MI_SITEMAP_BLOCKNAME','Sitemap');

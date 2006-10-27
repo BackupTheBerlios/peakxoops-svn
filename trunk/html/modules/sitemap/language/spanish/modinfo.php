@@ -1,5 +1,9 @@
 <?php /* Spanish Translation by Marcelo Yuji Himoro <http://yuji.ws> */
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-10-28 05:37:02
+define('_MI_SITEMAP_ADMENU_TOP','TOP');
+
 define('_MI_SITEMAP_NAME', 'Mapa del sitio');
 define('_MI_SITEMAP_MESSAGE', 'Aquí ud. podrá mostrar una orientación o mensaje. ¡Modifíquela en la administración! ;)');
 

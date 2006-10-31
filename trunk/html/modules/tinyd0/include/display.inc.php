@@ -64,7 +64,7 @@ if( $link > 0 ) {
 
 }
 
-// "tell to a friend" (It is too dificult to treat this for multibyte langs...)
+// "tell to a friend" (It is too difficult to treat this for multibyte langs...)
 if( $xoopsModuleConfig['tc_use_taf_module'] ) {
 	$mail_link = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( XOOPS_URL . "/modules/$mydirname/index.php?id=$id" ).'&amp;subject='.rawurlencode(sprintf(_TC_INTARTICLE,$xoopsConfig['sitename'])) ;
 } else {

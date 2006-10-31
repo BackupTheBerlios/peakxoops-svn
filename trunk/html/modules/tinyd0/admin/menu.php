@@ -34,9 +34,9 @@ $adminmenu[2]['title'] = _TC_MD_ADMENU1;
 $adminmenu[2]['link']  = "admin/index.php?op=submit";
 $adminmenu[3]['title'] = _TC_MD_ADMENU2;
 $adminmenu[3]['link']  = "admin/index.php?op=nlink";
-$adminmenu[4]['title'] = _TC_MD_ADMENU_MYBLOCKSADMIN;
+/*$adminmenu[4]['title'] = _TC_MD_ADMENU_MYBLOCKSADMIN;
 $adminmenu[4]['link']  = "admin/myblocksadmin.php";
 $adminmenu[] = array(
 	'title' => _TC_MD_ADMENU_MYTPLSADMIN ,
-	'link' => "admin/mytplsadmin.php" ) ;
+	'link' => "admin/mytplsadmin.php" ) ;*/
 ?>

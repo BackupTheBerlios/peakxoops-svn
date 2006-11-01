@@ -161,6 +161,8 @@ CHANGES:
 
 v1.03 2006-07-13
 - modified xoops_version.php as hasMain=1 (thx Rollei)
+- added language files
+-- persian (thx voltan) 1.03a
 
 v1.02 2005-12-03
 - updated myblocksadmin 0.41 & mymenu 0.15a

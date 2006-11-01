@@ -128,7 +128,7 @@ case "show":
 	xoops_cp_header();
 	include( dirname(__FILE__).'/mymenu.php' ) ;
 
-	if( check_browser_can_use_spaw() ) {
+	if( tinyd_check_browser_can_use_spaw() ) {
 		$can_use_spaw = true ;
 		$submitlink_with_spaw = "(<a href='index.php?op=submit&amp;usespaw=1' style='font-size:xx-small;'>SPAW</a>)" ;
 	} else {
@@ -451,7 +451,7 @@ case "edit" :
 	if( ! empty( $_GET['usespaw'] ) ) {
 		// SPAW Config
 		include XOOPS_ROOT_PATH.'/common/spaw/spaw_control.class.php' ;
-		if( check_browser_can_use_spaw() ) {
+		if( tinyd_check_browser_can_use_spaw() ) {
 			ob_start() ;
 			$sw = new SPAW_Wysiwyg( 'message' , $message ) ;
 			$sw->show() ;
@@ -984,7 +984,7 @@ case "moveto" :
 
 
 // checks browser compatibility with the control
-function check_browser_can_use_spaw() {
+function tinyd_check_browser_can_use_spaw() {
 
 	return true ;	// for nobunobu's spaw 2005-5-10
 

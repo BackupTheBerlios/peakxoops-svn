@@ -3,7 +3,7 @@
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 $modversion['name'] = _MI_XHNEWBB_NAME;
-$modversion['version'] = 1.30;
+$modversion['version'] = 1.31;
 $modversion['description'] = _MI_XHNEWBB_DESC;
 $modversion['credits'] = "Kazumi Ono<br />( http://www.myweb.ne.jp/ )";
 $modversion['author'] = "Original admin section (phpBB 1.4.4) by<br />The phpBB Group<br />( http://www.phpbb.com/ )<br />";

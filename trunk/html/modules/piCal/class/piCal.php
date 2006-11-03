@@ -80,6 +80,7 @@ class piCal
 	var $categories = array() ;		// アクセス可能なカテゴリオブジェクト連想配列
 	var $groups = array() ;			// PRIVATE時に選択可能なグループの連想配列
 	var $nameoruname = 'name' ;		// 投稿者の表示（ログイン名かハンドル名か）
+	var $proxysettings = '' ;		// Proxy setting
 	var $last_summary = '' ;		// 外部から件名を参照するためのプロパティ
 	var $plugins_path_monthly = 'plugins/monthly' ;
 	var $plugins_path_weekly = 'plugins/weekly' ;

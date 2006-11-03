@@ -821,12 +821,13 @@ function import_ics_via_fopen( $uri , $force_http = true , $user_uri = '' )
 	// $snoopy->read_timeout = $config['snoopy_timeout'] ;
 	$snoopy->read_timeout = 10 ;
 	// Set proxy if needed
-	//if( trim( $config['proxy_host'] ) != '' ) {
-		//$snoopy->proxy_host = $config['proxy_host'] ;
-		//$snoopy->proxy_port = $config['proxy_port'] > 0 ? intval( $config['proxy_port'] ) : 8080 ;
-		//$snoopy->user = $config['proxy_user'] ;
-		//$snoopy->pass = $config['proxy_pass'] ;
-	//}
+	if( trim( $this->proxysettings ) ) {
+		list( $proxy_host , $proxy_port , $proxy_user , $proxy_pass ) = explode( ':' , $this->proxysettings ) ;
+		$snoopy->proxy_host = $proxy_host ;
+		$snoopy->proxy_port = $proxy_port > 0 ? intval( $proxy_port ) : 8080 ;
+		$snoopy->proxy_user = $proxy_user ;
+		$snoopy->proxy_pass = $proxy_pass ;
+	}
 	//URL fetch
 	if( ! $snoopy->fetch( $uri ) || ! $snoopy->results ) {
 		return "-1:Could not open uri: $uri" ;

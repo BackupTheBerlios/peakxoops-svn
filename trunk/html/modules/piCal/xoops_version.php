@@ -36,7 +36,7 @@ $mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
 
 
 $modversion['name'] = _MI_PICAL_NAME . $mydirnumber ;
-$modversion['version'] = 0.89;
+$modversion['version'] = 0.90;
 $modversion['description'] = _MI_PICAL_DESC;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -432,6 +432,16 @@ $modversion['config'][26] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> 'uname' ,
 	'options'		=> array('_MI_OPT_USENAME'=>'name','_MI_OPT_USEUNAME'=>'uname')
+) ;
+
+$modversion['config'][27] = array(
+	'name'			=> 'pical_proxysettings' ,
+	'title'			=> '_MI_PROXYSETTINGS' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array() ,
 ) ;
 
 

@@ -68,6 +68,7 @@ define("_MI_TIMEZONE_USING", "Timezone of the server");
 define("_MI_USE24HOUR", "24hours system (No means 12hours system)");
 define("_MI_NAMEORUNAME" , "Poster name displayed" ) ;
 define("_MI_DESCNAMEORUNAME" , "Select which 'name' is displayed" ) ;
+define("_MI_PROXYSETTINGS" , "Proxy settings (host:port:user:pass)" ) ;
 
 // Description of each config items
 define("_MI_EDITBYGUESTDSC", "Permission of adding events by Guest");

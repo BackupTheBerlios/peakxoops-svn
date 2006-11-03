@@ -68,6 +68,7 @@ define("_MI_TIMEZONE_USING", "サーバのタイムゾーン指定");
 define("_MI_USE24HOUR", "24時間制とする（いいえなら、12時間制）");
 define("_MI_NAMEORUNAME" , "投稿者名の表示" ) ;
 define("_MI_DESCNAMEORUNAME" , "ログイン名かハンドル名か選択して下さい" ) ;
+define("_MI_PROXYSETTINGS" , "プロキシ設定(host:port:user:pass)" ) ;
 
 // Description of each config items
 define("_MI_EDITBYGUESTDSC", "ゲストが予定を追加できるかどうか");

@@ -78,6 +78,8 @@ if( ! empty( $_POST['cutpastepostsok'] ) ) {
 		'children_count' => count( $children ) ,
 		'forum_index_title' => _MD_XHNEWBB_FORUMINDEX ,
 		'lang_alltopicsindex' => _MD_XHNEWBB_ALLTOPICSINDEX ,
+		'mod_url' => XOOPS_URL.'/modules/xhnewbb' ,
+		'img_hotfolder' => $bbImage['newposts_forum'] ,
 	) ) ;
 
 	$xoopsTpl->assign( array( "xoops_module_header" => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['xhnewbb_css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) , "xoops_pagetitle" => _MD_XHNEWBB_CUTPASTEPOSTS ) ) ;

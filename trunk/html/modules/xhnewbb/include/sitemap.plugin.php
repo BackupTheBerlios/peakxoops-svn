@@ -1,54 +1,34 @@
 <?php
-// $Id: sitemap.plugin.php,v 1.1 2005/01/15 21:01:11 gij Exp $
-// FILE		::	xhnewbb.php
-// AUTHOR	::	Ryuji AMANO <info@ryus.biz>
-// WEB		::	Ryu's Planning <http://ryus.biz/>
-//
 
-function b_sitemap_xhnewbb(){
-    global $xoopsModuleConfig;
-    $db =& Database::getInstance();
-    $myts =& MyTextSanitizer::getInstance();
-    $sitemap = array();
-    
-    if($xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
-        // カテゴリを得る
-        $sql = 'SELECT DISTINCT c.* FROM '.$db->prefix('xhnewbb_categories').' c, '.$db->prefix("xhnewbb_forums").' f WHERE f.cat_id=c.cat_id GROUP BY c.cat_id, c.cat_title, c.cat_order ORDER BY c.cat_order';
-        $result = $db->query($sql);
-        $categories = array();
-        while ( $cat_row = $db->fetchArray($result) ) {
-            $i = $cat_row["cat_id"];
-            $sitemap['parent'][$i]['id'] = $cat_row["cat_id"];
-            $sitemap['parent'][$i]['title'] = $myts->makeTboxData4Show($cat_row["cat_title"]);
-            $sitemap['parent'][$i]['url'] = "index.php?cat=".$cat_row["cat_id"];
-            $categories[] = $cat_row["cat_id"];
-        }
-    }
+function b_sitemap_xhnewbb()
+{
+	include_once dirname(__FILE__).'/perm_functions.php' ;
 
-    // フォーラム情報取得
-    $sql = "SELECT f.* FROM ".$db->prefix("xhnewbb_forums")." f LEFT JOIN ".$db->prefix("xhnewbb_categories")." c ON f.cat_id=c.cat_id ORDER BY f.forum_id";
-    $result = $db->query($sql);
-    //$forums = array();
-    $i=0;
-    while($forum_row = $db->fetchArray($result)){
-        //if(in_array($forum_row["cat_id"], $categories)){
-            if($xoopsModuleConfig["show_subcategoris"]){ // サブカテ表示のときのみ実行 by Ryuji
-                $j = $forum_row["cat_id"];
-    			$sitemap['parent'][$j]['child'][$i]['id'] = $forum_row["forum_id"];
-    			$sitemap['parent'][$j]['child'][$i]['title'] = $myts->makeTboxData4Show($forum_row["forum_name"]);
-    			$sitemap['parent'][$j]['child'][$i]['image'] = 2;
-    			$sitemap['parent'][$j]['child'][$i]['url'] = "viewforum.php?forum=".$forum_row['forum_id'];
-            }else{
-                // サブカテ非表示ならフォーラムをルートにする
-                $sitemap['parent'][$i]['id'] = $forum_row["forum_id"];
-                $sitemap['parent'][$i]['title'] = $myts->makeTboxData4Show($forum_row["forum_name"]);
-                $sitemap['parent'][$i]['url'] = "viewforum.php?forum=".$forum_row['forum_id'];
-            }
-        $i++;
-        //}
-    }
-    //print_r($categories);
-    return $sitemap;
+	$db =& Database::getInstance() ;
+	$myts =& MyTextSanitizer::getInstance() ;
+	$sitemap = array() ;
+
+	$whr_forum = 'f.forum_id IN (' . implode( ',' , xhnewbb_get_forums_can_read() ) . ')' ;
+	$sql = "SELECT c.cat_id,c.cat_title,f.forum_id,f.forum_name FROM ".$db->prefix("xhnewbb_forums")." f LEFT JOIN ".$db->prefix("xhnewbb_categories")." c ON f.cat_id=c.cat_id WHERE ($whr_forum) ORDER BY c.cat_order, f.forum_weight, f.forum_id";
+	if( ! $result = $db->query( $sql ) ) die( __LINE__ . 'SQL Error' ) ;
+
+	while ( $row = $db->fetchArray( $result ) ) {
+		$cat_id = intval( $row['cat_id'] ) ;
+		if( empty( $sitemap['parent'][ $cat_id ] ) ) {
+			$sitemap['parent'][ $cat_id ] = array(
+				'id' => $cat_id ,
+				'title' => $myts->makeTboxData4Show( $row['cat_title'] ) ,
+				'url' => 'index.php?cat='.$cat_id ,
+			) ;
+		}
+		$sitemap['parent'][ $cat_id ]['child'][] = array(
+			'id' => intval( $row['forum_id'] ) ,
+			'title' => $myts->makeTboxData4Show( $row['forum_name'] ) ,
+			'image' => 2 ,
+			'url' => 'viewforum.php?forum='.intval( $row['forum_id'] ) ,
+		) ;
+	}
+	return $sitemap ;
 }
 
 

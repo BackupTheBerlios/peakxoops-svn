@@ -29,8 +29,28 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 include '../../../include/cp_header.php';
-include dirname(dirname(__FILE__)).'/include/functions.php' ;
+include_once dirname(dirname(__FILE__)).'/include/functions.php' ;
 include dirname(dirname(__FILE__)).'/include/config.php' ;
+
+// branch for altsys
+if( defined( 'XOOPS_TRUST_PATH' ) && ! empty( $_GET['lib'] ) ) {
+	$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+	$mydirpath = dirname( dirname( __FILE__ ) ) ;
+
+	// common libs (eg. altsys)
+	$lib = preg_replace( '[^a-zA-Z0-9_-]' , '' , $_GET['lib'] ) ;
+	$page = preg_replace( '[^a-zA-Z0-9_-]' , '' , @$_GET['page'] ) ;
+	
+	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;
+	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ;
+	} else {
+		die( 'wrong request' ) ;
+	}
+	exit ;
+}
+
 xoops_cp_header();
 if( file_exists( './mymenu.php' ) ) include( './mymenu.php' ) ;
 echo"<table width='100%' border='0' cellspacing='1' class='outer'>"

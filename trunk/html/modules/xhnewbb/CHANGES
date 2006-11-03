@@ -1,12 +1,17 @@
 [mlimg]
 [xlang:en]
 
+1.31beta (2006/11/04)
+- modified Cube 2.1 compatibility
+- fixed small typo in cutpasteposts.php (thx plusangel)
+- fixed sitemap plugin (thx Foxy)
+
 1.30 (2006/10/06)
 - released as a stable version
 - modified templates from 1.30beta09 (thx jidaikobo)
 
 1.30beta (2006/09/13)
-- rebuilding templates fundamentally now ... (special thx jidaikobo!)
+- rebuilt templates fundamentally (special thx jidaikobo!)
 - changed cat_order from varchar into smallint (thx Ujiki.oO)
 - modified behaviors of the marking feature
 - added names into topic_icons
@@ -115,12 +120,17 @@
 [/xlang:en]
 [xlang:ja]
 
+1.31beta (2006/11/04)
+- Cube 2.1用にmymenuを入れ替えた
+- cutpasteposts.php 内のtypo修正 (thx plusangel)
+- サイトマッププラグインがおかしかったのを修正 (thx Foxy)
+
 1.30 (2006/10/06)
 - 安定版としてのリリース
 - 1.30betaよりテンプレートの微調整 (thx jidaikobo)
 
 1.30beta (2006/09/13)
-- テンプレートをフルスクラッチ中... (special thx jidaikobo!)
+- テンプレートをフルスクラッチ (special thx jidaikobo!)
 - cat_order がなぜか varchar となっていたのを smallint に変更 (thx Ujiki.oO)
 - 注目トピック機能の動作修正
 - トピックアイコンに名前をつけた

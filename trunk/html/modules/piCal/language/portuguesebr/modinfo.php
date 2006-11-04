@@ -7,6 +7,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_MI_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-11-05 06:41:41
+define('_MI_PROXYSETTINGS','Proxy settings (host:port:user:pass)');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-02-15 05:31:20
 define('_MI_PICAL_ADMENU_MYTPLSADMIN','Templates');
 

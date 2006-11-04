@@ -4,6 +4,7 @@ v.090 beta (2006-11-04)
 - updated mymenu 0.18 for Cube 2.1 compatibility
 - removed default value of text field in sql
 - added proxy setting for getting iCalendar data
+- undeleted some files included in myblocksadmin (thx Foxy) 0.90beta2
 
 v.089 compatibility with Cube 2.1beta (2006-10-19)
 - modified title %s of some blocks in Cube 2.1 (thx minahito)
@@ -363,6 +364,7 @@ v.090 beta (2006-11-04)
 - Cube2.1 で動くように、mymenu を 0.18 にアップデート
 - SQL文中で、textフィールドへの default値がセット してあったのを削除
 - Proxy経由でiCalendarデータを取得できる設定の追加
+- myblocksadmin関連で消しすぎたファイルの復活 (thx Foxy) 0.90beta2
 
 v.089 Cube 2.1betaとの互換性問題解消 (2006-10-19)
 - Cube2.1でブロックタイトルの%sが解釈されないのを修正 (thx minahito)

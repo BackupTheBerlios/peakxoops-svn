@@ -2,7 +2,7 @@ How to use "comment-integration"
 
 == for conventional modules ==
 
-1. copy a plugin modifier.d3forum_comment of the archive into XOOPS_ROOT_PATH/class/smarty/plugins/
+1. copy a plugin function.d3forum_comment of the archive into XOOPS_ROOT_PATH/class/smarty/plugins/
 2. make a new forum for integration under appropriate category.
 3. import from xoopscomments of a module into the forum.
 4. edit template like this.

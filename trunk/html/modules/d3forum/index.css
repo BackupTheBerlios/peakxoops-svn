@@ -1,6 +1,29 @@
-/* general */
+/* general - xoops */
+/* xoopsCode */
 
-div.breadcrumbs{
+#post_reference dd div.xoopsCode,
+#post_preview dd div.xoopsCode,
+div.d3f_msg div.xoopsCode{
+	width				:95%;
+	overflow				:auto;
+	margin				:10px 0;}
+
+/* xoopsQuote */
+
+div.d3f_msg blockquote{
+	margin				:0;
+	padding				:5px;}
+div.d3f_msg div.xoopsQuote{
+	margin				:0;
+	padding				:0;}
+#post_reference dd blockquote,
+#post_preview dd blockquote{
+	margin				:0;
+	padding				:5px;}
+
+/* d3forum general */
+
+div.d3f_breadcrumbs{
 	font-size				:95%;
 	padding				:5px 2px;}
 hr.d3f_divide{
@@ -9,7 +32,7 @@ hr.d3f_divide{
 
 h1.d3f_title{
 	font-size				:130%;
-	margin				:0;}
+	margin				:0 0 25px;}
 h1.d3f_title img{
 	vertical-align		:middle;
 	margin-right			:5px;}
@@ -28,12 +51,18 @@ h2.d3f_head img{
 	text-align			:right;
 	padding				:3px;}
 
-div.d3f_msg blockquote{
+/* d3f_submit */
+
+p.d3f_submit{
+	text-align			:center;
 	margin				:0;
-	padding				:5px;}
-div.d3f_msg .xoopsQuote{
-	margin				:0;
-	padding				:0;}
+	padding				:10px;}
+
+/* #post_reference */
+
+#post_reference dd,
+#post_preview dd{
+	margin				:0;}
 
 /* d3f_bbsviewctrl */
 
@@ -44,7 +73,7 @@ div.d3f_bbsviewctrl{
 div.d3f_bbsviewctrl form{
 	margin				:0;
 	padding				:0;}
-div.d3f_bbsviewctrl form *{
+div.d3f_bbsviewctrl form *,p.d3f_bbsviewctrl *{
 	vertical-align		:middle;
 	margin				:0;
 	padding				:0;}
@@ -100,6 +129,13 @@ table.d3f_table td dd.d3f_td_topicinfo{
 	padding				:3px 3px 1px;
 	border-top			:1px #777 dashed;
 	font-size				:90%;}
+
+/* table.d3f_form_table */
+
+table.d3f_form_table td,
+table.d3f_form_table th{
+	vertical-align		:top !important;
+	text-align			:left;}
 
 /*  */
 
@@ -171,20 +207,32 @@ div.d3f_ctrl{
 	margin				:0 0 15px;}
 div.d3f_shtcut{
 	background-color		:#eee;
-	padding				:10px;
+	padding				:10px 0 5px;
 	margin				:0;
-	text-align			:center;
-	border-bottom			:1px #333 dashed;}
+	text-align			:center;}
 
 div.d3f_jump_box{
+	clear				:both;
+	border-top			:1px #333 dashed;
 	text-align			:left;
-	border-bottom			:none;
-	margin-bottom			:15px;}
+	padding				:0 20px;
+	margin				:15px 0;}
 div.d3f_jump_box form *{
 	vertical-align		:middle;}
 form.d3f_search{
 	padding				:0;
 	margin				:10px 0 0;}
+
+ul.d3f_othertopics,ul.d3f_othertopics li{
+	list-style			:none outside;
+	text-align			:center;
+	margin				:0;
+	padding				:0;}
+ul.d3f_othertopics li{
+	padding-bottom		:10px;}
+ul.d3f_othertopics li{
+	width				:33%;
+	float				:left;}
 
 
 /* d3f_msg */
@@ -328,6 +376,10 @@ div.d3f_msgfld{
 
 div.d3f_msgtitle h2{
 	background-color		:#555;}
+div.d3f_msgtitle h2.invisible {
+	background-color			:#f00;}
+div.d3f_msgtitle h2.yetapproval {
+	background-color			:#0ff;}
 div.d3f_msgtitle h2 a{
 	color				:#fff;}
 div.d3f_msgtitle h2 a:hover{
@@ -349,6 +401,6 @@ h2.d3f_head a:hover{
 .d3f_table tr.odd td{
 	background-color		:#f3f3f3 !important;}
 
-.attn {
+h2.attn {
 	background-color			:#f00;}
-
+.d3f_form_table th { color: black;}

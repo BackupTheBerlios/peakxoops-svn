@@ -15,16 +15,16 @@ $topic_id = intval( $post_row['topic_id'] ) ;
 include dirname(dirname(__FILE__)).'/include/process_this_topic.inc.php' ;
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // get $post4assign
 include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
 
 // check post permission
-if( empty( $can_post ) ) die( _MD_D3FORUM_ERR_POSTFORUM ) ;
+if( empty( $can_reply ) ) die( _MD_D3FORUM_ERR_REPLYPOST ) ;
 
 // check reply permission
 if( ! $isadminormod && ( $post_row['invisible'] || ! $post_row['approval'] ) ) {

@@ -1,36 +1,33 @@
 <!-- start module contents -->
-<div class="d3forum">
+<div class="d3f_breadcrumbs"><a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>&nbsp;&gt;&nbsp;<{$smarty.const._MD_D3FORUM_CATEGORYMANAGER}></div>
 
-<h1><{$smarty.const._MD_D3FORUM_CATEGORYMANAGER}></h1>
+<h1 class="d3f_title"><{$smarty.const._MD_D3FORUM_CATEGORYMANAGER}></h1>
 
-<div class="breadcrumbs"><a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>&nbsp;&gt;&nbsp;<{$smarty.const._MD_D3FORUM_CATEGORYMANAGER}></div>
-
+<h2 class="head d3f_head"><{$formtitle}></h2>
 <form name="categoryform" id="categoryform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;cat_id=<{$category.id}>" method="post" onsubmit="return xoopsFormValidate_categoryform();">
 
-	<{$gticket_hidden}>
 
-	<table width="100%" class="outer" cellspacing="1">
-
-		<tr>
-			<th colspan="2"><{$formtitle}></th>
+	<table class="outer d3f_form_table">
+		<tr style="display:none;">
+			<td><{$gticket_hidden}></td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_CATEGORYTITLE}></td>
+			<th class="head"><label for="category_title"><{$smarty.const._MD_D3FORUM_TH_CATEGORYTITLE}></label></th>
 			<td class="even">
-				<input type="text" name="title" id="category_title" size="60" maxlength="255" value="<{$category.title}>" />
+				<input type="text" name="title" id="category_title" size="50" maxlength="255" value="<{$category.title}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_CATEGORYDESC}></td>
+			<th class="head"><label for="category_desc"><{$smarty.const._MD_D3FORUM_TH_CATEGORYDESC}></label></th>
 			<td class="even">
 				<textarea name="desc" id="category_desc" cols="50" rows="10"><{$category.desc}></textarea>
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_CATEGORYPARENT}></td>
+			<th class="head"><label for="category_pid"><{$smarty.const._MD_D3FORUM_TH_CATEGORYPARENT}></label></th>
 			<td class="even">
 				<select name="pid" id="category_pid">
 					<option value="">(<{$smarty.const._MD_D3FORUM_TOP}>)</option>
@@ -40,43 +37,39 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_CATEGORYWEIGHT}></td>
+			<th class="head"><label for="category_weight"><{$smarty.const._MD_D3FORUM_TH_CATEGORYWEIGHT}></label></th>
 			<td class="even">
 				<input type="text" name="weight" id="category_weight" size="4" maxlength="4" value="<{$category.weight}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head">
+			<th class="head">
 				<{$smarty.const._MD_D3FORUM_TH_CATEGORYOPTIONS}>
 				<br />
 				<span class="categoryoptiondesc"><{$category.option_desc}></span>
-			</td>
+			</th>
 			<td class="even">
 				<textarea name="options" id="category_options" cols="50" rows="15"><{$category.options}></textarea>
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head">
+			<th class="head">
 				<{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}>
-			</td>
+			</th>
 			<td class="even">
 				<{$children_count}>
 			</td>
 		</tr>
 
-		<tr valign="top" align="left">
-			<td class="head"></td>
-			<td class="even">
-				<input type="submit" name="categoryman_post" value="<{$smarty.const._SUBMIT}>" />
-				<{if $page == 'categorymanager' && $children_count == 0}>
-				<input type="submit" name="categoryman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE}>')" />
-				<{/if}>
-			</td>
-		</tr>
-
 	</table>
+
+<p class="d3f_submit"><input type="submit" name="categoryman_post" value="<{$smarty.const._SUBMIT}>" />
+<{if $page == 'categorymanager' && $children_count == 0}>
+<input type="submit" name="categoryman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE}>')" />
+<{/if}></p>
+
 </form>
 
 <!-- Start Form Vaidation JavaScript //-->
@@ -90,5 +83,4 @@ function xoopsFormValidate_categoryform() {
 //--></script>
 <!-- End Form Vaidation JavaScript //-->
 
-</div>
 <!-- end module contents -->

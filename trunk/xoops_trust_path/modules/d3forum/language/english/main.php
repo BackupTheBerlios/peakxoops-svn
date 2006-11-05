@@ -51,6 +51,8 @@ define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','All data belongs this record wi
 define('_MD_D3FORUM_POSTASNEWTOPIC','Open a new topic');
 define('_MD_D3FORUM_REGTOPOST','Register To Post');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','You cannot post into this forum');
+define('_MD_D3FORUM_FORUMASCOMMENT','Forum for commentation');
+define('_MD_D3FORUM_ERR_FORUMASCOMMENT','You cannot create new topic in this forum directly.');
 define('_MD_D3FORUM_REPLIES','Replies');
 define('_MD_D3FORUM_POSTER','Poster');
 define('_MD_D3FORUM_VIEWS','Views');
@@ -68,6 +70,12 @@ define('_MD_D3FORUM_SOLVED_TURNON','Turn solved on');
 define('_MD_D3FORUM_SOLVED_TURNOFF','Turn solved off');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','Top of the posts'); //jidaikobo
 define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','Bottom of the posts'); //jidaikobo
+
+// comment integration
+define('_MD_D3FORUM_POSTASCOMMENTTOP','Post a new comment');
+define('_MD_D3FORUM_LINK_COMMENTSOURCE','target of the comment');
+define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','Go to richer form');
+define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 
 // topic,forum,category controller
 define('_MD_D3FORUM_SHORTCUT','Short cut');
@@ -241,6 +249,8 @@ define('_MD_D3FORUM_TH_FORUMTITLE','Forum title');
 define('_MD_D3FORUM_TH_FORUMWEIGHT','Forum weight');
 define('_MD_D3FORUM_TH_FORUMDESC','Forum desc');
 define('_MD_D3FORUM_TH_FORUMOPTIONS','Forum options');
+define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','Format for comment-integration');
+define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','leave blank for ordinary forums. If you write URI with %s started from  {XOOPS_URL}/modules/ , it will be the template linking to the sources. Native comment-integrated modules will set this field automatically.');
 
 // makecategory and categorymanager
 define('_MD_D3FORUM_CATEGORYMANAGER','Category Manager');

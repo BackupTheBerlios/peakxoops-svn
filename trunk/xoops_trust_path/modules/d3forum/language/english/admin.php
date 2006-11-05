@@ -27,12 +27,16 @@ define('_MD_A_D3FORUM_BTN_SYNCALLTABLES','Do synchronize');
 define('_MD_A_D3FORUM_MSG_SYNCALLTABLESDONE','Synchronized successfully');
 define('_MD_A_D3FORUM_HELP_SYNCALLTABLES','Execute it if your forum displays contradictory data. You have to execute it just after IMPORT from some modules');
 define('_MD_A_D3FORUM_H2_IMPORTFROM','Import');
+define('_MD_A_D3FORUM_H2_COMIMPORTFROM','Import from XOOPS comments');
 define('_MD_A_D3FORUM_LABEL_SELECTMODULE','Select a module');
 define('_MD_A_D3FORUM_BTN_DOIMPORT','Do import');
+define('_MD_A_D3FORUM_CONFIRM_DOIMPORT','Are you OK?');
 define('_MD_A_D3FORUM_MSG_IMPORTDONE','Imported successfully');
+define('_MD_A_D3FORUM_MSG_COMIMPORTDONE','XOOPS comments of the module are imported as comment-integration');
 define('_MD_A_D3FORUM_ERR_INVALIDMID','You\'ve specified wrong module to be imported');
 define('_MD_A_D3FORUM_ERR_SQLONIMPORT','Faild to import. You have to check the versions of each modules');
 define('_MD_A_D3FORUM_HELP_IMPORTFROM','You can import from newbb1,xhnewbb, and the other d3forum instances. And you should know this is not a perfect copy. Especially you should check permissions. You also have to know all data in this module will be lost when you execute to import.');
+define('_MD_A_D3FORUM_HELP_COMIMPORTFROM','XOOPS Comments will be imported as d3forum message. Also you have to enable comment-integration feature to use them. (Editing templates or modify preferences etc.)');
 
 
 ?>

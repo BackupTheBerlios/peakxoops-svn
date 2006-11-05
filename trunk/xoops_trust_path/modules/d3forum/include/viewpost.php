@@ -13,10 +13,10 @@ $topic_id = intval( $post_row['topic_id'] ) ;
 include dirname(__FILE__).'/process_this_topic.inc.php' ;
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(__FILE__).'/process_this_forum.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(__FILE__).'/process_this_category.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // get $post4assign
 include dirname(__FILE__).'/process_this_post.inc.php' ;
@@ -89,6 +89,7 @@ foreach( $posts as $eachpost ) {
 		$post4assign['next_id'] = @$eachpost['next_id'] ;
 		$post4assign['prev_id'] = @$eachpost['prev_id'] ;
 		$post4assign['first_child_id'] = @$eachpost['first_child_id'] ;
+		$post4assign['f1s'] = @$eachpost['f1s'] ;
 		break ;
 	}
 }

@@ -38,6 +38,7 @@ $post4assign = array(
 	'attachsig' => intval( $post_row['attachsig'] ) ,
 	'signature' => $signature4disp ,
 	'invisible' => intval( $post_row['invisible'] ) ,
+	'approval' => intval( $post_row['approval'] ) ,
 	'hide_uid' => intval( $post_row['hide_uid'] ) ,
 	'depth_in_tree' => intval( $post_row['depth_in_tree'] ) ,
 	'order_in_tree' => intval( $post_row['order_in_tree'] ) ,

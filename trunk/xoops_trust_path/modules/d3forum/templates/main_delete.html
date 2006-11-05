@@ -1,5 +1,5 @@
 <!-- start module contents -->
-<div class="breadcrumbs">
+<div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
 	<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &nbsp;&gt;&nbsp;
@@ -8,26 +8,26 @@
 	<{$smarty.const._DELETE}>
 </div>
 
-<h1><{$smarty.const._DELETE}></h1>
+<h1 class="d3f_title"><{$smarty.const._DELETE}></h1>
 
-<div id="post_reference" class="outer">
-	<div class="head"><{$reference_subject}></div>
-	<div class="even"><{$smarty.const._MD_D3FORUM_BY}>: <{$reference_name}> <{$smarty.const._MD_D3FORUM_ON}>: <{$reference_time_formatted}></div>
-	<div class="odd"><{$reference_message}></div>
-	<div class="even"><{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}> : <{$children_count}></div>
-</div>
+<dl id="post_reference" class="outer">
+	<dt class="head"><{$reference_subject}></dt>
+	<dd class="even"><{$smarty.const._MD_D3FORUM_BY}>: <{$reference_name}> <{$smarty.const._MD_D3FORUM_ON}>: <{$reference_time_formatted}></dd>
+	<dd class="odd"><{$reference_message}></dd>
+	<dd class="even"><{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}> : <{$children_count}></dd>
+</dl>
 
 <form name="deleteposts" id="deleteposts" action="<{$mod_url}>/index.php?page=delete&amp;post_id=<{$post_id}>" method="post">
 
-	<{$gticket_hidden}>
+	<p style="display:none;"><{$gticket_hidden}></p>
 
-	<{if $children_count}>
+	<p><{if $children_count}>
 		<{$smarty.const._MD_D3FORUM_CONFIRM_AREUSUREDEL}>
 	<{else}>
 		<{$smarty.const._MD_D3FORUM_CONFIRM_AREUSUREDELONE}>
-	<{/if}>
-	<br />
-	<input type="submit" name="deletepostsok" id="deletepostsok" value="<{$smarty.const._DELETE}>" />
+	<{/if}></p>
+
+	<p><input type="submit" name="deletepostsok" id="deletepostsok" value="<{$smarty.const._DELETE}>" /></p>
 
 </form>
 <!-- end module contents -->

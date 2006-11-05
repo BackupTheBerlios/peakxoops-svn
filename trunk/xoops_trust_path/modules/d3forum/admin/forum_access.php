@@ -9,12 +9,15 @@ $db =& Database::getInstance() ;
 
 // get right $forum_id
 $forum_id = intval( @$_GET['forum_id'] ) ;
-list( $forum_id ) = $db->fetchRow( $db->query( "SELECT forum_id FROM ".$db->prefix($mydirname."_forums")." WHERE forum_id=$forum_id" ) ) ;
+list( $forum_id , $forum_title ) = $db->fetchRow( $db->query( "SELECT forum_id,forum_title FROM ".$db->prefix($mydirname."_forums")." WHERE forum_id=$forum_id" ) ) ;
 if( empty( $forum_id ) ) {
 	$invalid_forum_id = true ;
 	list( $forum_id ) = $db->fetchRow( $db->query( "SELECT MIN(forum_id) FROM ".$db->prefix($mydirname."_forums") ) ) ;
 	if( empty( $forum_id ) ) {
 		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php" , 5 , _MD_D3FORUM_ERR_EXISTSFORUM ) ;
+		exit ;
+	} else {
+		header( "Location: ".XOOPS_URL."/modules/$mydirname/admin/index.php?page=forum_access&forum_id=$forum_id" ) ;
 		exit ;
 	}
 }
@@ -188,6 +191,7 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'forum_id' => $forum_id ,
+	'forum_title' => htmlspecialchars( $forum_title , ENT_QUOTES ) ,
 	'forum_jumpbox_options' => d3forum_make_jumpbox_options( $mydirname , '1' , '1' , $forum_id ) ,
 	'group_trs' => $group_trs ,
 	'user_trs' => $user_trs ,

@@ -22,7 +22,7 @@ if( empty( $cat_ids ) ) {
 	$cat_ids4param = $cat_id ;
 	$whr_cat_ids = 'c.cat_id='.$cat_id ;
 	// get&check this category ($category4assign, $category_row), override options
-	include dirname(__FILE__).'/process_this_category.inc.php' ;
+	if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 } else {
 	// topics under categories separated with commma
 	sort( $cat_ids ) ;

@@ -1,27 +1,4 @@
-<!-- start module contents -->
-<div class="d3f_breadcrumbs">
-	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
-	&nbsp;&gt;&nbsp;
-	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
-		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
-		&nbsp;&gt;&nbsp;
-	<{/foreach}>
-	<{$forum.title}>
-	&nbsp;
-	(<{$smarty.const._MD_D3FORUM_MODERATOR}>:
-	<{foreach from=$forum.moderate_groups item=moderator}>
-		<{$moderator.gname}>
-	<{/foreach}>
-	<{foreach from=$forum.moderate_users item=moderator}>
-		<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
-	<{/foreach}>
-	)
-</div>
-
-<h1 class="d3f_title"><{$forum.title}></h1>
-<p class="d3f_welcome"><{$forum.desc}></p>
-
-<div class="d3f_bbsviewctrl">
+<!-- <div class="d3f_bbsviewctrl">
 	<form action="<{$mod_url}>/index.php" method="get">
 	<{$forum_selection_sort}>
 		<input type="hidden" name="forum_id" value="<{$forum.id}>" />
@@ -36,7 +13,64 @@
 		</select>
 		<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_REFRESHTOPICS}>" title="<{$smarty.const._MD_D3FORUM_BTN_REFRESHTOPICS}>" />
 	</form>
-</div>
+</div> -->
+
+<!-- simple comment form -->
+<{if $forum.can_post}>
+<form name="postform" id="postform" action="<{$mod_url}>/index.php?page=post" method="post">
+	<p style="display:none;">
+	<input type="hidden" name="mode" id="mode" value="newtopic" />
+	<input type="hidden" name="forum_id" id="forum_id" value="<{$forum.id}>" />
+	<input type="hidden" name="external_link_id" id="external_link_id" value="<{$external_link_id}>" />
+	<input type="hidden" name="br" id="br" value="1" />
+	</p>
+
+	<table class="outer" cellspacing="1">
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_SUBJECT}></td>
+			<td class="even">
+				<input type="text" name="subject" id="subject" size="60" maxlength="255" value="<{$subject|escape}>" />
+			</td>
+		</tr>
+
+		<{if $uname}>
+		<!-- begin post by USER newly -->
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_TH_UNAME}></td>
+			<td class="even">
+				<{$uname|string_format:$smarty.const._MD_D3FORUM_FMT_UNAME}>
+			</td>
+		</tr>
+		<!-- end post by USER newly -->
+		<{else}>
+		<!-- begin GUEST's new post -->
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_TH_GUESTNAME}></td>
+			<td class="even">
+				<input type="text" name="guest_name" id="guest_name" value="<{$guest_name}>" size="25" maxlength="30" />
+			</td>
+		</tr>
+		<!-- end GUEST's new post -->
+		<{/if}>
+
+		<tr valign="top" align="left">
+			<td class="head"><{$smarty.const._MD_D3FORUM_TH_BODY}></td>
+			<td class="even">
+				<textarea name="message" cols="60" rows="8"><{$message}></textarea>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"></td>
+			<td class="even">
+				<input type="submit" class="formButton" name="contents_submit"  id="contents_submit" value="<{$smarty.const._SUBMIT}>" />
+				<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>&amp;external_link_id=<{$external_link_id}>&amp;subject=<{$subject|escape:"url"}>"><{$smarty.const._MD_D3FORUM_LINK_RICHERCOMMENTFORM}></a>
+			</td>
+		</tr>
+	</table>
+</form>
+<{/if}>
+<!-- end of simple comment form -->
+
 
 <{if $pagenav}><div class="d3f_pagenav"><{$pagenav}></div><{/if}>
 
@@ -97,7 +131,7 @@
 
 <{if $pagenav}><div class="d3f_pagenav"><{$pagenav}></div><{/if}>
 
-<div class="d3f_iconexps">
+<!-- <div class="d3f_iconexps">
 <ul class="d3f_iconexp">
 	<li><img src="<{$mod_imageurl}>/topic_11.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICNEWPOSTS}>
 	<li><img src="<{$mod_imageurl}>/topic_01.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICNONEWPOSTS}>
@@ -109,47 +143,5 @@
 	<li><img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}></li>
 	<li><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}></li>
 </ul>
-</div>
+</div>-->
 
-<!-- forum controller -->
-
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CONTROLLER_FORUM}></h2>
-<div class="d3f_ctrl">
-	<{if $forum.external_link_format}>
-		<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>
-	<{elseif $forum.can_post}>
-		<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
-	<{elseif ! $xoops_isuser}>
-		<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
-	<{else}>
-		<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
-	<{/if}>
-
-	<{if $forum.isadminormod}>
-		| <a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a>
-	<{/if}>
-</div>
-
-<!-- short cut -->
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
-<div class="d3f_shtcut d3f_jump_box">
-	<!-- forum jumpbox -->
-	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
-		<p><select name="forum_id"><{$forum_jumpbox_options}></select>
-		<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
-	</form>
-
-	<!-- search -->
-	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
-		<p><label for="keywords" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
-		<input name="keyword" type="text" size="30" id="keywords" />
-		<input type="hidden" name="page" value="search" />
-		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
-		&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]</p>
-	</form>
-</div>
-
-<hr class="notification" />
-
-<{include file='db:system_notification_select.html'}>
-<!-- end module contents -->

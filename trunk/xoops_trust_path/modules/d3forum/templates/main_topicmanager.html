@@ -1,65 +1,67 @@
 <!-- start module contents -->
-<div class="d3forum">
-
-<h1><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></h1>
-
-<div class="targettopic">
-	<p><{$category.title}> - <{$forum.title}> - <{$topic.title}></p>
+<div class="d3f_breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
+	&nbsp;&gt;&nbsp;
+	<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &nbsp;&gt;&nbsp;
+	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>&nbsp;&gt;&nbsp;
+	<{if $topic.id}><a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>&nbsp;&gt;&nbsp;<{/if}>
+	<{$smarty.const._MD_D3FORUM_TOPICMANAGER}>
 </div>
 
+<h1 class="d3f_title"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></h1>
+
+<p class="targettopic"><{$category.title}> - <{$forum.title}> - <{$topic.title}></p>
 
 <form name="topicmanager" id="topicmanager" action="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>" method="post">
 
-	<{$gticket_hidden}>
-
-	<table class="outer">
-	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_TOPICTITLE}></td>
-		<td class="odd"><input type="text" name="topic_title" size="80" value="<{$topic.title4edit}>" /></td>
+	<table class="outer d3f_form_table">
+	<tr style="display:none;">
+		<td><{$gticket_hidden}></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_FORUM}></td>
-		<td class="odd"><select name="forum_id"><{$forum_jumpbox_options}></select></td>
+		<th class="even" align="right"><label for="topic_title"><{$smarty.const._MD_D3FORUM_TOPICTITLE}></label></th>
+		<td class="odd"><input type="text" name="topic_title" id="topic_title" size="50" value="<{$topic.title4edit}>" /></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_REPLIES}></td>
+		<th class="even" align="right"><label for="forum_id"><{$smarty.const._MD_D3FORUM_FORUM}></label></th>
+		<td class="odd"><select name="forum_id" id="forum_id"><{$forum_jumpbox_options}></select></td>
+	</tr>
+	<tr>
+		<th class="even" align="right"><{$smarty.const._MD_D3FORUM_REPLIES}></th>
 		<td class="odd"><{$topic.replies}></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_VIEWS}></td>
+		<th class="even" align="right"><{$smarty.const._MD_D3FORUM_VIEWS}></th>
 		<td class="odd"><{$topic.views}></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_FIRSTPOST}></td>
+		<th class="even" align="right"><{$smarty.const._MD_D3FORUM_FIRSTPOST}></th>
 		<td class="odd"><{$topic.first_post_time_formatted}></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_LASTPOST}></td>
+		<th class="even" align="right"><{$smarty.const._MD_D3FORUM_LASTPOST}></th>
 		<td class="odd"><{$topic.last_post_time_formatted}></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_TH_STICKY}></td>
-		<td class="odd"><input type="text" name="topic_sticky" size="2" value="<{$topic.sticky}>" /></td>
+		<th class="even" align="right"><label for="topic_sticky"><{$smarty.const._MD_D3FORUM_TH_STICKY}></label></th>
+		<td class="odd"><input type="text" name="topic_sticky" id="topic_sticky" size="2" value="<{$topic.sticky}>" /></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_TH_LOCK}></td>
-		<td class="odd"><input type="checkbox" name="topic_locked" value="1" <{if $topic.locked}>checked="checked"<{/if}> /></td>
+		<th class="even" align="right"><label for="topic_locked"><{$smarty.const._MD_D3FORUM_TH_LOCK}></label></th>
+		<td class="odd"><input type="checkbox" name="topic_locked" id="topic_locked" value="1" <{if $topic.locked}>checked="checked"<{/if}> /></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_TH_INVISIBLE}></td>
-		<td class="odd"><input type="checkbox" name="topic_invisible" value="1" <{if $topic.invisible}>checked="checked"<{/if}> /></td>
+		<th class="even" align="right"><label for="topic_invisible"><{$smarty.const._MD_D3FORUM_TH_INVISIBLE}></label></th>
+		<td class="odd"><input type="checkbox" name="topic_invisible" id="topic_invisible" value="1" <{if $topic.invisible}>checked="checked"<{/if}> /></td>
 	</tr>
 	<tr>
-		<td class="even" align="right"><{$smarty.const._MD_D3FORUM_TH_SOLVED}></td>
-		<td class="odd"><input type="checkbox" name="topic_solved" value="1" <{if $topic.solved}>checked="checked"<{/if}> /></td>
-	</tr>
-	<tr>
-		<td class="head" colspan="2" align="center"><input type="submit" name="topicman_post" value="<{$smarty.const._SUBMIT}>" /></td>
+		<th class="even" align="right"><label for="topic_solved"><{$smarty.const._MD_D3FORUM_TH_SOLVED}></label></th>
+		<td class="odd"><input type="checkbox" name="topic_solved" id="topic_solved" value="1" <{if $topic.solved}>checked="checked"<{/if}> /></td>
 	</tr>
 
 </table>
 
-</form>
+<p class="d3f_submit"><input type="submit" name="topicman_post" value="<{$smarty.const._SUBMIT}>" /></p>
 
-</div>
+</form>
 <!-- end module contents -->

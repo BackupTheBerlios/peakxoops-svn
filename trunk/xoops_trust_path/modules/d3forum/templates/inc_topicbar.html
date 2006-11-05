@@ -5,7 +5,9 @@
 	<div class="d3f_ctrl">
 	
 		<!-- new topic -->
-		<{if $forum.can_post}>
+		<{if $forum.external_link_format}>
+			<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>
+		<{elseif $forum.can_post}>
 			<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
 		<{elseif ! $xoops_isuser}>
 			<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
@@ -38,50 +40,42 @@
 		<{if $forum.isadminormod}>
 			| <a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
 		<{/if}>
-	
+
 	</div>
 
 	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
 
 	<div class="d3f_shtcut">
-		<table>
-			<tr>
-				<td align="left" style="width:33%;">
-					<{if $prev_topic.id}>
-						<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicprev.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}>" /></a><br /><{$prev_topic.title}>
-					<{/if}>
-				</td>
-				<td align="center" style="width:34%;">
-					<{if $page=="viewpost"}>
-						<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><img src="<{$mod_imageurl}>/navicon_uptotopic.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTPOSTS}>" /></a><br /><{$topic.title}>
-					<{else}>
-						<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/navicon_uptoforum.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTTOPICS}>" /></a><br /><{$forum.title}>
-					<{/if}>
-				</td>
-				<td align="right" style="width:33%;">
-					<{if $next_topic.id}>
-						<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicnext.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_NEXTTOPIC}>" /></a><br /><{$next_topic.title}>
-					<{/if}>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<ul class="d3f_othertopics">
+	<li><{if $prev_topic.id}>
+		<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicprev.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}>" /><br /><{$prev_topic.title}></a>
+	<{/if}></li>
+	<li><{if $page=="viewpost"}>
+		<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><img src="<{$mod_imageurl}>/navicon_uptotopic.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTPOSTS}>" /><br /><{$topic.title}></a>
+	<{else}>
+		<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/navicon_uptoforum.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTTOPICS}>" /><br /><{$forum.title}></a>
+	<{/if}></li>
+	<li><{if $next_topic.id}>
+		<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicnext.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_NEXTTOPIC}>" /><br /><{$next_topic.title}></a>
+	<{/if}></li>
+	</ul>
 
-	<div class="d3f_shtcut d3f_jump_box">
+	<div class="d3f_jump_box">
 	
 		<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
-			<select name="forum_id"><{$forum_jumpbox_options}></select>
-			<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
+			<p><select name="forum_id"><{$forum_jumpbox_options}></select>
+			<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
 		</form>
 	
 		<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
-			<label for="d3f_search" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
-			<input name="keyword" type="text" id="d3f_search" size="30" id="kerywords" />
+			<p><label for="kerywords" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
+			<input name="keyword" type="text" size="30" id="kerywords" />
 			<input type="hidden" name="page" value="search" />
 			<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
-			&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]
+			&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]</p>
 		</form>
 
 	</div>
+
 
 </div>

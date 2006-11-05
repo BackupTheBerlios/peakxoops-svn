@@ -1,12 +1,17 @@
 <!-- start module contents -->
-<div class="d3forum">
-<h1><{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></h1>
+<div class="d3f_breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>&nbsp;&gt;&nbsp;
+	<{$smarty.const._MD_D3FORUM_TITLE_SEARCH}>
+</div>
 
-<div class="breadcrumbs"><a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>&nbsp;&gt;&nbsp;<{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></div>
+<h1 class="d3f_title"><{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></h1>
 
-<form name="Search" action="<{$mod_url}>/index.php" method="get">
-<input type="hidden" name="page" value="search" />
-<table class="outer search">
+
+<form name="search" action="<{$mod_url}>/index.php" method="get">
+
+<p style="display:none;"><input type="hidden" name="page" value="search" /></p>
+
+<table class="outer search d3f_form_table">
 	<tr>
 		<th><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
 		<td class="even">
@@ -40,34 +45,35 @@
 		<th><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
 		<td class="even"><{html_radios name="sortby" options=$sortby_options selected=$sortby_selected}></td>
 	</tr>
-	<tr>
-		<td class="head" colspan="2" align="center"><input type="submit" name="submit" value="<{$smarty.const._MD_D3FORUM_BTN_SEARCH}>" /></td>
-	</tr>
 </table>
+<p class="d3f_submit"><input type="submit" name="submit" value="<{$smarty.const._MD_D3FORUM_BTN_SEARCH}>" /></p>
+
 </form>
+
 
 <{if $show_results}>
 
-<h2 class="head"><{$smarty.const._MD_D3FORUM_TITLE_SEARCHRESULTS}></h2>
+<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_TITLE_SEARCHRESULTS}></h2>
 
 <{if $results}>
 
-<{$hits_count|string_format:$smarty.const._MD_D3FORUM_FMT_SEARCHHITS}>
+<p><{$hits_count|string_format:$smarty.const._MD_D3FORUM_FMT_SEARCHHITS}></p>
 
-<table class="outer searchresult">
+<table class="outer searchresult d3f_table">
+<thead>
 <tr>
-	<th><{$smarty.const._MD_D3FORUM_FORUM}></th>
-	<th><{$smarty.const._MD_D3FORUM_SUBJECT}></th>
-	<th><{$smarty.const._MD_D3FORUM_POSTER}></th>
-	<th><{$smarty.const._MD_D3FORUM_VIEWS}></th>
-	<th><{$smarty.const._MD_D3FORUM_ON}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_FORUM}>"><{$smarty.const._MD_D3FORUM_FORUM}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_SUBJECT}>"><{$smarty.const._MD_D3FORUM_SUBJECT}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_POSTER}>"><{$smarty.const._MD_D3FORUM_POSTER}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{$smarty.const._MD_D3FORUM_VIEWS}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_ON}>"><{$smarty.const._MD_D3FORUM_ON}></th>
 </tr>
-
+</thead>
 <!-- start search results -->
 <{foreach from=$results item=post}>
 <tr>
-	<td class="even"><a href="<{$mod_url}>/index.php?forum_id=<{$post.forum_id}>"><{$post.forum_title}></a></td>
-	<td class="odd topics"><a href="<{$mod_url}>/index.php?post_id=<{$post.post_id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" /><{$post.subject}></a> <{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}></td>
+	<td class="even d3f_topictitle"><a href="<{$mod_url}>/index.php?forum_id=<{$post.forum_id}>"><{$post.forum_title}></a></td>
+	<td class="odd d3f_topictitle"><a href="<{$mod_url}>/index.php?post_id=<{$post.post_id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" /><{$post.subject}></a> <{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}></td>
 	<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{$post.poster_uname}></a></td>
 	<td class="odd"><{$post.topic_views}></td>
 	<td class="even"><{$post.post_time_formatted}></td>
@@ -79,11 +85,10 @@
 <{else}>
 
 <{* no hit *}>
-<{$smarty.const._MD_D3FORUM_MSG_NOMATCH}>
+<p><{$smarty.const._MD_D3FORUM_MSG_NOMATCH}></p>
 
 <{/if}>
 
 <{/if}>
 
-</div>
 <!-- end module contents -->

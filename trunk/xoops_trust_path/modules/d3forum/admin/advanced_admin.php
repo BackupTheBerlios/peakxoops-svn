@@ -33,6 +33,15 @@ foreach( $modules as $module ) {
 	}
 }
 
+$modules =& $module_handler->getObjects( new Criteria('hascomments',1) ) ;
+$comment_handler =& xoops_gethandler( 'comment' ) ;
+$comimportable_modules = array() ;
+foreach( $modules as $module ) {
+	$mid = $module->getVar('mid') ;
+	$comment_sum = $comment_handler->getCount( new Criteria('com_modid',$mid) ) ;
+	$comimportable_modules[ $mid ] = $module->getVar('name')." ($comment_sum)" ;
+}
+
 
 //
 // transaction stage
@@ -91,6 +100,23 @@ if( ! empty( $_POST['do_import'] ) && ! empty( $_POST['import_mid'] ) ) {
 }
 
 
+if( ! empty( $_POST['do_comimport'] ) && ! empty( $_POST['comimport_mid'] ) && ! empty( $_POST['comimport_forum_id'] ) ) {
+	set_time_limit( 0 ) ;
+
+	if ( ! $xoopsGTicket->check( true , 'd3forum_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
+	$mid = intval( @$_POST['comimport_mid'] ) ;
+	if( empty( $comimportable_modules[ $mid ] ) ) die( _MD_A_D3FORUM_ERR_INVALIDMID ) ;
+	$forum_id = intval( @$_POST['comimport_forum_id'] ) ;
+	d3forum_comimport_as_topics( $mydirname , $mid , $forum_id ) ;
+
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_COMIMPORTDONE ) ;
+	exit ;
+}
+
+
 //
 // form stage
 //
@@ -108,6 +134,8 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'import_from_options' => $importable_modules ,
+	'comimport_from_options' => $comimportable_modules ,
+	'comimport_to_options' => d3forum_make_jumpbox_options( $mydirname , '1' , '1' , -1 ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'd3forum_admin') ,
 ) ) ;
 $tpl->display( 'db:'.$mydirname.'_admin_advanced_admin.html' ) ;

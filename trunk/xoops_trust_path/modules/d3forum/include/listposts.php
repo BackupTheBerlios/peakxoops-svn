@@ -6,10 +6,10 @@ $topic_id = intval( @$_GET['topic_id'] ) ;
 include dirname(__FILE__).'/process_this_topic.inc.php' ;
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(__FILE__).'/process_this_forum.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(__FILE__).'/process_this_category.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // post order
 switch( $postorder ) {
@@ -71,6 +71,7 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 		'attachsig' => intval( $post_row['attachsig'] ) ,
 		'signature' => $signature4disp ,
 		'invisible' => intval( $post_row['invisible'] ) ,
+		'approval' => intval( $post_row['approval'] ) ,
 		'hide_uid' => intval( $post_row['hide_uid'] ) ,
 		'depth_in_tree' => intval( $post_row['depth_in_tree'] ) ,
 		'order_in_tree' => intval( $post_row['order_in_tree'] ) ,

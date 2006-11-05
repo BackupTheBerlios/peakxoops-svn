@@ -6,9 +6,10 @@ if( ! $trs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 if( $xoopsDB->getRowsNum( $trs ) <= 0 ) die( _MD_D3FORUM_ERR_READTOPIC ) ;
 $topic_row = $xoopsDB->fetchArray( $trs ) ;
 $forum_id = intval( $topic_row['forum_id'] ) ;
-$isadminormod = (boolean)$forum_permissions[ $forum_id ]['is_moderator'] || $isadmin ;
+$isadminormod = (boolean) @$forum_permissions[ $forum_id ]['is_moderator'] || $isadmin ;
 $topic4assign = array(
 	'id' => $topic_row['topic_id'] ,
+	'external_link_id' => intval( $topic_row['topic_external_link_id'] ) ,
 	'title' => $myts->makeTboxData4Show( $topic_row['topic_title'] , $topic_row['number_entity'] , $topic_row['special_entity'] ) ,
 	'replies' => intval( $topic_row['topic_posts_count'] ) - 1 ,
 	'views' => intval( $topic_row['topic_views'] ) ,
@@ -78,6 +79,10 @@ if( $uid && @$topic_row['u2t_time'] <= $topic_row['topic_last_post_time'] ) {
 	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix($mydirname."_users2topics")." SET u2t_time=UNIX_TIMESTAMP() WHERE uid=$uid AND topic_id=$topic_id" ) ;
 	if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->queryF( "INSERT INTO ".$xoopsDB->prefix($mydirname."_users2topics")." SET uid=$uid,topic_id=$topic_id,u2t_time=UNIX_TIMESTAMP(),u2t_marked=0" ) ;
 }
+
+// $external_link_id
+$external_link_id = intval( $topic_row['topic_external_link_id'] ) ;
+
 
 // for debug
 // require_once dirname(__FILE__).'/transact_functions.php' ;

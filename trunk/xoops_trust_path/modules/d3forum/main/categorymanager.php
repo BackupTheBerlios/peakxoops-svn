@@ -6,7 +6,7 @@ require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $cat_id = intval( @$_GET['cat_id'] ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // count children
 include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;

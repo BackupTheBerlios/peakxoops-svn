@@ -7,8 +7,16 @@
 function d3forum_make_treeinformations( $data )
 {
 	$previous_depth = -1 ;
+	$path_to_i = array() ;
 
 	for( $i = 0 ; $i < sizeof( $data ) ; $i ++ ) {
+		$unique_path = $data[$i]['unique_path'] ;
+		$path_to_i[ $unique_path ] = $i ;
+		$parent_path = substr( $unique_path , 0 , strrpos( $unique_path , '.' ) ) ;
+		if( $parent_path && isset( $path_to_i[ $parent_path ] ) ) {
+			$data[ $path_to_i[ $parent_path ] ]['f1s'][ $data[$i]['id'] ] = $data[$i]['unique_path'] ;
+		}
+
 		$depth_diff = $data[$i]['depth_in_tree'] - @$previous_depth ;
 		$previous_depth = $data[$i]['depth_in_tree'] ;
 		$data[$i]['ul_in'] = '' ;
@@ -343,6 +351,23 @@ function d3forum_trigger_event( $category , $item_id , $event , $extra_tags=arra
 			$notification->notifyUser($mail_template_dir, $template, $subject, $tags);
 		}
 	}
+}
+
+
+function d3forum_get_comment_link( $external_link_format , $external_link_id )
+{
+	if( substr( $external_link_format , 0 , 11 ) == '{XOOPS_URL}' ) {
+		$format = str_replace( '{XOOPS_URL}' , XOOPS_URL , $external_link_format ) ;
+		return sprintf( $format , $external_link_id ) ;
+	} else {
+		return '' ;
+	}
+}
+
+
+function d3forum_get_comment_description( $forum_row , $topic_row )
+{
+	return '' ; // TODO
 }
 
 ?>

@@ -6,10 +6,10 @@ require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $forum_id = intval( @$_GET['forum_id'] ) ;
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // special check for forummanager
 if( ! $isadminormod ) die( _MD_D3FORUM_ERR_MODERATEFORUM ) ;
@@ -21,10 +21,11 @@ if( isset( $_POST['forumman_post'] ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 
-	// options and weight can be modified only by admin
+	// options, weight and external_link_format can be modified only by admin
 	if( ! $isadmin ) {
 		$_POST['options'] = '' ;
 		$_POST['weight'] = 0 ;
+		$_POST['external_link_format'] = '' ;
 	}
 
 	d3forum_updateforum( $mydirname , $forum_id , $isadmin ) ;
@@ -55,6 +56,7 @@ $forum4assign = array(
 	'id' => $forum_id ,
 	'title' => htmlspecialchars( $forum_row['forum_title'] , ENT_QUOTES ) ,
 	'weight' => intval( $forum_row['forum_weight'] ) ,
+	'external_link_format' => htmlspecialchars( $forum_row['forum_external_link_format'] , ENT_QUOTES ) ,
 	'desc' => htmlspecialchars( $forum_row['forum_desc'] , ENT_QUOTES ) ,
 	'options' => $options4html ,
 	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $d3forum_configs_can_be_override ) ) , ENT_QUOTES ) ) ,

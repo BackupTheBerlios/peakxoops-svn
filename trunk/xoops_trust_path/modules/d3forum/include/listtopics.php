@@ -3,10 +3,10 @@
 $forum_id = intval( @$_GET['forum_id'] ) ;
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(__FILE__).'/process_this_forum.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(__FILE__).'/process_this_category.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // get $odr_options, $solved_options, $query4assign
 $query4nav = "forum_id=$forum_id" ;

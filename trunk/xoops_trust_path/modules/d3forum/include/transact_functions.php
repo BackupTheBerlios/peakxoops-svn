@@ -446,6 +446,7 @@ function d3forum_get_requests4sql_forum( $mydirname )
 		'title' => addslashes( $myts->stripSlashesGPC( @$_POST['title'] ) ) ,
 		'desc' => addslashes( $myts->stripSlashesGPC( @$_POST['desc'] ) ) ,
 		'weight' => intval( @$_POST['weight'] ) ,
+		'external_link_format' => addslashes( $myts->stripSlashesGPC( @$_POST['external_link_format'] ) ) ,
 		'cat_id' => $cat_id ,
 		'options' => addslashes( serialize( $options ) ) ,
 	) ;
@@ -459,7 +460,7 @@ function d3forum_makeforum( $mydirname , $cat_id , $isadmin )
 
 	$requests = d3forum_get_requests4sql_forum( $mydirname ) ;
 
-	$set4admin = $isadmin ? ", forum_weight='{$requests['weight']}', forum_options='{$requests['options']}'" : '' ;
+	$set4admin = $isadmin ? ", forum_weight='{$requests['weight']}', forum_options='{$requests['options']}', forum_external_link_format='{$requests['external_link_format']}'" : '' ;
 	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_forums")." SET forum_title='{$requests['title']}', forum_desc='{$requests['desc']}', cat_id=$cat_id $set4admin" ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 	$new_forum_id = $db->getInsertId() ;
 
@@ -478,7 +479,7 @@ function d3forum_updateforum( $mydirname , $forum_id , $isadmin )
 
 	$requests = d3forum_get_requests4sql_forum( $mydirname ) ;
 
-	$set4admin = $isadmin ? ", forum_weight='{$requests['weight']}', forum_options='{$requests['options']}', cat_id='{$requests['cat_id']}'" : '' ;
+	$set4admin = $isadmin ? ", forum_weight='{$requests['weight']}', forum_options='{$requests['options']}', forum_external_link_format='{$requests['external_link_format']}', cat_id='{$requests['cat_id']}'" : '' ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_forums")." SET forum_title='{$requests['title']}', forum_desc='{$requests['desc']}' $set4admin WHERE forum_id=$forum_id" ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 
 	return $forum_id ;

@@ -3,9 +3,15 @@
 	<input type="hidden" name="mode" value="admin" />
 	<input type="hidden" name="page" value="forum_access" />
 	<label for="select_forum_id"><{$smarty.const._MD_A_D3FORUM_LABEL_SELECTFORUM}></label>:
-	<select name="forum_id" id="select_forum_id" onchange="submit();"><{$forum_jumpbox_options}></select>
+	<select name="forum_id" id="select_forum_id"><{$forum_jumpbox_options}></select>
 	<input type="submit" value="<{$smarty.const._SUBMIT}>" />
 </form>
+
+<!-- forum title -->
+<p>
+	<{$smarty.const._MD_D3FORUM_FORUM}>:<{$forum_title}>
+	(<a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum_id}>"><{$smarty.const._EDIT}></a>)
+</p>
 
 <!-- group form -->
 <h2 class="head"><{$smarty.const._MD_A_D3FORUM_H2_GROUPPERMS}></h2>

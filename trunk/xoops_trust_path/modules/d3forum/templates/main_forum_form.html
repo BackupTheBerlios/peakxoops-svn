@@ -1,27 +1,27 @@
 <!-- start module contents -->
-<div class="d3forum">
+<div class="d3f_breadcrumbs">
+	<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &gt; <{$smarty.const._MD_D3FORUM_FORUMMANAGER}>
+</div>
 
-<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &gt; <{$smarty.const._MD_D3FORUM_FORUMMANAGER}>
+<h1 class="d3f_title"><{$formtitle}></h1>
 
 <form name="forumform" id="forumform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;cat_id=<{$category.id}>&amp;forum_id=<{$forum.id}>" method="post" onsubmit="return xoopsFormValidate_forumform();">
 
-	<{$gticket_hidden}>
 
-	<table width="100%" class="outer" cellspacing="1">
-
-		<tr>
-			<th colspan="2"><{$formtitle}></th>
+	<table width="100%" class="outer d3f_form_table" cellspacing="1">
+		<tr style="display:none;">
+			<td><{$gticket_hidden}></td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_FORUMTITLE}></td>
+			<th class="head"><label for="forum_title"><{$smarty.const._MD_D3FORUM_TH_FORUMTITLE}></label></th>
 			<td class="even">
-				<input type="text" name="title" id="forum_title" size="60" maxlength="255" value="<{$forum.title}>" />
+				<input type="text" name="title" id="forum_title" size="50" maxlength="255" value="<{$forum.title}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_FORUMDESC}></td>
+			<th class="head"><label for="forum_desc"><{$smarty.const._MD_D3FORUM_TH_FORUMDESC}></label></th>
 			<td class="even">
 				<textarea name="desc" id="forum_desc" cols="50" rows="10"><{$forum.desc}></textarea>
 			</td>
@@ -30,7 +30,7 @@
 		<{if $xoops_isadmin}>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_CATEGORY}></td>
+			<th class="head"><label for="cat_id"><{$smarty.const._MD_D3FORUM_CATEGORY}></label></th>
 			<td class="even">
 				<{if $cat_jumpbox_options}>
 				<select name="cat_id" id="cat_id">
@@ -44,18 +44,27 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head"><{$smarty.const._MD_D3FORUM_TH_FORUMWEIGHT}></td>
+			<th class="head"><label for="forum_weight"><{$smarty.const._MD_D3FORUM_TH_FORUMWEIGHT}></label></th>
 			<td class="even">
 				<input type="text" name="weight" id="forum_weight" size="4" maxlength="4" value="<{$forum.weight}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<td class="head">
+			<th class="head"><label for="forum_external_link_format"><{$smarty.const._MD_D3FORUM_TH_EXTERNALLINKFORMAT}></label></th>
+			<td class="even">
+				<input type="text" name="external_link_format" id="forum_external_link_format" size="80" maxlength="255" value="<{$forum.external_link_format}>" />
+				<br />
+				<{$smarty.const._MD_D3FORUM_HELP_EXTERNALLINKFORMAT}>
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
+			<th class="head">
 				<{$smarty.const._MD_D3FORUM_TH_FORUMOPTIONS}>
 				<br />
 				<span class="forumoptiondesc"><{$forum.option_desc}></span>
-			</td>
+			</th>
 			<td class="even">
 				<textarea name="options" id="forum_options" cols="50" rows="15"><{$forum.options}></textarea>
 			</td>
@@ -63,17 +72,14 @@
 
 		<{/if}>
 
-		<tr valign="top" align="left">
-			<td class="head"></td>
-			<td class="even">
-				<input type="submit" name="forumman_post" value="<{$smarty.const._SUBMIT}>" />
-				<{if $page == 'forummanager' }>
-				<input type="submit" name="forumman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE}>')" />
-				<{/if}>
-			</td>
-		</tr>
-
 	</table>
+
+	<p class="d3f_submit"><input type="submit" name="forumman_post" value="<{$smarty.const._SUBMIT}>" />
+	<{if $page == 'forummanager' }>
+	<input type="submit" name="forumman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE}>')" />
+	<{/if}></p>
+
+
 </form>
 
 <!-- Start Form Vaidation JavaScript //-->
@@ -87,5 +93,4 @@ function xoopsFormValidate_forumform() {
 //--></script>
 <!-- End Form Vaidation JavaScript //-->
 
-</div>
-<!-- end module contents -->
+a<!-- end module contents -->

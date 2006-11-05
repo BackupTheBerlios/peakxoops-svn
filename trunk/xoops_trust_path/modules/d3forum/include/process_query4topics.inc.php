@@ -75,7 +75,7 @@
 		$odr_query = $odr_sqls[ $query4assign['odr'] ] ;
 	} else {
 		$query4assign['odr'] = 1 ;
-		$odr_query = 'u2t.u2t_marked DESC,t.topic_sticky DESC,' . $odr_sqls[1] ;
+		$odr_query = 'u2t.u2t_marked <=> 1 DESC,t.topic_sticky DESC,' . $odr_sqls[1] ;
 	}
 
 	// POS

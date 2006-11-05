@@ -3,9 +3,15 @@
 	<input type="hidden" name="mode" value="admin" />
 	<input type="hidden" name="page" value="category_access" />
 	<label for="select_cat_id"><{$smarty.const._MD_A_D3FORUM_LABEL_SELECTCATEGORY}></label>:
-	<select name="cat_id" id="select_cat_id" onchange="submit();"><{html_options options=$cat_options selected=$cat_id}></select>
+	<select name="cat_id" id="select_cat_id"><{html_options options=$cat_options selected=$cat_id}></select>
 	<input type="submit" value="<{$smarty.const._SUBMIT}>" />
 </form>
+
+<!-- category title -->
+<p>
+	<{$smarty.const._MD_D3FORUM_CATEGORY}>:<{$cat_title}>
+	(<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>)
+</p>
 
 <!-- group form -->
 <h2 class="head"><{$smarty.const._MD_A_D3FORUM_H2_GROUPPERMS}></h2>

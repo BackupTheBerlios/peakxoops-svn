@@ -9,12 +9,15 @@ $db =& Database::getInstance() ;
 
 // get right $cat_id
 $cat_id = intval( @$_GET['cat_id'] ) ;
-list( $cat_id ) = $db->fetchRow( $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
+list( $cat_id , $cat_title ) = $db->fetchRow( $db->query( "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
 if( empty( $cat_id ) ) {
 	$invalid_cat_id = true ;
 	list( $cat_id ) = $db->fetchRow( $db->query( "SELECT MIN(cat_id) FROM ".$db->prefix($mydirname."_categories") ) ) ;
 	if( empty( $cat_id ) ) {
 		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php" , 5 , _MD_D3FORUM_ERR_EXISTSCATEGORY ) ;
+		exit ;
+	} else {
+		header( "Location: ".XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&cat_id=$cat_id" ) ;
 		exit ;
 	}
 }
@@ -204,6 +207,7 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
+	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options ,
 	'group_trs' => $group_trs ,
 	'user_trs' => $user_trs ,

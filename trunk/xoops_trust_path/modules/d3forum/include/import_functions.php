@@ -362,4 +362,63 @@ function d3forum_import_from_d3forum( $mydirname , $import_mid )
 	}
 }
 
+
+function d3forum_comimport_as_topics( $mydirname , $mid , $forum_id )
+{
+	$db =& Database::getInstance() ;
+
+	// check forum_id
+	$frs = $db->query( "SELECT * FROM ".$db->prefix($mydirname."_forums")." WHERE forum_id=$forum_id" ) ;
+	if( ! $frs ) d3forum_import_errordie() ;
+	if( $db->getRowsNum( $frs ) != 1 ) die( 'Invalid forum_id' ) ;
+
+	// get comments configs from xoops_version.php of the module
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$module_obj =& $module_handler->get( $mid ) ;
+	if( ! is_object( $module_obj ) ) die( 'Invalid mid' ) ;
+	$com_configs = $module_obj->getInfo('comments') ;
+
+	// get exparams (consider it as "static" like "page=article&")
+	$ers = $db->query( "SELECT distinct com_exparams FROM ".$db->prefix("xoopscomments")." WHERE com_modid=$mid AND LENGTH(`com_exparams`) > 5 LIMIT 1" ) ;
+	list( $exparam ) = $db->fetchRow( $ers ) ;
+	if( empty( $exparam ) ) $exparam = '' ;
+	else if( substr( $exparam , -1 ) != '&' ) $exparam .= '&' ;
+
+	// import it into the forum record as format
+	$format = '{XOOPS_URL}/modules/'.$module_obj->getVar('dirname').'/'.$com_configs['pageName'].'?'.$exparam.$com_configs['itemName'].'=%s' ;
+	$frs = $db->query( "UPDATE ".$db->prefix($mydirname."_forums")." SET forum_external_link_format='".addslashes($format)."' WHERE forum_id=$forum_id" ) ;
+	if( ! $frs ) d3forum_import_errordie() ;
+
+	// import topics
+	$to_table = $db->prefix( $mydirname.'_topics' ) ;
+	$from_table = $db->prefix( 'xoopscomments' ) ;
+	$crs = $db->query( "SELECT com_id,com_itemid,com_title FROM `$from_table` WHERE com_modid=$mid AND com_pid=0" ) ;
+	if( ! $crs ) d3forum_import_errordie() ;
+	while( $row = $db->fetchArray( $crs ) ) {
+		$trs = $db->query( "INSERT INTO `$to_table` SET forum_id=$forum_id,topic_external_link_id=".intval($row['com_itemid']).",topic_title='".addslashes($row['com_title'])."'" ) ;
+		if( ! $trs ) d3forum_import_errordie() ;
+		$topic_id = $db->getInsertId() ;
+		d3forum_comimport_posts_recursive( $mydirname , $topic_id , intval( $row['com_id'] ) ) ;
+		d3forum_sync_topic( $mydirname , $topic_id ) ;
+	}
+}
+
+
+function d3forum_comimport_posts_recursive( $mydirname , $topic_id , $com_id , $pid4posts = 0 )
+{
+	$db =& Database::getInstance() ;
+
+	$to_table = $db->prefix( $mydirname.'_posts' ) ;
+	$from_table = $db->prefix( 'xoopscomments' ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (pid,topic_id,post_time,modified_time,uid,poster_ip,modifier_ip,subject,html,smiley,xcode,br,number_entity,special_entity,icon,attachsig,invisible,approval,post_text) SELECT $pid4posts,$topic_id,com_created,com_modified,com_uid,com_ip,com_ip,com_title,dohtml,dosmiley,doxcode,dobr,1,1,IF(SUBSTRING(com_icon,5,1),SUBSTRING(com_icon,5,1),1),com_sig,IF(com_status=3,1,0),IF(com_status=1,1,0),com_text FROM `$from_table` WHERE com_id=$com_id" ) ;
+	if( ! $irs ) d3forum_import_errordie() ;
+	$post_id = $db->getInsertId() ;
+
+	$crs = $db->query( "SELECT com_id FROM `$from_table` WHERE com_pid=$com_id" ) ;
+	while( list( $child_com_id ) = $db->fetchRow( $crs ) ) {
+		d3forum_comimport_posts_recursive( $mydirname , $topic_id , $child_com_id , $post_id ) ;
+	}
+}
+
+
 ?>

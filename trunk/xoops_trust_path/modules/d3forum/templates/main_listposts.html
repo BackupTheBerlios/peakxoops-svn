@@ -1,5 +1,5 @@
 <!-- start module contents -->
-<div class="breadcrumbs">
+<div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
@@ -13,9 +13,15 @@
 
 <h1 class="d3f_title"><{$topic.title}></h1>
 
+<{if $topic.comment_link}>
+	<p><a href="<{$topic.comment_link}>"><{$smarty.const._MD_D3FORUM_LINK_COMMENTSOURCE}></a></p>
+<{elseif $topic.comment_description}>
+	<p><{$topic.comment_description}></p>
+<{/if}>
+
 <!-- top of posts -->
 
-<p class="d3f_topicinfo"><{$smarty.const._MD_D3FORUM_REPLIES}>: <{$topic.replies}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$topic.views}> <{$smarty.const._MD_D3FORUM_VOTECOUNT}>: <{$topic.votes_count}> <{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>: <{$topic.votes_avg|string_format:"%.2f"}><br /><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$topic.last_post_time_formatted}><a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>"><{$topic.last_post_subject}></a><{$topic.last_post_uname}></p>
+<p class="d3f_topicinfo"><{$smarty.const._MD_D3FORUM_REPLIES}>: <{$topic.replies}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$topic.views}> <{$smarty.const._MD_D3FORUM_VOTECOUNT}>: <{$topic.votes_count}> <{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>: <{$topic.votes_avg|string_format:"%.2f"}> <{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$topic.last_post_time_formatted}> <{$topic.last_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>"><{$topic.last_post_subject}></a></p>
 
 <{foreach item=post from=$posts}>
 	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post caller="listposts"}>

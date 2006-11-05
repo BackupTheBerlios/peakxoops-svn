@@ -6,7 +6,7 @@ $cat_id = intval( @$_GET['cat_id'] ) ;
 if( ! empty( $_POST['cat_id'] ) ) $cat_id = intval( $_POST['cat_id'] ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // special check for makeforum
 if( ! $isadmin && ! @$category_permissions[ $cat_id ]['can_makeforum'] && ! @$category_permissions[ $cat_id ]['is_moderator'] ) die( _MD_D3FORUM_ERR_CREATEFORUM ) ;

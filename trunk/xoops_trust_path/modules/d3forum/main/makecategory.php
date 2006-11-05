@@ -7,7 +7,7 @@ if( ! empty( $_POST['cat_id'] ) ) $cat_id = intval( $_POST['cat_id'] ) ;
 
 if( $cat_id ) {
 	// get&check this category ($category4assign, $category_row), override options
-	include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
+	if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 }
 
 // special check for makecategory

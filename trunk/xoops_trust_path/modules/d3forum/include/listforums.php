@@ -19,7 +19,7 @@ if( $uid > 0 ) {
 if( empty( $last_visit ) ) $last_visit = time() ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(__FILE__).'/process_this_category.inc.php' ;
+if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // subcategories loop
 $subcategories = array() ;
@@ -71,6 +71,7 @@ while( $forum_row = $xoopsDB->fetchArray( $frs ) ) {
 		'id' => $forum_row['forum_id'] ,
 		'title' => $myts->makeTboxData4Show( $forum_row['forum_title'] ) ,
 		'desc' => $myts->displayTarea( $forum_row['forum_desc'] ) ,
+		'external_link_format' => htmlspecialchars( $forum_row['forum_external_link_format'] , ENT_QUOTES ) ,
 		'topics_count' => intval( $forum_row['forum_topics_count'] ) ,
 		'posts_count' => intval( $forum_row['forum_posts_count'] ) ,
 		'last_post_time' => intval( $forum_row['forum_last_post_time'] ) ,
@@ -83,6 +84,7 @@ while( $forum_row = $xoopsDB->fetchArray( $frs ) ) {
 		'last_post_uname' => $last_post_uname ,
 		'moderate_groups' => d3forum_get_forum_moderate_groups4show( $mydirname , $forum_row['forum_id'] ) ,
 		'moderate_users' => d3forum_get_forum_moderate_users4show( $mydirname , $forum_row['forum_id'] ) ,
+		'can_post' => (boolean)$forum_permissions[ $forum_row['forum_id'] ]['can_post'] ,
 		'isadminormod' => (boolean)$forum_permissions[ $forum_id ]['is_moderator'] || $isadmin ,
 	) ;
 }

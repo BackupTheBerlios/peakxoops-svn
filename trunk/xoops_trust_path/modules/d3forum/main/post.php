@@ -48,29 +48,39 @@ if( @$_POST['mode'] == 'edit' && ! empty( $_POST['post_id'] ) ) {
 }
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
-include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
 
 // get&check this category ($category4assign, $category_row), override options
-include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
+if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 if( $mode != 'newtopic' ) {
 	// get $post4assign
 	include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
 }
 
-// check post permission
-if( empty( $can_post ) ) die( _MD_D3FORUM_ERR_POSTFORUM ) ;
 
-// check edit permission
+// Permissions
 if( $mode == 'edit' ) {
+	// check edit permission
+	if( empty( $can_edit ) ) die( _MD_D3FORUM_ERR_EDITPOST ) ;
 	if( ! is_object( $xoopsUser ) ) die( _MD_D3FORUM_ERR_EDITPOST ) ; // TODO
 	else if( ! $isadminormod && ( $post_row['uid'] != $xoopsUser->getVar('uid') || time() >= $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ) ) die( _MD_D3FORUM_ERR_EDITPOST ) ;
-}
-
-// check reply permission
-if( $mode == 'reply' ) {
+} else if( $mode == 'reply' ) {
+	// check reply permission
+	if( empty( $can_reply ) ) die( _MD_D3FORUM_ERR_REPLYPOST ) ;
 	if( ! $isadminormod && ( $post_row['invisible'] || ! $post_row['approval'] ) ) {
 		die( _MD_D3FORUM_ERR_REPLYPOST ) ;
+	}
+} else {
+	// check post permission (new topic)
+	if( empty( $can_post ) ) die( _MD_D3FORUM_ERR_POSTFORUM ) ;
+	// comment integration
+	if( ! empty( $forum_row['forum_external_link_format'] ) ) {
+		if( empty( $_POST['external_link_id'] ) ) {
+			die( _MD_D3FORUM_ERR_FORUMASCOMMENT ) ;
+		} else {
+			$external_link_id = intval( $_POST['external_link_id'] ) ;
+		}
 	}
 }
 
@@ -234,13 +244,15 @@ if( !empty($_POST['contents_preview']) ) {
 		// approval
 		if( $forum_permissions[$forum_id]['post_auto_approved'] ) {
 			$set4sql .= ',approval=1' ;
+			$topic_invisible = 0 ;
 			$need_notify = true ;
 		} else {
 			$set4sql .= ',approval=0' ;
+			$topic_invisible = 1 ;
 			$need_admin_notify = true ;
 		}
 		// create topic and get a new topic_id
-		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_topics")." SET forum_id=$forum_id" ) ) die( "DB ERROR IN INSERT topic" ) ;
+		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_topics")." SET forum_id=$forum_id,topic_invisible=$topic_invisible,topic_external_link_id=".intval(@$external_link_id) ) ) die( "DB ERROR IN INSERT topic" ) ;
 		$topic_id = $xoopsDB->getInsertId() ;
 		// create post in the topic
 		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql,topic_id=$topic_id,post_time=UNIX_TIMESTAMP(),poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',uid='$uid'" ) ) die( "DB ERROR IN INSERT post" ) ;
@@ -311,7 +323,12 @@ if( !empty($_POST['contents_preview']) ) {
 		}
 	}
 
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 2 , $mode == 'edit' ? _MD_D3FORUM_MSG_THANKSEDIT : _MD_D3FORUM_MSG_THANKSPOST ) ;
+	$redirect_message = $mode == 'edit' ? _MD_D3FORUM_MSG_THANKSEDIT : _MD_D3FORUM_MSG_THANKSPOST ;
+	if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
+		redirect_header( sprintf( str_replace( '{XOOPS_URL}' , XOOPS_URL , $forum_row['forum_external_link_format'] ) , $external_link_id ) , 2 , $redirect_message ) ;
+	} else {
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 2 , $redirect_message ) ;
+	}
 	exit ;
 }
 

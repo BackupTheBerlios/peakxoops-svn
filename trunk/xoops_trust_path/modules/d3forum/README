@@ -1,0 +1,37 @@
+How to use "comment-integration"
+
+== for conventional modules ==
+
+1. copy a plugin modifier.d3forum_comment of the archive into XOOPS_ROOT_PATH/class/smarty/plugins/
+2. make a new forum for integration under appropriate category.
+3. import from xoopscomments of a module into the forum.
+4. edit template like this.
+
+original:
+[code]
+<div style="text-align: center; padding: 3px; margin:3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+[/code]
+
+modified:
+[code]
+<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] pagename="index.php" itemname="id" quote=$content subject=$title}>
+[/code]
+
+This sample is for TinyD.
+I will make more samples for comment-integration.
+

@@ -51,6 +51,8 @@ define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','¤³¤Î¥ì¥³¡¼¥É¤Ë½êÂ°¤·¤Æ¤¤¤ë¥Ç¡¼¥
 define('_MD_D3FORUM_POSTASNEWTOPIC','¿·µ¬¥È¥Ô¥Ã¥¯¤È¤·¤ÆÅê¹Æ¤¹¤ë');
 define('_MD_D3FORUM_REGTOPOST','Åê¹Æ¤¹¤ë¤Ë¤Ï¤Þ¤ºÅÐÏ¿¤ò');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','¤³¤Î¥Õ¥©¡¼¥é¥à¤Ë¤ÏÅê¹Æ¤Ç¤­¤Þ¤»¤ó');
+define('_MD_D3FORUM_FORUMASCOMMENT','¥³¥á¥ó¥ÈÍÑ¥Õ¥©¡¼¥é¥à');
+define('_MD_D3FORUM_ERR_FORUMASCOMMENT','¥³¥á¥ó¥ÈÍÑ¥Õ¥©¡¼¥é¥à¤Ë¤ÏÄ¾ÀÜ¿·µ¬¥È¥Ô¥Ã¥¯¤òºîÀ®¤Ç¤­¤Þ¤»¤ó');
 define('_MD_D3FORUM_REPLIES','ÊÖ¿®');
 define('_MD_D3FORUM_POSTER','Åê¹Æ¼Ô');
 define('_MD_D3FORUM_VIEWS','±ÜÍ÷');
@@ -68,6 +70,12 @@ define('_MD_D3FORUM_SOLVED_TURNON','²ò·èºÑ¤È¤¹¤ë');
 define('_MD_D3FORUM_SOLVED_TURNOFF','Ì¤²ò·è¤È¤¹¤ë');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','Åê¹Æ°ìÍ÷¤ÎºÇ¾åÉô¤Ç¤¹'); //jidaikobo
 define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','Åê¹Æ°ìÍ÷¤ÎºÇ²¼Éô¤Ç¤¹'); //jidaikobo
+
+// comment integration
+define('_MD_D3FORUM_POSTASCOMMENTTOP','¿·¤·¤¯¥³¥á¥ó¥È¤ò¤Ä¤±¤ë');
+define('_MD_D3FORUM_LINK_COMMENTSOURCE','¥³¥á¥ó¥È¸µ');
+define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','¤è¤ê¾ÜºÙ¤Ê¥³¥á¥ó¥ÈÆþÎÏ¥Õ¥©¡¼¥à¤Ø');
+define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 
 // topic,forum,category controller
 define('_MD_D3FORUM_SHORTCUT','¥·¥ç¡¼¥È¥«¥Ã¥È');
@@ -241,6 +249,8 @@ define('_MD_D3FORUM_TH_FORUMTITLE','¥Õ¥©¡¼¥é¥àÌ¾');
 define('_MD_D3FORUM_TH_FORUMWEIGHT','É½¼¨Í¥Àè½ç');
 define('_MD_D3FORUM_TH_FORUMDESC','¥Õ¥©¡¼¥é¥àÀâÌÀÊ¸');
 define('_MD_D3FORUM_TH_FORUMOPTIONS','¥Õ¥©¡¼¥é¥à¥ª¥×¥·¥ç¥ó');
+define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','¥³¥á¥ó¥ÈÅý¹ç»þ¤Î»²¾ÈÊýË¡');
+define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','¥³¥á¥ó¥ÈÅý¹ç¤ò»È¤ï¤Ê¤¤¤È¤­¤Ë¤Ï¶õÍó¤Ë¤·¤Þ¤¹¡£{XOOPS_URL}/modules/dirname ¤«¤é»Ï¤Þ¤ësprintf()ÍÑ¤Î¥Õ¥©¡¼¥Þ¥Ã¥È¤¬µ­½Ò¤µ¤ì¤¿¾ì¹ç¤Ï¡¢%s¤Ëµ­»öÈÖ¹æ¤òÂåÆþ¤·¤¿¤â¤Î¤¬¥³¥á¥ó¥È¸µ¤Ø¤ÎURI¤È¤Ê¤ê¤Þ¤¹¡£ºÇ½é¤«¤éd3forum¥³¥á¥ó¥ÈÅý¹ç¤ËÂÐ±þ¤·¤¿¥â¥¸¥å¡¼¥ë¤Î¾ì¹ç¤Ï¼«Æ°Åª¤Ë¥»¥Ã¥È¤µ¤ì¤ë¤Î¤Ç¡¢¤¤¤¸¤é¤Ê¤¤¤Ç¤¯¤À¤µ¤¤¡£');
 
 // makecategory and categorymanager
 define('_MD_D3FORUM_CATEGORYMANAGER','¥«¥Æ¥´¥ê¡¼´ÉÍý');

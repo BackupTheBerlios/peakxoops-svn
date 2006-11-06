@@ -7,6 +7,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_AM_LOADED' ) 
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2006-11-07 06:20:58
+define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
+define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
+
 // Appended by Xoops Language Checker -GIJOE- in 2006-04-11 11:14:42
 define('_TC_UPDATE_WRAP_CONTENTS','Update wrapped contents for searching');
 

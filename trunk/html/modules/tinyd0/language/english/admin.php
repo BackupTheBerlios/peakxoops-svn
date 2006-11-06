@@ -2,6 +2,11 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_AM_LOADED' ) ) {
 
+define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
+define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
+
+
 define( 'TINYCONTENT_AM_LOADED' , 1 ) ;
 
 //Admin Page Titles

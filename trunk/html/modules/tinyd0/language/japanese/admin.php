@@ -2,6 +2,11 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'TINYCONTENT_AM_LOADED' ) ) {
 
+define('_MD_A_MYMENU_MYTPLSADMIN','テンプレート管理');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限');
+define('_MD_A_MYMENU_MYPREFERENCES','一般設定');
+
+
 define( 'TINYCONTENT_AM_LOADED' , 1 ) ;
 
 //Admin Page Titles

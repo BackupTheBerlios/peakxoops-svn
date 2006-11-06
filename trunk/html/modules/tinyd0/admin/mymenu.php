@@ -2,6 +2,8 @@
 
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
+if( empty( $mydirname ) ) $mydirname = basename(dirname(dirname(__FILE__))) ;
+
 if( ! defined( 'XOOPS_ORETEKI' ) ) {
 	// Skip for ORETEKI XOOPS
 

@@ -1,19 +1,21 @@
 <?php
 
+define( 'WRAPS_DISALLOW_CHARS' , '?[^a-zA-Z0-9_./+-]?' ) ;
+
 if( ! empty( $_GET['path_info'] ) ) {
 	// path_info=($path_info) by mod_rewrite
-	$path_info = str_replace( '..' , '' , preg_replace( '?[^a-zA-Z0-9_./-]?' , '' , $_GET['path_info'] ) ) ;
+	$path_info = str_replace( '..' , '' , preg_replace( WRAPS_DISALLOW_CHARS , '' , $_GET['path_info'] ) ) ;
 } else if( ! empty( $_SERVER['PATH_INFO'] ) ) {
 	// try PATH_INFO first
-	$path_info = str_replace( '..' , '' , preg_replace( '?[^a-zA-Z0-9_./-]?' , '' , substr( @$_SERVER['PATH_INFO'] , 1 ) ) ) ;
+	$path_info = str_replace( '..' , '' , preg_replace( WRAPS_DISALLOW_CHARS , '' , substr( @$_SERVER['PATH_INFO'] , 1 ) ) ) ;
 } else if( stristr( $_SERVER['REQUEST_URI'] , $mydirname.'/index.php/' ) ) {
 	// try REQUEST_URI second
 	list( , $path_info_query ) = explode( $mydirname.'/index.php' , $_SERVER['REQUEST_URI'] , 2 ) ;
 	list( $path_info_tmp ) = explode( '?' , $path_info_query , 2 ) ;
-	$path_info = str_replace( '..' , '' , preg_replace( '?[^a-zA-Z0-9_./-]?' , '' , substr( $path_info_tmp , 1 ) ) ) ;
+	$path_info = str_replace( '..' , '' , preg_replace( WRAPS_DISALLOW_CHARS , '' , substr( $path_info_tmp , 1 ) ) ) ;
 } else if( strlen( $_SERVER['PHP_SELF'] ) > strlen( $_SERVER['SCRIPT_NAME'] ) ) {
 	// try PHP_SELF & SCRIPT_NAME third
-	$path_info = str_replace( '..' , '' , preg_replace( '?[^a-zA-Z0-9_./-]?' , '' , substr( $_SERVER['PHP_SELF'] , strlen( $_SERVER['SCRIPT_NAME'] ) + 1 ) ) ) ;
+	$path_info = str_replace( '..' , '' , preg_replace( WRAPS_DISALLOW_CHARS , '' , substr( $_SERVER['PHP_SELF'] , strlen( $_SERVER['SCRIPT_NAME'] ) + 1 ) ) ) ;
 } else {
 	// module top
 	$path_info = empty( $xoopsModuleConfig['index_file'] ) ? 'index.html' : $xoopsModuleConfig['index_file'] ;

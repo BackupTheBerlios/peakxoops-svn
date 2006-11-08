@@ -49,10 +49,12 @@ yybbs: suin
 amaxoop
 piCal-0.7x
 xhld
+xhnewbb
 
 
 =PLUGIN in module's trusted directory=
 bulletin 2.0
+d3forum
 
 
 =PLUGINless=

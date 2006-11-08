@@ -11,62 +11,16 @@ function cc_changeDisplay(id){
 //-->
 </script>
 
-<div><a href="javascript:void(0);" onclick="cc_changeDisplay('sitemap_block');"><{$block.lang.openclose}></a></div>
+<div><a href="javascript:void(0);" onclick="cc_changeDisplay('sitemap_block');"><{$smarty.const._MB_SITEMAP_OPENCLOSE}></a></div>
 
 <div id="sitemap_block" style="display: none;">
 
-<h3><{$xoops_sitename}> - <{$xoops_slogan}> &nbsp; <{$xoops_pagetitle}></h3>
-
-<div style="padding: 7px;"><{$block.msgs}></div>
-
-<div style="margin: 0 10px;">
-
-  <div align="right"><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/map.gif" /><a href="<{$xoops_url}>/"><{$smarty.const._MB_SITEMAP_HOME}></a>&nbsp;<a href="http://petitoops.net/"><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/chacha.gif" alt="" border="0" /></a></div>
-
-<br />
-
-<table>
-<tr>
-
 <{foreach name=i item=module from=$block.sitemap.modules}>
-<td width="33%">
-  <{if $module.name}>
-    <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/<{if $block.this.mods == $module.directory}>map<{else}>main<{/if}>.gif" /> <a class="menuMain" href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a></div>
-    <{foreach item=parent from=$module.parent}>
-      <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/cat.gif" /> <a class="menuSub" href="<{$xoops_url}>/modules/<{$module.directory}>/<{$parent.url}>"><{$parent.title}></a></div>
-      
-      <{if $block.show_subcategoris}>
-      <{foreach item=child from=$parent.child}>
-        <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/cat<{$child.image}>.gif" /> <a class="menuSub" href="<{$xoops_url}>/modules/<{$module.directory}>/<{$child.url}>"><{$child.title}></a></div>
-      <{/foreach}>
-      <{/if}>
-
-    <{/foreach}>
-    <{foreach item=sublink from=$module.sublinks}>
-      <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/sub.gif" /> <a class="menuSub" href="<{$sublink.url}>"><{$sublink.name}></a></div>
-    <{/foreach}>
+  <{if $block.cols > 0}>
+    <{include file="db:sitemap_inc_eachmodule.html" div_style="float:left;width:`$block.div_width`%;margin:10px;"}>
+  <{else}>
+    <{include file="db:sitemap_inc_eachmodule.html" div_style="margin:2px;"}>
   <{/if}>
-</td>
-<{if $smarty.foreach.i.iteration is div by $block.cols}></tr><{if !$smarty.foreach.i.last}><tr><td colspan="3"><br /></td></tr><tr><{/if}><{/if}>
 <{/foreach}>
-
-<{if $block.isuser}>
-  <{if $smarty.foreach.i.total is div by $block.cols}><tr><td colspan="3"><br /></td></tr><tr><{/if}>
-  <td>
-  <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/user.gif" /> <b><{$block.usermenu}></b></div>
-  <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/user.php"><{$block.lang.youraccount}></a></div>
-  <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/edituser.php"><{$block.lang.editaccount}></a></div>
-  <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/notifications.php"><{$block.lang.notifications}></a></div>
-  <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/user.php?op=logout"><{$block.lang.logout}></a></div>
-  <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/user_sub.gif" /> <a href="<{$xoops_url}>/viewpmsg.php"><{$block.lang.inbox}></a></div>
-  <{if $block.isadmin}>
-    <div><img src="<{$xoops_url}>/modules/<{$block.this.mods}>/images/acp.gif" /> <a href="<{$xoops_url}>/admin.php"><{$block.lang.adminmenu}></a></div>
-  <{/if}>
-  </td>
-<{/if}>
-</tr>
-</table>
-
-</div>
 
 </div>

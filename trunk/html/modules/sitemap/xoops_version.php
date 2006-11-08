@@ -1,7 +1,7 @@
 <?php
 
 $modversion['name'] = _MI_SITEMAP_NAME;
-$modversion['version'] = '1.29';
+$modversion['version'] = '1.30';
 $modversion['author'] = 'chanoir';
 $modversion['image'] = 'images/sitemap_slogo.png';
 $modversion['dirname'] = 'sitemap';
@@ -12,11 +12,14 @@ $modversion['adminmenu'] = 'admin/menu.php';
 
 $modversion['hasMain'] = 1;
 
-$modversion['templates'][1]['file'] = 'sitemap_index.html';
+$modversion['templates'][1]['file'] = 'sitemap_inc_eachmodule.html';
 $modversion['templates'][1]['description'] = '';
 
-$modversion['templates'][2]['file'] = 'sitemap_xml_google.html';
+$modversion['templates'][2]['file'] = 'sitemap_index.html';
 $modversion['templates'][2]['description'] = '';
+
+$modversion['templates'][3]['file'] = 'sitemap_xml_google.html';
+$modversion['templates'][3]['description'] = '';
 
 $modversion['blocks'][1]['file'] = 'sitemap_blocks.php';
 $modversion['blocks'][1]['name'] = _MI_SITEMAP_BLOCKNAME ;

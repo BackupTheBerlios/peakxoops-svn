@@ -18,8 +18,8 @@ function sitemap_show()
 
 	$block = array();
 
-	@$block['lang_home'] = _MB_SYSTEM_HOME;
-	@$block['lang_close'] = _CLOSE;
+	@$block['lang_home'] = _MD_SITEMAP_HOME ;
+	@$block['lang_close'] = _CLOSE ;
 	$module_handler =& xoops_gethandler('module');
 	$criteria = new CriteriaCompo(new Criteria('hasmain', 1));
 	$criteria->add(new Criteria('isactive', 1));

@@ -1,24 +1,12 @@
 <?php
 
-include '../../mainfile.php';
+require '../../mainfile.php' ;
 
-if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/modinfo.php'))
-{
-	include_once(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/modinfo.php');
-}
-else
-{
-	if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/english/modinfo.php'))
-	{
-		include_once(XOOPS_ROOT_PATH . '/modules/system/language/english/modinfo.php');
-	}
-}
-
-$xoopsOption['template_main'] = 'sitemap_index.html';
-include(XOOPS_ROOT_PATH . '/header.php');
+$xoopsOption['template_main'] = 'sitemap_index.html' ;
+include XOOPS_ROOT_PATH.'/header.php' ;
 
 $sitemap_configs = $xoopsModuleConfig ;
-include_once(XOOPS_ROOT_PATH . '/modules/sitemap/include/sitemap.php');
+include_once XOOPS_ROOT_PATH.'/modules/sitemap/include/sitemap.php' ;
 
 
 // for All-time guest mode (backup uid & set as Guest)
@@ -38,48 +26,10 @@ if( ! empty( $backup_uid ) && ! empty( $sitemap_configs['alltime_guest'] ) ) {
 	$xoopsUserIsAdmin = $backup_userisadmin ;
 }
 
-// PM受信数を得る by Ryuji
-// if(is_object($xoopsUser)){
-//     $pm_handler =& xoops_gethandler('privmessage');
-//     $criteria = new CriteriaCompo(new Criteria('read_msg', 0));
-//     $criteria->add(new Criteria('to_userid', $xoopsUser->getVar('uid')));
-//     $new_messages = $pm_handler->getCount($criteria);
-// }else{
-//     $new_messages = 0;
-// }
-
-// ユーザメニュ用言語ファイルを読む
-if(!defined("_MB_SYSTEM_VACNT")){
-    $lang_file = XOOPS_ROOT_PATH."/modules/system/language/".$xoopsConfig["language"]."/blocks.php";
-    if(file_exists($lang_file)){
-        include_once($lang_file);
-    }else{
-        $lang_file = XOOPS_ROOT_PATH."/modules/system/language/english/blocks.php";
-        include_once($lang_file);
-    }
-}
-$xoopsTpl->assign('lang', array(
-	'youraccount' => _MB_SYSTEM_VACNT,
-	'editaccount' => _MB_SYSTEM_EACNT,
-	'notifications' => _MB_SYSTEM_NOTIF,
-	'logout' => _MB_SYSTEM_LOUT,
-// 	'messages' => $new_messages,
-	'inbox' => _MB_SYSTEM_INBOX,
-	'adminmenu' => _MB_SYSTEM_ADMENU,
-));
-
-/// ユーザメニューブロックのブロックタイトルを取得
-$sql = "SELECT title FROM " . $xoopsDB->prefix("newblocks") . " WHERE show_func = 'b_system_user_show'" ;
-$result = $xoopsDB->query($sql);
-list($usermenu) = $xoopsDB->fetchRow($result);
-
 $myts =& MyTextSanitizer::getInstance();
 
-$msgs = $sitemap_configs['msgs'];
-
-$xoopsTpl->assign('usermenu', $myts->makeTboxData4Show($usermenu));
 $xoopsTpl->assign('sitemap', $sitemap);
-$xoopsTpl->assign('msgs', $myts->displayTarea($msgs,1));
+$xoopsTpl->assign('msgs', $myts->displayTarea( $sitemap_configs['msgs'] , 1 ) ) ;
 $xoopsTpl->assign('show_subcategoris', $sitemap_configs["show_subcategoris"]);
 
 if( $sitemap_configs['alltime_guest'] ) {

@@ -5,24 +5,14 @@ function b_sitemap_show( $options )
 	global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsUserIsAdmin;
 	global $sitemap_configs ;
 
+	$cols = empty( $options[0] ) ? 1 : intval( $options[0] ) ;
+
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->getByDirname('sitemap');
 	$config_handler =& xoops_gethandler('config');
 	$sitemap_configs = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
 
 	$block = array();
-
-	if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/modinfo.php'))
-	{
-		include_once(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/modinfo.php');
-	}
-	else
-	{
-		if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/english/modinfo.php'))
-		{
-			include_once(XOOPS_ROOT_PATH . '/modules/system/language/english/modinfo.php');
-		}
-	}
 
 	include_once(XOOPS_ROOT_PATH . '/modules/sitemap/include/sitemap.php');
 
@@ -43,41 +33,13 @@ function b_sitemap_show( $options )
 		$xoopsUserIsAdmin = $backup_userisadmin ;
 	}
 
-	// ユーザメニュ用言語ファイルを読む
-	if(!defined("_MB_SYSTEM_VACNT")){
-	    $lang_file = XOOPS_ROOT_PATH."/modules/system/language/".$xoopsConfig["language"]."/blocks.php";
-	    if(file_exists($lang_file)){
-	        include_once($lang_file);
-	    }else{
-	        $lang_file = XOOPS_ROOT_PATH."/modules/system/language/english/blocks.php";
-	        include_once($lang_file);
-	    }
-	}
-	$block['lang'] = array(
-		'youraccount' => _MB_SYSTEM_VACNT,
-		'editaccount' => _MB_SYSTEM_EACNT,
-		'notifications' => _MB_SYSTEM_NOTIF,
-		'logout' => _MB_SYSTEM_LOUT,
-		// 'messages' => $new_messages,
-		'inbox' => _MB_SYSTEM_INBOX,
-		'adminmenu' => _MB_SYSTEM_ADMENU,
-		'openclose' => _MB_SITEMAP_OPENCLOSE,
-	);
-
-	// ユーザメニューブロックのブロックタイトルを取得
-	$sql = "SELECT title FROM " . $xoopsDB->prefix("newblocks") . " WHERE show_func = 'b_system_user_show'" ;
-	$result = $xoopsDB->query($sql);
-	list($usermenu) = $xoopsDB->fetchRow($result);
-
-	$msgs = $sitemap_configs['msgs'];
+	$myts =& MyTextSanitizer::getInstance();
 
 	$block['this']['mods'] = 'sitemap';
-
-	$block['cols'] = intval( $options[0] ) ;
-
-	$block['usermenu'] = $usermenu;
+	$block['cols'] = $cols ;
+	$block['div_width'] = 90.0 / $cols ;
 	$block['sitemap'] = $sitemap;
-	$block['msgs'] = $msgs;
+	$block['msgs'] = $myts->displayTarea( $sitemap_configs['msgs'] , 1 ) ;
 	$block['show_subcategoris'] = $sitemap_configs['show_subcategoris'];
 
 	if( $sitemap_configs['alltime_guest'] ) {

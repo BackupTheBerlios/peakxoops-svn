@@ -1,6 +1,7 @@
 1.30beta 2006-11-08
 - modified compatibitity with Cube 2.1
 - removed "usermenu"
+- modified templates radically
 
 1.29 2006-10-01
 - modified the action when xml_google.php is directly accessed 1.29

@@ -73,7 +73,7 @@ function b_tinycontent_content_show( $options )
 		// external (=wrapped) content
 		$wrap_file = "$mymodpath/content/$address" ;
 		if( ! file_exists( $wrap_file ) ) {
-			redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+			redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 			exit ;
 		}
 

@@ -53,14 +53,14 @@ $mytablename = $xoopsDB->prefix( "tinycontent{$mydirnumber}" ) ;
 
 // check if $_GET['wrap'] is specified & exists the file
 if( empty( $_GET['wrap'] ) ) {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 
 // before fopen it eliminates '..' (thx JM2)
 $wrap = str_replace( '..' , '' , $_GET['wrap'] ) ;
 if( ! ( $fp = fopen( "content/$wrap" , "r" ) ) ) {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 

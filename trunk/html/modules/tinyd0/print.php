@@ -48,14 +48,14 @@ $mytablename = $xoopsDB->prefix( "tinycontent{$mydirnumber}" ) ;
 // check if $_GET['id'] is specified
 $id = empty( $_GET['id'] ) ? 0 : intval( $_GET['id'] ) ;
 if( $id <= 0 )  {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 
 // main query
 $result = $xoopsDB->query( "SELECT storyid,title,text,visible,nohtml,nosmiley,nobreaks,nocomments,link,address,UNIX_TIMESTAMP(last_modified) AS last_modified,html_header FROM $mytablename WHERE storyid='$id' AND visible" ) ;
 if( ( $result_array = $xoopsDB->fetchArray( $result ) ) == false ) {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 

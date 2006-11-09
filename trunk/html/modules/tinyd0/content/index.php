@@ -89,7 +89,7 @@ $mytablename = $xoopsDB->prefix( "tinycontent{$mydirnumber}" ) ;
 // get id of homepage
 $result = $xoopsDB->query( "SELECT storyid,link FROM $mytablename WHERE visible='1' ORDER BY homepage DESC, blockid" ) ;
 if( $xoopsDB->getRowsNum( $result ) < 1 ) {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 list( $homepage_id , $homepage_link_type ) = $xoopsDB->fetchRow( $result ) ;
@@ -97,14 +97,14 @@ list( $homepage_id , $homepage_link_type ) = $xoopsDB->fetchRow( $result ) ;
 // check if $_GET['id'] is specified
 $id = empty( $_GET['id'] ) ? 0 : intval( $_GET['id'] ) ;
 if( $id <= 0 )  {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 
 // main query
 $result = $xoopsDB->query( "SELECT storyid,title,text,visible,nohtml,nosmiley,nobreaks,nocomments,link,address,UNIX_TIMESTAMP(last_modified) AS last_modified,html_header FROM $mytablename WHERE storyid='$id' AND visible" ) ;
 if( ( $result_array = $xoopsDB->fetchArray( $result ) ) == false ) {
-	redirect_header( XOOPS_URL , 2 , _TC_FILENOTFOUND ) ;
+	redirect_header( XOOPS_URL.'/' , 2 , _TC_FILENOTFOUND ) ;
 	exit ;
 }
 

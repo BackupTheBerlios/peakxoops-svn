@@ -43,7 +43,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 
 	// external_link_id
 	if( empty( $params['itemname'] ) ) {
-		echo "set valid itemname in the templateh" ;
+		echo "set valid itemname in the template" ;
 		return ;
 	}
 	$external_link_id = intval( @$_GET[ $params['itemname'] ] ) ;

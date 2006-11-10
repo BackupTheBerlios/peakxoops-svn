@@ -29,11 +29,11 @@ function b_d3forum_list_topics_show( $options )
 	}
 
 	// use solved or not
-//	if( empty( $configs['use_solved'] ) ) {
+	if( empty( $configs['use_solved'] ) ) {
 		$sel_solved = '1 AS topic_solved' ;
-//	} else {
-//		$sel_solved = 't.topic_solved' ;
-//	}
+	} else {
+		$sel_solved = 't.topic_solved' ;
+	}
 
 	// order
 	$whr_order = '1' ;

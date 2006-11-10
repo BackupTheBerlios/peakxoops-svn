@@ -1,7 +1,7 @@
 <?php
 
 define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
-define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
 define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
 
 // forum_access and category_access
@@ -20,6 +20,8 @@ define('_MD_A_D3FORUM_TH_UID','uid');
 define('_MD_A_D3FORUM_TH_UNAME','uname');
 define('_MD_A_D3FORUM_TH_GROUPNAME','groupname');
 define('_MD_A_D3FORUM_NOTICE_ADDUSERS','Input either uid or uname.');
+define('_MD_A_D3FORUM_ERR_CREATECATEGORYFIRST','Create a category first');
+define('_MD_A_D3FORUM_ERR_CREATEFORUMFIRST','Create a forum first');
 
 // advanced
 define('_MD_A_D3FORUM_H2_SYNCALLTABLES','Synchronize redundant informations');

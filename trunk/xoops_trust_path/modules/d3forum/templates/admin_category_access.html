@@ -1,6 +1,5 @@
 <!-- category selection -->
-<form name="selectcategory" action="<{$mod_url}>/index.php" method="get" style="margin: 20px 0px">
-	<input type="hidden" name="mode" value="admin" />
+<form name="selectcategory" action="<{$mod_url}>/admin/index.php" method="get" style="margin: 20px 0px">
 	<input type="hidden" name="page" value="category_access" />
 	<label for="select_cat_id"><{$smarty.const._MD_A_D3FORUM_LABEL_SELECTCATEGORY}></label>:
 	<select name="cat_id" id="select_cat_id"><{html_options options=$cat_options selected=$cat_id}></select>
@@ -10,7 +9,9 @@
 <!-- category title -->
 <p>
 	<{$smarty.const._MD_D3FORUM_CATEGORY}>:<{$cat_title}>
-	(<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>)
+	[<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>]
+	[<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a>]
+	[<a href="<{$mod_url}>/index.php?page=makeforum&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}></a>]
 </p>
 
 <!-- group form -->

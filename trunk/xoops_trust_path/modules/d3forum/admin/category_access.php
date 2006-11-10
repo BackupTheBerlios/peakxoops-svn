@@ -13,8 +13,9 @@ list( $cat_id , $cat_title ) = $db->fetchRow( $db->query( "SELECT cat_id,cat_tit
 if( empty( $cat_id ) ) {
 	$invalid_cat_id = true ;
 	list( $cat_id ) = $db->fetchRow( $db->query( "SELECT MIN(cat_id) FROM ".$db->prefix($mydirname."_categories") ) ) ;
+	var_dump( $cat_id ) ;
 	if( empty( $cat_id ) ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php" , 5 , _MD_D3FORUM_ERR_EXISTSCATEGORY ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?page=makecategory" , 5 , _MD_A_D3FORUM_ERR_CREATECATEGORYFIRST ) ;
 		exit ;
 	} else {
 		header( "Location: ".XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&cat_id=$cat_id" ) ;

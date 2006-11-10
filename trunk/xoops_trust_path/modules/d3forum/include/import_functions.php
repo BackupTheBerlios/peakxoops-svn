@@ -382,7 +382,9 @@ function d3forum_comimport_as_topics( $mydirname , $mid , $forum_id )
 	$ers = $db->query( "SELECT distinct com_exparams FROM ".$db->prefix("xoopscomments")." WHERE com_modid=$mid AND LENGTH(`com_exparams`) > 5 LIMIT 1" ) ;
 	list( $exparam ) = $db->fetchRow( $ers ) ;
 	if( empty( $exparam ) ) $exparam = '' ;
-	else if( substr( $exparam , -1 ) != '&' ) $exparam .= '&' ;
+	else $exparam = str_replace( '&amp;' , '&' , $exparam ) ;
+
+	if( substr( $exparam , -1 ) != '&' ) $exparam .= '&' ;
 
 	// import it into the forum record as format
 	$format = '{XOOPS_URL}/modules/'.$module_obj->getVar('dirname').'/'.$com_configs['pageName'].'?'.$exparam.$com_configs['itemName'].'=%s' ;
@@ -410,7 +412,7 @@ function d3forum_comimport_posts_recursive( $mydirname , $topic_id , $com_id , $
 
 	$to_table = $db->prefix( $mydirname.'_posts' ) ;
 	$from_table = $db->prefix( 'xoopscomments' ) ;
-	$irs = $db->query( "INSERT INTO `$to_table` (pid,topic_id,post_time,modified_time,uid,poster_ip,modifier_ip,subject,html,smiley,xcode,br,number_entity,special_entity,icon,attachsig,invisible,approval,post_text) SELECT $pid4posts,$topic_id,com_created,com_modified,com_uid,com_ip,com_ip,com_title,dohtml,dosmiley,doxcode,dobr,1,1,IF(SUBSTRING(com_icon,5,1),SUBSTRING(com_icon,5,1),1),com_sig,IF(com_status=3,1,0),IF(com_status=1,1,0),com_text FROM `$from_table` WHERE com_id=$com_id" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (pid,topic_id,post_time,modified_time,uid,poster_ip,modifier_ip,subject,html,smiley,xcode,br,number_entity,special_entity,icon,attachsig,invisible,approval,post_text) SELECT $pid4posts,$topic_id,com_created,com_modified,com_uid,com_ip,com_ip,com_title,dohtml,dosmiley,doxcode,dobr,1,1,IF(SUBSTRING(com_icon,5,1),SUBSTRING(com_icon,5,1),1),com_sig,IF(com_status=3,1,0),IF(com_status<>1,1,0),com_text FROM `$from_table` WHERE com_id=$com_id" ) ;
 	if( ! $irs ) d3forum_import_errordie() ;
 	$post_id = $db->getInsertId() ;
 

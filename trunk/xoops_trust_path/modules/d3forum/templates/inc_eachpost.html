@@ -64,7 +64,7 @@
 	</ul>
 	</dd>
 	<{else}>
-		<{if $post.guest_url and $post.guest_trip}>
+		<{if $post.guest_url || $post.guest_trip}>
 		<dd>
 		<ul class="d3f_gueststatus">
 			<{* <{$post.guest_email}> *}>
@@ -89,7 +89,7 @@
 <{/if}>
 
 <{if ! $post.approval && $forum.isadminormod}>
-	<a href="<{$mod_url}>/index.php?page=update_post_approval&amp;post_id=<{$post.id}>&amp;ret_id=<{$ret_id}>&amp;ret_val=<{$ret_val}>"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></a>|
+	<a href="<{$mod_url}>/index.php?page=update_post_approval&amp;post_id=<{$post.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></a>|
 <{/if}>
 
 <{if ! $post.invisible && $post.approval}>

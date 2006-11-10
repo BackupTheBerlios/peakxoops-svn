@@ -21,8 +21,8 @@ if( $uid && @$xoopsModuleConfig['allow_mark'] ) {
 
 $allowed_identifiers = array( 'post_id' , 'topic_id' , 'forum_id' ) ;
 
-if( in_array( $_GET['ret_id'] , $allowed_identifiers ) ) {
-	$ret_request = $_GET['ret_id'] . '=' . intval( $_GET['ret_val'] ) ;
+if( in_array( $_GET['ret_name'] , $allowed_identifiers ) ) {
+	$ret_request = $_GET['ret_name'] . '=' . intval( $_GET['ret_val'] ) ;
 } else {
 	$ret_request = "topic_id=$topic_id" ;
 }

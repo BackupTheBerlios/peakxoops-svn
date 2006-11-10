@@ -161,7 +161,9 @@ define('_MD_D3FORUM_ERR_CREATETOPIC','You cannot open a new topic');
 define('_MD_D3FORUM_ERR_CREATEFORUM','You cannot create a new forum');
 define('_MD_D3FORUM_ERR_CREATECATEGORY','You cannot create a new category');
 
-// postforum (done)
+// postform (done)
+define('_MD_D3FORUM_LABEL_INPUTHELPER','Input Helper ON/OFF');
+define('_MD_D3FORUM_LABEL_ADVANCEDOPTIONS','Advanced Options');
 define('_MD_D3FORUM_REFERENCEPOST','Reference');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','Post from preview');
 define('_MD_D3FORUM_MSG_THANKSPOST','Thanks for your submission!');

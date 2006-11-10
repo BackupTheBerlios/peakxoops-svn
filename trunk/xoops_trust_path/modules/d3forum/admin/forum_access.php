@@ -14,7 +14,7 @@ if( empty( $forum_id ) ) {
 	$invalid_forum_id = true ;
 	list( $forum_id ) = $db->fetchRow( $db->query( "SELECT MIN(forum_id) FROM ".$db->prefix($mydirname."_forums") ) ) ;
 	if( empty( $forum_id ) ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php" , 5 , _MD_D3FORUM_ERR_EXISTSFORUM ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access" , 5 , _MD_A_D3FORUM_ERR_CREATEFORUMFIRST ) ;
 		exit ;
 	} else {
 		header( "Location: ".XOOPS_URL."/modules/$mydirname/admin/index.php?page=forum_access&forum_id=$forum_id" ) ;

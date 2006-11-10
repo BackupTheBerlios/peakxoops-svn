@@ -111,7 +111,7 @@ $xoopsTpl->assign(
 		'prev_topic' => $prev_topic4assign ,
 		'posts' => $posts ,
 		'page' => 'listposts' ,
-		'ret_id' => 'topic_id' ,
+		'ret_name' => 'topic_id' ,
 		'ret_val' => $topic_id ,
 		'xoops_pagetitle' => $topic4assign['title'] ,
 	)

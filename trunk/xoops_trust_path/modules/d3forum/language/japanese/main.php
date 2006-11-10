@@ -161,7 +161,9 @@ define('_MD_D3FORUM_ERR_CREATETOPIC','トピックの作成権限がありません');
 define('_MD_D3FORUM_ERR_CREATEFORUM','フォーラムの作成権限がありません');
 define('_MD_D3FORUM_ERR_CREATECATEGORY','カテゴリーの作成権限がありません');
 
-// postforum (done)
+// postform (done)
+define('_MD_D3FORUM_LABEL_INPUTHELPER','入力支援機能表示');
+define('_MD_D3FORUM_LABEL_ADVANCEDOPTIONS','詳細なオプション');
 define('_MD_D3FORUM_REFERENCEPOST','参照');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','プレビューからの再投稿');
 define('_MD_D3FORUM_MSG_THANKSPOST','投稿ありがとうございました。');

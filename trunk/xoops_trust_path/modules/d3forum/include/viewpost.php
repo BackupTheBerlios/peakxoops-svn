@@ -110,7 +110,7 @@ $xoopsTpl->assign(
 		'post' => $post4assign ,
 		'posts' => $posts ,
 		'page' => 'viewpost' ,
-		'ret_id' => 'post_id' ,
+		'ret_name' => 'post_id' ,
 		'ret_val' => $post_id ,
 		'xoops_pagetitle' => $post4assign['subject'] ,
 	)

@@ -1,7 +1,7 @@
 <?php
 
 define('_MD_A_MYMENU_MYTPLSADMIN','テンプレート管理');
-define('_MD_A_MYMENU_MYBLOCKSADMIN','ブロック・アクセス権限');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限');
 define('_MD_A_MYMENU_MYPREFERENCES','一般設定');
 
 // forum_access and category_access
@@ -20,6 +20,8 @@ define('_MD_A_D3FORUM_TH_UID','ユーザID');
 define('_MD_A_D3FORUM_TH_UNAME','ユーザ名');
 define('_MD_A_D3FORUM_TH_GROUPNAME','グループ名');
 define('_MD_A_D3FORUM_NOTICE_ADDUSERS','※ユーザを個別に新規追加する場合、ユーザID（数字）かユーザ名のいずれかを直接入力してください。<br />閲覧権限と投稿権限の両方を外せば、そのユーザはこのリストからも消えます。');
+define('_MD_A_D3FORUM_ERR_CREATECATEGORYFIRST','まずカテゴリーを作成してください');
+define('_MD_A_D3FORUM_ERR_CREATEFORUMFIRST','まずフォーラムを作成してください');
 
 // advanced
 define('_MD_A_D3FORUM_H2_SYNCALLTABLES','冗長情報の同期');

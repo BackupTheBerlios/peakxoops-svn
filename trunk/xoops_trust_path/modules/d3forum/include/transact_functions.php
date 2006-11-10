@@ -15,11 +15,11 @@ function d3forum_delete_post_recursive( $mydirname , $post_id )
 		d3forum_delete_post_recursive( $mydirname , $child_post_id ) ;
 	}
 
-	list( $uid ) = $db->fetchRow( $db->query( "SELECT uid FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ) ;
+	/* list( $uid ) = $db->fetchRow( $db->query( "SELECT uid FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ) ;
 	if( ! empty( $uid ) ) {
 		// decrement user's posts
 		$db->query( "UPDATE ".$db->prefix("users")." SET posts=posts-1 WHERE uid=$uid" ) ;
-	}
+	} */
 
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ;
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_post_votes")." WHERE post_id=$post_id" ) ;

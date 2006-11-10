@@ -200,12 +200,6 @@ if( !empty($_POST['contents_preview']) ) {
 		}
 	}
 
-	/* TODO
-	$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
-	if( ! empty( $xoopsModuleConfig['use_solved'] ) && $isadminormod ) {
-		$forumpost->setSolved( @$_POST['solved'] ) ;
-	}*/
-
 	if( $mode == 'edit' ) {
 		// edit
 
@@ -320,6 +314,18 @@ if( !empty($_POST['contents_preview']) ) {
 			$notification_handler->subscribe( 'topic', $topic_id , 'newpost' ) ;
 		} else {
 			$notification_handler->unsubscribe( 'topic', $topic_id , 'newpost' ) ;
+		}
+	}
+
+	// topic_solved of the topic
+	if( ! empty( $xoopsModuleConfig['use_solved'] ) ) {
+		if( $isadminormod ) {
+			// adminormod can turn "solved" both on and off
+			$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
+			$xoopsDB->query( "UPDATE ".$xoopsDB->prefix($mydirname."_topics")." SET topic_solved=$solved WHERE topic_id=$topic_id" ) ;
+		} else if( $mode != 'edit' ) {
+			// normal's post will be forced to turn solved off
+			$xoopsDB->query( "UPDATE ".$xoopsDB->prefix($mydirname."_topics")." SET topic_solved=0 WHERE topic_id=$topic_id" ) ;
 		}
 	}
 

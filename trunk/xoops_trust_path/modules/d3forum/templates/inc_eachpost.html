@@ -93,15 +93,25 @@
 <{/if}>
 
 <{if ! $post.invisible && $post.approval}>
-<span class="d3f_vote">
-	<{$smarty.const._MD_D3FORUM_VOTECOUNT}>:<{$post.votes_count}>
-	<{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>:<{$post.votes_avg|string_format:"%.2f"}>
+	<span class="d3f_vote">
+		<{$smarty.const._MD_D3FORUM_VOTECOUNT}>:<{$post.votes_count}>
+		<{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>:<{$post.votes_avg|string_format:"%.2f"}>
+	</span>
 	<{if $post.can_vote}>
-	<a href="<{$mod_url}>/index.php?page=vote_to_post&amp;post_id=<{$post.id}>&amp;point=10"><{$smarty.const._MD_D3FORUM_VOTEPOINTDSCBEST}></a>
-	<a href="<{$mod_url}>/index.php?page=vote_to_post&amp;post_id=<{$post.id}>&amp;point=0"><{$smarty.const._MD_D3FORUM_VOTEPOINTDSCWORST}></a>
-	|
+		<form action="<{$mod_url}>/index.php" method="get" style="display:inline;">
+			<input type="hidden" name="page" value="vote_to_post" />
+			<input type="hidden" name="post_id" value="<{$post.id}>" />
+			<input type="hidden" name="point" value="10" />
+			<input type="submit" value="<{$smarty.const._MD_D3FORUM_VOTEPOINTDSCBEST}>" />
+		</form>
+		<form action="<{$mod_url}>/index.php" method="get" style="display:inline;">
+			<input type="hidden" name="page" value="vote_to_post" />
+			<input type="hidden" name="post_id" value="<{$post.id}>" />
+			<input type="hidden" name="point" value="0" />
+			<input type="submit" value="<{$smarty.const._MD_D3FORUM_VOTEPOINTDSCWORST}>" />
+		</form>
 	<{/if}>
-</span>
+	|
 <{/if}>
 
 <{if $post.can_edit}>

@@ -50,7 +50,7 @@ $subject4html = substr( $reference_subject4html , 0 , 3 ) == 'Re:' ? $reference_
 $message4html = '' ;
 $topic_id = $topic_row['topic_id'] ;
 $u2t_marked = intval( $topic_row['u2t_marked'] ) ;
-$solved = intval( $topic_row['topic_solved'] ) ;
+$solved = $isadminormod ? 1 : intval( $topic_row['topic_solved'] ) ;
 $hide_uid = 0 ;
 $invisible = 0 ;
 $approval = 1 ;

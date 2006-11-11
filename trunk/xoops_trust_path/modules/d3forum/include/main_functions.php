@@ -104,7 +104,7 @@ function d3forum_get_category_permissions_of_current_user( $mydirname )
 
 
 // check done
-function get_users_can_read_forum( $mydirname , $forum_id , $cat_id )
+function d3forum_get_users_can_read_forum( $mydirname , $forum_id , $cat_id )
 {
 	$db =& Database::getInstance() ;
 	$forum_id = intval( $forum_id ) ;

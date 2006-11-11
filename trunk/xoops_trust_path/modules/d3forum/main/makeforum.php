@@ -33,7 +33,7 @@ if( isset( $_POST['forumman_post'] ) ) {
 	) ;
 	// Notify for newforum
 	$notification_handler =& xoops_gethandler('notification') ;
-	$users2notify = get_users_can_read_forum( $mydirname , $forum_id , $cat_id ) ;
+	$users2notify = d3forum_get_users_can_read_forum( $mydirname , $forum_id , $cat_id ) ;
 	if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
 	d3forum_trigger_event( 'global' , 0 , 'newforum' , $tags , $users2notify ) ;
 	d3forum_trigger_event( 'category' , $cat_id , 'newforum' , $tags , $users2notify ) ;

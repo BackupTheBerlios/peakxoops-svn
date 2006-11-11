@@ -25,8 +25,8 @@ define('_MD_D3FORUM_SUBCATEGORIES','サブカテゴリー');
 define('_MD_D3FORUM_FIRSTPOST','トピック開始');
 define('_MD_D3FORUM_LASTPOST','最新投稿');
 define('_MD_D3FORUM_MODERATOR','モデレータ');
-define('_MD_D3FORUM_ALT_NEWPOSTS','最終訪問日以降の新しい投稿があります');
-define('_MD_D3FORUM_ALT_NONEWPOSTS','最終訪問日以降の新しい投稿はありません');
+define('_MD_D3FORUM_ALT_NEWPOSTS','新しい投稿があります');
+define('_MD_D3FORUM_ALT_NONEWPOSTS','新しい投稿はありません');
 define('_MD_D3FORUM_TITLE_SEARCH','条件検索');
 define('_MD_D3FORUM_TITLE_SEARCHRESULTS','検索結果');
 define('_MD_D3FORUM_LABEL_SEARCH','検索');
@@ -136,8 +136,8 @@ define('_MD_D3FORUM_LASTVISIT','最終訪問日時');
 define('_MD_D3FORUM_TOPICLOCKED','ロックされたトピック');
 define('_MD_D3FORUM_TOPICSTICKY','特別扱いされたトピック');
 define('_MD_D3FORUM_TOPICPOPULAR','人気トピック');
-define('_MD_D3FORUM_TOPICNEWPOSTS','最終訪問日以降の新しい投稿があります');
-define('_MD_D3FORUM_TOPICNONEWPOSTS','最終訪問日以降の新しい投稿はありません');
+define('_MD_D3FORUM_TOPICNEWPOSTS','新しい投稿があります');
+define('_MD_D3FORUM_TOPICNONEWPOSTS','新しい投稿はありません');
 define('_MD_D3FORUM_TOPICINVISIBLE','不可視トピック（管理者とモデレータ以外には見えません）');
 
 // PERMISSION ERRORS (check done)
@@ -242,8 +242,8 @@ define('_MD_D3FORUM_VOTEPOINTDSCWORST','役に立たなかった');
 
 // makeforum and forummanager
 define('_MD_D3FORUM_FORUMMANAGER','フォーラム管理');
-define('_MD_D3FORUM_LINK_MAKEFORUM','フォーラムを作成する');
-define('_MD_D3FORUM_LINK_FORUMMANAGER','フォーラムを編集する');
+define('_MD_D3FORUM_LINK_MAKEFORUM','フォーラム作成');
+define('_MD_D3FORUM_LINK_FORUMMANAGER','フォーラム編集');
 define('_MD_D3FORUM_MSG_FORUMMADE','フォーラムを作成しました');
 define('_MD_D3FORUM_MSG_FORUMUPDATED','フォーラムを更新しました');
 define('_MD_D3FORUM_MSG_FORUMDELETED','フォーラムを削除しました');
@@ -256,9 +256,9 @@ define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','コメント統合を使わないときには空欄
 
 // makecategory and categorymanager
 define('_MD_D3FORUM_CATEGORYMANAGER','カテゴリー管理');
-define('_MD_D3FORUM_LINK_MAKECATEGORY','カテゴリーを作成する');
-define('_MD_D3FORUM_LINK_MAKESUBCATEGORY','サブカテゴリーを作成する');
-define('_MD_D3FORUM_LINK_CATEGORYMANAGER','カテゴリーを編集する');
+define('_MD_D3FORUM_LINK_MAKECATEGORY','カテゴリー作成');
+define('_MD_D3FORUM_LINK_MAKESUBCATEGORY','サブカテゴリー作成');
+define('_MD_D3FORUM_LINK_CATEGORYMANAGER','カテゴリー編集');
 define('_MD_D3FORUM_MSG_CATEGORYMADE','カテゴリーを作成しました');
 define('_MD_D3FORUM_MSG_CATEGORYUPDATED','カテゴリーを更新しました');
 define('_MD_D3FORUM_MSG_CATEGORYDELETED','カテゴリーを削除しました');

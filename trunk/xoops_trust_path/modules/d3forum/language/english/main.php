@@ -76,6 +76,7 @@ define('_MD_D3FORUM_POSTASCOMMENTTOP','Post a new comment');
 define('_MD_D3FORUM_LINK_COMMENTSOURCE','target of the comment');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','Go to richer form');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
+define('_MD_D3FORUM_COMMENTSLIST','Comments list');
 
 // topic,forum,category controller
 define('_MD_D3FORUM_SHORTCUT','Short cut');
@@ -91,7 +92,8 @@ define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','Newer is upper');
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
 define('_MD_D3FORUM_PARENTPOST','Parent');
-define('_MD_D3FORUM_FIRSTCHILDPOST','Child');
+define('_MD_D3FORUM_CHILDPOSTS','Children');
+define('_MD_D3FORUM_NOCHILDPOSTS','No child');
 
 // order options
 define('_MD_D3FORUM_ODR_LASTPOSTDSC','Last posted desc');

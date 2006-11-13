@@ -7,8 +7,6 @@
 		&nbsp;&gt;&nbsp;
 	<{/foreach}>
 	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
-	&nbsp;&gt;&nbsp;
-	<{$topic.title}>
 </div>
 
 <h1 class="d3f_title"><{$topic.title}></h1>
@@ -21,11 +19,13 @@
 
 <!-- top of posts -->
 
-<p class="d3f_topicinfo"><{$smarty.const._MD_D3FORUM_REPLIES}>: <{$topic.replies}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$topic.views}> <{$smarty.const._MD_D3FORUM_VOTECOUNT}>: <{$topic.votes_count}> <{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>: <{$topic.votes_avg|string_format:"%.2f"}> <{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$topic.last_post_time_formatted}> <{$topic.last_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>"><{$topic.last_post_subject}></a></p>
+<p class="d3f_topicinfo"><{$smarty.const._MD_D3FORUM_REPLIES}>: <{$topic.replies}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$topic.views}> <{$smarty.const._MD_D3FORUM_VOTECOUNT}>: <{$topic.votes_count}> <{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>: <{$topic.votes_avg|string_format:"%.2f"}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>" title="<{$topic.last_post_subject}>(<{$topic.last_post_uname}>, <{$topic.last_post_time_formatted}>)"><{$smarty.const._MD_D3FORUM_LASTPOST}></a></p>
 
+<div class="d3f_wrap">
 <{foreach item=post from=$posts}>
-	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post caller="listposts"}>
+	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post caller="listposts" inner_link_format="#post_id%s"}>
 <{/foreach}>
+</div>
 
 <!-- bottom of posts -->
 

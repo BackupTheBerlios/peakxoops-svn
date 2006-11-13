@@ -14,7 +14,7 @@ function d3forum_make_treeinformations( $data )
 		$path_to_i[ $unique_path ] = $i ;
 		$parent_path = substr( $unique_path , 0 , strrpos( $unique_path , '.' ) ) ;
 		if( $parent_path && isset( $path_to_i[ $parent_path ] ) ) {
-			$data[ $path_to_i[ $parent_path ] ]['f1s'][ $data[$i]['id'] ] = $data[$i]['unique_path'] ;
+			$data[ $path_to_i[ $parent_path ] ]['f1s'][ $data[$i]['id'] ] = strrchr( $data[$i]['unique_path'] , '.' ) ;
 		}
 
 		$depth_diff = $data[$i]['depth_in_tree'] - @$previous_depth ;

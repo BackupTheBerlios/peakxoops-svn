@@ -7,7 +7,6 @@
 	<dd><{$total_topics_count}></dd>
 <dt><{$smarty.const._MD_D3FORUM_TOTALPOSTSCOUNT}>:</dt>
 	<dd><{$total_posts_count}></dd>
-	<dd><a href="<{$mod_url}>/index.php?cat_ids=0"><{$smarty.const._MD_D3FORUM_LISTALLTOPICS}></a></dd>
 </dl>
 
 <dl class="d3f_timeinfo">
@@ -16,12 +15,13 @@
 <dt><{$smarty.const._MD_D3FORUM_LASTVISIT}>:</dt>
 	<dd><{$lastvisit_formatted}></dd>
 </dl>
-<hr class="d3f_divide" />
 
+<div class="d3f_wrap">
 <!-- start categories -->
 <{foreach item=category from=$categories}>
-<h2 class="head d3f_head"><a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><img src="<{$mod_imageurl}>/category_<{$category.bit_new}>.gif" alt="<{$category.title}>" /><{$category.title}></a></h2>
-<p><{$smarty.const._MD_D3FORUM_MODERATOR}>:
+<div class="head d3f_head">
+<h2><a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><img src="<{$mod_imageurl}>/category_<{$category.bit_new}>.gif" alt="" width="16" height="16" /> <{$category.title}></a></h2>
+	<p><{$smarty.const._MD_D3FORUM_MODERATOR}>:
 	<{foreach from=$category.moderate_groups item=moderator}>
 	<{$moderator.gname}>
 	<{/foreach}>
@@ -29,13 +29,12 @@
 	<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
 	<{/foreach}> 
 	<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$category.topics_count}> <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$category.posts_count}> 
-	<a href="<{$mod_url}>/index.php?cat_ids=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LISTTOPICSINCATEGORY}></a>
 	<{if $category.last_post_time}><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$category.last_post_time_formatted}><{/if}></p>
-<p><{$category.desc}></p>
-
-<{if $subcategories}><h3><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h3><{/if}>
+</div>
+<p class="d3f_info"><{$category.desc}></p>
 
 <{if $subcategories}>
+<h3 class="d3f_head_h3"><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h3>
 <ul class="d3f_subcategories">
 <{foreach item=subcategory from=$subcategories}>
 	<li><a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>" title="<{$subcategory.desc}>"><img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" /> <{$subcategory.title}></a> (<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$subcategory.topics_count}>, <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$subcategory.posts_count}>)</li>
@@ -43,29 +42,33 @@
 </ul>
 <{/if}>
 
-<{if $xoops_isadmin}>
-	<p><a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYMANAGER}></a>
-<{/if}>
-<{if $category.can_makeforum}>
-	- <a href="<{$mod_url}>/index.php?page=makeforum&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}></a>
-<{/if}>
-<{if $xoops_isadmin}>
-	- <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a></p>
-<{/if}>
-
+<h3 class="d3f_head_h3"><{$smarty.const._MD_D3FORUM_FORUM}></h3>
 <ul class="d3f_listforums">
 <{foreach item=forum from=$category.forums}>
 	<li>
 	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>">
-	<img src="<{$mod_imageurl}>/forum_<{$forum.bit_new}>.gif" alt="<{$forum.title}>" width="16" height="16" />
-	<{$forum.title}></a> 
+	<img src="<{$mod_imageurl}>/forum_<{$forum.bit_new}>.gif" alt="<{$forum.title}>" width="16" height="16" /> <{$forum.title}></a> 
 	<{$smarty.const._MD_D3FORUM_REPLIES}>: <{$forum.topics_count}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$forum.posts_count}>
 	<{if $forum.last_post_time}><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$forum.last_post_time_formatted}><{/if}>
 	</li>
 <{/foreach}>
 </ul>
+
+<div class="d3f_info_ctrl">
+<a href="<{$mod_url}>/index.php?cat_ids=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LISTTOPICSINCATEGORY}></a>
+<{if $xoops_isadmin}>
+	- <a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYMANAGER}></a>
+<{/if}>
+<{if $category.can_makeforum}>
+	- <a href="<{$mod_url}>/index.php?page=makeforum&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKEFORUM}></a>
+<{/if}>
+<{if $xoops_isadmin}>
+	- <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_MAKESUBCATEGORY}></a>
+<{/if}></div>
+
 <{/foreach}>
 <!-- end categories -->
+</div>
 
 <div class="d3f_iconexps">
 <ul class="d3f_iconexp">
@@ -89,7 +92,8 @@
 
 <!-- short cut -->
 <h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
-<div class="d3f_shtcut d3f_jump_box">
+<div class="d3f_ctrl">
+	<p><a href="<{$mod_url}>/index.php?cat_ids=0"><{$smarty.const._MD_D3FORUM_LISTALLTOPICS}></a></p>
 	<!-- forum jumpbox -->
 	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
 		<select name="forum_id"><{$forum_jumpbox_options}></select>

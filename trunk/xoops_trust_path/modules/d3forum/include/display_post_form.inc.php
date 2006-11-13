@@ -4,8 +4,8 @@
 $smiley = isset( $smiley ) ? $smiley : 1 ;
 $xcode = isset( $xcode ) ? $xcode : 1 ;
 $br = isset( $br ) ? $br : 1 ;
-$number_entity = isset( $number_entity ) ? $number_entity : 1 ;
-$special_entity = isset( $special_entity ) ? $special_entity : 1 ;
+$number_entity = isset( $number_entity ) ? $number_entity : 1 ; // default on
+$special_entity = isset( $special_entity ) ? $special_entity : 0 ; // default off
 $solved = isset( $solved ) ? $solved : 1 ;
 $pid = empty( $pid ) ? 0 : intval( $pid ) ;
 $post_id = empty( $post_id ) ? 0 : intval( $post_id ) ;

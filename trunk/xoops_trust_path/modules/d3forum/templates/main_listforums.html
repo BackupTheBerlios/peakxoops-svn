@@ -1,13 +1,10 @@
 <!-- start module contents -->
 <div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
-	&nbsp;&gt;&nbsp;
 	<{foreach name=catgorybreadcrumbs from=$category.paths_raw key=parent_id item=parent_title_raw}>
-		<{if $smarty.foreach.catgorybreadcrumbs.last}>
-			<{$parent_title_raw|escape}>
-		<{else}>
+		<{if ! $smarty.foreach.catgorybreadcrumbs.last}>
+		&nbsp;&gt;&nbsp;
 			<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
-			&nbsp;&gt;&nbsp;
 		<{/if}>
 	<{/foreach}>
 </div>
@@ -94,7 +91,7 @@
 
 <!-- short cut -->
 <h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
-<div class="d3f_shtcut d3f_jump_box">
+<div class="d3f_ctrl">
 	<!-- category jumpbox -->
 	<form name="category_jump_box" action="<{$mod_url}>/index.php" method="get">
 		<select name="cat_id">
@@ -106,7 +103,7 @@
 
 	<!-- search -->
 	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
-		<label for="d3f_search" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
+		<label for="d3f_search"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
 		<input name="keyword" type="text" id="d3f_search" size="30" id="kerywords" />
 		<input type="hidden" name="page" value="search" />
 		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />

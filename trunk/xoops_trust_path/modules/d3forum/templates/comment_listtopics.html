@@ -17,6 +17,8 @@
 
 <!-- simple comment form -->
 <{if $forum.can_post}>
+<h2 class="head"><{$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP}></h2>
+
 <form name="postform" id="postform" action="<{$mod_url}>/index.php?page=post" method="post">
 	<p style="display:none;">
 	<input type="hidden" name="mode" id="mode" value="newtopic" />
@@ -25,7 +27,7 @@
 	<input type="hidden" name="br" id="br" value="1" />
 	</p>
 
-	<table class="outer" cellspacing="1">
+	<table class="outer" cellspacing="1" class="d3f_postform">
 		<tr valign="top" align="left">
 			<td class="head"><{$smarty.const._MD_D3FORUM_SUBJECT}></td>
 			<td class="even">
@@ -71,6 +73,7 @@
 <{/if}>
 <!-- end of simple comment form -->
 
+<h2 class="head"><{$smarty.const._MD_D3FORUM_COMMENTSLIST}></h2>
 
 <{if $pagenav}><div class="d3f_pagenav"><{$pagenav}></div><{/if}>
 

@@ -1,13 +1,15 @@
 <!-- start module contents -->
 <div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
-	&nbsp;&gt;&nbsp;
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
+	&nbsp;&gt;&nbsp;
 		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
-		&nbsp;&gt;&nbsp;
 	<{/foreach}>
-	<{$forum.title}>
-	&nbsp;
+</div>
+
+<h1 class="d3f_title"><{$forum.title}></h1>
+
+<p class="d3f_welcome"><{$forum.desc}>
 	(<{$smarty.const._MD_D3FORUM_MODERATOR}>:
 	<{foreach from=$forum.moderate_groups item=moderator}>
 		<{$moderator.gname}>
@@ -15,11 +17,7 @@
 	<{foreach from=$forum.moderate_users item=moderator}>
 		<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
 	<{/foreach}>
-	)
-</div>
-
-<h1 class="d3f_title"><{$forum.title}></h1>
-<p class="d3f_welcome"><{$forum.desc}></p>
+	)</p>
 
 <div class="d3f_bbsviewctrl">
 	<form action="<{$mod_url}>/index.php" method="get">
@@ -136,7 +134,7 @@
 
 <!-- short cut -->
 <h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
-<div class="d3f_shtcut d3f_jump_box">
+<div class="d3f_ctrl">
 	<!-- forum jumpbox -->
 	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
 		<p><select name="forum_id"><{$forum_jumpbox_options}></select>
@@ -144,8 +142,8 @@
 	</form>
 
 	<!-- search -->
-	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
-		<p><label for="keywords" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
+	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get">
+		<p><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
 		<input name="keyword" type="text" size="30" id="keywords" />
 		<input type="hidden" name="page" value="search" />
 		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />

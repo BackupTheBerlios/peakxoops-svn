@@ -76,6 +76,7 @@ define('_MD_D3FORUM_POSTASCOMMENTTOP','新しくコメントをつける');
 define('_MD_D3FORUM_LINK_COMMENTSOURCE','コメント元');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','より詳細なコメント入力フォームへ');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
+define('_MD_D3FORUM_COMMENTSLIST','コメント一覧');
 
 // topic,forum,category controller
 define('_MD_D3FORUM_SHORTCUT','ショートカット');
@@ -91,7 +92,8 @@ define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','投稿の新しいものから');
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
 define('_MD_D3FORUM_PARENTPOST','親記事');
-define('_MD_D3FORUM_FIRSTCHILDPOST','子記事');
+define('_MD_D3FORUM_CHILDPOSTS','子記事');
+define('_MD_D3FORUM_NOCHILDPOSTS','子記事なし');
 
 // order options
 define('_MD_D3FORUM_ODR_LASTPOSTDSC','最終投稿日降順');

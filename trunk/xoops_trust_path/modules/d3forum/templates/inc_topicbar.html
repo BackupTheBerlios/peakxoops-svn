@@ -1,81 +1,71 @@
-<div class="d3f_bottomctrl">
+<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CONTROLLER_TOPIC}></h2>
 
-	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CONTROLLER_TOPIC}></h2>
-	
-	<div class="d3f_ctrl">
-	
-		<!-- new topic -->
-		<{if $forum.external_link_format}>
-			<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>
-		<{elseif $forum.can_post}>
-			<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
-		<{elseif ! $xoops_isuser}>
-			<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
-		<{else}>
-			<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
-		<{/if}>
-		
-		<!-- post orders -->
-		<{if $postorder != 0}>
-			| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=0"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}></a>
-		<{/if}>
-		<{if $postorder != 2}>
-			| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=2"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}></a>
-		<{/if}>
-		<{if $postorder != 3}>
-			| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=3"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}></a>
-		<{/if}>
-
-		<!-- mark -->
-		<{if $uid && $mod_config.allow_mark}>
-			| <a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
-		<{/if}>
-		
-		<!-- solved -->
-		<{if $forum.isadminormod && $mod_config.use_solved}>
-			| <a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
-		<{/if}>
-		
-		<!-- topic manager -->
-		<{if $forum.isadminormod}>
-			| <a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
-		<{/if}>
-
-	</div>
-
-	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
-
-	<div class="d3f_shtcut">
-	<ul class="d3f_othertopics">
-	<li><{if $prev_topic.id}>
-		<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicprev.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}>" /><br /><{$prev_topic.title}></a>
-	<{/if}></li>
-	<li><{if $page=="viewpost"}>
-		<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><img src="<{$mod_imageurl}>/navicon_uptotopic.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTPOSTS}>" /><br /><{$topic.title}></a>
+<div class="d3f_ctrl">
+	<!-- new topic -->
+	<{if $forum.external_link_format}>
+		<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>
+	<{elseif $forum.can_post}>
+		<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
+	<{elseif ! $xoops_isuser}>
+		<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
 	<{else}>
-		<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/navicon_uptoforum.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTTOPICS}>" /><br /><{$forum.title}></a>
-	<{/if}></li>
-	<li><{if $next_topic.id}>
-		<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicnext.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_NEXTTOPIC}>" /><br /><{$next_topic.title}></a>
-	<{/if}></li>
-	</ul>
+		<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
+	<{/if}>
 
-	<div class="d3f_jump_box">
-	
-		<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
-			<p><select name="forum_id"><{$forum_jumpbox_options}></select>
-			<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
-		</form>
-	
-		<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
-			<p><label for="kerywords" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
-			<input name="keyword" type="text" size="30" id="kerywords" />
-			<input type="hidden" name="page" value="search" />
-			<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
-			&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]</p>
-		</form>
+	<!-- post orders -->
+	<{if $postorder != 0}>
+		| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=0"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}></a>
+	<{/if}>
+	<{if $postorder != 2}>
+		| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=2"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}></a>
+	<{/if}>
+	<{if $postorder != 3}>
+		| <a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=3"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}></a>
+	<{/if}>
 
-	</div>
+	<!-- mark -->
+	<{if $uid && $mod_config.allow_mark}>
+		| <a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
+	<{/if}>
 
+	<!-- solved -->
+	<{if $forum.isadminormod && $mod_config.use_solved}>
+		| <a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
+	<{/if}>
 
+	<!-- topic manager -->
+	<{if $forum.isadminormod}>
+		| <a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
+	<{/if}>
+</div>
+
+<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
+
+<div class="d3f_ctrl">
+<ul class="d3f_othertopics">
+<li><{if $prev_topic.id}>
+	<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicprev.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}>" /><br /><{$prev_topic.title}></a>
+<{/if}></li>
+<li><{if $page=="viewpost"}>
+	<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><img src="<{$mod_imageurl}>/navicon_uptotopic.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTPOSTS}>" /><br /><{$topic.title}></a>
+<{else}>
+	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><img src="<{$mod_imageurl}>/navicon_uptoforum.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_LISTTOPICS}>" /><br /><{$forum.title}></a>
+<{/if}></li>
+<li><{if $next_topic.id}>
+	<a href="<{$mod_url}>/index.php?topic_id=<{$next_topic.id}>"><img src="<{$mod_imageurl}>/navicon_topicnext.gif" alt="<{$smarty.const._MD_D3FORUM_LINK_NEXTTOPIC}>" /><br /><{$next_topic.title}></a>
+<{/if}></li>
+</ul>
+
+	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
+		<p><select name="forum_id"><{$forum_jumpbox_options}></select>
+		<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
+	</form>
+
+	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get" class="d3f_search">
+		<p><label for="kerywords" class="d3f_searchinbbs"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
+		<input name="keyword" type="text" size="30" id="kerywords" />
+		<input type="hidden" name="page" value="search" />
+		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
+		&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]</p>
+	</form>
 </div>

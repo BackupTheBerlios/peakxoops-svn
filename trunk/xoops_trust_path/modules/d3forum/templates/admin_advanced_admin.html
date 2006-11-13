@@ -1,8 +1,26 @@
 <h2 class="head"><{$smarty.const._MD_A_D3FORUM_H2_SYNCALLTABLES}></h2>
 <form name="syncalltables" action="<{$mod_url}>/admin/index.php?page=advanced_admin" method="post">
-	<input type="submit" name="do_sycalltables" value="<{$smarty.const._MD_A_D3FORUM_BTN_SYNCALLTABLES}>" />
-	<br />
 	<{$smarty.const._MD_A_D3FORUM_HELP_SYNCALLTABLES}>
+	<h3>
+		<label for="button_synctopics">1.<{$smarty.const._MD_D3FORUM_TOPIC}></label>
+	</h3>
+	<p>
+		<{$smarty.const._MD_A_D3FORUM_MAX_TOPIC_ID}>:<{$max_topic_id}>
+		<br />
+		<label for="synctopics_start"><{$smarty.const._MD_A_D3FORUM_LABEL_SYNCTOPICS_START}></label>
+		<input type="textbox" size="10" name="synctopics_start" id="synctopics_start" value="<{$synctopics_start}>" />
+		<label for="synctopics_num"><{$smarty.const._MD_A_D3FORUM_LABEL_SYNCTOPICS_NUM}></label>
+		<input type="textbox" size="10" name="synctopics_num" id="synctopics_num" value="<{$synctopics_num}>" />
+		<input type="submit" name="do_synctopics" id="button_synctopics" value="<{$smarty.const._MD_A_D3FORUM_BTN_DOSYNCTABLES}>" />
+	</p>
+	<h3>
+		<label for="button_syncforums">2.<{$smarty.const._MD_D3FORUM_FORUM}></label>
+		<input type="submit" name="do_syncforums" id="button_syncforums" value="<{$smarty.const._MD_A_D3FORUM_BTN_DOSYNCTABLES}>" />
+	</h3>
+	<h3>
+		<label for="button_synccategories">3.<{$smarty.const._MD_D3FORUM_CATEGORY}></label>
+		<input type="submit" name="do_synccategories" id="button_synccategories" value="<{$smarty.const._MD_A_D3FORUM_BTN_DOSYNCTABLES}>" />
+	</h3>
 </form>
 
 <h2 class="head"><{$smarty.const._MD_A_D3FORUM_H2_IMPORTFROM}></h2>

@@ -39,6 +39,6 @@ I will make more samples for comment-integration.
 
 mydownloads:
 [code]
-<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="lid" subject=$file.title}>
+<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="lid" subject=$file.title|regex_replace:"/&nbsp;.*/":""}>
 [/code]
 

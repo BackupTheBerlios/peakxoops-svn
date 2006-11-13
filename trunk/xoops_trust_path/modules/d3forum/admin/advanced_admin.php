@@ -47,19 +47,52 @@ foreach( $modules as $module ) {
 // transaction stage
 //
 
-if( ! empty( $_POST['do_sycalltables'] ) ) {
+if( ! empty( $_POST['do_synctopics'] ) ) {
 	set_time_limit( 0 ) ;
 
-	// sync all topics
-	$result = $db->query( "SELECT topic_id FROM ".$db->prefix($mydirname."_topics") ) ;
-	while( list( $topic_id ) = $db->fetchRow( $result ) ) {
+	$synctopics_start = intval( @$_POST['synctopics_start'] ) ;
+	$synctopics_num = empty( $_POST['synctopics_num'] ) ? 100 : intval( $_POST['synctopics_num'] ) ;
+
+	// sync topics
+	$trs = $db->query( "SELECT topic_id FROM ".$db->prefix($mydirname."_topics")." WHERE topic_id>=$synctopics_start AND topic_id<".($synctopics_start+$synctopics_num) ) ;
+	$topic_counter = 0 ;
+	while( list( $topic_id ) = $db->fetchRow( $trs ) ) {
+		$topic_counter ++ ;
+		$topic_id = intval( $topic_id ) ;
+		// sync posts from post_votes
+		$prs = $db->query( "SELECT post_id FROM ".$db->prefix($mydirname."_posts")." WHERE topic_id=$topic_id" ) ;
+		while( list( $post_id ) = $db->fetchRow( $prs ) ) {
+			d3forum_sync_post_votes( $mydirname , $post_id , false ) ;
+		}
+		d3forum_sync_topic_votes( $mydirname , $topic_id , false ) ;
 		d3forum_sync_topic( $mydirname , $topic_id , false ) ;
 	}
+
+	$_SESSION[$mydirname.'_synctopics_start'] = $synctopics_start + $synctopics_num ;
+	$_SESSION[$mydirname.'_synctopics_num'] = $synctopics_num ;
+
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , sprintf( _MD_A_D3FORUM_FMT_SYNCTOPICSDONE , $topic_counter ) ) ;
+	exit ;
+}
+
+
+if( ! empty( $_POST['do_syncforums'] ) ) {
+	set_time_limit( 0 ) ;
+
 	// sync all forums
 	$result = $db->query( "SELECT forum_id FROM ".$db->prefix($mydirname."_forums") ) ;
 	while( list( $forum_id ) = $db->fetchRow( $result ) ) {
 		d3forum_sync_forum( $mydirname , $forum_id , false ) ;
 	}
+
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_SYNCTABLESDONE ) ;
+	exit ;
+}
+
+
+if( ! empty( $_POST['do_synccategories'] ) ) {
+	set_time_limit( 0 ) ;
+
 	// sync all categories
 	$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories") ) ;
 	while( list( $cat_id ) = $db->fetchRow( $result ) ) {
@@ -68,7 +101,7 @@ if( ! empty( $_POST['do_sycalltables'] ) ) {
 	// rebuild category's tree
 	d3forum_sync_cattree( $mydirname ) ;
 
-	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_SYNCALLTABLESDONE ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=advanced_admin" , 3 , _MD_A_D3FORUM_MSG_SYNCTABLESDONE ) ;
 	exit ;
 }
 
@@ -121,6 +154,11 @@ if( ! empty( $_POST['do_comimport'] ) && ! empty( $_POST['comimport_mid'] ) && !
 // form stage
 //
 
+$synctopics_start = intval( @$_SESSION[$mydirname.'_synctopics_start'] ) ;
+$synctopics_num = empty( $_SESSION[$mydirname.'_synctopics_num'] ) ? 100 : intval( $_SESSION[$mydirname.'_synctopics_num'] ) ;
+list( $max_topic_id ) = $db->fetchRow( $db->query( "SELECT MAX(topic_id) FROM ".$db->prefix($mydirname."_topics") ) ) ;
+
+
 //
 // display stage
 //
@@ -133,6 +171,9 @@ $tpl->assign( array(
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
+	'max_topic_id' => $max_topic_id ,
+	'synctopics_start' => $synctopics_start ,
+	'synctopics_num' => $synctopics_num ,
 	'import_from_options' => $importable_modules ,
 	'comimport_from_options' => $comimportable_modules ,
 	'comimport_to_options' => d3forum_make_jumpbox_options( $mydirname , '1' , '1' , -1 ) ,

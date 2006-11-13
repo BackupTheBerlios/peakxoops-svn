@@ -42,6 +42,7 @@
 </ul>
 <{/if}>
 
+<{if $category.forums}>
 <h3 class="d3f_head_h3"><{$smarty.const._MD_D3FORUM_FORUM}></h3>
 <ul class="d3f_listforums">
 <{foreach item=forum from=$category.forums}>
@@ -53,6 +54,7 @@
 	</li>
 <{/foreach}>
 </ul>
+<{/if}>
 
 <div class="d3f_info_ctrl">
 <a href="<{$mod_url}>/index.php?cat_ids=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LISTTOPICSINCATEGORY}></a>

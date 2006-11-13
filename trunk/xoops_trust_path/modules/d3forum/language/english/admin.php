@@ -25,8 +25,12 @@ define('_MD_A_D3FORUM_ERR_CREATEFORUMFIRST','Create a forum first');
 
 // advanced
 define('_MD_A_D3FORUM_H2_SYNCALLTABLES','Synchronize redundant informations');
-define('_MD_A_D3FORUM_BTN_SYNCALLTABLES','Do synchronize');
-define('_MD_A_D3FORUM_MSG_SYNCALLTABLESDONE','Synchronized successfully');
+define('_MD_A_D3FORUM_MAX_TOPIC_ID','Max topic id');
+define('_MD_A_D3FORUM_LABEL_SYNCTOPICS_START','topic started from');
+define('_MD_A_D3FORUM_LABEL_SYNCTOPICS_NUM','topics at once');
+define('_MD_A_D3FORUM_BTN_DOSYNCTABLES','Do synchronize');
+define('_MD_A_D3FORUM_FMT_SYNCTOPICSDONE','%s topics have been synchronized');
+define('_MD_A_D3FORUM_MSG_SYNCTABLESDONE','Synchronized successfully');
 define('_MD_A_D3FORUM_HELP_SYNCALLTABLES','Execute it if your forum displays contradictory data. You have to execute it just after IMPORT from some modules');
 define('_MD_A_D3FORUM_H2_IMPORTFROM','Import');
 define('_MD_A_D3FORUM_H2_COMIMPORTFROM','Import from XOOPS comments');

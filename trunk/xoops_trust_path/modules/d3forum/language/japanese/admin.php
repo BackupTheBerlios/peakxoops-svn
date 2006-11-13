@@ -25,9 +25,13 @@ define('_MD_A_D3FORUM_ERR_CREATEFORUMFIRST','まずフォーラムを作成してください');
 
 // advanced
 define('_MD_A_D3FORUM_H2_SYNCALLTABLES','冗長情報の同期');
-define('_MD_A_D3FORUM_BTN_SYNCALLTABLES','同期実行');
-define('_MD_A_D3FORUM_MSG_SYNCALLTABLESDONE','同期完了しました');
-define('_MD_A_D3FORUM_HELP_SYNCALLTABLES','フォーラムにおける総投稿数など、速度をかせぐために持たせている冗長情報がおかしくなった時に実行してください。インポートした直後にも実行が必要です。');
+define('_MD_A_D3FORUM_MAX_TOPIC_ID','最終トピック番号');
+define('_MD_A_D3FORUM_LABEL_SYNCTOPICS_START','開始トピック番号');
+define('_MD_A_D3FORUM_LABEL_SYNCTOPICS_NUM','同時処理トピック数');
+define('_MD_A_D3FORUM_BTN_DOSYNCTABLES','同期実行');
+define('_MD_A_D3FORUM_FMT_SYNCTOPICSDONE','%s件のトピックを同期しました');
+define('_MD_A_D3FORUM_MSG_SYNCTABLESDONE','同期完了しました');
+define('_MD_A_D3FORUM_HELP_SYNCALLTABLES','フォーラムにおける総投稿数など、速度をかせぐために持たせている冗長情報がおかしくなった時に上から順に実行してください。インポートした直後にも実行が必要です。');
 define('_MD_A_D3FORUM_H2_IMPORTFROM','インポート');
 define('_MD_A_D3FORUM_H2_COMIMPORTFROM','XOOPSコメントのインポート');
 define('_MD_A_D3FORUM_LABEL_SELECTMODULE','モジュール選択');

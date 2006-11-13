@@ -21,8 +21,8 @@
 </ul>
 <{/if}>
 
+<{if $forums}>
 <h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_FORUM}></h2>
-
 <table class="outer d3f_table">
 <thead>
 <tr class="head">
@@ -74,6 +74,7 @@
 	<li><img src="<{$mod_imageurl}>/forum_0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_NONEWPOSTS}></li>
 </ul>
 </div>
+<{/if}>
 
 <!-- category controller -->
 <{if $category.isadminormod}>

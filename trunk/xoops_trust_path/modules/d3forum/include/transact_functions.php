@@ -282,7 +282,7 @@ function d3forum_sync_post_votes( $mydirname , $post_id , $sync_also_topic_votes
 	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT post_votes in sync post_votes" ) ;
 	list( $votes_count , $votes_sum ) = $db->fetchRow( $result ) ;
 
-	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_posts")." SET votes_count=$votes_count,votes_sum=$votes_sum WHERE post_id=$post_id" ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_posts")." SET votes_count=".intval($votes_count).",votes_sum=".intval($votes_sum)." WHERE post_id=$post_id" ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 
 	if( $sync_also_topic_votes ) return d3forum_sync_topic_votes( $mydirname , $topic_id ) ;
 	else return true ;

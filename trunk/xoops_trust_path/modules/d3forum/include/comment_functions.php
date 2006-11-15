@@ -1,5 +1,47 @@
 <?php
 
+function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params )
+{
+	global $xoopsUser , $xoopsConfig ;
+
+	$mydirpath = XOOPS_ROOT_PATH.'/modules/'.$mydirname ;
+	$mytrustdirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+	$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
+
+	$db =& Database::getInstance() ;
+
+	// external_link_id
+	if( ! empty( $params['link_id'] ) ) {
+		$external_link_id = intval( $params['link_id'] ) ;
+	} else if( ! empty( $params['itemname'] ) ) {
+		$external_link_id = intval( @$_GET[ $params['itemname'] ] ) ;
+	} else {
+		echo "set valid link_id or itemname in the template" ;
+		return ;
+	}
+	if( $external_link_id <= 0 ) return ;
+
+	// check the d3forum exists and is active
+	$module_hanlder =& xoops_gethandler( 'module' ) ;
+	$module =& $module_hanlder->getByDirname( $mydirname ) ;
+	if( ! is_object( $module ) || ! $module->getVar('isactive') ) {
+		return ;
+	}
+
+	// check permission of "module_read"
+	$moduleperm_handler =& xoops_gethandler( 'groupperm' ) ;
+	$groups = is_object( $xoopsUser ) ? $xoopsUser->getGroups() : array( XOOPS_GROUP_ANONYMOUS ) ;
+	if( ! $moduleperm_handler->checkRight( 'module_read' , $module->getVar( 'mid' ) , $groups ) ) {
+		return ;
+	}
+
+	$sql = "SELECT COUNT(t.topic_id) FROM ".$db->prefix($mydirname."_topics")." t WHERE t.forum_id=$forum_id AND ! t.topic_invisible AND topic_external_link_id=$external_link_id" ;
+	if( ! $trs = $db->query( $sql ) ) die( 'd3forum_comment_error in '.__LINE__ ) ;
+	list( $count ) = $db->fetchRow( $trs ) ;
+	echo $count ;
+}
+
+
 function d3forum_display_comment( $mydirname , $forum_id , $params )
 {
 	global $xoopsUser , $xoopsConfig ;

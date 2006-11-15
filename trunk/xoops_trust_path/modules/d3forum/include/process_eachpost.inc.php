@@ -18,7 +18,7 @@
 	// get this poster's object
 	$user_handler =& xoops_gethandler( 'user' ) ;
 	$poster_obj =& $user_handler->get( intval( $post_row['uid'] ) ) ;
-	if( is_object( $poster_obj ) && ! $post_row['hide_uid'] ) {
+	if( is_object( $poster_obj ) ) {
 		// active user's post
 		$poster_uname4disp = $poster_obj->getVar( 'uname' ) ;
 		$poster_regdate = $poster_obj->getVar( 'user_regdate' ) ;
@@ -56,7 +56,6 @@
 		} else if( $post_row['uid'] == $uid ) {
 			$can_edit = $can_edit && time() < $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ? true : false ;
 			$can_delete = $can_delete && time() < $post_row['post_time'] + $xoopsModuleConfig['selfdellimit'] ? true : false ;
-			$can_delete = false ;
 		} else {
 			$can_edit = false ;
 			$can_delete = false ;
@@ -80,6 +79,9 @@
 		if( $isadminormod ) {
 			$can_edit = true ;
 			$can_delete = true ;
+		} else if( $post_row['uid_hidden'] && $post_row['uid_hidden'] == $uid  ) {
+			$can_edit = $can_edit && time() < $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ? true : false ;
+			$can_delete = $can_delete && time() < $post_row['post_time'] + $xoopsModuleConfig['selfdellimit'] ? true : false ;
 		} else {
 			$can_edit = false ;
 			$can_delete = false ;

@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.34 ;
+$modversion['version'] = 0.40 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -50,7 +50,29 @@ $modversion['blocks'][1] = array(
 	'description'	=> constant($constpref.'_BDESC_LIST_TOPICS') ,
 	'show_func'		=> 'b_d3forum_list_topics_show' ,
 	'edit_func'		=> 'b_d3forum_list_topics_edit' ,
-	'options'		=> "$mydirname|10|1|time|1|0|0" ,
+	'options'		=> "$mydirname|10|1|time|1|0|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
+$modversion['blocks'][2] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_LIST_POSTS') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_d3forum_list_posts_show' ,
+	'edit_func'		=> 'b_d3forum_list_posts_edit' ,
+	'options'		=> "$mydirname|10|time|0|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
+$modversion['blocks'][3] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_LIST_FORUMS') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_d3forum_list_forums_show' ,
+	'edit_func'		=> 'b_d3forum_list_forums_edit' ,
+	'options'		=> "$mydirname|0|" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -60,6 +82,16 @@ $modversion['hasComments'] = 0 ;
 
 // Configurations
 $modversion['config'][1] = array(
+	'name'			=> 'top_message' ,
+	'title'			=> $constpref.'_TOP_MESSAGE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textarea' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> constant($constpref.'_TOP_MESSAGEDEFAULT') ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'allow_html' ,
 	'title'			=> $constpref.'_ALLOW_HTML' ,
 	'description'	=> $constpref.'_ALLOW_HTMLDSC' ,
@@ -126,6 +158,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "20" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'use_vote' ,
+	'title'			=> $constpref.'_USE_VOTE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "1" ,
 	'options'		=> array()
 ) ;
 

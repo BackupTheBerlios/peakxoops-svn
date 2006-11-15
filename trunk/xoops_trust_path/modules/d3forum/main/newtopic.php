@@ -18,7 +18,7 @@ if( ! empty( $forum_row['forum_external_link_format'] ) && empty( $external_link
 // specific variables for newtopic
 $pid = 0 ;
 $post_id = 0 ;
-$subject4html = htmlspecialchars( $_GET['subject'] , ENT_QUOTES ) ;
+$subject4html = htmlspecialchars( @$_GET['subject'] , ENT_QUOTES ) ;
 $message4html = '' ;
 $topic_id = 0 ;
 $u2t_marked = @$xoopsModuleCongif['allow_mark'] ? 1 : 0 ;

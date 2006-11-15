@@ -20,6 +20,12 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' )
 // get&check this category ($category4assign, $category_row), override options
 if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
+// check if "use_vote" is on
+if( empty( $xoopsModuleConfig['use_vote'] ) ) {
+	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_MSG_VOTEDISABLED ) ;
+	exit ;
+}
+
 // special check for vote_to_post
 if( ! $uid && empty( $xoopsModuleConfig['guest_vote_interval'] ) ) {
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_ERR_VOTEPERM ) ;

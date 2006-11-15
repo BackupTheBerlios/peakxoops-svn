@@ -20,6 +20,8 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' )
 // get&check this category ($category4assign, $category_row), override options
 if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
+// hidden_uid
+if( $uid == $post_row['uid_hidden'] ) $post_row['uid'] = $post_row['uid_hidden'] ;
 // get $post4assign
 include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
 
@@ -30,9 +32,22 @@ if( empty( $can_edit ) ) die( _MD_D3FORUM_ERR_EDITPOST ) ;
 if( ! $uid ) {
 	// guest edit (TODO)
 	die( _MD_D3FORUM_ERR_EDITPOST ) ;
+} else if( $isadminormod ) {
+	// admin edit
+	// ok
+} else if( $uid == $post_row['uid'] && $xoopsModuleConfig['selfeditlimit'] > 0 ) {
+	// self edit
+	if( time() < $post_row['post_time'] + intval( $xoopsModuleConfig['selfeditlimit'] ) ) {
+		// before time limit
+		// all green for self edit
+	} else {
+		// after time limit
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 2 , _MD_D3FORUM_EDITTIMELIMITED ) ;
+		exit ;
+	}
 } else {
-	// user edit
-	if( ! $isadminormod && ( $post_row['uid'] != $xoopsUser->getVar('uid') || time() >= $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ) ) die( _MD_D3FORUM_ERR_EDITPOST ) ;
+	// no perm
+	die( _MD_D3FORUM_ERR_EDITPOST ) ;
 }
 
 // specific variables for edit
@@ -50,7 +65,7 @@ $br = intval( $post_row['br'] ) ;
 $number_entity = intval( $post_row['number_entity'] ) ;
 $special_entity = intval( $post_row['special_entity'] ) ;
 $icon = intval( $post_row['icon'] ) ;
-$hide_uid = intval( $post_row['hide_uid'] ) ;
+$hide_uid = empty( $post_row['uid_hidden'] ) ? 0 : 1 ;
 $invisible = intval( $post_row['invisible'] ) ;
 $approval = intval( $post_row['approval'] ) ;
 $attachsig = intval( $post_row['attachsig'] ) ;

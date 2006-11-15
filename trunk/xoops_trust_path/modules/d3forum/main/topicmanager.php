@@ -28,6 +28,23 @@ if( ! empty( $_POST['topicman_post'] ) ) {
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?topic_id=$topic_id" , 2 , _MD_D3FORUM_TOPICMANAGERDONE ) ;
 	exit ;
 }
+if( ! empty( $_POST['topicman_sync'] ) ) {
+	if ( ! $xoopsGTicket->check( true , 'd3forum' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+	// clear unique_paths for rebuilding them.
+	$prs = $db->query( "UPDATE ".$db->prefix($mydirname."_posts")." SET unique_path='' WHERE topic_id=$topic_id" ) ;
+	// sync posts from post_votes
+	$prs = $db->query( "SELECT post_id FROM ".$db->prefix($mydirname."_posts")." WHERE topic_id=$topic_id" ) ;
+	while( list( $post_id ) = $db->fetchRow( $prs ) ) {
+		d3forum_sync_post_votes( $mydirname , $post_id , false ) ;
+	}
+	d3forum_sync_topic_votes( $mydirname , $topic_id , false ) ;
+	d3forum_sync_topic( $mydirname , $topic_id , false ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?topic_id=$topic_id" , 2 , _MD_D3FORUM_TOPICMANAGERDONE ) ;
+	exit ;
+}
+
 
 // get target forums
 $jump_box_forums = array() ;

@@ -1,7 +1,12 @@
 <!-- start each post -->
 <div class="head d3f_head">
 	<h2 class="<{if $post.invisible}> invisible<{elseif ! $post.approval}> yetapproval<{/if}>">
-	<a id="post_id<{$post.id}>" name="post_id<{$post.id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" alt="<{$icon_meanings[$post.icon]}>" /></a> <a href="<{$mod_url}>/index.php?post_id=<{$post.id}>" id="post_path<{$post.unique_path}>" name="post_path<{$post.unique_path}>"><{$post.subject}></a>
+	<a id="post_id<{$post.id}>" name="post_id<{$post.id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" alt="<{$icon_meanings[$post.icon]}>" /></a>
+	<{if $caller == 'listposts'}>
+		<a href="<{$mod_url}>/index.php?post_id=<{$post.id}>" id="post_path<{$post.unique_path}>" name="post_path<{$post.unique_path}>"><{$post.subject}></a>
+	<{else}>
+		<{$post.subject}>
+	<{/if}>
 	</h2>
 	<span class="d3f_msgnum"><{$smarty.const._MD_D3FORUM_UNIQUEPATHPREFIX}> <{$post.unique_path}></span>
 </div>
@@ -26,15 +31,14 @@
 	<{/if}> -
 	
 	<{if $post.first_child_id}>
-		<{$smarty.const._MD_D3FORUM_CHILDPOSTS}>
-		<{foreach from=$post.f1s key="f1_id" item="f1_leaf_number"}>
-			<a href="<{$f1_id|string_format:$inner_link_format}>"><{$f1_leaf_number}></a>
+		<{foreach from=$post.f1s key="f1_id" item="f1_leaf_number" name="f1_loop"}>
+			<a href="<{$f1_id|string_format:$inner_link_format}>"><{if $smarty.foreach.f1_loop.first}><{$smarty.const._MD_D3FORUM_CHILDPOSTS}><{/if}><{$f1_leaf_number}></a>
 		<{/foreach}>
 	<{else}>
 		<{$smarty.const._MD_D3FORUM_NOCHILDPOSTS}>
 	<{/if}> |
 	
-	<{$smarty.const._MD_D3FORUM_ON}> <{$post.post_time_formatted}><{if $post.post_time < $post.modified_time}>(<{$smarty.const._MD_D3FORUM_LASTMODIFIED}> <{$post.modified_time_formatted}>)<{/if}>
+	<span title="<{if $post.post_time < $post.modified_time}><{$smarty.const._MD_D3FORUM_LASTMODIFIED}> <{$post.modified_time_formatted}><{/if}>"><{$smarty.const._MD_D3FORUM_ON}> <{$post.post_time_formatted}></span>
 </div>
 <!-- poster info -->
 <div class="d3f_info_sub">
@@ -42,7 +46,7 @@
 <{if $post.poster_uid != 0}>
 	<img src="<{$xoops_upload_url}>/<{$post.poster_rank_image}>" alt="" />
 	<{$post.poster_rank_title}>
-	<{$smarty.const._MD_D3FORUM_POSTERJOINED}>: <{$post.poster_regdate_formatted}>
+	<{* <{$smarty.const._MD_D3FORUM_POSTERJOINED}>: <{$post.poster_regdate_formatted}> *}>
 	<{if $post.poster_from}><{$smarty.const._MD_D3FORUM_POSTERFROM}>: <{$post.poster_from}><{/if}>&nbsp;
 	<{$smarty.const._MD_D3FORUM_POSTERPOSTS}>: <{$post.poster_posts_count}>
 	<{if $post.poster_is_online}><{$smarty.const._MD_D3FORUM_POSTERISONLINE}><{/if}>
@@ -75,7 +79,7 @@
 	<a href="<{$mod_url}>/index.php?page=update_post_approval&amp;post_id=<{$post.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></a>|
 <{/if}>
 
-<{if ! $post.invisible && $post.approval}>
+<{if $mod_config.use_vote && ! $post.invisible && $post.approval}>
 	<span class="d3f_vote">
 		<{$smarty.const._MD_D3FORUM_VOTECOUNT}>:<{$post.votes_count}>
 		<{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>:<{$post.votes_avg|string_format:"%.2f"}>

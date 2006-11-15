@@ -1,5 +1,114 @@
 <?php
 
+function b_d3forum_list_forums_show( $options )
+{
+	global $xoopsUser ;
+
+	$mydirname = empty( $options[0] ) ? 'd3forum' : $options[0] ;
+	$categories = empty( $options[1] ) ? array() : explode(',',$options[1]) ;
+	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_list_forums.html' : trim( $options[2] ) ;
+
+	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+
+	$db =& Database::getInstance();
+	$myts =& MyTextSanitizer::getInstance();
+	$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$configs = $config_handler->getConfigList( $module->mid() ) ;
+
+	// forums can be read by current viewer (check by forum_access)
+	require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
+	$whr_forum = "f.forum_id IN (".implode(",",d3forum_get_forums_can_read( $mydirname )).")" ;
+
+	// categories
+	if( empty( $categories ) ) {
+		$whr_categories = '1' ;
+		$categories4assign = '' ;
+	} else {
+		for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
+			$categories[ $i ] = intval( $categories[ $i ] ) ;
+		}
+		$whr_categories = 'f.cat_id IN ('.implode(',',$categories).')' ;
+		$categories4assign = implode(',',$categories) ;
+	}
+
+	$sql = "SELECT f.forum_id, f.forum_title, f.forum_last_post_time, f.forum_topics_count, f.forum_posts_count, c.cat_id, c.cat_title, c.cat_depth_in_tree FROM ".$db->prefix($mydirname."_forums")." f LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON f.cat_id=c.cat_id WHERE ($whr_forum) AND ($whr_categories) ORDER BY c.cat_order_in_tree,f.forum_weight" ;
+//	var_dump( $sql ) ;
+
+	if( ! $result = $db->query( $sql ) ) return array() ;
+
+	$constpref = '_MB_' . strtoupper( $mydirname ) ;
+
+	$block = array( 
+		'mydirname' => $mydirname ,
+		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
+		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$configs['images_dir'] ,
+		'mod_config' => $configs ,
+		'categories' => $categories4assign ,
+		'lang_forum' => constant($constpref.'_FORUM') ,
+		'lang_lastpost' => constant($constpref.'_LASTPOST') ,
+		'lang_linktosearch' => constant($constpref.'_LINKTOSEARCH') ,
+		'lang_linktolistcategories' => constant($constpref.'_LINKTOLISTCATEGORIES') ,
+		'lang_linktolistforums' => constant($constpref.'_LINKTOLISTFORUMS') ,
+		'lang_linktolisttopics' => constant($constpref.'_LINKTOLISTTOPICS') ,
+	) ;
+
+//	$cat4assign = array() ;
+//	$prev_cat_id = 0 ;
+	while( $forum_row = $db->fetchArray( $result ) ) {
+		$cat_id = intval( $forum_row['cat_id'] ) ;
+		$cat4assign[$cat_id]['id'] = intval( $forum_row['cat_id'] ) ;
+		$cat4assign[$cat_id]['title'] = $myts->makeTboxData4Show( $forum_row['cat_title'] ) ;
+		$cat4assign[$cat_id]['depth_in_tree'] = intval( $forum_row['cat_depth_in_tree'] ) ;
+
+		$cat4assign[$cat_id]['forums'][] = array(
+			'id' => intval( $forum_row['forum_id'] ) ,
+			'title' => $myts->makeTboxData4Show( $forum_row['forum_title'] ) ,
+			'topics_count' => intval( $forum_row['forum_topics_count'] ) ,
+			'posts_count' => intval( $forum_row['forum_posts_count'] ) ,
+			'last_post_time' => intval( $forum_row['forum_last_post_time'] ) ,
+			'last_post_time_formatted' => $forum_row['forum_last_post_time'] ? formatTimestamp( $forum_row['forum_last_post_time'] ) : '' ,
+		) ;
+	}
+	$block['categories'] = $cat4assign ;
+
+	$tpl =& new XoopsTpl() ;
+	$tpl->assign( 'block' , $block ) ;
+	$ret['content'] = $tpl->fetch( $this_template ) ;
+	return $ret ;
+}
+
+
+
+function b_d3forum_list_forums_edit( $options )
+{
+	$mydirname = empty( $options[0] ) ? 'd3forum' : $options[0] ;
+	$categories = empty( $options[1] ) ? array() : explode(',',$options[1]) ;
+	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_list_forums.html' : trim( $options[2] ) ;
+
+	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+
+	for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
+		$categories[ $i ] = intval( $categories[ $i ] ) ;
+	}
+
+	$form = "
+		<input type='hidden' name='options[0]' value='$mydirname' />
+		<label for='categories'>"._MB_D3FORUM_CATLIMIT."</label>&nbsp;:
+		<input type='text' size='20' name='options[1]' id='categories' value='".implode(',',$categories)."' />"._MB_D3FORUM_CATLIMITDSC."
+		<br />
+		<label for='this_template'>"._MB_D3FORUM_THISTEMPLATE."</label>&nbsp;:
+		<input type='text' size='60' name='options[2]' id='this_template' value='".htmlspecialchars($this_template,ENT_QUOTES)."' />
+		<br />
+	\n" ;
+
+	return $form;
+}
+
+
 function b_d3forum_list_topics_show( $options )
 {
 	global $xoopsUser ;
@@ -208,5 +317,160 @@ function b_d3forum_list_topics_edit( $options )
 
 	return $form;
 }
+
+
+function b_d3forum_list_posts_show( $options )
+{
+	global $xoopsUser ;
+
+	$mydirname = empty( $options[0] ) ? 'd3forum' : $options[0] ;
+	$max_posts = empty( $options[1] ) ? 10 : intval( $options[1] ) ;
+	$now_order = empty( $options[2] ) ? 'time' : trim( $options[2] ) ;
+	$categories = empty( $options[3] ) ? array() : explode(',',$options[3]) ;
+	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list_posts.html' : trim( $options[4] ) ;
+
+	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+
+	$db =& Database::getInstance();
+	$myts =& MyTextSanitizer::getInstance();
+	$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$configs = $config_handler->getConfigList( $module->mid() ) ;
+
+	// order
+	$whr_order = '1' ;
+	switch( $now_order ) {
+		case 'votes':
+			$odr = 'p.votes_count DESC';
+			break;
+		case 'points':
+			$odr = 'p.votes_sum DESC';
+			break;
+		case 'average':
+			$odr = 'p.votes_sum/p.votes_count DESC, p.votes_count DESC';
+			$whr_order = 'p.votes_count>0' ;
+			break;
+		case 'time':
+		default:
+			$odr = 'p.post_time DESC';
+			break;
+	}
+
+	// forums can be read by current viewer (check by forum_access)
+	require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
+	$whr_forum = "t.forum_id IN (".implode(",",d3forum_get_forums_can_read( $mydirname )).")" ;
+
+	// categories
+	if( empty( $categories ) ) {
+		$whr_categories = '1' ;
+		$categories4assign = '' ;
+	} else {
+		for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
+			$categories[ $i ] = intval( $categories[ $i ] ) ;
+		}
+		$whr_categories = 'f.cat_id IN ('.implode(',',$categories).')' ;
+		$categories4assign = implode(',',$categories) ;
+	}
+
+	$sql = "SELECT p.post_id, p.subject, p.votes_sum, p.votes_count, p.post_time, p.uid, f.forum_id, f.forum_title FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON p.topic_id=t.topic_id LEFT JOIN ".$db->prefix($mydirname."_forums")." f ON f.forum_id=t.forum_id WHERE ! t.topic_invisible AND ($whr_forum) AND ($whr_categories) AND ($whr_order) ORDER BY $odr" ;
+
+//	var_dump( $sql ) ;
+
+	if( ! $result = $db->query( $sql , $max_posts , 0 ) ) return array() ;
+
+	$constpref = '_MB_' . strtoupper( $mydirname ) ;
+
+	$block = array( 
+		'mydirname' => $mydirname ,
+		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
+		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$configs['images_dir'] ,
+		'mod_config' => $configs ,
+		'categories' => $categories4assign ,
+		'lang_forum' => constant($constpref.'_FORUM') ,
+		'lang_topic' => constant($constpref.'_TOPIC') ,
+		'lang_replies' => constant($constpref.'_REPLIES') ,
+		'lang_views' => constant($constpref.'_VIEWS') ,
+		'lang_votescount' => constant($constpref.'_VOTESCOUNT') ,
+		'lang_votessum' => constant($constpref.'_VOTESSUM') ,
+		'lang_lastpost' => constant($constpref.'_LASTPOST') ,
+		'lang_linktosearch' => constant($constpref.'_LINKTOSEARCH') ,
+		'lang_linktolistcategories' => constant($constpref.'_LINKTOLISTCATEGORIES') ,
+		'lang_linktolistforums' => constant($constpref.'_LINKTOLISTFORUMS') ,
+		'lang_linktolisttopics' => constant($constpref.'_LINKTOLISTTOPICS') ,
+	) ;
+	while( $post_row = $db->fetchArray( $result ) ) {
+		$post4assign = array(
+			'id' => intval( $post_row['post_id'] ) ,
+			'subject' => $myts->makeTboxData4Show( $post_row['subject'] ) ,
+			'forum_id' => intval( $post_row['forum_id'] ) ,
+			'forum_title' => $myts->makeTboxData4Show( $post_row['forum_title'] ) ,
+			'votes_count' => $post_row['votes_count'] ,
+			'votes_sum' => intval( $post_row['votes_sum'] ) ,
+			'post_time' => intval( $post_row['post_time'] ) ,
+			'post_time_formatted' => formatTimestamp( $post_row['post_time'] , 'm' ) ,
+			'uid' => intval( $post_row['uid'] ) ,
+			'uname' => XoopsUser::getUnameFromId( $post_row['uid'] ) ,
+		) ;
+		$block['posts'][] = $post4assign ;
+	}
+
+	$tpl =& new XoopsTpl() ;
+	$tpl->assign( 'block' , $block ) ;
+	$ret['content'] = $tpl->fetch( $this_template ) ;
+	return $ret ;
+}
+
+
+
+function b_d3forum_list_posts_edit( $options )
+{
+	$mydirname = empty( $options[0] ) ? 'd3forum' : $options[0] ;
+	$max_posts = empty( $options[1] ) ? 10 : intval( $options[1] ) ;
+	$now_order = empty( $options[2] ) ? 'time' : trim( $options[2] ) ;
+	$categories = empty( $options[3] ) ? array() : explode(',',$options[3]) ;
+	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list_posts.html' : trim( $options[4] ) ;
+
+	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+
+	for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
+		$categories[ $i ] = intval( $categories[ $i ] ) ;
+	}
+
+	$orders = array(
+		'time' => _MB_D3FORUM_ORDERTIMED ,
+		'votes' => _MB_D3FORUM_ORDERVOTESD ,
+		'points' => _MB_D3FORUM_ORDERPOINTSD ,
+		'average' => _MB_D3FORUM_ORDERAVERAGED ,
+	) ;
+	$order_options = '' ;
+	foreach( $orders as $order_value => $order_name ) {
+		$selected = $order_value == $now_order ? "selected='selected'" : "" ;
+		$order_options .= "<option value='$order_value' $selected>$order_name</option>\n" ;
+	}
+
+	$form = "
+		<input type='hidden' name='options[0]' value='$mydirname' />
+		<label for='o1'>" . sprintf( _MB_D3FORUM_DISPLAY , "</label><input type='text' size='4' name='options[1]' id='o1' value='$max_posts' style='text-align:right;' />" ) . "
+		<br />
+		"._MB_D3FORUM_DISPLAYF."&nbsp;:
+		<label for='orderrule'>"._MB_D3FORUM_ORDERRULE."</label>&nbsp;:
+		<select name='options[2]' id='orderrule'>
+			$order_options
+		</select>
+		<br />
+		<label for='categories'>"._MB_D3FORUM_CATLIMIT."</label>&nbsp;:
+		<input type='text' size='20' name='options[3]' id='categories' value='".implode(',',$categories)."' />"._MB_D3FORUM_CATLIMITDSC."
+		<br />
+		<label for='this_template'>"._MB_D3FORUM_THISTEMPLATE."</label>&nbsp;:
+		<input type='text' size='60' name='options[4]' id='this_template' value='".htmlspecialchars($this_template,ENT_QUOTES)."' />
+		<br />
+	\n" ;
+
+	return $form;
+}
+
 
 ?>

@@ -27,7 +27,7 @@ function d3forum_onupdate_base( $module , $mydirname )
 
 	// TABLES (write here ALTER TABLE etc. if necessary)
 
-	// 0.10 -> 0.20
+	// 0.1x -> 0.2x
 	$check_sql = "SELECT cat_unique_path FROM ".$db->prefix($mydirname."_categories") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD cat_unique_path text NOT NULL default '' AFTER cat_path_in_tree" ) ;
@@ -36,6 +36,10 @@ function d3forum_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_posts")." ADD path_in_tree text NOT NULL default '' AFTER order_in_tree , ADD unique_path text NOT NULL default '' AFTER order_in_tree" ) ;
 	}
 
+	// 0.3x -> 0.4x
+	$check_sql = "SELECT subject_waiting FROM ".$db->prefix($mydirname."_posts") ;	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_posts")." ADD subject_waiting varchar(255) NOT NULL default '' AFTER `subject`, ADD post_text_waiting text NOT NULL AFTER `post_text`, ADD uid_hidden mediumint(8) unsigned NOT NULL default 0 AFTER `uid`, DROP hide_uid" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

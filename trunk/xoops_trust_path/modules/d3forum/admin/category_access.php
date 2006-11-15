@@ -75,12 +75,12 @@ if( ! empty( $_POST['user_update'] ) && empty( $invaild_cat_id ) ) {
 	
 	$member_hander =& xoops_gethandler( 'member' ) ;
 	if( is_array( @$_POST['new_uids'] ) ) foreach( $_POST['new_uids'] as $i => $uid ) {
-		$can_post = empty( $_POST['new_can_posts'][$gid] ) ? 0 : 1 ;
-		$can_edit = empty( $_POST['new_can_edits'][$gid] ) ? 0 : 1 ;
-		$can_delete = empty( $_POST['new_can_deletes'][$gid] ) ? 0 : 1 ;
-		$post_auto_approved = empty( $_POST['new_post_auto_approveds'][$gid] ) ? 0 : 1 ;
-		$is_moderator = empty( $_POST['new_is_moderators'][$gid] ) ? 0 : 1 ;
-		$can_makeforum = empty( $_POST['new_can_makeforums'][$gid] ) ? 0 : 1 ;
+		$can_post = empty( $_POST['new_can_posts'][$i] ) ? 0 : 1 ;
+		$can_edit = empty( $_POST['new_can_edits'][$i] ) ? 0 : 1 ;
+		$can_delete = empty( $_POST['new_can_deletes'][$i] ) ? 0 : 1 ;
+		$post_auto_approved = empty( $_POST['new_post_auto_approveds'][$i] ) ? 0 : 1 ;
+		$is_moderator = empty( $_POST['new_is_moderators'][$i] ) ? 0 : 1 ;
+		$can_makeforum = empty( $_POST['new_can_makeforums'][$i] ) ? 0 : 1 ;
 		if( empty( $uid ) ) {
 			$criteria =& new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
 			@list( $user ) = $member_handler->getUsers( $criteria ) ;

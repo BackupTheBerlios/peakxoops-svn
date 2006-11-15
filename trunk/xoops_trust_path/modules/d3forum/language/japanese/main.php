@@ -127,8 +127,6 @@ define('_MD_D3FORUM_MSG_NOMATCH','検索条件に一致するデータは見つかりませんでした
 define('_MD_D3FORUM_FMT_SEARCHHITS','%s 件見つかりました');
 
 // module top (done)
-define('_MD_D3FORUM_FMT_WELCOME','%s フォーラムへようこそ');
-define('_MD_D3FORUM_TOSTART','興味のあるフォーラムへぜひご参加ください');
 define('_MD_D3FORUM_TOTALTOPICSCOUNT','総トピック数');
 define('_MD_D3FORUM_TOTALPOSTSCOUNT','総投稿数');
 define('_MD_D3FORUM_TIMENOW','現在の時刻');
@@ -169,6 +167,7 @@ define('_MD_D3FORUM_LABEL_ADVANCEDOPTIONS','詳細なオプション');
 define('_MD_D3FORUM_REFERENCEPOST','参照');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','プレビューからの再投稿');
 define('_MD_D3FORUM_MSG_THANKSPOST','投稿ありがとうございました。');
+define('_MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL','投稿ありがとうございました。投稿が承認されるまでお待ちください。');
 define('_MD_D3FORUM_MSG_THANKSEDIT','変更を登録しました。');
 define('_MD_D3FORUM_USERWROTE','%sさんは書きました：');
 define('_MD_D3FORUM_BTN_QUOTE','引用');
@@ -197,6 +196,7 @@ define('_MD_D3FORUM_LABEL_ATTACHSIG','署名を付ける');
 define('_MD_D3FORUM_POSTREPLY','返信する');
 define('_MD_D3FORUM_POSTEDIT','編集する');
 define('_MD_D3FORUM_POSTDELETE','削除する');
+define('_MD_D3FORUM_EDITTIMELIMITED','編集可能な期間を過ぎました');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','トピック管理');
@@ -205,6 +205,7 @@ define('_MD_D3FORUM_TH_STICKY','特別扱い');
 define('_MD_D3FORUM_TH_LOCK','ロック');
 define('_MD_D3FORUM_TH_INVISIBLE','不可視');
 define('_MD_D3FORUM_TH_SOLVED','解決済');
+define('_MD_D3FORUM_BTN_SYNCTHISTOPIC','トピック内同期');
 
 // delete (check done)
 define('_MD_D3FORUM_DELNOTALLOWED','この投稿を削除する権限がありません。');
@@ -237,6 +238,7 @@ define('_MD_D3FORUM_ERR_VOTEPERM','投票権がありません');
 define('_MD_D3FORUM_ERR_VOTEINVALID','不正な投票です');
 define('_MD_D3FORUM_MSG_VOTEDOUBLE','１投稿に対して投票は１回限りです');
 define('_MD_D3FORUM_MSG_VOTEACCEPTED','投票ありがとうございました');
+define('_MD_D3FORUM_MSG_VOTEDISABLED','このフォーラムでは投票機能は利用できません');
 define('_MD_D3FORUM_VOTECOUNT','投票数');
 define('_MD_D3FORUM_VOTEPOINTAVG','平均点');
 define('_MD_D3FORUM_VOTEPOINTDSCBEST','役に立った');

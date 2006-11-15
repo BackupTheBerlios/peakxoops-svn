@@ -437,7 +437,7 @@ function d3forum_get_requests4sql_forum( $mydirname )
 	}
 
 	// check $cat_id
-	$cat_id = intval( @$_POST['cat_id'] ) ;
+	$cat_id = empty( $_POST['cat_id'] ) ? intval( @$_GET['cat_id'] ) : intval( @$_POST['cat_id'] ) ;
 	$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$cat_id" ;
 	if( ! $crs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 	if( $db->getRowsNum( $crs ) <= 0 ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;

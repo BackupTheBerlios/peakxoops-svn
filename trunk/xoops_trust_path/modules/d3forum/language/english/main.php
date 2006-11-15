@@ -205,6 +205,7 @@ define('_MD_D3FORUM_TH_STICKY','Sticky');
 define('_MD_D3FORUM_TH_LOCK','Lock');
 define('_MD_D3FORUM_TH_INVISIBLE','Invisible');
 define('_MD_D3FORUM_TH_SOLVED','Solved');
+define('_MD_D3FORUM_BTN_SYNCTHISTOPIC','Sync this topic');
 
 // delete (check done)
 define('_MD_D3FORUM_DELNOTALLOWED','You cannot delete this post');

@@ -16,12 +16,16 @@ define($constpref."_DESC","XOOPSフォーラムモジュール");
 // Names of blocks for this module (Not all module has blocks)
 define($constpref."_BNAME_LIST_TOPICS","トピック一覧");
 define($constpref."_BDESC_LIST_TOPICS","汎用ブロック。「編集」で様々な機能を持たせることができます");
+define($constpref."_BNAME_LIST_POSTS","投稿一覧");
+define($constpref."_BNAME_LIST_FORUMS","フォーラム一覧");
 
 define($constpref.'_ADMENU_CATEGORYACCESS','カテゴリー権限設定');
 define($constpref.'_ADMENU_FORUMACCESS','フォーラム権限設定');
 define($constpref.'_ADMENU_ADVANCEDADMIN','アドバンス管理');
 
 // configurations
+define($constpref.'_TOP_MESSAGE','フォーラムトップのメッセージ');
+define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">フォーラムトップ</h1><p class="d3f_welcome">興味のあるフォーラムへぜひご参加ください</p>');
 define($constpref.'_ALLOW_HTML','投稿本文内のHTMLを許可する');
 define($constpref.'_ALLOW_HTMLDSC','投稿本文のHTML特殊文字を許可します。不特定多数に許可すると、Script Insertion 脆弱性につながります');
 define($constpref.'_ALLOW_TEXTIMG','投稿本文内の外部画像を許可する');
@@ -30,6 +34,7 @@ define($constpref.'_ALLOW_SIG','署名付与を許可する');
 define($constpref.'_ALLOW_SIGDSC','投稿本文の下部に署名がつけられるようになります');
 define($constpref.'_ALLOW_SIGIMG','署名内の外部画像を許可する');
 define($constpref.'_ALLOW_SIGIMGDSC','署名に[img]タグで外部サイトの画像を表示させると、このサイトの訪問者のIPやUser-Agentを抜かれることにつながります');
+define($constpref.'_USE_VOTE','投票機能を利用する');
 define($constpref.'_USE_SOLVED','解決済機能を利用する');
 define($constpref.'_ALLOW_MARK','注目トピック機能を利用する');
 define($constpref.'_ALLOW_HIDEUID','ユーザが名前を隠して投稿することを許可する');

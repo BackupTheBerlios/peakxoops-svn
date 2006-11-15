@@ -47,6 +47,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 			return $text ;
 		} else {
 			$this->nbsp = $nbsp ;
+			$text = $this->prepareXcode( $text ) ;
 			$text = $this->postCodeDecode( parent::displayTarea( $text , $html , $smiley , 1 , $image , $br ) , $image ) ;
 			if( $number_entity ) $text = $this->reviveNumberEntity( $text ) ;
 			if( $special_entity ) $text = $this->reviveSpecialEntity( $text ) ;
@@ -79,7 +80,25 @@ class D3forumTextSanitizer extends MyTextSanitizer
 		return $text;
 	}
 
-	// additional filters
+	// additional pre filters
+	function prepareXcode( $text )
+	{
+		$patterns = array(
+			'#\n?\[code\]\r?\n?#' , 
+			'#\n?\[\/code\]\r?\n?#' , 
+			'#\n?\[quote\]\r?\n?#' , 
+			'#\n?\[\/quote\]\r?\n?#' , 
+		) ;
+		$replacements = array(
+			'[code]' , 
+			'[/code]' , 
+			'[quote]' , 
+			'[/quote]' , 
+		) ;
+		return preg_replace( $patterns , $replacements , $text ) ;
+	}
+
+	// additional post filters
 	function postCodeDecode( $text , $image )
 	{
 		$removal_tags = array( '[summary]' , '[/summary]' , '[pagebreak]' ) ;

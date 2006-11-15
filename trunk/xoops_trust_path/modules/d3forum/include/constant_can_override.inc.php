@@ -8,6 +8,7 @@ $d3forum_configs_can_be_override = array(
 	'posts_per_topic' => 'int' ,
 	'hot_threshold' => 'int' ,
 	'topics_per_page' => 'int' ,
+	'use_vote' => 'bool' ,
 	'use_solved' => 'bool' ,
 	'allow_mark' => 'bool' ,
 	'allow_hideuid' => 'bool' ,

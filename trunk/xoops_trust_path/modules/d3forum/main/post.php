@@ -54,6 +54,8 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' )
 if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 if( $mode != 'newtopic' ) {
+	// hidden_uid
+	if( $uid == $post_row['uid_hidden'] ) $post_row['uid'] = $post_row['uid_hidden'] ;
 	// get $post4assign
 	include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
 }
@@ -86,7 +88,7 @@ if( $mode == 'edit' ) {
 
 
 // FETCH request (POST)
-$requests_01 = array( 'html' , 'smiley' , 'xcode' , 'br' , 'number_entity' , 'special_entity' , 'attachsig' , 'hide_uid' ) ;
+$requests_01 = array( 'html' , 'smiley' , 'xcode' , 'br' , 'number_entity' , 'special_entity' , 'attachsig' ) ;
 if( $isadminormod ) $requests_01[] = 'invisible' ;
 $requests_int = array( 'icon' ) ;
 $requests_text = array( 'subject' , 'message' , 'guest_name' , 'guest_email' , 'guest_url' , 'guest_pass' ) ;
@@ -109,7 +111,7 @@ $subject = $subject ? $subject : _NOTITLE ;
 if( $icon < 0 || $icon >= sizeof( $d3forum_icon_meanings ) ) $icon = 0 ;
 if( empty( $xoopsModuleConfig['allow_html'] ) ) $html = 0 ;
 if( empty( $xoopsModuleConfig['allow_sig'] ) ) $allow_sig = 0 ;
-if( empty( $xoopsModuleConfig['allow_hideuid'] ) || ! $uid ) $hide_uid = 0 ;
+$hide_uid = ! empty( $_POST['hide_uid'] ) && ! empty( $xoopsModuleConfig['allow_hideuid'] ) && $uid ? 1 : 0 ;
 
 
 if( !empty($_POST['contents_preview']) ) {
@@ -124,7 +126,7 @@ if( !empty($_POST['contents_preview']) ) {
 		$reference_time = intval( $post_row['post_time'] ) ;
 		if( ! empty( $post_row['guest_name'] ) ) {
 			$reference_name4html = htmlspecialchars( $post_row['guest_name'] , ENT_QUOTES ) ;
-		} else if( $post_row['uid'] && empty( $post_row['hide_uid'] ) ) {
+		} else if( $post_row['uid'] ) {
 			$reference_name4html = XoopsUser::getUnameFromId( $post_row['uid'] ) ;
 		} else {
 			$reference_name4html = $xoopsModuleConfig['anonymous_name'] ;
@@ -183,7 +185,7 @@ if( !empty($_POST['contents_preview']) ) {
 	$set4sql .= ",post_text='".addslashes($message)."'" ;
 
 	// guest's post
-	if( $mode != 'edit' && $uid == 0 || $mode == 'edit' && $post_row['uid'] == 0 ) {
+	if( $mode != 'edit' && $uid == 0 || $mode == 'edit' && $post_row['uid'] == 0 && $post_row['uid_hidden'] == 0 ) {
 		@list( $guest_name , $trip_base ) = explode( '#' , $guest_name , 2 ) ;
 		if( ! trim( @$guest_name ) ) $guest_name = $xoopsModuleConfig['anonymous_name'] ;
 		if( ! empty( $trip_base ) && function_exists( 'crypt' ) ) {
@@ -214,6 +216,14 @@ if( !empty($_POST['contents_preview']) ) {
 			$set4sql .= ',invisible=1' ;
 			$need_admin_notify = true ;
 		}
+
+		// hide_uid
+		if( $hide_uid && ! empty( $post_row['uid'] ) ) {
+			$set4sql .= ",uid=0,uid_hidden=".intval($post_row['uid']) ;
+		} else if( empty( $hide_uid ) && ! empty( $post_row['uid_hidden'] ) ) {
+			$set4sql .= ",uid_hidden=0,uid=".intval($post_row['uid_hidden']) ;
+		}
+
 		// update post specified post_id
 		if( ! $xoopsDB->query( "UPDATE ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql WHERE post_id=$post_id" ) ) die( "DB ERROR IN UPDATE post" ) ;
 		d3forum_sync_topic( $mydirname , $topic_id , true , ! (boolean)$post_row['pid'] ) ;
@@ -228,8 +238,16 @@ if( !empty($_POST['contents_preview']) ) {
 			$set4sql .= ',approval=0' ;
 			$need_admin_notify = true ;
 		}
+
+		// hide_uid
+		if( $hide_uid ) {
+			$set4sql .= ",uid=0,uid_hidden='$uid'" ;
+		} else {
+			$set4sql .= ",uid='$uid',uid_hidden=0" ;
+		}
+
 		// create post under specified post_id
-		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql,pid=$pid,topic_id=$topic_id,post_time=UNIX_TIMESTAMP(),poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',uid='$uid'" ) ) die( "DB ERROR IN INSERT post" ) ;
+		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql,pid=$pid,topic_id=$topic_id,post_time=UNIX_TIMESTAMP(),poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."'" ) ) die( "DB ERROR IN INSERT post" ) ;
 		$post_id = $xoopsDB->getInsertId() ;
 		d3forum_sync_topic( $mydirname , $topic_id ) ;
 	} else {
@@ -245,11 +263,19 @@ if( !empty($_POST['contents_preview']) ) {
 			$topic_invisible = 1 ;
 			$need_admin_notify = true ;
 		}
+
+		// hide_uid
+		if( $hide_uid ) {
+			$set4sql .= ",uid=0,uid_hidden='$uid'" ;
+		} else {
+			$set4sql .= ",uid='$uid',uid_hidden=0" ;
+		}
+
 		// create topic and get a new topic_id
 		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_topics")." SET forum_id=$forum_id,topic_invisible=$topic_invisible,topic_external_link_id=".intval(@$external_link_id) ) ) die( "DB ERROR IN INSERT topic" ) ;
 		$topic_id = $xoopsDB->getInsertId() ;
 		// create post in the topic
-		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql,topic_id=$topic_id,post_time=UNIX_TIMESTAMP(),poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',uid='$uid'" ) ) die( "DB ERROR IN INSERT post" ) ;
+		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql,topic_id=$topic_id,post_time=UNIX_TIMESTAMP(),poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."'" ) ) die( "DB ERROR IN INSERT post" ) ;
 		$post_id = $xoopsDB->getInsertId() ;
 		d3forum_sync_topic( $mydirname , $topic_id , true , true ) ;
 	}
@@ -269,7 +295,7 @@ if( !empty($_POST['contents_preview']) ) {
 
 	// Define tags for notification message
 	$tags = array(
-		'POSTER_UNAME' => $uid > 0 ? $xoopsUser->getVar('uname') :  $guest_name ,
+		'POSTER_UNAME' => $uid > 0 && ! $hide_uid ? $xoopsUser->getVar('uname') :  $guest_name ,
 
 		'POST_TITLE' => $subject ,
 		'POST_BODY' => $message ,
@@ -331,8 +357,13 @@ if( !empty($_POST['contents_preview']) ) {
 
 	$redirect_message = $mode == 'edit' ? _MD_D3FORUM_MSG_THANKSEDIT : _MD_D3FORUM_MSG_THANKSPOST ;
 	if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
+		// return to comment target
 		redirect_header( sprintf( str_replace( '{XOOPS_URL}' , XOOPS_URL , $forum_row['forum_external_link_format'] ) , $external_link_id ) , 2 , $redirect_message ) ;
+	} else if( ! empty( $topic_invisible ) ) {
+		// redirect the forum for invisible topic
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" , 2 , _MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL ) ;
 	} else {
+		// display the post
 		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 2 , $redirect_message ) ;
 	}
 	exit ;

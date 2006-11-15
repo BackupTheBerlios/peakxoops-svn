@@ -36,7 +36,7 @@ if( ! $uid ) {
 } else if( $isadminormod ) {
 	// admin delete
 	// ok
-} else if( $uid == $post_id && $xoopsModuleConfig['selfdellimit'] > 0 ) {
+} else if( ( $uid == $post_row['uid'] || $uid == $post_row['uid_hidden'] ) && $xoopsModuleConfig['selfdellimit'] > 0 ) {
 	// self delete
 	if( time() < $post_row['post_time'] + intval( $xoopsModuleConfig['selfdellimit'] ) ) {
 		// before time limit
@@ -84,7 +84,7 @@ if( ! empty( $_POST['deletepostsok'] ) ) {
 	$reference_time = intval( $post_row['post_time'] ) ;
 	if( ! empty( $post_row['guest_name'] ) ) {
 		$reference_name4html = htmlspecialchars( $post_row['guest_name'] , ENT_QUOTES ) ;
-	} else if( $post_row['uid'] && empty( $post_row['hide_uid'] ) ) {
+	} else if( $post_row['uid'] ) {
 		$reference_name4html = XoopsUser::getUnameFromId( $post_row['uid'] ) ;
 	} else {
 		$reference_name4html = $xoopsModuleConfig['anonymous_name'] ;

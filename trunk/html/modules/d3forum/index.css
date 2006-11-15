@@ -86,6 +86,7 @@ h3.d3f_head_h3{
 	padding				:2px 8px 3px;
 	background-color		:#fff;}
 .d3f_info_ctrl{
+	text-align			:right;
 	clear				:both;
 	margin				:2px -2px 2px;
 	padding				:3px 10px;
@@ -318,7 +319,7 @@ div.d3f_msgtitle h2 a:hover{
 .d3f_head a:hover,h2.d3f_head a:hover{
 	color				:#f4b343;}
 
-.d3f_table th,
+/*.d3f_table th,
 .d3f_form_table th,
 .d3f_table thead th,
 .d3f_form_table thead th{
@@ -329,7 +330,7 @@ div.d3f_msgtitle h2 a:hover{
 	background-color		:#dfdfdd !important;}
 .d3f_table tr.odd td,
 .d3f_form_table tr.odd td{
-	background-color		:#f3f3f3 !important;}
+	background-color		:#f3f3f3 !important;}*/
 
 h2.attn {
 	background-color			:#f00;}

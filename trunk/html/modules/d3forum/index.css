@@ -24,7 +24,9 @@ div.d3f_body div.xoopsQuote{
 /* d3f_breadcrumbs */
 
 div.d3f_breadcrumbs{
-	font-size				:95%;}
+	font-size				:95%;
+	padding				:0 0 3px;
+	border-bottom			:1px #aaa solid;}
 
 /* head */
 
@@ -41,6 +43,9 @@ div.d3f_breadcrumbs{
 
 /* h1 */
 
+.d3f_title{
+	font-size				:130%;
+	margin				:3px 0 15px;}
 .d3f_title *{
 	vertical-align		:middle;}
 
@@ -100,7 +105,7 @@ h3.d3f_head_h3{
 
 .d3f_body{
 	margin				:0 -2px;
-	padding				:5px 2px 5px 8px;
+	padding				:15px 8px;
 	border-top			:1px #aaa solid;}
 
 /* d3f_avatar */
@@ -119,6 +124,13 @@ h3.d3f_head_h3{
 	border-right			:1px #aaa solid;
 	border-left			:1px #aaa solid;
 	padding				:2px 2px 0;}
+
+/* d3f_orderctrl */
+
+p.d3f_viewctrl{
+	margin				:0;
+	padding				:3px;
+	text-align			:right;}
 
 /* d3f_topicinfo */
 
@@ -150,6 +162,22 @@ ul.d3f_othertopics li{
 	padding-bottom		:10px;}
 ul.d3f_othertopics li{
 	width				:33%;
+	float				:left;}
+
+div.d3f_topctrl{
+	float				:left;
+	width				:auto;}
+
+div.d3f_topctrl_icons{
+	float				:right;
+	width				:100px;}
+
+a.topic_icon_ctrl{
+	text-indent			:-9000px;
+	display				:block;
+	width				:20px;
+	height				:16px;
+	background-repeat		:no-repeat;
 	float				:left;}
 
 /* main_viewpost.html */

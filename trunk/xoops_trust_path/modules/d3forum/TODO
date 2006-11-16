@@ -6,6 +6,10 @@
 
 Smartyプラグインが各モジュールの $xoopsModuleConfig をルックアップする
 comment統合で、linkではなくdescriptionを返すためのクラス
+comment統合されたトピックの前後リンクが、なるべく同一external_link_idを返す
+
+投稿切り貼り後のtopic_sync
+
 
 モジュールインスタンス間のフォーラムコピー
 

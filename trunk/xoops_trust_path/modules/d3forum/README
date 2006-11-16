@@ -46,12 +46,26 @@ mydownloads_download.html
 
 
 [b]myAlbum-P[/b]
+myalbum_photo.html
 [code]
 <{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="lid" subject=$photo.title}>
 [/code]
+[code]
+<{d3forum_comment_topicscount dirname=d3forum forum_id=[i](number)[/i] link_id=$photo.lid}>
+[/code]
+myalbum_photo_in_list.html
+[code]
+<{d3forum_comment_topicscount dirname=d3forum forum_id=[i](number)[/i] link_id=$photo.lid}>
+[/code]
 
-bulletin2:
+
+[b]bulletin2[/b]
+{dirname}_article.html
 [code]
 <{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="storyid" subject=$p.topic_title}>
+[/code]
+{dirname}_item.html
+[code]
+<{d3forum_comment_topicscount dirname=d3forum forum_id=[i](number)[/i] link_id=$story.id}>
 [/code]
 

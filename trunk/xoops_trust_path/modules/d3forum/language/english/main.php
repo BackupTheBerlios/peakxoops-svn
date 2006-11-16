@@ -127,8 +127,6 @@ define('_MD_D3FORUM_MSG_NOMATCH','No match');
 define('_MD_D3FORUM_FMT_SEARCHHITS','hits %s items');
 
 // module top (done)
-define('_MD_D3FORUM_FMT_WELCOME','Welcome to %s Forum.');
-define('_MD_D3FORUM_TOSTART','To start viewing messages, select the category and forum that you want to visit from the selection below.');
 define('_MD_D3FORUM_TOTALTOPICSCOUNT','Total topics');
 define('_MD_D3FORUM_TOTALPOSTSCOUNT','Total posts');
 define('_MD_D3FORUM_TIMENOW','The time now is');
@@ -169,6 +167,7 @@ define('_MD_D3FORUM_LABEL_ADVANCEDOPTIONS','Advanced Options');
 define('_MD_D3FORUM_REFERENCEPOST','Reference');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','Post from preview');
 define('_MD_D3FORUM_MSG_THANKSPOST','Thanks for your submission!');
+define('_MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL','Thanks for your submission! Wait till your post is approved.');
 define('_MD_D3FORUM_MSG_THANKSEDIT','Modified successfully');
 define('_MD_D3FORUM_USERWROTE','%s wrotes:');
 define('_MD_D3FORUM_BTN_QUOTE','Quote');
@@ -197,6 +196,7 @@ define('_MD_D3FORUM_LABEL_ATTACHSIG','Attach signature');
 define('_MD_D3FORUM_POSTREPLY','Reply');
 define('_MD_D3FORUM_POSTEDIT','Edit');
 define('_MD_D3FORUM_POSTDELETE','Delete');
+define('_MD_D3FORUM_EDITTIMELIMITED','Sorry, it has been expired to edit this post');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','Topic Manager');
@@ -238,6 +238,7 @@ define('_MD_D3FORUM_ERR_VOTEPERM','You cannot vote it');
 define('_MD_D3FORUM_ERR_VOTEINVALID','Invalid vote');
 define('_MD_D3FORUM_MSG_VOTEDOUBLE','You can vote once per a post');
 define('_MD_D3FORUM_MSG_VOTEACCEPTED','Thanks for voting!');
+define('_MD_D3FORUM_MSG_VOTEDISABLED','You cannot vote into the forum');
 define('_MD_D3FORUM_VOTECOUNT','Votes');
 define('_MD_D3FORUM_VOTEPOINTAVG','Average');
 define('_MD_D3FORUM_VOTEPOINTDSCBEST','Useful');

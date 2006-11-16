@@ -16,12 +16,16 @@ define($constpref."_DESC","Forum module for XOOPS");
 // Names of blocks for this module (Not all module has blocks)
 define($constpref."_BNAME_LIST_TOPICS","Topics");
 define($constpref."_BDESC_LIST_TOPICS","This block can be used for multi-purpose. Of course, you can put it multiplly.");
+define($constpref."_BNAME_LIST_POSTS","Posts");
+define($constpref."_BNAME_LIST_FORUMS","Forums");
 
 define($constpref.'_ADMENU_CATEGORYACCESS','Permissions of Categories');
 define($constpref.'_ADMENU_FORUMACCESS','Permissions of Forums');
 define($constpref.'_ADMENU_ADVANCEDADMIN','Advanced');
 
 // configurations
+define($constpref.'_TOP_MESSAGE','Message in forum top');
+define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">Forum Top</h1><p class="d3f_welcome">To start viewing messages, select the category and forum that you want to visit from the selection below.</p>');
 define($constpref.'_ALLOW_HTML','Allow HTML');
 define($constpref.'_ALLOW_HTMLDSC','Don\'t turn this on casually. It cause Script Insertion vulnerability if malicious user can post.');
 define($constpref.'_ALLOW_TEXTIMG','Allow to dipslay external images in the post');
@@ -30,6 +34,7 @@ define($constpref.'_ALLOW_SIG','Allow Signature');
 define($constpref.'_ALLOW_SIGDSC','');
 define($constpref.'_ALLOW_SIGIMG','Allow to display external images in the signature');
 define($constpref.'_ALLOW_SIGIMGDSC','If some attackers post an external image using [img], he can know IPs or User-Agents of users visited your site.');
+define($constpref.'_USE_VOTE','use the feature of VOTE');
 define($constpref.'_USE_SOLVED','use the feature of SOLVED');
 define($constpref.'_ALLOW_MARK','use the feature of MARKING');
 define($constpref.'_ALLOW_HIDEUID','Allow a registered user can post without his/her name');

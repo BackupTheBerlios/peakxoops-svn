@@ -1,4 +1,8 @@
 <!-- start module contents -->
+<div class="d3f_breadcrumbs">
+	<a href="<{$mod_url}>/index.php?cat_ids=0"><{$smarty.const._MD_D3FORUM_LISTALLTOPICS}></a>
+</div>
+
 <{$mod_config.top_message}>
 
 <dl class="d3f_bbsinfo">
@@ -30,7 +34,7 @@
 	<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$category.topics_count}> <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$category.posts_count}> 
 	<{if $category.last_post_time}><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$category.last_post_time_formatted}><{/if}></p>
 </div>
-<p class="d3f_info"><{$category.desc}></p>
+<{if $category.desc}><p class="d3f_info"><{$category.desc}></p><{/if}>
 
 <{if $subcategories}>
 <h3 class="d3f_head_h3"><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h3>
@@ -94,7 +98,6 @@
 <!-- short cut -->
 <h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
 <div class="d3f_ctrl">
-	<p><a href="<{$mod_url}>/index.php?cat_ids=0"><{$smarty.const._MD_D3FORUM_LISTALLTOPICS}></a></p>
 	<!-- forum jumpbox -->
 	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
 		<select name="forum_id"><{$forum_jumpbox_options}></select>

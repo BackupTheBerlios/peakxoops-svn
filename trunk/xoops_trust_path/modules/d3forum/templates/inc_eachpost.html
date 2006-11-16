@@ -38,7 +38,7 @@
 		<{$smarty.const._MD_D3FORUM_NOCHILDPOSTS}>
 	<{/if}> |
 	
-	<span title="<{if $post.post_time < $post.modified_time}><{$smarty.const._MD_D3FORUM_LASTMODIFIED}> <{$post.modified_time_formatted}><{/if}>"><{$smarty.const._MD_D3FORUM_ON}> <{$post.post_time_formatted}></span>
+	<{$smarty.const._MD_D3FORUM_ON}> <{$post.post_time_formatted}> <{if $post.post_time < $post.modified_time}> | <span title="<{$post.modified_time_formatted}>"><{$smarty.const._MD_D3FORUM_LASTMODIFIED}></span><{/if}>
 </div>
 <!-- poster info -->
 <div class="d3f_info_sub">

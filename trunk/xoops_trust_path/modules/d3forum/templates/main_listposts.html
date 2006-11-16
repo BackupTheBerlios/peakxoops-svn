@@ -19,7 +19,46 @@
 
 <!-- top of posts -->
 
-<p class="d3f_topicinfo"><{$smarty.const._MD_D3FORUM_REPLIES}>: <{$topic.replies}> <{$smarty.const._MD_D3FORUM_VIEWS}>: <{$topic.views}> <{$smarty.const._MD_D3FORUM_VOTECOUNT}>: <{$topic.votes_count}> <{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>: <{$topic.votes_avg|string_format:"%.2f"}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>" title="<{$topic.last_post_subject}>(<{$topic.last_post_uname}>, <{$topic.last_post_time_formatted}>)"><{$smarty.const._MD_D3FORUM_LASTPOST}></a></p>
+<div class="d3f_topctrl">
+	<{if $forum.external_link_format}>
+		<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>
+	<{elseif $forum.can_post}>
+		<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
+	<{elseif ! $xoops_isuser}>
+		<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
+	<{else}>
+		<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
+	<{/if}>
+
+</div>
+
+<div class="d3f_topctrl_icons">
+	<!-- topic manager -->
+	<{if $forum.isadminormod}>
+		<a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_topicmanager.gif);" title="<{$smarty.const._MD_D3FORUM_TOPICMANAGER}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a>
+	<{/if}>
+
+	<!-- mark -->
+	<{if $uid && $mod_config.allow_mark}>
+		<a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_<{if $topic.u2t_marked}>marked_on.gif<{else}>marked_off.gif<{/if}>);" title="<{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}>"><{if $topic.u2t_marked}><{$smarty.const._MD_D3FORUM_MARK_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_MARK_TURNON}><{/if}></a>
+	<{/if}>
+
+	<!-- solved -->
+	<{if $forum.isadminormod && $mod_config.use_solved}>
+		<a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_<{if $topic.solved}>solved_on.gif<{else}>solved_off.gif<{/if}>);" title="<{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}>"><{if $topic.solved}><{$smarty.const._MD_D3FORUM_SOLVED_TURNOFF}><{else}><{$smarty.const._MD_D3FORUM_SOLVED_TURNON}><{/if}></a>
+	<{/if}>
+
+	<!-- post orders -->
+	<{if $postorder != 0}>
+		<a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=0" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_viewastree.gif);" title="<{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}>"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}></a>
+	<{/if}>
+	<{if $postorder != 2}>
+		<a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=2" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_newerislower.gif);" title="<{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}>"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}></a>
+	<{/if}>
+	<{if $postorder != 3}>
+		<a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=3" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_newerisupper.gif);" title="<{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}>"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}></a>
+	<{/if}>
+</div>
 
 <div class="d3f_wrap">
 <{foreach item=post from=$posts}>

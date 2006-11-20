@@ -2,6 +2,7 @@
 - modified compatibitity with Cube 2.1
 - removed "usermenu"
 - modified templates radically
+- modified sitemap_xml_google.html based on "Sitemaps XML format" (thx kimono)
 
 1.29 2006-10-01
 - modified the action when xml_google.php is directly accessed 1.29

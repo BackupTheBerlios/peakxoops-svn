@@ -3,11 +3,22 @@
 eval( ' function xoops_module_uninstall_'.$mydirname.'( $module ) { return pico_onuninstall_base( $module , "'.$mydirname.'" ) ; } ' ) ;
 
 
+if( ! function_exists( 'pico_onuninstall_base' ) ) {
+
 function pico_onuninstall_base( $module , $mydirname )
 {
 	// transations on module uninstall
 
-	global $ret ;
+	global $ret ; // TODO :-D
+
+	// for Cube 2.1
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
+		$root =& XCube_Root::getSingleton();
+		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleUninstall.' . ucfirst($mydirname) . '.Success' , 'pico_message_append_onuninstall' ) ;
+		$ret = array() ;
+	} else {
+		if( ! is_array( $ret ) ) $ret = array() ;
+	}
 
 	$db =& Database::getInstance() ;
 	$mid = $module->getVar('mid') ;
@@ -48,6 +59,19 @@ function pico_onuninstall_base( $module , $mydirname )
 
 
 	return true ;
+}
+
+function pico_message_append_onuninstall( &$module_obj , &$log )
+{
+	if( is_array( @$GLOBALS['ret'] ) ) {
+		foreach( $GLOBALS['ret'] as $message ) {
+			$log->add( strip_tags( $message ) ) ;
+		}
+	}
+
+	// use mLog->addWarning() or mLog->addError() if necessary
+}
+
 }
 
 ?>

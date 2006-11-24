@@ -3,15 +3,26 @@
 eval( ' function xoops_module_update_'.$mydirname.'( $module ) { return pico_onupdate_base( $module , "'.$mydirname.'" ) ; } ' ) ;
 
 
+if( ! function_exists( 'pico_onupdate_base' ) ) {
+
 function pico_onupdate_base( $module , $mydirname )
 {
-	global $msgs ;
+	// transations on module update
+
+	global $msgs ; // TODO :-D
+
+	// for Cube 2.1
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
+		$root =& XCube_Root::getSingleton();
+		$root->mDelegateManager->add( 'Legacy.Admin.Event.ModuleUpdate.' . ucfirst($mydirname) . '.Success', 'pico_message_append_onupdate' ) ;
+		$msgs = array() ;
+	} else {
+		if( ! is_array( $msgs ) ) $msgs = array() ;
+	}
 
 	$db =& Database::getInstance() ;
 	$mid = $module->getVar('mid') ;
 
-
-	// transations on module update
 
 	// TABLES (write here ALTER TABLE etc. if necessary)
 
@@ -23,7 +34,7 @@ function pico_onupdate_base( $module , $mydirname )
 		while( ( $file = readdir( $handler ) ) !== false ) {
 			if( substr( $file , 0 , 1 ) == '.' ) continue ;
 			$file_path = $tpl_path . '/' . $file ;
-			if( is_file( $file_path ) && substr( $file , -5 ) == '.html' ) {
+			if( is_file( $file_path ) && in_array( strrchr( $file , '.' ) , array( '.html' , '.css' , '.js' ) ) ) {
 				$mtime = intval( @filemtime( $file_path ) ) ;
 				$tplfile =& $tplfile_handler->create() ;
 				$tplfile->setVar( 'tpl_source' , file_get_contents( $file_path ) , true ) ;
@@ -41,7 +52,8 @@ function pico_onupdate_base( $module , $mydirname )
 					$tplid = $tplfile->getVar( 'tpl_id' ) ;
 					$msgs[] = 'Template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b> added to the database. (ID: <b>'.$tplid.'</b>)';
 					// generate compiled file
-					include_once XOOPS_ROOT_PATH.'/class/template.php';
+					include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php' ;
+					include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 					if( ! xoops_template_touch( $tplid ) ) {
 						$msgs[] = '<span style="color:#ff0000;">ERROR: Failed compiling template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b>.</span>';
 					} else {
@@ -52,10 +64,24 @@ function pico_onupdate_base( $module , $mydirname )
 		}
 		closedir( $handler ) ;
 	}
+	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php' ;
 	include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	xoops_template_clear_module_cache( $mid ) ;
 
 	return true ;
+}
+
+function pico_message_append_onupdate( &$module_obj , &$log )
+{
+	if( is_array( @$GLOBALS['msgs'] ) ) {
+		foreach( $GLOBALS['msgs'] as $message ) {
+			$log->add( strip_tags( $message ) ) ;
+		}
+	}
+
+	// use mLog->addWarning() or mLog->addError() if necessary
+}
+
 }
 
 ?>

@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 
 $modversion['name'] = $mydirname ;
-$modversion['description'] = constant($constpref.'_MODULE_DESCRIPTION') ;
+$modversion['description'] = constant($constpref.'_DESC') ;
 $modversion['version'] = 0.10 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -50,17 +50,146 @@ $modversion['blocks'] = array() ;
 $modversion['hasComments'] = 0 ;
 
 // Configs
-$modversion['config'] = array(
-	array( 
-		'name' => 'test' ,
-		'title' => $constpref.'_PREFERENCES' ,
-		'description' => '' ,
-		'formtype' => 'textbox' ,
-		'valuetype' => 'text' ,
-		'default' => "1" ,
-		'options' => array()
-	) ,
+$modversion['config'][1] = array(
+	'name'			=> 'top_message' ,
+	'title'			=> $constpref.'_TOP_MESSAGE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textarea' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> constant($constpref.'_TOP_MESSAGEDEFAULT') ,
+	'options'		=> array()
 ) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'show_listasindex' ,
+	'title'			=> $constpref.'_SHOW_LISTASINDEX' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'show_breadcrumbs' ,
+	'title'			=> $constpref.'_SHOW_BREADCRUMBS' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'show_pagenavi' ,
+	'title'			=> $constpref.'_SHOW_PAGENAVI' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'show_printicon' ,
+	'title'			=> $constpref.'_SHOW_PRINTICON' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'show_tellafriend' ,
+	'title'			=> $constpref.'_SHOW_TELLAFRIEND' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'filters' ,
+	'title'			=> $constpref.'_FILTERS' ,
+	'description'	=> $constpref.'_FILTERSDSC' ,
+	'formtype'		=> 'textarea' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> constant($constpref.'_FILTERSDEFAULT') ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'use_vote' ,
+	'title'			=> $constpref.'_USE_VOTE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> "1" ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'guest_vote_interval' ,
+	'title'			=> $constpref.'_GUESTVOTE_IVL' ,
+	'description'	=> $constpref.'_GUESTVOTE_IVLDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 86400 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'htmlheader' ,
+	'title'			=> $constpref.'_HTMLHEADER' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textarea' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'css_uri' ,
+	'title'			=> $constpref.'_CSS_URI' ,
+	'description'	=> $constpref.'_CSS_URIDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'index.css' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'images_dir' ,
+	'title'			=> $constpref.'_IMAGES_DIR' ,
+	'description'	=> $constpref.'_IMAGES_DIRDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'images' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_dirname' ,
+	'title'			=> $constpref.'_COM_DIRNAME' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_forum_id' ,
+	'title'			=> $constpref.'_COM_FORUM_ID' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '0' ,
+	'options'		=> array()
+) ;
+
 
 // Notification
 $modversion['hasNotification'] = 0 ;

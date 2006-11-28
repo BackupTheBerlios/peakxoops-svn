@@ -1,0 +1,17 @@
+<?php
+
+require_once dirname(__FILE__).'/main_functions.php' ;
+require_once dirname(__FILE__).'/common_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
+$myts =& PicoTextSanitizer::getInstance() ;
+$db =& Database::getInstance() ;
+
+// GET $uid
+$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+$isadmin = $uid > 0 ? $xoopsUser->isAdmin() : false ;
+
+// get this user's permissions as perm array
+$category_permissions = pico_get_category_permissions_of_current_user( $mydirname ) ;
+$whr_read4cat = 'c.`cat_id` IN (' . implode( "," , array_keys( $category_permissions ) ) . ')' ;
+
+?>

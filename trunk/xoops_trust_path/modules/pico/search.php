@@ -23,37 +23,37 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
-	$select4con = $showcontext ? "`body` AS text" : "'' AS text" ;
+	$select4con = $showcontext ? "`body_cached` AS text" : "'' AS text" ;
 
 	if( is_array( $keywords ) && count( $keywords ) > 0 ) {
 		switch( strtolower( $andor ) ) {
 			case "and" :
 				$whr = "" ;
 				foreach( $keywords as $keyword ) {
-					$whr .= "`body` LIKE '%$keyword%' AND " ;
+					$whr .= "(`subject` LIKE '%$keyword%' OR `body_cached` LIKE '%$keyword%') AND " ;
 				}
 				$whr .= "1" ;
 				break ;
 			case "or" :
 				$whr = "" ;
 				foreach( $keywords as $keyword ) {
-					$whr .= "`body` LIKE '%$keyword%' OR " ;
+					$whr .= "(`subject` LIKE '%$keyword%' OR `body_cached` LIKE '%$keyword%') OR " ;
 				}
 				$whr .= "0" ;
 				break ;
 			default :
-				$whr = "`body` LIKE '%{$keywords[0]}%'" ;
+				$whr = "(`subject` LIKE '%$keywords[0]%' OR `body_cached` LIKE '%{$keywords[0]}%')" ;
 				break ;
 		}
 	} else {
 		$whr = 1 ;
 	}
 
-	$sql = "SELECT `filename`,`title`,`mtime`,$select4con FROM ".$db->prefix( $mydirname."_indexes WHERE ($whr) ORDER BY 1" ) ;
+	$sql = "SELECT `content_id`,`subject`,`created_time`,$select4con FROM ".$db->prefix( $mydirname."_contents WHERE ($whr) ORDER BY 1" ) ;
 	$result = $db->query( $sql , $limit , $offset ) ;
 	$ret = array() ;
 	$context = '' ;
-	while( list( $filename , $title , $mtime , $text ) = $db->fetchRow( $result ) ) {
+	while( list( $content_id , $subject , $created_time , $text ) = $db->fetchRow( $result ) ) {
 
 		// get context for module "search"
 		if( function_exists( 'search_make_context' ) && $showcontext ) {
@@ -64,9 +64,9 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 
 		$ret[] = array(
 			"image" => "" ,
-			"link" => "index.php/$filename" ,
-			"title" => $title ,
-			"time" => $mtime ,
+			"link" => "index.php?content_id=$content_id" ,
+			"title" => $subject ,
+			"time" => $created_time ,
 			"uid" => "0" ,
 			"context" => $context
 		) ;

@@ -2,12 +2,12 @@
 
 // subcategory loop
 $subcategories4assign = array() ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_categories")." WHERE pid=$cat_id ORDER BY cat_weight" ;
+$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_categories")." c WHERE $whr_read4cat AND c.pid=$cat_id ORDER BY cat_weight" ;
 if( ! $srs = $xoopsDB->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 while( $subcat_row = $xoopsDB->fetchArray( $srs ) ) {
 
 	$subcat_id = intval( $subcat_row['cat_id'] ) ;
-	$isadminormod = (boolean)$category_permissions[ $subcat_id ]['is_moderator'] || $isadmin ;
+	$isadminormod = ! empty( $category_permissions[ $subcat_id ]['is_moderator'] ) || $isadmin ;
 	$subcategories4assign[] = array(
 		'id' => intval( $subcat_row['cat_id'] ) ,
 		'pid' => $subcat_row['pid'] ,

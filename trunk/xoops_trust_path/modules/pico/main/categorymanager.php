@@ -14,7 +14,13 @@ $mytree = new XoopsTree( $xoopsDB->prefix($mydirname."_categories") , "cat_id" ,
 $children = $mytree->getAllChildId( $cat_id ) ;
 
 // special check for categorymanager
-if( ! $isadminormod ) die( _MD_PICO_ERR_CATEGORYMANGAGEMENT ) ;
+if( ! $isadminormod ) die( _MD_PICO_ERR_CATEGORYMANAGEMENT ) ;
+
+// redirect to preferences (install altsys)
+if( ! $cat_id ) {
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?mode=admin&lib=altsys&page=mypreferences" , 2 , _MD_PICO_MSG_GOTOPREFERENCE4EDITTOP ) ;
+	exit ;
+}
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;

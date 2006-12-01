@@ -26,8 +26,10 @@ if( $content_id ) {
 	$pagetitle4assign = $category4assign['title'] ;
 }
 
+// xoops header
 include XOOPS_ROOT_PATH.'/header.php';
 
+// assign
 $xoopsTpl->assign(
 	array(
 		'mydirname' => $mydirname ,
@@ -39,12 +41,21 @@ $xoopsTpl->assign(
 		'subcategories' => $subcategories4assign ,
 		'contents' => @$contents4assign ,
 		'content' => @$content4assign ,
+		'next_content' => @$next_content4assign ,
+		'prev_content' => @$prev_content4assign ,
 		'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , @$content_row['cat_id'] ) ,
 		'xoops_pagetitle' => @$pagetitle4assign ,
-		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$content4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 
-include XOOPS_ROOT_PATH.'/footer.php';
+if( @$_GET['page'] == 'print' ) {
+	// for printer
+	$xoopsTpl->assign( 'sitename' , htmlspecialchars($xoopsConfig['sitename']) ) ;
+	$xoopsTpl->display( 'db:'.$mydirname.'_independent_print.html' ) ;
+} else {
+	// for monitor
+	include XOOPS_ROOT_PATH.'/footer.php';
+}
 
 ?>

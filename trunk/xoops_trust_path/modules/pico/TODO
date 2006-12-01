@@ -1,14 +1,47 @@
-・ブロック
-メニュー
-コンテンツ表示
-
+●未実装
 ・イベント通知
-
-・フィルター群
-
-・コメント統合
-
-・ページナビ
-
+・プラグイン (sitemap, waiting)
+・承認
+・投票
 ・WYSIWYG Editor
+・目次ページ
+・TinyDからのインポート
+・他のpicoへのエクスポート
+
+
+●実装済
+・階層カテゴリー
+・パンくず
+・ページナビゲーション
+・カテゴリーOption Overrideシステム
+・トップカテゴリーの特別扱い
+・カテゴリー（モジュール）トップが、リスト表示かコンテンツかの選択
+・任意の順番でかけることのできるフィルター群（新たに Smarty追加）
+・プレビュー
+・本文キャッシュ
+・プリンタ用画面
+・モジュール・カテゴリーレベルのHTMLヘッダ
+・コンテンツ毎のHTMLヘッダ（上とは独立）
+・検索（XOOPS検索の本文表示対応）
+・閲覧数カウント
+・ブロック「メニュー」複製可
+・ブロック「コンテンツ表示」複製可
+・d3forum nativeコメント統合
+・管理者用記事一覧管理
+
+
+●権限・表示ON/OFF関係の仕様
+category_access  レコードがあれば、そのカテゴリーの「読み出し権限」がある
+category_access.can_post 投稿権限 これだけだと投稿されてもvisible=0
+category_access.can_edit 変更権限 他者のエントリも変更できる。*_waitingに収まる
+category_access.can_delete 削除権限 他者のエントリも削除できる
+category_access.auto_approval 投稿したらvisible=1、編集したら*_waitingに収めることもスキップしていきなり書き換わる
+category_access.make_subcategory サブカテゴリー作成権限
+category_access.is_moderator カテゴリーモデレータ・不可視コンテンツが見える/承認権限がある/カテゴリー編集権限がある等。管理画面での操作（直接の権限設定等）は出来ない
+
+contents.visible 0なら、管理者/モデレータ以外には見えない
+contents.approval 表示/非表示とは直接関係ない。0は単に「待っている」ことを示す
+contents.show_in_navi ページナビゲーションに表示されるかどうか
+contents.show_in_menu メニューブロックに表示されるかどうか
+
 

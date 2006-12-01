@@ -266,17 +266,30 @@ function pico_get_requests4content( $mydirname )
 
 	// check $cat_id
 	$cat_id = intval( @$_POST['cat_id'] ) ;
-	$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$cat_id" ;
-	if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	if( $db->getRowsNum( $crs ) <= 0 ) die( _MD_PICO_ERR_READCATEGORY ) ;
+	if( $cat_id ) {
+		$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$cat_id" ;
+		if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+		if( $db->getRowsNum( $crs ) <= 0 ) die( _MD_PICO_ERR_READCATEGORY ) ;
+	}
+
+	// build filters
+	$filters = array() ;
+	foreach( $_POST as $key => $val ) {
+		if( substr( $key , 0 , 15 ) == 'filter_enabled_' && $val ) {
+			$name = substr( $key , 15 ) ;
+			$filters[ $name ] = intval( @$_POST['filter_weight_'.$name] ) ;
+		}
+	}
+	asort( $filters ) ;
 
 	return array( 
 		'cat_id' => $cat_id ,
 		'subject' => $myts->stripSlashesGPC( @$_POST['subject'] ) ,
 		'htmlheader' => $myts->stripSlashesGPC( @$_POST['htmlheader'] ) ,
 		'body' => $myts->stripSlashesGPC( @$_POST['body'] ) ,
-		'filters' => $myts->stripSlashesGPC( @$_POST['filters'] ) ,
+		'filters' => implode( '|' , array_keys( $filters ) ) ,
 		'weight' => intval( @$_POST['weight'] ) ,
+		'use_cache' => empty( $_POST['use_cache'] ) ? 0 : 1 ,
 		'visible' => empty( $_POST['visible'] ) ? 0 : 1 ,
 	) ;
 }
@@ -295,7 +308,7 @@ function pico_makecontent( $mydirname )
 		$set .= "`$key`='".addslashes( $val )."'," ;
 	}
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."'" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_content_id = $db->getInsertId() ;
 
 	return $new_content_id ;
@@ -315,7 +328,7 @@ function pico_updatecontent( $mydirname , $content_id )
 		$set .= "`$key`='".addslashes( $val )."'," ;
 	}
 
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."'" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return $content_id ;
 }

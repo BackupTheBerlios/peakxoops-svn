@@ -1,26 +1,83 @@
+<!-- breadcrumbs -->
+<{if $mod_config.show_breadcrumbs}>
 <div class="pico_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
 	&nbsp;&gt;&nbsp;
 		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
 	<{/foreach}>
+	&nbsp;&gt;&nbsp;
+	<{$content.subject}>
 </div>
-
-<{if $category.isadminormod}>
-<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
-<{/if}>
-<{if $category.can_makesubcategory}>
-<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
-<{/if}>
-<{if $category.can_post}>
-<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
-<{/if}>
-<{if $content.can_edit}>
-<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
 <{/if}>
 
-<div id="<{$mydirname}>_content">
-
+<!-- content (body) -->
+<div class="pico_body" id="<{$mydirname}>_body">
 <{$content.body}>
-
 </div>
+
+<!-- print icon -->
+<{if $mod_config.show_printicon}>
+	<div style="float:right;width:40px;height:40px;"><a href="<{$mod_url}>/index.php?page=print&amp;content_id=<{$content.id}>"><img src="<{$mod_imageurl}>/icon_print.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
+<{/if}>
+
+<!-- tell a friend -->
+<{if $mod_config.show_tellafriend}>
+	<div style="float:right;width:40px;height:40px;"><a href="<{$content.tellafriend_uri}>" target="_top"><img src="<{$mod_imageurl}>/icon_tellafriend.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_TELLAFRIEND}>" /></a></div>
+<{/if}>
+
+<hr style="clear:right;" />
+
+<!-- page navigation -->
+<{if $mod_config.show_pagenavi}>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="33%" align="left" valign="top">
+	<{if $prev_content.id}>
+		<a href="<{$mod_url}>/index.php?content_id=<{$prev_content.id}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_prev.gif" alt="<{$smarty.const._MD_PICO_PREV}>" /></a><br />
+		<{$prev_content.subject}>
+	<{/if}>
+	</td>
+	<td width="34%" align="center" valign="top">
+		<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>" accesskey="P"><img src="<{$mod_imageurl}>/navicon_up.gif" alt="<{$smarty.const._MD_PICO_CATEGORYINDEX}>" /></a><br />
+		<{$category.title}>
+	</td>
+	<td width="33%" align="right" valign="top">
+	<{if $next_content.id}>
+		<a href="<{$mod_url}>/index.php?content_id=<{$next_content.id}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_next.gif" alt="<{$smarty.const._MD_PICO_NEXT}>" /></a><br />
+		<{$next_content.subject}>
+	<{/if}>
+	</td>
+</tr>
+</table>
+<{/if}>
+
+<!-- admin's link -->
+<{if $category.isadminormod}>
+	<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}> <{$content.poster_uname}> 
+	<{if $content.modified_time > $content.created_time}>
+		&nbsp;
+		<{$smarty.const._MD_PICO_MODIFIED}>:<{$content.modified_time_formatted}> <{$content.modifier_uname}> 
+	<{/if}>
+	&nbsp;
+	<{$smarty.const._MD_PICO_VIEWED}>:<{$content.viewed}>
+	<br />
+	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
+<{/if}>
+
+<{if $category.can_makesubcategory}>
+	<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
+<{/if}>
+
+<{if $category.can_post}>
+	<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
+<{/if}>
+
+<{if $content.can_edit}>
+	<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
+<{/if}>
+
+<!-- d3forum comment integration -->
+<{if $mod_config.comment_dirname && $mod_config.comment_forum_id && $content.allow_comment}>
+	<{d3forum_comment dirname=$mod_config.comment_dirname forum_id=$mod_config.comment_forum_id class="PicoD3commentContent" mytrustdirname="pico" id=$content.id subject=$content.subject}>
+<{/if}>

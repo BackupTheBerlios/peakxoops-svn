@@ -18,8 +18,8 @@ if( empty( $cat_id ) ) {
 //
 
 // group update
-if( ! empty( $_POST['group_update'] ) && empty( $invaild_cat_id ) ) {
-	if ( ! $xoopsGTicket->check( true , 'd3forum_admin' ) ) {
+if( ! empty( $_POST['group_update'] ) ) {
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_access")." WHERE cat_id=$cat_id AND groupid>0" ) ;
@@ -42,7 +42,7 @@ if( ! empty( $_POST['group_update'] ) && empty( $invaild_cat_id ) ) {
 
 // user update
 if( ! empty( $_POST['user_update'] ) && empty( $invaild_cat_id ) ) {
-	if ( ! $xoopsGTicket->check( true , 'd3forum_admin' ) ) {
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_access")." WHERE cat_id=$cat_id AND uid>0" ) ;
@@ -202,7 +202,7 @@ $tpl->assign( array(
 	'group_trs' => $group_trs ,
 	'user_trs' => $user_trs ,
 	'newuser_trs' => $newuser_trs ,
-	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'd3forum_admin') ,
+	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico_admin') ,
 ) ) ;
 $tpl->display( 'db:'.$mydirname.'_admin_category_access.html' ) ;
 xoops_cp_footer();

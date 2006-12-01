@@ -6,7 +6,14 @@
 	<{/foreach}>
 </div>
 
-<h1 class="pico_title"><{$formtitle}>: <{$content.title}></h1>
+<h1 class="pico_title"><{$formtitle}>: <{$content.subject}></h1>
+
+<{if $preview}>
+	<h2 class="pico_title"><{$smarty.const._PREVIEW}></h2>
+	<div class="pico_body pico_preview" id="<{$mydirname}>_body">
+	<{$preview.body}>
+	</div>
+<{/if}>
 
 <form name="categoryform" id="categoryform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
 	<{$gticket_hidden}>
@@ -34,9 +41,9 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="htmlheader"><{$smarty.const._MD_PICO_TH_HTMLHEADER}></label></th>
 			<td class="even">
-				<input type="checkbox" id="htmlheader_onoff" onclick="if(this.checked){document.getElementById('htmlheader').style.display='block';}else{document.getElementById('htmlheader').style.display='none';};" /><label for="htmlheader_onoff"><{$smarty.const._MD_PICO_LABEL_HTMLHEADERONOFF}></label>
+				<input type="checkbox" id="htmlheader_onoff" onclick="if(this.checked){document.getElementById('htmlheader').style.display='block';}else{document.getElementById('htmlheader').style.display='none';};"  <{if $content.htmlheader}>checked="checked"<{/if}> /><label for="htmlheader_onoff"><{$smarty.const._MD_PICO_LABEL_HTMLHEADERONOFF}></label>
 				<br />
-				<textarea name="htmlheader" id="htmlheader" style="display:none;width:480px;height:120px;"><{$content.htmlheader}></textarea>
+				<textarea name="htmlheader" id="htmlheader" style="display:<{if $content.htmlheader}>block<{else}>none<{/if}>;width:480px;height:120px;"><{$content.htmlheader}></textarea>
 			</td>
 		</tr>
 
@@ -52,7 +59,11 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="filters"><{$smarty.const._MD_PICO_TH_FILTERS}></label></th>
 			<td class="even">
-				<input type="text" name="filters" id="filters" size="80" maxlength="255" value="<{$content.filters}>" style="ime-mode:disabled;" />
+				<ul>
+				<{foreach from=$content.filter_infos key="filter_name" item="filter"}>
+					<li title="<{$filter.desc}>"><input type="checkbox" name="filter_enabled_<{$filter_name}>" id="filter_enabled_<{$filter_name}>" value="1" <{if $filter.enabled}>checked="checked"<{/if}> /><input type="text" name="filter_weight_<{$filter_name}>" id="filter_weight_<{$filter_name}>" value="<{$filter.weight}>" size="3" style="text-align:right;" /> <{$filter.title}></li>
+				<{/foreach}>
+				</ul>
 			</td>
 		</tr>
 
@@ -64,9 +75,17 @@
 		</tr>
 
 		<tr valign="top" align="left">
+			<th class="head"><label for="use_cache"><{$smarty.const._MD_PICO_TH_USECACHE}></label></th>
+			<td class="even">
+				<input type="checkbox" name="use_cache" id="use_cache" value="1" <{if $content.use_cache}>checked="checked"<{/if}> />
+				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}></label>
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
 			<th class="head"><label for="visible"><{$smarty.const._MD_PICO_TH_VISIBLE}></label></th>
 			<td class="even">
-				<input type="checkbox" name="visible" id="visible" value="1" <{$content.visible_checked}> />
+				<input type="checkbox" name="visible" id="visible" value="1" <{if $content.visible}>checked="checked"<{/if}> />
 			</td>
 		</tr>
 

@@ -243,9 +243,65 @@ function pico_get_top_content_id_from_cat_id( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
-	list( $content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($mydirname."_contents")." WHERE cat_id=".intval($cat_id)." ORDER BY weight LIMIT 1" ) ) ;
+	list( $content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($mydirname."_contents")." WHERE cat_id=".intval($cat_id)." ORDER BY weight,content_id LIMIT 1" ) ) ;
 
 	return intval( $content_id ) ;
 }
+
+
+// escape string for <a href="mailto:..."> (eg. tellafriend)
+function pico_escape4mailto( $text )
+{
+	if( function_exists( 'mb_convert_encoding' ) && defined( '_MD_PICO_MAILTOENCODING' ) ) {
+		$text = mb_convert_encoding( $text , _MD_PICO_MAILTOENCODING ) ;
+	}
+	return rawurlencode( $text ) ;
+}
+
+
+// get filter's informations under XOOPS_TRUST_PATH/modules/pico/filters/
+function pico_get_filter_infos( $filters_separated_pipe )
+{
+	$filters = array() ;
+	$dh = opendir( XOOPS_TRUST_PATH.'/modules/pico/filters' ) ;
+	while( ( $file = readdir( $dh ) ) !== false ) {
+		if( preg_match( '/^pico\_(.*)\.php$/' , $file , $regs ) ) {
+			$name = $regs[1] ;
+			$constpref = '_MD_PICO_FILTERS_' . strtoupper( $name ) ;
+			$filters[ $name ] = array(
+				'title' => defined( $constpref.'TITLE' ) ? constant( $constpref.'TITLE' ) : $name ,
+				'desc' => defined( $constpref.'DESC' ) ? constant( $constpref.'DESC' ) : '' ,
+				'weight' => defined( $constpref.'INITWEIGHT' ) ? constant( $constpref.'INITWEIGHT' ) : 0 ,
+				'enabled' => false ,
+			) ;
+		}
+	}
+
+	$current_filters = explode( '|' , $filters_separated_pipe ) ;
+	$weight = 0 ;
+	foreach( $current_filters as $current_filter ) {
+		if( ! empty( $filters[ $current_filter ] ) ) {
+			$weight += 10 ;
+			$filters[ $current_filter ]['weight'] = $weight ;
+			$filters[ $current_filter ]['enabled'] = true ;
+		}
+	}
+
+	uasort( $filters , 'pico_filter_cmp' ) ;
+
+	return $filters ;
+}
+
+
+// for usort() in pico_get_filter_infos()
+function pico_filter_cmp( $a , $b )
+{
+	if( $a['enabled'] != $b['enabled'] ) {
+		return $a['enabled'] ? -1 : 1 ;
+	} else {
+		return $a['weight'] > $b['weight'] ? 1 : -1 ;
+	}
+}
+
 
 ?>

@@ -32,4 +32,21 @@ function pico_get_categories_can_read( $mydirname )
 }
 
 
+function pico_filter_body( $mydirname , $text , $filters , $id )
+{
+	foreach( explode( '|' , $filters ) as $filter ) {
+		$filter = trim( $filter ) ;
+		$func_name = 'pico_'.$filter ;
+		$file_path = dirname(dirname(__FILE__)).'/filters/pico_'.$filter.'.php' ;
+		if( function_exists( $func_name ) ) {
+			$text = $func_name( $mydirname , $text , $id ) ;
+		} else if( file_exists( $file_path ) ) {
+			include_once $file_path ;
+			$text = $func_name( $mydirname , $text , $id ) ;
+		}
+	}
+
+	return $text ;
+}
+
 ?>

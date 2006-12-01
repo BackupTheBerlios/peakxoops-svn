@@ -14,6 +14,7 @@ define($constpref."_NAME","pico");
 define($constpref."_DESC","静的コンテンツ作成モジュール");
 
 // admin menus
+define( $constpref.'_ADMENU_CONTENTSADMIN' , 'コンテンツ一括管理' ) ;
 define( $constpref.'_ADMENU_CATEGORYACCESS' , 'カテゴリーアクセス権限' ) ;
 
 // configurations
@@ -24,12 +25,13 @@ define($constpref.'_SHOW_BREADCRUMBS','パンくずを表示する');
 define($constpref.'_SHOW_PAGENAVI','ページナビゲーションを表示する');
 define($constpref.'_SHOW_PRINTICON','印刷画面へのリンクを表示する');
 define($constpref.'_SHOW_TELLAFRIEND','友達に紹介するリンクを表示する');
+define($constpref.'_USE_TAFMODULE','tellafriendモジュールを利用する');
 define($constpref.'_FILTERS','デフォルトフィルターセット');
-define($constpref.'_FILTERSDSC','フィルター名を|で区切って入力する');
-define($constpref.'_FILTERSDEFAULT','');
+define($constpref.'_FILTERSDSC','フィルター名を|で区切って入力します');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
 define($constpref.'_USE_VOTE','投票機能を利用する');
 define($constpref.'_GUESTVOTE_IVL','ゲスト投票の時間制限');
-define($constpref.'_GUESTVOTE_IVLDSC','同一のIPからは、この時間（秒数）内は投票することができない');
+define($constpref.'_GUESTVOTE_IVLDSC','同一のIPからは、この時間（秒数）内は投票することができません');
 define($constpref.'_HTMLHEADER','コンテンツ共通HTMLヘッダ');
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトはindex.cssです。');
@@ -38,7 +40,9 @@ define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレ
 define($constpref.'_COM_DIRNAME','コメント統合するd3forumのdirname');
 define($constpref.'_COM_FORUM_ID','コメント統合するフォーラムの番号');
 
-
+// blocks
+define($constpref.'_BNAME_MENU','メニュー');
+define($constpref.'_BNAME_CONTENT','コンテンツ');
 
 }
 

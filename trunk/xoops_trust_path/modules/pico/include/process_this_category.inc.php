@@ -4,19 +4,25 @@
 $sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE $whr_read4cat AND c.cat_id=$cat_id" ;
 if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 if( $db->getRowsNum( $crs ) <= 0 ) {
-	$cat_row = array(
-		'cat_id' => 0 ,
-		'pid' => 0 ,
-		'cat_title' => $xoopsModule->getVar('name') ,
-		'cat_desc' => $xoopsModuleConfig['top_message'] ,
-		'cat_weight' => 0 ,
-		'cat_path_in_tree' => serialize( array() ) ,
-	) ;
+	if( empty( $cat_id ) ) {
+		$cat_row = array(
+			'cat_id' => 0 ,
+			'pid' => 0 ,
+			'cat_title' => $xoopsModule->getVar('name') ,
+			'cat_desc' => $xoopsModuleConfig['top_message'] ,
+			'cat_weight' => 0 ,
+			'cat_path_in_tree' => serialize( array() ) ,
+		) ;
+	} else {
+		// redirect when permission error or invalid cat_id
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCATEGORY ) ;
+		exit ;
+	}
 } else {
 	$cat_row = $db->fetchArray( $crs ) ;
 }
 
-$isadminormod = (boolean)$category_permissions[ $cat_id ]['is_moderator'] || $isadmin ;
+$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 $category4assign = array(
 	'id' => intval( $cat_row['cat_id'] ) ,
 	'pid' => $cat_row['pid'] ,

@@ -44,7 +44,27 @@ $modversion['sub'] = array() ;
 $modversion['templates'] = array() ;
 
 // Blocks
-$modversion['blocks'] = array() ;
+$modversion['blocks'][1] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_MENU') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_pico_menu_show' ,
+	'edit_func'		=> 'b_pico_menu_edit' ,
+	'options'		=> "$mydirname|0|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
+$modversion['blocks'][2] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_CONTENT') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_pico_content_show' ,
+	'edit_func'		=> 'b_pico_content_edit' ,
+	'options'		=> "$mydirname|0|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
 
 // Comments
 $modversion['hasComments'] = 0 ;
@@ -103,6 +123,16 @@ $modversion['config'][] = array(
 $modversion['config'][] = array(
 	'name'			=> 'show_tellafriend' ,
 	'title'			=> $constpref.'_SHOW_TELLAFRIEND' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'use_taf_module' ,
+	'title'			=> $constpref.'_USE_TAFMODULE' ,
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,

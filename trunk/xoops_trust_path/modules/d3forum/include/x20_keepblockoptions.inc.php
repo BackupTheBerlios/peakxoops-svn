@@ -85,7 +85,7 @@ if ($record) {
 }
 
 global $msgs , $myblocksadmin_parsed_updateblock ;
-if( ! empty( $msgs ) && empty( $myblocksadmin_parsed_updateblock ) ) {
+if( ! empty( $msgs ) && ! empty( $local_msgs ) && empty( $myblocksadmin_parsed_updateblock ) ) {
 	$msgs = array_merge( $msgs , $local_msgs ) ;
 	$myblocksadmin_parsed_updateblock = true ;
 }

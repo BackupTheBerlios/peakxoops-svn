@@ -14,8 +14,7 @@ if( ! function_exists( 'd3forum_global_search_base' ) ) {
 
 function d3forum_global_search_base( $mydirname , $keywords , $andor , $limit , $offset , $userid )
 {
-	global $myts ;
-
+	$myts =& MyTextsanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
 
 	$andor = strtoupper( $andor ) ;

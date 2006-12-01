@@ -77,6 +77,9 @@ define('_MD_D3FORUM_LINK_COMMENTSOURCE','target of the comment');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','Go to richer form');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 define('_MD_D3FORUM_COMMENTSLIST','Comments list');
+define('_MD_D3FORUM_COM_TARGETMODULE','Target');
+define('_MD_D3FORUM_COM_SUBJECT','Subject');
+define('_MD_D3FORUM_COM_SUMMARY','Summary');
 
 // topic,forum,category controller
 define('_MD_D3FORUM_SHORTCUT','Short cut');

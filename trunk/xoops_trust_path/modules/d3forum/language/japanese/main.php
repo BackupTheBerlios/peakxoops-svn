@@ -77,6 +77,9 @@ define('_MD_D3FORUM_LINK_COMMENTSOURCE','コメント元');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','より詳細なコメント入力フォームへ');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 define('_MD_D3FORUM_COMMENTSLIST','コメント一覧');
+define('_MD_D3FORUM_COM_TARGETMODULE','対象モジュール');
+define('_MD_D3FORUM_COM_SUBJECT','件名');
+define('_MD_D3FORUM_COM_SUMMARY','要旨');
 
 // topic,forum,category controller
 define('_MD_D3FORUM_SHORTCUT','ショートカット');

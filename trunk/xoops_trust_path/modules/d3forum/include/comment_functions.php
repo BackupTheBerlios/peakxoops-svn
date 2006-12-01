@@ -5,7 +5,6 @@ function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params )
 	global $xoopsUser , $xoopsConfig ;
 
 	$mydirpath = XOOPS_ROOT_PATH.'/modules/'.$mydirname ;
-	$mytrustdirname = basename( dirname( dirname( __FILE__ ) ) ) ;
 	$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
 
 	$db =& Database::getInstance() ;
@@ -44,10 +43,9 @@ function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params )
 
 function d3forum_display_comment( $mydirname , $forum_id , $params )
 {
-	global $xoopsUser , $xoopsConfig ;
+	global $xoopsUser , $xoopsConfig , $xoopsModule ;
 
 	$mydirpath = XOOPS_ROOT_PATH.'/modules/'.$mydirname ;
-	$mytrustdirname = basename( dirname( dirname( __FILE__ ) ) ) ;
 	$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
 
 	$db =& Database::getInstance() ;
@@ -83,14 +81,36 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 	$config_handler =& xoops_gethandler( 'config' ) ;
 	$xoopsModuleConfig =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
 
-	// external_link_id
-	if( empty( $params['itemname'] ) ) {
-		echo "set valid itemname in the template" ;
-		return ;
+	// read d3comment class and make the object
+	if( ! empty( $params['class'] ) ) {
+		$external_dirname = $GLOBALS['xoopsModule']->getVar('dirname') ;
+		$class_name = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['class'] ) ;
+		@include_once XOOPS_TRUST_PATH."/modules/d3forum/class/D3commentAbstract.class.php" ;
+		if( empty( $params['mytrustdirname'] ) ) {
+			// other than D3 module
+			$external_trustdirname = '' ;
+			@include_once XOOPS_ROOT_PATH."/modules/$external_dirname/class/{$class_name}.class.php" ;
+		} else {
+			// D3 module
+			$external_trustdirname = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['mytrustdirname'] ) ;
+			@include_once XOOPS_TRUST_PATH."/modules/$external_trustdirname/class/{$class_name}.class.php" ;
+		}
+		if( class_exists( $class_name ) ) {
+			$d3com =& new $class_name( $external_dirname ) ;
+			$external_link_id = $d3com->external_link_id( $params ) ;
+		}
 	}
-	$external_link_id = intval( @$_GET[ $params['itemname'] ] ) ;
-	if( $external_link_id <= 0 ) return ;
 
+	// for conventional module
+	if( ! is_object( $d3com ) ) {
+		if( ! empty( $params['itemname'] ) ) {
+			$external_link_id = intval( @$_GET[ $params['itemname'] ] ) ;
+			if( $external_link_id <= 0 ) return ;
+		} else {
+			echo "set valid itemname or class in <{d3forum_comment}> of the template" ;
+			return ;
+		}
+	}
 
 	include dirname(__FILE__).'/common_prepend.php' ;
 
@@ -102,7 +122,12 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 	// get $odr_options, $solved_options, $query4assign
 	//$query4nav = "forum_id=$forum_id" ;
 	//include dirname(__FILE__).'/process_query4topics.inc.php' ;
-	
+
+	// force UPDATE forums.forum_external_link_format "(dirname)::(classname)::(trustdirname)"
+	if( empty( $forum_row['forum_external_link_format'] ) && is_object( $d3com ) ) {
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_forums")." SET forum_external_link_format='".addslashes($external_dirname.'::'.$params['class'].'::'.$external_trustdirname)."' WHERE forum_id=$forum_id" ) ;
+	}
+
 	// INVISIBLE
 	$whr_invisible = $isadminormod ? '1' : '! t.topic_invisible' ;
 	

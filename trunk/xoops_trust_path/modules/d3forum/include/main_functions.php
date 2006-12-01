@@ -354,20 +354,38 @@ function d3forum_trigger_event( $category , $item_id , $event , $extra_tags=arra
 }
 
 
+// started from {XOOPS_URL} for conventional modules
 function d3forum_get_comment_link( $external_link_format , $external_link_id )
 {
-	if( substr( $external_link_format , 0 , 11 ) == '{XOOPS_URL}' ) {
-		$format = str_replace( '{XOOPS_URL}' , XOOPS_URL , $external_link_format ) ;
-		return sprintf( $format , $external_link_id ) ;
-	} else {
-		return '' ;
-	}
+	if( substr( $external_link_format , 0 , 11 ) != '{XOOPS_URL}' ) return '' ;
+
+	$format = str_replace( '{XOOPS_URL}' , XOOPS_URL , $external_link_format ) ;
+	return sprintf( $format , $external_link_id ) ;
 }
 
 
-function d3forum_get_comment_description( $forum_row , $topic_row )
+// started from class:: for native d3comment modules
+function d3forum_get_comment_description( $external_link_format , $external_link_id )
 {
-	return '' ; // TODO
+	include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
+	list( $external_dirname , $class_name , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
+	if( empty( $class_name ) ) return '' ;
+
+	// find and read d3comment class file
+	if( empty( $external_trustdirname ) ) {
+		// other than D3 module
+		include_once XOOPS_ROOT_PATH.'/modules/'.$external_dirname.'/class/'.$class_name.'.class.php' ;
+	} else {
+		// D3 module
+		include_once XOOPS_TRUST_PATH.'/modules/'.$external_trustdirname.'/class/'.$class_name.'.class.php' ;
+	}
+
+	// check the class
+	if( ! $class_name || ! class_exists( $class_name ) ) return '' ;
+
+	$d3com =& new $class_name( $external_dirname ) ;
+	return $d3com->fetchSummary( $external_link_id ) ;
+
 }
 
 ?>

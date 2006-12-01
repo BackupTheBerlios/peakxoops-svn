@@ -62,7 +62,7 @@ myalbum_photo_in_list.html
 [b]bulletin2[/b]
 {dirname}_article.html
 [code]
-<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="storyid" subject=$p.topic_title}>
+<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="storyid" subject=$story.title}>
 [/code]
 {dirname}_item.html
 [code]

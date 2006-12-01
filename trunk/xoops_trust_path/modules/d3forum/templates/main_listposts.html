@@ -11,11 +11,7 @@
 
 <h1 class="d3f_title"><{$topic.title}></h1>
 
-<{if $topic.comment_link}>
-	<p><a href="<{$topic.comment_link}>"><{$smarty.const._MD_D3FORUM_LINK_COMMENTSOURCE}></a></p>
-<{elseif $topic.comment_description}>
-	<p><{$topic.comment_description}></p>
-<{/if}>
+<{include file="db:`$mydirname`_inc_d3comment_summary.html"}>
 
 <!-- top of posts -->
 

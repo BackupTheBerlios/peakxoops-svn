@@ -28,11 +28,7 @@
 
 <h2 class="d3f_head<{if $mode == "edit"}> attn<{/if}>"><strong><{$formtitle}></strong></h2>
 
-<{if $topic.comment_link}>
-	<p><a href="<{$topic.comment_link}>"><{$smarty.const._MD_D3FORUM_LINK_COMMENTSOURCE}></a></p>
-<{elseif $topic.comment_description}>
-	<p><{$topic.comment_description}></p>
-<{/if}>
+<{include file="db:`$mydirname`_inc_d3comment_summary.html"}>
 
 <form name="postform" id="postform" action="<{$mod_url}>/index.php?page=post" method="post" onsubmit="return xoopsFormValidate_postform();">
 

@@ -1259,6 +1259,7 @@ function get_weekly_html( )
 					for( $d = 1 ; $d < 21 ; $d ++ ) {
 						$plugin_returns[ $d ] = @$plugin_returns_backup[ $d ] ;
 					}
+					$plugin_returns_backup = $plugin_returns ;
 					$this->year = date( 'Y' , $wlast_unixtime ) ;
 					$this->month = $wlast_month ;
 					@include( $this->base_path . '/' . $this->plugins_path_monthly . '/' . $plugin['file'] ) ;
@@ -1697,7 +1698,7 @@ function get_schedule_view_html( $for_print = false )
 	// 編集ボタン
 	if( $editable && ! $for_print ) {
 		$edit_button = "
-			<form method='get' action='' style='margin:0px;'>
+			<form method='get' action='index.php' style='margin:0px;'>
 				<input type='hidden' name='smode' value='$smode' />
 				<input type='hidden' name='action' value='Edit' />
 				<input type='hidden' name='event_id' value='$event->id' />
@@ -1709,7 +1710,7 @@ function get_schedule_view_html( $for_print = false )
 	// 削除ボタン
 	if( $deletable && ! $for_print ) {
 		$delete_button = "
-			<form method='post' action='' name='MainForm' style='margin:0px;'>
+			<form method='post' action='index.php' name='MainForm' style='margin:0px;'>
 				<input type='hidden' name='smode' value='$smode' />
 				<input type='hidden' name='last_smode' value='$smode' />
 				<input type='hidden' name='event_id' value='$event->id' />
@@ -2090,7 +2091,7 @@ function get_schedule_edit_html( )
 	// FORM DISPLAY
 	$ret = "
 <h2>"._PICAL_MB_TITLE_EVENTINFO." <small>-"._PICAL_MB_SUBTITLE_EVENTEDIT."-</small></h2>
-<form action='' method='post' name='MainForm'>
+<form action='index.php' method='post' name='MainForm'>
 	".$GLOBALS['xoopsGTicket']->getTicketHtml( __LINE__ )."
 	<input type='hidden' name='caldate' value='$this->caldate' />
 	<input type='hidden' name='event_id' value='$event_id' />
@@ -2300,10 +2301,11 @@ function update_schedule( $set_sql_append = '' , $whr_sql_append = '' , $notify_
 			$this->rrule_extract( $event_id ) ;
 		}
 
-		// すべてを更新後、元の日付のカレンダーをリロード
+		// すべてを更新後、新しい日付のカレンダーをリロード
 		$last_smode = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_smode'] ) ;
-		$last_caldate = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_caldate'] ) ;
-		$this->redirect( "smode=$last_smode&caldate=$last_caldate" ) ;
+		//$last_caldate = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_POST['last_caldate'] ) ;
+		$new_caldate = $start_date ? $start_date : date( 'Y-n-j' , $start ) ;
+		$this->redirect( "smode=$last_smode&caldate=$new_caldate" ) ;
 
 	} else {
 		// 新規登録処理

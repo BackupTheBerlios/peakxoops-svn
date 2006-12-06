@@ -148,7 +148,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 	// main query
 	$sql = "SELECT t.*, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$db->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$db->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND topic_external_link_id=$external_link_id ORDER BY t.topic_last_post_time DESC" ;
 	if( ! $trs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
-	
+
 	// topics loop
 	$topics = array() ;
 	while( $topic_row = $db->fetchArray( $trs ) ) {
@@ -218,6 +218,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 //			'pagenav' => @$pagenav ,
 			'external_link_id' => $external_link_id ,
 			'page' => 'listtopics' ,
+			'plugin_params' => $params ,
 			'xoops_pagetitle' => $forum4assign['title'] ,
 		)
 	) ;

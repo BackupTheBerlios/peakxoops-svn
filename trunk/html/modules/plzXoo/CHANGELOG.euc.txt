@@ -1,5 +1,8 @@
 [xlang:en]
 
+-=v0.98alt --> v0.99alt=-
+* added d3forum comment integration natively
+
 -=v0.97alt --> v0.98alt=-
 * added context display for XOOPS search module
 * added approval system
@@ -79,6 +82,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.98alt --> v0.99alt=-
+* d3forumのコメント統合にNative対応（回答へのコメント）
 
 -=v0.97alt --> v0.98alt=-
 * XOOPS検索の本文表示対応

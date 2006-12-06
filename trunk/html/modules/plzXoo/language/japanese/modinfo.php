@@ -33,6 +33,8 @@ define ( '_MI_PLZXOO_AUTONOTIFYQ_DESC','質問を登録した人に、自動的に「回答が投稿
 define ( '_MI_PLZXOO_AUTONOTIFYA','回答者への質問変更自動通知' ) ;
 define ( '_MI_PLZXOO_AUTONOTIFYA_DESC','回答を登録した人に、自動的に「質問になんらかの動きがあった時に通知する」オプションが設定される' ) ;
 define ( '_MI_PLZXOO_LISTVIEWPPG','カテゴリリスト表示における１ページあたりのアイテム数' ) ;
+define ( '_MI_PLZXOO_D3COMMENT_DIRNAME','d3forumコメント統合対象となるディレクトリ名' ) ;
+define ( '_MI_PLZXOO_D3COMMENT_FORUM_ID','d3forumコメント統合対象となるフォーラム番号' ) ;
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'モジュール全体' ) ;

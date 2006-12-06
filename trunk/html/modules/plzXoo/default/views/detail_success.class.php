@@ -48,6 +48,7 @@ class default_DetailView_success
 		$renderer->setAttribute('enable_post_answer',exPerm::isPerm('post_answer')&& is_object( $user ) && $question->getVar('uid') != $user->uid() | exPerm::isPerm('post_answer_myself') ) ; // GIJ
 
 		$renderer->setAttribute('is_detail',true);
+		$renderer->setAttribute('mod_config',@$GLOBALS['xoopsModuleConfig']);
 
 		$cat_handler =& plzXoo::getHandler('category');
 		$cat_obj =& $cat_handler->get( $question->getVar('cid') ) ;

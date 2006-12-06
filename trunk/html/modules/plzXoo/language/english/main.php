@@ -26,9 +26,10 @@ define ( '_MD_PLZXOO_LANG_POST_QUESTION','post a new question' );
 define ( '_MD_PLZXOO_LANG_POST_QUESTION_CID','ask in this category' );
 define ( '_MD_PLZXOO_LANG_PLZXOO','plzXoo' );
 define ( '_MD_PLZXOO_LANG_POINT_TO_THIS','Add point to the answer' );
-define ( '_MD_PLZXOO_LANG_NEW_RESPONSE','Add a comment to the answer' );
-define ( '_MD_PLZXOO_LANG_EDIT_RESPONSE','Edit this comment' );
-define ( '_MD_PLZXOO_LANG_RESPONSE','RESPONSE' );
+define ( '_MD_PLZXOO_LANG_NEW_RESPONSE','Add a thank to the answer' );
+define ( '_MD_PLZXOO_LANG_EDIT_RESPONSE','Edit this thank' );
+define ( '_MD_PLZXOO_LANG_NEW_COMMENT','Add a comment to the answer' );
+define ( '_MD_PLZXOO_LANG_RESPONSE','THANK' );
 define ( '_MD_PLZXOO_LANG_COMMENT','COMMENT' );
 define ( '_MD_PLZXOO_LANG_RESET','RESET' );
 define ( '_MD_PLZXOO_LANG_GO_BACK','GO BACK' );
@@ -51,7 +52,7 @@ define ( '_MD_PLZXOO_LANG_NOTIFY_NEWW','New waiting' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_MODQ','Modified question' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_NEWA','New answer' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_MODA','Modified question' );
-define ( '_MD_PLZXOO_LANG_NOTIFY_MODC','New or Modified comments' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_MODC','New or Modified thanks' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_CLOSE','Closed' );
 
 // <--- BREAD CRUMB --->

@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.98;
+$modversion['version'] = 0.99;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";
@@ -113,6 +113,20 @@ $modversion['config'][6]['description']='';
 $modversion['config'][6]['formtype']='text';
 $modversion['config'][6]['valuetype']='int';
 $modversion['config'][6]['default']=20 ;
+
+$modversion['config'][7]['name']='comment_dirname';
+$modversion['config'][7]['title']='_MI_PLZXOO_D3COMMENT_DIRNAME';
+$modversion['config'][7]['description']='';
+$modversion['config'][7]['formtype']='text';
+$modversion['config'][7]['valuetype']='string';
+$modversion['config'][7]['default']='' ;
+
+$modversion['config'][8]['name']='comment_forum_id';
+$modversion['config'][8]['title']='_MI_PLZXOO_D3COMMENT_FORUM_ID';
+$modversion['config'][8]['description']='';
+$modversion['config'][8]['formtype']='text';
+$modversion['config'][8]['valuetype']='int';
+$modversion['config'][8]['default']=0 ;
 
 // <--- NOTIFICATION PROPERTY --->
 $modversion['hasNotification'] = 1;

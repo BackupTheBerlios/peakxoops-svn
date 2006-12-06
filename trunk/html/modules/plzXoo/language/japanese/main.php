@@ -26,9 +26,10 @@ define ( '_MD_PLZXOO_LANG_POST_QUESTION','新しく質問する' );
 define ( '_MD_PLZXOO_LANG_POST_QUESTION_CID','このカテゴリで質問する' );
 define ( '_MD_PLZXOO_LANG_PLZXOO','教えて！Ｘｏｏ' );
 define ( '_MD_PLZXOO_LANG_POINT_TO_THIS','この回答にポイントを付与' );
-define ( '_MD_PLZXOO_LANG_NEW_RESPONSE','この回答にコメントをつける' );
-define ( '_MD_PLZXOO_LANG_EDIT_RESPONSE','このコメントを編集する' );
-define ( '_MD_PLZXOO_LANG_RESPONSE','コメント' );
+define ( '_MD_PLZXOO_LANG_NEW_RESPONSE','この回答にお礼を書く' );
+define ( '_MD_PLZXOO_LANG_EDIT_RESPONSE','お礼を編集する' );
+define ( '_MD_PLZXOO_LANG_NEW_COMMENT','この回答にコメントをつける' );
+define ( '_MD_PLZXOO_LANG_RESPONSE','お礼' );
 define ( '_MD_PLZXOO_LANG_COMMENT','コメント' );
 define ( '_MD_PLZXOO_LANG_RESET','リセット' );
 define ( '_MD_PLZXOO_LANG_GO_BACK','前に戻る' );
@@ -51,7 +52,7 @@ define ( '_MD_PLZXOO_LANG_NOTIFY_NEWW','新規承認待ち' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_MODQ','質問変更' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_NEWA','新規回答' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_MODA','回答変更' );
-define ( '_MD_PLZXOO_LANG_NOTIFY_MODC','コメント追加または変更' );
+define ( '_MD_PLZXOO_LANG_NOTIFY_MODC','お礼追加または変更' );
 define ( '_MD_PLZXOO_LANG_NOTIFY_CLOSE','クローズ' );
 
 

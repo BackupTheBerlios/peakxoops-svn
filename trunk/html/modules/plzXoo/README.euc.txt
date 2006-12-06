@@ -10,6 +10,9 @@ http://prdownloads.sourceforge.jp/exmodules/15194/exFrame-0.89.zip
 
 HOW TO USE:
 
+- extract the archive
+- copy all into your system
+- don't forget copy class/smarty/plugins/d3forum_comment.php into your system
 - install it
 - set categories in admin area
 - set permissions in admin area
@@ -27,6 +30,9 @@ exFrame 0.89が必要です。
 PHP5の動作が怪しい場合、以下のリンクから落としたものを再度展開してください。
 
 http://prdownloads.sourceforge.jp/exmodules/15194/exFrame-0.89.zip
+
+また、0.99から、d3forumのコメントに対応しました。
+この機能を使う・使わないにかかわらず、class/smarty/plugins/d3forum_comment.php のコピーを必ず行ってください。そうしないと、テンプレートコンパイルに失敗します。
 
 変更点は、CHANGELOGをご覧ください。
 

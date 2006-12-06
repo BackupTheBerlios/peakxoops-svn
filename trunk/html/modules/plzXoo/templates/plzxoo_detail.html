@@ -81,7 +81,7 @@
 	</tr>
 	<{if $answer.comment}>
 	<tr>
-		<td class='head'><{$smarty.const._MD_PLZXOO_LANG_COMMENT}></td>
+		<td class='head'><{$smarty.const._MD_PLZXOO_LANG_RESPONSE}></td>
 		<td class='odd'><{$answer.comment}></td>
 	</tr>
 	<{/if}>
@@ -92,6 +92,7 @@
 	</tr>
 	<{/if}>
 </table>
+
 <{if $question.uid==$xoops_userid }>
 	[ <a href="index.php?action=response&amp;aid=<{$answer.aid}>">
 		<{if $answer.comment}>
@@ -101,6 +102,12 @@
 		<{/if}>
 	</a> ]
 <{/if}>
+
+<!-- d3forum comment integration -->
+<{if $mod_config.comment_dirname && $mod_config.comment_forum_id}>
+	<{d3forum_comment dirname=$mod_config.comment_dirname forum_id=$mod_config.comment_forum_id class="PlzxooD3commentAnswer" id=$answer.aid no_form=1 link_to_form=$smarty.const._MD_PLZXOO_LANG_NEW_COMMENT}>
+<{/if}>
+
 </p>
 <{/foreach}>
 

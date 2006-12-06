@@ -33,6 +33,8 @@ define ( '_MI_PLZXOO_AUTONOTIFYQ_DESC','A notification of "New answer" will be s
 define ( '_MI_PLZXOO_AUTONOTIFYA','Auto notify for answerer' ) ;
 define ( '_MI_PLZXOO_AUTONOTIFYA_DESC','A notification of "Modified question" will be set when he/she post a question' ) ;
 define ( '_MI_PLZXOO_LISTVIEWPPG','Questions per page in list views' ) ;
+define ( '_MI_PLZXOO_D3COMMENT_DIRNAME','dirname of d3forum for comment integration' ) ;
+define ( '_MI_PLZXOO_D3COMMENT_FORUM_ID','forum_id of d3forum for comment integration' ) ;
 
 // <--- NOTIFICATIONS PROPERTY --->
 define( '_MI_PLZXOO_GLOBAL_NOTIFY' , 'Global' ) ;

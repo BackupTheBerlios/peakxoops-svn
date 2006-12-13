@@ -93,11 +93,11 @@ Calendar._TT["ABOUT_TIME"] = "\n\n" +
 "- 同時按Shift鍵再點擊可減少其值\n" +
 "- 點擊並拖曳可加快改變的值";
 
-Calendar._TT["PREV_YEAR"] = "上一年 (按住選單)";
-Calendar._TT["PREV_MONTH"] = "下一年 (按住選單)";
-Calendar._TT["GO_TODAY"] = "到今日";
-Calendar._TT["NEXT_MONTH"] = "上一月 (按住選單)";
-Calendar._TT["NEXT_YEAR"] = "下一月 (按住選單)";
+Calendar._TT["PREV_YEAR"] = "前一年 (按住選單)";
+Calendar._TT["PREV_MONTH"] = "上個月 (按住選單)";
+Calendar._TT["GO_TODAY"] = "今　日";
+Calendar._TT["NEXT_MONTH"] = "下個月 (按住選單)";
+Calendar._TT["NEXT_YEAR"] = "次　年 (按住選單)";
 Calendar._TT["SEL_DATE"] = "選擇日期";
 Calendar._TT["DRAG_TO_MOVE"] = "拖曳";
 Calendar._TT["PART_TODAY"] = " (今日)";

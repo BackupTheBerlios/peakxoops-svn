@@ -177,8 +177,7 @@ class SPAW_Wysiwyg {
     global $spaw_dir;
     global $spaw_wysiwyg_instCount;
     global $spaw_active_toolbar;
-    
-    
+
     $n = $this->control_name;
 	$orn = $this->original_name;
     // todo: make more customizable

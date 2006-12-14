@@ -8,7 +8,15 @@ define( 'FCK_UPLOAD_PATH' , XOOPS_UPLOAD_PATH.'/fckeditor' ) ;
 define( 'FCK_UPLOAD_URL' , XOOPS_UPLOAD_URL.'/fckeditor' ) ;
 define( 'FCK_FILE_PREFIX' , 'fck' ) ;
 
+$fck_resource_type_extensions = array(
+	'File' => array() ,
+	'Image' => array( 'jpeg' , 'jpg' , 'png' , 'gif' ) ,
+	'Flash' => array( 'swf' , 'fla' ) ,
+	'Media' => array( 'jpeg' , 'jpg' , 'png' , 'gif' , 'swf' , 'fla' , 'avi' , 'mpg' , 'mpeg' , 'mov' ) ,
+) ;
 $fck_allowed_extensions = array() ;
+
+
 
 // check directory for uploading
 if( ! is_dir( FCK_UPLOAD_PATH ) ) {
@@ -43,8 +51,9 @@ if( empty( $fck_isadmin ) && empty( $fck_canupload ) ) {
 	}
 } else if( empty( $fck_isadmin ) ) {
 	// permissions for normal with upload
+	// never permit files other than image files
 	$fck_allowed_extensions = array(
-		'jpg' => 'image/jp' , // both ok image/jpeg, image/jpg
+		'jpg' => 'image/jp' ,
 		'jpeg' => 'image/jp' ,
 		'png' => 'image/png' , 
 		'gif' => 'image/gif' ,
@@ -60,6 +69,11 @@ if( empty( $fck_isadmin ) && empty( $fck_canupload ) ) {
 		'xls' => '' ,
 		'txt' => '' ,
 		'pdf' => '' ,
+		'swf' => '' ,
+		'fla' => '' ,
+		'mpeg' => '' ,
+		'mpg' => '' ,
+		'avi' => '' ,
 	) ;
 }
 

@@ -1,0 +1,96 @@
+[mlimg]
+[xlang:en]
+== FCKeditor for XOOPS ==
+
+[b]USAGE[/b]
+- extract file tree under XOOPS_ROOT_PATH  (XOOPS_ROOT_PATH/common/)
+- make directory named fckeditor under uploads (XOOPS_ROOT_PATH/uploads/fckeditor/)
+- set permission of the directory 0777 (if your PHP runs as CGI, set 0755 instead)
+- to modify configuration, rename  editor/filemanager/browser/default/connectors/phpconfig_and_auth.inc.dist.php to phpconfig_and_auth.inc.php. then edit the file.
+
+
+[b]DIFF[/b]
+
+- file tree
+all of connectors or uploaders other than php are removed.
+and php connector and uploader have been modified radically. (for preventing fatal vulnerability)
+
+- the file name stored in the server is independent from local file name
+
+- abondon directories per resource types
+in this version, resource type means the extraction from files
+
+- consider safe_mode
+if you want to create folder under safe_mode, you have to make the directory manually via FTP etc.
+
+- permission of browsing and uploading
+only admin of XOOPS can use browser and uploader.
+the system of permission will be modified later.
+
+[/xlang:en]
+[xlang:ja]
+== XOOPS用 FCKeditor ==
+
+●利用法
+
+アーカイブを解凍し、XOOPS_ROOT_PATH直下においてください。
+XOOPS_ROOT_PATH/common/
+という形になります。
+
+すでに、なんらかのcommonファイルを入れていれば、commonフォルダがある
+はずですし、なければ新しくcommonフォルダを作る形になります。
+
+ファイルアップロードを利用するためには、XOOPS_ROOT_PATH/uploads の下に、fckeditor というフォルダをFTP等で作ってください。このフォルダのパーミッションは場合に応じて異なりますが、phpがApacheモジュールとして動いているなら777、CGI版なら755です。
+
+アプリケーションからの利用法ですが、FCKeditorの本来の使い方でOKです。
+HTML+JavaScriptとして用意するだけです。
+
+XOOPSモジュールでは、とりあえずpicoが対応しています。
+
+fckxoopsの設定は、一応、editor/filemanager/browser/default/connectors/phpconfig_and_auth.inc.dist.php にまとまっています。これをカスタマイズする際には、phpconfig_and_auth.inc.php にリネームしてから編集すると、今後のバージョンアップで上書きされることはなくなるでしょう。
+
+
+●オリジナルとの相違
+
+・アーカイブ構成
+php以外のコネクタ・アップローダはすべて削除してます。
+また、オリジナルのphpのコネクタ・アップローダには大きな脆弱性があり、他にもいろいろ問題があったため、ほぼまるまる書き直してます。
+
+・ファイル名の非保存
+アップロードする際に、ローカルのファイル名は維持しません。
+新しくファイル名が作成されます。
+一応、判りやすくするために、日付をファイル名に含めています。
+
+・リソースタイプ毎のディレクトリの振り分け機能削除
+この振り分けは使いづらくなるだけで、意味がないと思われたため、その機能をバッサリ削除してます。「絞り込み」であれば意味があるので、一応実装してます。
+
+・safe_mode対応
+safe_mode制限でハマることを割けるため、ディレクトリを作ることが出来ないようにしています。
+safe_modeサーバの場合は、FTP等でuploads/fckeditor/の下に、適宜フォルダを作成してください。
+
+・ブラウズ権限/アップロード権限
+オリジナルではいずれも無制限にできる仕様だったのですが、この版では、XOOPSにログインしていて、かつ、特定の権限がなければ利用できません。
+現在は、いわゆる「管理者」にしか、いずれも許可していません。この「管理者」とは、システムモジュールの管理者（X2用）か、legacyモジュールの管理者(Cube 2.1用)のいずれかを意味します。
+将来的には、もう少し細かい権限を振るようにします。
+
+
+●TODO
+・ブラウズ権限/アップロード権限の細かな実装
+・画像の自動サムネール作成（リンクと画像の両方に自動入力されるように…）
+・Attachmanモジュールとの連携
+・XOOPS_TRUST_PATH側に保存する機能（もちろん転送スクリプトも）
+
+
+●FCKeditor のcommon化作業記録
+- FCKeditor 最新版のダウンロード/解凍
+- FCKeditor/直下から、editor/ *.js *.xml *.txt 以外をすべて削除
+- editor/filemanager/browser/default/connectors/ のphp以外のディレクトリをすべて削除 (test.htmlも)
+- editor/filemanager/upload/ のphp以外のディレクトリをすべて削除 (text.htmlも)
+- fckconfig.js の編集
+var _FileBrowserLanguage	= 'php' ; // オリジナルはasp
+var _QuickUploadLanguage	= 'php' ; // オリジナルはasp
+- editor/filemanager/browser/default/connectors/php/ 直下のPHPファイルをまるまる作り直し
+- editor/filemanager/upload/php/ 直下のPHPファイルをまるまる作り直し
+- uploadとbrowseが両方とも同じconfigを利用できるように
+
+[/xlang:ja]

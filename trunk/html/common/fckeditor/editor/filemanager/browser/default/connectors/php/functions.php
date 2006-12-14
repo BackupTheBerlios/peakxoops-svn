@@ -46,34 +46,37 @@ function GetFolders( $currentFolder )
 }
 
 
-function GetFoldersAndFiles( $currentFolder )
+function GetFoldersAndFiles( $currentFolder , $type )
 {
 	// Map the virtual path to the local server path.
 	$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
 
 	// Arrays that will hold the folders and files names.
-	$aFolders	= array() ;
-	$aFiles		= array() ;
+	$aFolders = array() ;
+	$aFiles = array() ;
 
 	$oCurrentFolder = opendir( $sServerDir ) ;
 
-	while ( $sFile = readdir( $oCurrentFolder ) )
-	{
-		if ( $sFile != '.' && $sFile != '..' )
-		{
-			if ( is_dir( $sServerDir . $sFile ) )
-				$aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) . '" />' ;
-			else
-			{
-				$iFileSize = filesize( $sServerDir . $sFile ) ;
-				if ( $iFileSize > 0 )
-				{
-					$iFileSize = round( $iFileSize / 1024 ) ;
-					if ( $iFileSize < 1 ) $iFileSize = 1 ;
-				}
+	while( $sFile = readdir( $oCurrentFolder ) ) {
+		if( substr( $sFile , 0 , 1 ) == '.' ) continue ;
 
-				$aFiles[] = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" />' ;
+		if( is_dir( $sServerDir . $sFile ) ) {
+			// folder
+			$aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) . '" />' ;
+		} else {
+			// file
+			if( ! empty( $GLOBALS['fck_resource_type_extensions'][$type] ) ) {
+				// file limitation by extension and resource type
+				$extension = strtolower( substr( strrchr( $sFile , '.' ) , 1 ) ) ;
+				if( ! in_array( $extension , $GLOBALS['fck_resource_type_extensions'][$type] ) ) continue ;
 			}
+			// filesize
+			$iFileSize = filesize( $sServerDir . $sFile ) ;
+			if( $iFileSize > 0 ) {
+				$iFileSize = round( $iFileSize / 1024 ) ;
+				if( $iFileSize < 1 ) $iFileSize = 1 ;
+			}
+			$aFiles[] = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" />' ;
 		}
 	}
 
@@ -114,7 +117,9 @@ function CreateFolder( $currentFolder )
 		$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
 
 		if( is_writable( $sServerDir ) && ! file_exists( $sServerDir . $sNewFolderName ) ) {
+			$oldumask = umask( 0 ) ;
 			@mkdir( $sServerDir . $sNewFolderName , 0777 ) ;
+			umask( $oldumask ) ;
 		} else {
 			$sErrorNumber = '103' ;
 		}

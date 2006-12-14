@@ -1,23 +1,21 @@
 # CREATE TABLE `tablename` will be queried as
 # CREATE TABLE `prefix_dirname_tablename`
 
-CREATE TABLE category_access (
+CREATE TABLE category_permissions (
   cat_id smallint(5) unsigned NOT NULL default 0,
   uid mediumint(8) default NULL,
   groupid smallint(5) default NULL,
-  can_post tinyint(1) NOT NULL default 0,
-  can_edit tinyint(1) NOT NULL default 0,
-  can_delete tinyint(1) NOT NULL default 0,
-  post_auto_approved tinyint(1) NOT NULL default 0,
-  can_makesubcategory tinyint(1) NOT NULL default 0,
-  is_moderator tinyint(1) NOT NULL default 0,
+  permissions text NOT NULL,
   UNIQUE KEY (cat_id,uid),
   UNIQUE KEY (cat_id,groupid),
   KEY (cat_id),
   KEY (uid),
-  KEY (groupid),
-  KEY (can_post)
+  KEY (groupid)
 ) TYPE=MyISAM;
+
+INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=1,permissions='a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:1;s:8:"can_edit";i:1;s:10:"can_delete";i:1;s:18:"post_auto_approved";i:1;s:12:"is_moderator";i:1;s:19:"can_makesubcategory";i:1;}';
+INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=2,permissions='a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:0;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}';
+INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=3,permissions='a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:0;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}';
 
 CREATE TABLE categories (
   cat_id smallint(5) unsigned NOT NULL auto_increment,

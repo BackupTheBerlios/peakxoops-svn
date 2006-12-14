@@ -24,18 +24,20 @@ define('_MD_A_PICO_MSG_CONTENTSMOVED','移動しました');
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','カテゴリーを選択');
 define('_MD_A_PICO_H2_GROUPPERMS','グループ毎の権限');
 define('_MD_A_PICO_H2_USERPERMS','ユーザー毎の権限');
-define('_MD_A_PICO_TH_CAN_READ','閲覧権限');
-define('_MD_A_PICO_TH_CAN_POST','投稿権限');
-define('_MD_A_PICO_TH_CAN_EDIT','編集権限');
-define('_MD_A_PICO_TH_CAN_DELETE','削除権限');
-define('_MD_A_PICO_TH_POST_AUTO_APPROVED','承認不要');
-define('_MD_A_PICO_TH_IS_MODERATOR','モデレータ');
-define('_MD_A_PICO_TH_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限');
 define('_MD_A_PICO_TH_UID','ユーザID');
 define('_MD_A_PICO_TH_UNAME','ユーザ名');
 define('_MD_A_PICO_TH_GROUPNAME','グループ名');
-define('_MD_A_PICO_NOTICE_ADDUSERS','※ユーザを個別に新規追加する場合、ユーザID（数字）かユーザ名のいずれかを直接入力してください。<br />閲覧権限と投稿権限の両方を外せば、そのユーザはこのリストからも消えます。');
+define('_MD_A_PICO_NOTICE_ADDUSERS','※ユーザを個別に新規追加する場合、ユーザID（数字）かユーザ名のいずれかを直接入力してください。<br />閲覧権限を外せば、そのユーザはこのリストからも消えます。');
 
+// import
+define('_MD_A_PICO_H2_IMPORTFROM','インポート');
+define('_MD_A_PICO_LABEL_SELECTMODULE','モジュール選択');
+define('_MD_A_PICO_BTN_DOIMPORT','インポート実行');
+define('_MD_A_PICO_CONFIRM_DOIMPORT','本当にインポートを実行してよろしいですか？');
+define('_MD_A_PICO_MSG_IMPORTDONE','インポート完了しました');
+define('_MD_A_PICO_ERR_INVALIDMID','指定されたモジュールからはインポートできません');
+define('_MD_A_PICO_ERR_SQLONIMPORT','インポートに失敗しました。インポート元とインポート先で、テーブル構造が違う可能性があります。両方とも最新版にアップデートしているか確認してください');
+define('_MD_A_PICO_HELP_IMPORTFROM','インポート可能なのは、pico・TinyDです。可能な限りオリジナル情報を損なわない形でインポートしますが、完全な再現はできません。各種権限・モデレータについてチェックしてください。なおインポートの成功・不成功にかかわらず、現在のモジュール内の情報は全削除されます。');
 
 
 ?>

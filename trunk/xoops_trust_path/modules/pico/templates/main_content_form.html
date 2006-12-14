@@ -50,9 +50,13 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label></th>
 			<td class="even">
-				<input type="checkbox" id="body_bbcode_onoff" onclick="if(this.checked){document.getElementById('body_bbcode_buttons_pre').style.display='block';document.getElementById('body_bbcode_buttons_post').style.display='block'}else{document.getElementById('body_bbcode_buttons_pre').style.display='none';document.getElementById('body_bbcode_buttons_post').style.display='none'};" /><label for="body_bbcode_onoff"><{$smarty.const._MD_PICO_LABEL_INPUTHELPER}></label>
-				<br />
-				<{xoopsdhtmltarea name="body" cols="60" rows="15" value=$content.body pre_style="display:none;" post_style="display:none;"}>
+				<{if $body_wysiwyg}>
+					<{$body_wysiwyg}>
+				<{else}>
+					<input type="checkbox" id="body_bbcode_onoff" onclick="if(this.checked){document.getElementById('body_bbcode_buttons_pre').style.display='block';document.getElementById('body_bbcode_buttons_post').style.display='block'}else{document.getElementById('body_bbcode_buttons_pre').style.display='none';document.getElementById('body_bbcode_buttons_post').style.display='none'};" /><label for="body_bbcode_onoff"><{$smarty.const._MD_PICO_LABEL_INPUTHELPER}></label>
+					<br />
+					<{xoopsdhtmltarea name="body" cols="60" rows="15" value=$content.body pre_style="display:none;" post_style="display:none;"}>
+				<{/if}>
 			</td>
 		</tr>
 

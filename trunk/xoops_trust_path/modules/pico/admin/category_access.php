@@ -12,6 +12,7 @@ if( empty( $cat_id ) ) {
 	$cat_title = _MD_PICO_TOP ;
 }
 
+include dirname(dirname(__FILE__)).'/include/category_permissions.inc.php' ;
 
 //
 // transaction stage
@@ -22,18 +23,15 @@ if( ! empty( $_POST['group_update'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_access")." WHERE cat_id=$cat_id AND groupid>0" ) ;
+	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id AND groupid>0" ) ;
 	$result = $db->query( "SELECT groupid FROM ".$db->prefix("groups") ) ;
 	while( list( $gid ) = $db->fetchRow( $result ) ) {
-		if( ! empty( $_POST['can_reads'][$gid] ) ) {
-			$can_post = empty( $_POST['can_posts'][$gid] ) ? 0 : 1 ;
-			$can_edit = empty( $_POST['can_edits'][$gid] ) ? 0 : 1 ;
-			$can_delete = empty( $_POST['can_deletes'][$gid] ) ? 0 : 1 ;
-			$post_auto_approved = empty( $_POST['post_auto_approveds'][$gid] ) ? 0 : 1 ;
-			$is_moderator = empty( $_POST['is_moderators'][$gid] ) ? 0 : 1 ;
-			$can_makesubcategory = empty( $_POST['can_makesubcategorys'][$gid] ) ? 0 : 1 ;
-
-			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_access")." SET cat_id=$cat_id, groupid=$gid, can_post=$can_post, can_edit=$can_edit, can_delete=$can_delete, post_auto_approved=$post_auto_approved, is_moderator=$is_moderator, can_makesubcategory=$can_makesubcategory" ) ;
+		if( ! empty( $_POST['can_read'][$gid] ) ) {
+			$perms = array() ;
+			foreach( $pico_category_permissions as $perm_name ) {
+				$perms[$perm_name] = empty( $_POST[$perm_name][$gid] ) ? 0 : 1 ;
+			}
+			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." SET cat_id=$cat_id, groupid=$gid, permissions='".addslashes(serialize($perms))."'" ) ;
 		}
 	}
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_PICO_MSG_UPDATED ) ;
@@ -41,47 +39,45 @@ if( ! empty( $_POST['group_update'] ) ) {
 }
 
 // user update
-if( ! empty( $_POST['user_update'] ) && empty( $invaild_cat_id ) ) {
+if( ! empty( $_POST['user_update'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_access")." WHERE cat_id=$cat_id AND uid>0" ) ;
-	$can_posts = is_array( @$_POST['can_posts'] ) ? $_POST['can_posts'] : array() ;
-	$can_reads = is_array( @$_POST['can_reads'] ) ? $_POST['can_reads'] + $can_posts : $can_posts ;
+	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id AND uid>0" ) ;
 
-	foreach( $can_reads as $uid => $can_read ) {
+	if( is_array( @$_POST['can_read'] ) ) foreach( $_POST['can_read'] as $uid => $can_read ) {
 		$uid = intval( $uid ) ;
 		if( $can_read ) {
-			$can_post = empty( $_POST['can_posts'][$uid] ) ? 0 : 1 ;
-			$can_edit = empty( $_POST['can_edits'][$uid] ) ? 0 : 1 ;
-			$can_delete = empty( $_POST['can_deletes'][$uid] ) ? 0 : 1 ;
-			$post_auto_approved = empty( $_POST['post_auto_approveds'][$uid] ) ? 0 : 1 ;
-			$is_moderator = empty( $_POST['is_moderators'][$uid] ) ? 0 : 1 ;
-			$can_makesubcategory = empty( $_POST['can_makesubcategorys'][$uid] ) ? 0 : 1 ;
-
-			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_access")." SET cat_id=$cat_id, uid=$uid, can_post=$can_post, can_edit=$can_edit, can_delete=$can_delete, post_auto_approved=$post_auto_approved, is_moderator=$is_moderator, can_makesubcategory=$can_makesubcategory" ) ;
+			$perms = array() ;
+			foreach( $pico_category_permissions as $perm_name ) {
+				$perms[$perm_name] = empty( $_POST[$perm_name][$uid] ) ? 0 : 1 ;
+			}
+			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." SET cat_id=$cat_id, uid=$uid, permissions='".addslashes(serialize($perms))."'" ) ;
 		}
 	}
 	
 	$member_hander =& xoops_gethandler( 'member' ) ;
-	if( is_array( @$_POST['new_uids'] ) ) foreach( $_POST['new_uids'] as $i => $uid ) {
-		$can_post = empty( $_POST['new_can_posts'][$i] ) ? 0 : 1 ;
-		$can_edit = empty( $_POST['new_can_edits'][$i] ) ? 0 : 1 ;
-		$can_delete = empty( $_POST['new_can_deletes'][$i] ) ? 0 : 1 ;
-		$post_auto_approved = empty( $_POST['new_post_auto_approveds'][$i] ) ? 0 : 1 ;
-		$is_moderator = empty( $_POST['new_is_moderators'][$i] ) ? 0 : 1 ;
-		$can_makesubcategory = empty( $_POST['new_can_makesubcategorys'][$i] ) ? 0 : 1 ;
-		if( empty( $uid ) ) {
+	if( is_array( @$_POST['new_uids'] ) ) foreach( array_keys( $_POST['new_uids'] ) as $i ) {
+		if( empty( $_POST['new_can_read'][$i] ) ) continue ;
+		if( empty( $_POST['new_uids'][$i] ) ) {
+			// add new user by uname
 			$criteria =& new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
 			@list( $user ) = $member_handler->getUsers( $criteria ) ;
 		} else {
-			$user =& $member_handler->getUser( intval( $uid ) ) ;
+			// add new user by uid
+			$user =& $member_handler->getUser( intval( $_POST['new_uids'][$i] ) ) ;
 		}
-		if( is_object( $user ) ) {
-			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_access")." SET cat_id=$cat_id, uid=".$user->getVar('uid').", can_post=$can_post, can_edit=$can_edit, can_delete=$can_delete, post_auto_approved=$post_auto_approved, is_moderator=$is_moderator, can_makesubcategory=$can_makesubcategory" ) ;
+		// check the user is valid
+		if( ! is_object( $user ) ) continue ;
+		$uid = $user->getVar( 'uid' ) ;
+
+		$perms = array( 'can_read' => 1 ) ;
+		foreach( $pico_category_permissions as $perm_name ) {
+			$perms[$perm_name] = empty( $_POST['new_'.$perm_name][$i] ) ? 0 : 1 ;
 		}
+		$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." SET cat_id=$cat_id, uid=$uid, permissions='".addslashes(serialize($perms))."'" ) ;
 	}
-	
+
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_PICO_MSG_UPDATED ) ;
 	exit ;
 }
@@ -99,88 +95,59 @@ while( list( $id , $title , $depth ) = $db->fetchRow( $crs ) ) {
 	$cat_options[ $id ] = str_repeat( '--' , $depth ) . htmlspecialchars( $title , ENT_QUOTES ) ;
 }
 
+// create permissions4assign
+$permissions4assign = array() ;
+foreach( $pico_category_permissions as $perm_name ) {
+	$permissions4assign[$perm_name] = constant( '_MD_PICO_PERMS_'.strtoupper( $perm_name ) ) ;
+}
 
 // create group form
 $group_handler =& xoops_gethandler( 'group' ) ;
 $groups =& $group_handler->getObjects() ;
-$group_trs = '' ;
+$groups4assign = array() ;
 foreach( $groups as $group ) {
 	$gid = $group->getVar('groupid') ;
 
-	$fars = $db->query( "SELECT can_post,can_edit,can_delete,post_auto_approved,is_moderator,can_makesubcategory FROM ".$db->prefix($mydirname."_category_access")." WHERE groupid=".$group->getVar('groupid')." AND cat_id=$cat_id" ) ;
-	if( $db->getRowsNum( $fars ) > 0 ) {
-		$can_read = true ;
-		list( $can_post , $can_edit , $can_delete , $post_auto_approved , $is_moderator , $can_makesubcategory ) = $db->fetchRow( $fars ) ;
+	$cprs = $db->query( "SELECT permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE groupid=".$group->getVar('groupid')." AND cat_id=$cat_id" ) ;
+	if( $db->getRowsNum( $cprs ) > 0 ) {
+		list( $serialized_gpermissions ) = $db->fetchRow( $cprs ) ;
+		$gpermissions = unserialize( $serialized_gpermissions ) ;
 	} else {
-		$can_post = $can_read = $can_edit = $can_delete = $post_auto_approved = $is_moderator = $can_makesubcategory = false ;
+		$gpermissions = array() ;
 	}
 
-	$can_read_checked = $can_read ? "checked='checked'" : "" ;
-	$can_post_checked = $can_post ? "checked='checked'" : "" ;
-	$can_edit_checked = $can_edit ? "checked='checked'" : "" ;
-	$can_delete_checked = $can_delete ? "checked='checked'" : "" ;
-	$post_auto_approved_checked = $post_auto_approved ? "checked='checked'" : "" ;
-	$is_moderator_checked = $is_moderator ? "checked='checked'" : "" ;
-	$can_makesubcategory_checked = $can_makesubcategory ? "checked='checked'" : "" ;
-	$group_trs .= "
-		<tr>
-			<td class='even'>".$group->getVar('name')."</td>
-			<td class='even'><input type='checkbox' name='can_reads[$gid]' id='gcol_1_{$gid}' value='1' $can_read_checked /></td>
-			<td class='even'><input type='checkbox' name='can_posts[$gid]' id='gcol_2_{$gid}' value='1' $can_post_checked /></td>
-			<td class='even'><input type='checkbox' name='can_edits[$gid]' id='gcol_3_{$gid}' value='1' $can_edit_checked /></td>
-			<td class='even'><input type='checkbox' name='can_deletes[$gid]' id='gcol_4_{$gid}' value='1' $can_delete_checked /></td>
-			<td class='even'><input type='checkbox' name='post_auto_approveds[$gid]' id='gcol_5_{$gid}' value='1' $post_auto_approved_checked /></td>
-			<td class='even'><input type='checkbox' name='is_moderators[$gid]' id='gcol_6_{$gid}' value='1' $is_moderator_checked /></td>
-			<td class='even'><input type='checkbox' name='can_makesubcategorys[$gid]' id='gcol_7_{$gid}' value='1' $can_makesubcategory_checked /></td>
-		</tr>\n" ;
+	$groups4assign[] = array(
+		'gid' => $gid ,
+		'name' => $group->getVar('name') ,
+		'perms' => $gpermissions ,
+	) ;
 }
 
 
 // create user form
-$fars = $db->query( "SELECT u.uid,u.uname,fa.can_post,fa.can_edit,fa.can_delete,fa.post_auto_approved,fa.is_moderator,fa.can_makesubcategory FROM ".$db->prefix($mydirname."_category_access")." fa LEFT JOIN ".$db->prefix("users")." u ON fa.uid=u.uid WHERE fa.cat_id=$cat_id AND fa.groupid IS NULL ORDER BY u.uid ASC" ) ;
+$users4assign = array() ;
+$cprs = $db->query( "SELECT u.uid,u.uname,cp.permissions FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("users")." u ON cp.uid=u.uid WHERE cp.cat_id=$cat_id AND cp.groupid IS NULL ORDER BY u.uid ASC" ) ;
 $user_trs = '' ;
-while( list( $uid , $uname , $can_post , $can_edit , $can_delete , $post_auto_approved , $is_moderator , $can_makesubcategory ) = $db->fetchRow( $fars ) ) {
+while( list( $uid , $uname , $serialized_upermissions ) = $db->fetchRow( $cprs ) ) {
 
 	$uid = intval( $uid ) ;
-	$uname4disp = htmlspecialchars( $uname , ENT_QUOTES ) ;
+	$upermissions = unserialize( $serialized_upermissions ) ;
 
-	$can_post_checked = $can_post ? "checked='checked'" : "" ;
-	$can_edit_checked = $can_edit ? "checked='checked'" : "" ;
-	$can_delete_checked = $can_delete ? "checked='checked'" : "" ;
-	$post_auto_approved_checked = $post_auto_approved ? "checked='checked'" : "" ;
-	$is_moderator_checked = $is_moderator ? "checked='checked'" : "" ;
-	$can_makesubcategory_checked = $can_makesubcategory ? "checked='checked'" : "" ;
-	$user_trs .= "
-		<tr>
-			<td class='even'>$uid</td>
-			<td class='even'>$uname4disp</td>
-			<td class='even'><input type='checkbox' name='can_reads[$uid]' id='ucol_1_{$uid}' value='1' checked='checked' /></td>
-			<td class='even'><input type='checkbox' name='can_posts[$uid]' id='ucol_2_{$uid}' value='1' $can_post_checked /></td>
-			<td class='even'><input type='checkbox' name='can_edits[$uid]' id='ucol_3_{$uid}' value='1' $can_edit_checked /></td>
-			<td class='even'><input type='checkbox' name='can_deletes[$uid]' id='ucol_4_{$uid}' value='1' $can_delete_checked /></td>
-			<td class='even'><input type='checkbox' name='post_auto_approveds[$uid]' id='ucol_5_{$uid}' value='1' $post_auto_approved_checked /></td>
-			<td class='even'><input type='checkbox' name='is_moderators[$uid]' id='ucol_6_{$uid}' value='1' $is_moderator_checked /></td>
-			<td class='even'><input type='checkbox' name='can_makesubcategorys[$uid]' id='ucol_7_{$uid}' value='1' $can_makesubcategory_checked /></td>
-		</tr>\n" ;
+	$users4assign[] = array(
+		'uid' => $uid ,
+		'name' => htmlspecialchars( $uname , ENT_QUOTES ) ,
+		'perms' => $upermissions ,
+	) ;
 }
 
 
 // create new user form
-$newuser_trs = '' ;
+$new_users4assign = array() ;
 for( $i = 0 ; $i < 5 ; $i ++ ) {
-	$newuser_trs .= "
-		<tr>
-			<td class='head'><input type='text' size='4' name='new_uids[$i]' value='' /></th>
-			<td class='head'><input type='text' size='12' name='new_unames[$i]' value='' /></th>
-			<td class='head'><input type='checkbox' name='new_can_reads[$i]' id='ncol_1_{$i}' checked='checked' disabled='disabled' /></th>
-			<td class='head'><input type='checkbox' name='new_can_posts[$i]' id='ncol_2_{$i}' value='1' /></th>
-			<td class='head'><input type='checkbox' name='new_can_edits[$i]' id='ncol_3_{$i}' value='1' /></td>
-			<td class='head'><input type='checkbox' name='new_can_deletes[$i]' id='ncol_4_{$i}' value='1' /></td>
-			<td class='head'><input type='checkbox' name='new_post_auto_approveds[$i]' id='ncol_5_{$i}' value='1' /></td>
-			<td class='head'><input type='checkbox' name='new_is_moderators[$i]' id='ncol_6_{$i}' value='1' /></td>
-			<td class='head'><input type='checkbox' name='new_can_makesubcategorys[$i]' id='ncol_7_{$i}' value='1' /></td>
-		</tr>
-	\n" ;
+	$new_users4assign[] = array(
+		'nid' => $i ,
+		'perms' => array( 'can_read' => 1 ) ,
+	) ;
 }
 
 
@@ -193,15 +160,17 @@ include dirname(__FILE__).'/mymenu.php' ;
 $tpl =& new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname' => $mydirname ,
+	'mod_name' => $xoopsModule->getVar('name') ,
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options ,
-	'group_trs' => $group_trs ,
-	'user_trs' => $user_trs ,
-	'newuser_trs' => $newuser_trs ,
+	'permissions' => $permissions4assign ,
+	'groups' => $groups4assign ,
+	'users' => $users4assign ,
+	'new_users' => $new_users4assign ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico_admin') ,
 ) ) ;
 $tpl->display( 'db:'.$mydirname.'_admin_category_access.html' ) ;

@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.10 ;
+$modversion['version'] = 0.20 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -37,8 +37,21 @@ $modversion['search']['func'] = $mydirname.'_global_search' ;
 // Menu
 $modversion['hasMain'] = 1 ;
 
-// There are no submenu (use menu moudle instead of mainmenu)
+// Submenu (just for mainmenu)
 $modversion['sub'] = array() ;
+if( is_object( $GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('dirname') == $mydirname ) {
+	$db =& Database::getInstance() ;
+	$myts =& MyTextSanitizer::getInstance();
+	require_once dirname(__FILE__).'/include/common_functions.php' ;
+	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$result = $db->query("SELECT content_id,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4cat" ) ;
+	if( $result ) while( list( $content_id , $subject ) = $db->fetchRow( $result ) ) {
+		$modversion['sub'][] = array(
+			'name' => $myts->makeTboxData4Show( $subject ) ,
+			'url' => 'index.php?content_id='.intval($content_id) ,
+		) ;
+	}
+}
 
 // All Templates can't be touched by modulesadmin.
 $modversion['templates'] = array() ;
@@ -198,6 +211,16 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> 'images' ,
 	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'body_editor' ,
+	'title'			=> $constpref.'_BODY_EDITOR' ,
+	'description'	=> '' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'xoopsdhtml' ,
+	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'common/spaw' => 'common_spaw' , 'common/fckeditor' => 'common_fckeditor' )
 ) ;
 
 $modversion['config'][] = array(

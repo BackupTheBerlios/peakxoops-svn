@@ -39,6 +39,8 @@ define('_MD_PICO_ERR_READCONTENT','指定されたコンテンツは存在しません');
 define('_MD_PICO_ERR_CREATECONTENT','コンテンツ作成権限がありません');
 define('_MD_PICO_ERR_EDITCONTENT','コンテンツ編集権限がありません');
 define('_MD_PICO_ERR_DELETECONTENT','コンテンツ削除権限がありません');
+define('_MD_PICO_ERR_PERMREADFULL','このコンテンツの全文を表示する権限がありません');
+define('_MD_PICO_ERR_LOGINTOREADFULL','このコンテンツの全文を表示するにはログインしてください');
 
 define('_MD_PICO_MSG_CATEGORYMADE','カテゴリーを作成しました');
 define('_MD_PICO_MSG_CATEGORYUPDATED','カテゴリーを更新しました');
@@ -82,7 +84,7 @@ define('_MD_PICO_FILTERS_TEXTWIKIDESC','TextWikiルールで整形されます');
 define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
 define('_MD_PICO_FILTERS_XOOPSTPLTITLE','Smarty(XoopsTpl)');
 define('_MD_PICO_FILTERS_XOOPSTPLDESC','Smartyテンプレートとして解釈されます');
-define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',15);
+define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',0);
 define('_MD_PICO_FILTERS_NL2BRTITLE','自動改行');
 define('_MD_PICO_FILTERS_NL2BRDESC','改行文字を&lt;br /&gt;に置き換えます');
 define('_MD_PICO_FILTERS_NL2BRINITWEIGHT',30);
@@ -93,5 +95,15 @@ define('_MD_PICO_FILTERS_XCODETITLE','BBCode変換');
 define('_MD_PICO_FILTERS_XCODEDESC','自動リンクおよびBBCodeが有効になります');
 define('_MD_PICO_FILTERS_XCODEINITWEIGHT',30);
 
+
+// permissions
+define('_MD_PICO_PERMS_CAN_READ','閲覧権限');
+define('_MD_PICO_PERMS_CAN_READFULL','全文閲覧権限');
+define('_MD_PICO_PERMS_CAN_POST','投稿権限');
+define('_MD_PICO_PERMS_CAN_EDIT','編集権限');
+define('_MD_PICO_PERMS_CAN_DELETE','削除権限');
+define('_MD_PICO_PERMS_POST_AUTO_APPROVED','承認不要');
+define('_MD_PICO_PERMS_IS_MODERATOR','モデレータ');
+define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限');
 
 ?>

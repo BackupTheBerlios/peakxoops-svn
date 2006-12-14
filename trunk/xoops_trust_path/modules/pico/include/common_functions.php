@@ -21,7 +21,7 @@ function pico_get_categories_can_read( $mydirname )
 	}
 
 	// get categories
-	$sql = "SELECT distinct cat_id FROM ".$db->prefix($mydirname."_category_access")." WHERE ($whr4cat)" ;
+	$sql = "SELECT distinct cat_id FROM ".$db->prefix($mydirname."_category_permissions")." WHERE ($whr4cat)" ;
 	$result = $db->query( $sql ) ;
 	if( $result ) while( list( $cat_id ) = $db->fetchRow( $result ) ) {
 		$cat_ids[] = intval( $cat_id ) ;

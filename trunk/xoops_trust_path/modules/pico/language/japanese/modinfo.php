@@ -16,6 +16,7 @@ define($constpref."_DESC","静的コンテンツ作成モジュール");
 // admin menus
 define( $constpref.'_ADMENU_CONTENTSADMIN' , 'コンテンツ一括管理' ) ;
 define( $constpref.'_ADMENU_CATEGORYACCESS' , 'カテゴリーアクセス権限' ) ;
+define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
 
 // configurations
 define($constpref.'_TOP_MESSAGE','モジュールトップのメッセージ');
@@ -37,6 +38,7 @@ define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトはindex.cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
 define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
+define($constpref.'_BODY_EDITOR','本文編集エディタ');
 define($constpref.'_COM_DIRNAME','コメント統合するd3forumのdirname');
 define($constpref.'_COM_FORUM_ID','コメント統合するフォーラムの番号');
 

@@ -40,7 +40,7 @@ function pico_delete_category( $mydirname , $cat_id , $delete_also_contents = tr
 	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// delete category_access
-	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_category_access")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return true ;
 }
@@ -206,24 +206,14 @@ function pico_makecategory( $mydirname )
 	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET cat_title='{$requests['title']}', cat_desc='{$requests['desc']}', cat_weight='{$requests['weight']}', cat_options='{$requests['options']}', pid={$requests['pid']}" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_cat_id = $db->getInsertId() ;
 
-	if( $requests['pid'] ) {
-		// permissions are set same as the parent category. (also moderator)
-		$sql = "SELECT uid,groupid,can_post,can_edit,can_delete,post_auto_approved,can_makesubcategory,is_moderator FROM ".$db->prefix($mydirname."_category_access")." WHERE cat_id={$requests['pid']}" ;
-		if( ! $result = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-		while( $row = $db->fetchArray( $result ) ) {
-			$uid4sql = empty( $row['uid'] ) ? 'null' : intval( $row['uid'] ) ;
-			$groupid4sql = empty( $row['groupid'] ) ? 'null' : intval( $row['groupid'] ) ;
-			$sql = "INSERT INTO ".$db->prefix($mydirname."_category_access")." (cat_id,uid,groupid,can_post,can_edit,can_delete,post_auto_approved,can_makesubcategory,is_moderator) VALUES ($new_cat_id,$uid4sql,$groupid4sql,{$row['can_post']},{$row['can_edit']},{$row['can_delete']},{$row['post_auto_approved']},{$row['can_makesubcategory']},{$row['is_moderator']})" ;
-			if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-		}
-	} else {
-		// default permissioning for top category
-		$groups = $xoopsUser->getGroups() ;
-		foreach( $groups as $groupid ) {
-			$adminflag = $groupid == 1 ? 1 : 0 ;
-			$sql = "INSERT INTO ".$db->prefix($mydirname."_category_access")." (cat_id,uid,groupid,can_post,can_edit,can_delete,post_auto_approved,can_makesubcategory,is_moderator) VALUES ($new_cat_id,null,$groupid,1,1,1,1,$adminflag,$adminflag)" ;
-			if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-		}
+	// permissions are set same as the parent category. (also moderator)
+	$sql = "SELECT uid,groupid,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id={$requests['pid']}" ;
+	if( ! $result = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	while( $row = $db->fetchArray( $result ) ) {
+		$uid4sql = empty( $row['uid'] ) ? 'null' : intval( $row['uid'] ) ;
+		$groupid4sql = empty( $row['groupid'] ) ? 'null' : intval( $row['groupid'] ) ;
+		$sql = "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,uid,groupid,permissions) VALUES ($new_cat_id,$uid4sql,$groupid4sql,'".addslashes($row['permissions'])."')" ;
+		if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	}
 
 	// rebuild category tree

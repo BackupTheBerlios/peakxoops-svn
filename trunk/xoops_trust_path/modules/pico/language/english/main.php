@@ -38,6 +38,8 @@ define('_MD_PICO_ERR_READCONTENT','You cannot access the specified content');
 define('_MD_PICO_ERR_CREATECONTENT','You cannot create a content');
 define('_MD_PICO_ERR_EDITCONTENT','You cannot edit the content');
 define('_MD_PICO_ERR_DELETECONTENT','You cannot delete the content');
+define('_MD_PICO_ERR_PERMREADFULL','You cannot read full of the contents');
+define('_MD_PICO_ERR_LOGINTOREADFULL','Log in as a member to read the contents entirely');
 
 define('_MD_PICO_MSG_CATEGORYMADE','A category is created successfully');
 define('_MD_PICO_MSG_CATEGORYUPDATED','The category is modified successfully');
@@ -81,7 +83,7 @@ define('_MD_PICO_FILTERS_TEXTWIKIDESC','Rendered by TextWiki rule');
 define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
 define('_MD_PICO_FILTERS_XOOPSTPLTITLE','Smarty(XoopsTpl)');
 define('_MD_PICO_FILTERS_XOOPSTPLDESC','Rendered as a Smarty template');
-define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',15);
+define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',0);
 define('_MD_PICO_FILTERS_NL2BRTITLE','Auto new line');
 define('_MD_PICO_FILTERS_NL2BRDESC','LF will be replaced into &lt;br /&gt;');
 define('_MD_PICO_FILTERS_NL2BRINITWEIGHT',30);
@@ -92,5 +94,15 @@ define('_MD_PICO_FILTERS_XCODETITLE','BBCode');
 define('_MD_PICO_FILTERS_XCODEDESC','Auto link and BBCode will be enabled');
 define('_MD_PICO_FILTERS_XCODEINITWEIGHT',30);
 
+
+// permissions
+define('_MD_PICO_PERMS_CAN_READ','READ');
+define('_MD_PICO_PERMS_CAN_READFULL','READ FULL');
+define('_MD_PICO_PERMS_CAN_POST','POST');
+define('_MD_PICO_PERMS_CAN_EDIT','EDIT');
+define('_MD_PICO_PERMS_CAN_DELETE','DELETE');
+define('_MD_PICO_PERMS_POST_AUTO_APPROVED','AUTO APPROVED');
+define('_MD_PICO_PERMS_IS_MODERATOR','MODERATE');
+define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','MAKE SUBCATEGORY');
 
 ?>

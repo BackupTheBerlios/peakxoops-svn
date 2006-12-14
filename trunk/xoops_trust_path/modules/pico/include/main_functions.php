@@ -65,10 +65,17 @@ function pico_get_category_permissions_of_current_user( $mydirname )
 		$whr = "`groupid`=".intval(XOOPS_GROUP_ANONYMOUS) ;
 	}
 
-	$sql = "SELECT cat_id,SUM(can_makesubcategory) AS can_makesubcategory,SUM(is_moderator) AS is_moderator FROM ".$db->prefix($mydirname."_category_access")." WHERE ($whr) GROUP BY cat_id" ;
+	$sql = "SELECT cat_id,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE ($whr)" ;
 	$result = $db->query( $sql ) ;
-	if( $result ) while( $row = $db->fetchArray( $result ) ) {
-		$ret[ $row['cat_id'] ] = $row ;
+	if( $result ) while( list( $cat_id , $serialized_permissions ) = $db->fetchRow( $result ) ) {
+		$permissions = unserialize( $serialized_permissions ) ;
+		if( is_array( @$ret[ $cat_id ] ) ) {
+			foreach( $permissions as $perm_name => $value ) {
+				@$ret[ $cat_id ][ $perm_name ] |= $value ;
+			}
+		} else {
+			$ret[ $cat_id ] = $permissions ;
+		}
 	}
 
 	if( empty( $ret ) ) return array( 0 => array() ) ;
@@ -84,7 +91,7 @@ function pico_get_category_moderate_groups4show( $mydirname , $cat_id )
 	$cat_id = intval( $cat_id ) ;
 
 	$ret = array() ;
-	$sql = 'SELECT g.groupid, g.name FROM '.$db->prefix($mydirname.'_category_access').' ca LEFT JOIN '.$db->prefix('groups').' g ON ca.groupid=g.groupid WHERE ca.groupid IS NOT NULL AND ca.is_moderator AND cat_id='.$cat_id ;
+	$sql = "SELECT g.groupid, g.name FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("groups")." g ON cp.groupid=g.groupid WHERE cp.groupid IS NOT NULL AND cat_id=".$cat_id." AND cp.permissions LIKE '%s:12:\"is\\_moderator\";i:1;%'" ;
 	$mrs = $db->query( $sql ) ;
 	while( list( $mod_gid , $mod_gname ) = $db->fetchRow( $mrs ) ) {
 		$ret[] = array(
@@ -105,7 +112,7 @@ function pico_get_category_moderate_users4show( $mydirname , $cat_id )
 	$cat_id = intval( $cat_id ) ;
 
 	$ret = array() ;
-	$sql = 'SELECT u.uid, u.uname FROM '.$db->prefix($mydirname.'_category_access').' ca LEFT JOIN '.$db->prefix('users').' u ON ca.uid=u.uid WHERE ca.uid IS NOT NULL AND ca.is_moderator AND cat_id='.$cat_id ;
+	$sql = "SELECT u.uid, u.uname FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("users")." u ON cp.uid=u.uid WHERE cp.uid IS NOT NULL AND cat_id=".$cat_id." AND cp.permissions LIKE '%s:12:\"is\\_moderator\";i:1;%'" ;
 	$mrs = $db->query( $sql ) ;
 	while( list( $mod_uid , $mod_uname ) = $db->fetchRow( $mrs ) ) {
 		$ret[] = array(

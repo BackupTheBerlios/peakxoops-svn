@@ -15,6 +15,15 @@ require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 
 if( $content_id ) {
+	// permission check "can_readfull"
+	if( empty( $category_permissions[$cat_id]['can_readfull'] ) ) {
+		if( is_object( $xoopsUser ) ) {
+			redirect_header( XOOPS_URL.'/' , 2 , _MD_PICO_ERR_PERMREADFULL ) ;
+		} else {
+			redirect_header( XOOPS_URL.'/user.php' , 2 , _MD_PICO_ERR_LOGINTOREADFULL ) ;
+		}
+		exit ;
+	}
 	// check,fetch and assign the content
 	require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 	$xoopsOption['template_main'] = $mydirname.'_main_viewcontent.html' ;

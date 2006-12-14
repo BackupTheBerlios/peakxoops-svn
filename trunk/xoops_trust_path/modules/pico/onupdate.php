@@ -25,7 +25,12 @@ function pico_onupdate_base( $module , $mydirname )
 
 
 	// TABLES (write here ALTER TABLE etc. if necessary)
-
+	// 0.1x -> 0.2x
+	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_category_permissions") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "DROP TABLE ".$db->prefix($mydirname."_category_access") ) ;
+		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_category_permissions")." ( cat_id smallint(5) unsigned NOT NULL default 0, uid mediumint(8) default NULL, groupid smallint(5) default NULL, permissions text NOT NULL, UNIQUE KEY (cat_id,uid), UNIQUE KEY (cat_id,groupid), KEY (cat_id), KEY (uid), KEY (groupid)) TYPE=MyISAM;" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

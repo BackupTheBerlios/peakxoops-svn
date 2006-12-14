@@ -28,30 +28,43 @@ needs XOOPS_TRUST_PATH.
 
 [b]USAGE:[/b]
 
-(1) copy html/modules/pico into your moduels/.
+(1) copy html/modules/pico into your modules/
 
 (2) name the directory name as you like.
 
-(3) make a new folder out of DocumentRoot  eg) /home/yourhome/xoops/
+(3) copy html/class/smarty/plugins/function.xoopsdhtmltarea.php in the archive into your class/smarty/plugins/
 
-(4) insert a line into just after defining XOOPS_URL in mainfile.php. (Edit '/ho
+(4) make a new folder out of DocumentRoot  eg) /home/yourhome/xoops/
+
+(5) insert a line into just after defining XOOPS_URL in mainfile.php. (Edit '/ho
 me/yourhome/xoops')
 [code]
         define('XOOPS_TRUST_PATH','/home/yourhome/xoops');
 [/code]
-(The step of (3)/(4) is the same as fastestcache hack)
+(The step of (4)(5) is the same as fastestcache hack)
 
-(5) make a directory 'modules' under the directory. (XOOPS_TRUST_PATH/modules/)
+(6) make a directory 'modules' under the directory. (XOOPS_TRUST_PATH/modules/)
 
-(6) copy xoops_trust_path/modules/pico into XOOPS_TRUST_PATH/modules/
+(7) copy xoops_trust_path/modules/pico into XOOPS_TRUST_PATH/modules/
 
-(7) install it in XOOPS modulesadmin
+(8) install it in XOOPS modulesadmin
 
-(8) set group permissions of the TOP category in admin area
+(9) set group permissions of the TOP category in admin area
 
 
 You'd better install altsys and d3forum also.
 (pico supports comment system integrated with d3forum only)
+
+
+[b]HISTORY:[/b]
+
+0.1->0.2  (update the module essentially)
+- rebuilt permission system
+- added a permission of "full read"
+- added submenu for "main menu"
+- added WYSIWYG Editors (common/spaw and common/fckeditor)
+- added a feature of importing from TinyD
+- added a feature of importing from the other pico
 
 
 [/xlang:en]
@@ -88,21 +101,23 @@ XOOPS_TRUST_PATH についての設定も必要です。
 
 (2) ディレクトリ名は好きにつけてください。
 
-(3) DocumentRootの外に専用のディレクトリを作ります  例) /home/yourhome/xoops/
+(3) アーカイブ内の html/class/smarty/plugins/function.xoopsdhtmltarea.php を class/smarty/plugins/ の下にコピーしてください (d3forum等と同じです）
 
-(4) そのディレクトリのフルパスをmainfile.phpに記述します。場所はXOOPS_URL定義行の直後が良いでしょう。
+(4) DocumentRootの外に専用のディレクトリを作ります  例) /home/yourhome/xoops/
+
+(5) そのディレクトリのフルパスをmainfile.phpに記述します。場所はXOOPS_URL定義行の直後が良いでしょう。
 [code]
         define('XOOPS_TRUST_PATH','/home/yourhome/xoops');
 [/code]
-（このステップ(3)と(4)は、altsysや最速キャッシュハックと同じです）
+（このステップ(4)と(5)は、altsysや最速キャッシュハックと同じです）
 
-(5) XOOPS_TRUST_PATHの下にmodulesディレクトリを作ります (XOOPS_TRUST_PATH/modules/)
+(6) XOOPS_TRUST_PATHの下にmodulesディレクトリを作ります (XOOPS_TRUST_PATH/modules/)
 
-(6) アーカイブのxoops_trust_path/modules/picoをXOOPS_TRUST_PATH/modules/にコピーします
+(7) アーカイブのxoops_trust_path/modules/picoをXOOPS_TRUST_PATH/modules/にコピーします
 
-(7) XOOPSモジュールとしてインストールしてください。
+(8) XOOPSモジュールとしてインストールしてください。
 
-(8) 管理者画面のカテゴリー権限設定で、トップカテゴリーについての権限をこの時点で設定しておくと後々楽が出来るかも知れません。
+(9) 管理者画面のカテゴリー権限設定で、トップカテゴリーについての権限をこの時点で設定しておくと後々楽が出来るかも知れません。
 
 
 あとはTinyDの操作を知っていれば、そう難しいことはないと思います。
@@ -111,7 +126,24 @@ XOOPS_TRUST_PATH についての設定も必要です。
 altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 （というか、d3forumがないとコメント機能は利用できません）
 
+
+[b]NOTICE:[/b]
+
+このモジュールは、TinyDと違い、モジュールキャッシュ非推奨です。本文キャッシュ機能があるので十分に速いはずです。
+
+
+[b]HISTORY:[/b]
+
+0.1->0.2 （※モジュールアップデート必須）
+- 権限システムの作り直し （0.1を使っていた人は、再度、カテゴリー権限を設定しなおしてください）
+- 本文の全文表示、という権限の追加
+- メインメニュー用サブメニュー処理
+- WYSIWYG Editor選択 (common/spaw および common/fckeditor)
+- TinyDからのインポート
+- 他のpicoからのインポート
+
+
 バグ報告を歓迎します。
 
-[/xlang:ja]
 
+[/xlang:ja]

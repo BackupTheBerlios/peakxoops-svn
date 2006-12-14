@@ -41,7 +41,11 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	$content = pico_get_requests4content( $mydirname ) ;
-	$content['id'] = $content_id ;
+	$content4assign = array_map( 'htmlspecialchars' , $content ) ;
+	$content4assign['id'] = $content_id ;
+	$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] ) ;
+	$content4assign['body_raw'] = $content['body'] ;
+
 	$preview4assign = array(
 		'htmlheader' => $content['htmlheader'] ,
 		'subject' => $myts->makeTboxData4Show( $content['subject'] ) ,
@@ -55,20 +59,24 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		exit ;
 	}
 	$content_row = $db->fetchArray( $ors ) ;
-	$content = array(
+	$content4assign = array(
 		'cat_id' => intval( $content_row['cat_id'] ) ,
 		'id' => intval( $content_row['content_id'] ) ,
-		'subject' => $content_row['subject'] ,
-		'htmlheader' => $content_row['htmlheader'] ,
-		'body' => $content_row['body'] ,
-		'filters' => $content_row['filters'] ,
+		'subject' => htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
+		'htmlheader' => htmlspecialchars( $content_row['htmlheader'] , ENT_QUOTES ) ,
+		'body' => htmlspecialchars( $content_row['body'] , ENT_QUOTES ) ,
+		'body_raw' => $content_row['body'] ,
+		'filters' => htmlspecialchars( $content_row['filters'] , ENT_QUOTES ) ,
+		'filter_infos' => pico_get_filter_infos( $content_row['filters'] ) ,
 		'weight' => intval( $content_row['weight'] ) ,
 		'use_cache' => intval( $content_row['use_cache'] ) ,
 		'visible' => intval( $content_row['visible'] ) ,
 	) ;
 }
-$content4assign = array_map( 'htmlspecialchars' , $content ) ;
-$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] ) ;
+
+// WYSIWYG (some editor needs global scope ... orz)
+$pico_wysiwygs = array( 'name' => 'body' , 'value' => $content4assign['body_raw'] ) ;
+include dirname(dirname(__FILE__)).'/include/wysiwyg_editors.inc.php' ;
 
 $xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
 include XOOPS_ROOT_PATH."/header.php";
@@ -80,12 +88,13 @@ $xoopsTpl->assign( array(
 	'mod_config' => $xoopsModuleConfig ,
 	'category' => $category4assign ,
 	'content' => $content4assign ,
+	'body_wysiwyg' => @$pico_wysiwyg_body ,
 	'preview' => @$preview4assign ,
 	'page' => 'contentmanager' ,
 	'formtitle' => _MD_PICO_LINK_EDITCONTENT ,
 	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
-	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . @$pico_wysiwyg_header ,
 	'xoops_pagetitle' => _MD_PICO_CONTENTMANAGER ,
 ) ) ;
 

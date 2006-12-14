@@ -265,7 +265,7 @@ $modversion['hasComments'] = 0;
 $modversion['hasNotification'] = 0;
 
 // On Install (turn banip on)
- $modversion['onInstall'] = 'include/oninstall.inc.php' ;
+// $modversion['onInstall'] = 'include/oninstall.inc.php' ;
 
 // On Update
 if( ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {

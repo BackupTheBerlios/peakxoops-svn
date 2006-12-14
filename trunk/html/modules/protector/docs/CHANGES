@@ -5,6 +5,7 @@
 - fixed treating blob on backing up in prefix_manager (thx fbs777)
 - fixed some notices
 - updated gticket into version2
+- disabled onInstall (2.57a)
 
 2.56 (2006/03/30)
 - modified error handling when config can't be received
@@ -211,6 +212,7 @@
 - プレフィックスマネージャのバックアップでBLOBの処理がおかしかったのを修正 (thx fbs777)
 - いくつか出ているNoticeを修正
 - gticket2 に更新
+- onInstall処理をやめた (2.57a)
 
 2.56 (2006/03/30)
 - コンフィグが取れないときのエラー処理を強制終了に変更した

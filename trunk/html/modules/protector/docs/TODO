@@ -1,1 +1,4 @@
 - full-time XSS protection (super filter against GPC)
+
+- implementing big umbrella
+- change protector_log field of timestamp from TIMESTAMP to DATETIME

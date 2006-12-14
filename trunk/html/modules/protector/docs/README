@@ -43,17 +43,14 @@ Please install it as well as a usual module.
 
 After Xoops Protector is installed, edit your mainfile.php like this:
 [code]
-	define('XOOPS_GROUP_ADMIN', '1');
-	define('XOOPS_GROUP_USERS', '2');
-	define('XOOPS_GROUP_ANONYMOUS', '3');
-
 	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/precheck.inc.php' ) ;[/color]
 	if (!isset($xoopsOption['nocommon']) [color=0000ff]&& XOOPS_ROOT_PATH != ''[/color] ) {
 		include XOOPS_ROOT_PATH."/include/common.php";
 	}
 	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/postcheck.inc.php' ) ;[/color]
 [/code]
-If the blue colored part is different from your mainfile.php, don't mind it.
+Just add two red-colored lines.
+If the blue-colored part is different from your mainfile.php, don't mind it.
 
 Both pre-check and post-check are needed.
 
@@ -151,17 +148,13 @@ Xoops Protector は、XOOPS2 を様々な悪意ある攻撃から守るためのモジュールです。
 
 Xoops Protector をインストール後、お使いのXOOPSの mainfile.php の一番下のあたりに
 [code]
-	define('XOOPS_GROUP_ADMIN', '1');
-	define('XOOPS_GROUP_USERS', '2');
-	define('XOOPS_GROUP_ANONYMOUS', '3');
-
 	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/precheck.inc.php' ) ;[/color]
 	if (!isset($xoopsOption['nocommon']) [color=0000ff]&& XOOPS_ROOT_PATH != ''[/color] ) {
 		include XOOPS_ROOT_PATH."/include/common.php";
 	}
 	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/postcheck.inc.php' ) ;[/color]
 [/code]
-と、２行追加して下さい。
+と、赤くなっている２行を追加して下さい。
 
 青色の部分は、最初にインストールした時のバージョンによって異なりますが、違っていても気にしなくて結構です。
 

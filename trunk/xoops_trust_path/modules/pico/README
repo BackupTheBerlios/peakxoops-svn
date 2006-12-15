@@ -65,6 +65,7 @@ You'd better install altsys and d3forum also.
 - added WYSIWYG Editors (common/spaw and common/fckeditor)
 - added a feature of importing from TinyD
 - added a feature of importing from the other pico
+- modified top category's permission (0.20a)
 
 
 [/xlang:en]
@@ -141,6 +142,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - WYSIWYG Editor選択 (common/spaw および common/fckeditor)
 - TinyDからのインポート
 - 他のpicoからのインポート
+- トップカテゴリーの権限処理を修正 (0.20a)
 
 
 バグ報告を歓迎します。

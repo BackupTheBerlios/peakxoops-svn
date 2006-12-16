@@ -39,7 +39,7 @@ function pico_delete_category( $mydirname , $cat_id , $delete_also_contents = tr
 	// delete category
 	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
-	// delete category_access
+	// delete category_permissions
 	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return true ;

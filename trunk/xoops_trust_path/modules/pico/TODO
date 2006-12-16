@@ -36,13 +36,16 @@
 
 
 ●権限・表示ON/OFF関係の仕様
-category_access  レコードがあれば、そのカテゴリーの「読み出し権限」がある
-category_access.can_post 投稿権限 これだけだと投稿されてもvisible=0
-category_access.can_edit 変更権限 他者のエントリも変更できる。*_waitingに収まる
-category_access.can_delete 削除権限 他者のエントリも削除できる
-category_access.auto_approval 投稿したらvisible=1、編集したら*_waitingに収めることもスキップしていきなり書き換わる
-category_access.make_subcategory サブカテゴリー作成権限
-category_access.is_moderator カテゴリーモデレータ・不可視コンテンツが見える/承認権限がある/カテゴリー編集権限がある等。管理画面での操作（直接の権限設定等）は出来ない
+category_permissions レコードがあれば、そのカテゴリーの「読み出し権限」がある
+category_permissions.permissions serializeデータ
+$permissions['can_read'] 閲覧権限 原則常に1（0の場合はレコード自体がない）
+$permissions['can_readfull'] 全文閲覧権限 viewcontent.php へのアクセス権限
+$permissions['can_post'] 投稿権限 これだけだと投稿されてもvisible=0
+$permissions['can_edit'] 変更権限 他者のエントリも変更できる。*_waitingに収まる
+$permissions['can_delete'] 削除権限 他者のエントリも削除できる
+$permissions['post_auto_approved'] 投稿したらvisible=1、編集したら*_waitingに収めることもスキップしていきなり書き換わる
+$permissions['can_makesubcategory'] サブカテゴリー作成権限
+$permissions['is_moderator'] カテゴリーモデレータ・不可視コンテンツが見える/承認権限がある/カテゴリー編集権限がある等。管理画面での操作（直接の権限設定等）は出来ない
 
 contents.visible 0なら、管理者/モデレータ以外には見えない
 contents.approval 表示/非表示とは直接関係ない。0は単に「待っている」ことを示す

@@ -14,7 +14,7 @@ if( ! $category4assign['can_makesubcategory'] ) die( _MD_PICO_ERR_CREATECATEGORY
 // permissions will be set same as the parent category. (also moderator)
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 if( isset( $_POST['categoryman_post'] ) ) {
-	// create a record for category and category_access
+	// create a record for category and category_permissions
 	$new_cat_id = pico_makecategory( $mydirname ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=$new_cat_id" , 2 , _MD_PICO_MSG_CATEGORYMADE ) ;
 	exit ;

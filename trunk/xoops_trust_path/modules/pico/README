@@ -58,7 +58,10 @@ You'd better install altsys and d3forum also.
 
 [b]HISTORY:[/b]
 
-0.1->0.2  (update the module essentially)
+0.20->0.21
+- fixed page navigation (thx PhotoSiteLinks)
+
+0.10->0.20  (update the module essentially)
 - rebuilt permission system
 - added a permission of "full read"
 - added submenu for "main menu"
@@ -135,7 +138,11 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
-0.1->0.2 （※モジュールアップデート必須）
+
+0.20->0.21
+- ページナビが正常に動作しなかったのを修正 (thx PhotoSiteLinks)
+
+0.10->0.20 （※モジュールアップデート必須）
 - 権限システムの作り直し （0.1を使っていた人は、再度、カテゴリー権限を設定しなおしてください）
 - 本文の全文表示、という権限の追加
 - メインメニュー用サブメニュー処理

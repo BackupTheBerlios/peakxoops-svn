@@ -38,7 +38,7 @@ $content4assign = array(
 $content4assign += $content_row ;
 
 // get next content of the category
-$next_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." WHERE (weight>".$content_row['weight']." OR content_id>$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
+$next_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (weight>".$content_row['weight']." OR content_id>$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
 if( empty( $next_content_row ) ) {
 	$next_content4assign = array() ;
 } else {
@@ -49,7 +49,7 @@ if( empty( $next_content_row ) ) {
 }
 
 // get prev content of the category
-$prev_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." WHERE (weight<".$content_row['weight']." OR content_id<$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
+$prev_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (weight<".$content_row['weight']." OR content_id<$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
 if( empty( $prev_content_row ) ) {
 	$prev_content4assign = array() ;
 } else {

@@ -46,7 +46,7 @@
 
 <{else}>
 
-<ol>
+<ol style="padding:3px;margin:0;">
 <{foreach item=topic from=$block.topics}>
 	<li><a href="<{$block.mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>(<{$topic.replies}>) <{$topic.last_uname}> <{$topic.last_post_time_formatted}></li>
 <{/foreach}>

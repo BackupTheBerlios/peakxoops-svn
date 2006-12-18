@@ -40,7 +40,7 @@ define('_MD_D3FORUM_LINK_NEXTTOPIC','次のトピック');
 define('_MD_D3FORUM_LINK_PREVTOPIC','前のトピック');
 define('_MD_D3FORUM_LINK_NEXTPOST','次の投稿');
 define('_MD_D3FORUM_LINK_PREVPOST','前の投稿');
-define('_MD_D3FORUM_LINK_LISTPOSTS','トピック内投稿一覧へ');
+define('_MD_D3FORUM_LINK_LISTPOSTS','このトピックの投稿一覧へ');
 define('_MD_D3FORUM_LINK_LISTTOPICS','フォーラム内トピック一覧へ');
 define('_MD_D3FORUM_LISTALLTOPICS','全トピック一覧');
 define('_MD_D3FORUM_LISTTOPICSINCATEGORY','カテゴリー内トピック一覧');
@@ -49,9 +49,13 @@ define('_MD_D3FORUM_FMT_TOPICHITS','%s件ヒットしました');
 define('_MD_D3FORUM_MSG_CONFIRMDELETE','本当に削除してよろしいですか？');
 define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','このレコードに所属しているデータがすべて削除されますが、本当に削除してよろしいですか？');
 define('_MD_D3FORUM_POSTASNEWTOPIC','新規トピックとして投稿する');
-define('_MD_D3FORUM_REGTOPOST','投稿するにはまず登録を');
+define('_MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM','このフォーラムに新規トピックを投稿できます');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','このフォーラムには投稿できません');
+define('_MD_D3FORUM_CANTCREATENEWTOPICTHISFORUM','このフォーラムに新しいトピックを立てることはできません');
+define('_MD_D3FORUM_GUESTSCANPOST_DESC','このフォーラムではゲスト投稿が許可されています');
+define('_MD_D3FORUM_GUESTSCANNOTPOST_DESC','このフォーラムではゲスト投稿が禁止されています');
 define('_MD_D3FORUM_FORUMASCOMMENT','コメント用フォーラム');
+define('_MD_D3FORUM_FORUMASCOMMENT_DESC','このフォーラムはコメント用フォーラムです。新規トピックはたてられません');
 define('_MD_D3FORUM_ERR_FORUMASCOMMENT','コメント用フォーラムには直接新規トピックを作成できません');
 define('_MD_D3FORUM_REPLIES','返信');
 define('_MD_D3FORUM_POSTER','投稿者');
@@ -62,10 +66,14 @@ define('_MD_D3FORUM_TOP','トップ');
 define('_MD_D3FORUM_WHOLE','全体');
 define('_MD_D3FORUM_ALT_MARKEDYES','注目トピック');
 define('_MD_D3FORUM_ALT_MARKEDNO','非注目トピック');
+define('_MD_D3FORUM_MARKEDYES_DESC','あなたはこのトピックを<em class="d3f_attn" title="投稿一覧画面でこのトピックは更新日時に関わらず、常に上の方に表示されます">注目トピック</em>にしています');
+define('_MD_D3FORUM_MARKEDNO_DESC','このトピックを<em class="d3f_attn" title="投稿一覧画面やブロック等で最上位に表示されます">注目トピック</em>にすることができます');
 define('_MD_D3FORUM_ALT_SOLVEDYES','解決済トピック');
 define('_MD_D3FORUM_ALT_SOLVEDNO','未解決トピック');
-define('_MD_D3FORUM_MARK_TURNON','トピックをマークする');
-define('_MD_D3FORUM_MARK_TURNOFF','トピックのマークを外す');
+define('_MD_D3FORUM_SOLVEDYES_DESC','このトピックは<em class="d3f_attn" title="管理者、モデレータによって、話題が解決しているとされています">解決済みトピック</em>です');
+define('_MD_D3FORUM_SOLVEDNO_DESC','このトピックは<em class="d3f_attn" title="話題への回答をまだ募集している状態です。">未解決トピック</em>です');
+define('_MD_D3FORUM_MARK_TURNON','注目トピックをオンにする');
+define('_MD_D3FORUM_MARK_TURNOFF','注目トピックをオフにする');
 define('_MD_D3FORUM_SOLVED_TURNON','解決済とする');
 define('_MD_D3FORUM_SOLVED_TURNOFF','未解決とする');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','投稿一覧の最上部です'); //jidaikobo
@@ -94,9 +102,9 @@ define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','投稿の新しいものから');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
-define('_MD_D3FORUM_PARENTPOST','親記事');
-define('_MD_D3FORUM_CHILDPOSTS','子記事');
-define('_MD_D3FORUM_NOCHILDPOSTS','子記事なし');
+define('_MD_D3FORUM_PARENTPOST','親投稿');
+define('_MD_D3FORUM_CHILDPOSTS','子投稿');
+define('_MD_D3FORUM_NOCHILDPOSTS','子投稿なし');
 
 // order options
 define('_MD_D3FORUM_ODR_LASTPOSTDSC','最終投稿日降順');
@@ -137,6 +145,7 @@ define('_MD_D3FORUM_LASTVISIT','最終訪問日時');
 
 // topic attributes (done)
 define('_MD_D3FORUM_TOPICLOCKED','ロックされたトピック');
+define('_MD_D3FORUM_TOPICLOCKED_DESC','このトピックは管理者もしくはモデレータにより<em class="d3f_attn" title="あたらしい書き込みや編集はできません">ロックされています</em>。');
 define('_MD_D3FORUM_TOPICSTICKY','特別扱いされたトピック');
 define('_MD_D3FORUM_TOPICPOPULAR','人気トピック');
 define('_MD_D3FORUM_TOPICNEWPOSTS','新しい投稿があります');
@@ -200,9 +209,11 @@ define('_MD_D3FORUM_POSTREPLY','返信する');
 define('_MD_D3FORUM_POSTEDIT','編集する');
 define('_MD_D3FORUM_POSTDELETE','削除する');
 define('_MD_D3FORUM_EDITTIMELIMITED','編集可能な期間を過ぎました');
+define('_MD_D3FORUM_NOTICE_YOUAREEDITING','発言を編集しようとしています');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','トピック管理');
+define('_MD_D3FORUM_TOPICMANAGER_DESC','このトピックのタイトル編集、ロック、可視属性などを編集できます。');
 define('_MD_D3FORUM_TOPICMANAGERDONE','トピックを変更しました');
 define('_MD_D3FORUM_TH_STICKY','特別扱い');
 define('_MD_D3FORUM_TH_LOCK','ロック');
@@ -259,7 +270,7 @@ define('_MD_D3FORUM_TH_FORUMWEIGHT','表示優先順');
 define('_MD_D3FORUM_TH_FORUMDESC','フォーラム説明文');
 define('_MD_D3FORUM_TH_FORUMOPTIONS','フォーラムオプション');
 define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','コメント統合時の参照方法');
-define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','コメント統合を使わないときには空欄にします。{XOOPS_URL}/modules/dirname から始まるsprintf()用のフォーマットが記述された場合は、%sに記事番号を代入したものがコメント元へのURIとなります。最初からd3forumコメント統合に対応したモジュールの場合は自動的にセットされるので、いじらないでください。');
+define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','コメント統合を使わないときには空欄にします。{XOOPS_URL}/modules/dirname から始まるsprintf()用のフォーマットが記述された場合は、%sに投稿番号を代入したものがコメント元へのURIとなります。最初からd3forumコメント統合に対応したモジュールの場合は自動的にセットされるので、いじらないでください。');
 
 // makecategory and categorymanager
 define('_MD_D3FORUM_CATEGORYMANAGER','カテゴリー管理');
@@ -274,6 +285,9 @@ define('_MD_D3FORUM_TH_CATEGORYWEIGHT','表示優先順');
 define('_MD_D3FORUM_TH_CATEGORYPARENT','親カテゴリー');
 define('_MD_D3FORUM_TH_CATEGORYDESC','カテゴリー説明文');
 define('_MD_D3FORUM_TH_CATEGORYOPTIONS','カテゴリーオプション');
+
+define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','（このカテゴリーの下に）');
+define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','（このフォーラムの下に）');
 
 // multi-byte spaces separated by ,
 // (don't define for single space languages)

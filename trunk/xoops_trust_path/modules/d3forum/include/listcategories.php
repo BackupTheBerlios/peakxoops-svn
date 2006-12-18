@@ -17,7 +17,7 @@ if( $uid > 0 ) {
 if( empty( $last_visit ) ) $last_visit = time() ;
 
 // categories loop
-$categories = array() ;
+$categories4assign = array() ;
 $previous_depth = -1 ;
 $sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_categories")." c WHERE ($whr_read4cat) ORDER BY cat_order_in_tree" ;
 if( ! $crs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
@@ -72,7 +72,7 @@ while( $cat_row = $xoopsDB->fetchArray( $crs ) ) {
 	}
 
 	// categories array
-	$categories[] = array(
+	$categories4assign[] = array(
 		'id' => $cat_id ,
 		'pid' => $cat_row['pid'] ,
 		'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
@@ -92,7 +92,22 @@ while( $cat_row = $xoopsDB->fetchArray( $crs ) ) {
 		'moderate_groups' => d3forum_get_category_moderate_groups4show( $mydirname , $cat_row['cat_id'] ) ,
 		'moderate_users' => d3forum_get_category_moderate_users4show( $mydirname , $cat_row['cat_id'] ) ,
 		'can_makeforum' => ( $isadmin || @$category_permissions[ $cat_id ]['can_makeforum'] || @$category_permissions[ $cat_id ]['is_moderator'] ) ,
+		'paths_raw' => unserialize( $cat_row['cat_path_in_tree'] ) ,
 	) ;
+}
+
+// extract $top_categories and thier subcategories (F1) from $categories
+$top_categories4assign = array() ;
+foreach( $categories4assign as $category ) {
+	if( $category['pid'] == 0 ) {
+		$category['subcategories'] = array() ;
+		foreach( $categories4assign as $subcategory ) {
+			if( $subcategory['pid'] == $category['id'] ) {
+				$category['subcategories'][] = $subcategory ;
+			}
+		}
+		$top_categories4assign[] = $category ;
+	}
 }
 
 $xoopsOption['template_main'] = $mydirname.'_main_listcategories.html' ;
@@ -106,7 +121,9 @@ $xoopsTpl->assign(
 		'lastvisit_formatted' => formatTimestamp( $last_visit , 'm' ) ,
 		'currenttime' => time() ,
 		'currenttime_formatted' => formatTimestamp( time() , 'm' ) ,
-		'categories' => $categories ,
+		'selected_category' => @$selected_category4assign ,
+		'categories' => $categories4assign ,
+		'top_categories' => $top_categories4assign ,
 		'categories_ul_out_last' => str_repeat( '</li></ul>' , $previous_depth + 1 ) ,
 		'page' => 'listcategories' ,
 	)

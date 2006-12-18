@@ -1,4 +1,7 @@
+<{strip}>
+
 <!-- start module contents -->
+<!-- breadcrumbs -->
 <div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
@@ -9,7 +12,8 @@
 
 <h1 class="d3f_title"><{$forum.title}></h1>
 
-<p class="d3f_welcome"><{$forum.desc}>
+<p class="d3f_welcome">
+	<{$forum.desc}>
 	(<{$smarty.const._MD_D3FORUM_MODERATOR}>:
 	<{foreach from=$forum.moderate_groups item=moderator}>
 		<{$moderator.gname}>
@@ -17,7 +21,31 @@
 	<{foreach from=$forum.moderate_users item=moderator}>
 		<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
 	<{/foreach}>
-	)</p>
+	)
+</p>
+
+<!-- forum controller -->
+<ul class="d3f_ctrl">
+	<!-- new topic -->
+	<{if $forum.external_link_format}>
+		<li><{$smarty.const._MD_D3FORUM_FORUMASCOMMENT_DESC}></li>
+	<{elseif $forum.can_post}>
+		<li><a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM}></a></li>
+	<{else}>
+		<li><{$smarty.const._MD_D3FORUM_CANTCREATENEWTOPICTHISFORUM}></li>
+	<{/if}>
+	
+	<!-- guest can post or not -->
+	<{if ! $xoops_isuser}>
+		<{if $forum.can_post}>
+			<li><{$smarty.const._MD_D3FORUM_GUESTSCANPOST_DESC}></li>
+		<{else}>
+			<li><{$smarty.const._MD_D3FORUM_GUESTSCANNOTPOST_DESC}></li>
+		<{/if}>
+	<{/if}>
+</ul>
+
+<h2 class="head d3f_head"><{$forum.title}></h2>
 
 <div class="d3f_bbsviewctrl">
 	<form action="<{$mod_url}>/index.php" method="get">
@@ -52,9 +80,7 @@
 </tr>
 </thead>
 
-<!-- start forum topic -->
 <{foreach item=topic from=$topics}>
-
 <{if $topic.sticky}>
 	<{assign var="topic_icon_src" value="`$mod_imageurl`/topic_sticky`$topic.bit_new`.gif"}>
 	<{assign var="topic_icon_alt" value=$smarty.const._MD_D3FORUM_TOPICSTICKY}>
@@ -65,9 +91,8 @@
 	<{assign var="topic_icon_src" value="`$mod_imageurl`/topic_`$topic.bit_new``$topic.bit_hot`.gif"}>
 	<{assign var="topic_icon_alt" value=""}>
 <{/if}>
-
+<!-- start forum topic -->
 <tr class="<{cycle values="even,odd"}>">
-<{strip}>
 	<td class="d3f_mainicon"><img src="<{$topic_icon_src}>" alt="<{$topic_icon_alt}>" /></td>
 	<td class="d3f_topictitle"><{if $topic.locked}>
 		<img src="<{$mod_imageurl}>/topic_status_locked1.gif" alt="<{$smarty.const._MD_D3FORUM_TOPICLOCKED}>" />
@@ -87,9 +112,10 @@
 	<td><{$topic.views}></td>
 	<td><{$topic.votes_count}></td>
 	<td><{$topic.votes_avg|string_format:"%.2f"}></td>
-	<td class="d3f_posters"><{$topic.first_post_time_formatted}><br /><{$topic.first_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.first_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$topic.first_post_icon}>.gif" alt="<{$topic.first_post_subject}>" /></a></td>
-	<td class="d3f_posters"><{if $topic.replies>0}><{$topic.last_post_time_formatted}><br /><{$topic.last_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$topic.last_post_icon}>.gif" alt="<{$topic.last_post_subject}>" /></a><{/if}></td>
-<{/strip}>
+	<td class="d3f_posters"><{$topic.first_post_time_formatted}><br />
+	<{$topic.first_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.first_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$topic.first_post_icon}>.gif" alt="<{$topic.first_post_subject}>" /></a></td>
+	<td class="d3f_posters"><{if $topic.replies>0}><{$topic.last_post_time_formatted}><br />
+	<{$topic.last_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.last_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$topic.last_post_icon}>.gif" alt="<{$topic.last_post_subject}>" /></a><{/if}></td>
 </tr>
 <{/foreach}>
 <!-- end forum topic -->
@@ -101,57 +127,27 @@
 
 <div class="d3f_iconexps">
 <ul class="d3f_iconexp">
-	<li><img src="<{$mod_imageurl}>/topic_11.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICNEWPOSTS}>
-	<li><img src="<{$mod_imageurl}>/topic_01.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICNONEWPOSTS}>
-	<li><img src="<{$mod_imageurl}>/topic_invisible.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICINVISIBLE}></li>
-	<li><img src="<{$mod_imageurl}>/topic_sticky0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICSTICKY}></li>
+	<li><img src="<{$mod_imageurl}>/topic_11.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_TOPICNEWPOSTS}>
+	<li><img src="<{$mod_imageurl}>/topic_01.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_TOPICNONEWPOSTS}>
+	<li><img src="<{$mod_imageurl}>/topic_invisible.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_TOPICINVISIBLE}></li>
+	<li><img src="<{$mod_imageurl}>/topic_sticky0.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_TOPICSTICKY}></li>
 </ul>
 <ul class="d3f_iconexp">
-	<li><img src="<{$mod_imageurl}>/topic_status_locked1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_TOPICLOCKED}></li>
-	<li><img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}></li>
-	<li><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}></li>
+	<li><img src="<{$mod_imageurl}>/topic_status_locked1.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_TOPICLOCKED}></li>
+	<li><img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}></li>
+	<li><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="" width="18"  height="18" /> = <{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}></li>
 </ul>
 </div>
 
-<!-- forum controller -->
-
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CONTROLLER_FORUM}></h2>
-<div class="d3f_ctrl">
-	<{if $forum.external_link_format}>
-		<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>
-	<{elseif $forum.can_post}>
-		<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_POSTASNEWTOPIC}></a>
-	<{elseif ! $xoops_isuser}>
-		<a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_D3FORUM_REGTOPOST}></a>
-	<{else}>
-		<{$smarty.const._MD_D3FORUM_CANTPOSTTHISFORUM}>
-	<{/if}>
-
-	<{if $forum.isadminormod}>
-		| <a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a>
-	<{/if}>
-</div>
-
-<!-- short cut -->
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SHORTCUT}></h2>
-<div class="d3f_ctrl">
-	<!-- forum jumpbox -->
-	<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get">
-		<p><select name="forum_id"><{$forum_jumpbox_options}></select>
-		<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
-	</form>
-
-	<!-- search -->
-	<form name="d3f_search" action="<{$mod_url}>/index.php" method="get">
-		<p><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_SEARCH}></label>&nbsp;
-		<input name="keyword" type="text" size="30" id="keywords" />
-		<input type="hidden" name="page" value="search" />
-		<input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>" />
-		&nbsp; [<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>]</p>
-	</form>
-</div>
+<!-- forum jumpbox -->
+<form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get" style="clear:both;">
+	<p><select name="forum_id"><{$forum_jumpbox_options}></select>
+	<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
+</form>
 
 <hr class="notification" />
 
 <{include file='db:system_notification_select.html'}>
 <!-- end module contents -->
+
+<{/strip}>

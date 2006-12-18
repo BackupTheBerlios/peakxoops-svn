@@ -368,7 +368,7 @@ function d3forum_get_comment_link( $external_link_format , $external_link_id )
 function d3forum_get_comment_description( $external_link_format , $external_link_id )
 {
 	include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
-	list( $external_dirname , $class_name , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
+	@list( $external_dirname , $class_name , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
 	if( empty( $class_name ) ) return '' ;
 
 	// find and read d3comment class file

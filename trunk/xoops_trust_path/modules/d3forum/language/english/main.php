@@ -49,9 +49,13 @@ define('_MD_D3FORUM_FMT_TOPICHITS','hits %s items');
 define('_MD_D3FORUM_MSG_CONFIRMDELETE','Are you sure to delete it?');
 define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','All data belongs this record will be also deleted. Are you sure to delete it?');
 define('_MD_D3FORUM_POSTASNEWTOPIC','Open a new topic');
-define('_MD_D3FORUM_REGTOPOST','Register To Post');
+define('_MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM','You can open a topic into this forum');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','You cannot post into this forum');
+define('_MD_D3FORUM_CANTCREATENEWTOPICTHISFORUM','You cannot open a new topic into this forum');
+define('_MD_D3FORUM_GUESTSCANPOST_DESC','Guests can post into this forum');
+define('_MD_D3FORUM_GUESTSCANNOTPOST_DESC','Guests cannot post into this forum');
 define('_MD_D3FORUM_FORUMASCOMMENT','Forum for commentation');
+define('_MD_D3FORUM_FORUMASCOMMENT_DESC','As this forum is only for commentation, you cannot open a new topic');
 define('_MD_D3FORUM_ERR_FORUMASCOMMENT','You cannot create new topic in this forum directly.');
 define('_MD_D3FORUM_REPLIES','Replies');
 define('_MD_D3FORUM_POSTER','Poster');
@@ -62,8 +66,12 @@ define('_MD_D3FORUM_TOP','Top');
 define('_MD_D3FORUM_WHOLE','Whole');
 define('_MD_D3FORUM_ALT_MARKEDYES','Marked');
 define('_MD_D3FORUM_ALT_MARKEDNO','Not marked');
+define('_MD_D3FORUM_MARKEDYES_DESC','You have checked this topic as <em class="d3f_attn" title="MARKED topics are displayed in the top of list">MARKED</em>');
+define('_MD_D3FORUM_MARKEDNO_DESC','You can check this topic as <em class="d3f_attn" title="MARKED topics are displayed in the top of list">MARKED</em>');
 define('_MD_D3FORUM_ALT_SOLVEDYES','Solved topic');
 define('_MD_D3FORUM_ALT_SOLVEDNO','Unsolved topic');
+define('_MD_D3FORUM_SOLVEDYES_DESC','This topic is<em class="d3f_attn" title="SOLVED topics are treated as closed topics by admins or moderators">SOLVED</em>');
+define('_MD_D3FORUM_SOLVEDNO_DESC','This topic is <em class="d3f_attn" title="Responses are welcome">UNSOLVED</em>');
 define('_MD_D3FORUM_MARK_TURNON','Mark this topic');
 define('_MD_D3FORUM_MARK_TURNOFF','Unmark this topic');
 define('_MD_D3FORUM_SOLVED_TURNON','Turn solved on');
@@ -137,6 +145,7 @@ define('_MD_D3FORUM_LASTVISIT','You last visited');
 
 // topic attributes (done)
 define('_MD_D3FORUM_TOPICLOCKED','Locked topic');
+define('_MD_D3FORUM_TOPICLOCKED_DESC','This topic is<em class="d3f_attn" title="You cannot reply nor edit posts">LOCKED</em> by administrators or moderators');
 define('_MD_D3FORUM_TOPICSTICKY','Sticky topic');
 define('_MD_D3FORUM_TOPICPOPULAR','Popular topic');
 define('_MD_D3FORUM_TOPICNEWPOSTS','Topic with new posts');
@@ -200,9 +209,11 @@ define('_MD_D3FORUM_POSTREPLY','Reply');
 define('_MD_D3FORUM_POSTEDIT','Edit');
 define('_MD_D3FORUM_POSTDELETE','Delete');
 define('_MD_D3FORUM_EDITTIMELIMITED','Sorry, it has been expired to edit this post');
+define('_MD_D3FORUM_NOTICE_YOUAREEDITING','You are editing the post now');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','Topic Manager');
+define('_MD_D3FORUM_TOPICMANAGER_DESC','You can change topic\'s title, status of lock, status of visible, and etc.');
 define('_MD_D3FORUM_TOPICMANAGERDONE','Topic is modified successfully');
 define('_MD_D3FORUM_TH_STICKY','Sticky');
 define('_MD_D3FORUM_TH_LOCK','Lock');
@@ -275,6 +286,8 @@ define('_MD_D3FORUM_TH_CATEGORYPARENT','Parent category');
 define('_MD_D3FORUM_TH_CATEGORYDESC','Category desc');
 define('_MD_D3FORUM_TH_CATEGORYOPTIONS','Category options');
 
+define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','(under this category)');
+define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','(under this forum)');
 
 // multi-byte spaces separated by ,
 // (don't define for single space languages)

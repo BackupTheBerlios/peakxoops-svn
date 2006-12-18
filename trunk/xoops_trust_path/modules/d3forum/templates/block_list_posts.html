@@ -1,6 +1,6 @@
-<ol>
+<ol style="padding:3px;margin:0;">
 <{foreach item=post from=$block.posts}>
-	<li><a href="<{$block.mod_url}>/index.php?post_id=<{$post.id}>"><{$post.subject}></a> <{$post.uname}> <{$post.post_time_formatted}></li>
+	<li style="margin:1px;"><a href="<{$block.mod_url}>/index.php?post_id=<{$post.id}>"><{$post.subject}></a> <{$post.uname}> <{$post.post_time_formatted}></li>
 <{/foreach}>
 </ol>
 

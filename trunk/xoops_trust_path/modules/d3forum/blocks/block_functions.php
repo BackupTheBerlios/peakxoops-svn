@@ -50,6 +50,7 @@ function b_d3forum_list_forums_show( $options )
 		'categories' => $categories4assign ,
 		'lang_forum' => constant($constpref.'_FORUM') ,
 		'lang_lastpost' => constant($constpref.'_LASTPOST') ,
+		'lang_lastupdated' => constant($constpref.'_LASTUPDATED') ,
 		'lang_linktosearch' => constant($constpref.'_LINKTOSEARCH') ,
 		'lang_linktolistcategories' => constant($constpref.'_LINKTOLISTCATEGORIES') ,
 		'lang_linktolistforums' => constant($constpref.'_LINKTOLISTFORUMS') ,

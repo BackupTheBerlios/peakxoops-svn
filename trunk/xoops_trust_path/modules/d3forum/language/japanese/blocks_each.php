@@ -15,6 +15,7 @@ define($constpref."_VIEWS","閲覧");
 define($constpref."_VOTESCOUNT","投票");
 define($constpref."_VOTESSUM","得票");
 define($constpref."_LASTPOST","最終投稿");
+define($constpref."_LASTUPDATED","最終更新");
 define($constpref."_LINKTOSEARCH","フォーラム内検索へ");
 define($constpref."_LINKTOLISTCATEGORIES","カテゴリー一覧へ");
 define($constpref."_LINKTOLISTFORUMS","フォーラム一覧へ");

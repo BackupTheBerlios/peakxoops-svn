@@ -15,6 +15,7 @@ define($constpref."_VIEWS","Views");
 define($constpref."_VOTESCOUNT","Votes");
 define($constpref."_VOTESSUM","Scores");
 define($constpref."_LASTPOST","Last Post");
+define($constpref."_LASTUPDATED","Last Updated");
 define($constpref."_LINKTOSEARCH","Search in the forum");
 define($constpref."_LINKTOLISTCATEGORIES","Category Index");
 define($constpref."_LINKTOLISTFORUMS","Forum Index");

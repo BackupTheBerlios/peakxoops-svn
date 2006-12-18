@@ -356,10 +356,10 @@ if( !empty($_POST['contents_preview']) ) {
 	}
 
 	$redirect_message = $mode == 'edit' ? _MD_D3FORUM_MSG_THANKSEDIT : _MD_D3FORUM_MSG_THANKSPOST ;
-	if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
+	/* if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
 		// return to comment target
 		redirect_header( sprintf( str_replace( '{XOOPS_URL}' , XOOPS_URL , $forum_row['forum_external_link_format'] ) , $external_link_id ) , 2 , $redirect_message ) ;
-	} else if( ! empty( $topic_invisible ) ) {
+	} else*/ if( ! empty( $topic_invisible ) ) {
 		// redirect the forum for invisible topic
 		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" , 2 , _MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL ) ;
 	} else {

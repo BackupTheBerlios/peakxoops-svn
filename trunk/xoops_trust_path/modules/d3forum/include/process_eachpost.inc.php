@@ -22,7 +22,7 @@
 		// active user's post
 		$poster_uname4disp = $poster_obj->getVar( 'uname' ) ;
 		$poster_regdate = $poster_obj->getVar( 'user_regdate' ) ;
-		$poster_from4disp = $myts->makeTboxData4Show( $poster_obj->getVar( 'user_from' ) ) ;
+		$poster_from4disp = $myts->makeTboxData4Show( $poster_obj->getVar( 'user_from' ) , 1 ) ;
 		$poster_rank = $poster_obj->rank() ;
 		$poster_rank_title4disp = htmlspecialchars( @$poster_rank['title'] , ENT_QUOTES ) ;
 		$poster_rank_image4disp = htmlspecialchars( @$poster_rank['image'] , ENT_QUOTES ) ;

@@ -2,21 +2,15 @@
 <div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
-	<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a> &nbsp;&gt;&nbsp;
-	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>&nbsp;&gt;&nbsp;
-	<{if $topic.id}><a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>&nbsp;&gt;&nbsp;<{/if}>
-	<{$formtitle}>
+	<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><{$category.title}></a>
+	&nbsp;&gt;&nbsp;<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
+	&nbsp;&gt;&nbsp;<{if $topic.id}><a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a><{/if}>
 </div>
 
 <h1 class="d3f_title"><{$formtitle}>: <{$forum.title}></h1>
 
-<{if $mode == "reply"}>
-<p><a href="javascript:void(0);" onclick="if(document.getElementById('post_reference').style.display=='none'){document.getElementById('post_reference').style.display='block'}else{document.getElementById('post_reference').style.display='none'};"><{$smarty.const._MD_D3FORUM_REFERENCEPOST}></a></p>
-<dl id="post_reference" class="outer" <{if $ispreview}>style="display:none;"<{/if}>>
-	<dt class="head"><{$reference_subject}></dt>
-	<dd class="even"><{$smarty.const._MD_D3FORUM_BY}>: <{$reference_name}> <{$smarty.const._MD_D3FORUM_ON}>: <{$reference_time_formatted}></dd>
-	<dd class="odd"><{$reference_message}></dd>
-</dl>
+<{if $mode == "edit"}>
+<p style="background-color:#900;color:#fff;"><strong><{$smarty.const._MD_D3FORUM_NOTICE_YOUAREEDITING}></strong></p>
 <{/if}>
 
 <{if $ispreview}>
@@ -25,8 +19,6 @@
 	<dd class="odd"><{$preview_message}></dd>
 </dl>
 <{/if}>
-
-<h2 class="d3f_head<{if $mode == "edit"}> attn<{/if}>"><strong><{$formtitle}></strong></h2>
 
 <{include file="db:`$mydirname`_inc_d3comment_summary.html"}>
 
@@ -208,7 +200,6 @@
 
 </form>
 
-
 <!-- Start Form Vaidation JavaScript //-->
 <script type="text/javascript">
 <!--//
@@ -223,5 +214,14 @@ function d3forum_quote_message() {
 //-->
 </script>
 <!-- End Form Vaidation JavaScript //-->
+
+<{if $mode == "reply"}>
+<p><a href="javascript:void(0);" onclick="if(document.getElementById('post_reference').style.display=='none'){document.getElementById('post_reference').style.display='block'}else{document.getElementById('post_reference').style.display='none'};"><{$smarty.const._MD_D3FORUM_REFERENCEPOST}></a></p>
+<dl id="post_reference" class="outer" <{if $ispreview}>style="display:none;"<{/if}>>
+	<dt class="head"><{$reference_subject}></dt>
+	<dd class="even"><{$smarty.const._MD_D3FORUM_BY}>: <{$reference_name}> <{$smarty.const._MD_D3FORUM_ON}>: <{$reference_time_formatted}></dd>
+	<dd class="odd"><{$reference_message}></dd>
+</dl>
+<{/if}>
 
 <!-- end module contents -->

@@ -187,6 +187,7 @@ include dirname(__FILE__).'/mymenu.php' ;
 $tpl =& new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname' => $mydirname ,
+	'mod_name' => $xoopsModule->getVar('name') ,
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,

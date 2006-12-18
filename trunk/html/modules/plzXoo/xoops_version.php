@@ -2,7 +2,7 @@
 
 // <--- BASIC PROPERTY --->
 $modversion['name'] = _MI_PLZXOO_NAME;
-$modversion['version'] = 0.99;
+$modversion['version'] = 1.00;
 $modversion['description'] = _MI_PLZXOO_NAME_DESC;
 
 $modversion['credits'] = "";
@@ -34,6 +34,8 @@ $modversion['templates'][8]['file'] = 'plzxoo_answer_edit.html';
 $modversion['templates'][8]['description'] = '';
 $modversion['templates'][9]['file'] = 'plzxoo_answer_response.html';
 $modversion['templates'][9]['description'] = '';
+$modversion['templates'][10]['file'] = 'plzxoo_d3comment_reference.html';
+$modversion['templates'][10]['description'] = '';
 
 // <--- BLOCK PROPERTY --->
 $modversion['blocks'][1]['file'] = 'plzxoo_block_list.php';

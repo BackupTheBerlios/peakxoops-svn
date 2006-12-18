@@ -25,7 +25,10 @@ class default_DefaultindexView_success
 		$cat_handler =& plzXoo::getHandler('category');
 		$cat_obj =& $cat_handler->get( intval( @$_GET['cid'] ) ) ;
 		if( is_object( $cat_obj ) ) {
-			$renderer->setAttribute('category',$cat_obj->getStructure());
+			$cat_arr = $cat_obj->getStructure() ;
+			$renderer->setAttribute('category',$cat_arr);
+			$renderer->setAttribute('xoops_pagetitle',$cat_arr['name']);
+
 		} else {
 			$renderer->setAttribute('category' , array( 'children' => plzXooCategoryObject::getChildren(0) , 'cid' => 0 ) ) ;
 			$renderer->setAttribute('searchtxt4disp' , htmlspecialchars( $listController->filter_->txt_ , ENT_QUOTES ) ) ;

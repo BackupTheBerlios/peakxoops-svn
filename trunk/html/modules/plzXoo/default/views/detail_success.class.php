@@ -58,6 +58,8 @@ class default_DetailView_success
 			$renderer->setAttribute('category',array());
 		}
 
+		$renderer->setAttribute('xoops_pagetitle',$question_arr['subject']);
+
 		return $renderer;
 	}
 }

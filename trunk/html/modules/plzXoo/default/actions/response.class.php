@@ -48,6 +48,10 @@ class default_ResponseAction extends mojaLE_AbstractAction
 		if($editform->init($obj)==ACTIONFORM_POST_SUCCESS) {
 			$editform->update($obj);
 
+			// update size of question
+			$question->setVar('modified_date',time());
+			$q_handler->insert($question);
+
 			// update answer
 			$request->setAttribute('answer',$obj);
 			$obj->setVar('modified_date',time());

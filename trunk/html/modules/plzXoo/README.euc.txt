@@ -1,3 +1,4 @@
+[mlimg]
 [xlang:en]
 Alternative version of plzXoo as a "Q&A module with points".
 

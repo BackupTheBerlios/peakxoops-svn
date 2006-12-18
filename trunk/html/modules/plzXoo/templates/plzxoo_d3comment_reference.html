@@ -1,0 +1,26 @@
+<table border="1" style="background-color:#FC9;width:70%;">
+	<tr>
+		<td style="width:20%;"><{$smarty.const._MD_D3FORUM_COM_TARGETMODULE}></td>
+		<td><a href="<{$xoops_url}>/modules/<{$comment.dirname}>/"><{$comment.module_name}></a></td>
+	</tr>
+	<tr>
+		<td><{$smarty.const._MD_PLZXOO_LANG_QUESTION}></td>
+		<td>
+			<a href="<{$xoops_url}>/modules/<{$comment.dirname}>/index.php?action=detail&amp;qid=<{$comment.question.id}>"><{$comment.question.subject}></a>
+			<br />
+			<{$comment.question.body}>
+		</td>
+	</tr>
+	<tr>
+		<td><{$smarty.const._MD_PLZXOO_LANG_ANSWER}></td>
+		<td>
+			<{$comment.answer.body}>
+		</td>
+	</tr>
+	<tr>
+		<td><{$smarty.const._MD_PLZXOO_LANG_RESPONSE}></td>
+		<td>
+			<{$comment.answer.comment}>
+		</td>
+	</tr>
+</table>

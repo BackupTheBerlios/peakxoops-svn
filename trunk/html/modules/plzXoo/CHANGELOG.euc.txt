@@ -1,5 +1,9 @@
 [xlang:en]
 
+-=v0.99alt --> v1.00alt=- (update the module)
+* modified xoops_pagetitle assigning
+* modified d3forum comment integration reference
+
 -=v0.98alt --> v0.99alt=-
 * added d3forum comment integration natively
 
@@ -82,6 +86,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v0.99alt --> v1.00alt=- (要モジュールアップデート)
+* xoops_pagetitle をアサインするようにした
+* コメント統合で、もう少し詳細な情報を参照できるようにした
 
 -=v0.98alt --> v0.99alt=-
 * d3forumのコメント統合にNative対応（回答へのコメント）

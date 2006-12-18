@@ -55,7 +55,7 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 		if( $module->getvar('hasconfig') ) array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getvar('mid') ) ) ;
 	} else {
 		// conventinal X2
-		if( $module->getvar('hasconfig') ) array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => 'admin/admin.php?fct=preferences&op=showmod&mod=' . $module->getvar('mid') ) ) ;
+		if( $module->getvar('hasconfig') ) array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->getvar('mid') ) ) ;
 	}
 
 	$mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;

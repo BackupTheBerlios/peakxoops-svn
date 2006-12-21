@@ -1,5 +1,10 @@
 [xlang:en]
 
+-=v1.00alt --> v1.01alt=-
+* fixed answer indexing
+* fixed displaying search result with context
+* fixed mysql.sql for newer MySQL (removed default from text fields)
+
 -=v0.99alt --> v1.00alt=- (update the module)
 * modified xoops_pagetitle assigning
 * modified d3forum comment integration reference
@@ -86,6 +91,11 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v1.00alt --> v1.01alt=-
+* 回答検索処理がおかしかったのを修正
+* コンテキスト表示処理がおかしかったのを修正
+* MySQLのtextフィールドのdefault値を削除
 
 -=v0.99alt --> v1.00alt=- (要モジュールアップデート)
 * xoops_pagetitle をアサインするようにした

@@ -12,7 +12,7 @@ if( $ref == '' || strpos( $ref , XOOPS_URL.'/modules/system/admin.php' ) === 0 )
 	// add column 'for_search' into question table
 	$result = $xoopsDB->query( "SELECT COUNT(`for_search`) FROM ".$xoopsDB->prefix("plzxoo_question") ) ;
 	if( $result === false ) {
-		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_question")." ADD `for_search` mediumtext NOT NULL default '' AFTER `size`" ) ;
+		$xoopsDB->query( "ALTER TABLE ".$xoopsDB->prefix("plzxoo_question")." ADD `for_search` mediumtext NOT NULL AFTER `size`" ) ;
 	}
 
 	// add column 'modified_date' into question&answer table

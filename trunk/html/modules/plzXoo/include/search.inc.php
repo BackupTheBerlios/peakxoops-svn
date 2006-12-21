@@ -45,9 +45,9 @@ class plzXooXoopsSearchService extends SimpleXoopsSearchService {
 
 		// get context for module "search"
 		if( function_exists( 'search_make_context' ) && ! empty( $_GET['showcontext'] ) ) {
-			$text = $row['body'] . $row['for_search'] ;
+			$text = $row['body'] . '  ' . $row['for_search'] ;
 			if( function_exists( 'easiestml' ) ) $text = easiestml( $text ) ;
-			$row['context'] = search_make_context( $text , $this->filter_->querys_ ) ;
+			$row['context'] = search_make_context( htmlspecialchars( $text , ENT_QUOTES ) , $this->filter_->querys_ ) ;
 		}
 
 		return $row;

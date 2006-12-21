@@ -81,7 +81,7 @@ class plzXooQuestionObject extends exXoopsObject {
 		// ついでに検索用フィールドも更新する
 		$for_search = '' ;
 		foreach( $answers as $answer ) {
-			$for_search .= $answer->getVar('body') . ' ' ;
+			$for_search .= $answer->getVar('body','n') . ' ' ;
 		}
 		$this->setVar('for_search',$for_search);
 	}

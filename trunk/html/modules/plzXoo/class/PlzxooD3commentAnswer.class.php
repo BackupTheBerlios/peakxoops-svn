@@ -41,6 +41,7 @@ function fetchSummary( $external_link_id )
 		) ,
 	) ;
 
+	include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign( 'comment' , $comment ) ;
 	$ret = $tpl->fetch( 'db:plzxoo_d3comment_reference.html' ) ;

@@ -194,7 +194,7 @@ function pico_get_requests4sql_category( $mydirname )
 }
 
 
-// create forum from post
+// create a category
 function pico_makecategory( $mydirname )
 {
 	global $xoopsUser ;
@@ -223,7 +223,7 @@ function pico_makecategory( $mydirname )
 }
 
 
-// update forum from post
+// update category
 function pico_updatecategory( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
@@ -285,7 +285,7 @@ function pico_get_requests4content( $mydirname )
 }
 
 
-// create forum from post
+// create content
 function pico_makecontent( $mydirname )
 {
 	global $xoopsUser ;
@@ -305,7 +305,7 @@ function pico_makecontent( $mydirname )
 }
 
 
-// update forum from post
+// update content
 function pico_updatecontent( $mydirname , $content_id )
 {
 	global $xoopsUser ;

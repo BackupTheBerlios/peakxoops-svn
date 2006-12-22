@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.21 ;
+$modversion['version'] = 0.22 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -63,7 +63,7 @@ $modversion['blocks'][1] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_pico_menu_show' ,
 	'edit_func'		=> 'b_pico_menu_edit' ,
-	'options'		=> "$mydirname|0|" ,
+	'options'		=> "$mydirname||" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -75,6 +75,17 @@ $modversion['blocks'][2] = array(
 	'show_func'		=> 'b_pico_content_show' ,
 	'edit_func'		=> 'b_pico_content_edit' ,
 	'options'		=> "$mydirname|0|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
+$modversion['blocks'][3] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_LIST') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_pico_list_show' ,
+	'edit_func'		=> 'b_pico_list_edit' ,
+	'options'		=> "$mydirname||o.created_time DESC|10|" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;

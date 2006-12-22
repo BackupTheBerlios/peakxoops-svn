@@ -45,6 +45,7 @@ define($constpref.'_COM_FORUM_ID','Comment-integration: forum ID');
 // blocks
 define($constpref.'_BNAME_MENU','Menu');
 define($constpref.'_BNAME_CONTENT','Content');
+define($constpref.'_BNAME_LIST','List');
 
 }
 

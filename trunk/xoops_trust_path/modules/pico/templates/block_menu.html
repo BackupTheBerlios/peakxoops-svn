@@ -1,5 +1,18 @@
-<ul class="pico_block_menu">
-<{foreach from=$block.contents item=content}>
-	<li><a href="<{$mod_url}>/index.php?content_id=<{$content.id}>"><{$content.subject}></a></li>
+<{foreach item=category from=$block.categories}>
+<dl>
+	<dt style="margin:5px 0 0;padding:3px;background-color:#eee;">
+		<a href="<{$block.mod_url}>/index.php?cat_id=<{$category.id}>">
+			<{if $category.id == 0}>
+				<{$block.lang_topcategory}>
+			<{else}>
+				<{$category.title}>
+			<{/if}>
+		</a>
+	</dt>
+	<dd style="margin:0;"><ul>
+	<{foreach item=content from=$category.contents}>
+		<li style="margin:0;background-color:#fff;"><a href="<{$block.mod_url}>/index.php?content_id=<{$content.id}>" title="<{$block.lang_lastupdated}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
+	<{/foreach}>
+	</ul></dd>
+</dl>
 <{/foreach}>
-</ul>

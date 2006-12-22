@@ -78,6 +78,7 @@ function pico_import_from_tinyd( $mydirname , $import_mid )
 	$module =& $module_handler->get( $import_mid ) ;
 	list( $from_table_base ) = $module->getInfo('tables') ;
 	if( empty( $from_table_base ) ) pico_import_errordie() ;
+	$target_dirname = $module->getVar('dirname') ;
 
 	// categories
 	// skip all
@@ -92,7 +93,7 @@ function pico_import_from_tinyd( $mydirname , $import_mid )
 	$to_table = $db->prefix( $mydirname.'_contents' ) ;
 	$from_table = $db->prefix( $from_table_base ) ;
 	$db->query( "DELETE FROM `$to_table`" ) ;
-	$irs = $db->query( "INSERT INTO `$to_table` (content_id,cat_id,weight,created_time,modified_time,subject,visible,allow_comment,show_in_navi,show_in_menu,htmlheader,body,filters,body_waiting,body_cached) SELECT storyid,0,blockid,UNIX_TIMESTAMP(created),UNIX_TIMESTAMP(last_modified),title,visible,!nocomments,1,submenu,html_header,`text`,nohtml,nosmiley,nobreaks FROM `$from_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (content_id,cat_id,weight,created_time,modified_time,subject,visible,allow_comment,show_in_navi,show_in_menu,htmlheader,body,filters,body_waiting,body_cached,subject_waiting) SELECT storyid,0,blockid,UNIX_TIMESTAMP(created),UNIX_TIMESTAMP(last_modified),title,visible,!nocomments,1,submenu,html_header,`text`,nohtml,nosmiley,nobreaks,address FROM `$from_table`" ) ;
 	if( ! $irs ) pico_import_errordie() ;
 
 	// update filters
@@ -106,7 +107,24 @@ function pico_import_from_tinyd( $mydirname , $import_mid )
 	$db->query( "UPDATE `$to_table` SET filters='xcode' WHERE filters='0'" ) ;
 	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|smiley') WHERE body_waiting='0'" ) ;
 	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|nl2br') WHERE body_cached='0'" ) ;
-	$db->query( "UPDATE `$to_table` SET body_waiting='',body_cache=''" ) ;
+	$db->query( "UPDATE `$to_table` SET body_waiting='',body_cached=''" ) ;
+
+	// import page wrap as db content (subject_waiting is temporary for address)
+	$result = $db->query( "SELECT content_id,subject_waiting FROM `$to_table` WHERE subject_waiting<>''" ) ;
+	if( ! $result ) pico_import_errordie() ;
+	while( list( $id , $address ) = $db->fetchRow( $result ) ) {
+		if( file_exists( XOOPS_ROOT_PATH.'/modules/'.$target_dirname.'/content/'.$address ) ) {
+			$body = file_get_contents( XOOPS_ROOT_PATH.'/modules/'.$target_dirname.'/content/'.$address ) ;
+			// convert encoding
+			if( function_exists( 'mb_convert_encoding' ) ) {
+				$body = mb_convert_encoding( $body , mb_internal_encoding() , "auto" ) ;
+			}
+		} else {
+			$body = '' ;
+		}
+		$urs = $db->query( "UPDATE `$to_table` SET subject_waiting='', filters='', body='".addslashes($body)."' WHERE content_id=$id" ) ;
+		if( ! $urs ) pico_import_errordie() ;
+	}
 
 }
 

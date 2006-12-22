@@ -32,7 +32,7 @@ needs XOOPS_TRUST_PATH.
 
 (2) name the directory name as you like.
 
-(3) copy html/class/smarty/plugins/function.xoopsdhtmltarea.php in the archive into your class/smarty/plugins/
+(3) copy two files under html/class/smarty/plugins/ in the archive into your class/smarty/plugins/
 
 (4) make a new folder out of DocumentRoot  eg) /home/yourhome/xoops/
 
@@ -57,6 +57,12 @@ You'd better install altsys and d3forum also.
 
 
 [b]HISTORY:[/b]
+
+0.21->0.22
+- fixed menu block (thx kuon)
+- added list block
+- fixed importing from TinyD
+- modified invisible contents
 
 0.20->0.21
 - fixed page navigation (thx PhotoSiteLinks)
@@ -105,7 +111,7 @@ XOOPS_TRUST_PATH についての設定も必要です。
 
 (2) ディレクトリ名は好きにつけてください。
 
-(3) アーカイブ内の html/class/smarty/plugins/function.xoopsdhtmltarea.php を class/smarty/plugins/ の下にコピーしてください (d3forum等と同じです）
+(3) アーカイブ内の html/class/smarty/plugins/ にあるファイル２つを class/smarty/plugins/ の下にコピーしてください (d3forum等と同じです）
 
 (4) DocumentRootの外に専用のディレクトリを作ります  例) /home/yourhome/xoops/
 
@@ -138,6 +144,13 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+
+
+0.21->0.22
+- メニューブロックが機能していなかったのを修正 (thx kuon)
+- 一覧ブロックを追加
+- TinyDからのインポート関連のデバッグ
+- 管理者でも非表示コンテンツは見えないようにした
 
 0.20->0.21
 - ページナビが正常に動作しなかったのを修正 (thx PhotoSiteLinks)

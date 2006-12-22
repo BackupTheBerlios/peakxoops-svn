@@ -44,7 +44,8 @@ define($constpref.'_COM_FORUM_ID','コメント統合するフォーラムの番号');
 
 // blocks
 define($constpref.'_BNAME_MENU','メニュー');
-define($constpref.'_BNAME_CONTENT','コンテンツ');
+define($constpref.'_BNAME_CONTENT','コンテンツ内容');
+define($constpref.'_BNAME_LIST','コンテンツ一覧');
 
 }
 

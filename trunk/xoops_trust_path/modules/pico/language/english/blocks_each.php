@@ -9,6 +9,7 @@ define( $constpref.'_LOADED' , 1 ) ;
 
 // definitions for displaying blocks 
 define($constpref."_CATEGORY","Category");
+define($constpref."_TOPCATEGORY","Top category");
 
 }
 

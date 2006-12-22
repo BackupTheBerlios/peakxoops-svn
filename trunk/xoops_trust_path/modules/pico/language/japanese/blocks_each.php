@@ -9,6 +9,7 @@ define( $constpref.'_LOADED' , 1 ) ;
 
 // definitions for displaying blocks 
 define($constpref."_CATEGORY","カテゴリー");
+define($constpref."_TOPCATEGORY","トップカテゴリー");
 
 }
 

@@ -63,6 +63,7 @@ You'd better install altsys and d3forum also.
 - added list block
 - fixed importing from TinyD
 - modified invisible contents
+- fixed templates for list block (thx choromo) 0.22a
 
 0.20->0.21
 - fixed page navigation (thx PhotoSiteLinks)
@@ -151,6 +152,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - 一覧ブロックを追加
 - TinyDからのインポート関連のデバッグ
 - 管理者でも非表示コンテンツは見えないようにした
+- 一覧ブロックのテンプレート修正 (thx choromo) 0.22a
 
 0.20->0.21
 - ページナビが正常に動作しなかったのを修正 (thx PhotoSiteLinks)

@@ -96,55 +96,23 @@ function pico_makecattree_recursive( $tablename , $cat_id , $order = 'cat_weight
 
 
 // store redundant informations to a content from its content_votes
-function pico_sync_content_votes( $mydirname , $post_id )
+function pico_sync_content_votes( $mydirname , $content_id )
 {
 	$db =& Database::getInstance() ;
 
-	$post_id = intval( $post_id ) ;
+	$content_id = intval( $content_id ) ;
 
-	$sql = "SELECT topic_id FROM ".$db->prefix($mydirname."_contents")." WHERE post_id=$post_id" ;
-	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT post in sync content_votes" ) ;
-	list( $topic_id ) = $db->fetchRow( $result ) ;
+	$sql = "SELECT cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ;
+	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT content in sync content_votes" ) ;
+	list( $cat_id ) = $db->fetchRow( $result ) ;
 
-	$sql = "SELECT COUNT(*),SUM(vote_point) FROM ".$db->prefix($mydirname."_content_votes")." WHERE post_id=$post_id" ;
+	$sql = "SELECT COUNT(*),SUM(vote_point) FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id" ;
 	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT content_votes in sync content_votes" ) ;
 	list( $votes_count , $votes_sum ) = $db->fetchRow( $result ) ;
 
-	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET votes_count=".intval($votes_count).",votes_sum=".intval($votes_sum)." WHERE post_id=$post_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET votes_count=".intval($votes_count).",votes_sum=".intval($votes_sum)." WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return true ;
-}
-
-
-function pico_maketree_recursive( $tablename , $post_id , $order = 'cat_id' , $parray = array() , $depth = 0 , $unique_path = '.1' )
-{
-	$db =& Database::getInstance() ;
-
-	$parray[] = array( 'post_id' => $post_id , 'depth' => $depth , 'unique_path' => $unique_path ) ;
-
-	$sql = "SELECT post_id,unique_path FROM $tablename WHERE pid=$post_id ORDER BY $order" ;
-	$result = $db->query( $sql ) ;
-	if( $db->getRowsNum( $result ) == 0 ) {
-		return $parray ;
-	}
-	$new_post_ids = array() ;
-	$max_count_of_last_level = 0 ;
-	while( list( $new_post_id , $new_unique_path ) = $db->fetchRow( $result ) ) {
-		$new_post_ids[ intval( $new_post_id ) ] = $new_unique_path ;
-		if( ! empty( $new_unique_path ) ) {
-			$count_of_last_level = intval( substr( strrchr( $new_unique_path , '.' ) , 1 ) ) ;
-			if( $max_count_of_last_level < $count_of_last_level ) {
-				$max_count_of_last_level = $count_of_last_level ;
-			}
-		}
-	}
-	foreach( $new_post_ids as $new_post_id => $new_unique_path ) {
-		if( empty( $new_unique_path ) ) {
-			$new_unique_path = $unique_path . '.' . ++ $max_count_of_last_level ;
-		}
-		$parray = pico_maketree_recursive( $tablename , $new_post_id , $order , $parray , $depth + 1 , $new_unique_path ) ;
-	}
-	return $parray ;
 }
 
 
@@ -281,6 +249,9 @@ function pico_get_requests4content( $mydirname )
 		'weight' => intval( @$_POST['weight'] ) ,
 		'use_cache' => empty( $_POST['use_cache'] ) ? 0 : 1 ,
 		'visible' => empty( $_POST['visible'] ) ? 0 : 1 ,
+		'show_in_navi' => empty( $_POST['show_in_navi'] ) ? 0 : 1 ,
+		'show_in_menu' => empty( $_POST['show_in_menu'] ) ? 0 : 1 ,
+		'allow_comment' => empty( $_POST['allow_comment'] ) ? 0 : 1 ,
 	) ;
 }
 

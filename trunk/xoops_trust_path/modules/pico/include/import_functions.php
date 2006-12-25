@@ -146,4 +146,29 @@ function pico_import_from_pico( $mydirname , $import_mid )
 }
 
 
+// just import a content (contents and content_votes only)
+function pico_import_a_content_from_pico( $mydirname , $import_mid , $content_id )
+{
+	$db =& Database::getInstance() ;
+
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$from_module =& $module_handler->get( $import_mid ) ;
+
+	// contents table
+	$to_table = $db->prefix( $mydirname.'_contents' ) ;
+	$from_table = $db->prefix( $from_module->getVar('dirname').'_contents' ) ;
+	$columns4sql = implode( ',' , array_diff( $GLOBALS['pico_tables']['contents'] , array( 'content_id' , 'cat_id') ) ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` ($columns4sql,cat_id) SELECT $columns4sql,0 FROM `$from_table` WHERE content_id=".intval($content_id) ) ;
+	if( ! $irs ) pico_import_errordie() ;
+
+	// content_votes table
+	$new_content_id = $db->getInsertId() ;
+	$to_table = $db->prefix( $mydirname.'_content_votes' ) ;
+	$from_table = $db->prefix( $from_module->getVar('dirname').'_content_votes' ) ;
+	$columns4sql = implode( ',' , array_diff( $GLOBALS['pico_tables']['content_votes'] , array( 'vote_id' , 'content_id' ) ) ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` ($columns4sql,content_id) SELECT $columns4sql,$new_content_id FROM `$from_table` WHERE content_id=".intval($content_id) ) ;
+	if( ! $irs ) pico_import_errordie() ;
+}
+
+
 ?>

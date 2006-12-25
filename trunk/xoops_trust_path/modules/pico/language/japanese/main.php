@@ -1,6 +1,7 @@
 <?php
 
 define('_MD_PICO_TOP','トップ');
+define('_MD_PICO_MENU','メニュー');
 define('_MD_PICO_CREATED','作成');
 define('_MD_PICO_MODIFIED','更新');
 define('_MD_PICO_VIEWED','閲覧数');
@@ -15,11 +16,14 @@ define('_MD_PICO_SUBCATEGORIES','サブカテゴリー');
 define('_MD_PICO_CONTENT','コンテンツ');
 define('_MD_PICO_CONTENTS','コンテンツ');
 
-define('_MD_PICO_LINK_MAKECATEGORY','サブカテゴリー作成');
+define('_MD_PICO_LINK_MAKECATEGORY','カテゴリー作成');
 define('_MD_PICO_LINK_MAKESUBCATEGORY','サブカテゴリー作成');
 define('_MD_PICO_LINK_MAKECONTENT','コンテンツ作成');
 define('_MD_PICO_LINK_EDITCATEGORY','カテゴリー編集');
 define('_MD_PICO_LINK_EDITCONTENT','コンテンツ編集');
+define('_MD_PICO_LINK_CATEGORYPERMISSIONS','カテゴリー権限設定');
+define('_MD_PICO_LINK_BATCHCONTENTS','コンテンツ一括管理');
+define('_MD_PICO_LINK_PUBLICCATEGORYINDEX','公開側カテゴリートップ');
 
 define('_MD_PICO_LINK_PRINTERFRIENDLY','プリンタ用画面');
 define('_MD_PICO_LINK_TELLAFRIEND','友達に伝える');
@@ -59,6 +63,9 @@ define('_MD_PICO_TH_WEIGHT','表示順');
 define('_MD_PICO_TH_USECACHE','本文キャッシュ');
 define('_MD_PICO_NOTE_USECACHEDSC','※閲覧条件によって内容が異なるコンテンツの場合にはOFFにしてください。ただし、ここがONでない記事は検索対象となりません。');
 define('_MD_PICO_TH_VISIBLE','表示');
+define('_MD_PICO_TH_SHOWINNAVI','ページナビに表示する');
+define('_MD_PICO_TH_SHOWINMENU','メニューに表示する');
+define('_MD_PICO_TH_ALLOWCOMMENT','コメント可能');
 define('_MD_PICO_TH_CATEGORYTITLE','タイトル');
 define('_MD_PICO_TH_CATEGORYDESC','説明');
 define('_MD_PICO_TH_CATEGORYPARENT','親カテゴリー');
@@ -71,6 +78,17 @@ define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','トップカテゴリーは特別なカテゴリー
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','HTMLヘッダカスタマイズ部表示');
 define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');
 
+
+// vote to content
+define('_MD_PICO_ERR_VOTEPERM','投票権がありません');
+define('_MD_PICO_ERR_VOTEINVALID','不正な投票です');
+define('_MD_PICO_MSG_VOTEDOUBLE','１記事に対して投票は１回限りです');
+define('_MD_PICO_MSG_VOTEACCEPTED','投票ありがとうございました');
+define('_MD_PICO_MSG_VOTEDISABLED','このカテゴリーでは投票機能は利用できません');
+define('_MD_PICO_VOTECOUNT','投票数');
+define('_MD_PICO_VOTEPOINTAVG','平均点');
+define('_MD_PICO_VOTEPOINTDSCBEST','役に立った');
+define('_MD_PICO_VOTEPOINTDSCWORST','役に立たなかった');
 
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','phpコード');

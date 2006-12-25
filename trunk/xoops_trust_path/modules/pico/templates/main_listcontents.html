@@ -1,5 +1,7 @@
 <div class="pico_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>
+	-
+	<a href="<{$mod_url}>/index.php?page=menu"><{$smarty.const._MD_PICO_MENU}></a>
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
 	&nbsp;&gt;&nbsp;
 		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
@@ -9,9 +11,19 @@
 <{if $category.isadminormod}>
 <a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
 <{/if}>
+
+<{if $xoops_isadmin}>
+	<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
+<{/if}>
+
+<{if $xoops_isadmin}>
+	<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
+<{/if}>
+
 <{if $category.can_makesubcategory}>
 <a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
 <{/if}>
+
 <{if $category.can_post}>
 <a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
 <{/if}>

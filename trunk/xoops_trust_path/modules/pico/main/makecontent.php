@@ -50,6 +50,9 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'weight' => 0 ,
 		'use_cache' => 1 ,
 		'visible' => 1 ,
+		'show_in_navi' => 1 ,
+		'show_in_menu' => 1 ,
+		'allow_comment' => 1 ,
 	) ;
 }
 

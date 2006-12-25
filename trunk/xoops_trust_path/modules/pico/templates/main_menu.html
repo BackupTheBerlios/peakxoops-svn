@@ -1,0 +1,26 @@
+<div class="pico_breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>
+</div>
+
+<{if $category.can_makesubcategory}>
+<a href="<{$mod_url}>/index.php?page=makecategory">[<{$smarty.const._MD_PICO_LINK_MAKECATEGORY}>]</a>
+<{/if}>
+
+<{if $category.can_post}>
+<a href="<{$mod_url}>/index.php?page=makecontent">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
+<{/if}>
+
+<{foreach item=category from=$categories}>
+<dl style="margin-left:<{$category.depth_in_tree}>0px;">
+	<dt style="margin:5px 0 0;padding:3px;background-color:#eee;">
+		<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>">
+			<{$category.title}>
+		</a>
+	</dt>
+	<dd style="margin:0;"><ul>
+	<{foreach item=content from=$category.contents}>
+		<li style="margin:0;background-color:#fff;"><a href="<{$mod_url}>/index.php?content_id=<{$content.id}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
+	<{/foreach}>
+	</ul></dd>
+</dl>
+<{/foreach}>

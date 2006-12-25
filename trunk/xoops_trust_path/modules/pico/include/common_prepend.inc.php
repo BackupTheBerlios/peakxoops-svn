@@ -13,6 +13,7 @@ $isadmin = $uid > 0 ? $xoopsUser->isAdmin() : false ;
 // get this user's permissions as perm array
 $category_permissions = pico_get_category_permissions_of_current_user( $mydirname ) ;
 $whr_read4cat = 'c.`cat_id` IN (' . implode( "," , array_keys( $category_permissions ) ) . ')' ;
+$whr_read4content = 'o.`cat_id` IN (' . implode( "," , array_keys( $category_permissions ) ) . ')' ;
 
 // add XOOPS_TRUST_PATH/PEAR/ into include_path
 if( ! defined( 'PATH_SEPARATOR' ) ) define( 'PATH_SEPARATOR' , DIRECTORY_SEPARATOR == '/' ? ':' : ';' ) ;

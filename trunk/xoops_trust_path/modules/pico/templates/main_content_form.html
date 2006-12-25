@@ -93,6 +93,27 @@
 			</td>
 		</tr>
 
+		<tr valign="top" align="left">
+			<th class="head"><label for="show_in_navi"><{$smarty.const._MD_PICO_TH_SHOWINNAVI}></label></th>
+			<td class="even">
+				<input type="checkbox" name="show_in_navi" id="show_in_navi" value="1" <{if $content.show_in_navi}>checked="checked"<{/if}> />
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
+			<th class="head"><label for="show_in_menu"><{$smarty.const._MD_PICO_TH_SHOWINMENU}></label></th>
+			<td class="even">
+				<input type="checkbox" name="show_in_menu" id="show_in_menu" value="1" <{if $content.show_in_menu}>checked="checked"<{/if}> />
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
+			<th class="head"><label for="allow_comment"><{$smarty.const._MD_PICO_TH_ALLOWCOMMENT}></label></th>
+			<td class="even">
+				<input type="checkbox" name="allow_comment" id="allow_comment" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
+			</td>
+		</tr>
+
 	</table>
 
 	<p class="pico_submit">

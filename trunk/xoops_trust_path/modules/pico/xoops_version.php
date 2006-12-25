@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.22 ;
+$modversion['version'] = 0.30 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -105,9 +105,19 @@ $modversion['config'][1] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'show_menuinmoduletop' ,
+	'title'			=> $constpref.'_SHOW_MENUINMODULETOP' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'show_listasindex' ,
 	'title'			=> $constpref.'_SHOW_LISTASINDEX' ,
-	'description'	=> '' ,
+	'description'	=> $constpref.'_SHOW_LISTASINDEXDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 1 ,

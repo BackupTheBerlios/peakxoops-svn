@@ -1,8 +1,31 @@
 <?php
 
+require_once dirname(dirname(__FILE__)).'/include/main_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/include/import_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
+
+// get exportable modules
+$module_handler =& xoops_gethandler( 'module' ) ;
+$modules =& $module_handler->getObjects() ;
+$exportable_modules = array( '0' => '----' ) ;
+foreach( $modules as $module ) {
+	$mid = $module->getVar('mid') ;
+	$dirname = $module->getVar('dirname') ;
+	$dirpath = XOOPS_ROOT_PATH.'/modules/'.$dirname ;
+	$mytrustdirname = '' ;
+	$tables = $module->getInfo('tables') ;
+	if( file_exists( $dirpath.'/mytrustdirname.php' ) ) {
+		include $dirpath.'/mytrustdirname.php' ;
+	}
+	if( $mytrustdirname == 'pico' && $dirname != $mydirname ) {
+		// pico
+		$exportable_modules[$mid] = $module->getVar('name')." ($dirname)" ;
+	}
+}
 
 // get $cat_id
 $cat_id = intval( @$_GET['cat_id'] ) ;
@@ -60,6 +83,42 @@ if( ! empty( $_POST['contents_move'] ) && ! empty( $_POST['action_selects'] ) &&
 	exit ;
 }
 
+// contents delete
+if( ! empty( $_POST['contents_delete'] ) && ! empty( $_POST['action_selects'] ) ) {
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
+	foreach( $_POST['action_selects'] as $content_id => $value ) {
+		if( empty( $value ) ) continue ;
+		$content_id = intval( $content_id ) ;
+		$db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ;
+		$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id" ) ;
+	}
+
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , _MD_A_PICO_MSG_CONTENTSDELETED ) ;
+	exit ;
+}
+
+// contents export
+if( ! empty( $_POST['contents_export'] ) && ! empty( $_POST['action_selects'] ) && ! empty( $_POST['export_mid'] ) ) {
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
+	$export_mid = intval( @$_POST['export_mid'] ) ;
+	if( empty( $exportable_modules[ $export_mid ] ) ) die( _MD_A_PICO_ERR_INVALIDMID ) ;
+	$export_module =& $module_handler->get( $export_mid ) ;
+
+	foreach( $_POST['action_selects'] as $content_id => $value ) {
+		if( empty( $value ) ) continue ;
+		pico_import_a_content_from_pico( $export_module->getVar('dirname') , $xoopsModule->getVar('mid') , $content_id ) ;
+	}
+
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , _MD_A_PICO_MSG_CONTENTSEXPORTED ) ;
+	exit ;
+}
+
 
 //
 // form stage
@@ -104,6 +163,7 @@ $tpl->assign( array(
 	'cat_id' => $cat_id ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options ,
+	'module_options' => $exportable_modules ,
 	'contents' => $contents4assign ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico_admin') ,
 ) ) ;

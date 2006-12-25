@@ -71,6 +71,17 @@ define('_MD_PICO_LABEL_HTMLHEADERONOFF','display the textarea');
 define('_MD_PICO_LABEL_INPUTHELPER','Input Helper ON/OFF');
 
 
+// vote to post
+define('_MD_PICO_ERR_VOTEPERM','You cannot vote it');
+define('_MD_PICO_ERR_VOTEINVALID','Invalid vote');
+define('_MD_PICO_MSG_VOTEDOUBLE','You can vote once per a content');
+define('_MD_PICO_MSG_VOTEACCEPTED','Thanks for voting!');
+define('_MD_PICO_MSG_VOTEDISABLED','You cannot vote into the item');
+define('_MD_PICO_VOTECOUNT','Votes');
+define('_MD_PICO_VOTEPOINTAVG','Average');
+define('_MD_PICO_VOTEPOINTDSCBEST','Useful');
+define('_MD_PICO_VOTEPOINTDSCWORST','Useless');
+
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','php code');
 define('_MD_PICO_FILTERS_EVALDESC','It will be the parameter of eval() function');

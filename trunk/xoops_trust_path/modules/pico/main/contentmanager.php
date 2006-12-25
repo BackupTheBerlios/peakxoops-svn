@@ -71,6 +71,9 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'weight' => intval( $content_row['weight'] ) ,
 		'use_cache' => intval( $content_row['use_cache'] ) ,
 		'visible' => intval( $content_row['visible'] ) ,
+		'show_in_navi' => intval( $content_row['show_in_navi'] ) ,
+		'show_in_menu' => intval( $content_row['show_in_menu'] ) ,
+		'allow_comment' => intval( $content_row['allow_comment'] ) ,
 	) ;
 }
 

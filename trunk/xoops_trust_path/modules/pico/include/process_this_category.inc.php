@@ -51,9 +51,4 @@ if( is_array( $cat_configs ) ) foreach( $cat_configs as $key => $val ) {
 	}
 }
 
-// get top $content_id if necessary
-if( empty( $content_id ) && empty( $xoopsModuleConfig['show_listasindex'] ) ) {
-	$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
-}
-
 ?>

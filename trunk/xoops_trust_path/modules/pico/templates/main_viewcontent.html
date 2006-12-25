@@ -2,6 +2,8 @@
 <{if $mod_config.show_breadcrumbs}>
 <div class="pico_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>
+	-
+	<a href="<{$mod_url}>/index.php?page=menu"><{$smarty.const._MD_PICO_MENU}></a>
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
 	&nbsp;&gt;&nbsp;
 		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
@@ -24,6 +26,28 @@
 <!-- tell a friend -->
 <{if $mod_config.show_tellafriend}>
 	<div style="float:right;width:40px;height:40px;"><a href="<{$content.tellafriend_uri}>" target="_top"><img src="<{$mod_imageurl}>/icon_tellafriend.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_TELLAFRIEND}>" /></a></div>
+<{/if}>
+
+<!-- vote -->
+<{if $mod_config.use_vote}>
+	<div class="pico_vote">
+		<{$smarty.const._MD_PICO_VOTECOUNT}>:<{$content.votes_count}>
+		<{$smarty.const._MD_PICO_VOTEPOINTAVG}>:<{$content.votes_avg|string_format:"%.2f"}>
+		<{if $content.can_vote}>
+			<form action="<{$mod_url}>/index.php" method="get" style="display:inline;">
+				<input type="hidden" name="page" value="vote_to_content" />
+				<input type="hidden" name="content_id" value="<{$content.id}>" />
+				<input type="hidden" name="point" value="10" />
+				<input type="submit" value="<{$smarty.const._MD_PICO_VOTEPOINTDSCBEST}>" />
+			</form>
+			<form action="<{$mod_url}>/index.php" method="get" style="display:inline;">
+				<input type="hidden" name="page" value="vote_to_content" />
+				<input type="hidden" name="content_id" value="<{$content.id}>" />
+				<input type="hidden" name="point" value="0" />
+				<input type="submit" value="<{$smarty.const._MD_PICO_VOTEPOINTDSCWORST}>" />
+			</form>
+		<{/if}>
+	</div>
 <{/if}>
 
 <hr style="clear:right;" />
@@ -65,16 +89,16 @@
 	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
 <{/if}>
 
-<{if $category.can_makesubcategory}>
-	<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
-<{/if}>
-
-<{if $category.can_post}>
-	<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
-<{/if}>
-
 <{if $content.can_edit}>
 	<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
+<{/if}>
+
+<{if $xoops_isadmin}>
+	<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
+<{/if}>
+
+<{if $xoops_isadmin}>
+	<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
 <{/if}>
 
 <!-- d3forum comment integration -->

@@ -21,7 +21,9 @@ define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
 // configurations
 define($constpref.'_TOP_MESSAGE','モジュールトップのメッセージ');
 define($constpref.'_TOP_MESSAGEDEFAULT','');
+define($constpref.'_SHOW_MENUINMODULETOP','モジュールトップでは自動生成メニューを表示する');
 define($constpref.'_SHOW_LISTASINDEX','カテゴリートップでリストを表示する');
+define($constpref.'_SHOW_LISTASINDEXDSC','「はい」の場合、カテゴリートップではサブカテゴリーと直下のコンテンツがリスト式に表示されます。「いいえ」の場合、そのカテゴリー内で最も表示優先度の高いコンテンツが表示されます。');
 define($constpref.'_SHOW_BREADCRUMBS','パンくずを表示する');
 define($constpref.'_SHOW_PAGENAVI','ページナビゲーションを表示する');
 define($constpref.'_SHOW_PRINTICON','印刷画面へのリンクを表示する');

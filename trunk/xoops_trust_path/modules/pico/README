@@ -58,6 +58,12 @@ You'd better install altsys and d3forum also.
 
 [b]HISTORY:[/b]
 
+0.22->0.30  (update the module essentially)
+- added vote
+- added index menu
+- added sitemap plugin
+- added export to the other pico per contents
+
 0.21->0.22
 - fixed menu block (thx kuon)
 - added list block
@@ -145,7 +151,11 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
-
+0.22->0.30（※モジュールアップデート必須）
+- 投票を実装
+- コンテンツメニューを実装
+- sitemapプラグインを実装
+- 他のpicoへのコンテンツごとのエクスポートを実装
 
 0.21->0.22
 - メニューブロックが機能していなかったのを修正 (thx kuon)

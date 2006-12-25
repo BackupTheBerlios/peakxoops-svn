@@ -1,5 +1,21 @@
 <?php
 
+// $content_id check
+if( empty( $content_id ) ) {
+	redirect_header( XOOPS_URL.'/' , 2 , _MD_PICO_ERR_READCONTENT ) ;
+	exit ;
+}
+
+// permission check "can_readfull"
+if( empty( $category_permissions[$cat_id]['can_readfull'] ) ) {
+	if( is_object( $xoopsUser ) ) {
+		redirect_header( XOOPS_URL.'/' , 2 , _MD_PICO_ERR_PERMREADFULL ) ;
+	} else {
+		redirect_header( XOOPS_URL.'/user.php' , 2 , _MD_PICO_ERR_LOGINTOREADFULL ) ;
+	}
+	exit ;
+}
+
 // visible check
 //$whr4visible = $isadminormod ? '1' : 'o.visible' ;
 $whr4visible = 'o.visible' ;
@@ -32,9 +48,11 @@ $content4assign = array(
 	'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
 	'poster_uname' => $myts->makeTboxData4Show( $content_row['poster_uname'] ) ,
 	'modifier_uname' => $myts->makeTboxData4Show( $content_row['modifier_uname'] ) ,
+	'votes_avg' => $content_row['votes_count'] ? $content_row['votes_sum'] / doubleval( $content_row['votes_count'] ) : 0 ,
 	'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 	'body' => $body4assign ,
 	'can_edit' => $category4assign['can_edit'] ,
+	'can_vote' => ( $uid || $xoopsModuleConfig['guest_vote_interval'] ) ? true : false ,
 ) ;
 $content4assign += $content_row ;
 

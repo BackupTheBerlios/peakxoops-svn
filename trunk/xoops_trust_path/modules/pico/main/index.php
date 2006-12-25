@@ -14,25 +14,25 @@ require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 // get $subcategories
 require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 
-if( $content_id ) {
-	// permission check "can_readfull"
-	if( empty( $category_permissions[$cat_id]['can_readfull'] ) ) {
-		if( is_object( $xoopsUser ) ) {
-			redirect_header( XOOPS_URL.'/' , 2 , _MD_PICO_ERR_PERMREADFULL ) ;
-		} else {
-			redirect_header( XOOPS_URL.'/user.php' , 2 , _MD_PICO_ERR_LOGINTOREADFULL ) ;
-		}
-		exit ;
+if( empty( $cat_id ) && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
+	// auto-made menu
+	require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
+	$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;
+	$pagetitle4assign = $xoopsModule->getVar('name') ;
+} else if( empty( $content_id ) && @$xoopsModuleConfig['show_listasindex'] ) {
+	// list contents of the category
+	require dirname(dirname(__FILE__)).'/include/listcontents.inc.php' ;
+	$xoopsOption['template_main'] = $mydirname.'_main_listcontents.html' ;
+	$pagetitle4assign = $category4assign['title'] ;
+} else {
+	// display the content with detail
+	if( empty( $content_id ) ) {
+		$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
 	}
 	// check,fetch and assign the content
 	require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 	$xoopsOption['template_main'] = $mydirname.'_main_viewcontent.html' ;
 	$pagetitle4assign = $content4assign['subject'] ;
-} else {
-	// list contents of the category
-	require dirname(dirname(__FILE__)).'/include/listcontents.inc.php' ;
-	$xoopsOption['template_main'] = $mydirname.'_main_listcontents.html' ;
-	$pagetitle4assign = $category4assign['title'] ;
 }
 
 // xoops header
@@ -46,8 +46,9 @@ $xoopsTpl->assign(
 		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 		'mod_config' => $xoopsModuleConfig ,
 		'uid' => $uid ,
-		'category' => $category4assign ,
-		'subcategories' => $subcategories4assign ,
+		'category' => @$category4assign ,
+		'categories' => @$categories4assign ,
+		'subcategories' => @$subcategories4assign ,
 		'contents' => @$contents4assign ,
 		'content' => @$content4assign ,
 		'next_content' => @$next_content4assign ,

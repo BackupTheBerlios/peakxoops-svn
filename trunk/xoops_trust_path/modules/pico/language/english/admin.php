@@ -19,6 +19,12 @@ define('_MD_A_PICO_LEGEND_CONTENTSTHS','VIS: visible &nbsp; NAVI:show in page na
 define('_MD_A_PICO_BTN_MOVE','MOVED');
 define('_MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED','selected items will be:');
 define('_MD_A_PICO_MSG_CONTENTSMOVED','Contents have been moved');
+define('_MD_A_PICO_BTN_DELETE','delete');
+define('_MD_A_PICO_CONFIRM_DELETE','Are you sure to delete them?');
+define('_MD_A_PICO_MSG_CONTENTSDELETED','Deleted successfully');
+define('_MD_A_PICO_BTN_EXPORT','Export');
+define('_MD_A_PICO_CONFIRM_EXPORT','Selected contents are exported as the top contents of the module. Comments will not be copied. Are you OK?');
+define('_MD_A_PICO_MSG_CONTENTSEXPORTED','Exported successfully');
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','Select a category');

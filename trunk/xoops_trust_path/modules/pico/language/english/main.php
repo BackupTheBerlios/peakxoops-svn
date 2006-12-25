@@ -1,6 +1,7 @@
 <?php
 
 define('_MD_PICO_TOP','TOP');
+define('_MD_PICO_MENU','MENU');
 define('_MD_PICO_CREATED','Created');
 define('_MD_PICO_MODIFIED','Modified');
 define('_MD_PICO_VIEWED','Views');
@@ -20,6 +21,9 @@ define('_MD_PICO_LINK_MAKESUBCATEGORY','Make a subcategory');
 define('_MD_PICO_LINK_MAKECONTENT','Make a content');
 define('_MD_PICO_LINK_EDITCATEGORY','Edit the category');
 define('_MD_PICO_LINK_EDITCONTENT','Edit the content');
+define('_MD_PICO_LINK_CATEGORYPERMISSIONS','Permissions');
+define('_MD_PICO_LINK_BATCHCONTENTS','Batch');
+define('_MD_PICO_LINK_PUBLICCATEGORYINDEX','Public index of the category');
 
 define('_MD_PICO_LINK_PRINTERFRIENDLY','Printer friendly');
 define('_MD_PICO_LINK_TELLAFRIEND','Tell a friend');
@@ -58,6 +62,9 @@ define('_MD_PICO_TH_WEIGHT','weight');
 define('_MD_PICO_TH_USECACHE','use cache');
 define('_MD_PICO_NOTE_USECACHEDSC','Disable it for dynamic contents. Enable it for searchable');
 define('_MD_PICO_TH_VISIBLE','Visible');
+define('_MD_PICO_TH_SHOWINNAVI','Show in navigation');
+define('_MD_PICO_TH_SHOWINMENU','Show in menu');
+define('_MD_PICO_TH_ALLOWCOMMENT','Allow comments');
 define('_MD_PICO_TH_CATEGORYTITLE','Title');
 define('_MD_PICO_TH_CATEGORYDESC','Description');
 define('_MD_PICO_TH_CATEGORYPARENT','Parent');

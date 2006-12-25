@@ -21,7 +21,9 @@ define( $constpref.'_ADMENU_IMPORT' , 'Import/Sync' ) ;
 // configurations
 define($constpref.'_TOP_MESSAGE','Description of TOP category');
 define($constpref.'_TOP_MESSAGEDEFAULT','');
+define($constpref.'_SHOW_MENUINMODULETOP','Display menu(index) in the top of this module');
 define($constpref.'_SHOW_LISTASINDEX',"Display contents index in category's top");
+define($constpref.'_SHOW_LISTASINDEXDSC','YES means auto made list is displayed in the top of the category. NO means a content with the highest priority is displayeed instead auto made list');
 define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
 define($constpref.'_SHOW_PAGENAVI','Display page navigation');
 define($constpref.'_SHOW_PRINTICON','Display printer friendly icon');

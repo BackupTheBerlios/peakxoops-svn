@@ -14,22 +14,25 @@ require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 // get $subcategories
 require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 
-if( empty( $cat_id ) && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
-	// auto-made menu
-	require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
-	$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;
-	$pagetitle4assign = $xoopsModule->getVar('name') ;
-} else if( empty( $content_id ) && @$xoopsModuleConfig['show_listasindex'] ) {
-	// list contents of the category
-	require dirname(dirname(__FILE__)).'/include/listcontents.inc.php' ;
-	$xoopsOption['template_main'] = $mydirname.'_main_listcontents.html' ;
-	$pagetitle4assign = $category4assign['title'] ;
-} else {
-	// display the content with detail
-	if( empty( $content_id ) ) {
+if( empty( $content_id ) ) {
+	if( empty( $cat_id ) && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
+		// auto-made menu
+		require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
+		$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;
+		$pagetitle4assign = $xoopsModule->getVar('name') ;
+	} else if( @$xoopsModuleConfig['show_listasindex'] ) {
+		// list contents of the category
+		require dirname(dirname(__FILE__)).'/include/listcontents.inc.php' ;
+		$xoopsOption['template_main'] = $mydirname.'_main_listcontents.html' ;
+		$pagetitle4assign = $category4assign['title'] ;
+	} else {
+		// get the top of the content
 		$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
 	}
-	// check,fetch and assign the content
+}
+
+if( empty( $xoopsOption['template_main'] ) ) {
+	// display the content with detail
 	require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 	$xoopsOption['template_main'] = $mydirname.'_main_viewcontent.html' ;
 	$pagetitle4assign = $content4assign['subject'] ;

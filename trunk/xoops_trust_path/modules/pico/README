@@ -63,6 +63,7 @@ You'd better install altsys and d3forum also.
 - added index menu
 - added sitemap plugin
 - added export to the other pico per contents
+- fixed top contents cannot be accessed (thx starck and emomo) 0.30a
 
 0.21->0.22
 - fixed menu block (thx kuon)
@@ -156,6 +157,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - コンテンツメニューを実装
 - sitemapプラグインを実装
 - 他のpicoへのコンテンツごとのエクスポートを実装
+- トップ直下のコンテンツにアクセスできないバグを修正 (thx starck and emomo) 0.30a
 
 0.21->0.22
 - メニューブロックが機能していなかったのを修正 (thx kuon)

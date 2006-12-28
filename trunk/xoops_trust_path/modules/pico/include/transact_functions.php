@@ -171,7 +171,7 @@ function pico_makecategory( $mydirname )
 
 	$requests = pico_get_requests4sql_category( $mydirname ) ;
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET cat_title='{$requests['title']}', cat_desc='{$requests['desc']}', cat_weight='{$requests['weight']}', cat_options='{$requests['options']}', pid={$requests['pid']}" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET cat_title='{$requests['title']}', cat_desc='{$requests['desc']}', cat_weight='{$requests['weight']}', cat_options='{$requests['options']}', cat_path_in_tree='',cat_unique_path='', pid={$requests['pid']}" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_cat_id = $db->getInsertId() ;
 
 	// permissions are set same as the parent category. (also moderator)
@@ -269,7 +269,7 @@ function pico_makecontent( $mydirname )
 		$set .= "`$key`='".addslashes( $val )."'," ;
 	}
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='',htmlheader_waiting='',body_waiting=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_content_id = $db->getInsertId() ;
 
 	return $new_content_id ;

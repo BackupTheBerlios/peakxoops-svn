@@ -58,6 +58,9 @@ You'd better install altsys and d3forum also.
 
 [b]HISTORY:[/b]
 
+0.30->0.31
+- modified compatibility with MySQL5 (thx sakichi)
+
 0.22->0.30  (update the module essentially)
 - added vote
 - added index menu
@@ -151,6 +154,9 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+0.30->0.31
+- MySQL5 との互換性問題を改善 (thx sakichi)
 
 0.22->0.30（※モジュールアップデート必須）
 - 投票を実装

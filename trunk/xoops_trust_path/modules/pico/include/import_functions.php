@@ -93,7 +93,7 @@ function pico_import_from_tinyd( $mydirname , $import_mid )
 	$to_table = $db->prefix( $mydirname.'_contents' ) ;
 	$from_table = $db->prefix( $from_table_base ) ;
 	$db->query( "DELETE FROM `$to_table`" ) ;
-	$irs = $db->query( "INSERT INTO `$to_table` (content_id,cat_id,weight,created_time,modified_time,subject,visible,allow_comment,show_in_navi,show_in_menu,htmlheader,body,filters,body_waiting,body_cached,subject_waiting) SELECT storyid,0,blockid,UNIX_TIMESTAMP(created),UNIX_TIMESTAMP(last_modified),title,visible,!nocomments,1,submenu,html_header,`text`,nohtml,nosmiley,nobreaks,address FROM `$from_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (content_id,cat_id,weight,created_time,modified_time,subject,visible,allow_comment,show_in_navi,show_in_menu,htmlheader,body,filters,body_waiting,body_cached,subject_waiting,htmlheader_waiting) SELECT storyid,0,blockid,UNIX_TIMESTAMP(created),UNIX_TIMESTAMP(last_modified),title,visible,!nocomments,1,submenu,html_header,`text`,nohtml,nosmiley,nobreaks,address,'' FROM `$from_table`" ) ;
 	if( ! $irs ) pico_import_errordie() ;
 
 	// update filters

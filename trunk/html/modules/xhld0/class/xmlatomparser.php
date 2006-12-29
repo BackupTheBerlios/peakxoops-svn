@@ -486,6 +486,9 @@ class XhldXmlAtomParser
 			$w3cDT = "{$regs[3]}-{$regs[2]}-{$regs[1]}{$regs[4]}" ;
 		}
 
+		// for too detailed format like ss.ssss
+		$w3cDT = preg_replace( '/T(\d{2})\:(\d{2})\:(\d{2})\.\d+/' , 'T$1:$2:$3' , $w3cDT ) ;
+
 		// get the timezone
 		$tzoffset = date( 'Z' ) ;
 		if( $pos = strrpos( $w3cDT , 'Z' ) ) {

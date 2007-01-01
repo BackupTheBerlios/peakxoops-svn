@@ -60,6 +60,7 @@ You'd better install altsys and d3forum also.
 
 0.31->0.32  (update the module essentially)
 - fixed the problem 30 character limits in config table (thx starck)
+- modified index menu (thx emomo) 0.32a
 
 0.30->0.31
 - modified compatibility with MySQL5 (thx sakichi)
@@ -160,6 +161,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 0.31->0.32（※モジュールアップデート必須）
 - 一般設定が30字制限に引っかかっていたのを修正 (thx starck)
+- コンテンツメニュー処理の改善 (thx emomo) 0.32a
 
 0.30->0.31
 - MySQL5 との互換性問題を改善 (thx sakichi)

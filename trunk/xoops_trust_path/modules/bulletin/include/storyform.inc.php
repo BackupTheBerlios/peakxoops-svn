@@ -17,7 +17,7 @@ if( $storyid > 0 ){
 	$form->addElement(new XoopsFormLabel(_MD_POSTEDBY, XoopsUser::getUnameFromId($my_uid) ));
 }
 
-$form->addElement(new XoopsFormText(_MD_TITLE, 'title', 50, 80, $story->getVar('title', 'f') ), true);
+$form->addElement(new XoopsFormText(_MD_TITLE, 'title', 50, 255, $story->getVar('title', 'f') ), true); // GIJ
 $topic_select = new XoopsFormSelect(_MD_TOPIC, 'topicid', $story->getVar('topicid') );
 $topic_select->addOptionArray(Bulletin::makeCategoryArrayForSelect());
 $form->addElement($topic_select);

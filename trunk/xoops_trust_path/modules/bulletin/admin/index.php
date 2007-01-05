@@ -38,7 +38,7 @@ if ($op == 'preview' || $op == 'save') {
 if( $op == 'form' ) {
 	$BTopic = new BulletinTopic();
 	if( !$BTopic->topicExists() ){
-		redirect_header('index.php?mode=admin&op=topicsmanager', 3, _AM_NO_TOPICS);
+		redirect_header('index.php?op=topicsmanager', 3, _AM_NO_TOPICS);
 		exit;
 	}
 }
@@ -108,7 +108,7 @@ case 'listall':
 
 	$navi = '';
 	if ( $total > $limit ) {
-		$pagenav = new XoopsPageNav($total, $limit, $start, 'start', 'mode=admin&amp;op=listall&amp;statu='.$statu);
+		$pagenav = new XoopsPageNav($total, $limit, $start, 'start', 'op=listall&amp;statu='.$statu);
 		$navi = $pagenav->renderNav();
 	}
 	
@@ -206,7 +206,7 @@ case 'addTopic':
 	$BTopic->setTopicPid( $_POST['topic_pid'] );
 	
 	if( empty( $_POST['topic_title'] ) ){
-		redirect_header( "index.php?mode=admin&op=topicsmanager", 2, _AM_ERRORTOPICNAME );
+		redirect_header( "index.php?op=topicsmanager", 2, _AM_ERRORTOPICNAME );
 	}
 	
 	$BTopic->setTopicTitle( $_POST['topic_title'] );
@@ -225,7 +225,7 @@ case 'addTopic':
 	// 新しいトピックが作られた時、イベント通知
 	$notification_handler->triggerEvent( 'global', 0, 'new_category', $tags );
 		
-	redirect_header( 'index.php?mode=admin&op=topicsmanager', 1, _AM_DBUPDATED );
+	redirect_header( 'index.php?op=topicsmanager', 1, _AM_DBUPDATED );
 
 	break;
 
@@ -302,7 +302,7 @@ case 'delTopic':
 			$eachtopic->delete();
 			xoops_notification_deletebyitem( $xoopsModule->getVar( 'mid' ), 'category', $eachtopic->topic_id );
 		}
-		redirect_header( 'index.php?mode=admin&op=topicsmanager', 1, _AM_DBUPDATED );
+		redirect_header( 'index.php?op=topicsmanager', 1, _AM_DBUPDATED );
 
 	}
 
@@ -319,7 +319,7 @@ case 'modTopicS':
 	$BTopic -> setTopicPid( $_POST['topic_pid'] );
 	if ( empty( $_POST['topic_title'] ) )
 	{
-		redirect_header( "index.php?mode=admin&op=topicsmanager", 2, _AM_ERRORTOPICNAME );
+		redirect_header( "index.php?op=topicsmanager", 2, _AM_ERRORTOPICNAME );
 	}
 	$BTopic -> setTopicTitle( $_POST['topic_title'] );
 	if ( isset( $_POST['topic_imgurl'] ) && $_POST['topic_imgurl'] != "" )
@@ -327,7 +327,7 @@ case 'modTopicS':
 		$BTopic -> setTopicImgurl( $_POST['topic_imgurl'] );
 	}
 	$BTopic -> store();
-	redirect_header( 'index.php?mode=admin&op=topicsmanager', 1, _AM_DBUPDATED );
+	redirect_header( 'index.php?op=topicsmanager', 1, _AM_DBUPDATED );
 
 	break;
 	
@@ -337,7 +337,7 @@ case 'convert':
 
 	if( empty($_POST['ok']) ){
 	
-		xoops_confirm( array( 'op' => 'convert', 'ok' => 1 ), 'index.php?mode=admin', _AM_DO_YOU_CONVERT );
+		xoops_confirm( array( 'op' => 'convert', 'ok' => 1 ), 'admin/index.php', _AM_DO_YOU_CONVERT );
 		
 	}else{
 
@@ -398,7 +398,7 @@ case 'convert':
 		
 		}
 		
-		echo '<br /><a href="index.php?mode=admin">'._BACK.'</a>';
+		echo '<br /><a href="admin/index.php">'._BACK.'</a>';
 	}
 
 	break;

@@ -10,10 +10,10 @@ function bulletin_onuninstall_base( $module , $mydirname )
 	global $ret ;
 
 	// for Cube 2.1
-	if( class_exists( 'XCube_Root' ) ) {
+	if( defined('XOOPS_CUBE_LEGACY')) {
 		$isCube = true ;
 		$root =& XCube_Root::getSingleton();
-		$root->mEventManager->add("Module.Legacy.ModuleUninstall.Success", new XCube_Delegate( 'bulletin_message_append_onuninstall' ) ) ;
+		$root->mDelegateManager->add("Module.Legacy.ModuleUninstall.Success", 'bulletin_message_append_onuninstall') ;
 		$ret = array() ;
 	} else {
 		$isCube = false ;

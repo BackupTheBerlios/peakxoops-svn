@@ -3,16 +3,16 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $i=1;
 $adminmenu[$i]['title'] = constant( $constpref.'_ADMENU5');
-$adminmenu[$i]['link']  = "index.php?mode=admin&op=list";
+$adminmenu[$i]['link']  = "admin/index.php?op=list";
 $i++;
 $adminmenu[$i]['title'] = constant( $constpref.'_ADMENU2');
-$adminmenu[$i]['link']  = "index.php?mode=admin&op=topicsmanager";
+$adminmenu[$i]['link']  = "admin/index.php?op=topicsmanager";
 $i++;
 $adminmenu[$i]['title'] = constant( $constpref.'_ADMENU4');
-$adminmenu[$i]['link']  = "index.php?mode=admin&op=permition";
+$adminmenu[$i]['link']  = "admin/index.php?op=permition";
 $i++;
 $adminmenu[$i]['title'] = constant( $constpref.'_ADMENU7');
-$adminmenu[$i]['link']  = "index.php?mode=admin&op=convert";
+$adminmenu[$i]['link']  = "admin/index.php?op=convert";
 $i++;
 /*
 if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mytplsadmin.php' ) ) {

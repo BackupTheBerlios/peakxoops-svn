@@ -13,10 +13,10 @@ function bulletin_oninstall_base( $module , $mydirname )
 	$mid = $module->getVar('mid') ;
 
 	// for Cube 2.1
-	if( class_exists( 'XCube_Root' ) ) {
+	if( defined('XOOPS_CUBE_LEGACY')) {
 		$isCube = true ;
 		$root =& XCube_Root::getSingleton();
-		$root->mEventManager->add("Module.Legacy.ModuleInstall.Success", new XCube_Delegate( 'bulletin_message_append_oninstall' ) ) ;
+		$root->mDelegateManager->add("Module.Legacy.ModuleInstall.Success", 'bulletin_message_append_oninstall') ;
 		$ret = array() ;
 	} else {
 		$isCube = false ;

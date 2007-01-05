@@ -8,10 +8,10 @@ function bulletin_onupdate_base( $module, $prev_version , $mydirname )
 	global $msgs, $xoopsDB, $xoopsUser, $xoopsConfig ;
 
 	// for Cube 2.1
-	if( class_exists( 'XCube_Root' ) ) {
+	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 		$isCube = true ;
 		$root =& XCube_Root::getSingleton();
-		$root->mEventManager->add("Module.Legacy.ModuleUpdate.Success", new XCube_Delegate( 'bulletin_message_append_onupdate' ) ) ;
+		$root->mDelegateManager->add("Module.Legacy.ModuleUpdate.Success", 'bulletin_message_append_onupdate') ;
 		$msgs = array() ;
 	} else {
 		$isCube = false ;

@@ -9,7 +9,7 @@ if( file_exists( dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modi
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = $mydirname;
-$modversion['version']     = 2.04;
+$modversion['version']     = 2.04; // GIJ hacked ver 001
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -82,7 +82,7 @@ $modversion['hasMain'] = 1;
 /*$modversion['sub'][1]['name'] = constant($constpref.'_SMNAME1');
 $modversion['sub'][1]['url']  = 'index.php?page=submit';
 $modversion['sub'][2]['name'] = constant($constpref.'_SMNAME2');
-$modversion['sub'][2]['url']  = 'index.php?page=archive';*/
+$modversion['sub'][2]['url']  = 'index.php?page=archive';*/ //GIJ
 
 // Search
 $modversion['hasSearch'] = 1 ;

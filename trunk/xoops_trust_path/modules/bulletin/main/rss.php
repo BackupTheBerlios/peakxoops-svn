@@ -14,9 +14,9 @@ $tpl->xoops_setCacheTime(0);
 if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
 	$articles = Bulletin::getAllPublished(10, 0);
 	if (is_array($articles)) {
-		$tpl->assign('channel_title', xoops_utf8_encode(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
+		$tpl->assign('channel_title', bulletin_utf8_encode(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
 		$tpl->assign('channel_link', XOOPS_URL.'/');
-		$tpl->assign('channel_desc', xoops_utf8_encode(htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES)));
+		$tpl->assign('channel_desc', bulletin_utf8_encode(htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES)));
 		$tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
 		$tpl->assign('channel_webmaster', $xoopsConfig['adminmail']);
 		$tpl->assign('channel_editor', $xoopsConfig['adminmail']);
@@ -39,18 +39,32 @@ if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
 		$tpl->assign('image_height', $height);
 		$count = $articles;
 		foreach ($articles as $article) {
-			$conetent = $article->getVar('hometext') . $article->getDividedBodytext() ;
+			$content = $article->getVar('hometext') . $article->getDividedBodytext() ;
 			$tpl->append('items', array(
-				'title' => htmlspecialchars(xoops_utf8_encode($article->getVar('title', 'n')), ENT_QUOTES), 
-				'category' => htmlspecialchars(xoops_utf8_encode($article->newstopic->topic_title), ENT_QUOTES), 
+				'title' => htmlspecialchars(bulletin_utf8_encode($article->getVar('title', 'n')), ENT_QUOTES), 
+				'category' => htmlspecialchars(bulletin_utf8_encode($article->newstopic->topic_title), ENT_QUOTES), 
 				'link' => $mydirurl.'/index.php?page=article&amp;storyid='.$article->getVar('storyid'), 
 				'guid' => $mydirurl.'/index.php?page=article&amp;storyid='.$article->getVar('storyid'), 
 				'pubdate' => formatTimestamp($article->getVar('published'), 'rss'), 
-				'description' => xoops_utf8_encode(htmlspecialchars(strip_tags($myts->xoopsCodeDecode($article->getVar('hometext','n'))), ENT_QUOTES)),
-				'content' => xoops_utf8_encode($conetent)));
-//				'content' => xoops_utf8_encode($article->getVar('hometext'))));
+				'description' => bulletin_utf8_encode(htmlspecialchars(strip_tags($myts->xoopsCodeDecode($article->getVar('hometext','n'))), ENT_QUOTES)),
+//				'content' => bulletin_utf8_encode($content))), // GIJ
+			) ) ;
 		}
 	}
 }
 $tpl->display("db:{$mydirname}_rss.html");
+
+
+
+function bulletin_utf8_encode($text) // GIJ
+{
+    if (XOOPS_USE_MULTIBYTES == 1) {
+        if (function_exists('mb_convert_encoding')) {
+            return mb_convert_encoding($text, 'UTF-8', 'auto');
+        }
+        return $text;
+    }
+    return utf8_encode($text);
+}
+
 ?>

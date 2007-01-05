@@ -337,7 +337,7 @@ case 'convert':
 
 	if( empty($_POST['ok']) ){
 	
-		xoops_confirm( array( 'op' => 'convert', 'ok' => 1 ), 'admin/index.php', _AM_DO_YOU_CONVERT );
+		xoops_confirm( array( 'op' => 'convert', 'ok' => 1 ), 'index.php', _AM_DO_YOU_CONVERT );
 		
 	}else{
 
@@ -367,9 +367,9 @@ case 'convert':
 			$smiley    = ($story['nosmiley'] == 0) ? 1 : 0;
 			$ihome     = ($story['ihome'] == 0) ? 1 : 0;
 			$type      = ($story['story_type'] == 1 && $story['published'] == 0) ? 0 : 1;
-			if( $story['topicdisplay'] == 0 ) $topicimg = 0;
 			if( $story['topicalign'] == 'R' ) $topicimg = 1;
-			if( $story['topicalign'] == 'L' ) $topicimg = 2;
+			else if( $story['topicalign'] == 'L' ) $topicimg = 2;
+			else $topicimg = 0;
 
 			$new_story = new Bulletin();
 			$new_story->setVar('uid', $story['uid']);
@@ -398,7 +398,7 @@ case 'convert':
 		
 		}
 		
-		echo '<br /><a href="admin/index.php">'._BACK.'</a>';
+		echo '<br /><a href="index.php">'._BACK.'</a>';
 	}
 
 	break;

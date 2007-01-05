@@ -83,10 +83,12 @@ if( $gperm->group_perm(4) ){
 	$html_checkbox = new XoopsFormCheckBox('', 'html', $story->getVar('html') );
 	$html_checkbox->addOption(1, _MD_USE_HTML);
 	$option_tray->addElement($html_checkbox);
-	$br_checkbox = new XoopsFormCheckBox('', 'br', $story->getVar('br') );
-	$br_checkbox->addOption(1, _MD_USE_BR);
-	$option_tray->addElement($br_checkbox);
 }
+
+// br (GIJ)
+$br_checkbox = new XoopsFormCheckBox('', 'br', $story->getVar('br') );
+$br_checkbox->addOption(1, _MD_USE_BR);
+$option_tray->addElement($br_checkbox);
 
 $smiley_checkbox = new XoopsFormCheckBox('', 'smiley', $story->getVar('smiley') );
 $smiley_checkbox->addOption(1, _MD_USE_SMILEY);

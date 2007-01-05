@@ -49,6 +49,11 @@
 <{/if}>
 <br />
 
+<{*
+<{d3forum_comment dirname="(dirname)" forum_id="(number)" class="BulletinD3commentStory" mytrustdirname="bulletin" id=$story.id subject=$story.title}>
+*}>
+
+<!-- begin comments area -->
 <div style="text-align: center;">
 <{$commentsnav}>
 <{$lang_notice}>
@@ -65,6 +70,8 @@
 <{/if}>
 <!-- end comments loop -->
 </div>
+<!-- end comments area -->
+
 <{include file='db:system_notification_select.html'}>
 
 <{/strip}>

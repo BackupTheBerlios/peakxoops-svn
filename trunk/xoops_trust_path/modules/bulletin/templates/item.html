@@ -31,7 +31,7 @@
 <{if $story.readmore}>
 <a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$smarty.const._MD_READMORE}></a> | <{$story.bytes}> | 
 <{/if}>
-<a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$story.comentstotal}></a>
+<a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$story.comentstotal}><{* <{d3forum_comment_topicscount dirname=(dirname) forum_id=(number) link_id=$story.id}> *}></a>
 </span>
   </div>
 </div>

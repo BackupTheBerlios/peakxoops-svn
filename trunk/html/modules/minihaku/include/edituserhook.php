@@ -25,6 +25,7 @@ $allowed_requests = array(
 	'user_mailok' => intval( $xoopsUser->getVar('user_mailok','n') ) ,
 	'bio' => $xoopsUser->getVar('bio','n') ,
 ) ;
+$stop_reason_extras = array() ;
 
 // rename config.dist.php -> config.php
 $minihaku_uid4whr = $xoopsUser->getVar('uid') ;
@@ -66,7 +67,7 @@ if ($op == 'saveuser') foreach( $allowed_requests as $key => $val ) {
 }
 
 
-$errors = array();
+$errors = $stop_reason_extras ;
 
 if ($op == 'saveuser') {
 	/*if (!XoopsSingleTokenHandler::quickValidate('edituser')) {
@@ -150,7 +151,8 @@ if ($op == 'editprofile') {
 	$xoopsOption['template_main'] = 'minihaku_edituser.html' ;
 	$xoopsTpl->assign(
 		array(
-			'error_msg' => implode( '<br />' , $errors ) ,
+			'error_msg' => implode( '<br />' , $errors ) , // older assign
+			'stop_reasons' => $errors ,
 			'timezone_options' => XoopsLists::getTimeZoneList() ,
 			'umode_options' => $umode_options ,
 			'uorder_options' => $uorder_options ,

@@ -1,4 +1,8 @@
-<span style="color: #ff0000; font-weight: bold;"><{$error_msg}></span>
+<span style='color:#ff0000; font-weight:bold;'>
+	<{foreach from=$stop_reasons item="reason"}>
+		<{$reason}><br />
+	<{/foreach}>
+</span>
 
 <form name="userinfo" id="userinfo" action="" method="post" onsubmit="return userinfo_validation();">
 

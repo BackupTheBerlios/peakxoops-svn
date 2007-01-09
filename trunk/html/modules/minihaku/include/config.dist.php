@@ -50,7 +50,7 @@ if( empty( $minihaku_uid4whr ) ) {
 // request maintenances
 if( isset( $_POST['sex'] ) ) {
 	if( $_POST['sex'] < 0 || $_POST['sex'] > 1 ) {
-		die( "invalid sex value" ) ;
+		$stop_reason_extras[] = "invalid sex value" ;
 	}
 }
 if( ! empty( $_POST['Date_Year'] ) ) {

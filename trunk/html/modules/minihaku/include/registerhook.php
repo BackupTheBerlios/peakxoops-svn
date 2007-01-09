@@ -12,6 +12,7 @@ $allowed_requests = array(
 	'user_mailok' => 0 ,
 	'agree_disc' => 0 ,
 ) ;
+$stop_reason_extras = array() ;
 
 // rename config.dist.php -> config.php
 if( file_exists( dirname(__FILE__).'/config.php' ) ) {
@@ -50,9 +51,9 @@ foreach( $allowed_requests as $key => $val ) {
 $email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : $allowed_requests['email'] ;
 $allowed_requests['vpass'] = $allow_blank_vpass ? $allowed_requests['pass'] : $allowed_requests['vpass'] ;
 
-if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $allowed_requests['uname'] , $email4check , $allowed_requests['pass'] , $allowed_requests['vpass'] ) ) ) {
+if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && ! ( $stop_reason = userCheck( $allowed_requests['uname'] , $email4check , $allowed_requests['pass'] , $allowed_requests['vpass'] ) ) ) {
 
-	if( empty( $allowed_requests['agree_disc'] ) ) die( _US_UNEEDAGREE ) ;
+	if( $xoopsConfigUser['reg_dispdsclmr'] && empty( $allowed_requests['agree_disc'] ) ) die( _US_UNEEDAGREE ) ;
 
 	include XOOPS_ROOT_PATH.'/header.php';
 	$member_handler =& xoops_gethandler('member');
@@ -161,11 +162,15 @@ if( ! empty( $_POST['do_register'] ) && ! ( $stop_reason = userCheck( $allowed_r
 
 	include XOOPS_ROOT_PATH.'/header.php' ;
 	$xoopsOption['template_main'] = 'minihaku_register.html' ;
+	$stop_reasons = empty( $stop_reason ) ? array() : array_merge( explode( '<br />' , $stop_reason ) ) ;
 	$xoopsTpl->assign(
 		array(
-			'stop_reason' => @$stop_reason ,
+			'stop_reason' => @$stop_reason , // older assign
+			'stop_reasons' => array_merge( $stop_reason_extras , $stop_reasons ) ,
 			'timezone_options' => XoopsLists::getTimeZoneList() ,
-			'reg_disclaimer' => $xoopsConfigUser['reg_disclaimer'] ,
+			'reg_disclaimer' => $xoopsConfigUser['reg_disclaimer'] , // older assign
+			'xoops_config_user' => $xoopsConfigUser ,
+			'xoops_config_general' => $xoopsConfig ,
 		)
 	) ;
 	$xoopsTpl->assign( $allowed_requests ) ;

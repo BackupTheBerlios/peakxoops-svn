@@ -19,7 +19,7 @@ if( ! empty( $_GET['path_info'] ) ) {
 } else {
 	// module top
 	$path_info = empty( $xoopsModuleConfig['index_file'] ) ? 'index.html' : $xoopsModuleConfig['index_file'] ;
-	$wrap_full_path = XOOPS_TRUST_PATH.'/wraps/'.$mydirname.'/'.$path_info ;
+	$wrap_full_path = _MD_WRAPS_BASEDIR.'/'.$path_info ;
 	if( ! file_exists( $wrap_full_path ) ) {
 		die( _MD_WRAPS_NO_INDEX_FILE ) ;
 	} else {
@@ -28,9 +28,13 @@ if( ! empty( $_GET['path_info'] ) ) {
 	}
 }
 
+// auto update indexes
+if( ! empty( $xoopsModuleConfig['index_auto_updated'] ) && @filemtime( _MD_WRAPS_BASEDIR ) > @$xoopsModuleConfig['index_last_updated'] ) {
+	require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
+	$imported_count = wraps_update_indexes( $mydirname , _MD_WRAPS_BASEDIR ) ;
+};
 
-$wrap_full_path = XOOPS_TRUST_PATH.'/wraps/'.$mydirname.'/'.$path_info ;
-
+$wrap_full_path = _MD_WRAPS_BASEDIR.'/'.$path_info ;
 if( ! file_exists( $wrap_full_path ) ) {
 	header( 'HTTP/1.0 404 Not Found' ) ;
 	exit ;

@@ -30,6 +30,21 @@ if( file_exists( "$mydirpath/language/$language/admin.php" ) ) {
 	include_once "$mytrustdirpath/language/english/admin.php" ;
 }
 
+// language files (main.php)
+$language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
+if( file_exists( "$mydirpath/language/$language/main.php" ) ) {
+	// user customized language file
+	include_once "$mydirpath/language/$language/main.php" ;
+} else if( file_exists( "$mytrustdirpath/language/$language/main.php" ) ) {
+	// default language file
+	include_once "$mytrustdirpath/language/$language/main.php" ;
+} else {
+	// fallback english
+	include_once "$mytrustdirpath/language/english/main.php" ;
+}
+
+
+
 if( ! empty( $_GET['lib'] ) ) {
 	// common libs (eg. altsys)
 	$lib = preg_replace( '[^a-zA-Z0-9_-]' , '' , $_GET['lib'] ) ;

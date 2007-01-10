@@ -25,6 +25,17 @@ function wraps_onupdate_base( $module , $mydirname )
 
 	// TABLES (write here ALTER TABLE etc. if necessary)
 
+	// configs (Though I know it is not a recommended way...)
+	$check_sql = "SHOW COLUMNS FROM ".$db->prefix("config")." LIKE 'conf_title'" ;
+	if( ( $result = $db->query( $check_sql ) ) && ( $myrow = $db->fetchArray( $result ) ) && @$myrow['Type'] == 'varchar(30)' ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix("config")." MODIFY `conf_title` varchar(255) NOT NULL default '', MODIFY `conf_desc` varchar(255) NOT NULL default ''" ) ;
+	}
+
+	// configs (Though I know it is not a recommended way...)
+	$check_sql = "SHOW COLUMNS FROM ".$db->prefix("config")." LIKE 'conf_title'" ;
+	if( ( $result = $db->query( $check_sql ) ) && ( $myrow = $db->fetchArray( $result ) ) && @$myrow['Type'] == 'varchar(30)' ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix("config")." MODIFY `conf_title` varchar(255) NOT NULL default '', MODIFY `conf_desc` varchar(255) NOT NULL default ''" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;
@@ -33,7 +44,7 @@ function wraps_onupdate_base( $module , $mydirname )
 		while( ( $file = readdir( $handler ) ) !== false ) {
 			if( substr( $file , 0 , 1 ) == '.' ) continue ;
 			$file_path = $tpl_path . '/' . $file ;
-			if( is_file( $file_path ) && substr( $file , -5 ) == '.html' ) {
+			if( is_file( $file_path ) && in_array( strrchr( $file , '.' ) , array( '.html' , '.css' , '.js' ) ) ) {
 				$mtime = intval( @filemtime( $file_path ) ) ;
 				$tplfile =& $tplfile_handler->create() ;
 				$tplfile->setVar( 'tpl_source' , file_get_contents( $file_path ) , true ) ;

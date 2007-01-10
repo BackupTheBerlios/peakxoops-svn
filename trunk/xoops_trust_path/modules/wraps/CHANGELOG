@@ -3,6 +3,10 @@
 
 [b]CHANGES:[/b]
 
+1.12 (2007/01/10) update the module
+- added auto update indexes for searching
+- updated some D3 standard files
+
 1.11 (2006/10/27) update the module
 - added configuration to specify module top page
 - modified checking file name (1.11a)
@@ -47,6 +51,10 @@
 [xlang:ja]
 
 [b]更新履歴:[/b]
+
+1.12 (2007/01/10) ※要モジュールアップデート
+- 検索用インデックスの自動更新機能追加
+- D3モジュールとしての標準機能をキャッチアップ
 
 1.11 (2006/10/27) ※要モジュールアップデート
 - モジュールトップページ指定を追加

@@ -15,6 +15,8 @@ define( $constpref.'_UPDATE_SEARCH_INDEX' , '検索用インデックスの更新' ) ;
 // configs
 define( $constpref.'_INDEX_FILE' , 'トップページ' ) ;
 define( $constpref.'_INDEX_FILEDSC' , 'モジュールトップにアクセスされた時にラップするファイルを指定します' ) ;
+define( $constpref.'_INDEXAUTOUPD' , '検索インデックスの自動更新' ) ;
+define( $constpref.'_INDEXLASTUPD' , '検索インデックスの最終更新日時' ) ;
 
 
 }

@@ -15,6 +15,8 @@ define( $constpref.'_UPDATE_SEARCH_INDEX' , 'Update indexes for searching' ) ;
 // configs
 define( $constpref.'_INDEX_FILE' , 'Top page' ) ;
 define( $constpref.'_INDEX_FILEDSC' , 'specify the file should be wrapped when the top of this module is accessed' ) ;
+define( $constpref.'_INDEXAUTOUPD' , 'Update indexes automatically (touch the base directory)' ) ;
+define( $constpref.'_INDEXLASTUPD' , "Indexes last updated (timestamp)" ) ;
 
 
 }

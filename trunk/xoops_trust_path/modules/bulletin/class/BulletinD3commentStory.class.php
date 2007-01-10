@@ -21,22 +21,32 @@ function fetchSummary( $external_link_id )
 	if( Bulletin::isPublishedExists( $storyid ) ){
 
 		$article = new Bulletin( $storyid ) ;
-		return array(
-			'dirname' => $mydirname ,
-			'module_name' => $module->getVar( 'name' ) ,
-			'subject' => $article->getVar( 'title' ) ,
-			'uri' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=article&amp;storyid='.$storyid ,
-			'summary' => htmlspecialchars( xoops_substr( strip_tags( $article->getVar('hometext') ) , 0 , 255 ) , ENT_QUOTES ) ,
-		) ;
+		$subject4assign = $article->getVar( 'title' ) ;
+		$summary = $article->getVar('hometext') ;
+		if( function_exists( 'easiestml' ) ) {
+			$summary = easiestml( $summary ) ;
+		}
+		$summary4assign = htmlspecialchars( xoops_substr( strip_tags( $summary ) , 0 , 255 ) , ENT_QUOTES ) ;
+		if( function_exists( 'easiestml' ) ) {
+			$summary4assign = easiestml( $summary4assign ) ;
+		}
 
 	} else {
 
-		return array(
-			'dirname' => $mydirname ,
-			'module_name' => $module->getVar( 'name' ) ,
-		) ;
+		$subject4assign = '' ;
+		$summary4assign = '' ;
 
 	}
+
+	return array(
+		'dirname' => $mydirname ,
+		'module_name' => $module->getVar( 'name' ) ,
+		'subject' => $subject4assign ,
+		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=article&amp;storyid='.$storyid ,
+		'summary' => $summary4assign ,
+	) ;
+
+
 }
 
 

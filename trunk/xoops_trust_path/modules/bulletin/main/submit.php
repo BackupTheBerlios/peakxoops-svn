@@ -56,8 +56,8 @@ if( isset( $_GET['topicid'] ) ) $story->setVar('topicid', $_GET['topicid']);
 
 // ホワイトリストによるサニタイズ
 $str_arr = array('title','text');
-$int_arr = array('topicid','type','ihome','topicimg','published','expired','approve');
-$bai_arr = array('html','smiley','br','xcode','autodate','autoexpdate','notifypub','block');
+$int_arr = array('topicid','type','topicimg','published','expired','approve');
+$bai_arr = array('html','smiley','br','xcode','autodate','autoexpdate','notifypub','block','ihome');
 foreach( $str_arr as $k ){
 	if( isset($_POST[$k]) ) $story->setVar($k, $_POST[$k]);
 }

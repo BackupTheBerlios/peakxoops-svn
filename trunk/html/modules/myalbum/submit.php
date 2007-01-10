@@ -106,16 +106,16 @@ if( ! empty( $_POST['submit'] ) ) {
 	}
 
 	// Check if upload file name specified
-	$field = $_POST["xoops_upload_file"][0] ;
+	$field = @$_POST["xoops_upload_file"][0] ;
 	if( empty( $field ) || $field == "" ) {
 		die( "UPLOAD error: file name not specified" ) ;
 	}
-	$field = $_POST['xoops_upload_file'][0] ;
+	$field = @$_POST['xoops_upload_file'][0] ;
 
 	if( $_FILES[$field]['name'] == '' ) {
 		// No photo uploaded
 
-		if( trim( $_POST["title"] ) === "" ) {
+		if( trim( @$_POST["title"] ) === "" ) {
 			$_POST['title'] = 'no title' ;
 		}
 
@@ -145,7 +145,7 @@ if( ! empty( $_POST['submit'] ) ) {
 			// Succeed to upload
 
 			// The original file name will be the title if title is empty
-			if( trim( $_POST["title"] ) === "" ) {
+			if( trim( @$_POST["title"] ) === "" ) {
 				$_POST['title'] = $uploader->getMediaName() ;
 			}
 
@@ -168,8 +168,8 @@ if( ! empty( $_POST['submit'] ) ) {
 		exit ;
 	}
 
-	$title = $myts->stripSlashesGPC( $_POST["title"] ) ;
-	$desc_text = $myts->stripSlashesGPC( $_POST["desc_text"] ) ;
+	$title = $myts->stripSlashesGPC( @$_POST["title"] ) ;
+	$desc_text = $myts->stripSlashesGPC( @$_POST["desc_text"] ) ;
 	$date = time() ;
 	$ext = substr( strrchr( $tmp_name , '.' ) , 1 ) ;
 	$status = ( $global_perms & GPERM_SUPERINSERT ) ? 1 : 0 ;
@@ -195,8 +195,10 @@ if( ! empty( $_POST['submit'] ) ) {
 	// Update User's Posts (Should be modified when need admission.)
 	$user_handler =& xoops_gethandler('user') ;
 	$submitter_obj =& $user_handler->get( $submitter ) ;
-	for( $i = 0 ; $i < $myalbum_addposts ; $i ++ ) {
-		$submitter_obj->incrementPost() ;
+	if( is_object( $submitter_obj ) ) {
+		for( $i = 0 ; $i < $myalbum_addposts ; $i ++ ) {
+			$submitter_obj->incrementPost() ;
+		}
 	}
 
 	// Trigger Notification
@@ -244,11 +246,11 @@ include_once( "../../include/xoopscodes.php" ) ;
 
 // Preview
 if( $caller != 'imagemanager' && ! empty( $_POST['preview'] ) ) {
-	$photo['description'] = $myts->stripSlashesGPC( $_POST["desc_text"] ) ;
-	$photo['title'] = $myts->stripSlashesGPC( $_POST["title"] ) ;
+	$photo['description'] = $myts->stripSlashesGPC( @$_POST["desc_text"] ) ;
+	$photo['title'] = $myts->stripSlashesGPC( @$_POST["title"] ) ;
 	$photo['cid'] = empty( $_POST['cid'] ) ? 0 : intval( $_POST['cid'] ) ;
 
-	$field = $_POST['xoops_upload_file'][0] ;
+	$field = @$_POST['xoops_upload_file'][0] ;
 	if( is_readable( $_FILES[$field]['tmp_name'] ) ) {
 		// new preview
 		if( $myalbum_canresize ) $uploader = new MyXoopsMediaUploader( $photos_dir , $array_allowed_mimetypes , $myalbum_fsize , null , null , $array_allowed_exts ) ;

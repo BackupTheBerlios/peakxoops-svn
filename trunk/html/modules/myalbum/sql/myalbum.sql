@@ -1,10 +1,3 @@
-# phpMyAdmin MySQL-Dump
-# version 2.2.2
-# http://phpwizard.net/phpMyAdmin/
-# http://phpmyadmin.sourceforge.net/ (download page)
-#
-# --------------------------------------------------------
-
 #
 # Table structure for table `myalbum_cat`
 #
@@ -14,8 +7,14 @@ CREATE TABLE myalbum_cat (
   pid int(5) unsigned NOT NULL default '0',
   title varchar(50) NOT NULL default '',
   imgurl varchar(150) NOT NULL default '',
-  PRIMARY KEY  (cid),
-  KEY pid (pid)
+  weight int(5) unsigned NOT NULL default 0,
+  depth int(5) unsigned NOT NULL default 0,
+  description text,
+  allowed_ext varchar(255) NOT NULL default 'jpg|jpeg|gif|png',
+  PRIMARY KEY (cid),
+  KEY (weight),
+  KEY (depth),
+  KEY (pid)
 ) TYPE=MyISAM;
 # --------------------------------------------------------
 
@@ -26,7 +25,7 @@ CREATE TABLE myalbum_cat (
 CREATE TABLE myalbum_photos (
   lid int(11) unsigned NOT NULL auto_increment,
   cid int(5) unsigned NOT NULL default '0',
-  title varchar(100) NOT NULL default '',
+  title varchar(255) NOT NULL default '',
   ext varchar(10) NOT NULL default '',
   res_x int(11) NOT NULL default '0',
   res_y int(11) NOT NULL default '0',
@@ -37,10 +36,11 @@ CREATE TABLE myalbum_photos (
   rating double(6,4) NOT NULL default '0.0000',
   votes int(11) unsigned NOT NULL default '0',
   comments int(11) unsigned NOT NULL default '0',
-  PRIMARY KEY  (lid),
-  KEY cid (cid),
-  KEY status (status),
-  KEY title (title(40))
+  PRIMARY KEY (lid),
+  KEY (cid),
+  KEY (date),
+  KEY (status),
+  KEY (title)
 ) TYPE=MyISAM;
 # --------------------------------------------------------
 
@@ -50,8 +50,8 @@ CREATE TABLE myalbum_photos (
 
 CREATE TABLE myalbum_text (
   lid int(11) unsigned NOT NULL default '0',
-  description text NOT NULL,
-  KEY lid (lid)
+  description text,
+  PRIMARY KEY lid (lid)
 ) TYPE=MyISAM;
 # --------------------------------------------------------
 
@@ -67,7 +67,8 @@ CREATE TABLE myalbum_votedata (
   ratinghostname varchar(60) NOT NULL default '',
   ratingtimestamp int(10) NOT NULL default '0',
   PRIMARY KEY  (ratingid),
-  KEY ratinguser (ratinguser),
-  KEY ratinghostname (ratinghostname)
+  KEY (lid),
+  KEY (ratinguser),
+  KEY (ratinghostname)
 ) TYPE=MyISAM;
 

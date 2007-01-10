@@ -4,6 +4,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_AM_LOADED' ) ) {
 
 define( 'MYALBUM_AM_LOADED' , 1 ) ;
 
+define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
+define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
+
 // Index (Categories)
 define( "_AM_H3_FMT_CATEGORIES" , "Categories Manager (%s)" ) ;
 define( "_AM_CAT_TH_TITLE" , "Name" ) ;

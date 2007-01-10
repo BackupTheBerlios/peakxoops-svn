@@ -69,9 +69,11 @@ table_cat:
  -depth
  -description
  -allowed_ext
- -read permissions
- -post/edit permissions
 
+table_cat_perms:
+ -read
+ -write
+ -exec
 
 
 更新時のイベント通知

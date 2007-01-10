@@ -17,8 +17,8 @@ $adminmenu[7]['title'] = _ALBM_MYALBUM_ADMENU_EXPORT;
 $adminmenu[7]['link'] = "admin/export.php";
 $adminmenu[8]['title'] = _ALBM_MYALBUM_ADMENU_GPERM ;
 $adminmenu[8]['link'] = "admin/groupperm_global.php";
-$adminmenu[9]['title'] = _ALBM_MYALBUM_ADMENU_MYBLOCKSADMIN;
-$adminmenu[9]['link'] = "admin/myblocksadmin.php";
-$adminmenu[10]['title'] = _ALBM_MYALBUM_ADMENU_MYTPLSADMIN;
-$adminmenu[10]['link'] = "admin/mytplsadmin.php";
+//$adminmenu[9]['title'] = _ALBM_MYALBUM_ADMENU_MYBLOCKSADMIN;
+//$adminmenu[9]['link'] = "admin/myblocksadmin.php";
+//$adminmenu[10]['title'] = _ALBM_MYALBUM_ADMENU_MYTPLSADMIN;
+//$adminmenu[10]['link'] = "admin/mytplsadmin.php";
 ?>

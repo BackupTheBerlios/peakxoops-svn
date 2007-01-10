@@ -4,6 +4,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_AM_LOADED' ) ) {
 
 define( 'MYALBUM_AM_LOADED' , 1 ) ;
 
+define('_MD_A_MYMENU_MYTPLSADMIN','テンプレート管理');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限');
+define('_MD_A_MYMENU_MYPREFERENCES','一般設定');
+
 // Index (Categories)
 define( "_AM_H3_FMT_CATEGORIES" , "%s カテゴリー管理" ) ;
 define( "_AM_CAT_TH_TITLE" , "カテゴリー名" ) ;

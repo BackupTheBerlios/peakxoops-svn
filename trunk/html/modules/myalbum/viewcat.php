@@ -103,7 +103,10 @@ $xoopsTpl->assign( 'photo_total_sum' , ( empty( $photo_total_sum ) ? $photo_smal
 
 if( $photo_small_sum > 0 ) {
 
-	$prs = $xoopsDB->query( "SELECT l.lid, l.cid, l.title, l.ext, l.res_x, l.res_y, l.status, l.date, l.hits, l.rating, l.votes, l.comments, l.submitter, t.description $select_append FROM $table_photos l LEFT JOIN $table_text t ON l.lid=t.lid $join_append WHERE $where AND l.status>0 ORDER BY {$myalbum_orders[$orderby][0]}" , $num , $pos ) ;
+	$prs = $xoopsDB->query( "SELECT l.lid, l.cid, l.title, l.ext, l.res_x, l.res_y, l.status, l.date, l.hits, l.rating, l.votes, l.comments, l.submitter, t.description $select_append FROM $table_photos l USE INDEX (date) INNER JOIN $table_text t ON l.lid=t.lid $join_append WHERE $where AND l.status>0 ORDER BY {$myalbum_orders[$orderby][0]}" , $num , $pos ) ;
+	if( ! $prs ) {
+		$prs = $xoopsDB->query( "SELECT l.lid, l.cid, l.title, l.ext, l.res_x, l.res_y, l.status, l.date, l.hits, l.rating, l.votes, l.comments, l.submitter, t.description $select_append FROM $table_photos l INNER JOIN $table_text t ON l.lid=t.lid $join_append WHERE $where AND l.status>0 ORDER BY {$myalbum_orders[$orderby][0]}" , $num , $pos ) ;
+	}
 
 	//if 2 or more items in result, num the navigation menu
 	if( $photo_small_sum > 1 ) {

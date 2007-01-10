@@ -134,7 +134,7 @@ class MyAlbumTextSanitizer extends MyTextSanitizer {
      *
      * @return	string
 	 */
-	function nl2Br( $text )
+	function &nl2Br( $text )
 	{
 		$text = preg_replace("/(\015\012)|(\015)|(\012)/","<br />",$text);
 		if( $this->nbsp ) {

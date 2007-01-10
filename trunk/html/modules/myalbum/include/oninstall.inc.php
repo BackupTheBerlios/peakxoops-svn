@@ -2,7 +2,8 @@
 
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
-$mydirname = $_SESSION['myalbum_mydirname'] ;
+$mydirname = @$_SESSION['myalbum_mydirname'] ;
+if( empty( $mydirname ) ) $mydirname = basename(dirname(dirname(__FILE__)));
 // TODO
 include_once XOOPS_ROOT_PATH."/modules/$mydirname/language/english/myalbum_constants.php" ;
 
@@ -33,6 +34,8 @@ function xoops_module_install_'.$mydirname.'( $module )
 		$gperm_handler->insert($gperm) ;
 		unset($gperm);
 	}
+	
+	return true ;
 }
 
 ' ) ;

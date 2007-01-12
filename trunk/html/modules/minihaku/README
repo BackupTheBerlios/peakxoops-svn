@@ -60,6 +60,7 @@ usersテーブルにフィールドを増やすこと自体は、DBに対して、ALTER TABLEを直接発行し
 - config.php 内で $stop_error_extras 配列を利用できるようにした (thx jidaikobo)
 - 一般設定をアサインするようにした（ユーザ名の最大・最小文字数などを表示するため）
 - 一般設定の利用許諾文表示設定を反映するようにした (thx eyesonly)
+- エラー表示方法をちょっと改善した (thx jidaikobo) 1.08a
 
 1.07 2006-09-24
 - 環境によってインストールできないバグを修正 (thx kojima)

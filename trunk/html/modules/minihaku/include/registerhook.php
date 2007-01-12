@@ -47,12 +47,17 @@ foreach( $allowed_requests as $key => $val ) {
 	}
 }
 
+//
+// REGISTER STAGE
+//
+if( ! empty( $_POST['do_register'] ) ) {
+	// check before register (uname, email, password)
+	$email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : $allowed_requests['email'] ;
+	$allowed_requests['vpass'] = $allow_blank_vpass ? $allowed_requests['pass'] : $allowed_requests['vpass'] ;
+	$stop_reason = userCheck( $allowed_requests['uname'] , $email4check , $allowed_requests['pass'] , $allowed_requests['vpass'] ) ;
+}
 
-$email4check = $allow_blank_email ? substr(md5(time()),-6).'@example.com' : $allowed_requests['email'] ;
-$allowed_requests['vpass'] = $allow_blank_vpass ? $allowed_requests['pass'] : $allowed_requests['vpass'] ;
-
-if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && ! ( $stop_reason = userCheck( $allowed_requests['uname'] , $email4check , $allowed_requests['pass'] , $allowed_requests['vpass'] ) ) ) {
-
+if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && empty( $stop_reason ) ) {
 	if( $xoopsConfigUser['reg_dispdsclmr'] && empty( $allowed_requests['agree_disc'] ) ) die( _US_UNEEDAGREE ) ;
 
 	include XOOPS_ROOT_PATH.'/header.php';
@@ -158,34 +163,36 @@ if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && ! ( $sto
 	include XOOPS_ROOT_PATH.'/footer.php';
 	exit ;
 
-} else {
-
-	include XOOPS_ROOT_PATH.'/header.php' ;
-	$xoopsOption['template_main'] = 'minihaku_register.html' ;
-	$stop_reasons = empty( $stop_reason ) ? array() : array_merge( explode( '<br />' , $stop_reason ) ) ;
-	$xoopsTpl->assign(
-		array(
-			'stop_reason' => @$stop_reason , // older assign
-			'stop_reasons' => array_merge( $stop_reason_extras , $stop_reasons ) ,
-			'timezone_options' => XoopsLists::getTimeZoneList() ,
-			'reg_disclaimer' => $xoopsConfigUser['reg_disclaimer'] , // older assign
-			'xoops_config_user' => $xoopsConfigUser ,
-			'xoops_config_general' => $xoopsConfig ,
-		)
-	) ;
-	$xoopsTpl->assign( $allowed_requests ) ;
-	// extra field which has options
-	if( ! empty( $extra_fields ) ) {
-		foreach( $extra_fields as $key => $attribs ) {
-			if( ! empty( $attribs['options'] ) ) {
-				$xoopsTpl->assign( $key.'_options' , $attribs['options'] ) ;
-			}
-		}
-	}
-	include XOOPS_ROOT_PATH.'/footer.php' ;
-	exit ;
-
 }
 
+//
+// FORM STAGE
+//
+
+include XOOPS_ROOT_PATH.'/header.php' ;
+$xoopsOption['template_main'] = 'minihaku_register.html' ;
+$stop_reasons = explode( '<br />' , @$stop_reason ) ;
+if( empty( $stop_reasons[sizeof($stop_reasons)-1] ) ) array_pop( $stop_reasons ) ;
+$xoopsTpl->assign(
+	array(
+		'stop_reason' => @$stop_reason , // older assign
+		'stop_reasons' => array_merge( $stop_reasons , $stop_reason_extras ) ,
+		'timezone_options' => XoopsLists::getTimeZoneList() ,
+		'reg_disclaimer' => $xoopsConfigUser['reg_disclaimer'] , // older assign
+		'xoops_config_user' => $xoopsConfigUser ,
+		'xoops_config_general' => $xoopsConfig ,
+	)
+) ;
+$xoopsTpl->assign( $allowed_requests ) ;
+// extra field which has options
+if( ! empty( $extra_fields ) ) {
+	foreach( $extra_fields as $key => $attribs ) {
+		if( ! empty( $attribs['options'] ) ) {
+			$xoopsTpl->assign( $key.'_options' , $attribs['options'] ) ;
+		}
+	}
+}
+include XOOPS_ROOT_PATH.'/footer.php' ;
+exit ;
 
 ?>

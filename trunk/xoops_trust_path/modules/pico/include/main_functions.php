@@ -152,6 +152,8 @@ function pico_trigger_event( $category , $item_id , $event , $extra_tags=array()
 {
 	global $xoopsModule , $xoopsConfig , $mydirname , $mydirpath , $mytrustdirname , $mytrustdirpath ;
 
+	$notification_handler =& xoops_gethandler('notification') ;
+
 	$mid = $xoopsModule->getVar('mid') ;
 
 	// language file
@@ -204,7 +206,6 @@ function pico_trigger_event( $category , $item_id , $event , $extra_tags=array()
 		}
 		$criteria->add($user_criteria);
 	}
-	$notification_handler =& xoops_gethandler('notification') ;
 	$notifications =& $notification_handler->getObjects($criteria);
 	if (empty($notifications)) {
 		return;
@@ -233,6 +234,31 @@ function pico_trigger_event( $category , $item_id , $event , $extra_tags=array()
 		}
 	}
 }
+
+
+// get category's moderators as array
+function pico_get_moderators( $mydirname , $cat_id )
+{
+	$db =& Database::getInstance() ;
+	$cat_id = intval( $cat_id ) ;
+	$cat_uids = array() ;
+
+	$sql = "SELECT `uid` FROM ".$db->prefix($mydirname."_category_permissions")." WHERE `cat_id`=$cat_id AND `uid` IS NOT NULL AND permissions LIKE '%is\\_moderator\";i:1%'" ;
+	$result = $db->query( $sql ) ;
+	while( list( $uid ) = $db->fetchRow( $result ) ) {
+		$cat_uids[] = $uid ;
+	}
+	$sql = "SELECT distinct g.uid FROM ".$db->prefix($mydirname."_category_permissions")." x , ".$db->prefix("groups_users_link")." g WHERE x.groupid=g.groupid AND x.`cat_id`=$cat_id AND x.`groupid` IS NOT NULL AND permissions LIKE '%is\\_moderator\";i:1%'" ;
+	$result = $db->query( $sql ) ;
+	while( list( $uid ) = $db->fetchRow( $result ) ) {
+		$cat_uids[] = $uid ;
+	}
+
+	return array_unique( $cat_uids ) ;
+}
+
+
+
 
 
 // get $cat_id from $content_id

@@ -1,6 +1,7 @@
 <?php
 
 define('_MD_PICO_TOP','TOP');
+define('_MD_PICO_ALLCONTENTS','All contents');
 define('_MD_PICO_MENU','MENU');
 define('_MD_PICO_CREATED','Created');
 define('_MD_PICO_MODIFIED','Modified');
@@ -8,6 +9,9 @@ define('_MD_PICO_VIEWED','Views');
 define('_MD_PICO_NEXT','Next');
 define('_MD_PICO_PREV','Prev');
 define('_MD_PICO_CATEGORYINDEX','top of the category');
+define('_MD_PICO_NOSUBJECT','(no subject)');
+define('_MD_PICO_WAITINGREGISTER','waiting new');
+define('_MD_PICO_WAITINGUPDATE','waiting update');
 
 define('_MD_PICO_CATEGORY','Category');
 define('_MD_PICO_CATEGORIES','Categories');
@@ -30,6 +34,7 @@ define('_MD_PICO_LINK_TELLAFRIEND','Tell a friend');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','Article found in %s');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"I've just found an interestiong article\nSubject:%s");
 
+
 define('_MD_PICO_ERR_SQL','SQL Error Occurred in: ');
 define('_MD_PICO_ERR_PIDLOOP','parent/child loop error');
 
@@ -49,22 +54,28 @@ define('_MD_PICO_MSG_CATEGORYMADE','A category is created successfully');
 define('_MD_PICO_MSG_CATEGORYUPDATED','The category is modified successfully');
 define('_MD_PICO_MSG_CATEGORYDELETED','The category is deleted successfully');
 define('_MD_PICO_MSG_CONTENTMADE','A content has been created successfully');
+define('_MD_PICO_MSG_CONTENTWAITINGREGISTER','A content has been queued for registering');
 define('_MD_PICO_MSG_CONTENTUPDATED','The content has been modified successfully');
+define('_MD_PICO_MSG_CONTENTWAITINGUPDATE','The content has been queued for updating');
 define('_MD_PICO_MSG_CONTENTDELETED','The content has been deleted successfully');
 
 define('_MD_PICO_CATEGORYMANAGER','Category manager');
 define('_MD_PICO_CONTENTMANAGER','Content manager');
 define('_MD_PICO_TH_SUBJECT','Subject');
+define('_MD_PICO_TH_SUBJECT_WAITING','Waiting subject');
 define('_MD_PICO_TH_HTMLHEADER','HTML headers');
+define('_MD_PICO_TH_HTMLHEADER_WAITING','Waiting HTML headers');
 define('_MD_PICO_TH_BODY','body');
+define('_MD_PICO_TH_BODY_WAITING','Waiting body');
 define('_MD_PICO_TH_FILTERS','filters');
 define('_MD_PICO_TH_WEIGHT','weight');
-define('_MD_PICO_TH_USECACHE','use cache');
+define('_MD_PICO_TH_CONTENTOPTIONS','options');
+define('_MD_PICO_LABEL_USECACHE','use cache');
 define('_MD_PICO_NOTE_USECACHEDSC','Disable it for dynamic contents. Enable it for searchable');
-define('_MD_PICO_TH_VISIBLE','Visible');
-define('_MD_PICO_TH_SHOWINNAVI','Show in navigation');
-define('_MD_PICO_TH_SHOWINMENU','Show in menu');
-define('_MD_PICO_TH_ALLOWCOMMENT','Allow comments');
+define('_MD_PICO_LABEL_VISIBLE','Visible');
+define('_MD_PICO_LABEL_SHOWINNAVI','Show in navigation');
+define('_MD_PICO_LABEL_SHOWINMENU','Show in menu');
+define('_MD_PICO_LABEL_ALLOWCOMMENT','Allow comments');
 define('_MD_PICO_TH_CATEGORYTITLE','Title');
 define('_MD_PICO_TH_CATEGORYDESC','Description');
 define('_MD_PICO_TH_CATEGORYPARENT','Parent');
@@ -76,6 +87,9 @@ define('_MD_PICO_MSG_CONFIRMDELETECONTENT','Are you OK?');
 define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','The TOP category is the special. You can change the settings of the TOP in module preferences.');
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','display the textarea');
 define('_MD_PICO_LABEL_INPUTHELPER','Input Helper ON/OFF');
+define('_MD_PICO_BTN_SUBMITEDITING','register this form');
+define('_MD_PICO_BTN_COPYFROMWAITING','register waiting data');
+define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','Data you edited in this form will be lost. Are you OK?');
 
 
 // vote to post

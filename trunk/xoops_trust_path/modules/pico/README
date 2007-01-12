@@ -58,6 +58,11 @@ You'd better install altsys and d3forum also.
 
 [b]HISTORY:[/b]
 
+0.32->0.40
+- added concept of waiting
+- added a plugin for waiting
+- added a notification for waiting
+
 0.31->0.32  (update the module essentially)
 - fixed the problem 30 character limits in config table (thx starck)
 - modified index menu (thx emomo) 0.32a
@@ -158,6 +163,11 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+0.32->0.40
+- 承認待ち、という概念を実装した
+- waitingモジュール用プラグインの追加
+- 承認待ちイベント通知の実装
 
 0.31->0.32（※モジュールアップデート必須）
 - 一般設定が30字制限に引っかかっていたのを修正 (thx starck)

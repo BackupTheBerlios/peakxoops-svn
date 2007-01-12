@@ -38,6 +38,13 @@
 			</td>
 		</tr>
 
+		<{if ! $content.approval}>
+		<tr valign="top" align="left">
+			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></th>
+			<td class="even" style="color:red;background-color:white;"><{$content.subject_waiting}></td>
+		</tr>
+		<{/if}>
+
 		<tr valign="top" align="left">
 			<th class="head"><label for="htmlheader"><{$smarty.const._MD_PICO_TH_HTMLHEADER}></label></th>
 			<td class="even">
@@ -46,6 +53,13 @@
 				<textarea name="htmlheader" id="htmlheader" style="display:<{if $content.htmlheader}>block<{else}>none<{/if}>;width:480px;height:120px;"><{$content.htmlheader}></textarea>
 			</td>
 		</tr>
+
+		<{if ! $content.approval}>
+		<tr valign="top" align="left">
+			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
+			<td class="even" style="color:red;background-color:white;"><{$content.htmlheader_waiting}></td>
+		</tr>
+		<{/if}>
 
 		<tr valign="top" align="left">
 			<th class="head"><label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label></th>
@@ -59,6 +73,13 @@
 				<{/if}>
 			</td>
 		</tr>
+
+		<{if ! $content.approval}>
+		<tr valign="top" align="left">
+			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
+			<td class="even" style="color:red;background-color:white;"><{$content.body_waiting}></td>
+		</tr>
+		<{/if}>
 
 		<tr valign="top" align="left">
 			<th class="head"><label for="filters"><{$smarty.const._MD_PICO_TH_FILTERS}></label></th>
@@ -79,38 +100,39 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="use_cache"><{$smarty.const._MD_PICO_TH_USECACHE}></label></th>
+			<th class="head">
+				<{$smarty.const._MD_PICO_TH_CONTENTOPTIONS}>
+			</th>
+			
 			<td class="even">
-				<input type="checkbox" name="use_cache" id="use_cache" value="1" <{if $content.use_cache}>checked="checked"<{/if}> />
-				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}></label>
-			</td>
-		</tr>
 
-		<tr valign="top" align="left">
-			<th class="head"><label for="visible"><{$smarty.const._MD_PICO_TH_VISIBLE}></label></th>
-			<td class="even">
+				<!-- visible -->
 				<input type="checkbox" name="visible" id="visible" value="1" <{if $content.visible}>checked="checked"<{/if}> />
-			</td>
-		</tr>
+				<label for="visible"><{$smarty.const._MD_PICO_LABEL_VISIBLE}></label>
+				<br />
 
-		<tr valign="top" align="left">
-			<th class="head"><label for="show_in_navi"><{$smarty.const._MD_PICO_TH_SHOWINNAVI}></label></th>
-			<td class="even">
+				<!-- show in navi -->
 				<input type="checkbox" name="show_in_navi" id="show_in_navi" value="1" <{if $content.show_in_navi}>checked="checked"<{/if}> />
-			</td>
-		</tr>
+				<label for="show_in_navi"><{$smarty.const._MD_PICO_LABEL_SHOWINNAVI}></label>
+				<br />
 
-		<tr valign="top" align="left">
-			<th class="head"><label for="show_in_menu"><{$smarty.const._MD_PICO_TH_SHOWINMENU}></label></th>
-			<td class="even">
+				<!-- show in menu -->
 				<input type="checkbox" name="show_in_menu" id="show_in_menu" value="1" <{if $content.show_in_menu}>checked="checked"<{/if}> />
-			</td>
-		</tr>
+				<label for="show_in_menu"><{$smarty.const._MD_PICO_LABEL_SHOWINMENU}></label>
+				<br />
 
-		<tr valign="top" align="left">
-			<th class="head"><label for="allow_comment"><{$smarty.const._MD_PICO_TH_ALLOWCOMMENT}></label></th>
-			<td class="even">
+				<!-- allow comment -->
 				<input type="checkbox" name="allow_comment" id="allow_comment" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
+				<label for="allow_comment"><{$smarty.const._MD_PICO_LABEL_ALLOWCOMMENT}></label>
+				<br />
+
+				<!-- use body cache -->
+				<input type="checkbox" name="use_cache" id="use_cache" value="1" <{if $content.use_cache}>checked="checked"<{/if}> />
+				<label for="use_cache"><{$smarty.const._MD_PICO_LABEL_USECACHE}></label>
+				<br />
+				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}></label>
+				<br />
+
 			</td>
 		</tr>
 
@@ -118,7 +140,10 @@
 
 	<p class="pico_submit">
 		<input type="submit" class="formButton" name="contentman_preview"  id="contentman_preview" value="<{$smarty.const._PREVIEW}>" />
-		<input type="submit" class="formButton" name="contentman_post"  id="contentman_post" value="<{$smarty.const._SUBMIT}>" />
+		<input type="submit" class="formButton" name="contentman_post"  id="contentman_post" value="<{$smarty.const._MD_PICO_BTN_SUBMITEDITING}>" />
+		<{if ! $content.approval && $category.isadminormod}>
+		<input type="submit" name="contentman_copyfromwaiting" value="<{$smarty.const._MD_PICO_BTN_COPYFROMWAITING}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMCOPYFROMWAITING}>')" />
+		<{/if}>
 		<{if $page == 'contentmanager' && $category.can_delete}>
 		<input type="submit" name="contentman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMDELETECONTENT}>')" />
 		<{/if}>

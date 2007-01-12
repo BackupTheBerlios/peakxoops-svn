@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.32 ;
+$modversion['version'] = 0.40 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -266,8 +266,32 @@ $modversion['config'][] = array(
 
 
 // Notification
-$modversion['hasNotification'] = 0 ;
+$modversion['hasNotification'] = 1 ;
+$modversion['notification'] = array(
+	'lookup_file' => 'notification.php' ,
+	'lookup_func' => "{$mydirname}_notify_iteminfo" ,
+	'category' => array(
+		array(
+			'name' => 'global' ,
+			'title' => constant($constpref.'_NOTCAT_GLOBAL') ,
+			'description' => constant($constpref.'_NOTCAT_GLOBALDSC') ,
+			'subscribe_from' => 'index.php' ,
+		) ,
+	) ,
+	'event' => array(
+		array(
+			'name' => 'waitingcontent' ,
+			'category' => 'global' ,
+			'title' => constant($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT') ,
+			'caption' => constant($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP') ,
+			'description' => constant($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP') ,
+			'mail_template' => 'global_waitingcontent' ,
+			'mail_subject' => constant($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ') ,
+		) ,
+	) ,
+) ;
 
+// onInstall, onUpdate, onUninstall
 $modversion['onInstall'] = 'oninstall.php' ;
 $modversion['onUpdate'] = 'onupdate.php' ;
 $modversion['onUninstall'] = 'onuninstall.php' ;

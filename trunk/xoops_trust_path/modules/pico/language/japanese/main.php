@@ -1,6 +1,7 @@
 <?php
 
 define('_MD_PICO_TOP','トップ');
+define('_MD_PICO_ALLCONTENTS','全コンテンツ');
 define('_MD_PICO_MENU','メニュー');
 define('_MD_PICO_CREATED','作成');
 define('_MD_PICO_MODIFIED','更新');
@@ -8,6 +9,9 @@ define('_MD_PICO_VIEWED','閲覧数');
 define('_MD_PICO_NEXT','次');
 define('_MD_PICO_PREV','前');
 define('_MD_PICO_CATEGORYINDEX','カテゴリートップ');
+define('_MD_PICO_NOSUBJECT','(no subject)');
+define('_MD_PICO_WAITINGREGISTER','新規登録申請中');
+define('_MD_PICO_WAITINGUPDATE','変更申請中');
 
 define('_MD_PICO_CATEGORY','カテゴリー');
 define('_MD_PICO_CATEGORIES','カテゴリー');
@@ -27,9 +31,9 @@ define('_MD_PICO_LINK_PUBLICCATEGORYINDEX','公開側カテゴリートップ');
 
 define('_MD_PICO_LINK_PRINTERFRIENDLY','プリンタ用画面');
 define('_MD_PICO_LINK_TELLAFRIEND','友達に伝える');
-define('_MD_PICO_MAILTOENCODING','Shift_JIS'); // don't define it for singlebyte
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','%sで見つけた記事');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"興味深い記事を見つけました\n記事タイトル:%s");
+define('_MD_PICO_MAILTOENCODING','Shift_JIS'); // don't define it for singlebyte
 
 define('_MD_PICO_ERR_SQL','SQLエラーが発生しました。行: ');
 define('_MD_PICO_ERR_PIDLOOP','親子関係でループが発生しています');
@@ -50,22 +54,28 @@ define('_MD_PICO_MSG_CATEGORYMADE','カテゴリーを作成しました');
 define('_MD_PICO_MSG_CATEGORYUPDATED','カテゴリーを更新しました');
 define('_MD_PICO_MSG_CATEGORYDELETED','カテゴリーを削除しました');
 define('_MD_PICO_MSG_CONTENTMADE','コンテンツを作成しました');
+define('_MD_PICO_MSG_CONTENTWAITINGREGISTER','新規コンテンツの登録申請を行いました');
 define('_MD_PICO_MSG_CONTENTUPDATED','コンテンツを更新しました');
+define('_MD_PICO_MSG_CONTENTWAITINGUPDATE','このコンテンツの変更申請を行いました');
 define('_MD_PICO_MSG_CONTENTDELETED','コンテンツを削除しました');
 
 define('_MD_PICO_CATEGORYMANAGER','カテゴリーマネージャ');
 define('_MD_PICO_CONTENTMANAGER','コンテンツマネージャ');
 define('_MD_PICO_TH_SUBJECT','表題');
+define('_MD_PICO_TH_SUBJECT_WAITING','申請中の表題');
 define('_MD_PICO_TH_HTMLHEADER','HTMLヘッダー');
+define('_MD_PICO_TH_HTMLHEADER_WAITING','申請中のHTMLヘッダー');
 define('_MD_PICO_TH_BODY','本文');
+define('_MD_PICO_TH_BODY_WAITING','申請中の本文');
 define('_MD_PICO_TH_FILTERS','本文フィルター');
 define('_MD_PICO_TH_WEIGHT','表示順');
-define('_MD_PICO_TH_USECACHE','本文キャッシュ');
+define('_MD_PICO_TH_CONTENTOPTIONS','オプション');
+define('_MD_PICO_LABEL_USECACHE','本文キャッシュ');
 define('_MD_PICO_NOTE_USECACHEDSC','※閲覧条件によって内容が異なるコンテンツの場合にはOFFにしてください。ただし、ここがONでない記事は検索対象となりません。');
-define('_MD_PICO_TH_VISIBLE','表示');
-define('_MD_PICO_TH_SHOWINNAVI','ページナビに表示する');
-define('_MD_PICO_TH_SHOWINMENU','メニューに表示する');
-define('_MD_PICO_TH_ALLOWCOMMENT','コメント可能');
+define('_MD_PICO_LABEL_VISIBLE','表示');
+define('_MD_PICO_LABEL_SHOWINNAVI','ページナビに表示する');
+define('_MD_PICO_LABEL_SHOWINMENU','メニューに表示する');
+define('_MD_PICO_LABEL_ALLOWCOMMENT','コメント可能');
 define('_MD_PICO_TH_CATEGORYTITLE','タイトル');
 define('_MD_PICO_TH_CATEGORYDESC','説明');
 define('_MD_PICO_TH_CATEGORYPARENT','親カテゴリー');
@@ -77,6 +87,9 @@ define('_MD_PICO_MSG_CONFIRMDELETECONTENT','コンテンツを削除してよろしいですか？
 define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','トップカテゴリーは特別なカテゴリーです。設定変更は管理画面の一般設定で行います');
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','HTMLヘッダカスタマイズ部表示');
 define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');
+define('_MD_PICO_BTN_SUBMITEDITING','編集内容を登録');
+define('_MD_PICO_BTN_COPYFROMWAITING','申請データへの置換');
+define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','このフォーム内での編集内容は破棄され、申請された通りのデータに置き換わりますが、よろしいですか？');
 
 
 // vote to content

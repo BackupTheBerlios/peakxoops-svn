@@ -10,11 +10,13 @@
 
 <!-- category title -->
 <p>
-	<{$smarty.const._MD_PICO_CATEGORY}>:<{$cat_title}>
-	[<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>]
-	[<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}></a>]
-	[<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKECONTENT}></a>]
-	[<a href="<{$mod_url}>/index.php?cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_PUBLICCATEGORYINDEX}></a>]
+	<{$smarty.const._MD_PICO_CATEGORY}>:<strong><{$cat_title}></strong>
+	<{if $cat_id >= 0}>
+		[<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>]
+		[<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}></a>]
+		[<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKECONTENT}></a>]
+		[<a href="<{$mod_url}>/index.php?cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_PUBLICCATEGORYINDEX}></a>]
+	<{/if}>
 </p>
 
 <!-- contents form -->
@@ -77,7 +79,7 @@
 				<td align="center">
 					<input type="checkbox" name="allow_comments[<{$content.id}>]" id="col_allow_comment_<{$content.id}>" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
 				</td>
-				<td align="right" nowrap="nowrap">
+				<td align="right" nowrap="nowrap" <{if ! $content.approval}>style="background-color:#fcc;"<{/if}>>
 					<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><{$smarty.const._EDIT}></a> |
 					<input type="checkbox" name="action_selects[<{$content.id}>]" id="col_action_<{$content.id}>" value="1" />
 					<br />
@@ -90,7 +92,7 @@
 				<{$smarty.const._MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED}>
 				<input type="submit" name="contents_delete" value="<{$smarty.const._MD_A_PICO_BTN_DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_DELETE}>');" />
 				<input type="submit" name="contents_move" value="<{$smarty.const._MD_A_PICO_BTN_MOVE}>" />
-				<select name="dest_cat_id" id="select_dest_cat_id"><{html_options options=$cat_options selected=$cat_id}></select>
+				<select name="dest_cat_id" id="select_dest_cat_id"><{html_options options=$cat_options4move selected=$cat_id}></select>
 				<br />
 				<input type="submit" name="contents_export" value="<{$smarty.const._MD_A_PICO_BTN_EXPORT}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_EXPORT}>');"  />
 				<select name="export_mid" id="select_export_mid"><{html_options options=$module_options}></select>

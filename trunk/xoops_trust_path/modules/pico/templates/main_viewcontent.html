@@ -90,7 +90,7 @@
 <{/if}>
 
 <{if $content.can_edit}>
-	<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
+	<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>" <{if ! $content.approval}>style="color:red;"<{/if}>>[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
 <{/if}>
 
 <{if $xoops_isadmin}>

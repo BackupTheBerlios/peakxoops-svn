@@ -19,7 +19,15 @@ if( isset( $_POST['contentman_post'] ) ) {
 	}
 	// create a content
 	$content_id = pico_makecontent( $mydirname , $cat_id ) ;
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 2 , _MD_PICO_MSG_CONTENTMADE ) ;
+	if( $category4assign['post_auto_approved'] ) {
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
+	} else {
+		// Notify for new waiting content (only for admin or mod)
+		$users2notify = pico_get_moderators( $mydirname , $cat_id ) ;
+		if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
+		pico_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_MSG_CONTENTWAITINGREGISTER ) ;
+	}
 	exit ;
 }
 
@@ -29,7 +37,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$content = pico_get_requests4content( $mydirname ) ;
+	$content = pico_get_requests4content( $mydirname , $category4assign['post_auto_approved'] ) ;
 	$content4assign = array_map( 'htmlspecialchars' , $content ) ;
 	$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] ) ;
 	$content4assign['body_raw'] = $content['body'] ;

@@ -49,6 +49,15 @@ define($constpref.'_BNAME_MENU','メニュー');
 define($constpref.'_BNAME_CONTENT','コンテンツ内容');
 define($constpref.'_BNAME_LIST','コンテンツ一覧');
 
+// Notify Categories
+define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');
+define($constpref.'_NOTCAT_GLOBALDSC', 'このpicoモジュール全体における通知オプション');
+
+// Each Notifications
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', '承認待ち');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'コンテンツの新規登録・変更などで、承認が必要な投稿があった場合に通知する（モデレータ以外には通知されません）');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: 承認待ち');
+
 }
 
 

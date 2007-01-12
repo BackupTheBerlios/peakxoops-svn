@@ -22,7 +22,24 @@ if( isset( $_POST['contentman_post'] ) && $category4assign['can_edit'] ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	// update the content
-	pico_updatecontent( $mydirname , $content_id ) ;
+	pico_updatecontent( $mydirname , $content_id , $category4assign['post_auto_approved'] ) ;
+	if( $category4assign['post_auto_approved'] ) {
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
+	} else {
+		// Notify for new waiting content (only for admin or mod)
+		$users2notify = pico_get_moderators( $mydirname , $cat_id ) ;
+		if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
+		pico_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 2 , _MD_PICO_MSG_CONTENTWAITINGUPDATE ) ;
+	}
+	exit ;
+}
+if( isset( $_POST['contentman_copyfromwaiting'] ) && $category4assign['isadminormod'] ) {
+	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+	// copy from waiting eg) body_waiting -> body
+	pico_copyfromwaitingcontent( $mydirname , $content_id ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	exit ;
 }
@@ -40,7 +57,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$content = pico_get_requests4content( $mydirname ) ;
+	$content = pico_get_requests4content( $mydirname , $category4assign['post_auto_approved'] ) ;
 	$content4assign = array_map( 'htmlspecialchars' , $content ) ;
 	$content4assign['id'] = $content_id ;
 	$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] ) ;
@@ -63,8 +80,11 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'cat_id' => intval( $content_row['cat_id'] ) ,
 		'id' => intval( $content_row['content_id'] ) ,
 		'subject' => htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
+		'subject_waiting' => htmlspecialchars( $content_row['subject_waiting'] , ENT_QUOTES ) ,
 		'htmlheader' => htmlspecialchars( $content_row['htmlheader'] , ENT_QUOTES ) ,
+		'htmlheader_waiting' => htmlspecialchars( $content_row['htmlheader_waiting'] , ENT_QUOTES ) ,
 		'body' => htmlspecialchars( $content_row['body'] , ENT_QUOTES ) ,
+		'body_waiting' => htmlspecialchars( $content_row['body_waiting'] , ENT_QUOTES ) ,
 		'body_raw' => $content_row['body'] ,
 		'filters' => htmlspecialchars( $content_row['filters'] , ENT_QUOTES ) ,
 		'filter_infos' => pico_get_filter_infos( $content_row['filters'] ) ,
@@ -75,6 +95,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'show_in_menu' => intval( $content_row['show_in_menu'] ) ,
 		'allow_comment' => intval( $content_row['allow_comment'] ) ,
 	) ;
+	$content4assign += $content_row ;
 }
 
 // WYSIWYG (some editor needs global scope ... orz)

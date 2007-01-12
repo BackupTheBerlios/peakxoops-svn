@@ -217,7 +217,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 
 
 // get requests for content's sql (parse options)
-function pico_get_requests4content( $mydirname )
+function pico_get_requests4content( $mydirname , $auto_approval = true )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
@@ -235,12 +235,13 @@ function pico_get_requests4content( $mydirname )
 	foreach( $_POST as $key => $val ) {
 		if( substr( $key , 0 , 15 ) == 'filter_enabled_' && $val ) {
 			$name = substr( $key , 15 ) ;
+			if( ! $auto_approval && in_array( $name , array( 'eval' , 'xoopstpl' ) ) ) continue ;
 			$filters[ $name ] = intval( @$_POST['filter_weight_'.$name] ) ;
 		}
 	}
 	asort( $filters ) ;
 
-	return array( 
+	$ret = array( 
 		'cat_id' => $cat_id ,
 		'subject' => $myts->stripSlashesGPC( @$_POST['subject'] ) ,
 		'htmlheader' => $myts->stripSlashesGPC( @$_POST['htmlheader'] ) ,
@@ -248,28 +249,49 @@ function pico_get_requests4content( $mydirname )
 		'filters' => implode( '|' , array_keys( $filters ) ) ,
 		'weight' => intval( @$_POST['weight'] ) ,
 		'use_cache' => empty( $_POST['use_cache'] ) ? 0 : 1 ,
-		'visible' => empty( $_POST['visible'] ) ? 0 : 1 ,
 		'show_in_navi' => empty( $_POST['show_in_navi'] ) ? 0 : 1 ,
 		'show_in_menu' => empty( $_POST['show_in_menu'] ) ? 0 : 1 ,
 		'allow_comment' => empty( $_POST['allow_comment'] ) ? 0 : 1 ,
 	) ;
+
+	// approval
+	if( $auto_approval ) {
+		$ret += array(
+			'subject_waiting' => '' ,
+			'htmlheader_waiting' => '' ,
+			'body_waiting' => '' ,
+			'visible' => empty( $_POST['visible'] ) ? 0 : 1 ,
+			'approval' => 1 ,
+		) ;
+	} else {
+		$ret += array(
+			'subject_waiting' => $myts->stripSlashesGPC( @$_POST['subject'] ) ,
+			'htmlheader_waiting' => $myts->stripSlashesGPC( @$_POST['htmlheader'] ) ,
+			'body_waiting' => $myts->stripSlashesGPC( @$_POST['body'] ) ,
+			'visible' => 0 ,
+			'approval' => 0 ,
+		) ;
+	}
+	return $ret ;
 }
 
 
 // create content
-function pico_makecontent( $mydirname )
+function pico_makecontent( $mydirname , $auto_approval = true )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname ) ;
-	$set = '' ;
+	$requests = pico_get_requests4content( $mydirname , $auto_approval ) ;
+	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
+	$set = $auto_approval ? '' : "visible=0,subject='"._MD_PICO_WAITINGREGISTER."',htmlheader='',body=''," ;
 	foreach( $requests as $key => $val ) {
+		if( in_array( $key , $ignore_requests ) ) continue ;
 		$set .= "`$key`='".addslashes( $val )."'," ;
 	}
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='',htmlheader_waiting='',body_waiting=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_content_id = $db->getInsertId() ;
 
 	return $new_content_id ;
@@ -277,19 +299,35 @@ function pico_makecontent( $mydirname )
 
 
 // update content
-function pico_updatecontent( $mydirname , $content_id )
+function pico_updatecontent( $mydirname , $content_id , $auto_approval = true )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname ) ;
+	$requests = pico_get_requests4content( $mydirname , $auto_approval ) ;
+	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
 	$set = '' ;
 	foreach( $requests as $key => $val ) {
+		if( in_array( $key , $ignore_requests ) ) continue ;
 		$set .= "`$key`='".addslashes( $val )."'," ;
 	}
 
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+
+	return $content_id ;
+}
+
+
+// copy from waiting fields
+function pico_copyfromwaitingcontent( $mydirname , $content_id )
+{
+	global $xoopsUser ;
+
+	$db =& Database::getInstance() ;
+
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body=body_waiting, subject=subject_waiting, htmlheader=htmlheader_waiting, visible=1, approval=1 WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='',`modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return $content_id ;
 }

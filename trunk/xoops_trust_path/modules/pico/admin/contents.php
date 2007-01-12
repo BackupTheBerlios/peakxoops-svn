@@ -29,10 +29,14 @@ foreach( $modules as $module ) {
 
 // get $cat_id
 $cat_id = intval( @$_GET['cat_id'] ) ;
-list( $cat_id , $cat_title ) = $db->fetchRow( $db->query( "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
-if( empty( $cat_id ) ) {
-	$cat_id = 0 ;
-	$cat_title = _MD_PICO_TOP ;
+if( $cat_id == -1 ) {
+	$cat_title = _MD_PICO_ALLCONTENTS ;
+} else {
+	list( $cat_id , $cat_title ) = $db->fetchRow( $db->query( "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
+	if( empty( $cat_id ) ) {
+		$cat_id = 0 ;
+		$cat_title = _MD_PICO_TOP ;
+	}
 }
 
 
@@ -132,7 +136,8 @@ while( list( $id , $title , $depth ) = $db->fetchRow( $crs ) ) {
 }
 
 // fetch contents
-$ors = $db->query( "SELECT o.*,up.uname AS poster_uname,um.uname AS modifier_uname  FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix("users")." up ON o.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON o.modifier_uid=um.uid WHERE cat_id='$cat_id' ORDER BY o.weight,o.content_id" ) ;
+$whr_cat_id = $cat_id == -1 ? "1" : "cat_id=$cat_id" ;
+$ors = $db->query( "SELECT o.*,up.uname AS poster_uname,um.uname AS modifier_uname  FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix("users")." up ON o.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON o.modifier_uid=um.uid WHERE ($whr_cat_id) ORDER BY o.weight,o.content_id" ) ;
 $contents4assign = array() ;
 while( $content_row = $db->fetchArray( $ors ) ) {
 	$content4assign = array(
@@ -162,7 +167,8 @@ $tpl->assign( array(
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
-	'cat_options' => $cat_options ,
+	'cat_options' => $cat_options + array( -1 => _MD_PICO_ALLCONTENTS ) ,
+	'cat_options4move' => $cat_options ,
 	'module_options' => $exportable_modules ,
 	'contents' => $contents4assign ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico_admin') ,

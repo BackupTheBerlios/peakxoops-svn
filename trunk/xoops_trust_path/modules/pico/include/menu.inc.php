@@ -7,6 +7,7 @@ if( ! empty( $category_permissions[0] ) ) {
 		'id' => 0 ,
 		'title' => $xoopsModule->getVar('name') ,
 		'depth_in_tree' => 0 ,
+		'isadminormod' => ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ,
 	) ;
 }
 
@@ -22,18 +23,25 @@ while( $cat_row = $db->fetchArray( $crs ) ) {
 		'id' => intval( $cat_row['cat_id'] ) ,
 		'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 		'depth_in_tree' => $cat_row['cat_depth_in_tree'] + 1 ,
+		'isadminormod' => ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ,
 	) ;
 	$categories4assign[ $cat_id ] = $category4assign + $cat_row ;
 }
 
 foreach( array_keys( $categories4assign ) as $cat_id ) {
 	// contents loop
-	$sql = "SELECT o.* FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=$cat_id AND o.visible AND o.show_in_menu ORDER BY o.weight" ;
+	$sql = "SELECT o.* FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=$cat_id ORDER BY o.weight" ;
 	if( ! $ors = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;
 	}
+	$invisible_contents_counter = 0 ;
 	while( $content_row = $db->fetchArray( $ors ) ) {
+		if( ! $content_row['visible'] ) {
+			$invisible_contents_counter ++ ;
+			continue ;
+		}
+		if( ! $content_row['show_in_menu'] ) continue ;
 		$content4assign = array(
 			'id' => intval( $content_row['content_id'] ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
@@ -42,6 +50,7 @@ foreach( array_keys( $categories4assign ) as $cat_id ) {
 		) ;
 		$categories4assign[ $cat_id ]['contents'][] = $content4assign + $content_row ;
 	}
+	$categories4assign[ $cat_id ]['invisible_contents_counter'] = $invisible_contents_counter ;
 }
 
 ?>

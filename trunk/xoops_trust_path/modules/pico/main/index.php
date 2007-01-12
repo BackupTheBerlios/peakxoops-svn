@@ -15,7 +15,7 @@ require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 
 if( empty( $content_id ) ) {
-	if( empty( $cat_id ) && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
+	if( empty( $cat_id ) && @$_GET['cat_id'] !== "0" && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
 		// auto-made menu
 		require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
 		$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;

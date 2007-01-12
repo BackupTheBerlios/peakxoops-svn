@@ -17,12 +17,24 @@
 	<dt style="margin:5px 0 0;padding:3px;background-color:#eee;">
 		<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>">
 			<{$category.title}>
+			<{if $category.isadminormod && $category.invisible_contents_counter}>
+				<span style="color:red;">(<{$category.invisible_contents_counter}>)</span>
+			<{/if}>
 		</a>
 	</dt>
 	<dd style="margin:0;"><ul>
 	<{foreach item=content from=$category.contents}>
-		<li style="margin:0;background-color:#fff;"><a href="<{$mod_url}>/index.php?content_id=<{$content.id}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
+		<li style="margin:0;background-color:#fff;">
+			<a href="<{$mod_url}>/index.php?content_id=<{$content.id}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a>
+			<{if $category.isadminormod && ! $content.approval}>
+				<span style="color:red;">(<{$smarty.const._MD_PICO_WAITINGUPDATE}>)</span>
+			<{/if}>
+		</li>
 	<{/foreach}>
 	</ul></dd>
 </dl>
 <{/foreach}>
+
+<hr class="notification" />
+<{include file='db:system_notification_select.html'}>
+<!-- end module contents -->

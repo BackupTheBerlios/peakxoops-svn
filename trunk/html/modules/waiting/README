@@ -135,6 +135,7 @@ PLUGINS:
 -PDlinks (by flying.tux)
 -PDdownloads (by flying.tux)
 -piCal (by GIJOE) (>=0.8 has the module side plugin)
+-pico (by GIJOE) (D3 module side plugin)
 -popnupblog (by dashboard)
 -simpleblog (by kousuke)
 -smartfaq (by mariuss)
@@ -161,6 +162,8 @@ PLUGINS:
 
 CHANGES:
 
+ver 0.95|
+- added D3 module ready
 - added french (thx marco)
 - added portuguesebr (thx Izzy)
 

@@ -9,6 +9,6 @@ define('_AM_WAITING_MODNAME', 'Modules');
 define('_AM_WAITING_STATUS', 'Status');
 
 define('_AM_WAITING_PLUGINLIST', 'Plugin Checker');
-define('_AM_WAITING_PLUGINLIST_DESC', '<b>module:</b> using the original plugin included in the module<br /><b>waiting:</b> using the bundled plugin in Waiting Contents Extensible<br /><b>Blank:</b> no plugins found');
+define('_AM_WAITING_PLUGINLIST_DESC', '<b>module:</b> using the original plugin included in the module<br /><b>built-in:</b> using the bundled plugin in Waiting Contents Extensible<br /><b>Blank:</b> no plugins found');
 
 ?>

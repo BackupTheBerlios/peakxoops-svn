@@ -49,98 +49,75 @@ function b_waiting_waiting_show($options)
 		}
 	}
 
-    // read language files for plugins
-    $lang_dir = XOOPS_ROOT_PATH . "/modules/waiting/language";
-    if( file_exists( "$lang_dir/$userlang/plugins.php" ) ) {
-        include_once( "$lang_dir/$userlang/plugins.php" ) ;
-    } else if( file_exists( "$lang_dir/english/plugins.php" ) ) {
-        include_once( "$lang_dir/english/plugins.php" ) ;
-    }
+	require_once dirname(dirname(__FILE__)).'/include/functions.php' ;
 
-    $plugins_path = XOOPS_ROOT_PATH . "/modules/waiting/plugins";
-    $xoopsDB =& Database::getInstance();
-    $module_handler =& xoops_gethandler('module');
-    $block = array();
+	// read language files for plugins
+	$lang_dir = XOOPS_ROOT_PATH . "/modules/waiting/language";
+	if( file_exists( "$lang_dir/$userlang/plugins.php" ) ) {
+		include_once( "$lang_dir/$userlang/plugins.php" ) ;
+	} else if( file_exists( "$lang_dir/english/plugins.php" ) ) {
+		include_once( "$lang_dir/english/plugins.php" ) ;
+	}
 
-    // get module's list installed
-    $mod_lists = $module_handler->getList(new Criteria(1,1),true);
-    //print_r($mod_lists);
-    foreach ($mod_lists as $mod => $name){
-        // moudule's side plugin (prior than waiting side plugin)
-        // check whether the module has a plugin for waiting.
-        //  plugin modules/DIRNAME/include/waiting.plugin.php
-        //  lang   modules/DIRNAME/language/LANG/waiting.php
-        $plugin_flag = false;
-        $mod_plugin_file = XOOPS_ROOT_PATH."/modules/$mod/include/waiting.plugin.php";
-        if(file_exists($mod_plugin_file)){
-            // plugin found in the module
-            // language file needed by the module's side plugin
-            $mod_plugin_lng = XOOPS_ROOT_PATH."/modules/$mod/language/$userlang/waiting.php";
-            if(file_exists($mod_plugin_lng)){
-                include_once($mod_plugin_lng);
-            }else{
-                $mod_plugin_lng = XOOPS_ROOT_PATH."/modules/".$mod."/language/english/waiting.php";
-                if(file_exists($mod_plugin_lng)){
-                    include_once($mod_plugin_lng);
-                }
-            }
-            // main of module's side plugin
-            require_once($mod_plugin_file);
-            $plugin_flag = true;
-        }else{
-            // search from waiting if there are no plugin in the module
-            $plugin_file = "$plugins_path/{$mod}.php";
-            // no language files will be read
-            // main of waiting's side plugin
-            if (file_exists($plugin_file)){
-                include_once($plugin_file);
-                $plugin_flag = true;
-            }
-        }
+	$plugins_path = XOOPS_ROOT_PATH . "/modules/waiting/plugins";
+	$xoopsDB =& Database::getInstance();
+	$module_handler =& xoops_gethandler('module');
+	$block = array();
 
-        // call the plugin
-        if($plugin_flag){
-            if (function_exists("b_waiting_" . $mod)){
-                // get the list of waitings
-                $_tmp = call_user_func("b_waiting_" . $mod);
-                if(isset($_tmp["lang_linkname"])){
-                    if( @$_tmp["pendingnum"] > 0 || $options[0] > 0){
-                        $block["modules"][$mod]["pending"][] = $_tmp;
-                    }
-                    unset($_tmp);
-                }else{
-                    // Judging the plugin returns multiple items
-                    // if lang_linkname does not exist
-                    foreach($_tmp as $_one){
-                        if( @$_one["pendingnum"] > 0 || $options[0] > 0){
-                            $block["modules"][$mod]["pending"][] = $_one;
-                        }
-                    }
-                }
-            }
+	// get module's list installed
+	$mod_lists = $module_handler->getList(new Criteria(1,1),true);
+	foreach( $mod_lists as $dirname => $name ) {
 
-            // for older compatibilities
-            // Hacked by GIJOE
-            $i = 0 ;
-            while( 1 ) {
-                $function_name = "b_waiting_{$mod}_$i" ;
-                if (function_exists( $function_name )){
-                    $_tmp = call_user_func( $function_name ) ;
-                    ++ $i ;
-                    if($_tmp["pendingnum"] > 0 || $options[0] > 0){
-                        $block["modules"][$mod]["pending"][] = $_tmp;
-                    }
-                    unset($_tmp);
-                } else break ;
-            }
-            // End of Hack
-            // if(count($block["modules"][$mod]) > 0){
-            if ( ! empty( $block["modules"][$mod] ) ) {
-                $block["modules"][$mod]["name"] = $name;
-            }
-        }
-    }
-    //print_r($block);
+		$plugin_info = waiting_get_plugin_info( $dirname , $xoopsConfig['language'] ) ;
+		if( empty( $plugin_info ) || empty( $plugin_info['plugin_path'] ) ) continue ;
+
+		if( ! empty( $plugin_info['langfile_path'] ) ) {
+			include_once $plugin_info['langfile_path'] ;
+		}
+		include_once $plugin_info['plugin_path'] ;
+
+		// call the plugin
+		if( function_exists( @$plugin_info['func'] ) ) {
+			// get the list of waitings
+			$_tmp = call_user_func( $plugin_info['func'] , $dirname ) ;
+			if( isset( $_tmp["lang_linkname"] ) ) {
+				if( @$_tmp["pendingnum"] > 0 || $options[0] > 0){
+					$block["modules"][$dirname]["pending"][] = $_tmp;
+				}
+				unset( $_tmp ) ;
+			} else {
+				// Judging the plugin returns multiple items
+				// if lang_linkname does not exist
+				foreach( $_tmp as $_one ) {
+					if( @$_one["pendingnum"] > 0 || $options[0] > 0){
+						$block["modules"][$dirname]["pending"][] = $_one;
+					}
+				}
+			}
+		}
+
+		// for older compatibilities
+		// Hacked by GIJOE
+		$i = 0 ;
+		while( 1 ) {
+			$function_name = "b_waiting_{$dirname}_$i" ;
+			if (function_exists( $function_name )){
+				$_tmp = call_user_func( $function_name ) ;
+				++ $i ;
+				if($_tmp["pendingnum"] > 0 || $options[0] > 0){
+					$block["modules"][$dirname]["pending"][] = $_tmp;
+				}
+				unset($_tmp);
+			} else break ;
+		}
+		// End of Hack
+
+		// if(count($block["modules"][$dirname]) > 0){
+		if ( ! empty( $block["modules"][$dirname] ) ) {
+			$block["modules"][$dirname]["name"] = $name;
+		}
+	}
+	//print_r($block);
 
 	// SQL cache touch (you have to use this cache with block's cache by system)
 	if( empty( $block ) && $sql_cache_min > 0 ) {
@@ -148,7 +125,7 @@ function b_waiting_waiting_show($options)
 		fclose( $fp ) ;
 	}
 
-    return $block;
+	return $block ;
 }
 
 function b_waiting_waiting_edit($options){
@@ -157,19 +134,19 @@ function b_waiting_waiting_edit($options){
 
 	$sql_cache_min = empty( $options[1] ) ? 0 : intval( $options[1] ) ;
 
-    $form = _MB_WAITING_NOWAITING_DISPLAY.":&nbsp;<input type='radio' name='options[0]' value='1'";
-    if ( $options[0] == 1 ) {
-        $form .= " checked='checked'";
-    }
-    $form .= " />&nbsp;"._YES."<input type='radio' name='options[0]' value='0'";
-    if ( $options[0] == 0 ) {
-        $form .= " checked='checked'";
-    }
-    $form .=" />&nbsp;"._NO."<br />\n";
-    $form .= sprintf( _MINUTES , _MB_WAITING_SQL_CACHE.":&nbsp;<input type='text' name='options[1]' value='$sql_cache_min' size='2' />" ) ;
-    $form .="<br />\n<br />\n<a href='$mod_url/admin/index.php'><img src='$mod_url/images/folder16.gif' />"._MB_WAITING_LINKTOPLUGINCHECK."</a>" ;
+	$form = _MB_WAITING_NOWAITING_DISPLAY.":&nbsp;<input type='radio' name='options[0]' value='1'";
+	if ( $options[0] == 1 ) {
+		$form .= " checked='checked'";
+	}
+	$form .= " />&nbsp;"._YES."<input type='radio' name='options[0]' value='0'";
+	if ( $options[0] == 0 ) {
+		$form .= " checked='checked'";
+	}
+	$form .=" />&nbsp;"._NO."<br />\n";
+	$form .= sprintf( _MINUTES , _MB_WAITING_SQL_CACHE.":&nbsp;<input type='text' name='options[1]' value='$sql_cache_min' size='2' />" ) ;
+	$form .="<br />\n<br />\n<a href='$mod_url/admin/index.php'><img src='$mod_url/images/folder16.gif' />"._MB_WAITING_LINKTOPLUGINCHECK."</a>" ;
 
-    return $form;
+	return $form;
 }
 
 ?>

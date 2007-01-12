@@ -9,6 +9,6 @@ define('_AM_WAITING_MODNAME', 'モジュール名');
 define('_AM_WAITING_STATUS', '対応状況');
 
 define('_AM_WAITING_PLUGINLIST', '拡張承認待ちコンテンツ対応状況');
-define('_AM_WAITING_PLUGINLIST_DESC', '<b>module:</b>モジュールが対応しています。<br /><b>waiting:</b> プラグインがインストールされています<br /><b>空欄:</b> 拡張承認待ちコンテンツに対応していません');
+define('_AM_WAITING_PLUGINLIST_DESC', '<b>module:</b>モジュールが対応しています。<br /><b>built-in:</b> このモジュールにバンドルされたプラグインを利用します<br /><b>空欄:</b> 拡張承認待ちコンテンツに対応していません');
 
 ?>

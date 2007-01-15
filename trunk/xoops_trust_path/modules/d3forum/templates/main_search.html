@@ -13,7 +13,7 @@
 
 <table class="outer search d3f_form_table">
 	<tr>
-		<th><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
+		<th class="head"><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
 		<td class="even">
 			<input type="text" name="keyword" id="keywords" size="48" value="<{$keyword}>" />
 			<fieldset>
@@ -29,7 +29,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th><{$smarty.const._MD_D3FORUM_FORUM}></th>
+		<th class="head"><{$smarty.const._MD_D3FORUM_FORUM}></th>
 		<td class="even">
 			<select name="forum_id">
 				<option value="">-<{$smarty.const._MD_D3FORUM_WHOLE}>-</option>
@@ -38,11 +38,11 @@
 		</td>
 	</tr>
 	<tr>
-		<th><label for="searchin_poster"><{$smarty.const._MD_D3FORUM_POSTER}></label></th>
+		<th class="head"><label for="searchin_poster"><{$smarty.const._MD_D3FORUM_POSTER}></label></th>
 		<td class="even"><input type="text" name="search_username" id="searchin_poster" value="<{$uname}>" /></td>
 	</tr>
 	<tr>
-		<th><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
+		<th class="head"><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
 		<td class="even"><{html_radios name="sortby" options=$sortby_options selected=$sortby_selected}></td>
 	</tr>
 </table>
@@ -65,7 +65,7 @@
 	<th abbr="<{$smarty.const._MD_D3FORUM_FORUM}>"><{$smarty.const._MD_D3FORUM_FORUM}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_SUBJECT}>"><{$smarty.const._MD_D3FORUM_SUBJECT}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_POSTER}>"><{$smarty.const._MD_D3FORUM_POSTER}></th>
-	<th abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{$smarty.const._MD_D3FORUM_VIEWS}></th>
+	<th abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{if $mod_config.use_vote}><{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}><{else}><{$smarty.const._MD_D3FORUM_VIEWS}><{/if}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_ON}>"><{$smarty.const._MD_D3FORUM_ON}></th>
 </tr>
 </thead>
@@ -75,7 +75,7 @@
 	<td class="even d3f_topictitle"><a href="<{$mod_url}>/index.php?forum_id=<{$post.forum_id}>"><{$post.forum_title}></a></td>
 	<td class="odd d3f_topictitle"><a href="<{$mod_url}>/index.php?post_id=<{$post.post_id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" /><{$post.subject}></a> <{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}></td>
 	<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{$post.poster_uname}></a></td>
-	<td class="odd"><{$post.topic_views}></td>
+	<td class="odd"><{if $mod_config.use_vote}><{$post.votes_avg|string_format:"%.2f"}>/<{$post.votes_count}><{else}><{$post.topic_views}><{/if}></td>
 	<td class="even"><{$post.post_time_formatted}></td>
 </tr>
 <{/foreach}>

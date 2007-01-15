@@ -70,7 +70,7 @@ define('_MD_D3FORUM_MARKEDYES_DESC','You have checked this topic as <em class="d
 define('_MD_D3FORUM_MARKEDNO_DESC','You can check this topic as <em class="d3f_attn" title="MARKED topics are displayed in the top of list">MARKED</em>');
 define('_MD_D3FORUM_ALT_SOLVEDYES','Solved topic');
 define('_MD_D3FORUM_ALT_SOLVEDNO','Unsolved topic');
-define('_MD_D3FORUM_SOLVEDYES_DESC','This topic is<em class="d3f_attn" title="SOLVED topics are treated as closed topics by admins or moderators">SOLVED</em>');
+define('_MD_D3FORUM_SOLVEDYES_DESC','This topic is <em class="d3f_attn" title="SOLVED topics are treated as closed topics by admins or moderators">SOLVED</em>');
 define('_MD_D3FORUM_SOLVEDNO_DESC','This topic is <em class="d3f_attn" title="Responses are welcome">UNSOLVED</em>');
 define('_MD_D3FORUM_MARK_TURNON','Mark this topic');
 define('_MD_D3FORUM_MARK_TURNOFF','Unmark this topic');

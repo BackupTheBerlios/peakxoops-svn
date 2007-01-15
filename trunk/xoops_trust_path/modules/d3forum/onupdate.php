@@ -27,6 +27,12 @@ function d3forum_onupdate_base( $module , $mydirname )
 
 	// TABLES (write here ALTER TABLE etc. if necessary)
 
+	// configs (Though I know it is not a recommended way...)
+	$check_sql = "SHOW COLUMNS FROM ".$db->prefix("config")." LIKE 'conf_title'" ;
+	if( ( $result = $db->query( $check_sql ) ) && ( $myrow = $db->fetchArray( $result ) ) && @$myrow['Type'] == 'varchar(30)' ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix("config")." MODIFY `conf_title` varchar(255) NOT NULL default '', MODIFY `conf_desc` varchar(255) NOT NULL default ''" ) ;
+	}
+
 	// 0.1x -> 0.2x
 	$check_sql = "SELECT cat_unique_path FROM ".$db->prefix($mydirname."_categories") ;
 	if( ! $db->query( $check_sql ) ) {

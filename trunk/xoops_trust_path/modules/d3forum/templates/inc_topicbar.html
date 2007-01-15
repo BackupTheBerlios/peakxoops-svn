@@ -48,6 +48,12 @@
 	<{/if}>
 	
 	<{if $forum.isadminormod}>
+
+		<{if $topic.invisible}>
+			<!-- invisible -->
+			<li><strong><{$smarty.const._MD_D3FORUM_TOPICINVISIBLE}></strong></li>
+		<{/if}>
+
 		<!-- topic manager -->
 		<li><a href="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>" title="<{$smarty.const._MD_D3FORUM_TOPICMANAGER_DESC}>"><{$smarty.const._MD_D3FORUM_TOPICMANAGER}></a></li>
 	<{/if}>

@@ -97,7 +97,7 @@ if( ! isset( $_GET['submit'] ) ) {
 	) ;
 	$sortby = in_array( @$_GET['sortby'] , $allowed_sortbys ) ? $_GET['sortby'] : "p.post_time desc" ;
 
-	$sql = 'SELECT u.uid,u.uname,p.post_id,p.subject,p.post_time,p.icon,LENGTH(p.post_text) AS body_length,t.topic_id,t.topic_title,t.topic_views,t.topic_posts_count,f.forum_id,f.forum_title,c.cat_id,c.cat_title FROM '.$xoopsDB->prefix($mydirname.'_posts').' p LEFT JOIN '.$xoopsDB->prefix('users').' u ON p.uid=u.uid LEFT JOIN '.$xoopsDB->prefix($mydirname.'_topics').' t ON p.topic_id = t.topic_id LEFT JOIN '.$xoopsDB->prefix($mydirname.'_forums').' f ON t.forum_id = f.forum_id LEFT JOIN '.$xoopsDB->prefix($mydirname.'_categories')." c ON f.cat_id = c.cat_id WHERE ($whr_keyword) AND ($whr_forum) AND ($whr_uname) AND ($whr_read4forum) AND ($whr_read4cat) ORDER BY $sortby" ;
+	$sql = 'SELECT u.uid,u.uname,p.post_id,p.subject,p.post_time,p.icon,LENGTH(p.post_text) AS body_length,p.votes_count,p.votes_sum,t.topic_id,t.topic_title,t.topic_views,t.topic_posts_count,f.forum_id,f.forum_title,c.cat_id,c.cat_title FROM '.$xoopsDB->prefix($mydirname.'_posts').' p LEFT JOIN '.$xoopsDB->prefix('users').' u ON p.uid=u.uid LEFT JOIN '.$xoopsDB->prefix($mydirname.'_topics').' t ON p.topic_id = t.topic_id LEFT JOIN '.$xoopsDB->prefix($mydirname.'_forums').' f ON t.forum_id = f.forum_id LEFT JOIN '.$xoopsDB->prefix($mydirname.'_categories')." c ON f.cat_id = c.cat_id WHERE ($whr_keyword) AND ($whr_forum) AND ($whr_uname) AND ($whr_read4forum) AND ($whr_read4cat) ORDER BY $sortby" ;
 
 	// TODO :-)
 	if( ! $result = $xoopsDB->query( $sql , 100 , 0 ) ) {
@@ -123,7 +123,8 @@ if( ! isset( $_GET['submit'] ) ) {
 			'poster_uname' => $myts->makeTboxData4Show($row['uname']),
 			'post_time' => intval( $row['post_time'] ) ,
 			'post_time_formatted' => formatTimestamp( $row['post_time'] , 'm' ) ,
-		);
+			'votes_avg' => $row['votes_count'] ? $row['votes_sum'] / (double)$row['votes_count'] : 0 ,
+		) + $row ;
 	}
 
 }

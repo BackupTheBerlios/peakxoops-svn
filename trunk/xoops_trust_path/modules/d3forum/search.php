@@ -37,7 +37,7 @@ function d3forum_global_search_base( $mydirname , $keywords , $andor , $limit , 
 		$whr_query .= " (p.subject LIKE '%$word4sql%' OR p.post_text LIKE '%$word4sql%')" ;
 	}
 
-	$sql = "SELECT p.post_id,p.topic_id,p.post_time,p.uid,p.subject,p.html,p.smiley,p.xcode,p.br,$select4con FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON t.topic_id=p.topic_id WHERE ($whr_forum) AND ($whr_uid) AND ($whr_query) ORDER BY p.post_time DESC" ;
+	$sql = "SELECT p.post_id,p.topic_id,p.post_time,p.uid,p.subject,p.html,p.smiley,p.xcode,p.br,$select4con FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON t.topic_id=p.topic_id WHERE ($whr_forum) AND ($whr_uid) AND ($whr_query) AND ! topic_invisible ORDER BY p.post_time DESC" ;
 
 	$result = $db->query( $sql , $limit , $offset ) ;
 	$ret = array() ;

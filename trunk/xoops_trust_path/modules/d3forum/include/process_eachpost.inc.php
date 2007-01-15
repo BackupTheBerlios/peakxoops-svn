@@ -54,8 +54,8 @@
 			$can_edit = true ;
 			$can_delete = true ;
 		} else if( $post_row['uid'] == $uid ) {
-			$can_edit = $can_edit && time() < $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ? true : false ;
-			$can_delete = $can_delete && time() < $post_row['post_time'] + $xoopsModuleConfig['selfdellimit'] ? true : false ;
+			$can_edit = $forum_permissions[ $forum_id ]['can_edit'] && time() < $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ? true : false ;
+			$can_delete = $forum_permissions[ $forum_id ]['can_delete'] && time() < $post_row['post_time'] + $xoopsModuleConfig['selfdellimit'] ? true : false ;
 		} else {
 			$can_edit = false ;
 			$can_delete = false ;
@@ -80,8 +80,8 @@
 			$can_edit = true ;
 			$can_delete = true ;
 		} else if( $post_row['uid_hidden'] && $post_row['uid_hidden'] == $uid  ) {
-			$can_edit = $can_edit && time() < $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ? true : false ;
-			$can_delete = $can_delete && time() < $post_row['post_time'] + $xoopsModuleConfig['selfdellimit'] ? true : false ;
+			$can_edit = $forum_permissions[ $forum_id ]['can_edit'] && time() < $post_row['post_time'] + $xoopsModuleConfig['selfeditlimit'] ? true : false ;
+			$can_delete = $forum_permissions[ $forum_id ]['can_delete'] && time() < $post_row['post_time'] + $xoopsModuleConfig['selfdellimit'] ? true : false ;
 		} else {
 			$can_edit = false ;
 			$can_delete = false ;

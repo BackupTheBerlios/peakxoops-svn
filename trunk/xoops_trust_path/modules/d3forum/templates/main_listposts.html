@@ -49,8 +49,12 @@
 
 <!-- forum jump -->
 <form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get" style="clear:both;">
-	<p><select name="forum_id"><{$forum_jumpbox_options}></select>
-	<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" /></p>
+	<p>
+		<select name="forum_id"><{$forum_jumpbox_options}></select>
+		<input type="submit" value="<{$smarty.const._MD_D3FORUM_BTN_JUMPTOFORUM}>" />
+		&nbsp;
+		<a href="<{$mod_url}>/index.php?page=search"><{$smarty.const._MD_D3FORUM_LINK_ADVSEARCH}></a>
+	</p>
 </form>
 
 <hr class="notification" />

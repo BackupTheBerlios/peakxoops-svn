@@ -44,8 +44,10 @@
 <div class="d3f_info_sub">
 <{if $post.poster_uid != 0}><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{/if}><{$post.poster_uname}><{if $post.poster_uid != 0}></a><{/if}>&nbsp;
 <{if $post.poster_uid != 0}>
-	<img src="<{$xoops_upload_url}>/<{$post.poster_rank_image}>" alt="" />
-	<{$post.poster_rank_title}>
+	<{if $post.poster_rank_title}>
+		<img src="<{$xoops_upload_url}>/<{$post.poster_rank_image}>" alt="" />
+		<{$post.poster_rank_title}>
+	<{/if}>
 	<{* <{$smarty.const._MD_D3FORUM_POSTERJOINED}>: <{$post.poster_regdate_formatted}> *}>
 	<{if $post.poster_from}><{$smarty.const._MD_D3FORUM_POSTERFROM}>: <{$post.poster_from}><{/if}>&nbsp;
 	<{$smarty.const._MD_D3FORUM_POSTERPOSTS}>: <{$post.poster_posts_count}>
@@ -61,7 +63,7 @@
 <!-- post -->
 <div class="d3f_body">
 <{if $post.poster_avatar}>
-	<img src="<{$xoops_upload_url}>/<{$post.poster_avatar.path}>" width="height="<{$post.poster_avatar.width}>"" height="<{$post.poster_avatar.height}>" alt="" class="d3f_avatar" />
+	<img src="<{$xoops_upload_url}>/<{$post.poster_avatar.path}>" width="<{$post.poster_avatar.width}>" height="<{$post.poster_avatar.height}>" alt="" class="d3f_avatar" />
 <{/if}>
 <{$post.post_text}>
 <{if $post.signature}>

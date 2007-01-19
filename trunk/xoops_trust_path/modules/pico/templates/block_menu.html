@@ -11,7 +11,7 @@
 	</dt>
 	<dd style="margin:0;"><ul>
 	<{foreach item=content from=$category.contents}>
-		<li style="margin:0;background-color:#fff;"><a href="<{$block.mod_url}>/index.php?content_id=<{$content.id}>" title="<{$block.lang_lastupdated}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
+		<li style="margin:0;background-color:#fff;"><a href="<{$block.mod_url}>/<{$content.link}>" title="<{$block.lang_lastupdated}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
 	<{/foreach}>
 	</ul></dd>
 </dl>

@@ -1,10 +1,13 @@
 <?php
 
-function pico_xoopstpl( $mydirname , $text , $id )
+define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',0);
+define('_MD_PICO_FILTERS_XOOPSTPLISINSECURE',1); // only admins/moderators can use it
+
+function pico_xoopstpl( $mydirname , $text , $content_row )
 {
 	$tpl =& new XoopsTpl() ;
 
-	$temp_file = XOOPS_COMPILE_PATH.'/'.substr(md5(XOOPS_DB_PREFIX.$id),16).$mydirname.'_temp_resource' ;
+	$temp_file = XOOPS_COMPILE_PATH.'/'.substr(md5(XOOPS_DB_PREFIX.$content_row['content_id']),16).$mydirname.'_temp_resource' ;
 	if( ! $text || $text != @file_get_contents( $temp_file ) ) {
 		$fw = fopen( $temp_file , 'wb' ) ;
 		fwrite( $fw , $text ) ;

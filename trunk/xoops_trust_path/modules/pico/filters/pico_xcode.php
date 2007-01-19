@@ -1,6 +1,8 @@
 <?php
 
-function pico_xcode( $mydirname , $text )
+define('_MD_PICO_FILTERS_XCODEINITWEIGHT',30);
+
+function pico_xcode( $mydirname , $text , $content_row )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 

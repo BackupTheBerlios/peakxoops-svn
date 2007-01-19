@@ -293,7 +293,7 @@ function pico_escape4mailto( $text )
 
 
 // get filter's informations under XOOPS_TRUST_PATH/modules/pico/filters/
-function pico_get_filter_infos( $filters_separated_pipe )
+function pico_get_filter_infos( $filters_separated_pipe , $isadminormod = false )
 {
 	$filters = array() ;
 	$dh = opendir( XOOPS_TRUST_PATH.'/modules/pico/filters' ) ;
@@ -301,6 +301,12 @@ function pico_get_filter_infos( $filters_separated_pipe )
 		if( preg_match( '/^pico\_(.*)\.php$/' , $file , $regs ) ) {
 			$name = $regs[1] ;
 			$constpref = '_MD_PICO_FILTERS_' . strtoupper( $name ) ;
+
+			require_once dirname(dirname(__FILE__)).'/filters/pico_'.$name.'.php' ;
+
+			// check the filter is secure or not
+			if( ! $isadminormod && defined( $constpref.'ISINSECURE' ) ) continue ;
+
 			$filters[ $name ] = array(
 				'title' => defined( $constpref.'TITLE' ) ? constant( $constpref.'TITLE' ) : $name ,
 				'desc' => defined( $constpref.'DESC' ) ? constant( $constpref.'DESC' ) : '' ,
@@ -336,5 +342,130 @@ function pico_filter_cmp( $a , $b )
 	}
 }
 
+
+// parse and get path_info
+function pico_parse_path_info( $mydirname )
+{
+	$disallow_chars = '?[^a-zA-Z0-9_./+-]?' ;
+
+	if( ! empty( $_GET['path_info'] ) ) {
+		// path_info=($path_info) by mod_rewrite
+		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , $_GET['path_info'] ) ) ;
+	} else if( ! empty( $_SERVER['PATH_INFO'] ) ) {
+		// try PATH_INFO first
+		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , substr( @$_SERVER['PATH_INFO'] , 1 ) ) ) ;
+	} else if( stristr( $_SERVER['REQUEST_URI'] , $mydirname.'/index.php/' ) ) {
+		// try REQUEST_URI second
+		list( , $path_info_query ) = explode( $mydirname.'/index.php' , $_SERVER['REQUEST_URI'] , 2 ) ;
+		list( $path_info_tmp ) = explode( '?' , $path_info_query , 2 ) ;
+		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , substr( $path_info_tmp , 1 ) ) ) ;
+	} else if( strlen( $_SERVER['PHP_SELF'] ) > strlen( $_SERVER['SCRIPT_NAME'] ) ) {
+		// try PHP_SELF & SCRIPT_NAME third
+		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , substr( $_SERVER['PHP_SELF'] , strlen( $_SERVER['SCRIPT_NAME'] ) + 1 ) ) ) ;
+	} else {
+		$path_info = false ;
+	}
+
+	if( $path_info ) {
+		// check if (number).html 1st
+		if( preg_match( '/^([0-9]+)\.html$/' , $path_info , $regs ) ) {
+			$content_id = intval( @$regs[1] ) ;
+			return array( $content_id , pico_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
+		}
+
+		// check vpath in DB 2nd
+		$ext = strtolower( substr( strrchr( $path_info , '.' ) , 1 ) ) ;
+		if( in_array( $ext , array( 'htm' , 'html' ) ) ) {
+			$db =& Database::getInstance() ;
+			$result = $db->query( "SELECT content_id,cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='/".addslashes($path_info)."'" ) ;
+			list( $content_id , $cat_id ) = $db->fetchRow( $result ) ;
+			if( $content_id ) {
+				$_GET['content_id'] = $content_id ;
+				return array( $content_id , intval( $cat_id ) , false ) ;
+			}
+		}
+
+		// check wrap file 
+		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.'/'.$path_info ;
+		if( ! file_exists( $wrap_full_path ) ) {
+			header( 'HTTP/1.0 404 Not Found' ) ;
+			exit ;
+		}
+
+		if( in_array( $ext , array( 'htm' , 'html' , 'php' ) ) ) {
+			// HTML wrapping
+			// get category from path_info
+			$directory = strtolower( substr( $path_info , 0 , strrpos( $path_info , '/' ) ) ) ;
+			$db =& Database::getInstance() ;
+			$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath='/".addslashes($directory)."'" ) ;
+			list( $cat_id ) = $db->fetchRow( $result ) ;
+			return array( 0 , intval( $cat_id ) , $path_info ) ;
+		} else {
+			// just transfer
+			// remove output bufferings
+			while( ob_get_level() ) {
+				ob_end_clean() ;
+			}
+	
+			// can headers be sent?
+			if( headers_sent() ) {
+				restore_error_handler() ;
+				die( "Can't send headers. check language files etc." ) ;
+			}
+	
+			require dirname(dirname(__FILE__)).'/include/mimes.php' ;
+			if( ! empty( $mimes[ $ext ] ) ) {
+				header( 'Content-Type: '.$mimes[ $ext ] ) ;
+			} else {
+				header( 'Content-Type: application/octet-stream' ) ;
+			}
+			set_time_limit( 0 ) ;
+			$fp = fopen( $wrap_full_path , "rb" ) ;
+			while( ! feof( $fp ) ) {
+				echo fread( $fp , 65536 ) ;
+			}
+			exit ;
+		}
+	} else {
+		return array( false , false , false ) ;
+	}
+}
+
+
+// parse and get path_info
+function pico_read_wrapped_file( $mydirname , $path_info )
+{
+	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.'/'.$path_info ;
+
+	ob_start() ;
+	include $wrap_full_path ;
+	$full_content = pico_convert_encoding_to_ie( ob_get_contents() ) ;
+	ob_end_clean() ;
+
+	// parse full_content (get subject, body etc.)
+	$file = substr( strrchr( $wrap_full_path , '/' ) , 1 ) ;
+	$mtime = intval( @filemtime( $wrap_full_path ) ) ;
+	if( preg_match( '/\<title\>([^<>]+)\<\/title\>/is' , $full_content , $regs ) ) {
+		$subject = $regs[1] ;
+	} else {
+		$subject = $file ;
+	}
+	if( preg_match( '/\<body[^<>]*\>(.*)\<\/body\>/is' , $full_content , $regs ) ) {
+		$body = $regs[1] ;
+	} else {
+		$body = $full_content ;
+	}
+
+	return array(
+		'id' => 0 ,
+		'link' => 'index.php/'.$path_info ,
+		'created_time' => $mtime ,
+		'created_time_formatted' => formatTimestamp( $mtime ) ,
+		'subject' => $subject ,
+		'body' => $body ,
+		'can_edit' => false ,
+		'can_vote' => false ,
+	) ;
+}
 
 ?>

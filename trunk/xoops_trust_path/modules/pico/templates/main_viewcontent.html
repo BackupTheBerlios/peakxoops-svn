@@ -20,16 +20,16 @@
 
 <!-- print icon -->
 <{if $mod_config.show_printicon}>
-	<div style="float:right;width:40px;height:40px;"><a href="<{$mod_url}>/index.php?page=print&amp;content_id=<{$content.id}>"><img src="<{$mod_imageurl}>/icon_print.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
+	<div style="float:right;width:40px;height:40px;"><a href="<{$mod_url}>/<{$content.link}>?page=print"><img src="<{$mod_imageurl}>/icon_print.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
 <{/if}>
 
 <!-- tell a friend -->
-<{if $mod_config.show_tellafriend}>
+<{if $mod_config.show_tellafriend && $content.id}>
 	<div style="float:right;width:40px;height:40px;"><a href="<{$content.tellafriend_uri}>" target="_top"><img src="<{$mod_imageurl}>/icon_tellafriend.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_TELLAFRIEND}>" /></a></div>
 <{/if}>
 
 <!-- vote -->
-<{if $mod_config.use_vote}>
+<{if $mod_config.use_vote && $content.id}>
 	<div class="pico_vote">
 		<{$smarty.const._MD_PICO_VOTECOUNT}>:<{$content.votes_count}>
 		<{$smarty.const._MD_PICO_VOTEPOINTAVG}>:<{$content.votes_avg|string_format:"%.2f"}>
@@ -53,12 +53,12 @@
 <hr style="clear:right;" />
 
 <!-- page navigation -->
-<{if $mod_config.show_pagenavi}>
+<{if $mod_config.show_pagenavi && $content.id}>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td width="33%" align="left" valign="top">
 	<{if $prev_content.id}>
-		<a href="<{$mod_url}>/index.php?content_id=<{$prev_content.id}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_prev.gif" alt="<{$smarty.const._MD_PICO_PREV}>" /></a><br />
+		<a href="<{$mod_url}>/<{$prev_content.link}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_prev.gif" alt="<{$smarty.const._MD_PICO_PREV}>" /></a><br />
 		<{$prev_content.subject}>
 	<{/if}>
 	</td>
@@ -68,7 +68,7 @@
 	</td>
 	<td width="33%" align="right" valign="top">
 	<{if $next_content.id}>
-		<a href="<{$mod_url}>/index.php?content_id=<{$next_content.id}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_next.gif" alt="<{$smarty.const._MD_PICO_NEXT}>" /></a><br />
+		<a href="<{$mod_url}>/<{$next_content.link}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_next.gif" alt="<{$smarty.const._MD_PICO_NEXT}>" /></a><br />
 		<{$next_content.subject}>
 	<{/if}>
 	</td>

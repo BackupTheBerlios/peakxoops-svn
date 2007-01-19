@@ -17,6 +17,7 @@ if( $db->getRowsNum( $crs ) <= 0 ) {
 				'cat_title' => $xoopsModule->getVar('name') ,
 				'cat_desc' => $xoopsModuleConfig['top_message'] ,
 				'cat_weight' => 0 ,
+				'cat_vpath' => '' ,
 				'cat_path_in_tree' => serialize( array() ) ,
 			) ;
 		}

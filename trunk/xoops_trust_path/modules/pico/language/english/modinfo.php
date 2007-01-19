@@ -19,6 +19,7 @@ define( $constpref.'_ADMENU_CATEGORYACCESS' , 'Permissions of Categories' ) ;
 define( $constpref.'_ADMENU_IMPORT' , 'Import/Sync' ) ;
 
 // configurations
+define($constpref.'_USE_WRAPSMODE','enable wraps mode');
 define($constpref.'_TOP_MESSAGE','Description of TOP category');
 define($constpref.'_TOP_MESSAGEDEFAULT','');
 define($constpref.'_MENUINMODULETOP','Display menu(index) in the top of this module');
@@ -37,7 +38,7 @@ define($constpref.'_GUESTVOTE_IVL','Vote from guests');
 define($constpref.'_GUESTVOTE_IVLDSC','Set this 0, to disable voting from guest. The other this number means time(sec.) to allow second post from the same IP.');
 define($constpref.'_HTMLHEADER','common HTML header');
 define($constpref.'_CSS_URI','URI of CSS file for this module');
-define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: index.css');
+define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: {mod_url}/index.css');
 define($constpref.'_IMAGES_DIR','Directory for image files');
 define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
 define($constpref.'_BODY_EDITOR','Editor for body');
@@ -50,13 +51,13 @@ define($constpref.'_BNAME_CONTENT','Content');
 define($constpref.'_BNAME_LIST','List');
 
 // Notify Categories
-define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');
-define($constpref.'_NOTCAT_GLOBALDSC', 'このpicoモジュール全体における通知オプション');
+define($constpref.'_NOTCAT_GLOBAL', 'global');
+define($constpref.'_NOTCAT_GLOBALDSC', 'notifications about this module');
 
 // Each Notifications
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', '承認待ち');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'コンテンツの新規登録・変更などで、承認が必要な投稿があった場合に通知する（モデレータ以外には通知されません）');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: 承認待ち');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', 'waitings');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'Notify if new posts or modifications waiting approval (Just notify to admins or moderators)');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: waiting');
 
 }
 

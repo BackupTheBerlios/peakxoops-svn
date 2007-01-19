@@ -51,9 +51,9 @@
 <ul>
 <{foreach from=$contents item="content"}>
 	<{if $content.visible}>
-		<li><a href="<{$mod_url}>/index.php?content_id=<{$content.id}>"><{$content.subject}></a></li>
+		<li><a href="<{$mod_url}>/<{$content.link}>"><{$content.subject}></a></li>
 	<{elseif $category.isadminormod}>
-		<li><a style="color:red;" href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><{$content.subject}></a></li>
+		<li><a style="color:red;" href="<{$mod_url}>/<{$content.link}>"><{$content.subject}></a></li>
 	<{/if}>
 <{/foreach}>
 </ul>

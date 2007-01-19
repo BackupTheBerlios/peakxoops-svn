@@ -56,6 +56,7 @@ $category4assign = array(
 	'id' => $cat_id ,
 	'title' => htmlspecialchars( $cat_row['cat_title'] , ENT_QUOTES ) ,
 	'weight' => intval( $cat_row['cat_weight'] ) ,
+	'vpath' => htmlspecialchars( $cat_row['cat_vpath'] , ENT_QUOTES ) ,
 	'desc' => htmlspecialchars( $cat_row['cat_desc'] , ENT_QUOTES ) ,
 	'options' => $options4html ,
 	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $pico_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
@@ -76,7 +77,7 @@ $xoopsTpl->assign( array(
 	'children_count' => count( $children ) ,
 	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_row['pid'] ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
-	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => _MD_PICO_CATEGORYMANAGER ,
 ) ) ;
 

@@ -19,6 +19,7 @@ define( $constpref.'_ADMENU_CATEGORYACCESS' , 'カテゴリーアクセス権限' ) ;
 define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
 
 // configurations
+define($constpref.'_USE_WRAPSMODE','wrapsモードを有効にする');
 define($constpref.'_TOP_MESSAGE','モジュールトップのメッセージ');
 define($constpref.'_TOP_MESSAGEDEFAULT','');
 define($constpref.'_MENUINMODULETOP','モジュールトップでは自動生成メニューを表示する');
@@ -37,7 +38,7 @@ define($constpref.'_GUESTVOTE_IVL','ゲスト投票の時間制限');
 define($constpref.'_GUESTVOTE_IVLDSC','同一のIPからは、この時間（秒数）内は投票することができません');
 define($constpref.'_HTMLHEADER','コンテンツ共通HTMLヘッダ');
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
-define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトはindex.cssです。');
+define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
 define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
 define($constpref.'_BODY_EDITOR','本文編集エディタ');

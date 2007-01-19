@@ -44,6 +44,7 @@ foreach( array_keys( $categories4assign ) as $cat_id ) {
 		if( ! $content_row['show_in_menu'] ) continue ;
 		$content4assign = array(
 			'id' => intval( $content_row['content_id'] ) ,
+			'link' => pico_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 			'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
 			'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,

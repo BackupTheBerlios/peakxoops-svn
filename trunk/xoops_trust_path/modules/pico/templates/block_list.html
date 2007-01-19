@@ -2,7 +2,7 @@
 <ul class="pico_block_menu">
 	<{foreach from=$block.contents item=content}>
 		<li>
-			<a href="<{$block.mod_url}>/index.php?content_id=<{$content.id}>">
+			<a href="<{$block.mod_url}>/<{$content.link}>">
 				<{$content.subject}>
 				&nbsp;
 				<{if $content.cat_id == 0}>

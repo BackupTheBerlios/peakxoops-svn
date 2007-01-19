@@ -1,5 +1,7 @@
 <?php
 
+include_once dirname(__FILE__).'/include/common_functions.php' ;
+
 eval( '
 
 function '.$mydirname.'_global_search( $keywords , $andor , $limit , $offset , $userid )
@@ -20,6 +22,12 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 	}
 
 	$db =& Database::getInstance() ;
+
+	// get this module's config
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
@@ -49,26 +57,26 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 		$whr = 1 ;
 	}
 
-	$sql = "SELECT `content_id`,`subject`,`created_time`,$select4con FROM ".$db->prefix( $mydirname."_contents WHERE ($whr) ORDER BY 1" ) ;
+	$sql = "SELECT `content_id`,`vpath`,`subject`,`created_time`,$select4con FROM ".$db->prefix( $mydirname."_contents WHERE ($whr) ORDER BY 1" ) ;
 	$result = $db->query( $sql , $limit , $offset ) ;
 	$ret = array() ;
 	$context = '' ;
-	while( list( $content_id , $subject , $created_time , $text ) = $db->fetchRow( $result ) ) {
+	while( $content_row = $db->fetchArray( $result ) ) {
 
 		// get context for module "search"
 		if( function_exists( 'search_make_context' ) && $showcontext ) {
-			$full_context = strip_tags( $text ) ;
+			$full_context = strip_tags( @$content_row['text'] ) ;
 			if( function_exists( 'easiestml' ) ) $full_context = easiestml( $full_context ) ;
 			$context = search_make_context( $full_context , $keywords ) ;
 		}
 
 		$ret[] = array(
-			"image" => "" ,
-			"link" => "index.php?content_id=$content_id" ,
-			"title" => $subject ,
-			"time" => $created_time ,
-			"uid" => "0" ,
-			"context" => $context
+			'image' => '' ,
+			'link' => pico_make_content_link4html( $configs , $content_row ) ,
+			'title' => $content_row['subject'] ,
+			'time' => $content_row['created_time'] ,
+			'uid' => 0 ,
+			'context' => $context ,
 		) ;
 	}
 

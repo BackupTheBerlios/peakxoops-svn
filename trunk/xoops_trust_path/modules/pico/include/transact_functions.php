@@ -117,27 +117,26 @@ function pico_sync_content_votes( $mydirname , $content_id )
 
 
 // get requests for category's sql (parse options)
-function pico_get_requests4sql_category( $mydirname )
+function pico_get_requests4category( $mydirname )
 {
-	global $myts , $xoopsModuleConfig ;
-
+	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
 
 	include dirname(dirname(__FILE__)).'/include/constant_can_override.inc.php' ;
-	$options = array() ;
-	foreach( $xoopsModuleConfig as $key => $val ) {
+	$cat_options = array() ;
+	foreach( $GLOBALS['xoopsModuleConfig'] as $key => $val ) {
 		if( empty( $pico_configs_can_be_override[ $key ] ) ) continue ;
-		foreach( explode( "\n" , @$_POST['options'] ) as $line ) {
+		foreach( explode( "\n" , @$_POST['cat_options'] ) as $line ) {
 			if( preg_match( '/^'.$key.'\:(.{1,100})$/' , $line , $regs ) ) {
 				switch( $pico_configs_can_be_override[ $key ] ) {
 					case 'text' :
-						$options[ $key ] = trim( $regs[1] ) ;
+						$cat_options[ $key ] = trim( $regs[1] ) ;
 						break ;
 					case 'int' :
-						$options[ $key ] = intval( $regs[1] ) ;
+						$cat_options[ $key ] = intval( $regs[1] ) ;
 						break ;
 					case 'bool' :
-						$options[ $key ] = intval( $regs[1] ) > 0 ? 1 : 0 ;
+						$cat_options[ $key ] = intval( $regs[1] ) > 0 ? 1 : 0 ;
 						break ;
 				}
 			}
@@ -153,11 +152,12 @@ function pico_get_requests4sql_category( $mydirname )
 	}
 
 	return array( 
-		'title' => addslashes( $myts->stripSlashesGPC( @$_POST['title'] ) ) ,
-		'desc' => addslashes( $myts->stripSlashesGPC( @$_POST['desc'] ) ) ,
-		'weight' => intval( @$_POST['weight'] ) ,
+		'cat_title' => $myts->stripSlashesGPC( @$_POST['cat_title'] ) ,
+		'cat_desc' => $myts->stripSlashesGPC( @$_POST['cat_desc'] ) ,
+		'cat_weight' => intval( @$_POST['cat_weight'] ) ,
+		'cat_vpath' => trim( $myts->stripSlashesGPC( @$_POST['cat_vpath'] ) ) ,
 		'pid' => $pid ,
-		'options' => addslashes( serialize( $options ) ) ,
+		'cat_options' => serialize( $cat_options ) ,
 	) ;
 }
 
@@ -169,9 +169,16 @@ function pico_makecategory( $mydirname )
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4sql_category( $mydirname ) ;
+	$requests = pico_get_requests4category( $mydirname ) ;
+	foreach( $requests as $key => $val ) {
+		if( $key == 'cat_vpath' && empty( $val ) ) {
+			$set .= "`$key`=null," ;
+		} else {
+			$set .= "`$key`='".addslashes( $val )."'," ;
+		}
+	}
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET cat_title='{$requests['title']}', cat_desc='{$requests['desc']}', cat_weight='{$requests['weight']}', cat_options='{$requests['options']}', cat_path_in_tree='',cat_unique_path='', pid={$requests['pid']}" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_cat_id = $db->getInsertId() ;
 
 	// permissions are set same as the parent category. (also moderator)
@@ -196,7 +203,14 @@ function pico_updatecategory( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4sql_category( $mydirname ) ;
+	$requests = pico_get_requests4category( $mydirname ) ;
+	foreach( $requests as $key => $val ) {
+		if( $key == 'cat_vpath' && empty( $val ) ) {
+			$set .= "`$key`=null," ;
+		} else {
+			$set .= "`$key`='".addslashes( $val )."'," ;
+		}
+	}
 
 	// get children
 	include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
@@ -207,7 +221,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 	// loop check
 	if( in_array( $requests['pid'] , $children ) ) die( _MD_PICO_ERR_PIDLOOP ) ;
 
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_title='{$requests['title']}', cat_desc='{$requests['desc']}', cat_weight='{$requests['weight']}', cat_options='{$requests['options']}', pid='{$requests['pid']}' WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_categories")." SET ".substr($set,0,-1)." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
@@ -217,7 +231,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 
 
 // get requests for content's sql (parse options)
-function pico_get_requests4content( $mydirname , $auto_approval = true )
+function pico_get_requests4content( $mydirname , $auto_approval = true , $isadminormod = false )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
@@ -234,15 +248,19 @@ function pico_get_requests4content( $mydirname , $auto_approval = true )
 	$filters = array() ;
 	foreach( $_POST as $key => $val ) {
 		if( substr( $key , 0 , 15 ) == 'filter_enabled_' && $val ) {
-			$name = substr( $key , 15 ) ;
-			if( ! $auto_approval && in_array( $name , array( 'eval' , 'xoopstpl' ) ) ) continue ;
-			$filters[ $name ] = intval( @$_POST['filter_weight_'.$name] ) ;
+			$name = str_replace( '..' , '' , substr( $key , 15 ) ) ;
+			$constpref = '_MD_PICO_FILTERS_' . strtoupper( $name ) ;
+			$filter_file = dirname(dirname(__FILE__)).'/filters/pico_'.$name.'.php' ;
+			if( ! file_exists( $filter_file ) ) continue ;
+			require_once $filter_file ;
+			if( ! $isadminormod && defined( $constpref.'ISINSECURE' ) ) continue ;			$filters[ $name ] = intval( @$_POST['filter_weight_'.$name] ) ;
 		}
 	}
 	asort( $filters ) ;
 
 	$ret = array( 
 		'cat_id' => $cat_id ,
+		'vpath' => trim( $myts->stripSlashesGPC( @$_POST['vpath'] ) ) ,
 		'subject' => $myts->stripSlashesGPC( @$_POST['subject'] ) ,
 		'htmlheader' => $myts->stripSlashesGPC( @$_POST['htmlheader'] ) ,
 		'body' => $myts->stripSlashesGPC( @$_POST['body'] ) ,
@@ -277,21 +295,25 @@ function pico_get_requests4content( $mydirname , $auto_approval = true )
 
 
 // create content
-function pico_makecontent( $mydirname , $auto_approval = true )
+function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = false )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname , $auto_approval ) ;
+	$requests = pico_get_requests4content( $mydirname , $auto_approval , $isadminormod ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
 	$set = $auto_approval ? '' : "visible=0,subject='"._MD_PICO_WAITINGREGISTER."',htmlheader='',body=''," ;
 	foreach( $requests as $key => $val ) {
 		if( in_array( $key , $ignore_requests ) ) continue ;
-		$set .= "`$key`='".addslashes( $val )."'," ;
+		if( $key == 'vpath' && empty( $val ) ) {
+			$set .= "`$key`=null," ;
+		} else {
+			$set .= "`$key`='".addslashes( $val )."'," ;
+		}
 	}
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
 
 	return $new_content_id ;
@@ -299,21 +321,25 @@ function pico_makecontent( $mydirname , $auto_approval = true )
 
 
 // update content
-function pico_updatecontent( $mydirname , $content_id , $auto_approval = true )
+function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , $isadminormod )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname , $auto_approval ) ;
+	$requests = pico_get_requests4content( $mydirname , $auto_approval , $isadminormod ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
 	$set = '' ;
 	foreach( $requests as $key => $val ) {
 		if( in_array( $key , $ignore_requests ) ) continue ;
-		$set .= "`$key`='".addslashes( $val )."'," ;
+		if( $key == 'vpath' && empty( $val ) ) {
+			$set .= "`$key`=null," ;
+		} else {
+			$set .= "`$key`='".addslashes( $val )."'," ;
+		}
 	}
 
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
 	return $content_id ;
 }

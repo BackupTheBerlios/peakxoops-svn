@@ -34,16 +34,17 @@ if( $content_row['use_cache'] ) {
 	if( $content_row['body_cached'] ) {
 		$body4assign = $content_row['body_cached'] ;
 	} else {
-		$body4assign = pico_filter_body( $mydirname , $content_row['body'] , $content_row['filters'] , $content_id ) ;
+		$body4assign = pico_filter_body( $mydirname , $content_row ) ;
 		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($body4assign)."' WHERE content_id='$content_id'" ) ;
 	}
 } else {
-	$body4assign = pico_filter_body( $mydirname , $content_row['body'] , $content_row['filters'] , $content_id ) ;
+	$body4assign = pico_filter_body( $mydirname , $content_row ) ;
 }
 
 // assigning
 $content4assign = array(
 	'id' => intval( $content_row['content_id'] ) ,
+	'link' => pico_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 	'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
 	'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
 	'poster_uname' => $myts->makeTboxData4Show( $content_row['poster_uname'] ) ,
@@ -57,32 +58,34 @@ $content4assign = array(
 $content4assign += $content_row ;
 
 // get next content of the category
-$next_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (weight>".$content_row['weight']." OR content_id>$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
+$next_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,vpath,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (weight>".$content_row['weight']." OR content_id>$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
 if( empty( $next_content_row ) ) {
 	$next_content4assign = array() ;
 } else {
 	$next_content4assign = array(
 		'id' => $next_content_row['content_id'] ,
+		'link' => pico_make_content_link4html( $xoopsModuleConfig , $next_content_row ) ,
 		'subject' => $myts->makeTboxData4Show( $next_content_row['subject'] ) ,
 	) ;
 }
 
 // get prev content of the category
-$prev_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (weight<".$content_row['weight']." OR content_id<$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
+$prev_content_row = $xoopsDB->fetchArray( $xoopsDB->query( "SELECT content_id,vpath,subject FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (weight<".$content_row['weight']." OR content_id<$content_id AND weight=".$content_row['weight'].") AND cat_id=$cat_id AND ($whr4visible) AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
 if( empty( $prev_content_row ) ) {
 	$prev_content4assign = array() ;
 } else {
 	$prev_content4assign = array(
 		'id' => $prev_content_row['content_id'] ,
+		'link' => pico_make_content_link4html( $xoopsModuleConfig , $prev_content_row ) ,
 		'subject' => $myts->makeTboxData4Show( $prev_content_row['subject'] ) ,
 	) ;
 }
 
 // make link for "tell to a friend"
 if( $xoopsModuleConfig['use_taf_module'] ) {
-	$content4assign['tellafriend_uri'] = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" ).'&amp;subject='.rawurlencode(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])) ;
+	$content4assign['tellafriend_uri'] = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( XOOPS_URL."/modules/$mydirname/".pico_make_content_link4html( $xoopsModuleConfig , $content_row ) ).'&amp;subject='.rawurlencode(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])) ;
 } else {
-	$content4assign['tellafriend_uri'] = 'mailto:?subject='.pico_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])).'&amp;body='.pico_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $content_row['subject'])).'%0A'.XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" ;
+	$content4assign['tellafriend_uri'] = 'mailto:?subject='.pico_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])).'&amp;body='.pico_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $content_row['subject'])).'%0A'.XOOPS_URL."/modules/$mydirname/".rawurlencode(pico_make_content_link4html( $xoopsModuleConfig , $content_row )) ;
 }
 
 // count up 'viewed'

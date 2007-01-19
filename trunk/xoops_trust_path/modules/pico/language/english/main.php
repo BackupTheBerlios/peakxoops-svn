@@ -10,6 +10,7 @@ define('_MD_PICO_NEXT','Next');
 define('_MD_PICO_PREV','Prev');
 define('_MD_PICO_CATEGORYINDEX','top of the category');
 define('_MD_PICO_NOSUBJECT','(no subject)');
+define('_MD_PICO_WAITINGAPPROVAL','waiting approval');
 define('_MD_PICO_WAITINGREGISTER','waiting new');
 define('_MD_PICO_WAITINGUPDATE','waiting update');
 
@@ -36,6 +37,7 @@ define('_MD_PICO_FMT_TELLAFRIENDBODY',"I've just found an interestiong article\n
 
 
 define('_MD_PICO_ERR_SQL','SQL Error Occurred in: ');
+define('_MD_PICO_ERR_DUPLICATEDVPATH','The virtual path is duplicated');
 define('_MD_PICO_ERR_PIDLOOP','parent/child loop error');
 
 define('_MD_PICO_MSG_UPDATED','Updated successfully');
@@ -61,6 +63,7 @@ define('_MD_PICO_MSG_CONTENTDELETED','The content has been deleted successfully'
 
 define('_MD_PICO_CATEGORYMANAGER','Category manager');
 define('_MD_PICO_CONTENTMANAGER','Content manager');
+define('_MD_PICO_TH_VIRTUALPATH','Virtual path');
 define('_MD_PICO_TH_SUBJECT','Subject');
 define('_MD_PICO_TH_SUBJECT_WAITING','Waiting subject');
 define('_MD_PICO_TH_HTMLHEADER','HTML headers');
@@ -106,25 +109,20 @@ define('_MD_PICO_VOTEPOINTDSCWORST','Useless');
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','php code');
 define('_MD_PICO_FILTERS_EVALDESC','It will be the parameter of eval() function');
-define('_MD_PICO_FILTERS_EVALINITWEIGHT',0);
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSTITLE','HTML special character escape');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSDESC','If you want to use BBCode etc. also, set it the first place.');
-define('_MD_PICO_FILTERS_HTMLSPECIALCHARSINITWEIGHT',5);
 define('_MD_PICO_FILTERS_TEXTWIKITITLE','PEAR TextWiki');
 define('_MD_PICO_FILTERS_TEXTWIKIDESC','Rendered by TextWiki rule');
-define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
 define('_MD_PICO_FILTERS_XOOPSTPLTITLE','Smarty(XoopsTpl)');
 define('_MD_PICO_FILTERS_XOOPSTPLDESC','Rendered as a Smarty template');
-define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',0);
 define('_MD_PICO_FILTERS_NL2BRTITLE','Auto new line');
 define('_MD_PICO_FILTERS_NL2BRDESC','LF will be replaced into &lt;br /&gt;');
-define('_MD_PICO_FILTERS_NL2BRINITWEIGHT',30);
 define('_MD_PICO_FILTERS_SMILEYTITLE','Smiley');
 define('_MD_PICO_FILTERS_SMILEYDESC',':-) :-D etc.');
-define('_MD_PICO_FILTERS_SMILEYINITWEIGHT',30);
 define('_MD_PICO_FILTERS_XCODETITLE','BBCode');
 define('_MD_PICO_FILTERS_XCODEDESC','Auto link and BBCode will be enabled');
-define('_MD_PICO_FILTERS_XCODEINITWEIGHT',30);
+define('_MD_PICO_FILTERS_WRAPSTITLE','Page wraps (note: the file specified by virtual path is displayed instead of body');
+define('_MD_PICO_FILTERS_WRAPSDESC','The target file is XOOPS_TRUST_PATH/wraps/(dirname)/file (same as wraps)');
 
 
 // permissions
@@ -136,5 +134,12 @@ define('_MD_PICO_PERMS_CAN_DELETE','DELETE');
 define('_MD_PICO_PERMS_POST_AUTO_APPROVED','AUTO APPROVED');
 define('_MD_PICO_PERMS_IS_MODERATOR','MODERATE');
 define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','MAKE SUBCATEGORY');
+
+
+if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {
+	function pico_convert_encoding_to_ie( $str ) {
+		return $str ;
+	}
+}
 
 ?>

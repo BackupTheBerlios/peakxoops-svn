@@ -19,6 +19,7 @@ INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=3,permissions='a:
 
 CREATE TABLE categories (
   cat_id smallint(5) unsigned NOT NULL auto_increment,
+  cat_vpath varchar(255),
   pid smallint(5) unsigned NOT NULL default 0,
   cat_title varchar(255) NOT NULL default '',
   cat_desc text,
@@ -29,12 +30,14 @@ CREATE TABLE categories (
   cat_weight smallint(5) NOT NULL default 0,
   cat_options text,
   PRIMARY KEY (cat_id),
+  UNIQUE KEY (cat_vpath),
   KEY (cat_weight),
   KEY (pid)
 ) TYPE=MyISAM;
 
 CREATE TABLE contents (
   content_id int(10) unsigned NOT NULL auto_increment,
+  vpath varchar(255),
   cat_id smallint(5) unsigned NOT NULL default 0,
   weight smallint(5) unsigned NOT NULL default 0,
   created_time int(10) NOT NULL default 0,
@@ -61,6 +64,7 @@ CREATE TABLE contents (
   body_cached text,
   filters text,
   PRIMARY KEY (content_id),
+  UNIQUE KEY (vpath),
   KEY (poster_uid),
   KEY (subject),
   KEY (created_time),

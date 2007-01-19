@@ -96,7 +96,7 @@ function pico_import_from_tinyd( $mydirname , $import_mid )
 	$irs = $db->query( "INSERT INTO `$to_table` (content_id,cat_id,weight,created_time,modified_time,subject,visible,allow_comment,show_in_navi,show_in_menu,htmlheader,body,filters,body_waiting,body_cached,subject_waiting,htmlheader_waiting) SELECT storyid,0,blockid,UNIX_TIMESTAMP(created),UNIX_TIMESTAMP(last_modified),title,visible,!nocomments,1,submenu,html_header,`text`,nohtml,nosmiley,nobreaks,address,'' FROM `$from_table`" ) ;
 	if( ! $irs ) pico_import_errordie() ;
 
-	// update filters
+	// update filters for DB contents
 	$db->query( "UPDATE `$to_table` SET filters='textwiki' WHERE filters='16'" ) ;
 	$db->query( "UPDATE `$to_table` SET filters='textwiki|xcode' WHERE filters='18'" ) ;
 	$db->query( "UPDATE `$to_table` SET filters='eval' WHERE filters='8'" ) ;
@@ -109,22 +109,9 @@ function pico_import_from_tinyd( $mydirname , $import_mid )
 	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|nl2br') WHERE body_cached='0'" ) ;
 	$db->query( "UPDATE `$to_table` SET body_waiting='',body_cached=''" ) ;
 
-	// import page wrap as db content (subject_waiting is temporary for address)
-	$result = $db->query( "SELECT content_id,subject_waiting FROM `$to_table` WHERE subject_waiting<>''" ) ;
-	if( ! $result ) pico_import_errordie() ;
-	while( list( $id , $address ) = $db->fetchRow( $result ) ) {
-		if( file_exists( XOOPS_ROOT_PATH.'/modules/'.$target_dirname.'/content/'.$address ) ) {
-			$body = file_get_contents( XOOPS_ROOT_PATH.'/modules/'.$target_dirname.'/content/'.$address ) ;
-			// convert encoding
-			if( function_exists( 'mb_convert_encoding' ) ) {
-				$body = mb_convert_encoding( $body , mb_internal_encoding() , "auto" ) ;
-			}
-		} else {
-			$body = '' ;
-		}
-		$urs = $db->query( "UPDATE `$to_table` SET subject_waiting='', filters='', body='".addslashes($body)."' WHERE content_id=$id" ) ;
-		if( ! $urs ) pico_import_errordie() ;
-	}
+	// update fileters for WRAP contents (using subject_waiting as a temporary)
+	$db->query( "UPDATE `$to_table` SET filters='wraps',vpath=CONCAT('/',subject_waiting) WHERE LENGTH(subject_waiting)>0" ) ;
+	$db->query( "UPDATE `$to_table` SET subject_waiting=''" ) ;
 
 }
 

@@ -41,7 +41,6 @@ function b_pico_list_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
 
 	// categories
@@ -56,7 +55,7 @@ function b_pico_list_show( $options )
 		$categories4assign = implode(',',$categories) ;
 	}
 
-	$sql = "SELECT o.content_id,o.subject,o.created_time,o.modified_time,o.poster_uid,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4cat) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
+	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4cat) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
 	if( ! $result = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;
@@ -77,6 +76,7 @@ function b_pico_list_show( $options )
 	while( $content_row = $db->fetchArray( $result ) ) {
 		$block['contents'][] = array(
 			'id' => intval( $content_row['content_id'] ) ,
+			'link' => pico_make_content_link4html( $configs , $content_row ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 			'created_time' => $content_row['created_time'] ,
 			'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,

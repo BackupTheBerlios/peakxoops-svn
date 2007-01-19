@@ -20,7 +20,6 @@ function b_pico_content_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
 
 	$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4cat) AND content_id='$content_id' AND o.visible" ;
@@ -36,11 +35,11 @@ function b_pico_content_show( $options )
 		if( $content_row['body_cached'] ) {
 			$body4assign = $content_row['body_cached'] ;
 		} else {
-			$body4assign = pico_filter_body( $mydirname , $content_row['body'] , $content_row['filters'] , $content_id ) ;
+			$body4assign = pico_filter_body( $mydirname , $content_row ) ;
 			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($body4assign)."' WHERE content_id='$content_id'" ) ;
 		}
 	} else {
-		$body4assign = pico_filter_body( $mydirname , $content_row['body'] , $content_row['filters'] , $content_id ) ;
+		$body4assign = pico_filter_body( $mydirname , $content_row ) ;
 	}
 
 	// assigning

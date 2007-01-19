@@ -25,7 +25,7 @@
 	<dd style="margin:0;"><ul>
 	<{foreach item=content from=$category.contents}>
 		<li style="margin:0;background-color:#fff;">
-			<a href="<{$mod_url}>/index.php?content_id=<{$content.id}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a>
+			<a href="<{$mod_url}>/<{$content.link}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a>
 			<{if $category.isadminormod && ! $content.approval}>
 				<span style="color:red;">(<{$smarty.const._MD_PICO_WAITINGUPDATE}>)</span>
 			<{/if}>

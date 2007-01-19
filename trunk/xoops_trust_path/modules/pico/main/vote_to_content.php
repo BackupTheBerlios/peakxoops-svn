@@ -11,15 +11,18 @@ $cat_id = $content_id ? pico_get_cat_id_from_content_id( $mydirname , $content_i
 // check,fetch and assign the category (set $content_id if necessary)
 require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 
+// check,fetch and assign the content
+require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
+
 // check if "use_vote" is on
 if( empty( $xoopsModuleConfig['use_vote'] ) ) {
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 0 , _MD_PICO_MSG_VOTEDISABLED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_MSG_VOTEDISABLED ) ;
 	exit ;
 }
 
 // special check for vote_to_post
 if( ! $uid && empty( $xoopsModuleConfig['guest_vote_interval'] ) ) {
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 0 , _MD_PICO_ERR_VOTEPERM ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_ERR_VOTEPERM ) ;
 	exit ;
 }
 
@@ -50,7 +53,7 @@ if( $count > 0 ) {
 		$sql = "DELETE FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id AND uid=$uid" ;
 		if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	} else {
-		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 0 , _MD_PICO_MSG_VOTEDOUBLE ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_MSG_VOTEDOUBLE ) ;
 		exit ;
 	}
 }
@@ -61,7 +64,7 @@ $sql = "INSERT INTO ".$db->prefix($mydirname."_content_votes")." SET content_id=
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 pico_sync_content_votes( $mydirname , $content_id ) ;
 
-redirect_header( XOOPS_URL."/modules/$mydirname/index.php?content_id=$content_id" , 0 , _MD_PICO_MSG_VOTEACCEPTED ) ;
+redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_MSG_VOTEACCEPTED ) ;
 exit ;
 
 ?>

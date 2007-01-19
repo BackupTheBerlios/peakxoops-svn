@@ -1,6 +1,8 @@
 <?php
 
-function pico_textwiki( $mydirname , $text , $id )
+define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
+
+function pico_textwiki( $mydirname , $text , $content_row )
 {
 	include_once "Text/Wiki.php";
 	// include_once "Text/sunday_Wiki.php";

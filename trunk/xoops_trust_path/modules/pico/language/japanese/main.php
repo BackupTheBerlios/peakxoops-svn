@@ -10,6 +10,7 @@ define('_MD_PICO_NEXT','次');
 define('_MD_PICO_PREV','前');
 define('_MD_PICO_CATEGORYINDEX','カテゴリートップ');
 define('_MD_PICO_NOSUBJECT','(no subject)');
+define('_MD_PICO_WAITINGAPPROVAL','承認待ち');
 define('_MD_PICO_WAITINGREGISTER','新規登録申請中');
 define('_MD_PICO_WAITINGUPDATE','変更申請中');
 
@@ -36,6 +37,7 @@ define('_MD_PICO_FMT_TELLAFRIENDBODY',"興味深い記事を見つけました\n記事タイトル:
 define('_MD_PICO_MAILTOENCODING','Shift_JIS'); // don't define it for singlebyte
 
 define('_MD_PICO_ERR_SQL','SQLエラーが発生しました。行: ');
+define('_MD_PICO_ERR_DUPLICATEDVPATH','仮想パスが重複しています');
 define('_MD_PICO_ERR_PIDLOOP','親子関係でループが発生しています');
 
 define('_MD_PICO_MSG_UPDATED','更新しました');
@@ -61,6 +63,7 @@ define('_MD_PICO_MSG_CONTENTDELETED','コンテンツを削除しました');
 
 define('_MD_PICO_CATEGORYMANAGER','カテゴリーマネージャ');
 define('_MD_PICO_CONTENTMANAGER','コンテンツマネージャ');
+define('_MD_PICO_TH_VIRTUALPATH','仮想パス');
 define('_MD_PICO_TH_SUBJECT','表題');
 define('_MD_PICO_TH_SUBJECT_WAITING','申請中の表題');
 define('_MD_PICO_TH_HTMLHEADER','HTMLヘッダー');
@@ -106,25 +109,20 @@ define('_MD_PICO_VOTEPOINTDSCWORST','役に立たなかった');
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','phpコード');
 define('_MD_PICO_FILTERS_EVALDESC','eval()に渡してPHPコードとして解釈/実行されます');
-define('_MD_PICO_FILTERS_EVALINITWEIGHT',0);
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSTITLE','HTML特殊文字エスケープ');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSDESC','明示的にHTMLとしての解釈を禁止したい時に有効にします。BBCode等の各種修飾処理と併用する時には必ず先頭に置いてください。');
-define('_MD_PICO_FILTERS_HTMLSPECIALCHARSINITWEIGHT',5);
 define('_MD_PICO_FILTERS_TEXTWIKITITLE','PEAR TextWiki');
 define('_MD_PICO_FILTERS_TEXTWIKIDESC','TextWikiルールで整形されます');
-define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
 define('_MD_PICO_FILTERS_XOOPSTPLTITLE','Smarty(XoopsTpl)');
 define('_MD_PICO_FILTERS_XOOPSTPLDESC','Smartyテンプレートとして解釈されます');
-define('_MD_PICO_FILTERS_XOOPSTPLINITWEIGHT',0);
 define('_MD_PICO_FILTERS_NL2BRTITLE','自動改行');
 define('_MD_PICO_FILTERS_NL2BRDESC','改行文字を&lt;br /&gt;に置き換えます');
-define('_MD_PICO_FILTERS_NL2BRINITWEIGHT',30);
 define('_MD_PICO_FILTERS_SMILEYTITLE','顔文字変換');
 define('_MD_PICO_FILTERS_SMILEYDESC',':-) などのスマイリーが画像に置き換わります');
-define('_MD_PICO_FILTERS_SMILEYINITWEIGHT',30);
 define('_MD_PICO_FILTERS_XCODETITLE','BBCode変換');
 define('_MD_PICO_FILTERS_XCODEDESC','自動リンクおよびBBCodeが有効になります');
-define('_MD_PICO_FILTERS_XCODEINITWEIGHT',30);
+define('_MD_PICO_FILTERS_WRAPSTITLE','ページラップ ※仮想パスの中身が読み込まれ、本文は無視されます');
+define('_MD_PICO_FILTERS_WRAPSDESC','XOOPS_TRUST_PATH/wraps/(dirname)/下のファイルを読込みます。(wraps互換)');
 
 
 // permissions
@@ -136,5 +134,18 @@ define('_MD_PICO_PERMS_CAN_DELETE','削除権限');
 define('_MD_PICO_PERMS_POST_AUTO_APPROVED','承認不要');
 define('_MD_PICO_PERMS_IS_MODERATOR','モデレータ');
 define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限');
+
+
+if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {
+	if( function_exists( 'mb_convert_encoding' ) && function_exists( 'mb_internal_encoding' ) ) {
+		function pico_convert_encoding_to_ie( $str ) {
+			return mb_convert_encoding( $str , mb_internal_encoding() , "auto" ) ;
+		}
+	} else {
+		function pico_convert_encoding_to_ie( $str ) {
+			return $str ;
+		}
+	}
+}
 
 ?>

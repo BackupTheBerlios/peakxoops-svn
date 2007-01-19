@@ -32,13 +32,20 @@
 		</tr>
 
 		<tr valign="top" align="left">
+			<th class="head"><label for="vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
+			<td class="even">
+				<input type="text" name="vpath" id="vpath" size="70" maxlength="255" value="<{$content.vpath}>" />
+			</td>
+		</tr>
+
+		<tr valign="top" align="left">
 			<th class="head"><label for="subject"><{$smarty.const._MD_PICO_TH_SUBJECT}></label></th>
 			<td class="even">
 				<input type="text" name="subject" id="subject" size="80" maxlength="255" value="<{$content.subject}>" />
 			</td>
 		</tr>
 
-		<{if ! $content.approval}>
+		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></th>
 			<td class="even" style="color:red;background-color:white;"><{$content.subject_waiting}></td>
@@ -54,7 +61,7 @@
 			</td>
 		</tr>
 
-		<{if ! $content.approval}>
+		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
 			<td class="even" style="color:red;background-color:white;"><{$content.htmlheader_waiting}></td>
@@ -74,7 +81,7 @@
 			</td>
 		</tr>
 
-		<{if ! $content.approval}>
+		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
 			<td class="even" style="color:red;background-color:white;"><{$content.body_waiting}></td>
@@ -141,7 +148,7 @@
 	<p class="pico_submit">
 		<input type="submit" class="formButton" name="contentman_preview"  id="contentman_preview" value="<{$smarty.const._PREVIEW}>" />
 		<input type="submit" class="formButton" name="contentman_post"  id="contentman_post" value="<{$smarty.const._MD_PICO_BTN_SUBMITEDITING}>" />
-		<{if ! $content.approval && $category.isadminormod}>
+		<{if ! $content.approval && $category.isadminormod && $page != 'makecontent'}>
 		<input type="submit" name="contentman_copyfromwaiting" value="<{$smarty.const._MD_PICO_BTN_COPYFROMWAITING}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMCOPYFROMWAITING}>')" />
 		<{/if}>
 		<{if $page == 'contentmanager' && $category.can_delete}>

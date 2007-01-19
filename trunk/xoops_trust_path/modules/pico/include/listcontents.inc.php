@@ -9,6 +9,7 @@ while( $content_row = $xoopsDB->fetchArray( $ors ) ) {
 	// contents array
 	$content4assign_tmp = array(
 		'id' => intval( $content_row['content_id'] ) ,
+		'link' => pico_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 		'subject' => $content_row['subject'] ? $myts->makeTboxData4Show( $content_row['subject'] ) : _MD_PICO_NOSUBJECT ,
 		'created_time' => intval( $content_row['created_time'] ) ,
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] , 'm' ) ,

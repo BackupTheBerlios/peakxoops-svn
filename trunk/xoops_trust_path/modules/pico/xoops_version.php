@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.40 ;
+$modversion['version'] = 0.90 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -39,16 +39,16 @@ $modversion['hasMain'] = 1 ;
 
 // Submenu (just for mainmenu)
 $modversion['sub'] = array() ;
-if( is_object( $GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('dirname') == $mydirname ) {
+if( is_object( @$GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('dirname') == $mydirname ) {
 	$db =& Database::getInstance() ;
 	$myts =& MyTextSanitizer::getInstance();
 	require_once dirname(__FILE__).'/include/common_functions.php' ;
 	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
-	$result = $db->query("SELECT content_id,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4cat" ) ;
-	if( $result ) while( list( $content_id , $subject ) = $db->fetchRow( $result ) ) {
+	$result = $db->query("SELECT content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4cat" ) ;
+	if( $result ) while( $content_row = $db->fetchArray( $result ) ) {
 		$modversion['sub'][] = array(
-			'name' => $myts->makeTboxData4Show( $subject ) ,
-			'url' => 'index.php?content_id='.intval($content_id) ,
+			'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
+			'url' => pico_make_content_link4html( @$GLOBALS['xoopsModuleConfig'] , $content_row ) ,
 		) ;
 	}
 }
@@ -95,6 +95,16 @@ $modversion['hasComments'] = 0 ;
 
 // Configs
 $modversion['config'][1] = array(
+	'name'			=> 'use_wraps_mode' ,
+	'title'			=> $constpref.'_USE_WRAPSMODE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'top_message' ,
 	'title'			=> $constpref.'_TOP_MESSAGE' ,
 	'description'	=> '' ,
@@ -220,7 +230,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_CSS_URIDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> 'index.css' ,
+	'default'		=> '{mod_url}/index.css' ,
 	'options'		=> array()
 ) ;
 

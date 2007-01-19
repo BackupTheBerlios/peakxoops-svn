@@ -1,10 +1,13 @@
 [mlimg]
 [xlang:en]
-====  pico prototype  ===
+====  pico - the module for static contents  ===
 
-A module based on Duplicatable V3 for static contents.
-needs XOOPS_TRUST_PATH.
+[b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
+Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
+
+TinyD will be deprecated module after pico is marked as stable.
+Of course, you can upgrade your contents from TinyD to pico easily.
 
 
 [b]SPEC:[/b]
@@ -12,18 +15,36 @@ needs XOOPS_TRUST_PATH.
 - hierarchial category
 - breadcrumbs
 - page navigation
+- XOOPS_TRUST_PATH/wraps/(dirname) files manual page-wrapping
+- XOOPS_TRUST_PATH/wraps/(dirname) files automatic page-wrapping/transfer
+- static URI (same as wraps)
 - overridable options at each categories
-- body filter system
+- body filter system (smarty, wiki, php etc.)
 - better preview
 - contents cache
+- tell a friend link (tellafriend module supported natively)
 - printer friendly views
 - html header customize per module/categories
 - html header customize per contents
-- search
+- search (with context)
 - counts views
+- list block (duplicatable)
 - menu block (duplicatable)
 - contents block (duplicatable)
+- contents controller for admin
+- dynamic submenu
 - native d3forum comment-integration
+- Wysiwyg Editor (common/spaw and common/fckeditor)
+- import from TinyD per a module
+- import from pico per a module
+- import from pico per a content
+- plugin for sitemap module
+- vote
+- automated menu page
+- approval system for creating contents
+- approval system for modifying contents
+- event notification for waiting approval
+- plugin for waiting module
 
 
 [b]USAGE:[/b]
@@ -34,16 +55,17 @@ needs XOOPS_TRUST_PATH.
 
 (3) copy two files under html/class/smarty/plugins/ in the archive into your class/smarty/plugins/
 
-(4) make a new folder out of DocumentRoot  eg) /home/yourhome/xoops/
+(4) make a new folder out of DocumentRoot  eg) /home/yourhome/xoops_trust_path/
 
 (5) insert a line into just after defining XOOPS_URL in mainfile.php. (Edit '/ho
-me/yourhome/xoops')
+me/yourhome/xoops_trust_path')
 [code]
-        define('XOOPS_TRUST_PATH','/home/yourhome/xoops');
+        define('XOOPS_TRUST_PATH','/home/yourhome/xoops_trust_path');
 [/code]
-(The step of (4)(5) is the same as fastestcache hack)
 
 (6) make a directory 'modules' under the directory. (XOOPS_TRUST_PATH/modules/)
+
+(Since the steps of (4)(5)(6) are the same as altsys or D3 modules, you need not to do the steps if you've already done it.)
 
 (7) copy xoops_trust_path/modules/pico into XOOPS_TRUST_PATH/modules/
 
@@ -51,12 +73,27 @@ me/yourhome/xoops')
 
 (9) set group permissions of the TOP category in admin area
 
+You did it.
+you can add categories or contents as you like.
 
 You'd better install altsys and d3forum also.
 (pico supports comment system integrated with d3forum only)
 
 
+
+[b]NOTICE:[/b]
+
+You have to turn "module cache" off about this module.
+pico is fast enough if you use content's cache.
+
+
 [b]HISTORY:[/b]
+
+0.40->0.90beta (update the module essentially)
+- upgraded the version as BETA
+- added static URI (same as wraps)
+- added auto-page-wrap
+- added manual-page-wrap
 
 0.32->0.40
 - added concept of waiting
@@ -99,11 +136,17 @@ You'd better install altsys and d3forum also.
 
 [/xlang:en]
 [xlang:ja]
-====  pico プロトタイプ版  ===
+====  静的コンテンツ用モジュール pico  ===
 
-Duplicatable V3技術を応用した静的コンテンツ用モジュールpicoのプロトタイプ版です。
+pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
+開発当初から想定していた機能を一通り実装したこともあり、現時点ではβ版としています。
 
-XOOPS_TRUST_PATH についての設定も必要です。
+いきなり互換性が失われるような大きな機能追加はしばらくありません。バグ取りと細かな操作性向上が一通り済んだら、安定版とします。
+
+D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
+（すでにこのあたりの設定がしてあれば、とても簡単にインストールできます）
+
+機能的には、TinyDの後継という位置づけですが、コード的には完全なフルスクラッチであり、TinyDとは（もちろんTinyContentとも）完全に独立しています。picoが安定版となった時点で、TinyDは開発終了とします。もちろん、TinyDからのアップグレードパスは用意してますので、必要に応じて、適宜引っ越してください。少なくとも、picoがTinyDに機能的に劣ることはないはずです。
 
 
 [b]SPEC:[/b]
@@ -111,39 +154,57 @@ XOOPS_TRUST_PATH についての設定も必要です。
 ・階層カテゴリー
 ・パンくず
 ・ページナビゲーション
+・XOOPS_TRUST_PATH/wraps/(dirname)ファイルの手動ページラップ
+・XOOPS_TRUST_PATH/wraps/(dirname)ファイルの自動ページラップ/転送
+・静的URI (wraps方式)
 ・カテゴリーOption Overrideシステム
 ・任意の順番でかけることのできるフィルター群（新たに Smarty追加）
 ・プレビュー
-・本文キャッシュ
+・本文キャッシュ（代わりにXOOPSのモジュールキャッシュは利用不可）
+・文字化けのない友達紹介リンク
 ・プリンタ用画面
 ・モジュール・カテゴリーレベルのHTMLヘッダ
 ・コンテンツ毎のHTMLヘッダ（上とは独立）
 ・検索（XOOPS検索の本文表示対応）
 ・閲覧数カウント
+・ブロック「コンテンツ一覧」複製可
 ・ブロック「メニュー」複製可
 ・ブロック「コンテンツ表示」複製可
+・管理者用記事一覧管理
+・サブメニュー（ただし、メインメニューで自分自身が選択されている場合のみ）
 ・d3forum nativeコメント統合
+・Wysiwyg Editor (common/spaw と common/fckeditorの両対応)
+・TinyDからのインポート（モジュールまるごと）
+・他のpicoからのインポート（モジュールまるごと）
+・他のpicoへのエクスポート（記事単位）
+・sitemapプラグイン
+・投票
+・目次ページ
+・新規登録の承認制
+・変更申請の承認制
+・申請があったことへのイベント通知
+・申請に対するwaitingプラグイン
 
 
 [b]USAGE:[/b]
 
 (1) アーカイブを展開して、html/modules/pico を moduels の下にコピー
 
-(2) ディレクトリ名は好きにつけてください。
+(2) ディレクトリ名は好きにつけてください。（"pico"をリネーム可）
 
 (3) アーカイブ内の html/class/smarty/plugins/ にあるファイル２つを class/smarty/plugins/ の下にコピーしてください (d3forum等と同じです）
 
-(4) DocumentRootの外に専用のディレクトリを作ります  例) /home/yourhome/xoops/
+(4) DocumentRootの外に専用のディレクトリを作ります  例) /home/yourhome/xoops_trust_path/
 
 (5) そのディレクトリのフルパスをmainfile.phpに記述します。場所はXOOPS_URL定義行の直後が良いでしょう。
 [code]
-        define('XOOPS_TRUST_PATH','/home/yourhome/xoops');
+	define('XOOPS_TRUST_PATH','/home/yourhome/xoops_trust_path');
 [/code]
-（このステップ(4)と(5)は、altsysや最速キャッシュハックと同じです）
 
 (6) XOOPS_TRUST_PATHの下にmodulesディレクトリを作ります (XOOPS_TRUST_PATH/modules/)
+（ステップ(4)〜(6)は、altsysや各種D3モジュールと共通ですので、すでに行ってあればスキップして構いません）
 
-(7) アーカイブのxoops_trust_path/modules/picoをXOOPS_TRUST_PATH/modules/にコピーします
+(7) アーカイブのxoops_trust_path/modules/picoをXOOPS_TRUST_PATH/modules/にコピーします。（この"pico"はリネームしないでください）
 
 (8) XOOPSモジュールとしてインストールしてください。
 
@@ -151,8 +212,7 @@ XOOPS_TRUST_PATH についての設定も必要です。
 
 
 あとはTinyDの操作を知っていれば、そう難しいことはないと思います。
-コンテンツを追加していくだけです。
-
+カテゴリーやコンテンツを追加していくだけです。
 altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 （というか、d3forumがないとコメント機能は利用できません）
 
@@ -163,6 +223,12 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+0.40->0.90beta （※モジュールアップデート必須）
+- 一通り機能を実装したので、β版扱いに格上げした
+- 静的URIの実装 (wraps方式)
+- 自動ページラップの実装
+- 手動ページラップの実装（コンテンツ追加で、フィルター指定する）
 
 0.32->0.40
 - 承認待ち、という概念を実装した

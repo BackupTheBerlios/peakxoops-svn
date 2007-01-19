@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(__FILE__).'/constants.php' ;
 require_once dirname(__FILE__).'/main_functions.php' ;
 require_once dirname(__FILE__).'/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;

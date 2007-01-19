@@ -1,7 +1,4 @@
 ●未実装
-・静的URI (wraps方式との混在?)
-・ページラップをどうするか？
-・（もし実装するなら）ページラップのインポート
 ・コメント統合用クラスで、htmlspecialchars()をどのタイミングで入れるか、再チェック
 ・キャッシュに保存するタイミング（特にSmartyフィルター利用時）と検索の関係
 
@@ -20,6 +17,7 @@
 ・コンテンツ毎のHTMLヘッダ（上とは独立）
 ・検索（XOOPS検索の本文表示対応）
 ・閲覧数カウント
+・ブロック「コンテンツ一覧」複製可
 ・ブロック「メニュー」複製可
 ・ブロック「コンテンツ表示」複製可
 ・d3forum nativeコメント統合
@@ -36,6 +34,9 @@
 ・変更申請の承認制
 ・申請があったことへのイベント通知
 ・プラグイン (waiting)
+・静的URI (wraps方式)
+・XOOPS_TRUST_PATH/wraps/(dirname)ファイルの手動ページラップ
+・XOOPS_TRUST_PATH/wraps/(dirname)ファイルの自動ページラップ
 
 
 ●権限・表示ON/OFF関係の仕様
@@ -48,7 +49,7 @@ $permissions['can_edit'] 変更権限 他者のエントリも変更できる。*_waitingに収まる
 $permissions['can_delete'] 削除権限 他者のエントリも削除できる
 $permissions['post_auto_approved'] 投稿したらvisible=1、編集したら*_waitingに収めることもスキップしていきなり書き換わる
 $permissions['can_makesubcategory'] サブカテゴリー作成権限
-$permissions['is_moderator'] カテゴリーモデレータ・不可視コンテンツが見える/承認権限がある/カテゴリー編集権限がある等。管理画面での操作（直接の権限設定等）は出来ない
+$permissions['is_moderator'] カテゴリーモデレータ・不可視コンテンツが見える/承認権限がある/カテゴリー編集権限がある等。管理画面での操作（直接の権限設定等）は出来ない。また、INSECURE指定されたフィルター(evalやxoopstpl等)を利用できるのもモデレータ（と管理者）だけ
 
 contents.visible 0なら、管理者/モデレータ以外には見えない
 contents.approval 表示/非表示とは直接関係ない。0は単に「待っている」ことを示す
@@ -56,4 +57,21 @@ contents.show_in_navi ページナビゲーションに表示されるかどうか
 contents.show_in_menu メニューブロックに表示されるかどうか
 
 
+●ページラップの仕様 （大きく分けて３パターン）
+(mydirname)/index.php/foo.gif
+  拡張子に合ったHTTPヘッダつけて単純転送 (wrapsと同じ)
+
+(mydirname)/index.php/foo.html
+・contentsテーブルにある場合
+  content_idを求め、そこからは通常のコンテンツ処理
+  filtersに"wraps"があればラップされるし、なければDBの内容
+  キャッシュに収めることが出来るので、検索対象にもなる
+・contentsテーブルになく、かつ、対応するファイルがある場合
+  cat_idをpathから求める（なければtopカテゴリー扱い)
+  headerとfooterをつけて転送
+  <body></body>の内側をコンテンツ扱い
+  最初の<title></title>の内側をsubject扱い
+  エンコード変換も行う
+  「友達に知らせる」機能はとりあえず強制OFF（将来的には修正すべきか？）
+  ページナビゲーションも強制OFF
 

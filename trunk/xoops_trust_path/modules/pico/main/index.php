@@ -32,14 +32,23 @@ if( empty( $content_id ) ) {
 		require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
 		$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;
 		$pagetitle4assign = $xoopsModule->getVar('name') ;
-	} else if( @$xoopsModuleConfig['show_listasindex'] ) {
+	} else if( ! @$xoopsModuleConfig['show_listasindex'] ) {
+		// redirect to the top of the content
+		$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
+		if( $content_id ) {
+			$redirect_uri = XOOPS_URL.'/modules/'.$mydirname.'/'.pico_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) ;
+			if( headers_sent() ) {
+				redirect_header( $redirect_uri , 0 , '&nbsp;' ) ;
+			} else {
+				header( 'Location: '.$redirect_uri ) ;
+			}
+		}
+	}
+	if( empty( $xoopsOption['template_main'] ) ) {
 		// list contents of the category
 		require dirname(dirname(__FILE__)).'/include/listcontents.inc.php' ;
 		$xoopsOption['template_main'] = $mydirname.'_main_listcontents.html' ;
 		$pagetitle4assign = $category4assign['title'] ;
-	} else {
-		// get the top of the content
-		$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
 	}
 }
 

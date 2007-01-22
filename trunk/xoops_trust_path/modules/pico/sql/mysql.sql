@@ -39,7 +39,7 @@ CREATE TABLE contents (
   content_id int(10) unsigned NOT NULL auto_increment,
   vpath varchar(255),
   cat_id smallint(5) unsigned NOT NULL default 0,
-  weight smallint(5) unsigned NOT NULL default 0,
+  weight smallint(5) NOT NULL default 0,
   created_time int(10) NOT NULL default 0,
   modified_time int(10) NOT NULL default 0,
   poster_uid mediumint(8) unsigned NOT NULL default 0,

@@ -97,6 +97,11 @@
 			</tr>
 		<{/foreach}>
 		<tr>
+			<td colspan="9" align="center" class="head">
+				<input type="submit" name="contents_update" value="<{$smarty.const._SUBMIT}>" tabindex="0" />
+			</td>
+		</tr>
+		<tr>
 			<th colspan="9" align="right">
 				<{$smarty.const._MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED}>
 				<input type="submit" name="contents_delete" value="<{$smarty.const._MD_A_PICO_BTN_DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_DELETE}>');" />
@@ -108,6 +113,5 @@
 			</th>
 		</tr>
 	</table>
-	<input type="submit" name="contents_update" value="<{$smarty.const._SUBMIT}>" />
 </form>
 

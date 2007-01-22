@@ -1,5 +1,7 @@
 <?php
 
+@include_once dirname(dirname(__FILE__)).'/include/constants.php' ;
+if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(dirname(__FILE__)).'/include/constants.dist.php' ;
 require_once dirname(dirname(__FILE__)).'/include/main_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;

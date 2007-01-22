@@ -64,7 +64,7 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 		if( ! empty( $content_row['vpath'] ) ) {
 			return 'index.php'.htmlspecialchars($content_row['vpath'],ENT_QUOTES) ;
 		} else {
-			return 'index.php/'.intval($content_row['content_id']).'.html' ;
+			return 'index.php/' . sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) ;
 		}
 	} else {
 		// normal link

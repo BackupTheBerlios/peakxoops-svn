@@ -1,6 +1,7 @@
 <?php
 
-require_once dirname(__FILE__).'/constants.php' ;
+@include_once dirname(__FILE__).'/constants.php' ;
+if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constants.dist.php' ;
 require_once dirname(__FILE__).'/main_functions.php' ;
 require_once dirname(__FILE__).'/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;

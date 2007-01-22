@@ -367,15 +367,7 @@ function pico_parse_path_info( $mydirname )
 	}
 
 	if( $path_info ) {
-		// check if (number).html 1st
-		if( preg_match( '/^([0-9]+)\.html$/' , $path_info , $regs ) ) {
-			$content_id = intval( @$regs[1] ) ;
-			var_dump( $content_id ) ;
-			exit ;
-			return array( $content_id , pico_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
-		}
-
-		// check vpath in DB 2nd
+		// check vpath in DB (1st)
 		$ext = strtolower( substr( strrchr( $path_info , '.' ) , 1 ) ) ;
 		if( in_array( $ext , array( 'htm' , 'html' ) ) ) {
 			$db =& Database::getInstance() ;
@@ -385,6 +377,12 @@ function pico_parse_path_info( $mydirname )
 				$_GET['content_id'] = $content_id ;
 				return array( $content_id , intval( $cat_id ) , false ) ;
 			}
+		}
+
+		// check path_info obeys the ruled for autonaming (2nd)
+		if( preg_match( _MD_PICO_AUTONAME4PREGEX , $path_info , $regs ) ) {
+			$content_id = intval( @$regs[1] ) ;
+			return array( $content_id , pico_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
 		}
 
 		// check wrap file 

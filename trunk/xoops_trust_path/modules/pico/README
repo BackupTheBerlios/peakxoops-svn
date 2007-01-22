@@ -94,6 +94,8 @@ pico is fast enough if you use content's cache.
 - added static URI (same as wraps)
 - added auto-page-wrap
 - added manual-page-wrap
+- fixed top page with wraps mode (thx Kaz) 0.90a
+
 
 0.32->0.40
 - added concept of waiting
@@ -229,6 +231,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - 静的URIの実装 (wraps方式)
 - 自動ページラップの実装
 - 手動ページラップの実装（コンテンツ追加で、フィルター指定する）
+- トップページの処理がおかしかったのをfix (thx Kaz) 0.90a
 
 0.32->0.40
 - 承認待ち、という概念を実装した

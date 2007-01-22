@@ -370,6 +370,8 @@ function pico_parse_path_info( $mydirname )
 		// check if (number).html 1st
 		if( preg_match( '/^([0-9]+)\.html$/' , $path_info , $regs ) ) {
 			$content_id = intval( @$regs[1] ) ;
+			var_dump( $content_id ) ;
+			exit ;
 			return array( $content_id , pico_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
 		}
 

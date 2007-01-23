@@ -13,6 +13,7 @@ define('_MD_PICO_NOSUBJECT','(no subject)');
 define('_MD_PICO_WAITINGAPPROVAL','waiting approval');
 define('_MD_PICO_WAITINGREGISTER','waiting new');
 define('_MD_PICO_WAITINGUPDATE','waiting update');
+define('_MD_PICO_REGISTERED_AUTOMATICALLY','AUTOMATIC');
 
 define('_MD_PICO_CATEGORY','Category');
 define('_MD_PICO_CATEGORIES','Categories');

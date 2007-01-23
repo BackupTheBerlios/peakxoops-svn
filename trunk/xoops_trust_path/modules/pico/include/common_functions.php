@@ -1,5 +1,8 @@
 <?php
 
+@include_once dirname(__FILE__).'/constants.php' ;
+if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constants.dist.php' ;
+
 // this file can be included from d3forum's blocks.
 
 function pico_get_categories_can_read( $mydirname )
@@ -32,8 +35,23 @@ function pico_get_categories_can_read( $mydirname )
 }
 
 
-function pico_filter_body( $mydirname , $content_row )
+function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 {
+	$can_use_cache = $use_cache && $content_row['body_cached'] ;
+
+	// wraps special check (compare filemtime with modified_time )
+	if( strstr( $content_row['filters'] , 'wraps' ) && $content_row['vpath'] ) {
+		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
+		if( filemtime( $wrap_full_path ) > $content_row['modified_time'] ) {
+			$can_use_cache = false ;
+		}
+	}
+
+	if( $can_use_cache ) {
+		return $content_row['body_cached'] ;
+	}
+
+	// process each filters
 	$text = $content_row['body'] ;
 	foreach( explode( '|' , $content_row['filters'] ) as $filter ) {
 		$filter = trim( $filter ) ;
@@ -45,6 +63,12 @@ function pico_filter_body( $mydirname , $content_row )
 			include_once $file_path ;
 			$text = $func_name( $mydirname , $text , $content_row ) ;
 		}
+	}
+
+	// store the result into body_cached field
+	if( $use_cache ) {
+		$db =& Database::getInstance() ;
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($text)."',modified_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content_row['content_id']) ) ;
 	}
 
 	return $text ;
@@ -64,7 +88,7 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 		if( ! empty( $content_row['vpath'] ) ) {
 			return 'index.php'.htmlspecialchars($content_row['vpath'],ENT_QUOTES) ;
 		} else {
-			return 'index.php/' . sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) ;
+			return 'index.php' . sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) ;
 		}
 	} else {
 		// normal link

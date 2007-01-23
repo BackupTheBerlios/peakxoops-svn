@@ -31,18 +31,25 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix("config")." MODIFY `conf_title` varchar(255) NOT NULL default '', MODIFY `conf_desc` varchar(255) NOT NULL default ''" ) ;
 	}
 
-	// 0.1x -> 0.2x
+	// 0.1 -> 0.2
 	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_category_permissions") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "DROP TABLE ".$db->prefix($mydirname."_category_access") ) ;
 		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_category_permissions")." ( cat_id smallint(5) unsigned NOT NULL default 0, uid mediumint(8) default NULL, groupid smallint(5) default NULL, permissions text, UNIQUE KEY (cat_id,uid), UNIQUE KEY (cat_id,groupid), KEY (cat_id), KEY (uid), KEY (groupid)) TYPE=MyISAM" ) ;
 	}
 
-	// 0.2x -> 0.9x
+	// 0.2 -> 0.9
 	$check_sql = "SELECT cat_vpath FROM ".$db->prefix($mydirname."_categories") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD   `cat_vpath` varchar(255) AFTER `cat_id`, ADD UNIQUE KEY (`cat_vpath`)" ) ;
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." ADD   `vpath` varchar(255) AFTER `content_id`, ADD UNIQUE KEY (`vpath`)" ) ;
+	}
+
+	// 0.9 -> 0.95
+	$check_sql = "SELECT cat_vpath_mtime FROM ".$db->prefix($mydirname."_categories") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD cat_created_time int(10) NOT NULL default 0, ADD cat_modified_time int(10) NOT NULL default 0, ADD cat_vpath_mtime int(10) NOT NULL default 0" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." MODIFY weight smallint(5) NOT NULL default 0" ) ;
 	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)

@@ -41,7 +41,7 @@ function b_pico_list_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
 
 	// categories
 	if( $categories === array() ) {
@@ -55,7 +55,7 @@ function b_pico_list_show( $options )
 		$categories4assign = implode(',',$categories) ;
 	}
 
-	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4cat) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
+	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
 	if( ! $result = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;

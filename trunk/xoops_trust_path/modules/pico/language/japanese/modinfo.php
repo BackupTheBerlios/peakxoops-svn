@@ -20,6 +20,7 @@ define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
 
 // configurations
 define($constpref.'_USE_WRAPSMODE','wrapsモードを有効にする');
+define($constpref.'_WRAPSAUTOREGIST','HTMLラップファイルの自動DB登録');
 define($constpref.'_TOP_MESSAGE','モジュールトップのメッセージ');
 define($constpref.'_TOP_MESSAGEDEFAULT','');
 define($constpref.'_MENUINMODULETOP','モジュールトップでは自動生成メニューを表示する');

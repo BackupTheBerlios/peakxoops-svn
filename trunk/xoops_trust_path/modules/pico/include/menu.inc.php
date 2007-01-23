@@ -28,6 +28,14 @@ while( $cat_row = $db->fetchArray( $crs ) ) {
 	$categories4assign[ $cat_id ] = $category4assign + $cat_row ;
 }
 
+// auto-register
+if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) ) {
+	require_once dirname(__FILE__).'/transact_functions.php' ;
+	foreach( $categories4assign as $category_tmp ) {
+		pico_auto_register_from_cat_vpath( $mydirname , $category_tmp ) ;
+	}
+}
+
 foreach( array_keys( $categories4assign ) as $cat_id ) {
 	// contents loop
 	$sql = "SELECT o.* FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=$cat_id ORDER BY o.weight" ;

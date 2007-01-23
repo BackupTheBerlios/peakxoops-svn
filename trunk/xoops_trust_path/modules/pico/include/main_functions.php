@@ -346,22 +346,22 @@ function pico_filter_cmp( $a , $b )
 // parse and get path_info
 function pico_parse_path_info( $mydirname )
 {
-	$disallow_chars = '?[^a-zA-Z0-9_./+-]?' ;
+	global $xoopsModuleConfig ;
 
 	if( ! empty( $_GET['path_info'] ) ) {
 		// path_info=($path_info) by mod_rewrite
-		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , $_GET['path_info'] ) ) ;
+		$path_info = '/' . str_replace( '..' , '' , preg_replace( _MD_PICO_WRAPS_DISALLOWEDCHARS4PREGEX , '' , $_GET['path_info'] ) ) ;
 	} else if( ! empty( $_SERVER['PATH_INFO'] ) ) {
 		// try PATH_INFO first
-		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , substr( @$_SERVER['PATH_INFO'] , 1 ) ) ) ;
+		$path_info = str_replace( '..' , '' , preg_replace( _MD_PICO_WRAPS_DISALLOWEDCHARS4PREGEX , '' , @$_SERVER['PATH_INFO'] ) ) ;
 	} else if( stristr( $_SERVER['REQUEST_URI'] , $mydirname.'/index.php/' ) ) {
 		// try REQUEST_URI second
 		list( , $path_info_query ) = explode( $mydirname.'/index.php' , $_SERVER['REQUEST_URI'] , 2 ) ;
 		list( $path_info_tmp ) = explode( '?' , $path_info_query , 2 ) ;
-		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , substr( $path_info_tmp , 1 ) ) ) ;
+		$path_info = str_replace( '..' , '' , preg_replace( _MD_PICO_WRAPS_DISALLOWEDCHARS4PREGEX , '' , $path_info_tmp ) ) ;
 	} else if( strlen( $_SERVER['PHP_SELF'] ) > strlen( $_SERVER['SCRIPT_NAME'] ) ) {
 		// try PHP_SELF & SCRIPT_NAME third
-		$path_info = str_replace( '..' , '' , preg_replace( $disallow_chars , '' , substr( $_SERVER['PHP_SELF'] , strlen( $_SERVER['SCRIPT_NAME'] ) + 1 ) ) ) ;
+		$path_info = str_replace( '..' , '' , preg_replace( _MD_PICO_WRAPS_DISALLOWEDCHARS4PREGEX , '' , substr( $_SERVER['PHP_SELF'] , strlen( $_SERVER['SCRIPT_NAME'] ) ) ) ) ;
 	} else {
 		$path_info = false ;
 	}
@@ -369,9 +369,9 @@ function pico_parse_path_info( $mydirname )
 	if( $path_info ) {
 		// check vpath in DB (1st)
 		$ext = strtolower( substr( strrchr( $path_info , '.' ) , 1 ) ) ;
-		if( in_array( $ext , array( 'htm' , 'html' ) ) ) {
+		if( in_array( $ext , explode( '|' , _MD_PICO_ALLOWEDEXTSINVPATH ) ) ) {
 			$db =& Database::getInstance() ;
-			$result = $db->query( "SELECT content_id,cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='/".addslashes($path_info)."'" ) ;
+			$result = $db->query( "SELECT content_id,cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".addslashes($path_info)."'" ) ;
 			list( $content_id , $cat_id ) = $db->fetchRow( $result ) ;
 			if( $content_id ) {
 				$_GET['content_id'] = $content_id ;
@@ -386,20 +386,26 @@ function pico_parse_path_info( $mydirname )
 		}
 
 		// check wrap file 
-		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.'/'.$path_info ;
+		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$path_info ;
 		if( ! file_exists( $wrap_full_path ) ) {
 			header( 'HTTP/1.0 404 Not Found' ) ;
 			exit ;
 		}
 
-		if( in_array( $ext , array( 'htm' , 'html' , 'php' ) ) ) {
+		if( in_array( $ext , explode( '|' , _MD_PICO_EXTS4HTMLWRAPPING ) ) ) {
 			// HTML wrapping
 			// get category from path_info
 			$directory = strtolower( substr( $path_info , 0 , strrpos( $path_info , '/' ) ) ) ;
 			$db =& Database::getInstance() ;
-			$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath='/".addslashes($directory)."'" ) ;
+			$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath='".addslashes($directory)."'" ) ;
 			list( $cat_id ) = $db->fetchRow( $result ) ;
-			return array( 0 , intval( $cat_id ) , $path_info ) ;
+			if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) ) {
+				require_once dirname(__FILE__).'/transact_functions.php' ;
+				$new_content_id = pico_auto_register_wrapped_file( $mydirname , $path_info , $cat_id ) ;
+				return array( $new_content_id , intval( $cat_id ) , false ) ;
+			} else {
+				return array( 0 , intval( $cat_id ) , $path_info ) ;
+			}
 		} else {
 			// just transfer
 			// remove output bufferings
@@ -435,7 +441,7 @@ function pico_parse_path_info( $mydirname )
 // parse and get path_info
 function pico_read_wrapped_file( $mydirname , $path_info )
 {
-	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.'/'.$path_info ;
+	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$path_info ;
 
 	ob_start() ;
 	include $wrap_full_path ;
@@ -458,7 +464,7 @@ function pico_read_wrapped_file( $mydirname , $path_info )
 
 	return array(
 		'id' => 0 ,
-		'link' => 'index.php/'.$path_info ,
+		'link' => 'index.php'.$path_info ,
 		'created_time' => $mtime ,
 		'created_time_formatted' => formatTimestamp( $mtime ) ,
 		'subject' => $subject ,

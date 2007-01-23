@@ -6,7 +6,7 @@ function pico_wraps( $mydirname , $text , $content_row )
 {
 	if( empty( $content_row['vpath'] ) ) return $text ;
 
-	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.'/'.str_replace('..','',$content_row['vpath']) ;
+	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
 
 	if( file_exists( $wrap_full_path ) ) {
 		ob_start() ;

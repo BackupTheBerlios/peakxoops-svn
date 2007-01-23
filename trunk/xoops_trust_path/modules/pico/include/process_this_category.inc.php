@@ -43,7 +43,7 @@ $category4assign = array(
 	'post_auto_approved' => ( $isadminormod || @$category_permissions[ $cat_id ]['post_auto_approved'] ) ,
 	'can_makesubcategory' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_makesubcategory'] ) ,
 	'paths_raw' => unserialize( $cat_row['cat_path_in_tree'] ) ,
-) ;
+) + $cat_row ;
 
 // $xoopsModuleConfig override
 $cat_configs = @unserialize( @$cat_row['cat_options'] ) ;

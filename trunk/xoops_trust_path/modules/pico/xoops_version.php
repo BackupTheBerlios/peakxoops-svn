@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.90 ;
+$modversion['version'] = 0.95 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -43,8 +43,8 @@ if( is_object( @$GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('di
 	$db =& Database::getInstance() ;
 	$myts =& MyTextSanitizer::getInstance();
 	require_once dirname(__FILE__).'/include/common_functions.php' ;
-	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
-	$result = $db->query("SELECT content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4cat" ) ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$result = $db->query("SELECT content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4content" ) ;
 	if( $result ) while( $content_row = $db->fetchArray( $result ) ) {
 		$modversion['sub'][] = array(
 			'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
@@ -97,6 +97,16 @@ $modversion['hasComments'] = 0 ;
 $modversion['config'][1] = array(
 	'name'			=> 'use_wraps_mode' ,
 	'title'			=> $constpref.'_USE_WRAPSMODE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'wraps_auto_register' ,
+	'title'			=> $constpref.'_WRAPSAUTOREGIST' ,
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,

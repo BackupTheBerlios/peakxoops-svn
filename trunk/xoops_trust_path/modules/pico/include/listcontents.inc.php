@@ -1,5 +1,11 @@
 <?php
 
+// auto-register
+if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) && is_array( @$category4assign ) ) {
+	require_once dirname(__FILE__).'/transact_functions.php' ;
+	pico_auto_register_from_cat_vpath( $mydirname , $category4assign ) ;
+}
+
 // contents loop
 $contents4assign = array() ;
 $sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_contents")." WHERE cat_id=$cat_id ORDER BY weight,content_id" ;

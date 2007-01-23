@@ -122,7 +122,7 @@ function pico_get_requests4category( $mydirname )
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
 
-	include dirname(dirname(__FILE__)).'/include/constant_can_override.inc.php' ;
+	include dirname(dirname(__FILE__)).'/include/configs_can_override.inc.php' ;
 	$cat_options = array() ;
 	foreach( $GLOBALS['xoopsModuleConfig'] as $key => $val ) {
 		if( empty( $pico_configs_can_be_override[ $key ] ) ) continue ;
@@ -342,6 +342,61 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
 	return $content_id ;
+}
+
+
+// register a file of "wraps/dirname/$path" into contents table automatically
+function pico_auto_register_wrapped_file( $mydirname , $path , $cat_id = 0 )
+{
+	$db =& Database::getInstance() ;
+
+	$file_info = pico_read_wrapped_file( $mydirname , $path ) ;
+	$cat_id = intval( $cat_id ) ;
+
+	$content_row = $db->fetchArray( $db->query( "SELECT content_id,cat_id,modified_time FROM ".$db->prefix($mydirname."_contents")." WHERE `vpath`='".addslashes($path)."'" ) ) ;
+	if( empty( $content_row ) ) {
+		// insert a new record into the category
+		list( $weight ) = $db->fetchRow( $db->query( "SELECT MAX(weight) FROM ".$db->prefix($mydirname."_contents")." WHERE `cat_id`=$cat_id" ) ) ;
+	
+		if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET `cat_id`=$cat_id,`vpath`='".addslashes($path)."',`subject`='".addslashes($file_info['subject'])."',`body`='',`created_time`={$file_info['created_time']},`modified_time`={$file_info['created_time']},poster_uid=0,modifier_uid=0,poster_ip='',modifier_ip='',use_cache=1,weight=".($weight+1).",filters='wraps',show_in_navi=1,show_in_menu=1,allow_comment=0,visible=1,approval=1,htmlheader='',htmlheader_waiting='',body_waiting='',body_cached=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+		$content_id = $db->getInsertId() ;
+	} else if( $content_row['modified_time'] < $file_info['created_time'] ) {
+		// clear body_cache
+		$content_id = intval( $content_row['content_id'] ) ;
+		if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET `modified_time`={$file_info['created_time']},body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	} else {
+		$content_id = 0 ;
+	}
+
+	return $content_id ;
+}
+
+
+// register files under "wraps/dirname/$cat_vpath" automatically
+function pico_auto_register_from_cat_vpath( $mydirname , $category_row )
+{
+	$db =& Database::getInstance() ;
+
+	if( ord( @$category_row['cat_vpath'] ) == 0x2f ) {
+		$wrap_dir = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$category_row['cat_vpath']) ;
+		if( is_dir( $wrap_dir ) && filemtime( $wrap_dir ) > $category_row['cat_vpath_mtime'] ) {
+			$dh = opendir( $wrap_dir ) ;
+			$files = array() ;
+			while( ( $file = readdir( $dh ) ) !== false ) {
+				if( preg_match( _MD_PICO_AUTOREGIST4PREGEX , $file ) ) {
+					$files[] = $file ;
+				}
+			}
+			closedir( $dh ) ;
+
+			sort( $files ) ;
+			foreach( $files as $file ) {
+				pico_auto_register_wrapped_file( $mydirname , $category_row['cat_vpath'].'/'.$file , intval( $category_row['cat_id'] ) ) ;
+			}
+
+			if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET `cat_vpath_mtime`=UNIX_TIMESTAMP() WHERE cat_id=".intval($category_row['cat_id']) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+		}
+	}
 }
 
 

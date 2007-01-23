@@ -29,18 +29,6 @@ if( $db->getRowsNum( $ors ) <= 0 ) {
 }
 $content_row = $db->fetchArray( $ors ) ;
 
-// body/filter/cache
-if( $content_row['use_cache'] ) {
-	if( $content_row['body_cached'] ) {
-		$body4assign = $content_row['body_cached'] ;
-	} else {
-		$body4assign = pico_filter_body( $mydirname , $content_row ) ;
-		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($body4assign)."' WHERE content_id='$content_id'" ) ;
-	}
-} else {
-	$body4assign = pico_filter_body( $mydirname , $content_row ) ;
-}
-
 // assigning
 $content4assign = array(
 	'id' => intval( $content_row['content_id'] ) ,
@@ -51,7 +39,7 @@ $content4assign = array(
 	'modifier_uname' => $myts->makeTboxData4Show( $content_row['modifier_uname'] ) ,
 	'votes_avg' => $content_row['votes_count'] ? $content_row['votes_sum'] / doubleval( $content_row['votes_count'] ) : 0 ,
 	'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-	'body' => $body4assign ,
+	'body' => pico_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) ,
 	'can_edit' => $category4assign['can_edit'] ,
 	'can_vote' => ( $uid || $xoopsModuleConfig['guest_vote_interval'] ) ? true : false ,
 ) ;

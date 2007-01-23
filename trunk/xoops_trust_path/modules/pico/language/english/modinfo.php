@@ -20,6 +20,7 @@ define( $constpref.'_ADMENU_IMPORT' , 'Import/Sync' ) ;
 
 // configurations
 define($constpref.'_USE_WRAPSMODE','enable wraps mode');
+define($constpref.'_WRAPSAUTOREGIST','enable auto-registering HTML wrapped files into DB as contents');
 define($constpref.'_TOP_MESSAGE','Description of TOP category');
 define($constpref.'_TOP_MESSAGEDEFAULT','');
 define($constpref.'_MENUINMODULETOP','Display menu(index) in the top of this module');

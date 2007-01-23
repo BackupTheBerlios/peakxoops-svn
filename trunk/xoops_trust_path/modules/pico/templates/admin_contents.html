@@ -40,18 +40,22 @@
 			</th>
 			<th>
 				<{$smarty.const._MD_A_PICO_TH_CONTENTSVISIBLE}>
+				<br />
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_visible_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
 			<th>
 				<{$smarty.const._MD_A_PICO_TH_CONTENTSSHOWINNAVI}>
+				<br />
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_show_in_navi_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
 			<th>
 				<{$smarty.const._MD_A_PICO_TH_CONTENTSSHOWINMENU}>
+				<br />
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_show_in_menu_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
 			<th>
 				<{$smarty.const._MD_A_PICO_TH_CONTENTSALLOWCOMMENT}>
+				<br />
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_allow_comment_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
 			<th align="right">
@@ -65,7 +69,7 @@
 					<{$content.id}>
 				</td>
 				<td align="left">
-					<{$content.subject}>
+					<input type="text" size="24" name="subjects[<{$content.id}>]" id="col_subject_<{$content.id}>" value="<{$content.subject}>" />
 				</td>
 				<td align="center">
 					<input type="text" size="24" name="vpaths[<{$content.id}>]" id="col_vpath_<{$content.id}>" value="<{$content.vpath}>" />

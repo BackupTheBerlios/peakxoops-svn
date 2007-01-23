@@ -22,7 +22,7 @@ if( isset( $_POST['categoryman_post'] ) ) {
 
 // FORM PART
 
-include dirname(dirname(__FILE__)).'/include/constant_can_override.inc.php' ;
+include dirname(dirname(__FILE__)).'/include/configs_can_override.inc.php' ;
 $options4html = '' ;
 foreach( $xoopsModuleConfig as $key => $val ) {
 	if( isset( $pico_configs_can_be_override[ $key ] ) ) {

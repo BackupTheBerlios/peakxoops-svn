@@ -13,6 +13,7 @@ define('_MD_PICO_NOSUBJECT','(no subject)');
 define('_MD_PICO_WAITINGAPPROVAL','承認待ち');
 define('_MD_PICO_WAITINGREGISTER','新規登録申請中');
 define('_MD_PICO_WAITINGUPDATE','変更申請中');
+define('_MD_PICO_REGISTERED_AUTOMATICALLY','自動登録');
 
 define('_MD_PICO_CATEGORY','カテゴリー');
 define('_MD_PICO_CATEGORIES','カテゴリー');

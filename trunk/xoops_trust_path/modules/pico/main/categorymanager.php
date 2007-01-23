@@ -43,7 +43,7 @@ if( isset( $_POST['categoryman_delete'] ) && count( $children ) == 0 ) {
 
 // FORM PART
 
-include dirname(dirname(__FILE__)).'/include/constant_can_override.inc.php' ;
+include dirname(dirname(__FILE__)).'/include/configs_can_override.inc.php' ;
 $options4html = '' ;
 $category_configs = @unserialize( $cat_row['cat_options'] ) ;
 if( is_array( $category_configs ) ) foreach( $category_configs as $key => $val ) {

@@ -20,27 +20,15 @@ function b_pico_content_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4cat = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
 
-	$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4cat) AND content_id='$content_id' AND o.visible" ;
+	$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND content_id='$content_id' AND o.visible" ;
 	if( ! $result = $db->query( $sql ) ) return array() ;
 	if( ! $db->getRowsNum( $result ) ) return array() ;
 
 	$constpref = '_MB_' . strtoupper( $mydirname ) ;
 
 	$content_row = $db->fetchArray( $result ) ;
-	
-	// body/filter/cache
-	if( $content_row['use_cache'] ) {
-		if( $content_row['body_cached'] ) {
-			$body4assign = $content_row['body_cached'] ;
-		} else {
-			$body4assign = pico_filter_body( $mydirname , $content_row ) ;
-			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($body4assign)."' WHERE content_id='$content_id'" ) ;
-		}
-	} else {
-		$body4assign = pico_filter_body( $mydirname , $content_row ) ;
-	}
 
 	// assigning
 	$content4assign = array(
@@ -48,7 +36,7 @@ function b_pico_content_show( $options )
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
 		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-		'body' => $body4assign ,
+		'body' => pico_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) ,
 	) ;
 	$content4assign += $content_row ;
 

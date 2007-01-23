@@ -45,6 +45,8 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - approval system for modifying contents
 - event notification for waiting approval
 - plugin for waiting module
+- RSS (both entire module and each categories)
+- auto-registering wrapped files into DB
 
 
 [b]USAGE:[/b]
@@ -89,13 +91,16 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+0.90->0.95beta (update the module essentially)
+- added RSS
+- added auto-registering wrapped files into DB
+
 0.40->0.90beta (update the module essentially)
 - upgraded the version as BETA
 - added static URI (same as wraps)
 - added auto-page-wrap
 - added manual-page-wrap
 - fixed top page with wraps mode (thx Kaz) 0.90a
-
 
 0.32->0.40
 - added concept of waiting
@@ -186,6 +191,8 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・変更申請の承認制
 ・申請があったことへのイベント通知
 ・申請に対するwaitingプラグイン
+・新着RSS（モジュール全体およびカテゴリー毎）
+・ラップページ自動登録
 
 
 [b]USAGE:[/b]
@@ -225,6 +232,11 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+
+0.90->0.95beta （※モジュールアップデート必須）
+- RSS追加
+- ラップページ自動登録追加
 
 0.40->0.90beta （※モジュールアップデート必須）
 - 一通り機能を実装したので、β版扱いに格上げした

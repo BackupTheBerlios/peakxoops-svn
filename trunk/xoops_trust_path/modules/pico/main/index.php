@@ -27,6 +27,11 @@ if( empty( $content_id ) ) {
 		$xoopsOption['template_main'] = $mydirname.'_main_viewcontent.html' ;
 		$content4assign = pico_read_wrapped_file( $mydirname , $pico_path_info ) ;
 		$pagetitle4assign = $content4assign['subject'] ;
+	} else if( @$_GET['page'] == 'rss' ) {
+		// latest contents for rss
+		require dirname(dirname(__FILE__)).'/include/rss.inc.php' ;
+		$xoopsOption['template_main'] = $mydirname.'_independent_rss20.html' ;
+		$pagetitle4assign = $xoopsModule->getVar('name') ;
 	} else if( empty( $cat_id ) && @$_GET['cat_id'] !== "0" && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
 		// auto-made menu
 		require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
@@ -68,6 +73,7 @@ $xoopsTpl->assign(
 		'mydirname' => $mydirname ,
 		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
+		'xoops_config' => $xoopsConfig ,
 		'mod_config' => $xoopsModuleConfig ,
 		'uid' => $uid ,
 		'category' => @$category4assign ,
@@ -85,8 +91,12 @@ $xoopsTpl->assign(
 
 if( @$_GET['page'] == 'print' ) {
 	// for printer
-	$xoopsTpl->assign( 'sitename' , htmlspecialchars($xoopsConfig['sitename']) ) ;
 	$xoopsTpl->display( 'db:'.$mydirname.'_independent_print.html' ) ;
+} else if( @$_GET['page'] == 'rss' && is_array( $contents4assign ) ) {
+	// RSS 2.0
+	if( function_exists( 'mb_http_output' ) ) mb_http_output( 'pass' ) ;
+	header( 'Content-Type:text/xml; charset=utf-8' ) ;
+	$xoopsTpl->display( 'db:'.$mydirname.'_independent_rss20.html' ) ;
 } else {
 	// for monitor
 	include XOOPS_ROOT_PATH.'/footer.php';

@@ -13,7 +13,8 @@
 // ================================================
 
 // unset $spaw_imglib_include
-unset($spaw_imglib_include);
+//unset($spaw_imglib_include);
+if (isset($spaw_imglib_include)) die(¡Çset this in configuration¡Ç);
 
 // include wysiwyg config
 include '../config/spaw_control.config.php';
@@ -37,10 +38,10 @@ $zoom = isset( $_POST['zoom'] ) ? intval($_POST['zoom']) : '0';
 $zoomrate = isset( $_POST['zoomrate'] ) ? intval($_POST['zoomrate']) : '100';
 
 // if set include file specified in $spaw_imglib_include
-if (!empty($spaw_imglib_include))
+/*if (!empty($spaw_imglib_include))
 {
   include $spaw_imglib_include;
-}
+}*/
 
 $value_found = false;
 // callback function for preventing listing of non-library directory

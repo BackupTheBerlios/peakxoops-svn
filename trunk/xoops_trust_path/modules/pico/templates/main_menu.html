@@ -6,12 +6,12 @@
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>
 </div>
 
-<{if $category.can_makesubcategory}>
-<a href="<{$mod_url}>/index.php?page=makecategory">[<{$smarty.const._MD_PICO_LINK_MAKECATEGORY}>]</a>
+<{if $xoops_isadmin}>
+	<a href="<{$mod_url}>/admin/index.php?page=category_access">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
 <{/if}>
 
-<{if $category.can_post}>
-<a href="<{$mod_url}>/index.php?page=makecontent">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
+<{if $xoops_isadmin}>
+	<a href="<{$mod_url}>/admin/index.php?page=contents">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
 <{/if}>
 
 <p><{$mod_config.top_message}></p>
@@ -19,12 +19,29 @@
 <{foreach item=category from=$categories}>
 <dl style="margin-left:<{$category.depth_in_tree}>0px;">
 	<dt style="margin:5px 0 0;padding:3px;background-color:#eee;">
+
+		<!-- controllers -->
+		<div class="pico_contollers_in_menu" style="float:right;">
+			<{if $category.isadminormod}>
+			<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
+			<{/if}>
+	
+			<{if $category.can_makesubcategory}>
+			<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
+			<{/if}>
+	
+			<{if $category.can_post}>
+				<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
+			<{/if}>
+		</div>
+
 		<a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>">
 			<{$category.title}>
 			<{if $category.isadminormod && $category.invisible_contents_counter}>
 				<span style="color:red;">(<{$category.invisible_contents_counter}>)</span>
 			<{/if}>
 		</a>
+
 	</dt>
 	<dd style="margin:0;"><ul>
 	<{foreach item=content from=$category.contents}>

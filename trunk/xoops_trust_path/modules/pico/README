@@ -96,6 +96,7 @@ pico is fast enough if you use content's cache.
 - added sync tables
 - fixed filter xoopstpl
 - checked compatibility with XOOPS Cube 2.1 Legacy
+- fixed some bugs (thx starck)
 
 0.90->0.95beta (update the module essentially)
 - added RSS
@@ -245,6 +246,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - 同期実装
 - Smartyフィルターの動作がおかしかったのを改善
 - XOOPS Cube 2.1 Legacy での動作確認
+- いくつかのバグ修正 (thx starck)
 
 0.90->0.95beta （※モジュールアップデート必須）
 - RSS追加

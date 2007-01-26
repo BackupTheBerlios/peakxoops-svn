@@ -3,11 +3,19 @@
 // top category
 $categories4assign = array() ;
 if( ! empty( $category_permissions[0] ) ) {
+	$cat_id = 0 ;
+	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 	$categories4assign[0] = array(
 		'id' => 0 ,
 		'title' => $xoopsModule->getVar('name') ,
 		'depth_in_tree' => 0 ,
-		'isadminormod' => ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ,
+		'isadminormod' => $isadminormod ,
+		'can_post' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_post'] ) ,
+		'can_edit' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_edit'] ) ,
+		'can_delete' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_delete'] ) ,
+		'post_auto_approved' => ( $isadminormod || @$category_permissions[ $cat_id ]['post_auto_approved'] ) ,
+		'can_makesubcategory' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_makesubcategory'] ) ,
+		'paths_raw' => array() ,
 	) ;
 }
 
@@ -19,11 +27,18 @@ if( ! $crs = $db->query( $sql ) ) {
 }
 while( $cat_row = $db->fetchArray( $crs ) ) {
 	$cat_id = intval( $cat_row['cat_id'] ) ;
+	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 	$category4assign = array(
 		'id' => intval( $cat_row['cat_id'] ) ,
 		'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 		'depth_in_tree' => $cat_row['cat_depth_in_tree'] + 1 ,
-		'isadminormod' => ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ,
+		'isadminormod' => $isadminormod ,
+		'can_post' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_post'] ) ,
+		'can_edit' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_edit'] ) ,
+		'can_delete' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_delete'] ) ,
+		'post_auto_approved' => ( $isadminormod || @$category_permissions[ $cat_id ]['post_auto_approved'] ) ,
+		'can_makesubcategory' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_makesubcategory'] ) ,
+		'paths_raw' => unserialize( $cat_row['cat_path_in_tree'] ) ,
 	) ;
 	$categories4assign[ $cat_id ] = $category4assign + $cat_row ;
 }

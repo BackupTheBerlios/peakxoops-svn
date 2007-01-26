@@ -6,6 +6,14 @@ require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 $myts =& PicoTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
+// for compatibility "wraps mode" and "GET" in some environment
+if( substr( $_SERVER['REQUEST_URI'] , -11 ) == '?page=print' ) {
+	$_GET['page'] = 'print' ;
+}
+if( substr( $_SERVER['REQUEST_URI'] , -9 ) == '?page=rss' ) {
+	$_GET['page'] = 'rss' ;
+}
+
 // GET $uid
 $uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 $isadmin = $uid > 0 ? $xoopsUser->isAdmin() : false ;

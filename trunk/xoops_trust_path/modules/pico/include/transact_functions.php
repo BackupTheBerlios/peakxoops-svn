@@ -185,8 +185,6 @@ function pico_get_requests4category( $mydirname )
 // create a category
 function pico_makecategory( $mydirname )
 {
-	global $xoopsUser ;
-
 	$db =& Database::getInstance() ;
 
 	$requests = pico_get_requests4category( $mydirname ) ;
@@ -334,7 +332,8 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 		}
 	}
 
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='".$xoopsUser->getVar('uid')."',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='$uid',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
 
 	return $new_content_id ;
@@ -360,7 +359,8 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 		}
 	}
 
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
 	return $content_id ;
 }
@@ -428,8 +428,9 @@ function pico_copyfromwaitingcontent( $mydirname , $content_id )
 
 	$db =& Database::getInstance() ;
 
+	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body=body_waiting, subject=subject_waiting, htmlheader=htmlheader_waiting, visible=1, approval=1 WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='',`modified_time`=UNIX_TIMESTAMP(),modifier_uid='".$xoopsUser->getVar('uid')."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='',`modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return $content_id ;
 }

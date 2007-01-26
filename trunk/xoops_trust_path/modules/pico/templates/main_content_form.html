@@ -64,7 +64,7 @@
 		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
-			<td class="even" style="color:red;background-color:white;"><{$content.htmlheader_waiting}></td>
+			<td class="even" style="color:red;background-color:white;"><{$content.htmlheader_waiting|nl2br}></td>
 		</tr>
 		<{/if}>
 
@@ -84,7 +84,7 @@
 		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
-			<td class="even" style="color:red;background-color:white;"><{$content.body_waiting}></td>
+			<td class="even" style="color:red;background-color:white;"><{$content.body_waiting|nl2br}></td>
 		</tr>
 		<{/if}>
 

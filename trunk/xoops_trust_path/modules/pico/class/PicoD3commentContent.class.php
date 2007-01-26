@@ -22,12 +22,15 @@ function fetchSummary( $external_link_id )
 	// query
 	$content_row = $db->fetchArray( $db->query( "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ) ;
 
+	// dare to convert it irregularly
+	$summary = str_replace( '&amp;' , '&' , htmlspecialchars( xoops_substr( strip_tags( $content_row['body_cached'] ) , 0 , 255 ) , ENT_QUOTES ) ) ;
+
 	return array(
 		'dirname' => $mydirname ,
 		'module_name' => $module->getVar( 'name' ) ,
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_make_content_link4html( $configs , $content_row ) ,
-		'summary' => xoops_substr( strip_tags( $content_row['body_cached'] ) , 0 , 255 ) ,
+		'summary' => $summary ,
 	) ;
 }
 

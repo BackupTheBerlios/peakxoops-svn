@@ -116,6 +116,26 @@ function pico_sync_content_votes( $mydirname , $content_id )
 }
 
 
+// sync content_votes and category's tree
+function pico_sync_all( $mydirname )
+{
+	$db =& Database::getInstance() ;
+
+	// sync contents <- content_votes
+	$result = $db->query( "SELECT content_id FROM ".$db->prefix($mydirname."_contents") ) ;
+	while( list( $content_id ) = $db->fetchRow( $result ) ) {
+		pico_sync_content_votes( $mydirname , intval( $content_id ) ) ;
+	}
+
+	// fix null and '' confusion
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_vpath=null WHERE cat_vpath=''" ) ;
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET vpath=null WHERE vpath=''" ) ;
+
+	// sync category's tree
+	pico_sync_cattree( $mydirname ) ;
+}
+
+
 // get requests for category's sql (parse options)
 function pico_get_requests4category( $mydirname )
 {
@@ -204,6 +224,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 	$db =& Database::getInstance() ;
 
 	$requests = pico_get_requests4category( $mydirname ) ;
+	$set = '' ;
 	foreach( $requests as $key => $val ) {
 		if( $key == 'cat_vpath' && empty( $val ) ) {
 			$set .= "`$key`=null," ;

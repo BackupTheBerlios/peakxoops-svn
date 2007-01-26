@@ -91,6 +91,12 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+0.95->0.96
+- modified treating directory in wraps mode
+- added sync tables
+- fixed filter xoopstpl
+- checked compatibility with XOOPS Cube 2.1 Legacy
+
 0.90->0.95beta (update the module essentially)
 - added RSS
 - added auto-registering wrapped files into DB
@@ -233,6 +239,12 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+
+0.95->0.96
+- wrapsモードでのディレクトリの扱い改善
+- 同期実装
+- Smartyフィルターの動作がおかしかったのを改善
+- XOOPS Cube 2.1 Legacy での動作確認
 
 0.90->0.95beta （※モジュールアップデート必須）
 - RSS追加

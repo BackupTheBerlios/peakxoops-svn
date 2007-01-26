@@ -10,3 +10,11 @@
 	<{$smarty.const._MD_A_PICO_HELP_IMPORTFROM}>
 </form>
 
+<h2 class="head"><{$smarty.const._MD_A_PICO_H2_SYNCALL}></h2>
+<form name="syncall" action="<{$mod_url}>/admin/index.php?page=import" method="post">
+	<{$gticket_hidden}>
+	<input type="submit" name="do_syncall" value="<{$smarty.const._MD_A_PICO_BTN_DOSYNCALL}>" />
+	<br />
+	<{$smarty.const._MD_A_PICO_HELP_SYNCALL}>
+</form>
+

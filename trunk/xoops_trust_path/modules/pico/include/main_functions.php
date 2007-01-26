@@ -392,18 +392,32 @@ function pico_parse_path_info( $mydirname )
 			exit ;
 		}
 
-		if( in_array( $ext , explode( '|' , _MD_PICO_EXTS4HTMLWRAPPING ) ) ) {
+		$path_info_is_dir = is_dir( $wrap_full_path ) ;
+
+		if( $path_info_is_dir || in_array( $ext , explode( '|' , _MD_PICO_EXTS4HTMLWRAPPING ) ) ) {
 			// HTML wrapping
-			// get category from path_info
-			$directory = strtolower( substr( $path_info , 0 , strrpos( $path_info , '/' ) ) ) ;
+			// get category from path_info (finding longest equality)
+			$dir_tmp = strtolower( $path_info ) ;
+			$vpaths4sql = '' ;
+			do {
+				$vpaths4sql .= ",'".addslashes($dir_tmp)."'" ;
+				$dir_tmp = substr( $path_info , 0 , strrpos( $dir_tmp , '/' ) ) ;
+			} while( $dir_tmp ) ;
+			$vpaths4sql = $vpaths4sql ? substr( $vpaths4sql , 1 ) : "''" ;
 			$db =& Database::getInstance() ;
-			$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath='".addslashes($directory)."'" ) ;
+			$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath IN ($vpaths4sql) ORDER BY LENGTH(cat_vpath) DESC" ) ;
 			list( $cat_id ) = $db->fetchRow( $result ) ;
-			if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) ) {
+			if( $path_info_is_dir ) {
+				// just return $cat_id
+				return array( 0 , intval( $cat_id ) , false ) ;
+			} else if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) ) {
+				// register it as a new content
 				require_once dirname(__FILE__).'/transact_functions.php' ;
 				$new_content_id = pico_auto_register_wrapped_file( $mydirname , $path_info , $cat_id ) ;
+				// return new content_id
 				return array( $new_content_id , intval( $cat_id ) , false ) ;
 			} else {
+				// return path_info instead of content_id
 				return array( 0 , intval( $cat_id ) , $path_info ) ;
 			}
 		} else {

@@ -44,6 +44,10 @@ define('_MD_A_PICO_MSG_IMPORTDONE','インポート完了しました');
 define('_MD_A_PICO_ERR_INVALIDMID','指定されたモジュールからはインポートできません');
 define('_MD_A_PICO_ERR_SQLONIMPORT','インポートに失敗しました。インポート元とインポート先で、テーブル構造が違う可能性があります。両方とも最新版にアップデートしているか確認してください');
 define('_MD_A_PICO_HELP_IMPORTFROM','インポート可能なのは、pico・TinyDです。可能な限りオリジナル情報を損なわない形でインポートしますが、完全な再現はできません。各種権限・モデレータについてチェックしてください。なおインポートの成功・不成功にかかわらず、現在のモジュール内の情報は全削除されます。');
+define('_MD_A_PICO_H2_SYNCALL','冗長情報の同期');
+define('_MD_A_PICO_BTN_DOSYNCALL','同期実行');
+define('_MD_A_PICO_MSG_SYNCALLDONE','同期完了しました');
+define('_MD_A_PICO_HELP_SYNCALL','カテゴリーのツリー構造・コンテンツにおける投票数など、速度をかせぐために持たせている冗長情報がおかしくなった時に実行してください');
 
 
 ?>

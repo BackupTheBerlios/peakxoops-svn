@@ -44,6 +44,10 @@ define('_MD_A_PICO_MSG_IMPORTDONE','Imported successfully');
 define('_MD_A_PICO_ERR_INVALIDMID','You\'ve specified wrong module to be imported');
 define('_MD_A_PICO_ERR_SQLONIMPORT','Faild to import. You have to check the versions of each modules');
 define('_MD_A_PICO_HELP_IMPORTFROM','You can import from pico and TinyD instances. And you should know this is not a perfect copy. Especially you should check permissions. You also have to know all data in this module will be lost when you execute to import.');
+define('_MD_A_PICO_H2_SYNCALL','Synchronize redundant informations');
+define('_MD_A_PICO_BTN_DOSYNCALL','Do synchronize');
+define('_MD_A_PICO_MSG_SYNCALLDONE','Synchronized successfully');
+define('_MD_A_PICO_HELP_SYNCALL','Execute it if your categories or contents display contradictory data.');
 
 
 ?>

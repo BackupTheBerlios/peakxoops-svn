@@ -58,14 +58,14 @@
 				<br />
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_allow_comment_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
-			<th align="right">
+			<th style="text-align:right;">
 				<{$smarty.const._MD_A_PICO_TH_CONTENTSACTIONS}>
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_action_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
 		</tr>
 		<{foreach from=$contents item="content"}>
 			<tr class="<{cycle values="even,odd"}>">
-				<td align="right">
+				<td style="text-align:right;">
 					<{$content.id}>
 				</td>
 				<td align="left">
@@ -89,7 +89,7 @@
 				<td align="center">
 					<input type="checkbox" name="allow_comments[<{$content.id}>]" id="col_allow_comment_<{$content.id}>" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
 				</td>
-				<td align="right" nowrap="nowrap">
+				<td nowrap="nowrap" style="text-align:right;">
 					<{if ! $content.approval}>
 						<strong style="color:#f00;"><{$smarty.const._MD_PICO_WAITINGAPPROVAL}></strong>
 					<{/if}>
@@ -106,7 +106,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th colspan="9" align="right">
+			<th colspan="9" style="text-align:right;">
 				<{$smarty.const._MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED}>
 				<input type="submit" name="contents_delete" value="<{$smarty.const._MD_A_PICO_BTN_DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_DELETE}>');" />
 				<input type="submit" name="contents_move" value="<{$smarty.const._MD_A_PICO_BTN_MOVE}>" />

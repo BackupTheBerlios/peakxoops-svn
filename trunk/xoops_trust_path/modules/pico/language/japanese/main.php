@@ -140,7 +140,7 @@ define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限');
 if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {
 	if( function_exists( 'mb_convert_encoding' ) && function_exists( 'mb_internal_encoding' ) ) {
 		function pico_convert_encoding_to_ie( $str ) {
-			return mb_convert_encoding( $str , mb_internal_encoding() , "auto" ) ;
+			return mb_convert_encoding( $str , mb_internal_encoding() , "EUC-JP" ) ;
 		}
 	} else {
 		function pico_convert_encoding_to_ie( $str ) {

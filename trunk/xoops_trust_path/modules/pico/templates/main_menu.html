@@ -43,12 +43,15 @@
 		</a>
 
 	</dt>
-	<dd style="margin:0;"><ul>
+	<dd style="margin:0 0 0 10px;"><ul>
 	<{foreach item=content from=$category.contents}>
 		<li style="margin:0;background-color:#fff;">
 			<a href="<{$mod_url}>/<{$content.link}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a>
 			<{if $category.isadminormod && ! $content.approval}>
 				<span style="color:red;">(<{$smarty.const._MD_PICO_WAITINGUPDATE}>)</span>
+			<{/if}>
+			<{if $category.can_post}>
+				<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><img src="<{$mod_imageurl}>/icon_edit.gif" alt="<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>" /></a>
 			<{/if}>
 		</li>
 	<{/foreach}>

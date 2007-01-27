@@ -91,7 +91,8 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
-0.95->0.96
+0.95->0.96RC
+- upgraded the version as RC
 - modified treating directory in wraps mode
 - added sync tables
 - fixed filter xoopstpl
@@ -153,7 +154,7 @@ pico is fast enough if you use content's cache.
 ====  静的コンテンツ用モジュール pico  ===
 
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
-開発当初から想定していた機能を一通り実装したこともあり、現時点ではβ版としています。
+開発当初から想定していた機能を一通り実装したこともあり、現時点ではRC版としています。
 
 いきなり互換性が失われるような大きな機能追加はしばらくありません。バグ取りと細かな操作性向上が一通り済んだら、安定版とします。
 
@@ -241,7 +242,8 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 [b]HISTORY:[/b]
 
 
-0.95->0.96
+0.95->0.96RC
+- だいたいの動作確認がとれたので、RC版扱いに格上げした
 - wrapsモードでのディレクトリの扱い改善
 - 同期実装
 - Smartyフィルターの動作がおかしかったのを改善

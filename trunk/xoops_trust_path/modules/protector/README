@@ -9,7 +9,7 @@ This module can protect a various kind of attacks like:
 - DoS
 - Bad Crawlers (like bots collecting e-mails...)
 - SQL Injection
-- XSS (Just only a little kind of ...)
+- XSS (not all though)
 - System globals pollution
 - Session hi-jacking
 - Null-bytes
@@ -29,52 +29,49 @@ However, I [color=ff0000][b]strongly[/b][/color] recommend installing this modul
 
 
 
-= RELATION to AntiDoS-P =
+= INSTALL =
 
-The antecedent of Xoops Protector was AntiDoS-P.
+First, define XOOPS_TRUST_PATH into mainfile.php if you've never done it yet.
 
-Since all functions of AntiDoS-P has been succeeded in Xoops Protector, you'd better to uninstall AntiDoS-P.
+Copy html/modules/protector in the archive into your XOOPS_ROOT_PATH/modules/
+Copy xoops_trust_path/modules/protector in the archive into your XOOPS_TRUST_PATH/modules/
 
-
-
-= USAGE =
-
-Please install it as well as a usual module. 
+Turn permission of XOOPS_TRUST_PATH/modules/protector/configs writable
 
 After Xoops Protector is installed, edit your mainfile.php like this:
 [code]
-	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/precheck.inc.php' ) ;[/color]
+	[color=ff0000]include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;[/color]
 	if (!isset($xoopsOption['nocommon']) [color=0000ff]&& XOOPS_ROOT_PATH != ''[/color] ) {
 		include XOOPS_ROOT_PATH."/include/common.php";
 	}
-	[color=ff0000]include( XOOPS_ROOT_PATH . '/modules/protector/include/postcheck.inc.php' ) ;[/color]
+	[color=ff0000]include XOOPS_TRUST_PATH.'/modules/protector/include/postcheck.inc.php' ;[/color]
 [/code]
 Just add two red-colored lines.
 If the blue-colored part is different from your mainfile.php, don't mind it.
 
 Both pre-check and post-check are needed.
 
-When you turn this on, you have to check if your IP is included in
-"Enter IP addresses that should be banned from the site".
-
-If unfortunately you as an administrator are banned by some unexpected erros, you can directly access
-
-http://(your xoops)/modules/protector/admin/rescue.php
-
-but be sure to set the password in preferences of XoopsProtector in advance.
-
-
 An option "DENY by .htaccess" is added on version 2.34.
 If you try this option, set writable XOOPS_ROOT_PATH/.htaccess
 Before installing this, you should compare it to the security risks which .htaccess is writable.
 
 
-= UPGRADE =
+= How to rescue =
 
-- overwrite them
-- "upgrade" Protector in module's admin
+If you've been banned from Protector, just delete files under XOOPS_TRUST_PATH/modules/protector/configs/
 
-If you can't go to admin's area, edit mainfile.php to temporarily remove the precheck/postcheck. (After "update", add the precheck/postcheck again)
+The setting and controller of "rescue password" has been eliminated.
+
+
+= UPGRADE from Protector 2.x =
+
+- remove two lines for Protector from your mainfile.php
+- remove all files under XOOPS_ROOT_PATH/modules/protector/ via FTP etc.
+- upload files in the archive (refer INSTALL)
+- do "upgrade" Protector in modulesadmin
+- add two lines for Protector into your mainfile.php
+
+Note: "XOOPS_TRUST_PATH" for 3.0 instead of "XOOPS_ROOT_PATH" for 2.x
 
 
 
@@ -89,16 +86,11 @@ If you can't go to admin's area, edit mainfile.php to temporarily remove the pre
  - Tomasz (Polski language files)
  - Sergey (Russian language files)
  - Bezoops (Spanish language files)
+These contributions was made for v2.x
+I'm appreciated new language files for v3.0 :-)
 
 Moreover, I thank to JM2 and minahito -zx team- about having taught me kindly.
 You are very great programmers!
-
-
-
-p.s.
-
-If you've created or modified language files for this module, contact to me.
-I will register it in Protector archive.
 
 
 [/xlang:en][xlang:ja]
@@ -112,7 +104,7 @@ Xoops Protector ¤Ï¡¢XOOPS2 ¤òÍÍ¡¹¤Ê°­°Õ¤¢¤ë¹¶·â¤«¤é¼é¤ë¤¿¤á¤Î¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 - DoS
 - °­°Õ¤¢¤ë¥¯¥í¡¼¥é¡¼¡Ê¥á¡¼¥ë¼ý½¸¥Ü¥Ã¥È¤Ê¤É¡Ë
 - SQL Injection
-- XSS ¡Ê¤È¤¤¤Ã¤Æ¤â¡¢¤´¤¯°ìÉô¤Î¥Ñ¥¿¡¼¥ó¤À¤±¤Ç¤¹¤¬...¡Ë
+- XSS ¡Ê¤È¤¤¤Ã¤Æ¤â¡¢Á´¤Æ¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡Ë
 - ¥·¥¹¥Æ¥à¥°¥í¡¼¥Ð¥ëÊÑ¿ô±øÀ÷
 - ¥»¥Ã¥·¥ç¥ó¥Ï¥¤¥¸¥ã¥Ã¥¯
 - ¥Ì¥ë¥Ð¥¤¥È¹¶·â
@@ -159,6 +151,22 @@ Xoops Protector ¤ò¥¤¥ó¥¹¥È¡¼¥ë¸å¡¢¤ª»È¤¤¤ÎXOOPS¤Î mainfile.php ¤Î°ìÈÖ²¼¤Î¤¢¤¿¤ê¤
 ¤â¤·¡¢¤Ê¤ó¤é¤«¤ÎÍýÍ³¤Ç¡¢¼«Ê¬¼«¿È¤¬IPµñÈÝ¥ê¥¹¥È¤ËºÜ¤Ã¤Æ¤·¤Þ¤Ã¤¿¾ì¹ç¡¢¥Ð¡¼¥¸¥ç¥ó2¤Þ¤Ç¤Ï¥ì¥¹¥­¥å¡¼¥Ñ¥¹¥ï¡¼¥É¤òÍøÍÑ¤·¤Æ¤¤¤Þ¤·¤¿¤¬¡¢¥Ð¡¼¥¸¥ç¥ó3¤«¤é¤Ï¡¢FTPÅù¤Ç XOOPS_TRUST_PATH/modules/protector/configs Æâ¤Î¥Õ¥¡¥¤¥ë¤òÊÔ½¸¤Þ¤¿¤Ïºï½ü¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 2.34¤«¤é¡¢¼Â¸³Åª¤Ë¡¢.htaccess¤Ë¤è¤ëDoSËÉ¸æ¤È¤¤¤¦¥ª¥×¥·¥ç¥ó¤òÄÉ²Ã¤·¤Þ¤·¤¿¡£¤³¤ì¤òÍøÍÑ¤¹¤ë¾ì¹ç¡¢XOOPS_ROOT_PATH¤Ë¤¢¤ë.htaccess¤ò½ñ¹þ²ÄÇ½¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£Æ³Æþ¤¹¤ëºÝ¤Ë¤Ï¡¢.htaccess¥Õ¥¡¥¤¥ë¤¬½ñ¹þ²ÄÇ½¤Ç¤¢¤ë¡¢¤È¤¤¤¦¥ê¥¹¥¯¤ÈÈæ³Ó¤·¤Æ²¼¤µ¤¤¡£
+
+
+¡üCube 2.1 Legacy¤Ø¤Î¥¤¥ó¥¹¥È¡¼¥ë
+
+ÆÃÃÊ°ã¤¤¤Ï¤¢¤ê¤Þ¤»¤ó¡£
+mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤¹¡£
+[code]
+    include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;
+    if (!defined('_LEGACY_PREVENT_LOAD_CORE_') && XOOPS_ROOT_PATH != '') {
+        @include_once XOOPS_ROOT_PATH.'/include/cubecore_init.php';
+        if (!isset($xoopsOption['nocommon']) && !defined('_LEGACY_PREVENT_EXEC_COMMON_')) {
+            include XOOPS_ROOT_PATH.'/include/common.php';
+        }
+    }
+    include XOOPS_TRUST_PATH.'/modules/protector/include/postcheck.inc.php' ;
+[/code]
 
 
 ¡ü¥Ð¡¼¥¸¥ç¥ó2¤«¤é¤Î¥Ð¡¼¥¸¥ç¥ó¥¢¥Ã¥×

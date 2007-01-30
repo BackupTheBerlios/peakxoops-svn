@@ -1,6 +1,15 @@
 [xlang:en]
 = CHANGES = 
 
+3.00beta (2007/01/30)
+- moved almost files under XOOPS_TRUST_PATH
+- modified denying IP from DB to a file under configs
+- removed rescue feature (just remove a file via FTP)
+- added allowed IPs for user of group=1
+- modified table structures (compatible MySQL5)
+- added BigUmbrella anti-XSS system
+- added anti-SPAM feature
+
 2.57 (2006/07/17)
 - fixed treating blob on backing up in prefix_manager (thx fbs777)
 - fixed some notices
@@ -207,6 +216,16 @@
 [/xlang:en][xlang:ja]
 
 ●変更履歴
+
+3.00beta (2007/01/30)
+- XOOPS_TRUST_PATH側に本体を置くことにした
+- IP拒否機能を単純なファイル処理(configsディレクトリ下)に変更した
+- グループ1になれるIPアドレス制限機能の追加（これも単なるファイル処理）
+- レスキュー機能の削除 （3.0以降は単にFTP等でファイルを削除すれば復活します）
+- テーブル構造の修正 (MySQL5対応)
+- BigUmbrella anti-XSS の導入
+- コメント・トラックバックSPAM対策機能追加
+- Cube 2.1 Legacy RC での動作確認
 
 2.57 (2006/07/17)
 - プレフィックスマネージャのバックアップでBLOBの処理がおかしかったのを修正 (thx fbs777)

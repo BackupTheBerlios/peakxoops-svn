@@ -46,9 +46,10 @@ function Protector( $conn )
 	$this->mydirname = 'protector' ;
 
 	$this->_conn = $conn ;
+	$constpref = '_MI_' . strtoupper( $this->mydirname ) ;
 
 	// Preferences (for performance, I dare to use an irregular method)
-	$result = @mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '_MI_PROTECTOR%'" , $conn ) ;
+	$result = @mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '".$constpref."%'" , $conn ) ;
 	if( ! $result || mysql_num_rows( $result ) < 5 ) {
 		die( 'DB connection failed, or wrong XOOPS_DB_PREFIX in mainfile.php, or broken config table, or broken Protector installation.' ) ;
 	}
@@ -813,7 +814,7 @@ function spam_check( $points4deny , $uid )
 
 	if( $this->_spamcount_uri >= $points4deny ) {
 		$this->message .= "SPAM POINT: $this->_spamcount_uri\n" ;
-		$this->output_log( 'URI SPAM' , $uid , false , 16 ) ;
+		$this->output_log( 'URI SPAM' , $uid , false , 128 ) ;
 		exit ;
 	}
 }

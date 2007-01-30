@@ -1,0 +1,2 @@
+- full-time XSS protection (super filter against GPC)
+

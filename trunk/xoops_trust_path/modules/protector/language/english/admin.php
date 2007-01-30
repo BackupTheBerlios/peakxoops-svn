@@ -1,5 +1,10 @@
 <?php
 
+// mymenu
+define('_MD_A_MYMENU_MYTPLSADMIN','');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Permissions');
+define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
+
 // index.php
 define("_AM_TH_DATETIME","Time");
 define("_AM_TH_USER","User");

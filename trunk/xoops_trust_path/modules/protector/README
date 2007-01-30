@@ -74,6 +74,17 @@ The setting and controller of "rescue password" has been eliminated.
 Note: "XOOPS_TRUST_PATH" for 3.0 instead of "XOOPS_ROOT_PATH" for 2.x
 
 
+= CHANGES =
+
+3.00beta (2007/01/30)
+- moved almost files under XOOPS_TRUST_PATH
+- modified denying IP from DB to a file under configs
+- removed rescue feature (just remove a file via FTP)
+- added allowed IPs for user of group=1
+- modified table structures (compatible MySQL5)
+- added BigUmbrella anti-XSS system
+- added anti-SPAM feature
+
 
 = THANKS =
  - Kikuchi  (Traditional Chinese language files)
@@ -180,6 +191,19 @@ mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤
 ´ÉÍý²èÌÌ¤«¤é¥â¥¸¥å¡¼¥ë´ÉÍý¤ËÆþ¤Ã¤Æ¡¢Protector¥â¥¸¥å¡¼¥ë¤ò¥¢¥Ã¥×¥Ç¡¼¥È¤·¤Þ¤¹¡£
 
 ºÇ¸å¤Ë¡¢ºÆÅÙ¡¢mainfile.php¤òÊÔ½¸¤·¡¢precheck¤ª¤è¤Ópostcheck¤òÍ­¸ú¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£¥Ð¡¼¥¸¥ç¥ó2¤Ç¤Ï¡¢XOOPS_ROOT_PATH ¤È¤Ê¤Ã¤Æ¤¤¤¿ÉôÊ¬¤¬¡¢¥Ð¡¼¥¸¥ç¥ó3¤Ç¤Ï¡¢XOOPS_TRUST_PATH ¤È¤Ê¤Ã¤Æ¤¤¤ë¤³¤È¤ËÃí°Õ¤¬É¬Í×¤Ç¤¹¡£
+
+
+¡üÊÑ¹¹ÍúÎò
+
+3.00beta (2007/01/30)
+- XOOPS_TRUST_PATHÂ¦¤ËËÜÂÎ¤òÃÖ¤¯¤³¤È¤Ë¤·¤¿
+- IPµñÈÝµ¡Ç½¤òÃ±½ã¤Ê¥Õ¥¡¥¤¥ë½èÍý(configs¥Ç¥£¥ì¥¯¥È¥ê²¼)¤ËÊÑ¹¹¤·¤¿
+- ¥°¥ë¡¼¥×1¤Ë¤Ê¤ì¤ëIP¥¢¥É¥ì¥¹À©¸Âµ¡Ç½¤ÎÄÉ²Ã¡Ê¤³¤ì¤âÃ±¤Ê¤ë¥Õ¥¡¥¤¥ë½èÍý¡Ë
+- ¥ì¥¹¥­¥å¡¼µ¡Ç½¤Îºï½ü ¡Ê3.0°Ê¹ß¤ÏÃ±¤ËFTPÅù¤Ç¥Õ¥¡¥¤¥ë¤òºï½ü¤¹¤ì¤ÐÉü³è¤·¤Þ¤¹¡Ë
+- ¥Æ¡¼¥Ö¥ë¹½Â¤¤Î½¤Àµ (MySQL5ÂÐ±þ)
+- BigUmbrella anti-XSS ¤ÎÆ³Æþ
+- ¥³¥á¥ó¥È¡¦¥È¥é¥Ã¥¯¥Ð¥Ã¥¯SPAMÂÐºöµ¡Ç½ÄÉ²Ã
+- Cube 2.1 Legacy RC ¤Ç¤ÎÆ°ºî³ÎÇ§
 
 
 ¡ü¼Õ¼­

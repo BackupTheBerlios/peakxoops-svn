@@ -104,8 +104,8 @@ function protector_postcommon()
 		if( $conf['union_action'] & 2 ) $protector->purge() ;
 	}
 
-	// SPAM Check
 	if( ! empty( $_POST ) ) {
+		// SPAM Check
 		if( is_object( $xoopsUser ) ) {
 			if( ! $xoopsUser->isAdmin() && $conf['spamcount_uri4user'] ) {
 				$protector->spam_check( intval( $conf['spamcount_uri4user'] ) , $xoopsUser->getVar('uid') ) ;
@@ -114,8 +114,20 @@ function protector_postcommon()
 
 			$protector->spam_check( intval( $conf['spamcount_uri4guest'] ) , 0 ) ;
 		}
-	}
 
+		// filter plugins for POST on postcommon stage
+		$filters_base = XOOPS_TRUST_PATH.'/modules/protector/filters_enabled' ;
+		$dh = opendir( $filters_base ) ;
+		while( ( $file = readdir( $dh ) ) !== false ) {
+			if( substr( $file , 0 , 16 ) == 'postcommon_post_' ) {
+				@include_once $filters_base.'/'.$file ;
+				if( function_exists( 'protector_'.substr($file,0,-4) ) ) {
+					call_user_func( 'protector_'.substr($file,0,-4) ) ;
+				}
+			}
+		}
+		closedir( $dh ) ;
+	}
 }
 
 ?>

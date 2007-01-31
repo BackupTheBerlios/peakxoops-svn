@@ -19,6 +19,7 @@ This module can protect a various kind of attacks like:
 - Camouflaged Image File Uploading (== IE Content-Type XSS)
 - Executable File Uploading Attack
 - XMLRPC's eval() and SQL Injection Attacks
+- SPAMs for comment, trackback etc.
 
 Xoops Protector defends you XOOPS from these attacks, and it records into its log. 
 
@@ -74,7 +75,32 @@ The setting and controller of "rescue password" has been eliminated.
 Note: "XOOPS_TRUST_PATH" for 3.0 instead of "XOOPS_ROOT_PATH" for 2.x
 
 
+= Using filter-plugin =
+
+You can put a filter-plugin in XOOPS_TRUST_PATH/modules/protector/filters_enabled/
+
+There are two plugins in this archive.
+
+- postcommon_post_deny_by_rbl.php
+an anti-SPAM plugin.
+All of Post from IP registered in RBL will be rejected.
+This plugin can slow the performance of Post, especially chat modules.
+
+-postcommon_post_need_multibyte.php
+an anti-SPAM plugin.
+Post without multi-byte characters will be rejected.
+This plugin is only for sites of japanese, tchinese, schinese, and korean.
+
+If you want to turn the plugin on, copy the file in filters_disabled into filters_enabled.
+
+
 = CHANGES =
+
+3.00beta2 (2007/01/31)
+- added plugin system (just postcommon_post_*)
+- added filtering-plugins
+-- postcommon_post_deny_by_rbl.php (deny SPAM by RBL)
+-- postcommon_post_need_multibyte.php (deny SPAM by character type)
 
 3.00beta (2007/01/30)
 - moved almost files under XOOPS_TRUST_PATH
@@ -84,7 +110,6 @@ Note: "XOOPS_TRUST_PATH" for 3.0 instead of "XOOPS_ROOT_PATH" for 2.x
 - modified table structures (compatible MySQL5)
 - added BigUmbrella anti-XSS system
 - added anti-SPAM feature
-
 
 = THANKS =
  - Kikuchi  (Traditional Chinese language files)
@@ -125,6 +150,7 @@ Xoops Protector ¤Ï¡¢XOOPS2 ¤òÍÍ¡¹¤Ê°­°Õ¤¢¤ë¹¶·â¤«¤é¼é¤ë¤¿¤á¤Î¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 - ³ÈÄ¥»Òµ¶Áõ²èÁü¥Õ¥¡¥¤¥ë¥¢¥Ã¥×¥í¡¼¥É (¤¹¤Ê¤ï¤Á¡¢IE Content-Type XSS)
 - ¼Â¹Ô²ÄÇ½¤Ê¥Õ¥¡¥¤¥ë¤ò¥¢¥Ã¥×¥í¡¼¥É¤¹¤ë¹¶·â
 - XMLRPC´ØÏ¢
+- ¥³¥á¥ó¥ÈSPAM/¥È¥é¥Ã¥¯¥Ð¥Ã¥¯SPAMÅù¡¢¤¢¤é¤æ¤ëSPAM
 
 ¤³¤ì¤é¤Î¹¶·â¤«¤é¤¢¤Ê¤¿¤ÎXOOPS¤ò¼é¤ê¡¢¥í¥°¤Ëµ­Ï¿¤·¤Þ¤¹¡£
 
@@ -193,7 +219,32 @@ mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤
 ºÇ¸å¤Ë¡¢ºÆÅÙ¡¢mainfile.php¤òÊÔ½¸¤·¡¢precheck¤ª¤è¤Ópostcheck¤òÍ­¸ú¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£¥Ð¡¼¥¸¥ç¥ó2¤Ç¤Ï¡¢XOOPS_ROOT_PATH ¤È¤Ê¤Ã¤Æ¤¤¤¿ÉôÊ¬¤¬¡¢¥Ð¡¼¥¸¥ç¥ó3¤Ç¤Ï¡¢XOOPS_TRUST_PATH ¤È¤Ê¤Ã¤Æ¤¤¤ë¤³¤È¤ËÃí°Õ¤¬É¬Í×¤Ç¤¹¡£
 
 
+¡ü¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ÎÍøÍÑ
+
+V3¤«¤é¡¢XOOPS_TRUST_PATH/modules/protector/filters_enabled/ ¤Ë¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ò³ÊÇ¼¤¹¤ë¤³¤È¤Ç¡¢ÄÉ²Ã¥Á¥§¥Ã¥¯¤¬¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤ê¤Þ¤·¤¿¡£
+
+¸½¾õ¤ÇÍÑ°Õ¤µ¤ì¤Æ¤¤¤ë¤Î¤Ï¡¢²¼¤Î£²¼ïÎà¤Ç¤¹¡£
+
+- postcommon_post_deny_by_rbl.php
+¥¹¥Ñ¥àÂÐºöÍÑ¡£
+RBL¤òÍøÍÑ¤·¤ÆPOST¤ò¤Ï¤Í¤Þ¤¹¡£
+RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹Æ»þ¤Î½èÍý¤¬¤ä¤ä½Å¤¯¤Ê¤ë¤«¤â¤·¤ì¤Þ¤»¤ó¡£¡ÊÆÃ¤ËChat¤Ê¤É¤Ç¤Ï±Æ¶Á¤¬¤¢¤ë¤«¤â¡Ë
+
+-postcommon_post_need_multibyte.php
+¥¹¥Ñ¥àÂÐºöÍÑ¡£
+Åê¹Æ¤ËÆüËÜ¸ì¤¬´Þ¤Þ¤ì¤Æ¤¤¤ë¤³¤È¤òÍ×µá¤¹¤ë¥×¥é¥°¥¤¥ó¡£
+ÆüËÜ¸ì¤¬£±Ê¸»ú¤â´Þ¤Þ¤ì¤Æ¤¤¤Ê¤¤100byte°Ê¾å¤ÎÊ¸»úÎó¤¬¤¢¤Ã¤¿¤éSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£
+
+¤¤¤º¤ì¤â¡¢XOOPS_TRUST_PATH/modules/protector/filters_disabled/ ¤ËÃÖ¤¤¤Æ¤¢¤ë¤Î¤Ç¡¢É¬Í×¤Ë±þ¤¸¤Æ¡¢filters_enabled ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+
 ¡üÊÑ¹¹ÍúÎò
+
+3.00beta2 (2007/01/31)
+- ¥×¥é¥°¥¤¥ó¥·¥¹¥Æ¥à¤ÎÆ³Æþ (¤È¤ê¤¢¤¨¤º postcommon_post_* ¤È¤¤¤¦¥¿¥¤¥×¤Î¤ß)
+- ¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ÎÄÉ²Ã
+-- postcommon_post_deny_by_rbl.php (RBL¤Ë¤è¤ëIP¥Ù¡¼¥¹¤ÊSPAMÂÐºö)
+-- postcommon_post_need_multibyte.php (Ê¸»ú¼ïÎà¤Ë¤è¤ëSPAMÂÐºö)
 
 3.00beta (2007/01/30)
 - XOOPS_TRUST_PATHÂ¦¤ËËÜÂÎ¤òÃÖ¤¯¤³¤È¤Ë¤·¤¿

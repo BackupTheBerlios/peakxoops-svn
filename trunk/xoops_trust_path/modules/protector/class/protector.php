@@ -109,7 +109,7 @@ function _initial_recursive( $val , $key )
 }
 
 
-function &getInstance( $conn )
+function &getInstance( $conn = null )
 {
 	static $instance ;
 	if( ! isset( $instance ) ) {

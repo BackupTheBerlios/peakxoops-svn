@@ -88,6 +88,7 @@ function protector_prepare()
 	//}
 
 	if( ! empty( $conf['disable_features'] ) ) $protector->disable_features() ;
+
 }
 
 ?>

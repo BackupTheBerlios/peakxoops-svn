@@ -276,7 +276,7 @@ function pico_get_top_content_id_from_cat_id( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
-	list( $content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($mydirname."_contents")." WHERE cat_id=".intval($cat_id)." ORDER BY weight,content_id LIMIT 1" ) ) ;
+	list( $content_id ) = $db->fetchRow( $db->query( "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=".intval($cat_id)." AND o.visible ORDER BY o.weight,o.content_id LIMIT 1" ) ) ;
 
 	return intval( $content_id ) ;
 }

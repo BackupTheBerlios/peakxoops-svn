@@ -98,6 +98,7 @@ pico is fast enough if you use content's cache.
 - fixed filter xoopstpl
 - checked compatibility with XOOPS Cube 2.1 Legacy
 - fixed some bugs (thx starck)
+- fixed a looping bug (thx photositelinks&starck) 0.96a
 
 0.90->0.95beta (update the module essentially)
 - added RSS
@@ -249,6 +250,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - Smartyフィルターの動作がおかしかったのを改善
 - XOOPS Cube 2.1 Legacy での動作確認
 - いくつかのバグ修正 (thx starck)
+- 無限ループバグを修正 (thx photositelinks&starck) 0.96a
 
 0.90->0.95beta （※モジュールアップデート必須）
 - RSS追加

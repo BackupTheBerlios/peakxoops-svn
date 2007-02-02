@@ -152,6 +152,7 @@ if( !empty($_POST['contents_preview']) ) {
 	// RMV-NOTIFY
 	// Define tags for notification message
 	$tags = array();
+	$tags['POSTER_UNAME'] = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uname') : _GUESTS ;
 	$tags['THREAD_NAME'] = $_POST['subject'];
 	$tags['THREAD_URL'] = XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/viewtopic.php?post_id=$post_id&topic_id=" . $forumpost->topic() ;
 	$tags['POST_URL'] = $tags['THREAD_URL'] . '#forumpost' . $post_id ;

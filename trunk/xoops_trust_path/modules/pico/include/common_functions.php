@@ -96,4 +96,22 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 	}
 }
 
+
+function pico_utf8_encode_recursive( &$data )
+{
+	if( is_array( $data ) ) {
+		foreach( array_keys( $data ) as $key ) {
+			pico_utf8_encode_recursive( $data[ $key ] ) ;
+		}
+	} else if( ! is_numeric( $data ) ) {
+		if( XOOPS_USE_MULTIBYTES == 1 ) {
+			if( function_exists( 'mb_convert_encoding' ) ) {
+				$data = mb_convert_encoding( $data , 'UTF-8' , mb_internal_encoding() ) ;
+			}
+		} else {
+			$data = utf8_encode( $data ) ;
+		}
+	}
+}
+
 ?>

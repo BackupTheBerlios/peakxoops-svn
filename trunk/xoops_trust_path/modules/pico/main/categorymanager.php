@@ -3,6 +3,9 @@
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 
+$xoopsOption['template_main'] = $mydirname.'_main_category_form.html' ;
+include XOOPS_ROOT_PATH."/header.php";
+
 $cat_id = isset( $_POST['cat_id'] ) ? intval( $_POST['cat_id'] ) : intval( @$_GET['cat_id'] ) ;
 
 // get&check this category ($category4assign, $category_row), override options
@@ -62,9 +65,6 @@ $category4assign = array(
 	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $pico_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
 ) ;
 
-
-$xoopsOption['template_main'] = $mydirname.'_main_category_form.html' ;
-include XOOPS_ROOT_PATH."/header.php";
 
 $xoopsTpl->assign( array(
 	'mydirname' => $mydirname ,

@@ -1,6 +1,10 @@
 <?php
 
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
+require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
+
+$xoopsOption['template_main'] = $mydirname.'_main_category_form.html' ;
+include XOOPS_ROOT_PATH."/header.php";
 
 $cat_id = isset( $_POST['cat_id'] ) ? intval( $_POST['cat_id'] ) : intval( @$_GET['cat_id'] ) ;
 
@@ -14,6 +18,9 @@ if( ! $category4assign['can_makesubcategory'] ) die( _MD_PICO_ERR_CREATECATEGORY
 // permissions will be set same as the parent category. (also moderator)
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 if( isset( $_POST['categoryman_post'] ) ) {
+	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 	// create a record for category and category_permissions
 	$new_cat_id = pico_makecategory( $mydirname ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=$new_cat_id" , 2 , _MD_PICO_MSG_CATEGORYMADE ) ;
@@ -40,9 +47,6 @@ $category4assign = array(
 ) ;
 
 
-$xoopsOption['template_main'] = $mydirname.'_main_category_form.html' ;
-include XOOPS_ROOT_PATH."/header.php";
-
 $xoopsTpl->assign( array(
 	'mydirname' => $mydirname ,
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
@@ -53,6 +57,7 @@ $xoopsTpl->assign( array(
 	'formtitle' => _MD_PICO_LINK_MAKECATEGORY ,
 	'children_count' => 0 ,
 	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
+	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => _MD_PICO_CATEGORYMANAGER ,
 ) ) ;

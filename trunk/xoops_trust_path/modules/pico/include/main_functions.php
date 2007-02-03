@@ -271,6 +271,7 @@ function pico_get_cat_id_from_content_id( $mydirname , $content_id )
 	return intval( $cat_id ) ;
 }
 
+
 // get top $content_id from $cat_id
 function pico_get_top_content_id_from_cat_id( $mydirname , $cat_id )
 {

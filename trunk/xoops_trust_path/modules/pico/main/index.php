@@ -2,6 +2,9 @@
 
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 
+// xoops header
+include XOOPS_ROOT_PATH.'/header.php';
+
 // get content_id
 $content_id = intval( @$_GET['content_id'] ) ;
 
@@ -64,9 +67,6 @@ if( empty( $xoopsOption['template_main'] ) ) {
 	$pagetitle4assign = $content4assign['subject'] ;
 }
 
-// xoops header
-include XOOPS_ROOT_PATH.'/header.php';
-
 // assign
 $xoopsTpl->assign(
 	array(
@@ -92,9 +92,12 @@ $xoopsTpl->assign(
 if( @$_GET['page'] == 'print' ) {
 	// for printer
 	$xoopsTpl->display( 'db:'.$mydirname.'_independent_print.html' ) ;
-} else if( @$_GET['page'] == 'rss' && is_array( $contents4assign ) ) {
+} else if( @$_GET['page'] == 'rss' && is_array( @$contents4assign ) ) {
 	// RSS 2.0
 	if( function_exists( 'mb_http_output' ) ) mb_http_output( 'pass' ) ;
+	$data = $xoopsTpl->get_template_vars() ;
+	pico_utf8_encode_recursive( $data ) ;
+	$xoopsTpl->assign( $data ) ;
 	header( 'Content-Type:text/xml; charset=utf-8' ) ;
 	$xoopsTpl->display( 'db:'.$mydirname.'_independent_rss20.html' ) ;
 } else {

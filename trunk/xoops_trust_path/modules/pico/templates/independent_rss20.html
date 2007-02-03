@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 	<channel>
-		<title><{$xoops_config.sitename|xoops_utf8_encode}> - <{$xoops_pagetitle|xoops_utf8_encode}></title>
+		<title><{$xoops_config.sitename}> - <{$xoops_pagetitle}></title>
 		<link><{$mod_url}>/index.php?cat_id=<{$contents[0].cat_id}></link>
-		<description><{$category.desc|xoops_utf8_encode}></description>
+		<description><{$category.desc}></description>
 		<lastBuildDate><{$contents[0].modified_time4rss}></lastBuildDate>
 		<docs>http://backend.userland.com/rss/</docs>
 		<generator>XOOPS - pico</generator>
-		<category><{$category.title|xoops_utf8_encode}></category>
+		<category><{$category.title}></category>
 		<webMaster><{$xoops_config.adminmail}></webMaster>
 		<language><{$smarty.const._LANGCODE}></language>
 
 		<{foreach item="content" from=$contents}>
 		<item>
-			<title><{$content.subject|xoops_utf8_encode}></title>
+			<title><{$content.subject}></title>
 			<link><{$mod_url}>/<{$content.link}></link>
-			<description><{$content.body4rss|xoops_utf8_encode}></description>
+			<description><{$content.body4rss}></description>
 			<guid><{$mod_url}>/<{$content.link}></guid>
 			<pubDate><{$content.modified_time4rss}></pubDate>
-			<category><{$content.cat_title|xoops_utf8_encode}></category>
+			<category><{$content.cat_title}></category>
 		</item>
 		<{/foreach}>
 

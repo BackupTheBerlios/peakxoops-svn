@@ -91,6 +91,12 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+0.96->0.97RC2
+- modified the filter of xoopstpl radically
+- fixed RSS encoding conversion
+- fixed wrapping encoding conversion
+- fixed mymenu's wrong link (thx umasan)
+
 0.95->0.96RC
 - upgraded the version as RC
 - modified treating directory in wraps mode
@@ -242,6 +248,12 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+
+0.96->0.97RC2
+- Smarty(XoopsTpl)フィルターの動作修正（XOOPS専用テンプレート変数が使えるように）
+- RSSのエンコーディング処理変更（要テンプレートマージ）
+- ラップファイルのエンコード変換処理の修正
+- mymenuが誤ったリンクを指し示す問題の修正 (thx umasan)
 
 0.95->0.96RC
 - だいたいの動作確認がとれたので、RC版扱いに格上げした

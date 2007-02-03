@@ -7,7 +7,7 @@ function pico_smiley( $mydirname , $text , $content_row )
 	$myts =& MyTextSanitizer::getInstance() ;
 
 	// html=on, smiley=0, xcode=1, $image=1, $br=0
-	$text =& $myts->smiley( $text ) ;
+	$text = $myts->smiley( $text ) ;
 	return $text ;
 }
 

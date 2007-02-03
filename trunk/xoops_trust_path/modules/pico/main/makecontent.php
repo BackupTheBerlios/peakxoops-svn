@@ -3,6 +3,9 @@
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 
+$xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
+include XOOPS_ROOT_PATH."/header.php";
+
 $cat_id = isset( $_POST['cat_id'] ) ? intval( $_POST['cat_id'] ) : intval( @$_GET['cat_id'] ) ;
 
 // get&check this category ($category4assign, $category_row), override options
@@ -69,9 +72,6 @@ if( isset( $_POST['contentman_preview'] ) ) {
 // WYSIWYG (some editor needs global scope ... orz)
 $pico_wysiwygs = array( 'name' => 'body' , 'value' => $content4assign['body_raw'] ) ;
 include dirname(dirname(__FILE__)).'/include/wysiwyg_editors.inc.php' ;
-
-$xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
-include XOOPS_ROOT_PATH."/header.php";
 
 $xoopsTpl->assign( array(
 	'mydirname' => $mydirname ,

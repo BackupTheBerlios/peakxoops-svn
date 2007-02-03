@@ -19,7 +19,7 @@
 	restore_error_handler() ;
 
 	// get my mid
-	$rs = $xoopsDB->query( "SELECT mid FROM ".$xoopsDB->prefix('modules')." WHERE dirname='$mydirname'" ) ;
+	$rs = $xoopsDB->query( "SELECT mid FROM ".$xoopsDB->prefix('modules')." WHERE dirname LIKE '$mydirname'" ) ;
 	list( $mid ) = $xoopsDB->fetchRow( $rs ) ;
 
 	// read from xoops_config

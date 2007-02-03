@@ -3,6 +3,14 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'PICAL_AM_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-02-04 05:11:47
+define('_AM_PICAL_DBUPDATED','Database Updated Successfully!');
+define('_AM_PICAL_PERMADDNG','Could not add %s permission to %s for group %s');
+define('_AM_PICAL_PERMADDOK','Added %s permission to %s for group %s');
+define('_AM_PICAL_PERMRESETNG','Could not reset group permission for module %s');
+define('_AM_PICAL_PERMADDNGP','All parent items must be selected.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2005-06-29 17:19:30
 define('_AM_PI_TH_OPTIONS','Options (usually blank)');
 

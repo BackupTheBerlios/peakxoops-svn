@@ -14,10 +14,6 @@ require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 // the names of tables
 $cat_table = $xoopsDB->prefix( "pical{$mydirnumber}_cat" ) ;
 
-// language files
-$language = $xoopsConfig['language'] ;
-if( ! file_exists( XOOPS_ROOT_PATH . "/modules/system/language/$language/admin/blocksadmin.php") ) $language = 'english' ;
-include_once( XOOPS_ROOT_PATH . "/modules/system/language/$language/admin.php" ) ;
 
 if( ! empty( $_POST['submit'] ) ) {
 
@@ -27,7 +23,7 @@ if( ! empty( $_POST['submit'] ) ) {
 	}
 
 	include( "mygroupperm.php" ) ;
-	redirect_header( XOOPS_URL."/modules/$mydirname/admin/cat2groupperm.php" , 1 , _MD_AM_DBUPDATED );
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/cat2groupperm.php" , 1 , _AM_PICAL_DBUPDATED );
 	exit ;
 }
 

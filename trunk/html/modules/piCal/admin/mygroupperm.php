@@ -35,7 +35,7 @@ if (!is_object($module) || !$module->getVar('isactive')) {
 }
 $member_handler =& xoops_gethandler('member');
 $group_list = $member_handler->getGroupList();
-if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
+if (is_array(@$_POST['perms'])) {
 	$gperm_handler = xoops_gethandler('groupperm');
 	foreach ($_POST['perms'] as $perm_name => $perm_data) {
 		foreach( $perm_data['itemname' ] as $item_id => $item_name ) {
@@ -55,7 +55,7 @@ if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
 							foreach ($parent_ids as $pid) {
 								if ($pid != 0 && !in_array($pid, array_keys($item_ids))) {
 									// one of the parent items were not selected, so skip this item
-									$msg[] = sprintf(_MD_AM_PERMADDNG, '<b>'.$perm_name.'</b>', '<b>'.$perm_data['itemname'][$item_id].'</b>', '<b>'.$group_list[$group_id].'</b>').' ('._MD_AM_PERMADDNGP.')';
+									$msg[] = sprintf(_AM_PICAL_PERMADDNG, '<b>'.$perm_name.'</b>', '<b>'.$perm_data['itemname'][$item_id].'</b>', '<b>'.$group_list[$group_id].'</b>').' ('._AM_PICAL_PERMADDNGP.')';
 									continue 2;
 								}
 							}
@@ -66,15 +66,15 @@ if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
 						$gperm->setVar('gperm_modid', $modid);
 						$gperm->setVar('gperm_itemid', $item_id);
 						if (!$gperm_handler->insert($gperm)) {
-							$msg[] = sprintf(_MD_AM_PERMADDNG, '<b>'.$perm_name.'</b>', '<b>'.$perm_data['itemname'][$item_id].'</b>', '<b>'.$group_list[$group_id].'</b>');
+							$msg[] = sprintf(_AM_PICAL_PERMADDNG, '<b>'.$perm_name.'</b>', '<b>'.$perm_data['itemname'][$item_id].'</b>', '<b>'.$group_list[$group_id].'</b>');
 						} else {
-							$msg[] = sprintf(_MD_AM_PERMADDOK, '<b>'.$perm_name.'</b>', '<b>'.$perm_data['itemname'][$item_id].'</b>', '<b>'.$group_list[$group_id].'</b>');
+							$msg[] = sprintf(_AM_PICAL_PERMADDOK, '<b>'.$perm_name.'</b>', '<b>'.$perm_data['itemname'][$item_id].'</b>', '<b>'.$group_list[$group_id].'</b>');
 						}
 						unset($gperm);
 					}
 				}
 			} else {
-				$msg[] = sprintf(_MD_AM_PERMRESETNG, $module->getVar('name'));
+				$msg[] = sprintf(_AM_PICAL_PERMRESETNG, $module->getVar('name'));
 			}
 		}
 	}

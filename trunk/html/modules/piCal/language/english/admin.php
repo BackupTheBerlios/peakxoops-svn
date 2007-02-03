@@ -127,7 +127,12 @@ define( '_AM_PI_VIEWMONTHLY' , 'Monthly View' ) ;
 define( '_AM_PI_VIEWWEEKLY' , 'Weekly View' ) ;
 define( '_AM_PI_VIEWDAILY' , 'Daily View' ) ;
 
-
+// groupperm
+define('_AM_PICAL_DBUPDATED','Database Updated Successfully!');
+define('_AM_PICAL_PERMADDNG', 'Could not add %s permission to %s for group %s');
+define('_AM_PICAL_PERMADDOK','Added %s permission to %s for group %s');
+define('_AM_PICAL_PERMRESETNG','Could not reset group permission for module %s');
+define('_AM_PICAL_PERMADDNGP', 'All parent items must be selected.');
 
 }
 

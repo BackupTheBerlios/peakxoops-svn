@@ -97,7 +97,7 @@ function _initial_recursive( $val , $key )
 			$val = str_replace( chr(0) , ' ' , $val ) ;
 			$this->replace_doubtful( $key , $val ) ;
 			$this->message .= "Injecting Null-byte '$val' found.\n" ;
-			$this->output_log( 'NullByte' , 0 , false , 64 ) ;
+			$this->output_log( 'NullByte' , 0 , false , 32 ) ;
 			// $this->purge() ;
 		}
 
@@ -380,7 +380,7 @@ function eliminate_dotdot()
 		if( substr( trim( $val ) , 0 , 3 ) == '../' || strstr( $val , '../../' ) ) {
 			$this->last_error_type = 'DirTraversal' ;
 			$this->message .= "Directory Traversal '$val' found.\n" ;
-			$this->output_log( $this->last_error_type , 0 , false , 128 ) ;
+			$this->output_log( $this->last_error_type , 0 , false , 64 ) ;
 			$sanitized_val = str_replace( chr(0) , '' , $val ) ;
 			if( substr( $sanitized_val , -2 ) != ' .' ) $sanitized_val .= ' .' ;
 			$_GET[ $key ] = $HTTP_GET_VARS[ $key ] = $sanitized_val ;
@@ -784,7 +784,7 @@ function check_brute_force()
 		$this->register_bad_ips() ;
 		$this->last_error_type = 'BruteForce' ;
 		$this->message .= "Trying to login as '".addslashes($victim_uname)."' found.\n" ;
-		$this->output_log( 'BRUTE FORCE' , 0 , true ) ;
+		$this->output_log( 'BRUTE FORCE' , 0 , true , 1 ) ;
 		exit ;
 	}
 	// delayed insert
@@ -813,7 +813,7 @@ function spam_check( $points4deny , $uid )
 	$this->_spam_check_point_recursive( $_POST ) ;
 
 	if( $this->_spamcount_uri >= $points4deny ) {
-		$this->message .= "SPAM POINT: $this->_spamcount_uri\n" ;
+		$this->message .= @$_SERVER['REQUEST_URI']." SPAM POINT: $this->_spamcount_uri\n" ;
 		$this->output_log( 'URI SPAM' , $uid , false , 128 ) ;
 		exit ;
 	}
@@ -836,7 +836,7 @@ function disable_features()
 
 		// zx 2005/1/5 disable xmlrpc.php in root
 		if( /* ! stristr( $_SERVER['SCRIPT_NAME'] , 'modules' ) && */ substr( @$_SERVER['SCRIPT_NAME'] , -10 ) == 'xmlrpc.php' ) {
-			$this->output_log( 'xmlrpc' , 0 , true ) ;
+			$this->output_log( 'xmlrpc' , 0 , true , 1 ) ;
 			exit ;
 		}
 

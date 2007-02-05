@@ -96,6 +96,11 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 
 = CHANGES =
 
+3.00 (2007/02/06)
+- marked as a stable version
+- fixed typo in log level
+- fixed multibyte plugin never denies registered users (thx mizukami)
+
 3.00beta2 (2007/01/31)
 - added plugin system (just postcommon_post_*)
 - added filtering-plugins
@@ -239,6 +244,11 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.00 (2007/02/06)
+- °ÂÄêÈÇ¤È¤·¤Æ¤Î¥ê¥ê¡¼¥¹
+- ¥í¥°¥ì¥Ù¥ë»ØÄê¥ß¥¹¤Î½¤Àµ
+- ¥Þ¥ë¥Á¥Ð¥¤¥È¥×¥é¥°¥¤¥ó¤¬ÅÐÏ¿¥æ¡¼¥¶¤ÎPOST¤òÃÆ¤«¤Ê¤¤¤è¤¦¤Ë½¤Àµ (thx mizukami)
 
 3.00beta2 (2007/01/31)
 - ¥×¥é¥°¥¤¥ó¥·¥¹¥Æ¥à¤ÎÆ³Æþ (¤È¤ê¤¢¤¨¤º postcommon_post_* ¤È¤¤¤¦¥¿¥¤¥×¤Î¤ß)

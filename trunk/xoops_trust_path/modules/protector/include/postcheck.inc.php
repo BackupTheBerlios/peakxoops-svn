@@ -93,14 +93,14 @@ function protector_postcommon()
 	// SQL Injection "Isolated /*"
 	if( ! $protector->check_sql_isolatedcommentin( $conf['isocom_action'] & 1 ) ) {
 		if( ( $conf['isocom_action'] & 4 ) && $can_ban ) $protector->register_bad_ips() ;
-		$protector->output_log( 'ISOCOM' , $uid , 64 ) ;
+		$protector->output_log( 'ISOCOM' , $uid , true , 32 ) ;
 		if( $conf['isocom_action'] & 2 ) $protector->purge() ;
 	}
 
 	// SQL Injection "UNION"
 	if( ! $protector->check_sql_union( $conf['union_action'] & 1 ) ) {
 		if( ( $conf['union_action'] & 4 ) && $can_ban ) $protector->register_bad_ips() ;
-		$protector->output_log( 'UNION' , $uid , 64 ) ;
+		$protector->output_log( 'UNION' , $uid , true , 32 ) ;
 		if( $conf['union_action'] & 2 ) $protector->purge() ;
 	}
 

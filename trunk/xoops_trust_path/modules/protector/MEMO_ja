@@ -220,12 +220,15 @@ precheck ¤Ç¡¢¤³¤ÎÃÍ¤ò¸«¤Æ¡¢md5²½¤µ¤ì¤Æ¤¤¤Ê¤¤¤Ê¤é¡¢¶¯À©Åª¤Ëmd5¥Ï¥Ã¥·¥å¤ò¤È¤Ã¤¿¤â¤
 ¥Ó¥Ã¥È¤ÇÂÐ±þ
 --------------------------------
 1:   ´í¸±ÅÙ¤Î¹â¤¤¤â¤Î¡Ê¥Ç¥Õ¥©¥ë¥È¡Ë
+     CONTAMI, UPLOAD
+     BruteForce, xmlrpc, CRITERIA,
+     misc debug, misc smilies, edituser avatar choose, findusersh
 -------------------------------- Quiet
 16:  DoS, CRAWLER
-32:  
+32:  NullByte, ISOCOM, UNION
 -------------------------------- quiet
-64:  ISOCOM, CONTAMI,NullByte
-128: ../ ¤Ç¤ÎÁÌ¤ê SPAM
+64:  ../ ¤Ç¤ÎÁÌ¤ê 
+128: SPAM
 -------------------------------- full
 
 

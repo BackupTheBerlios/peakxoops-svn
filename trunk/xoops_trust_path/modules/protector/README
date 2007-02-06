@@ -100,6 +100,7 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 - marked as a stable version
 - fixed typo in log level
 - fixed multibyte plugin never denies registered users (thx mizukami)
+- modified compatibility with 2.2.x from xoops.org 3.00a
 
 3.00beta2 (2007/01/31)
 - added plugin system (just postcommon_post_*)
@@ -249,6 +250,7 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 - °ÂÄêÈÇ¤È¤·¤Æ¤Î¥ê¥ê¡¼¥¹
 - ¥í¥°¥ì¥Ù¥ë»ØÄê¥ß¥¹¤Î½¤Àµ
 - ¥Ş¥ë¥Á¥Ğ¥¤¥È¥×¥é¥°¥¤¥ó¤¬ÅĞÏ¿¥æ¡¼¥¶¤ÎPOST¤òÃÆ¤«¤Ê¤¤¤è¤¦¤Ë½¤Àµ (thx mizukami)
+- ËÜ²ÈÈÇ2.2.x¤È¤ÎÁêÀ­ÌäÂê¤Î²şÁ± 3.00a
 
 3.00beta2 (2007/01/31)
 - ¥×¥é¥°¥¤¥ó¥·¥¹¥Æ¥à¤ÎÆ³Æş (¤È¤ê¤¢¤¨¤º postcommon_post_* ¤È¤¤¤¦¥¿¥¤¥×¤Î¤ß)

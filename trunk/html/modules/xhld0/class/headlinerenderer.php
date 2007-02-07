@@ -380,7 +380,7 @@ class XhldRenderer
 
 		// auto decision
 		if( $this->_hl->getVar('headline_syndication') == '' ) {
-			if( stristr( substr( $xml , 0 , 255 ) , 'http://purl.org/atom/' ) ) {
+			if( stristr( substr( $xml , 0 , 255 ) , '/atom' ) ) {
 				$this->_hl->setVar('headline_syndication','ATOM',true) ;
 			} else {
 				$this->_hl->setVar('headline_syndication','RSS',true) ;

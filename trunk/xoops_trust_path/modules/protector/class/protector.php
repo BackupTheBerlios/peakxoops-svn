@@ -206,7 +206,6 @@ function get_bad_ips()
 	list( $bad_ips_serialized ) = @file( Protector::get_filepath4badips() ) ;
 	$bad_ips = empty( $bad_ips_serialized ) ? array() : @unserialize( $bad_ips_serialized ) ;
 	if( ! is_array( $bad_ips ) ) $bad_ips = array() ;
-	sort( $bad_ips ) ;
 
 	return $bad_ips ;
 }
@@ -223,7 +222,6 @@ function get_group1_ips()
 	list( $group1_ips_serialized ) = @file( Protector::get_filepath4group1ips() ) ;
 	$group1_ips = empty( $group1_ips_serialized ) ? array() : @unserialize( $group1_ips_serialized ) ;
 	if( ! is_array( $group1_ips ) ) $group1_ips = array() ;
-	sort( $group1_ips ) ;
 
 	return $group1_ips ;
 }

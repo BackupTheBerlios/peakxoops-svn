@@ -96,6 +96,12 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 
 = CHANGES =
 
+3.01 (2007/02/10)
+- modified the rule for sorting IPs
+- added language files
+-- portuguesebr (thx beduino)
+-- spanish (thx PepeMty)
+
 3.00 (2007/02/06)
 - marked as a stable version
 - fixed typo in log level
@@ -245,6 +251,12 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.01 (2007/02/10)
+- IP¥½¡¼¥È¥ë¡¼¥ë¤ÎÊÑ¹¹
+- ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
+-- portuguesebr (thx beduino)
+-- spanish (thx PepeMty)
 
 3.00 (2007/02/06)
 - °ÂÄêÈÇ¤È¤·¤Æ¤Î¥ê¥ê¡¼¥¹

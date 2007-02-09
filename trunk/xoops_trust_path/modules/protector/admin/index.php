@@ -113,6 +113,16 @@ include dirname(__FILE__).'/mymenu.php' ;
 // title
 echo "<h3 style='text-align:left;'>".$xoopsModule->name()."</h3>\n" ;
 
+// bad_ips
+$bad_ips = $protector->get_bad_ips() ;
+usort( $bad_ips , 'protector_ip_cmp' ) ;
+$bad_ips4disp = htmlspecialchars(implode("\n",$bad_ips),ENT_QUOTES) ;
+
+// group1_ips
+$group1_ips = $protector->get_group1_ips() ;
+usort( $group1_ips , 'protector_ip_cmp' ) ;
+$group1_ips4disp = htmlspecialchars(implode("\n",$group1_ips),ENT_QUOTES) ;
+
 // edit configs about IP ban and IPs for group=1
 echo "
 <form name='ConfigForm' action='' method='POST'>
@@ -124,7 +134,7 @@ echo "
       "._AM_TH_BADIPS."
     </td>
     <td class='even'>
-      <textarea name='bad_ips' id='bad_ips' style='width:200px;height:60px;'>".htmlspecialchars(implode("\n",$protector->get_bad_ips()),ENT_QUOTES)."</textarea>
+      <textarea name='bad_ips' id='bad_ips' style='width:200px;height:60px;'>$bad_ips4disp</textarea>
       <br />
       ".htmlspecialchars($protector->get_filepath4badips())."
     </td>
@@ -134,7 +144,7 @@ echo "
       "._AM_TH_GROUP1IPS."
     </td>
     <td class='even'>
-      <textarea name='group1_ips' id='group1_ips' style='width:200px;height:60px;'>".htmlspecialchars(implode("\n",$protector->get_group1_ips()),ENT_QUOTES)."</textarea>
+      <textarea name='group1_ips' id='group1_ips' style='width:200px;height:60px;'>$group1_ips4disp</textarea>
       <br />
       ".htmlspecialchars($protector->get_filepath4group1ips())."
     </td>
@@ -223,4 +233,16 @@ echo "
 " ;
 
 xoops_cp_footer();
+
+
+function protector_ip_cmp( $a , $b )
+{
+	$as = explode( '.' , $a ) ;
+	$aval = @$as[0] * 167777216 + @$as[1] * 65536 + @$as[2] * 256 + @$as[3] ;
+	$bs = explode( '.' , $b ) ;
+	$bval = @$bs[0] * 167777216 + @$bs[1] * 65536 + @$bs[2] * 256 + @$bs[3] ;
+
+	return $aval > $bval ? 1 : -1 ;
+}
+
 ?>

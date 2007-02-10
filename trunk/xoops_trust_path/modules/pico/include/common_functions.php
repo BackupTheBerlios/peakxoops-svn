@@ -97,6 +97,26 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 }
 
 
+function pico_get_submenu( $mydirname )
+{
+	$db =& Database::getInstance() ;
+	$myts =& MyTextSanitizer::getInstance();
+
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$result = $db->query("SELECT content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4content ORDER BY weight" ) ;
+
+	$ret = array() ;
+	if( $result ) while( $content_row = $db->fetchArray( $result ) ) {
+		$ret[] = array(
+			'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
+			'url' => pico_make_content_link4html( @$GLOBALS['xoopsModuleConfig'] , $content_row ) ,
+		) ;
+	}
+
+	return $ret ;
+}
+
+
 function pico_utf8_encode_recursive( &$data )
 {
 	if( is_array( $data ) ) {

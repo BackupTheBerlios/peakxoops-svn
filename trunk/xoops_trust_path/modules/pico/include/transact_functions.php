@@ -63,12 +63,10 @@ function pico_sync_cattree( $mydirname )
 			for( $i = 0 ; $i < $depth_diff ; $i ++ ) {
 				$paths[ $val['cat_id'] ] = $val['cat_title'] ;
 			}
-		} else if( $depth_diff < 0 ) {
-			for( $i = 0 ; $i < - $depth_diff ; $i ++ ) {
+		} else {
+			for( $i = 0 ; $i < - $depth_diff + 1 ; $i ++ ) {
 				array_pop( $paths ) ;
 			}
-		} else {
-			array_pop( $paths ) ;
 			$paths[ $val['cat_id'] ] = $val['cat_title'] ;
 		}
 
@@ -188,6 +186,7 @@ function pico_makecategory( $mydirname )
 	$db =& Database::getInstance() ;
 
 	$requests = pico_get_requests4category( $mydirname ) ;
+	$set = '' ;
 	foreach( $requests as $key => $val ) {
 		if( $key == 'cat_vpath' && empty( $val ) ) {
 			$set .= "`$key`=null," ;

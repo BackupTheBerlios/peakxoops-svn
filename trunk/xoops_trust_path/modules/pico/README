@@ -95,6 +95,7 @@ pico is fast enough if you use content's cache.
 - fixed some minor bugs
 - added language files
 -- persian (thx voltan)
+-- spanish (thx PepeMty) 0.98a
 
 0.96->0.97RC2
 - modified the filter of xoopstpl radically
@@ -258,6 +259,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - 細かなバグ修正数件
 - 言語ファイル追加
 -- persian (thx voltan)
+-- spanish (thx PepeMty) 0.98a
 
 0.96->0.97RC2
 - Smarty(XoopsTpl)フィルターの動作修正（XOOPS専用テンプレート変数が使えるように）

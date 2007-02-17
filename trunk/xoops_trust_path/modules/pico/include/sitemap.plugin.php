@@ -11,7 +11,7 @@ function b_sitemap_pico( $mydirname )
 	$whr_category = 'cat_id IN ('.implode(',',pico_get_categories_can_read( $mydirname )).')' ;
 	$whr_pid = @$GLOBALS['sitemap_configs']['show_subcategoris'] ? '1' : 'pid=0' ;
 
-	$sql = "SELECT cat_id,cat_title,pid,cat_depth_in_tree FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_category) AND ($whr_pid)" ;
+	$sql = "SELECT cat_id,cat_title,pid,cat_depth_in_tree FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_category) AND ($whr_pid) ORDER BY cat_order_in_tree" ;
 	$result = $db->query($sql);
 
 	$ret = array() ;

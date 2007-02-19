@@ -1,6 +1,9 @@
 [mlimg]
 [xlang:en]
 
+- added language
+-- portuguesebr (thx X-TRAD)
+
 1.31beta (2006/11/04)
 - modified Cube 2.1 compatibility
 - fixed small typo in cutpasteposts.php (thx plusangel)
@@ -119,6 +122,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+
+- 言語ファイル追加
+-- portuguesebr (thx X-TRAD)
 
 1.31beta (2006/11/04)
 - Cube 2.1用にmymenuを入れ替えた

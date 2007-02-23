@@ -3,11 +3,29 @@
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 
+// redirect with POST as SESSION when wraps mode's preview
+if( $xoopsModuleConfig['use_wraps_mode'] && ! empty( $_POST['contentman_preview'] ) && empty( $_SESSION[$mydirname.'_preview'] ) && ! empty( $_GET['content_id'] ) ) {
+	$link = empty( $_POST['vpath'] ) ? sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $_GET['content_id'] ) ) : preg_replace( '#[^0-9a-zA-Z_/.+-]#' , '' , $_POST['vpath'] ) ;
+	$_POST['content_id'] = intval( $_GET['content_id'] ) ;
+	$_SESSION[$mydirname.'_preview'] = $_POST ;
+	header( 'Location: '.XOOPS_URL.'/modules/'.$mydirname.'/index.php'.$link.'?page=contentmanager' ) ;
+	exit ;
+}
+if( ! empty( $_SESSION[$mydirname.'_preview'] ) ) {
+	$_POST = $_SESSION[$mydirname.'_preview'] ;
+	unset( $_SESSION[$mydirname.'_preview'] ) ;
+}
+
 $xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
 include XOOPS_ROOT_PATH."/header.php";
 
 // get $content_id
 $content_id = isset( $_POST['content_id'] ) ? intval( $_POST['content_id'] ) : intval( @$_GET['content_id'] ) ;
+
+if( empty( $content_id ) ) {
+	// parse path_info
+	if( $xoopsModuleConfig['use_wraps_mode'] ) list( $content_id , $cat_id , $pico_path_info ) = pico_parse_path_info( $mydirname ) ;
+}
 
 // get and process $cat_id
 $cat_id = pico_get_cat_id_from_content_id( $mydirname , $content_id ) ;
@@ -82,6 +100,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	$content4assign = array(
 		'cat_id' => intval( $content_row['cat_id'] ) ,
 		'id' => intval( $content_row['content_id'] ) ,
+		'link' => pico_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 		'vpath' => htmlspecialchars( $content_row['vpath'] , ENT_QUOTES ) ,
 		'subject' => htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
 		'subject_waiting' => htmlspecialchars( $content_row['subject_waiting'] , ENT_QUOTES ) ,
@@ -121,6 +140,7 @@ $xoopsTpl->assign( array(
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . @$pico_wysiwyg_header ,
 	'xoops_pagetitle' => _MD_PICO_CONTENTMANAGER ,
+	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _MD_PICO_CONTENTMANAGER ) ) ) ,
 ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';

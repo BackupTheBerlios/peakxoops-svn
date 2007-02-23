@@ -67,6 +67,15 @@ if( empty( $xoopsOption['template_main'] ) ) {
 	$pagetitle4assign = $content4assign['subject'] ;
 }
 
+// make xoops_breadcrumbs
+$parents = is_array( @$category4assign['paths_raw'] ) ? $category4assign['paths_raw'] : array() ;
+foreach( $parents as $cat_id_tmp => $name_raw ) {
+	$xoops_breadcrumbs[] = array(
+		'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$cat_id_tmp ,
+		'name' => htmlspecialchars( $name_raw , ENT_QUOTES ) ,
+	) ;
+}
+
 // assign
 $xoopsTpl->assign(
 	array(
@@ -84,6 +93,7 @@ $xoopsTpl->assign(
 		'next_content' => @$next_content4assign ,
 		'prev_content' => @$prev_content4assign ,
 		'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , @$content_row['cat_id'] ) ,
+		'xoops_breadcrumbs' => @$xoops_breadcrumbs ,
 		'xoops_pagetitle' => @$pagetitle4assign ,
 		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$content4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
@@ -92,6 +102,9 @@ $xoopsTpl->assign(
 if( @$_GET['page'] == 'print' ) {
 	// for printer
 	$xoopsTpl->display( 'db:'.$mydirname.'_independent_print.html' ) ;
+} else if( @$_GET['page'] == 'singlecontent' ) {
+	// just display as a singlecontent
+	$xoopsTpl->display( 'db:'.$mydirname.'_independent_singlecontent.html' ) ;
 } else if( @$_GET['page'] == 'rss' && is_array( @$contents4assign ) ) {
 	// RSS 2.0
 	if( function_exists( 'mb_http_output' ) ) mb_http_output( 'pass' ) ;

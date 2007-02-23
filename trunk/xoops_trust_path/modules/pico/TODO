@@ -1,7 +1,6 @@
 ●TODO
 
 ・wrapsモードのプレビュー
-・singlecontent実装
 ・xoops_breadcrumbs実装
 ・申請内容とのdiff表示
 ・wikiの「バックアップ」のように、過去の内容を復元できる機能
@@ -44,6 +43,7 @@
 ・XOOPS_TRUST_PATH/wraps/(dirname)ファイルの自動ページラップ
 ・新着RSS（モジュール全体およびカテゴリー毎）
 ・ラップページ自動登録
+・シングルコンテント機能
 
 
 ●権限・表示ON/OFF関係の仕様

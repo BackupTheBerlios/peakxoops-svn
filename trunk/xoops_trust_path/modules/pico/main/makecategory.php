@@ -67,6 +67,7 @@ $xoopsTpl->assign( array(
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => _MD_PICO_CATEGORYMANAGER ,
+	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _MD_PICO_LINK_MAKECATEGORY ) ) ) ,
 ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';

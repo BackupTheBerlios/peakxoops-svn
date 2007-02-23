@@ -23,7 +23,8 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - better preview
 - contents cache
 - tell a friend link (tellafriend module supported natively)
-- printer friendly views
+- printer friendly view
+- singlecontent view
 - html header customize per module/categories
 - html header customize per contents
 - search (with context)
@@ -47,6 +48,7 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - plugin for waiting module
 - RSS (both entire module and each categories)
 - auto-registering wrapped files into DB
+- xoops_breadcrumbs
 
 
 [b]USAGE:[/b]
@@ -90,6 +92,13 @@ pico is fast enough if you use content's cache.
 
 
 [b]HISTORY:[/b]
+
+0.98->0.99RC4
+- added xoops_breadcrumbs
+- added singlecontent
+- fixed preview with wraps mode (thx toplan)
+- fixed checking of permission of making subcategories (thx t_yamo)
+- fixed a plugin for sitemap module (thx starck)
 
 0.97->0.98RC3
 - fixed some minor bugs
@@ -192,6 +201,7 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・本文キャッシュ（代わりにXOOPSのモジュールキャッシュは利用不可）
 ・文字化けのない友達紹介リンク
 ・プリンタ用画面
+・シングルコンテント画面
 ・モジュール・カテゴリーレベルのHTMLヘッダ
 ・コンテンツ毎のHTMLヘッダ（上とは独立）
 ・検索（XOOPS検索の本文表示対応）
@@ -215,6 +225,7 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・申請に対するwaitingプラグイン
 ・新着RSS（モジュール全体およびカテゴリー毎）
 ・ラップページ自動登録
+・xoops_breadcrumbs規格に対応
 
 
 [b]USAGE:[/b]
@@ -255,7 +266,10 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
-
+0.98->0.99RC4
+- xoops_breadcrumbs に対応
+- シングルコンテント追加
+- wrapsモードでのプレビューが機能していなかったのを修正 (thx toplan)
 - subcategory権限が正しく機能していなかったバグの修正 (thx t_yamo)
 - sitemapプラグインのバグ修正 (thx starck)
 

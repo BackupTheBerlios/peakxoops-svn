@@ -3,6 +3,18 @@
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 
+// redirect with POST as SESSION when wraps mode's preview
+if( $xoopsModuleConfig['use_wraps_mode'] && ! empty( $_POST['contentman_preview'] ) && empty( $_SESSION[$mydirname.'_preview'] ) ) {
+	$link = empty( $_POST['vpath'] ) ? sprintf( _MD_PICO_AUTONAME4SPRINTF , 0 ) : preg_replace( '#[^0-9a-zA-Z_/.+-]#' , '' , $_POST['vpath'] ) ;
+	$_SESSION[$mydirname.'_preview'] = $_POST ;
+	header( 'Location: '.XOOPS_URL.'/modules/'.$mydirname.'/index.php'.$link.'?page=makecontent' ) ;
+	exit ;
+}
+if( ! empty( $_SESSION[$mydirname.'_preview'] ) ) {
+	$_POST = $_SESSION[$mydirname.'_preview'] ;
+	unset( $_SESSION[$mydirname.'_preview'] ) ;
+}
+
 $xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
 include XOOPS_ROOT_PATH."/header.php";
 
@@ -73,6 +85,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 $pico_wysiwygs = array( 'name' => 'body' , 'value' => $content4assign['body_raw'] ) ;
 include dirname(dirname(__FILE__)).'/include/wysiwyg_editors.inc.php' ;
 
+// assign
 $xoopsTpl->assign( array(
 	'mydirname' => $mydirname ,
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
@@ -87,7 +100,8 @@ $xoopsTpl->assign( array(
 	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . @$pico_wysiwyg_header ,
-	'xoops_pagetitle' => _MD_PICO_CONTENTMANAGER ,
+	'xoops_pagetitle' => _MD_PICO_LINK_MAKECONTENT ,
+	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _MD_PICO_LINK_MAKECONTENT ) ) ) ,
 ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';

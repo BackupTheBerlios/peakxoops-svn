@@ -13,7 +13,7 @@
 	<{$smarty.const._MD_PICO_CATEGORY}>:<strong><{$cat_title}></strong>
 	<{if $cat_id >= 0}>
 		[<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>]
-		[<a href="<{$mod_url}>/index.php?page=makecategory&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}></a>]
+		[<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}></a>]
 		[<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKECONTENT}></a>]
 		[<a href="<{$mod_url}>/index.php?cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_PUBLICCATEGORYINDEX}></a>]
 	<{/if}>

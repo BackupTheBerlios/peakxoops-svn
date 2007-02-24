@@ -1,6 +1,12 @@
 <?php
 
 // index.php
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-02-24 17:45:41
+define('_MD_A_MYMENU_MYTPLSADMIN','');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Permissions');
+define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
+
 define("_AM_TH_DATETIME","Czas");
 define("_AM_TH_USER","U¿ytkownik");
 define("_AM_TH_IP","IP");

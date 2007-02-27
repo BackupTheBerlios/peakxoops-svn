@@ -24,6 +24,15 @@ require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 // get $subcategories
 require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 
+// make xoops_breadcrumbs
+$parents = is_array( @$category4assign['paths_raw'] ) ? $category4assign['paths_raw'] : array() ;
+foreach( $parents as $cat_id_tmp => $name_raw ) {
+	$xoops_breadcrumbs[] = array(
+		'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$cat_id_tmp ,
+		'name' => htmlspecialchars( $name_raw , ENT_QUOTES ) ,
+	) ;
+}
+
 if( empty( $content_id ) ) {
 	if( ! empty( $pico_path_info ) ) {
 		// HTML wrapping without DB
@@ -39,7 +48,8 @@ if( empty( $content_id ) ) {
 		// auto-made menu
 		require dirname(dirname(__FILE__)).'/include/menu.inc.php' ;
 		$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;
-		$pagetitle4assign = $xoopsModule->getVar('name') ;
+		$pagetitle4assign = @$_GET['page'] == 'menu' ? _MD_PICO_MENU : $xoopsModule->getVar('name') ;
+		if( @$_GET['page'] == 'menu' ) $xoops_breadcrumbs[] = array( 'name' => _MD_PICO_MENU ) ;
 	} else if( ! @$xoopsModuleConfig['show_listasindex'] ) {
 		// redirect to the top of the content
 		$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
@@ -57,6 +67,7 @@ if( empty( $content_id ) ) {
 		require dirname(dirname(__FILE__)).'/include/listcontents.inc.php' ;
 		$xoopsOption['template_main'] = $mydirname.'_main_listcontents.html' ;
 		$pagetitle4assign = $category4assign['title'] ;
+		unset( $xoops_breadcrumbs[ sizeof( $xoops_breadcrumbs ) - 1 ]['url'] ) ;
 	}
 }
 
@@ -65,15 +76,7 @@ if( empty( $xoopsOption['template_main'] ) ) {
 	require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 	$xoopsOption['template_main'] = $mydirname.'_main_viewcontent.html' ;
 	$pagetitle4assign = $content4assign['subject'] ;
-}
-
-// make xoops_breadcrumbs
-$parents = is_array( @$category4assign['paths_raw'] ) ? $category4assign['paths_raw'] : array() ;
-foreach( $parents as $cat_id_tmp => $name_raw ) {
-	$xoops_breadcrumbs[] = array(
-		'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$cat_id_tmp ,
-		'name' => htmlspecialchars( $name_raw , ENT_QUOTES ) ,
-	) ;
+	$xoops_breadcrumbs[] = array( 'name' => $content4assign['subject'] ) ;
 }
 
 // assign

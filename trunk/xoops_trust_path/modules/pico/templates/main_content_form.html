@@ -9,13 +9,14 @@
 <h1 class="pico_title"><{$formtitle}>: <{$content.subject}></h1>
 
 <{if $preview}>
+	<{foreach from=$preview.errors item="error_message"}><p style="color:red;" onmouseover="document.contentform.vpath.focus();document.contentform.vpath.style.backgroundColor='#FFFFCC';"><{$error_message}></p><{/foreach}>
 	<h2 class="pico_title"><{$smarty.const._PREVIEW}></h2>
 	<div class="pico_body pico_preview" id="<{$mydirname}>_body">
 	<{$preview.body}>
 	</div>
 <{/if}>
 
-<form name="categoryform" id="categoryform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
+<form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
 	<{$gticket_hidden}>
 	<input type="hidden" name="content_id" value="<{$content.id}>" />
 
@@ -161,9 +162,14 @@
 <!-- Start Form Vaidation JavaScript //-->
 <script type="text/javascript">
 <!--//
-function xoopsFormValidate_postform() {
-	myform = window.document.postform;
-	if ( myform.subject.value == "" ) { window.alert("<{$smarty.const._MD_PICO_SUBJECT|string_format:$smarty.const._FORM_ENTER}>"); myform.subject.focus(); return false; }
+function xoopsFormValidate_contentform() {
+	myform = window.document.contentform;
+	if ( myform.subject.value == "" ) {
+		window.alert("<{$smarty.const._MD_PICO_TH_SUBJECT|string_format:$smarty.const._FORM_ENTER}>");
+		myform.subject.focus();
+		myform.subject.style.backgroundColor='#FFFFCC';
+		return false;
+	}
 	return true;
 }
 //-->

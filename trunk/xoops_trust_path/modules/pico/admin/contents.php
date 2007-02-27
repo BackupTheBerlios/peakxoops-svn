@@ -50,6 +50,7 @@ if( ! empty( $_POST['contents_update'] ) && ! empty( $_POST['weights'] ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 
+	$errors = array() ;
 	foreach( $_POST['weights'] as $content_id => $weight ) {
 		$content_id = intval( $content_id ) ;
 		$weight = intval( $weight ) ;
@@ -59,10 +60,11 @@ if( ! empty( $_POST['contents_update'] ) && ! empty( $_POST['weights'] ) ) {
 		$show_in_navi = empty( $_POST['show_in_navis'][$content_id] ) ? 0 : 1 ;
 		$show_in_menu = empty( $_POST['show_in_menus'][$content_id] ) ? 0 : 1 ;
 		$allow_comment = empty( $_POST['allow_comments'][$content_id] ) ? 0 : 1 ;
-		$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET weight=$weight,subject=$subject4sql,vpath=$vpath4sql,visible=$visible,show_in_navi=$show_in_navi,show_in_menu=$show_in_menu,allow_comment=$allow_comment WHERE content_id=$content_id" ) ;
+		$result = $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET weight=$weight,subject=$subject4sql,vpath=$vpath4sql,visible=$visible,show_in_navi=$show_in_navi,show_in_menu=$show_in_menu,allow_comment=$allow_comment WHERE content_id=$content_id" ) ;
+		if( ! $result ) $errors[] = $content_id ;
 	}
 
-	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , _MD_PICO_MSG_UPDATED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , $errors ? sprintf( _MD_A_PICO_MSG_FMT_DUPLICATEDVPATH , implode( ',' , $errors ) ) : _MD_PICO_MSG_UPDATED ) ;
 	exit ;
 }
 

@@ -25,6 +25,7 @@ define('_MD_A_PICO_MSG_CONTENTSDELETED','削除しました');
 define('_MD_A_PICO_BTN_EXPORT','他のpicoへのコピー');
 define('_MD_A_PICO_CONFIRM_EXPORT','対象モジュールのトップコンテンツとしてエクスポート（移動ではなくコピー）します。コメントはコピーされません。よろしいですか？');
 define('_MD_A_PICO_MSG_CONTENTSEXPORTED','エクスポートしました');
+define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','仮想パスの重複などの原因で、いくつかのコンテンツは更新されませんでした ID: %s');
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','カテゴリーを選択');

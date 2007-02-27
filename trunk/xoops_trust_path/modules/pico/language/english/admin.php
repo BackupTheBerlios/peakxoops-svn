@@ -25,6 +25,7 @@ define('_MD_A_PICO_MSG_CONTENTSDELETED','Deleted successfully');
 define('_MD_A_PICO_BTN_EXPORT','Export');
 define('_MD_A_PICO_CONFIRM_EXPORT','Selected contents are exported as the top contents of the module. Comments will not be copied. Are you OK?');
 define('_MD_A_PICO_MSG_CONTENTSEXPORTED','Exported successfully');
+define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','Some contents have not been updated because of duplicated vpath (ID: %s)');
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','Select a category');

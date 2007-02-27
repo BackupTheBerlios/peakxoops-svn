@@ -42,7 +42,7 @@ function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 	// wraps special check (compare filemtime with modified_time )
 	if( strstr( $content_row['filters'] , 'wraps' ) && $content_row['vpath'] ) {
 		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
-		if( filemtime( $wrap_full_path ) > @$content_row['modified_time'] ) {
+		if( @filemtime( $wrap_full_path ) > @$content_row['modified_time'] ) {
 			$can_use_cache = false ;
 		}
 	}

@@ -249,7 +249,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 
 
 // get requests for content's sql (parse options)
-function pico_get_requests4content( $mydirname , $auto_approval = true , $isadminormod = false )
+function pico_get_requests4content( $mydirname , &$errors , $auto_approval = true , $isadminormod = false )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
@@ -290,6 +290,15 @@ function pico_get_requests4content( $mydirname , $auto_approval = true , $isadmi
 		'allow_comment' => empty( $_POST['allow_comment'] ) ? 0 : 1 ,
 	) ;
 
+	// vpath check
+	while( 1 ) {
+		list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".addslashes($ret['vpath'])."'" ) ) ;
+		if( empty( $count ) ) break ;
+		$ext = strrchr( $ret['vpath'] , '.' ) ;
+		$ret['vpath'] = str_replace( $ext , '.1'.$ext , $ret['vpath'] ) ;
+		$errors[] = _MD_PICO_ERR_DUPLICATEDVPATH ;
+	}
+
 	// approval
 	if( $auto_approval ) {
 		$ret += array(
@@ -319,7 +328,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname , $auto_approval , $isadminormod ) ;
+	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
 	$set = $auto_approval ? '' : "visible=0,subject='"._MD_PICO_WAITINGREGISTER."',htmlheader='',body=''," ;
 	foreach( $requests as $key => $val ) {
@@ -346,7 +355,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname , $auto_approval , $isadminormod ) ;
+	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
 	$set = '' ;
 	foreach( $requests as $key => $val ) {

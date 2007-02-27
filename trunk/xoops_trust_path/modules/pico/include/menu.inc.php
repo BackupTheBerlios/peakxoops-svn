@@ -28,7 +28,7 @@ if( ! $crs = $db->query( $sql ) ) {
 while( $cat_row = $db->fetchArray( $crs ) ) {
 	$cat_id = intval( $cat_row['cat_id'] ) ;
 	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
-	$category4assign = array(
+	$category4assign_tmp = array(
 		'id' => intval( $cat_row['cat_id'] ) ,
 		'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 		'depth_in_tree' => $cat_row['cat_depth_in_tree'] + 1 ,
@@ -40,7 +40,7 @@ while( $cat_row = $db->fetchArray( $crs ) ) {
 		'can_makesubcategory' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_makesubcategory'] ) ,
 		'paths_raw' => unserialize( $cat_row['cat_path_in_tree'] ) ,
 	) ;
-	$categories4assign[ $cat_id ] = $category4assign + $cat_row ;
+	$categories4assign[ $cat_id ] = $category4assign_tmp + $cat_row ;
 }
 
 // auto-register

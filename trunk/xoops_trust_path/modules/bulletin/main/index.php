@@ -114,5 +114,18 @@ $xoopsTpl->assign($assing_array);
 if($bulletin_assing_rssurl_head){
 	$xoopsTpl->assign('xoops_module_header', $rss_feed . $xoopsTpl->get_template_vars( "xoops_module_header" ));
 }
+
+// GIJ
+$breadcrumbs = array( array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ) ;
+$topic =& new BulletinTopic( $storytopic ) ;
+if( $storytopic ) {
+	$pankuzu4assign = $topic->makePankuzuForHTML( $storytopic ) ;
+	foreach( $pankuzu4assign as $p4a ) {
+		if( $p4a['topic_id'] == $storytopic ) $breadcrumbs[] = array( 'name' => $p4a['topic_title'] ) ;
+		else $breadcrumbs[] = array( 'name' => $p4a['topic_title'] , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?storytopic='.$p4a['topic_id'] ) ;
+	}
+}
+$xoopsTpl->assign( 'xoops_breadcrumbs' , $breadcrumbs ) ;
+
 require_once XOOPS_ROOT_PATH.'/footer.php';
 ?>

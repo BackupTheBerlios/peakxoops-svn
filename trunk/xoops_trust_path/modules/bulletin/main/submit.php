@@ -301,6 +301,10 @@ if( $op == 'form' ){
 	require_once XOOPS_ROOT_PATH.'/header.php';
 	if( !empty($errors) ) xoops_error($errors);
 	require $mytrustdirpath.'/include/storyform.inc.php';
+	$xoopsTpl->assign( 'xoops_breadcrumbs' , array(
+		array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ,
+		array( 'name' => _MD_SUBMITNEWS ) ,
+	) ) ; // GIJ
 	require_once XOOPS_ROOT_PATH.'/footer.php';
 }
 

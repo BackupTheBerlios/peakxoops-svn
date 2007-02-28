@@ -115,5 +115,10 @@ if($bulletin_assing_rssurl_head){
 	$xoopsTpl->assign('xoops_module_header', $rss_feed . $xoopsTpl->get_template_vars( "xoops_module_header" ));
 }
 
+$xoopsTpl->assign( 'xoops_breadcrumbs' , array(
+	array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ,
+	array( 'name' => _MD_NEWSARCHIVES ) ,
+) ) ; // GIJ
+
 require_once XOOPS_ROOT_PATH.'/footer.php';
 ?>

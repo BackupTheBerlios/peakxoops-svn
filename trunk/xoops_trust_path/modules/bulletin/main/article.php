@@ -126,5 +126,15 @@ $xoopsTpl->assign($assing_array);
 if (empty($_GET['com_id']) && !isset($_GET['storypage'])) {
 	$article->updateCounter();
 }
+
+// GIJ
+$breadcrumbs = array( array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ) ;
+$pankuzu4assign = $article->topics->makePankuzuForHTML($article->getVar('topicid')) ;
+foreach( $pankuzu4assign as $p4a ) {
+	$breadcrumbs[] = array( 'name' => $p4a['topic_title'] , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?storytopic='.$p4a['topic_id'] ) ;
+}
+$breadcrumbs[] = array( 'name' => $article->getVar('title') ) ;
+$xoopsTpl->assign( 'xoops_breadcrumbs' , $breadcrumbs ) ;
+
 require_once XOOPS_ROOT_PATH.'/footer.php';
 ?>

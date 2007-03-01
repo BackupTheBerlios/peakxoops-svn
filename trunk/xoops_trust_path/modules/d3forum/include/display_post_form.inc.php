@@ -124,6 +124,7 @@ $xoopsTpl->assign( array(
 	'post' => $mode == 'edit' ? @$post4assign : array() ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => $formTitle ,
+	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => $formTitle ) ) ) ,
 ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php' ;

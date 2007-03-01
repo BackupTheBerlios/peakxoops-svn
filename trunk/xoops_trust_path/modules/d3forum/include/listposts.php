@@ -102,6 +102,8 @@ $topic4assign['last_post_uname'] = @$posts[ $last_post_offset ]['poster_uname'] 
 
 $xoopsOption['template_main'] = $mydirname.'_main_listposts.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;
+
+unset( $xoops_breadcrumbs[ sizeof( $xoops_breadcrumbs ) - 1 ]['url'] ) ;
 $xoopsTpl->assign(
 	array(
 		'category' => $category4assign ,
@@ -114,6 +116,7 @@ $xoopsTpl->assign(
 		'ret_name' => 'topic_id' ,
 		'ret_val' => $topic_id ,
 		'xoops_pagetitle' => $topic4assign['title'] ,
+		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 	)
 ) ;
 

@@ -100,6 +100,7 @@ $_GET['topic_id'] = $topic_id ;
 $xoopsOption['template_main'] = $mydirname.'_main_viewpost.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;
 
+unset( $xoops_breadcrumbs[ sizeof( $xoops_breadcrumbs ) - 1 ]['url'] ) ;
 $xoopsTpl->assign(
 	array(
 		'category' => $category4assign ,
@@ -113,6 +114,7 @@ $xoopsTpl->assign(
 		'ret_name' => 'post_id' ,
 		'ret_val' => $post_id ,
 		'xoops_pagetitle' => $post4assign['subject'] ,
+		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 	)
 ) ;
 

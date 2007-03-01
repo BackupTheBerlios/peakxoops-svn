@@ -70,7 +70,15 @@ $sql = "INSERT INTO ".$xoopsDB->prefix($mydirname."_post_votes")." SET post_id=$
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 d3forum_sync_post_votes( $mydirname , $post_id ) ;
 
-redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_MSG_VOTEACCEPTED ) ;
+$allowed_identifiers = array( 'post_id' , 'topic_id' ) ;
+
+if( in_array( $_GET['ret_name'] , $allowed_identifiers ) ) {
+	$ret_request = $_GET['ret_name'] . '=' . intval( $_GET['ret_val'] ) ;
+} else {
+	$ret_request = "post_id=$post_id" ;
+}
+
+redirect_header( XOOPS_URL."/modules/$mydirname/index.php?$ret_request" , 0 , _MD_D3FORUM_MSG_VOTEACCEPTED ) ;
 exit ;
 
 ?>

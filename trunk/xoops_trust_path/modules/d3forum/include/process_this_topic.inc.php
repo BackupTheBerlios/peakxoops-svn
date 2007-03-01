@@ -43,8 +43,11 @@ if( $isadminormod ) {
 }
 
 
+// where for comment-integration next&prev
+$whr_external_link_id = $topic4assign['external_link_id'] ? "topic_external_link_id=".$topic4assign['external_link_id'] : "1" ;
+
 // get next "topic" of the forum
-list( $next_topic_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT MAX(topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." WHERE topic_id<$topic_id AND forum_id=$forum_id AND ($whr_topic_invisible)" ) ) ;
+list( $next_topic_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT MAX(topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." WHERE topic_id<$topic_id AND forum_id=$forum_id AND ($whr_topic_invisible) AND ($whr_external_link_id)" ) ) ;
 if( empty( $next_topic_id ) ) {
 	$next_topic4assign = array() ;
 } else {
@@ -56,7 +59,7 @@ if( empty( $next_topic_id ) ) {
 }
 
 // get prev "topic" of the forum
-list( $prev_topic_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT MIN(topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." WHERE topic_id>$topic_id AND forum_id=$forum_id AND ($whr_topic_invisible)" ) ) ;
+list( $prev_topic_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT MIN(topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." WHERE topic_id>$topic_id AND forum_id=$forum_id AND ($whr_topic_invisible) AND ($whr_external_link_id)" ) ) ;
 if( empty( $prev_topic_id ) ) {
 	$prev_topic4assign = array() ;
 } else {
@@ -82,6 +85,9 @@ if( $uid && @$topic_row['u2t_time'] <= $topic_row['topic_last_post_time'] ) {
 
 // $external_link_id
 $external_link_id = intval( $topic_row['topic_external_link_id'] ) ;
+
+// assign breadcrumbs of this forum
+array_splice( $xoops_breadcrumbs , 1 , 0 , array( array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?topic_id='.$topic_id , 'name' => $topic4assign['title'] ) ) ) ;
 
 
 // for debug

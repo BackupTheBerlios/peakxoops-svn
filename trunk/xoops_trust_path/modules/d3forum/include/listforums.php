@@ -92,6 +92,7 @@ while( $forum_row = $xoopsDB->fetchArray( $frs ) ) {
 $xoopsOption['template_main'] = $mydirname.'_main_listforums.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;
 
+unset( $xoops_breadcrumbs[ sizeof( $xoops_breadcrumbs ) - 1 ]['url'] ) ;
 $xoopsTpl->assign(
 	array(
 		'total_topics_count' => $total_topics_count ,
@@ -106,6 +107,7 @@ $xoopsTpl->assign(
 		'category' => $category4assign ,
 		'page' => 'listforums' ,
 		'xoops_pagetitle' => $category4assign['title'] ,
+		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 	)
 ) ;
 

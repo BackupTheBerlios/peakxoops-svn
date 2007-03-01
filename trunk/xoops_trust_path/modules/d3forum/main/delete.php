@@ -21,6 +21,9 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' )
 // get&check this category ($category4assign, $category_row), override options
 if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
+// get $post4assign
+include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
+
 // check delete permission
 if( empty( $can_delete ) ) die( _MD_D3FORUM_ERR_DELETEPOST ) ;
 
@@ -111,9 +114,11 @@ if( ! empty( $_POST['deletepostsok'] ) ) {
 		'category' => $category4assign ,
 		'forum' => $forum4assign ,
 		'topic' => $topic4assign ,
+		'post' => $post4assign ,
 		'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'd3forum') ,
 		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 		'xoops_pagetitle' => _DELETE ,
+		'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _DELETE ) ) ) ,
 	) ) ;
 
 	include XOOPS_ROOT_PATH.'/footer.php';

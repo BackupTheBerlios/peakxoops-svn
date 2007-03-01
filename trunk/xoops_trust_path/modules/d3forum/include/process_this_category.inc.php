@@ -42,4 +42,7 @@ if( is_array( $forum_configs ) ) foreach( $forum_configs as $key => $val ) {
 // icon meanings
 $d3forum_icon_meanings = explode( '|' , $xoopsModuleConfig['icon_meanings'] ) ;
 
+// assign breadcrumbs of this category
+array_splice( $xoops_breadcrumbs , 1 , 0 , array( array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$cat_id , 'name' => $category4assign['title'] ) ) ) ;
+
 ?>

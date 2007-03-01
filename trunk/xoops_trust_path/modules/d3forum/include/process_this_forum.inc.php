@@ -35,4 +35,7 @@ if( ! empty( $external_link_id ) ) {
 	$topic4assign['comment_description'] = d3forum_get_comment_description( $forum_row['forum_external_link_format'] , $external_link_id ) ;
 }
 
+// assign breadcrumbs of this forum
+array_splice( $xoops_breadcrumbs , 1 , 0 , array( array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?forum_id='.$forum_id , 'name' => $forum4assign['title'] ) ) ) ;
+
 ?>

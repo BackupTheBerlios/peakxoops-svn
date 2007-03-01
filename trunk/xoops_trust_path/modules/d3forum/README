@@ -64,10 +64,33 @@ myalbum_photo_in_list.html
 [code]
 <{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="storyid" subject=$story.title}>
 [/code]
-{dirname}_item.html
+{dirname}_item.html (instead of <{$story.comentstotal}>)
 [code]
-<{d3forum_comment_topicscount dirname=d3forum forum_id=[i](number)[/i] link_id=$story.id}>
+Comments(<{d3forum_comment_topicscount dirname=d3forum forum_id=[i](number)[/i] link_id=$story.id}>)
 [/code]
+
+
+[b]xoopspoll[/b]
+xoopspoll_results.html
+[code]
+<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="poll_id" subject=$poll.question}>
+[/code]
+
+
+[b]TinyD[/b]
+tinycontent*_index.html
+[code]
+<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="id" subject=$xoops_pagetitle}>
+[/code]
+
+
+[b]PukiWikiMod[/b]
+tinycontent*_index.html
+[code]
+<{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="pgid" subject=$xoops_pagetitle}>
+[/code]
+
+
 
 
 
@@ -75,3 +98,4 @@ MEMO
 
 russian from Konstantine
 persian from voltan
+french from gigamaster

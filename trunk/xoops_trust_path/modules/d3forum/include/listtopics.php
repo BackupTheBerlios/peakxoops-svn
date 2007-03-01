@@ -81,6 +81,7 @@ while( $topic_row = $xoopsDB->fetchArray( $trs ) ) {
 $xoopsOption['template_main'] = $mydirname.'_main_listtopics.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;
 
+unset( $xoops_breadcrumbs[ sizeof( $xoops_breadcrumbs ) - 1 ]['url'] ) ;
 $xoopsTpl->assign(
 	array(
 		'category' => $category4assign ,
@@ -93,6 +94,7 @@ $xoopsTpl->assign(
 		'pagenav' => @$pagenav ,
 		'page' => 'listtopics' ,
 		'xoops_pagetitle' => $forum4assign['title'] ,
+		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 	)
 ) ;
 

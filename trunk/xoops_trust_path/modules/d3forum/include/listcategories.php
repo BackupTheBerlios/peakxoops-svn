@@ -113,6 +113,7 @@ foreach( $categories4assign as $category ) {
 $xoopsOption['template_main'] = $mydirname.'_main_listcategories.html' ;
 include XOOPS_ROOT_PATH.'/header.php' ;
 
+unset( $xoops_breadcrumbs[ sizeof( $xoops_breadcrumbs ) - 1 ]['url'] ) ;
 $xoopsTpl->assign(
 	array(
 		'total_topics_count' => $total_topics_count ,
@@ -126,6 +127,7 @@ $xoopsTpl->assign(
 		'top_categories' => $top_categories4assign ,
 		'categories_ul_out_last' => str_repeat( '</li></ul>' , $previous_depth + 1 ) ,
 		'page' => 'listcategories' ,
+		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 	)
 ) ;
 

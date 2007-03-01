@@ -59,4 +59,7 @@ $post4assign = array(
 	'can_vote' => $can_vote ,
 ) ;
 
+// assign breadcrumbs of this forum
+$xoops_breadcrumbs[] = array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?post_id='.$post_id , 'name' => $post4assign['subject'] ) ;
+
 ?>

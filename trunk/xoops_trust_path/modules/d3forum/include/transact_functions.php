@@ -148,12 +148,10 @@ function d3forum_sync_cattree( $mydirname )
 			for( $i = 0 ; $i < $depth_diff ; $i ++ ) {
 				$paths[ $val['cat_id'] ] = $val['cat_title'] ;
 			}
-		} else if( $depth_diff < 0 ) {
-			for( $i = 0 ; $i < - $depth_diff ; $i ++ ) {
+		} else {
+			for( $i = 0 ; $i < - $depth_diff + 1 ; $i ++ ) {
 				array_pop( $paths ) ;
 			}
-		} else {
-			array_pop( $paths ) ;
 			$paths[ $val['cat_id'] ] = $val['cat_title'] ;
 		}
 
@@ -260,7 +258,7 @@ function d3forum_sync_topic_votes( $mydirname , $topic_id )
 	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT topic_votes in sync topic_votes" ) ;
 	list( $votes_count , $votes_sum ) = $db->fetchRow( $result ) ;
 
-	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_votes_count=$votes_count,topic_votes_sum=$votes_sum WHERE topic_id=$topic_id" ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_votes_count=".intval($votes_count).",topic_votes_sum=".intval($votes_sum)." WHERE topic_id=$topic_id" ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 
 	//if( $sync_also_topic_votes ) return d3forum_sync_forum_votes( $mydirname , $forum_id ) ;
 	return true ;

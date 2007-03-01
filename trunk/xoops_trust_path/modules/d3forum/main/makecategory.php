@@ -57,7 +57,8 @@ $xoopsTpl->assign( array(
 	'formtitle' => _MD_D3FORUM_LINK_MAKECATEGORY ,
 	'cat_jumpbox_options' => d3forum_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
-	'xoops_pagetitle' => _MD_D3FORUM_CATEGORYMANAGER ,
+	'xoops_pagetitle' => _MD_D3FORUM_LINK_MAKECATEGORY ,
+	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _MD_D3FORUM_LINK_MAKECATEGORY ) ) ) ,
 ) ) ;
 
 include XOOPS_ROOT_PATH.'/footer.php';

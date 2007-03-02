@@ -41,7 +41,8 @@ class XoopsFormSelectTime extends XoopsFormElementTray
 
 		$thsy = date('Y');
 		$year_select  = new XoopsFormSelect('', $name.'[year]', $this->year);
-		$year_select  ->addOptionArray(array($thsy-8=>$thsy-8, $thsy-7, $thsy-6, $thsy-5, $thsy-4, $thsy-3, $thsy-2, $thsy-1, $thsy, $thsy+1));
+//		$year_select  ->addOptionArray(array($thsy-8=>$thsy-8, $thsy-7, $thsy-6, $thsy-5, $thsy-4, $thsy-3, $thsy-2, $thsy-1, $thsy, $thsy+1));
+		for($y=1970;$y<2038;$y++) $year_select->addOption($y,$y); // GIJ
 		$month_select = new XoopsFormSelect('', $name.'[month]', $this->month);
 		$month_select ->addOptionArray(array(1=>1,2,3,4,5,6,7,8,9,10,11,12));
 		$day_select   = new XoopsFormSelect('', $name.'[day]', $this->day);

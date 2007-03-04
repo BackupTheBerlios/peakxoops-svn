@@ -21,7 +21,8 @@ if( ! $isadminormod ) die( _MD_PICO_ERR_CATEGORYMANAGEMENT ) ;
 
 // redirect to preferences (install altsys)
 if( ! $cat_id ) {
-	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?mode=admin&lib=altsys&page=mypreferences" , 2 , _MD_PICO_MSG_GOTOPREFERENCE4EDITTOP ) ;
+	$use_altsys = file_exists(XOOPS_TRUST_PATH.'/libs/altsys/mypreferences.php') ? '?mode=admin&lib=altsys&page=mypreferences' : '' ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php$use_altsys" , 2 , _MD_PICO_MSG_GOTOPREFERENCE4EDITTOP ) ;
 	exit ;
 }
 

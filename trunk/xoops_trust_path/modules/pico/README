@@ -93,6 +93,10 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+0.99RC4->1.00
+- fixed xoops_breadcrumbs (thx starck)
+- fixed form template to edit content
+
 0.98->0.99RC4
 - added xoops_breadcrumbs
 - added singlecontent
@@ -266,7 +270,9 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+0.99RC4->1.00
 - xoops_breadcrumbs の修正 (thx starck)
+- 編集テンプレートのおかしかったところを修正
 
 0.98->0.99RC4
 - xoops_breadcrumbs に対応

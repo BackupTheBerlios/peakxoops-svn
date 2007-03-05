@@ -254,6 +254,13 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
 
+	// get config
+	$module_handler =& xoops_gethandler('module') ;
+	$module =& $module_handler->getByDirname( $mydirname ) ;
+	if( ! is_object( $module ) ) return array() ;
+	$config_handler =& xoops_gethandler('config') ;
+	$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar('mid') ) ;
+
 	// check $cat_id
 	$cat_id = intval( @$_POST['cat_id'] ) ;
 	if( $cat_id ) {
@@ -275,6 +282,23 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		}
 	}
 	asort( $filters ) ;
+
+	// forced filters
+	$filters_forced = array_map( 'trim' , explode( ',' , $mod_config['filters_forced'] ) ) ;
+	foreach( $filters_forced as $filter_forced ) {
+		$regs = explode( ':' , $filter_forced ) ;
+		if( stristr( $filter_forced , ':LAST' ) ) {
+			$filters[ $regs[0] ] = 0 ;
+		} else {
+			$filters = array( $regs[0] => 0 ) + $filters ;
+		}
+	}
+
+	// prohibited filters
+	$filters_prohibited = array_map( 'trim' , explode( ',' , $mod_config['filters_prohibited'] ) ) ;
+	foreach( $filters_prohibited as $filter_prohibited ) {
+		unset( $filters[ $filter_prohibited ] ) ;
+	}
 
 	$ret = array( 
 		'cat_id' => $cat_id ,

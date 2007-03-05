@@ -8,10 +8,9 @@ if( file_exists( dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modi
 }
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
-
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.00 ;
+$modversion['version'] = 1.10 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -192,6 +191,26 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textarea' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> constant($constpref.'_FILTERSDEFAULT') ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'filters_forced' ,
+	'title'			=> $constpref.'_FILTERSF' ,
+	'description'	=> $constpref.'_FILTERSFDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'filters_prohibited' ,
+	'title'			=> $constpref.'_FILTERSP' ,
+	'description'	=> $constpref.'_FILTERSPDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
 	'options'		=> array()
 ) ;
 

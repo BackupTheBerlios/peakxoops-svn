@@ -99,23 +99,66 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 
 function pico_get_submenu( $mydirname )
 {
+	static $submenus_cache ;
+
+	if( ! empty( $submenus_cache[$mydirname] ) ) return $submenus_cache[$mydirname] ;
+
+	$module_handler =& xoops_gethandler('module') ;
+	$module =& $module_handler->getByDirname( $mydirname ) ;
+	if( ! is_object( $module ) ) return array() ;
+	$config_handler =& xoops_gethandler('config') ;
+	$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar('mid') ) ;
+
 	$db =& Database::getInstance() ;
 	$myts =& MyTextSanitizer::getInstance();
 
-	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
-	$result = $db->query("SELECT content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." o WHERE cat_id=0 AND show_in_menu AND visible AND $whr_read4content ORDER BY weight" ) ;
+	$whr_read = '`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' ) ) ;
 
-	$ret = array() ;
-	if( $result ) while( $content_row = $db->fetchArray( $result ) ) {
-		$ret[] = array(
-			'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-			'url' => pico_make_content_link4html( @$GLOBALS['xoopsModuleConfig'] , $content_row ) ,
+	// categories query
+	$sql = "SELECT cat_id,pid,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_read) ORDER BY cat_order_in_tree" ;
+	$crs = $db->query( $sql ) ;
+	if( $crs ) while( $cat_row = $db->fetchArray( $crs ) ) {
+		$cat_id = intval( $cat_row['cat_id'] ) ;
+		$categories[ $cat_id ] = array(
+			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
+			'url' => '?cat_id='.$cat_id ,
+			'pid' => $cat_row['pid'] ,
 		) ;
+	}
+
+	// contents query
+	$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND $whr_read ORDER BY weight" ) ;
+	if( $ors ) while( $content_row = $db->fetchArray( $ors ) ) {
+		$cat_id = intval( $content_row['cat_id'] ) ;
+		$categories[ $cat_id ]['sub'][] = array(
+			'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
+			'url' => pico_make_content_link4html( $mod_config , $content_row ) ,
+		) ;
+	}
+
+	// restruct categories
+	$submenus_cache[$mydirname] = array_merge( $categories[0]['sub'] , pico_restruct_categories( $categories , 0 ) ) ;
+	return $submenus_cache[$mydirname] ;
+}
+
+
+function pico_restruct_categories( $categories , $parent )
+{
+	$ret = array() ;
+	foreach( $categories as $cat_id => $category ) {
+		if( $category['pid'] == $parent ) {
+			if( empty( $category['sub'] ) ) $category['sub'] = array() ;
+			$ret[] = array(
+				'name' => $category['name'] ,
+				'url' => $category['url'] ,
+				'sub' => array_merge( $category['sub'] , pico_restruct_categories( $categories , $cat_id ) ) ,
+			) ;
+		}
 	}
 
 	return $ret ;
 }
-
 
 function pico_utf8_encode_recursive( &$data )
 {

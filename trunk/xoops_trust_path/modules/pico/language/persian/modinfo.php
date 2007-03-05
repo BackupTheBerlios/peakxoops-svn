@@ -5,6 +5,13 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-06 04:56:32
+define($constpref.'_FILTERSF','Forced filters');
+define($constpref.'_FILTERSFDSC','input filter names separated with ,(comma). filter:LAST means the filter is passed in the last phase. The other filters are passed in the first phase.');
+define($constpref.'_FILTERSP','Prohibited filters');
+define($constpref.'_FILTERSPDSC','input filter names separated with ,(comma).');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

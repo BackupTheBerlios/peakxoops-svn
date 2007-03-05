@@ -230,6 +230,7 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・新着RSS（モジュール全体およびカテゴリー毎）
 ・ラップページ自動登録
 ・xoops_breadcrumbs規格に対応
+・階層サブメニュー
 
 
 [b]USAGE:[/b]
@@ -269,6 +270,11 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.10 beta
+- 階層サブメニュー追加
+- 禁止フィルター追加
+- 強制フィルター追加
 
 0.99RC4->1.00
 - xoops_breadcrumbs の修正 (thx starck)

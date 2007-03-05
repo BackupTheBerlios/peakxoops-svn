@@ -296,6 +296,12 @@ function pico_escape4mailto( $text )
 // get filter's informations under XOOPS_TRUST_PATH/modules/pico/filters/
 function pico_get_filter_infos( $filters_separated_pipe , $isadminormod = false )
 {
+	global $xoopsModuleConfig ;
+
+	// forced & prohibited filters
+	$filters_forced = array_map( 'trim' , explode( ',' , str_replace( ':LAST' , '' , @$xoopsModuleConfig['filters_forced'] ) ) ) ;
+	$filters_prohibited = array_map( 'trim' , explode( ',' , @$xoopsModuleConfig['filters_prohibited'] ) ) ;
+
 	$filters = array() ;
 	$dh = opendir( XOOPS_TRUST_PATH.'/modules/pico/filters' ) ;
 	while( ( $file = readdir( $dh ) ) !== false ) {
@@ -307,6 +313,8 @@ function pico_get_filter_infos( $filters_separated_pipe , $isadminormod = false 
 
 			// check the filter is secure or not
 			if( ! $isadminormod && defined( $constpref.'ISINSECURE' ) ) continue ;
+			// prohibited
+			if( in_array( $name , $filters_prohibited ) ) continue ;
 
 			$filters[ $name ] = array(
 				'title' => defined( $constpref.'TITLE' ) ? constant( $constpref.'TITLE' ) : $name ,
@@ -314,6 +322,12 @@ function pico_get_filter_infos( $filters_separated_pipe , $isadminormod = false 
 				'weight' => defined( $constpref.'INITWEIGHT' ) ? constant( $constpref.'INITWEIGHT' ) : 0 ,
 				'enabled' => false ,
 			) ;
+
+			// forced
+			if( in_array( $name , $filters_forced ) ) {
+				$filters[ $name ]['enabled'] = true ;
+				$filters[ $name ]['fixed'] = true ;
+			}
 		}
 	}
 

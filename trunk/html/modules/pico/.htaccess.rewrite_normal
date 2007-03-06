@@ -1,0 +1,3 @@
+RewriteEngine on
+
+RewriteRule ^content(.*).html$ index.php?content_id=$1 [L]

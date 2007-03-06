@@ -20,6 +20,8 @@ define( $constpref.'_ADMENU_IMPORT' , 'Import/Sync' ) ;
 
 // configurations
 define($constpref.'_USE_WRAPSMODE','enable wraps mode');
+define($constpref.'_USE_REWRITE','enable mod_rewrite mode');
+define($constpref.'_USE_REWRITEDSC','Depends your environment. If you turn this on, rename .htaccess.rewrite_wraps(with wraps) or htaccess.rewrite_normal(without wraps) to .htaccess under XOOPS_ROOT_PATH/modules/(dirname)/');
 define($constpref.'_WRAPSAUTOREGIST','enable auto-registering HTML wrapped files into DB as contents');
 define($constpref.'_TOP_MESSAGE','Description of TOP category');
 define($constpref.'_TOP_MESSAGEDEFAULT','');

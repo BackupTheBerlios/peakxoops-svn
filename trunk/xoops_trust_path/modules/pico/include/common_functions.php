@@ -86,13 +86,14 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 	if( ! empty( $mod_config['use_wraps_mode'] ) ) {
 		// wraps mode 
 		if( ! empty( $content_row['vpath'] ) ) {
-			return 'index.php'.htmlspecialchars($content_row['vpath'],ENT_QUOTES) ;
+			$ret = 'index.php'.htmlspecialchars($content_row['vpath'],ENT_QUOTES) ;
 		} else {
-			return 'index.php' . sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) ;
+			$ret = 'index.php' . sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) ;
 		}
+		return empty( $mod_config['use_rewrite'] ) ? $ret : substr( $ret , 10 ) ;
 	} else {
-		// normal link
-		return 'index.php?content_id='.intval($content_row['content_id']) ;
+		// normal mode
+		return empty( $mod_config['use_rewrite'] ) ? 'index.php?content_id='.intval($content_row['content_id']) : substr( sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) , 1 ) ;
 	}
 }
 

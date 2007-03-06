@@ -6,6 +6,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-07 04:39:59
+define($constpref.'_USE_REWRITE','enable mod_rewrite mode');
+define($constpref.'_USE_REWRITEDSC','Depends your environment. If you turn this on, rename .htaccess.rewrite_wraps(with wraps) or htaccess.rewrite_normal(without wraps) to .htaccess under XOOPS_ROOT_PATH/modules/(dirname)/');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-06 04:56:32
 define($constpref.'_FILTERSF','Forced filters');
 define($constpref.'_FILTERSFDSC','input filter names separated with ,(comma). filter:LAST means the filter is passed in the last phase. The other filters are passed in the first phase.');

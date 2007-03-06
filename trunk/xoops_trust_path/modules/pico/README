@@ -4,6 +4,10 @@
 
 [b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
+This is the developping version.
+If you are power user/programmer/designer, let's try this instead of stable numbered 1.00 :-)
+Don't forget updating the module after overwriting the developping version.
+
 Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
 
 TinyD will be deprecated module after pico is marked as stable.
@@ -93,7 +97,15 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
-0.99RC4->1.00
+1.11 beta (2007/03/07)
+- added mod_rewrite mode
+
+1.10 beta (2007/03/06)
+- added hierarchial submenu
+- added a config of prohibited filters
+- added a config of forced filters
+
+0.99RC4->1.00 (2007/03/05)
 - fixed xoops_breadcrumbs (thx starck)
 - fixed form template to edit content
 
@@ -181,9 +193,11 @@ pico is fast enough if you use content's cache.
 ====  静的コンテンツ用モジュール pico  ===
 
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
-開発当初から想定していた機能を一通り実装したこともあり、現時点ではRC版としています。
+開発当初から想定していた機能を一通り実装したこともあり、現時点では1.00を安定版としています。
 
-いきなり互換性が失われるような大きな機能追加はしばらくありません。バグ取りと細かな操作性向上が一通り済んだら、安定版とします。
+ただし、こちらは機能向上を目的とした1.1x版です。やる気のある方はぜひこちらをお試しください。開発版なので、特には書きませんが、バージョンアップ時のモジュールアップデートはほぼ必須です。
+
+以下、安定版・開発版共通。
 
 D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 （すでにこのあたりの設定がしてあれば、とても簡単にインストールできます）
@@ -271,12 +285,15 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
-1.10 beta
+1.11 beta (2007/03/07)
+- mod_rewriteモード新設
+
+1.10 beta (2007/03/06)
 - 階層サブメニュー追加
 - 禁止フィルター追加
 - 強制フィルター追加
 
-0.99RC4->1.00
+0.99RC4->1.00 (2007/03/05)
 - xoops_breadcrumbs の修正 (thx starck)
 - 編集テンプレートのおかしかったところを修正
 

@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.10 ;
+$modversion['version'] = 1.11 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -88,6 +88,16 @@ $modversion['config'][1] = array(
 	'name'			=> 'use_wraps_mode' ,
 	'title'			=> $constpref.'_USE_WRAPSMODE' ,
 	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'use_rewrite' ,
+	'title'			=> $constpref.'_USE_REWRITE' ,
+	'description'	=> $constpref.'_USE_REWRITEDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 0 ,

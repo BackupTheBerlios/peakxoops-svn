@@ -20,6 +20,8 @@ define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
 
 // configurations
 define($constpref.'_USE_WRAPSMODE','wrapsモードを有効にする');
+define($constpref.'_USE_REWRITE','mod_rewriteモードを有効にする');
+define($constpref.'_USE_REWRITEDSC','これを有効にする場合、XOOPS_ROOT_PATH/modules/(dirname)/ 下にある.htaccess.rewrite_wraps（wrapsモード有効時）または.htaccess.rewrite_normal（wrapsモード無効時）を、.htaccessにリネームする必要があります。この機能は、XOOPSを運用しているサーバがApacheのmod_rewriteをサポートしていて、.htaccessでの指定が可能でなければ利用できません。');
 define($constpref.'_WRAPSAUTOREGIST','HTMLラップファイルの自動DB登録');
 define($constpref.'_TOP_MESSAGE','モジュールトップのメッセージ');
 define($constpref.'_TOP_MESSAGEDEFAULT','');

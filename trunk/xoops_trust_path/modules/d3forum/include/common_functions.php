@@ -73,4 +73,72 @@ function d3forum_get_categories_can_read( $mydirname )
 }
 
 
+function d3forum_get_submenu( $mydirname )
+{
+	static $submenus_cache ;
+
+	if( ! empty( $submenus_cache[$mydirname] ) ) return $submenus_cache[$mydirname] ;
+
+	$module_handler =& xoops_gethandler('module') ;
+	$module =& $module_handler->getByDirname( $mydirname ) ;
+	if( ! is_object( $module ) ) return array() ;
+	$config_handler =& xoops_gethandler('config') ;
+	$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar('mid') ) ;
+
+	$db =& Database::getInstance() ;
+	$myts =& MyTextSanitizer::getInstance();
+
+	$whr_read4cat = '`cat_id` IN (' . implode( "," , d3forum_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4forum = '`forum_id` IN (' . implode( "," , d3forum_get_forums_can_read( $mydirname ) ) . ')' ;
+	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' ) ) ;
+
+	// categories query
+	$sql = "SELECT cat_id,pid,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_read4cat) ORDER BY cat_order_in_tree" ;
+	$crs = $db->query( $sql ) ;
+	if( $crs ) while( $cat_row = $db->fetchArray( $crs ) ) {
+		$cat_id = intval( $cat_row['cat_id'] ) ;
+		$categories[ $cat_id ] = array(
+			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
+			'url' => 'index.php?cat_id='.$cat_id ,
+			'pid' => $cat_row['pid'] ,
+		) ;
+	}
+
+	// forums query
+	$frs = $db->query( "SELECT cat_id,forum_id,forum_title FROM ".$db->prefix($mydirname."_forums" )." WHERE ($whr_read4forum) ORDER BY forum_weight" ) ;
+	if( $frs ) while( $forum_row = $db->fetchArray( $frs ) ) {
+		$cat_id = intval( $forum_row['cat_id'] ) ;
+		$categories[ $cat_id ]['sub'][] = array(
+			'name' => $myts->makeTboxData4Show( $forum_row['forum_title'] ) ,
+			'url' => '?forum_id='.intval( $forum_row['forum_id'] ) ,
+		) ;
+	}
+
+	// restruct categories
+	$submenus_cache[$mydirname] = array_merge( d3forum_restruct_categories( $categories , 0 ) ) ;
+	return $submenus_cache[$mydirname] ;
+}
+
+
+function d3forum_restruct_categories( $categories , $parent )
+{
+	$ret = array() ;
+	foreach( $categories as $cat_id => $category ) {
+		if( $category['pid'] == $parent ) {
+			if( empty( $category['sub'] ) ) $category['sub'] = array() ;
+			$ret[] = array(
+				'name' => $category['name'] ,
+				'url' => $category['url'] ,
+				'sub' => array_merge( $category['sub'] , d3forum_restruct_categories( $categories , $cat_id ) ) ,
+			) ;
+		}
+	}
+
+	return $ret ;
+}
+
+
+
+
+
 ?>

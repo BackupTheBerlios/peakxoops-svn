@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.46 ;
+$modversion['version'] = 0.47 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -37,8 +37,12 @@ $modversion['search']['func'] = $mydirname.'_global_search' ;
 // Menu
 $modversion['hasMain'] = 1 ;
 
-// There are no submenu (use menu moudle instead of mainmenu)
+// Submenu (just for mainmenu)
 $modversion['sub'] = array() ;
+if( is_object( @$GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('dirname') == $mydirname ) {
+	require_once dirname(__FILE__).'/include/common_functions.php' ;
+	$modversion['sub'] = d3forum_get_submenu( $mydirname ) ;
+}
 
 // All Templates can't be touched by modulesadmin.
 $modversion['templates'] = array() ;

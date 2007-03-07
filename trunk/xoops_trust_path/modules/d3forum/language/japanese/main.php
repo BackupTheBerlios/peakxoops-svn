@@ -46,6 +46,7 @@ define('_MD_D3FORUM_LISTALLTOPICS','全トピック一覧');
 define('_MD_D3FORUM_LISTTOPICSINCATEGORY','カテゴリー内トピック一覧');
 define('_MD_D3FORUM_LISTTOPICSINCATEGORIES','特定カテゴリー内トピック一覧');
 define('_MD_D3FORUM_FMT_TOPICHITS','%s件ヒットしました');
+define('_MD_D3FORUM_MSG_CONFIRMOK','実行してよろしいですか？');
 define('_MD_D3FORUM_MSG_CONFIRMDELETE','本当に削除してよろしいですか？');
 define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','このレコードに所属しているデータがすべて削除されますが、本当に削除してよろしいですか？');
 define('_MD_D3FORUM_POSTASNEWTOPIC','新規トピックとして投稿する');
@@ -220,6 +221,8 @@ define('_MD_D3FORUM_TH_LOCK','ロック');
 define('_MD_D3FORUM_TH_INVISIBLE','不可視');
 define('_MD_D3FORUM_TH_SOLVED','解決済');
 define('_MD_D3FORUM_BTN_SYNCTHISTOPIC','トピック内同期');
+define('_MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM','このトピックを他フォーラムモジュールへ移動する');
+define('_MD_D3FORUM_BTN_COPYTOPICTOOTHERFORUM','このトピックを他フォーラムモジュールへコピーする');
 
 // delete (check done)
 define('_MD_D3FORUM_DELNOTALLOWED','この投稿を削除する権限がありません。');
@@ -271,6 +274,8 @@ define('_MD_D3FORUM_TH_FORUMDESC','フォーラム説明文');
 define('_MD_D3FORUM_TH_FORUMOPTIONS','フォーラムオプション');
 define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','コメント統合時の参照方法');
 define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','コメント統合を使わないときには空欄にします。{XOOPS_URL}/modules/dirname から始まるsprintf()用のフォーマットが記述された場合は、%sに投稿番号を代入したものがコメント元へのURIとなります。最初からd3forumコメント統合に対応したモジュールの場合は自動的にセットされるので、いじらないでください。');
+define('_MD_D3FORUM_BTN_MOVEFORUMTOOTHERFORUM','このフォーラムを他フォーラムモジュールへ移動する');
+define('_MD_D3FORUM_BTN_COPYFORUMTOOTHERFORUM','このフォーラムを他フォーラムモジュールへコピーする');
 
 // makecategory and categorymanager
 define('_MD_D3FORUM_CATEGORYMANAGER','カテゴリー管理');

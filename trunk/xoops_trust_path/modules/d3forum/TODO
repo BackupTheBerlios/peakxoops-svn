@@ -7,8 +7,6 @@
 Smartyプラグインが各モジュールの $xoopsModuleConfig をルックアップする
 
 
-モジュールインスタンス間のフォーラムコピー
-
 ゲスト編集 (guest_md5_pass check)
 ゲスト削除 (guest_md5_pass check)
 ゲスト投稿のcapchaみたいなの

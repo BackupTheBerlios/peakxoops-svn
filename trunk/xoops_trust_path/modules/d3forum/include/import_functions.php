@@ -425,4 +425,106 @@ function d3forum_comimport_posts_recursive( $mydirname , $topic_id , $com_id , $
 }
 
 
+function d3forum_export_forum_to_d3forum( $mydirname , $export_mid , $export_cat_id , $cat_id , $forum_id , $is_move = false )
+{
+	$db =& Database::getInstance() ;
+
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$to_module =& $module_handler->get( $export_mid ) ;
+	$export_mydirname = $to_module->getVar('dirname') ;
+
+	// forums table
+	$table_name = 'forums' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
+	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'forum_id' , 'cat_id' ) ) ;
+	$columns4sql = implode( ',' , $columns ) ;
+	$sql = "INSERT INTO `$to_table` ($columns4sql,`cat_id`) SELECT $columns4sql,$export_cat_id FROM `$from_table` WHERE forum_id=$forum_id" ;
+	$ers = $db->query( $sql ) ;
+	$export_forum_id = $db->getInsertId() ;
+	if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE forum_id=$forum_id" ) ;
+
+	// forum_access table
+	$table_name = 'forum_access' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
+	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'forum_id' ) ) ;
+	$columns4sql = implode( ',' , $columns ) ;
+	$sql = "INSERT INTO `$to_table` ($columns4sql,`forum_id`) SELECT $columns4sql,$export_forum_id FROM `$from_table` WHERE forum_id=$forum_id" ;
+	$ers = $db->query( $sql ) ;
+	if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE forum_id=$forum_id" ) ;
+
+	// topics etc.
+	$table_name = 'topics' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$trs = $db->query( "SELECT topic_id FROM `$from_table` WHERE forum_id=$forum_id" ) ;
+	while( list( $topic_id ) = $db->fetchRow( $trs ) ) {
+		d3forum_export_topic_to_d3forum( $mydirname , $export_mid , $export_forum_id , $forum_id , $topic_id , $is_move ) ;
+	}
+}
+
+
+function d3forum_export_topic_to_d3forum( $mydirname , $export_mid , $export_forum_id , $forum_id , $topic_id , $is_move = false )
+{
+	$db =& Database::getInstance() ;
+
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$to_module =& $module_handler->get( $export_mid ) ;
+	$export_mydirname = $to_module->getVar('dirname') ;
+
+	// topics table
+	$table_name = 'topics' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
+	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'topic_id' , 'forum_id' ) ) ;
+	$columns4sql = implode( ',' , $columns ) ;
+	$sql = "INSERT INTO `$to_table` ($columns4sql,`forum_id`) SELECT $columns4sql,$export_forum_id FROM `$from_table` WHERE topic_id=$topic_id" ;
+	$ers = $db->query( $sql ) ;
+	$export_topic_id = $db->getInsertId() ;
+	if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE topic_id=$topic_id" ) ;
+
+	// users2topics table
+	$table_name = 'users2topics' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
+	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'topic_id' ) ) ;
+	$columns4sql = implode( ',' , $columns ) ;
+	$sql = "INSERT INTO `$to_table` ($columns4sql,`topic_id`) SELECT $columns4sql,$export_topic_id FROM `$from_table` WHERE topic_id=$topic_id" ;
+	$ers = $db->query( $sql ) ;
+	if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE topic_id=$topic_id" ) ;
+
+	// posts table
+	$table_name = 'posts' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
+	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'post_id' , 'topic_id' ) ) ;
+	$columns4sql = implode( ',' , $columns ) ;
+	$prs = $db->query( "SELECT post_id FROM `$from_table` WHERE topic_id=$topic_id" ) ;
+	$post_conversions = array() ;
+	while( list( $post_id ) = $db->fetchRow( $prs ) ) {
+		$sql = "INSERT INTO `$to_table` ($columns4sql,`topic_id`) SELECT $columns4sql,$export_topic_id FROM `$from_table` WHERE post_id=$post_id" ;
+		$ers = $db->query( $sql ) ;
+		$post_conversions[ $post_id ] = $db->getInsertId() ;
+		if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE post_id=$post_id" ) ;
+	}
+
+	// post_votes table
+	$table_name = 'post_votes' ;
+	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
+	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'post_id' ) ) ;
+	$columns4sql = implode( ',' , $columns ) ;
+	foreach( $post_conversions as $post_id => $export_post_id ) {
+		$sql = "INSERT INTO `$to_table` ($columns4sql,`post_id`) SELECT $columns4sql,$export_post_id FROM `$from_table` WHERE post_id=$post_id" ;
+		$ers = $db->query( $sql ) ;
+		if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE post_id=$post_id" ) ;
+	}
+
+	// sync topic, forum, category
+	d3forum_sync_topic( $export_mydirname , $export_topic_id ) ;
+	if( $is_move ) d3forum_sync_forum( $mydirname , $forum_id ) ;
+}
+
+
+
 ?>

@@ -1,5 +1,13 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-07 13:42:10
+define('_MD_D3FORUM_MSG_CONFIRMOK','Are you OK?');
+define('_MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM','Move this topic into the other forum');
+define('_MD_D3FORUM_BTN_COPYTOPICTOOTHERFORUM','Copy this topic into the other forum');
+define('_MD_D3FORUM_BTN_MOVEFORUMTOOTHERFORUM','Move this forum into the other forum');
+define('_MD_D3FORUM_BTN_COPYFORUMTOOTHERFORUM','Copy this forum into the other forum');
+
 define('_MD_D3FORUM_ON','Posted on');
 define('_MD_D3FORUM_LASTMODIFIED','Last modified');
 define('_MD_D3FORUM_BY','فرستاده شده به وسیله ی');

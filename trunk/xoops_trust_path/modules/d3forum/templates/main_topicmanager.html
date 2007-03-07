@@ -12,7 +12,7 @@
 
 <p class="targettopic"><{$category.title}> - <{$forum.title}> - <{$topic.title}></p>
 
-<form name="topicmanager" id="topicmanager" action="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>" method="post">
+<form name="topicmanager_update" id="topicmanager_update" action="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>" method="post">
 
 	<table class="outer d3f_form_table">
 	<tr style="display:none;">
@@ -67,4 +67,50 @@
 </p>
 
 </form>
+
+
+<br />
+
+<form name="topicmanager_export" id="topicmanager_export" action="<{$mod_url}>/index.php?page=topicmanager&amp;topic_id=<{$topic.id}>" class="outer head" method="post">
+
+	<select name="export_mid" id="export_mid" onchange="d3forum_showhide_forum_select(this);"><{html_options options=$export_to_module_options}></select>
+
+	<select name="export_forum_id[0]" id="export_forum_id_0">
+		<option value="0">----</option>
+	</select>
+	<{foreach from=$export_to_forum_options key="ex_forum_id" item="ex_options"}>
+		<select name="export_forum_id[<{$ex_forum_id}>]" id="export_forum_id_<{$ex_forum_id}>">
+			<option value="0">----</option>
+			<{$ex_options}>
+		</select>
+	<{/foreach}>
+
+	<br />
+	<input type="submit" name="topicman_export_move" value="<{$smarty.const._MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMOK}>')" />
+	<input type="submit" name="topicman_export_copy" value="<{$smarty.const._MD_D3FORUM_BTN_COPYTOPICTOOTHERFORUM}>" onclick="return confirm('<{$smarty.const._MD_D3FORUM_MSG_CONFIRMOK}>')" />
+	<{$gticket_hidden}>
+
+</form>
+
+<script type="text/javascript">
+<!--//
+d3forum_showhide_forum_select( document.getElementById("export_forum_id_0") ) ;
+
+function d3forum_showhide_forum_select(select)
+{
+	selected_val = select.options[select.selectedIndex].value ;
+	form = select.form ;
+	for( i = 0 ; i < form.elements.length ; i ++ ) {
+		if( form.elements[i].name.match(/export_forum_id/) ) {
+			if( form.elements[i].id == "export_forum_id_" + selected_val ) {
+				form.elements[i].style.display = "inline" ;
+			} else {
+				form.elements[i].style.display = "none" ;
+			}
+		}
+	}
+}
+//-->
+</script>
+
 <!-- end module contents -->

@@ -46,6 +46,7 @@ define('_MD_D3FORUM_LISTALLTOPICS','List all topics');
 define('_MD_D3FORUM_LISTTOPICSINCATEGORY','List topics in the category');
 define('_MD_D3FORUM_LISTTOPICSINCATEGORIES','List topics in the specified categories');
 define('_MD_D3FORUM_FMT_TOPICHITS','hits %s items');
+define('_MD_D3FORUM_MSG_CONFIRMOK','Are you OK?');
 define('_MD_D3FORUM_MSG_CONFIRMDELETE','Are you sure to delete it?');
 define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','All data belongs this record will be also deleted. Are you sure to delete it?');
 define('_MD_D3FORUM_POSTASNEWTOPIC','Open a new topic');
@@ -220,6 +221,8 @@ define('_MD_D3FORUM_TH_LOCK','Lock');
 define('_MD_D3FORUM_TH_INVISIBLE','Invisible');
 define('_MD_D3FORUM_TH_SOLVED','Solved');
 define('_MD_D3FORUM_BTN_SYNCTHISTOPIC','Sync this topic');
+define('_MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM','Move this topic into the other forum');
+define('_MD_D3FORUM_BTN_COPYTOPICTOOTHERFORUM','Copy this topic into the other forum');
 
 // delete (check done)
 define('_MD_D3FORUM_DELNOTALLOWED','You cannot delete this post');
@@ -271,6 +274,8 @@ define('_MD_D3FORUM_TH_FORUMDESC','Forum desc');
 define('_MD_D3FORUM_TH_FORUMOPTIONS','Forum options');
 define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','Format for comment-integration');
 define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','leave blank for ordinary forums. If you write URI with %s started from  {XOOPS_URL}/modules/ , it will be the template linking to the sources. Native comment-integrated modules will set this field automatically.');
+define('_MD_D3FORUM_BTN_MOVEFORUMTOOTHERFORUM','Move this forum into the other forum');
+define('_MD_D3FORUM_BTN_COPYFORUMTOOTHERFORUM','Copy this forum into the other forum');
 
 // makecategory and categorymanager
 define('_MD_D3FORUM_CATEGORYMANAGER','Category Manager');

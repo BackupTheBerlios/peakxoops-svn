@@ -43,6 +43,12 @@
 			<li><{$smarty.const._MD_D3FORUM_GUESTSCANNOTPOST_DESC}></li>
 		<{/if}>
 	<{/if}>
+
+	<{if $forum.isadminormod}>
+	<!-- edit forum -->
+		<li><a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a></li>
+	<{/if}>
+
 </ul>
 
 <h2 class="head d3f_head"><{$forum.title}></h2>

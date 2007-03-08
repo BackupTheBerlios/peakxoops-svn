@@ -171,6 +171,7 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
+	'cat_link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options + array( -1 => _MD_PICO_ALLCONTENTS ) ,
 	'cat_options4move' => $cat_options ,

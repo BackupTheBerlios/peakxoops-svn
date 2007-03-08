@@ -77,14 +77,14 @@ function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 
 function pico_make_content_link4html( $mod_config , $content_row , $mydirname = null )
 {
-	if( ! is_array( $content_row ) && ! empty( $mydirname ) ) {
-		// specify content by content_id instead of content_row
-		$db =& Database::getInstance() ;
-		$content_row = $db->fetchArray( $db->query( "SELECT content_id,vpath FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_row) ) ) ;
-	}
-
 	if( ! empty( $mod_config['use_wraps_mode'] ) ) {
 		// wraps mode 
+		if( ! is_array( $content_row ) && ! empty( $mydirname ) ) {
+			// specify content by content_id instead of content_row
+			$db =& Database::getInstance() ;
+			$content_row = $db->fetchArray( $db->query( "SELECT content_id,vpath FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_row) ) ) ;
+		}
+
 		if( ! empty( $content_row['vpath'] ) ) {
 			$ret = 'index.php'.htmlspecialchars($content_row['vpath'],ENT_QUOTES) ;
 		} else {
@@ -93,7 +93,33 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 		return empty( $mod_config['use_rewrite'] ) ? $ret : substr( $ret , 10 ) ;
 	} else {
 		// normal mode
-		return empty( $mod_config['use_rewrite'] ) ? 'index.php?content_id='.intval($content_row['content_id']) : substr( sprintf( _MD_PICO_AUTONAME4SPRINTF , intval( $content_row['content_id'] ) ) , 1 ) ;
+		$content_id = is_array( $content_row ) ? intval( $content_row['content_id'] ) : intval( $content_row ) ;
+		return empty( $mod_config['use_rewrite'] ) ? 'index.php?content_id='.$content_id : substr( sprintf( _MD_PICO_AUTONAME4SPRINTF , $content_id ) , 1 ) ;
+	}
+}
+
+
+function pico_make_category_link4html( $mod_config , $cat_row , $mydirname = null )
+{
+	if( ! empty( $mod_config['use_wraps_mode'] ) ) {
+		if( empty( $cat_row ) || is_array( $cat_row ) && $cat_row['cat_id'] == 0 ) return '' ;
+		if( ! is_array( $cat_row ) && ! empty( $mydirname ) ) {
+			// specify category by cat_id instead of cat_row
+			$db =& Database::getInstance() ;
+			$cat_row = $db->fetchArray( $db->query( "SELECT cat_id,cat_vpath FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=".intval($cat_row) ) ) ;
+		}
+		if( ! empty( $cat_row['cat_vpath'] ) ) {
+			$ret = 'index.php'.htmlspecialchars($cat_row['cat_vpath'],ENT_QUOTES) ;
+			if( substr( $ret , -1 ) != '/' ) $ret .= '/' ;
+		} else {
+			$ret = 'index.php' . sprintf( _MD_PICO_AUTOCATNAME4SPRINTF , intval( $cat_row['cat_id'] ) ) ;
+		}
+		return empty( $mod_config['use_rewrite'] ) ? $ret : substr( $ret , 10 ) ;
+	} else {
+		// normal mode
+		$cat_id = is_array( $cat_row ) ? intval( $cat_row['cat_id'] ) : intval( $cat_row ) ;
+		if( $cat_id ) return empty( $mod_config['use_rewrite'] ) ? 'index.php?cat_id='.$cat_id : substr( sprintf( _MD_PICO_AUTOCATNAME4SPRINTF , $cat_id ) , 1 ) ;
+		else return '' ;
 	}
 }
 
@@ -114,7 +140,7 @@ function pico_get_submenu( $mydirname )
 	$myts =& MyTextSanitizer::getInstance();
 
 	$whr_read = '`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
-	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' ) ) ;
+	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' , 'sub' => array() ) ) ;
 
 	// categories query
 	$sql = "SELECT cat_id,pid,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_read) ORDER BY cat_order_in_tree" ;
@@ -123,7 +149,7 @@ function pico_get_submenu( $mydirname )
 		$cat_id = intval( $cat_row['cat_id'] ) ;
 		$categories[ $cat_id ] = array(
 			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
-			'url' => '?cat_id='.$cat_id ,
+			'url' => pico_make_category_link4html( $mod_config , $cat_row ) ,
 			'pid' => $cat_row['pid'] ,
 		) ;
 	}

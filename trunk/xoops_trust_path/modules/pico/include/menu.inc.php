@@ -7,6 +7,7 @@ if( ! empty( $category_permissions[0] ) ) {
 	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 	$categories4assign[0] = array(
 		'id' => 0 ,
+		'link' => '' ,
 		'title' => $xoopsModule->getVar('name') ,
 		'depth_in_tree' => 0 ,
 		'isadminormod' => $isadminormod ,
@@ -30,6 +31,7 @@ while( $cat_row = $db->fetchArray( $crs ) ) {
 	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 	$category4assign_tmp = array(
 		'id' => intval( $cat_row['cat_id'] ) ,
+		'link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_row ) ,
 		'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 		'depth_in_tree' => $cat_row['cat_depth_in_tree'] + 1 ,
 		'isadminormod' => $isadminormod ,

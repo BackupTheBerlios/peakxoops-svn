@@ -12,6 +12,7 @@ if( empty( $cat_id ) ) {
 	$cat_title = _MD_PICO_TOP ;
 }
 
+include_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 include dirname(dirname(__FILE__)).'/include/category_permissions.inc.php' ;
 
 //
@@ -165,6 +166,7 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
+	'cat_link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options ,
 	'permissions' => $permissions4assign ,

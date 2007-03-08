@@ -1,15 +1,11 @@
-<div class="pico_breadcrumbs">
-	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>
-	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
-	&nbsp;&gt;&nbsp;
-		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
-	<{/foreach}>
-</div>
+<div id="<{$mydirname}>_container">
+
+<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
 
 <h1 class="pico_title"><{$formtitle}>: <{$content.subject}></h1>
 
 <{if $preview}>
-	<{foreach from=$preview.errors item="error_message"}><p style="color:red;" onmouseover="document.contentform.vpath.focus();document.contentform.vpath.style.backgroundColor='#FFFFCC';"><{$error_message}></p><{/foreach}>
+	<{foreach from=$preview.errors item="error_message"}><p onmouseover="document.contentform.vpath.focus();document.contentform.vpath.style.backgroundColor='#FFFFCC';"><em class="pico_notice"><{$error_message}></em></p><{/foreach}>
 	<h2 class="pico_title"><{$smarty.const._PREVIEW}></h2>
 	<div class="pico_body pico_preview" id="<{$mydirname}>_body">
 	<{$preview.body}>
@@ -35,7 +31,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
 			<td class="even">
-				<input type="text" name="vpath" id="vpath" size="70" maxlength="255" value="<{$content.vpath}>" />
+				<input type="text" name="vpath" id="vpath" size="70" maxlength="255" value="<{$content.vpath}>" class="pico_ascii_only" />
 			</td>
 		</tr>
 
@@ -48,8 +44,8 @@
 
 		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
-			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></th>
-			<td class="even" style="color:red;background-color:white;"><{$content.subject_waiting}></td>
+			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></th>
+			<td class="even pico_waiting"><{$content.subject_waiting}></td>
 		</tr>
 		<{/if}>
 
@@ -64,8 +60,8 @@
 
 		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
-			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
-			<td class="even" style="color:red;background-color:white;"><{$content.htmlheader_waiting|nl2br}></td>
+			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
+			<td class="even pico_waiting"><{$content.htmlheader_waiting|nl2br}></td>
 		</tr>
 		<{/if}>
 
@@ -84,8 +80,8 @@
 
 		<{if ! $content.approval && $page != 'makecontent'}>
 		<tr valign="top" align="left">
-			<th class="head" style="color:red;"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
-			<td class="even" style="color:red;background-color:white;"><{$content.body_waiting|nl2br}></td>
+			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
+			<td class="even pico_waiting"><{$content.body_waiting|nl2br}></td>
 		</tr>
 		<{/if}>
 
@@ -94,7 +90,7 @@
 			<td class="even">
 				<ul>
 				<{foreach from=$content.filter_infos key="filter_name" item="filter"}>
-					<li title="<{$filter.desc}>"><input type="checkbox" name="filter_enabled_<{$filter_name}>" id="filter_enabled_<{$filter_name}>" value="1" <{if $filter.enabled}>checked="checked"<{/if}> <{if $filter.fixed}>disabled="disabled"<{/if}> /><input type="text" name="filter_weight_<{$filter_name}>" id="filter_weight_<{$filter_name}>" value="<{$filter.weight}>" size="3" style="text-align:right;" /> <{$filter.title}></li>
+					<li title="<{$filter.desc}>"><input type="checkbox" name="filter_enabled_<{$filter_name}>" id="filter_enabled_<{$filter_name}>" value="1" <{if $filter.enabled}>checked="checked"<{/if}> <{if $filter.fixed}>disabled="disabled"<{/if}> /><input type="text" name="filter_weight_<{$filter_name}>" id="filter_weight_<{$filter_name}>" value="<{$filter.weight}>" size="3" class="pico_number_only"  /> <{$filter.title}></li>
 				<{/foreach}>
 				</ul>
 			</td>
@@ -103,7 +99,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="weight"><{$smarty.const._MD_PICO_TH_WEIGHT}></label></th>
 			<td class="even">
-				<input type="text" name="weight" id="weight" size="5" maxlength="10" value="<{$content.weight}>" style="ime-mode:disabled;" />
+				<input type="text" name="weight" id="weight" size="5" maxlength="10" value="<{$content.weight}>" class="pico_number_only" />
 			</td>
 		</tr>
 
@@ -176,6 +172,4 @@ function xoopsFormValidate_contentform() {
 </script>
 <!-- End Form Vaidation JavaScript //-->
 
-<!-- end module contents -->
-
-
+</div>

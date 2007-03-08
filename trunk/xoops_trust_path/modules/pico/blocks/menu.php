@@ -55,6 +55,7 @@ function b_pico_menu_show( $options )
 	while( $content_row = $db->fetchArray( $result ) ) {
 		$cat_id = intval( $content_row['cat_id'] ) ;
 		$cat4assign[$cat_id]['id'] = intval( $content_row['cat_id'] ) ;
+		$cat4assign[$cat_id]['link'] = pico_make_category_link4html( $configs , $content_row ) ;
 		$cat4assign[$cat_id]['title'] = $myts->makeTboxData4Show( $content_row['cat_title'] ) ;
 		$cat4assign[$cat_id]['depth_in_tree'] = intval( $content_row['cat_depth_in_tree'] ) ;
 		$cat4assign[$cat_id]['contents'][] = array(

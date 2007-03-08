@@ -28,7 +28,7 @@ require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 $parents = is_array( @$category4assign['paths_raw'] ) ? $category4assign['paths_raw'] : array() ;
 foreach( $parents as $cat_id_tmp => $name_raw ) {
 	$xoops_breadcrumbs[] = array(
-		'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$cat_id_tmp ,
+		'url' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_make_category_link4html( $xoopsModuleConfig , $cat_id_tmp , $mydirname ) ,
 		'name' => htmlspecialchars( $name_raw , ENT_QUOTES ) ,
 	) ;
 }

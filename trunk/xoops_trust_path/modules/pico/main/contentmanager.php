@@ -69,7 +69,7 @@ if( isset( $_POST['contentman_delete'] ) && $category4assign['can_delete'] ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	pico_delete_content( $mydirname , $content_id ) ;
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=".intval($cat_row['cat_id']) , 2 , _MD_PICO_MSG_CONTENTDELETED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_category_link4html( $xoopsModuleConfig , $cat_row ) , 2 , _MD_PICO_MSG_CONTENTDELETED ) ;
 	exit ;
 }
 

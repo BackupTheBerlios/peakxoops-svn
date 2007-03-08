@@ -33,7 +33,7 @@ if( isset( $_POST['categoryman_post'] ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	pico_updatecategory( $mydirname , $cat_id ) ;
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=$cat_id" , 2 , _MD_PICO_MSG_CATEGORYUPDATED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) , 2 , _MD_PICO_MSG_CATEGORYUPDATED ) ;
 	exit ;
 }
 if( isset( $_POST['categoryman_delete'] ) && count( $children ) == 0 ) {
@@ -41,7 +41,7 @@ if( isset( $_POST['categoryman_delete'] ) && count( $children ) == 0 ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	pico_delete_category( $mydirname , $cat_id ) ;
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=".intval($cat_row['pid']) , 2 , _MD_PICO_MSG_CATEGORYDELETED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_category_link4html( $xoopsModuleConfig , $cat_row['pid'] , $mydirname ) , 2 , _MD_PICO_MSG_CATEGORYDELETED ) ;
 	exit ;
 }
 

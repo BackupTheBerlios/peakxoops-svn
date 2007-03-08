@@ -16,7 +16,7 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 
 [b]SPEC:[/b]
 
-- hierarchial category
+- hierarchical category
 - breadcrumbs
 - page navigation
 - XOOPS_TRUST_PATH/wraps/(dirname) files manual page-wrapping
@@ -97,11 +97,16 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.12 beta (2007/03/09)
+- modified html/css radically (thx emomo)
+- modified sitemap plugin
+- added mod_rewrite mode for categories
+
 1.11 beta (2007/03/07)
 - added mod_rewrite mode
 
 1.10 beta (2007/03/06)
-- added hierarchial submenu
+- added hierarchical submenu
 - added a config of prohibited filters
 - added a config of forced filters
 
@@ -195,7 +200,7 @@ pico is fast enough if you use content's cache.
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
 開発当初から想定していた機能を一通り実装したこともあり、現時点では1.00を安定版としています。
 
-ただし、こちらは機能向上を目的とした1.1x版です。やる気のある方はぜひこちらをお試しください。開発版なので、特には書きませんが、バージョンアップ時のモジュールアップデートはほぼ必須です。
+ただし、こちらの1.1xは機能向上を目的とした開発版です。やる気のある方はぜひこちらをお試しください。開発版なので、特には書きませんが、バージョンアップ時のモジュールアップデートはほぼ必須です。
 
 以下、安定版・開発版共通。
 

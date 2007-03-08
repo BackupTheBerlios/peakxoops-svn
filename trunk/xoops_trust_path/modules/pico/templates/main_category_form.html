@@ -1,5 +1,6 @@
-<!-- start module contents -->
-<div class="pico_breadcrumbs"><a href="<{$mod_url}>/index.php"><{$smarty.const._MD_PICO_TOP}></a>&nbsp;&gt;&nbsp;<{$smarty.const._MD_PICO_CATEGORYMANAGER}></div>
+<div id="<{$mydirname}>_container">
+
+<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
 
 <h1 class="pico_title"><{$smarty.const._MD_PICO_CATEGORYMANAGER}></h1>
 
@@ -92,4 +93,4 @@ function xoopsFormValidate_categoryform() {
 //--></script>
 <!-- End Form Vaidation JavaScript //-->
 
-<!-- end module contents -->
+</div>

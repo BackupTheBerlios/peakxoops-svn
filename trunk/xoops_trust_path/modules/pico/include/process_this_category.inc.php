@@ -33,6 +33,7 @@ if( $db->getRowsNum( $crs ) <= 0 ) {
 $isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 $category4assign = array(
 	'id' => intval( $cat_row['cat_id'] ) ,
+	'link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_row ) ,
 	'pid' => $cat_row['pid'] ,
 	'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 	'desc' => $myts->displayTarea( $cat_row['cat_desc'] ) ,

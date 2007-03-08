@@ -2,37 +2,27 @@
 
 function b_sitemap_pico( $mydirname )
 {
-	$db =& Database::getInstance();
-	$myts =& MyTextSanitizer::getInstance();
-	$ret = array();
-
 	include_once dirname(__FILE__).'/common_functions.php' ;
 
-	$whr_category = 'cat_id IN ('.implode(',',pico_get_categories_can_read( $mydirname )).')' ;
-	$whr_pid = @$GLOBALS['sitemap_configs']['show_subcategoris'] ? '1' : 'pid=0' ;
-
-	$sql = "SELECT cat_id,cat_title,pid,cat_depth_in_tree FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_category) AND ($whr_pid) ORDER BY cat_order_in_tree" ;
-	$result = $db->query($sql);
-
+	$submenus = pico_get_submenu( $mydirname ) ;
+	$show_subcat = @$GLOBALS['sitemap_configs']['show_subcategoris'] ? true : false ;
 	$ret = array() ;
 	$p_count = 0 ;
-	while( list( $cat_id , $cat_title , $pid , $cat_depth_in_tree ) = $db->fetchRow( $result ) ) {
-		if( $pid == 0 ) {
-			// F1 category
-			$p_count ++ ;
-			$ret['parent'][$p_count] = array(
-				'id' => intval( $cat_id ) ,
-				'title' => $myts->makeTboxData4Show( $cat_title ) ,
-				'url' => 'index.php?cat_id='.intval( $cat_id ) ,
-			) ;
-		} else {
-			// F2,F3... category
-			$ret['parent'][$p_count]['child'][] = array(
-				'id' => intval( $cat_id ) ,
-				'title' => $myts->makeTboxData4Show( $cat_title ) ,
-				'url' => 'index.php?cat_id='.intval( $cat_id ) ,
-				'image' => $cat_depth_in_tree > 2 ? 4 : $cat_depth_in_tree + 1 ,
-			) ;
+	foreach( $submenus as $submenu ) {
+		$p_count ++ ;
+		$ret['parent'][$p_count] = array(
+			'title' => $submenu['name'] ,
+			'url' => $submenu['url'] ,
+			'image' => 1 ,
+		) ;
+		if( $show_subcat && ! empty( $submenu['sub'] ) ) {
+			foreach( $submenu['sub'] as $subsubmenu ) {
+				$ret['parent'][$p_count]['child'][] = array(
+					'title' => $subsubmenu['name'] ,
+					'url' => $subsubmenu['url'] ,
+					'image' => 2 ,
+				) ;
+			}
 		}
 	}
 

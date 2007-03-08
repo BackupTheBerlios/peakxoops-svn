@@ -389,15 +389,36 @@ function pico_parse_path_info( $mydirname )
 			$result = $db->query( "SELECT content_id,cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".addslashes($path_info)."'" ) ;
 			list( $content_id , $cat_id ) = $db->fetchRow( $result ) ;
 			if( $content_id ) {
+				$content_id = intval( $content_id ) ;
 				$_GET['content_id'] = $content_id ;
 				return array( $content_id , intval( $cat_id ) , false ) ;
 			}
 		}
 
-		// check path_info obeys the ruled for autonaming (2nd)
+		// check cat_vpath in DB (2nd)
+		if( substr( $path_info , -1 ) == '/' ) {
+			$db =& Database::getInstance() ;
+			$result = $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath='".addslashes($path_info)."' OR cat_vpath='".addslashes(substr($path_info,0,-1))."'" ) ;
+			list( $cat_id ) = $db->fetchRow( $result ) ;
+			if( $cat_id ) {
+				$cat_id = intval( $cat_id ) ;
+				$_GET['cat_id'] = $cat_id ;
+				return array( 0 , $cat_id , false ) ;
+			}
+		}
+
+		// check path_info obeys the ruled for autonaming for contents (3rd)
 		if( preg_match( _MD_PICO_AUTONAME4PREGEX , $path_info , $regs ) ) {
 			$content_id = intval( @$regs[1] ) ;
+			$_GET['content_id'] = $content_id ;
 			return array( $content_id , pico_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
+		}
+
+		// check path_info obeys the ruled for autonaming for category (4th)
+		if( preg_match( _MD_PICO_AUTOCATNAME4PREGEX , $path_info , $regs ) ) {
+			$cat_id = intval( @$regs[1] ) ;
+			$_GET['cat_id'] = $cat_id ;
+			return array( 0 , $cat_id , false ) ;
 		}
 
 		// check wrap file 

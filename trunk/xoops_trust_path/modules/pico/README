@@ -97,7 +97,7 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
-1.12 beta (2007/03/09)
+1.12 beta (2007/03/09) overwrite public side also
 - modified html/css radically (thx emomo)
 - modified sitemap plugin
 - added mod_rewrite mode for categories
@@ -289,6 +289,11 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.12 beta (2007/03/09) 公開側も上書きする必要あり
+- HTML/CSSを抜本的に書き直した (thx emomo)
+- sitemap用プラグインの改善（改悪か？）
+- カテゴリーURIも mod_rewriteモード に対応した
 
 1.11 beta (2007/03/07)
 - mod_rewriteモード新設

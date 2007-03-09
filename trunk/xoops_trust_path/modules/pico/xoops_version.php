@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.12 ;
+$modversion['version'] = 1.13 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -225,12 +225,32 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'submenu_showcontents' ,
+	'title'			=> $constpref.'_SUBMENU_SC' ,
+	'description'	=> $constpref.'_SUBMENU_SCDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'sitemap_showcontents' ,
+	'title'			=> $constpref.'_SITEMAP_SC' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'use_vote' ,
 	'title'			=> $constpref.'_USE_VOTE' ,
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "1" ,
+	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
 

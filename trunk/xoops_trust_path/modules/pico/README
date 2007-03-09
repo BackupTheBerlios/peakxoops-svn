@@ -10,7 +10,7 @@ Don't forget updating the module after overwriting the developping version.
 
 Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
 
-TinyD will be deprecated module after pico is marked as stable.
+TinyD became a deprecated module because pico has been marked as stable.
 Of course, you can upgrade your contents from TinyD to pico easily.
 
 
@@ -53,6 +53,8 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - RSS (both entire module and each categories)
 - auto-registering wrapped files into DB
 - xoops_breadcrumbs
+- static URI by mod_rewrite (both wraps mode and normal mode)
+- refer histories of contents
 
 
 [b]USAGE:[/b]
@@ -97,10 +99,16 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.13 beta (2007/03/10) update the module
+- added history
+- added a config for sitemap plugin (also display contents or not)
+- added a config for submenu (also display contents or not)
+
 1.12 beta (2007/03/09) overwrite public side also
 - modified html/css radically (thx emomo)
 - modified sitemap plugin
 - added mod_rewrite mode for categories
+- fixed notice in submenus (thx starck)
 
 1.11 beta (2007/03/07)
 - added mod_rewrite mode
@@ -207,7 +215,7 @@ pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
 D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 （すでにこのあたりの設定がしてあれば、とても簡単にインストールできます）
 
-機能的には、TinyDの後継という位置づけですが、コード的には完全なフルスクラッチであり、TinyDとは（もちろんTinyContentとも）完全に独立しています。picoが安定版となった時点で、TinyDは開発終了とします。もちろん、TinyDからのアップグレードパスは用意してますので、必要に応じて、適宜引っ越してください。少なくとも、picoがTinyDに機能的に劣ることはないはずです。
+機能的には、TinyDの後継という位置づけですが、コード的には完全なフルスクラッチであり、TinyDとは（もちろんTinyContentとも）完全に独立しています。なお、picoが安定版となったので、TinyDは開発終了とします。もちろん、TinyDからのアップグレードパスは用意してますので、必要に応じて、適宜引っ越してください。少なくとも、picoがTinyDに機能的に劣ることはないはずです。
 
 
 [b]SPEC:[/b]
@@ -250,6 +258,8 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・ラップページ自動登録
 ・xoops_breadcrumbs規格に対応
 ・階層サブメニュー
+・mod_rewriteによる静的URI(wrapsモードおよびnormalモード)
+・コンテンツ編集履歴機能
 
 
 [b]USAGE:[/b]
@@ -290,10 +300,16 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.13 beta (2007/03/10) モジュールアップデート必須
+- 履歴機能の実装
+- sitemap用プラグインの動作設定（コンテンツも同列表示するかどうか）追加
+- サブメニューの動作設定（コンテンツも同列表示するかどうか）追加
+
 1.12 beta (2007/03/09) 公開側も上書きする必要あり
 - HTML/CSSを抜本的に書き直した (thx emomo)
 - sitemap用プラグインの改善（改悪か？）
 - カテゴリーURIも mod_rewriteモード に対応した
+- サブメニュー関連のNotice潰し (thx starck)
 
 1.11 beta (2007/03/07)
 - mod_rewriteモード新設

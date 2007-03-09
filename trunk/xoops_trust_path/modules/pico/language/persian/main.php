@@ -1,5 +1,11 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
+define('_MD_PICO_BYTE','byte');
+define('_MD_PICO_HISTORY','History');
+define('_MD_PICO_REFERIT','Refer it');
+
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه ها');
 define('_MD_PICO_MENU','منو');

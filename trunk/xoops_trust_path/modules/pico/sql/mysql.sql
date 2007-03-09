@@ -89,3 +89,25 @@ CREATE TABLE content_votes (
   KEY (vote_ip)
 ) TYPE=MyISAM;
 
+CREATE TABLE content_histories (
+  content_history_id int(10) unsigned NOT NULL auto_increment,
+  content_id int(10) unsigned NOT NULL default 0,
+  vpath varchar(255),
+  cat_id smallint(5) unsigned NOT NULL default 0,
+  created_time int(10) NOT NULL default 0,
+  modified_time int(10) NOT NULL default 0,
+  poster_uid mediumint(8) unsigned NOT NULL default 0,
+  poster_ip varchar(15) NOT NULL default '',
+  modifier_uid mediumint(8) unsigned NOT NULL default 0,
+  modifier_ip varchar(15) NOT NULL default '',
+  subject varchar(255) NOT NULL default '',
+  htmlheader text,
+  body text,
+  filters text,
+  PRIMARY KEY (content_history_id),
+  KEY (content_id),
+  KEY (created_time),
+  KEY (modified_time),
+  KEY (modifier_uid)
+) TYPE=MyISAM;
+

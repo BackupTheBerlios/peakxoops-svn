@@ -7,6 +7,9 @@ function pico_delete_content( $mydirname , $content_id )
 {
 	$db =& Database::getInstance() ;
 
+	// backup the content, first
+	pico_backupcontent( $mydirname , $content_id ) ;
+
 	// delete content
 	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
@@ -365,7 +368,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	}
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='$uid',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set `created_time`=UNIX_TIMESTAMP(),`modified_time`=UNIX_TIMESTAMP(),poster_uid='$uid',modifier_uid='$uid',poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
 
 	return $new_content_id ;
@@ -390,6 +393,9 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 			$set .= "`$key`='".addslashes( $val )."'," ;
 		}
 	}
+
+	// backup the content, first
+	pico_backupcontent( $mydirname , $content_id ) ;
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
@@ -460,11 +466,26 @@ function pico_copyfromwaitingcontent( $mydirname , $content_id )
 
 	$db =& Database::getInstance() ;
 
+	// backup the content, first
+	pico_backupcontent( $mydirname , $content_id ) ;
+
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body=body_waiting, subject=subject_waiting, htmlheader=htmlheader_waiting, visible=1, approval=1 WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='',`modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return $content_id ;
+}
+
+
+// store a content into history table (before delete or update)
+function pico_backupcontent( $mydirname , $content_id )
+{
+	global $xoopsUser ;
+
+	$db =& Database::getInstance() ;
+
+	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters) SELECT content_id,vpath,cat_id,modified_time,UNIX_TIMESTAMP(),modifier_uid,modifier_ip,$uid,'".addslashes(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 }
 
 

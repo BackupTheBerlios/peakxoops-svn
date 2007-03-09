@@ -55,6 +55,22 @@ $GLOBALS['pico_tables'] = array(
 		'vote_time' ,
 		'vote_ip' ,
 	) ,
+	'content_histories' => array(
+		'content_history_id' ,
+		'content_id' ,
+		'vpath' ,
+		'cat_id' ,
+		'created_time' ,
+		'modified_time' ,
+		'poster_uid' ,
+		'poster_ip' ,
+		'modifier_uid' ,
+		'modifier_ip' ,
+		'subject' ,
+		'htmlheader' ,
+		'body' ,
+		'filters' ,
+	) ,
 ) ;
 
 

@@ -16,6 +16,12 @@
 
 <{foreach item=category from=$categories}>
 
+	<h<{$category.depth_in_tree+2}>><a href="<{$mod_url}>/<{$category.link}>"><{$category.title}></a>
+	<{if $category.isadminormod && $category.invisible_contents_counter}>
+ <em class="pico_notice">(<{$category.invisible_contents_counter}>)</em>
+	<{/if}>
+	</h<{$category.depth_in_tree+2}>>
+
 	<!-- controllers for each categories -->
 	<div class="pico_contollers_in_menu">
 		<{if $category.isadminormod}>
@@ -30,12 +36,6 @@
 			<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
 		<{/if}>
 	</div>
-
-	<h<{$category.depth_in_tree+2}>><a href="<{$mod_url}>/<{$category.link}>"><{$category.title}></a>
-	<{if $category.isadminormod && $category.invisible_contents_counter}>
- <em class="pico_notice">(<{$category.invisible_contents_counter}>)</em>
-	<{/if}>
-	</h<{$category.depth_in_tree+2}>>
 
 	<div class="level<{$category.depth_in_tree+2}>">
 		<{if $content.subject}>
@@ -55,6 +55,7 @@
 	</div>
 <{/foreach}>
 
+<br />
 <hr class="notification" />
 <{include file='db:system_notification_select.html'}>
 

@@ -124,7 +124,7 @@ function pico_make_category_link4html( $mod_config , $cat_row , $mydirname = nul
 }
 
 
-function pico_get_submenu( $mydirname )
+function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
 {
 	static $submenus_cache ;
 
@@ -150,18 +150,22 @@ function pico_get_submenu( $mydirname )
 		$categories[ $cat_id ] = array(
 			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 			'url' => pico_make_category_link4html( $mod_config , $cat_row ) ,
+			'is_category' => true ,
 			'pid' => $cat_row['pid'] ,
 		) ;
 	}
 
-	// contents query
-	$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND $whr_read ORDER BY weight" ) ;
-	if( $ors ) while( $content_row = $db->fetchArray( $ors ) ) {
-		$cat_id = intval( $content_row['cat_id'] ) ;
-		$categories[ $cat_id ]['sub'][] = array(
-			'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-			'url' => pico_make_content_link4html( $mod_config , $content_row ) ,
-		) ;
+	if( ! ( $caller == 'sitemap_plugin' && ! @$mod_config['sitemap_showcontents'] ) && ! ( $caller == 'xoops_version' && ! @$mod_config['submenu_showcontents'] ) ) {
+		// contents query
+		$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND $whr_read ORDER BY weight" ) ;
+		if( $ors ) while( $content_row = $db->fetchArray( $ors ) ) {
+			$cat_id = intval( $content_row['cat_id'] ) ;
+			$categories[ $cat_id ]['sub'][] = array(
+				'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
+				'url' => pico_make_content_link4html( $mod_config , $content_row ) ,
+				'is_category' => false ,
+			) ;
+		}
 	}
 
 	// restruct categories
@@ -179,6 +183,7 @@ function pico_restruct_categories( $categories , $parent )
 			$ret[] = array(
 				'name' => $category['name'] ,
 				'url' => $category['url'] ,
+				'is_category' => $category['is_category'] ,
 				'sub' => array_merge( $category['sub'] , pico_restruct_categories( $categories , $cat_id ) ) ,
 			) ;
 		}

@@ -7,6 +7,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
+define($constpref.'_SUBMENU_SC','Show contents in submenu');
+define($constpref.'_SUBMENU_SCDSC','Only categories are displayed in default. If you turn this on, contents marked "menu" will be displayed also');
+define($constpref.'_SITEMAP_SC','Show contents in sitemap module');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-07 04:40:00
 define($constpref.'_USE_REWRITE','enable mod_rewrite mode');
 define($constpref.'_USE_REWRITEDSC','Depends your environment. If you turn this on, rename .htaccess.rewrite_wraps(with wraps) or htaccess.rewrite_normal(without wraps) to .htaccess under XOOPS_ROOT_PATH/modules/(dirname)/');

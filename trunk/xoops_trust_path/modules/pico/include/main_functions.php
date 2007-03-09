@@ -524,4 +524,26 @@ function pico_read_wrapped_file( $mydirname , $path_info )
 	) ;
 }
 
+
+// get content_histories for form
+function pico_get_content_histories4assign( $mydirname , $content_id )
+{
+	$db =& Database::getInstance() ;
+	$myts =& MyTextSanitizer::getInstance() ;
+	
+	$ret = array() ;
+	$sql = "SELECT oh.content_history_id,oh.created_time,LENGTH(body) AS body_size,oh.poster_uid,up.uname AS poster_uname FROM ".$db->prefix($mydirname."_content_histories")." oh LEFT JOIN ".$db->prefix("users")." up ON oh.poster_uid=up.uid WHERE oh.content_id=$content_id ORDER BY oh.content_history_id DESC LIMIT 10" ;
+	$result = $db->query( $sql ) ;
+	if( $result ) while( $row = $db->fetchArray( $result ) ) {
+		$row4assign = array(
+			'id' => intval( $row['content_history_id'] ) ,
+			'created_time_formatted' => formatTimestamp( $row['created_time'] , 'm' ) ,
+			'poster_uname' => $row['poster_uid'] ? $myts->makeTboxData4Show( $row['poster_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
+		) ;
+		$ret[] = $row4assign + $row ;
+	}
+
+	return $ret ;
+}
+
 ?>

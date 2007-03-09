@@ -118,6 +118,8 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'show_in_navi' => intval( $content_row['show_in_navi'] ) ,
 		'show_in_menu' => intval( $content_row['show_in_menu'] ) ,
 		'allow_comment' => intval( $content_row['allow_comment'] ) ,
+		'created_time_formatted' => formatTimestamp( $content_row['created_time'] , 'm' ) ,
+		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] , 'm' ) ,
 	) ;
 	$content4assign += $content_row ;
 }
@@ -133,6 +135,7 @@ $xoopsTpl->assign( array(
 	'mod_config' => $xoopsModuleConfig ,
 	'category' => $category4assign ,
 	'content' => $content4assign ,
+	'content_histories' => pico_get_content_histories4assign( $mydirname , $content_id ) ,
 	'body_wysiwyg' => @$pico_wysiwyg_body ,
 	'preview' => @$preview4assign ,
 	'page' => 'contentmanager' ,

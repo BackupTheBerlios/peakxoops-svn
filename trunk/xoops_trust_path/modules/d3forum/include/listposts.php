@@ -12,7 +12,7 @@ if( ! include dirname(__FILE__).'/process_this_forum.inc.php' ) die( _MD_D3FORUM
 if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
 // post order
-switch( $postorder ) {
+/* switch( $postorder ) {
 	case 3 :
 		$postorder4sql = 'post_id DESC' ;
 		break ;
@@ -26,13 +26,14 @@ switch( $postorder ) {
 	default :
 		$postorder4sql = 'order_in_tree,post_id' ;
 		break ;
-}
+} */
+
 
 // posts loop
 $max_post_time = 0 ;
 $last_post_offset = 0 ;
 $posts = array() ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY $postorder4sql" ;
+$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY order_in_tree,post_id" ;
 if( ! $prs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 
@@ -95,6 +96,23 @@ while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
 
 // rebuild tree informations
 $posts = d3forum_make_treeinformations( $posts ) ;
+
+// post order
+switch( $postorder ) {
+	case 3 :
+		usort( $posts , create_function( '$a,$b' , 'return $a["id"] > $b["id"] ? -1 : 1 ;' ) ) ;
+		break ;
+	case 2 :
+		usort( $posts , create_function( '$a,$b' , 'return $a["id"] > $b["id"] ? 1 : -1 ;' ) ) ;
+		break ;
+	case 1 :
+		rsort( $posts ) ;
+		break ;
+	case 0 :
+	default :
+		break ;
+}
+
 
 // reassign last_post informations
 $topic4assign['last_post_subject'] = @$posts[ $last_post_offset ]['subject'] ;

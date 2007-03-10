@@ -39,7 +39,7 @@ define($constpref.'_USE_SOLVED','解決済機能を利用する');
 define($constpref.'_ALLOW_MARK','注目トピック機能を利用する');
 define($constpref.'_ALLOW_HIDEUID','ユーザが名前を隠して投稿することを許可する');
 define($constpref.'_POSTS_PER_TOPIC','トピック内最大投稿数');
-define($constpref.'_POSTS_PER_TOPICDSC','この数を越える投稿はできなくなり、新トピックに移行する形になります。');
+define($constpref.'_POSTS_PER_TOPICDSC','投稿数がこの数に到達したトピックは自動的にロックされます');
 define($constpref.'_HOT_THRESHOLD','人気トピック投稿数');
 define($constpref.'_HOT_THRESHOLDDSC','「盛り上がっている」スレッドかどうかを判断する基準となる投稿数です');
 define($constpref.'_TOPICS_PER_PAGE','トピック一覧での表示トピック数');

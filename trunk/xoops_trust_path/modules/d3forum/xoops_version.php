@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.47 ;
+$modversion['version'] = 0.48 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -101,7 +101,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_ALLOW_HTMLDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -111,7 +111,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_ALLOW_TEXTIMGDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -121,7 +121,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_ALLOW_SIGDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "1" ,
+	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
 
@@ -131,7 +131,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_ALLOW_SIGIMGDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -141,7 +141,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_POSTS_PER_TOPICDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "100" ,
+	'default'		=> 50 ,
 	'options'		=> array()
 ) ;
 
@@ -151,7 +151,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_HOT_THRESHOLDDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "10" ,
+	'default'		=> 10 ,
 	'options'		=> array()
 ) ;
 
@@ -161,7 +161,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_TOPICS_PER_PAGEDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "20" ,
+	'default'		=> 20 ,
 	'options'		=> array()
 ) ;
 
@@ -171,7 +171,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "1" ,
+	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
 
@@ -181,7 +181,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -191,7 +191,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -201,7 +201,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -211,7 +211,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_VIEWALLBREAKDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "10" ,
+	'default'		=> 10 ,
 	'options'		=> array()
 ) ;
 
@@ -221,7 +221,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_SELFEDITLIMITDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "31536000" ,
+	'default'		=> 31536000 ,
 	'options'		=> array()
 ) ;
 
@@ -231,7 +231,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_SELFDELLIMITDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "0" ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 

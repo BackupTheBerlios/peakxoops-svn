@@ -6,6 +6,9 @@
 
 Smartyプラグインが各モジュールの $xoopsModuleConfig をルックアップする
 
+d3forum_make_treeinformations( $data )
+f1s を保存するようにして、取得時にORDERかけるだけで、あとからusort()かける必要をなくす (ul_in, ul_out, prev_id, next_id)
+
 
 ゲスト編集 (guest_md5_pass check)
 ゲスト削除 (guest_md5_pass check)

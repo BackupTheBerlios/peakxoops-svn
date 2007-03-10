@@ -23,6 +23,10 @@ $forum_permissions = d3forum_get_forum_permissions_of_current_user( $mydirname )
 $whr_read4forum = 'f.`forum_id` IN (' . implode( "," , array_keys( $forum_permissions ) ) . ')' ;
 
 // init xoops_breadcrumbs
-$xoops_breadcrumbs[0] = array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php' , 'name' => $xoopsModule->getVar( 'name' ) ) ;
+if( is_object( $xoopsModule ) ) {
+	$xoops_breadcrumbs[0] = array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php' , 'name' => $xoopsModule->getVar( 'name' ) ) ;
+} else {
+	$xoops_breadcrumbs = array() ;
+}
 
 ?>

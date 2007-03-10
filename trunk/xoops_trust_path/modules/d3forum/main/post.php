@@ -355,6 +355,14 @@ if( !empty($_POST['contents_preview']) ) {
 		}
 	}
 
+	// auto lock the topic by posts_per_topic
+	if( ! empty( $xoopsModuleConfig['posts_per_topic'] ) ) {
+		if( $mode != 'edit' ) {
+			// normal's post will be forced to turn solved off
+			$xoopsDB->query( "UPDATE ".$xoopsDB->prefix($mydirname."_topics")." SET topic_locked=1 WHERE topic_id=$topic_id AND topic_posts_count>=".intval( $xoopsModuleConfig['posts_per_topic'] ) ) ;
+		}
+	}
+
 	$redirect_message = $mode == 'edit' ? _MD_D3FORUM_MSG_THANKSEDIT : _MD_D3FORUM_MSG_THANKSPOST ;
 	/* if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
 		// return to comment target

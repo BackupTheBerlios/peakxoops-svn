@@ -39,7 +39,7 @@ define($constpref.'_USE_SOLVED','use the feature of SOLVED');
 define($constpref.'_ALLOW_MARK','use the feature of MARKING');
 define($constpref.'_ALLOW_HIDEUID','Allow a registered user can post without his/her name');
 define($constpref.'_POSTS_PER_TOPIC','Max posts in a topic');
-define($constpref.'_POSTS_PER_TOPICDSC','A topic has a limit about its posts.');
+define($constpref.'_POSTS_PER_TOPICDSC','A topic having this number of posts will be locked automatically.');
 define($constpref.'_HOT_THRESHOLD','Hot Topic Threshold');
 define($constpref.'_HOT_THRESHOLDDSC','');
 define($constpref.'_TOPICS_PER_PAGE','Topics per a page in the view of a forum');

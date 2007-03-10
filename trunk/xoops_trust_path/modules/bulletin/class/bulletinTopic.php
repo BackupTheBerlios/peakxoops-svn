@@ -60,5 +60,19 @@ class BulletinTopic extends XoopsTopic{
 		return $pankuzu;
 	}
 
+	// GIJ
+	function getAllChildId( $topic_ids = null )
+	{
+		$db =& $this->db ;
+		
+		if( empty( $topic_ids ) ) $topic_ids = array( $this->topic_id ) ;
+		$result = $db->query( "SELECT distinct topic_id FROM ".$db->prefix(DB_BULLETIN_TOPICS)." WHERE topic_pid IN (".implode(',',$topic_ids).")" ) ;
+		$children = array() ;
+		while( list( $child_id ) = $db->fetchRow( $result ) ) $children[] = $child_id ;
+		if( empty( $children ) ) return array() ;
+		else {
+			return array_merge( $children , $this->getAllChildId( $children ) ) ;
+		}
+	}
 }
 ?>

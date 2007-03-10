@@ -184,7 +184,7 @@ class Bulletin extends XoopsObject{
 	}
 	
 	// 掲載中の記事一覧を取得
-	function getAllPublished($limit4sql=0, $start4sql=0, $topic4sql=0, $ihome=1, $asobject=true)
+	function getAllPublished($limit4sql=0, $start4sql=0, $topic4sql=0, $ihome=1, $asobject=true, $topic_recursive=false)
 	{
 		$topic4sql = intval($topic4sql);
 		$limit4sql = intval($limit4sql);
@@ -197,7 +197,14 @@ class Bulletin extends XoopsObject{
 		$criteria[] = "(expired = 0 OR expired > ".time().")";
 		
 		if ( !empty($topic4sql) ) {
-			$criteria[] = "topicid=$topic4sql";
+			if( $topic_recursive ) {
+				$topic =& new BulletinTopic( intval( $topic4sql ) ) ;
+				$topics = $topic->getAllChildId() ;
+				$topics[] = intval( $topic4sql ) ;
+				$criteria[] = "topicid IN (".implode(',',$topics).")";
+			} else {
+				$criteria[] = "topicid=$topic4sql";
+			}
 			$criteria[] = "(ihome=1 OR ihome=0)";
 		} else {
 			if ( $ihome == 1 ) {
@@ -416,12 +423,11 @@ class Bulletin extends XoopsObject{
 		$xt = new XoopsTopic($db->prefix(DB_BULLETIN_TOPICS));
 		
 		ob_start();
-		$xt->makeTopicSelBox($none=0, $seltopic, $selname, $onchange);
+		$xt->makeTopicSelBox($none, $seltopic, $selname, $onchange);
 		$ret = ob_get_contents();
 		ob_end_clean();	
 
 		$ret = str_replace('topic_id','topicid', $ret);
-		
 		return $ret;
 	}
 
@@ -455,7 +461,7 @@ class Bulletin extends XoopsObject{
 	}
 
 	// 掲載中の記事数を数える
-	function countPublished($topicid=0)
+	function countPublished($topicid=0,$topic_recursive=false)
 	{
 		$criteria = array();
 		$criteria[] = 'type > 0';
@@ -463,7 +469,14 @@ class Bulletin extends XoopsObject{
 		$criteria[] = 'published <= '.time();
 		$criteria[] = '(expired = 0 OR expired > '.time().')';
 		if ( !empty($topicid) ) {
-			$criteria[] = 'topicid='.intval($topicid);
+			if( $topic_recursive ) {
+				$topic =& new BulletinTopic( intval( $topicid ) ) ;
+				$topics = $topic->getAllChildId() ;
+				$topics[] = intval( $topicid ) ;
+				$criteria[] = "topicid IN (".implode(',',$topics).")";
+			} else {
+				$criteria[] = 'topicid='.intval($topicid);
+			}
 		} else {
 			$criteria[] = 'ihome=1';
 		}

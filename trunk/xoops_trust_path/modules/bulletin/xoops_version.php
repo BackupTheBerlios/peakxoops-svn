@@ -9,7 +9,7 @@ if( file_exists( dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modi
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = $mydirname;
-$modversion['version']     = 2.04; // GIJ hacked ver 004
+$modversion['version']     = 2.04; // GIJ hacked ver 006
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -83,6 +83,13 @@ $modversion['hasMain'] = 1;
 $modversion['sub'][1]['url']  = 'index.php?page=submit';
 $modversion['sub'][2]['name'] = constant($constpref.'_SMNAME2');
 $modversion['sub'][2]['url']  = 'index.php?page=archive';*/ //GIJ
+
+// Submenu (just for mainmenu)
+$modversion['sub'] = array() ;
+if( is_object( @$GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('dirname') == $mydirname ) {
+	require_once dirname(__FILE__).'/include/common_functions.php' ;
+	$modversion['sub'] = bulletin_get_submenu( $mydirname ) ;
+}
 
 // Search
 $modversion['hasSearch'] = 1 ;

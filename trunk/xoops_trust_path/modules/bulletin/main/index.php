@@ -38,7 +38,7 @@ if( !empty($caldate) && preg_match('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', $caldat
 	$xoopsTpl->assign('displaynav', false);
 }else{
 // 通常表示の場合
-	$articles = Bulletin::getAllPublished($storynum, $start, $storytopic);
+	$articles = Bulletin::getAllPublished($storynum, $start, $storytopic, 1, true, true);
 }
 
 $scount = count($articles);
@@ -97,7 +97,7 @@ if( !empty($caldate) && preg_match('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', $caldat
 	$totalcount = Bulletin::countPublishedByDate($caldate);
 	$query      = 'caldate='.$caldate;
 }else{
-	$totalcount = Bulletin::countPublished($storytopic);
+	$totalcount = Bulletin::countPublished($storytopic,true);
 	$query      = 'storytopic='.$storytopic;
 }
 if ( $totalcount > $scount ) {

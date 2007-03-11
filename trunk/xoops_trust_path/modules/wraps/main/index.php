@@ -49,7 +49,11 @@ switch( $ext ) {
 		// page wrapping
 		$xoopsOption['template_main'] = $mydirname.'_index.html' ;
 		include XOOPS_ROOT_PATH.'/header.php' ;
-		$xoopsTpl->assign( 'main_contents' , file_get_contents( $wrap_full_path ) ) ;
+		list( $mytitle ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT title FROM ".$xoopsDB->prefix($mydirname."_indexes")." WHERE filename='".addslashes($path_info)."'" ) ) ;
+		$xoopsTpl->assign( array(
+			'main_contents' => file_get_contents( $wrap_full_path ) ,
+			'xoops_pagetitle' => htmlspecialchars( $mytitle , ENT_QUOTES ) ,
+		) ) ;
 		include XOOPS_ROOT_PATH.'/footer.php' ;
 		exit ;
 

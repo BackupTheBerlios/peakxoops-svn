@@ -5,6 +5,9 @@
 
 1.20 (2007/03/12) update the module
 - added a config of image caching for browser
+- added an assign of xoops_pagetitle
+- moved a file of main/mimes.php into include/
+- modified module_icon.php cacheable
 
 1.12 (2007/01/10) update the module
 - added auto update indexes for searching
@@ -57,6 +60,9 @@
 
 1.20 (2007/03/12) ※要モジュールアップデート
 - 画像などHTML以外のファイルをブラウザがキャッシュできる設定を追加
+- xoops_pagetitle のアサイン
+- main/mimes.php を include/mimes.php に場所移動
+- モジュールアイコンもキャッシュするように変更
 
 1.12 (2007/01/10) ※要モジュールアップデート
 - 検索用インデックスの自動更新機能追加

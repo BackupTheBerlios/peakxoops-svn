@@ -17,6 +17,8 @@ define( $constpref.'_INDEX_FILE' , 'Top page' ) ;
 define( $constpref.'_INDEX_FILEDSC' , 'specify the file should be wrapped when the top of this module is accessed' ) ;
 define( $constpref.'_INDEXAUTOUPD' , 'Update indexes automatically (touch the base directory)' ) ;
 define( $constpref.'_INDEXLASTUPD' , "Indexes last updated (timestamp)" ) ;
+define( $constpref.'_BRCACHE' , 'Cache life time for image files' ) ;
+define( $constpref.'_BRCACHEDSC' , 'Files other than HTML will be cached by web browser in this second (0 means disabled)' ) ;
 
 
 }

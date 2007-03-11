@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 
 $modversion['name'] = $mydirname ;
-$modversion['version'] = 1.12 ;
+$modversion['version'] = 1.20 ;
 $modversion['description'] = constant($constpref.'_MODULE_DESCRIPTION') ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -59,7 +59,7 @@ $modversion['config'][1] = array(
 	'default'		=> 'index.html' ,
 	'options'		=> array()
 ) ;
-$modversion['config'][2] = array(
+$modversion['config'][] = array(
 	'name'			=> 'index_auto_updated' ,
 	'title'			=> $constpref.'_INDEXAUTOUPD' ,
 	'description'	=> '' ,
@@ -68,13 +68,22 @@ $modversion['config'][2] = array(
 	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
-$modversion['config'][3] = array(
+$modversion['config'][] = array(
 	'name'			=> 'index_last_updated' ,
 	'title'			=> $constpref.'_INDEXLASTUPD' ,
 	'description'	=> '' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'browser_cache' ,
+	'title'			=> $constpref.'_BRCACHE' ,
+	'description'	=> $constpref.'_BRCACHEDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 3600 ,
 	'options'		=> array()
 ) ;
 

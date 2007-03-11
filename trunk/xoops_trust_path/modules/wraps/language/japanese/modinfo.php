@@ -17,6 +17,8 @@ define( $constpref.'_INDEX_FILE' , 'トップページ' ) ;
 define( $constpref.'_INDEX_FILEDSC' , 'モジュールトップにアクセスされた時にラップするファイルを指定します' ) ;
 define( $constpref.'_INDEXAUTOUPD' , '検索インデックスの自動更新' ) ;
 define( $constpref.'_INDEXLASTUPD' , '検索インデックスの最終更新日時' ) ;
+define( $constpref.'_BRCACHE' , '画像ファイルのブラウザキャッシュ' ) ;
+define( $constpref.'_BRCACHEDSC' , 'HTML以外のファイルをブラウザにキャッシュする時間を秒で指定（0で無効化）' ) ;
 
 
 }

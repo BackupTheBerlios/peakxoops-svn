@@ -3,6 +3,9 @@
 
 [b]CHANGES:[/b]
 
+1.20 (2007/03/12) update the module
+- added a config of image caching for browser
+
 1.12 (2007/01/10) update the module
 - added auto update indexes for searching
 - updated some D3 standard files
@@ -51,6 +54,9 @@
 [xlang:ja]
 
 [b]更新履歴:[/b]
+
+1.20 (2007/03/12) ※要モジュールアップデート
+- 画像などHTML以外のファイルをブラウザがキャッシュできる設定を追加
 
 1.12 (2007/01/10) ※要モジュールアップデート
 - 検索用インデックスの自動更新機能追加

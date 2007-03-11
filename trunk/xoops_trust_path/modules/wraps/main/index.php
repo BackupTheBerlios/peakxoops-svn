@@ -40,17 +40,19 @@ if( ! file_exists( $wrap_full_path ) ) {
 	exit ;
 }
 
-require dirname(__FILE__).'/mimes.php' ;
+require dirname(dirname(__FILE__)).'/include/mimes.php' ;
 $ext = strtolower( substr( strrchr( $path_info , '.' ) , 1 ) ) ;
 
 switch( $ext ) {
 	case 'htm' :
 	case 'html' :
+		// page wrapping
 		$xoopsOption['template_main'] = $mydirname.'_index.html' ;
 		include XOOPS_ROOT_PATH.'/header.php' ;
 		$xoopsTpl->assign( 'main_contents' , file_get_contents( $wrap_full_path ) ) ;
 		include XOOPS_ROOT_PATH.'/footer.php' ;
 		exit ;
+
 	default :
 		// remove output bufferings
 		while( ob_get_level() ) {
@@ -63,11 +65,23 @@ switch( $ext ) {
 			die( "Can't send headers. check language files etc." ) ;
 		}
 
+		// headers for browser cache
+		$cache_limit = intval( @$xoopsModuleConfig['browser_cache'] ) ;
+		if( $cache_limit > 0 ) {
+			session_cache_limiter('public');
+			header("Expires: ".date('r',intval(time()/$cache_limit)*$cache_limit)+$cache_limit);
+			header("Cache-Control: public, max-age=$cache_limit");
+			header("Last-Modified: ".date('r',intval(time()/$cache_limit)*$cache_limit));
+		}
+
+		// Content-Type header
 		if( ! empty( $mimes[ $ext ] ) ) {
 			header( 'Content-Type: '.$mimes[ $ext ] ) ;
 		} else {
 			header( 'Content-Type: application/octet-stream' ) ;
 		}
+
+		// Transfer
 		set_time_limit( 0 ) ;
 //		readfile( $wrap_full_path ) ;
 		$fp = fopen( $wrap_full_path , "rb" ) ;

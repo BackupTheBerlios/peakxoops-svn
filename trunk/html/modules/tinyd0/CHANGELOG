@@ -1,6 +1,9 @@
 [xlang:en]
 CHANGELOG:
 
+2007-03-12 2.30
+- marked as stable (The last version)
+
 2006-10-31 2.30beta
 - updated mymenu for compatibility with Cube 2.1
 - fixed wrong URI for redirection (thx morry)
@@ -220,6 +223,10 @@ CHANGELOG:
 [xlang:ja]
 
 変更履歴:
+
+2007-03-12 2.30
+- 一応最終版としてマークしておきます。
+- これをもってTinyDの開発・サポートは完全終了とし、picoへと移行します。
 
 2006-10-31 2.30beta
 - Cube 2.1 との互換性のために、mymenuをアップデート

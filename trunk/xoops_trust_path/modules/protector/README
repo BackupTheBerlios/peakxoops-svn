@@ -103,6 +103,7 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 -- spanish (thx PepeMty)
 -- polish (thx kurak_bu) 3.01a
 -- german (thx wuddel) 3.01b
+- modified module_icon.php 3.01c
 
 3.00 (2007/02/06)
 - marked as a stable version
@@ -261,6 +262,7 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 -- spanish (thx PepeMty)
 -- polish (thx kurak_bu) 3.01a
 -- german (thx wuddel) 3.01b
+- module_icon.php ¤ò¥­¥ã¥Ã¥·¥å²ÄÇ½¤Ë 3.01c
 
 3.00 (2007/02/06)
 - °ÂÄêÈÇ¤È¤·¤Æ¤Î¥ê¥ê¡¼¥¹

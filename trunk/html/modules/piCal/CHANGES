@@ -1,5 +1,9 @@
 [xlang:en]
 
+v.090 (2007-03-12)
+- marked as stable
+- fixed small typos in templates
+
 v.090 beta (2006-11-04)
 - updated mymenu 0.18 for Cube 2.1 compatibility
 - removed default value of text field in sql
@@ -360,6 +364,10 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.090 (2007-03-12)
+- 安定版への格上げ
+- テンプレート内の細かなtypo修正
 
 v.090 beta (2006-11-04)
 - Cube2.1 で動くように、mymenu を 0.18 にアップデート

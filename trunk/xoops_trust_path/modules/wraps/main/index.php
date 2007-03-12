@@ -50,7 +50,12 @@ switch( $ext ) {
 		$xoopsOption['template_main'] = $mydirname.'_index.html' ;
 		include XOOPS_ROOT_PATH.'/header.php' ;
 		list( $mytitle ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT title FROM ".$xoopsDB->prefix($mydirname."_indexes")." WHERE filename='".addslashes($path_info)."'" ) ) ;
+		if( empty( $mytitle ) ) $mytitle = $path_info ;
 		$xoopsTpl->assign( array(
+			'mydirname' => $mydirname ,
+			'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
+			'xoops_config' => $xoopsConfig ,
+			'mod_config' => $xoopsModuleConfig ,
 			'main_contents' => file_get_contents( $wrap_full_path ) ,
 			'xoops_pagetitle' => htmlspecialchars( $mytitle , ENT_QUOTES ) ,
 		) ) ;

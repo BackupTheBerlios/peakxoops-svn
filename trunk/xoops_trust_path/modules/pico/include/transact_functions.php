@@ -8,7 +8,7 @@ function pico_delete_content( $mydirname , $content_id )
 	$db =& Database::getInstance() ;
 
 	// backup the content, first
-	pico_backupcontent( $mydirname , $content_id ) ;
+	pico_backupcontent( $mydirname , $content_id , true ) ;
 
 	// delete content
 	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
@@ -478,7 +478,7 @@ function pico_copyfromwaitingcontent( $mydirname , $content_id )
 
 
 // store a content into history table (before delete or update)
-function pico_backupcontent( $mydirname , $content_id )
+function pico_backupcontent( $mydirname , $content_id , $forced = false )
 {
 	global $xoopsUser , $xoopsModuleConfig ;
 
@@ -487,11 +487,15 @@ function pico_backupcontent( $mydirname , $content_id )
 	$histories_per_content = intval( @$xoopsModuleConfig['histories_per_content'] ) ;
 	$minlifetime_per_history = intval( @$xoopsModuleConfig['minlifetime_per_history'] ) ;
 
+	// fetch the latest history first
+	list( $last_ch_id ) = $db->fetchRow( $db->query( "SELECT MAX(content_history_id) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_id=".intval($content_id) ) ) ;
+	list( $last_ch_modified , $last_ch_md5bodies ) = $db->fetchRow( $db->query( "SELECT modified_time,MD5(concat(subject,htmlheader,body)) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_history_id=".intval($last_ch_id) ) ) ;	list( $current_md5bodies ) = $db->fetchRow( $db->query( "SELECT MD5(concat(subject,htmlheader,body)) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) ;
+
+	// compare MD5 of subject,htmlheader,body (it is not saved if identical)
+	if( ! $forced && $current_md5bodies == $last_ch_md5bodies ) return ;
+
 	// min life time of each history
-	if( $minlifetime_per_history > 0 ) {
-		list( $max_ch_updated ) = $db->fetchRow( $db->query( "SELECT MAX(modified_time) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_id=".intval($content_id) ) ) ;
-		if( $max_ch_updated > time() - $minlifetime_per_history ) return ;
-	}
+	if( $minlifetime_per_history > 0 && $last_ch_modified > time() - $minlifetime_per_history ) return ;
 
 	// max histories
 	if( $histories_per_content > 0 ) {

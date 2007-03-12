@@ -320,7 +320,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 3600 ,
+	'default'		=> 300 ,
 	'options'		=> array()
 ) ;
 

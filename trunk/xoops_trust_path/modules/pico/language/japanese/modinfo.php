@@ -48,10 +48,14 @@ define($constpref.'_GUESTVOTE_IVL','ゲスト投票の時間制限');
 define($constpref.'_GUESTVOTE_IVLDSC','同一のIPからは、この時間（秒数）内は投票することができません');
 define($constpref.'_HTMLHEADER','コンテンツ共通HTMLヘッダ');
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
-define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.cssです。');
+define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.php?page=main_cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
 define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
 define($constpref.'_BODY_EDITOR','本文編集エディタ');
+define($constpref.'_HISTORY_P_C','履歴機能を何世代まで保存するか');
+define($constpref.'_MLT_HISTORY','履歴の一世代として保存する最小時間(sec)');
+define($constpref.'_BRCACHE','画像ファイルのブラウザキャッシュ (wrapsモード時のみ)');
+define($constpref.'_BRCACHEDSC' , 'HTML以外のファイルをブラウザにキャッシュする時間を秒で指定（0で無効化）');
 define($constpref.'_COM_DIRNAME','コメント統合するd3forumのdirname');
 define($constpref.'_COM_FORUM_ID','コメント統合するフォーラムの番号');
 

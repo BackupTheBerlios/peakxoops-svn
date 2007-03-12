@@ -1,6 +1,10 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:22
+define('_MD_PICO_DELETEDCONTENTS','Deleted contents');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
 define('_MD_PICO_BYTE','byte');
 define('_MD_PICO_HISTORY','History');

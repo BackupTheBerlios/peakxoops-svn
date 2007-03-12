@@ -99,6 +99,13 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.14 beta (2007/03/13)
+- modified CSS of this module's template into a template
+- added two configs about the feature of history
+- modified module_icon.php cacheable for web browser
+- modified images etc. transferred by php in wraps cacheable for web browser
+- added referring feature to deleted contents (in contents manager for admin)
+
 1.13 beta (2007/03/10) update the module
 - added history
 - added a config for sitemap plugin (also display contents or not)
@@ -299,6 +306,13 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.14 beta (2007/03/13)
+- モジュールCSSのテンプレート化
+- 履歴機能関連の設定追加
+- モジュールアイコンをブラウザキャッシュ可能にした
+- wrapsモードで転送する画像等をブラウザキャッシュ可能にした
+- 削除済コンテンツの参照機能（コンテンツ一括管理）
 
 1.13 beta (2007/03/10) モジュールアップデート必須
 - 履歴機能の実装

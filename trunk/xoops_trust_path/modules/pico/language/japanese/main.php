@@ -2,6 +2,7 @@
 
 define('_MD_PICO_TOP','トップ');
 define('_MD_PICO_ALLCONTENTS','全コンテンツ');
+define('_MD_PICO_DELETEDCONTENTS','削除済コンテンツ');
 define('_MD_PICO_MENU','メニュー');
 define('_MD_PICO_CREATED','作成');
 define('_MD_PICO_MODIFIED','更新');

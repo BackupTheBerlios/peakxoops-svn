@@ -52,6 +52,10 @@ define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: 
 define($constpref.'_IMAGES_DIR','Directory for image files');
 define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
 define($constpref.'_BODY_EDITOR','Editor for body');
+define($constpref.'_HISTORY_P_C','How many revisions are stored in DB');
+define($constpref.'_MLT_HISTORY','Minimum lifetime of each revisions (sec)');
+define($constpref.'_BRCACHE','Cache life time for image files (only with wraps mode)');
+define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 means disabled)');
 define($constpref.'_COM_DIRNAME','Comment-integration: dirname of d3forum');
 define($constpref.'_COM_FORUM_ID','Comment-integration: forum ID');
 

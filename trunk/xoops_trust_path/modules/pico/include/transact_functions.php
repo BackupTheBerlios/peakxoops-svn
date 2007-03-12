@@ -480,9 +480,28 @@ function pico_copyfromwaitingcontent( $mydirname , $content_id )
 // store a content into history table (before delete or update)
 function pico_backupcontent( $mydirname , $content_id )
 {
-	global $xoopsUser ;
+	global $xoopsUser , $xoopsModuleConfig ;
 
 	$db =& Database::getInstance() ;
+
+	$histories_per_content = intval( @$xoopsModuleConfig['histories_per_content'] ) ;
+	$minlifetime_per_history = intval( @$xoopsModuleConfig['minlifetime_per_history'] ) ;
+
+	// min life time of each history
+	if( $minlifetime_per_history > 0 ) {
+		list( $max_ch_updated ) = $db->fetchRow( $db->query( "SELECT MAX(modified_time) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_id=".intval($content_id) ) ) ;
+		if( $max_ch_updated > time() - $minlifetime_per_history ) return ;
+	}
+
+	// max histories
+	if( $histories_per_content > 0 ) {
+		do {
+			list( $ch_count , $min_ch_id ) = $db->fetchRow( $db->query( "SELECT COUNT(*),MIN(content_history_id) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_id=".intval($content_id) ) ) ;
+			if( $ch_count >= $histories_per_content ) {
+				$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_history_id=".intval($min_ch_id) ) ;
+			}
+		} while( $ch_count >= $histories_per_content ) ;
+	}
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters) SELECT content_id,vpath,cat_id,modified_time,UNIX_TIMESTAMP(),modifier_uid,modifier_ip,$uid,'".addslashes(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;

@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.13 ;
+$modversion['version'] = 1.14 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -280,7 +280,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_CSS_URIDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> '{mod_url}/index.css' ,
+	'default'		=> '{mod_url}/index.php?page=main_css' ,
 	'options'		=> array()
 ) ;
 
@@ -302,6 +302,36 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> 'xoopsdhtml' ,
 	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'common/spaw' => 'common_spaw' , 'common/fckeditor' => 'common_fckeditor' )
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'histories_per_content' ,
+	'title'			=> $constpref.'_HISTORY_P_C' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 20 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'minlifetime_per_history' ,
+	'title'			=> $constpref.'_MLT_HISTORY' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 3600 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'browser_cache' ,
+	'title'			=> $constpref.'_BRCACHE' ,
+	'description'	=> $constpref.'_BRCACHEDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 3600 ,
+	'options'		=> array()
 ) ;
 
 $modversion['config'][] = array(

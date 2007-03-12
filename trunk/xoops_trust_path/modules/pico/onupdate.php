@@ -66,7 +66,7 @@ function pico_onupdate_base( $module , $mydirname )
 		while( ( $file = readdir( $handler ) ) !== false ) {
 			if( substr( $file , 0 , 1 ) == '.' ) continue ;
 			$file_path = $tpl_path . '/' . $file ;
-			if( is_file( $file_path ) && in_array( strrchr( $file , '.' ) , array( '.html' , '.css' , '.js' ) ) ) {
+			if( is_file( $file_path ) ) {
 				$mtime = intval( @filemtime( $file_path ) ) ;
 				$tplfile =& $tplfile_handler->create() ;
 				$tplfile->setVar( 'tpl_source' , file_get_contents( $file_path ) , true ) ;

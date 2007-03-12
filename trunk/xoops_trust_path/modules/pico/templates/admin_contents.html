@@ -67,6 +67,10 @@
 			<tr class="<{cycle values="even,odd"}>">
 				<td style="text-align:right;">
 					<{$content.id}>
+					<{if $cat_id == -1}>
+						<br />
+						<span title="<{"-- "|str_repeat:$content.cat_depth_in_tree}><{$content.cat_title}>">(<{$content.cat_id}>)</span>
+					<{/if}>
 				</td>
 				<td align="left">
 					<input type="text" size="24" name="subjects[<{$content.id}>]" id="col_subject_<{$content.id}>" value="<{$content.subject}>" />
@@ -90,13 +94,21 @@
 					<input type="checkbox" name="allow_comments[<{$content.id}>]" id="col_allow_comment_<{$content.id}>" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
 				</td>
 				<td nowrap="nowrap" style="text-align:right;">
-					<{if ! $content.approval}>
-						<strong style="color:#f00;"><{$smarty.const._MD_PICO_WAITINGAPPROVAL}></strong>
+					<{if $content.is_deleted}>
+						<ul class="pico_content_history_list">
+							<{foreach from=$content.histories item="history"}>
+								<li><{$history.created_time_formatted}> - <{$history.poster_uname}> (<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>) <a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>" target="_blank"><{$smarty.const._MD_PICO_REFERIT}></a></li>
+							<{/foreach}>
+						</ul>
+					<{else}>
+						<{if ! $content.approval}>
+							<strong style="color:#f00;"><{$smarty.const._MD_PICO_WAITINGAPPROVAL}></strong>
+						<{/if}>
+						<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><{$smarty.const._EDIT}></a> |
+						<input type="checkbox" name="action_selects[<{$content.id}>]" id="col_action_<{$content.id}>" value="1" />
+						<br />
+						<{$content.modifier_uname}> <{$content.modified_time_formatted}>
 					<{/if}>
-					<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><{$smarty.const._EDIT}></a> |
-					<input type="checkbox" name="action_selects[<{$content.id}>]" id="col_action_<{$content.id}>" value="1" />
-					<br />
-					<{$content.modifier_uname}> <{$content.modified_time_formatted}>
 				</td>
 			</tr>
 		<{/foreach}>

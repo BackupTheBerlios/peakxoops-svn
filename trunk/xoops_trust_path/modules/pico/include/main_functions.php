@@ -469,6 +469,15 @@ function pico_parse_path_info( $mydirname )
 				die( "Can't send headers. check language files etc." ) ;
 			}
 	
+			// headers for browser cache
+			$cache_limit = intval( @$xoopsModuleConfig['browser_cache'] ) ;
+			if( $cache_limit > 0 ) {
+				session_cache_limiter('public');
+				header("Expires: ".date('r',intval(time()/$cache_limit)*$cache_limit)+$cache_limit);
+				header("Cache-Control: public, max-age=$cache_limit");
+				header("Last-Modified: ".date('r',intval(time()/$cache_limit)*$cache_limit));
+			}
+	
 			require dirname(dirname(__FILE__)).'/include/mimes.php' ;
 			if( ! empty( $mimes[ $ext ] ) ) {
 				header( 'Content-Type: '.$mimes[ $ext ] ) ;
@@ -532,7 +541,7 @@ function pico_get_content_histories4assign( $mydirname , $content_id )
 	$myts =& MyTextSanitizer::getInstance() ;
 	
 	$ret = array() ;
-	$sql = "SELECT oh.content_history_id,oh.created_time,LENGTH(body) AS body_size,oh.poster_uid,up.uname AS poster_uname FROM ".$db->prefix($mydirname."_content_histories")." oh LEFT JOIN ".$db->prefix("users")." up ON oh.poster_uid=up.uid WHERE oh.content_id=$content_id ORDER BY oh.content_history_id DESC LIMIT 10" ;
+	$sql = "SELECT oh.content_history_id,oh.created_time,LENGTH(body) AS body_size,oh.poster_uid,up.uname AS poster_uname FROM ".$db->prefix($mydirname."_content_histories")." oh LEFT JOIN ".$db->prefix("users")." up ON oh.poster_uid=up.uid WHERE oh.content_id=$content_id ORDER BY oh.content_history_id DESC" ;
 	$result = $db->query( $sql ) ;
 	if( $result ) while( $row = $db->fetchArray( $result ) ) {
 		$row4assign = array(
@@ -545,5 +554,17 @@ function pico_get_content_histories4assign( $mydirname , $content_id )
 
 	return $ret ;
 }
+
+
+// get <link> to CSS for main
+function pico_get_link2maincss( $mydirname )
+{
+	global $xoopsModuleConfig ;
+
+	$css_uri4disp = htmlspecialchars( str_replace( '{mod_url}' , XOOPS_URL.'/modules/'.$mydirname , @$xoopsModuleConfig['css_uri'] ) , ENT_QUOTES ) ;
+
+	return '<link rel="stylesheet" type="text/css" media="all" href="'.$css_uri4disp.'" />'."\n" ;
+}
+
 
 ?>

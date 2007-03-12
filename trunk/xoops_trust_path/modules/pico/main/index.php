@@ -98,7 +98,7 @@ $xoopsTpl->assign(
 		'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , @$content_row['cat_id'] ) ,
 		'xoops_breadcrumbs' => @$xoops_breadcrumbs ,
 		'xoops_pagetitle' => @$pagetitle4assign ,
-		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$content4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => pico_get_link2maincss( $mydirname ) . @$xoopsModuleConfig['htmlheader'] . "\n" . @$content4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 

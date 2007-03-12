@@ -8,6 +8,13 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:22
+define($constpref.'_HISTORY_P_C','How many revisions are stored in DB');
+define($constpref.'_MLT_HISTORY','Minimum lifetime of each revisions (sec)');
+define($constpref.'_BRCACHE','Cache life time for image files (only with wraps mode)');
+define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 means disabled)');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
 define($constpref.'_SUBMENU_SC','Show contents in submenu');
 define($constpref.'_SUBMENU_SCDSC','Only categories are displayed in default. If you turn this on, contents marked "menu" will be displayed also');

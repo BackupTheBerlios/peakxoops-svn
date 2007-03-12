@@ -11,6 +11,7 @@ if( ! include dirname(__FILE__).'/process_this_forum.inc.php' ) die( _MD_D3FORUM
 // get&check this category ($category4assign, $category_row), override options
 if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
+
 // post order
 /* switch( $postorder ) {
 	case 3 :

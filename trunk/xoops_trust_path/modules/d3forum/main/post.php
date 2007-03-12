@@ -189,7 +189,7 @@ if( !empty($_POST['contents_preview']) ) {
 		@list( $guest_name , $trip_base ) = explode( '#' , $guest_name , 2 ) ;
 		if( ! trim( @$guest_name ) ) $guest_name = $xoopsModuleConfig['anonymous_name'] ;
 		if( ! empty( $trip_base ) && function_exists( 'crypt' ) ) {
-			$salt = strtr( preg_replace( '[^\.-z]' , '.' , substr( $trip_base . 'H.' , 1 , 2 ) ) , ':;<=>?@[\]^_`' , 'ABCDEFGabcdef' ) ;
+			$salt = strtr( preg_replace( '/[^\.-z]/' , '.' , substr( $trip_base . 'H.' , 1 , 2 ) ) , ':;<=>?@[\]^_`' , 'ABCDEFGabcdef' ) ;
 			$guest_trip = substr( crypt( $trip_base , $salt ) , -10 ) ;
 		} else {
 			$guest_trip = '' ;

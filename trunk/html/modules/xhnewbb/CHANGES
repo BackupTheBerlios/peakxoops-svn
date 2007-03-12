@@ -1,6 +1,8 @@
 [mlimg]
 [xlang:en]
 
+1.31 (2007/03/12)
+- marked as the last and stable version
 - added language
 -- portuguesebr (thx X-TRAD)
 
@@ -124,6 +126,9 @@
 [xlang:ja]
 
 
+1.31 (2007/03/12)
+- 最終版としてのリリース
+- このバージョンをもって、開発・サポートを終了とします
 - 言語ファイル追加
 -- portuguesebr (thx X-TRAD)
 

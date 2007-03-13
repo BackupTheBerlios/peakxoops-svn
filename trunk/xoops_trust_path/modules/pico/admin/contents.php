@@ -8,6 +8,11 @@ require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
+
+define( 'SPECIAL_CAT_ID_ALL' , -1 ) ;
+define( 'SPECIAL_CAT_ID_DELETED' , -2 ) ;
+
+
 // get exportable modules
 $module_handler =& xoops_gethandler( 'module' ) ;
 $modules =& $module_handler->getObjects() ;
@@ -29,9 +34,9 @@ foreach( $modules as $module ) {
 
 // get $cat_id
 $cat_id = intval( @$_GET['cat_id'] ) ;
-if( $cat_id == -1 ) {
+if( $cat_id == SPECIAL_CAT_ID_ALL ) {
 	$cat_title = _MD_PICO_ALLCONTENTS ;
-} else if( $cat_id == -2 ) {
+} else if( $cat_id == SPECIAL_CAT_ID_DELETED ) {
 	$cat_title = _MD_PICO_DELETEDCONTENTS ;
 } else {
 	list( $cat_id , $cat_title ) = $db->fetchRow( $db->query( "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
@@ -142,10 +147,10 @@ while( list( $id , $title , $depth ) = $db->fetchRow( $crs ) ) {
 }
 
 // fetch contents
-if( $cat_id == -2 ) {
+if( $cat_id == SPECIAL_CAT_ID_DELETED ) {
 	$ors = $db->query( "SELECT oh.*,up.uname AS poster_uname,um.uname AS modifier_uname,c.cat_title,c.cat_depth_in_tree,1 AS is_deleted  FROM ".$db->prefix($mydirname."_content_histories")." oh LEFT JOIN ".$db->prefix("users")." up ON oh.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON oh.modifier_uid=um.uid LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON oh.cat_id=c.cat_id LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=oh.content_id WHERE o.content_id IS NULL GROUP BY oh.content_id ORDER BY c.cat_depth_in_tree,oh.modified_time DESC" ) ;
 } else {
-	$whr_cat_id = $cat_id == -1 ? "1" : "cat_id=$cat_id" ;
+	$whr_cat_id = $cat_id == SPECIAL_CAT_ID_ALL ? "1" : "o.cat_id=$cat_id" ;
 	$ors = $db->query( "SELECT o.*,up.uname AS poster_uname,um.uname AS modifier_uname,c.cat_title,c.cat_depth_in_tree,0 AS is_deleted  FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix("users")." up ON o.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON o.modifier_uid=um.uid LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_cat_id) ORDER BY c.cat_depth_in_tree,o.weight,o.content_id" ) ;
 }
 $contents4assign = array() ;
@@ -182,7 +187,7 @@ $tpl->assign( array(
 	'cat_id' => $cat_id ,
 	'cat_link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
-	'cat_options' => $cat_options + array( -1 => _MD_PICO_ALLCONTENTS , -2 => _MD_PICO_DELETEDCONTENTS ) ,
+	'cat_options' => $cat_options + array( SPECIAL_CAT_ID_ALL => _MD_PICO_ALLCONTENTS , SPECIAL_CAT_ID_DELETED => _MD_PICO_DELETEDCONTENTS ) ,
 	'cat_options4move' => $cat_options ,
 	'module_options' => $exportable_modules ,
 	'contents' => $contents4assign ,

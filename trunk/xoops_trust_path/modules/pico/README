@@ -105,6 +105,7 @@ pico is fast enough if you use content's cache.
 - modified module_icon.php cacheable for web browser
 - modified images etc. transferred by php in wraps cacheable for web browser
 - added referring feature to deleted contents (in contents manager for admin)
+- fixed a typo in contents controller for admin 1.14a (thx t_yamo)
 
 1.13 beta (2007/03/10) update the module
 - added history
@@ -313,6 +314,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - モジュールアイコンをブラウザキャッシュ可能にした
 - wrapsモードで転送する画像等をブラウザキャッシュ可能にした
 - 削除済コンテンツの参照機能（コンテンツ一括管理）
+- コンテンツ一括管理のtypo修正 1.14a (thx t_yamo)
 
 1.13 beta (2007/03/10) モジュールアップデート必須
 - 履歴機能の実装

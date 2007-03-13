@@ -1,6 +1,9 @@
 [mlimg]
 [xlang:en]
 
+v0.30 (2007-03-14) note: remove XOOPS_ROOT_PATH/modules/altsys once
+- modified the structure of file tree
+
 v0.21 (2006-10-27)
 - fixed wrong link from templates (thx makimaki)
 - added language persian (thx voltan)
@@ -28,6 +31,9 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.30 (2007-03-14) ※ 公開側をいったん消してください
+- ファイル構成の見直し（以降はXOOPS_TRUST_PATHのみ上書きすれば良い形にした）
 
 v0.21 (2006-10-27)
 - テンプレートへの埋め込みでリンク先がおかしかったのを修正 (thx makimaki)

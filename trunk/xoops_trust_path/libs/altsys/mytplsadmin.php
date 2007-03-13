@@ -13,19 +13,9 @@ include_once dirname(__FILE__)."/include/tpls_functions.php" ;
 // only groups have 'module_admin' of 'altsys' can do that.
 $module_handler =& xoops_gethandler( 'module' ) ;
 $module =& $module_handler->getByDirname( 'altsys' ) ;
+if( ! is_object( $module ) ) die( 'install altsys' ) ;
 $moduleperm_handler =& xoops_gethandler( 'groupperm' ) ;
 if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_admin' , $module->getVar( 'mid' ) , $xoopsUser->getGroups() ) ) die( 'only admin of altsys can access this area' ) ;
-
-
-// searching a language file "mytplsadmin.php"
-// (in module instance)->(in module class)->(in this lib)->(fallbacked english)
-//if( file_exists( $mydirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
-//	include_once $mydirpath.'/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
-//} else if( file_exists( XOOPS_ROOT_PATH.'/modules/tplsadmin/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ) ) {
-//	include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/language/'.$xoopsConfig['language'].'/mytplsadmin.php' ;
-//} else {
-//	include_once XOOPS_ROOT_PATH.'/modules/tplsadmin/language/english/mytplsadmin.php' ;
-//}
 
 
 // initials
@@ -33,22 +23,7 @@ $db =& Database::getInstance();
 $myts =& MyTextSanitizer::getInstance() ;
 
 // language file
-$altsys_path = XOOPS_ROOT_PATH . '/modules/altsys' ;
-$language = $xoopsConfig['language'] ;
-if( ! file_exists("$altsys_path/language/$language/mytplsadmin.php") ) $language = 'english' ;
-include_once "$altsys_path/language/$language/mytplsadmin.php" ;
-
-// determine language
-//$language = $xoopsConfig['language'] ;
-//if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
-
-// load language constants
-// to prevent from notice that constants already defined
-//$error_reporting_level = error_reporting( 0 ) ;
-//include_once( "$xoops_system_path/constants.php" ) ;
-//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-//include_once( "$xoops_system_path/language/$language/admin/tplsets.php" ) ;
-//error_reporting( $error_reporting_level ) ;
+altsys_include_language_file( 'mytplsadmin' ) ;
 
 // check $xoopsModule
 if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;

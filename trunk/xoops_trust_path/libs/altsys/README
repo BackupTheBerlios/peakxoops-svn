@@ -32,6 +32,15 @@ You will get blocks,templates menu in your D3 module.
 Since mypreferences is automatically enabled too, you will be easy to operate module's prefences.
 
 
+[b]UPDATE[/b]
+from 0.2x to 0.30:
+ - remove XOOPS_ROOT_PATH/modules/altsys/ once
+ - upload/overwrite both XOOPS_ROOT_PATH/modules/altsys and XOOPS_TRUST_PATH/libs/altsys
+
+from 0.3x to the latter versions
+ - just overwrite XOOPS_TRUST_PATH/libs/altsys
+
+
 [b]USAGE:[/b]
 
 refer blocksadmin about operating 'blocks'.
@@ -95,6 +104,13 @@ Duplicatable V3¥â¥¸¥å¡¼¥ë¤«¤é¡¢¥é¥¤¥Ö¥é¥ê¤È¤·¤ÆÍøÍÑ¤Ç¤­¤ë·Á¤Ë¤·¤¿¤¿¤á¡¢¹½Â¤¤«¤éÂ
 - ¥¢¡¼¥«¥¤¥Ö¤Îxoops_trus_path/Æâ¤ò¡¢XOOPS_TRUST_PATH¤ËÅ¸³«¤·¤Æ¤¯¤À¤µ¤¤
 
 D3¥â¥¸¥å¡¼¥ë¤Ç¤¢¤ì¤Ð¡¢¤³¤ì¤Ç¼«Æ°Åª¤Ë¥é¥¤¥Ö¥é¥ê¤òÇ§¼±¤·¤Æ¡¢¥Ö¥í¥Ã¥¯´ÉÍý¤ä¥Æ¥ó¥×¥ì¡¼¥È´ÉÍý¤¬¥á¥Ë¥å¡¼¤ËÄÉ²Ã¤µ¤ì¤Þ¤¹¡£°ìÈÌÀßÄê¤Ë¤Ä¤¤¤Æ¤â¡¢½¾Íè¤ÎmymenuÁêÅö--¥â¥¸¥å¡¼¥ëÆâÉô¤Ç°ìÈÌÀßÄê¤¬´°·ë¤¹¤ë¤â¤Î--¤ËÃÖ¤­´¹¤ï¤ê¤Þ¤¹¡Ê¤³¤ÎÉôÊ¬¤Ïmypreferences¤È¸Æ¤Ó¤Þ¤¹¡Ë¡£
+
+
+¡ü¥¢¥Ã¥×¥Ç¡¼¥È
+
+0.2x ¤«¤é 0.30 ¤Ø¤Î¥¢¥Ã¥×¥Ç¡¼¥È¤Ç¤Ï¡¢¸ø³«Â¦(XOOPS_ROOT_PATH/modules/altsys)¤ò¤¤¤Ã¤¿¤ó¾Ã¤·¤Æ¤«¤é¡¢¾å½ñ¤­¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+0.30¤«¤é¸å¤Î¥¢¥Ã¥×¥Ç¡¼¥È¤Ç¤Ï¡¢TRUST_PATHÂ¦¤À¤±¤Î¾å½ñ¤­¤ÇºÑ¤ß¤Þ¤¹¡£
 
 
 ¡ü»È¤¤Êý

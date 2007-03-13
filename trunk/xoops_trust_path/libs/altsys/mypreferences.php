@@ -19,29 +19,7 @@ $db =& Database::getInstance();
 $myts =& MyTextSanitizer::getInstance() ;
 
 // language file
-$altsys_path = XOOPS_ROOT_PATH . '/modules/altsys' ;
-$language = $xoopsConfig['language'] ;
-if( ! file_exists("$altsys_path/language/$language/mypreferences.php") ) $language = 'english' ;
-include_once "$altsys_path/language/$language/mypreferences.php" ;
-
-// load language constants
-// to prevent from notice that constants already defined
-//$error_reporting_level = error_reporting( 0 ) ;
-//include_once( "$xoops_system_path/constants.php" ) ;
-//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-
-
-// determine language
-//$language = $xoopsConfig['language'] ;
-//if( ! file_exists( "$xoops_system_path/language/$language/admin/tplsets.php") ) $language = 'english' ;
-
-// load language constants
-// to prevent from notice that constants already defined
-//$error_reporting_level = error_reporting( 0 ) ;
-//include_once( "$xoops_system_path/constants.php" ) ;
-//include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-//include_once( "$xoops_system_path/language/$language/admin/preferences.php" ) ;
-//error_reporting( $error_reporting_level ) ;
+altsys_include_language_file( 'mypreferences' ) ;
 
 
 $op = empty( $_GET['op'] ) ? 'showmod' : preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['op'] ) ;

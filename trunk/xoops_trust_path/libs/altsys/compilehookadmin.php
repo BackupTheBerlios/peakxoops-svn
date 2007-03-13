@@ -10,15 +10,10 @@ include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
 
 // this page can be called only from altsys
-if( $xoopsModule->getVar('dirname') != 'altsys' ) die( 'this page can be called only from altsys' ) ;
-
+// if( $xoopsModule->getVar('dirname') != 'altsys' ) die( 'this page can be called only from altsys' ) ;
 
 // language file
-if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['language'].'/compilehookadmin.php' ) ) {
-	include_once XOOPS_ROOT_PATH.'/modules/altsys/language/'.$xoopsConfig['language'].'/compilehookadmin.php' ;
-} else if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/english/compilehookadmin.php' ) ) {
-	include_once XOOPS_ROOT_PATH.'/modules/altsys/language/english/compilehookadmin.php' ;
-}
+altsys_include_language_file( 'compilehookadmin' ) ;
 
 
 //

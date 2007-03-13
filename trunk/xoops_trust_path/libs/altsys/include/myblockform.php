@@ -135,7 +135,7 @@ $form->addElement( $button_tray ) ;
 
 
 // checks browser compatibility with the control
-function check_browser_can_use_spaw() {
+function altsys_check_browser_can_use_spaw() {
 	$browser = $_SERVER['HTTP_USER_AGENT'] ;
 	// check if msie
 	if( eregi( "MSIE[^;]*" , $browser , $msie ) ) {

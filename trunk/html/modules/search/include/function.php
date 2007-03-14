@@ -40,7 +40,8 @@ function &context_search( $funcname, $queryarray, $andor = 'AND', $limit = 0, $o
 	if( $funcname=="" ){
 		return false;
 	}
-	return $funcname($queryarray, $andor, $limit, $offset, $userid);
+	$ret = $funcname($queryarray, $andor, $limit, $offset, $userid);
+	return $ret ;
 
 }
 ?>

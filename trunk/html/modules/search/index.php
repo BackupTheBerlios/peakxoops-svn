@@ -216,7 +216,7 @@ case "results":
 			}else{
 				$results2 = array();
 			}
-			$results  = array_merge($results1,$results2);
+			$results  = array_unique( array_merge($results1,$results2) ) ; // GIJ
 			usort($results, 'sort_by_date');
 			$count = count($results);
 			if ( $count > 5 ) {

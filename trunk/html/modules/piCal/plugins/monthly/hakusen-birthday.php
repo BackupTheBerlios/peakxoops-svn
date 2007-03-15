@@ -31,7 +31,7 @@
 		$tmp_array = array(
 			'dotgif' => $plugin['dotgif'] ,
 			'dirname' => $plugin['dirname'] ,
-			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/userinfo.php?uid=$uid&amp;caldate={$this->year}-{$this->month}-$target_date" ,
+			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/userinfo.php?uid=$uid" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
 			'id' => $uid ,
 			'server_time' => 0 ,
 			'user_time' => 0 ,

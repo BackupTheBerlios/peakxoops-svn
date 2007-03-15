@@ -1,6 +1,6 @@
 <?php
 
-	// a plugin for bulletin 2.0
+	// a plugin for d3forum
 
 	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -27,13 +27,18 @@
 	$options = explode( '|' , $plugin['options'] ) ;
 	// options[0] : category extract
 	if( ! empty( $options[0] ) ) {
-		$whr_topic = '`topicid` IN (' . addslashes( $options[0] ) . ')' ;
+		$cat_ids = array_map( 'intval' , explode( ',' , $options[0] ) ) ;
+		$whr_cat = 'f.cat_id IN (' . implode( ',' , $cat_ids ) . ')' ;
 	} else {
-		$whr_topic = '1' ;
+		$whr_cat = '1' ;
 	}
 
+	// forums can be read by current viewer (check by forum_access)
+	require_once XOOPS_TRUST_PATH.'/modules/d3forum/include/common_functions.php' ;
+	$whr_forum = "t.forum_id IN (".implode(",",d3forum_get_forums_can_read( $plugin['dirname'] )).")" ;
+
 	// query (added 86400 second margin "begin" & "end")
-	$result = $db->query( "SELECT title,storyid,published FROM ".$db->prefix($plugin['dirname']."_stories")." WHERE ($whr_topic) AND published < UNIX_TIMESTAMP() AND published >= $range_start_s AND published < $range_end_s AND type=1 AND (expired = 0 OR expired > '$now')" ) ;
+	$result = $db->query( "SELECT p.subject,p.post_id,p.post_time FROM ".$db->prefix($plugin['dirname']."_posts")." p LEFT JOIN ".$db->prefix($plugin['dirname']."_topics")." t ON p.topic_id=t.topic_id LEFT JOIN ".$db->prefix($plugin['dirname']."_forums")." f ON f.forum_id=t.forum_id WHERE ! p.invisible AND ! t.topic_invisible AND ($whr_forum) AND ($whr_cat) AND p.post_time >= $range_start_s AND p.post_time < $range_end_s" ) ;
 
 	while( list( $title , $id , $server_time ) = $db->fetchRow( $result ) ) {
 		$user_time = $server_time + $tzoffset_s2u ;
@@ -42,11 +47,11 @@
 		$tmp_array = array(
 			'dotgif' => $plugin['dotgif'] ,
 			'dirname' => $plugin['dirname'] ,
-			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/index.php?page=article&amp;storyid=$id" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
+			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/index.php?post_id=$id" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
 			'id' => $id ,
 			'server_time' => $server_time ,
 			'user_time' => $user_time ,
-			'name' => 'storyid' ,
+			'name' => 'post_id' ,
 			'title' => $myts->makeTboxData4Show( $title )
 		) ;
 		if( $just1gif ) {

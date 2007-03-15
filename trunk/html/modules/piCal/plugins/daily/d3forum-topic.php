@@ -1,5 +1,6 @@
 <?php
-	// a plugin for myAlbum-P
+
+	// a plugin for d3forum
 
 	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -19,10 +20,6 @@
 		$plugin_returns[ DATE ][]
 	*/
 
-	// for Duplicatable
-	if( ! preg_match( '/^(\D+)(\d*)$/' , $plugin['dirname'] , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $plugin['dirname'] ) ) ;
-	$mydirnumber = $regs[2] === '' ? '' : intval( $regs[2] ) ;
-
 	// set range (added 86400 second margin "begin" & "end")
 	$range_start_s = mktime(0,0,0,$this->month,$this->date-1,$this->year) ;
 	$range_end_s = mktime(0,0,0,$this->month,$this->date+2,$this->year) ;
@@ -31,28 +28,33 @@
 	$options = explode( '|' , $plugin['options'] ) ;
 	// options[0] : category extract
 	if( ! empty( $options[0] ) ) {
-		$whr_cid = '`cid` IN (' . addslashes( $options[0] ) . ')' ;
+		$cat_ids = array_map( 'intval' , explode( ',' , $options[0] ) ) ;
+		$whr_cat = 'f.cat_id IN (' . implode( ',' , $cat_ids ) . ')' ;
 	} else {
-		$whr_cid = '1' ;
+		$whr_cat = '1' ;
 	}
 
-	// query (added 86400 second margin "begin" & "end")
-	$result = $db->query( "SELECT title,lid,`date` FROM ".$db->prefix("myalbum{$mydirnumber}_photos")." WHERE ($whr_cid) AND `date` >= $range_start_s AND `date` < $range_end_s AND `status` > 0" ) ;
+	// forums can be read by current viewer (check by forum_access)
+	require_once XOOPS_TRUST_PATH.'/modules/d3forum/include/common_functions.php' ;
+	$whr_forum = "t.forum_id IN (".implode(",",d3forum_get_forums_can_read( $plugin['dirname'] )).")" ;
 
-	while( list( $title , $id , $server_time ) = $db->fetchRow( $result ) ) {
+	// query (added 86400 second margin "begin" & "end")
+	$result = $db->query( "SELECT t.topic_title,t.topic_id,t.topic_last_post_time,p.subject,p.invisible FROM ".$db->prefix($plugin['dirname']."_topics")." t LEFT JOIN ".$db->prefix($plugin['dirname']."_forums")." f ON f.forum_id=t.forum_id LEFT JOIN ".$db->prefix($plugin['dirname']."_posts")." p ON t.topic_last_post_id=p.post_id WHERE ! t.topic_invisible AND ($whr_forum) AND ($whr_cat) AND t.topic_last_post_time >= $range_start_s AND t.topic_last_post_time < $range_end_s" ) ;
+
+	while( list( $title , $id , $server_time , $post_title , $post_invisible ) = $db->fetchRow( $result ) ) {
 		$user_time = $server_time + $tzoffset_s2u ;
-		if( date( 'j' , $user_time ) != $this->date ) continue ;
+		// if( date( 'n' , $user_time ) != $this->month ) continue ;
 		$target_date = date('j',$user_time) ;
 		$tmp_array = array(
 			'dotgif' => $plugin['dotgif'] ,
 			'dirname' => $plugin['dirname'] ,
-			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/photo.php?lid=$id" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
+			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/index.php?topic_id=$id" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
 			'id' => $id ,
 			'server_time' => $server_time ,
 			'user_time' => $user_time ,
-			'name' => 'lid' ,
+			'name' => 'topic_id' ,
 			'title' => $myts->makeTboxData4Show( $title ) ,
-			'description' => ''
+			'description' => $post_invisible ? '' : $post_title ,
 		) ;
 
 		// multiple gifs allowed per a plugin & per a day

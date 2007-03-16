@@ -99,6 +99,9 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.15 beta (2007/03/16)
+- fixed a typo in header('Expires'...) (thx rock)
+
 1.14 beta (2007/03/13)
 - modified CSS of this module's template into a template
 - added two configs about the feature of history
@@ -307,6 +310,9 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.15 beta (2007/03/16)
+- HTTPヘッダ送出でのtypoを修正 (thx rock)
 
 1.14 beta (2007/03/13)
 - モジュールCSSのテンプレート化

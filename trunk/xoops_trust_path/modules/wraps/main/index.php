@@ -78,7 +78,7 @@ switch( $ext ) {
 		$cache_limit = intval( @$xoopsModuleConfig['browser_cache'] ) ;
 		if( $cache_limit > 0 ) {
 			session_cache_limiter('public');
-			header("Expires: ".date('r',intval(time()/$cache_limit)*$cache_limit)+$cache_limit);
+			header("Expires: ".date('r',intval(time()/$cache_limit)*$cache_limit+$cache_limit));
 			header("Cache-Control: public, max-age=$cache_limit");
 			header("Last-Modified: ".date('r',intval(time()/$cache_limit)*$cache_limit));
 		}

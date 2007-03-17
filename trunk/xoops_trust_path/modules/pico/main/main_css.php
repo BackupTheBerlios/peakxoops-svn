@@ -23,6 +23,8 @@ if( is_object( $xoopsUser ) ) {
 	$xoops_isadmin = false ;
 }
 
+
+require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 $tpl =& new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname' => $mydirname ,

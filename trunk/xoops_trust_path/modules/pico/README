@@ -101,6 +101,7 @@ pico is fast enough if you use content's cache.
 
 1.15 beta (2007/03/16)
 - fixed a typo in header('Expires'...) (thx rock)
+- fixed css template does not work (thx mizukami) 1.15a
 
 1.14 beta (2007/03/13)
 - modified CSS of this module's template into a template
@@ -313,6 +314,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 1.15 beta (2007/03/16)
 - HTTPヘッダ送出でのtypoを修正 (thx rock)
+- テンプレートCSSが効いていないのを修正 (thx mizukami) 1.15a
 
 1.14 beta (2007/03/13)
 - モジュールCSSのテンプレート化

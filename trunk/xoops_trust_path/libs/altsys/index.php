@@ -21,7 +21,9 @@ $controllers = array(
 	'mytplsform',
 	'put_templates',
 ) ;
-if( ! in_array( $page , $controllers ) ) $page = 'myblocksadmin' ;
+if( ! in_array( $page , $controllers ) ) {
+	$_GET['page'] = $page = 'myblocksadmin' ;
+}
 
 
 // half measure ... (TODO)

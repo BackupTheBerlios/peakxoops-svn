@@ -161,7 +161,7 @@ if ($op == 'save') {
 	if ( ! $xoopsGTicket->check( true , 'mypreferences' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	require_once(XOOPS_ROOT_PATH.'/class/template.php');
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$xoopsTpl = new XoopsTpl();
 	$xoopsTpl->clear_all_cache();
 	// regenerate admin menu file

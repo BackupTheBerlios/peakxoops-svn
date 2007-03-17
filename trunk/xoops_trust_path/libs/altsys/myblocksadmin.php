@@ -56,7 +56,7 @@ if( ! empty( $target_module ) && is_object( $target_module ) ) {
 
 
 // fork XOOPS 2.0.x and XOOPS 2.2.x
-if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+if( altsys_get_core_type() == ALTSYS_CORE_TYPE_X22 ) {
 	include_once dirname(__FILE__).'/include/MyBlocksAdminForXoops22.class.php' ;
 	$myba =& MyBlocksAdminForXoops22::getInstance() ;
 } else {

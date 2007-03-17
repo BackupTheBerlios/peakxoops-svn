@@ -6,7 +6,7 @@ include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 altsys_include_language_file( 'modinfo' ) ;
 
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.30' ;
+$modversion['version'] = '0.31' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -29,7 +29,27 @@ $modversion['hasSearch'] = 0;
 // Comments
 $modversion['hasComments'] = 0;
 
-// Config Settings (only for modules that need config settings generated automatically)
+// Configurations
+$modversion['config'][1] = array(
+	'name'			=> 'adminmenu_hack_ft' ,
+	'title'			=> '_MI_ALTSYS_ADMINMENU_HFT' ,
+	'description'	=> '_MI_ALTSYS_ADMINMENU_HFTDSC' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array( '_NONE' => 0 , '_MI_ALTSYS_AMHFT_OPT_2COL' => 1 , '_MI_ALTSYS_AMHFT_OPT_NOIMG' => 2 , '_MI_ALTSYS_AMHFT_OPT_XCSTY' => 3 )
+) ;
+
+// Configurations
+$modversion['config'][] = array(
+	'name'			=> 'adminmenu_insert_mymenu' ,
+	'title'			=> '_MI_ALTSYS_ADMINMENU_IM' ,
+	'description'	=> '_MI_ALTSYS_ADMINMENU_IMDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
 
 // Notification
 

@@ -18,6 +18,9 @@ include dirname(__FILE__).'/admin_menu.php' ;
 $mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;
 $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
 
+// preferences for altsys self
+array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
+
 // highlight (you can customize the colors)
 foreach( array_keys( $adminmenu ) as $i ) {
 	if( $mymenu_link == $adminmenu[$i]['link'] ) {
@@ -36,7 +39,6 @@ if( empty( $adminmenu_hilighted ) ) {
 	}
 }
 
-
 // display (you can customize htmls)
 echo "<div style='text-align:left;width:98%;'>" ;
 foreach( $adminmenu as $menuitem ) {
@@ -46,7 +48,7 @@ echo "</div>\n<hr style='clear:left;display:block;' />\n" ;
 
 
 // submenu
-$page = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , $_GET['page'] ) ;
+$page = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , @$_GET['page'] ) ;
 if( file_exists( dirname(__FILE__).'/mymenusub_'.$page.'.php' ) ) {
 	include dirname(__FILE__).'/mymenusub_'.$page.'.php' ;
 }

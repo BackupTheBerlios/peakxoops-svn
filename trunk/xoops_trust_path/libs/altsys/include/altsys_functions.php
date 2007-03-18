@@ -8,8 +8,12 @@ function set_altsys_module_config()
 
 	$module_handler =& xoops_gethandler( 'module' ) ;
 	$module =& $module_handler->getByDirname( 'altsys' ) ;
-	$config_handler =& xoops_gethandler( 'config' ) ;
-	$altsysModuleConfig = $config_handler->getConfigList( $module->mid() ) ;
+	if( is_object( $module ) ) {
+		$config_handler =& xoops_gethandler( 'config' ) ;
+		$altsysModuleConfig = $config_handler->getConfigList( $module->mid() ) ;
+	} else {
+		$altsysModuleConfig = array() ;
+	}
 }
 
 

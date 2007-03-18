@@ -3,6 +3,7 @@
 
 v0.32 (2007-03-19)
 - modified admin menu hacks
+- fixed a bug on installing newly (thx fourpsk)
 
 v0.31 (2007-03-18)
 - added admin menu hacks :-)
@@ -40,6 +41,7 @@ v0.10 (2006-05-19)
 
 v0.32 (2007-03-19)
 - 管理メニューの書き換え機能の完成度を高めた
+- 0.31でインストールできなくなっていたバグの修正 (thx fourpsk)
 
 v0.31 (2007-03-18)
 - 管理メニューの書き換え機能追加

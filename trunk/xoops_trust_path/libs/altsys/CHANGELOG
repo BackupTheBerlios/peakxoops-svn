@@ -1,6 +1,12 @@
 [mlimg]
 [xlang:en]
 
+v0.32 (2007-03-19)
+- modified admin menu hacks
+
+v0.31 (2007-03-18)
+- added admin menu hacks :-)
+
 v0.30 (2007-03-14) note: remove XOOPS_ROOT_PATH/modules/altsys once
 - modified the structure of file tree
 
@@ -31,6 +37,12 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.32 (2007-03-19)
+- 管理メニューの書き換え機能の完成度を高めた
+
+v0.31 (2007-03-18)
+- 管理メニューの書き換え機能追加
 
 v0.30 (2007-03-14) ※ 公開側をいったん消してください
 - ファイル構成の見直し（以降はXOOPS_TRUST_PATHのみ上書きすれば良い形にした）

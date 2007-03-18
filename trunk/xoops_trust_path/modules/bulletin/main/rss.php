@@ -17,7 +17,8 @@ if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
 		$tpl->assign('channel_title', bulletin_utf8_encode(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
 		$tpl->assign('channel_link', XOOPS_URL.'/');
 		$tpl->assign('channel_desc', bulletin_utf8_encode(htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES)));
-		$tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
+		// $tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
+		$tpl->assign('channel_lastbuild', date( 'r' ) ) ; // GIJ
 		$tpl->assign('channel_webmaster', $xoopsConfig['adminmail']);
 		$tpl->assign('channel_editor', $xoopsConfig['adminmail']);
 		$tpl->assign('channel_category', 'News');
@@ -45,7 +46,8 @@ if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
 				'category' => htmlspecialchars(bulletin_utf8_encode($article->newstopic->topic_title), ENT_QUOTES), 
 				'link' => $mydirurl.'/index.php?page=article&amp;storyid='.$article->getVar('storyid'), 
 				'guid' => $mydirurl.'/index.php?page=article&amp;storyid='.$article->getVar('storyid'), 
-				'pubdate' => formatTimestamp($article->getVar('published'), 'rss'), 
+//				'pubdate' => formatTimestamp($article->getVar('published'), 'rss'), 
+				'pubdate' => date( 'r' , $article->getVar('published') ) , // GIJ
 				'description' => bulletin_utf8_encode(htmlspecialchars(strip_tags($myts->xoopsCodeDecode($article->getVar('hometext','n'))), ENT_QUOTES)),
 //				'content' => bulletin_utf8_encode($content))), // GIJ
 			) ) ;

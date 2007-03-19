@@ -36,6 +36,7 @@ function altsys_adminmenu_insert_mymenu_x20( &$module )
 	$anchor = '<!-- ALTSYS ANCHOR '.$dirname.' -->' ;
 
 	// fetch popup_no
+	if( empty( $xoops_admin_menu_ft[$mid] ) ) return ;
 	if( ! preg_match( '/popUpL(\d+)/' , $xoops_admin_menu_ft[$mid] , $regs ) ) return ;
 	$popup_no = intval( $regs[1] ) ;
 
@@ -183,7 +184,7 @@ function altsys_adminmenu_hack_ft_noimg_x20()
 	foreach( $mids as $mid ) {
 		$module =& $module_handler->get( $mid ) ;
 		$xoops_admin_menu_ft[$mid] = preg_replace( '/\<img src\=.*$/' , $module->getVar('name').'</a>' , $xoops_admin_menu_ft[$mid] ) ;
-		$xoops_admin_menu_ft[$mid] = '<div width="100%" style="text-align:left;background-color:#EEE;">'.$xoops_admin_menu_ft[$mid].'</div>' ;
+		$xoops_admin_menu_ft[$mid] = '<div style="text-align:left;background-color:#CCC;" title="'.$module->getVar('dirname').'">'.$xoops_admin_menu_ft[$mid].'</div>' ;
 		$xoops_admin_menu_ml[$mid] = str_replace( ',105);' , ',45);' , $xoops_admin_menu_ml[$mid] ) ;
 	}
 
@@ -234,17 +235,20 @@ function altsys_adminmenu_hack_ft_xcsty_x20()
 				$submenuitems[] = str_replace( $popup.'();' , '' , $submenuitem ) ;
 			}
 		} else return ;
+		// module icon
 		if( preg_match( '#\<img .*/\>#U' , $xoops_admin_menu_ft[$mid] , $regs ) ) {
-			$icon_img = $regs[0] ;
+			$icon_img = str_replace( "alt=''" , 'alt="'.$module->getVar('name').'"' , $regs[0] ) ;
 		} else {
 			$icon_img = '' ;
 		}
+		// version number
+		$icon_img .= '<span class="version" style="">' . sprintf( '%.2f' , $module->getVar('version') / 100.0 ) . '</span>' ;
 		$newline = preg_replace( '/ onmouseover.*$/' , '' , $xoops_admin_menu_ft[$mid] ) ;
-		$newline = '<!-- '.$popup.' --><div id="adminmenu_ft'.$mid.'" style="text-align:left;background-color:#CCC;" title="'.$module->getVar('dirname').'"><a id="adminmenu_ftpoint'.$mid.'" href="javascript:void(0);" onclick="submenuToggle('.$mid.');">+</a> '.$newline.'>'.$module->getVar('name').'</a></div><div id="adminmenu_ftsub'.$mid.'" style="display:none;">'.$icon_img.'<ul>' ;
+		$newline = "\n".'<!-- '.$popup.' --><div id="adminmenu_ft'.$mid.'" style="text-align:left;background-color:#CCC;" title="'.$module->getVar('dirname').'"><a id="adminmenu_ftpoint'.$mid.'" href="javascript:void(0);" onclick="submenuToggle('.$mid.');">+</a> '.$newline.'>'.$module->getVar('name').'</a></div><div id="adminmenu_ftsub'.$mid.'" style="display:none;"><ul>' ;
 		foreach( $submenuitems as $submenuitem ) {
 			$newline .= '<li>'.$submenuitem.'</li>' ;
 		}
-		$newline .= '</ul></div>' ;
+		$newline .= '</ul>'.$icon_img.'</div>' ;
 		$xoops_admin_menu_ft[$mid] = $newline ;
 	}
 
@@ -289,7 +293,10 @@ function altsys_adminmenu_save_x20( $xoops_admin_vars )
 if( is_object( @$GLOBALS["xoopsModule"] ) && empty( $not_inside_cp_functions ) ) {
 	$mid_tmp = $GLOBALS["xoopsModule"]->getVar("mid") ;
 	if( $mid_tmp == 1 && @$_GET["fct"] == "preferences" && @$_GET["op"] == "showmod" && ! empty( $_GET["mod"] ) ) $mid_tmp = intval( $_GET["mod"] ) ;
-	$xoops_admin_menu_ft[ $mid_tmp ] = str_replace( array( "background-color:#EEE;" , "display:none;" ) , array( "background-color:#CCC;" , "display:block;" ) , $xoops_admin_menu_ft[ $mid_tmp ] ) ;
+	$xoops_admin_menu_ft[ $mid_tmp ] = str_replace( array( "background-color:#CCC;" , "display:none;" ) , array( "background-color:#AAA;" , "display:block;" ) , $xoops_admin_menu_ft[ $mid_tmp ] ) ;
+	if( $GLOBALS["xoopsModule"]->getInfo("version") > $GLOBALS["xoopsModule"]->getVar("version") / 100.0 + 0.0001 ) {
+		$xoops_admin_menu_ft[ $mid_tmp ] = str_replace( "class=\"version\" style=\"\"" , "class=\"version\" style=\"color:red;\"" , $xoops_admin_menu_ft[ $mid_tmp ] ) ;
+	} ;
 }
 		' ;
 	}

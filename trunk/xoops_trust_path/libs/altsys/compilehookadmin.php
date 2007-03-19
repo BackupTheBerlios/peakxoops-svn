@@ -80,8 +80,8 @@ if( ! empty( $_POST['clearcache'] ) || ! empty( $_POST['cleartplsvars'] ) ) {
 		while( ( $file = readdir( $handler ) ) !== false ) {
 	
 			if( ! empty( $_POST['clearcache'] ) ) {
-				// judging template cache '*.html.php'
-				if( substr( $file , -9 ) !== '.html.php' ) continue ;
+				// judging template cache '*.php'
+				if( substr( $file , -4 ) !== '.php' ) continue ;
 			} else {
 				// judging tplsvars cache 'tplsvars_*'
 				if( substr( $file , 0 , 9 ) !== 'tplsvars_' ) continue ;
@@ -112,8 +112,8 @@ foreach( $compile_hooks as $command => $compile_hook ) {
 				// skip /. /.. and hidden files
 				if( $file{0} == '.' ) continue ;
 
-				// skip if the extension is not .php
-				if( substr( $file , -4 ) != '.php' ) continue ;
+				// skip if the extension is not .html.php
+				if( substr( $file , -9 ) != '.html.php' ) continue ;
 
 				// skip theme.html when comment-mode or div-mode
 				if( $compile_hook['skip_theme'] && substr( $file , -15 ) == '%theme.html.php' ) $skip_mode = true ;
@@ -186,7 +186,7 @@ $tplsvars_num = 0 ;
 if( $handler = opendir( XOOPS_COMPILE_PATH . '/' ) ) {
 	while( ( $file = readdir( $handler ) ) !== false ) {
 		if( strncmp( $file , 'tplsvars_' , 9 ) === 0 ) $tplsvars_num ++ ;
-		else if( substr( $file , -9 ) === '.html.php' ) $compiledcache_num ++ ;
+		else if( substr( $file , -4 ) === '.php' ) $compiledcache_num ++ ;
 	}
 }
 

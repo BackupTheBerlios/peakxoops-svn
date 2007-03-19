@@ -1,5 +1,8 @@
-[mlimg]
 [xlang:en]
+
+v0.33 (2007-03-20)
+- modified admin menu hacks a little bit
+- modified compilehookadmin for other than html templates
 
 v0.32 (2007-03-19)
 - modified admin menu hacks

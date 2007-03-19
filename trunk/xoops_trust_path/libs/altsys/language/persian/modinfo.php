@@ -1,24 +1,23 @@
 <?php
 
+define( '_MI_ALTSYS_MODULENAME' , 'آلت سیس' ) ;
+define( '_MI_ALTSYS_MODULEDESC' , 'مدیریت ساده ی سیستم' ) ;
 
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-18 05:54:39
-define('_MI_ALTSYS_ADMINMENU_HFT','Rewrite admin menu');
-define('_MI_ALTSYS_ADMINMENU_HFTDSC','If your admin menu is broken, remove cache/adminmenu.php. This feature works only with XOOPS 2.0.x');
-define('_MI_ALTSYS_AMHFT_OPT_2COL','Two columns of module icons');
-define('_MI_ALTSYS_AMHFT_OPT_NOIMG','IMG to TEXT');
-define('_MI_ALTSYS_AMHFT_OPT_XCSTY','Like XoopsCube Legacy 2.1');
-define('_MI_ALTSYS_ADMINMENU_IM','Copy mymenu links into admin menu');
-define('_MI_ALTSYS_ADMINMENU_IMDSC','If your admin menu is broken, remove cache/adminmenu.php. This feature works only with XOOPS 2.0.x');
-
-define( '_MI_ALTSYS_MODULENAME' , 'ALTSYS' ) ;
-define( '_MI_ALTSYS_MODULEDESC' , 'اداره کننده ی آسان سیستم' ) ;
-
-define( '_MI_ALTSYS_MENU_CUSTOMBLOCKS' , 'بلاک های دست ساز' ) ;
+define( '_MI_ALTSYS_MENU_CUSTOMBLOCKS' , 'بلاک دست ساز' ) ;
 define( '_MI_ALTSYS_MENU_NEWCUSTOMBLOCK' , '(بلاک دست ساز جدید)' ) ;
-define( '_MI_ALTSYS_MENU_MYBLOCKSADMIN' , 'بلاک های ماژول' ) ;
+define( '_MI_ALTSYS_MENU_MYBLOCKSADMIN' , 'بلاک ماژول ها' ) ;
 define( '_MI_ALTSYS_MENU_MYTPLSADMIN' , 'تمپلیت ها' ) ;
 define( '_MI_ALTSYS_MENU_COMPILEHOOKADMIN' , 'تمپلیت های پیشرفته' ) ;
 define( '_MI_ALTSYS_MENU_MYAVATAR' , 'آواتور ها' ) ;
 define( '_MI_ALTSYS_MENU_MYSMILEY' , 'لبخند ها' ) ;
+
+define( '_MI_ALTSYS_ADMINMENU_HFT' , 'باز نویسی منوی مدیریت' ) ;
+define( '_MI_ALTSYS_ADMINMENU_HFTDSC' , 'اگر شکل منوی مدیریت شما تغییر نکرد کش cache/adminmenu.php را حذف کنید یا با استفاده از ctrl + F5 کش سیستم را خالی کنید. این ویژگی فقط در زوپس 2.0 کار میکند' ) ;
+define( '_MI_ALTSYS_AMHFT_OPT_2COL' , 'نمایش آیکن ماژول ها در دو ردیف' ) ;
+define( '_MI_ALTSYS_AMHFT_OPT_NOIMG' , 'نمایش نام ماژول ها به جای آیکن آن ها' ) ;
+define( '_MI_ALTSYS_AMHFT_OPT_XCSTY' , 'مشابه XoopsCube Legacy 2.1' ) ;
+
+define( '_MI_ALTSYS_ADMINMENU_IM' , 'کپی کردن لینک های ماژول mymenu در منوی مدیریت' ) ;
+define( '_MI_ALTSYS_ADMINMENU_IMDSC' , 'اگر شکل منوی مدیریت شما تغییر نکرد کش cache/adminmenu.php را حذف کنید یا با استفاده از ctrl + F5 کش سیستم را خالی کنید. این ویژگی فقط در زوپس 2.0 کار میکند' ) ;
 
 ?>

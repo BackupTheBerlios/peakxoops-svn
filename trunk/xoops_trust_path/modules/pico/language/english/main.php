@@ -8,6 +8,8 @@ define('_MD_PICO_CREATED','Created');
 define('_MD_PICO_MODIFIED','Modified');
 define('_MD_PICO_BYTE','byte');
 define('_MD_PICO_HISTORY','History');
+define('_MD_PICO_DIFF2NOW','diff to now');
+define('_MD_PICO_DIFFFROMPREV','diff from previous');
 define('_MD_PICO_REFERIT','Refer it');
 define('_MD_PICO_VIEWED','Views');
 define('_MD_PICO_NEXT','Next');

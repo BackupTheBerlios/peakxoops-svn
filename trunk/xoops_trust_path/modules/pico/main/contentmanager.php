@@ -1,6 +1,7 @@
 <?php
 
 include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
+require_once dirname(dirname(__FILE__)).'/include/history_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 
 // redirect with POST as SESSION when wraps mode's preview

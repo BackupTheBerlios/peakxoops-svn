@@ -48,3 +48,6 @@ p.pico_submit{
 
 input.pico_ascii_only { ime-mode: disabled; }
 input.pico_number_only { ime-mode: disabled; text-align: right; }
+
+pre.pico_history_diff del { color: red; }
+pre.pico_history_diff ins { color: blue; }

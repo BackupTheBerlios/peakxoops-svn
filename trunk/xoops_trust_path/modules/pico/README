@@ -99,6 +99,10 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.16 beta (2007/03/20)
+- added history diff
+- modified viewer of histories
+
 1.15 beta (2007/03/16)
 - fixed a typo in header('Expires'...) (thx rock)
 - fixed css template does not work (thx mizukami) 1.15a
@@ -312,6 +316,10 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.16 beta (2007/03/20)
+- 履歴比較機能実装
+- ヒストリ参照機能の改善(IE対策)
 
 1.15 beta (2007/03/16)
 - HTTPヘッダ送出でのtypoを修正 (thx rock)

@@ -8,6 +8,8 @@ define('_MD_PICO_CREATED','作成');
 define('_MD_PICO_MODIFIED','更新');
 define('_MD_PICO_BYTE','byte');
 define('_MD_PICO_HISTORY','履歴');
+define('_MD_PICO_DIFF2NOW','現在との差分');
+define('_MD_PICO_DIFFFROMPREV','前バージョンとの差分');
 define('_MD_PICO_REFERIT','参照する');
 define('_MD_PICO_VIEWED','閲覧数');
 define('_MD_PICO_NEXT','次');

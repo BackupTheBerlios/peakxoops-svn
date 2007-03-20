@@ -1,5 +1,8 @@
 [xlang:en]
 
+v0.34 (2007-03-21)
+- added a feature of "admin in theme"
+
 v0.33 (2007-03-20)
 - modified admin menu hacks a little bit
 - modified compilehookadmin for other than html templates
@@ -44,11 +47,18 @@ v0.10 (2006-05-19)
 [/xlang:en]
 [xlang:ja]
 
+v0.34 (2007-03-21)
+- 管理画面を公開側テーマで表示する機能の追加
+
+v0.33 (2007-03-20)
+- 管理メニューの書き換え機能をもう少し改良した
+- テンプレートの高度な管理で、HTML以外のテンプレートの処理を変更
+- 言語ファイル更新
+-- persian (thx voltan)
+
 v0.32 (2007-03-19)
 - 管理メニューの書き換え機能の完成度を高めた
 - 0.31でインストールできなくなっていたバグの修正 (thx fourpsk)
-- 言語ファイル更新
--- persian (thx voltan)
 
 v0.31 (2007-03-18)
 - 管理メニューの書き換え機能追加

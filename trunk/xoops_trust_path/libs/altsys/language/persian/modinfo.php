@@ -1,5 +1,10 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-21 05:34:59
+define('_MI_ALTSYS_ADMIN_IN_THEME','Theme set for admin');
+define('_MI_ALTSYS_ADMIN_IN_THEMEDSC','Set the name of the theme displaying admin area. Insert a line just after including common.php in mainfile.php<br />include XOOPS_TRUST_PATH.\'/libs/altsys/include/admin_in_theme.inc.php\';<br /> to enable this. This feature works only with XOOPS 2.0.x');
+
 define( '_MI_ALTSYS_MODULENAME' , 'آلت سیس' ) ;
 define( '_MI_ALTSYS_MODULEDESC' , 'مدیریت ساده ی سیستم' ) ;
 

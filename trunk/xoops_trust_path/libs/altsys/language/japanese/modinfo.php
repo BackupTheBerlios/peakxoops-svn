@@ -20,4 +20,8 @@ define( '_MI_ALTSYS_AMHFT_OPT_XCSTY' , 'XC Legacy 2.1風にする' ) ;
 define( '_MI_ALTSYS_ADMINMENU_IM' , 'mymenu対応モジュールの反映' ) ;
 define( '_MI_ALTSYS_ADMINMENU_IMDSC' , 'mymenu対応モジュールのリンクを、管理画面左のモジュールメニューに反映させます。表示がおかしくなった時の対応法は、上と同じです。XOOPS 2.0.x以外では無視されます。' ) ;
 
+define( '_MI_ALTSYS_ADMIN_IN_THEME' , '管理画面用テーマ' ) ;
+define( '_MI_ALTSYS_ADMIN_IN_THEMEDSC' , '管理画面を表示するテーマ名を指定します。XOOPS 2.0.x 以外では有効になりません。また、mainfile.phpのcommon.php行直後に、<br />include XOOPS_TRUST_PATH.\'/libs/altsys/include/admin_in_theme.inc.php\';<br />の１行を挿入する必要があります' ) ;
+
+
 ?>

@@ -66,6 +66,8 @@ function altsys_admin_in_theme_in_last()
 		'content' => $admin_menu_block_contents ,
 		'weight' => 0 ,
 	) ) ;
+	$lblocks = $xoopsTpl->get_template_vars( 'xoops_lblocks' ) ;
+	if( ! is_array( $lblocks ) ) $lblocks = array() ;
 	$xoopsTpl->assign( 'xoops_lblocks' , array_merge( $admin_menu_block , $xoopsTpl->get_template_vars( 'xoops_lblocks' ) ) ) ;
 
 	// javascripts
@@ -97,7 +99,6 @@ function altsys_admin_in_theme_in_last()
 		$xoopsLogger->activated = true ;
 		echo $xoopsLogger->render('') ;
 	}
-	echo 'hi' ;
 }
 
 

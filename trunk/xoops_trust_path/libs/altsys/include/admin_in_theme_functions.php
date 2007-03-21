@@ -68,7 +68,7 @@ function altsys_admin_in_theme_in_last()
 	) ) ;
 	$lblocks = $xoopsTpl->get_template_vars( 'xoops_lblocks' ) ;
 	if( ! is_array( $lblocks ) ) $lblocks = array() ;
-	$xoopsTpl->assign( 'xoops_lblocks' , array_merge( $admin_menu_block , $xoopsTpl->get_template_vars( 'xoops_lblocks' ) ) ) ;
+	$xoopsTpl->assign( 'xoops_lblocks' , array_merge( $admin_menu_block , $lblocks ) ) ;
 
 	// javascripts
 	$xoops_admin_menu_js .= '

@@ -2,11 +2,22 @@
 
 function altsys_admin_in_theme( $s )
 {
-	global $xoops_admin_contents ;
+	global $xoops_admin_contents , $xoops_debug_mode ;
 
-	list( , $s ) = explode( "<div class='content'>" , $s ) ;
-	list( $s , ) = explode( "<td width='1%' background='".XOOPS_URL."/modules/system/images/bg_content.gif'>" , $s ) ;
-	$xoops_admin_contents = substr( strrev( strstr( strrev( $s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
+	// redirect
+	if( strstr( $s , '<meta http-equiv="Refresh" ' ) ) return $s ;
+
+	list( , $tmp_s ) = explode( "<div class='content'>" , $s ) ;
+	if( empty( $tmp_s ) ) {
+		$xoops_admin_contents = $s ;
+	} else {
+		list( $tmp_s , $tmp_after ) = explode( "<td width='1%' background='".XOOPS_URL."/modules/system/images/bg_content.gif'>" , $tmp_s ) ;
+		if( empty( $tmp_after ) ) {
+			$xoops_admin_contents = $s ;
+		} else {
+			$xoops_admin_contents = substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
+		}
+	}
 
 	register_shutdown_function( 'altsys_admin_in_theme_in_last' ) ;
 
@@ -16,11 +27,19 @@ function altsys_admin_in_theme( $s )
 
 function altsys_admin_in_theme_in_last()
 {
-	global $xoops_admin_contents , $xoopsConfig , $xoopsUser , $altsysModuleConfig ;
+	global $xoops_admin_contents , $xoops_debug_mode , $xoopsConfig , $xoopsUser , $xoopsLogger , $altsysModuleConfig ;
 
-	// Smarty
-	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-	$tpl =& new XoopsTpl() ;
+	if( altsys_get_core_type() == ALTSYS_CORE_TYPE_X20 ) {
+		// cheat header.php :-)
+		$xoopsOption['template_main'] = 'system_dummy' ;
+		$xoopsUserIsAdmin = true ;
+		global $block_arr , $i ;
+		include XOOPS_ROOT_PATH.'/header.php' ;
+	} else {
+		// Smarty
+		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+		$xoopsTpl =& new XoopsTpl() ;
+	}
 
 	// set the theme
 	$xoopsConfig['theme_set'] = $altsysModuleConfig['admin_in_theme'] ;
@@ -42,6 +61,12 @@ function altsys_admin_in_theme_in_last()
 
 	// adminmenu as a block
 	$admin_menu_block_contents = '<div class="adminmenu_block">'.implode( "\n" , $xoops_admin_menu_ft ).'</div>' ;
+	$admin_menu_block = array( array(
+		'title' => 'Admin Menu' ,
+		'content' => $admin_menu_block_contents ,
+		'weight' => 0 ,
+	) ) ;
+	$xoopsTpl->assign( 'xoops_lblocks' , array_merge( $admin_menu_block , $xoopsTpl->get_template_vars( 'xoops_lblocks' ) ) ) ;
 
 	// javascripts
 	$xoops_admin_menu_js .= '
@@ -51,27 +76,28 @@ function altsys_admin_in_theme_in_last()
 		function shutdown() {'.implode("\n",$xoops_admin_menu_sd).'}' ;
 
 	// assignment
-	$tpl->assign( array(
+	$xoopsTpl->assign( array(
 		'xoops_theme' => $xoopsConfig['theme_set'] ,
 		'xoops_imageurl' => XOOPS_THEME_URL.'/'.$xoopsConfig['theme_set'].'/',
 		'xoops_themecss'=> xoops_getcss($xoopsConfig['theme_set']),
 		'xoops_requesturi' => htmlspecialchars($GLOBALS['xoopsRequestUri'], ENT_QUOTES),
 		'xoops_sitename' => htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES),
-		'xoops_lblocks' => array(
-			array(
-				'title' => 'Admin Menu' ,
-				'content' => $admin_menu_block_contents ,
-				'weight' => 0 ,
-			) ,
-		) ,
 		'xoops_showlblock' => 1 ,
 		'xoops_js' => '//--></script><script type="text/javascript" src="'.XOOPS_URL.'/include/xoops.js"></script><script type="text/javascript" src="'.XOOPS_URL.'/include/layersmenu.js"></script><script type="text/javascript"><!--'."\n".$xoops_admin_menu_js ,
+		'xoops_runs_admin_side' => 1 ,
 		'xoops_slogan' => htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES) ,
 		'xoops_contents' => $xoops_admin_contents . '<div id="adminmenu_layers">' . $xoops_admin_menu_dv . '</div>' ,
 	) ) ;
 
 	// rendering
-	$tpl->display( $xoopsConfig['theme_set'].'/theme.html' ) ;
+	$xoopsTpl->display( $xoopsConfig['theme_set'].'/theme.html' ) ;
+
+	// for XOOPS 2.0.14/15/16 from xoops.org
+	if( is_object( @$xoopsLogger ) && method_exists( $xoopsLogger , 'render' ) && in_array( $xoopsConfig['debug_mode'] , array( 1 , 2 ) ) ) {
+		$xoopsLogger->activated = true ;
+		echo $xoopsLogger->render('') ;
+	}
+	echo 'hi' ;
 }
 
 

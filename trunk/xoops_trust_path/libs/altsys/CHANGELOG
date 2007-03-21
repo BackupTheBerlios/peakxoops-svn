@@ -1,5 +1,9 @@
 [xlang:en]
 
+v0.35 (2007-03-22)
+- modified compatibilities of "admin in theme"
+- added a feature any blocks can be displayed in "admin in theme" (only with JP)
+
 v0.34 (2007-03-21)
 - added a feature of "admin in theme"
 
@@ -46,6 +50,10 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.35 (2007-03-22)
+- 管理画面テーマの互換性改善
+- ブロック表示を可能にした (現状ではJP版のみ)
 
 v0.34 (2007-03-21)
 - 管理画面を公開側テーマで表示する機能の追加

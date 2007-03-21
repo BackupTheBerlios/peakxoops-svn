@@ -6,7 +6,7 @@ include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 altsys_include_language_file( 'modinfo' ) ;
 
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.34' ;
+$modversion['version'] = '0.35' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -21,7 +21,7 @@ $modversion['adminindex'] = "admin/index.php?lib=altsys&page=myblocksadmin" ;
 $modversion['adminmenu'] = "admin/admin_menu.php";
 
 // Menu
-$modversion['hasMain'] = 0;
+$modversion['hasMain'] = 1;
 
 // Search
 $modversion['hasSearch'] = 0;

@@ -57,7 +57,7 @@ function altsys_include_language_file( $type )
 
 
 define( 'ALTSYS_CORE_TYPE_X20' , 1 ) ; // 2.0.0-2.0.13 and 2.0.x-JP
-define( 'ALTSYS_CORE_TYPE_X20S' , 2 ) ; // 2.0.14- from xoops.org
+define( 'ALTSYS_CORE_TYPE_X20S' , 2 ) ; // 2.0.14- from xoops.org Skalpa's "S"
 define( 'ALTSYS_CORE_TYPE_ORE' , 4 ) ; // ORETEKI by marijuana
 define( 'ALTSYS_CORE_TYPE_X22' , 8 ) ; // 2.2 from xoops.org
 define( 'ALTSYS_CORE_TYPE_XC21L' , 16 ) ; // XOOPS Cube 2.1 Legacy
@@ -66,8 +66,9 @@ function altsys_get_core_type()
 {
 	if( defined( 'XOOPS_ORETEKI' ) ) return ALTSYS_CORE_TYPE_ORE ;
 	else if( defined( 'XOOPS_CUBE_LEGACY' ) ) return ALTSYS_CORE_TYPE_XC21L ;
+	else if( strstr( XOOPS_VERSION , 'JP' ) ) return ALTSYS_CORE_TYPE_X20 ;
 	else {
-		$versions = array_map( 'intval' , explode( '.' , XOOPS_VERSION ) ) ;
+		$versions = array_map( 'intval' , explode( '.' , preg_replace( '/[^0-9.]/' , '' , XOOPS_VERSION ) ) ) ;
 		if( $versions[0] == 2 && $versions[1] > 0 ) {
 			return ALTSYS_CORE_TYPE_X22 ;
 		} else if( $versions[0] == 2 && $versions[1] == 0 && $versions[2] > 13 ) {

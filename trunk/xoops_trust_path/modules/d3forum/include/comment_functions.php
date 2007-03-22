@@ -196,6 +196,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 		) ;
 	}
 
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign(
 		array(

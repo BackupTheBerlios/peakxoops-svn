@@ -76,6 +76,7 @@ function b_d3forum_list_forums_show( $options )
 	}
 	$block['categories'] = $cat4assign ;
 
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign( 'block' , $block ) ;
 	$ret['content'] = $tpl->fetch( $this_template ) ;
@@ -237,6 +238,7 @@ function b_d3forum_list_topics_show( $options )
 		$block['topics'][] = $topic4assign ;
 	}
 
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign( 'block' , $block ) ;
 	$ret['content'] = $tpl->fetch( $this_template ) ;
@@ -418,6 +420,7 @@ function b_d3forum_list_posts_show( $options )
 		$block['posts'][] = $post4assign ;
 	}
 
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign( 'block' , $block ) ;
 	$ret['content'] = $tpl->fetch( $this_template ) ;

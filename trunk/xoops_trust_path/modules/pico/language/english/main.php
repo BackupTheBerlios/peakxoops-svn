@@ -11,6 +11,7 @@ define('_MD_PICO_HISTORY','History');
 define('_MD_PICO_DIFF2NOW','diff to now');
 define('_MD_PICO_DIFFFROMPREV','diff from previous');
 define('_MD_PICO_REFERIT','Refer it');
+define('_MD_PICO_DOWNLOADIT','Download it');
 define('_MD_PICO_VIEWED','Views');
 define('_MD_PICO_NEXT','Next');
 define('_MD_PICO_PREV','Prev');

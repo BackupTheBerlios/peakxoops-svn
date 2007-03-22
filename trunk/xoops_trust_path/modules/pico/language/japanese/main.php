@@ -11,6 +11,7 @@ define('_MD_PICO_HISTORY','履歴');
 define('_MD_PICO_DIFF2NOW','現在との差分');
 define('_MD_PICO_DIFFFROMPREV','前バージョンとの差分');
 define('_MD_PICO_REFERIT','参照する');
+define('_MD_PICO_DOWNLOADIT','ダウンロード');
 define('_MD_PICO_VIEWED','閲覧数');
 define('_MD_PICO_NEXT','次');
 define('_MD_PICO_PREV','前');

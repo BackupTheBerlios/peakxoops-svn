@@ -17,10 +17,10 @@ if( ! $category4assign['can_edit'] ) die( _MD_PICO_ERR_EDITCONTENT ) ;
 
 if( headers_sent() ) die( 'headers are already sent' ) ;
 
-header( 'Content-Type: text/html;' ) ;
-header( 'Content-Disposition: inline; filename="content_history_'.sprintf('%010d',$content_history_id).'.txt"' ) ;
+header( 'Content-Type: text/plain' ) ;
+header( 'Content-Disposition: attachment; filename="content_history_'.sprintf('%010d',$content_history_id).'.txt"' ) ;
 
-echo nl2br( htmlspecialchars( $history_body , ENT_QUOTES ) ) ;
+echo $history_body ;
 
 exit ;
 

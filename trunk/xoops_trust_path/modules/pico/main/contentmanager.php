@@ -79,7 +79,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$content = pico_get_requests4content( $mydirname , $errors = array() , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] ) ;
+	$content = pico_get_requests4content( $mydirname , $errors = array() , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] , $content_id ) ;
 	$content4assign = array_map( 'htmlspecialchars_ent' , $content ) ;
 	$content4assign['id'] = $content_id ;
 	$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] , $category4assign['isadminormod'] ) ;

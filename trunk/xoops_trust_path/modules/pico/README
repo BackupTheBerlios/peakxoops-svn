@@ -102,6 +102,8 @@ pico is fast enough if you use content's cache.
 1.16 beta (2007/03/20)
 - added history diff
 - modified viewer of histories
+- fixed the checker for duplicated vpaths 1.16a
+- separated two features viewer and downloader of histories 1.16a
 
 1.15 beta (2007/03/16)
 - fixed a typo in header('Expires'...) (thx rock)
@@ -320,6 +322,8 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 1.16 beta (2007/03/20)
 - 履歴比較機能実装
 - ヒストリ参照機能の改善(IE対策)
+- 仮想パス重複チェックのバグを修正 1.16a
+- 参照とダウンロードを機能として分けた 1.16a
 
 1.15 beta (2007/03/16)
 - HTTPヘッダ送出でのtypoを修正 (thx rock)

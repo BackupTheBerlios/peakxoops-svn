@@ -195,6 +195,8 @@ function xoopsFormValidate_contentform() {
 			(<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)
 			<a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_REFERIT}></a>
 			-
+			<a href="<{$mod_url}>/index.php?page=downloadhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DOWNLOADIT}></a>
+			-
 			<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.id}>&amp;newer_history_id=0"><{$smarty.const._MD_PICO_DIFF2NOW}></a>
 			<{if $history.prev_id}>
 				-

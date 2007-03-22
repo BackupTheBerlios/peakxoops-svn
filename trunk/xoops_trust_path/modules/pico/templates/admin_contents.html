@@ -102,7 +102,11 @@
 									-
 									<{$history.poster_uname}>
 									(<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)
-									<a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>" target="_blank"><{$smarty.const._MD_PICO_REFERIT}></a>
+									<br />
+									&nbsp;
+									<a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_REFERIT}></a>
+									-
+									<a href="<{$mod_url}>/index.php?page=downloadhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DOWNLOADIT}></a>
 									<{if $history.prev_id}>
 										-
 										<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.prev_id}>&amp;newer_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DIFFFROMPREV}></a>

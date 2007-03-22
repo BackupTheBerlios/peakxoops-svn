@@ -16,7 +16,6 @@ function pico_wraps( $mydirname , $text , $content_row )
 		ob_start() ;
 		include $wrap_full_path ;
 		$text = ob_get_contents() ;
-		var_dump( $text ) ;
 		ob_end_clean() ;
 	}
 

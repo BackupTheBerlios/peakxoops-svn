@@ -252,7 +252,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 
 
 // get requests for content's sql (parse options)
-function pico_get_requests4content( $mydirname , &$errors , $auto_approval = true , $isadminormod = false )
+function pico_get_requests4content( $mydirname , &$errors , $auto_approval = true , $isadminormod = false , $content_id = 0 )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
@@ -317,9 +317,9 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		'allow_comment' => empty( $_POST['allow_comment'] ) ? 0 : 1 ,
 	) ;
 
-	// vpath check
+	// vpath duplication check
 	while( 1 ) {
-		list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".addslashes($ret['vpath'])."'" ) ) ;
+		list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".addslashes($ret['vpath'])."' AND content_id<>".intval($content_id) ) ) ;
 		if( empty( $count ) ) break ;
 		$ext = strrchr( $ret['vpath'] , '.' ) ;
 		$ret['vpath'] = str_replace( $ext , '.1'.$ext , $ret['vpath'] ) ;
@@ -382,7 +382,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	$db =& Database::getInstance() ;
 
-	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
+	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
 	$set = '' ;
 	foreach( $requests as $key => $val ) {

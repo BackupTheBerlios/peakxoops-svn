@@ -69,6 +69,7 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 		if( $mymenu_link == $adminmenu[$i]['link'] ) {
 			$adminmenu[$i]['color'] = '#FFCCCC' ;
 			$adminmenu_hilighted = true ;
+			$GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'] ;
 		} else {
 			$adminmenu[$i]['color'] = '#DDDDDD' ;
 		}
@@ -77,6 +78,7 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 		foreach( array_keys( $adminmenu ) as $i ) {
 			if( stristr( $mymenu_uri , $adminmenu[$i]['link'] ) ) {
 				$adminmenu[$i]['color'] = '#FFCCCC' ;
+				$GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'] ;
 				break ;
 			}
 		}

@@ -32,6 +32,8 @@ define($constpref.'_SHOW_BREADCRUMBS','パンくずを表示する');
 define($constpref.'_SHOW_PAGENAVI','ページナビゲーションを表示する');
 define($constpref.'_SHOW_PRINTICON','印刷画面へのリンクを表示する');
 define($constpref.'_SHOW_TELLAFRIEND','友達に紹介するリンクを表示する');
+define($constpref.'_SEARCHBYUID','検索で「投稿者」という概念を有効にする');
+define($constpref.'_SEARCHBYUIDDSC','ONにすると、検索やユーザプロフィール画面などで、「投稿」扱いで表示されます。純粋な静的コンテンツの場合はOFFにすることを勧めます。');
 define($constpref.'_USE_TAFMODULE','tellafriendモジュールを利用する');
 define($constpref.'_FILTERS','デフォルトフィルターセット');
 define($constpref.'_FILTERSDSC','コンテンツ作成時に最初からチェックされているフィルター名を|で区切って入力します。ここに書かれた順番通り適用されます。');

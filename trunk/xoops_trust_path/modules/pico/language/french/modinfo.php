@@ -9,6 +9,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:08
+define($constpref.'_SEARCHBYUID','Enable concepts of poster');
+define($constpref.'_SEARCHBYUIDDSC','Contents will be listed in user profile of its poster. If you use this module as static contents, turn this off.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:23
 define($constpref.'_HISTORY_P_C','How many revisions are stored in DB');
 define($constpref.'_MLT_HISTORY','Minimum lifetime of each revisions (sec)');

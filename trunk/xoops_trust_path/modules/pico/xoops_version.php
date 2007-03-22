@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.16 ;
+$modversion['version'] = 1.17 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -195,10 +195,20 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'search_by_uid' ,
+	'title'			=> $constpref.'_SEARCHBYUID' ,
+	'description'	=> $constpref.'_SEARCHBYUIDDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'filters' ,
 	'title'			=> $constpref.'_FILTERS' ,
 	'description'	=> $constpref.'_FILTERSDSC' ,
-	'formtype'		=> 'textarea' ,
+	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> constant($constpref.'_FILTERSDEFAULT') ,
 	'options'		=> array()

@@ -3,6 +3,10 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:08
+define('_MD_PICO_DOWNLOADIT','Download it');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-20 06:23:19
 define('_MD_PICO_DIFF2NOW','diff to now');
 define('_MD_PICO_DIFFFROMPREV','diff from previous');

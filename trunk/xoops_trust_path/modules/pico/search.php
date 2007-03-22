@@ -4,9 +4,9 @@ include_once dirname(__FILE__).'/include/common_functions.php' ;
 
 eval( '
 
-function '.$mydirname.'_global_search( $keywords , $andor , $limit , $offset , $userid )
+function '.$mydirname.'_global_search( $keywords , $andor , $limit , $offset , $uid )
 {
-	return pico_global_search_base( "'.$mydirname.'" , $keywords , $andor , $limit , $offset , $userid ) ;
+	return pico_global_search_base( "'.$mydirname.'" , $keywords , $andor , $limit , $offset , $uid ) ;
 }
 
 ' ) ;
@@ -14,13 +14,8 @@ function '.$mydirname.'_global_search( $keywords , $andor , $limit , $offset , $
 
 if( ! function_exists( 'pico_global_search_base' ) ) {
 
-function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $offset , $userid )
+function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $offset , $uid )
 {
-	// not implemented for uid specifications
-	if( ! empty( $userid ) ) {
-		return array() ;
-	}
-
 	$db =& Database::getInstance() ;
 
 	// get this module's config
@@ -31,33 +26,47 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
-	$select4con = $showcontext ? "`body_cached` AS text" : "'' AS text" ;
+	$select4con = $showcontext ? "o.`body_cached` AS text" : "'' AS text" ;
 
+	// categories can be read by current viewer (check by category_permissions)
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+
+	// where by uid
+	if( ! empty( $uid ) ) {
+		if( empty( $configs['search_by_uid'] ) ) {
+			return array() ;
+		}
+		$whr_uid = 'o.poster_uid='.intval($uid) ;
+	} else {
+		$whr_uid = '1' ;
+	}
+
+	// where by keywords
 	if( is_array( $keywords ) && count( $keywords ) > 0 ) {
 		switch( strtolower( $andor ) ) {
 			case "and" :
-				$whr = "" ;
+				$whr_kw = "" ;
 				foreach( $keywords as $keyword ) {
-					$whr .= "(`subject` LIKE '%$keyword%' OR `body_cached` LIKE '%$keyword%') AND " ;
+					$whr_kw .= "(o.`subject` LIKE '%$keyword%' OR o.`body_cached` LIKE '%$keyword%') AND " ;
 				}
-				$whr .= "1" ;
+				$whr_kw .= "1" ;
 				break ;
 			case "or" :
-				$whr = "" ;
+				$whr_kw = "" ;
 				foreach( $keywords as $keyword ) {
-					$whr .= "(`subject` LIKE '%$keyword%' OR `body_cached` LIKE '%$keyword%') OR " ;
+					$whr_kw .= "(o.`subject` LIKE '%$keyword%' OR o.`body_cached` LIKE '%$keyword%') OR " ;
 				}
-				$whr .= "0" ;
+				$whr_kw .= "0" ;
 				break ;
 			default :
-				$whr = "(`subject` LIKE '%$keywords[0]%' OR `body_cached` LIKE '%{$keywords[0]}%')" ;
+				$whr_kw = "(o.`subject` LIKE '%$keywords[0]%' OR o.`body_cached` LIKE '%{$keywords[0]}%')" ;
 				break ;
 		}
 	} else {
-		$whr = 1 ;
+		$whr_kw = 1 ;
 	}
 
-	$sql = "SELECT `content_id`,`vpath`,`subject`,`created_time`,$select4con FROM ".$db->prefix( $mydirname."_contents WHERE ($whr) ORDER BY 1" ) ;
+	$sql = "SELECT o.`content_id`,o.`vpath`,o.`subject`,o.`created_time`,o.`poster_uid`,$select4con FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_kw) AND ($whr_uid) AND ($whr_read4content) ORDER BY 1" ;
 	$result = $db->query( $sql , $limit , $offset ) ;
 	$ret = array() ;
 	$context = '' ;
@@ -75,7 +84,7 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 			'link' => pico_make_content_link4html( $configs , $content_row ) ,
 			'title' => $content_row['subject'] ,
 			'time' => $content_row['created_time'] ,
-			'uid' => 0 ,
+			'uid' => empty( $configs['search_by_uid'] ) ? 0 : $content_row['poster_uid'] ,
 			'context' => $context ,
 		) ;
 	}

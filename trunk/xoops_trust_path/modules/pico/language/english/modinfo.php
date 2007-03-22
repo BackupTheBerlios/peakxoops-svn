@@ -32,6 +32,8 @@ define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
 define($constpref.'_SHOW_PAGENAVI','Display page navigation');
 define($constpref.'_SHOW_PRINTICON','Display printer friendly icon');
 define($constpref.'_SHOW_TELLAFRIEND','Display tell a friend icon');
+define($constpref.'_SEARCHBYUID','Enable concepts of poster');
+define($constpref.'_SEARCHBYUIDDSC','Contents will be listed in user profile of its poster. If you use this module as static contents, turn this off.');
 define($constpref.'_USE_TAFMODULE','Use "tellafriend" module');
 define($constpref.'_FILTERS','Default filter set');
 define($constpref.'_FILTERSDSC','input filter names separated with | (pipe)');

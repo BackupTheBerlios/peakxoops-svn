@@ -21,11 +21,15 @@ $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
 // preferences for altsys self
 array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
 
+// xoops_breadcrumbs
+$GLOBALS['altsysXoopsBreadcrumbs'] = array( array( 'url' => XOOPS_URL.'/modules/altsys/admin/index.php' , 'name' => $xoopsModule->getVar('name') ) ) ;
+
 // highlight (you can customize the colors)
 foreach( array_keys( $adminmenu ) as $i ) {
 	if( $mymenu_link == $adminmenu[$i]['link'] ) {
 		$adminmenu[$i]['color'] = '#FFCCCC' ;
 		$adminmenu_hilighted = true ;
+		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
 	} else {
 		$adminmenu[$i]['color'] = '#DDDDDD' ;
 	}
@@ -34,6 +38,7 @@ if( empty( $adminmenu_hilighted ) ) {
 	foreach( array_keys( $adminmenu ) as $i ) {
 		if( stristr( $mymenu_uri , $adminmenu[$i]['link'] ) ) {
 			$adminmenu[$i]['color'] = '#FFCCCC' ;
+			$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
 			break ;
 		}
 	}

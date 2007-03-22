@@ -15,6 +15,7 @@ while( list( $name , $dirname ) = $db->fetchRow( $mrs ) ) {
 			'title' => $name ,
 			'link' => '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$dirname ,
 		) ;
+		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => htmlspecialchars( $name , ENT_QUOTES ) ) ;
 	} else {
 		$adminmenu[] = array(
 			'color' => '#DDDDDD' ,

@@ -21,6 +21,7 @@ foreach( $modules4menu as $m4menu ) {
 			'title' => $m4menu->getVar('name') ,
 			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname') ,
 		) ;
+		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => $m4menu->getVar('name') ) ;
 	} else {
 		$adminmenu[] = array(
 			'color' => '#DDDDDD' ,

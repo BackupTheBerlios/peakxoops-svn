@@ -4,15 +4,17 @@ set_altsys_module_config() ;
 
 function set_altsys_module_config()
 {
-	global $altsysModuleConfig ;
+	global $altsysModuleConfig , $altsysModuleId ;
 
 	$module_handler =& xoops_gethandler( 'module' ) ;
 	$module =& $module_handler->getByDirname( 'altsys' ) ;
 	if( is_object( $module ) ) {
 		$config_handler =& xoops_gethandler( 'config' ) ;
-		$altsysModuleConfig = $config_handler->getConfigList( $module->mid() ) ;
+		$altsysModuleConfig = $config_handler->getConfigList( $module->getVar('mid') ) ;
+		$altsysModuleId = $module->getVar('mid') ;
 	} else {
 		$altsysModuleConfig = array() ;
+		$altsysModuleId = 0 ;
 	}
 }
 

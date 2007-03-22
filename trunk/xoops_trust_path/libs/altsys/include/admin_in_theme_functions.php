@@ -2,22 +2,21 @@
 
 function altsys_admin_in_theme( $s )
 {
-	global $xoops_admin_contents , $xoops_debug_mode ;
+	global $xoops_admin_contents ;
+
+	// check whether cp_functions.php is loaded
+	if( ! defined( 'XOOPS_CPFUNC_LOADED' ) ) return $s ;
 
 	// redirect
 	if( strstr( $s , '<meta http-equiv="Refresh" ' ) ) return $s ;
 
-	list( , $tmp_s ) = explode( "<div class='content'>" , $s ) ;
-	if( empty( $tmp_s ) ) {
-		$xoops_admin_contents = $s ;
-	} else {
-		list( $tmp_s , $tmp_after ) = explode( "<td width='1%' background='".XOOPS_URL."/modules/system/images/bg_content.gif'>" , $tmp_s ) ;
-		if( empty( $tmp_after ) ) {
-			$xoops_admin_contents = $s ;
-		} else {
-			$xoops_admin_contents = substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
-		}
-	}
+	list( , $tmp_s ) = explode( "<div class='content'>" , $s , 2 ) ;
+	if( empty( $tmp_s ) ) return $s ;
+
+	list( $tmp_s , $tmp_after ) = explode( "<td width='1%' background='".XOOPS_URL."/modules/system/images/bg_content.gif'>" , $tmp_s ) ;
+	if( empty( $tmp_after ) ) return $s ;
+
+	$xoops_admin_contents = substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
 
 	register_shutdown_function( 'altsys_admin_in_theme_in_last' ) ;
 
@@ -27,22 +26,21 @@ function altsys_admin_in_theme( $s )
 
 function altsys_admin_in_theme_in_last()
 {
-	global $xoops_admin_contents , $xoops_debug_mode , $xoopsConfig , $xoopsUser , $xoopsLogger , $altsysModuleConfig ;
+	global $xoops_admin_contents , $xoopsConfig , $xoopsModule , $xoopsUser , $xoopsUserIsAdmin , $xoopsLogger , $altsysModuleConfig , $altsysModuleId ;
 
-	if( altsys_get_core_type() == ALTSYS_CORE_TYPE_X20 ) {
-		// cheat header.php :-)
-		$xoopsOption['template_main'] = 'system_dummy' ;
-		$xoopsUserIsAdmin = true ;
-		global $block_arr , $i ;
-		include XOOPS_ROOT_PATH.'/header.php' ;
+	if( ! is_object( $xoopsUser ) ) exit ;
+
+	// language files
+	if( file_exists( dirname(dirname(__FILE__)).'/language/'.$xoopsConfig['language'].'/admin_in_theme.php' ) ) {
+		include dirname(dirname(__FILE__)).'/language/'.$xoopsConfig['language'].'/admin_in_theme.php' ;
 	} else {
-		// Smarty
-		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-		$xoopsTpl =& new XoopsTpl() ;
+		include dirname(dirname(__FILE__)).'/language/english/admin_in_theme.php' ;
 	}
 
 	// set the theme
 	$xoopsConfig['theme_set'] = $altsysModuleConfig['admin_in_theme'] ;
+
+	include dirname(__FILE__).'/admin_in_theme_header.inc.php' ;
 
 	// include adminmenu
 	include XOOPS_CACHE_PATH.'/adminmenu.php' ;
@@ -51,7 +49,7 @@ function altsys_admin_in_theme_in_last()
 	$moduleperm_handler =& xoops_gethandler('groupperm');
 	$admin_mids = $moduleperm_handler->getItemIds('module_admin', $xoopsUser->getGroups());
 	$module_handler =& xoops_gethandler('module');
-	$modules =& $module_handler->getObjects(new Criteria('mid', "(".implode(',', $admin_mids).")", 'IN'), true);
+	$modules = $module_handler->getObjects(new Criteria('mid', "(".implode(',', $admin_mids).")", 'IN'), true);
 	$admin_mids = array_keys($modules);
 
 	// menu items &= admin permissions
@@ -87,6 +85,7 @@ function altsys_admin_in_theme_in_last()
 		'xoops_showlblock' => 1 ,
 		'xoops_js' => '//--></script><script type="text/javascript" src="'.XOOPS_URL.'/include/xoops.js"></script><script type="text/javascript" src="'.XOOPS_URL.'/include/layersmenu.js"></script><script type="text/javascript"><!--'."\n".$xoops_admin_menu_js ,
 		'xoops_runs_admin_side' => 1 ,
+		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 		'xoops_slogan' => htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES) ,
 		'xoops_contents' => $xoops_admin_contents . '<div id="adminmenu_layers">' . $xoops_admin_menu_dv . '</div>' ,
 	) ) ;

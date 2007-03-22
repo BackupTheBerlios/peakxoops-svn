@@ -1,5 +1,18 @@
 [xlang:en]
 
+v0.36 (2007-03-23)
+- modified compatibilities of "admin in theme" still
+- added a feature blocks can be displayed in "admin in theme" (also xoops.org)
+- changed blocks displaying rule in "admin in theme" (specify ALTSYS explicitly)
+- added xoops_breadcrumbs for "admin in theme"
+
+v0.36 (2007-03-23)
+- 管理画面テーマの互換性のさらなる改善
+- 管理画面テーマで、本家版2.0.xでもブロック表示を可能とした
+- 管理画面テーマブロック表示仕様変更 （対象に"ALTSYS"が明示的に指定された時だけ）
+- 管理画面テーマでのxoops_breadcrumbs対応
+
+
 v0.35 (2007-03-22)
 - modified compatibilities of "admin in theme"
 - added a feature any blocks can be displayed in "admin in theme" (only with JP)
@@ -50,6 +63,12 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.36 (2007-03-23)
+- 管理画面テーマの互換性のさらなる改善
+- 管理画面テーマで、本家版2.0.xでもブロック表示を可能とした
+- 管理画面テーマブロック表示仕様変更 （対象に"ALTSYS"が明示的に指定された時だけ）
+- 管理画面テーマでのxoops_breadcrumbs対応
 
 v0.35 (2007-03-22)
 - 管理画面テーマの互換性改善

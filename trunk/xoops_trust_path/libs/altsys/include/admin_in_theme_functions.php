@@ -4,6 +4,8 @@ function altsys_admin_in_theme( $s )
 {
 	global $xoops_admin_contents ;
 
+	$xoops_admin_contents = '' ;
+
 	// check whether cp_functions.php is loaded
 	if( ! defined( 'XOOPS_CPFUNC_LOADED' ) ) return $s ;
 
@@ -18,8 +20,6 @@ function altsys_admin_in_theme( $s )
 
 	$xoops_admin_contents = substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
 
-	register_shutdown_function( 'altsys_admin_in_theme_in_last' ) ;
-
 	return '' ;
 }
 
@@ -28,13 +28,19 @@ function altsys_admin_in_theme_in_last()
 {
 	global $xoops_admin_contents , $xoopsConfig , $xoopsModule , $xoopsUser , $xoopsUserIsAdmin , $xoopsLogger , $altsysModuleConfig , $altsysModuleId ;
 
+	while( ob_get_level() ) {
+		ob_end_flush() ;
+	}
+
+	if( empty( $xoops_admin_contents ) ) return ;
+
 	if( ! is_object( $xoopsUser ) ) exit ;
 
 	// language files
 	if( file_exists( dirname(dirname(__FILE__)).'/language/'.$xoopsConfig['language'].'/admin_in_theme.php' ) ) {
-		include dirname(dirname(__FILE__)).'/language/'.$xoopsConfig['language'].'/admin_in_theme.php' ;
+		include_once dirname(dirname(__FILE__)).'/language/'.$xoopsConfig['language'].'/admin_in_theme.php' ;
 	} else {
-		include dirname(dirname(__FILE__)).'/language/english/admin_in_theme.php' ;
+		include_once dirname(dirname(__FILE__)).'/language/english/admin_in_theme.php' ;
 	}
 
 	// set the theme

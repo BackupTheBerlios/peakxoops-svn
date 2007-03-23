@@ -13,6 +13,7 @@ if( is_object( $xoopsUser ) ) {
 			// for security with register_globals=1
 			unset( $GLOBALS['altsysAdminPageTitle'] , $GLOBALS['altsysXoopsBreadcrumbs'] ) ;
 
+			register_shutdown_function( 'altsys_admin_in_theme_in_last' ) ;
 			ob_start( 'altsys_admin_in_theme' ) ;
 		}
 	}

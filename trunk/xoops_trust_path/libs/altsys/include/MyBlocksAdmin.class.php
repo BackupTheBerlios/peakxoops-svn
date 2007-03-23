@@ -108,10 +108,8 @@ function list_blocks( $target_mid , $target_dirname )
 		$module_handler =& xoops_gethandler('module');
 		$criteria = new CriteriaCompo(new Criteria('hasmain', 1));
 		$criteria->add(new Criteria('isactive', 1));
-		$module_list =& $module_handler->getList($criteria);
-		$module_list[-1] = _MD_A_MYBLOCKSADMIN_TOPPAGE;
-		$module_list[0] = _MD_A_MYBLOCKSADMIN_ALLPAGES;
-		ksort($module_list);
+		$module_list = $module_handler->getList($criteria);
+		$module_list= array( -1 => _MD_A_MYBLOCKSADMIN_TOPPAGE , 0 => _MD_A_MYBLOCKSADMIN_ALLPAGES ) + $module_list ;
 		$module_options = '' ;
 		foreach( $module_list as $mid => $mname ) {
 			if( in_array( $mid , $selected_mids ) ) {

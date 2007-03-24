@@ -21,6 +21,13 @@ div.d3f_body div.xoopsQuote{
 	margin				:0;
 	padding				:5px;}
 
+/* em.d3f_attn */
+
+em.d3f_attn{
+	font-style			:normal;
+	border-bottom			:1px #333 dotted;
+	cursor				:help;}
+
 /* d3f_breadcrumbs */
 
 div.d3f_breadcrumbs{
@@ -33,7 +40,7 @@ div.d3f_breadcrumbs{
 .d3f_head{
 	clear				:both;
 	padding				:3px 8px;}
-.d3f_head *{
+.d3f_head h2 img{
 	vertical-align		:middle;}
 .d3f_head p{
 	font-weight			:normal;
@@ -70,6 +77,7 @@ h2.d3f_tree{
 /* h3 */
 
 h3.d3f_head_h3{
+	font-size				:120%;
 	margin				:5px 0 0;
 	padding				:2px 8px;
 	border-bottom			:1px #999 solid;}
@@ -98,12 +106,13 @@ h3.d3f_head_h3{
 	background-color		:#fff;
 	border-top			:1px #aaa dotted;
 	border-bottom			:1px #aaa solid;}
-.d3f_info *,.d3f_info_sub *,.d3f_info_ctrl *{
+.d3f_info form input,.d3f_info_sub form input,.d3f_info_ctrl form input{
 	vertical-align		:middle;}
 
 /* d3f_body */
 
 .d3f_body{
+	line-height			:150%;
 	margin				:0 -2px;
 	padding				:15px 8px;
 	border-top			:1px #aaa solid;}
@@ -142,27 +151,11 @@ p.d3f_viewctrl{
 /* d3f_ctrl */
 
 .d3f_ctrl{
-	text-align			:center;
-	clear				:both;
-	margin				:-8px 0 10px;
-	padding				:8px;
-	background-color		:#eee;}
-.d3f_ctrl *{
-	vertical-align		:middle;}
-.d3f_ctrl p,.d3f_ctrl form{
-	padding				:3px;
-	margin				:0;}
-
-ul.d3f_othertopics,ul.d3f_othertopics li{
-	list-style			:none outside;
-	text-align			:center;
-	margin				:0;
-	padding				:0;}
-ul.d3f_othertopics li{
-	padding-bottom		:10px;}
-ul.d3f_othertopics li{
-	width				:33%;
-	float				:left;}
+	border				:1px #ccc solid;
+	background-color		:#f8f8f8;
+	padding				:5px;
+	line-height			:150%;
+	clear				:both;}
 
 div.d3f_topctrl{
 	float				:left;
@@ -170,7 +163,7 @@ div.d3f_topctrl{
 
 div.d3f_topctrl_icons{
 	float				:right;
-	width				:100px;}
+	width				:40px;}
 
 a.topic_icon_ctrl{
 	text-indent			:-9000px;
@@ -196,6 +189,8 @@ ul.d3f_eachbranch li img{
 /* d3f_currenttopic */
 
 .d3f_eachbranch li.d3f_eachbranchitem{
+	padding-top			:2px;
+	padding-bottom		:2px;
 	background-color		:#eee;}
 .d3f_eachbranch li.d3f_currenttopic{
 	background-color		:#fff;}
@@ -272,7 +267,7 @@ table.d3f_table td img{
 	margin-right			:3px;}
 
 table.d3f_table td dl{
-	text-align			:left;
+	text-align			:left !important;
 	margin				:0 -3px;
 	padding				:0;}
 table.d3f_table td dt{
@@ -325,42 +320,72 @@ p.d3f_submit{
 	margin				:0;
 	padding				:10px;}
 
+
 /* edit colors */
-/* titles */
-
-div.d3f_msgtitle h2{
-	background-color		:#555;}
-div.d3f_msgtitle h2.invisible {
-	background-color			:#f00;}
-div.d3f_msgtitle h2.yetapproval {
-	background-color			:#0ff;}
-div.d3f_msgtitle h2 a{
-	color				:#fff;}
-div.d3f_msgtitle h2 a:hover{
-	color				:#f4b343;}
-
-.d3f_head ,h2.d3f_head{
-	color				:#fff;
-	background-color		:#555;}
-.d3f_head a,h2.d3f_head a{
-	color				:#fff;}
-.d3f_head a:hover,h2.d3f_head a:hover{
-	color				:#f4b343;}
-
-/*.d3f_table th,
-.d3f_form_table th,
-.d3f_table thead th,
-.d3f_form_table thead th{
-	text-align			:left !important;
-	background-color		:#555 !important;}
-.d3f_table tr.even td,
-.d3f_form_table tr.even td{
-	background-color		:#dfdfdd !important;}
-.d3f_table tr.odd td,
-.d3f_form_table tr.odd td{
-	background-color		:#f3f3f3 !important;}*/
 
 h2.attn {
 	background-color			:#f00;}
-.d3f_form_table th { color: black;}
+.d3f_form_table th {
+	color					:black;}
 
+/* invisible topic background */
+.d3f_head h2.invisible {
+	background-color		:#f00;}
+
+/* Yet Approved topic background */
+.d3f_head h2.yetapproval {
+	background-color		:#0ff;}
+
+/* each post: read controler background */
+.d3f_info{
+	background-color		:#eee;}
+
+/* each post: read poster infomation background */
+.d3f_info_sub{
+	background-color		:#fff;}
+
+/* each post: read controler background and border */
+.d3f_info_ctrl{
+	background-color		:#fff;
+	border-top			:1px #aaa dotted;
+	border-bottom			:1px #aaa solid;}
+
+/* tree view: current and not current */
+.d3f_eachbranch li.d3f_eachbranchitem{
+	background-color		:#eee;}
+.d3f_eachbranch li.d3f_currenttopic{
+	background-color		:#fff;}
+
+/* page top: controler */
+.d3f_ctrl{
+	border				:1px #ccc solid;
+	background-color		:#f8f8f8;}
+
+/* breadcrumbs */
+div.d3f_breadcrumbs{
+	border-bottom			:1px #aaa solid;}
+
+/* top page: forum list title */
+h3.d3f_head_h3{
+	border-bottom			:1px #999 solid;}
+
+
+/* each post: wraper */
+.d3f_wrap{
+	border-top			:1px #aaa solid;
+	border-right			:1px #aaa solid;
+	border-left			:1px #aaa solid;}
+.d3f_body{
+	border-top			:1px #aaa solid;}
+
+/* forum explanation border */
+
+table.d3f_table td dd.d3f_td_topicinfo{
+	border-top			:1px #777 dashed;}
+
+/* heading */
+/* remove this line
+.d3f_head a:link{color		:#333 !important;}
+.d3f_head a:visited{color	:#333 !important;}
+.d3f_head a:hover{color		:#900 !important;}
+remove this line */

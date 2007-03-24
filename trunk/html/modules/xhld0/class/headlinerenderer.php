@@ -97,7 +97,7 @@ class XhldRenderer
 				$snoopy->proxy_pass = $this->config['proxy_pass'] ;
 			}
 			// set curl_path for SSL access
-			if( file_exists( '/usr/bin/curl' ) ) {
+			if( @file_exists( '/usr/bin/curl' ) ) {
 				$snoopy->curl_path = '/usr/bin/curl' ;
 			} else {
 				$snoopy->curl_path = '/usr/local/bin/curl' ;

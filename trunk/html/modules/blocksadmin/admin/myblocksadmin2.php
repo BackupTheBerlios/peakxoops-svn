@@ -35,7 +35,7 @@ foreach( $group_defs as $def ) {
 // check $xoopsModule
 if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
 
-// set target_module if specified by $_GET['dirname'] && this is 'blocksadmin'
+// set target_module if specified by $_GET['dirname']
 $module_handler =& xoops_gethandler('module');
 if( ! empty( $_GET['dirname'] ) ) {
 	$dirname = strtr( $_GET['dirname'] , "\'\"\0<>" , '     ' ) ;
@@ -50,7 +50,7 @@ if( ! empty( $target_module ) && is_object( $target_module ) ) {
 } else if( $xoopsModule->getVar('dirname') == 'blocksadmin' ) {
 	$target_mid = 0 ;
 	$target_mname = '' ;
-	$target_dirname = '' ;
+	$target_dirname = '__CustomBlocks__' ;
 } else {
 	$target_mid = $xoopsModule->getVar( 'mid' ) ;
 	$target_mname = $xoopsModule->getVar( 'name' ) ;

@@ -16,23 +16,40 @@ mymenu integrates your modules's preferences seamlessly into your
 module's admin section.
 
 
-
 HOW TO USE:
 
-1) copy mymenu.php & admin.php to modules/(your module)/admin/
-   (this admin.php is compatible for myblocksadmin)
+1) copy mymenu.php to modules/(your module)/admin/
 
-2) copy preferences.inc.php & gtickets.php to modules/(your module)/include/
-   (this gtickets.php is compatible for myblocksadmin)
-
-3) edit all of your admin's files and add include('./mymenu.php'); 
+2) edit all of your admin's files and add include('./mymenu.php'); 
    after xoops_cp_header();
+
+3) edit admin/index.php and insert branch code for altsys after including cp_header.php
 
 
 This is a sample skelton of admin's file.
 
-----------------------------
+[code]
 require_once( '../../../include/cp_header.php' ) ;
+
+// branch for altsys
+if( defined( 'XOOPS_TRUST_PATH' ) && ! empty( $_GET['lib'] ) ) {
+	$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+	$mydirpath = dirname( dirname( __FILE__ ) ) ;
+
+	// common libs (eg. altsys)
+	$lib = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
+	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
+	
+	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;
+	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ;
+	} else {
+		die( 'wrong request' ) ;
+	}
+	exit ;
+}
+
 
 (DB update section)
 
@@ -42,8 +59,7 @@ include(dirname(__FILE__).'/mymenu.php');
 (output section)
 
 xoops_cp_footer() ;
-----------------------------
-
+[/code]
 
 That's all !
 
@@ -62,21 +78,40 @@ That's all !
 
 mymenuは、一般設定画面にもメニューを表示し、設定変更後も、その設定画面に戻れるようにするために作りました。
 
+0.18からは、altsysがインストールされている場合には、altsys内のblocksadminやtplsadminへのリンクも表示します。
+
 
 ●使い方：
 
-1) mymenu.php と admin.php を modules/(dirname)/admin/ にコピーします。
-   admin.php というファイルは、myblocksadmin にも含まれていますが、コンパチです。
+1) mymenu.php を modules/(dirname)/admin/ にコピーします。
 
-2) preferences.inc.php と gtickets.php を、modules/(dirname)/include/ にコピーします。
-   gtickets.php というファイルは、myblocksadmin にも含まれますが、コンパチです。
+2) 管理画面用のファイルを一通り編集し、include('./mymenu.php'); という行を、xoops_cp_header(); の直後に挿入します。
 
-3) 管理画面用のファイルを一通り編集し、include('./mymenu.php'); という行を、xoops_cp_header(); の直後に挿入します。
+3) admin/index.php のcp_header.php読込直後に、altsysへの分岐処理を挿入します。
 
 
 管理画面用スクリプトのサンプルスケルトン：
-----------------------------
+[code]
 require_once( '../../../include/cp_header.php' ) ;
+
+// branch for altsys
+if( defined( 'XOOPS_TRUST_PATH' ) && ! empty( $_GET['lib'] ) ) {
+	$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+	$mydirpath = dirname( dirname( __FILE__ ) ) ;
+
+	// common libs (eg. altsys)
+	$lib = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
+	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
+	
+	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;
+	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ;
+	} else {
+		die( 'wrong request' ) ;
+	}
+	exit ;
+}
 
 (DB update section)
 
@@ -86,7 +121,7 @@ include(dirname(__FILE__).'/mymenu.php');
 (output section)
 
 xoops_cp_footer() ;
-----------------------------
+[/code]
 
 
 お試しあれ！
@@ -97,6 +132,10 @@ xoops_cp_footer() ;
 
 CHANGELOG:
 
+2007-03-22 0.20 added page title for breadcrumbs of "admin in theme"
+2006-12-18 0.19 modified compatibility environment without XOOPS_TRUST_PATH
+2006-10-31 0.18 modified compatibility with Cube 2.1
+                modified altsys friendly
 2006-05-03 0.17 updated gticket2
 2006-02-10 0.16 fixed compatibility problem with XoopsCube2.1alpha (thx nobunobu)
 2005-11-13 0.15 modified the compatibility with PHP 5.0.5

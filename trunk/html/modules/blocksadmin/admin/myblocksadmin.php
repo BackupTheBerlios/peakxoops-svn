@@ -267,7 +267,7 @@ function list_blocks()
 function get_block_configs()
 {
 	$error_reporting_level = error_reporting( 0 ) ;
-	if( preg_match( '/^[.0-9a-zA-Z_-]+$/' , @$_GET['dirname'] ) ) {
+	if( preg_match( '/^[0-9a-zA-Z_-]+$/' , @$_GET['dirname'] ) ) {
 		include dirname(dirname(dirname(__FILE__))).'/'.$_GET['dirname'].'/xoops_version.php' ;
 	} else {
 		include '../xoops_version.php' ;

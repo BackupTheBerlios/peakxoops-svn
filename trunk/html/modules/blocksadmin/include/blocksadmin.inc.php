@@ -46,7 +46,7 @@ if ( isset($_GET['op']) ) {
     $bid = isset($_GET['bid']) ? intval($_GET['bid']) : 0;
   }
 }
-$dirname4disp = preg_replace( '[^a-zA-Z0-9_.-]' , '' , @$_GET['dirname'] ) ;
+$dirname4disp = preg_replace( '/[^a-zA-Z0-9_.-]/' , '' , @$_GET['dirname'] ) ;
 
 
 if (isset($_POST['previewblock'])) {
@@ -381,9 +381,9 @@ if ($op == 'clone_ok') {
 
 	// block type check
 	$block_type = $block->getVar('block_type') ;
-	if( $block_type != 'C' && $block_type != 'M' && $block_type != 'D' ) {
+	/*if( $block_type != 'C' && $block_type != 'M' && $block_type != 'D' ) {
 		redirect_header('myblocksadmin.php',4,'Invalid block');
-	}
+	}*/
 
 	if( empty( $_POST['options'] ) ) $options = array() ;
 	else if( is_array( $_POST['options'] ) ) $options = $_POST['options'] ;

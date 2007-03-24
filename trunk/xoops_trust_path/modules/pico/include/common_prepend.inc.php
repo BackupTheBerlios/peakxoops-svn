@@ -7,10 +7,11 @@ $myts =& PicoTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
 // for compatibility "wraps mode" and "GET" in some environment
-if( substr( $_SERVER['REQUEST_URI'] , -11 ) == '?page=print' ) {
+if( substr( $_SERVER['REQUEST_URI'] , -19 ) == '?page=singlecontent' ) {
+	$_GET['page'] = 'singlecontent' ;
+} else if( substr( $_SERVER['REQUEST_URI'] , -11 ) == '?page=print' ) {
 	$_GET['page'] = 'print' ;
-}
-if( substr( $_SERVER['REQUEST_URI'] , -9 ) == '?page=rss' ) {
+} else if( substr( $_SERVER['REQUEST_URI'] , -9 ) == '?page=rss' ) {
 	$_GET['page'] = 'rss' ;
 }
 

@@ -103,6 +103,7 @@ pico is fast enough if you use content's cache.
 - fixed category's permissions is not affected in search
 - added a configuration using concept of "poster" in search
 - updated mymenu
+- changed some text field into mediumtext 1.17a
 - minor fixes 1.17a
 
 1.16 beta (2007/03/20)
@@ -329,6 +330,7 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 - 検索で権限が反映されていないバグの修正
 - 検索に「投稿ユーザ」という概念を導入するかどうかの設定を追加
 - mymenuの更新
+- 一部のtextをmediumtextに変更 1.17a
 - 細かな修正 1.17a
 
 1.16 beta (2007/03/20)

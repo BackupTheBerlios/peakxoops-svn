@@ -1,6 +1,12 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-26 17:09:10
+define('_MI_ALTSYS_BNAME_ADMIN_MENU','Admin Menu');
+define('_MI_ALTSYS_IMAGES_DIR','Directory for image files');
+define('_MI_ALTSYS_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-21 05:34:59
 define('_MI_ALTSYS_ADMIN_IN_THEME','Theme set for admin');
 define('_MI_ALTSYS_ADMIN_IN_THEMEDSC','Set the name of the theme displaying admin area. Insert a line just after including common.php in mainfile.php<br />include XOOPS_TRUST_PATH.\'/libs/altsys/include/admin_in_theme.inc.php\';<br /> to enable this. This feature works only with XOOPS 2.0.x');

@@ -11,7 +11,8 @@ foreach( $tplsadmin_autoupdate_mydirnames as $tplsadmin_mydirname ) {
 
 	$tplsadmin_mydirname = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $tplsadmin_mydirname ) ;
 	require XOOPS_ROOT_PATH . '/modules/' . $tplsadmin_mydirname . '/mytrustdirname.php' ;
-	$tplsadmin_autoupdate_path = XOOPS_TRUST_PATH . '/modules/' . $mytrustdirname . '/templates' ;
+	$altsys_mid_path = $mytrustdirname == 'altsys' ? '/libs/' : '/modules/' ;
+	$tplsadmin_autoupdate_path = XOOPS_TRUST_PATH . $altsys_mid_path . $mytrustdirname . '/templates' ;
 
 	// modules
 	if( $handler = @opendir( $tplsadmin_autoupdate_path . '/' ) ) {

@@ -6,7 +6,7 @@ include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 altsys_include_language_file( 'modinfo' ) ;
 
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.36' ;
+$modversion['version'] = '0.40' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -19,6 +19,20 @@ $modversion['dirname'] = "altsys";
 $modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = "admin/index.php?lib=altsys&page=myblocksadmin" ;
 $modversion['adminmenu'] = "admin/admin_menu.php";
+
+// All Templates can't be touched by modulesadmin.
+$modversion['templates'] = array() ;
+
+// Blocks
+$modversion['blocks'][1] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> _MI_ALTSYS_BNAME_ADMIN_MENU ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_altsys_admin_menu_show' ,
+	'edit_func'		=> 'b_altsys_admin_menu_edit' ,
+	'options'		=> "$mydirname" ,
+	'template'		=> '' , // use "module" template instead
+) ;
 
 // Menu
 $modversion['hasMain'] = 1;
@@ -60,9 +74,27 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
+$modversion['config'][] = array(
+	'name'			=> 'images_dir' ,
+	'title'			=> '_MI_ALTSYS_IMAGES_DIR' ,
+	'description'	=> '_MI_ALTSYS_IMAGES_DIRDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'images' ,
+	'options'		=> array()
+) ;
+
 // Notification
 
 $modversion['hasNotification'] = 0;
 
+$modversion['onInstall'] = 'include/oninstall.php' ;
+$modversion['onUpdate'] = 'include/onupdate.php' ;
+$modversion['onUninstall'] = 'include/onuninstall.php' ;
+
+// keep block's options
+if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) < 2.1 && ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {
+	include dirname(__FILE__).'/include/x20_keepblockoptions.inc.php' ;
+}
 
 ?>

@@ -131,7 +131,9 @@ function tplsadmin_get_basefilepath( $dirname , $type , $tpl_file )
 	if( ! file_exists( $basefilepath ) && file_exists( XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ) ) {
 		include XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ;
 		if( ! empty( $mytrustdirname ) ) {
-			$path = XOOPS_TRUST_PATH.'/modules/'.$mytrustdirname.'/templates/'.($type=='block'?'blocks/':'').substr( $tpl_file , strlen( $dirname ) + 1 ) ;
+			$mid_path = $mytrustdirname == 'altsys' ? '/libs/' : '/modules/' ;
+		
+			$path = XOOPS_TRUST_PATH.$mid_path.$mytrustdirname.'/templates/'.($type=='block'?'blocks/':'').substr( $tpl_file , strlen( $dirname ) + 1 ) ;
 		}
 	}
 

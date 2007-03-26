@@ -58,27 +58,34 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 	if (is_object($xoopsUser)) {
 		$xoopsTpl->assign(array('xoops_isuser' => true, 'xoops_userid' => $xoopsUser->getVar('uid'), 'xoops_uname' => $xoopsUser->getVar('uname'), 'xoops_isadmin' => $xoopsUserIsAdmin));
 		if ( is_object( @$xoopsModule ) ) {
+			if( $xoopsModule->getVar('mid') == 1 && @$_GET["fct"] == "preferences" && @$_GET["op"] == "showmod" && ! empty( $_GET["mod"] ) ) {
+				$module_handler =& xoops_gethandler( 'module' ) ;
+				$target_module = $module_handler->get( intval( $_GET["mod"] ) ) ;
+			} else {
+				$target_module =& $xoopsModule ;
+			}
+
 			// set page title
-			$xoopsTpl->assign(array('xoops_pagetitle' => $xoopsModule->getVar('name'), 'xoops_modulename' => $xoopsModule->getVar('name'), 'xoops_dirname' => $xoopsModule->getVar('dirname')));
+			$xoopsTpl->assign(array('xoops_pagetitle' => $target_module->getVar('name'), 'xoops_modulename' => $target_module->getVar('name'), 'xoops_dirname' => $target_module->getVar('dirname')));
 
 			// xoops_breadcrumbs
 			if( is_array( @$GLOBALS['altsysXoopsBreadcrumbs'] ) ) {
 				$xoops_breadcrumbs = $GLOBALS['altsysXoopsBreadcrumbs'] ;
 			} else {
-				$mod_url = XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname') ;
-				$mod_path = XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->getVar('dirname') ;
-				$modinfo = $xoopsModule->getInfo() ;
+				$mod_url = XOOPS_URL.'/modules/'.$target_module->getVar('dirname') ;
+				$mod_path = XOOPS_ROOT_PATH.'/modules/'.$target_module->getVar('dirname') ;
+				$modinfo = $target_module->getInfo() ;
 				$xoops_breadcrumbs = array() ;
 				if( ! empty( $modinfo['hasMain'] ) ) {
 					$xoops_breadcrumbs[] = array(
 						'url' => $mod_url.'/' ,
-						'name' => sprintf( _MD_A_AINTHEME_FMT_PUBLICTOP , $xoopsModule->getVar('name') ) ,
+						'name' => sprintf( _MD_A_AINTHEME_FMT_PUBLICTOP , $target_module->getVar('name') ) ,
 					) ;
 				}
 				if( ! empty( $modinfo['adminindex'] ) ) {
 					$xoops_breadcrumbs[] = array(
 						'url' => $mod_url.'/'.$modinfo['adminindex'] ,
-						'name' => sprintf( _MD_A_AINTHEME_FMT_ADMINTOP , $xoopsModule->getVar('name') ) ,
+						'name' => sprintf( _MD_A_AINTHEME_FMT_ADMINTOP , $target_module->getVar('name') ) ,
 					) ;
 				}
 				if( ! empty( $GLOBALS['altsysAdminPageTitle'] ) ) {
@@ -94,7 +101,7 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 				}
 			}
 
-			//$block_arr =& $xoopsblock->getAllByGroupModule($xoopsUser->getGroups(), $xoopsModule->getVar('mid'), false, XOOPS_BLOCK_VISIBLE);
+			//$block_arr =& $xoopsblock->getAllByGroupModule($xoopsUser->getGroups(), $target_module->getVar('mid'), false, XOOPS_BLOCK_VISIBLE);
 		} else {
 			$xoopsTpl->assign( array( 'xoops_pagetitle' => _CPHOME ) ) ;
 			$xoops_breadcrumbs = array(
@@ -127,7 +134,9 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 		}
 	}
 
+	$adminmenublock_exists = false ;
 	foreach (array_keys($block_arr) as $i) {
+		if( $block_arr[$i]->getVar('show_func') == 'b_altsys_admin_menu_show' ) $adminmenublock_exists = true ;
 		$bcachetime = $block_arr[$i]->getVar('bcachetime');
 		if (empty($bcachetime)) {
 			$xoopsTpl->xoops_setCaching(0);
@@ -205,6 +214,17 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 		}
 		unset($bcontent);
 	}
+
+	// FALLBACK inserting admin_menu_block in admin side
+	if( ! $adminmenublock_exists ) {
+		require_once XOOPS_ROOT_PATH.'/modules/altsys/blocks/blocks.php' ;
+		$admin_menu_block = array( b_altsys_admin_menu_show( array( 'altsys' ) ) ) ;
+		$admin_menu_block[0]['title'] = 'Admin Menu' ;
+		$lblocks = $xoopsTpl->get_template_vars( 'xoops_lblocks' ) ;
+		if( ! is_array( $lblocks ) ) $lblocks = array() ;
+		$xoopsTpl->assign( 'xoops_lblocks' , array_merge( $admin_menu_block , $lblocks ) ) ;
+	}
+
 	//unset($block_arr);
 	if (!isset($show_lblock)) {
 		$xoopsTpl->assign('xoops_showlblock', 0);

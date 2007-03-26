@@ -1,5 +1,11 @@
 [xlang:en]
 
+v0.40 (2007-03-27) note: overwrite XOOPS_ROOT_PATH/modules/altsys also
+- modified the structure radically
+- added a bridge "admin in theme" to XC Legacy 2.1
+- added a block of adminmenu
+- modified README better
+
 v0.36 (2007-03-23)
 - modified compatibilities of "admin in theme" still
 - added a feature blocks can be displayed in "admin in theme" (also xoops.org)
@@ -57,6 +63,12 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.40 (2007-03-27) ※ 公開側も上書きしてください
+- 構造を大幅に変更した
+- 管理画面テーマをXC Legacy 2.1で動くようにした
+- 管理画面メニューをブロック化した
+- ドキュメントを少し整備した
 
 v0.36 (2007-03-23)
 - 管理画面テーマの互換性のさらなる改善

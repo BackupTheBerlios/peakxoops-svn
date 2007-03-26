@@ -24,12 +24,16 @@ function altsys_admin_in_theme( $s )
 }
 
 
-function altsys_admin_in_theme_in_last()
+function altsys_admin_in_theme_in_last( $contents = null )
 {
 	global $xoops_admin_contents , $xoopsConfig , $xoopsModule , $xoopsUser , $xoopsUserIsAdmin , $xoopsLogger , $altsysModuleConfig , $altsysModuleId ;
 
-	while( ob_get_level() ) {
-		ob_end_flush() ;
+	if( empty( $contents ) ) {
+		while( ob_get_level() ) {
+			ob_end_flush() ;
+		}
+	} else {
+		$xoops_admin_contents = $contents ;
 	}
 
 	if( empty( $xoops_admin_contents ) ) return ;
@@ -48,7 +52,7 @@ function altsys_admin_in_theme_in_last()
 
 	include dirname(__FILE__).'/admin_in_theme_header.inc.php' ;
 
-	// include adminmenu
+/*	// include adminmenu
 	include XOOPS_CACHE_PATH.'/adminmenu.php' ;
 
 	// admin permissions
@@ -79,7 +83,16 @@ function altsys_admin_in_theme_in_last()
 		var thresholdY = 15;
 		var ordinata_margin = 20;
 		function moveLayers() {'.implode("\n",$xoops_admin_menu_ml).'}
-		function shutdown() {'.implode("\n",$xoops_admin_menu_sd).'}' ;
+		function shutdown() {'.implode("\n",$xoops_admin_menu_sd).'}' ; */
+
+	// appendix (core specific css etc)
+	$xoops_module_header = '' ;
+	if( altsys_get_core_type() == ALTSYS_CORE_TYPE_XC21L ) {
+		$xoops_module_header .= '<link rel="stylesheet" type="text/css" media="all" href="'.XOOPS_URL.'/modules/legacy/admin/css.php?file=style.css" />'."\n" ;
+		if( is_object( @$xoopsModule ) ) {
+			$xoops_module_header .= '<link rel="stylesheet" type="text/css" media="all" href="'.XOOPS_URL.'/modules/legacy/admin/css.php?file=module.css&amp;dirname='.$xoopsModule->getVar('dirname').'" />'."\n" ;
+		}
+	}
 
 	// assignment
 	$xoopsTpl->assign( array(
@@ -89,11 +102,13 @@ function altsys_admin_in_theme_in_last()
 		'xoops_requesturi' => htmlspecialchars($GLOBALS['xoopsRequestUri'], ENT_QUOTES),
 		'xoops_sitename' => htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES),
 		'xoops_showlblock' => 1 ,
-		'xoops_js' => '//--></script><script type="text/javascript" src="'.XOOPS_URL.'/include/xoops.js"></script><script type="text/javascript" src="'.XOOPS_URL.'/include/layersmenu.js"></script><script type="text/javascript"><!--'."\n".$xoops_admin_menu_js ,
+//		'xoops_js' => '//--></script><script type="text/javascript" src="'.XOOPS_URL.'/include/xoops.js"></script><script type="text/javascript" src="'.XOOPS_URL.'/include/layersmenu.js"></script><script type="text/javascript"><!--'."\n".$xoops_admin_menu_js ,
+		'xoops_js' => '//--></script><script type="text/javascript" src="'.XOOPS_URL.'/include/xoops.js"></script><script type="text/javascript"><!--'."\n" ,
 		'xoops_runs_admin_side' => 1 ,
 		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 		'xoops_slogan' => htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES) ,
-		'xoops_contents' => $xoops_admin_contents . '<div id="adminmenu_layers">' . $xoops_admin_menu_dv . '</div>' ,
+		'xoops_contents' => $xoops_admin_contents , //. '<div id="adminmenu_layers">' . $xoops_admin_menu_dv . '</div>' ,
+		'xoops_module_header' => $xoops_module_header ,
 	) ) ;
 
 	// rendering

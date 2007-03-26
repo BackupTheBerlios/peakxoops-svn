@@ -10,7 +10,11 @@ define( $constpref.'_LOADED' , 1 ) ;
 
 define( $constpref.'_MODULE_DESCRIPTION' , 'A little module for wrapping' ) ;
 
+// admin menu
 define( $constpref.'_UPDATE_SEARCH_INDEX' , 'Update indexes for searching' ) ;
+define( $constpref.'_ADMENU_MYTPLSADMIN' , 'Templates' ) ;
+define( $constpref.'_ADMENU_MYBLOCKSADMIN' , 'Permissions' ) ;
+define( $constpref.'_ADMENU_MYPREFERENCES' , 'Preferences' ) ;
 
 // configs
 define( $constpref.'_INDEX_FILE' , 'Top page' ) ;

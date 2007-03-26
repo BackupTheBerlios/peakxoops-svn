@@ -10,7 +10,11 @@ define( $constpref.'_LOADED' , 1 ) ;
 
 define( $constpref.'_MODULE_DESCRIPTION' , 'ページラップ専用モジュール' ) ;
 
+// admin menu
 define( $constpref.'_UPDATE_SEARCH_INDEX' , '検索用インデックスの更新' ) ;
+define($constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
+define($constpref.'_ADMENU_MYBLOCKSADMIN' , 'アクセス権限' ) ;
+define($constpref.'_ADMENU_MYPREFERENCES' , '一般設定' ) ;
 
 // configs
 define( $constpref.'_INDEX_FILE' , 'トップページ' ) ;

@@ -49,7 +49,7 @@ function wraps_global_search_base( $mydirname , $keywords , $andor , $limit , $o
 		$whr = 1 ;
 	}
 
-	$sql = "SELECT `filename`,`title`,`mtime`,$select4con FROM ".$db->prefix( $mydirname."_indexes WHERE ($whr) ORDER BY 1" ) ;
+	$sql = "SELECT `filename`,`title`,`mtime`,$select4con FROM ".$db->prefix($mydirname."_indexes")." WHERE ($whr) ORDER BY 1" ;
 	$result = $db->query( $sql , $limit , $offset ) ;
 	$ret = array() ;
 	$context = '' ;

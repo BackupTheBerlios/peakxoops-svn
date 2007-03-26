@@ -3,8 +3,8 @@
 // Skip for ORETEKI XOOPS
 if( defined( 'XOOPS_ORETEKI' ) ) return ;
 
-if( ! isset( $module ) || ! is_object( $module ) ) $module = $xoopsModule ;
-else if( ! is_object( $xoopsModule ) ) die( '$xoopsModule is not set' )  ;
+global $xoopsModule ;
+if( ! is_object( $xoopsModule ) ) die( '$xoopsModule is not set' )  ;
 
 // language files (modinfo.php)
 $language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
@@ -35,14 +35,14 @@ if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/myblocksadmin.php' ) ) {
 
 // preferences
 $config_handler =& xoops_gethandler('config');
-if( count( $config_handler->getConfigs( new Criteria( 'conf_modid' , $module->mid() ) ) ) > 0 ) {
+if( count( $config_handler->getConfigs( new Criteria( 'conf_modid' , $xoopsModule->mid() ) ) ) > 0 ) {
 	if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mypreferences.php' ) ) {
 		// mypreferences
 		$title = defined( '_MD_A_MYMENU_MYPREFERENCES' ) ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES ;
 		array_push( $adminmenu , array( 'title' => $title , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
 	} else {
 		// system->preferences
-		array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$module->mid() ) ) ;
+		array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$xoopsModule->mid() ) ) ;
 	}
 }
 
@@ -56,6 +56,7 @@ foreach( array_keys( $adminmenu ) as $i ) {
 	if( $mymenu_link == $adminmenu[$i]['link'] ) {
 		$adminmenu[$i]['color'] = '#FFCCCC' ;
 		$adminmenu_hilighted = true ;
+		$GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'] ;
 	} else {
 		$adminmenu[$i]['color'] = '#DDDDDD' ;
 	}
@@ -64,6 +65,7 @@ if( empty( $adminmenu_hilighted ) ) {
 	foreach( array_keys( $adminmenu ) as $i ) {
 		if( stristr( $mymenu_uri , $adminmenu[$i]['link'] ) ) {
 			$adminmenu[$i]['color'] = '#FFCCCC' ;
+			$GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'] ;
 			break ;
 		}
 	}

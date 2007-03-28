@@ -6,9 +6,12 @@ if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) && is_array( @$category
 	pico_auto_register_from_cat_vpath( $mydirname , $category4assign ) ;
 }
 
+// visible check
+$whr4visible = $isadminormod ? '1' : 'o.visible' ;
+
 // contents loop
 $contents4assign = array() ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_contents")." WHERE cat_id=$cat_id ORDER BY weight,content_id" ;
+$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE o.cat_id=$cat_id AND ($whr4visible) ORDER BY o.weight,o.content_id" ;
 if( ! $ors = $xoopsDB->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 while( $content_row = $xoopsDB->fetchArray( $ors ) ) {
 

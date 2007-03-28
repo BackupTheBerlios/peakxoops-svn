@@ -357,6 +357,11 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
+	// only adminormod can set htmlheader
+	if( ! $isadminormod ) {
+		$requests['htmlheader_waiting'] = $requests['htmlheader'] ;
+		$ignore_requests[] = 'htmlheader' ;
+	}
 	$set = $auto_approval ? '' : "visible=0,subject='"._MD_PICO_WAITINGREGISTER."',htmlheader='',body=''," ;
 	foreach( $requests as $key => $val ) {
 		if( in_array( $key , $ignore_requests ) ) continue ;
@@ -384,6 +389,11 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
+	// only adminormod can set htmlheader
+	if( ! $isadminormod ) {
+		$requests['htmlheader_waiting'] = $requests['htmlheader'] ;
+		$ignore_requests[] = 'htmlheader' ;
+	}
 	$set = '' ;
 	foreach( $requests as $key => $val ) {
 		if( in_array( $key , $ignore_requests ) ) continue ;
@@ -397,8 +407,12 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	// backup the content, first
 	pico_backupcontent( $mydirname , $content_id ) ;
 
+	// admin/moderator hack
+	$created_time4sql = $isadminormod && trim( @$_POST['created_time'] ) && strtotime( $_POST['created_time'] ) != -1 ? strtotime( $_POST['created_time'] ) : 'created_time' ;
+	$modified_time4sql = $isadminormod && trim( @$_POST['modified_time'] ) && strtotime( $_POST['modified_time'] ) != -1 ? strtotime( $_POST['modified_time'] ) : 'UNIX_TIMESTAMP()' ;
+
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set `created_time`=$created_time4sql,`modified_time`=$modified_time4sql,modifier_uid='$uid',modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
 	return $content_id ;
 }

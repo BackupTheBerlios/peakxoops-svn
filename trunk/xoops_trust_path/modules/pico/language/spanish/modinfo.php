@@ -10,6 +10,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-03-26 11:38:35
+define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions');
+define($constpref.'_ADMENU_MYPREFERENCES','Preferences');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:08
 define($constpref.'_SEARCHBYUID','Enable concepts of poster');
 define($constpref.'_SEARCHBYUIDDSC','Contents will be listed in user profile of its poster. If you use this module as static contents, turn this off.');

@@ -17,8 +17,7 @@ if( empty( $category_permissions[$cat_id]['can_readfull'] ) ) {
 }
 
 // visible check
-//$whr4visible = $isadminormod ? '1' : 'o.visible' ;
-$whr4visible = 'o.visible' ; // to prevent from malicious post (by php etc.)
+$whr4visible = $isadminormod ? '1' : 'o.visible' ;
 
 // get this "content" from given $content_id
 $sql = "SELECT o.*,up.uname AS poster_uname,um.uname AS modifier_uname FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix("users")." up ON o.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON o.modifier_uid=um.uid WHERE o.content_id='$content_id' AND ($whr4visible)" ;

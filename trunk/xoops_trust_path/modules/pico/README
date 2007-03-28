@@ -99,6 +99,12 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.18 beta (2007/03/29)
+- fixed bugs for invisible content
+- modified only moderators can enable HTML headers
+- modified moderators can change created/modified time
+- modified blocks for xugj_block plugin
+
 1.17 beta (2007/03/23)
 - fixed category's permissions is not affected in search
 - added a configuration using concept of "poster" in search
@@ -325,6 +331,12 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.18 beta (2007/03/29)
+- 非表示コンテンツの閲覧・編集権限処理を修正
+- HTMLヘッダの編集は管理者かモデレータでないと最終的に有効にならないよう仕様変更
+- 管理者/モデレータは各日時をいじれるようにした
+- xugj_blockプラグインへの対応
 
 1.17 beta (2007/03/23)
 - 検索で権限が反映されていないバグの修正

@@ -42,7 +42,7 @@
 			</td>
 		</tr>
 
-		<{if ! $content.approval && $page != 'makecontent'}>
+		<{if $content.subject_waiting && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></th>
 			<td class="even pico_waiting"><{$content.subject_waiting}></td>
@@ -58,7 +58,7 @@
 			</td>
 		</tr>
 
-		<{if ! $content.approval && $page != 'makecontent'}>
+		<{if $content.htmlheader_waiting && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
 			<td class="even pico_waiting"><{$content.htmlheader_waiting|nl2br}></td>
@@ -78,7 +78,7 @@
 			</td>
 		</tr>
 
-		<{if ! $content.approval && $page != 'makecontent'}>
+		<{if $content.body_waiting && $page != 'makecontent'}>
 		<tr valign="top" align="left">
 			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
 			<td class="even pico_waiting"><{$content.body_waiting|nl2br}></td>
@@ -143,12 +143,24 @@
 		<{if $page != 'makecontent' && ! $preview}>
 		<tr valign="top" align="left">
 			<th class="head"><{$smarty.const._MD_PICO_CREATED}></th>
-			<td class="even"><{$content.created_time_formatted}></td>
+			<td class="even">
+				<{$content.created_time_formatted}>
+				<{if $category.isadminormod}>
+					<input type="checkbox" onclick="if(this.checked){document.getElementById('created_time').style.display='inline';}else{document.getElementById('created_time').style.display='none'}" />
+					<input type="text" name="created_time" id="created_time" size="16" value="" style="display:none;" />
+				<{/if}>
+			</td>
 		</tr>
 
 		<tr valign="top" align="left">
 			<th class="head"><{$smarty.const._MD_PICO_MODIFIED}></th>
-			<td class="even"><{$content.modified_time_formatted}></td>
+			<td class="even">
+				<{$content.modified_time_formatted}>
+				<{if $category.isadminormod}>
+					<input type="checkbox" onclick="if(this.checked){document.getElementById('modified_time').style.display='inline';}else{document.getElementById('modified_time').style.display='none'}" />
+					<input type="text" name="modified_time" id="modified_time" size="16" value="" style="display:none;" />
+				<{/if}>
+			</td>
 		</tr>
 		<{/if}>
 

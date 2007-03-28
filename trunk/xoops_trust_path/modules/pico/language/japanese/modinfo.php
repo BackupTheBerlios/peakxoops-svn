@@ -17,6 +17,9 @@ define($constpref."_DESC","静的コンテンツ作成モジュール");
 define( $constpref.'_ADMENU_CONTENTSADMIN' , 'コンテンツ一括管理' ) ;
 define( $constpref.'_ADMENU_CATEGORYACCESS' , 'カテゴリーアクセス権限' ) ;
 define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
+define( $constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
+define( $constpref.'_ADMENU_MYBLOCKSADMIN' , 'ブロック管理/アクセス権限' ) ;
+define( $constpref.'_ADMENU_MYPREFERENCES' , '一般設定' ) ;
 
 // configurations
 define($constpref.'_USE_WRAPSMODE','wrapsモードを有効にする');

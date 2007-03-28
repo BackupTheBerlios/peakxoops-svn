@@ -88,10 +88,15 @@ function b_pico_list_show( $options )
 		) ;
 	}
 
-	$tpl =& new XoopsTpl() ;
-	$tpl->assign( 'block' , $block ) ;
-	$ret['content'] = $tpl->fetch( $this_template ) ;
-	return $ret ;
+	if( empty( $options['disable_renderer'] ) ) {
+		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+		$tpl =& new XoopsTpl() ;
+		$tpl->assign( 'block' , $block ) ;
+		$ret['content'] = $tpl->fetch( $this_template ) ;
+		return $ret ;
+	} else {
+		return $block ;
+	}
 }
 
 

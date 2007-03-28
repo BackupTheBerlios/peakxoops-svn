@@ -34,6 +34,9 @@ $cat_id = pico_get_cat_id_from_content_id( $mydirname , $content_id ) ;
 // get&check this category ($category4assign, $category_row), override options
 require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 
+// get&check this content
+require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
+
 // special check for contentmanager
 if( ! $category4assign['can_edit'] && ! $category4assign['can_delete'] ) die( _MD_PICO_ERR_EDITCONTENT ) ;
 

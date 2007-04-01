@@ -8,6 +8,7 @@ v.091 (2007-03-15)
 -- d3forum-post
 -- pico-content-modified
 -- pico-content-created
+- fixed templates for minical_ex blocks
 
 v.090 (2007-03-12)
 - marked as stable
@@ -382,6 +383,7 @@ v.091 (2007-03-15)
 -- d3forum-post
 -- pico-content-modified
 -- pico-content-created
+- テンプレートの微修正 0.91a
 
 v.090 (2007-03-12)
 - 安定版への格上げ

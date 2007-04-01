@@ -50,11 +50,11 @@
 
       </table>
 
-      <div align=right style="padding:3px;">
+      <div align="right" style="padding:3px;">
         <{foreach from=$block.plugins item=plugin}>
-          <div style='float:right;height:1.5em;'><nobr>
+          <div style='float:right;height:1.5em;white-space:nowrap;'>
             <img src="<{$block.skinpath}>/<{$plugin.dotgif}>" alt="<{$plugin.pi_title}>" />&nbsp;<{$plugin.pi_title}>&nbsp;&nbsp;
-          </nobr></div>
+          </div>
         <{/foreach}>
       </div>
 

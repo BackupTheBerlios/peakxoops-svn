@@ -161,6 +161,10 @@ class MyXoopsGroupPermForm extends XoopsForm
 			$ele = new MyXoopsGroupFormCheckBox($glist[$i], 'perms['.$this->_permName.']', $i, $selected);
 			$ele->setOptionTree($this->_itemTree);
 
+			// GIJ start
+			$ele->setDescription( '<input type="checkbox" onclick="with(document.groupperm_form){for(i=0;i<length;i++){if(elements[i].name.match(/^perms\[(module_admin|module_read|block_read)\]\[groups\]\['.$i.'\]/)){elements[i].checked=this.checked;}}};">' ) ;
+			// GIJ_end
+
 			foreach( $this->_appendix as $key => $append ) {
 				$this->_appendix[$key]['selected'] = $gperm_handler->checkRight($append['permname'], $append['itemid'], $i, $this->_modid ) ;
 			}
@@ -192,7 +196,9 @@ class MyXoopsGroupPermForm extends XoopsForm
 			if (!is_object($elements[$i])) {
 				$ret .= $elements[$i];
 			} elseif (!$elements[$i]->isHidden()) {
+				// group name
 				$ret .= "<tr valign='top' align='left'><td class='head'>".$elements[$i]->getCaption();
+				// group description
 				if ($elements[$i]->getDescription() != '') {
 					$ret .= '<br /><br /><span style="font-weight: normal;">'.$elements[$i]->getDescription().'</span>';
 				}

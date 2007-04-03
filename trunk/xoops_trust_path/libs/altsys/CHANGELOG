@@ -1,5 +1,9 @@
 [xlang:en]
 
+v0.41 (2007-04-04)
+- modified tplsadmin can edit themes with dbtheme module
+- fixed compatibility between "admin in theme" and Legacy 2.1 (thx sakichi)
+
 v0.40 (2007-03-27) note: overwrite XOOPS_ROOT_PATH/modules/altsys also
 - modified the structure radically
 - added a bridge "admin in theme" to XC Legacy 2.1
@@ -63,6 +67,10 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.41 (2007-04-04)
+- tplsadmin をテーマ編集対応した (dbthemeモジュールとの併用時)
+- 管理画面テーマの対Legacy 2.1互換性を向上させた (thx sakichi)
 
 v0.40 (2007-03-27) ※ 公開側も上書きしてください
 - 構造を大幅に変更した

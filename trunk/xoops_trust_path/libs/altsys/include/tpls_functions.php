@@ -127,8 +127,11 @@ function tplsadmin_get_basefilepath( $dirname , $type , $tpl_file )
 	// module instance
 	$path = $basefilepath = XOOPS_ROOT_PATH.'/modules/'.$dirname.'/templates/'.($type=='block'?'blocks/':'').$tpl_file ;
 
-	// D3 module base
-	if( ! file_exists( $basefilepath ) && file_exists( XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ) ) {
+	if( defined( 'ALTSYS_TPLSADMIN_BASEPATH' ) ) {
+		// Special hook
+		$path = ALTSYS_TPLSADMIN_BASEPATH.'/'.substr( $tpl_file , strlen( $dirname ) + 1 ) ;
+	} else if( ! file_exists( $basefilepath ) && file_exists( XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ) ) {
+		// D3 module base
 		include XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ;
 		if( ! empty( $mytrustdirname ) ) {
 			$mid_path = $mytrustdirname == 'altsys' ? '/libs/' : '/modules/' ;

@@ -28,7 +28,7 @@ function altsys_admin_in_theme_in_last( $contents = null )
 {
 	global $xoops_admin_contents , $xoopsConfig , $xoopsModule , $xoopsUser , $xoopsUserIsAdmin , $xoopsLogger , $altsysModuleConfig , $altsysModuleId ;
 
-	if( empty( $contents ) ) {
+	if( ! isset( $contents ) ) {
 		while( ob_get_level() ) {
 			ob_end_flush() ;
 		}
@@ -36,7 +36,7 @@ function altsys_admin_in_theme_in_last( $contents = null )
 		$xoops_admin_contents = $contents ;
 	}
 
-	if( empty( $xoops_admin_contents ) ) return ;
+	if( ! isset( $xoops_admin_contents ) ) return ;
 
 	if( ! is_object( $xoopsUser ) ) exit ;
 

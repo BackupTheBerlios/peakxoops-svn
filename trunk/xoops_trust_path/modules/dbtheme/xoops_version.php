@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.10 ;
+$modversion['version'] = 0.20 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -56,6 +56,15 @@ $modversion['blocks'][1] = array(
 $modversion['hasComments'] = 0 ;
 
 // Configs
+$modversion['config'][1] = array(
+	'name'			=> 'css_cache_time' ,
+	'title'			=> $constpref.'_CSSCACHETIME' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 3600 ,
+	'options'		=> array()
+) ;
 
 // Notification
 $modversion['hasNotification'] = 0 ;

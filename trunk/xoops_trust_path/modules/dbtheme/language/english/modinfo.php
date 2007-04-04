@@ -21,6 +21,9 @@ define($constpref.'_ADMENU_MYPREFERENCES','Preferences') ;
 // blocks
 define( $constpref.'_BNAME_THEMEHOOK' , 'Theme hook' ) ;
 
+// configs
+define($constpref.'_CSSCACHETIME','CSS cache time for browser (sec)') ;
+
 
 }
 

@@ -13,12 +13,6 @@ function smarty_resource_dbtheme_source($tpl_name, &$tpl_source, &$smarty)
 	}
 	if (count($tplobj) > 0) {
         $tpl_source = $tplobj[0]->getVar('tpl_source');
-        // CSS hooking
-        $searches[] = '/\"\<\{\$xoops_themecss\}\>"/' ;
-        $replacements[] = '"'.XOOPS_URL.'/modules/dbtheme/?template=style.css'.'"' ;
-        $searches[] = '/\"\<\{\$xoops_imageurl\}\>([0-9a-zA-Z_-]+)\.(css|html|js)\"/' ;
-        $replacements[] = '"'.XOOPS_URL.'/modules/dbtheme/?template=$1.$2'.'"' ;
-        $tpl_source = preg_replace( $searches , $replacements , $tpl_source ) ;
         return true;
     } else {
 		return false;

@@ -1,9 +1,89 @@
 [mlimg]
 [xlang:en]
-====  db theme  ===
+====  DB theme  ===
 
+You can specify DB template as the theme.
+
+[b]MERITS[/b]
+
+- You can edit the theme/css via altsys (you can see diff)
+- CSS of the theme will be templatized automatically
+- You can specify different themes by blocks (Of course, the block is duplicatable)
+- You can turn "Update module template .html files from themes/your theme/templates directory" off when editing DB theme
+
+
+[b]USAGES[/b]
+
+(If you didnot...)
+- set XOOPS_TRUST_PATH
+- Install altsys
+
+
+- Install dbtheme as usual D3 module (Don't forget copying a smarty plugin)
+- Set 
+- If you use XoopsCube Legacy 2.1, edit/append site_custom.ini.php like this.
+- Turn visible of "Theme hook" block on
+- Specify the DB template in the block's option
+
+[RenderSystems]
+Legacy_RenderSystem=Legacy_DbthemeRenderSystem
+
+[Legacy_DbthemeRenderSystem]
+root=XOOPS_TRUST_PATH
+path=/modules/dbtheme/class
+class=Legacy_DbthemeRenderSystem
+
+
+[b]NOTICE[/b]
+
+This module has DB templates.
+If you use this module continuously, you'd better copy base files of theme into 
+XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
 [/xlang:en]
 [xlang:ja]
+
+====  DB テーマ  ===
+
+任意のDBテンプレートをテーマとして利用できるモジュール
+
+
+●メリット
+
+- altsysで編集できる（当然、差分表示も利用できる）
+- CSSが自動的にテンプレート化される
+- ブロック単位で任意のテーマを割り当てることができる（もちろんブロックは複製可）
+- 「themes/からの自動更新」をOFFのままでもテーマ変更が反映される
+
+
+●使い方
+
+普通のD3モジュールとしてインストールします。
+Smartyプラグインのコピーをお忘れ無く。
+また、altsysとの併用が大前提です。
+
+テーマフックブロックを、テーマを置き換えたいページに表示してください。
+テーマとして利用するDBテンプレートは、テーマフックブロックのオプションで設定します。
+
+なお、Legacy 2.1 の場合のみ、settings/site_custom.ini.php に以下の記述が必要です。
+
+[RenderSystems]
+Legacy_RenderSystem=Legacy_DbthemeRenderSystem
+
+[Legacy_DbthemeRenderSystem]
+root=XOOPS_TRUST_PATH
+path=/modules/dbtheme/class
+class=Legacy_DbthemeRenderSystem
+
+
+
+●テンプレートについての注意
+
+このモジュール自身もDBテンプレートを持ちます。
+通常は、現在利用中のテーマから引っ張ってきますが、そういう使い方だと、テーマを切り替えた途端に、DB上でカスタマイズしたテンプレートが失われる恐れがあります。
+
+XOOPS_TRUST_PATH/modules/dbtheme/templates/
+
+の中に、theme.html 等のファイルを一通り入れておくのが良いでしょう。
 
 [/xlang:ja]

@@ -19,8 +19,10 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限') ;
 define($constpref.'_ADMENU_MYPREFERENCES','一般設定') ;
 
 // blocks
-define( $constpref.'_BNAME_THEMEHOOK' , 'テーマフック' ) ;
+define($constpref.'_BNAME_THEMEHOOK','テーマフック') ;
 
+// configs
+define($constpref.'_CSSCACHETIME','CSSのブラウザキャッシュ時間(sec)') ;
 
 }
 

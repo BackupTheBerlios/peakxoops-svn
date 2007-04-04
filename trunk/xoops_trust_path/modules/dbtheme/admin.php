@@ -50,8 +50,11 @@ if( ! empty( $_GET['lib'] ) ) {
 	$lib = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
 	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
 
-	// dbtheme specific procedure
-	define( 'ALTSYS_TPLSADMIN_BASEPATH' , XOOPS_THEME_PATH.'/'.$GLOBALS['xoopsConfig']['theme_set'] ) ;
+	/*************** BEGIN DBTHEME SPECIFIC PART ******************/
+	if( ! file_exists( dirname(__FILE__).'/templates/theme.html' ) ) {
+		define( 'ALTSYS_TPLSADMIN_BASEPATH' , XOOPS_THEME_PATH.'/'.$GLOBALS['xoopsConfig']['theme_set'] ) ;
+	}
+	/*************** END DBTHEME SPECIFIC PART ******************/
 
 	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
 		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;

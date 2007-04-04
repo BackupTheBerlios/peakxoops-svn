@@ -1,6 +1,6 @@
 <?php
 
-$cache_limit = 3600 ;
+$cache_limit = empty( $xoopsModuleConfig['css_cache_time'] ) ? 3600 : intval( $xoopsModuleConfig['css_cache_time'] ) ;
 
 $theme = $xoopsConfig['theme_set'] ;
 $template = preg_replace( '/[^0-9a-zA-Z_.-]/' , '' , @$_GET['template'] ) ;

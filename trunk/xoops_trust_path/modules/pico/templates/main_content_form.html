@@ -52,7 +52,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="htmlheader"><{$smarty.const._MD_PICO_TH_HTMLHEADER}></label></th>
 			<td class="even">
-				<input type="checkbox" id="htmlheader_onoff" onclick="if(this.checked){document.getElementById('htmlheader').style.display='block';}else{document.getElementById('htmlheader').style.display='none';};"  <{if $content.htmlheader}>checked="checked"<{/if}> /><label for="htmlheader_onoff"><{$smarty.const._MD_PICO_LABEL_HTMLHEADERONOFF}></label>
+				<input type="checkbox" id="htmlheader_onoff" onclick="if(this.checked){xoopsGetElementById('htmlheader').style.display='block';}else{xoopsGetElementById('htmlheader').style.display='none';};"  <{if $content.htmlheader}>checked="checked"<{/if}> /><label for="htmlheader_onoff"><{$smarty.const._MD_PICO_LABEL_HTMLHEADERONOFF}></label>
 				<br />
 				<textarea name="htmlheader" id="htmlheader" style="display:<{if $content.htmlheader}>block<{else}>none<{/if}>;width:480px;height:120px;"><{$content.htmlheader}></textarea>
 			</td>
@@ -71,7 +71,7 @@
 				<{if $body_wysiwyg}>
 					<{$body_wysiwyg}>
 				<{else}>
-					<input type="checkbox" id="body_bbcode_onoff" onclick="if(this.checked){document.getElementById('body_bbcode_buttons_pre').style.display='block';document.getElementById('body_bbcode_buttons_post').style.display='block'}else{document.getElementById('body_bbcode_buttons_pre').style.display='none';document.getElementById('body_bbcode_buttons_post').style.display='none'};" /><label for="body_bbcode_onoff"><{$smarty.const._MD_PICO_LABEL_INPUTHELPER}></label>
+					<input type="checkbox" id="body_bbcode_onoff" onclick="if(this.checked){xoopsGetElementById('body_bbcode_buttons_pre').style.display='block';xoopsGetElementById('body_bbcode_buttons_post').style.display='block'}else{xoopsGetElementById('body_bbcode_buttons_pre').style.display='none';xoopsGetElementById('body_bbcode_buttons_post').style.display='none'};" /><label for="body_bbcode_onoff"><{$smarty.const._MD_PICO_LABEL_INPUTHELPER}></label>
 					<br />
 					<{xoopsdhtmltarea name="body" cols="60" rows="15" value=$content.body pre_style="display:none;" post_style="display:none;"}>
 				<{/if}>
@@ -146,8 +146,8 @@
 			<td class="even">
 				<{$content.created_time_formatted}>
 				<{if $category.isadminormod}>
-					<input type="checkbox" onclick="if(this.checked){document.getElementById('created_time').style.display='inline';}else{document.getElementById('created_time').style.display='none'}" />
-					<input type="text" name="created_time" id="created_time" size="16" value="" style="display:none;" />
+					<input type="checkbox" name="specify_created_time" value="1" onclick="if(this.checked){xoopsGetElementById('created_time').style.display='inline';}else{xoopsGetElementById('created_time').style.display='none'}" />
+					<input type="text" name="created_time" id="created_time" size="24" value="<{$content.created_time_formatted|escape}>" style="display:none;" />
 				<{/if}>
 			</td>
 		</tr>
@@ -157,8 +157,8 @@
 			<td class="even">
 				<{$content.modified_time_formatted}>
 				<{if $category.isadminormod}>
-					<input type="checkbox" onclick="if(this.checked){document.getElementById('modified_time').style.display='inline';}else{document.getElementById('modified_time').style.display='none'}" />
-					<input type="text" name="modified_time" id="modified_time" size="16" value="" style="display:none;" />
+					<input type="checkbox" name="specify_modified_time" value="1" onclick="if(this.checked){xoopsGetElementById('modified_time').style.display='inline';}else{xoopsGetElementById('modified_time').style.display='none'}" />
+					<input type="text" name="modified_time" id="modified_time" size="24" value="<{$content.modified_time_formatted|escape}>" style="display:none;" />
 				<{/if}>
 			</td>
 		</tr>

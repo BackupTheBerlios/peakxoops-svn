@@ -44,6 +44,8 @@ function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
 		if( @filemtime( $wrap_full_path ) > @$content_row['modified_time'] ) {
 			$can_use_cache = false ;
+			$db =& Database::getInstance() ;
+			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET modified_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content_row['content_id']) ) ;
 		}
 	}
 
@@ -68,7 +70,7 @@ function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 	// store the result into body_cached field
 	if( $use_cache ) {
 		$db =& Database::getInstance() ;
-		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($text)."',modified_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content_row['content_id']) ) ;
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($text)."' WHERE content_id=".intval($content_row['content_id']) ) ;
 	}
 
 	return $text ;

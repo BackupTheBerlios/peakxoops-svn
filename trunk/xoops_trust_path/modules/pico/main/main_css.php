@@ -31,7 +31,6 @@ $tpl->assign( array(
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 	'xoops_config' => $xoopsConfig ,
 	'mod_config' => $xoopsModuleConfig ,
-	'mod_config' => $xoopsModuleConfig ,
 	'xoops_theme' => $xoopsConfig['theme_set'] ,
 	'xoops_imageurl' => XOOPS_THEME_URL.'/'.$xoopsConfig['theme_set'].'/' ,
 	'xoops_themecss' => xoops_getcss($xoopsConfig['theme_set']) ,

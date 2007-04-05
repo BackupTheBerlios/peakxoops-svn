@@ -71,7 +71,7 @@ function b_pico_content_edit( $options )
 
 	$form = "
 		<input type='hidden' name='options[0]' value='$mydirname' />
-		<label for='categories'>"._MB_PICO_CONTENT_ID."</label>&nbsp;:
+		<label for='content_id'>"._MB_PICO_CONTENT_ID."</label>&nbsp;:
 		<input type='text' size='20' name='options[1]' id='content_id' value='$content_id' />
 		<br />
 		<label for='this_template'>"._MB_PICO_THISTEMPLATE."</label>&nbsp;:

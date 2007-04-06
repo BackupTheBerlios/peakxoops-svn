@@ -19,8 +19,7 @@ You can specify DB template as the theme.
 - Install altsys
 
 
-- Install dbtheme as usual D3 module (Don't forget copying a smarty plugin)
-- Set 
+- Install dbtheme as usual D3 module
 - If you use XoopsCube Legacy 2.1, edit/append site_custom.ini.php like this.
 - Turn visible of "Theme hook" block on
 - Specify the DB template in the block's option
@@ -36,9 +35,13 @@ class=Legacy_DbthemeRenderSystem
 
 [b]NOTICE[/b]
 
-This module has DB templates.
-If you use this module continuously, you'd better copy base files of theme into 
-XOOPS_TRUST_PATH/modules/dbtheme/templates/
+This module has DB templates from current theme set.
+If you change the theme set as base, input the name of theme in this module's preferences and update the module from modulesadmin.
+Then, the templates are updated from specified theme set.
+
+If you want to use multiple theme set at once, install another DBTHEME modules.
+
+Since DBTHEME module is designed as D3 module, you can intall the module as much as you like.
 
 [/xlang:en]
 [xlang:ja]
@@ -59,7 +62,6 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 ●使い方
 
 普通のD3モジュールとしてインストールします。
-Smartyプラグインのコピーをお忘れ無く。
 また、altsysとの併用が大前提です。
 
 テーマフックブロックを、テーマを置き換えたいページに表示してください。
@@ -80,10 +82,18 @@ class=Legacy_DbthemeRenderSystem
 ●テンプレートについての注意
 
 このモジュール自身もDBテンプレートを持ちます。
-通常は、現在利用中のテーマから引っ張ってきますが、そういう使い方だと、テーマを切り替えた途端に、DB上でカスタマイズしたテンプレートが失われる恐れがあります。
+
+通常は、現在利用中のテーマから引っ張ってきますが、ベースとするテーマを違うものにしたい場合は、一般設定でベーステーマを切り替えてから、モジュールアップデートを行ってください。
+
+これによって、そのモジュールが持つテンプレートが、指定されたテーマのものに入れ替わります。
+
+複数のベーステーマをいろいろ切り替えて使いたい場合は、DBTHEMEモジュールを複数入れてしまうのが楽でしょう。なにせD3モジュールですから、個数やディレクトリ名制限は一切ありません。
+
+
+一応、非公式な使い方として、
 
 XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
-の中に、theme.html 等のファイルを一通り入れておくのが良いでしょう。
+の中に、theme.html 等のファイルを一通り入れておく、なんてのもありますが、DBTHEMEモジュールを複数入れる可能性を考えたら、あまりお勧めできません。
 
 [/xlang:ja]

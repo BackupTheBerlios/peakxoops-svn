@@ -22,6 +22,8 @@ define($constpref.'_ADMENU_MYPREFERENCES','Preferences') ;
 define( $constpref.'_BNAME_THEMEHOOK' , 'Theme hook' ) ;
 
 // configs
+define($constpref.'_BASETHEME','Base theme set') ;
+define($constpref.'_BASETHEMEDSC','If you want to change the base of DB theme, update this module after change it. (Specify theme set as directory name)') ;
 define($constpref.'_CSSCACHETIME','CSS cache time for browser (sec)') ;
 
 

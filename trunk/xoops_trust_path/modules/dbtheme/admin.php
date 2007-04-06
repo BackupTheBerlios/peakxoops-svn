@@ -52,7 +52,7 @@ if( ! empty( $_GET['lib'] ) ) {
 
 	/*************** BEGIN DBTHEME SPECIFIC PART ******************/
 	if( ! file_exists( dirname(__FILE__).'/templates/theme.html' ) ) {
-		define( 'ALTSYS_TPLSADMIN_BASEPATH' , XOOPS_THEME_PATH.'/'.$GLOBALS['xoopsConfig']['theme_set'] ) ;
+		define( 'ALTSYS_TPLSADMIN_BASEPATH' , XOOPS_THEME_PATH.'/'.( empty($xoopsModuleConfig['base_theme']) ? $GLOBALS['xoopsConfig']['theme_set'] : $xoopsModuleConfig['base_theme'] ) ) ;
 	}
 	/*************** END DBTHEME SPECIFIC PART ******************/
 

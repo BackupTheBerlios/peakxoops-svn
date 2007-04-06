@@ -22,6 +22,8 @@ define($constpref.'_ADMENU_MYPREFERENCES','一般設定') ;
 define($constpref.'_BNAME_THEMEHOOK','テーマフック') ;
 
 // configs
+define($constpref.'_BASETHEME','ベーステーマ') ;
+define($constpref.'_BASETHEMEDSC','ベースとなるテーマを変更する時には、ここにテーマディレクトリ名を設定した後に、モジュールアップデートをかけてください。') ;
 define($constpref.'_CSSCACHETIME','CSSのブラウザキャッシュ時間(sec)') ;
 
 }

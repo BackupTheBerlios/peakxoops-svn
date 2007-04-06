@@ -36,8 +36,14 @@ function dbtheme_onupdate_base( $module , $mydirname )
 
 
 	/*************** BEGIN DBTHEME SPECIFIC PART ******************/
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$module =& $module_handler->getByDirname( $mydirname ) ;
+	$config_handler =& xoops_gethandler( 'config' ) ;
+	$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
 	if( file_exists( dirname(__FILE__).'/templates/theme.html' ) ) {
 		$tpl_path = dirname(__FILE__).'/templates' ;
+	} else if( ! empty( $mod_config['base_theme'] ) ) {
+		$tpl_path = XOOPS_ROOT_PATH.'/themes/'.$mod_config['base_theme'] ;
 	} else {
 		$tpl_path = XOOPS_ROOT_PATH.'/themes/'.$GLOBALS['xoopsConfig']['theme_set'] ;
 	}
@@ -58,8 +64,6 @@ function dbtheme_onupdate_base( $module , $mydirname )
 				$replacements = array() ;
 				if( strrchr( $file , '.' ) == '.html' ) {
 					// CSS hooking
-					$searches[] = '/\"\<\{\$xoops_themecss\}\>"/' ;
-					$replacements[] = '"<{$xoops_url}>/modules/dbtheme/?template=style.css'.'"' ;
 					$searches[] = '/\"\<\{\$xoops_imageurl\}\>([0-9a-zA-Z_-]+)\.(css|html|js)\"/' ;
 					$replacements[] = '"<{$xoops_url}>/modules/dbtheme/?template=$1.$2'.'"' ;
 				} else if( strrchr( $file , '.' ) == '.css' ) {

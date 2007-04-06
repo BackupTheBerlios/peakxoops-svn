@@ -50,8 +50,27 @@ function renderTheme(&$target)
 		//
 		$result=null;
 		if($target->getAttribute("isFileTheme")) {
+
+			/**** DB THEME ******/
+			$mydirname = DBTHEME_MYDIRNAME ;
+			$module_handler =& xoops_gethandler( 'module' ) ;
+			$module =& $module_handler->getByDirname( $mydirname ) ;
+			$config_handler =& xoops_gethandler( 'config' ) ;
+			$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
+
+			if( ! empty( $mod_config['base_theme'] ) ) {
+				$this->mXoopsTpl->assign( array(
+					'xoops_theme' => $mod_config['base_theme'] ,
+					'xoops_imageurl' => XOOPS_THEME_URL.'/'.$mod_config['base_theme'].'/' ,
+					'xoops_themecss' => XOOPS_URL.'/modules/'.$mydirname.'/?template=style.css' , // TODO (?)
+				) ) ;
+			}
+
+			$result = $this->mXoopsTpl->fetch('db:'.DBTHEME_THEME_NAME);
+			/**** DB THEME ******/
+
 			//$result=$this->mXoopsTpl->fetch($target->getTemplateName()."/theme.html");
-			$result=$this->mXoopsTpl->fetch('dbtheme:'.DBTHEME_THEME_NAME);
+
 		}
 		else {
 			$result=$this->mXoopsTpl->fetch("db:".$target->getTemplateName());

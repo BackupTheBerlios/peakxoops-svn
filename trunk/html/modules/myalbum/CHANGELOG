@@ -3,6 +3,7 @@
  - updated mymenu for Cube 2.1
  - removed myblocksadmin and mytplsadmin (install altsys instead)
  - fixed a lot of small bugs
+ - fixed guest's post cannot be searched (thx kentaro) 2.88a
 
 2006-05-26 v2.87 (2.90 beta1)
  - added mytplsadmin
@@ -363,6 +364,7 @@
  - Cube 2.1対応のmymenu導入
  - myblocksadminとmytplsadminを削除 (altsysを代わりにインストールしてください)
  - その他多くの細かい修正
+ - ゲスト投稿が検索できないバグの修正 (thx kentaro) 2.88a
 
 2006-05-26 v2.87 (2.90 beta1)
  - mytplsadmin導入

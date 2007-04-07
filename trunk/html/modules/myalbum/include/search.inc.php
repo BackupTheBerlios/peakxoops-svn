@@ -38,18 +38,18 @@ function myalbum_search_base( $mydirname , $keywords , $andor , $limit , $offset
 		switch( strtolower( $andor ) ) {
 			case "and" :
 				foreach( $keywords as $keyword ) {
-					$whr .= "CONCAT(l.title,' ',t.description,' ',u.uname) LIKE '%$keyword%' AND " ;
+					$whr .= "CONCAT(l.title,' ',t.description,' ',IFNULL(u.uname,'')) LIKE '%$keyword%' AND " ;
 				}
 				$whr = substr( $whr , 0 , -5 ) ;
 				break ;
 			case "or" :
 				foreach( $keywords as $keyword ) {
-					$whr .= "CONCAT(l.title,' ',t.description,' ',u.uname) LIKE '%$keyword%' OR " ;
+					$whr .= "CONCAT(l.title,' ',t.description,' ',IFNULL(u.uname,'')) LIKE '%$keyword%' OR " ;
 				}
 				$whr = substr( $whr , 0 , -4 ) ;
 				break ;
 			default :
-				$whr .= "CONCAT(l.title,'  ',t.description,' ',u.uname) LIKE '%{$keywords[0]}%'" ;
+				$whr .= "CONCAT(l.title,'  ',t.description,' ',IFNULL(u.uname,'')) LIKE '%{$keywords[0]}%'" ;
 				break ;
 		}
 		$whr .= ")" ;

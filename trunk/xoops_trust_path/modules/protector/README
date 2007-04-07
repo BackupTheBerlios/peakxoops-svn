@@ -86,7 +86,7 @@ an anti-SPAM plugin.
 All of Post from IP registered in RBL will be rejected.
 This plugin can slow the performance of Post, especially chat modules.
 
--postcommon_post_need_multibyte.php
+- postcommon_post_need_multibyte.php
 an anti-SPAM plugin.
 Post without multi-byte characters will be rejected.
 This plugin is only for sites of japanese, tchinese, schinese, and korean.
@@ -95,6 +95,15 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 
 
 = CHANGES =
+
+3.02 (2007/04/08)
+- modified compatibility of the option "force_intval"
+- fixed wrong link in advisory.php (thx genet)
+- added a method module can skip DoS/crawler check (define a constant)
+- updated D3 system
+- added language files
+-- persian (thx voltan)
+-- arabic (thx onasre)
 
 3.01 (2007/02/10)
 - modified the rule for sorting IPs
@@ -256,6 +265,15 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 ¡üÊÑ¹¹ÍúÎò
 
+3.02 (2007/04/08)
+- IDÉ÷ÊÑ¿ô¤Î¶¯À©ÊÑ´¹¤Î½èÍý¤ò¤â¤¦¾¯¤·´Ë¤ä¤«¤Ë¤·¤¿
+- ¥»¥­¥å¥ê¥Æ¥£¥¬¥¤¥É¤Î¥ê¥ó¥¯ÀÚ¤ì¤ò½¤Àµ
+- DoS/crawler¥Á¥§¥Ã¥¯¤ò¥¹¥­¥Ã¥×¤Ç¤­¤ë¼êÃÊ¤ÎÄó¶¡¡Ê¤¢¤ëÄê¿ô¤òÄêµÁ¤¹¤ë¡Ë
+- D3¥·¥¹¥Æ¥à¤Î¥¢¥Ã¥×¥Ç¡¼¥È
+- ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
+-- persian (thx voltan)
+-- arabic (thx onasre)
+
 3.01 (2007/02/10)
 - IP¥½¡¼¥È¥ë¡¼¥ë¤ÎÊÑ¹¹
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
@@ -301,6 +319,13 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
  - Sergey (¥í¥·¥¢¸ì¥Õ¥¡¥¤¥ë)
  - Bezoops (¥¹¥Ú¥¤¥ó¸ì¥Õ¥¡¥¤¥ë)
  (°Ê¾å¡¢¥Ð¡¼¥¸¥ç¥ó2¤Þ¤Ç¤Î¸À¸ì¥Õ¥¡¥¤¥ëºîÀ®¼Ô¤Ç¤¹¡£¥Ð¡¼¥¸¥ç¥ó3¤Ç¤Ï¤¤¤Ã¤¿¤óºï¤Ã¤Æ¤Þ¤¹¡£¤¹¤ß¤Þ¤»¤ó¡Ë
+ - beduino (¥Ö¥é¥¸¥ë¤Î¥Ý¥ë¥È¥¬¥ë¸ì¥Õ¥¡¥¤¥ë)
+ - PepeMty (¥¹¥Ú¥¤¥ó¸ì¥Õ¥¡¥¤¥ë)
+ - kurak_bu (¥Ý¡¼¥é¥ó¥É¸ì¥Õ¥¡¥¤¥ë)
+ - wuddel (¥É¥¤¥Ä¸ì)
+ - voltan (¥Ú¥ë¥·¥ã¸ì)
+ - onasure (¥¢¥é¥Ó¥¢¸ì)
+
 
 ¤Þ¤¿¡¢¤³¤Î¥â¥¸¥å¡¼¥ëºîÀ®¤Ë¤¢¤¿¤ê¡¢ÍÍ¡¹¤Ê¤´»ØÆ³¡¦¤´ÊÜÚ¥¤ò¤¤¤¿¤À¤¤¤¿¡¢zx¥Á¡¼¥à¤Î³§ÍÍ¡¢¤È¤ê¤ï¤±JM2¤µ¤ó¡¢minahito¤µ¤ó¤Ë¡¢¿´¤è¤ê´¶¼Õ¤¤¤¿¤·¤Þ¤¹¡£
 

@@ -57,7 +57,7 @@ if( $safe ) {
 	echo XOOPS_DB_PREFIX." &nbsp; <span style='color:red;font-weight:bold;'>"._AM_ADV_NOTSECURE."</span></dt>\n" ;
 	echo "<dd>"._AM_ADV_DBPREFIX."</dd>" ;
 }
-echo "<br /> &nbsp; <a href='prefix_manager.php'>"._AM_ADV_LINK_TO_PREFIXMAN."</a>" ;
+echo "<br /> &nbsp; <a href='index.php?page=prefix_manager'>"._AM_ADV_LINK_TO_PREFIXMAN."</a>" ;
 echo "</dl>\n" ;
 
 

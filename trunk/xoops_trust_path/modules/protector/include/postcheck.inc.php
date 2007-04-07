@@ -65,6 +65,7 @@ function protector_postcommon()
 	}
 
 	// DOS/CRAWLER skipping based on 'dirname' or getcwd()
+	$dos_skipping = false ;
 	$skip_dirnames = explode( '|' , $conf['dos_skipmodules'] ) ;
 	if( ! is_array( $skip_dirnames ) ) $skip_dirnames = array() ;
 	if( is_object( @$xoopsModule ) ) {
@@ -79,6 +80,9 @@ function protector_postcommon()
 			}
 		}
 	}
+
+	// module can controll DoS skipping
+	if( defined( 'PROTECTOR_SKIP_DOS_CHECK' ) ) $dos_skipping = true ;
 
 	// DoS Attack
 	if( empty( $dos_skipping ) && ! $protector->check_dos_attack( $uid , $can_ban ) ) {

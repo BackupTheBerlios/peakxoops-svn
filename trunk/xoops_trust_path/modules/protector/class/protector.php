@@ -339,25 +339,28 @@ function intval_allrequestsendid()
 
 	foreach( $_GET as $key => $val ) {
 		if( substr( $key , -2 ) == 'id' && ! is_array( $_GET[ $key ] ) ) {
-			$_GET[ $key ] = $HTTP_GET_VARS[ $key ] = intval( $val ) ;
+			$newval = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , $val ) ;
+			$_GET[ $key ] = $HTTP_GET_VARS[ $key ] = $newval ;
 			if( $_REQUEST[ $key ] == $_GET[ $key ] ){
-				$_REQUEST[ $key ] = intval( $val ) ;
+				$_REQUEST[ $key ] = $newval ;
 			}
 		}
 	}
 	foreach( $_POST as $key => $val ) {
 		if( substr( $key , -2 ) == 'id' && ! is_array( $_POST[ $key ] ) ) {
-			$_POST[ $key ] = $HTTP_POST_VARS[ $key ] = intval( $val ) ;
+			$newval = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , $val ) ;
+			$_POST[ $key ] = $HTTP_POST_VARS[ $key ] = $newval ;
 			if( $_REQUEST[ $key ] == $_POST[ $key ] ){
-				$_REQUEST[ $key ] = intval( $val ) ;
+				$_REQUEST[ $key ] = $newval ;
 			}
 		}
 	}
 	foreach( $_COOKIE as $key => $val ) {
 		if( substr( $key , -2 ) == 'id' && ! is_array( $_COOKIE[ $key ] ) ) {
-			$_COOKIE[ $key ] = $HTTP_COOKIE_VARS[ $key ] = intval( $val ) ;
+			$newval = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , $val ) ;
+			$_COOKIE[ $key ] = $HTTP_COOKIE_VARS[ $key ] = $newval ;
 			if( $_REQUEST[ $key ] == $_COOKIE[ $key ] ){
-				$_REQUEST[ $key ] = intval( $val ) ;
+				$_REQUEST[ $key ] = $newval ;
 			}
 		}
 	}

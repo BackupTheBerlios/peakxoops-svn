@@ -17,6 +17,7 @@ define($constpref."_DESC","悪意ある攻撃からXOOPSを守るためのモジュール<br />DoS,
 define($constpref."_ADMININDEX","Protect Center");
 define($constpref."_ADVISORY","セキュリティガイド");
 define($constpref."_PREFIXMANAGER","PREFIX マネージャ");
+define($constpref.'_ADMENU_MYBLOCKSADMIN','アクセス権限') ;
 
 // Configs
 define($constpref.'_GLOBAL_DISBL','動作の一時的中断');

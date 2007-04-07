@@ -17,6 +17,7 @@ define($constpref."_DESC","This module protects your xoops site from various att
 define($constpref."_ADMININDEX","Protect Center");
 define($constpref."_ADVISORY","Security Advisory");
 define($constpref."_PREFIXMANAGER","Prefix Manager");
+define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions') ;
 
 // Configs
 define($constpref.'_GLOBAL_DISBL','Temporary disabled');

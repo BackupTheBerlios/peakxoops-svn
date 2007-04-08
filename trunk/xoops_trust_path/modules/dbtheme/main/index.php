@@ -2,7 +2,12 @@
 
 $cache_limit = empty( $xoopsModuleConfig['css_cache_time'] ) ? 3600 : intval( $xoopsModuleConfig['css_cache_time'] ) ;
 
-$theme = $xoopsConfig['theme_set'] ;
+if( empty( $xoopsModuleConfig['base_theme'] ) ) {
+	$theme = $xoopsConfig['theme_set'] ;
+} else {
+	$theme = $xoopsModuleConfig['base_theme'] ;
+}
+
 $template = preg_replace( '/[^0-9a-zA-Z_.-]/' , '' , @$_GET['template'] ) ;
 if( empty( $template ) ) $template = 'style.css' ;
 
@@ -42,7 +47,7 @@ $tpl->assign( array(
 	'xoops_config' => $xoopsConfig ,
 	'xoops_theme' => $theme ,
 	'xoops_imageurl' => XOOPS_THEME_URL.'/'.$theme.'/' ,
-	'xoops_themecss' => xoops_getcss($theme) ,
+	'xoops_themecss' => XOOPS_URL.'/modules/'.$mydirname.'/?template=style.css' , // TODO (?)
 	'xoops_isuser' => $xoops_isuser ,
 	'xoops_userid' => $xoops_userid ,
 	'xoops_uname' => $xoops_uname ,

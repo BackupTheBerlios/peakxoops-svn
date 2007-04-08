@@ -20,8 +20,10 @@ You can specify DB template as the theme.
 
 
 - Install dbtheme as usual D3 module
+- Set weight=0 in modulesadmin
 - If you use XoopsCube Legacy 2.1, edit/append site_custom.ini.php like this.
 - Turn visible of "Theme hook" block on
+- Allow to access module/block in "Permissions"
 - Specify the DB template in the block's option
 
 [RenderSystems]
@@ -61,11 +63,15 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 
 ●使い方
 
-普通のD3モジュールとしてインストールします。
-また、altsysとの併用が大前提です。
+altsysとの併用が大前提ですので、もし入っていなかったらまずaltsysをインストールします。altsysは可能な限り最新版（0.41以降推奨）を使ってください。
 
-テーマフックブロックを、テーマを置き換えたいページに表示してください。
-テーマとして利用するDBテンプレートは、テーマフックブロックのオプションで設定します。
+DBTHEMEモジュール自体は、普通のD3モジュールとしてインストールします。（以前のバージョンではSmartyプラグインも必要でしたが、今は不要です）
+
+モジュールインストール直後に、モジュール管理画面で表示順を0にしておくのをお勧めします。
+
+テーマフックブロックを、テーマを置き換えたいページに表示してください。テーマとして利用するDBテンプレートは、テーマフックブロックのオプションで設定します。
+
+同じ「ブロック管理/アクセス権限」の下半分で、モジュールアクセス権限とブロックアクセス権限を振っておくと良いでしょう。
 
 なお、Legacy 2.1 の場合のみ、settings/site_custom.ini.php に以下の記述が必要です。
 
@@ -76,7 +82,6 @@ Legacy_RenderSystem=Legacy_DbthemeRenderSystem
 root=XOOPS_TRUST_PATH
 path=/modules/dbtheme/class
 class=Legacy_DbthemeRenderSystem
-
 
 
 ●テンプレートについての注意
@@ -95,5 +100,27 @@ class=Legacy_DbthemeRenderSystem
 XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
 の中に、theme.html 等のファイルを一通り入れておく、なんてのもありますが、DBTHEMEモジュールを複数入れる可能性を考えたら、あまりお勧めできません。
+
+
+
+●更新履歴
+
+
+0.31 2007-04-09
+- CSS側に有効なxoops_imageurlがアサインされていないバグの修正 (thx mizukami)
+- テーマファイル取り込み時の自動変換処理最適化 (thx mizukami)
+
+0.30 2007-04-07
+- smartyプラグインに頼らない作りにした
+- xoops_theme, xoops_imageurl, xoops_themecss を書き換えるようにした
+- ベースとなるテーマを明示的に指定するようにした
+
+0.20 2007-04-05
+- テンプレート取り込み時の自動書き換え機能追加
+- templatesフォルダにファイルがあればそれを取り込むようにした
+- XC Legacy 2.1対応
+
+0.10 2007-04-04
+- 最初のリリース
 
 [/xlang:ja]

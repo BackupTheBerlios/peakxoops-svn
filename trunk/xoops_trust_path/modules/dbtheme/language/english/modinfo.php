@@ -19,7 +19,7 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions') ;
 define($constpref.'_ADMENU_MYPREFERENCES','Preferences') ;
 
 // blocks
-define( $constpref.'_BNAME_THEMEHOOK' , 'Theme hook' ) ;
+define( $constpref.'_BNAME_THEMEHOOK' , 'Theme hook block' ) ;
 
 // configs
 define($constpref.'_BASETHEME','Base theme set') ;

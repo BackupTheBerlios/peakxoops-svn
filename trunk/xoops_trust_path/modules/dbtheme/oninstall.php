@@ -99,8 +99,8 @@ function dbtheme_oninstall_base( $module , $mydirname )
 					$replacements[] = '"<{$xoops_url}>/modules/dbtheme/?template=$1.$2'.'"' ;
 				} else if( strrchr( $file , '.' ) == '.css' ) {
 					// url() hooking
-					$searches[] = '/url\(([a-z]{3})/' ;
-					$replacements[] = 'url(<{$xoops_imageurl}>$1' ;
+					$searches[] = '#url\(\s*([\"\']?)([0-9a-z./]{3})#i' ;
+					$replacements[] = 'url($1<{$xoops_imageurl}>$2' ;
 				}
 				$tplfile->setVar( 'tpl_source' , preg_replace( $searches , $replacements , $tpl_source ) ) ;
 				$mtime = time() ;

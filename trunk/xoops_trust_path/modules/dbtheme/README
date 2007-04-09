@@ -109,6 +109,7 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 0.31 2007-04-09
 - CSS側に有効なxoops_imageurlがアサインされていないバグの修正 (thx mizukami)
 - テーマファイル取り込み時の自動変換処理最適化 (thx mizukami)
+- oninstallのtypo fix (thx hodaka) 0.31a
 
 0.30 2007-04-07
 - smartyプラグインに頼らない作りにした

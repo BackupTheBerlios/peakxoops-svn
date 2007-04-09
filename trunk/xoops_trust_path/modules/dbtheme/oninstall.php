@@ -72,7 +72,7 @@ function dbtheme_oninstall_base( $module , $mydirname )
 	$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
 	if( file_exists( dirname(__FILE__).'/templates/theme.html' ) ) {
 		$tpl_path = dirname(__FILE__).'/templates' ;
-	} else if( ! empty( $mod_config['base_theme'] ) {
+	} else if( ! empty( $mod_config['base_theme'] ) ) {
 		$tpl_path = XOOPS_ROOT_PATH.'/themes/'.$mod_config['base_theme'] ;
 	} else {
 		$tpl_path = XOOPS_ROOT_PATH.'/themes/'.$GLOBALS['xoopsConfig']['theme_set'] ;

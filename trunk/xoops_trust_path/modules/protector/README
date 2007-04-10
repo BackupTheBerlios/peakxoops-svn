@@ -104,6 +104,7 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 - added language files
 -- persian (thx voltan)
 -- arabic (thx onasre)
+-- russian (thx West) 3.02a
 
 3.01 (2007/02/10)
 - modified the rule for sorting IPs
@@ -273,6 +274,7 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
 -- persian (thx voltan)
 -- arabic (thx onasre)
+-- russian (thx West) 3.02a
 
 3.01 (2007/02/10)
 - IP¥½¡¼¥È¥ë¡¼¥ë¤ÎÊÑ¹¹

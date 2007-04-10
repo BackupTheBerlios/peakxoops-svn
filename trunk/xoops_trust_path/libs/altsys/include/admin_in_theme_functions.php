@@ -28,6 +28,13 @@ function altsys_admin_in_theme_in_last( $contents = null )
 {
 	global $xoops_admin_contents , $xoopsConfig , $xoopsModule , $xoopsUser , $xoopsUserIsAdmin , $xoopsLogger , $altsysModuleConfig , $altsysModuleId ;
 
+	if( isset( $_SESSION['redirect_message'] ) ) {
+		$_SESSION['redirect_message_backup'] = $_SESSION['redirect_message'] ;
+	} else if( isset( $_SESSION['redirect_message_backup'] ) ) {
+		$_SESSION['redirect_message'] = $_SESSION['redirect_message_backup'] ;
+		unset( $_SESSION['redirect_message_backup'] ) ;
+	}
+
 	if( ! isset( $contents ) ) {
 		while( ob_get_level() ) {
 			ob_end_flush() ;

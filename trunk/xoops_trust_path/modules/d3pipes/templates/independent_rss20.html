@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+	<channel>
+		<title><{$pipe.name4xml}></title>
+		<link><{$mod_url}>/index.php?page=eachpipe&amp;pipe_id=<{$pipe.id}></link>
+		<description></description>
+		<lastBuildDate><{"r"|date:$pipe.lastfetch_time}></lastBuildDate>
+		<docs>http://backend.userland.com/rss/</docs>
+		<generator>XOOPS - d3pipes</generator>
+		<category>d3pipes</category>
+		<webMaster><{$xoops_config.adminmail}></webMaster>
+		<language><{$smarty.const._LANGCODE}></language>
+
+		<{foreach from=$entries item="entry"}>
+		<item>
+			<title><{$entry.headline|escape}></title>
+			<link><{$entry.link|escape}></link>
+			<description><{$entry.description|escape}></description>
+			<guid><{$entry.fingerprint|escape}></guid>
+			<pubDate><{"r"|date:$entry.pubtime}></pubDate>
+			<category><{$entry.category}></category>
+		</item>
+		<{/foreach}>
+
+	</channel>
+</rss>

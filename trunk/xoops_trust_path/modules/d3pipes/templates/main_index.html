@@ -1,0 +1,20 @@
+<div class="d3pipes_index" id="<{$mydirname}>_index">
+
+	<h2><{$smarty.const._MD_D3PIPES_H2_INDEX}></h2>
+
+	<ul>
+		<{foreach from=$headpipes item="pipe"}>
+			<li>
+				<a href="<{$mod_url}>/index.php?page=eachpipe&amp;pipe_id=<{$pipe.id}>"><{$pipe.name}></a>
+				<{if $pipe.url}>
+					&nbsp; (<a href="<{$pipe.url}>"><{$pipe.url}></a>)
+				<{/if}>
+			</li>
+		<{/foreach}>
+	</ul>
+
+	<h2><{$smarty.const._MD_D3PIPES_H2_LATESTHEADLINES}></h2>
+
+	<{include file="db:`$mydirname`_inc_entries.html" caller="index"}>
+
+</div>

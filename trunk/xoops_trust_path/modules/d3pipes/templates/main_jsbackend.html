@@ -1,0 +1,16 @@
+<{* Don't use the character of singlequote (') in this templte *}>
+<ul>
+	<{foreach from=$entries item="entry"}>
+		<li>
+			<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
+			<{if $entry.clipping_id}>
+				<a href="<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
+			<{else}>
+				<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
+			<{/if}>
+			<{if $entry.pipe.name}>
+				(<{$entry.pipe.name}>)
+			<{/if}>
+		</li>
+	<{/foreach}>
+</ul>

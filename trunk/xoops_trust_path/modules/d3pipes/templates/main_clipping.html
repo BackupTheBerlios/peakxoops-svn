@@ -1,0 +1,30 @@
+<div class="d3pipes_clipping" id="<{$mydirname}>_clipping">
+
+	<h2><{$smarty.const._MD_D3PIPES_H2_CLIPPING}></h2>
+
+	<dl>
+		<dt><{$smarty.const._MD_D3PIPES_TH_PUBTIME}></dt>
+		<dd><{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}></dd>
+	</dl>
+
+	<dl>
+		<dt><{$smarty.const._MD_D3PIPES_TH_HEADLINE}></dt>
+		<dd><{$entry.headline|escape}></dd>
+	</dl>
+
+	<dl>
+		<dt><{$smarty.const._MD_D3PIPES_TH_LINKURL}></dt>
+		<dd><a href="<{$entry.link|escape}>"><{$entry.link|escape}></a></dd>
+	</dl>
+
+	<dl>
+		<dt><{$smarty.const._MD_D3PIPES_TH_DESCRIPTION}></dt>
+		<dd><{$entry.description|escape|trim|nl2br}></dd>
+	</dl>
+
+	<{* d3forum comment integration *}>
+	<{if $mod_config.comment_dirname && $mod_config.comment_forum_id}>
+		<{d3forum_comment dirname=$mod_config.comment_dirname forum_id=$mod_config.comment_forum_id class="D3pipesD3commentContent" mytrustdirname="d3pipes" id=$clipping_id subject=$entry.headline}>
+	<{/if}>
+
+</div>

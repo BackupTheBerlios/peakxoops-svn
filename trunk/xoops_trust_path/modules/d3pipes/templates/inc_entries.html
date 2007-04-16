@@ -1,0 +1,59 @@
+<table class="outer">
+	<tr>
+		<th><{$smarty.const._MD_D3PIPES_TH_PUBTIME}></th>
+		<{if $entries[0].pipe.name}>
+			<{assign var="display_pipe_name_column" value="1"}>
+			<th><{$smarty.const._MD_D3PIPES_TH_PIPENAME}></th>
+		<{/if}>
+		<th><{$smarty.const._MD_D3PIPES_TH_HEADLINE}></th>
+	</tr>
+	<{foreach from=$entries item="entry"}>
+		<tr class="<{cycle values="odd,even"}>">
+			<td>
+				<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
+			</td>
+			<{if $display_pipe_name_column}>
+				<td>
+					<{if $entry.pipe.url}>
+						<a href="<{$entry.pipe.url}>"><{$entry.pipe.name}></a>
+					<{else}>
+						<a href="<{$mod_url}>/index.php?page=eachpipe&amp;pipe_id=<{$entry.pipe.id}>"><{$entry.pipe.name}></a>
+					<{/if}>
+				</td>
+			<{/if}>
+			<td>
+
+				<!-- internal links -->
+				<{if strstr($entry.link,$xoops_url)}>
+					<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
+				<{elseif $entry.clipping_id}>
+					<a href="<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
+					<{* d3forum comment integration *}>
+					<{if $mod_config.comment_dirname && $mod_config.comment_forum_id}>
+						(<{d3forum_comment_topicscount dirname=$mod_config.comment_dirname forum_id=$mod_config.comment_forum_id link_id=$entry.clipping_id}>)
+					<{/if}>
+				<{else}>
+					<{$entry.headline|escape}>
+				<{/if}>
+
+				<!-- link to outside directly -->
+				<{if ! strstr($entry.link,$xoops_url)}>
+					<a href="<{$entry.link|escape}>"> <img src="<{$mod_imageurl}>/external.png" alt="<{$entry.headline|escape|string_format:$smarty.const._MD_D3PIPES_FMT_EXTERNALLINK}>" /> </a>
+				<{/if}>
+
+				<!-- description on/off -->
+				<{if $entry.fingerprint && $entry.description}>
+					<a href="javascript:void(0);" onclick="obj=document.getElementById('<{$entry.fingerprint|escape}>');obj.style.display=obj.style.display=='block'?'none':'block';"> <img src="<{$mod_imageurl}>/description_closed.gif" alt="+" /> </a>
+					<div id="<{$entry.fingerprint|escape}>" style="display:none;">
+						<{if $entry.content_encoded}>
+							<{$entry.content_encoded}>
+						<{else}>
+							<{$entry.description|escape}>
+						<{/if}>
+					</div>
+				<{/if}>
+
+			</td>
+		</tr>
+	<{/foreach}>
+</table>

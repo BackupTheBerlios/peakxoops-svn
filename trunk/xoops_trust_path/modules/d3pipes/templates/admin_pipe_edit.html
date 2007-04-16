@@ -1,0 +1,78 @@
+<div class="d3pipes_admin_pipe_edit" id="<{$mydirname}>_admin_pipe_edit">
+
+<h2><{$mod_name}> - 
+<{if $pipe_id>0}>
+	<{$pipe_id|string_format:$smarty.const._MD_A_D3PIPES_H2_PIPEADMINEDIT_FMT}>
+<{else}>
+	<{$smarty.const._MD_A_D3PIPES_H2_PIPEADMINNEW}>
+<{/if}>
+</h2>
+
+<form action="<{$mod_url}>/admin/index.php?page=pipe" method="post">
+	<table class="outer">
+		<tr>
+			<th><{$smarty.const._MD_A_D3PIPES_TH_WEIGHT}></th>
+			<th><{$smarty.const._MD_A_D3PIPES_TH_JOINT}></th>
+			<th><{$smarty.const._MD_A_D3PIPES_TH_JOINTCLASS}></th>
+			<th><{$smarty.const._MD_A_D3PIPES_TH_OPTION}></th>
+		</tr>
+	<{foreach from=$pipe.joints item="joint" key="index"}>
+		<tr class="<{cycle values="odd,even"}>">
+			<td>
+				<input type="text" name="joint_weights[<{$index}>]" value="<{$index*10}>" size="3" style="text-align:right;" />
+			</td>
+			<td>
+				<select name="joint_joints[<{$index}>]" onchange="d3pipes_update_notice4joint(<{$index}>,this)">
+					<{html_options options=$joints selected=$joint.joint}>
+				</select>
+			</td>
+			<td>
+				<input type="text" name="joint_classes[<{$index}>]" value="<{$joint.joint_class|escape}>" size="8" />
+			</td>
+			<td>
+				<input type="text" name="joint_option[<{$index}>]" value="<{$joint.option|escape}>" size="100" />
+				<div id="joint_notice_<{$index}>" style="height:16px;"><{$joint_notices[$joint.joint]}></div>
+			</td>
+		</tr>
+	<{/foreach}>
+	</table>
+
+	<div align="left" class="head" style="margin: 12px;">
+		<p>
+		<{$smarty.const._MD_A_D3PIPES_TH_PIPENAME}>: <input type="text" name="name" value="<{$pipe.name4xml}>" size="40" />
+		</p>
+		<p>
+		<{$smarty.const._MD_A_D3PIPES_TH_PIPEURL}>: <input type="text" name="url" value="<{$pipe.url4xml}>" size="60" />
+		</p>
+		<p>
+		<{$smarty.const._MD_A_D3PIPES_TH_PIPEIMAGE}>: <input type="text" name="image" value="<{$pipe.image4xml}>" size="60" />
+		</p>
+	</div>
+
+	<div align="center" style="margin: 12px;">
+		<input type="submit" name="do_update" value="<{$smarty.const._MD_A_D3PIPES_BTN_SAVE}>" />
+		<{if $pipe_id>0}>
+			<input type="submit" name="do_saveas" value="<{$smarty.const._MD_A_D3PIPES_BTN_SAVEASNEWPIPE}>" />
+			<input type="reset" value="<{$smarty.const._MD_A_D3PIPES_BTN_RESET}>" />
+			<input type="submit" name="do_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_D3PIPES_CNFM_PIPEDELETE}>');" />
+			<input type="hidden" name="pipe_id" value="<{$pipe_id}>" />
+		<{/if}>
+		<{$gticket_hidden}>
+	</div>
+
+</form>
+
+<script type="text/javascript">
+<!--//
+function d3pipes_update_notice4joint(index,select) {
+	var notices = new Array(
+	<{foreach from=$joint_notices item="notice" key="i"}>
+		'<{$notice}>' ,
+	<{/foreach}>
+	'' ) ;
+	xoopsGetElementById("joint_notice_"+index).innerHTML = notices[ select.selectedIndex ] ;
+}
+//-->
+</script>
+
+</div>

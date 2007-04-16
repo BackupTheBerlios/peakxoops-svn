@@ -1,0 +1,70 @@
+[mlimg]
+[xlang:en]
+====  D3 Pipes  ===
+
+A synthetic module for site syndications.
+
+
+[b]SUMMARY[/b]
+
+- Outer RSS/ATOMs can be displayed with any aggregation
+- Outer RSS/ATOMs can be imported/deleted automatically
+- Outer RSS/ATOMs can be marked/commented
+- Inside "what's new" information can be displayed with any aggregation
+- Both informations of inside/ouside can be treated seamlessly
+- Both informations of inside/ouside can be output by the format of RSS1/2/ATOM
+- Full customizable "Joint Model"
+- Entry extraction
+- Asynchronous blocks which never make your site heavy (Of course, clonable)
+- As D3 module, free dirname, duplicate, and easy maintenance.
+
+
+[b]USAGES[/b]
+
+Be sure smarty plugins (d3comment_*) are copied into class/smarty/plugins/
+Install it as normal D3 module.
+I recommend you to install altsys also.
+
+
+[b]CHANGELOG[/b]
+
+0.10 2007-04-17
+- The first release
+
+
+[/xlang:en]
+[xlang:ja]
+
+====  D3パイプ  ===
+
+某!Pipesっぽい、シンジケーション総合モジュール
+
+
+●概要
+
+- 外部のRSS/ATOM等を任意のアグリゲーションで表示できる
+- 外部のRSS/ATOM等を取り込む/自動的に削除する
+- 取り込んだ外部のRSS/ATOM等にマークをつける/コメントをつける
+- 内部の新着情報を任意のアグリゲーションで表示できる
+- 内外の情報をシームレスに取り扱える
+- 内外の情報いずれもRSS1/RSS2/ATOMのフォーマットで出力できる
+- 機能を徹底的に分解したジョイントモデルにより拡張も自由自在
+- エントリ絞り込み（mbregexも選択可能）
+- XML取得動作でサイト全体を重く感じさせない非同期表示ブロック搭載
+- D3モジュールなので、自由なdirnameでの複製と簡単なバージョン管理は当たり前
+
+
+●使い方
+
+普通のD3モジュールとしてインストールします。
+インストールする前に、Smartyプラグイン２つがちゃんとコピーされているか確認してください。
+altsysとの併用を強く推奨します。
+
+
+●更新履歴
+
+0.10 2007-04-17
+- 最初のリリース
+
+
+[/xlang:ja]

@@ -32,6 +32,20 @@ function d3pipes_common_get_default_joint_class( $mydirname , $joint_type )
 	$db =& Database::getInstance() ;
 
 	list( $ret ) = $db->fetchRow( $db->query( "SELECT default_class FROM ".$db->prefix($mydirname."_joints")." WHERE joint_type='".addslashes($joint_type)."'" ) ) ;
+	if( empty( $ret ) ) {
+		$classes_base = XOOPS_TRUST_PATH.'/modules/d3pipes/joints/'.$joint_type ;
+		if( $handler = @opendir( $classes_base ) ) {
+			while( ( $file = readdir( $handler ) ) !== false ) {
+				if( substr( $file , 0 , 1 ) == '.' ) continue ;
+				$file = str_replace( '..' , '' , $file ) ;
+				if( file_exists( $classes_base . '/' . $file ) ) {
+					$ret = strtolower( substr( $file , strlen( 'D3pipes'.$joint_type ) , - strlen( '.class.php' ) ) ) ;
+					break ;
+				}
+			}
+		}
+	}
+	
 	return $ret ;
 }
 

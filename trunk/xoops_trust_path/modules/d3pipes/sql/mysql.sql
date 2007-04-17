@@ -98,8 +98,11 @@ CREATE TABLE joints (
 ) TYPE=MyISAM;
 
 INSERT INTO joints SET joint_type='filter',default_class='pcre';
+INSERT INTO joints SET joint_type='parse',default_class='keithxml';
 INSERT INTO joints SET joint_type='utf8from',default_class='mbstring';
 INSERT INTO joints SET joint_type='utf8to',default_class='mbstring';
+INSERT INTO joints SET joint_type='union',default_class='mergesort';
+INSERT INTO joints SET joint_type='clip',default_class='moduledb';
 
 
 CREATE TABLE joint_classes (

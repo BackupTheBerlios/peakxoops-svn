@@ -53,7 +53,7 @@ $modversion['blocks'][1] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_async_show' ,
 	'edit_func'		=> 'b_d3pipes_async_edit' ,
-	'options'		=> "$mydirname|".uniqid(rand())."|0|10" ,
+	'options'		=> "$mydirname|".uniqid(rand())."|1|10" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;

@@ -104,7 +104,10 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				break ;
 			}
 		}
-		if( ! $base_found ) return array() ;
+		if( ! $base_found ) {
+			$this->errors[] = 'Perhaps keithxml\'s option does not match for this xml' ;
+			return array() ;
+		}
 
 		$items = array() ;
 		$attributes = array() ;

@@ -7,7 +7,12 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 	function execute( $dummy = '' , $max_entries = '' )
 	{
 		$xml_source = '' ;
-	
+
+		if( ! strstr( $this->url , '://' ) ) {
+			$this->errors[] = 'Input URI for snoopy\'s option' ;
+			return '' ;
+		}
+
 		$cache_result = $this->fetch_cache() ;
 		if( $cache_result !== false ) {
 			list( $cached_time , $xml_source ) = $cache_result ;

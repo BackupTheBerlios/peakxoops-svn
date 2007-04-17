@@ -25,7 +25,7 @@ function b_pico_list_show( $options )
 
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
 	$categories = trim( @$options[1] ) === '' ? array() : explode(',',$options[1]) ;
-	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time' : $options[2] ;
+	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
 	$contents_num = empty( $options[3] ) ? 10 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
 
@@ -105,7 +105,7 @@ function b_pico_list_edit( $options )
 {
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
 	$categories = trim( @$options[1] ) === '' ? array() : explode(',',$options[1]) ;
-	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time' : $options[2] ;
+	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
 	$contents_num = empty( $options[3] ) ? 10 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
 

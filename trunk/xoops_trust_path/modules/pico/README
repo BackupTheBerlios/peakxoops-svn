@@ -4,10 +4,6 @@
 
 [b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
-This is the developping version.
-If you are power user/programmer/designer, let's try this instead of stable numbered 1.00 :-)
-Don't forget updating the module after overwriting the developping version.
-
 Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
 
 TinyD became a deprecated module because pico has been marked as stable.
@@ -98,6 +94,9 @@ pico is fast enough if you use content's cache.
 
 
 [b]HISTORY:[/b]
+
+1.20 (2007/04/18)
+- numbered as stable version
 
 1.18 beta (2007/03/29)
 - fixed bugs for invisible content
@@ -239,9 +238,9 @@ pico is fast enough if you use content's cache.
 ====  静的コンテンツ用モジュール pico  ===
 
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
-開発当初から想定していた機能を一通り実装したこともあり、現時点では1.00を安定版としています。
+開発当初から想定していた機能を一通り実装したこともあり、現時点では1.20を安定版としています。
 
-ただし、こちらの1.1xは機能向上を目的とした開発版です。やる気のある方はぜひこちらをお試しください。開発版なので、特には書きませんが、バージョンアップ時のモジュールアップデートはほぼ必須です。
+機能追加は1.3xにて行います。最新機能を利用したい方は、ぜひ1.3xにトライしてください。
 
 以下、安定版・開発版共通。
 
@@ -332,6 +331,9 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.20 (2007/04/18)
+- 安定版としてのリリース
 
 1.18 beta (2007/03/29)
 - 非表示コンテンツの閲覧・編集権限処理を修正

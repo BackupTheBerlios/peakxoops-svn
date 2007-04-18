@@ -29,7 +29,7 @@ class D3pipesFetchAbstract extends D3pipesJointAbstract {
 	function store_cache( $xml_source )
 	{
 		$cache_file = $this->get_xml_cache_path() ;
-		$fp = fopen( $cache_file , 'wb' ) ;
+		$fp = @fopen( $cache_file , 'wb' ) ;
 		if( ! $fp ) return false ;
 		fwrite( $fp , $xml_source ) ;
 		fclose( $fp ) ;

@@ -32,11 +32,28 @@ define('_MD_D3PIPES_TH_PIPENAME','name');
 define('_MD_D3PIPES_TH_HEADLINE','headline');
 define('_MD_D3PIPES_TH_LINKURL','Link URI');
 define('_MD_D3PIPES_TH_DESCRIPTION','Description');
+define('_MD_D3PIPES_TH_ACTIONTOCLIPPING','Action to this clipping');
+
+define('_MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING','Highlight it');
+
+define('_MD_D3PIPES_BTN_UPDATE','Update');
 
 define('_MD_D3PIPES_FMT_EXTERNALLINK','External link to %s');
 
+define('_MD_D3PIPES_MSG_CLIPPINGUPDATED','The clipping updated successfully');
+
 define('_MD_D3PIPES_ERR_INVALIDCLIPPINGID','Invalid clipping ID');
 define('_MD_D3PIPES_ERR_INVALIDPIPEID','Invalid pipe ID');
+define('_MD_D3PIPES_ERR_PERMISSION','Permission error');
+define('_MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK','Invalid pipe_id. Go to blocks admin and edit the pipe_id');
+define('_MD_D3PIPES_ERR_PARSETYPEMISMATCH','XML type is not matched');
+define('_MD_D3PIPES_ERR_CACHEFOLDERNOTWRITABLE','Cache folder does not exist or is not writable');
+define('_MD_D3PIPES_ERR_INVALIDURIINFETCH','Invalid URI specified as fetch joint\'s option');
+define('_MD_D3PIPES_ERR_CANTCONNECTINFETCH','Cannot access to outer contents');
+define('_MD_D3PIPES_ERR_URLFOPENINFETCH','You cannot use "fopen" under allow_url_fopen=off');
+define('_MD_D3PIPES_ERR_INVALIDDIRNAMEINBLOCK','Invalid dirname on the block joint');
+define('_MD_D3PIPES_ERR_INVALIDFILEINBLOCK','Invalid blockfile on the block joint');
+define('_MD_D3PIPES_ERR_INVALIDFUNCINBLOCK','Invalid blockfunc on the block joint');
 
 
 ?>

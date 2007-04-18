@@ -15,6 +15,12 @@
 
 	<h2><{$smarty.const._MD_D3PIPES_H2_LATESTHEADLINES}></h2>
 
+	<{if $errors}>
+		<{foreach from=$errors item="error"}>
+			<div class="errorMsg"><{$error|escape|nl2br}></div>
+		<{/foreach}>
+	<{/if}>
+
 	<{include file="db:`$mydirname`_inc_entries.html" caller="index"}>
 
 </div>

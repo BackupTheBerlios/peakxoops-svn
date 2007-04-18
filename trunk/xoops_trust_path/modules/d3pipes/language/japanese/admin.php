@@ -65,5 +65,7 @@ define('_MD_A_D3PIPES_MSG_CLIPPINGUPDATED','切り抜きを更新/削除しました');
 define('_MD_A_D3PIPES_CNFM_DELETE','本当に削除してよろしいですか？');
 define('_MD_A_D3PIPES_CNFM_PIPEDELETE','本当にパイプを削除しますか？ このパイプによって保存された切り抜きは削除されません。必要に応じて、「切り抜き管理」より操作してください');
 
+define('_MD_A_D3PIPES_ERR_INVALIDSTARTJOINT_FMT','開始ジョイントとして指定できるのは、%s のいずれかだけです');
+define('_MD_A_D3PIPES_ERR_CORRESPONDPARSENOTFOUND','外部より取得したXMLを解析するジョイントが指定されていません');
 
 ?>

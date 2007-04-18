@@ -1,4 +1,11 @@
 <{* Don't use the character of singlequote (') in this templte *}>
+
+<{if $errors}>
+	<{foreach from=$errors item="error"}>
+		<div class="errorMsg"><{$error|escape|nl2br}></div>
+	<{/foreach}>
+<{/if}>
+
 <ul>
 	<{foreach from=$entries item="entry"}>
 		<li>

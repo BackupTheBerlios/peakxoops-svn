@@ -2,7 +2,7 @@
 
 	<{if $errors}>
 		<{foreach from=$errors item="error"}>
-			<div class="errorMsg"><{$error|escape}></div>
+			<div class="errorMsg"><{$error|escape|nl2br}></div>
 		<{/foreach}>
 	<{/if}>
 

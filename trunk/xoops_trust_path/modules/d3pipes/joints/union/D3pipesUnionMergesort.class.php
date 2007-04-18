@@ -9,7 +9,8 @@ class D3pipesUnionMergesort extends D3pipesUnionAbstract {
 	{
 		foreach( $this->union_ids as $union_ids ) {
 			$pipe4assign = d3pipes_common_get_pipe4assign( $this->mydirname , $union_ids['pipe_id'] ) ;
-			$entries_tmp = d3pipes_common_fetch_entries( $this->mydirname , $pipe4assign , $union_ids['num'] , $this->errors , $this->mod_configs ) ;
+			$entries_tmp = d3pipes_common_fetch_entries( $this->mydirname , $pipe4assign , $union_ids['num'] , $errors , $this->mod_configs ) ;
+			$this->errors = array_merge( $this->errors , $errors ) ;
 			foreach( array_keys( $entries_tmp ) as $i ) {
 				$entries_tmp[ $i ][ 'pipe' ] = $pipe4assign ;
 			}

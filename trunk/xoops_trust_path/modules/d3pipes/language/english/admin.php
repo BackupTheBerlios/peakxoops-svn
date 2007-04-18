@@ -65,4 +65,7 @@ define('_MD_A_D3PIPES_MSG_CLIPPINGUPDATED','Clippings have been updated/removed'
 define('_MD_A_D3PIPES_CNFM_DELETE','Are you OK to remove?');
 define('_MD_A_D3PIPES_CNFM_PIPEDELETE','Are you OK to remove? If you want to remove clippings saved by this pipe, go to clippings admin of this module.');
 
+define('_MD_A_D3PIPES_ERR_INVALIDSTARTJOINT_FMT','You have to slect the starting joint from %s');
+define('_MD_A_D3PIPES_ERR_CORRESPONDPARSENOTFOUND','You have to set XML Parser to use XML fetching joint');
+
 ?>

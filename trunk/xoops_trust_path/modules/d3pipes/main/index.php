@@ -26,6 +26,7 @@ while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
 $union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $union_options ) ) ;
 $union_obj->setModConfigs( $xoopsModuleConfig ) ;
 $entries = $union_obj->execute( array() , $xoopsModuleConfig['index_total'] ) ;
+$errors = $union_obj->getErrors() ;
 
 // pagetitle & xoops_breadcrumbs
 $pagetitle4assign = $xoopsModule->getVar('name') ;
@@ -40,6 +41,7 @@ $xoopsTpl->assign(
 		'mod_config' => @$xoopsModuleConfig ,
 		'xoops_breadcrumbs' => @$xoops_breadcrumbs ,
 		'xoops_pagetitle' => @$pagetitle4assign ,
+		'errors' => $errors ,
 		'headpipes' => $headpipes4assign ,
 		'entries' => $entries ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,

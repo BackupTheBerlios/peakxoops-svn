@@ -23,6 +23,7 @@ $pagetitle4assign = empty( $clipping['headline'] ) ? _MD_D3PIPES_H2_CLIPPING : h
 $xoops_breadcrumbs[] = array( 'name' => @$pipe4assign['name'] , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=eachpipe&amp;pipe_id='.$clipping['pipe_id'] ) ;
 $xoops_breadcrumbs[] = array( 'name' => $pagetitle4assign ) ;
 
+
 // assign
 $xoopsTpl->assign(
 	array(

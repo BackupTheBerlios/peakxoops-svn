@@ -22,6 +22,20 @@
 		<dd><{$entry.description|escape|trim|nl2br}></dd>
 	</dl>
 
+	<{if $xoops_isadmin}>
+	<dl>
+		<dt><{$smarty.const._MD_D3PIPES_TH_ACTIONTOCLIPPING}></dt>
+		<dd>
+			<form action="<{$mod_url}>/index.php?page=update_clipping" method="post">
+				<input type="checkbox" name="highlight_clipping" id="highlight_clipping" value="1" <{if $entry.clipping_highlight}>checked="checked"<{/if}> /><label for="highlight_clipping"><{$smarty.const._MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING}></label>
+				<br />
+				<input type="hidden" name="clipping_id" value="<{$clipping_id}>" />
+				<input type="submit" value="<{$smarty.const._MD_D3PIPES_BTN_UPDATE}>" />
+			</form>
+		</dd>
+	</dl>
+	<{/if}>
+
 	<{* d3forum comment integration *}>
 	<{if $mod_config.comment_dirname && $mod_config.comment_forum_id}>
 		<{d3forum_comment dirname=$mod_config.comment_dirname forum_id=$mod_config.comment_forum_id class="D3pipesD3commentContent" mytrustdirname="d3pipes" id=$clipping_id subject=$entry.headline}>

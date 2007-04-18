@@ -2,7 +2,7 @@
 
 require dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 
-// @ini_set( 'display_errors' , 0 ) ;
+@ini_set( 'display_errors' , 0 ) ;
 
 // fetch unique_id
 $unique_id = preg_replace( '/[^0-9a-z]/' , '' , $_GET['unique_id'] ) ;
@@ -17,7 +17,7 @@ $pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_id ) ;
 
 // specialcheck for js
 if( empty( $pipe4assign['block_disp'] ) ) {
-	echo "d3pipes_insert_html('{$mydirname}_async_block_{$unique_id}','invalid pipe_id');" ;
+	echo "d3pipes_insert_html('{$mydirname}_async_block_{$unique_id}','"._MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK."');" ;
 	exit ;
 }
 

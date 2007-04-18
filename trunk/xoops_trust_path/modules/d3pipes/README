@@ -28,6 +28,12 @@ I recommend you to install altsys also.
 
 [b]CHANGELOG[/b]
 
+0.11 2007-04-19
+- modified error handlings easier
+- modified rss/rdf/atom auto recognization
+- added incoherence checks on pipe editing
+- added highlight
+
 0.10 2007-04-17
 - The first release
 - modified failable initials 0.10a
@@ -63,6 +69,12 @@ altsysとの併用を強く推奨します。
 
 
 ●更新履歴
+
+0.11 2007-04-19
+- エラー表示を判りやすくした
+- XML解析ジョイントに、RSS/RDF/ATOM自動判断処理を搭載した
+- パイプ編集時にジョイント順の矛盾チェックを行うようにした
+- ハイライト機能を実装した
 
 0.10 2007-04-17
 - 最初のリリース

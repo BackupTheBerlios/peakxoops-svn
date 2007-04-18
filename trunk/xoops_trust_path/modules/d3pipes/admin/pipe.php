@@ -39,6 +39,22 @@ if( ( ! empty( $_POST['do_update'] ) || ! empty( $_POST['do_saveas'] ) ) && is_a
 		) ;
 	}
 	ksort( $joints ) ;
+	$joints = array_values( $joints ) ;
+
+	// check joints interrelations
+	require dirname(dirname(__FILE__)).'/include/start_joints.inc.php' ;
+	if( ! in_array( @$joints[0]['joint'] , $start_joints ) ) {
+		die( sprintf( _MD_A_D3PIPES_ERR_INVALIDSTARTJOINT_FMT , implode( ',' , $start_joints ) ) ) ;
+	}
+	if( @$joints[0]['joint'] == 'fetch' ) {
+		$parse_found = false ;
+		foreach( $joints as $joint ) {
+			if( $joint['joint'] == 'parse' ) $parse_found = true ;
+		}
+		if( empty( $parse_found ) ) die( _MD_A_D3PIPES_ERR_CORRESPONDPARSENOTFOUND ) ;
+	}
+
+	// make sql
 	$set4sql = "`joints`='".addslashes(serialize(array_values($joints)))."',name='".$myts->addSlashes(@$_POST['name'])."',url='".$myts->addSlashes(@$_POST['url'])."',image='".$myts->addSlashes(@$_POST['image'])."'" ;
 	
 	$pipe_id = intval( @$_POST['pipe_id'] ) ;

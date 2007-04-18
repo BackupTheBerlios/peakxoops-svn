@@ -37,6 +37,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				'headline'=>'title' ,
 				'fingerprint'=>'link' ,
 				'description'=>'description' ,
+				'content_encoded'=>'content:encoded' ,
 			) ,
 			'minimum_elements' => array() ,
 			'post_filter_func' => '' ,
@@ -63,6 +64,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 	function parse_option()
 	{
 		$xml_type = trim( strtolower( $this->option ) ) ;
+
 		switch( $xml_type ) {
 			case 'rss' : $xml_type = 'rss2' ; break ;
 			case 'rdf' : $xml_type = 'rss1' ; break ;
@@ -83,6 +85,8 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 
 	function execute( $xml_source , $max_entries = '' )
 	{
+		if( ! trim( $this->option ) ) $this->detect_xml_type( $xml_source ) ;
+
 		$this->parse_option() ;
 
 		// prefilter
@@ -105,7 +109,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 			}
 		}
 		if( ! $base_found ) {
-			$this->errors[] = 'Perhaps keithxml\'s option does not match for this xml' ;
+			$this->errors[] = _MD_D3PIPES_ERR_PARSETYPEMISMATCH."\n($this->pipe_id)" ;
 			return array() ;
 		}
 
@@ -124,13 +128,13 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 
 			$item = array() ;
 			foreach( $this->params['indexes'] as $api_tag => $xml_tags ) {
-				foreach( explode( '|' , $xml_tags ) as $tag ) {
-					if( isset( $entry[ $tag ] ) ) {
+				foreach( explode( '|' , $xml_tags ) as $xml_tag ) {
+					if( isset( $entry[ $xml_tag ] ) ) {
 						if( strstr( $api_tag , 'time' ) ) {
-							$item[ $api_tag ] = $this->dateToUnix( $entry[ $tag ] ) ;
+							$item[ $api_tag ] = $this->dateToUnix( $entry[ $xml_tag ] ) ;
 							// $item[ $api_tag ] = $this->dateToUnix( '2007-10-10T12:34:56.7Z' ) ; // DEBUG
 						} else {
-							$item[ $api_tag ] = $entry[ $tag ] ;
+							$item[ $api_tag ] = $entry[ $xml_tag ] ;
 						}
 						break ;
 					}
@@ -171,6 +175,19 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 		if( is_array( $entry['link'] ) ) $entry['link'] = '' ; // TODO
 
 		return $entry ;
+	}
+
+	function detect_xml_type( $xml_source )
+	{
+		$data = XML_unserialize( $xml_source ) ;
+		if( ! empty( $data['rdf:RDF'] ) ) {
+			$this->option = 'rdf' ;
+		} else if( ! empty( $data['feed'] ) ) {
+			$this->option = 'atom' ;
+		} else {
+			$this->option = 'rss' ;
+		}
+		d3pipes_common_update_joint_option( $this->mydirname , $this->pipe_id , 'parse' , $this->option ) ;
 	}
 
 }

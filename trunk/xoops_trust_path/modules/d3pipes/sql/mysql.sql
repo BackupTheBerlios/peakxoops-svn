@@ -97,6 +97,7 @@ CREATE TABLE joints (
   PRIMARY KEY (joint_type)
 ) TYPE=MyISAM;
 
+INSERT INTO joints SET joint_type='fetch',default_class='snoopy';
 INSERT INTO joints SET joint_type='filter',default_class='pcre';
 INSERT INTO joints SET joint_type='parse',default_class='keithxml';
 INSERT INTO joints SET joint_type='utf8from',default_class='mbstring';

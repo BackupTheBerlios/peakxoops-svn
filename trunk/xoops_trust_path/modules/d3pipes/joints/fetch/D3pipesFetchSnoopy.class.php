@@ -9,7 +9,7 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 		$xml_source = '' ;
 
 		if( ! strstr( $this->url , '://' ) ) {
-			$this->errors[] = 'Input URI for snoopy\'s option' ;
+			$this->errors[] = _MD_D3PIPES_ERR_INVALIDURIINFETCH."\n($this->pipe_id)" ;
 			return '' ;
 		}
 
@@ -26,9 +26,13 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 		if( ! $snoopy->fetch( $this->url ) || ! ( $xml_source = $snoopy->results ) ) {
 			// fetch error
 			$this->touch_cache() ;
+			$this->errors[] = _MD_D3PIPES_ERR_CANTCONNECTINFETCH."\n($this->pipe_id)" ;
 			return $xml_source ;
 		}
-		if( ! $this->store_cache( $xml_source ) ) die( 'set writable XOOPS_TRUST_PATH/cache' ) ;
+		if( ! $this->store_cache( $xml_source ) ) {
+			$this->errors[] = _MD_D3PIPES_ERR_CACHEFOLDERNOTWRITABLE."\nXOOPS_TRUST_PATH/cache ($this->pipe_id)" ;
+			return '' ;
+		}
 
 		return $xml_source ;
 	}

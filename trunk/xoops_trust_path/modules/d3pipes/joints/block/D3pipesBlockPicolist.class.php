@@ -11,7 +11,7 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 		// parse and check option for this class
 		$params = array_map( 'trim' , explode( '|' , $this->option ) ) ;
 		if( empty( $params[0] ) ) {
-			$this->errors[] = 'Set the dirname as parameter' ;
+			$this->errors[] = _MD_D3PIPES_ERR_INVALIDDIRNAMEINBLOCK."\n($this->pipe_id)" ;
 			return false ;
 		}
 		$this->target_dirname = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , $params[0] ) ;

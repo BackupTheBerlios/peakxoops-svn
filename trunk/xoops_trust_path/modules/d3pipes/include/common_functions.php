@@ -27,6 +27,24 @@ function d3pipes_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 }
 
 
+function d3pipes_common_update_joint_option( $mydirname , $pipe_id , $joint_type , $option )
+{
+	$db =& Database::getInstance() ;
+
+	$pipe_id = intval( $pipe_id ) ;
+
+	list( $joints_serialized ) = $db->fetchRow( $db->query( "SELECT joints FROM ".$db->prefix($mydirname."_pipes")." WHERE pipe_id=$pipe_id" ) ) ;
+	if( ! empty( $joints_serialized ) && $joints = unserialize( $joints_serialized ) ) {
+		foreach( array_keys( $joints ) as $i ) {
+			if( $joints[ $i ]['joint'] == $joint_type ) {
+				$joints[ $i ][ 'option' ] = $option ;
+			}
+		}
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_pipes")." SET joints='".addslashes(serialize($joints))."' WHERE pipe_id=$pipe_id" ) ;
+	}
+}
+
+
 function d3pipes_common_get_default_joint_class( $mydirname , $joint_type )
 {
 	$db =& Database::getInstance() ;
@@ -115,7 +133,7 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 	$pipe_id = $pipe_row['pipe_id'] ;
 
 	$joints_dir = dirname(dirname(__FILE__)).'/joints' ;
-	$initial_joints = array( 'fetch' , 'local' , 'block' , 'union' ) ;
+	include dirname(__FILE__).'/start_joints.inc.php' ;
 
 	$objects = array() ;
 
@@ -124,7 +142,7 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 	$cache_obj_pos = 0 ;
 	$cache_obj = false ;
 	foreach( $joints as $joint ) {
-		if( in_array( $joint['joint'] , $initial_joints ) ) $is_started = true ;
+		if( in_array( $joint['joint'] , $start_joints ) ) $is_started = true ;
 		if( ! $is_started ) continue ;
 
 		$class_name = 'D3pipes'.ucfirst($joint['joint']).ucfirst($joint['joint_class']) ;
@@ -155,10 +173,11 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 	foreach( $objects as $obj ) {
 		$obj->setModConfigs( $mod_configs ) ;
 		$data = $obj->execute( $data , $max_entries ) ;
-		$errors = array_merge( $errors , $obj->errors ) ;
+		$errors = array_merge( $errors , $obj->getErrors() ) ;
 	}
 
 	return array_slice( $data , 0 , $max_entries ) ;
 }
+
 
 ?>

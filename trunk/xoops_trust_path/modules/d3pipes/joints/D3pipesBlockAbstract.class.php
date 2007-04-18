@@ -25,14 +25,14 @@ class D3pipesBlockAbstract extends D3pipesJointAbstract {
 
 		// file check
 		if( ! file_exists( $this->func_file ) ) {
-			$this->errors[] = 'Wrong block file: '.$this->func_file.' ('.get_class( $this ).')' ;
+			$this->errors[] = _MD_D3PIPES_ERR_INVALIDFILEINBLOCK."\n".$this->func_file.' ('.get_class( $this ).')' ;
 			return array() ;
 		}
 		require_once $this->func_file ;
 
 		// function check
 		if( ! function_exists( $this->func_name ) ) {
-			$this->errors[] = 'Wrong block function: '.$this->func_name.' ('.get_class( $this ).')' ;
+			$this->errors[] = _MD_D3PIPES_ERR_INVALIDFUNCINBLOCK."\n".$this->func_name.' ('.get_class( $this ).')' ;
 			return array() ;
 		}
 

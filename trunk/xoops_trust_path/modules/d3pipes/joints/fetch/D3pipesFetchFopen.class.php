@@ -9,14 +9,14 @@ class D3pipesFetchFopen extends D3pipesFetchAbstract {
 		$xml_source = '' ;
 
 		if( trim( $this->url ) == '' ) {
-			$this->errors[] = 'Input URI for fopen\'s option' ;
+			$this->errors[] = _MD_D3PIPES_ERR_INVALIDURIINFETCH."\n($this->pipe_id)" ;
 			return '' ;
 		}
 
 		$cache_result = $this->fetch_cache() ;
 		if( $cache_result !== false ) {
 			list( $cached_time , $xml_source ) = $cache_result ;
-			if( $cached_time + $this->cache_life_time > time() ) {
+			if( $cached_time + $this->cache_life_time > time() && $xml_source ) {
 				return $xml_source ;
 			}
 		}
@@ -25,6 +25,11 @@ class D3pipesFetchFopen extends D3pipesFetchAbstract {
 		if( ! $fp ) {
 			// fetch error
 			$this->touch_cache() ;
+			if( ! @ini_get( 'allow_url_fopen' ) ) {
+				$this->errors[] = _MD_D3PIPES_ERR_URLFOPENINFETCH ;
+			} else {
+				$this->errors[] = _MD_D3PIPES_ERR_CANNOTCONNECTINFETCH."\n($this->pipe_id)" ;
+			}
 			return $xml_source ;
 		}
 
@@ -34,7 +39,10 @@ class D3pipesFetchFopen extends D3pipesFetchAbstract {
 		}
 		fclose( $fp ) ;
 
-		if( ! $this->store_cache( $xml_source ) ) die( 'set writable XOOPS_TRUST_PATH/cache' ) ;
+		if( ! $this->store_cache( $xml_source ) ) {
+			$this->errors[] = _MD_D3PIPES_ERR_CACHEFOLDERNOTWRITABLE."\nXOOPS_TRUST_PATH/cache ($this->pipe_id)" ;
+			return '' ;
+		}
 
 		return $xml_source ;
 	}

@@ -45,6 +45,34 @@ If you want to use multiple theme set at once, install another DBTHEME modules.
 
 Since DBTHEME module is designed as D3 module, you can intall the module as much as you like.
 
+
+[b]CHANGES[/b]
+
+0.32 2007-04-19
+- added an assignment xoops_dbthemecssurl for special themes for dbtheme
+- added language files
+-- persian (thx stranger)
+
+0.31 2007-04-09
+- fixed xoops_imageurl in CSS (thx mizukami)
+- modified preg_replace pattern on updating the module (thx mizukami)
+- fixed typo in oninstall (thx hodaka) 0.31a
+
+0.30 2007-04-07
+- modified smarty no longer necessary
+- modified xoops_theme, xoops_imageurl, xoops_themecss
+- added a configration "base theme"
+
+0.20 2007-04-05
+- added preg_replace theme/css in oninstall/onupdate
+- added importing templates from (dbtheme dirname)/templates/*
+- applied for XC Legacy 2.1
+
+0.10 2007-04-04
+- 1st release
+
+
+
 [/xlang:en]
 [xlang:ja]
 
@@ -105,6 +133,11 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
 ●更新履歴
 
+
+0.32 2007-04-19
+- dbtheme専用テーマのために xoops_dbthemecssurl をアサインするようにした
+- 言語ファイル追加
+-- persian (thx stranger)
 
 0.31 2007-04-09
 - CSS側に有効なxoops_imageurlがアサインされていないバグの修正 (thx mizukami)

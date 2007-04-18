@@ -63,6 +63,7 @@ function renderTheme(&$target)
 					'xoops_theme' => $mod_config['base_theme'] ,
 					'xoops_imageurl' => XOOPS_THEME_URL.'/'.$mod_config['base_theme'].'/' ,
 					'xoops_themecss' => XOOPS_URL.'/modules/'.$mydirname.'/?template=style.css' , // TODO (?)
+					'xoops_dbthemecssurl' => XOOPS_URL.'/modules/'.$mydirname.'/?template=' ,
 				) ) ;
 			}
 

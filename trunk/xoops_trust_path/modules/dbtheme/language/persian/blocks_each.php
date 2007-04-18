@@ -1,0 +1,13 @@
+<?php
+
+if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'dbtheme' ;
+$constpref = '_MB_' . strtoupper( $mydirname ) ;
+
+if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
+
+define( $constpref.'_LOADED' , 1 ) ;
+
+
+}
+
+?>

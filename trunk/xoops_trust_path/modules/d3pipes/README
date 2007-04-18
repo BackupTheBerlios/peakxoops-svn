@@ -25,6 +25,11 @@ Be sure smarty plugins (d3comment_*) are copied into class/smarty/plugins/
 Install it as normal D3 module.
 I recommend you to install altsys also.
 
+(If you did not)
+Make a directory XOOPS_TRUST_PATH/cache and change the mode writable
+
+add pipes in "pipe" admin
+
 
 [b]CHANGELOG[/b]
 
@@ -66,6 +71,11 @@ I recommend you to install altsys also.
 普通のD3モジュールとしてインストールします。
 インストールする前に、Smartyプラグイン２つがちゃんとコピーされているか確認してください。
 altsysとの併用を強く推奨します。
+
+XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
+（まだ作っていない場合）
+
+あとは、パイプ管理からパイプを追加していくだけです。
 
 
 ●更新履歴

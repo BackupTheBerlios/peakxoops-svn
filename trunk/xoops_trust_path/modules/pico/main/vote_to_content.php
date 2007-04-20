@@ -33,10 +33,8 @@ if( ! $vote_ip ) die( _MD_PICO_ERR_VOTEINVALID.__LINE__ ) ;
 // branch users and guests
 if( $uid ) {
 	$useridentity4select = "uid=$uid" ;
-	$useridentity4insert = "vote_ip='".addslashes($vote_ip)."', uid=$uid" ;
 } else {
-	$useridentity4select = "vote_ip='".addslashes($vote_ip)."' AND uid=0 AND vote_time>".( time() - @$xoopsModuleConfig['guest_vote_interval'] ) ;
-	$useridentity4insert = "vote_ip='".addslashes($vote_ip)."', uid=0" ;
+	$useridentity4select = "vote_ip='".mysql_real_escape_string($vote_ip)."' AND uid=0 AND vote_time>".( time() - @$xoopsModuleConfig['guest_vote_interval'] ) ;
 }
 
 // get POINT and validation
@@ -59,7 +57,8 @@ if( $count > 0 ) {
 }
 
 // transaction stage
-$sql = "INSERT INTO ".$db->prefix($mydirname."_content_votes")." SET content_id=$content_id, vote_point=$point4vote, vote_time=UNIX_TIMESTAMP(), $useridentity4insert" ;if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+$sql = "INSERT INTO ".$db->prefix($mydirname."_content_votes")." (content_id,vote_point,vote_time,vote_ip,uid) VALUES ($content_id,$point4vote,UNIX_TIMESTAMP(),'".mysql_real_escape_string($vote_ip)."',uid=$uid)" ;
+if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 pico_sync_content_votes( $mydirname , $content_id ) ;

@@ -31,7 +31,7 @@ function pico_onuninstall_base( $module , $mydirname )
 		$sql_lines = file( $sql_file_path ) ;
 		foreach( $sql_lines as $sql_line ) {
 			if( preg_match( '/^CREATE TABLE \`?([a-zA-Z0-9_-]+)\`? /i' , $sql_line , $regs ) ) {
-				$sql = 'DROP TABLE '.addslashes($prefix_mod.'_'.$regs[1]);
+				$sql = 'DROP TABLE '.$prefix_mod.'_'.$regs[1] ;
 				if (!$db->query($sql)) {
 					$ret[] = '<span style="color:#ff0000;">ERROR: Could not drop table <b>'.htmlspecialchars($prefix_mod.'_'.$regs[1]).'<b>.</span><br />';
 				} else {

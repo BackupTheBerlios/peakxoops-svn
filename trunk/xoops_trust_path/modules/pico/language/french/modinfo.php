@@ -76,7 +76,7 @@ define($constpref.'_GUESTVOTE_IVL','Vote des visiteurs');
 define($constpref.'_GUESTVOTE_IVLDSC','Ajoutez 0, pour désactiver le vote des visiteurs anonymes. Autrement ajoutez un nombre équivalent au temps (sec.) pour permettre un second vote de même IP.');
 define($constpref.'_HTMLHEADER','En tête HTML commun');
 define($constpref.'_CSS_URI','URI du fichier CSS pour ce module');
-define($constpref.'_CSS_URIDSC','Vous pouvez indiquer une adresse relative ou absolue. Par défaut: {mod_url}/index.css');
+define($constpref.'_CSS_URIDSC','Vous pouvez indiquer une adresse relative ou absolue. Par défaut: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','Dossier pour les fichiers images');
 define($constpref.'_IMAGES_DIRDSC','Vous pouvez indiquer une adresse relative ou absolue. Par défaut: images');
 define($constpref.'_BODY_EDITOR','Editeur du document');

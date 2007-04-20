@@ -1,24 +1,7 @@
 <?php
 
-// top category
+// init
 $categories4assign = array() ;
-if( ! empty( $category_permissions[0] ) ) {
-	$cat_id = 0 ;
-	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
-	$categories4assign[0] = array(
-		'id' => 0 ,
-		'link' => '' ,
-		'title' => $xoopsModule->getVar('name') ,
-		'depth_in_tree' => 0 ,
-		'isadminormod' => $isadminormod ,
-		'can_post' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_post'] ) ,
-		'can_edit' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_edit'] ) ,
-		'can_delete' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_delete'] ) ,
-		'post_auto_approved' => ( $isadminormod || @$category_permissions[ $cat_id ]['post_auto_approved'] ) ,
-		'can_makesubcategory' => ( $isadminormod || @$category_permissions[ $cat_id ]['can_makesubcategory'] ) ,
-		'paths_raw' => array() ,
-	) ;
-}
 
 // categories loop
 $sql = "SELECT c.* FROM ".$db->prefix($mydirname."_categories")." c WHERE ($whr_read4cat) ORDER BY c.cat_order_in_tree" ;

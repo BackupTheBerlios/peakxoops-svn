@@ -10,7 +10,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.20 ;
+$modversion['version'] = 1.30 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -114,7 +114,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-$modversion['config'][] = array(
+/* $modversion['config'][] = array(
 	'name'			=> 'top_message' ,
 	'title'			=> $constpref.'_TOP_MESSAGE' ,
 	'description'	=> '' ,
@@ -122,7 +122,7 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> constant($constpref.'_TOP_MESSAGEDEFAULT') ,
 	'options'		=> array()
-) ;
+) ; */
 
 $modversion['config'][] = array(
 	'name'			=> 'show_menuinmoduletop' ,

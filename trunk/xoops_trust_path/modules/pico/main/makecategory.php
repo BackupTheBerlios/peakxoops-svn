@@ -45,7 +45,7 @@ foreach( $xoopsModuleConfig as $key => $val ) {
 }
 
 $category4assign = array(
-	'id' => 0 ,
+	'id' => -1 ,
 	'title' => '' ,
 	'weight' => 0 ,
 	'desc' => '' ,

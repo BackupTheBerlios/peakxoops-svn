@@ -52,13 +52,20 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." MODIFY weight smallint(5) NOT NULL default 0" ) ;
 	}
 
-	// 1.0 -> 1.1
+	// 1.0 -> 1.1/1.2
 	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_content_histories") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_content_histories")." ( content_history_id int(10) unsigned NOT NULL auto_increment, content_id int(10) unsigned NOT NULL default 0, vpath varchar(255), cat_id smallint(5) unsigned NOT NULL default 0, created_time int(10) NOT NULL default 0, modified_time int(10) NOT NULL default 0, poster_uid mediumint(8) unsigned NOT NULL default 0, poster_ip varchar(15) NOT NULL default '', modifier_uid mediumint(8) unsigned NOT NULL default 0, modifier_ip varchar(15) NOT NULL default '', subject varchar(255) NOT NULL default '', htmlheader mediumtext, body mediumtext, filters text, PRIMARY KEY (content_history_id), KEY (content_id), KEY (created_time), KEY (modified_time), KEY (modifier_uid) ) TYPE=MyISAM" ) ;
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." MODIFY htmlheader mediumtext, MODIFY htmlheader_waiting mediumtext, MODIFY body mediumtext, MODIFY body_waiting mediumtext, MODIFY body_cached mediumtext" ) ;
 	}
 
+	// 1.1/1.2 -> 1.3
+	$check_sql = "SELECT cat_redundants FROM ".$db->prefix($mydirname."_categories") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." MODIFY cat_id smallint(5) unsigned NOT NULL, ADD cat_redundants text AFTER cat_vpath_mtime" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." ADD comments_count int(10) unsigned NOT NULL default 0 AFTER votes_count" ) ;
+		$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_categories")." (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP')" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

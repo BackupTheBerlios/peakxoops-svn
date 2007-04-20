@@ -4,6 +4,10 @@
 
 [b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
+This is developping version.
+Don't forget updating this module after overwritting older version.
+And you have to "sync" once on upgrading from 1.1x/1.2x
+
 Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
 
 TinyD became a deprecated module because pico has been marked as stable.
@@ -94,6 +98,16 @@ pico is fast enough if you use content's cache.
 
 
 [b]HISTORY:[/b]
+
+1.30 alpha (2007/04/21)
+- modified addslashes() into mysql_real_escape_string()
+- addded some redundants informations
+- changed the top category editable (like normal category)
+- modified pagewrap returns just between <body> and </body>
+- added pico's special Smarty plugin system
+- added pico's Smarty plugins
+-- pico contents <{pico}>
+-- d3pipes entries <{d3pipes}>
 
 1.20 (2007/04/18)
 - numbered as stable version
@@ -240,7 +254,10 @@ pico is fast enough if you use content's cache.
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
 開発当初から想定していた機能を一通り実装したこともあり、現時点では1.20を安定版としています。
 
-機能追加は1.3xにて行います。最新機能を利用したい方は、ぜひ1.3xにトライしてください。
+ちらの1.3xは機能向上を目的とした開発版です。やる気のある方はぜひこちらをお試しください。開発版なので、特には書きませんが、バージョンアップ時のモジュールアップデートはほぼ必須です。
+
+また、1.1/1.2 からアップデートした際には、モジュールアップデート後に、管理画面の「インポート/同期」から「同期」を最低1度実行してください。
+
 
 以下、安定版・開発版共通。
 
@@ -331,6 +348,16 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.30 alpha (2007/04/21)
+- addslashes()をmysql_real_escape_string()にしてみた
+- カテゴリとコンテンツに冗長情報フィールドを追加した
+- トップカテゴリーを通常のカテゴリーとして編集可能にした
+- ページラップ時に、常に<body></body>の内側を返すようにした
+- pico専用Smartyプラグインの実装
+- pico専用Smartyプラグインの追加
+-- pico内容表示 <{pico}>
+-- d3pipes表示  <{d3pipes}>
 
 1.20 (2007/04/18)
 - 安定版としてのリリース

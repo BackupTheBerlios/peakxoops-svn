@@ -19,7 +19,8 @@ while( $subcat_row = $xoopsDB->fetchArray( $srs ) ) {
 		'can_edit' => ( $subcat_isadminormod || @$category_permissions[ $subcat_id ]['can_edit'] ) ,
 		'can_delete' => ( $subcat_isadminormod || @$category_permissions[ $subcat_id ]['can_delete'] ) ,
 		'can_makesubcategory' => ( $subcat_isadminormod || @$category_permissions[ $subcat_id ]['can_makesubcategory'] ) ,
-		'paths_raw' => unserialize( $subcat_row['cat_path_in_tree'] ) ,
+		'paths_raw' => @unserialize( $subcat_row['cat_path_in_tree'] ) ,
+		'redundants' => @unserialize( $subcat_row['cat_redundants'] ) ,
 	) ;
 
 }

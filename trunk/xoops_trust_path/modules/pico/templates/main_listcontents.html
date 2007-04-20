@@ -33,6 +33,13 @@
 </div>
 
 <h1><{$category.title}></h1>
+<{if $category.isadminormod}>
+	<p>
+	<{$smarty.const._MD_PICO_CONTENTS_TOTAL}>:<{$category.redundants.contents_total}>
+	<{$smarty.const._MD_PICO_SUBCATEGORIES_TOTAL}>:<{$category.redundants.subcategories_total}>
+	</p>
+<{/if}>
+
 <p><{$category.desc}></p>
 
 <!-- list subcategories -->
@@ -42,6 +49,10 @@
 	<dl class="pico_subcategory">
 		<dt>
 			<a href="<{$mod_url}>/<{$subcategory.link}>"><{$subcategory.title}></a>
+			<{if $category.isadminormod}>
+				<{$smarty.const._MD_PICO_CONTENTS_TOTAL}>:<{$subcategory.redundants.contents_total}>
+				<{$smarty.const._MD_PICO_SUBCATEGORIES_TOTAL}>:<{$subcategory.redundants.subcategories_total}>
+			<{/if}>
 		</dt>
 		<dd>
 			<{$subcategory.desc}>

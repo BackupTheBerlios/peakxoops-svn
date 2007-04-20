@@ -75,7 +75,7 @@ define($constpref.'_GUESTVOTE_IVL','رای دادن مهمان ها');
 define($constpref.'_GUESTVOTE_IVLDSC',' با انتخواب 0 امکان رای دادن مهمان ها را بگیرید. بقیه ی اعداد زمان(ثانیه) رای دادن هر ip میباشد');
 define($constpref.'_HTMLHEADER','سرفصل HTML مشترک');
 define($constpref.'_CSS_URI','آدرس فایل های CSS در ماژول');
-define($constpref.'_CSS_URIDSC','مسیر داخلی( داخل ماژول) یا خارجی( از جای دیگر) قابل تنضیم است. مسیر پیش فرض: {mod_url}/index.css');
+define($constpref.'_CSS_URIDSC','مسیر داخلی( داخل ماژول) یا خارجی( از جای دیگر) قابل تنضیم است. مسیر پیش فرض: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','محل قرار گیری تصاویر');
 define($constpref.'_IMAGES_DIRDSC','مسیر مورد نظر را در شاخه های ماژول تنظیم کنید. پیش فرض: images');
 define($constpref.'_BODY_EDITOR','ادیتور متن اصلی( بدنه ی اصلی)');

@@ -17,6 +17,11 @@ function pico_wraps( $mydirname , $text , $content_row )
 		include $wrap_full_path ;
 		$text = ob_get_contents() ;
 		ob_end_clean() ;
+		if( preg_match( '/\<body[^<>]*\>(.*)\<\/body\>/is' , $text , $regs ) ) {
+			$text = $regs[1] ;
+		} else {
+			$text = $full_content ;
+		}
 	}
 
 	if( function_exists( 'pico_convert_encoding_to_ie' ) ) {

@@ -16,11 +16,11 @@
 
 <{foreach item=category from=$categories}>
 
-	<h<{$category.depth_in_tree+2}>><a href="<{$mod_url}>/<{$category.link}>"><{$category.title}></a>
+	<h<{$category.depth_in_tree|min:5}>><a href="<{$mod_url}>/<{$category.link}>"><{$category.title}></a>
 	<{if $category.isadminormod && $category.invisible_contents_counter}>
  <em class="pico_notice">(<{$category.invisible_contents_counter}>)</em>
 	<{/if}>
-	</h<{$category.depth_in_tree+2}>>
+	</h<{$category.depth_in_tree|min:5}>>
 
 	<!-- controllers for each categories -->
 	<div class="pico_contollers_in_menu">
@@ -37,7 +37,7 @@
 		<{/if}>
 	</div>
 
-	<div class="level<{$category.depth_in_tree+2}>">
+	<div class="level<{$category.depth_in_tree|min:5}>">
 		<{if $content.subject}>
 		<ul class="pico_list_contents_in_menu">
 		<{foreach item=content from=$category.contents}>

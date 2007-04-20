@@ -75,7 +75,7 @@ define($constpref.'_GUESTVOTE_IVL','Votos de anónimos');
 define($constpref.'_GUESTVOTE_IVLDSC','Fijar en cero (0) para deshabilitar votos de anónimos. Otro número significa tiempo en segundos para permitir un segundo voto del mismo número IP.');
 define($constpref.'_HTMLHEADER','Encabezado HTML común');
 define($constpref.'_CSS_URI','URI del archivo CSS de este módulo');
-define($constpref.'_CSS_URIDSC','Puede emplearse ruta relativa o absoluta. default: {mod_url}/index.css');
+define($constpref.'_CSS_URIDSC','Puede emplearse ruta relativa o absoluta. default: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','Directorio para archivo de imágenes');
 define($constpref.'_IMAGES_DIRDSC','La ruta relativa debe ser fijada en el directorio del módulo. Default: images');
 define($constpref.'_BODY_EDITOR','Editor de texto');

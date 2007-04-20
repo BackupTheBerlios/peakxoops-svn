@@ -13,12 +13,12 @@ CREATE TABLE category_permissions (
   KEY (groupid)
 ) TYPE=MyISAM;
 
-INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=1,permissions='a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:1;s:8:"can_edit";i:1;s:10:"can_delete";i:1;s:18:"post_auto_approved";i:1;s:12:"is_moderator";i:1;s:19:"can_makesubcategory";i:1;}';
-INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=2,permissions='a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}';
-INSERT INTO category_permissions SET cat_id=0,uid=NULL,groupid=3,permissions='a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}';
+INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL,1,'a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:1;s:8:"can_edit";i:1;s:10:"can_delete";i:1;s:18:"post_auto_approved";i:1;s:12:"is_moderator";i:1;s:19:"can_makesubcategory";i:1;}');
+INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL,2,'a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}');
+INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL,3,'a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}');
 
 CREATE TABLE categories (
-  cat_id smallint(5) unsigned NOT NULL auto_increment,
+  cat_id smallint(5) unsigned NOT NULL,
   cat_vpath varchar(255),
   pid smallint(5) unsigned NOT NULL default 0,
   cat_title varchar(255) NOT NULL default '',
@@ -32,11 +32,14 @@ CREATE TABLE categories (
   cat_created_time int(10) NOT NULL default 0,
   cat_modified_time int(10) NOT NULL default 0,
   cat_vpath_mtime int(10) NOT NULL default 0,
+  cat_redundants text,
   PRIMARY KEY (cat_id),
   UNIQUE KEY (cat_vpath),
   KEY (cat_weight),
   KEY (pid)
 ) TYPE=MyISAM;
+
+INSERT INTO categories (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP');
 
 CREATE TABLE contents (
   content_id int(10) unsigned NOT NULL auto_increment,
@@ -60,6 +63,7 @@ CREATE TABLE contents (
   viewed int(10) unsigned NOT NULL default 0,
   votes_sum int(10) unsigned NOT NULL default 0,
   votes_count int(10) unsigned NOT NULL default 0,
+  comments_count int(10) unsigned NOT NULL default 0,
   htmlheader mediumtext,
   htmlheader_waiting mediumtext,
   body mediumtext,

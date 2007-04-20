@@ -16,14 +16,17 @@
 		<tr valign="top" align="left">
 			<th class="head"><label for="category_pid"><{$smarty.const._MD_PICO_TH_CATEGORYPARENT}></label></th>
 			<td class="even">
-				<select name="pid" id="category_pid">
-					<option value="">(<{$smarty.const._MD_PICO_TOP}>)</option>
-					<{$cat_jumpbox_options}>
-				</select>
+				<{if $category.id == 0}>
+					(<{$smarty.const._MD_PICO_TOP}>)
+				<{else}>
+					<select name="pid" id="category_pid">
+						<{$cat_jumpbox_options}>
+					</select>
+				<{/if}>
 			</td>
 		</tr>
 
-		<{if $mod_config.use_wraps_mode}>
+		<{if $mod_config.use_wraps_mode && $category.id != 0}>
 		<tr valign="top" align="left">
 			<th class="head"><label for="category_vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
 			<td class="even">

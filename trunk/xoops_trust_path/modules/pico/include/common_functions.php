@@ -1,9 +1,9 @@
 <?php
 
+// this file can be included from d3forum's blocks or getSublink().
+
 @include_once dirname(__FILE__).'/constants.php' ;
 if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constants.dist.php' ;
-
-// this file can be included from d3forum's blocks.
 
 function pico_get_categories_can_read( $mydirname )
 {
@@ -70,7 +70,7 @@ function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 	// store the result into body_cached field
 	if( $use_cache ) {
 		$db =& Database::getInstance() ;
-		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".addslashes($text)."' WHERE content_id=".intval($content_row['content_id']) ) ;
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."' WHERE content_id=".intval($content_row['content_id']) ) ;
 	}
 
 	return $text ;
@@ -130,7 +130,7 @@ function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
 {
 	static $submenus_cache ;
 
-	if( ! empty( $submenus_cache[$mydirname] ) ) return $submenus_cache[$mydirname] ;
+	if( ! empty( $submenus_cache[$caller][$mydirname] ) ) return $submenus_cache[$caller][$mydirname] ;
 
 	$module_handler =& xoops_gethandler('module') ;
 	$module =& $module_handler->getByDirname( $mydirname ) ;
@@ -171,8 +171,8 @@ function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
 	}
 
 	// restruct categories
-	$submenus_cache[$mydirname] = array_merge( $categories[0]['sub'] , pico_restruct_categories( $categories , 0 ) ) ;
-	return $submenus_cache[$mydirname] ;
+	$submenus_cache[$caller][$mydirname] = array_merge( @$categories[0]['sub'] , pico_restruct_categories( $categories , 0 ) ) ;
+	return $submenus_cache[$caller][$mydirname] ;
 }
 
 

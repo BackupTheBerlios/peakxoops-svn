@@ -20,11 +20,11 @@ $children = $mytree->getAllChildId( $cat_id ) ;
 if( ! $isadminormod ) die( _MD_PICO_ERR_CATEGORYMANAGEMENT ) ;
 
 // redirect to preferences (install altsys)
-if( ! $cat_id ) {
+/* if( ! $cat_id ) {
 	$use_altsys = file_exists(XOOPS_TRUST_PATH.'/libs/altsys/mypreferences.php') ? '?mode=admin&lib=altsys&page=mypreferences' : '' ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php$use_altsys" , 2 , _MD_PICO_MSG_GOTOPREFERENCE4EDITTOP ) ;
 	exit ;
-}
+} */
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
@@ -36,7 +36,7 @@ if( isset( $_POST['categoryman_post'] ) ) {
 	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) , 2 , _MD_PICO_MSG_CATEGORYUPDATED ) ;
 	exit ;
 }
-if( isset( $_POST['categoryman_delete'] ) && count( $children ) == 0 ) {
+if( isset( $_POST['categoryman_delete'] ) && count( $children ) == 0 && $cat_id > 0 ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}

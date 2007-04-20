@@ -4,6 +4,11 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-04-21 04:44:07
+define('_MD_PICO_CONTENTS_TOTAL','Total contents');
+define('_MD_PICO_SUBCATEGORIES_TOTAL','Total subcategories');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:08
 define('_MD_PICO_DOWNLOADIT','Download it');
 

@@ -10,9 +10,12 @@ function pico_xoopstpl( $mydirname , $text , $content_row )
 	global $xoopsTpl ;
 
 	$tpl =& new XoopsTpl() ;
+	//$tpl->plugins_dir[] = dirname(dirname(__FILE__)).'/smarty_plugins' ;
+	array_unshift( $tpl->plugins_dir , dirname(dirname(__FILE__)).'/smarty_plugins' ) ; // pico plugin has the first priority
 
 	if( is_object( @$xoopsTpl ) ) {
 		$tpl->assign( $xoopsTpl->get_template_vars() ) ;
+		$tpl->assign( 'mydirname' , $mydirname ) ;
 	}
 
 	$temp_file = XOOPS_COMPILE_PATH.'/'.substr(md5(XOOPS_DB_PREFIX.$content_row['content_id']),16).$mydirname.'_temp_resource' ;

@@ -97,13 +97,13 @@ CREATE TABLE joints (
   PRIMARY KEY (joint_type)
 ) TYPE=MyISAM;
 
-INSERT INTO joints SET joint_type='fetch',default_class='snoopy';
-INSERT INTO joints SET joint_type='filter',default_class='pcre';
-INSERT INTO joints SET joint_type='parse',default_class='keithxml';
-INSERT INTO joints SET joint_type='utf8from',default_class='mbstring';
-INSERT INTO joints SET joint_type='utf8to',default_class='mbstring';
-INSERT INTO joints SET joint_type='union',default_class='mergesort';
-INSERT INTO joints SET joint_type='clip',default_class='moduledb';
+INSERT INTO joints (joint_type,default_class) VALUES ('fetch','snoopy');
+INSERT INTO joints (joint_type,default_class) VALUES ('filter','pcre');
+INSERT INTO joints (joint_type,default_class) VALUES ('parse','keithxml');
+INSERT INTO joints (joint_type,default_class) VALUES ('utf8from','mbstring');
+INSERT INTO joints (joint_type,default_class) VALUES ('utf8to','mbstring');
+INSERT INTO joints (joint_type,default_class) VALUES ('union','mergesort');
+INSERT INTO joints (joint_type,default_class) VALUES ('clip','moduledb');
 
 
 CREATE TABLE joint_classes (

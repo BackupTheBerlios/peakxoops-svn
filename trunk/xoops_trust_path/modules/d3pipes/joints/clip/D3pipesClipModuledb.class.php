@@ -19,16 +19,16 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$entries = array_reverse( $entries ) ;
 
 		foreach( $entries as $i => $entry ) {
-			$fingerprint4sql = addslashes( @$entry['fingerprint'] ) ;
+			$fingerprint4sql = mysql_real_escape_string( @$entry['fingerprint'] ) ;
 			if( empty( $fingerprint4sql ) ) continue ;
 			list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM $clip_table WHERE fingerprint='$fingerprint4sql' AND pipe_id=$this->pipe_id" ) ) ;
 			if( $count > 0 ) continue ;
 
 			$pubtime4sql = empty( $entry['pubtime'] ) ? time() : intval( $entry['pubtime'] ) ;
-			$link4sql = empty( $entry['link'] ) ? '' : addslashes( $entry['link'] ) ;
-			$headline4sql = empty( $entry['headline'] ) ? '(no title)' : addslashes( $entry['headline'] ) ;
+			$link4sql = empty( $entry['link'] ) ? '' : mysql_real_escape_string( $entry['link'] ) ;
+			$headline4sql = empty( $entry['headline'] ) ? '(no title)' : mysql_real_escape_string( $entry['headline'] ) ;
 
-			$db->queryF( "INSERT INTO $clip_table SET pipe_id=$this->pipe_id,fingerprint='$fingerprint4sql',pubtime=$pubtime4sql,link='$link4sql',headline='$headline4sql',data='".addslashes(serialize($entry))."',fetched_time=UNIX_TIMESTAMP()" ) ;
+			$db->queryF( "INSERT INTO $clip_table (pipe_id,fingerprint,pubtime,link,headline,data,fetched_time) VALUES ($this->pipe_id,'$fingerprint4sql',$pubtime4sql,'$link4sql','$headline4sql','".mysql_real_escape_string(serialize($entry))."',UNIX_TIMESTAMP())" ) ;
 		}
 
 		return $this->getCaches( $max_entries ) ;
@@ -51,6 +51,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		return $entries ;
 	}
 
+
 	// fetch single entry
 	function getClipping( $clipping_id )
 	{
@@ -63,11 +64,47 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 
 		if( empty( $data_serialized ) ) return false ;
 		else return unserialize( $data_serialized ) + array(
+			'clipping_id' => intval( $clipping_id ) ,
 			'pipe_id' => intval( $pipe_id ) ,
 			'clipping_highlight' => $highlight ,
 			'clipping_weight' => $weight ,
 			'clipping_fetched_time' => $fetched_time ,
 		) ;
+	}
+
+
+	// fetch entries in the range
+	function getClippings( $pipe_id , $num , $pos = 0 )
+	{
+		$db =& Database::getInstance() ;
+
+		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
+
+		$entries = array() ;
+
+		$pipe_id = intval( $pipe_id ) ;
+		$num = intval( $num ) ;
+		$pos = intval( $pos ) ;
+		$result = $db->query( "SELECT clipping_id FROM $clip_table WHERE pipe_id=$pipe_id ORDER BY pubtime DESC LIMIT $pos,$num" ) ;
+		while( list( $clipping_id ) = $db->fetchRow( $result ) ) {
+			$entries[] = $this->getClipping( $clipping_id ) ;
+		}
+		
+		return $entries ;
+	}
+
+
+	// get entries count of the pipe
+	function getClippingCount( $pipe_id )
+	{
+		$db =& Database::getInstance() ;
+
+		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
+
+		$pipe_id = intval( $pipe_id ) ;
+		list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM $clip_table WHERE pipe_id=$pipe_id" ) ) ;
+
+		return $count ;
 	}
 
 

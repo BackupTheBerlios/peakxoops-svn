@@ -47,7 +47,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				'feed.entry' ,
 			) ,
 			'indexes' => array(
-				'pubtime'=>'updated|published' ,
+				'pubtime'=>'updated|published|modified|created|issued' ,
 				'link'=>'link' ,
 				'headline'=>'title' ,
 				'fingerprint'=>'id' ,

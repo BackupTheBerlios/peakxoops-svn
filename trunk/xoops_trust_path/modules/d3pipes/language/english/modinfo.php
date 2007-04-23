@@ -19,7 +19,7 @@ define($constpref.'_ADMENU_CACHE','Cache') ;
 define($constpref.'_ADMENU_CLIPPING','Clippings') ;
 define($constpref.'_ADMENU_JOINT','Joint initials') ;
 define($constpref.'_ADMENU_JOINTCLASS','Class initials') ;
-define($constpref.'_ADMENU_MYTPLSADMIN','Theme templates') ;
+define($constpref.'_ADMENU_MYTPLSADMIN','Templates') ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions') ;
 define($constpref.'_ADMENU_MYPREFERENCES','Preferences') ;
 

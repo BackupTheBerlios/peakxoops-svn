@@ -33,6 +33,12 @@ add pipes in "pipe" admin
 
 [b]CHANGELOG[/b]
 
+0.12 2007-04-24
+- added page navigation to older clippings
+- modified parser Atom 0.3 (thx kilica)
+- modified SQL escape from addslashes() to mysql_real_escape_string()
+- modified MySQL original style SQL into standard style (for MySQL5)
+
 0.11 2007-04-19
 - modified error handlings easier
 - modified rss/rdf/atom auto recognization
@@ -79,6 +85,12 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.12 2007-04-24
+- 過去の切り抜きへのページナビゲーションをつけた
+- Atom 0.3に対応した (thx kilica)
+- エスケープをaddslashes()からmysql_real_escape_string()にした
+- 標準的なSQL構文にした (MySQL5対策)
 
 0.11 2007-04-19
 - エラー表示を判りやすくした

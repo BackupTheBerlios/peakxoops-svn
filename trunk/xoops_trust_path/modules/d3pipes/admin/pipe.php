@@ -55,14 +55,14 @@ if( ( ! empty( $_POST['do_update'] ) || ! empty( $_POST['do_saveas'] ) ) && is_a
 	}
 
 	// make sql
-	$set4sql = "`joints`='".addslashes(serialize(array_values($joints)))."',name='".$myts->addSlashes(@$_POST['name'])."',url='".$myts->addSlashes(@$_POST['url'])."',image='".$myts->addSlashes(@$_POST['image'])."'" ;
+	$set4sql = "`joints`='".mysql_real_escape_string(serialize(array_values($joints)))."',name='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['name']))."',url='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['url']))."',image='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['image']))."'" ;
 	
 	$pipe_id = intval( @$_POST['pipe_id'] ) ;
-	if( $pipe_id > 0 && empty( $_POST['do_saveas'] ) ) {
-		$db->query( "UPDATE ".$db->prefix($mydirname."_pipes")." SET ".$set4sql.",modified_time=UNIX_TIMESTAMP(),lastfetch_time=0 WHERE `pipe_id`=$pipe_id" ) ;
-	} else {
-		$db->query( "INSERT INTO ".$db->prefix($mydirname."_pipes")." SET ".$set4sql.",created_time=UNIX_TIMESTAMP(),modified_time=UNIX_TIMESTAMP(),lastfetch_time=0" ) ;
+	if( $pipe_id == 0 || ! empty( $_POST['do_saveas'] ) ) {
+		$db->query( "INSERT INTO ".$db->prefix($mydirname."_pipes")." (created_time) VALUES (UNIX_TIMESTAMP())" ) ;
+		$pipe_id = $db->getInsertId() ;
 	}
+	$db->query( "UPDATE ".$db->prefix($mydirname."_pipes")." SET ".$set4sql.",modified_time=UNIX_TIMESTAMP(),lastfetch_time=0 WHERE `pipe_id`=$pipe_id" ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=pipe" , 3 , _MD_A_D3PIPES_MSG_PIPEUPDATED ) ;
 	exit ;
@@ -89,7 +89,7 @@ if( ! empty( $_POST['do_batchupdate'] ) ) {
 
 	foreach( $_POST['name'] as $pipe_id => $name ) {
 		$pipe_id = intval( $pipe_id ) ;
-		$name4sql = $myts->addSlashes( $name ) ;
+		$name4sql = mysql_real_escape_string($myts->stripSlashesGPC( $name )) ;
 		$weight4sql = intval( @$_POST['weight'][$pipe_id] ) ;
 		$flags4sql = '' ;
 		foreach( array( 'main_disp' , 'main_list' , 'main_aggr' , 'main_rss' , 'block_disp' , 'in_submenu' ) as $key ) {

@@ -1,31 +1,38 @@
 <?php
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
-$i=1;
-$adminmenu[$i]['title'] = constant( $constpref.'_ADMENU5');
-$adminmenu[$i]['link']  = "admin/index.php?op=list";
-$i++;
-$adminmenu[$i]['title'] = constant( $constpref.'_ADMENU2');
-$adminmenu[$i]['link']  = "admin/index.php?op=topicsmanager";
-$i++;
-$adminmenu[$i]['title'] = constant( $constpref.'_ADMENU4');
-$adminmenu[$i]['link']  = "admin/index.php?op=permition";
-$i++;
-$adminmenu[$i]['title'] = constant( $constpref.'_ADMENU7');
-$adminmenu[$i]['link']  = "admin/index.php?op=convert";
-$i++;
-/*
-if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mytplsadmin.php' ) ) {
-	// mytplsadmin (TODO check if this module has tplfile)
-	$adminmenu[$i]['title'] = defined( '_MD_A_MYMENU_MYTPLSADMIN' ) ? _MD_A_MYMENU_MYTPLSADMIN : 'tplsadmin' ;
-	$adminmenu[$i]['link']  = 'index.php?mode=admin&lib=altsys&page=mytplsadmin' ;
-	$i++;
-}
+$adminmenu = array(
+	array(
+		'title' => constant( $constpref.'_ADMENU5' ) ,
+		'link' => 'admin/index.php?op=list' ,
+	) ,
+	array(
+		'title' => constant( $constpref.'_ADMENU2' ) ,
+		'link' => 'admin/index.php?op=topicsmanager' ,
+	) ,
+	array(
+		'title' => constant( $constpref.'_ADMENU4' ) ,
+		'link' => 'admin/index.php?op=permition' ,
+	) ,
+	array(
+		'title' => constant( $constpref.'_ADMENU7' ) ,
+		'link' => 'admin/index.php?op=convert' ,
+	) ,
+) ;
 
-if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/myblocksadmin.php' ) ) {
-	// myblocksadmin
-	$adminmenu[$i]['title'] = defined( '_MD_A_MYMENU_MYBLOCKSADMIN' ) ? _MD_A_MYMENU_MYBLOCKSADMIN : 'blocksadmin' ;
-	$adminmenu[$i]['link']  = 'index.php?mode=admin&lib=altsys&page=myblocksadmin' ;
-	$i++;
-}*/
+$adminmenu4altsys = array(
+	array(
+		'title' => 'tplsadmin' ,
+		'link' => 'admin/index.php?mode=admin&lib=altsys&page=mytplsadmin' ,
+	) ,
+	array(
+		'title' => 'blocksadmin' ,
+		'link' => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin' ,
+	) ,
+	array(
+		'title' => _PREFERENCES ,
+		'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ,
+	) ,
+) ;
+
 ?>

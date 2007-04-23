@@ -103,6 +103,7 @@ function bulletin_onupdate_base( $module, $prev_version , $mydirname )
 					$tplid = $tplfile->getVar( 'tpl_id' ) ;
 					$msgs[] = 'Template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b> added to the database. (ID: <b>'.$tplid.'</b>)';
 					// generate compiled file
+					include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 					include_once XOOPS_ROOT_PATH.'/class/template.php';
 					if( ! xoops_template_touch( $tplid ) ) {
 						$msgs[] = '<span style="color:#ff0000;">ERROR: Failed compiling template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b>.</span>';
@@ -114,6 +115,7 @@ function bulletin_onupdate_base( $module, $prev_version , $mydirname )
 		}
 		closedir( $handler ) ;
 	}
+	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 	include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	xoops_template_clear_module_cache( $mid ) ;
 
@@ -187,6 +189,7 @@ function bulletin_onupdate_base( $module, $prev_version , $mydirname )
 					} else {
 						$msgs[] = 'Template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b> added to the database. (ID: <b>'.$tpl_id.'</b>)';
 						// generate compiled file
+						include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 						include_once XOOPS_ROOT_PATH.'/class/template.php';
 						if( ! xoops_template_touch( $tpl_id ) ) {
 							$msgs[] = '<span style="color:#ff0000;">ERROR: Failed compiling template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b>.</span>';

@@ -8,7 +8,9 @@ v.091 (2007-03-15)
 -- d3forum-post
 -- pico-content-modified
 -- pico-content-created
-- fixed templates for minical_ex blocks
+- fixed templates for minical_ex blocks 0.91a
+- added language files
+-- danish (thx Anders) 0.91b
 
 v.090 (2007-03-12)
 - marked as stable
@@ -384,6 +386,8 @@ v.091 (2007-03-15)
 -- pico-content-modified
 -- pico-content-created
 - テンプレートの微修正 0.91a
+- 言語ファイル追加
+-- danish (thx Anders) 0.91b
 
 v.090 (2007-03-12)
 - 安定版への格上げ

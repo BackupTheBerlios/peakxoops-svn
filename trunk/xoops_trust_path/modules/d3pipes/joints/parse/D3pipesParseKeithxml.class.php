@@ -49,6 +49,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 			'indexes' => array(
 				'pubtime'=>'updated|published|modified|created|issued' ,
 				'link'=>'link' ,
+				'link_attr'=>'link attr' ,
 				'headline'=>'title' ,
 				'fingerprint'=>'id' ,
 				'description'=>'content' ,
@@ -173,6 +174,10 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 			}
 		}
 		if( is_array( $entry['link'] ) ) $entry['link'] = '' ; // TODO
+
+		if( empty( $entry['link'] ) && ! empty( $entry['link_attr'] ) ) {
+			$entry['link'] = @$entry['link_attr']['href'] ;
+		}
 
 		return $entry ;
 	}

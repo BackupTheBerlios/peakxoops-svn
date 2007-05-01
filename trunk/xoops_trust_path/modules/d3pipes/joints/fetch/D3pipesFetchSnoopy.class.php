@@ -23,6 +23,16 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 
 		require_once XOOPS_ROOT_PATH.'/class/snoopy.php' ;
 		$snoopy = new Snoopy ;
+		$snoopy->maxredirs = 0 ; // TODO
+		// $snoopy->proxy_host = '' ; // TODO
+		// $snoopy->proxy_port = '' ; // TODO
+		// $snoopy->proxy_user = '' ; // TODO
+		// $snoopy->proxy_pass = '' ; // TODO
+		// $snoopy->agent = '' ; // TODO
+		// $snoopy->referer = '' ; // TODO
+		// $snoopy->user = '' ; // TODO
+		// $snoopy->pass = '' ; // TODO
+		// $snoopy->curl_path = '' ; // TODO
 		if( ! $snoopy->fetch( $this->url ) || ! ( $xml_source = $snoopy->results ) ) {
 			// fetch error
 			$this->touch_cache() ;

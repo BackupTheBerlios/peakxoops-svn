@@ -33,6 +33,10 @@ add pipes in "pipe" admin
 
 [b]CHANGELOG[/b]
 
+0.14 2007-05-02
+- added parse class LinkHTML
+- fixed parsing <link> of Atom 0.3
+
 0.13 2007-04-27
 - added parse class SimpleHTML
 - added reassign class DefaultLink
@@ -89,6 +93,10 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.14 2007-05-02
+- パースジョイントにLinkHTMLを追加
+- Atom 0.3で<link>がとれていないのを修正した
 
 0.13 2007-04-27
 - パースジョイントにSimpleHTMLを追加

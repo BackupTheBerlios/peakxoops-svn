@@ -8,7 +8,11 @@ class D3pipesParseSimplehtml extends D3pipesParseAbstract {
 	{
 		$items = array() ;
 
-		preg_match_all( $this->option , $html_source , $matches , PREG_SET_ORDER ) ;
+		$result = preg_match_all( $this->option , $html_source , $matches , PREG_SET_ORDER ) ;
+		if( ! $result ) {
+			$this->errors[] = 'Invalid pattern for this Parser' ;
+		}
+
 		foreach( $matches as $match ) {
 			$items[] = array(
 				'headline' => $match[1] ,

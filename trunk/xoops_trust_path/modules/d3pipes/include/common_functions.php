@@ -147,6 +147,7 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 
 		$class_name = 'D3pipes'.ucfirst($joint['joint']).ucfirst($joint['joint_class']) ;
 		require_once $joints_dir.'/'.$joint['joint'].'/'.$class_name.'.class.php' ;
+		if( ! class_exists( $class_name ) ) die( 'Class '.$class_name.' does not exist' ) ;
 		$objects[] =& new $class_name( $mydirname , $pipe_id , $joint['option'] ) ;
 		if( $joint['joint'] == 'clip' ) {
 			$cache_obj_pos = sizeof( $objects ) - 1 ;

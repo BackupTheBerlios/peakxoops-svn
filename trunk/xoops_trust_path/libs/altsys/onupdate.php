@@ -33,19 +33,12 @@ function altsys_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix("config")." MODIFY `conf_title` varchar(255) NOT NULL default '', MODIFY `conf_desc` varchar(255) NOT NULL default ''" ) ;
 	}
 
-	// 0.1x -> 0.2x
-	$check_sql = "SELECT cat_unique_path FROM ".$db->prefix($mydirname."_categories") ;
+	// 0.4 -> 0.5
+	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_language_constants") ;
 	if( ! $db->query( $check_sql ) ) {
-		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD cat_unique_path text NOT NULL default '' AFTER cat_path_in_tree" ) ;
-		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_forums")." ADD forum_external_link_format varchar(255) NOT NULL default '' AFTER cat_id" ) ;
-		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_topics")." ADD topic_external_link_id int(10) unsigned NOT NULL default 0 AFTER forum_id, ADD KEY (`topic_external_link_id`)" ) ;
-		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_posts")." ADD path_in_tree text NOT NULL default '' AFTER order_in_tree , ADD unique_path text NOT NULL default '' AFTER order_in_tree" ) ;
+		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_language_constants")." (mid smallint(5) unsigned NOT NULL default 0,language varchar(32) NOT NULL default '',name varchar(255) NOT NULL default '',value text,PRIMARY KEY (mid,language,name)) TYPE=MyISAM" ) ;
 	}
 
-	// 0.3x -> 0.4x
-	$check_sql = "SELECT subject_waiting FROM ".$db->prefix($mydirname."_posts") ;	if( ! $db->query( $check_sql ) ) {
-		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_posts")." ADD subject_waiting varchar(255) NOT NULL default '' AFTER `subject`, ADD post_text_waiting text NOT NULL AFTER `post_text`, ADD uid_hidden mediumint(8) unsigned NOT NULL default 0 AFTER `uid`, DROP hide_uid" ) ;
-	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

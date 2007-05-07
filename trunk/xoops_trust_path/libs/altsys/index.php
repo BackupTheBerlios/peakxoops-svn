@@ -11,16 +11,7 @@ require XOOPS_ROOT_PATH.'/include/cp_functions.php' ;
 
 // get page
 $page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
-$controllers = array(
-	'compilehookadmin',
-	'get_templates',
-	'get_tplsvarsinfo',
-	'myblocksadmin',
-	'mypreferences',
-	'mytplsadmin',
-	'mytplsform',
-	'put_templates',
-) ;
+require dirname(__FILE__).'/controllers.php' ;
 if( ! in_array( $page , $controllers ) ) {
 	$_GET['page'] = $page = 'myblocksadmin' ;
 }

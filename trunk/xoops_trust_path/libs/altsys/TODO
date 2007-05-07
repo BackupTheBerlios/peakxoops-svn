@@ -12,8 +12,10 @@ x optionsの処理チェック
 importing avaman
 x argonさんにちゃんとしたアイコンを作ってもらう:-)
 hasMainがないモジュールのモジュールアクセス権限
-管理画面メニューフック
+x 管理画面メニューフック
 2.0.14以降の表示サイド（本当にやる？）
+
+altsys自体の言語定数オーバーライドシステム
 
 
 = Premissions =
@@ -21,4 +23,5 @@ mypreferences -> module_admin of the module
 myblocksadmin -> module_admin of altsys  (old XOOPS_SYSTEM_BLOCK)
 mytplsadmin,mytplsform -> module_admin of altsys  (old XOOPS_SYSTEM_TPLSET)
 compilehookadmin,get_*,put_* -> module_admin of altsys
+mylangadmin -> module_admin of altsys
 

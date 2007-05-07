@@ -6,7 +6,7 @@ function b_altsys_admin_menu_show( $options )
 {
 	global $xoopsUser ;
 
-	$mydirname = empty( $options[0] ) ? 'd3forum' : $options[0] ;
+	$mydirname = empty( $options[0] ) ? 'altsys' : $options[0] ;
 	$this_template = empty( $options[1] ) ? 'db:'.$mydirname.'_block_admin_menu.html' : trim( $options[1] ) ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;

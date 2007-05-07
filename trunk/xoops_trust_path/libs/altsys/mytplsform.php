@@ -61,7 +61,7 @@ if( empty( $tpl ) ) {
 //************//
 // POST stage //
 //************//
-if( ! empty( $_POST['do_modify'] ) ) {
+if( ! empty( $_POST['do_modifycont'] ) || ! empty( $_POST['do_modify'] ) ) {
 	// Ticket Check
 	if ( ! $xoopsGTicket->check() ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
@@ -74,7 +74,13 @@ if( ! empty( $_POST['do_modify'] ) ) {
 		$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_lastmodified=UNIX_TIMESTAMP() WHERE tpl_id=$tpl_id" ) ;
 		xoops_template_touch( $tpl_id ) ;
 	}
-	redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$tpl['tpl_module'] , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
+
+	// continue or end ?
+	if( ! empty( $_POST['do_modifycont'] ) ) {
+		redirect_header( '?mode=admin&lib=altsys&page=mytplsform&tpl_file='.$tpl_file.'&tpl_tplset='.$tpl_tplset.'#altsys_tplsform_top' , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
+	} else {
+		redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$tpl['tpl_module'] , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
+	}
 	exit ;
 }
 
@@ -133,12 +139,14 @@ echo "
 
 
 echo "
-<form name='MainForm' action='?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)."&amp;tpl_tplset=".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES)."' method='post'>
+<a name='altsys_tplsform_top' id='altsys_tplsform_top'></a>
+<form name='MainForm' id='altsys_tplsform' action='?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)."&amp;tpl_tplset=".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES)."' method='post'>
 	".$xoopsGTicket->getTicketHtml( __LINE__ )."
-	<textarea name='tpl_source' wrap='off' style='width:600px;height:400px;'>".htmlspecialchars($tpl['tpl_source'],ENT_QUOTES)."</textarea>
+	<textarea name='tpl_source' id='altsys_tpl_source' wrap='off' style='width:600px;height:400px;'>".htmlspecialchars($tpl['tpl_source'],ENT_QUOTES)."</textarea>
 	<br />
-	<input type='submit' name='do_modify' value='"._SUBMIT."' />
-	<input type='reset' name='reset' value='reset' />
+	<input type='submit' name='do_modifycont' id='do_modifycont' value='"._MD_A_MYTPLSFORM_BTN_MODIFYCONT."' />
+	<input type='submit' name='do_modify' id='do_modify' value='"._MD_A_MYTPLSFORM_BTN_MODIFYEND."' />
+	<input type='reset' name='reset' value='"._MD_A_MYTPLSFORM_BTN_RESET."' />
 </form>\n" ;
 
 xoops_cp_footer() ;

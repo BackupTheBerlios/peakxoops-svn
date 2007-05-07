@@ -1,5 +1,12 @@
 [xlang:en]
 
+v0.50 (2007-05-07)
+- added mylangadmin - the override system for language constants
+- templatized mymenu
+- added "update and continue to edit" button into mytplsadmin
+- added language files
+-- japaneseutf
+
 v0.41 (2007-04-04)
 - modified tplsadmin can edit themes with dbtheme module
 - fixed compatibility between "admin in theme" and Legacy 2.1 (thx sakichi)
@@ -68,6 +75,13 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.50 (2007-05-07)
+- 言語ファイルオーバーライドシステムmylangadminの実装
+- mymenuのテンプレート化
+- テンプレート編集での確認ボタンの追加
+- 言語ファイル追加
+-- japaneseutf
 
 v0.41 (2007-04-04)
 - tplsadmin をテーマ編集対応した (dbthemeモジュールとの併用時)

@@ -71,6 +71,7 @@ if( ! empty( $_POST['contents_update'] ) && ! empty( $_POST['weights'] ) ) {
 		$result = $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET weight=$weight,subject=$subject4sql,vpath=$vpath4sql,visible=$visible,show_in_navi=$show_in_navi,show_in_menu=$show_in_menu,allow_comment=$allow_comment WHERE content_id=$content_id" ) ;
 		if( ! $result ) $errors[] = $content_id ;
 	}
+	pico_sync_all( $mydirname ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , $errors ? sprintf( _MD_A_PICO_MSG_FMT_DUPLICATEDVPATH , implode( ',' , $errors ) ) : _MD_PICO_MSG_UPDATED ) ;
 	exit ;
@@ -94,6 +95,7 @@ if( ! empty( $_POST['contents_move'] ) && ! empty( $_POST['action_selects'] ) &&
 		$content_id = intval( $content_id ) ;
 		$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET cat_id=$dest_cat_id WHERE content_id=$content_id" ) ;
 	}
+	pico_sync_all( $mydirname ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , _MD_A_PICO_MSG_CONTENTSMOVED ) ;
 	exit ;
@@ -111,6 +113,7 @@ if( ! empty( $_POST['contents_delete'] ) && ! empty( $_POST['action_selects'] ) 
 		$db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ;
 		$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id" ) ;
 	}
+	pico_sync_all( $mydirname ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=contents&amp;cat_id=$cat_id" , 3 , _MD_A_PICO_MSG_CONTENTSDELETED ) ;
 	exit ;
@@ -186,7 +189,7 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
-	'cat_link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) ,
+	'cat_link' => pico_common_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options + array( SPECIAL_CAT_ID_ALL => _MD_PICO_ALLCONTENTS , SPECIAL_CAT_ID_DELETED => _MD_PICO_DELETEDCONTENTS ) ,
 	'cat_options4move' => $cat_options ,

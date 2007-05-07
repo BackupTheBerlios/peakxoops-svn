@@ -1,36 +1,39 @@
 <div class="pico_container" id="<{$mydirname}>_container">
 
-<!-- link to RSS -->
-<div class="pico_category_rss">
-	<a href="<{$mod_url}>/index.php?page=rss&amp;cat_id=<{$category.id}>">[RSS]</a>
-</div>
-
 <{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
 
 <!-- controllers -->
 <div class="pico_controllers">
 
-<{if $category.isadminormod}>
-<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
-<{/if}>
-
-<{if $xoops_isadmin}>
-	<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
-<{/if}>
-
-<{if $xoops_isadmin}>
-	<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
-<{/if}>
-
-<{if $category.can_makesubcategory}>
-<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
-<{/if}>
-
-<{if $category.can_post}>
-<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
-<{/if}>
+	<!-- link to menu -->
+	<a href="<{$mod_url}>/index.php?page=menu">[<{$smarty.const._MD_PICO_MENU}>]</a>
+	
+	<!-- link to RSS -->
+	<a href="<{$mod_url}>/index.php?page=rss&amp;cat_id=<{$category.id}>">[RSS]</a>
+	
+	<{if $category.isadminormod}>
+	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
+	<{/if}>
+	
+	<{* <{if $xoops_isadmin}>
+		<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
+	<{/if}>
+	
+	<{if $xoops_isadmin}>
+		<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
+	<{/if}> *}>
+	
+	<{if $category.can_makesubcategory}>
+	<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
+	<{/if}>
+	
+	<{if $category.can_post}>
+	<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
+	<{/if}>
 
 </div>
+
+<{if $category.id == 0}><p><{$mod_config.top_message}></p><{/if}>
 
 <h1><{$category.title}></h1>
 <{if $category.isadminormod}>

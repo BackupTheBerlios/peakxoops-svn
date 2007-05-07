@@ -1,9 +1,5 @@
 <?php
 
-define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
-define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
-define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
-
 // contents list admin
 define('_MD_A_PICO_H2_CONTENTS','Contents list');
 define('_MD_A_PICO_TH_CONTENTSID','ID');

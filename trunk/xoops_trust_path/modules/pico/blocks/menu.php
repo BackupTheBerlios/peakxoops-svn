@@ -20,7 +20,7 @@ function b_pico_menu_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
 
 	// categories
 	if( $categories === array() ) {
@@ -55,12 +55,12 @@ function b_pico_menu_show( $options )
 	while( $content_row = $db->fetchArray( $result ) ) {
 		$cat_id = intval( $content_row['cat_id'] ) ;
 		$cat4assign[$cat_id]['id'] = intval( $content_row['cat_id'] ) ;
-		$cat4assign[$cat_id]['link'] = pico_make_category_link4html( $configs , $content_row ) ;
+		$cat4assign[$cat_id]['link'] = pico_common_make_category_link4html( $configs , $content_row ) ;
 		$cat4assign[$cat_id]['title'] = $myts->makeTboxData4Show( $content_row['cat_title'] ) ;
 		$cat4assign[$cat_id]['depth_in_tree'] = intval( $content_row['cat_depth_in_tree'] ) ;
 		$cat4assign[$cat_id]['contents'][] = array(
 			'id' => intval( $content_row['content_id'] ) ,
-			'link' => pico_make_content_link4html( $configs , $content_row ) ,
+			'link' => pico_common_make_content_link4html( $configs , $content_row ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 			'created_time' => $content_row['created_time'] ,
 			'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,

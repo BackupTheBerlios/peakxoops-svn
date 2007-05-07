@@ -6,6 +6,9 @@ function pico_textwiki( $mydirname , $text , $content_row )
 {
 	include_once "Text/Wiki.php";
 	// include_once "Text/sunday_Wiki.php";
+
+	if( ! class_exists( 'Text_Wiki' ) ) die( 'PEAR/Text/Wiki is not installed correctly' ) ;
+
 	$wiki = new Text_Wiki(); // create instance
 
 	// Configuration

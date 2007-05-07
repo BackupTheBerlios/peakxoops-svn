@@ -20,25 +20,18 @@ function b_pico_content_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
 
-	$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND content_id='$content_id' AND o.visible" ;
+	$sql = "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND o.content_id='$content_id' AND o.visible" ;
 	if( ! $result = $db->query( $sql ) ) return array() ;
 	if( ! $db->getRowsNum( $result ) ) return array() ;
 
 	$constpref = '_MB_' . strtoupper( $mydirname ) ;
 
-	$content_row = $db->fetchArray( $result ) ;
+	list( $content_id ) = $db->fetchRow( $result ) ;
 
 	// assigning
-	$content4assign = array(
-		'id' => intval( $content_row['content_id'] ) ,
-		'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
-		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
-		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-		'body' => pico_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) ,
-	) ;
-	$content4assign += $content_row ;
+	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $configs , array() ) ;
 
 	$block = array( 
 		'mydirname' => $mydirname ,

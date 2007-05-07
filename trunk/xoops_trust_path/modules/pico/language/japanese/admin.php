@@ -1,9 +1,5 @@
 <?php
 
-define('_MD_A_MYMENU_MYTPLSADMIN','テンプレート管理');
-define('_MD_A_MYMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限');
-define('_MD_A_MYMENU_MYPREFERENCES','一般設定');
-
 // contents list admin
 define('_MD_A_PICO_H2_CONTENTS','コンテンツ一括管理');
 define('_MD_A_PICO_TH_CONTENTSID','ID');

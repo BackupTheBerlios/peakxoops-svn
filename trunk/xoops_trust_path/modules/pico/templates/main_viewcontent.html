@@ -2,7 +2,26 @@
 
 <{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
 
+<{* admin controllers *}>
+<{capture name="controllers"}>
+	<{if $content.can_edit}>
+		<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
+	<{/if}>
+
+	<{if $xoops_isadmin}>
+		<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
+	<{/if}>
+<{/capture}>
+
+<{if trim($smarty.capture.controllers)}>
+	<!-- controllers -->
+	<div class="pico_controllers">
+		<{$smarty.capture.controllers}>
+	</div>
+<{/if}>
+
 <!-- content (body) -->
+<a name="top_of_pico_body" id="top_of_pico_body"></a>
 <div class="pico_body" id="<{$mydirname}>_body">
 <{$content.body}>
 </div>
@@ -39,11 +58,31 @@
 	</div>
 <{/if}>
 
-<hr class="bottom_of_content_body" />
+<!-- jump to top -->
+<div class="bottom_of_content_body"><a href="#top_of_pico_body"><{$smarty.const._MD_PICO_JUMPTOTOPOFPICOBODY}></a></div>
+
+<{if $category.isadminormod}>
+	<!-- informations for admin -->
+	<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}> <{$content.poster_uname}> 
+	<{if $content.modified_time > $content.created_time}>
+		&nbsp;
+		<{$smarty.const._MD_PICO_MODIFIED}>:<{$content.modified_time_formatted}> <{$content.modifier_uname}> 
+	<{/if}>
+	&nbsp;
+	<{$smarty.const._MD_PICO_VIEWED}>:<{$content.viewed}>
+	<br />
+<{/if}>
+
+<{if trim($smarty.capture.controllers)}>
+	<!-- controllers -->
+	<div class="pico_controllers">
+		<{$smarty.capture.controllers}>
+	</div>
+<{/if}>
 
 <!-- page navigation -->
 <{if $mod_config.show_pagenavi && $content.id}>
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="pico_pagenavigation">
 <tr>
 	<td width="33%" align="left" valign="top">
 	<{if $prev_content.id}>
@@ -63,39 +102,6 @@
 	</td>
 </tr>
 </table>
-<{/if}>
-
-<!-- admin's link -->
-<{if $category.isadminormod}>
-	<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}> <{$content.poster_uname}> 
-	<{if $content.modified_time > $content.created_time}>
-		&nbsp;
-		<{$smarty.const._MD_PICO_MODIFIED}>:<{$content.modified_time_formatted}> <{$content.modifier_uname}> 
-	<{/if}>
-	&nbsp;
-	<{$smarty.const._MD_PICO_VIEWED}>:<{$content.viewed}>
-	<br />
-	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
-<{/if}>
-
-<{if $content.can_edit}>
-	<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
-<{/if}>
-
-<{if $xoops_isadmin}>
-	<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
-<{/if}>
-
-<{if $xoops_isadmin}>
-	<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
-<{/if}>
-
-<{if $category.can_makesubcategory}>
-<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
-<{/if}>
-
-<{if $category.can_post}>
-<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
 <{/if}>
 
 

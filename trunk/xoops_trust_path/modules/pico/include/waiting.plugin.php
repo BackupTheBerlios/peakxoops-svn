@@ -3,6 +3,7 @@
 function b_waiting_pico( $mydirname )
 {
 	$db =& Database::getInstance();
+	$ret = array() ;
 
 	$sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE approval=0" ;
 	if( $result = $db->query($sql) ) {

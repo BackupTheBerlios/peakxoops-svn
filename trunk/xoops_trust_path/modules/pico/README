@@ -55,9 +55,12 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - xoops_breadcrumbs
 - static URI by mod_rewrite (both wraps mode and normal mode)
 - refer histories of contents
+- language constants override system
 
 
 [b]USAGE:[/b]
+
+(0) Install altsys before using pico.
 
 (1) copy html/modules/pico into your modules/
 
@@ -86,7 +89,7 @@ me/yourhome/xoops_trust_path')
 You did it.
 you can add categories or contents as you like.
 
-You'd better install altsys and d3forum also.
+And you'd better install d3forum also.
 (pico supports comment system integrated with d3forum only)
 
 
@@ -98,6 +101,17 @@ pico is fast enough if you use content's cache.
 
 
 [b]HISTORY:[/b]
+
+1.31 alpha (2007/05/07)
+- changed the structure "altsys essential"
+- added language constants override system (with altsys>=0.5)
+- templatized mymenu (with altsys>=0.5)
+- modified many templates
+- modified php removing duplicated codes
+- modified SQLs common as possible
+- added language files
+-- japaneseutf
+-- italian (thx evoc)
 
 1.30 alpha (2007/04/21)
 - modified addslashes() into mysql_real_escape_string()
@@ -309,9 +323,12 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・階層サブメニュー
 ・mod_rewriteによる静的URI(wrapsモードおよびnormalモード)
 ・コンテンツ編集履歴機能
+・言語定数オーバーライドシステム
 
 
 [b]USAGE:[/b]
+
+(0) pico1.3から、altsysが必須となりました。picoより先にaltsysをインストールしてください。
 
 (1) アーカイブを展開して、html/modules/pico を moduels の下にコピー
 
@@ -338,7 +355,7 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 
 あとはTinyDの操作を知っていれば、そう難しいことはないと思います。
 カテゴリーやコンテンツを追加していくだけです。
-altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
+d3forumを一緒にインストールすると幸せになれるかもしれません。
 （というか、d3forumがないとコメント機能は利用できません）
 
 
@@ -349,12 +366,23 @@ altsysやd3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.31 alpha (2007/05/07)
+- 正式にaltsys必須とした
+- 文字定数オーバーライドシステムを導入した（要altsys-0.5以上）
+- mymenuのテンプレート化（要altsys-0.5以上）
+- テンプレートを少しでも使いやすく変更
+- 重複コードを整理した
+- 一般的なSQL構文だけにしてみた
+- 言語ファイル追加
+-- japaneseutf
+-- italian (thx evoc)
+
 1.30 alpha (2007/04/21)
 - addslashes()をmysql_real_escape_string()にしてみた
 - カテゴリとコンテンツに冗長情報フィールドを追加した
 - トップカテゴリーを通常のカテゴリーとして編集可能にした
 - ページラップ時に、常に<body></body>の内側を返すようにした
-- pico専用Smartyプラグインの実装
+- pico専用Smartyプラグインシステムの実装
 - pico専用Smartyプラグインの追加
 -- pico内容表示 <{pico}>
 -- d3pipes表示  <{d3pipes}>

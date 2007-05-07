@@ -42,6 +42,7 @@ define('_MD_PICO_LINK_PRINTERFRIENDLY','Printer friendly');
 define('_MD_PICO_LINK_TELLAFRIEND','Tell a friend');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','Article found in %s');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"I've just found an interestiong article\nSubject:%s");
+define('_MD_PICO_JUMPTOTOPOFPICOBODY',"Jump to the top");
 
 
 define('_MD_PICO_ERR_SQL','SQL Error Occurred in: ');

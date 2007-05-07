@@ -41,7 +41,7 @@ function b_pico_list_show( $options )
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
 
 	// categories
 	if( $categories === array() ) {
@@ -76,7 +76,7 @@ function b_pico_list_show( $options )
 	while( $content_row = $db->fetchArray( $result ) ) {
 		$block['contents'][] = array(
 			'id' => intval( $content_row['content_id'] ) ,
-			'link' => pico_make_content_link4html( $configs , $content_row ) ,
+			'link' => pico_common_make_content_link4html( $configs , $content_row ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 			'created_time' => $content_row['created_time'] ,
 			'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,

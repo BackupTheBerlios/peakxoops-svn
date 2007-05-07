@@ -19,8 +19,6 @@ function pico_wraps( $mydirname , $text , $content_row )
 		ob_end_clean() ;
 		if( preg_match( '/\<body[^<>]*\>(.*)\<\/body\>/is' , $text , $regs ) ) {
 			$text = $regs[1] ;
-		} else {
-			$text = $full_content ;
 		}
 	}
 

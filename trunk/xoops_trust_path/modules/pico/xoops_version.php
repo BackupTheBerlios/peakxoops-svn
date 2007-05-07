@@ -1,16 +1,17 @@
 <?php
 
 // language file (modinfo.php)
-if( file_exists( dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modinfo.php' ) ) {
-	include dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modinfo.php' ;
-} else if( file_exists( dirname(__FILE__).'/language/english/modinfo.php' ) ) {
-	include dirname(__FILE__).'/language/english/modinfo.php' ;
-}
+$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
+if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
+require_once( $langmanpath ) ;
+$langman =& D3LanguageManager::getInstance() ;
+$langman->read( 'modinfo.php' , $mydirname , $mytrustdirname ) ;
+
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.30 ;
+$modversion['version'] = 1.31 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -40,7 +41,7 @@ $modversion['hasMain'] = 1 ;
 $modversion['sub'] = array() ;
 if( is_object( @$GLOBALS['xoopsModule'] ) && $GLOBALS['xoopsModule']->getVar('dirname') == $mydirname ) {
 	require_once dirname(__FILE__).'/include/common_functions.php' ;
-	$modversion['sub'] = pico_get_submenu( $mydirname ) ;
+	$modversion['sub'] = pico_common_get_submenu( $mydirname ) ;
 }
 
 // All Templates can't be touched by modulesadmin.
@@ -114,7 +115,7 @@ $modversion['config'][] = array(
 	'options'		=> array()
 ) ;
 
-/* $modversion['config'][] = array(
+$modversion['config'][] = array(
 	'name'			=> 'top_message' ,
 	'title'			=> $constpref.'_TOP_MESSAGE' ,
 	'description'	=> '' ,
@@ -122,7 +123,7 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> constant($constpref.'_TOP_MESSAGEDEFAULT') ,
 	'options'		=> array()
-) ; */
+) ;
 
 $modversion['config'][] = array(
 	'name'			=> 'show_menuinmoduletop' ,

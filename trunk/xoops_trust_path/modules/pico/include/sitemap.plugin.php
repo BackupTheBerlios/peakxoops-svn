@@ -4,7 +4,7 @@ function b_sitemap_pico( $mydirname )
 {
 	include_once dirname(__FILE__).'/common_functions.php' ;
 
-	$submenus = pico_get_submenu( $mydirname , 'sitemap_plugin' ) ;
+	$submenus = pico_common_get_submenu( $mydirname , 'sitemap_plugin' ) ;
 	$show_subcat = @$GLOBALS['sitemap_configs']['show_subcategoris'] ? true : false ;
 	$ret = array() ;
 	$p_count = 0 ;

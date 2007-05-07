@@ -5,7 +5,11 @@
 @include_once dirname(__FILE__).'/constants.php' ;
 if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constants.dist.php' ;
 
-function pico_get_categories_can_read( $mydirname )
+
+
+function pico_get_categories_can_read( $mydirname ) { return pico_common_get_categories_can_read( $mydirname ) ; }
+
+function pico_common_get_categories_can_read( $mydirname )
 {
 	global $xoopsUser ;
 
@@ -35,7 +39,7 @@ function pico_get_categories_can_read( $mydirname )
 }
 
 
-function pico_filter_body( $mydirname , $content_row , $use_cache = false )
+function pico_common_filter_body( $mydirname , $content_row , $use_cache = false )
 {
 	$can_use_cache = $use_cache && $content_row['body_cached'] ;
 
@@ -77,7 +81,9 @@ function pico_filter_body( $mydirname , $content_row , $use_cache = false )
 }
 
 
-function pico_make_content_link4html( $mod_config , $content_row , $mydirname = null )
+function pico_make_content_link4html( $mod_config , $content_row , $mydirname = null ) { return pico_common_make_content_link4html( $mod_config , $content_row , $mydirname ) ; }
+
+function pico_common_make_content_link4html( $mod_config , $content_row , $mydirname = null )
 {
 	if( ! empty( $mod_config['use_wraps_mode'] ) ) {
 		// wraps mode 
@@ -101,7 +107,7 @@ function pico_make_content_link4html( $mod_config , $content_row , $mydirname = 
 }
 
 
-function pico_make_category_link4html( $mod_config , $cat_row , $mydirname = null )
+function pico_common_make_category_link4html( $mod_config , $cat_row , $mydirname = null )
 {
 	if( ! empty( $mod_config['use_wraps_mode'] ) ) {
 		if( empty( $cat_row ) || is_array( $cat_row ) && $cat_row['cat_id'] == 0 ) return '' ;
@@ -126,7 +132,7 @@ function pico_make_category_link4html( $mod_config , $cat_row , $mydirname = nul
 }
 
 
-function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
+function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 {
 	static $submenus_cache ;
 
@@ -141,7 +147,7 @@ function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
 	$db =& Database::getInstance() ;
 	$myts =& MyTextSanitizer::getInstance();
 
-	$whr_read = '`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read = '`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
 	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' , 'sub' => array() ) ) ;
 
 	// categories query
@@ -151,7 +157,7 @@ function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
 		$cat_id = intval( $cat_row['cat_id'] ) ;
 		$categories[ $cat_id ] = array(
 			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
-			'url' => pico_make_category_link4html( $mod_config , $cat_row ) ,
+			'url' => pico_common_make_category_link4html( $mod_config , $cat_row ) ,
 			'is_category' => true ,
 			'pid' => $cat_row['pid'] ,
 		) ;
@@ -164,19 +170,19 @@ function pico_get_submenu( $mydirname , $caller = 'xoops_version' )
 			$cat_id = intval( $content_row['cat_id'] ) ;
 			$categories[ $cat_id ]['sub'][] = array(
 				'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-				'url' => pico_make_content_link4html( $mod_config , $content_row ) ,
+				'url' => pico_common_make_content_link4html( $mod_config , $content_row ) ,
 				'is_category' => false ,
 			) ;
 		}
 	}
 
 	// restruct categories
-	$submenus_cache[$caller][$mydirname] = array_merge( @$categories[0]['sub'] , pico_restruct_categories( $categories , 0 ) ) ;
+	$submenus_cache[$caller][$mydirname] = array_merge( @$categories[0]['sub'] , pico_common_restruct_categories( $categories , 0 ) ) ;
 	return $submenus_cache[$caller][$mydirname] ;
 }
 
 
-function pico_restruct_categories( $categories , $parent )
+function pico_common_restruct_categories( $categories , $parent )
 {
 	$ret = array() ;
 	foreach( $categories as $cat_id => $category ) {
@@ -186,7 +192,7 @@ function pico_restruct_categories( $categories , $parent )
 				'name' => $category['name'] ,
 				'url' => $category['url'] ,
 				'is_category' => $category['is_category'] ,
-				'sub' => array_merge( $category['sub'] , pico_restruct_categories( $categories , $cat_id ) ) ,
+				'sub' => array_merge( $category['sub'] , pico_common_restruct_categories( $categories , $cat_id ) ) ,
 			) ;
 		}
 	}
@@ -194,11 +200,48 @@ function pico_restruct_categories( $categories , $parent )
 	return $ret ;
 }
 
-function pico_utf8_encode_recursive( &$data )
+
+function pico_common_get_content4assign( $mydirname , $content_id , $mod_config , $category_row = null )
+{
+	$content_id = intval( $content_id ) ;
+
+	$myts =& MyTextSanitizer::getInstance() ;
+	$db =& Database::getInstance() ;
+	$user_handler =& xoops_gethandler( 'user' ) ;
+
+	$content_row = $db->fetchArray( $db->query( "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".$content_id ) ) ;
+
+	// poster & modifier uname
+	$poster =& $user_handler->get( $content_row['poster_uid'] ) ;
+	$poster_uname = is_object( $poster ) ? $poster->getVar('uname') : _MD_PICO_REGISTERED_AUTOMATICALLY ;
+	$modifier =& $user_handler->get( $content_row['modifier_uid'] ) ;
+	$modifier_uname = is_object( $modifier ) ? $modifier->getVar('uname') : _MD_PICO_REGISTERED_AUTOMATICALLY ;
+
+	$content4assign = array(
+		'id' => intval( $content_row['content_id'] ) ,
+		'link' => pico_common_make_content_link4html( $mod_config , $content_row ) ,
+		'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
+		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
+		'poster_uname' => $poster_uname ,
+		'modifier_uname' => $modifier_uname ,
+		'votes_avg' => $content_row['votes_count'] ? $content_row['votes_sum'] / doubleval( $content_row['votes_count'] ) : 0 ,
+		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
+		'subject_raw' => $content_row['subject'] ,
+		'body' => pico_common_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) ,
+		'can_edit' => @$category_row['can_edit'] ,
+		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
+	) ;
+	$content4assign += $content_row ;
+	
+	return $content4assign ;
+}
+
+
+function pico_common_utf8_encode_recursive( &$data )
 {
 	if( is_array( $data ) ) {
 		foreach( array_keys( $data ) as $key ) {
-			pico_utf8_encode_recursive( $data[ $key ] ) ;
+			pico_common_utf8_encode_recursive( $data[ $key ] ) ;
 		}
 	} else if( ! is_numeric( $data ) ) {
 		if( XOOPS_USE_MULTIBYTES == 1 ) {

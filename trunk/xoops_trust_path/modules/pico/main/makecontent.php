@@ -35,7 +35,7 @@ if( isset( $_POST['contentman_post'] ) ) {
 	// create a content
 	$content_id = pico_makecontent( $mydirname , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] ) ;
 	if( $category4assign['post_auto_approved'] ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	} else {
 		// Notify for new waiting content (only for admin or mod)
 		$users2notify = pico_get_moderators( $mydirname , $cat_id ) ;
@@ -60,7 +60,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'errors' => $errors ,
 		'htmlheader' => $content['htmlheader'] ,
 		'subject' => $myts->makeTboxData4Show( $content['subject'] ) ,
-		'body' => pico_filter_body( $mydirname , $content + array('content_id'=>0) ) ,
+		'body' => pico_common_filter_body( $mydirname , $content + array('content_id'=>0) ) ,
 	) ;
 } else {
 	$content4assign = array(

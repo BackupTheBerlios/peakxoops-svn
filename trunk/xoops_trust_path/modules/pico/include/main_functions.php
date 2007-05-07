@@ -366,6 +366,8 @@ function pico_parse_path_info( $mydirname )
 	if( ! empty( $_GET['path_info'] ) ) {
 		// path_info=($path_info) by mod_rewrite
 		$path_info = '/' . str_replace( '..' , '' , preg_replace( _MD_PICO_WRAPS_DISALLOWEDCHARS4PREGEX , '' , $_GET['path_info'] ) ) ;
+		$_SERVER['SCRIPT_NAME'] = '' ; // for EMLH
+		unset( $_SERVER['QUERY_STRING'] ) ; // for EMLH
 	} else if( ! empty( $_SERVER['PATH_INFO'] ) ) {
 		// try PATH_INFO first
 		$path_info = str_replace( '..' , '' , preg_replace( _MD_PICO_WRAPS_DISALLOWEDCHARS4PREGEX , '' , @$_SERVER['PATH_INFO'] ) ) ;
@@ -384,7 +386,7 @@ function pico_parse_path_info( $mydirname )
 	if( $path_info ) {
 		// check vpath in DB (1st)
 		$ext = strtolower( substr( strrchr( $path_info , '.' ) , 1 ) ) ;
-		if( in_array( $ext , explode( '|' , _MD_PICO_ALLOWEDEXTSINVPATH ) ) ) {
+		if( in_array( $ext , explode( '|' , _MD_PICO_EXTS4HTMLWRAPPING ) ) ) {
 			$db =& Database::getInstance() ;
 			$result = $db->query( "SELECT content_id,cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".mysql_real_escape_string($path_info)."'" ) ;
 			list( $content_id , $cat_id ) = $db->fetchRow( $result ) ;
@@ -425,7 +427,7 @@ function pico_parse_path_info( $mydirname )
 		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$path_info ;
 		if( ! file_exists( $wrap_full_path ) ) {
 			header( 'HTTP/1.0 404 Not Found' ) ;
-			exit ;
+			die( "The requested file ".htmlspecialchars($path_info)." is not found" ) ;
 		}
 
 		$path_info_is_dir = is_dir( $wrap_full_path ) ;

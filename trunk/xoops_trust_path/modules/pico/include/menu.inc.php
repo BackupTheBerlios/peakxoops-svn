@@ -14,7 +14,7 @@ while( $cat_row = $db->fetchArray( $crs ) ) {
 	$isadminormod = ! empty( $category_permissions[ $cat_id ]['is_moderator'] ) || $isadmin ;
 	$category4assign_tmp = array(
 		'id' => intval( $cat_row['cat_id'] ) ,
-		'link' => pico_make_category_link4html( $xoopsModuleConfig , $cat_row ) ,
+		'link' => pico_common_make_category_link4html( $xoopsModuleConfig , $cat_row ) ,
 		'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 		'depth_in_tree' => $cat_row['cat_depth_in_tree'] + 1 ,
 		'isadminormod' => $isadminormod ,
@@ -52,7 +52,7 @@ foreach( array_keys( $categories4assign ) as $cat_id ) {
 		if( ! $content_row['show_in_menu'] ) continue ;
 		$content4assign = array(
 			'id' => intval( $content_row['content_id'] ) ,
-			'link' => pico_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
+			'link' => pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 			'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
 			'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,

@@ -29,7 +29,7 @@ function fetchSummary( $external_link_id )
 		'dirname' => $mydirname ,
 		'module_name' => $module->getVar( 'name' ) ,
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_make_content_link4html( $configs , $content_row ) ,
+		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_content_link4html( $configs , $content_row ) ,
 		'summary' => $summary ,
 	) ;
 }

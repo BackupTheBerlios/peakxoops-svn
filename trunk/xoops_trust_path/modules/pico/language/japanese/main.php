@@ -42,6 +42,7 @@ define('_MD_PICO_LINK_PRINTERFRIENDLY','プリンタ用画面');
 define('_MD_PICO_LINK_TELLAFRIEND','友達に伝える');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','%sで見つけた記事');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"興味深い記事を見つけました\n記事タイトル:%s");
+define('_MD_PICO_JUMPTOTOPOFPICOBODY',"この記事の1行目に飛ぶ");
 define('_MD_PICO_MAILTOENCODING','Shift_JIS'); // don't define it for singlebyte
 
 define('_MD_PICO_ERR_SQL','SQLエラーが発生しました。行: ');

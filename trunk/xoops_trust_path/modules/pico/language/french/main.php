@@ -5,6 +5,10 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-02 18:27:45
+define('_MD_PICO_JUMPTOTOPOFPICOBODY','Jump to the top');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-04-21 04:44:07
 define('_MD_PICO_CONTENTS_TOTAL','Total contents');
 define('_MD_PICO_SUBCATEGORIES_TOTAL','Total subcategories');

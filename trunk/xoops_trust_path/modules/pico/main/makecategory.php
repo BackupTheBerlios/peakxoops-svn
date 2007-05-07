@@ -30,7 +30,7 @@ if( isset( $_POST['categoryman_post'] ) ) {
 	}
 	// create a record for category and category_permissions
 	$new_cat_id = pico_makecategory( $mydirname ) ;
-	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_make_category_link4html( $xoopsModuleConfig , $new_cat_id , $mydirname ) , 2 , _MD_PICO_MSG_CATEGORYMADE ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_category_link4html( $xoopsModuleConfig , $new_cat_id , $mydirname ) , 2 , _MD_PICO_MSG_CATEGORYMADE ) ;
 	exit ;
 }
 

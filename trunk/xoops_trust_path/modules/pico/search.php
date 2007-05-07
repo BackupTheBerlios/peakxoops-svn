@@ -29,7 +29,7 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 	$select4con = $showcontext ? "o.`body_cached` AS text" : "'' AS text" ;
 
 	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_get_categories_can_read( $mydirname ) ) . ')' ;
+	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
 
 	// where by uid
 	if( ! empty( $uid ) ) {
@@ -81,7 +81,7 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 
 		$ret[] = array(
 			'image' => '' ,
-			'link' => pico_make_content_link4html( $configs , $content_row ) ,
+			'link' => pico_common_make_content_link4html( $configs , $content_row ) ,
 			'title' => $content_row['subject'] ,
 			'time' => $content_row['created_time'] ,
 			'uid' => empty( $configs['search_by_uid'] ) ? 0 : $content_row['poster_uid'] ,

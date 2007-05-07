@@ -28,7 +28,7 @@ require dirname(dirname(__FILE__)).'/include/listsubcategories.inc.php' ;
 $parents = is_array( @$category4assign['paths_raw'] ) ? $category4assign['paths_raw'] : array() ;
 foreach( $parents as $cat_id_tmp => $name_raw ) {
 	$xoops_breadcrumbs[] = array(
-		'url' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_make_category_link4html( $xoopsModuleConfig , $cat_id_tmp , $mydirname ) ,
+		'url' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_category_link4html( $xoopsModuleConfig , $cat_id_tmp , $mydirname ) ,
 		'name' => htmlspecialchars( $name_raw , ENT_QUOTES ) ,
 	) ;
 }
@@ -54,7 +54,7 @@ if( empty( $content_id ) ) {
 		// redirect to the top of the content
 		$content_id = pico_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
 		if( $content_id ) {
-			$redirect_uri = XOOPS_URL.'/modules/'.$mydirname.'/'.pico_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) ;
+			$redirect_uri = XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) ;
 			if( headers_sent() ) {
 				redirect_header( $redirect_uri , 0 , '&nbsp;' ) ;
 			} else {
@@ -112,7 +112,7 @@ if( @$_GET['page'] == 'print' ) {
 	// RSS 2.0
 	if( function_exists( 'mb_http_output' ) ) mb_http_output( 'pass' ) ;
 	$data = $xoopsTpl->get_template_vars() ;
-	pico_utf8_encode_recursive( $data ) ;
+	pico_common_utf8_encode_recursive( $data ) ;
 	$xoopsTpl->assign( $data ) ;
 	header( 'Content-Type:text/xml; charset=utf-8' ) ;
 	$xoopsTpl->display( 'db:'.$mydirname.'_independent_rss20.html' ) ;

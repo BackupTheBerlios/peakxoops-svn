@@ -1,10 +1,10 @@
 <?php
 
 $controllers = array(
+	'myblocksadmin',
 	'compilehookadmin',
 	'get_templates',
 	'get_tplsvarsinfo',
-	'myblocksadmin',
 	'mypreferences',
 	'mytplsadmin',
 	'mytplsform',

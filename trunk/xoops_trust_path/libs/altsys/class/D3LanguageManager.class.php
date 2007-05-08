@@ -27,26 +27,47 @@ function &getInstance( $conn = null )
 }
 
 
-function read( $resource , $mydirname , $mytrustdirname = null )
+function read( $resource , $mydirname , $mytrustdirname = null , $read_once = true )
 {
-	if( empty( $mytrustdirname ) ) {
-		require XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/mytrustdirname.php' ;
+	$d3file = XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/mytrustdirname.php' ;
+
+	if( empty( $mytrustdirname ) && file_exists( $d3file ) ) {
+		require $d3file ;
 	}
 
 	$cache_file = $this->getCacheFileName( $resource , $mydirname ) ;
 	$root_file = XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/language/'.$this->language.'/'.$resource ;
-	$trust_file = XOOPS_TRUST_PATH.'/modules/'.$mytrustdirname.'/language/'.$this->language.'/'.$resource ;
-	$default_file = XOOPS_TRUST_PATH.'/modules/'.$mytrustdirname.'/language/'.$this->default_language.'/'.$resource ;
 
-	if( file_exists( $cache_file ) ) {
-		require_once $cache_file ;
-	} else if( file_exists( $root_file ) ) {
-		require_once $root_file ;
-	} else if( file_exists( $trust_file ) ) {
-		require $trust_file ;
+	if( empty( $mytrustdirname ) ) {
+		// conventional module
+		$default_file = XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/language/'.$this->default_language.'/'.$resource ;
+	
+		if( file_exists( $cache_file ) ) {
+			require_once $cache_file ;
+		} else if( file_exists( $root_file ) ) {
+			require_once $root_file ;
+		} else {
+			// fall back english
+			require_once $default_file ;
+		}
+
 	} else {
-		// fall back english
-		require $default_file ;
+		// D3 modules
+		$trust_file = XOOPS_TRUST_PATH.'/modules/'.$mytrustdirname.'/language/'.$this->language.'/'.$resource ;
+		$default_file = XOOPS_TRUST_PATH.'/modules/'.$mytrustdirname.'/language/'.$this->default_language.'/'.$resource ;
+	
+		if( file_exists( $cache_file ) ) {
+			require_once $cache_file ;
+		} else if( file_exists( $root_file ) ) {
+			require_once $root_file ;
+		} else if( file_exists( $trust_file ) ) {
+			if( $read_once ) require_once $trust_file ;
+			else require $trust_file ;
+		} else {
+			// fall back english
+			if( $read_once ) require_once $default_file ;
+			else require $default_file ;
+		}
 	}
 }
 

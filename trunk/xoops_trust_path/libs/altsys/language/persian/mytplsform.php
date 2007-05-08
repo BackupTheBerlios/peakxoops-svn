@@ -2,8 +2,8 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-07 18:10:30
-define('_MD_A_MYTPLSFORM_BTN_MODIFYCONT','Reflect');
-define('_MD_A_MYTPLSFORM_BTN_MODIFYEND','Save and Finish');
+define('_MD_A_MYTPLSFORM_BTN_MODIFYCONT','برگرداندن');
+define('_MD_A_MYTPLSFORM_BTN_MODIFYEND','ذخیره و پایان');
 define('_MD_A_MYTPLSFORM_BTN_RESET','Reset');
 
 define( '_MD_A_MYTPLSFORM_EDIT' , 'ویرایش تمپلیت' ) ;

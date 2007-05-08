@@ -63,7 +63,7 @@ if( empty( $tpl ) ) {
 //************//
 if( ! empty( $_POST['do_modifycont'] ) || ! empty( $_POST['do_modify'] ) ) {
 	// Ticket Check
-	if ( ! $xoopsGTicket->check() ) {
+	if ( ! $xoopsGTicket->check( true , 'altsys_tplsform' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 
@@ -77,13 +77,12 @@ if( ! empty( $_POST['do_modifycont'] ) || ! empty( $_POST['do_modify'] ) ) {
 
 	// continue or end ?
 	if( ! empty( $_POST['do_modifycont'] ) ) {
-		redirect_header( '?mode=admin&lib=altsys&page=mytplsform&tpl_file='.$tpl_file.'&tpl_tplset='.$tpl_tplset.'#altsys_tplsform_top' , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
+		redirect_header( 'index.php?mode=admin&lib=altsys&page=mytplsform&tpl_file='.$tpl_file.'&tpl_tplset='.$tpl_tplset.'&#altsys_tplsform_top' , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
 	} else {
-		redirect_header( '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$tpl['tpl_module'] , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
+		redirect_header( 'index.php?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$tpl['tpl_module'] , 1 , _MD_A_MYTPLSFORM_UPDATED ) ;
 	}
 	exit ;
 }
-
 
 xoops_cp_header() ;
 $mymenu_fake_uri = 'index.php?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$mydirname ;
@@ -141,7 +140,7 @@ echo "
 echo "
 <a name='altsys_tplsform_top' id='altsys_tplsform_top'></a>
 <form name='MainForm' id='altsys_tplsform' action='?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)."&amp;tpl_tplset=".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES)."' method='post'>
-	".$xoopsGTicket->getTicketHtml( __LINE__ )."
+	".$xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'altsys_tplsform' )."
 	<textarea name='tpl_source' id='altsys_tpl_source' wrap='off' style='width:600px;height:400px;'>".htmlspecialchars($tpl['tpl_source'],ENT_QUOTES)."</textarea>
 	<br />
 	<input type='submit' name='do_modifycont' id='do_modifycont' value='"._MD_A_MYTPLSFORM_BTN_MODIFYCONT."' />

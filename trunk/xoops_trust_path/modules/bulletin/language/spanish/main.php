@@ -2,6 +2,31 @@
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'BULLETIN_MB_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:29
+define('_MD_TOPIC_IMAGE','Category image');
+define('_MD_TOPIC_DISABLE','Do not display category icon');
+define('_MD_TOPIC_LEFT','Display category icon on left side');
+define('_MD_TOPIC_RIGHT','Display category icon on right side');
+define('_MD_PUBINHOME','Publish on the index page');
+define('_MD_PUBLISHED','Posted date');
+define('_MD_EXPIRED','Expired');
+define('_MD_SETDATETIME','Set the publication time');
+define('_MD_SETDATETIME_DESC','* If you do not check it, published time will be current time.');
+define('_MD_SETEXPDATETIME','Set expiration time');
+define('_MD_SETEXPDATETIME_DESC','* If you do not check it, expired setting will become invalid.');
+define('_MD_APPROVE','Approve this story');
+define('_MD_DATE_FORMAT','%d %m %y %h : %i : %s');
+define('_MD_DBPUDATED','Database updated successfully!');
+define('_MD_POSTEDBY','Poster');
+define('_MD_RELATION','Related articles');
+define('_MD_ADD_RELATION','Add related articles');
+define('_MD_CHECKED_AS_RELATION','Add as related articles');
+define('_MD_DISP_BLOCK','Display on block');
+define('_MD_RUSUREDEL','Are you sure you want to delete this news and all its comments?');
+define('_MD_EMPTYNODELETE','Unable to delete.');
+define('_MD_ARCHIVES','Archive');
+
 define( 'BULLETIN_MB_LOADED' , 1 ) ;
 
 //%%%%%%		File Name index.php 		%%%%%

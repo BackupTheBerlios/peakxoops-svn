@@ -1,6 +1,10 @@
 <?php /* Spanish Translation by Marcelo Yuji Himoro <http://yuji.ws> */
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'BULLETIN_AM_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:29
+define('_AM_RIGHT_RELATION','Allow related articles feature');
+
 define( 'BULLETIN_AM_LOADED' , 1 ) ;
 
 //%%%%%%	Admin Module Name  Articles 	%%%%%

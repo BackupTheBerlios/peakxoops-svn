@@ -4,29 +4,12 @@ $mytrustdirname = basename( dirname( __FILE__ ) ) ;
 $mytrustdirpath = dirname( __FILE__ ) ;
 
 // language files (blocks)
-$language = empty( $GLOBALS['xoopsConfig']['language'] ) ? 'english' : $GLOBALS['xoopsConfig']['language'] ;
-if( file_exists( "$mydirpath/language/$language/blocks.php" ) ) {
-	// user customized language file (already read by common.php)
-	// include_once "$mydirpath/language/$language/blocks.php" ;
-} else if( file_exists( "$mytrustdirpath/language/$language/blocks.php" ) ) {
-	// default language file
-	include_once "$mytrustdirpath/language/$language/blocks.php" ;
-} else {
-	// fallback english
-	include_once "$mytrustdirpath/language/english/blocks.php" ;
-}
-
-// language files (main)
-if( file_exists( "$mydirpath/language/$language/main.php" ) ) {
-	// user customized language file (already read by common.php)
-	// include_once "$mydirpath/language/$language/main.php" ;
-} else if( file_exists( "$mytrustdirpath/language/$language/main.php" ) ) {
-	// default language file
-	include_once "$mytrustdirpath/language/$language/main.php" ;
-} else {
-	// fallback english
-	include_once "$mytrustdirpath/language/english/main.php" ;
-}
+$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
+if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
+require_once( $langmanpath ) ;
+$langman =& D3LanguageManager::getInstance() ;
+$langman->read( 'blocks.php' , $mydirname , $mytrustdirname ) ;
+//$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
 
 // include all block files
 $block_path = $mytrustdirpath.'/blocks' ;

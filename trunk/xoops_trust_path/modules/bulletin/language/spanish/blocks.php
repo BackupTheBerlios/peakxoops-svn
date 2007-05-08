@@ -2,6 +2,14 @@
 // Blocks
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'BULLETIN_BL_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:29
+define('_MB_BULLETIN_READMORE','Read more...');
+define('_MB_BULLETIN_COMMENTS','0 comments');
+define('_MB_BULLETIN_ONECOMMENT','1 comment');
+define('_MB_BULLETIN_BYTESMORE','%s bytes to go');
+define('_MB_BULLETIN_NUMCOMMENTS','%s comments');
+
 define( 'BULLETIN_BL_LOADED' , 1 ) ;
 
 define("_MB_BULLETIN_NOTYET","De momento no hay gran noticia.");

@@ -8,6 +8,12 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 // a flag for this language file has already been read or not.
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:29
+define($constpref.'_ADMENU_MYLANGADMIN','languages');
+define($constpref.'_ADMENU_MYTPLSADMIN','templates');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','blocks/permissions');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

@@ -39,6 +39,9 @@ define($constpref."_ADMENU3","Post a new story");
 define($constpref."_ADMENU4","Posting permission manager");
 define($constpref."_ADMENU5","News manager");
 define($constpref."_ADMENU7","Import from news");
+define($constpref.'_ADMENU_MYLANGADMIN','languages');
+define($constpref.'_ADMENU_MYTPLSADMIN','templates');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','blocks/permissions');
 
 // Title of config items
 define($constpref."_CONFIG1","Number of news to display on the index page");

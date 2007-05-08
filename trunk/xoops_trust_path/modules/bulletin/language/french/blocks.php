@@ -2,6 +2,14 @@
 
 // Blocks
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:29
+define('_MB_BULLETIN_READMORE','Read more...');
+define('_MB_BULLETIN_COMMENTS','0 comments');
+define('_MB_BULLETIN_ONECOMMENT','1 comment');
+define('_MB_BULLETIN_BYTESMORE','%s bytes to go');
+define('_MB_BULLETIN_NUMCOMMENTS','%s comments');
+
 define("_MB_BULLETIN_NOTYET","Il n'y a pas encore d'Article du jour.");
 define("_MB_BULLETIN_TMRSI","L'Article le plus lu aujourd'hui est :");
 define("_MB_BULLETIN_ORDER","Ordonner par");

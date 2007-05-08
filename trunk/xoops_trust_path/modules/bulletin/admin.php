@@ -17,39 +17,22 @@ if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_adm
 $xoopsOption['pagetype'] = 'admin' ;
 require XOOPS_ROOT_PATH.'/include/cp_functions.php' ;
 
-// language files (admin.php)
-$language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
-if( file_exists( "$mydirpath/language/$language/admin.php" ) ) {
-	// user customized language file
-	include_once "$mydirpath/language/$language/admin.php" ;
-} else if( file_exists( "$mytrustdirpath/language/$language/admin.php" ) ) {
-	// default language file
-	include_once "$mytrustdirpath/language/$language/admin.php" ;
-} else {
-	// fallback english
-	include_once "$mytrustdirpath/language/english/admin.php" ;
-}
-
-// language files (main.php)
-$language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
-if( file_exists( "$mydirpath/language/$language/main.php" ) ) {
-	// user customized language file
-	include_once "$mydirpath/language/$language/main.php" ;
-} else if( file_exists( "$mytrustdirpath/language/$language/main.php" ) ) {
-	// default language file
-	include_once "$mytrustdirpath/language/$language/main.php" ;
-} else {
-	// fallback english
-	include_once "$mytrustdirpath/language/english/main.php" ;
-}
-
+// initialize language manager
+$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
+if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
+require_once( $langmanpath ) ;
+$langman =& D3LanguageManager::getInstance() ;
 
 
 if( ! empty( $_GET['lib'] ) ) {
 	// common libs (eg. altsys)
 	$lib = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
 	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
-	
+
+	// check the page can be accessed
+	preg_match_all( '/lib\='.$lib.'\&page\=([a-zA-Z0-9_-]+)/' , file_get_contents( dirname(__FILE__).'/admin_menu.php' ) , $matches ) ;
+	if( ! in_array( $page , $matches[1] ) ) $page = $matches[1][0] ;
+
 	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
 		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;
 	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ) ) {
@@ -58,6 +41,10 @@ if( ! empty( $_GET['lib'] ) ) {
 		die( 'wrong request' ) ;
 	}
 } else {
+	// load language files (main.php & admin.php)
+	$langman->read( 'admin.php' , $mydirname , $mytrustdirname ) ;
+	$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
+
 	// fork each pages of this module
 	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
 	

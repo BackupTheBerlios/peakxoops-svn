@@ -7,6 +7,24 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 // a flag for this language file has already been read or not.
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:30
+define($constpref.'_ADMENU_MYLANGADMIN','languages');
+define($constpref.'_ADMENU_MYTPLSADMIN','templates');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','blocks/permissions');
+define($constpref.'_CONFIG15','Enable related articles feature?');
+define($constpref.'_CONFIG15_D','');
+define($constpref.'_CONFIG16','Display recent stories in the same category?');
+define($constpref.'_CONFIG16_D','Displays a list of articles in the same category at the bottom of each story.');
+define($constpref.'_CONFIG17','Number of recent storeis in the same category.');
+define($constpref.'_CONFIG17_D','');
+define($constpref.'_CONFIG18','Display category bread crumb?');
+define($constpref.'_CONFIG18_D','A category tree is displayed in each articles.');
+define($constpref.'_NOTIFY5_TITLE','New comment posted');
+define($constpref.'_NOTIFY5_CAPTION','Notify me when a new comment is posted.');
+define($constpref.'_NOTIFY5_DESC','Notify me when a new comment is posted.');
+define($constpref.'_NOTIFY5_SUBJECT','[{X_SITENAME}] {X_MODULE}: New comment posted');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

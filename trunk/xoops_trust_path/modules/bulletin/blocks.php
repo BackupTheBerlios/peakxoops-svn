@@ -9,7 +9,7 @@ if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
 require_once( $langmanpath ) ;
 $langman =& D3LanguageManager::getInstance() ;
 $langman->read( 'blocks.php' , $mydirname , $mytrustdirname ) ;
-//$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
+$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
 
 // include all block files
 $block_path = $mytrustdirpath.'/blocks' ;

@@ -29,10 +29,13 @@ if( ! empty( $_GET['lib'] ) ) {
 	$lib = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
 	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
 
-	// check the page can be accessed
-	preg_match_all( '/lib\='.$lib.'\&page\=([a-zA-Z0-9_-]+)/' , file_get_contents( dirname(__FILE__).'/admin_menu.php' ) , $matches ) ;
-	if( ! in_array( $page , $matches[1] ) ) $page = $matches[1][0] ;
-
+	// check the page can be accessed (make controllers.php just under the lib)
+	$controllers = array() ;
+	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/controllers.php' ) ) {
+		require XOOPS_TRUST_PATH.'/libs/'.$lib.'/controllers.php' ;
+		if( ! in_array( $page , $controllers ) ) $page = $controllers[0] ;
+	}
+	
 	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
 		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;
 	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ) ) {

@@ -112,6 +112,7 @@ pico is fast enough if you use content's cache.
 - added language files
 -- japaneseutf
 -- italian (thx evoc)
+- modified the interface for mylangadmin 1.31a
 
 1.30 alpha (2007/04/21)
 - modified addslashes() into mysql_real_escape_string()
@@ -376,6 +377,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - 言語ファイル追加
 -- japaneseutf
 -- italian (thx evoc)
+- mylangsadminへの接続部分の互換性改善 1.31a
 
 1.30 alpha (2007/04/21)
 - addslashes()をmysql_real_escape_string()にしてみた

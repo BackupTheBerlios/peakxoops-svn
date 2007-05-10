@@ -33,9 +33,17 @@ add pipes in "pipe" admin
 
 [b]CHANGELOG[/b]
 
+0.20 2007-05-11
+- changed the structure "altsys essential"
+- added language constants override system (with altsys>=0.5)
+- templatized mymenu (with altsys>=0.5)
+- fixed typo in block joint of PicoList (thx emomo)
+- added language files
+-- japaneseutf
+
 0.14 2007-05-02
 - added parse class LinkHTML
-- fixed parsing <link> of Atom 0.3
+- fixed parsing <link> of Atom 0.3 (thx kilica)
 
 0.13 2007-04-27
 - added parse class SimpleHTML
@@ -94,9 +102,17 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 ●更新履歴
 
+0.20 2007-05-11
+- altsys必須となった
+- 文字定数オーバーライドシステムを導入した（要altsys-0.5以上）
+- mymenuのテンプレート化（要altsys-0.5以上）
+- PicoListブロックのtypo修正 (thx emomo)
+- 言語ファイル追加
+-- japaneseutf
+
 0.14 2007-05-02
 - パースジョイントにLinkHTMLを追加
-- Atom 0.3で<link>がとれていないのを修正した
+- Atom 0.3で<link>がとれていないのを修正した (thx kilica)
 
 0.13 2007-04-27
 - パースジョイントにSimpleHTMLを追加

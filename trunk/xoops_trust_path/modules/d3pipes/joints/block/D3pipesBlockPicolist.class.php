@@ -37,9 +37,9 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 		foreach( $data['contents'] as $content ) {
 			$entries[] = array(
 				'pubtime' => $content['modified_time'] , // timestamp
-				'link' => $data['mod_url'].$content['link'] ,
+				'link' => $data['mod_url'].'/'.$content['link'] ,
 				'headline' => $content['subject'] ,
-				'fingerprint' => $data['mod_url'].$content['link'] ,
+				'fingerprint' => $data['mod_url'].'/'.$content['link'] ,
 				'description' => '' ,
 			) ;
 		}

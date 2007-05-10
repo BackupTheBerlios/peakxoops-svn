@@ -19,6 +19,7 @@ define($constpref.'_ADMENU_CACHE','キャッシュ管理') ;
 define($constpref.'_ADMENU_CLIPPING','切り抜き管理') ;
 define($constpref.'_ADMENU_JOINT','ジョイント初期設定') ;
 define($constpref.'_ADMENU_JOINTCLASS','ジョイントクラス初期設定') ;
+define($constpref.'_ADMENU_MYLANGADMIN','言語定数管理') ;
 define($constpref.'_ADMENU_MYTPLSADMIN','テンプレート管理') ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限') ;
 define($constpref.'_ADMENU_MYPREFERENCES','一般設定') ;

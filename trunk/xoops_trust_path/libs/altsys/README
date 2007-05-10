@@ -126,6 +126,18 @@ This is not a core hack but a cache hack.
 If your admin area is broken, just remove cache/adminmenu.
 
 
+[b]Language constants override system[/b]
+
+mylangadmin offers you to override the language constants of each modules.
+
+But, there are a hardle to enable this feature.
+
+- You always override constants of module using D3LanguageManager natively.
+
+- With core XoopsCube Legacy2.1, you can use this feature with conventional modules just by copying preload/SetupAltsysLangMgr.class.php
+
+- With conventinal core of XOOPS2, you have to hack the core. (follow the instruction in mylangadmin)
+
 [/xlang:en]
 [xlang:ja]
 == ALTSYS == 代替システムモジュール＆ライブラリ
@@ -256,5 +268,17 @@ class=Legacy_AltsysAdminRenderSystem
 
 XOOPS2.0.x において、通常管理画面を利用している場合（管理画面テーマを利用していない場合）、altsys一般設定の「管理者用メニューの書き換え」が意味を持ちます。いろいろ試してみてください。これによってもし画面がおかしくなったなら、cache/adminmenu.php というファイルを削除してから、あらためて管理画面に入るだけで復旧します。（確認画面で「はい」を押してください）
 
+
+●言語ファイルオーバーライド
+
+0.5から言語ファイルオーバーライド機能がaltsysにつきました。言語定数管理から、モジュール->言語->ファイルを選んで、必要な部分を書き換えるだけです。
+
+ただし、これが有効にならないケースも多い点に注意が必要です。
+
+D3LanguageManagerに対応したモジュールであれば、無条件で有効に機能しますが、それ以外のモジュールについては、コアバージョンによる制約があります。
+
+XoopsCube Legacy2.1であれば最も簡単です。アーカイブ添付のpreloadを有効にするだけです。これで一般的なモジュールは書き換え可能です。
+
+従来のXOOPS2について、この機能を有効にするためには、コアHackが必要になってしまいます。言語ファイルの共通読込処理を書き換える形になるため、比較的ハードルも高く、あまりお勧めしません。（やり方もここでは書きません）
 
 [/xlang:ja]

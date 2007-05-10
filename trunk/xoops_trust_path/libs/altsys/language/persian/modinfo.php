@@ -2,6 +2,11 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-10 17:21:59
+define('_MI_ALTSYS_MENU_MYLANGADMIN','Languages');
+define('_MI_ALTSYS_MENU_ADVANCEDLANGADMIN','Advanced Languages');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-26 17:09:10
 define('_MI_ALTSYS_BNAME_ADMIN_MENU','منوی مدیریت');
 define('_MI_ALTSYS_IMAGES_DIR','شاخه  برای تصاویر');

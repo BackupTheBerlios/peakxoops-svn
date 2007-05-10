@@ -1,9 +1,5 @@
 <?php
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-05-07 18:10:31
-define('_MI_ALTSYS_MENU_MYLANGADMIN','言語定数管理');
-
 define( '_MI_ALTSYS_MODULENAME' , 'ALTSYS' ) ;
 define( '_MI_ALTSYS_MODULEDESC' , 'もっと使いやすいシステム管理を！' ) ;
 
@@ -13,6 +9,8 @@ define( '_MI_ALTSYS_MENU_NEWCUSTOMBLOCK' , '(新規)' ) ;
 define( '_MI_ALTSYS_MENU_MYBLOCKSADMIN' , 'ブロック管理' ) ;
 define( '_MI_ALTSYS_MENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
 define( '_MI_ALTSYS_MENU_COMPILEHOOKADMIN' , 'テンプレートの高度な操作' ) ;
+define( '_MI_ALTSYS_MENU_MYLANGADMIN' , '言語定数管理' ) ;
+define( '_MI_ALTSYS_MENU_ADVANCEDLANGADMIN' , '言語定数の高度な操作' ) ;
 define( '_MI_ALTSYS_MENU_MYAVATAR' , 'アバター管理' ) ;
 define( '_MI_ALTSYS_MENU_MYSMILEY' , '顔アイコン管理' ) ;
 

@@ -1,12 +1,10 @@
-<h3 style="text-align:left;"><{$smarty.const._MYLANGADMIN_H3_MODULE}> : <{$target_mname}> : <{$target_file|escape}></h3>
-
 <form name="SelectLangFile" action="index.php" method="get">
 	<input type="hidden" name="mode" value="admin" />
 	<input type="hidden" name="lib" value="altsys" />
 	<input type="hidden" name="page" value="mylangadmin" />
 	<input type="hidden" name="dirname" value="<{$target_dirname}>" />
 	<select name="target_lang" onchange="submit();">
-		<{html_options values=$languages output=$languages selected=$target_lang}>
+		<{html_options values=$languages output=$languages4disp selected=$target_lang}>
 	</select}>
 	<select name="target_file" onchange="submit();">
 		<{html_options values=$lang_files output=$lang_files selected=$target_file}>
@@ -14,6 +12,14 @@
 	<input type="submit" value="<{$smarty.const._SUBMIT}>" />
 </form>
 
+<h3 style="text-align:left;"><{$smarty.const._MYLANGADMIN_H3_MODULE}> : <{$target_mname}> : <{$target_lang|escape}> : <{$target_file|escape}></h3>
+
+<dl class="altsys_langman_information">
+	<dt><{$smarty.const._MYLANGADMIN_DT_CACHEFILENAME}></dt>
+	<dd><{$cache_file_name}></dd>
+	<dt><{$smarty.const._MYLANGADMIN_DT_CACHESTATUS}></dt>
+	<dd><{if $cache_file_mtime}><{$smarty.const._MYLANGADMIN_CREATED}> (<{"Y-m-d H:i:s"|date:$cache_file_mtime+$timezone_offset}>)<{else}><{$smarty.const._MYLANGADMIN_NOTCREATED}><{/if}></dd>
+</dl>
 
 <form name="MainForm" action="index.php?mode=admin&amp;lib=altsys&amp;page=mylangadmin&amp;dirname=<{$target_dirname}>&amp;target_lang=<{$target_lang}>&amp;target_file=<{$target_file}>" method="post">
 	<table class="outer">
@@ -24,8 +30,8 @@
 		</tr>
 
 		<{foreach from=$langfile_constants key="langfile_name" item="langfile_uservalue"}>
-		<tr class="<{cycle values="even,odd"}>">
-			<td><label for="input_<{$langfile_name|escape}>"><{$langfile_name|escape}></label></td>
+		<tr class="<{cycle values="even,odd"}>" title="<{$langfile_name|escape}>">
+			<td><label for="input_<{$langfile_name|escape}>"><{$langfile_name|truncate:30|escape}></label></td>
 			<td><{$langfile_name|constant|escape}></td>
 			<td>
 				<{if strlen(constant($langfile_name)) < 32}>
@@ -44,3 +50,7 @@
 		<{$gticket_hidden}>
 	</div>
 </form>
+
+<div class="altsys_mylangadmin_notice">
+	<{$notice}>
+</div>

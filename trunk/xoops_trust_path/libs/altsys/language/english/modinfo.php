@@ -9,6 +9,8 @@ define( '_MI_ALTSYS_MENU_NEWCUSTOMBLOCK' , '(new)' ) ;
 define( '_MI_ALTSYS_MENU_MYBLOCKSADMIN' , 'Module Blocks' ) ;
 define( '_MI_ALTSYS_MENU_MYTPLSADMIN' , 'Templates' ) ;
 define( '_MI_ALTSYS_MENU_COMPILEHOOKADMIN' , 'Advanced Templates' ) ;
+define( '_MI_ALTSYS_MENU_MYLANGADMIN' , 'Languages' ) ;
+define( '_MI_ALTSYS_MENU_ADVANCEDLANGADMIN' , 'Advanced Languages' ) ;
 define( '_MI_ALTSYS_MENU_MYAVATAR' , 'Avatars' ) ;
 define( '_MI_ALTSYS_MENU_MYSMILEY' , 'Smileys' ) ;
 

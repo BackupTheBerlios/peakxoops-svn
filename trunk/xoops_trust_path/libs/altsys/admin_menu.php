@@ -23,6 +23,10 @@ $adminmenu = array(
 		'title' => _MI_ALTSYS_MENU_COMPILEHOOKADMIN ,
 		'link' => 'admin/index.php?mode=admin&lib=altsys&page=compilehookadmin' ,
 	) ,
+	array(
+		'title' => _MI_ALTSYS_MENU_MYLANGADMIN ,
+		'link' => 'admin/index.php?mode=admin&lib=altsys&page=mylangadmin' ,
+	) ,
 /*	array(
 		'title' => _MI_ALTSYS_MENU_MYAVATAR ,
 		'link' => 'index.php?mode=admin&lib=altsys&page=myavatar' ,
@@ -31,6 +35,13 @@ $adminmenu = array(
 		'title' => _MI_ALTSYS_MENU_MYSMILEY ,
 		'link' => 'index.php?mode=admin&lib=altsys&page=mysmiley' ,
 	) ,*/
+) ;
+
+$adminmenu4altsys = array(
+	array(
+		'title' => _PREFERENCES ,
+		'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ,
+	) ,
 ) ;
 
 ?>

@@ -1,5 +1,11 @@
 [xlang:en]
 
+v0.51 (2007-05-10)
+- added mylangadmin for conventional modules
+- added a preload for overriding XC Legacy 2.1 Language Manager
+- modified interface of mylangadmin
+- templatized mymenu for altsys
+- templatized mymenusub for altsys
 
 v0.50 (2007-05-07)
 - added mylangadmin - the override system for language constants
@@ -79,6 +85,13 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.51 (2007-05-10)
+- 通常モジュールも言語ファイルオーバーライドシステムで扱えるように仕様変更
+- XoopsCube Legacy 2.1 用のランゲージマネージャオーバーライドpreloadの同梱
+- mylangadmin の操作性改善
+- altsys専用mymenuのテンプレート化
+- 同サブメニューのテンプレート化
 
 v0.50 (2007-05-07)
 - 言語ファイルオーバーライドシステムmylangadminの実装

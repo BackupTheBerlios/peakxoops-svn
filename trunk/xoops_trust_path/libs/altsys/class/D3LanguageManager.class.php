@@ -46,7 +46,7 @@ function read( $resource , $mydirname , $mytrustdirname = null , $read_once = tr
 			require_once $cache_file ;
 		} else if( file_exists( $root_file ) ) {
 			require_once $root_file ;
-		} else {
+		} else if( file_exists( $default_file ) ) {
 			// fall back english
 			require_once $default_file ;
 		}
@@ -63,7 +63,7 @@ function read( $resource , $mydirname , $mytrustdirname = null , $read_once = tr
 		} else if( file_exists( $trust_file ) ) {
 			if( $read_once ) require_once $trust_file ;
 			else require $trust_file ;
-		} else {
+		} else if( file_exists( $default_file ) ) {
 			// fall back english
 			if( $read_once ) require_once $default_file ;
 			else require $default_file ;

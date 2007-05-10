@@ -26,7 +26,7 @@ if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _
 // set target_module if specified by $_GET['dirname']
 $module_handler =& xoops_gethandler('module');
 if( ! empty( $_GET['dirname'] ) ) {
-	$dirname = strtr( $_GET['dirname'] , "\'\"\0<>" , '     ' ) ;
+	$dirname = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , $_GET['dirname'] ) ;
 	$target_module =& $module_handler->getByDirname( $dirname ) ;
 }
 

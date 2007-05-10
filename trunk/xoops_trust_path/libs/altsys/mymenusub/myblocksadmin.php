@@ -17,14 +17,14 @@ $adminmenu = array() ;
 foreach( $modules4menu as $m4menu ) {
 	if( $m4menu->getVar('dirname') == $current_dirname ) {
 		$adminmenu[] = array(
-			'color' => '#FFDD99' ,
+			'selected' => true ,
 			'title' => $m4menu->getVar('name') ,
 			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname') ,
 		) ;
 		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => $m4menu->getVar('name') ) ;
 	} else {
 		$adminmenu[] = array(
-			'color' => '#DDDDDD' ,
+			'selected' => false ,
 			'title' => $m4menu->getVar('name') ,
 			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname') ,
 		) ;
@@ -32,12 +32,13 @@ foreach( $modules4menu as $m4menu ) {
 }
 
 
-// display (you can customize htmls)
-echo "<div style='text-align:left;width:98%;'>" ;
-foreach( $adminmenu as $menuitem ) {
-	echo "<div style='float:left;height:1.5em;'><nobr><a href='".htmlspecialchars($menuitem['link'],ENT_QUOTES)."' style='background-color:{$menuitem['color']};font:normal normal bold 9pt/12pt;'>".htmlspecialchars($menuitem['title'],ENT_QUOTES)."</a> | </nobr></div>\n" ;
-}
-echo "</div>\n<hr style='clear:left;display:block;' />\n" ;
-
+// display
+require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+$tpl =& new XoopsTpl() ;
+$tpl->assign( array(
+	'adminmenu' => $adminmenu ,
+	'highlight_color' => '#ffdd99' ,
+) ) ;
+$tpl->display( 'db:altsys_inc_mymenusub.html' ) ;
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-// mymenu only for ALTSYS
+/********* mymenu only for ALTSYS ********/
 
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -15,47 +15,54 @@ altsys_include_language_file( 'modinfo' ) ;
 
 include dirname(__FILE__).'/admin_menu.php' ;
 
+$adminmenu = array_merge( $adminmenu , $adminmenu4altsys ) ;
+
 $mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;
 $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
 
-// preferences for altsys self
-array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
 
 // xoops_breadcrumbs
 $GLOBALS['altsysXoopsBreadcrumbs'] = array( array( 'url' => XOOPS_URL.'/modules/altsys/admin/index.php' , 'name' => $xoopsModule->getVar('name') ) ) ;
 
-// highlight (you can customize the colors)
+// highlight
 foreach( array_keys( $adminmenu ) as $i ) {
 	if( $mymenu_link == $adminmenu[$i]['link'] ) {
-		$adminmenu[$i]['color'] = '#FFCCCC' ;
+		$adminmenu[$i]['selected'] = true ;
 		$adminmenu_hilighted = true ;
 		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
 	} else {
-		$adminmenu[$i]['color'] = '#DDDDDD' ;
+		$adminmenu[$i]['selected'] = false ;
 	}
 }
 if( empty( $adminmenu_hilighted ) ) {
 	foreach( array_keys( $adminmenu ) as $i ) {
 		if( stristr( $mymenu_uri , $adminmenu[$i]['link'] ) ) {
-			$adminmenu[$i]['color'] = '#FFCCCC' ;
+			$adminmenu[$i]['selected'] = true ;
 			$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
 			break ;
 		}
 	}
 }
 
-// display (you can customize htmls)
-echo "<div style='text-align:left;width:98%;'>" ;
-foreach( $adminmenu as $menuitem ) {
-	echo "<div style='float:left;height:1.5em;'><nobr><a href='".XOOPS_URL."/modules/altsys/".htmlspecialchars($menuitem['link'],ENT_QUOTES)."' style='background-color:{$menuitem['color']};font:normal normal bold 9pt/12pt;'>".htmlspecialchars($menuitem['title'],ENT_QUOTES)."</a> | </nobr></div>\n" ;
+// link conversion from relative to absolute
+foreach( array_keys( $adminmenu ) as $i ) {
+	if( stristr( $adminmenu[$i]['link'] , XOOPS_URL ) === false ) {
+		$adminmenu[$i]['link'] = XOOPS_URL."/modules/$mydirname/" . $adminmenu[$i]['link'] ;
+	}
 }
-echo "</div>\n<hr style='clear:left;display:block;' />\n" ;
 
+// display
+require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+$tpl =& new XoopsTpl() ;
+$tpl->assign( array(
+	'adminmenu' => $adminmenu ,
+) ) ;
+$tpl->display( 'db:altsys_inc_mymenu.html' ) ;
 
 // submenu
 $page = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , @$_GET['page'] ) ;
-if( file_exists( dirname(__FILE__).'/mymenusub_'.$page.'.php' ) ) {
-	include dirname(__FILE__).'/mymenusub_'.$page.'.php' ;
+if( file_exists( dirname(__FILE__).'/mymenusub/'.$page.'.php' ) ) {
+	include dirname(__FILE__).'/mymenusub/'.$page.'.php' ;
 }
 
 ?>

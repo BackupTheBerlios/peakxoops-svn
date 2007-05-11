@@ -1,16 +1,17 @@
 <?php
 
 // language file (modinfo.php)
-if( file_exists( dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modinfo.php' ) ) {
-	include dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modinfo.php' ;
-} else if( file_exists( dirname(__FILE__).'/language/english/modinfo.php' ) ) {
-	include dirname(__FILE__).'/language/english/modinfo.php' ;
-}
+$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
+if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
+require_once( $langmanpath ) ;
+$langman =& D3LanguageManager::getInstance() ;
+$langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
+
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 
 $modversion['name'] = $mydirname ;
-$modversion['version'] = 1.20 ;
+$modversion['version'] = 1.21 ;
 $modversion['description'] = constant($constpref.'_MODULE_DESCRIPTION') ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;

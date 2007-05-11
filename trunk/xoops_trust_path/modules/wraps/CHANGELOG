@@ -3,6 +3,13 @@
 
 [b]CHANGES:[/b]
 
+1.21 (2007/05/12)
+- changed the structure "altsys essential"
+- added language constants override system (with altsys>=0.5)
+- templatized mymenu (with altsys>=0.5)
+- added language files
+-- japaneseutf
+
 1.20 (2007/03/12) update the module
 - added a config of image caching for browser
 - added an assign of xoops_pagetitle
@@ -59,6 +66,13 @@
 [xlang:ja]
 
 [b]更新履歴:[/b]
+
+1.21 (2007/05/12)
+- 正式にaltsys必須とした
+- 文字定数オーバーライドシステムを導入した（要altsys-0.5以上）
+- mymenuのテンプレート化（要altsys-0.5以上）
+- 言語ファイル追加
+-- japaneseutf
 
 1.20 (2007/03/12) ※要モジュールアップデート
 - 画像などHTML以外のファイルをブラウザがキャッシュできる設定を追加

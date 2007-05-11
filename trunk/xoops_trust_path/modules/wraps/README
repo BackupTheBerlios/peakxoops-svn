@@ -3,7 +3,7 @@
 ====  WRAPS  a module for wrapping  ===
 
 A little module based on Duplicatable V3 (D3).
-needs XOOPS_TRUST_PATH.
+This module require the latest ALTSYS installed.
 
 
 
@@ -78,7 +78,7 @@ A) Check it:
 
 Duplicatable V3 (D3) 技術を応用したページラップ専用モジュールです。
 XOOPS_TRUST_PATH についての設定も必要です。
-
+1.21以降、ALTSYS必須モジュールとなっています。
 
 
 [b]最初の１個をインストールする方法:[/b]

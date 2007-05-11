@@ -27,8 +27,26 @@ class AltsysLangMgr_LanguageManager extends Legacy_LanguageManager
 		if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
 		require_once( $langmanpath ) ;
 		$langman =& D3LanguageManager::getInstance() ;
+		$langman->language = $this->mLanguageName ;
 		$langman->read( $fileBodyName.'.php' , $dirname ) ;
 	}
+
+	function loadGlobalMessageCatalog()
+	{
+		/* if (!$this->_loadFile(XOOPS_ROOT_PATH . "/modules/legacy/language/" . $this->mLanguageName . "/global.php")) {
+			$this->_loadFile(XOOPS_ROOT_PATH . "/modules/legacy/language/english/global.php");
+		} */
+		$this->_loadLanguage( 'legacy' , 'global' ) ;
+
+		//
+		// Now, if XOOPS_USE_MULTIBYTES isn't defined, set zero to it.
+		//
+		if (!defined("XOOPS_USE_MULTIBYTES")) {
+			define("XOOPS_USE_MULTIBYTES", 0);
+		}
+	}
+
+
 }
 
 ?>

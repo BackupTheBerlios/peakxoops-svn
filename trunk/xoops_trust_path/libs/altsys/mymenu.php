@@ -20,7 +20,6 @@ $adminmenu = array_merge( $adminmenu , $adminmenu4altsys ) ;
 $mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;
 $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
 
-
 // xoops_breadcrumbs
 $GLOBALS['altsysXoopsBreadcrumbs'] = array( array( 'url' => XOOPS_URL.'/modules/altsys/admin/index.php' , 'name' => $xoopsModule->getVar('name') ) ) ;
 

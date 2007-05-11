@@ -21,5 +21,6 @@ define( '_MYLANGADMIN_ERR_MODEMPTYLANGDIR' , 'このモジュールは変更可能な言語ファ
 define( '_MYLANGADMIN_MSG_D3LANGMANENABLED' , '言語ファイルオーバーライドシステムは有効になっています' ) ;
 define( '_MYLANGADMIN_FMT_HOWTOENABLED3LANGMAN4XCL' , '言語ファイルオーバーライドシステムは無効になっています。有効にするには、"%s" を "%s" にコピーしてください' ) ;
 define( '_MYLANGADMIN_MSG_HOWTOENABLED3LANGMAN4X2' , 'このコアでは、言語ファイルオーバーライドシステムはD3LanguageManager対応モジュールでしか有効になりません。非対応モジュールでもオーバーライドシステムを利用する場合は、以下のHackを試してください。' ) ;
+define( '_MYLANGADMIN_MSG_NOTICE4ALREADYREAD' , '現在編集中のファイルはすでにシステムで読み込み済のため、このカラムはデフォルトではなく現在値を示しています' ) ;
 
 ?>

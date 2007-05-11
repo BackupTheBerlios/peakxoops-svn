@@ -12,7 +12,7 @@ define( '_MYLANGADMIN_TH_USERVALUE' , 'User Value' ) ;
 define( '_MYLANGADMIN_DT_CACHEFILENAME' , 'Cache file name' ) ;
 define( '_MYLANGADMIN_DT_CACHESTATUS' , 'Caching status' ) ;
 define( '_MYLANGADMIN_CREATED' , 'Created' ) ;
-define( '_MYLANGADMIN_NOTCREATED' , 'Does not exist' ) ;
+define( '_MYLANGADMIN_NOTCREATED' , 'Has not created yet' ) ;
 
 define( '_MYLANGADMIN_ERR_MODNOLANGUAGE' , 'Selected module does not have language folder' ) ;
 define( '_MYLANGADMIN_ERR_MODLANGINCOMPATIBLE' , 'Selected module has incompatible language structure' ) ;
@@ -21,5 +21,6 @@ define( '_MYLANGADMIN_ERR_MODEMPTYLANGDIR' , 'Selected module does not have over
 define( '_MYLANGADMIN_MSG_D3LANGMANENABLED' , 'The overriding system is enabled now.' ) ;
 define( '_MYLANGADMIN_FMT_HOWTOENABLED3LANGMAN4XCL' , 'The overriding system is disabled now. To enable it, copy "%s" into "%s"' ) ;
 define( '_MYLANGADMIN_MSG_HOWTOENABLED3LANGMAN4X2' , 'The overriding system cannot work with this XOOPS core except some D3 modules. If you want to enable it with this core, try to hack like this:' ) ;
+define( '_MYLANGADMIN_MSG_NOTICE4ALREADYREAD' , 'Since this file has been already read by system, this column means current value' ) ;
 
 ?>

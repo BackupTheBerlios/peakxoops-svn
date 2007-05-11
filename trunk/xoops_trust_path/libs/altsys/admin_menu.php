@@ -10,6 +10,7 @@ $adminmenu = array(
 	array(
 		'title' => _MI_ALTSYS_MENU_NEWCUSTOMBLOCK ,
 		'link' => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin&dirname=__CustomBlocks__&op=edit' ,
+		'show' => false ,
 	) ,
 	array(
 		'title' => _MI_ALTSYS_MENU_MYBLOCKSADMIN ,
@@ -39,7 +40,7 @@ $adminmenu = array(
 
 $adminmenu4altsys = array(
 	array(
-		'title' => _PREFERENCES ,
+		'title' => 'ALTSYS '._PREFERENCES ,
 		'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ,
 	) ,
 ) ;

@@ -7,6 +7,7 @@
 
 include_once dirname(__FILE__)."/include/gtickets.php" ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
+include_once dirname(__FILE__).'/include/lang_functions.php' ;
 include_once dirname(__FILE__).'/class/D3LanguageManager.class.php' ;
 
 
@@ -101,19 +102,21 @@ $dh = opendir( $lang_base_dir ) ;
 if( $dh ) while( $file = readdir( $dh ) ) {
 	if( substr( $file , 0 , 1 ) == '.' ) continue ;
 	if( $file == 'index.html' ) continue ;
-	if( $file == 'modinfo.php' ) continue ; // TODO(?)
-	if( $file == 'global.php' ) continue ; // TODO(?)
+	//if( $file == 'modinfo.php' ) continue ; // TODO(?)
+	//if( $file == 'global.php' ) continue ; // TODO(?)
 	if( is_file( "$lang_base_dir/$file" ) ) $lang_files[] = $file ;
 }
 closedir( $dh ) ;
 if( empty( $lang_files ) ) altsys_mylangadmin_errordie( $target_mname , _MYLANGADMIN_ERR_MODEMPTYLANGDIR ) ;
 if( ! in_array( $target_file , $lang_files ) ) $target_file = $lang_files[0] ;
 
+// get unique path of language_file
+$langfile_unique_path = "$lang_base_dir/$target_file" ;
+
 // get constants defined by the target_file
-$system_constants = array_keys( get_defined_constants() ) ;
-unset( $constpref ) ;
-require "$lang_base_dir/$target_file" ;
-$langfile_names = array_diff( array_keys( get_defined_constants() ) , $system_constants ) ;
+list( $langfile_names , $constpref , $already_read ) = altsys_mylangadmin_get_constant_names( $langfile_unique_path , $target_dirname ) ;
+
+// get user_values should be overrided
 $langfile_constants = array() ;
 foreach( $langfile_names as $name ) {
 	list( $value ) = $db->fetchRow( $db->query( "SELECT value FROM ".$db->prefix("altsys_language_constants")." WHERE mid=$target_mid AND language='$target_lang4sql' AND name='".addslashes($name)."'" ) ) ;
@@ -132,7 +135,11 @@ if( ! empty( $_POST['do_update'] ) ) {
 	}
 
 	// read original file
-	$file_contents = file_get_contents( "$lang_base_dir/$target_file" ) ;
+	$file_contents = file_get_contents( $langfile_unique_path ) ;
+
+	// insert fingerprint of langfile_unique_path
+	$langfile_fingerprint = '_MYLANGADMIN_'.md5( $langfile_unique_path ) ;
+	$file_contents = str_replace( '<?php' , "<?php\nif(!defined('$langfile_fingerprint'))define('$langfile_fingerprint',1);" , $file_contents ) ;
 
 	// constants loop
 	$overrides_counter = 0 ;
@@ -150,9 +157,8 @@ if( ! empty( $_POST['do_update'] ) ) {
 			} else {
 				$from = '/.*define\(\s*\$constpref\s*\.\s*(["\'])'.preg_quote(substr($name,strlen($constpref))).'(\\1).*\;.*/' ;
 			}
-			$file_contents = preg_replace( $from , '//$0' , $file_contents ) ;
-			// add a line of define()
-			$file_contents = str_replace( '<?php' , "<?php\ndefine('".addslashes($name)."','".addslashes($user_value)."');" , $file_contents ) ;
+			$to = '//$0'."\ndefine('".addslashes($name)."','".addslashes($user_value)."');" ;
+			$file_contents = preg_replace( $from , $to , $file_contents ) ;
 		}
 	}
 
@@ -238,22 +244,12 @@ $tpl->assign( array(
 	'cache_file_mtime' => intval( $cache_file_mtime ) ,
 	'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
 	'notice' => $notice4disp ,
+	'already_read' => $already_read ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'altsys') ,
 ) ) ;
 $tpl->display( 'db:altsys_main_mylangadmin.html' ) ;
 
 xoops_cp_footer() ;
 exit ;
-
-
-function altsys_mylangadmin_errordie( $target_mname , $message4disp )
-{
-	xoops_cp_header() ;
-	altsys_include_mymenu() ;
-	echo '<h3>' . _MYLANGADMIN_H3_MODULE . ' : ' . $target_mname . '</h3>' ;
-	echo '<p>'.$message4disp.'</p>' ;
-	xoops_cp_footer() ;
-	exit ;
-}
 
 ?>

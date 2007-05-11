@@ -141,7 +141,11 @@ function list_blocks( $target_mid , $target_dirname )
 		if( $can_clone ) {
 			$clone_link = "<br /><a href='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;op=clone&amp;bid=$bid'>"._CLONE."</a>" ;
 		} else {
-			$clone_link = '' ;
+			if( empty( $GLOBALS['altsysModuleConfig']['enable_force_clone'] ) ) {
+				$clone_link = '' ;
+			} else {
+				$clone_link = "<br /><a href='?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=$target_dirname&amp;op=clone&amp;bid=$bid'>"._MD_A_MYBLOCKSADMIN_LINK_FORCECLONE."</a>" ;
+			}
 		}
 
 		// displaying part
@@ -388,7 +392,7 @@ function do_clone( $bid )
 
 	// block type check
 	$block_type = $block->getVar('block_type') ;
-	if( ! in_array( $block_type , array( 'C' , 'M' , 'D' ) ) ) {
+	if( ! in_array( $block_type , array( 'C' , 'M' , 'D' ) ) && empty( $GLOBALS['altsysModuleConfig']['enable_force_clone'] ) ) {
 		die( 'Invalid block_type' ) ;
 	}
 

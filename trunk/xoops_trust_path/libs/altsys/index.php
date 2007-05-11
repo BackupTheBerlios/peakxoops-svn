@@ -14,6 +14,7 @@ $page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
 require dirname(__FILE__).'/controllers.php' ;
 if( ! in_array( $page , $controllers ) ) {
 	$_GET['page'] = $page = 'myblocksadmin' ;
+	$_SERVER['REQUEST_URI'] = '/admin/index.php?mode=admin&lib=altsys&page=myblocksadmin' ;
 }
 
 

@@ -5,6 +5,10 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-12 05:01:31
+define($constpref.'_ADMENU_MYLANGADMIN','Languages');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

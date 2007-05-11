@@ -14,6 +14,7 @@ define($constpref."_NAME","DB theme");
 define($constpref."_DESC","A module enables you to edit your theme in admin area");
 
 // admin menus
+define($constpref.'_ADMENU_MYLANGADMIN','Languages') ;
 define($constpref.'_ADMENU_MYTPLSADMIN','Theme templates') ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions') ;
 define($constpref.'_ADMENU_MYPREFERENCES','Preferences') ;

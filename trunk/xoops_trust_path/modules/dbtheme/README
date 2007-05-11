@@ -3,6 +3,7 @@
 ====  DB theme  ===
 
 You can specify DB template as the theme.
+This module depends on altsys.
 
 [b]MERITS[/b]
 
@@ -16,7 +17,7 @@ You can specify DB template as the theme.
 
 (If you didnot...)
 - set XOOPS_TRUST_PATH
-- Install altsys
+- Install altsys >= 0.5
 
 
 - Install dbtheme as usual D3 module
@@ -47,6 +48,13 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 
 
 [b]CHANGES[/b]
+
+0.33 2007-05-12
+- changed the structure "altsys essential"
+- added language constants override system (with altsys>=0.5)
+- templatized mymenu (with altsys>=0.5)
+- added language files
+-- japaneseutf
 
 0.32 2007-04-19
 - added an assignment xoops_dbthemecssurl for special themes for dbtheme
@@ -79,6 +87,7 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 ====  DB テーマ  ===
 
 任意のDBテンプレートをテーマとして利用できるモジュール
+ALTSYS 0.5以上が必須です。
 
 
 ●メリット
@@ -91,7 +100,7 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 
 ●使い方
 
-altsysとの併用が大前提ですので、もし入っていなかったらまずaltsysをインストールします。altsysは可能な限り最新版（0.41以降推奨）を使ってください。
+altsysとの併用が大前提ですので、もし入っていなかったらまずaltsysをインストールします。altsysは可能な限り最新版（0.52以降推奨）を使ってください。
 
 DBTHEMEモジュール自体は、普通のD3モジュールとしてインストールします。（以前のバージョンではSmartyプラグインも必要でしたが、今は不要です）
 
@@ -133,6 +142,13 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
 ●更新履歴
 
+
+0.33 2007-05-12
+- 正式にaltsys必須とした
+- 文字定数オーバーライドシステムを導入した（要altsys-0.5以上）
+- mymenuのテンプレート化（要altsys-0.5以上）
+- 言語ファイル追加
+-- japaneseutf
 
 0.32 2007-04-19
 - dbtheme専用テーマのために xoops_dbthemecssurl をアサインするようにした

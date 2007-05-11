@@ -14,6 +14,7 @@ define($constpref."_NAME","DB theme");
 define($constpref."_DESC","管理画面上でテーマを編集できるようにするモジュール");
 
 // admin menus
+define($constpref.'_ADMENU_MYLANGADMIN','言語定数管理') ;
 define($constpref.'_ADMENU_MYTPLSADMIN','テンプレート管理') ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN','ブロック管理/アクセス権限') ;
 define($constpref.'_ADMENU_MYPREFERENCES','一般設定') ;

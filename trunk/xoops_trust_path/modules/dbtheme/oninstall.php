@@ -40,7 +40,7 @@ function dbtheme_oninstall_base( $module , $mydirname )
 		$sql_query = trim( file_get_contents( $sql_file_path ) ) ;
 		$sqlutil->splitMySqlFile( $pieces , $sql_query ) ;
 		$created_tables = array() ;
-		foreach( $pieces as $piece ) {
+		if( is_array( $pieces ) ) foreach( $pieces as $piece ) {
 			$prefixed_query = $sqlutil->prefixQuery( $piece , $prefix_mod ) ;
 			if( ! $prefixed_query ) {
 				$ret[] = "Invalid SQL <b>".htmlspecialchars($piece)."</b><br />";
@@ -66,6 +66,9 @@ function dbtheme_oninstall_base( $module , $mydirname )
 
 
 	/*************** BEGIN DBTHEME SPECIFIC PART ******************/
+	// set weight=0
+	$db->queryF( "UPDATE ".$db->prefix("modules")." SET weight=0 WHERE mid=$mid" ) ;
+	// set tpl_path
 	$module_handler =& xoops_gethandler( 'module' ) ;
 	$module =& $module_handler->getByDirname( $mydirname ) ;
 	$config_handler =& xoops_gethandler( 'config' ) ;
@@ -90,6 +93,7 @@ function dbtheme_oninstall_base( $module , $mydirname )
 				$tplfile =& $tplfile_handler->create() ;
 
 				/*************** BEGIN DBTHEME SPECIFIC PART ******************/
+				// modify the theme/css
 				$tpl_source = file_get_contents( $file_path ) ;
 				$searches = array() ;
 				$replacements = array() ;

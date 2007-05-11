@@ -2,17 +2,17 @@
 // $Id$
 
 // Keep Block option values when update (by nobunobu) for XOOPS 2.0.x
-global $xoopsDB;
-$query = "SELECT mid FROM ".$xoopsDB->prefix('modules')." WHERE dirname='".$modversion['dirname']."' ";
-$result = $xoopsDB->query($query);
-$record= $xoopsDB->fetcharray($result);
+$db =& Database::getInstance() ;
+$query = "SELECT mid FROM ".$db->prefix('modules')." WHERE dirname='".$modversion['dirname']."' ";
+$result = $db->query($query);
+$record= $db->fetcharray($result);
 if ($record) {
 	$mid = $record['mid'];
 	$count = count($modversion['blocks']);
-	/* $sql = "SELECT * FROM ".$xoopsDB->prefix('newblocks')." WHERE mid=".$mid." AND block_type ='D'";
-	$fresult = $xoopsDB->query($sql);
+	/* $sql = "SELECT * FROM ".$db->prefix('newblocks')." WHERE mid=".$mid." AND block_type ='D'";
+	$fresult = $db->query($sql);
 	$n_funcnum = $count;
-	while ($fblock = $xoopsDB->fetchArray($fresult)) {
+	while ($fblock = $db->fetchArray($fresult)) {
 		$bnum = 0;
 		for ($i = 1 ; $i <= $count ; $i++) {
 			if (($modversion['blocks'][$i]['file'] == $fblock['func_file']) and ($modversion['blocks'][$i]['show_func'] == $fblock['show_func'])) {
@@ -47,24 +47,24 @@ if ($record) {
 					$local_msgs[] = "Option's values of the cloned block <b>".$fblock['name']."</b> will be reset to the default, because of some decrease of options. (value = <b>".$modversion['blocks'][$n_funcnum]['options']."</b>)";
 				}
 			}
-			$sql = "UPDATE ".$xoopsDB->prefix('newblocks')." SET func_num='$n_funcnum' WHERE mid=".$mid." AND bid='".$fblock['bid']."'";
-			$iret = $xoopsDB->query($sql);
+			$sql = "UPDATE ".$db->prefix('newblocks')." SET func_num='$n_funcnum' WHERE mid=".$mid." AND bid='".$fblock['bid']."'";
+			$iret = $db->query($sql);
 
 		}
 	} */
 	
-	$sql = "SELECT * FROM ".$xoopsDB->prefix('newblocks')." WHERE mid=".$mid." AND block_type <>'D' AND func_num > $count";
-	$fresult = $xoopsDB->query($sql);
-	while ($fblock = $xoopsDB->fetchArray($fresult)) {
+	$sql = "SELECT * FROM ".$db->prefix('newblocks')." WHERE mid=".$mid." AND block_type <>'D' AND func_num > $count";
+	$fresult = $db->query($sql);
+	while ($fblock = $db->fetchArray($fresult)) {
 		$local_msgs[] = "Non Defined Block <b>".$fblock['name']."</b> will be deleted";
-		$sql = "DELETE FROM ".$xoopsDB->prefix('newblocks')." WHERE bid='".$fblock['bid']."'";
-		$iret = $xoopsDB->query($sql);
+		$sql = "DELETE FROM ".$db->prefix('newblocks')." WHERE bid='".$fblock['bid']."'";
+		$iret = $db->query($sql);
 	}
 	
 	for ($i = 1 ; $i <= $count ; $i++) {
-		$sql = "SELECT name,options FROM ".$xoopsDB->prefix('newblocks')." WHERE mid=".$mid." AND func_num=".$i." AND show_func='".addslashes($modversion['blocks'][$i]['show_func'])."' AND func_file='".addslashes($modversion['blocks'][$i]['file'])."'";
-		$fresult = $xoopsDB->query($sql);
-		$fblock = $xoopsDB->fetchArray($fresult);
+		$sql = "SELECT name,options FROM ".$db->prefix('newblocks')." WHERE mid=".$mid." AND func_num=".$i." AND show_func='".mysql_real_escape_string($modversion['blocks'][$i]['show_func'])."' AND func_file='".mysql_real_escape_string($modversion['blocks'][$i]['file'])."'";
+		$fresult = $db->query($sql);
+		$fblock = $db->fetchArray($fresult);
 		if ( isset( $fblock['options'] ) ) {
 			$old_vals=explode("|",$fblock['options']);
 			$def_vals=explode("|",$modversion['blocks'][$i]['options']);

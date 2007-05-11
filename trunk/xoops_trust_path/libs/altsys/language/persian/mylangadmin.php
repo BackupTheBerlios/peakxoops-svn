@@ -1,6 +1,10 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
+define('_MYLANGADMIN_MSG_NOTICE4ALREADYREAD','Since this file has been already read by system, this column means current value');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-10 17:21:59
 define('_MYLANGADMIN_DT_CACHEFILENAME','Cache file name');
 define('_MYLANGADMIN_DT_CACHESTATUS','Caching status');

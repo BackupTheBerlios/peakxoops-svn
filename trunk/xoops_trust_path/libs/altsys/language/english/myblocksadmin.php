@@ -35,6 +35,8 @@ define( '_MD_A_MYBLOCKSADMIN_CLONEFORM' , 'Clone the block' ) ;
 define( '_MD_A_MYBLOCKSADMIN_NEWFORM' , 'Create a block' ) ;
 define( '_MD_A_MYBLOCKSADMIN_EDITFORM' , 'Edit the block' ) ;
 
+define( '_MD_A_MYBLOCKSADMIN_LINK_FORCECLONE' , 'Force clone' ) ;
+
 define( '_MD_A_MYBLOCKSADMIN_BTN_CLONE' , 'Clone' ) ;
 define( '_MD_A_MYBLOCKSADMIN_BTN_NEW' , 'Create' ) ;
 define( '_MD_A_MYBLOCKSADMIN_BTN_EDIT' , 'Update' ) ;

@@ -35,6 +35,8 @@ define( '_MD_A_MYBLOCKSADMIN_CLONEFORM' , 'ブロックの複製' ) ;
 define( '_MD_A_MYBLOCKSADMIN_NEWFORM' , 'ブロックの新規作成' ) ;
 define( '_MD_A_MYBLOCKSADMIN_EDITFORM' , 'ブロックの編集' ) ;
 
+define( '_MD_A_MYBLOCKSADMIN_LINK_FORCECLONE' , '強制複製' ) ;
+
 define( '_MD_A_MYBLOCKSADMIN_BTN_CLONE' , '複製実行' ) ;
 define( '_MD_A_MYBLOCKSADMIN_BTN_NEW' , '新規作成' ) ;
 define( '_MD_A_MYBLOCKSADMIN_BTN_EDIT' , '更新実行' ) ;

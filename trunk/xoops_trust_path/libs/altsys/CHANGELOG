@@ -1,5 +1,10 @@
 [xlang:en]
 
+v0.52 (2007-05-11)
+- added config of "force block cloning"
+- mofieid cache files for overriding language constants
+- modified mylangadmin can treat modinfo.php even
+
 v0.51 (2007-05-10)
 - added mylangadmin for conventional modules
 - added a preload for overriding XC Legacy 2.1 Language Manager

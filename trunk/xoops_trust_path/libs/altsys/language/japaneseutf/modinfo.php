@@ -30,6 +30,9 @@ define( '_MI_ALTSYS_ADMINMENU_IMDSC' , 'mymenu対応モジュールのリンク�
 define( '_MI_ALTSYS_ADMIN_IN_THEME' , '管理画面用テーマ' ) ;
 define( '_MI_ALTSYS_ADMIN_IN_THEMEDSC' , '管理画面を表示するテーマ名を指定します。XOOPS 2.0.x 以外では有効になりません。また、mainfile.phpのcommon.php行直後に、<br />include XOOPS_TRUST_PATH.\'/libs/altsys/include/admin_in_theme.inc.php\';<br />の１行を挿入する必要があります' ) ;
 
+define( '_MI_ALTSYS_ENABLEFORCECLONE' , '全ブロックを複製可能とする' ) ;
+define( '_MI_ALTSYS_ENABLEFORCECLONEDSC' , '全てのモジュール所属ブロックを複製可能であると見なします。同時に複数個表示するとおかしくなるブロックがある点には注意が必要です' ) ;
+
 define('_MI_ALTSYS_IMAGES_DIR','イメージファイルディレクトリ');
 define('_MI_ALTSYS_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
 

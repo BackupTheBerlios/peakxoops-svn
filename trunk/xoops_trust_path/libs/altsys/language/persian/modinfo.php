@@ -3,6 +3,11 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
+define('_MI_ALTSYS_ENABLEFORCECLONE','Force all blocks to be clonable');
+define('_MI_ALTSYS_ENABLEFORCECLONEDSC','You should know there are blocks cause errors if multiple instances is displayed on a page');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-10 17:21:59
 define('_MI_ALTSYS_MENU_MYLANGADMIN','Languages');
 define('_MI_ALTSYS_MENU_ADVANCEDLANGADMIN','Advanced Languages');

@@ -94,6 +94,16 @@ This plugin is only for sites of japanese, tchinese, schinese, and korean.
 If you want to turn the plugin on, copy the file in filters_disabled into filters_enabled.
 
 
+= CONTRIBUTIONS =
+
+Here is a good documentation for installing/running the latest Protector.
+http://library.fishbreeder.net/xoopsdocs/protector-3-02.pdf (PDF)
+http://library.fishbreeder.net/xoopsdocs/protector-3-02.odt (OpenDocument)
+http://library.fishbreeder.net/xoopsdocs/protector-3-02.doc (Word)
+
+I thank Madfish for this excellent work!
+
+
 = CHANGES =
 
 3.02 (2007/04/08)
@@ -105,6 +115,7 @@ If you want to turn the plugin on, copy the file in filters_disabled into filter
 -- persian (thx voltan)
 -- russian (thx West) 3.02a
 -- arabic (thx onasure) 3.02b
+-- japaneseutf 3.02c
 
 3.01 (2007/02/10)
 - modified the rule for sorting IPs
@@ -275,6 +286,7 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 -- persian (thx voltan)
 -- russian (thx West) 3.02a
 -- arabic (thx onasure) 3.02b
+-- japaneseutf 3.02c
 
 3.01 (2007/02/10)
 - IP¥½¡¼¥È¥ë¡¼¥ë¤ÎÊÑ¹¹

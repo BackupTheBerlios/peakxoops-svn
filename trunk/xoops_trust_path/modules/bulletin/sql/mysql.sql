@@ -30,8 +30,7 @@ CREATE TABLE `stories` (
   KEY `uid` (`uid`),
   KEY `published_ihome` (`published`,`ihome`),
   KEY `title` (`title`(40)),
-  KEY `created` (`created`),
-  FULLTEXT KEY `search` (`title`,`hometext`,`bodytext`)
+  KEY `created` (`created`)
 ) TYPE=MyISAM AUTO_INCREMENT=1 ;
 # --------------------------------------------------------
 

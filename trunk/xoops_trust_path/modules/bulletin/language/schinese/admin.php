@@ -37,7 +37,7 @@ define('_AM_DISP_CONTENUE', '[显示所有新闻]');
 define('_AM_PUB_ARTICLES', '已发布的新闻');
 define('_AM_WAITING_ARTICLES', '等候审核的新闻');
 define('_AM_ARTICLE_ADMIN', '新闻管理');
-define('_AM_NOSUBJECT', '没有主旨');
+define('_AM_NOSUBJECT', '没有主题');
 define('_AM_RIGHT_TO_POST', '允许发表');
 define('_AM_RIGHT_TO_APPROVE', '自动审核发布');
 define('_AM_RIGHT_TO_CHOSE_DATE', '允许设定发布日期');

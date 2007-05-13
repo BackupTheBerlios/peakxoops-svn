@@ -19,7 +19,7 @@ define('_MD_POST', '发表');
 define('_MD_GO', '发送');
 define('_MD_THANKS', '感谢您提供新闻。请等待网站管理员审核发布。'); //submission of news article
 define('_MD_THANKS_AUTOAPPROVE', '谢谢您的投稿。');
-define('_MD_THANKS_BUT_ERROR', '感谢您的投稿。但是，因为一个<span style=\"color:red\">错误</span>，您的文章没有发布。由此造成的不便，请多多见谅。也请联系网站管理员。');
+define('_MD_THANKS_BUT_ERROR', '感谢您的投稿。但是，因为一个<span style="color:red">错误</span>，您的文章没有发布。由此造成的不便，请多多见谅。也请联系网站管理员。');
 define('_MD_USE_HTML', '启用HTML');
 define('_MD_USE_SMILEY', '启用表情符号');
 define('_MD_USE_BR', '启用自动换行');

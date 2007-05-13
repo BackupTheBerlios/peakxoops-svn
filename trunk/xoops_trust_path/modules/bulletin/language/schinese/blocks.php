@@ -15,8 +15,8 @@ define('_MB_BULLETIN_TUE', '二');
 define('_MB_BULLETIN_WED', '三');
 define('_MB_BULLETIN_THE', '四');
 define('_MB_BULLETIN_FRI', '五');
-define('_MB_BULLETIN_SAT', '<span style=\"color:green\">六</span>');
-define('_MB_BULLETIN_SUN', '<span style=\"color:red\">日</span>');
+define('_MB_BULLETIN_SAT', '<span style="color:green">六</span>');
+define('_MB_BULLETIN_SUN', '<span style="color:red">日</span>');
 define('_MB_BULLETIN_DATE_FORMAT', 'Y/m');
 
 define('_MB_BULLETIN_DISP_TOPICID', '显示类别 (0 = 全部显示)');

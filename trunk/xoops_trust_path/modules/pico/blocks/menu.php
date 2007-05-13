@@ -5,7 +5,7 @@ function b_pico_menu_show( $options )
 	global $xoopsUser ;
 
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
-	$categories = trim( @$options[1] ) === '' ? array() : explode(',',$options[1]) ;
+	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
 	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_menu.html' : trim( $options[2] ) ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
@@ -27,9 +27,6 @@ function b_pico_menu_show( $options )
 		$whr_categories = '1' ;
 		$categories4assign = '' ;
 	} else {
-		for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
-			$categories[ $i ] = intval( $categories[ $i ] ) ;
-		}
 		$whr_categories = 'o.cat_id IN ('.implode(',',$categories).')' ;
 		$categories4assign = implode(',',$categories) ;
 	}
@@ -87,26 +84,21 @@ function b_pico_menu_show( $options )
 function b_pico_menu_edit( $options )
 {
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
-	$categories = trim( @$options[1] ) === '' ? array() : explode(',',$options[1]) ;
+	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
 	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_menu.html' : trim( $options[2] ) ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
-	for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
-		$categories[ $i ] = intval( $categories[ $i ] ) ;
-	}
-
-	$form = "
-		<input type='hidden' name='options[0]' value='$mydirname' />
-		<label for='categories'>"._MB_PICO_CATLIMIT."</label>&nbsp;:
-		<input type='text' size='20' name='options[1]' id='categories' value='".implode(',',$categories)."' />"._MB_PICO_CATLIMITDSC."
-		<br />
-		<label for='this_template'>"._MB_PICO_THISTEMPLATE."</label>&nbsp;:
-		<input type='text' size='60' name='options[2]' id='this_template' value='".htmlspecialchars($this_template,ENT_QUOTES)."' />
-		<br />
-	\n" ;
-
-	return $form;
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+	$tpl =& new XoopsTpl() ;
+	$tpl->assign( array(
+		'mydirname' => $mydirname ,
+		'categories' => $categories ,
+		'categories_imploded' => implode( ',' , $categories ) ,
+		'order_options' => b_pico_list_allowed_order() ,
+		'this_template' => $this_template ,
+	) ) ;
+	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_menu.html' ) ;
 }
 
 ?>

@@ -7,14 +7,14 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-02 18:27:44
-define('_MD_PICO_JUMPTOTOPOFPICOBODY','Jump to the top');
+define('_MD_PICO_JUMPTOTOPOFPICOBODY','برو به بالای صفحه');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-04-21 04:44:07
-define('_MD_PICO_CONTENTS_TOTAL','Total contents');
-define('_MD_PICO_SUBCATEGORIES_TOTAL','Total subcategories');
+define('_MD_PICO_CONTENTS_TOTAL','مجموع اسناد');
+define('_MD_PICO_SUBCATEGORIES_TOTAL','مجموع زیر شاخه ها');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:07
-define('_MD_PICO_DOWNLOADIT','Download it');
+define('_MD_PICO_DOWNLOADIT','دانلود سند');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-20 06:23:18
 define('_MD_PICO_DIFF2NOW','diff to now');
@@ -25,8 +25,8 @@ define('_MD_PICO_DELETEDCONTENTS','Deleted contents');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
 define('_MD_PICO_BYTE','byte');
-define('_MD_PICO_HISTORY','History');
-define('_MD_PICO_REFERIT','Refer it');
+define('_MD_PICO_HISTORY','آرشیو تغییرات');
+define('_MD_PICO_REFERIT','مراجعه به سند');
 
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه ها');
@@ -44,9 +44,9 @@ define('_MD_PICO_WAITINGUPDATE','waiting update');
 define('_MD_PICO_REGISTERED_AUTOMATICALLY','اتوماتیک');
 
 define('_MD_PICO_CATEGORY','شاخه');
-define('_MD_PICO_CATEGORIES','Categories');
+define('_MD_PICO_CATEGORIES','شاخه ها');
 define('_MD_PICO_SUBCATEGORY','زیر شاخه');
-define('_MD_PICO_SUBCATEGORIES','Subcategories');
+define('_MD_PICO_SUBCATEGORIES','زیر شاخه ها');
 define('_MD_PICO_CONTENT','سند');
 define('_MD_PICO_CONTENTS','اسناد');
 
@@ -67,7 +67,7 @@ define('_MD_PICO_FMT_TELLAFRIENDBODY',"من مقاله ی مورد علاقه ی
 
 define('_MD_PICO_ERR_SQL','یک خطای SQL رخ داده در:');
 define('_MD_PICO_ERR_DUPLICATEDVPATH','The virtual path is duplicated');
-define('_MD_PICO_ERR_PIDLOOP','parent/child loop error');
+define('_MD_PICO_ERR_PIDLOOP','خطا حلقه اصلی/ وابسته');
 
 define('_MD_PICO_MSG_UPDATED','با موفقیت به روز شد');
 
@@ -85,10 +85,10 @@ define('_MD_PICO_MSG_CATEGORYMADE','شاخه با موفقیت ساخته شد')
 define('_MD_PICO_MSG_CATEGORYUPDATED','شاخه با موفقیت ویرایش شد');
 define('_MD_PICO_MSG_CATEGORYDELETED','شاخه با موفقیت حذف شد');
 define('_MD_PICO_MSG_CONTENTMADE','سند با موفقیت ساخته شد');
-define('_MD_PICO_MSG_CONTENTWAITINGREGISTER','A content has been queued for registering');
+define('_MD_PICO_MSG_CONTENTWAITINGREGISTER','سند های منتظر برای ثبت شدن');
 define('_MD_PICO_MSG_CONTENTUPDATED','سند با موفقیت ویرایش شد');
-define('_MD_PICO_MSG_CONTENTWAITINGUPDATE','The content has been queued for updating');
-define('_MD_PICO_MSG_CONTENTDELETED','شند با موفقیت حذف شد');
+define('_MD_PICO_MSG_CONTENTWAITINGUPDATE','سند های منتظر برای به روز شدن');
+define('_MD_PICO_MSG_CONTENTDELETED','سند با موفقیت حذف شد');
 
 define('_MD_PICO_CATEGORYMANAGER','مدیریت شاخه');
 define('_MD_PICO_CONTENTMANAGER','مدیریت سند');

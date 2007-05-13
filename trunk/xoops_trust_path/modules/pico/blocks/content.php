@@ -33,6 +33,15 @@ function b_pico_content_show( $options )
 	// assigning
 	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $configs , array() ) ;
 
+	// convert links from relative to absolute (wraps mode only)
+	if( $configs['use_wraps_mode'] ) {
+		$wrap_base_url = XOOPS_URL.'/modules/'.$mydirname ;
+		if( empty( $configs['use_rewrite'] ) ) $wrap_base_url .= '/index.php' ;
+		$patterns = array( "/src\=\"(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/src\=\'(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/src\=(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=\"(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=\'(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" ) ;
+		$replacements = array( "src=\"$wrap_base_url/\\1" , "src='$wrap_base_url/\\1" , "src=$wrap_base_url/\\1" , "href=\"$wrap_base_url/\\1" , "href='$wrap_base_url/\\1" , "href=$wrap_base_url/\\1" ) ;
+		$content4assign['body'] = preg_replace( $patterns , $replacements , $content4assign['body'] ) ;
+	}
+
 	$block = array( 
 		'mydirname' => $mydirname ,
 		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
@@ -62,17 +71,25 @@ function b_pico_content_edit( $options )
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
-	$form = "
-		<input type='hidden' name='options[0]' value='$mydirname' />
-		<label for='content_id'>"._MB_PICO_CONTENT_ID."</label>&nbsp;:
-		<input type='text' size='20' name='options[1]' id='content_id' value='$content_id' />
-		<br />
-		<label for='this_template'>"._MB_PICO_THISTEMPLATE."</label>&nbsp;:
-		<input type='text' size='60' name='options[2]' id='this_template' value='".htmlspecialchars($this_template,ENT_QUOTES)."' />
-		<br />
-	\n" ;
+	$db =& Database::getInstance();
+	$myts =& MyTextSanitizer::getInstance();
 
-	return $form;
+	// get content_title
+	$contents = array( 0 => '--' ) ;
+	$result = $db->query( "SELECT content_id,subject,c.cat_depth_in_tree FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id ORDER BY c.cat_order_in_tree,o.weight" ) ;
+	while( list( $id , $sbj , $depth ) = $db->fetchRow( $result ) ) {
+		$contents[ $id ] = sprintf('%06d',$id).': '.str_repeat('--',$depth).$myts->makeTboxData4Show( $sbj ) ;
+	}
+
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+	$tpl =& new XoopsTpl() ;
+	$tpl->assign( array(
+		'mydirname' => $mydirname ,
+		'contents' => $contents ,
+		'content_id' => $content_id ,
+		'this_template' => $this_template ,
+	) ) ;
+	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_content.html' ) ;
 }
 
 

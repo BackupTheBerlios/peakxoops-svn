@@ -24,10 +24,11 @@ function b_pico_list_show( $options )
 	global $xoopsUser ;
 
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
-	$categories = trim( @$options[1] ) === '' ? array() : explode(',',$options[1]) ;
+	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
 	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
 	$contents_num = empty( $options[3] ) ? 10 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
+	$display_body = empty( $options[5] ) ? false : true ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
@@ -48,14 +49,11 @@ function b_pico_list_show( $options )
 		$whr_categories = '1' ;
 		$categories4assign = '' ;
 	} else {
-		for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
-			$categories[ $i ] = intval( $categories[ $i ] ) ;
-		}
 		$whr_categories = 'o.cat_id IN ('.implode(',',$categories).')' ;
 		$categories4assign = implode(',',$categories) ;
 	}
 
-	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
+	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,o.use_cache,o.body_cached,o.body,o.filters,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
 	if( ! $result = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;
@@ -74,18 +72,17 @@ function b_pico_list_show( $options )
 	) ;
 
 	while( $content_row = $db->fetchArray( $result ) ) {
-		$block['contents'][] = array(
+		$content4assign = array(
 			'id' => intval( $content_row['content_id'] ) ,
 			'link' => pico_common_make_content_link4html( $configs , $content_row ) ,
 			'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-			'created_time' => $content_row['created_time'] ,
+			'subject_raw' => $content_row['subject'] ,
+			'body' => $display_body ? pico_common_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) : '' ,
 			'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
-			'modified_time' => $content_row['modified_time'] ,
 			'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
-			'poster_uid' => $content_row['poster_uid'] ,
-			'cat_id' => intval( $content_row['cat_id'] ) ,
 			'cat_title' => $myts->makeTboxData4Show( $content_row['cat_title'] ) ,
 		) ;
+		$block['contents'][] = $content4assign + $content_row ;
 	}
 
 	if( empty( $options['disable_renderer'] ) ) {
@@ -104,41 +101,27 @@ function b_pico_list_show( $options )
 function b_pico_list_edit( $options )
 {
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
-	$categories = trim( @$options[1] ) === '' ? array() : explode(',',$options[1]) ;
+	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
 	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
 	$contents_num = empty( $options[3] ) ? 10 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
+	$display_body = empty( $options[5] ) ? false : true ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
-	for( $i = 0 ; $i < count( $categories ) ; $i ++ ) {
-		$categories[ $i ] = intval( $categories[ $i ] ) ;
-	}
-
-	$order_options = '' ;
-	foreach( b_pico_list_allowed_order() as $order ) {
-		$order_options .= '<option value="'.htmlspecialchars($order).'" '.($order==$selected_order?'selected="selected"':'').'>'.htmlspecialchars($order).'</option>' ;
-	}
-
-	$form = "
-		<input type='hidden' name='options[0]' value='$mydirname' />
-		<label for='categories'>"._MB_PICO_CATLIMIT."</label>&nbsp;:
-		<input type='text' size='20' name='options[1]' id='categories' value='".implode(',',$categories)."' />"._MB_PICO_CATLIMITDSC."
-		<br />
-		<label for='this_template'>"._MB_PICO_SELECTORDER."</label>&nbsp;:
-		<select name='options[2]' id='select_order'>
-			$order_options
-		</select>
-		<br />
-		<label for='contents_num'>"._MB_PICO_CONTENTSNUM."</label>&nbsp;:
-		<input type='text' size='4' name='options[3]' id='contents_num' value='$contents_num' />
-		<br />
-		<label for='this_template'>"._MB_PICO_THISTEMPLATE."</label>&nbsp;:
-		<input type='text' size='60' name='options[4]' id='this_template' value='".htmlspecialchars($this_template,ENT_QUOTES)."' />
-		<br />
-	\n" ;
-
-	return $form;
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+	$tpl =& new XoopsTpl() ;
+	$tpl->assign( array(
+		'mydirname' => $mydirname ,
+		'categories' => $categories ,
+		'categories_imploded' => implode( ',' , $categories ) ,
+		'order_options' => b_pico_list_allowed_order() ,
+		'selected_order' => $selected_order ,
+		'contents_num' => $contents_num ,
+		'this_template' => $this_template ,
+		'display_body' => $display_body ,
+	) ) ;
+	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_list.html' ) ;
 }
 
 ?>

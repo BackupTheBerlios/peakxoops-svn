@@ -6,7 +6,12 @@
 				&nbsp;
 				(<{$content.cat_title}>)
 				&nbsp;
-				<{$content.created_time_formatted}></a>
+				<{$content.created_time_formatted}>
+			</a>
+			<{if $content.body}>
+				<br />
+				<{$content.body|strip_tags|truncate:"100"}>
+			<{/if}>
 		</li>
 	<{/foreach}>
 </ul>

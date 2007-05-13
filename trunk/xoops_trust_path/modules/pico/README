@@ -102,6 +102,14 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.32 beta (2007/05/14)
+- templatized block editing area
+- added an option to display body also into list block
+- modified content block can select a content from listdown box.
+- modified links in content block from relative to absolute on wraps mode
+- updated language files
+-- persian (thx voltan)
+
 1.31 alpha (2007/05/07)
 - changed the structure "altsys essential"
 - added language constants override system (with altsys>=0.5)
@@ -366,6 +374,14 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.32 beta (2007/05/14)
+- ブロック編集部分をテンプレート化した
+- 一覧ブロックに本文表示機能追加
+- 内容表示ブロックの選択方法変更
+- wrapsモードコンテンツをブロック表示する際に、相対->絶対パス変換をするよう変更
+- 言語ファイル更新
+-- persian (thx voltan)
 
 1.31 alpha (2007/05/07)
 - 正式にaltsys必須とした

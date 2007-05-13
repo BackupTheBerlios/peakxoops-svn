@@ -13,37 +13,37 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-07 17:48:20
-define($constpref.'_ADMENU_MYLANGADMIN','Languages');
+define($constpref.'_ADMENU_MYLANGADMIN','تنظیمات زبان');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-26 11:38:35
-define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
-define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions');
-define($constpref.'_ADMENU_MYPREFERENCES','Preferences');
+define($constpref.'_ADMENU_MYTPLSADMIN','تمپلیت ها');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','بلاک ها / دسترسی ها');
+define($constpref.'_ADMENU_MYPREFERENCES','ویژگی ها');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:08
-define($constpref.'_SEARCHBYUID','Enable concepts of poster');
-define($constpref.'_SEARCHBYUIDDSC','Contents will be listed in user profile of its poster. If you use this module as static contents, turn this off.');
+define($constpref.'_SEARCHBYUID','فعال کردن صفحات ساخته شده برای سازنده');
+define($constpref.'_SEARCHBYUIDDSC','قرار دادن لیست اسناد  در پروفایل سازنده ی سند. اگر از این  ماژول برای ساخت صفحات استاتیک استفاده میکنید این گزینه را خاموش کنید.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:22
-define($constpref.'_HISTORY_P_C','How many revisions are stored in DB');
-define($constpref.'_MLT_HISTORY','Minimum lifetime of each revisions (sec)');
-define($constpref.'_BRCACHE','Cache life time for image files (only with wraps mode)');
+define($constpref.'_HISTORY_P_C','چه تعداد اصلاح (سند) در پایگاه داده ها ذخیره شود');
+define($constpref.'_MLT_HISTORY','کمترین عمر هر اصلاح ( ثانیه)');
+define($constpref.'_BRCACHE','زمان نگاه داری فایل کش برای  فایل های تصویری (only with wraps mode)');
 define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 means disabled)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
-define($constpref.'_SUBMENU_SC','Show contents in submenu');
-define($constpref.'_SUBMENU_SCDSC','Only categories are displayed in default. If you turn this on, contents marked "menu" will be displayed also');
-define($constpref.'_SITEMAP_SC','Show contents in sitemap module');
+define($constpref.'_SUBMENU_SC','نمایش اسناد در یک زیر منو ');
+define($constpref.'_SUBMENU_SCDSC','به طور پیش فرض فقط شاخه ها نمایش داده میشوند. اگر این گزینه را فعال کنید سند های که گزینه ی"نمایش در منو" آن ها فعال است هم در  منو ی اصلی سایت نمایش داده میشوند');
+define($constpref.'_SITEMAP_SC','نمایش اسناد در ماژول نقشه ی سایت');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-07 04:39:59
 define($constpref.'_USE_REWRITE','enable mod_rewrite mode');
 define($constpref.'_USE_REWRITEDSC','Depends your environment. If you turn this on, rename .htaccess.rewrite_wraps(with wraps) or htaccess.rewrite_normal(without wraps) to .htaccess under XOOPS_ROOT_PATH/modules/(dirname)/');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-06 04:56:32
-define($constpref.'_FILTERSF','Forced filters');
-define($constpref.'_FILTERSFDSC','input filter names separated with ,(comma). filter:LAST means the filter is passed in the last phase. The other filters are passed in the first phase.');
-define($constpref.'_FILTERSP','Prohibited filters');
-define($constpref.'_FILTERSPDSC','input filter names separated with ,(comma).');
+define($constpref.'_FILTERSF','فیلتر های اجباری');
+define($constpref.'_FILTERSFDSC','فیلتر های ورودی را به وسیله ی , ( کاما) از هم جدا کنید. filter:LAST means the filter is passed in the last phase. The other filters are passed in the first phase.');
+define($constpref.'_FILTERSP','فیلتر های ممنوع');
+define($constpref.'_FILTERSPDSC','فیلتر های ورودی را به وسیله ی , ( کاما) از هم جدا کنید');
 
 define( $constpref.'_LOADED' , 1 ) ;
 
@@ -66,7 +66,7 @@ define($constpref.'_TOP_MESSAGEDEFAULT','');
 define($constpref.'_MENUINMODULETOP','نمایش منو در صفحه ی اصلی ماژول');
 define($constpref.'_LISTASINDEX',"نمایش فهرست اسناد در شاخه ی اصلی");
 define($constpref.'_LISTASINDEXDSC','با انتخواب بله لیست  اسناد به صورت خودکار در شاخه ی اصلی قرار میگیرد.   اگر نه را انتخواب کنید اسناد  بر اساس اولیت خود نمایش داده میشوند');
-define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
+define($constpref.'_SHOW_BREADCRUMBS','نمایش مسیر صفحه (breadcrumbs)');
 define($constpref.'_SHOW_PAGENAVI','نمایش صفحه ی راهبری');
 define($constpref.'_SHOW_PRINTICON','نمایش آیکن  چاپگر');
 define($constpref.'_SHOW_TELLAFRIEND','نمایش آیکن تماس با دوستان');

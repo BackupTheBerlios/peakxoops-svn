@@ -35,8 +35,8 @@ function b_pico_content_show( $options )
 
 	// convert links from relative to absolute (wraps mode only)
 	if( $configs['use_wraps_mode'] ) {
-		$wrap_base_url = XOOPS_URL.'/modules/'.$mydirname ;
-		if( empty( $configs['use_rewrite'] ) ) $wrap_base_url .= '/index.php' ;
+		$content_url = XOOPS_URL.'/modules/'.$mydirname.'/'.$content4assign['link'] ;
+		$wrap_base_url = substr( $content_url , 0 , strrpos( $content_url , '/' ) ) ;
 		$patterns = array( "/src\=\"(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/src\=\'(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/src\=(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=\"(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=\'(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" ) ;
 		$replacements = array( "src=\"$wrap_base_url/\\1" , "src='$wrap_base_url/\\1" , "src=$wrap_base_url/\\1" , "href=\"$wrap_base_url/\\1" , "href='$wrap_base_url/\\1" , "href=$wrap_base_url/\\1" ) ;
 		$content4assign['body'] = preg_replace( $patterns , $replacements , $content4assign['body'] ) ;

@@ -107,6 +107,7 @@ pico is fast enough if you use content's cache.
 - added an option to display body also into list block
 - modified content block can select a content from listdown box.
 - modified links in content block from relative to absolute on wraps mode
+- fixed links in content block above (thx makimaki) 1.32a
 - updated language files
 -- persian (thx voltan)
 
@@ -380,6 +381,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - 一覧ブロックに本文表示機能追加
 - 内容表示ブロックの選択方法変更
 - wrapsモードコンテンツをブロック表示する際に、相対->絶対パス変換をするよう変更
+- 同上パス修正 (thx makimaki) 1.32a
 - 言語ファイル更新
 -- persian (thx voltan)
 

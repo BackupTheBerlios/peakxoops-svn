@@ -213,9 +213,9 @@ function pico_common_get_content4assign( $mydirname , $content_id , $mod_config 
 
 	// poster & modifier uname
 	$poster =& $user_handler->get( $content_row['poster_uid'] ) ;
-	$poster_uname = is_object( $poster ) ? $poster->getVar('uname') : _MD_PICO_REGISTERED_AUTOMATICALLY ;
+	$poster_uname = is_object( $poster ) ? $poster->getVar('uname') : @_MD_PICO_REGISTERED_AUTOMATICALLY ;
 	$modifier =& $user_handler->get( $content_row['modifier_uid'] ) ;
-	$modifier_uname = is_object( $modifier ) ? $modifier->getVar('uname') : _MD_PICO_REGISTERED_AUTOMATICALLY ;
+	$modifier_uname = is_object( $modifier ) ? $modifier->getVar('uname') : @_MD_PICO_REGISTERED_AUTOMATICALLY ;
 
 	$content4assign = array(
 		'id' => intval( $content_row['content_id'] ) ,

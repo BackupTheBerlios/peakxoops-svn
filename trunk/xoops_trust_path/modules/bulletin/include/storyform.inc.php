@@ -26,10 +26,31 @@ $topicalign_select = new XoopsFormSelect(_MD_TOPIC_IMAGE, 'topicimg', $story->ge
 $topicalign_select->addOptionArray(array('1' => _MD_TOPIC_RIGHT, '2' => _MD_TOPIC_LEFT, '0' => _MD_TOPIC_DISABLE));
 $form->addElement($topicalign_select);
 
+// bodytext
 $bodytext_tray = new XoopsFormElementTray(_MD_THESCOOP, '');
-$bodytext_tray->addElement(new XoopsFormDhtmlTextArea('', 'text', $story->getVar('text', 'f'), $bulletin_post_tray_row, $bulletin_post_tray_col), true);
+if( empty( $xoopsModuleConfig['use_fckeditor'] ) || ! $gperm->group_perm(4) ) {
+	// XoopsForm Dhtml
+	$bodytext_tray->addElement(new XoopsFormDhtmlTextArea('', 'text', $story->getVar('text', 'f'), $bulletin_post_tray_row, $bulletin_post_tray_col), true);
+} else {
+	// fckeditor
+	$wysiwyg_header = '
+		<script type="text/javascript" src="'.XOOPS_URL.'/common/fckeditor/fckeditor.js"></script>
+		<script type="text/javascript"><!--
+			function fckeditor_exec() {
+				var oFCKeditor = new FCKeditor( "bodytext" , "100%" , "500" , "Default" );
+				
+				oFCKeditor.BasePath = "'.XOOPS_URL.'/common/fckeditor/";
+				
+				oFCKeditor.ReplaceTextarea();
+			}
+		// --></script>
+	' ;
+	$xoopsTpl->assign( 'xoops_module_header' , $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . $wysiwyg_header ) ;
+	$bodytext_tray->addElement(new XoopsFormLabel('', '<textarea id="bodytext" name="text">'.$story->getVar('text', 'f').'</textarea><script>fckeditor_exec();</script>' ));
+}
 $bodytext_tray->addElement(new XoopsFormLabel('', '<div>'._MULTIPAGE.'</div>'));
 $form->addElement($bodytext_tray);
+
 
 // if user has right to set date.
 if( $gperm->group_perm(3) ){

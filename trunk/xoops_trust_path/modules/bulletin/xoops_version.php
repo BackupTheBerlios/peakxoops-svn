@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = $mydirname;
-$modversion['version']     = 2.04; // GIJ hacked ver 009
+$modversion['version']     = 2.04; // GIJ hacked ver 011
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -235,6 +235,13 @@ $modversion['config'][$i]['description'] = $constpref.'_CONFIG18_D';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
+$i++;
+$modversion['config'][$i]['name']        = 'use_fckeditor';
+$modversion['config'][$i]['title']       = $constpref.'_CONFIG19';
+$modversion['config'][$i]['description'] = $constpref.'_CONFIG19_D';
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 0;
 
 // Notification
 $modversion['hasNotification'] = 1;

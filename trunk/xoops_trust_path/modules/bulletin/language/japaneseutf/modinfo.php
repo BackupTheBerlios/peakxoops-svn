@@ -7,6 +7,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 // a flag for this language file has already been read or not.
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-15 04:44:33
+define($constpref.'_CONFIG19','common/fckeditorを利用する');
+define($constpref.'_CONFIG19_D','HTMLが許可されている編集者にはFCKeditor on XOOPSを利用できるようにします。');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

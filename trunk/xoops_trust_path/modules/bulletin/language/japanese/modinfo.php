@@ -82,6 +82,8 @@ define($constpref.'_CONFIG17','カテゴリの最新記事の記事数');
 define($constpref.'_CONFIG17_D', '各記事の下に表示する同一カテゴリの最新記事一覧の記事数を指定します。');
 define($constpref.'_CONFIG18','カテゴリのパンくずリストを表示する');
 define($constpref.'_CONFIG18_D', '');
+define($constpref.'_CONFIG19','common/fckeditorを利用する');
+define($constpref.'_CONFIG19_D', 'HTMLが許可されている編集者にはFCKeditor on XOOPSを利用できるようにします。');
 
 // Text for notifications
 define($constpref.'_GLOBAL_NOTIFY', 'モジュール全体');

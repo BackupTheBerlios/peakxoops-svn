@@ -81,7 +81,9 @@ define($constpref."_CONFIG16_D","Displays a list of articles in the same categor
 define($constpref."_CONFIG17","Number of recent storeis in the same category.");
 define($constpref."_CONFIG17_D","");
 define($constpref."_CONFIG18","Display category bread crumb?");
-define($constpref."_CONFIG18_D","A category tree is displayed in each articles.");
+define($constpref."_CONFIG18_D","A category tree is displayed in each articles.");define($constpref.'_CONFIG19','use common/fckeditor');
+define($constpref.'_CONFIG19_D', 'Posters can use FCKeditor on XOOPS if he/she is allowed to use HTML');
+
 
 // Text for notifications
 define($constpref."_GLOBAL_NOTIFY","Global");

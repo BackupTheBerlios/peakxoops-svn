@@ -212,9 +212,15 @@ function d3forum_sync_topic( $mydirname , $topic_id , $sync_also_forum = true , 
 	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT topic in sync topic" ) ;
 	list( $forum_id ) = $db->fetchRow( $result ) ;
 
-	$sql = "SELECT MAX(post_id),MIN(post_id),COUNT(post_id) FROM ".$db->prefix($mydirname."_posts")." WHERE topic_id=$topic_id" ;
-	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT posts in sync topic" ) ;
-	list( $last_post_id , $first_post_id , $total_posts ) = $db->fetchRow( $result ) ;
+	// get first_post_id
+	$sql = "SELECT post_id FROM ".$db->prefix($mydirname."_posts")." WHERE topic_id=$topic_id AND pid=0" ;
+	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT first_post in sync topic" ) ;
+	list( $first_post_id ) = $db->fetchRow( $result ) ;
+
+	// get last_post_id and total_posts
+	$sql = "SELECT MAX(post_id),COUNT(post_id) FROM ".$db->prefix($mydirname."_posts")." WHERE topic_id=$topic_id" ;
+	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT last_post in sync topic" ) ;
+	list( $last_post_id , $total_posts ) = $db->fetchRow( $result ) ;
 
 	if( empty( $total_posts ) ) {
 		// this is empty topic should be removed

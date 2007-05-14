@@ -19,9 +19,13 @@ define($constpref."_BDESC_LIST_TOPICS","汎用ブロック。「編集」で様々な機能を持た
 define($constpref."_BNAME_LIST_POSTS","投稿一覧");
 define($constpref."_BNAME_LIST_FORUMS","フォーラム一覧");
 
+// admin menu
 define($constpref.'_ADMENU_CATEGORYACCESS','カテゴリー権限設定');
 define($constpref.'_ADMENU_FORUMACCESS','フォーラム権限設定');
 define($constpref.'_ADMENU_ADVANCEDADMIN','アドバンス管理');
+define($constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
+define($constpref.'_ADMENU_MYBLOCKSADMIN' , 'ブロック管理/アクセス権限' ) ;
+define($constpref.'_ADMENU_MYPREFERENCES' , '一般設定' ) ;
 
 // configurations
 define($constpref.'_TOP_MESSAGE','フォーラムトップのメッセージ');

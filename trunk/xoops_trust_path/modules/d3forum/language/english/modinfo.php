@@ -19,9 +19,13 @@ define($constpref."_BDESC_LIST_TOPICS","This block can be used for multi-purpose
 define($constpref."_BNAME_LIST_POSTS","Posts");
 define($constpref."_BNAME_LIST_FORUMS","Forums");
 
+// admin menu
 define($constpref.'_ADMENU_CATEGORYACCESS','Permissions of Categories');
 define($constpref.'_ADMENU_FORUMACCESS','Permissions of Forums');
 define($constpref.'_ADMENU_ADVANCEDADMIN','Advanced');
+define( $constpref.'_ADMENU_MYTPLSADMIN' , 'Templates' ) ;
+define( $constpref.'_ADMENU_MYBLOCKSADMIN' , 'Blocks/Permissions' ) ;
+define( $constpref.'_ADMENU_MYPREFERENCES' , 'Preferences' ) ;
 
 // configurations
 define($constpref.'_TOP_MESSAGE','Message in forum top');

@@ -5,6 +5,11 @@ $constpref = '_MB_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-04-05 12:11:23
+define($constpref.'_ALT_UNSOLVED','Unsolved topic');
+define($constpref.'_ALT_MARKED','Marked topic');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // definitions for displaying blocks 

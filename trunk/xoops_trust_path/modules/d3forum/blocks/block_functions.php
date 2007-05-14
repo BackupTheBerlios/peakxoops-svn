@@ -76,11 +76,15 @@ function b_d3forum_list_forums_show( $options )
 	}
 	$block['categories'] = $cat4assign ;
 
-	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-	$tpl =& new XoopsTpl() ;
-	$tpl->assign( 'block' , $block ) ;
-	$ret['content'] = $tpl->fetch( $this_template ) ;
-	return $ret ;
+	if( empty( $options['disable_renderer'] ) ) {
+		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+		$tpl =& new XoopsTpl() ;
+		$tpl->assign( 'block' , $block ) ;
+		$ret['content'] = $tpl->fetch( $this_template ) ;
+		return $ret ;
+	} else {
+		return $block ;
+	}
 }
 
 
@@ -216,6 +220,8 @@ function b_d3forum_list_topics_show( $options )
 		'lang_linktolistcategories' => constant($constpref.'_LINKTOLISTCATEGORIES') ,
 		'lang_linktolistforums' => constant($constpref.'_LINKTOLISTFORUMS') ,
 		'lang_linktolisttopics' => constant($constpref.'_LINKTOLISTTOPICS') ,
+		'lang_alt_unsolved' => constant($constpref.'_ALT_UNSOLVED') ,
+		'lang_alt_marked' => constant($constpref.'_ALT_MARKED') ,
 	) ;
 	while( $topic_row = $db->fetchArray( $result ) ) {
 		$topic4assign = array(
@@ -238,11 +244,15 @@ function b_d3forum_list_topics_show( $options )
 		$block['topics'][] = $topic4assign ;
 	}
 
-	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-	$tpl =& new XoopsTpl() ;
-	$tpl->assign( 'block' , $block ) ;
-	$ret['content'] = $tpl->fetch( $this_template ) ;
-	return $ret ;
+	if( empty( $options['disable_renderer'] ) ) {
+		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+		$tpl =& new XoopsTpl() ;
+		$tpl->assign( 'block' , $block ) ;
+		$ret['content'] = $tpl->fetch( $this_template ) ;
+		return $ret ;
+	} else {
+		return $block ;
+	}
 }
 
 
@@ -420,11 +430,15 @@ function b_d3forum_list_posts_show( $options )
 		$block['posts'][] = $post4assign ;
 	}
 
-	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-	$tpl =& new XoopsTpl() ;
-	$tpl->assign( 'block' , $block ) ;
-	$ret['content'] = $tpl->fetch( $this_template ) ;
-	return $ret ;
+	if( empty( $options['disable_renderer'] ) ) {
+		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+		$tpl =& new XoopsTpl() ;
+		$tpl->assign( 'block' , $block ) ;
+		$ret['content'] = $tpl->fetch( $this_template ) ;
+		return $ret ;
+	} else {
+		return $block ;
+	}
 }
 
 

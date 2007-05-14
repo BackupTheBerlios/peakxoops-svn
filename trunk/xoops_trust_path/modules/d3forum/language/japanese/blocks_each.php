@@ -20,6 +20,8 @@ define($constpref."_LINKTOSEARCH","フォーラム内検索へ");
 define($constpref."_LINKTOLISTCATEGORIES","カテゴリー一覧へ");
 define($constpref."_LINKTOLISTFORUMS","フォーラム一覧へ");
 define($constpref."_LINKTOLISTTOPICS","トピック一覧へ");
+define($constpref."_ALT_UNSOLVED","未解決トピック");
+define($constpref."_ALT_MARKED","注目トピック");
 
 }
 

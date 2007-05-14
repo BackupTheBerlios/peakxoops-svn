@@ -20,6 +20,8 @@ define($constpref."_LINKTOSEARCH","Search in the forum");
 define($constpref."_LINKTOLISTCATEGORIES","Category Index");
 define($constpref."_LINKTOLISTFORUMS","Forum Index");
 define($constpref."_LINKTOLISTTOPICS","Topic Index");
+define($constpref."_ALT_UNSOLVED","Unsolved topic");
+define($constpref."_ALT_MARKED","Marked topic");
 
 }
 

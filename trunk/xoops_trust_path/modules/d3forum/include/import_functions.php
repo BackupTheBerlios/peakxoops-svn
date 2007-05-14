@@ -457,7 +457,7 @@ function d3forum_export_forum_to_d3forum( $mydirname , $export_mid , $export_cat
 	// topics etc.
 	$table_name = 'topics' ;
 	$from_table = $db->prefix( $mydirname.'_'.$table_name ) ;
-	$trs = $db->query( "SELECT topic_id FROM `$from_table` WHERE forum_id=$forum_id" ) ;
+	$trs = $db->query( "SELECT topic_id FROM `$from_table` WHERE forum_id=$forum_id ORDER BY topic_id" ) ;
 	while( list( $topic_id ) = $db->fetchRow( $trs ) ) {
 		d3forum_export_topic_to_d3forum( $mydirname , $export_mid , $export_forum_id , $forum_id , $topic_id , $is_move ) ;
 	}
@@ -499,13 +499,19 @@ function d3forum_export_topic_to_d3forum( $mydirname , $export_mid , $export_for
 	$to_table = $db->prefix( $export_mydirname.'_'.$table_name ) ;
 	$columns = array_diff( $GLOBALS['d3forum_tables'][$table_name] , array( 'post_id' , 'topic_id' ) ) ;
 	$columns4sql = implode( ',' , $columns ) ;
-	$prs = $db->query( "SELECT post_id FROM `$from_table` WHERE topic_id=$topic_id" ) ;
+	$prs = $db->query( "SELECT post_id FROM `$from_table` WHERE topic_id=$topic_id ORDER BY post_id" ) ;
 	$post_conversions = array() ;
 	while( list( $post_id ) = $db->fetchRow( $prs ) ) {
 		$sql = "INSERT INTO `$to_table` ($columns4sql,`topic_id`) SELECT $columns4sql,$export_topic_id FROM `$from_table` WHERE post_id=$post_id" ;
 		$ers = $db->query( $sql ) ;
 		$post_conversions[ $post_id ] = $db->getInsertId() ;
 		if( $is_move ) $db->query( "DELETE FROM `$from_table` WHERE post_id=$post_id" ) ;
+	}
+
+	// update pid of posts table
+	foreach( $post_conversions as $post_id => $export_post_id ) {
+		$sql = "UPDATE `$to_table` SET pid=$export_post_id WHERE pid=$post_id AND topic_id=$export_topic_id" ;
+		$ers = $db->query( $sql ) ;
 	}
 
 	// post_votes table

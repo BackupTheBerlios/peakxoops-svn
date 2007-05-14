@@ -1,4 +1,82 @@
-How to use "comment-integration"
+[mlimg]
+[xlang:en]
+============ D3FORUM ==============
+
+The REAL Innovative and Basic forum module for XOOPS.
+I -GIJOE- release this module with convidence though this module might be still buggy.
+
+Enjoy D3 World!
+
+
+[b]INSTALL[/b]
+
+(If necessary)
+- set up XOOPS_TRUST_PATH
+
+- Copy all files into your XOOPS.
+- Install it as usual D3 module. Of course, you can name the directory under modules/ freely.
+
+
+[b]AUTHOR[/b]
+
+GIJOE -basic designing and PHP coding-
+jidaikobo -template coding-
+
+
+[b]CHANGES[/b]
+
+0.60
+- 1st release as beta
+- fixed export topic/forum into the other d3forum
+- fixed sync topic
+- updated D3 system
+- added language files
+-- japaneseutf
+
+0.49
+- updated D3 system
+
+0.48
+- fixed xoops_breadcrumbs
+- fixed a config of posts_per_topic
+- fixed child link in listposts
+
+0.47
+- added hierarchical submenu
+
+0.46
+- added topic move/copy into the other d3forum in topicmanager
+- added forum move/copy into the other d3forum in forummanager
+
+0.45
+- fixed a bug in sync (thx nao-pon)
+- added xoops_breadcrumbs
+- added language files
+-- french (thx gigamaster)
+
+0.44
+- fixed minor bugs (thx Konstantine)
+- modified some templates
+- added language files
+-- persian (thx voltan)
+-- russian (thx Konstantine)
+
+0.43
+- merged the latest templates from jidaikobo
+
+0.42
+- implement native comment-integration
+
+0.41
+- merged jidaikobo's templates and images
+- language fixes
+
+0.40
+- update the module!
+- some fixes, new smarty plugin counting comments
+
+
+[b]How to use "comment-integration"[/b]
 
 == for conventional modules ==
 
@@ -6,6 +84,91 @@ How to use "comment-integration"
 2. make a new forum for integration under appropriate category.
 3. import from xoopscomments of a module into the forum.
 4. edit template like this.
+[/xlang:en]
+[xlang:ja]
+============ D3FORUM ==============
+
+XOOPS2用に0から設計し直したフォーラムモジュール。
+私-GIJOE-が、自信を持ってリリースしています。
+まだいくつかバグはあるでしょうが、D3モジュール群の中核を成す存在であり、D3モジュールを利用する以上はインストールが推奨されます。
+
+
+●インストール手順
+
+(もしまだなら)
+- XOOPS_TRUST_PATH をセットアップする
+
+- 利用中のXOOPSにアーカイブを展開してコピーする。この際、Smartyプラグインのコピーを忘れないこと
+- 通常のD3モジュールとしてインストールします。もちろん、ディレクトリ名は自由に決めることが出来ます
+
+
+●変更履歴
+
+0.60
+- β版としての最初のリリース
+- トピック/フォーラムのエクスポート機能で、親子関係が壊れていたのを修正
+- トピック同期のバグを修正
+- D3システムの更新（管理者メニューなど）
+- 言語ファイル追加
+-- japaneseutf
+
+0.49
+- D3システムの更新
+
+0.48
+- xoops_breadcrumbsがバグっていたのを修正
+- トピック内投稿数の設定が効いていなかったのを修正
+- 子投稿のリンクがおかしかったのを修正
+
+0.47
+- 階層サブメニューに対応
+
+0.46
+- 他のd3forumへ、トピック単位の移動/コピーを実装
+- 他のd3forumへ、フォーラム単位の移動/コピーを実装
+
+0.45
+- 同期処理のバグを修正 (thx nao-pon)
+- xoops_breadcrumbs を実装
+- 言語ファイル追加
+-- french (thx gigamaster)
+
+0.44
+- いくつかの細かなバグの修正 (thx Konstantine)
+- テンプレートの微修正
+- 言語ファイル追加
+-- persian (thx voltan)
+-- russian (thx Konstantine)
+
+0.43
+- jidaikobo作の最新のテンプレートをマージした
+
+0.42
+- ネイティブなコメント統合機能の実装 (作成法はpicoを参照のこと）
+
+0.41
+- jidaikobo作の最新のテンプレートをマージした
+- 言語ファイルの修正
+
+0.40 ※要モジュールアップデート
+- 細かなバグフィックス
+- コメント数を表示するプラグイン作成
+
+
+●d3forumコメント統合の利用法
+
+・d3forumコメント統合対応モジュールに対して
+
+d3forumコメント統合を謳っているモジュールであれば、d3forum側で何の設定も必要ありません。必要に応じて、フォーラムを新規に作って、そのフォーラム番号をモジュール側に指定するだけです。
+
+・通常モジュールへのd3forumコメント統合
+
+1. アーカイブ内の function.d3forum_comment が、XOOPS_ROOT_PATH/class/smarty/plugins/ に存在することを確認
+2. コメント統合用に新規にフォーラムを作成する
+3. （必要に応じて）管理画面からxoopscommentsをそのフォーラムにインポートする
+4. 対象モジュールのテンプレートを以下の様に編集する
+[/xlang:ja]
+
 
 original:
 [code]
@@ -31,7 +194,6 @@ modified:
 [code]
 <{d3forum_comment dirname=d3forum forum_id=[i](number)[/i] itemname="id" subject=$title}>
 [/code]
-
 
 
 [b]mydownloads[/b]
@@ -91,11 +253,3 @@ tinycontent*_index.html
 [/code]
 
 
-
-
-
-MEMO
-
-russian from Konstantine
-persian from voltan
-french from gigamaster

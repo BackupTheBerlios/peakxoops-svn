@@ -102,6 +102,10 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.33 beta (2007/05/15)
+- fixed a typo in vote
+- fixed a typo in tellafriend
+
 1.32 beta (2007/05/14)
 - templatized block editing area
 - added an option to display body also into list block
@@ -375,6 +379,10 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.33 beta (2007/05/15)
+- 投票関連のtypoを修正
+- tellafriendリンクのtypoを修正
 
 1.32 beta (2007/05/14)
 - ブロック編集部分をテンプレート化した

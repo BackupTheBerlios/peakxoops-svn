@@ -16,13 +16,13 @@ require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 
 // check if "use_vote" is on
 if( empty( $xoopsModuleConfig['use_vote'] ) ) {
-	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_MSG_VOTEDISABLED ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign ) , 0 , _MD_PICO_MSG_VOTEDISABLED ) ;
 	exit ;
 }
 
 // special check for vote_to_post
 if( ! $uid && empty( $xoopsModuleConfig['guest_vote_interval'] ) ) {
-	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_ERR_VOTEPERM ) ;
+	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign ) , 0 , _MD_PICO_ERR_VOTEPERM ) ;
 	exit ;
 }
 
@@ -51,19 +51,19 @@ if( $count > 0 ) {
 		$sql = "DELETE FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id AND uid=$uid" ;
 		if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	} else {
-		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_MSG_VOTEDOUBLE ) ;
+		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign ) , 0 , _MD_PICO_MSG_VOTEDOUBLE ) ;
 		exit ;
 	}
 }
 
 // transaction stage
-$sql = "INSERT INTO ".$db->prefix($mydirname."_content_votes")." (content_id,vote_point,vote_time,vote_ip,uid) VALUES ($content_id,$point4vote,UNIX_TIMESTAMP(),'".mysql_real_escape_string($vote_ip)."',uid=$uid)" ;
+$sql = "INSERT INTO ".$db->prefix($mydirname."_content_votes")." (content_id,vote_point,vote_time,vote_ip,uid) VALUES ($content_id,$point4vote,UNIX_TIMESTAMP(),'".mysql_real_escape_string($vote_ip)."',$uid)" ;
 if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 pico_sync_content_votes( $mydirname , $content_id ) ;
 
-redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) , 0 , _MD_PICO_MSG_VOTEACCEPTED ) ;
+redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign ) , 0 , _MD_PICO_MSG_VOTEACCEPTED ) ;
 exit ;
 
 ?>

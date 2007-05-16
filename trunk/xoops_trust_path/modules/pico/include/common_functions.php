@@ -228,6 +228,7 @@ function pico_common_get_content4assign( $mydirname , $content_id , $mod_config 
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 		'subject_raw' => $content_row['subject'] ,
 		'body' => pico_common_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) ,
+		'body_raw' => $content_row['body'] ,
 		'can_edit' => @$category_row['can_edit'] ,
 		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
 	) ;

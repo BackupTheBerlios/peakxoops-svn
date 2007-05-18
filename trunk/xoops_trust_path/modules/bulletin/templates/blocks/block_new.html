@@ -10,11 +10,11 @@
 <ul>
   <{foreach item=story from=$block.stories}>
   <li><a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$story.title}></a>
-  <{if $block.type == "published"}>
+  <{* <{if $block.type == "published"}> *}>
     (<{$story.date}>)
-  <{else}>
+  <{* <{else}>
     (<{$story.hits}>)
-  <{/if}>
+  <{/if}> *}>
   </li>
   <{/foreach}>
 </ul>

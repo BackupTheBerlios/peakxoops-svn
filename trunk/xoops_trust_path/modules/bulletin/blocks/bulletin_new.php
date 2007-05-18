@@ -1,8 +1,26 @@
 <?php
 
+function b_bulletin_new_allowed_order()
+{
+	return array(
+		_MB_BULLETIN_DATE . ' DESC' => 'publised DESC' ,
+		_MB_BULLETIN_HITS . ' DESC' => 'counter DESC' ,
+		_MB_BULLETIN_DATE . ' ASC' => 'published ASC' ,
+		_MB_BULLETIN_HITS . ' ASC' => 'counter ASC' ,
+		'title' => 'title' ,
+		'created DESC' => 'created DESC' ,
+		'created ASC' => 'created ASC' ,
+		'expired DESC' => 'expired DESC' ,
+		'expired ASC' => 'expired ASC' ,
+		'comments DESC' => 'comments DESC' ,
+	) ;
+}
+
 function b_bulletin_new_show($options) {
 
 	$mydirname = $options[0] ;
+	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+	$selected_order = empty( $options[1] ) || ! in_array( $options[1] , b_bulletin_new_allowed_order() ) ? 'published DESC' : $options[1] ;
 
 	require dirname( dirname( __FILE__ ) ).'/include/configs.inc.php';
 
@@ -14,7 +32,7 @@ function b_bulletin_new_show($options) {
 	// 
 	if($options[4] > 0){
 
-		$sql  = sprintf('SELECT s.storyid, s.topicid, s.title, s.hometext, s.bodytext, s.published, s.expired, s.counter, s.comments, s.uid, s.topicimg, s.html, s.smiley, s.br, s.xcode, t.topic_title, t. topic_imgurl FROM %s s, %s t WHERE s.type > 0 AND s.published < %u AND s.published > 0 AND (s.expired = 0 OR s.expired > %3$u) AND s.topicid = t.topic_id AND s.block = 1 ORDER BY %s DESC', $table_stories, $table_topics, time(), $options[1]);
+		$sql  = sprintf('SELECT s.storyid, s.topicid, s.title, s.hometext, s.bodytext, s.published, s.expired, s.counter, s.comments, s.uid, s.topicimg, s.html, s.smiley, s.br, s.xcode, t.topic_title, t. topic_imgurl FROM %s s, %s t WHERE s.type > 0 AND s.published < %u AND s.published > 0 AND (s.expired = 0 OR s.expired > %3$u) AND s.topicid = t.topic_id AND s.block = 1 ORDER BY %s', $table_stories, $table_topics, time(), $selected_order);
 
 		$result = $xoopsDB->query($sql,$options[4],0);
 
@@ -22,6 +40,8 @@ function b_bulletin_new_show($options) {
 		while ( $myrow = $xoopsDB->fetchArray($result) ) {
 			$fullstory['id']       = $myrow['storyid'];
 			$fullstory['posttime'] = formatTimestamp($myrow['published'], $bulletin_date_format);
+			$fullstory['date']     = formatTimestamp($myrow['published'], $bulletin_date_format);
+			$fullstory['published'] = intval($myrow['published']);
 			$fullstory['topicid']  = $myrow['topicid'];
 			$fullstory['topic']    = $myts->makeTboxData4Show($myrow['topic_title']);
 			$fullstory['title']    = $myts->makeTboxData4Show($myrow['title']);
@@ -69,7 +89,7 @@ function b_bulletin_new_show($options) {
 
 	if( $options[2] - $options[4] > 0 ){
 
-		$sql  = sprintf('SELECT storyid, title, published, expired, counter, uid FROM %s WHERE type > 0 AND published < %u AND published > 0 AND (expired = 0 OR expired > %2$u) AND block = 1 ORDER BY %s DESC', $table_stories, time(), $options[1]);
+		$sql  = sprintf('SELECT storyid, title, published, expired, counter, uid FROM %s WHERE type > 0 AND published < %u AND published > 0 AND (expired = 0 OR expired > %2$u) AND block = 1 ORDER BY %s', $table_stories, time(), $selected_order);
 
 		$result = $xoopsDB->query($sql,$options[2]-$options[4],$options[4]);
 
@@ -80,6 +100,7 @@ function b_bulletin_new_show($options) {
 			$story['title']    = $myts->makeTboxData4Show(xoops_substr($myrow['title'], 0 ,$options[3] + 3, '...'));
 			$story['id']       = $myrow['storyid'];
 			$story['date']     = formatTimestamp($myrow['published'], $bulletin_date_format);
+			$story['published'] = intval($myrow['published']);
 			$story['hits']     = $myrow['counter'];
 			$story['uid']      = $myrow['uid'];
 			$story['uname']    = XoopsUser::getUnameFromId($myrow['uid']);
@@ -94,34 +115,30 @@ function b_bulletin_new_show($options) {
 	$block['lang_on']       = _ON;
 	$block['lang_reads']    = _READS;
 	$block['lang_readmore'] = _MB_BULLETIN_READMORE;
-	$block['type']  = $options[1];
+	$block['type']  = $selected_order;
 	$block['mydirurl'] = XOOPS_URL.'/modules/'.$mydirname;;
 	$block['mydirname'] = $mydirname;
 
 	return $block;
 }
 
+
+
 function b_bulletin_new_edit($options) {
 	
-	$form  = "<input type='hidden' name='options[]' value='".$options[0]."' />";
-	$form .= ""._MB_BULLETIN_ORDER."&nbsp;<select name='options[]'>";
-	$form .= "<option value='published'";
-	if ( $options[1] == "published" ) {
-		$form .= " selected='selected'";
-	}
-	$form .= ">"._MB_BULLETIN_DATE."</option>\n";
-	$form .= "<option value='counter'";
-	if($options[1] == "counter"){
-		$form .= " selected='selected'";
-	}
-	$form .= ">"._MB_BULLETIN_HITS."</option>\n";
-	$form .= "</select>";
-	
-	$form .= "<br />"._MB_BULLETIN_DISP."&nbsp;<input type='text' name='options[]' value='".$options[2]."' />&nbsp;"._MB_BULLETIN_ARTCLS."";
-	$form .= "<br />"._MB_BULLETIN_CHARS."&nbsp;<input type='text' name='options[]' value='".$options[3]."' />&nbsp;"._MB_BULLETIN_LENGTH."";
-	$form .= "<br />"._MB_BULLETIN_DISP_HOMETEXT."&nbsp;<input type='text' name='options[]' value='".$options[4]."' />&nbsp;"._MB_BULLETIN_ARTCLS."";
+	$mydirname = $options[0] ;
+	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+	$selected_order = empty( $options[1] ) || ! in_array( $options[1] , b_bulletin_new_allowed_order() ) ? 'published DESC' : $options[1] ;
 
-	return $form;
+	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+	$tpl =& new XoopsTpl() ;
+	$tpl->assign( array(
+		'mydirname' => $mydirname ,
+		'options' => $options ,
+		'order_options' => array_flip( b_bulletin_new_allowed_order() ) ,
+		'selected_order' => $selected_order ,
+	) ) ;
+	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_new.html' ) ;
 }
 
 ?>

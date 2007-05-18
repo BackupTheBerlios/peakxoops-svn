@@ -1,5 +1,6 @@
 <!-- start module contents -->
 <div class="d3f_breadcrumbs">
+	<{if $mod_config.show_breadcrumbs}>
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
@@ -7,6 +8,7 @@
 		&nbsp;&gt;&nbsp;
 	<{/foreach}>
 	<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
+	<{/if}>
 	<{strip}>
 	(<{if $prev_topic.id}>
 		<a href="<{$mod_url}>/index.php?topic_id=<{$prev_topic.id}>" title="<{$prev_topic.title}>"><{$smarty.const._MD_D3FORUM_LINK_PREVTOPIC}></a>
@@ -26,26 +28,17 @@
 
 <{include file="db:`$mydirname`_inc_d3comment_summary.html"}>
 
-<div class="d3f_topctrl_icons">
-	<!-- post orders -->
-	<{if $postorder != 0}>
-		<a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=0" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_viewastree.gif);" title="<{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}>"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTREEASC}></a>
-	<{/if}>
-	<{if $postorder != 2}>
-		<a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=2" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_newerislower.gif);" title="<{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}>"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEASC}></a>
-	<{/if}>
-	<{if $postorder != 3}>
-		<a href="<{$mod_url}>/index.php?page=update_postorder&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>&amp;postorder=3" class="topic_icon_ctrl" style="background-image:url(<{$mod_imageurl}>/topicctrl_newerisupper.gif);" title="<{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}>"><{$smarty.const._MD_D3FORUM_LINK_POSTORDERTIMEDESC}></a>
-	<{/if}>
-</div>
+<{include file="db:`$mydirname`_inc_postorder_links.html"}>
 
+<!-- top of posts -->
 <div class="d3f_wrap">
 <{foreach item=post from=$posts}>
 	<{include file="db:`$mydirname`_inc_eachpost.html" post=$post caller="listposts" inner_link_format="#post_id%s"}>
 <{/foreach}>
 </div>
-
 <!-- bottom of posts -->
+
+<{include file="db:`$mydirname`_inc_postorder_links.html"}>
 
 <!-- forum jump -->
 <form name="forum_jump_box" action="<{$mod_url}>/index.php" method="get" style="clear:both;">

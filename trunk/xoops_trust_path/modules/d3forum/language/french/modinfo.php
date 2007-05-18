@@ -6,6 +6,15 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-18 17:34:37
+define($constpref.'_ADMENU_MYLANGADMIN','Languages');
+define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
+define($constpref.'_ANTISPAM_GROUPS','Groups should be checked anti-SPAM');
+define($constpref.'_ANTISPAM_GROUPSDSC','Usually set all blank.');
+define($constpref.'_ANTISPAM_CLASS','Class name of anti-SPAM');
+define($constpref.'_ANTISPAM_CLASSDSC','Default value is "default". If you disable anti-SPAM against guests even, set it blank');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-26 11:39:17
 define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
 define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions');

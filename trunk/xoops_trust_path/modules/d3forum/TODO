@@ -1,34 +1,47 @@
-コメント統合のコールバック処理
-コメント統合の本文表示処理（最新10件にする？）
-コメント統合のリダイレクト処理（できるだけ元のページに戻す）
-投稿削除後の投稿数減算処理
+●完了
+×D3LangMan対応
+×本文や題名のない投稿への対応
+×コメント統合のリダイレクト処理（できるだけ元のページに戻す）
+×コメント統合のexternal_link_id validation
+×external_link_id の varchar(255)化 (onupdate)
+×index.cssのテンプレート化
+×[quote]と[/quote]の数が合わない場合の対処
+×コメント統合のコールバック処理
+×waitingプラグイン
+×コメント統合の本文表示処理
+×ゲスト削除 (guest_md5_pass check)
+×AntiSPAMシステム（とりあえずJS使ったdefaultだけ）
+------------ここまで0.70---------------
 
-
-ゲスト関連一通り対応
+●現在のTODO（優先度順不同）
+post_text_waiting, subject_waiting の実装
 クイック投稿フォーム（クイックからならtrunkを太らせる）
-画像認証ロボット避け
-なぞなぞ認証
 系統表示ビュー（あるpostの直系の親だけを一覧できるビュー）
-
-Smartyプラグインが各モジュールの $xoopsModuleConfig をルックアップする
-
 d3forum_make_treeinformations( $data )
 f1s を保存するようにして、取得時にORDERかけるだけで、あとからusort()かける必要をなくす (ul_in, ul_out, prev_id, next_id)
+RSS
+モジュールをまたぐエクスポートだと、コメントコールバックがかからない不具合の修正
+newbb2のインポートスクリプトのインポート
+ユーザ＆グループから、権限を表示・変更できるコントローラ
 
 
-ゲスト編集 (guest_md5_pass check)
-ゲスト削除 (guest_md5_pass check)
-ゲスト投稿のcapchaみたいなの
-waitingプラグイン
+●チェックすべき項目
+
 cut&paste で消えたtopicの残滓処理のチェック
 solved, marked の再チェック
-post.php のリファイン
 invisible なpostのsubjectが表示されないか（*_waitingに移行すべきか？）
-全トピック一覧で、サブカテゴリー内のトピックも含む（必要か？）
 
+
+●やるかどうか微妙な件（先送り）
+画像認証ロボット避け …CAPTCHAって本当にいいか？ 視覚障害者への逃げ道が必要
+なぞなぞ認証 …問題をどう作ろう？
+post.php のリファイン …うわ、大変そう
 can_post,can_edit,can_delete,can_replyの整理
 可能なら、picoと同じパターンの権限方式に移行
-
+投稿削除後の投稿数減算処理 ……必要？
+全トピック一覧で、サブカテゴリー内のトピックも含む …必要？
+Smartyプラグインが各モジュールの $xoopsModuleConfig をルックアップする
+ゲスト編集 (guest_md5_pass check) …削除だけあれば十分じゃないか？
 
 
 ※テーブル構造を変えたときには、必ず、include/import_functions.php も書き換える

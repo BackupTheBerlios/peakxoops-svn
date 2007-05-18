@@ -50,6 +50,13 @@ if( ! empty( $xoopsModuleConfig['use_solved'] ) && $isadminormod ) {
 	$can_change_solved = false ;
 }
 
+// form elements or javascripts for anti-SPAM
+if( d3forum_common_is_necessary_antispam( $xoopsUser , $xoopsModuleConfig ) ) {
+	$antispam_obj =& d3forum_common_get_antispam_object( $xoopsModuleConfig ) ;
+	$antispam4assign = $antispam_obj->getHtml4Assign() ;
+} else {
+	$antispam4assign = array() ;
+}
 
 // dare to set 'template_main' after header.php (for disabling cache)
 include XOOPS_ROOT_PATH.'/header.php' ;
@@ -122,7 +129,8 @@ $xoopsTpl->assign( array(
 	'forum' => $forum4assign ,
 	'topic' => @$topic4assign ,
 	'post' => $mode == 'edit' ? @$post4assign : array() ,
-	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+	'antispam' => $antispam4assign ,
+	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => $formTitle ,
 	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => $formTitle ) ) ) ,
 ) ) ;

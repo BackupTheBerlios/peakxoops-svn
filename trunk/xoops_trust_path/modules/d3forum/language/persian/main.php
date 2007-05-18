@@ -1,6 +1,16 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-18 17:34:37
+define('_MD_D3FORUM_ERR_INVALIDEXTERNALLINKID','You have commented to invalid target');
+define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','View more comments...');
+define('_MD_D3FORUM_ERR_TOOMANYDIVBEGIN','Too many [quote] or <div>');
+define('_MD_D3FORUM_ERR_TOOMANYDIVEND','Too many [/quote] or </div>');
+define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','Post again after turning JavaScript of your browser.');
+define('_MD_D3FORUM_ERR_NOMESSAGE','You have posted empty message');
+define('_MD_D3FORUM_ERR_GUESTPASSMISMATCH','Invaild password');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-07 13:42:10
 define('_MD_D3FORUM_MSG_CONFIRMOK','Are you OK?');
 define('_MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM','Move this topic into the other forum');

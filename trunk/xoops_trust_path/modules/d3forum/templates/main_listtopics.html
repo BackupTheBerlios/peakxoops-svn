@@ -2,6 +2,7 @@
 
 <!-- start module contents -->
 <!-- breadcrumbs -->
+<{if $mod_config.show_breadcrumbs}>
 <div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
@@ -9,6 +10,7 @@
 		<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
 	<{/foreach}>
 </div>
+<{/if}>
 
 <h1 class="d3f_title"><{$forum.title}></h1>
 
@@ -53,10 +55,13 @@
 
 <h2 class="head d3f_head"><{$forum.title}></h2>
 
+<{include file="db:`$mydirname`_inc_d3comment_summary.html" topic=$d3comment_info}>
+
 <div class="d3f_bbsviewctrl">
 	<form action="<{$mod_url}>/index.php" method="get">
 	<{$forum_selection_sort}>
 		<input type="hidden" name="forum_id" value="<{$forum.id}>" />
+		<input type="hidden" name="external_link_id" value="<{$query.external_link_id}>" />
 		<input type="text" size="12" name="txt" value="<{$query.txt}>" />
 		<{if $mod_config.use_solved}>
 		<select name="solved">

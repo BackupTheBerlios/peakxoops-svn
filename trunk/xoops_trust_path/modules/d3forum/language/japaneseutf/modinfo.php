@@ -23,6 +23,7 @@ define($constpref."_BNAME_LIST_FORUMS","フォーラム一覧");
 define($constpref.'_ADMENU_CATEGORYACCESS','カテゴリー権限設定');
 define($constpref.'_ADMENU_FORUMACCESS','フォーラム権限設定');
 define($constpref.'_ADMENU_ADVANCEDADMIN','アドバンス管理');
+define($constpref.'_ADMENU_MYLANGADMIN' , '言語定数管理' ) ;
 define($constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN' , 'ブロック管理/アクセス権限' ) ;
 define($constpref.'_ADMENU_MYPREFERENCES' , '一般設定' ) ;
@@ -30,6 +31,7 @@ define($constpref.'_ADMENU_MYPREFERENCES' , '一般設定' ) ;
 // configurations
 define($constpref.'_TOP_MESSAGE','フォーラムトップのメッセージ');
 define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">フォーラムトップ</h1><p class="d3f_welcome">興味のあるフォーラムへぜひご参加ください</p>');
+define($constpref.'_SHOW_BREADCRUMBS','パンくずを表示する');
 define($constpref.'_ALLOW_HTML','投稿本文内のHTMLを許可する');
 define($constpref.'_ALLOW_HTMLDSC','投稿本文のHTML特殊文字を許可します。不特定多数に許可すると、Script Insertion 脆弱性につながります');
 define($constpref.'_ALLOW_TEXTIMG','投稿本文内の外部画像を許可する');
@@ -55,7 +57,7 @@ define($constpref.'_SELFEDITLIMITDSC','一般ユーザが自分の投稿を編�
 define($constpref.'_SELFDELLIMIT','自己削除タイムリミット(秒)');
 define($constpref.'_SELFDELLIMITDSC','一般ユーザが自分の投稿を削除する場合、投稿してから何秒まで削除を許可するか。ただし、一般ユーザは、その下にレスポンスのついてしまった投稿は削除できません。一般ユーザによる自己削除を禁止する場合は0を指定');
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
-define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトはindex.cssです。');
+define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは {mod_url}/index.php?page=main_css です。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
 define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
 define($constpref.'_ANONYMOUS_NAME','ゲストユーザのデフォルト名');
@@ -65,7 +67,10 @@ define($constpref.'_ICON_MEANINGSDSC','投稿に性格を持たせるための�
 define($constpref.'_ICON_MEANINGSDEF','なし|通常|不満|満足|下げ|上げ|報告|質問');
 define($constpref.'_GUESTVOTE_IVL','投稿へのゲスト投票');
 define($constpref.'_GUESTVOTE_IVLDSC','ある投稿(post)へのゲストによる投票を禁止する場合は0を、投票を許可する場合は、同一IPからの再投票を禁止する秒数を指定します。');
-
+define($constpref.'_ANTISPAM_GROUPS','SPAM投稿チェックを行うグループ');
+define($constpref.'_ANTISPAM_GROUPSDSC','通常は全て未選択です。SPAM投稿チェックを行うべきグループがある場合のみ選択してください。');
+define($constpref.'_ANTISPAM_CLASS','SPAM投稿チェック用クラス');
+define($constpref.'_ANTISPAM_CLASSDSC','デフォルトは default です。ゲストについてもSPAM投稿チェックを行わない場合はここを空欄にします。');
 
 
 // Notify Categories

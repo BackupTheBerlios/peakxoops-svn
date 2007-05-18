@@ -25,13 +25,32 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
-0.60
+0.70 alpha (2007-05-18)
+- changed the structure "altsys essential"
+- added language constants override system (with altsys>=0.5)
+- templatized mymenu (with altsys>=0.5)
+- changed a post without body will be refused
+- modified checking bbcode (number of quote) of post's body
+- modified d3comment will redirect to target of the comment after posting
+- added external_link_id validation system into class of d3comment
+- modfied the field of external_link_id from integer to varchar
+- templated index.css
+- added callback system into d3comment class
+- added a plugin for waiting module
+- modified d3comment can be selected its view from thread or flat
+- added guest's deletion
+- added antiSPAM system
+- added an antiSPAM class
+-- default (using JavaScript)
+
+0.60 (2007-05-14)
 - 1st release as beta
 - fixed export topic/forum into the other d3forum
 - fixed sync topic
 - updated D3 system
 - added language files
 -- japaneseutf
+- fixed incompatibility with XC Legacy 2.1 (0.60a)
 
 0.49
 - updated D3 system
@@ -104,13 +123,32 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 ●変更履歴
 
-0.60
+0.70 alpha (2007-05-18)
+- 正式にaltsys必須とした
+- 文字定数オーバーライドシステムを導入した（要altsys-0.5以上）
+- mymenuのテンプレート化（要altsys-0.5以上）
+- 本文のない投稿を弾くようにした
+- テーマを壊すようなbbcode (quote) を弾くようにした
+- コメント統合で、投稿後にできるだけ元のページに戻すようにした
+- コメント統合のリンクIDのvalidationを出来る仕組みを作った
+- リンクIDを整数型から文字列型に変更した（より広く活用できるように）
+- index.cssのテンプレート化
+- コメント統合のコールバック処理を実装した
+- waitingプラグイン追加
+- コメント統合をスレッドビューかフラットビューから選べるようにした
+- ゲストがパスワードで削除出来る機能を実装した
+- AntiSPAMシステムを実装した
+- AntiSPAMクラス追加
+-- default (JavaScriptによるもの)
+
+0.60 (2007-05-14)
 - β版としての最初のリリース
 - トピック/フォーラムのエクスポート機能で、親子関係が壊れていたのを修正
 - トピック同期のバグを修正
 - D3システムの更新（管理者メニューなど）
 - 言語ファイル追加
 -- japaneseutf
+- XC Legacy 2.1の非互換性修正 0.60a
 
 0.49
 - D3システムの更新

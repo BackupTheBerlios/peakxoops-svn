@@ -1,17 +1,17 @@
 <?php
 
 // language file (modinfo.php)
-if( file_exists( dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modinfo.php' ) ) {
-	include dirname(__FILE__).'/language/'.@$xoopsConfig['language'].'/modinfo.php' ;
-} else if( file_exists( dirname(__FILE__).'/language/english/modinfo.php' ) ) {
-	include dirname(__FILE__).'/language/english/modinfo.php' ;
-}
-$constpref = '_MI_' . strtoupper( $mydirname ) ;
+$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
+if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
+require_once( $langmanpath ) ;
+$langman =& D3LanguageManager::getInstance() ;
+$langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 
+$constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.60 ;
+$modversion['version'] = 0.70 ;
 $modversion['credits'] = "PEAK Corp. and JIDAIKOBO";
 $modversion['author'] = "GIJ=CHECKMATE and JIDAIKOBO" ;
 $modversion['help'] = "" ;
@@ -84,7 +84,7 @@ $modversion['blocks'][3] = array(
 // Comments
 $modversion['hasComments'] = 0 ;
 
-// Configurations
+// Configs
 $modversion['config'][1] = array(
 	'name'			=> 'top_message' ,
 	'title'			=> $constpref.'_TOP_MESSAGE' ,
@@ -92,6 +92,16 @@ $modversion['config'][1] = array(
 	'formtype'		=> 'textarea' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> constant($constpref.'_TOP_MESSAGEDEFAULT') ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'show_breadcrumbs' ,
+	'title'			=> $constpref.'_SHOW_BREADCRUMBS' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
 
@@ -241,7 +251,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_CSS_URIDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> 'index.css' ,
+	'default'		=> '{mod_url}/index.php?page=main_css' ,
 	'options'		=> array()
 ) ;
 
@@ -284,6 +294,27 @@ $modversion['config'][] = array(
 	'default'		=> 86400 ,
 	'options'		=> array()
 ) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'antispam_groups' ,
+	'title'			=> $constpref.'_ANTISPAM_GROUPS' ,
+	'description'	=> $constpref.'_ANTISPAM_GROUPSDSC' ,
+	'formtype'		=> 'group_multi' ,
+	'valuetype'		=> 'array' ,
+	'default'		=> array(3) ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'antispam_class' ,
+	'title'			=> $constpref.'_ANTISPAM_CLASS' ,
+	'description'	=> $constpref.'_ANTISPAM_CLASSDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'default' ,
+	'options'		=> array()
+) ;
+
 
 
 // Notification

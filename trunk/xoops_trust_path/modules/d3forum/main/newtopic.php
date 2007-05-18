@@ -3,7 +3,7 @@
 include dirname(dirname(__FILE__)).'/include/common_prepend.php' ;
 
 $forum_id = intval( @$_GET['forum_id'] ) ;
-$external_link_id = intval( @$_GET['external_link_id'] ) ;
+$external_link_id = @$_GET['external_link_id'] ;
 
 // get&check this forum ($forum4assign, $forum_row, $cat_id, $isadminormod), override options
 if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' ) die( _MD_D3FORUM_ERR_READFORUM ) ;
@@ -14,6 +14,14 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php
 // check post permission
 if( empty( $can_post ) ) die( _MD_D3FORUM_ERR_POSTFORUM ) ;
 if( ! empty( $forum_row['forum_external_link_format'] ) && empty( $external_link_id ) ) die( _MD_D3FORUM_ERR_FORUMASCOMMENT ) ;
+
+// get external ID and validate it
+if( $external_link_id ) {
+	$d3com =& d3forum_main_get_comment_object( $forum_row['forum_external_link_format'] ) ;
+	if( ( $external_link_id = $d3com->validate_id( $external_link_id ) ) === false ) {
+		die( _MD_D3FORUM_ERR_INVALIDEXTERNALLINKID ) ;
+	}
+}
 
 // specific variables for newtopic
 $pid = 0 ;

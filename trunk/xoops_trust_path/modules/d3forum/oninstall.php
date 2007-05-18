@@ -40,7 +40,7 @@ function d3forum_oninstall_base( $module , $mydirname )
 		$sql_query = trim( file_get_contents( $sql_file_path ) ) ;
 		$sqlutil->splitMySqlFile( $pieces , $sql_query ) ;
 		$created_tables = array() ;
-		foreach( $pieces as $piece ) {
+		if( is_array( $pieces ) ) foreach( $pieces as $piece ) {
 			$prefixed_query = $sqlutil->prefixQuery( $piece , $prefix_mod ) ;
 			if( ! $prefixed_query ) {
 				$ret[] = "Invalid SQL <b>".htmlspecialchars($piece)."</b><br />";

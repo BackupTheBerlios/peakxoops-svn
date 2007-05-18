@@ -1,4 +1,5 @@
 <!-- start module contents -->
+<{if $mod_config.show_breadcrumbs}>
 <div class="d3f_breadcrumbs">
 	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
 	&nbsp;&gt;&nbsp;
@@ -6,6 +7,7 @@
 	&nbsp;&gt;&nbsp;<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
 	&nbsp;&gt;&nbsp;<{if $topic.id}><a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a><{/if}>
 </div>
+<{/if}>
 
 <h1 class="d3f_title"><{$formtitle}>: <{$forum.title}></h1>
 
@@ -30,7 +32,7 @@
 	<input type="hidden" name="post_id" id="post_id" value="<{$post_id}>" />
 	<input type="hidden" name="topic_id" id="topic_id" value="<{$topic_id}>" />
 	<input type="hidden" name="forum_id" id="forum_id" value="<{$forum.id}>" />
-	<input type="hidden" name="external_link_id" id="external_link_id" value="<{$external_link_id}>" />
+	<input type="hidden" name="external_link_id" id="external_link_id" value="<{$external_link_id|escape}>" />
 	<input type="hidden" name="reference_quote" id="reference_quote" value="<{$reference_quote}>" />
 	</p>
 
@@ -195,6 +197,8 @@
 		</tr>
 	</table>
 
+	<{$antispam.html_in_form}>
+
 	<p class="d3f_submit"><input type="submit" class="formButton" name="contents_preview"  id="contents_preview" value="<{$smarty.const._PREVIEW}>" />
 	<input type="submit" class="formButton" name="contents_submit"  id="contents_submit" value="<{$smarty.const._SUBMIT}>" /></p>
 
@@ -203,9 +207,13 @@
 <!-- Start Form Vaidation JavaScript //-->
 <script type="text/javascript">
 <!--//
+<{$antispam.js_global}>
+
 function xoopsFormValidate_postform() {
 	myform = window.document.postform;
-	if ( myform.subject.value == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_SUBJECT|string_format:$smarty.const._FORM_ENTER}>"); myform.subject.focus(); return false; }
+	if ( myform.subject.value.replace(/^\s+|\s+$/g,"") == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_SUBJECT|string_format:$smarty.const._FORM_ENTER}>"); myform.subject.focus(); return false; }
+	if ( myform.message.value.replace(/^\s+|\s+$/g,"") == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_ERR_NOMESSAGE}>"); myform.message.focus(); return false; }
+	<{$antispam.js_in_validate_function}>
 	return true;
 }
 function d3forum_quote_message() {

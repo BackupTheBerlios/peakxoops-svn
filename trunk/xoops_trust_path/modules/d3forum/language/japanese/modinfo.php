@@ -23,6 +23,7 @@ define($constpref."_BNAME_LIST_FORUMS","е╒ейб╝ещер░ь═ў");
 define($constpref.'_ADMENU_CATEGORYACCESS','еле╞е┤еъб╝╕в╕┬└▀─ъ');
 define($constpref.'_ADMENU_FORUMACCESS','е╒ейб╝ещер╕в╕┬└▀─ъ');
 define($constpref.'_ADMENU_ADVANCEDADMIN','еве╔е╨еєе╣┤╔═¤');
+define($constpref.'_ADMENU_MYLANGADMIN' , '╕└╕ь─ъ┐Ї┤╔═¤' ) ;
 define($constpref.'_ADMENU_MYTPLSADMIN' , 'е╞еєе╫еьб╝е╚┤╔═¤' ) ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN' , 'е╓еэе├еп┤╔═¤/евепе╗е╣╕в╕┬' ) ;
 define($constpref.'_ADMENU_MYPREFERENCES' , '░ь╚╠└▀─ъ' ) ;
@@ -30,6 +31,7 @@ define($constpref.'_ADMENU_MYPREFERENCES' , '░ь╚╠└▀─ъ' ) ;
 // configurations
 define($constpref.'_TOP_MESSAGE','е╒ейб╝ещере╚е├е╫д╬есе├е╗б╝е╕');
 define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">е╒ейб╝ещере╚е├е╫</h1><p class="d3f_welcome">╢╜╠гд╬двдые╒ейб╝ещерд╪д╝д╥д┤╗▓▓├дпд└д╡дд</p>');
+define($constpref.'_SHOW_BREADCRUMBS','е╤еєдпд║дЄ╔╜╝ид╣ды');
 define($constpref.'_ALLOW_HTML','┼ъ╣╞╦▄╩╕╞тд╬HTMLдЄ╡Ў▓─д╣ды');
 define($constpref.'_ALLOW_HTMLDSC','┼ъ╣╞╦▄╩╕д╬HTML╞├╝ь╩╕╗·дЄ╡Ў▓─д╖д▐д╣бг╔╘╞├─ъ┬┐┐Їд╦╡Ў▓─д╣дыд╚бвScript Insertion └╚╝х└нд╦д─д╩дмдъд▐д╣');
 define($constpref.'_ALLOW_TEXTIMG','┼ъ╣╞╦▄╩╕╞тд╬│░╔Ї▓ш┴№дЄ╡Ў▓─д╣ды');
@@ -55,7 +57,7 @@ define($constpref.'_SELFEDITLIMITDSC','░ь╚╠ецб╝е╢дм╝л╩мд╬┼ъ╣╞дЄ╩╘╜╕д╣ды╛ь╣чбв┼ъ╣
 define($constpref.'_SELFDELLIMIT','╝л╕╩║я╜№е┐едереъе▀е├е╚(╔├)');
 define($constpref.'_SELFDELLIMITDSC','░ь╚╠ецб╝е╢дм╝л╩мд╬┼ъ╣╞дЄ║я╜№д╣ды╛ь╣чбв┼ъ╣╞д╖д╞длдщ▓┐╔├д▐д╟║я╜№дЄ╡Ў▓─д╣дыдлбгд┐д└д╖бв░ь╚╠ецб╝е╢д╧бвд╜д╬▓╝д╦еье╣е▌еєе╣д╬д─ддд╞д╖д▐д├д┐┼ъ╣╞д╧║я╜№д╟днд▐д╗дєбг░ь╚╠ецб╝е╢д╦дшды╝л╕╩║я╜№дЄ╢╪╗▀д╣ды╛ь╣чд╧0дЄ╗╪─ъ');
 define($constpref.'_CSS_URI','ете╕ехб╝еы═╤CSSд╬URI');
-define($constpref.'_CSS_URIDSC','д│д╬ете╕ехб╝еы└ь═╤д╬CSSе╒ебедеыд╬URIдЄ┴ъ┬╨е╤е╣д▐д┐д╧└ф┬╨е╤е╣д╟╗╪─ъд╖д▐д╣бге╟е╒ейеые╚д╧index.cssд╟д╣бг');
+define($constpref.'_CSS_URIDSC','д│д╬ете╕ехб╝еы└ь═╤д╬CSSе╒ебедеыд╬URIдЄ┴ъ┬╨е╤е╣д▐д┐д╧└ф┬╨е╤е╣д╟╗╪─ъд╖д▐д╣бге╟е╒ейеые╚д╧ {mod_url}/index.php?page=main_css д╟д╣бг');
 define($constpref.'_IMAGES_DIR','едесб╝е╕е╒ебедеые╟егеьепе╚еъ');
 define($constpref.'_IMAGES_DIRDSC','д│д╬ете╕ехб╝еы═╤д╬едесб╝е╕дм│╩╟╝д╡дьд┐е╟егеьепе╚еъдЄете╕ехб╝еые╟егеьепе╚еъдлдщд╬┴ъ┬╨е╤е╣д╟╗╪─ъд╖д▐д╣бге╟е╒ейеые╚д╧imagesд╟д╣бг');
 define($constpref.'_ANONYMOUS_NAME','е▓е╣е╚ецб╝е╢д╬е╟е╒ейеые╚╠╛');
@@ -65,7 +67,10 @@ define($constpref.'_ICON_MEANINGSDSC','┼ъ╣╞д╦└н│╩дЄ╗¤д┐д╗дыд┐дсд╬┴к┬Є╗шд╟д╣бге╤е
 define($constpref.'_ICON_MEANINGSDEF','д╩д╖|─╠╛я|╔╘╦■|╦■┬н|▓╝д▓|╛хд▓|╩є╣Ё|╝┴╠ф');
 define($constpref.'_GUESTVOTE_IVL','┼ъ╣╞д╪д╬е▓е╣е╚┼ъ╔╝');
 define($constpref.'_GUESTVOTE_IVLDSC','двды┼ъ╣╞(post)д╪д╬е▓е╣е╚д╦дшды┼ъ╔╝дЄ╢╪╗▀д╣ды╛ь╣чд╧0дЄбв┼ъ╔╝дЄ╡Ў▓─д╣ды╛ь╣чд╧бв╞▒░ьIPдлдщд╬║╞┼ъ╔╝дЄ╢╪╗▀д╣ды╔├┐ЇдЄ╗╪─ъд╖д▐д╣бг');
-
+define($constpref.'_ANTISPAM_GROUPS','SPAM┼ъ╣╞е┴езе├епдЄ╣╘дже░еыб╝е╫');
+define($constpref.'_ANTISPAM_GROUPSDSC','─╠╛яд╧┴┤д╞╠д┴к┬Єд╟д╣бгSPAM┼ъ╣╞е┴езе├епдЄ╣╘джд┘дне░еыб╝е╫дмдвды╛ь╣чд╬д▀┴к┬Єд╖д╞дпд└д╡ддбг');
+define($constpref.'_ANTISPAM_CLASS','SPAM┼ъ╣╞е┴езе├еп═╤епеще╣');
+define($constpref.'_ANTISPAM_CLASSDSC','е╟е╒ейеые╚д╧ default д╟д╣бге▓е╣е╚д╦д─ддд╞дтSPAM┼ъ╣╞е┴езе├епдЄ╣╘дяд╩дд╛ь╣чд╧д│д│дЄ╢ї═єд╦д╖д▐д╣бг');
 
 
 // Notify Categories

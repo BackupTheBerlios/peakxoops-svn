@@ -360,16 +360,29 @@ function d3forum_get_comment_link( $external_link_format , $external_link_id )
 	if( substr( $external_link_format , 0 , 11 ) != '{XOOPS_URL}' ) return '' ;
 
 	$format = str_replace( '{XOOPS_URL}' , XOOPS_URL , $external_link_format ) ;
-	return sprintf( $format , $external_link_id ) ;
+	return sprintf( $format , urlencode( $external_link_id ) ) ;
 }
 
 
 // started from class:: for native d3comment modules
-function d3forum_get_comment_description( $external_link_format , $external_link_id )
+function d3forum_get_comment_description( $mydirname , $external_link_format , $external_link_id )
+{
+	$d3com =& d3forum_main_get_comment_object( $mydirname , $external_link_format ) ;
+	if( ! is_object( $d3com ) ) return '' ;
+
+	return $d3com->fetchSummary( $external_link_id ) ;
+}
+
+
+// get object for comment integration
+function &d3forum_main_get_comment_object( $mydirname , $external_link_format )
 {
 	include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
 	@list( $external_dirname , $class_name , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
-	if( empty( $class_name ) ) return '' ;
+	if( empty( $class_name ) ) {
+		$obj =& new D3commentAbstract( $mydirname , $external_dirname ) ;
+		return $obj ;
+	}
 
 	// find and read d3comment class file
 	if( empty( $external_trustdirname ) ) {
@@ -381,11 +394,15 @@ function d3forum_get_comment_description( $external_link_format , $external_link
 	}
 
 	// check the class
-	if( ! $class_name || ! class_exists( $class_name ) ) return '' ;
+	if( ! $class_name || ! class_exists( $class_name ) ) {
+		$obj =& new D3commentAbstract( $mydirname , $external_dirname ) ;
+		return $obj ;
+	}
 
-	$d3com =& new $class_name( $external_dirname ) ;
-	return $d3com->fetchSummary( $external_link_id ) ;
-
+	$obj =& new $class_name( $mydirname , $external_dirname ) ;
+	return $obj ;
 }
+
+
 
 ?>

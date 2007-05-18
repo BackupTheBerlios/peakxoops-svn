@@ -138,6 +138,33 @@ function d3forum_restruct_categories( $categories , $parent )
 }
 
 
+function d3forum_common_is_necessary_antispam( $user , $mod_config )
+{
+	$belong_groups = is_object( $user ) ? $user->getGroups() : array( XOOPS_GROUP_ANONYMOUS ) ;
+
+	if( trim( $mod_config['antispam_class'] ) == '' ) return false ;
+	if( ! is_object( $user ) ) return true ;
+	if( count( array_intersect( $mod_config['antispam_groups'] , $belong_groups ) ) == count( $belong_groups ) ) return true ;
+	return false ;
+}
+
+
+function &d3forum_common_get_antispam_object( $mod_config )
+{
+	require_once dirname(dirname(__FILE__)).'/class/D3forumAntispamDefault.class.php' ;
+	$class_name = 'D3forumAntispam'.ucfirst(trim($mod_config['antispam_class'])) ;
+	if( file_exists( dirname(dirname(__FILE__)).'/class/'.$class_name.'.class.php' ) ) {
+		require_once dirname(dirname(__FILE__)).'/class/'.$class_name.'.class.php' ;
+		if( class_exists( $class_name ) ) {
+			$antispam_obj =& new $class_name() ;
+		}
+	}
+	if( ! is_object( $antispam_obj ) ) {
+		$antispam_obj =& new D3forumAntispamDefault() ;
+	}
+	
+	return $antispam_obj ;
+}
 
 
 

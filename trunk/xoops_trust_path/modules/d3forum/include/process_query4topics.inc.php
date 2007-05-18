@@ -2,6 +2,29 @@
 
 	$query4assign = array() ;
 
+	// EXTERNAL LINK ID (get d3comment_info also)
+	if( ! empty( $forum_row['forum_external_link_format'] ) && ! empty( $_GET['external_link_id'] ) ) {
+		$external_link_id = $myts->stripSlashesGPC( $_GET['external_link_id'] ) ;
+		$query4assign['external_link_id'] = htmlspecialchars( $external_link_id , ENT_QUOTES ) ;
+		$query4nav .= "&amp;external_link_id=".rawurlencode( $external_link_id ) ;
+		$external_link_id4sql = addslashes( $external_link_id ) ;
+		$whr_external_link_id = "t.topic_external_link_id='$external_link_id4sql'" ;
+		$d3comment_info = array(
+			'comment_link' => d3forum_get_comment_link( $forum_row['forum_external_link_format'] , $external_link_id ) ,
+			'comment_description' => d3forum_get_comment_description( $mydirname , $forum_row['forum_external_link_format'] , $external_link_id ) ,
+		) ;
+		if( is_array( $d3comment_info['comment_description'] ) ) {
+			$xoops_breadcrumbs[] = array(
+				'name' => $d3comment_info['comment_description']['subject'] ,
+			) ;
+		}
+	} else {
+		unset( $external_link_id ) ;
+		$query4assign['external_link_id'] = '' ;
+		$whr_external_link_id = '1' ;
+		$d3comment_info = array() ;
+	}
+	
 	// TXT
 	if( ! empty( $_GET['txt'] ) ) {
 		$txt = $myts->stripSlashesGPC( $_GET['txt'] ) ;

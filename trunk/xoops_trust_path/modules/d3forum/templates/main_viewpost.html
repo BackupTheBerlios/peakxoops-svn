@@ -1,6 +1,7 @@
 
 <!-- start module contents -->
 <!-- breadcrumbs -->
+<{if $mod_config.show_breadcrumbs}>
 <div class="d3f_breadcrumbs">
 	<{strip}>
 		<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>
@@ -14,6 +15,7 @@
 		<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>
 	<{/strip}>
 </div>
+<{/if}>
 
 <h1 class="d3f_title"><{$post.subject}></h1>
 

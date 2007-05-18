@@ -43,7 +43,7 @@ if( is_array( $forum_configs ) ) foreach( $forum_configs as $key => $val ) {
 $d3forum_icon_meanings = explode( '|' , $xoopsModuleConfig['icon_meanings'] ) ;
 
 // assign breadcrumbs of this category
-foreach( array_reverse( $category4assign['paths_raw'] ) as $cat_id_tmp => $cat_title_tmp ) {
+foreach( array_reverse( $category4assign['paths_raw'] , true ) as $cat_id_tmp => $cat_title_tmp ) {
 	array_splice( $xoops_breadcrumbs , 1 , 0 , array( array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$cat_id_tmp , 'name' => $cat_title_tmp ) ) ) ;
 }
 

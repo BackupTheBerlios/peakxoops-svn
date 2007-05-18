@@ -47,6 +47,12 @@ function d3forum_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_posts")." ADD subject_waiting varchar(255) NOT NULL default '' AFTER `subject`, ADD post_text_waiting text NOT NULL AFTER `post_text`, ADD uid_hidden mediumint(8) unsigned NOT NULL default 0 AFTER `uid`, DROP hide_uid" ) ;
 	}
 
+	// 0.4x/0.6x -> 0.7x
+	$check_sql = "SHOW COLUMNS FROM ".$db->prefix($mydirname."_topics")." LIKE 'topic_external_link_id'" ;
+	if( ( $result = $db->query( $check_sql ) ) && ( $myrow = $db->fetchArray( $result ) ) && substr( @$myrow['Type'] , 0 , 3 ) == 'int' ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_topics")." MODIFY topic_external_link_id varchar(255) NOT NULL default ''" ) ;
+	}
+
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;
 	$tpl_path = dirname(__FILE__).'/templates' ;

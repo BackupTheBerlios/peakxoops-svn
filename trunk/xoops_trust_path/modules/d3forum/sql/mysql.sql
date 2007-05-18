@@ -83,7 +83,7 @@ CREATE TABLE forums (
 CREATE TABLE topics (
   topic_id int(8) unsigned NOT NULL auto_increment,
   forum_id int(6) unsigned NOT NULL default 0,
-  topic_external_link_id int(10) unsigned NOT NULL default 0,
+  topic_external_link_id varchar(255) NOT NULL default '',
   topic_title varchar(255) default NULL,
   topic_first_uid mediumint(8) NOT NULL default 0,
   topic_first_post_id int(10) unsigned NOT NULL default 0,

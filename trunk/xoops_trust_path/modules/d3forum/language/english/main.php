@@ -58,6 +58,7 @@ define('_MD_D3FORUM_GUESTSCANNOTPOST_DESC','Guests cannot post into this forum')
 define('_MD_D3FORUM_FORUMASCOMMENT','Forum for commentation');
 define('_MD_D3FORUM_FORUMASCOMMENT_DESC','As this forum is only for commentation, you cannot open a new topic');
 define('_MD_D3FORUM_ERR_FORUMASCOMMENT','You cannot create new topic in this forum directly.');
+define('_MD_D3FORUM_ERR_INVALIDEXTERNALLINKID','You have commented to invalid target');
 define('_MD_D3FORUM_REPLIES','Replies');
 define('_MD_D3FORUM_POSTER','Poster');
 define('_MD_D3FORUM_VIEWS','Views');
@@ -84,6 +85,7 @@ define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','Bottom of the posts'); //jidaikobo
 define('_MD_D3FORUM_POSTASCOMMENTTOP','Post a new comment');
 define('_MD_D3FORUM_LINK_COMMENTSOURCE','target of the comment');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','Go to richer form');
+define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','View more comments...');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 define('_MD_D3FORUM_COMMENTSLIST','Comments list');
 define('_MD_D3FORUM_COM_TARGETMODULE','Target');
@@ -100,6 +102,13 @@ define('_MD_D3FORUM_LINK_POSTORDERTREEASC','Tree order');
 define('_MD_D3FORUM_LINK_POSTORDERTREEDESC','Tree order reversal');
 define('_MD_D3FORUM_LINK_POSTORDERTIMEASC','Older is upper');
 define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','Newer is upper');
+
+// D3forumMessageValidator.class.php
+define('_MD_D3FORUM_ERR_TOOMANYDIVBEGIN','Too many [quote] or <div>');
+define('_MD_D3FORUM_ERR_TOOMANYDIVEND','Too many [/quote] or </div>');
+
+// D3forumAntispam classes
+define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','Post again after turning JavaScript of your browser.');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
@@ -211,6 +220,7 @@ define('_MD_D3FORUM_POSTEDIT','Edit');
 define('_MD_D3FORUM_POSTDELETE','Delete');
 define('_MD_D3FORUM_EDITTIMELIMITED','Sorry, it has been expired to edit this post');
 define('_MD_D3FORUM_NOTICE_YOUAREEDITING','You are editing the post now');
+define('_MD_D3FORUM_ERR_NOMESSAGE','You have posted empty message');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','Topic Manager');
@@ -231,6 +241,7 @@ define('_MD_D3FORUM_DELCHILDEXISTS','Sorry, any parent posts cannot be removed.'
 define('_MD_D3FORUM_CONFIRM_AREUSUREDEL','Are you sure you want to delete this post and all its child posts?');
 define('_MD_D3FORUM_CONFIRM_AREUSUREDELONE','Are you sure you want to delete this post?');
 define('_MD_D3FORUM_MSG_POSTSDELETED','Selected post and all its child posts deleted.');
+define('_MD_D3FORUM_ERR_GUESTPASSMISMATCH','Invaild password');
 
 // cut&paste posts (check done)
 define('_MD_D3FORUM_CUTPASTEPOSTS','Cut and paste posts') ;

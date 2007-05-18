@@ -153,6 +153,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 
 	function codeConv($text, $xcode = 1, $image = 1){
 		if( $xcode != 0 ) {
+			// bug fix
 			$text = preg_replace_callback( "/\[code](.*)\[\/code\]/sU" , array( $this , 'myCodeSanitizer' ) , $text ) ;
 		}
 		return $text ;
@@ -165,18 +166,22 @@ class D3forumTextSanitizer extends MyTextSanitizer
 
 	function xoopsCodeDecodeSafe( $text )
 	{
+		if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
+			$text = htmlspecialchars( $text , ENT_QUOTES ) ;
+		}
+
 		$patterns[] = "/\[color=(['\"]?)([a-zA-Z0-9]*)\\1](.*)\[\/color\]/sU";
 		$replacements[] = '<span style="color: #\\2;">\\3</span>';
-		$patterns[] = "/\[size=(['\"]?)([a-z0-9-]*)\\1](.*)\[\/size\]/sU";
-		$replacements[] = '<span style="font-size: \\2;">\\3</span>';
-		$patterns[] = "/\[font=(['\"]?)([^;<>\*\(\)\"']*)\\1](.*)\[\/font\]/sU";
-		$replacements[] = '<span style="font-family: \\2;">\\3</span>';
+//		$patterns[] = "/\[size=(['\"]?)([a-z-]*)\\1](.*)\[\/size\]/sU";
+//		$replacements[] = '<span style="font-size: \\2;">\\3</span>';
+//		$patterns[] = "/\[font=(['\"]?)([^;<>\*\(\)\"']*)\\1](.*)\[\/font\]/sU";
+//		$replacements[] = '<span style="font-family: \\2;">\\3</span>';
 		$patterns[] = "/\[b](.*)\[\/b\]/sU";
-		$replacements[] = '<b>\\1</b>';
+		$replacements[] = '<strong>\\1</strong>';
 		$patterns[] = "/\[i](.*)\[\/i\]/sU";
 		$replacements[] = '<i>\\1</i>';
 		$patterns[] = "/\[u](.*)\[\/u\]/sU";
-		$replacements[] = '<u>\\1</u>';
+		$replacements[] = '<span style="text-decoration:underline">\\1</span>';
 		$patterns[] = "/\[d](.*)\[\/d\]/sU";
 		$replacements[] = '<del>\\1</del>';
 		

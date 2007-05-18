@@ -33,10 +33,7 @@ $mytree = new XoopsTree( $xoopsDB->prefix($mydirname."_posts") , "post_id" , "pi
 $children = $mytree->getAllChildId( $post_id ) ;
 
 // special permission check for delete
-if( ! $uid ) {
-	// guest delete (TODO)
-	die( _MD_D3FORUM_DELNOTALLOWED ) ;
-} else if( $isadminormod ) {
+if( $isadminormod ) {
 	// admin delete
 	// ok
 } else if( ( $uid == $post_row['uid'] || $uid == $post_row['uid_hidden'] ) && $xoopsModuleConfig['selfdellimit'] > 0 ) {
@@ -65,6 +62,14 @@ if( ! empty( $_POST['deletepostsok'] ) ) {
 	// TRANSACTION PART
 	if ( ! $xoopsGTicket->check( true , 'd3forum' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
+	// guest's delete (check password)
+	if( empty( $uid ) ) {
+		if( empty( $_POST['guest_pass'] ) || md5( $_POST['guest_pass'].'d3forum' ) != $post_row['guest_pass_md5'] ) {
+			redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 2 , _MD_D3FORUM_ERR_GUESTPASSMISMATCH ) ;
+			exit ;
+		}
 	}
 
 	require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
@@ -116,7 +121,7 @@ if( ! empty( $_POST['deletepostsok'] ) ) {
 		'topic' => $topic4assign ,
 		'post' => $post4assign ,
 		'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'd3forum') ,
-		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".$xoopsModuleConfig['css_uri']."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 		'xoops_pagetitle' => _DELETE ,
 		'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _DELETE ) ) ) ,
 	) ) ;

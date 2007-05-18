@@ -58,6 +58,7 @@ define('_MD_D3FORUM_GUESTSCANNOTPOST_DESC','このフォーラムではゲスト投稿が禁止さ
 define('_MD_D3FORUM_FORUMASCOMMENT','コメント用フォーラム');
 define('_MD_D3FORUM_FORUMASCOMMENT_DESC','このフォーラムはコメント用フォーラムです。新規トピックはたてられません');
 define('_MD_D3FORUM_ERR_FORUMASCOMMENT','コメント用フォーラムには直接新規トピックを作成できません');
+define('_MD_D3FORUM_ERR_INVALIDEXTERNALLINKID','コメント対象指定が無効です');
 define('_MD_D3FORUM_REPLIES','返信');
 define('_MD_D3FORUM_POSTER','投稿者');
 define('_MD_D3FORUM_VIEWS','閲覧');
@@ -84,6 +85,7 @@ define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','投稿一覧の最下部です'); //jidaikobo
 define('_MD_D3FORUM_POSTASCOMMENTTOP','新しくコメントをつける');
 define('_MD_D3FORUM_LINK_COMMENTSOURCE','コメント元');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','より詳細なコメント入力フォームへ');
+define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','すべてのコメント一覧へ');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 define('_MD_D3FORUM_COMMENTSLIST','コメント一覧');
 define('_MD_D3FORUM_COM_TARGETMODULE','対象モジュール');
@@ -100,6 +102,13 @@ define('_MD_D3FORUM_LINK_POSTORDERTREEASC','ツリー構造順で表示');
 define('_MD_D3FORUM_LINK_POSTORDERTREEDESC','ツリー構造逆順で表示');
 define('_MD_D3FORUM_LINK_POSTORDERTIMEASC','投稿の古いものから');
 define('_MD_D3FORUM_LINK_POSTORDERTIMEDESC','投稿の新しいものから');
+
+// D3forumMessageValidator.class.php
+define('_MD_D3FORUM_ERR_TOOMANYDIVBEGIN','[quote]または<div>の数が多すぎます');
+define('_MD_D3FORUM_ERR_TOOMANYDIVEND','[/quote]または</div>の数が多すぎます');
+
+// D3forumAntispam classes
+define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','JavaScriptを有効にしてから、再度投稿してください（さらにもう一度投稿ボタンを押す必要があるかもしれません）');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
@@ -211,6 +220,7 @@ define('_MD_D3FORUM_POSTEDIT','編集する');
 define('_MD_D3FORUM_POSTDELETE','削除する');
 define('_MD_D3FORUM_EDITTIMELIMITED','編集可能な期間を過ぎました');
 define('_MD_D3FORUM_NOTICE_YOUAREEDITING','発言を編集しようとしています');
+define('_MD_D3FORUM_ERR_NOMESSAGE','投稿本文がありません');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','トピック管理');
@@ -231,6 +241,7 @@ define('_MD_D3FORUM_DELCHILDEXISTS','すでにこの投稿への返信が登録されています。'
 define('_MD_D3FORUM_CONFIRM_AREUSUREDEL','この投稿およびこの投稿に対する返信を全て削除してもいいですか？');
 define('_MD_D3FORUM_CONFIRM_AREUSUREDELONE','この投稿を削除してもいいですか？');
 define('_MD_D3FORUM_MSG_POSTSDELETED','選択した投稿を削除しました。');
+define('_MD_D3FORUM_ERR_GUESTPASSMISMATCH','投稿時のパスワードと一致しません');
 
 // cut&paste posts (check done)
 define('_MD_D3FORUM_CUTPASTEPOSTS','投稿の切り貼り') ;

@@ -2,12 +2,32 @@
 
 // this file can be included from transaction procedures
 
+// call back for comment integration
+function d3forum_main_d3comment_callback( $mydirname , $topic_id , $mode = 'update' )
+{
+	$db =& Database::getInstance() ;
+
+	$topic_id = intval( $topic_id ) ;
+
+	list( $external_link_format , $external_link_id , $forum_id ) = $db->fetchRow( $db->query( "SELECT f.forum_external_link_format,t.topic_external_link_id,t.forum_id FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_forums")." f ON f.forum_id=t.forum_id WHERE topic_id=$topic_id" ) ) ;
+
+	if( ! empty( $external_link_format ) && ! empty( $external_link_id ) ) {
+		$d3com =& d3forum_main_get_comment_object( $mydirname , $external_link_format ) ;
+		if( is_object( @$d3com ) ) {
+			$d3com->onUpdate( $mode , $external_link_id , $forum_id , $topic_id ) ;
+		}
+	}
+}
+
+
 // delete posts recursively
 function d3forum_delete_post_recursive( $mydirname , $post_id )
 {
 	$db =& Database::getInstance() ;
 
 	$post_id = intval( $post_id ) ;
+
+	list( $topic_id ) = $db->fetchRow( $db->query( "SELECT topic_id FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ) ;
 
 	$sql = "SELECT post_id FROM ".$db->prefix($mydirname."_posts")." WHERE pid=$post_id" ;
 	if( ! $result = $db->query( $sql ) ) die( "DB ERROR in delete posts" ) ;
@@ -23,6 +43,9 @@ function d3forum_delete_post_recursive( $mydirname , $post_id )
 
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ;
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_post_votes")." WHERE post_id=$post_id" ) ;
+	
+	// call back to the target of comment
+	d3forum_main_d3comment_callback( $mydirname , $topic_id , 'delete' ) ;
 }
 
 
@@ -393,10 +416,16 @@ function d3forum_update_topic_from_post( $mydirname , $topic_id , $forum_id , $f
 
 	$db =& Database::getInstance() ;
 
+	$sql4set = '' ;
+
 	$topic_id = intval( $topic_id ) ;
 	$new_forum_id = intval( @$_POST['forum_id'] ) ;
+	$sql4set .= $forum_id == $new_forum_id ? '' : "topic_external_link_id=''," ;
 
-	// check the user is distinated forum's admin or mod
+	// prefetch
+	list( $external_link_format , $external_link_id ) = $db->fetchRow( $db->query( "SELECT f.forum_external_link_format,t.topic_external_link_id FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_forums")." f ON f.forum_id=t.forum_id WHERE topic_id=$topic_id" ) ) ;
+
+	// check the user is destined forum's admin or mod
 	if( ! $isadmin && ! $forum_permissions[ $new_forum_id ]['is_moderator'] ) die( _MD_D3FORUM_ERR_CUTPASTENOTADMINOFDESTINATION ) ;
 
 	$topic_title4sql = addslashes( $myts->stripSlashesGPC( @$_POST['topic_title'] ) ) ;
@@ -405,7 +434,16 @@ function d3forum_update_topic_from_post( $mydirname , $topic_id , $forum_id , $f
 	$topic_invisible = intval( @$_POST['topic_invisible'] ) ;
 	$topic_solved = intval( @$_POST['topic_solved'] ) ;
 
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_title='$topic_title4sql', forum_id='$new_forum_id', topic_sticky='$topic_sticky', topic_locked='$topic_locked', topic_invisible='$topic_invisible', topic_solved='$topic_solved' WHERE topic_id=$topic_id" ) ) die( "DB ERROR IN UPDATE topic".__LINE__ ) ;
+	// do update
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_topics")." SET $sql4set topic_title='$topic_title4sql', forum_id='$new_forum_id', topic_sticky='$topic_sticky', topic_locked='$topic_locked', topic_invisible='$topic_invisible', topic_solved='$topic_solved' WHERE topic_id=$topic_id" ) ) die( "DB ERROR IN UPDATE topic".__LINE__ ) ;
+
+	// call back to the target of comment
+	if( ! empty( $external_link_format ) && ! empty( $external_link_id ) ) {
+		$d3com =& d3forum_main_get_comment_object( $mydirname , $external_link_format ) ;
+		if( is_object( @$d3com ) ) {
+			$d3com->onUpdate( 'update' , $external_link_id , $forum_id , $topic_id ) ;
+		}
+	}
 
 	d3forum_sync_forum( $mydirname , $forum_id ) ;
 	d3forum_sync_forum( $mydirname , $new_forum_id ) ;

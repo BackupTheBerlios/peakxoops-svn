@@ -23,13 +23,15 @@ define($constpref."_BNAME_LIST_FORUMS","Forums");
 define($constpref.'_ADMENU_CATEGORYACCESS','Permissions of Categories');
 define($constpref.'_ADMENU_FORUMACCESS','Permissions of Forums');
 define($constpref.'_ADMENU_ADVANCEDADMIN','Advanced');
-define( $constpref.'_ADMENU_MYTPLSADMIN' , 'Templates' ) ;
-define( $constpref.'_ADMENU_MYBLOCKSADMIN' , 'Blocks/Permissions' ) ;
-define( $constpref.'_ADMENU_MYPREFERENCES' , 'Preferences' ) ;
+define($constpref.'_ADMENU_MYLANGADMIN','Languages');
+define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions');
+define($constpref.'_ADMENU_MYPREFERENCES','Preferences');
 
 // configurations
 define($constpref.'_TOP_MESSAGE','Message in forum top');
 define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">Forum Top</h1><p class="d3f_welcome">To start viewing messages, select the category and forum that you want to visit from the selection below.</p>');
+define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
 define($constpref.'_ALLOW_HTML','Allow HTML');
 define($constpref.'_ALLOW_HTMLDSC','Don\'t turn this on casually. It cause Script Insertion vulnerability if malicious user can post.');
 define($constpref.'_ALLOW_TEXTIMG','Allow to dipslay external images in the post');
@@ -55,7 +57,7 @@ define($constpref.'_SELFEDITLIMITDSC','To allow normal users can edit his/her po
 define($constpref.'_SELFDELLIMIT','Time limit for users delete (sec)');
 define($constpref.'_SELFDELLIMITDSC','To allow normal users can delete his/her posts, set plus value as seconds. To disallow normal users can delete it, set 0. Anyway any parent posts cannot be removed.');
 define($constpref.'_CSS_URI','URI of CSS file for this module');
-define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: index.css');
+define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','Directory for image files');
 define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
 define($constpref.'_ANONYMOUS_NAME','Anonymous Name');
@@ -65,7 +67,10 @@ define($constpref.'_ICON_MEANINGSDSC','Specify ALTs of icons. each alts should b
 define($constpref.'_ICON_MEANINGSDEF','none|normal|unhappy|happy|raise it|lower it|report|question');
 define($constpref.'_GUESTVOTE_IVL','Vote from guests');
 define($constpref.'_GUESTVOTE_IVLDSC','Set this 0, to disable voting from guest. The other this number means time(sec.) to allow second post from the same IP.');
-
+define($constpref.'_ANTISPAM_GROUPS','Groups should be checked anti-SPAM');
+define($constpref.'_ANTISPAM_GROUPSDSC','Usually set all blank.');
+define($constpref.'_ANTISPAM_CLASS','Class name of anti-SPAM');
+define($constpref.'_ANTISPAM_CLASSDSC','Default value is "default". If you disable anti-SPAM against guests even, set it blank');
 
 
 // Notify Categories

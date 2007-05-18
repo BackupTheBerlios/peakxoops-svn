@@ -60,6 +60,8 @@ if( $mode != 'newtopic' ) {
 	include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
 }
 
+// d3comment object
+if( ! empty( $forum_row['forum_external_link_format'] ) ) $d3com =& d3forum_main_get_comment_object( $mydirname , $forum_row['forum_external_link_format'] ) ;
 
 // Permissions
 if( $mode == 'edit' ) {
@@ -76,12 +78,15 @@ if( $mode == 'edit' ) {
 } else {
 	// check post permission (new topic)
 	if( empty( $can_post ) ) die( _MD_D3FORUM_ERR_POSTFORUM ) ;
-	// comment integration
+	// comment integration (get external ID and validate it)
 	if( ! empty( $forum_row['forum_external_link_format'] ) ) {
 		if( empty( $_POST['external_link_id'] ) ) {
 			die( _MD_D3FORUM_ERR_FORUMASCOMMENT ) ;
 		} else {
-			$external_link_id = intval( $_POST['external_link_id'] ) ;
+			$external_link_id = $_POST['external_link_id'] ;
+			if( ( $external_link_id = $d3com->validate_id( $external_link_id ) ) === false ) {
+				die( _MD_D3FORUM_ERR_INVALIDEXTERNALLINKID ) ;
+			}
 		}
 	}
 }
@@ -107,14 +112,33 @@ foreach( $requests_text as $key ) {
 }
 
 // Validations after FETCH
-$subject = $subject ? $subject : _NOTITLE ;
+$subject = trim( $subject ) == '' ? _NOTITLE : $subject ;
 if( $icon < 0 || $icon >= sizeof( $d3forum_icon_meanings ) ) $icon = 0 ;
 if( empty( $xoopsModuleConfig['allow_html'] ) ) $html = 0 ;
 if( empty( $xoopsModuleConfig['allow_sig'] ) ) $allow_sig = 0 ;
 $hide_uid = ! empty( $_POST['hide_uid'] ) && ! empty( $xoopsModuleConfig['allow_hideuid'] ) && $uid ? 1 : 0 ;
 
+// Validate message
+$preview_message4html = $myts->displayTarea( $message , $html , $smiley , $xcode , @$xoopsModuleConfig['allow_textimg'] , $br , 0 , $number_entity , $special_entity ) ;
+require_once dirname(dirname(__FILE__)).'/class/D3forumMessageValidator.class.php' ;
+$validator =& new D3forumMessageValidator() ;
+if( ! $validator->validate_by_rendered( $preview_message4html ) ) {
+	// if message is invalid, force to preview instead of post
+	$preview_message4html = $validator->get_errors4html() ;
+	$_POST['contents_preview'] = true ;
+}
 
-if( !empty($_POST['contents_preview']) ) {
+// Validate by anti-SPAM
+if( d3forum_common_is_necessary_antispam( $xoopsUser , $xoopsModuleConfig ) ) {
+	$antispam_obj =& d3forum_common_get_antispam_object( $xoopsModuleConfig ) ;
+	if( ! $antispam_obj->checkValidate() ) {
+		// if this post does not pass the check, force to preview
+		$preview_message4html = $antispam_obj->getErrors4Html() ;
+		$_POST['contents_preview'] = true ;
+	}
+}
+
+if( ! empty( $_POST['contents_preview'] ) ) {
 
 	//
 	// PREVIEW
@@ -137,7 +161,6 @@ if( !empty($_POST['contents_preview']) ) {
 
 	// user's post data
 	$preview_subject4html = $myts->makeTboxData4Show( $subject , $number_entity , $special_entity ) ;
-	$preview_message4html = $myts->displayTarea( $message , $html , $smiley , $xcode , @$xoopsModuleConfig['allow_textimg'] , $br , 0 , $number_entity , $special_entity ) ;
 	$subject4html = $myts->makeTboxData4Edit( $subject , $number_entity ) ;
 	$message4html = $myts->makeTareaData4Edit( $message , $number_entity ) ;
 	$guest_name4html = $myts->makeTboxData4Edit( $guest_name ) ;
@@ -183,6 +206,9 @@ if( !empty($_POST['contents_preview']) ) {
 	}*/
 	$set4sql .= ",subject='".addslashes($subject)."'" ;
 	$set4sql .= ",post_text='".addslashes($message)."'" ;
+
+	// reject "blank message"
+	if( trim( $message ) == '' ) die( _MD_D3FORUM_ERR_NOMESSAGE ) ;
 
 	// guest's post
 	if( $mode != 'edit' && $uid == 0 || $mode == 'edit' && $post_row['uid'] == 0 && $post_row['uid_hidden'] == 0 ) {
@@ -272,7 +298,7 @@ if( !empty($_POST['contents_preview']) ) {
 		}
 
 		// create topic and get a new topic_id
-		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_topics")." SET forum_id=$forum_id,topic_invisible=$topic_invisible,topic_external_link_id=".intval(@$external_link_id) ) ) die( "DB ERROR IN INSERT topic" ) ;
+		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_topics")." SET forum_id=$forum_id,topic_invisible=$topic_invisible,topic_external_link_id='".addslashes(@$external_link_id)."'" ) ) die( "DB ERROR IN INSERT topic" ) ;
 		$topic_id = $xoopsDB->getInsertId() ;
 		// create post in the topic
 		if( ! $xoopsDB->query( "INSERT INTO ".$xoopsDB->prefix($mydirname."_posts")." SET $set4sql,topic_id=$topic_id,post_time=UNIX_TIMESTAMP(),poster_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."'" ) ) die( "DB ERROR IN INSERT post" ) ;
@@ -363,11 +389,19 @@ if( !empty($_POST['contents_preview']) ) {
 		}
 	}
 
+	// call back to the target of comment
+	if( is_object( @$d3com ) && ! empty( $external_link_id ) ) {
+		$d3com->onUpdate( $mode , $external_link_id , $forum_id , $topic_id , $post_id ) ;
+	}
+
 	$redirect_message = $mode == 'edit' ? _MD_D3FORUM_MSG_THANKSEDIT : _MD_D3FORUM_MSG_THANKSPOST ;
-	/* if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
-		// return to comment target
+	if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
+		// return to comment target (conventional module)
 		redirect_header( sprintf( str_replace( '{XOOPS_URL}' , XOOPS_URL , $forum_row['forum_external_link_format'] ) , $external_link_id ) , 2 , $redirect_message ) ;
-	} else*/ if( ! empty( $topic_invisible ) ) {
+	} else if( is_object( @$d3com ) && ! empty( $external_link_id ) && ( $summary = $d3com->fetchSummary( $external_link_id ) ) ) {
+		// return to comment target (d3comment native module)
+		redirect_header( @$summary['uri'] , 2 , $redirect_message ) ;
+	} else if( ! empty( $topic_invisible ) ) {
 		// redirect the forum for invisible topic
 		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" , 2 , _MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL ) ;
 	} else {

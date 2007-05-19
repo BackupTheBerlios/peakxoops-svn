@@ -3,7 +3,7 @@
 function b_bulletin_category_new_allowed_order()
 {
 	return array(
-		_MB_BULLETIN_DATE . ' DESC' => 'publised DESC' ,
+		_MB_BULLETIN_DATE . ' DESC' => 'published DESC' ,
 		_MB_BULLETIN_HITS . ' DESC' => 'counter DESC' ,
 		_MB_BULLETIN_DATE . ' ASC' => 'published ASC' ,
 		_MB_BULLETIN_HITS . ' ASC' => 'counter ASC' ,

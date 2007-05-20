@@ -1,5 +1,4 @@
 <!-- start each post -->
-<div class="d3f_post_container" <{if $postorder < 2}>style="margin-left:<{$post.depth_in_tree|min:10}>0px;"<{/if}>>
 <div class="head d3f_head">
 	<h2 class="<{if $post.invisible}> invisible<{elseif ! $post.approval}> yetapproval<{/if}>">
 	<a id="post_id<{$post.id}>" name="post_id<{$post.id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" alt="<{$icon_meanings[$post.icon]}>" /></a>
@@ -46,8 +45,7 @@
 <{if $post.poster_uid != 0}><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{/if}><{$post.poster_uname}><{if $post.poster_uid != 0}></a><{/if}>&nbsp;
 <{if $post.poster_uid != 0}>
 	<{if $post.poster_rank_title}>
-		<img src="<{$xoops_upload_url}>/<{$post.poster_rank_image}>" alt="" />
-		<{$post.poster_rank_title}>
+		<img src="<{$xoops_upload_url}>/<{$post.poster_rank_image}>" alt="<{$post.poster_rank_title}>"  title="<{$post.poster_rank_title}>" />
 	<{/if}>
 	<{* <{$smarty.const._MD_D3FORUM_POSTERJOINED}>: <{$post.poster_regdate_formatted}> *}>
 	<{if $post.poster_from}><{$smarty.const._MD_D3FORUM_POSTERFROM}>: <{$post.poster_from}><{/if}>&nbsp;
@@ -71,7 +69,6 @@
 	<p>-- <br /><{$post.signature}></p>
 <{/if}>
 </div>
-</div>
 
 <!-- post foot control -->
 <div class="d3f_info_ctrl">
@@ -80,7 +77,7 @@
 <{/if}>
 
 <{if ! $post.approval && $forum.isadminormod}>
-	<a href="<{$mod_url}>/index.php?page=update_post_approval&amp;post_id=<{$post.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></a>|
+	<a href="<{$mod_url}>/index.php?page=update_post_approval&amp;post_id=<{$post.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></a> |
 <{/if}>
 
 <{if $mod_config.use_vote && ! $post.invisible && $post.approval}>
@@ -110,11 +107,10 @@
 			<input type="submit" value="<{$smarty.const._MD_D3FORUM_VOTEPOINTDSCWORST}>" />
 		</form>
 	<{/if}>
-	|
 <{/if}>
 
 <{if $post.can_edit}>
-<a href="<{$mod_url}>/index.php?page=edit&amp;post_id=<{$post.id}>"><{$smarty.const._MD_D3FORUM_POSTEDIT}></a> |
+ | <a href="<{$mod_url}>/index.php?page=edit&amp;post_id=<{$post.id}>"><{$smarty.const._MD_D3FORUM_POSTEDIT}></a> |
 <{/if}>
 
 <{if $post.can_delete}>

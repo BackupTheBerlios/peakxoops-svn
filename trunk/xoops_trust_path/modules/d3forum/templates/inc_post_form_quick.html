@@ -16,7 +16,7 @@
 			<tr valign="top" align="left">
 				<td class="head"><{$smarty.const._MD_D3FORUM_SUBJECT}></td>
 				<td class="even">
-					<input type="text" name="subject" id="subject" size="60" maxlength="255" value="<{$subject|escape}>" />
+					<input type="text" name="subject" id="subject" size="60" maxlength="255" value="<{$subject_raw|escape}>" />
 				</td>
 			</tr>
 	
@@ -52,8 +52,9 @@
 			<tr valign="top" align="left">
 				<td class="head"></td>
 				<td class="even">
+					<{$antispam.html_in_form}>
 					<input type="submit" class="formButton" name="contents_submit"  id="contents_submit" value="<{$smarty.const._SUBMIT}>" />
-					<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>&amp;external_link_id=<{$external_link_id|escape:"url"}>&amp;subject=<{$subject|escape:"url"}>"><{$smarty.const._MD_D3FORUM_LINK_RICHERCOMMENTFORM}></a>
+					<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>&amp;external_link_id=<{$external_link_id|escape:"url"}>&amp;subject=<{$subject_raw|escape:"url"}>"><{$smarty.const._MD_D3FORUM_LINK_RICHERCOMMENTFORM}></a>
 				</td>
 			</tr>
 		</table>
@@ -62,10 +63,13 @@
 	<!-- Start Form Vaidation JavaScript //-->
 	<script type="text/javascript">
 	<!--//
+	<{$antispam.js_global}>
+
 	function xoopsFormValidate_postform() {
 		myform = window.document.postform;
 		if ( myform.subject.value.replace(/^\s+|\s+$/g,"") == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_SUBJECT|string_format:$smarty.const._FORM_ENTER}>"); myform.subject.focus(); return false; }
 		if ( myform.message.value.replace(/^\s+|\s+$/g,"") == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_ERR_NOMESSAGE}>"); myform.message.focus(); return false; }
+		<{$antispam.js_in_validate_function}>
 		return true;
 	}
 	function d3forum_quote_message() {

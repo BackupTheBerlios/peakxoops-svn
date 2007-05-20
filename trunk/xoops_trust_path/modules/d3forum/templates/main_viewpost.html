@@ -8,10 +8,10 @@
 		&nbsp;&gt;&nbsp;
 		<{foreach from=$category.paths_raw key=parent_id item=parent_title_raw}>
 			<a href="<{$mod_url}>/index.php?cat_id=<{$parent_id}>"><{$parent_title_raw|escape}></a>
-		&nbsp;&gt
+		&nbsp;&gt;
 		<{/foreach}>
 		<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
-		&nbsp;&gt
+		&nbsp;&gt;
 		<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a>
 	<{/strip}>
 </div>
@@ -38,7 +38,7 @@
 <{/if}>
 	<a href="<{$mod_url}>/index.php?post_id=<{$eachpost.id}>" id="post_path<{$eachpost.unique_path}>" name="post_path<{$eachpost.unique_path}>"><img src="<{$mod_imageurl}>/posticon<{$eachpost.icon}>.gif" alt="<{$icon_meanings[$eachpost.icon]}>" /> <{$eachpost.subject}></a>
 	(<{$eachpost.poster_uname}>, <{$eachpost.post_time_formatted}>)
-	<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/adminicon_cutpaste.gif" alt="<{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}>" /></a></span><{/if}>
+	<{if $forum.isadminormod}><a href="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$eachpost.id}>"><img src="<{$mod_imageurl}>/adminicon_cutpaste.gif" alt="<{$smarty.const._MD_D3FORUM_CUTPASTEPOSTS}>" /></a><{/if}></span>
 <{$eachpost.ul_out}>
 <{/foreach}>
 <!-- end topic tree -->

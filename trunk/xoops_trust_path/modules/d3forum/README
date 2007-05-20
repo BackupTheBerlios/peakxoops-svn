@@ -25,6 +25,11 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.71 alpha (2007-05-21)
+- modified templates by jidaikobo
+- fixed comment's form does not have antiSpam elements
+- fixed escaping subject on d3comment integration
+
 0.70 alpha (2007-05-18)
 - changed the structure "altsys essential"
 - added language constants override system (with altsys>=0.5)
@@ -122,6 +127,11 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.71 alpha (2007-05-21)
+- jidaikoboさんのテンプレートを一部マージした
+- 直接コメントをつけるフォームにantiSpam要素が含まれていなかったのを修正
+- コメント統合時のサブジェクトエスケープ処理修正
 
 0.70 alpha (2007-05-18)
 - 正式にaltsys必須とした

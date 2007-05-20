@@ -266,6 +266,18 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 		$topics_hits = 0 ;
 	}
 
+	// form elements or javascripts for anti-SPAM
+	if( d3forum_common_is_necessary_antispam( $xoopsUser , $xoopsModuleConfig ) ) {
+		$antispam_obj =& d3forum_common_get_antispam_object( $xoopsModuleConfig ) ;
+		$antispam4assign = $antispam_obj->getHtml4Assign() ;
+	} else {
+		$antispam4assign = array() ;
+	}
+
+	// subject pre filter
+	$subject_raw = empty( $params['subject_escaped'] ) ? @$params['subject'] : d3forum_common_unhtmlspecialchars( @$params['subject'] ) ;
+	var_dump( $subject_raw ) ;
+
 	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign(
@@ -276,7 +288,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 			'mod_config' => $xoopsModuleConfig ,
 			'uid' => $uid ,
 			'uname' => is_object( $xoopsUser ) ? $xoopsUser->getVar('uname') : '' ,
-			'subject' => empty( $params['subject'] ) ? '' : sprintf( _MD_D3FORUM_FMT_COMMENTSUBJECT , $params['subject'] ) ,
+			'subject_raw' => sprintf( _MD_D3FORUM_FMT_COMMENTSUBJECT , $subject_raw ) ,
 			'postorder' => $postorder ,
 			'icon_meanings' => $d3forum_icon_meanings ,
 			'category' => $category4assign ,
@@ -292,6 +304,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 			'page' => 'listtopics' ,
 			'plugin_params' => $params ,
 			'xoops_pagetitle' => $forum4assign['title'] ,
+			'antispam' => $antispam4assign ,
 		)
 	) ;
 	$tpl->display( $this_template ) ;

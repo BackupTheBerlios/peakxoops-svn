@@ -46,7 +46,7 @@ function getHtml4Assign()
 
 function checkValidate()
 {
-	$yomigana = mb_convert_kana( trim( @$_POST['antispam_yomigana'] ) , 'Hc' ) ;
+	$yomigana = mb_convert_kana( trim( @$_POST['antispam_yomigana'] ) , 'HVc' ) ;
 
 	$yomi_kan0 = $this->getKanaKanji() ;
 	$yomi_kan1 = $this->getKanaKanji( time() - 3600 ) ;

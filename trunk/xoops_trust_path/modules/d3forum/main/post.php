@@ -131,7 +131,7 @@ if( ! $validator->validate_by_rendered( $preview_message4html ) ) {
 // Validate by anti-SPAM
 if( d3forum_common_is_necessary_antispam( $xoopsUser , $xoopsModuleConfig ) ) {
 	$antispam_obj =& d3forum_common_get_antispam_object( $xoopsModuleConfig ) ;
-	if( ! $antispam_obj->checkValidate() ) {
+	if( ! $antispam_obj->checkValidate() && empty( $_POST['contents_preview'] ) ) {
 		// if this post does not pass the check, force to preview
 		$preview_message4html = $antispam_obj->getErrors4Html() ;
 		$_POST['contents_preview'] = true ;

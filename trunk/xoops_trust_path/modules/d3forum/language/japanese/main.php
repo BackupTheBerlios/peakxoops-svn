@@ -109,6 +109,8 @@ define('_MD_D3FORUM_ERR_TOOMANYDIVEND','[/quote]または</div>の数が多すぎます');
 
 // D3forumAntispam classes
 define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','JavaScriptを有効にしてから、再度投稿してください（さらにもう一度投稿ボタンを押す必要があるかもしれません）');
+define('_MD_D3FORUM_LABEL_JAPANESEINPUTYOMI','この漢字の読みを入力してください');
+define('_MD_D3FORUM_ERR_JAPANESENOTINPUT','漢字の読みが間違っています。再度入力してください');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');

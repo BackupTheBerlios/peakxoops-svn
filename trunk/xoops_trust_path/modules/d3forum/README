@@ -12,6 +12,7 @@ Enjoy D3 World!
 
 (If necessary)
 - set up XOOPS_TRUST_PATH
+- install the latest altsys module
 
 - Copy all files into your XOOPS.
 - Install it as usual D3 module. Of course, you can name the directory under modules/ freely.
@@ -29,6 +30,8 @@ jidaikobo -template coding-
 - modified templates by jidaikobo
 - fixed comment's form does not have antiSpam elements
 - fixed escaping subject on d3comment integration
+- added an antiSPAM class
+-- japanese (only for Japanese. input reading of kanji) 0.71a
 
 0.70 alpha (2007-05-18)
 - changed the structure "altsys essential"
@@ -119,8 +122,10 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 ●インストール手順
 
-(もしまだなら)
+
+もしまだなら)
 - XOOPS_TRUST_PATH をセットアップする
+- 最新のaltsysモジュールをインストールする
 
 - 利用中のXOOPSにアーカイブを展開してコピーする。この際、Smartyプラグインのコピーを忘れないこと
 - 通常のD3モジュールとしてインストールします。もちろん、ディレクトリ名は自由に決めることが出来ます
@@ -132,6 +137,8 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 - jidaikoboさんのテンプレートを一部マージした
 - 直接コメントをつけるフォームにantiSpam要素が含まれていなかったのを修正
 - コメント統合時のサブジェクトエスケープ処理修正
+- AntiSPAMクラス追加
+-- japanese (漢字の読み方を入力してもらう方法) 0.71a
 
 0.70 alpha (2007-05-18)
 - 正式にaltsys必須とした

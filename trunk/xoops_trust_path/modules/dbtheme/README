@@ -49,6 +49,9 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 
 [b]CHANGES[/b]
 
+0.34 2007-05-23
+- fixed the dependency of dirname "dbtheme" in oninstall and onupdate
+
 0.33 2007-05-12
 - changed the structure "altsys essential"
 - added language constants override system (with altsys>=0.5)
@@ -142,6 +145,9 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
 ●更新履歴
 
+
+0.34 2007-05-23
+- oninstallおよびonupdate内に、"dbtheme" が直書きになっていたのを修正
 
 0.33 2007-05-12
 - 正式にaltsys必須とした

@@ -100,7 +100,7 @@ function dbtheme_oninstall_base( $module , $mydirname )
 				if( strrchr( $file , '.' ) == '.html' ) {
 					// CSS hooking
 					$searches[] = '/\"\<\{\$xoops_imageurl\}\>([0-9a-zA-Z_-]+)\.(css|html|js)\"/' ;
-					$replacements[] = '"<{$xoops_url}>/modules/dbtheme/?template=$1.$2'.'"' ;
+					$replacements[] = '"<{$xoops_url}>/modules/'.$mydirname.'/?template=$1.$2'.'"' ;
 				} else if( strrchr( $file , '.' ) == '.css' ) {
 					// url() hooking
 					$searches[] = '#url\(\s*([\"\']?)([0-9a-z./]{3})#i' ;

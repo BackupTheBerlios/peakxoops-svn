@@ -55,14 +55,15 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 
 foreach( $block['events'] as $event ) {
 
-	// start
 	$start = date( "n/j G:i" , $event['start'] ) ;
+	$summary = pical_get_escaped4xml( $event['summary'] ) ;
+	$description = pical_get_escaped4xml( $event['description'] ) ;
 
 	echo "
     <item>
-      <title>$start {$event['summary']}</title>
+      <title>$start $summary</title>
       <link>$mod_url/?event_id={$event['id']}</link>
-      <description>{$event['description']}</description>
+      <description>$description</description>
     </item>\n" ;
 
 //      <pubDate>".formatTimestamp($event['start'],'r')."</pubDate>
@@ -72,5 +73,11 @@ foreach( $block['events'] as $event ) {
 echo "
   </channel>
 </rss>\n" ;
+
+function pical_get_escaped4xml( $text )
+{
+	return htmlspecialchars( str_replace( array( '&#039;' , '&quot;' , '&lt;' , '&gt;' ) , array( "'" , '"' , '<' , '>' ) , $text ) , ENT_QUOTES ) ;
+}
+
 
 ?>

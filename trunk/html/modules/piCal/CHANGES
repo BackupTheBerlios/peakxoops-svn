@@ -11,6 +11,7 @@ v.091 (2007-03-15)
 - fixed templates for minical_ex blocks 0.91a
 - added language files
 -- danish (thx Anders) 0.91b
+- fixed wrong entity in rss2_coming.php and rss2_today.php 0.91c
 
 v.090 (2007-03-12)
 - marked as stable
@@ -388,6 +389,7 @@ v.091 (2007-03-15)
 - テンプレートの微修正 0.91a
 - 言語ファイル追加
 -- danish (thx Anders) 0.91b
+- RSS出力コントローラで、無効なエンティティが出るのを修正 0.91c
 
 v.090 (2007-03-12)
 - 安定版への格上げ

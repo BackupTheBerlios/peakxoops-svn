@@ -276,7 +276,6 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 
 	// subject pre filter
 	$subject_raw = empty( $params['subject_escaped'] ) ? @$params['subject'] : d3forum_common_unhtmlspecialchars( @$params['subject'] ) ;
-	var_dump( $subject_raw ) ;
 
 	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;

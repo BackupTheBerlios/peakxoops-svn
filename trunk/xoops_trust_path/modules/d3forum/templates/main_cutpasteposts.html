@@ -19,7 +19,7 @@
 	<dd class="even"><{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}> : <{$children_count}><br /><{$smarty.const._MD_D3FORUM_PARENT_POSTID}> : <{$post.pid}></dd>
 </dl>
 
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CUTPASTEBYPOSTIDSBJ}></h2>
+<h2 class="d3f_head"><{$smarty.const._MD_D3FORUM_CUTPASTEBYPOSTIDSBJ}></h2>
 
 <form name="cutpastebypostid" id="cutpastebypostid" action="<{$mod_url}>/index.php?page=cutpasteposts&amp;post_id=<{$post_id}>" method="post">
 
@@ -31,10 +31,10 @@
 </form>
 
 <{if $post.pid}>
-	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CUTPASTETOPICDIVSBJ}></h2>
+	<h2 class="d3f_head"><{$smarty.const._MD_D3FORUM_CUTPASTETOPICDIVSBJ}></h2>
 	<p><{$smarty.const._MD_D3FORUM_CUTPASTETOPICDIVDSC}></p>
 <{else}>
-	<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_CUTPASTEBYFORUMIDSBJ}></h2>
+	<h2 class="d3f_head"><{$smarty.const._MD_D3FORUM_CUTPASTEBYFORUMIDSBJ}></h2>
 	<p><{$smarty.const._MD_D3FORUM_CUTPASTEBYFORUMIDDSC}></p>
 <{/if}>
 

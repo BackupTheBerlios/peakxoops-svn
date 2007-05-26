@@ -34,7 +34,7 @@
 <{/if}>
 
 <{if $subcategories}>
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h2>
+<h2 class="d3f_head"><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h2>
 <ul class="d3f_subcategories">
 <{foreach item=subcategory from=$subcategories}>
 	<li><a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>"<{if $subcategory.desc}> title="<{$subcategory.desc}>"<{/if}>><img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" /> <{$subcategory.title}></a> (<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$subcategory.topics_count}>, <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$subcategory.posts_count}>)</li>
@@ -43,7 +43,7 @@
 <{/if}>
 
 <{if $forums}>
-<h2 class="head d3f_head"><{$smarty.const._MD_D3FORUM_FORUM}></h2>
+<h2 class="d3f_head"><{$smarty.const._MD_D3FORUM_FORUM}></h2>
 <table class="outer d3f_table">
 <thead>
 <tr class="head">

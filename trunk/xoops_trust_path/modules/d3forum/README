@@ -26,6 +26,9 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.72 alpha (2007-05-27)
+- modified templates by jidaikobo
+
 0.71 alpha (2007-05-21)
 - modified templates by jidaikobo
 - fixed comment's form does not have antiSpam elements
@@ -133,6 +136,9 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.72 alpha (2007-05-27)
+- jidaikoboさんのテンプレートを一通りマージ完了した
 
 0.71 alpha (2007-05-21)
 - jidaikoboさんのテンプレートを一部マージした

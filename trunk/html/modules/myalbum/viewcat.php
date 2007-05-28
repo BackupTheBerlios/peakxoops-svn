@@ -69,6 +69,7 @@ if( $cid > 0 ) {
 
 	// This means 'my photo'
 	if( $uid < 0 ) {
+		$xoopsModule->getInfo() ;
 		$where = "submitter=$my_uid" ;
 		$get_append = "uid=-1" ;
 		$xoopsTpl->assign( 'uid' , -1 ) ;

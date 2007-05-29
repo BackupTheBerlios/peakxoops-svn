@@ -15,7 +15,7 @@ function pico_get_content_history_profile( $mydirname , $content_history_id , $c
 	}
 
 	// get and process $cat_id
-	$cat_id = pico_get_cat_id_from_content_id( $mydirname , $content_id ) ;
+	$cat_id = pico_main_get_cat_id_from_content_id( $mydirname , $content_id ) ;
 
 return array( $cat_id , $content_id , 
 "content_id: {$history_row['content_id']}

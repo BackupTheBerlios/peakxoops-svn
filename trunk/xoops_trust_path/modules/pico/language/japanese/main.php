@@ -21,6 +21,7 @@ define('_MD_PICO_WAITINGAPPROVAL','承認待ち');
 define('_MD_PICO_WAITINGREGISTER','新規登録申請中');
 define('_MD_PICO_WAITINGUPDATE','変更申請中');
 define('_MD_PICO_REGISTERED_AUTOMATICALLY','自動登録');
+define('_MD_PICO_ONOFF','表示/非表示');
 
 define('_MD_PICO_CATEGORY','カテゴリー');
 define('_MD_PICO_CATEGORIES','カテゴリー');
@@ -104,7 +105,7 @@ define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');
 define('_MD_PICO_BTN_SUBMITEDITING','編集内容を登録');
 define('_MD_PICO_BTN_COPYFROMWAITING','申請データへの置換');
 define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','このフォーム内での編集内容は破棄され、申請された通りのデータに置き換わりますが、よろしいですか？');
-
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','一般設定での設定値をこのカテゴリーだけ変更したい場合は、<br />(オプション名):(オプション値)<br />という形で、１行に１設定ずつ記述してください。<br />例）<br />show_breadcrumbs:1 <br /><br />変更可能なオプションと現在値は以下の通りです。');
 
 // vote to content
 define('_MD_PICO_ERR_VOTEPERM','投票権がありません');

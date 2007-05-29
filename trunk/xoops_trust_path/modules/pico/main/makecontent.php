@@ -38,9 +38,9 @@ if( isset( $_POST['contentman_post'] ) ) {
 		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	} else {
 		// Notify for new waiting content (only for admin or mod)
-		$users2notify = pico_get_moderators( $mydirname , $cat_id ) ;
+		$users2notify = pico_main_get_moderators( $mydirname , $cat_id ) ;
 		if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
-		pico_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
+		pico_main_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
 		redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_MSG_CONTENTWAITINGREGISTER ) ;
 	}
 	exit ;
@@ -54,7 +54,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	}
 	$content = pico_get_requests4content( $mydirname , $errors = array() , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] ) ;
 	$content4assign = array_map( 'htmlspecialchars_ent' , $content ) ;
-	$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] , $category4assign['isadminormod'] ) ;
+	$content4assign['filter_infos'] = pico_main_get_filter_infos( $content['filters'] , $category4assign['isadminormod'] ) ;
 	$content4assign['body_raw'] = $content['body'] ;
 	$preview4assign = array(
 		'errors' => $errors ,
@@ -71,7 +71,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'body' => '' ,
 		'body_raw' => '' ,
 		'filters' => $xoopsModuleConfig['filters'] ,
-		'filter_infos' => pico_get_filter_infos( $xoopsModuleConfig['filters'] , $category4assign['isadminormod'] ) ,
+		'filter_infos' => pico_main_get_filter_infos( $xoopsModuleConfig['filters'] , $category4assign['isadminormod'] ) ,
 		'weight' => 0 ,
 		'use_cache' => 1 ,
 		'visible' => 1 ,
@@ -98,7 +98,7 @@ $xoopsTpl->assign( array(
 	'preview' => @$preview4assign ,
 	'page' => 'makecontent' ,
 	'formtitle' => _MD_PICO_LINK_MAKECONTENT ,
-	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
+	'cat_jumpbox_options' => pico_main_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . @$pico_wysiwyg_header ,
 	'xoops_pagetitle' => _MD_PICO_LINK_MAKECONTENT ,

@@ -143,12 +143,8 @@ if( ! empty( $_POST['contents_export'] ) && ! empty( $_POST['action_selects'] ) 
 // form stage
 //
 
-// create jump box options as array
-$crs = $db->query( "SELECT cat_id,cat_title,cat_depth_in_tree FROM ".$db->prefix($mydirname."_categories")." ORDER BY cat_order_in_tree" ) ;
-$cat_options = array( 0 => _MD_PICO_TOP ) ;
-while( list( $id , $title , $depth ) = $db->fetchRow( $crs ) ) {
-	$cat_options[ $id ] = str_repeat( '--' , $depth ) . htmlspecialchars( $title , ENT_QUOTES ) ;
-}
+// category options as array
+$cat_options = pico_common_get_cat_options( $mydirname ) ;
 
 // fetch contents
 if( $cat_id == SPECIAL_CAT_ID_DELETED ) {
@@ -159,6 +155,9 @@ if( $cat_id == SPECIAL_CAT_ID_DELETED ) {
 }
 $contents4assign = array() ;
 while( $content_row = $db->fetchArray( $ors ) ) {
+	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
+
+
 	$content4assign = array(
 		'id' => intval( $content_row['content_id'] ) ,
 		'cat_title' => $myts->makeTboxData4Show( $content_row['cat_title'] ) ,
@@ -168,6 +167,7 @@ while( $content_row = $db->fetchArray( $ors ) ) {
 		'modifier_uname' => $content_row['modifier_uid'] ? $myts->makeTboxData4Show( $content_row['modifier_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 		'vpath' => htmlspecialchars( $content_row['vpath'] ) ,
+		'wrap_file' => is_file( $wrap_full_path ) ? array( 'mtime_formatted' => formatTimestamp( filemtime( $wrap_full_path ) , 'm' ) , 'size' => filesize( $wrap_full_path ) ) : false ,
 		'histories' => $content_row['is_deleted'] ? pico_get_content_histories4assign( $mydirname , intval( $content_row['content_id'] ) ) : array() ,
 
 	) ;

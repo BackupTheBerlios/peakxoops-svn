@@ -471,7 +471,7 @@ function pico_auto_register_wrapped_file( $mydirname , $path , $cat_id = 0 )
 {
 	$db =& Database::getInstance() ;
 
-	$file_info = pico_read_wrapped_file( $mydirname , $path ) ;
+	$file_info = pico_main_read_wrapped_file( $mydirname , $path ) ;
 	$cat_id = intval( $cat_id ) ;
 
 	$content_row = $db->fetchArray( $db->query( "SELECT content_id,cat_id,modified_time FROM ".$db->prefix($mydirname."_contents")." WHERE `vpath`='".mysql_real_escape_string($path)."'" ) ) ;

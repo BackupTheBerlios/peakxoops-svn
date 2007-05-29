@@ -50,7 +50,8 @@ $category4assign = array(
 	'weight' => 0 ,
 	'desc' => '' ,
 	'options' => '' , //$options4html ,
-	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $pico_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
+	'option_desc' => pico_main_get_categoryoptions4edit( $pico_configs_can_be_override ) ,
+	'wraps_directories' => array( '' => '---' ) + pico_main_get_wraps_directories_recursively( $mydirname , '/' ) ,
 ) ;
 
 
@@ -63,7 +64,7 @@ $xoopsTpl->assign( array(
 	'page' => 'makecategory' ,
 	'formtitle' => _MD_PICO_LINK_MAKECATEGORY ,
 	'children_count' => 0 ,
-	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $pid ) ,
+	'cat_jumpbox_options' => pico_main_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $pid ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	'xoops_pagetitle' => _MD_PICO_CATEGORYMANAGER ,

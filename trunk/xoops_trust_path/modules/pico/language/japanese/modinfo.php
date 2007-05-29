@@ -64,6 +64,7 @@ define($constpref.'_BRCACHE','▓ш┴№е╒ебедеыд╬е╓ещеже╢енеуе├е╖ех (wrapsетб╝е╔╗■д╬д
 define($constpref.'_BRCACHEDSC' , 'HTML░╩│░д╬е╒ебедеыдЄе╓ещеже╢д╦енеуе├е╖ехд╣ды╗■┤╓дЄ╔├д╟╗╪─ъб╩0д╟╠╡╕·▓╜б╦');
 define($constpref.'_COM_DIRNAME','е│есеєе╚┼¤╣чд╣дыd3forumд╬dirname');
 define($constpref.'_COM_FORUM_ID','е│есеєе╚┼¤╣чд╣дые╒ейб╝ещерд╬╚╓╣ц');
+define($constpref.'_COM_VIEW','е│есеєе╚┼¤╣чд╬╔╜╝и╩¤╦б');
 
 // blocks
 define($constpref.'_BNAME_MENU','есе╦ехб╝');

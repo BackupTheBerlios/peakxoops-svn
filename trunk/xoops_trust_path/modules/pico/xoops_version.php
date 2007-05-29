@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.34 ;
+$modversion['version'] = 1.35 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -363,6 +363,16 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'int' ,
 	'default'		=> '0' ,
 	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_view' ,
+	'title'			=> $constpref.'_COM_VIEW' ,
+	'description'	=> '' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'listposts_flat' ,
+	'options'		=> array( '_FLAT' => 'listposts_flat' , '_THREADED' => 'listtopics' )
 ) ;
 
 

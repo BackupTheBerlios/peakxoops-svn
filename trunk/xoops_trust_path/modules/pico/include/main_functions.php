@@ -4,7 +4,7 @@
 
 
 // add fields for tree structure into $categories
-function pico_make_treeinformations( $data )
+function pico_main_make_treeinformations( $data )
 {
 	$previous_depth = -1 ;
 	$path_to_i = array() ;
@@ -50,7 +50,7 @@ function pico_make_treeinformations( $data )
 
 
 // get permissions of current user
-function pico_get_category_permissions_of_current_user( $mydirname )
+function pico_main_get_category_permissions_of_current_user( $mydirname )
 {
 	global $xoopsUser ;
 
@@ -84,7 +84,7 @@ function pico_get_category_permissions_of_current_user( $mydirname )
 
 
 // moderator groups
-function pico_get_category_moderate_groups4show( $mydirname , $cat_id )
+function pico_main_get_category_moderate_groups4show( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
@@ -105,7 +105,7 @@ function pico_get_category_moderate_groups4show( $mydirname , $cat_id )
 
 
 // moderator users
-function pico_get_category_moderate_users4show( $mydirname , $cat_id )
+function pico_main_get_category_moderate_users4show( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
@@ -126,7 +126,7 @@ function pico_get_category_moderate_users4show( $mydirname , $cat_id )
 
 
 // select box for jumping into a specified category
-function pico_make_cat_jumpbox_options( $mydirname , $whr4cat , $cat_selected = 0 )
+function pico_main_make_cat_jumpbox_options( $mydirname , $whr4cat , $cat_selected = 0 )
 {
 	global $myts ;
 
@@ -148,7 +148,7 @@ function pico_make_cat_jumpbox_options( $mydirname , $whr4cat , $cat_selected = 
 
 
 // trigger event for D3
-function pico_trigger_event( $category , $item_id , $event , $extra_tags=array() , $user_list=array() , $omit_user_id=null )
+function pico_main_trigger_event( $category , $item_id , $event , $extra_tags=array() , $user_list=array() , $omit_user_id=null )
 {
 	global $xoopsModule , $xoopsConfig , $mydirname , $mydirpath , $mytrustdirname , $mytrustdirpath ;
 
@@ -237,7 +237,7 @@ function pico_trigger_event( $category , $item_id , $event , $extra_tags=array()
 
 
 // get category's moderators as array
-function pico_get_moderators( $mydirname , $cat_id )
+function pico_main_get_moderators( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 	$cat_id = intval( $cat_id ) ;
@@ -262,7 +262,7 @@ function pico_get_moderators( $mydirname , $cat_id )
 
 
 // get $cat_id from $content_id
-function pico_get_cat_id_from_content_id( $mydirname , $content_id )
+function pico_main_get_cat_id_from_content_id( $mydirname , $content_id )
 {
 	$db =& Database::getInstance() ;
 
@@ -273,7 +273,7 @@ function pico_get_cat_id_from_content_id( $mydirname , $content_id )
 
 
 // get top $content_id from $cat_id
-function pico_get_top_content_id_from_cat_id( $mydirname , $cat_id )
+function pico_main_get_top_content_id_from_cat_id( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
@@ -284,7 +284,7 @@ function pico_get_top_content_id_from_cat_id( $mydirname , $cat_id )
 
 
 // escape string for <a href="mailto:..."> (eg. tellafriend)
-function pico_escape4mailto( $text )
+function pico_main_escape4mailto( $text )
 {
 	if( function_exists( 'mb_convert_encoding' ) && defined( '_MD_PICO_MAILTOENCODING' ) ) {
 		$text = mb_convert_encoding( $text , _MD_PICO_MAILTOENCODING ) ;
@@ -294,7 +294,7 @@ function pico_escape4mailto( $text )
 
 
 // get filter's informations under XOOPS_TRUST_PATH/modules/pico/filters/
-function pico_get_filter_infos( $filters_separated_pipe , $isadminormod = false )
+function pico_main_get_filter_infos( $filters_separated_pipe , $isadminormod = false )
 {
 	global $xoopsModuleConfig ;
 
@@ -341,14 +341,14 @@ function pico_get_filter_infos( $filters_separated_pipe , $isadminormod = false 
 		}
 	}
 
-	uasort( $filters , 'pico_filter_cmp' ) ;
+	uasort( $filters , 'pico_main_filter_cmp' ) ;
 
 	return $filters ;
 }
 
 
-// for usort() in pico_get_filter_infos()
-function pico_filter_cmp( $a , $b )
+// for usort() in pico_main_get_filter_infos()
+function pico_main_filter_cmp( $a , $b )
 {
 	if( $a['enabled'] != $b['enabled'] ) {
 		return $a['enabled'] ? -1 : 1 ;
@@ -359,7 +359,7 @@ function pico_filter_cmp( $a , $b )
 
 
 // parse and get path_info
-function pico_parse_path_info( $mydirname )
+function pico_main_parse_path_info( $mydirname )
 {
 	global $xoopsModuleConfig ;
 
@@ -413,7 +413,7 @@ function pico_parse_path_info( $mydirname )
 		if( preg_match( _MD_PICO_AUTONAME4PREGEX , $path_info , $regs ) ) {
 			$content_id = intval( @$regs[1] ) ;
 			$_GET['content_id'] = $content_id ;
-			return array( $content_id , pico_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
+			return array( $content_id , pico_main_get_cat_id_from_content_id( $mydirname , $content_id ) , false ) ;
 		}
 
 		// check path_info obeys the ruled for autonaming for category (4th)
@@ -500,7 +500,7 @@ function pico_parse_path_info( $mydirname )
 
 
 // parse and get path_info
-function pico_read_wrapped_file( $mydirname , $path_info )
+function pico_main_read_wrapped_file( $mydirname , $path_info )
 {
 	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$path_info ;
 
@@ -537,7 +537,7 @@ function pico_read_wrapped_file( $mydirname , $path_info )
 
 
 // get <link> to CSS for main
-function pico_get_link2maincss( $mydirname )
+function pico_main_get_link2maincss( $mydirname )
 {
 	global $xoopsModuleConfig ;
 
@@ -545,6 +545,103 @@ function pico_get_link2maincss( $mydirname )
 
 	return '<link rel="stylesheet" type="text/css" media="all" href="'.$css_uri4disp.'" />'."\n" ;
 }
+
+
+// get samples of category options
+function pico_main_get_categoryoptions4edit( $pico_configs_can_be_override )
+{
+	global $xoopsModuleConfig ;
+
+	$lines = array() ;
+	foreach( $pico_configs_can_be_override as $key => $type ) {
+		if( isset( $xoopsModuleConfig[ $key ] ) ) {
+			$val = $xoopsModuleConfig[ $key ] ;
+			if( $type == 'int' || $type == 'bool' ) {
+				$val = intval( $val ) ;
+			}
+			$lines[] = htmlspecialchars( $key . ':' . $val , ENT_QUOTES ) ;
+		}
+	}
+	return implode( '<br />' , $lines ) ;
+}
+
+
+// get directories recursively under WRAP
+function pico_main_get_wraps_directories_recursively( $mydirname , $dir_path = '/' )
+{
+	$full_dir_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$dir_path ;	if( ! is_dir( $full_dir_path ) ) return array() ;
+
+	$dir_path4key = substr( $dir_path , 0 , -1 ) ;
+	$full_dir_path4disp = htmlspecialchars( 'XOOPS_TRUST_PATH'._MD_PICO_WRAPBASE.'/'.$mydirname.$dir_path4key , ENT_QUOTES ) ;
+
+	// make an option will be displayed
+	$db =& Database::getInstance() ;
+	$myrow = $db->fetchArray( $db->query( "SELECT cat_title,cat_depth_in_tree FROM ".$db->prefix($mydirname."_categories")." WHERE cat_vpath='".addslashes($dir_path4key)."'" ) ) ;
+	$ret[ $dir_path4key ] = empty( $myrow ) ? $full_dir_path4disp : $full_dir_path4disp.' ('.str_repeat('--',$myrow['cat_depth_in_tree']).htmlspecialchars( $myrow['cat_title'] , ENT_QUOTES ).')' ;
+
+	// sub directries loop (1)
+	$dir_tmps = array() ;
+	$dh = opendir( $full_dir_path ) ;
+	while( ( $file = readdir( $dh ) ) !== false ) {
+		if( substr( $file , 0 , 1 ) == '.' ) continue ;
+		if( is_dir( $full_dir_path . $file ) ) {
+			$dir_tmps[] = $file ;
+		}
+	}
+	closedir( $dh ) ;
+
+	// sub directries loop (2)
+	foreach( $dir_tmps as $dir_tmp ) {
+		$ret += pico_main_get_wraps_directories_recursively( $mydirname , $dir_path.$dir_tmp.'/' ) ;
+	}
+
+	return $ret ;
+}
+
+
+// get files recursively under WRAP
+function pico_main_get_wraps_files_recursively( $mydirname , $dir_path = '/' )
+{
+	$full_dir_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$dir_path ;	if( ! is_dir( $full_dir_path ) ) return array() ;
+
+	$ret = array() ;
+	$db =& Database::getInstance() ;
+
+	// parse currenct directry
+	$dir_tmps = array() ;
+	$file_tmps = array() ;
+	$dh = opendir( $full_dir_path ) ;
+	while( ( $file = readdir( $dh ) ) !== false ) {
+		if( substr( $file , 0 , 1 ) == '.' ) continue ;
+		if( is_dir( $full_dir_path . $file ) ) {
+			$dir_tmps[] = $file ;
+		} else if( is_file( $full_dir_path . $file ) ) {
+			$ext = strtolower( substr( strrchr( $file , '.' ) , 1 ) ) ;
+			if( in_array( $ext , explode( '|' , _MD_PICO_EXTS4HTMLWRAPPING ) ) ) {
+				$file_tmps[] = $file ;
+			}
+		}
+	}
+	closedir( $dh ) ;
+
+	// files
+	foreach( $file_tmps as $file_tmp ) {
+		$file_path4key = $dir_path . $file_tmp ;
+		$ret[ $file_path4key ] = htmlspecialchars( 'XOOPS_TRUST_PATH'._MD_PICO_WRAPBASE.'/'.$mydirname.$file_path4key , ENT_QUOTES ) ;
+		$myrow = $db->fetchArray( $db->query( "SELECT subject FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".addslashes($file_path4key)."'" ) ) ;
+		if( ! empty( $myrow ) ) {
+			$ret[ $file_path4key ] .= ' (' . htmlspecialchars( xoops_substr( $myrow['subject'] , 0 , 20 ) , ENT_QUOTES ) . ')' ;
+		}
+	}
+
+	// subdirs
+	foreach( $dir_tmps as $dir_tmp ) {
+		$ret += pico_main_get_wraps_files_recursively( $mydirname , $dir_path.$dir_tmp.'/' ) ;
+	}
+
+	return $ret ;
+}
+
 
 
 ?>

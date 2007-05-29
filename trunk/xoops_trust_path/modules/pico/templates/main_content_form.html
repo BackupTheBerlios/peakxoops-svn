@@ -32,6 +32,12 @@
 			<th class="head"><label for="vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
 			<td class="even">
 				<input type="text" name="vpath" id="vpath" size="70" maxlength="255" value="<{$content.vpath}>" class="pico_ascii_only" />
+				<{if $xoops_isadmin}>
+					<br />
+					<select name="wraps_target" onchange="xoopsGetElementById('vpath').value=this.value;">
+						<{html_options options=$content.wraps_files selected=$content.vpath}>
+					</select>
+				<{/if}>
 			</td>
 		</tr>
 

@@ -177,7 +177,8 @@ function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 	}
 
 	// restruct categories
-	$submenus_cache[$caller][$mydirname] = array_merge( @$categories[0]['sub'] , pico_common_restruct_categories( $categories , 0 ) ) ;
+	$top_sub = ! empty( $categories[0]['sub'] ) ? $categories[0]['sub'] : array() ;
+	$submenus_cache[$caller][$mydirname] = array_merge( $top_sub , pico_common_restruct_categories( $categories , 0 ) ) ;
 	return $submenus_cache[$caller][$mydirname] ;
 }
 
@@ -254,6 +255,22 @@ function pico_common_utf8_encode_recursive( &$data )
 		}
 	}
 }
+
+
+// create category options as array
+function pico_common_get_cat_options( $mydirname )
+{
+	$db =& Database::getInstance() ;
+
+	$crs = $db->query( "SELECT c.cat_id,c.cat_title,c.cat_depth_in_tree,COUNT(o.content_id) FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON c.cat_id=o.cat_id GROUP BY c.cat_id ORDER BY c.cat_order_in_tree" ) ;
+	$cat_options = array( 0 => _MD_PICO_TOP ) ;
+	while( list( $id , $title , $depth , $contents_num ) = $db->fetchRow( $crs ) ) {
+		$cat_options[ $id ] = str_repeat( '--' , $depth ) . htmlspecialchars( $title , ENT_QUOTES ) . " ($contents_num)" ;
+	}
+
+	return $cat_options ;
+}
+
 
 
 if( ! function_exists( 'htmlspecialchars_ent' ) ) {

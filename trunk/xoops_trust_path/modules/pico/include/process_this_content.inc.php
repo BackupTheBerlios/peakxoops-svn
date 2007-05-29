@@ -50,7 +50,7 @@ if( empty( $prev_content_id ) ) {
 if( $xoopsModuleConfig['use_taf_module'] ) {
 	$content4assign['tellafriend_uri'] = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign ) ).'&amp;subject='.rawurlencode(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])) ;
 } else {
-	$content4assign['tellafriend_uri'] = 'mailto:?subject='.pico_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])).'&amp;body='.pico_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $content4assign['subject_raw'])).'%0A'.XOOPS_URL."/modules/$mydirname/".rawurlencode(pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign )) ;
+	$content4assign['tellafriend_uri'] = 'mailto:?subject='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])).'&amp;body='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $content4assign['subject_raw'])).'%0A'.XOOPS_URL."/modules/$mydirname/".rawurlencode(pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign )) ;
 }
 
 // count up 'viewed'

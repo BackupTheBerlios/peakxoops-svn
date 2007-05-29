@@ -102,6 +102,12 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.35 beta (2007/05/29)
+- modified interfaces managing contents/categories
+- added drop-down controller for vpath 
+- modified wrapping speed
+- fixed small typo in submenu (thx taku777)
+
 1.34 beta (2007/05/17)
 - added D3Comment callback
 - added language files
@@ -384,6 +390,12 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.35 beta (2007/05/29)
+- 各種操作性の向上
+- 管理者のみ、ラップディレクトリから選択できるようにした
+- 処理速度改善
+- サブメニュー処理のtypo修正 (thx taku777)
 
 1.34 beta (2007/05/17)
 - D3Commentのコールバック処理対応

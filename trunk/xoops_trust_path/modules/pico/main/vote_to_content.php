@@ -6,7 +6,7 @@ include dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 $content_id = intval( @$_GET['content_id'] ) ;
 
 // get and process $cat_id
-$cat_id = $content_id ? pico_get_cat_id_from_content_id( $mydirname , $content_id ) : intval( @$_GET['cat_id'] ) ;
+$cat_id = $content_id ? pico_main_get_cat_id_from_content_id( $mydirname , $content_id ) : intval( @$_GET['cat_id'] ) ;
 
 // check,fetch and assign the category (set $content_id if necessary)
 require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;

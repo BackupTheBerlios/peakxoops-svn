@@ -89,12 +89,8 @@ if( ! empty( $_POST['user_update'] ) ) {
 // form stage
 //
 
-// create jump box options as array
-$crs = $db->query( "SELECT cat_id,cat_title,cat_depth_in_tree FROM ".$db->prefix($mydirname."_categories")." ORDER BY cat_order_in_tree" ) ;
-$cat_options = array( 0 => _MD_PICO_TOP ) ;
-while( list( $id , $title , $depth ) = $db->fetchRow( $crs ) ) {
-	$cat_options[ $id ] = str_repeat( '--' , $depth ) . htmlspecialchars( $title , ENT_QUOTES ) ;
-}
+// category options as array
+$cat_options = pico_common_get_cat_options( $mydirname ) ;
 
 // create permissions4assign
 $permissions4assign = array() ;

@@ -31,6 +31,12 @@
 			<th class="head"><label for="category_vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
 			<td class="even">
 				<input type="text" name="cat_vpath" id="category_vpath" size="60" value="<{$category.vpath}>" class="pico_ascii_only" />
+				<{if $xoops_isadmin}>
+					<br />
+					<select name="wraps_target" onchange="xoopsGetElementById('category_vpath').value=this.value;">
+						<{html_options options=$category.wraps_directories selected=$category.vpath}>
+					</select>
+				<{/if}>
 			</td>
 		</tr>
 		<{/if}>
@@ -58,21 +64,26 @@
 
 		<tr valign="top" align="left">
 			<th class="head">
-				<{$smarty.const._MD_PICO_TH_CATEGORYOPTIONS}>
-				<br />
-				<span class="categoryoptiondesc"><{$category.option_desc}></span>
+				<{$smarty.const._MD_PICO_SUBCATEGORY_COUNT}>
 			</th>
 			<td class="even">
-				<textarea name="cat_options" id="category_options" cols="50" rows="10"><{$category.options}></textarea>
+				<{$children_count}>
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
 			<th class="head">
-				<{$smarty.const._MD_PICO_SUBCATEGORY_COUNT}>
+				<{$smarty.const._MD_PICO_TH_CATEGORYOPTIONS}>
 			</th>
 			<td class="even">
-				<{$children_count}>
+				<input type="checkbox" id="category_option_controller_onoff" onclick="if(this.checked){xoopsGetElementById('category_option_controller').style.display='block';}else{xoopsGetElementById('category_option_controller').style.display='none';};"  <{if $category.options}>checked="checked"<{/if}> /><label for="category_option_controller_onoff"><{$smarty.const._MD_PICO_ONOFF}></label>
+				<div id="category_option_controller" <{if ! $category.options}>style="display:none;"<{/if}>>
+					<textarea name="cat_options" id="category_options" cols="50" rows="10"><{$category.options}></textarea>
+					<br />
+					<{$smarty.const._MD_PICO_HOWTO_OVERRIDEOPTIONS}>:
+					<br />
+					<span class="categoryoptiondesc"><{$category.option_desc}></span>
+				</div>
 			</td>
 		</tr>
 

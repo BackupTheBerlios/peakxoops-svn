@@ -42,7 +42,7 @@ $diff =& new Text_Diff( explode("\n",$older_profile[2]) , explode("\n",$newer_pr
 $renderer =& new Text_Diff_Renderer_inline();
 $diff_str = $renderer->render( $diff ) ;
 
-echo '<html><meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" /><head>'.pico_get_link2maincss( $mydirname ).'</head><body><pre class="pico_history_diff" id="'.$mydirname.'_history_diff">'.$diff_str.'</pre></body></html>' ;
+echo '<html><meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" /><head>'.pico_main_get_link2maincss( $mydirname ).'</head><body><pre class="pico_history_diff" id="'.$mydirname.'_history_diff">'.$diff_str.'</pre></body></html>' ;
 exit ;
 
 ?>

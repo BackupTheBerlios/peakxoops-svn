@@ -25,11 +25,11 @@ $content_id = isset( $_POST['content_id'] ) ? intval( $_POST['content_id'] ) : i
 
 if( empty( $content_id ) ) {
 	// parse path_info
-	if( $xoopsModuleConfig['use_wraps_mode'] ) list( $content_id , $cat_id , $pico_path_info ) = pico_parse_path_info( $mydirname ) ;
+	if( $xoopsModuleConfig['use_wraps_mode'] ) list( $content_id , $cat_id , $pico_path_info ) = pico_main_parse_path_info( $mydirname ) ;
 }
 
 // get and process $cat_id
-$cat_id = pico_get_cat_id_from_content_id( $mydirname , $content_id ) ;
+$cat_id = pico_main_get_cat_id_from_content_id( $mydirname , $content_id ) ;
 
 // get&check this category ($category4assign, $category_row), override options
 require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
@@ -52,9 +52,9 @@ if( isset( $_POST['contentman_post'] ) && $category4assign['can_edit'] ) {
 		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	} else {
 		// Notify for new waiting content (only for admin or mod)
-		$users2notify = pico_get_moderators( $mydirname , $cat_id ) ;
+		$users2notify = pico_main_get_moderators( $mydirname , $cat_id ) ;
 		if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
-		pico_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
+		pico_main_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
 		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTWAITINGUPDATE ) ;
 	}
 	exit ;
@@ -85,7 +85,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	$content = pico_get_requests4content( $mydirname , $errors = array() , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] , $content_id ) ;
 	$content4assign = array_map( 'htmlspecialchars_ent' , $content ) ;
 	$content4assign['id'] = $content_id ;
-	$content4assign['filter_infos'] = pico_get_filter_infos( $content['filters'] , $category4assign['isadminormod'] ) ;
+	$content4assign['filter_infos'] = pico_main_get_filter_infos( $content['filters'] , $category4assign['isadminormod'] ) ;
 	$content4assign['body_raw'] = $content['body'] ;
 
 	$preview4assign = array(
@@ -115,7 +115,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'body_waiting' => htmlspecialchars( $content_row['body_waiting'] , ENT_QUOTES ) ,
 		'body_raw' => $content_row['body'] ,
 		'filters' => htmlspecialchars( $content_row['filters'] , ENT_QUOTES ) ,
-		'filter_infos' => pico_get_filter_infos( $content_row['filters'] , $category4assign['isadminormod'] ) ,
+		'filter_infos' => pico_main_get_filter_infos( $content_row['filters'] , $category4assign['isadminormod'] ) ,
 		'weight' => intval( $content_row['weight'] ) ,
 		'use_cache' => intval( $content_row['use_cache'] ) ,
 		'visible' => intval( $content_row['visible'] ) ,
@@ -127,6 +127,10 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	) ;
 	$content4assign += $content_row ;
 }
+
+// vpath options
+$content4assign['wraps_files'] = array( '' => '---' ) + pico_main_get_wraps_files_recursively( $mydirname , '/' ) ;
+
 
 // WYSIWYG (some editor needs global scope ... orz)
 $pico_wysiwygs = array( 'name' => 'body' , 'value' => $content4assign['body_raw'] ) ;
@@ -144,7 +148,7 @@ $xoopsTpl->assign( array(
 	'preview' => @$preview4assign ,
 	'page' => 'contentmanager' ,
 	'formtitle' => _MD_PICO_LINK_EDITCONTENT ,
-	'cat_jumpbox_options' => pico_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
+	'cat_jumpbox_options' => pico_main_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
 	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . @$pico_wysiwyg_header ,
 	'xoops_pagetitle' => _MD_PICO_CONTENTMANAGER ,

@@ -1,5 +1,10 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:36:31
+define('_MD_PICO_ONOFF','表示/非表示');
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','一般設定での設定値をこのカテゴリーだけ変更したい場合は、<br />(オプション名):(オプション値)<br />という形で、１行に１設定ずつ記述してください。<br />例）<br />show_breadcrumbs:1 <br /><br />変更可能なオプションと現在値は以下の通りです。');
+
 define('_MD_PICO_TOP','トップ');
 define('_MD_PICO_ALLCONTENTS','全コンテンツ');
 define('_MD_PICO_DELETEDCONTENTS','削除済コンテンツ');

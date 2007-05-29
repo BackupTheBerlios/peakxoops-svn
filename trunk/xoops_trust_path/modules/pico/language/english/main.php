@@ -21,6 +21,7 @@ define('_MD_PICO_WAITINGAPPROVAL','waiting approval');
 define('_MD_PICO_WAITINGREGISTER','waiting new');
 define('_MD_PICO_WAITINGUPDATE','waiting update');
 define('_MD_PICO_REGISTERED_AUTOMATICALLY','AUTOMATIC');
+define('_MD_PICO_ONOFF','ON/OFF');
 
 define('_MD_PICO_CATEGORY','Category');
 define('_MD_PICO_CATEGORIES','Categories');
@@ -104,6 +105,7 @@ define('_MD_PICO_LABEL_INPUTHELPER','Input Helper ON/OFF');
 define('_MD_PICO_BTN_SUBMITEDITING','register this form');
 define('_MD_PICO_BTN_COPYFROMWAITING','register waiting data');
 define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','Data you edited in this form will be lost. Are you OK?');
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
 
 
 // vote to post

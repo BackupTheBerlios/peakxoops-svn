@@ -12,6 +12,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:39:06
+define($constpref.'_COM_VIEW','View of Comment-integration');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-07 17:48:20
 define($constpref.'_ADMENU_MYLANGADMIN','تنظیمات زبان');
 

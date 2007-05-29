@@ -1,6 +1,11 @@
 <?php
 //traduzione italiana di evoc cadelsanto@gmail.com www.cadelsanto.org
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:39:06
+define('_MD_PICO_ONOFF','ON/OFF');
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-02 18:27:45
 define('_MD_PICO_JUMPTOTOPOFPICOBODY','Jump to the top');
 define('_MD_PICO_CONTENTS_TOTAL','Total contents');

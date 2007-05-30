@@ -8,7 +8,7 @@ function pico_delete_content( $mydirname , $content_id )
 	$db =& Database::getInstance() ;
 
 	// backup the content, first
-	pico_backupcontent( $mydirname , $content_id , true ) ;
+	pico_transact_backupcontent( $mydirname , $content_id , true ) ;
 
 	// delete content
 	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
@@ -453,7 +453,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	}
 
 	// backup the content, first
-	pico_backupcontent( $mydirname , $content_id ) ;
+	pico_transact_backupcontent( $mydirname , $content_id ) ;
 
 	// admin/moderator hack
 	$created_time4sql = $isadminormod && ! empty( $_POST['specify_created_time'] ) && strtotime( @$_POST['created_time'] ) != -1 ? strtotime( $_POST['created_time'] ) : 'created_time' ;
@@ -525,25 +525,25 @@ function pico_auto_register_from_cat_vpath( $mydirname , $category_row )
 
 
 // copy from waiting fields
-function pico_copyfromwaitingcontent( $mydirname , $content_id )
+function pico_transact_copyfromwaitingcontent( $mydirname , $content_id )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 
 	// backup the content, first
-	pico_backupcontent( $mydirname , $content_id ) ;
+	pico_transact_backupcontent( $mydirname , $content_id ) ;
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body=body_waiting, subject=subject_waiting, htmlheader=htmlheader_waiting, visible=1, approval=1 WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='',`modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='' /*,`modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."'*/ ,body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	return $content_id ;
 }
 
 
 // store a content into history table (before delete or update)
-function pico_backupcontent( $mydirname , $content_id , $forced = false )
+function pico_transact_backupcontent( $mydirname , $content_id , $forced = false )
 {
 	global $xoopsUser , $xoopsModuleConfig ;
 

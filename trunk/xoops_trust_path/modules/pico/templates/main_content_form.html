@@ -150,6 +150,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><{$smarty.const._MD_PICO_CREATED}></th>
 			<td class="even">
+				<{$content.poster_uname}>
 				<{$content.created_time_formatted}>
 				<{if $category.isadminormod}>
 					<input type="checkbox" name="specify_created_time" value="1" onclick="if(this.checked){xoopsGetElementById('created_time').style.display='inline';}else{xoopsGetElementById('created_time').style.display='none'}" />
@@ -161,6 +162,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><{$smarty.const._MD_PICO_MODIFIED}></th>
 			<td class="even">
+				<{$content.modifier_uname}>
 				<{$content.modified_time_formatted}>
 				<{if $category.isadminormod}>
 					<input type="checkbox" name="specify_modified_time" value="1" onclick="if(this.checked){xoopsGetElementById('modified_time').style.display='inline';}else{xoopsGetElementById('modified_time').style.display='none'}" />

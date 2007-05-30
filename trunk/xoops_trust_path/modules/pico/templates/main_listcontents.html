@@ -74,6 +74,9 @@
 		<{$content.subject}>
 	<{elseif $category.isadminormod}>
 		<em class="pico_notice"><{$content.subject}></em>
+		<{if ! $content.approval}>
+			(<{$content.poster_uname}> <{$content.created_time_formatted}> )
+		<{/if}>
 	<{/if}>
 	</a>
 	<{if $category.can_edit}>

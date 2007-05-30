@@ -64,7 +64,7 @@ if( isset( $_POST['contentman_copyfromwaiting'] ) && $category4assign['isadminor
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	// copy from waiting eg) body_waiting -> body
-	pico_copyfromwaitingcontent( $mydirname , $content_id ) ;
+	pico_transact_copyfromwaitingcontent( $mydirname , $content_id ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	exit ;
 }
@@ -102,10 +102,9 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		exit ;
 	}
 	$content_row = $db->fetchArray( $ors ) ;
-	$content4assign = array(
+	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $cat_row ) ;
+	$content4edit = array(
 		'cat_id' => intval( $content_row['cat_id'] ) ,
-		'id' => intval( $content_row['content_id'] ) ,
-		'link' => pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 		'vpath' => htmlspecialchars( $content_row['vpath'] , ENT_QUOTES ) ,
 		'subject' => htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
 		'subject_waiting' => htmlspecialchars( $content_row['subject_waiting'] , ENT_QUOTES ) ,
@@ -113,7 +112,6 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'htmlheader_waiting' => htmlspecialchars( $content_row['htmlheader_waiting'] , ENT_QUOTES ) ,
 		'body' => htmlspecialchars( $content_row['body'] , ENT_QUOTES ) ,
 		'body_waiting' => htmlspecialchars( $content_row['body_waiting'] , ENT_QUOTES ) ,
-		'body_raw' => $content_row['body'] ,
 		'filters' => htmlspecialchars( $content_row['filters'] , ENT_QUOTES ) ,
 		'filter_infos' => pico_main_get_filter_infos( $content_row['filters'] , $category4assign['isadminormod'] ) ,
 		'weight' => intval( $content_row['weight'] ) ,
@@ -122,10 +120,8 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'show_in_navi' => intval( $content_row['show_in_navi'] ) ,
 		'show_in_menu' => intval( $content_row['show_in_menu'] ) ,
 		'allow_comment' => intval( $content_row['allow_comment'] ) ,
-		'created_time_formatted' => formatTimestamp( $content_row['created_time'] , 'm' ) ,
-		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] , 'm' ) ,
 	) ;
-	$content4assign += $content_row ;
+	$content4assign = $content4edit + $content4assign + $content_row ;
 }
 
 // vpath options

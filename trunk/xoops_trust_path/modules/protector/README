@@ -106,6 +106,9 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.03 (2007/06/03)
+- added a protection against installer attack
+
 3.02 (2007/04/08)
 - modified compatibility of the option "force_intval"
 - fixed wrong link in advisory.php (thx genet)
@@ -276,6 +279,9 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.03 (2007/06/03)
+- ¥¤¥ó¥¹¥È¡¼¥é¥¢¥¿¥Ã¥¯¤Ø¤ÎÂÐºö¤òÄÉ²Ã¤·¤¿
 
 3.02 (2007/04/08)
 - IDÉ÷ÊÑ¿ô¤Î¶¯À©ÊÑ´¹¤Î½èÍý¤ò¤â¤¦¾¯¤·´Ë¤ä¤«¤Ë¤·¤¿

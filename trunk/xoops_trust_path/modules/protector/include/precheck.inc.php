@@ -19,6 +19,9 @@ protector_prepare() ;
 
 function protector_prepare()
 {
+	// check the access is from install/index.php
+	if( defined( '_INSTALL_CHARSET' ) ) die( 'To use installer, remove protector\'s lines from mainfile.php first.' ) ;
+
 	// Protector class
 	require_once dirname(dirname(__FILE__)).'/class/protector.php' ;
 

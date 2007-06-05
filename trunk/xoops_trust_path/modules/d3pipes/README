@@ -33,6 +33,15 @@ add pipes in "pipe" admin
 
 [b]CHANGELOG[/b]
 
+0.30 2007-06-05 (update the module)
+- modified interface of pipe admin
+- modified multiple pipe_id can be assinged for a block
+- modified block/jsbackend templates
+- added sync type block
+- modified blocks into D3 standard style
+- added methods of callback and validation into D3 comment class
+- added a field of comments_count
+
 0.20 2007-05-11
 - changed the structure "altsys essential"
 - added language constants override system (with altsys>=0.5)
@@ -101,6 +110,15 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.30 2007-06-05 ※要モジュールアップデート
+- パイプ管理のインターフェースを多少マシにした
+- ブロックでパイプ番号を複数選択できるようにした
+- ブロックに割り当てられたパイプ数に応じて、表示方式を切り替えるようにした
+- 同期ブロックを追加した
+- ブロックの仕様をD3標準にした
+- D3コメント用クラスに、コールバックとバリデータを実装した
+- コメント数フィールドの追加
 
 0.20 2007-05-11
 - altsys必須となった

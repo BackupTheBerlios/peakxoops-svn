@@ -6,6 +6,15 @@
 	<{/foreach}>
 <{/if}>
 
+<{* only for single pipe *}>
+<{if $pipe.name}>
+	<{$pipe.name}>
+	<{if $pipe.image && $pipe.url}>
+		<a href="<{$pipe.url}>"><img src="<{$pipe.image}>" alt="<{$pipe.name}>" /></a>
+	<{/if}>
+<{/if}>
+
+
 <ul>
 	<{foreach from=$entries item="entry"}>
 		<li>
@@ -15,6 +24,8 @@
 			<{else}>
 				<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
 			<{/if}>
+
+			<{* only for multiple pipe *}>
 			<{if $entry.pipe.name}>
 				(<{$entry.pipe.name}>)
 			<{/if}>

@@ -12,17 +12,30 @@ $max_entries = intval( @$_GET['max_entries'] ) ;
 if( $max_entries > 50 ) $max_entries = 50 ;
 
 // fetch pipe_row
-$pipe_id = intval( @$_GET['pipe_id'] ) ;
-$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_id ) ;
+$pipe_ids = empty( $_GET['pipe_ids'] ) ? array(0) : array_map( 'intval' , explode( ',' , $_GET['pipe_ids'] ) ) ;
+if( sizeof( $pipe_ids ) == 1 ) {
+	// single pipe_id
+	$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_ids[0] ) ;
 
-// specialcheck for js
-if( empty( $pipe4assign['block_disp'] ) ) {
-	echo "d3pipes_insert_html('{$mydirname}_async_block_{$unique_id}','"._MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK."');" ;
-	exit ;
+	// specialcheck for js
+	if( empty( $pipe4assign['block_disp'] ) ) {
+		echo "d3pipes_insert_html('{$mydirname}_async_block_{$unique_id}','"._MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK."');" ;
+		exit ;
+	}
+	
+	// fetch entries
+	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
+} else {
+	// multiple pipe_id (call union)
+	$pipe4assign = array() ;
+	
+	// Union object
+	$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $pipe_ids ) ) ;
+	$union_obj->setModConfigs( $xoopsModuleConfig ) ;
+	$entries = $union_obj->execute( array() , $max_entries ) ;
+
+	$errors = $union_obj->getErrors() ;
 }
-
-// fetch entries
-$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
 
 // assign
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;

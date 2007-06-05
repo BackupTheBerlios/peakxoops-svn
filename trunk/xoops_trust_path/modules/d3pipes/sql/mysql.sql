@@ -75,6 +75,7 @@ CREATE TABLE clippings (
   can_search tinyint NOT NULL default 1,
   highlight tinyint NOT NULL default 0,
   weight smallint NOT NULL default 0,
+  comments_count smallint NOT NULL default 0,
   fetched_time int(10) NOT NULL default 0,
   data mediumtext,
   KEY (fingerprint),

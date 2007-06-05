@@ -60,7 +60,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
 
 		$clipping_id = intval( $clipping_id ) ;
-		list( $pipe_id , $highlight , $weight , $fetched_time , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,fetched_time,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
+		list( $pipe_id , $highlight , $weight , $comments_count , $fetched_time , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,comments_count,fetched_time,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
 
 		if( empty( $data_serialized ) ) return false ;
 		else return unserialize( $data_serialized ) + array(
@@ -69,6 +69,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 			'clipping_highlight' => $highlight ,
 			'clipping_weight' => $weight ,
 			'clipping_fetched_time' => $fetched_time ,
+			'comments_count' => $comments_count ,
 		) ;
 	}
 
@@ -89,7 +90,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		while( list( $clipping_id ) = $db->fetchRow( $result ) ) {
 			$entries[] = $this->getClipping( $clipping_id ) ;
 		}
-		
+
 		return $entries ;
 	}
 

@@ -20,7 +20,7 @@ class D3pipesUnionMergesort extends D3pipesUnionAbstract {
 		// sort by pubtime DESC
 		usort( $entries , array( $this , 'pubtime_sort' ) ) ;
 
-		return $entries ;
+		return array_slice( $entries , 0 , $max_entries ) ;
 	}
 
 

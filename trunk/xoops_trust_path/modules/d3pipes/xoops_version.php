@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.20 ;
+$modversion['version'] = 0.30 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -54,7 +54,18 @@ $modversion['blocks'][1] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_async_show' ,
 	'edit_func'		=> 'b_d3pipes_async_edit' ,
-	'options'		=> "$mydirname|".uniqid(rand())."|1|10" ,
+	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
+$modversion['blocks'][2] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_SYNC') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_d3pipes_sync_show' ,
+	'edit_func'		=> 'b_d3pipes_async_edit' , // appropriation
+	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;

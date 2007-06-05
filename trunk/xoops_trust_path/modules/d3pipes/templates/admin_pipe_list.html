@@ -10,6 +10,7 @@
 		<table class="outer">
 			<tr>
 				<th><{$smarty.const._MD_A_D3PIPES_TH_PIPEID}></th>
+				<th><{$smarty.const._MD_A_D3PIPES_TH_PIPETYPE}></th>
 				<th><{$smarty.const._MD_A_D3PIPES_TH_PIPENAME}></th>
 				<th><{$smarty.const._MD_A_D3PIPES_TH_PIPEWEIGHT}></th>
 				<th><{$smarty.const._MD_A_D3PIPES_TH_MAINDISP}></th>
@@ -25,6 +26,7 @@
 		<{foreach from=$pipes item="pipe"}>
 			<tr class="<{cycle values="odd,even"}>">
 				<td><{$pipe.id}></td>
+				<td><{$pipe.type}></td>
 				<td><input type="text" name="name[<{$pipe.id}>]" value="<{$pipe.name4xml}>" size="16" /></td>
 				<td><input type="text" name="weight[<{$pipe.id}>]" value="<{$pipe.weight}>" size="2" style="text-align:right;" /></td>
 				<td><input type="checkbox" name="main_disp[<{$pipe.id}>]" value="1" <{if $pipe.main_disp}>checked="checked"<{/if}> title="<{$smarty.const._MD_A_D3PIPES_TITLE_MAINDISP}>" /></td>

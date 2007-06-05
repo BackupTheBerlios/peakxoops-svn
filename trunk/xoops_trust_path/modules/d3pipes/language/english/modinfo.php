@@ -26,6 +26,7 @@ define($constpref.'_ADMENU_MYPREFERENCES','Preferences') ;
 
 // blocks
 define($constpref.'_BNAME_ASYNC','List entries (Async)') ;
+define($constpref.'_BNAME_SYNC','List entries (Sync)') ;
 
 // configs
 define($constpref.'_INDEXTOTAL','Total entries in the top of this module');

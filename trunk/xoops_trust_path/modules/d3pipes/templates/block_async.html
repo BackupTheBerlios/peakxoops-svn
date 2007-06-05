@@ -1,10 +1,12 @@
-<{*<a href="<{$block.mod_url}>/index.php?page=jsbackend&pipe_id=<{$block.pipe_id}>&max_entries=<{$block.max_entries}>&unique_id=<{$block.unique_id}>">DEBUG</a>*}>
+<{*
+<a href="<{$block.mod_url}>/index.php?page=jsbackend&amp;pipe_ids=<{","|implode:$block.pipe_ids}>&amp;max_entries=<{$block.max_entries}>&amp;unique_id=<{$block.unique_id}>">DEBUG</a>
+*}>
 
 <div class="d3pipes_async_block" id="<{$block.mydirname}>_async_block_<{$block.unique_id}>"></div>
 
 <script type="text/javascript">
 <!-- 
-	d3pipes_add_script( "<{$block.mod_url}>/index.php?page=jsbackend&pipe_id=<{$block.pipe_id}>&max_entries=<{$block.max_entries}>&unique_id=<{$block.unique_id}>" ) ;
+	d3pipes_add_script( "<{$block.mod_url}>/index.php?page=jsbackend&pipe_ids=<{","|implode:$block.pipe_ids}>&max_entries=<{$block.max_entries}>&unique_id=<{$block.unique_id}>" ) ;
 //-->
 </script>
 <noscript><{$block.lang_async_noscript}></noscript>

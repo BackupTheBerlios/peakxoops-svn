@@ -14,6 +14,7 @@ define('_MD_A_D3PIPES_H2_JOINTADMIN','¥¸¥ç¥¤¥ó¥È½é´üÀßÄê');
 define('_MD_A_D3PIPES_H2_JOINTCLASSADMIN','¥¸¥ç¥¤¥ó¥È¥¯¥é¥¹½é´üÀßÄê');
 
 define('_MD_A_D3PIPES_TH_PIPEID','ÈÖ¹æ');
+define('_MD_A_D3PIPES_TH_PIPETYPE','¼ïÊÌ');
 define('_MD_A_D3PIPES_TH_PIPENAME','Ì¾¾Î');
 define('_MD_A_D3PIPES_TH_PIPEURL','URL');
 define('_MD_A_D3PIPES_TH_PIPEIMAGE','²èÁü');
@@ -67,5 +68,13 @@ define('_MD_A_D3PIPES_CNFM_PIPEDELETE','ËÜÅö¤Ë¥Ñ¥¤¥×¤òºï½ü¤·¤Þ¤¹¤«¡© ¤³¤Î¥Ñ¥¤¥×¤
 
 define('_MD_A_D3PIPES_ERR_INVALIDSTARTJOINT_FMT','³«»Ï¥¸¥ç¥¤¥ó¥È¤È¤·¤Æ»ØÄê¤Ç¤­¤ë¤Î¤Ï¡¢%s ¤Î¤¤¤º¤ì¤«¤À¤±¤Ç¤¹');
 define('_MD_A_D3PIPES_ERR_CORRESPONDPARSENOTFOUND','³°Éô¤è¤ê¼èÆÀ¤·¤¿XML¤ò²òÀÏ¤¹¤ë¥¸¥ç¥¤¥ó¥È¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Þ¤»¤ó');
+
+define('_MD_A_D3PIPES_TYPE_FETCH','³°Éô¼èÆÀ');
+define('_MD_A_D3PIPES_TYPE_BLOCK','ÆâÉô¼èÆÀ(¥Ö¥í¥Ã¥¯)');
+define('_MD_A_D3PIPES_TYPE_LOCAL','ÆâÉô¼èÆÀ');
+define('_MD_A_D3PIPES_TYPE_UNION','Ï¢·ë');
+define('_MD_A_D3PIPES_TYPE_OTHER','ÆÃ¼ì');
+define('_MD_A_D3PIPES_TYPE_CLIP','¡ÊÊÝÂ¸Í­¡Ë');
+
 
 ?>

@@ -51,4 +51,25 @@ function d3pipes_admin_get_notice4joint( $mydirname , $all_joints )
 	return $joint_notices ;
 }
 
+
+function d3pipes_admin_judge_type_of_pipe( $joints )
+{
+	if( $joints[0]['joint'] == 'fetch' ) {
+		foreach( $joints as $joint ) {
+			if( $joint['joint'] == 'clip' ) {
+				return _MD_A_D3PIPES_TYPE_FETCH . _MD_A_D3PIPES_TYPE_CLIP ;
+			}
+		}
+		return _MD_A_D3PIPES_TYPE_FETCH ;
+	} else if( $joints[0]['joint'] == 'block' ) {
+		return _MD_A_D3PIPES_TYPE_BLOCK ;
+	} else if( $joints[0]['joint'] == 'local' ) {
+		return _MD_A_D3PIPES_TYPE_LOCAL ;
+	} else if( $joints[0]['joint'] == 'union' ) {
+		return _MD_A_D3PIPES_TYPE_UNION ;
+	} else {
+		return _MD_A_D3PIPES_TYPE_OTHER ;
+	}
+}
+
 ?>

@@ -28,10 +28,10 @@ if( $last_joint['joint'] == 'clip' && $last_joint['joint_class'] == 'moduledb' )
 	require_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
 	$pagenav = new XoopsPageNav( $clipping_count , $xoopsModuleConfig['entries_per_eachpipe'] , $pos , 'pos' , "page=eachpipe&amp;pipe_id=$pipe_id" ) ;
 	$pagenav4assign = $pagenav->renderNav( 10 ) ;
-	if( $pos > 0 ) {
-		// refetch entries
-		$entries = d3pipes_main_get_clippings_moduledb( $mydirname , $pipe_id , $xoopsModuleConfig['entries_per_eachpipe'] , $pos ) ;
-	}
+	//if( $pos > 0 ) {
+	// refetch entries
+	$entries = d3pipes_main_get_clippings_moduledb( $mydirname , $pipe_id , $xoopsModuleConfig['entries_per_eachpipe'] , $pos ) ;
+	//}
 } else {
 	$pagenav4assign = '' ;
 }

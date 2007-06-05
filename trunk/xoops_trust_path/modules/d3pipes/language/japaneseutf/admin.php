@@ -14,6 +14,7 @@ define('_MD_A_D3PIPES_H2_JOINTADMIN','ジョイント初期設定');
 define('_MD_A_D3PIPES_H2_JOINTCLASSADMIN','ジョイントクラス初期設定');
 
 define('_MD_A_D3PIPES_TH_PIPEID','番号');
+define('_MD_A_D3PIPES_TH_PIPETYPE','種別');
 define('_MD_A_D3PIPES_TH_PIPENAME','名称');
 define('_MD_A_D3PIPES_TH_PIPEURL','URL');
 define('_MD_A_D3PIPES_TH_PIPEIMAGE','画像');
@@ -67,5 +68,13 @@ define('_MD_A_D3PIPES_CNFM_PIPEDELETE','本当にパイプを削除しますか�
 
 define('_MD_A_D3PIPES_ERR_INVALIDSTARTJOINT_FMT','開始ジョイントとして指定できるのは、%s のいずれかだけです');
 define('_MD_A_D3PIPES_ERR_CORRESPONDPARSENOTFOUND','外部より取得したXMLを解析するジョイントが指定されていません');
+
+define('_MD_A_D3PIPES_TYPE_FETCH','外部取得');
+define('_MD_A_D3PIPES_TYPE_BLOCK','内部取得(ブロック)');
+define('_MD_A_D3PIPES_TYPE_LOCAL','内部取得');
+define('_MD_A_D3PIPES_TYPE_UNION','連結');
+define('_MD_A_D3PIPES_TYPE_OTHER','特殊');
+define('_MD_A_D3PIPES_TYPE_CLIP','（保存有）');
+
 
 ?>

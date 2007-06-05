@@ -26,6 +26,7 @@ define($constpref.'_ADMENU_MYPREFERENCES','一般設定') ;
 
 // blocks
 define($constpref.'_BNAME_ASYNC','非同期パイプ一覧ブロック') ;
+define($constpref.'_BNAME_SYNC','同期パイプ一覧ブロック') ;
 
 // configs
 define($constpref.'_INDEXTOTAL','モジュールトップで表示する最新ヘッドラインの総数');

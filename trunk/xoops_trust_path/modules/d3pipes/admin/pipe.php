@@ -112,6 +112,7 @@ $result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." 
 $pipes4assign = array() ;
 while( list( $pipe_id_tmp ) = $db->fetchRow( $result ) ) {
 	$pipes4assign[ $pipe_id_tmp ] = d3pipes_common_get_pipe4assign( $mydirname , $pipe_id_tmp ) ;
+	$pipes4assign[ $pipe_id_tmp ]['type'] = d3pipes_admin_judge_type_of_pipe( $pipes4assign[ $pipe_id_tmp ]['joints'] ) ;
 }
 
 

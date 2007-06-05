@@ -33,6 +33,12 @@ function d3pipes_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix("config")." MODIFY `conf_title` varchar(255) NOT NULL default '', MODIFY `conf_desc` varchar(255) NOT NULL default ''" ) ;
 	}
 
+	// 0.2 -> 0.3
+	$check_sql = "SELECT comments_count FROM ".$db->prefix($mydirname."_clippings") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_clippings")." ADD comments_count smallint NOT NULL default 0 AFTER `weight`" ) ;
+	}
+
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;
 	$tpl_path = dirname(__FILE__).'/templates' ;

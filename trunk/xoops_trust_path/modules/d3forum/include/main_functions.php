@@ -370,7 +370,10 @@ function d3forum_get_comment_description( $mydirname , $external_link_format , $
 	$d3com =& d3forum_main_get_comment_object( $mydirname , $external_link_format ) ;
 	if( ! is_object( $d3com ) ) return '' ;
 
-	return $d3com->fetchSummary( $external_link_id ) ;
+	$description = $d3com->fetchDescription( $external_link_id ) ;
+
+	if( $description ) return $description ;
+	else return $d3com->fetchSummary( $external_link_id ) ;
 }
 
 
@@ -385,7 +388,10 @@ function &d3forum_main_get_comment_object( $mydirname , $external_link_format )
 	}
 
 	// find and read d3comment class file
-	if( empty( $external_trustdirname ) ) {
+	if( empty( $external_dirname ) ) {
+		// other than module
+		include_once dirname(dirname(__FILE__))."/class/{$class_name}.class.php" ;
+	} else if( empty( $external_trustdirname ) ) {
 		// other than D3 module
 		include_once XOOPS_ROOT_PATH.'/modules/'.$external_dirname.'/class/'.$class_name.'.class.php' ;
 	} else {

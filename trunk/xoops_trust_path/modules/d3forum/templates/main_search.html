@@ -15,7 +15,7 @@
 
 <table class="outer search d3f_form_table">
 	<tr>
-		<th class="head"><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
+		<th class="d3f_head"><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
 		<td class="even">
 			<input type="text" name="keyword" id="keywords" size="48" value="<{$keyword}>" />
 			<fieldset>
@@ -31,7 +31,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th class="head"><{$smarty.const._MD_D3FORUM_FORUM}></th>
+		<th class="d3f_head"><{$smarty.const._MD_D3FORUM_FORUM}></th>
 		<td class="even">
 			<select name="forum_id">
 				<option value="">-<{$smarty.const._MD_D3FORUM_WHOLE}>-</option>
@@ -40,11 +40,11 @@
 		</td>
 	</tr>
 	<tr>
-		<th class="head"><label for="searchin_poster"><{$smarty.const._MD_D3FORUM_POSTER}></label></th>
+		<th class="d3f_head"><label for="searchin_poster"><{$smarty.const._MD_D3FORUM_POSTER}></label></th>
 		<td class="even"><input type="text" name="search_username" id="searchin_poster" value="<{$uname}>" /></td>
 	</tr>
 	<tr>
-		<th class="head"><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
+		<th class="d3f_head"><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
 		<td class="even"><{html_radios name="sortby" options=$sortby_options selected=$sortby_selected}></td>
 	</tr>
 </table>

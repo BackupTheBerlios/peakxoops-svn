@@ -137,6 +137,14 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 ●変更履歴
 
+0.73 alpha (2007-06-05)
+- AntiSPAMクラスjapaneseの動作改善
+- テンプレートの微調整
+- コメント処理クラスの仕様一部変更
+- 投稿数をカウントするSmartyプラグイン function.d3forum_comment_postscount.php
+- 言語ファイル追加
+-- polish (thx kurak_bu)
+
 0.72 alpha (2007-05-27)
 - jidaikoboさんのテンプレートを一通りマージ完了した
 

@@ -1,5 +1,7 @@
 <?php
 
+define( '_D3FORUM_ANTISPAM_JAPANESE_AMB' , 3 ) ;
+
 require_once dirname(__FILE__).'/D3forumAntispamAbstract.class.php' ;
 
 class D3forumAntispamJapanese extends D3forumAntispamAbstract {
@@ -25,14 +27,19 @@ function getKanaKanji( $time = null )
 	}
 	
 	$size = sizeof( $this->dictionary_cache ) ;
-	$key = abs( crc32( md5( gmdate( 'YmdH' , $time ) . XOOPS_DB_PREFIX . XOOPS_DB_NAME ) ) ) ;
+	$ret = array() ;
+	for( $i = 0 ; $i < 3 ; $i ++ ) {
+		$ret[] = $this->dictionary_cache[ abs( crc32( md5( gmdate( 'YmdH' , $time ) . XOOPS_DB_PREFIX . XOOPS_DB_NAME . $i ) ) ) % $size ] ;
+	}
 
-	return $this->dictionary_cache[ $key % $size ] ;
+	return $ret ;
 }
 
 function getHtml4Assign()
 {
-	$yomi_kan = $this->getKanaKanji() ;
+	$yomi_kans = $this->getKanaKanji() ;
+	shuffle( $yomi_kans ) ;
+	$yomi_kan = $yomi_kans[0] ;
 	$kanji = $yomi_kan['kanji'] ;
 
 	$html = '<label for="antispam_yomigana">'._MD_D3FORUM_LABEL_JAPANESEINPUTYOMI.': <strong class="antispam_kanji">'.htmlspecialchars($kanji).'</strong></label><input type="text" name="antispam_yomigana" id="antispam_yomigana" value="" />' ;
@@ -40,7 +47,8 @@ function getHtml4Assign()
 	return array(
 		'html_in_form' => $html ,
 		'js_global' => '' ,
-		'js_in_validate_function' => '' ,
+		'js_in_validate_function' => 'if ( ! myform.antispam_yomigana.value ) { window.alert("'._MD_D3FORUM_ERR_JAPANESENOTINPUT.'"); myform.antispam_yomigana.focus(); return false; }
+' ,
 	) ;
 }
 
@@ -48,14 +56,16 @@ function checkValidate()
 {
 	$yomigana = mb_convert_kana( trim( @$_POST['antispam_yomigana'] ) , 'HVc' ) ;
 
-	$yomi_kan0 = $this->getKanaKanji() ;
-	$yomi_kan1 = $this->getKanaKanji( time() - 3600 ) ;
+	$yomi_kans = array_merge( $this->getKanaKanji() , $this->getKanaKanji( time() - 3600 ) ) ;
 
-	if( $yomigana != $yomi_kan0['yomigana'] && $yomigana != $yomi_kan1['yomigana'] ) {
-		$this->errors[] = _MD_D3FORUM_ERR_TURNJAVASCRIPTON ;
-		return false ;
+	foreach( $yomi_kans as $yomi_kan ) {
+		if( $yomigana == $yomi_kan['yomigana'] ) {
+			return true ;
+		}
 	}
-	return true ;
+
+	$this->errors[] = _MD_D3FORUM_ERR_JAPANESEINCORRECT ;
+	return false ;
 }
 
 }

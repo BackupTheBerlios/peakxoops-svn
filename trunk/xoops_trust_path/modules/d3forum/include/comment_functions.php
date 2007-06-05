@@ -1,6 +1,6 @@
 <?php
 
-function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params )
+function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params , $mode = 'post' )
 {
 	global $xoopsUser , $xoopsConfig ;
 
@@ -34,10 +34,12 @@ function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params )
 		return ;
 	}
 
-	$sql = "SELECT COUNT(t.topic_id) FROM ".$db->prefix($mydirname."_topics")." t WHERE t.forum_id=$forum_id AND ! t.topic_invisible AND topic_external_link_id='".addslashes($external_link_id)."'" ;
+	$select = $mode == 'topic' ? 'COUNT(t.topic_id)' : 'SUM(t.topic_posts_count)' ;
+
+	$sql = "SELECT $select FROM ".$db->prefix($mydirname."_topics")." t WHERE t.forum_id=$forum_id AND ! t.topic_invisible AND topic_external_link_id='".addslashes($external_link_id)."'" ;
 	if( ! $trs = $db->query( $sql ) ) die( 'd3forum_comment_error in '.__LINE__ ) ;
 	list( $count ) = $db->fetchRow( $trs ) ;
-	echo $count ;
+	echo intval( $count ) ;
 }
 
 
@@ -77,17 +79,24 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 
 	// read d3comment class and make the object
 	if( ! empty( $params['class'] ) ) {
-		$external_dirname = $GLOBALS['xoopsModule']->getVar('dirname') ;
 		$class_name = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['class'] ) ;
-		@include_once XOOPS_TRUST_PATH."/modules/d3forum/class/D3commentAbstract.class.php" ;
-		if( empty( $params['mytrustdirname'] ) ) {
-			// other than D3 module
-			$external_trustdirname = '' ;
-			@include_once XOOPS_ROOT_PATH."/modules/$external_dirname/class/{$class_name}.class.php" ;
+		include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
+		if( is_object( $GLOBALS['xoopsModule'] ) ) {
+			$external_dirname = $GLOBALS['xoopsModule']->getVar('dirname') ;
+			if( empty( $params['mytrustdirname'] ) ) {
+				// other than D3 module
+				$external_trustdirname = '' ;
+				include_once XOOPS_ROOT_PATH."/modules/$external_dirname/class/{$class_name}.class.php" ;
+			} else {
+				// D3 module
+				$external_trustdirname = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['mytrustdirname'] ) ;
+				include_once XOOPS_TRUST_PATH."/modules/$external_trustdirname/class/{$class_name}.class.php" ;
+			}
 		} else {
-			// D3 module
-			$external_trustdirname = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['mytrustdirname'] ) ;
-			@include_once XOOPS_TRUST_PATH."/modules/$external_trustdirname/class/{$class_name}.class.php" ;
+			// other than module
+			include_once dirname(dirname(__FILE__))."/class/{$class_name}.class.php" ;
+			$external_dirname = '' ;
+			$external_trustdirname = '' ;
 		}
 		if( class_exists( $class_name ) ) {
 			$d3com =& new $class_name( $mydirname , $external_dirname ) ;
@@ -287,7 +296,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 			'mod_config' => $xoopsModuleConfig ,
 			'uid' => $uid ,
 			'uname' => is_object( $xoopsUser ) ? $xoopsUser->getVar('uname') : '' ,
-			'subject_raw' => sprintf( _MD_D3FORUM_FMT_COMMENTSUBJECT , $subject_raw ) ,
+			'subject_raw' => $subject_raw ? sprintf( _MD_D3FORUM_FMT_COMMENTSUBJECT , $subject_raw ) : '' ,
 			'postorder' => $postorder ,
 			'icon_meanings' => $d3forum_icon_meanings ,
 			'category' => $category4assign ,

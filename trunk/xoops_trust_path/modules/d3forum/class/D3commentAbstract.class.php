@@ -14,10 +14,18 @@ function D3commentAbstract( $d3forum_dirname , $target_dirname )
 
 
 // abstract (override it)
+// get reference description as string
+function fetchDescription( $link_id )
+{
+	return false ;
+}
+
+
+// abstract (override it)
+// get reference information as array
 function fetchSummary( $link_id )
 {
-	return '' ;
-	// return array( 'module_name' => '' , 'subject' => '' , 'uri' => '' , 'summary' => '' ) ;
+	return array( 'module_name' => '' , 'subject' => '' , 'uri' => '' , 'summary' => '' ) ;
 	// all values should be HTML escaped.
 }
 

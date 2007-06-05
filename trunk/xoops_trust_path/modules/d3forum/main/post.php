@@ -398,7 +398,7 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 	if( substr( $forum_row['forum_external_link_format'] , 0 , 11 ) == '{XOOPS_URL}' && ! empty( $external_link_id ) ) {
 		// return to comment target (conventional module)
 		redirect_header( sprintf( str_replace( '{XOOPS_URL}' , XOOPS_URL , $forum_row['forum_external_link_format'] ) , $external_link_id ) , 2 , $redirect_message ) ;
-	} else if( is_object( @$d3com ) && ! empty( $external_link_id ) && ( $summary = $d3com->fetchSummary( $external_link_id ) ) ) {
+	} else if( is_object( @$d3com ) && ! empty( $external_link_id ) && is_array( $summary = $d3com->fetchSummary( $external_link_id ) ) ) {
 		// return to comment target (d3comment native module)
 		redirect_header( @$summary['uri'] , 2 , $redirect_message ) ;
 	} else if( ! empty( $topic_invisible ) ) {

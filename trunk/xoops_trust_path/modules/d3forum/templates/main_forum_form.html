@@ -15,14 +15,14 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="forum_title"><{$smarty.const._MD_D3FORUM_TH_FORUMTITLE}></label></th>
+			<th class="d3f_head"><label for="forum_title"><{$smarty.const._MD_D3FORUM_TH_FORUMTITLE}></label></th>
 			<td class="even">
 				<input type="text" name="title" id="forum_title" size="50" maxlength="255" value="<{$forum.title}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="forum_desc"><{$smarty.const._MD_D3FORUM_TH_FORUMDESC}></label></th>
+			<th class="d3f_head"><label for="forum_desc"><{$smarty.const._MD_D3FORUM_TH_FORUMDESC}></label></th>
 			<td class="even">
 				<textarea name="desc" id="forum_desc" cols="50" rows="10"><{$forum.desc}></textarea>
 			</td>
@@ -31,7 +31,7 @@
 		<{if $xoops_isadmin}>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="cat_id"><{$smarty.const._MD_D3FORUM_CATEGORY}></label></th>
+			<th class="d3f_head"><label for="cat_id"><{$smarty.const._MD_D3FORUM_CATEGORY}></label></th>
 			<td class="even">
 				<{if $cat_jumpbox_options}>
 				<select name="cat_id" id="cat_id">
@@ -45,14 +45,14 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="forum_weight"><{$smarty.const._MD_D3FORUM_TH_FORUMWEIGHT}></label></th>
+			<th class="d3f_head"><label for="forum_weight"><{$smarty.const._MD_D3FORUM_TH_FORUMWEIGHT}></label></th>
 			<td class="even">
 				<input type="text" name="weight" id="forum_weight" size="4" maxlength="4" value="<{$forum.weight}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="forum_external_link_format"><{$smarty.const._MD_D3FORUM_TH_EXTERNALLINKFORMAT}></label></th>
+			<th class="d3f_head"><label for="forum_external_link_format"><{$smarty.const._MD_D3FORUM_TH_EXTERNALLINKFORMAT}></label></th>
 			<td class="even">
 				<input type="text" name="external_link_format" id="forum_external_link_format" size="80" maxlength="255" value="<{$forum.external_link_format}>" />
 				<br />
@@ -61,7 +61,7 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head">
+			<th class="d3f_head">
 				<{$smarty.const._MD_D3FORUM_TH_FORUMOPTIONS}>
 				<br />
 				<span class="forumoptiondesc"><{$forum.option_desc}></span>

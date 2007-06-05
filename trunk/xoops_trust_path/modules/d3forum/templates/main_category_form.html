@@ -15,21 +15,21 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="category_title"><{$smarty.const._MD_D3FORUM_TH_CATEGORYTITLE}></label></th>
+			<th class="d3f_head"><label for="category_title"><{$smarty.const._MD_D3FORUM_TH_CATEGORYTITLE}></label></th>
 			<td class="even">
 				<input type="text" name="title" id="category_title" size="50" maxlength="255" value="<{$category.title}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="category_desc"><{$smarty.const._MD_D3FORUM_TH_CATEGORYDESC}></label></th>
+			<th class="d3f_head"><label for="category_desc"><{$smarty.const._MD_D3FORUM_TH_CATEGORYDESC}></label></th>
 			<td class="even">
 				<textarea name="desc" id="category_desc" cols="50" rows="10"><{$category.desc}></textarea>
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="category_pid"><{$smarty.const._MD_D3FORUM_TH_CATEGORYPARENT}></label></th>
+			<th class="d3f_head"><label for="category_pid"><{$smarty.const._MD_D3FORUM_TH_CATEGORYPARENT}></label></th>
 			<td class="even">
 				<select name="pid" id="category_pid">
 					<option value="">(<{$smarty.const._MD_D3FORUM_TOP}>)</option>
@@ -39,14 +39,14 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="category_weight"><{$smarty.const._MD_D3FORUM_TH_CATEGORYWEIGHT}></label></th>
+			<th class="d3f_head"><label for="category_weight"><{$smarty.const._MD_D3FORUM_TH_CATEGORYWEIGHT}></label></th>
 			<td class="even">
 				<input type="text" name="weight" id="category_weight" size="4" maxlength="4" value="<{$category.weight}>" />
 			</td>
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head">
+			<th class="d3f_head">
 				<{$smarty.const._MD_D3FORUM_TH_CATEGORYOPTIONS}>
 				<br />
 				<span class="categoryoptiondesc"><{$category.option_desc}></span>
@@ -57,7 +57,7 @@
 		</tr>
 
 		<tr valign="top" align="left">
-			<th class="head">
+			<th class="d3f_head">
 				<{$smarty.const._MD_D3FORUM_CHILDREN_COUNT}>
 			</th>
 			<td class="even">

@@ -41,6 +41,7 @@ add pipes in "pipe" admin
 - modified blocks into D3 standard style
 - added methods of callback and validation into D3 comment class
 - added a field of comments_count
+- added filter joints for exception
 
 0.20 2007-05-11
 - changed the structure "altsys essential"
@@ -119,6 +120,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - ブロックの仕様をD3標準にした
 - D3コメント用クラスに、コールバックとバリデータを実装した
 - コメント数フィールドの追加
+- 除外用フィルタージョイントの追加
 
 0.20 2007-05-11
 - altsys必須となった

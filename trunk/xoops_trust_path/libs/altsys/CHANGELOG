@@ -1,5 +1,10 @@
 [xlang:en]
 
+v0.53 (2007-06-05)
+- modified some interfaces
+- renamed language
+-- japanese_utf8 (formerly japanaeseutf)
+
 v0.52 (2007-05-11)
 - added config of "force block cloning"
 - mofieid cache files for overriding language constants
@@ -90,6 +95,11 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.53 (2007-06-05)
+- 細かな操作性向上
+- 言語ファイル名変更
+-- japanese_utf8 (旧 japanaeseutf)
 
 v0.52 (2007-05-11)
 - ブロック強制複製可能オプションの新設

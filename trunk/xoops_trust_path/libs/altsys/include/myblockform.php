@@ -25,14 +25,12 @@ $form->addElement( new XoopsFormRadioYN( _MD_A_MYBLOCKSADMIN_VISIBLE , 'bvisible
 
 // module (multi-select)
 if( $block['modules'] !== -1 ) {
-	$mod_select = new XoopsFormSelect( _MD_A_MYBLOCKSADMIN_VISIBLEIN , 'bmodules' , $block['modules'] , 10 , true ) ;
 	$module_handler =& xoops_gethandler( 'module' ) ;
 	$criteria = new CriteriaCompo( new Criteria( 'hasmain' , 1 ) ) ;
 	$criteria->add( new Criteria( 'isactive' , 1 ) ) ;
 	$module_list = $module_handler->getList( $criteria ) ;
-	$module_list[-1] = _MD_A_MYBLOCKSADMIN_TOPPAGE ;
-	$module_list[0] = _MD_A_MYBLOCKSADMIN_ALLPAGES ;
-	ksort( $module_list ) ;
+	$module_list= array( -1 => _MD_A_MYBLOCKSADMIN_TOPPAGE , 0 => _MD_A_MYBLOCKSADMIN_ALLPAGES ) + $module_list ;
+	$mod_select = new XoopsFormSelect( _MD_A_MYBLOCKSADMIN_VISIBLEIN , 'bmodules' , $block['modules'] , min( 15 , sizeof( $module_list ) ) , true ) ;
 	$mod_select->addOptionArray( $module_list ) ;
 	$form->addElement( $mod_select ) ;
 }

@@ -23,6 +23,11 @@ function altsys_oninstall_base( $module , $mydirname )
 	$db =& Database::getInstance() ;
 	$mid = $module->getVar('mid') ;
 
+	/*************** BEGIN ALTSYS SPECIFIC PART ******************/
+	// set weight=0
+	$db->queryF( "UPDATE ".$db->prefix("modules")." SET weight=0 WHERE mid=$mid" ) ;
+	/*************** END ALTSYS SPECIFIC PART ******************/
+
 	// TABLES (loading mysql.sql)
 	$sql_file_path = dirname(__FILE__).'/sql/mysql.sql' ;
 	$prefix_mod = $db->prefix() . '_' . $mydirname ;

@@ -26,6 +26,15 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.73 alpha (2007-06-05)
+- modified AntiSPAM class japanese
+- modified some templates
+- changed some specs of comment integration class
+- added smarty's plugin function.d3forum_comment_postscount.php
+- added language files
+-- polish (thx kurak_bu)
+-- ja_utf8 (formerly japaneseutf) 0.73a
+
 0.72 alpha (2007-05-27)
 - modified templates by jidaikobo
 
@@ -144,6 +153,7 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 - 投稿数をカウントするSmartyプラグイン function.d3forum_comment_postscount.php
 - 言語ファイル追加
 -- polish (thx kurak_bu)
+-- ja_utf8 (以前のjapaneseutfをリネーム) 0.73a
 
 0.72 alpha (2007-05-27)
 - jidaikoboさんのテンプレートを一通りマージ完了した

@@ -108,6 +108,8 @@ I thank Madfish for this excellent work!
 
 3.03 (2007/06/03)
 - added a protection against installer attack
+- changed language name
+-- ja_utf8 (formerly japaneseutf) 3.03a
 
 3.02 (2007/04/08)
 - modified compatibility of the option "force_intval"
@@ -282,6 +284,8 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 3.03 (2007/06/03)
 - ¥¤¥ó¥¹¥È¡¼¥é¥¢¥¿¥Ã¥¯¤Ø¤ÎÂÐºö¤òÄÉ²Ã¤·¤¿
+- ¸À¸ìÌ¾ÊÑ¹¹
+-- ja_utf8 (°ÊÁ°¤Îjapaneseutf) 3.03a
 
 3.02 (2007/04/08)
 - IDÉ÷ÊÑ¿ô¤Î¶¯À©ÊÑ´¹¤Î½èÍý¤ò¤â¤¦¾¯¤·´Ë¤ä¤«¤Ë¤·¤¿

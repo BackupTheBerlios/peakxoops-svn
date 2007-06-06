@@ -42,6 +42,8 @@ add pipes in "pipe" admin
 - added methods of callback and validation into D3 comment class
 - added a field of comments_count
 - added filter joints for exception
+- changed language name
+-- ja_utf8 (formerly japaneseutf) 0.30a
 
 0.20 2007-05-11
 - changed the structure "altsys essential"
@@ -112,7 +114,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 ●更新履歴
 
-0.30 2007-06-05 ※要モジュールアップデート
+0.30 2007-06-05 ※要モジュールアップデート/Smartyプラグインのコピーを忘れずに（一つ追加になってます）
 - パイプ管理のインターフェースを多少マシにした
 - ブロックでパイプ番号を複数選択できるようにした
 - ブロックに割り当てられたパイプ数に応じて、表示方式を切り替えるようにした
@@ -121,6 +123,8 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - D3コメント用クラスに、コールバックとバリデータを実装した
 - コメント数フィールドの追加
 - 除外用フィルタージョイントの追加
+- 言語ファイル名前変更
+-- ja_utf8 (以前のjapaneseutf) 0.30a
 
 0.20 2007-05-11
 - altsys必須となった

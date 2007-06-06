@@ -59,14 +59,33 @@ function pico_common_filter_body( $mydirname , $content_row , $use_cache = false
 
 	// process each filters
 	$text = $content_row['body'] ;
-	foreach( explode( '|' , $content_row['filters'] ) as $filter ) {
-		$filter = trim( $filter ) ;
+	$filters = explode( '|' , $content_row['filters'] ) ;
+	foreach( array_keys( $filters ) as $i ) {
+		$filter = trim( $filters[ $i ] ) ;
+		if( empty( $filter ) ) continue ;
+		// xcode special check
+		if( $filter == 'xcode' ) {
+			$nl2br = $smiley = 0 ;
+			for( $j = $i + 1 ; $j < $i + 3 ; $j ++ ) {
+				if( @$filters[ $j ] == 'nl2br' ) {
+					$nl2br = 1 ;
+					$filters[ $j ] = '' ;
+				} else if( @$filters[ $j ] == 'smiley' ) {
+					$smiley = 1 ;
+					$filters[ $j ] = '' ;
+				}
+			}
+			require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
+			$myts =& PicoTextSanitizer::getInstance() ;
+			$text = $myts->displayTarea( $text , 1 , $smiley , 1 , 1 , $nl2br ) ;
+			continue ;
+		}
 		$func_name = 'pico_'.$filter ;
 		$file_path = dirname(dirname(__FILE__)).'/filters/pico_'.$filter.'.php' ;
 		if( function_exists( $func_name ) ) {
 			$text = $func_name( $mydirname , $text , $content_row ) ;
 		} else if( file_exists( $file_path ) ) {
-			include_once $file_path ;
+			require_once $file_path ;
 			$text = $func_name( $mydirname , $text , $content_row ) ;
 		}
 	}

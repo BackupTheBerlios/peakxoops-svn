@@ -102,6 +102,8 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+- modified compatibility of BBCode filter
+
 1.35 beta (2007/05/29)
 - modified interfaces managing contents/categories
 - added drop-down controller for vpath 
@@ -391,6 +393,9 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+
+- BBCode処理の非互換性(特にcodeブロック)の改善
 
 1.35 beta (2007/05/29)
 - 各種操作性の向上

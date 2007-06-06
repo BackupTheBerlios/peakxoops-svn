@@ -41,7 +41,7 @@ define($constpref.'_SEARCHBYUIDDSC','ONд╦д╣дыд╚бв╕б║ўдфецб╝е╢е╫еэе╒егб╝еы▓ш╠╠д╩д
 define($constpref.'_USE_TAFMODULE','tellafriendете╕ехб╝еыдЄ═°═╤д╣ды');
 define($constpref.'_FILTERS','е╟е╒ейеые╚е╒егеые┐б╝е╗е├е╚');
 define($constpref.'_FILTERSDSC','е│еєе╞еєе─║ю└о╗■д╦║╟╜щдлдще┴езе├епд╡дьд╞дддые╒егеые┐б╝╠╛дЄ|д╟╢ш└┌д├д╞╞■╬╧д╖д▐д╣бгд│д│д╦╜ёдлдьд┐╜ч╚╓─╠дъ┼м═╤д╡дьд▐д╣бг');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
 define($constpref.'_FILTERSF','╢п└йе╒егеые┐б╝');
 define($constpref.'_FILTERSFDSC','╔мд║─╠▓сд╣дые╒егеые┐б╝╠╛дЄ,д╟╢ш└┌д├д╞╞■╬╧д╖д▐д╣бге╒егеые┐б╝╠╛д╬╕хдэд╦:LASTдЄд─д▒д┐╛ь╣чд╧д╜д╬е╒егеые┐б╝дЄ║╟╕хд╦─╠▓сд╖д▐д╣бг╗╪─ъдмд╩д▒дьд╨бв║╟╜щд╦─╠▓сд╖д▐д╣бг');
 define($constpref.'_FILTERSP','╢╪╗▀е╒егеые┐б╝е╗е├е╚');

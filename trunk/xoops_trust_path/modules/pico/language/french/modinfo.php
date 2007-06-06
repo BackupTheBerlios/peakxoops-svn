@@ -78,7 +78,7 @@ define($constpref.'_SHOW_TELLAFRIEND','Afficher l\'icone pour informer un ami');
 define($constpref.'_USE_TAFMODULE','Utiliser le module "tellafriend"');
 define($constpref.'_FILTERS','Série de filtres par défaut');
 define($constpref.'_FILTERSDSC','Ajoutez les noms des filtres séparés par | ');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
 define($constpref.'_USE_VOTE','Activer l\'option de VOTE');
 define($constpref.'_GUESTVOTE_IVL','Vote des visiteurs');
 define($constpref.'_GUESTVOTE_IVLDSC','Ajoutez 0, pour désactiver le vote des visiteurs anonymes. Autrement ajoutez un nombre équivalent au temps (sec.) pour permettre un second vote de même IP.');

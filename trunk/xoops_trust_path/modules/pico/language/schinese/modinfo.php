@@ -45,7 +45,7 @@ define($constpref.'_SEARCHBYUIDDSC','ÎÄÕÂ½«³öÏÖÓÚÆä×÷ÕßµÄÓÃ»§×ÊÁÏÖĞ¡£Èç¹ûÄú×÷Îª¾
 define($constpref.'_USE_TAFMODULE','Ê¹ÓÃ¡°Tellafriend¡±Ä£¿é');
 define($constpref.'_FILTERS','Ä¬ÈÏ¹ıÂËÆ÷Éè¶¨');
 define($constpref.'_FILTERSDSC','ÊäÈë¹ıÂËÆ÷Ãû£¬²¢ÒÔÊúÏß (|) ·Ö¸ô');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
 define($constpref.'_FILTERSF','Ç¿ÖÆµÄ¹ıÂËÆ÷');
 define($constpref.'_FILTERSFDSC','ÊäÈë¹ıÂËÆ÷Ãû£¬²¢ÒÔ¶ººÅ (,) ·Ö¸ô¡£¹ıÂËÆ÷£ºLASTÖ¸¹ıÂËÆ÷ÊÇÔÚ×îºó½×¶ÎÍ¨¹ıµÄ£¬ÆäËüµÄ¹ıÂËÆ÷ÊÇÔÚÊ×½×¶ÎÍ¨¹ıµÄ¡£');
 define($constpref.'_FILTERSP','½ûÖ¹µÄ¹ıÂËÆ÷');

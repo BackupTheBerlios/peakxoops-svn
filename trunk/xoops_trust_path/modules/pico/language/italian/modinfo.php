@@ -48,7 +48,7 @@ define($constpref.'_SEARCHBYUIDDSC','I contenuti saranno messi fra i posts nel p
 define($constpref.'_USE_TAFMODULE','Usa modulo "tellafriend"');
 define($constpref.'_FILTERS','Default filter set');
 define($constpref.'_FILTERSDSC','Inserisci nomi nel filtro, separati da un | (pipe)');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
 define($constpref.'_FILTERSF','Filtri forzati');
 define($constpref.'_FILTERSFDSC','Immetti nomi da filtrare separati con ,(virgola). filtro: LAST significa che il filtro è passato nell\'ultima fase. Gli altri filtri sono passati nella prima fase.');
 define($constpref.'_FILTERSP','Filtri proibiti');

@@ -45,7 +45,7 @@ define($constpref.'_SEARCHBYUIDDSC','ONにすると、検索やユーザプロ�
 define($constpref.'_USE_TAFMODULE','tellafriendモジュールを利用する');
 define($constpref.'_FILTERS','デフォルトフィルターセット');
 define($constpref.'_FILTERSDSC','コンテンツ作成時に最初からチェックされているフィルター名を|で区切って入力します。ここに書かれた順番通り適用されます。');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
 define($constpref.'_FILTERSF','強制フィルター');
 define($constpref.'_FILTERSFDSC','必ず通過するフィルター名を,で区切って入力します。フィルター名の後ろに:LASTをつけた場合はそのフィルターを最後に通過します。指定がなければ、最初に通過します。');
 define($constpref.'_FILTERSP','禁止フィルターセット');

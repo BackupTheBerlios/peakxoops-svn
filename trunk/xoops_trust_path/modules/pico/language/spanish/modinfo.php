@@ -77,7 +77,7 @@ define($constpref.'_SHOW_TELLAFRIEND','Mostrar icono de avisa a un amigo');
 define($constpref.'_USE_TAFMODULE','Emplear módulo "avisa a un amigo"');
 define($constpref.'_FILTERS','Juego de filtros default');
 define($constpref.'_FILTERSDSC','Ingresar nombres filtro separados con | (barra vertical)');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|smiley|xcode|nl2br');
+define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
 define($constpref.'_USE_VOTE','Emplear función de VOTAR');
 define($constpref.'_GUESTVOTE_IVL','Votos de anónimos');
 define($constpref.'_GUESTVOTE_IVLDSC','Fijar en cero (0) para deshabilitar votos de anónimos. Otro número significa tiempo en segundos para permitir un segundo voto del mismo número IP.');

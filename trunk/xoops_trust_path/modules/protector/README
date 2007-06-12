@@ -106,6 +106,9 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.04 (2007/06/13)
+- added a check against the phpmailer command-injection vulnerability.
+
 3.03 (2007/06/03)
 - added a protection against installer attack
 - changed language name
@@ -281,6 +284,9 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.04 (2007/06/13)
+- phpmailer¤Î¥³¥Ş¥ó¥É¼Â¹ÔÀÈ¼åÀ­¤ËÂĞ¤¹¤ë¥Á¥§¥Ã¥¯¤òÄÉ²Ã¤·¤¿
 
 3.03 (2007/06/03)
 - ¥¤¥ó¥¹¥È¡¼¥é¥¢¥¿¥Ã¥¯¤Ø¤ÎÂĞºö¤òÄÉ²Ã¤·¤¿

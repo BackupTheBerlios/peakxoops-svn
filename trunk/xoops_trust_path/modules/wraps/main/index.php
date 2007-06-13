@@ -4,7 +4,7 @@ define( 'WRAPS_DISALLOW_CHARS' , '?[^a-zA-Z0-9_./+-]?' ) ;
 
 if( ! empty( $_GET['path_info'] ) ) {
 	// path_info=($path_info) by mod_rewrite
-	@list( , $path_info ) = explode( '/'.$mydirname.'/' , $_SERVER['REQUEST_URI'] ) ;
+	@list( , $path_info ) = explode( '/'.$mydirname.'/' , $_SERVER['REQUEST_URI'] , 2 ) ;
 	if( empty( $path_info ) ) $path_info = $_GET['path_info'] ;
 	$path_info = str_replace( '..' , '' , preg_replace( WRAPS_DISALLOW_CHARS , '' , $path_info ) ) ;
 } else if( ! empty( $_SERVER['PATH_INFO'] ) ) {

@@ -3,6 +3,11 @@
 
 [b]CHANGES:[/b]
 
+1.22 (2007/06/14)
+- fixed rewrite_mode file name limitation
+- renamed language files
+-- ja_utf8 (formerly japaneseutf)
+
 1.21 (2007/05/12)
 - changed the structure "altsys essential"
 - added language constants override system (with altsys>=0.5)
@@ -66,6 +71,11 @@
 [xlang:ja]
 
 [b]更新履歴:[/b]
+
+1.22 (2007/06/14)
+- mod_rewriteモードでのファイル名制限の対応をした
+- 言語ファイル名変更
+-- ja_utf8 (旧japaneseutf)
 
 1.21 (2007/05/12)
 - 正式にaltsys必須とした

@@ -102,7 +102,16 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.36 beta (2007/06/14)
+- modified controller about created/modified (thx moegiiro)
+- modified future timestamped content is not displayed yet
+- added an event "new content"
+- modified notifications around escaping HTML
 - modified compatibility of BBCode filter
+- added import feature from SmartSection
+- added a block "subcategories"
+- changed thelanguage file name
+-- ja_utf8 (formerly japaneseutf)
 
 1.35 beta (2007/05/29)
 - modified interfaces managing contents/categories
@@ -394,8 +403,16 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
-
+1.36 beta (2007/06/15)
+- 作成日/更新日等の処理改善 (thx moegiiro)
+- 未来の作成日時を持つコンテンツは、その時間が来るまで表示されないようにした
+- 新規コンテンツのイベント通知追加
+- イベント通知でHTMLエスケープ処理がおかしかったのを改善
 - BBCode処理の非互換性(特にcodeブロック)の改善
+- SmartSectionからのインポート実装
+- サブカテゴリーブロック実装
+- 言語ファイル名変更
+-- ja_utf8 (旧japaneseutf)
 
 1.35 beta (2007/05/29)
 - 各種操作性の向上

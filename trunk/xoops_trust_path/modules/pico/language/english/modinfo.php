@@ -70,6 +70,7 @@ define($constpref.'_COM_VIEW','View of Comment-integration');
 define($constpref.'_BNAME_MENU','Menu');
 define($constpref.'_BNAME_CONTENT','Content');
 define($constpref.'_BNAME_LIST','List');
+define($constpref.'_BNAME_SUBCATEGORIES','Subcategories');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'global');
@@ -79,6 +80,9 @@ define($constpref.'_NOTCAT_GLOBALDSC', 'notifications about this module');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', 'waitings');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'Notify if new posts or modifications waiting approval (Just notify to admins or moderators)');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: waiting');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT', 'new content');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP', 'Notify if a new content is registered. (approved contents only)');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : New content');
 
 }
 

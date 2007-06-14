@@ -81,6 +81,17 @@ $modversion['blocks'][3] = array(
 	'can_clone'		=> true ,
 ) ;
 
+$modversion['blocks'][4] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_SUBCATEGORIES') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_pico_subcategories_show' ,
+	'edit_func'		=> 'b_pico_subcategories_edit' ,
+	'options'		=> "$mydirname|0|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
 // Comments
 $modversion['hasComments'] = 0 ;
 
@@ -398,6 +409,15 @@ $modversion['notification'] = array(
 			'description' => constant($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP') ,
 			'mail_template' => 'global_waitingcontent' ,
 			'mail_subject' => constant($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ') ,
+		) ,
+		array(
+			'name' => 'newcontent' ,
+			'category' => 'global' ,
+			'title' => constant($constpref.'_NOTIFY_GLOBAL_NEWCONTENT') ,
+			'caption' => constant($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP') ,
+			'description' => constant($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP') ,
+			'mail_template' => 'global_newcontent' ,
+			'mail_subject' => constant($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ') ,
 		) ,
 	) ,
 ) ;

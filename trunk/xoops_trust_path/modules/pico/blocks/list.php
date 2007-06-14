@@ -53,7 +53,7 @@ function b_pico_list_show( $options )
 		$categories4assign = implode(',',$categories) ;
 	}
 
-	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,o.use_cache,o.body_cached,o.body,o.filters,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
+	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,o.use_cache,o.body_cached,o.body,o.filters,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible AND o.created_time <= UNIX_TIMESTAMP() ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
 	if( ! $result = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;

@@ -70,6 +70,7 @@ define($constpref.'_COM_VIEW','コメント統合の表示方法');
 define($constpref.'_BNAME_MENU','メニュー');
 define($constpref.'_BNAME_CONTENT','コンテンツ内容');
 define($constpref.'_BNAME_LIST','コンテンツ一覧');
+define($constpref.'_BNAME_SUBCATEGORIES','サブカテゴリー一覧');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');
@@ -77,8 +78,11 @@ define($constpref.'_NOTCAT_GLOBALDSC', 'このpicoモジュール全体における通知オプシ
 
 // Each Notifications
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', '承認待ち');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'コンテンツの新規登録・変更などで、承認が必要な投稿があった場合に通知する（モデレータ以外には通知されません）');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: 承認待ち');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'コンテンツの新規登録・変更などで、承認が必要な投稿があった場合に通知します（モデレータ以外には通知されません）');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : 承認待ち');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT', '新規コンテンツ');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP', 'コンテンツの新規登録があった場合に通知します（未承認であれば通知しません）');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : 新規コンテンツ');
 
 }
 

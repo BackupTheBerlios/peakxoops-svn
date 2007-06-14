@@ -1,10 +1,5 @@
 <?php
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:36:31
-define('_MD_PICO_ONOFF','表示/非表示');
-define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','一般設定での設定値をこのカテゴリーだけ変更したい場合は、<br />(オプション名):(オプション値)<br />という形で、１行に１設定ずつ記述してください。<br />例）<br />show_breadcrumbs:1 <br /><br />変更可能なオプションと現在値は以下の通りです。');
-
 define('_MD_PICO_TOP','トップ');
 define('_MD_PICO_ALLCONTENTS','全コンテンツ');
 define('_MD_PICO_DELETEDCONTENTS','削除済コンテンツ');
@@ -22,10 +17,13 @@ define('_MD_PICO_NEXT','次');
 define('_MD_PICO_PREV','前');
 define('_MD_PICO_CATEGORYINDEX','カテゴリートップ');
 define('_MD_PICO_NOSUBJECT','(no subject)');
+define('_MD_PICO_WAITINGRELEASE','公開待ち');
+define('_MD_PICO_EXPIRED','期限切れ');
 define('_MD_PICO_WAITINGAPPROVAL','承認待ち');
 define('_MD_PICO_WAITINGREGISTER','新規登録申請中');
 define('_MD_PICO_WAITINGUPDATE','変更申請中');
 define('_MD_PICO_REGISTERED_AUTOMATICALLY','自動登録');
+define('_MD_PICO_ONOFF','表示/非表示');
 
 define('_MD_PICO_CATEGORY','カテゴリー');
 define('_MD_PICO_CATEGORIES','カテゴリー');
@@ -89,6 +87,7 @@ define('_MD_PICO_TH_WEIGHT','表示順');
 define('_MD_PICO_TH_CONTENTOPTIONS','オプション');
 define('_MD_PICO_LABEL_USECACHE','本文キャッシュ');
 define('_MD_PICO_NOTE_USECACHEDSC','※閲覧条件によって内容が異なるコンテンツの場合にはOFFにしてください。ただし、ここがONでない記事は検索対象となりません。');
+define('_MD_PICO_LABEL_SPECIFY_DATETIME','日時を指定する');
 define('_MD_PICO_LABEL_VISIBLE','表示');
 define('_MD_PICO_LABEL_SHOWINNAVI','ページナビに表示する');
 define('_MD_PICO_LABEL_SHOWINMENU','メニューに表示する');
@@ -107,9 +106,10 @@ define('_MD_PICO_MSG_CONFIRMDELETECONTENT','コンテンツを削除してよろ
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','HTMLヘッダカスタマイズ部表示');
 define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');
 define('_MD_PICO_BTN_SUBMITEDITING','編集内容を登録');
+define('_MD_PICO_BTN_SUBMITSAVEAS','別レコードとして保存');
 define('_MD_PICO_BTN_COPYFROMWAITING','申請データへの置換');
 define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','このフォーム内での編集内容は破棄され、申請された通りのデータに置き換わりますが、よろしいですか？');
-
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','一般設定での設定値をこのカテゴリーだけ変更したい場合は、<br />(オプション名):(オプション値)<br />という形で、１行に１設定ずつ記述してください。<br />例）<br />show_breadcrumbs:1 <br /><br />変更可能なオプションと現在値は以下の通りです。');
 
 // vote to content
 define('_MD_PICO_ERR_VOTEPERM','投票権がありません');
@@ -155,7 +155,7 @@ define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限')
 if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {
 	if( function_exists( 'mb_convert_encoding' ) && function_exists( 'mb_internal_encoding' ) ) {
 		function pico_convert_encoding_to_ie( $str , $from = 'auto' ) {
-			return mb_convert_encoding( $str , "UTF-8" , mb_detect_encoding( $str , 'ASCII,JIS,UTF-8,EUC-JP,SJIS' ) ) ;
+			return mb_convert_encoding( $str , "EUC-JP" , mb_detect_encoding( $str , 'ASCII,JIS,UTF-8,EUC-JP,SJIS' ) ) ;
 		}
 	} else {
 		function pico_convert_encoding_to_ie( $str ) {

@@ -17,7 +17,7 @@ if( empty( $category_permissions[$cat_id]['can_readfull'] ) ) {
 }
 
 // visible check
-$whr4visible = $isadminormod ? '1' : 'visible' ;
+$whr4visible = $isadminormod ? '1' : 'visible AND created_time <= UNIX_TIMESTAMP()' ;
 
 // confirm this "content" exists from given $content_id
 $sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id='$content_id' AND ($whr4visible)" ;
@@ -52,9 +52,5 @@ if( $xoopsModuleConfig['use_taf_module'] ) {
 } else {
 	$content4assign['tellafriend_uri'] = 'mailto:?subject='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,$xoopsConfig['sitename'])).'&amp;body='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $content4assign['subject_raw'])).'%0A'.XOOPS_URL."/modules/$mydirname/".rawurlencode(pico_common_make_content_link4html( $xoopsModuleConfig , $content4assign )) ;
 }
-
-// count up 'viewed'
-$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET viewed=viewed+1 WHERE content_id='$content_id'" ) ;
-
 
 ?>

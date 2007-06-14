@@ -20,7 +20,7 @@ function fetchSummary( $external_link_id )
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
 	// query
-	$content_row = $db->fetchArray( $db->query( "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id AND allow_comment AND visible AND approval" ) ) ;
+	$content_row = $db->fetchArray( $db->query( "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id AND allow_comment AND visible AND created_time <= UNIX_TIMESTAMP() AND approval" ) ) ;
 	if( empty( $content_row ) ) return '' ;
 
 	// dare to convert it irregularly
@@ -43,7 +43,7 @@ function validate_id( $link_id )
 
 	$db =& Database::getInstance() ;
 	
-	list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id AND allow_comment AND visible AND approval" ) ) ;
+	list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id AND allow_comment AND visible AND created_time <= UNIX_TIMESTAMP() AND approval" ) ) ;
 	if( $count <= 0 ) return false ;
 	else return $content_id ;
 }

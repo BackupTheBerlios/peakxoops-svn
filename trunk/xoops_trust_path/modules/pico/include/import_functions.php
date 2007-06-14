@@ -40,6 +40,7 @@ $GLOBALS['pico_tables'] = array(
 		'viewed' ,
 		'votes_sum' ,
 		'votes_count' ,
+		'comments_count' ,
 		'htmlheader' ,
 		'htmlheader_waiting' ,
 		'body' ,
@@ -84,6 +85,57 @@ function pico_import_errordie()
 }
 
 
+
+function pico_import_from_smartsection( $mydirname , $import_mid )
+{
+	$db =& Database::getInstance() ;
+	$import_mid = intval( $import_mid ) ;
+
+	// get name of `contents` table 
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$module =& $module_handler->get( $import_mid ) ;
+	$from_tables = $module->getInfo('tables') ;
+	if( sizeof( $from_tables ) != 5 ) pico_import_errordie() ;
+	$target_dirname = $module->getVar('dirname') ;
+
+	// categories
+	$to_table = $db->prefix( $mydirname.'_categories' ) ;
+	$from_table = $db->prefix( $from_tables[0] ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	$db->query( "INSERT INTO `$to_table` (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP')" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (cat_id,pid,cat_title,cat_desc,cat_weight,cat_created_time,cat_modified_time) SELECT categoryid,parentid,name,description,weight,created,created FROM `$from_table`" ) ;
+	if( ! $irs ) pico_import_errordie() ;
+
+	// category_permissions
+	$to_table = $db->prefix( $mydirname.'_category_permissions' ) ;
+	$from_table = $db->prefix( 'group_permission' ) ;
+	$db->query( "DELETE FROM `$to_table` WHERE cat_id>0" ) ;
+	$rs = $db->query( "SELECT * FROM `$from_table` WHERE gperm_modid=$import_mid AND gperm_name='category_read'" ) ;
+	while( $row = $db->fetchArray( $rs ) ) {
+		$permissions4sql = addslashes( serialize(array('can_read'=>1,'can_readfull'=>1,'can_post'=>0,'can_edit'=>0,'can_delete'=>0,'post_auto_approved'=>0,'is_moderator'=>0,'can_makesubcategory'=>0)) ) ;
+		$db->query( "INSERT INTO `$to_table` SET cat_id={$row['gperm_itemid']},uid=NULL,groupid={$row['gperm_groupid']},permissions='$permissions4sql'" ) ;
+	}
+	// groupid=1
+	$permissions4sql = addslashes( serialize(array('can_read'=>1,'can_readfull'=>1,'can_post'=>1,'can_edit'=>1,'can_delete'=>1,'post_auto_approved'=>1,'is_moderator'=>1,'can_makesubcategory'=>1)) ) ;
+	$db->query( "INSERT INTO `$to_table` (cat_id,uid,groupid,permissions) SELECT categoryid,NULL,1,'$permissions4sql' FROM ".$db->prefix( $from_tables[0] ) ) ;
+
+	// content_votes (delete all)
+	$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_votes") ) ;
+
+	// contents (temporary body_waiting,body_cached for reconstruct filters)
+	$to_table = $db->prefix( $mydirname.'_contents' ) ;
+	$from_table = $db->prefix( $from_tables[1] ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (content_id,cat_id,weight,created_time,modified_time,subject,visible,approval,allow_comment,show_in_navi,show_in_menu,htmlheader,body,poster_uid,modifier_uid,viewed,/*1*/body_waiting,body_cached,subject_waiting,htmlheader_waiting) SELECT itemid,categoryid,weight,datesub,datesub,title,status=2,status<>1,cancomment,1,1,'',CONCAT(summary,body),uid,uid,counter,/*1*/dohtml,dosmiley,doxcode,dobr FROM `$from_table`" ) ;
+	if( ! $irs ) pico_import_errordie() ;
+
+	// update filters for DB contents
+	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|htmlspecialchars') WHERE ! body_waiting" ) ;
+	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|xcode') WHERE subject_waiting" ) ;
+	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|smiley') WHERE body_cached" ) ;
+	$db->query( "UPDATE `$to_table` SET filters=CONCAT(filters,'|nl2br') WHERE htmlheader_waiting" ) ;
+	$db->query( "UPDATE `$to_table` SET body_waiting='',body_cached='',subject_waiting='',htmlheader_waiting=''" ) ;
+}
 
 function pico_import_from_tinyd( $mydirname , $import_mid )
 {

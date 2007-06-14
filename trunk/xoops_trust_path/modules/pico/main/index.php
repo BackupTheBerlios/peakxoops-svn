@@ -79,6 +79,8 @@ if( empty( $xoopsOption['template_main'] ) ) {
 	require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 	$pagetitle4assign = $content4assign['subject'] ;
 	$xoops_breadcrumbs[] = array( 'name' => $content4assign['subject'] ) ;
+	// count up 'viewed'
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET viewed=viewed+1 WHERE content_id='$content_id'" ) ;
 }
 
 

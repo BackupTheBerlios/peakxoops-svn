@@ -48,13 +48,16 @@ if( isset( $_POST['contentman_post'] ) && $category4assign['can_edit'] ) {
 	}
 	// update the content
 	pico_updatecontent( $mydirname , $content_id , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] ) ;
+	$content_uri4html = XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) ;
 	if( $category4assign['post_auto_approved'] ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
+		// message "modified"
+		redirect_header( $content_uri4html , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	} else {
 		// Notify for new waiting content (only for admin or mod)
 		$users2notify = pico_main_get_moderators( $mydirname , $cat_id ) ;
 		if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
 		pico_main_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
+		// message "waiting approval"
 		redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTWAITINGUPDATE ) ;
 	}
 	exit ;
@@ -78,33 +81,40 @@ if( isset( $_POST['contentman_delete'] ) && $category4assign['can_delete'] ) {
 }
 
 // FORM PART
+
+// get content data specified by content_id
+$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." o WHERE content_id='$content_id'" ;
+if( ! $ors = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+if( $db->getRowsNum( $ors ) <= 0 ) {
+	redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCONTENT ) ;
+	exit ;
+}
+$content_row = $db->fetchArray( $ors ) ;
+$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $cat_row ) ;
+$content4assign_base = $content4assign ;
+$preview4assign = array() ;
+
 if( isset( $_POST['contentman_preview'] ) ) {
+	// preview (override content4assign by request4assign)
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$content = pico_get_requests4content( $mydirname , $errors = array() , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] , $content_id ) ;
-	$content4assign = array_map( 'htmlspecialchars_ent' , $content ) ;
+	$request = pico_get_requests4content( $mydirname , $errors = array() , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] , $content_id ) ;
+	$request4assign = array_map( 'htmlspecialchars_ent' , $request ) ;
+	$content4assign = $request4assign + $content4assign ;
 	$content4assign['id'] = $content_id ;
-	$content4assign['filter_infos'] = pico_main_get_filter_infos( $content['filters'] , $category4assign['isadminormod'] ) ;
-	$content4assign['body_raw'] = $content['body'] ;
+	$content4assign['filter_infos'] = pico_main_get_filter_infos( $request['filters'] , $category4assign['isadminormod'] ) ;
+	$content4assign['body_raw'] = $request['body'] ;
 
 	$preview4assign = array(
 		'errors' => $errors ,
-		'htmlheader' => $content['htmlheader'] ,
-		'subject' => $myts->makeTboxData4Show( $content['subject'] ) ,
-		'body' => pico_common_filter_body( $mydirname , $content + array('content_id'=>0) ) ,
+		'htmlheader' => $request['htmlheader'] ,
+		'subject' => $myts->makeTboxData4Show( $request['subject'] ) ,
+		'body' => pico_common_filter_body( $mydirname , $request + array('content_id'=>0) ) ,
 	) ;
 } else {
-	$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." o WHERE content_id='$content_id'" ;
-	if( ! $ors = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	if( $db->getRowsNum( $ors ) <= 0 ) {
-		redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCONTENT ) ;
-		exit ;
-	}
-	$content_row = $db->fetchArray( $ors ) ;
-	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $cat_row ) ;
+	// filter overriding for edit instead of view
 	$content4edit = array(
-		'cat_id' => intval( $content_row['cat_id'] ) ,
 		'vpath' => htmlspecialchars( $content_row['vpath'] , ENT_QUOTES ) ,
 		'subject' => htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
 		'subject_waiting' => htmlspecialchars( $content_row['subject_waiting'] , ENT_QUOTES ) ,
@@ -114,12 +124,6 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'body_waiting' => htmlspecialchars( $content_row['body_waiting'] , ENT_QUOTES ) ,
 		'filters' => htmlspecialchars( $content_row['filters'] , ENT_QUOTES ) ,
 		'filter_infos' => pico_main_get_filter_infos( $content_row['filters'] , $category4assign['isadminormod'] ) ,
-		'weight' => intval( $content_row['weight'] ) ,
-		'use_cache' => intval( $content_row['use_cache'] ) ,
-		'visible' => intval( $content_row['visible'] ) ,
-		'show_in_navi' => intval( $content_row['show_in_navi'] ) ,
-		'show_in_menu' => intval( $content_row['show_in_menu'] ) ,
-		'allow_comment' => intval( $content_row['allow_comment'] ) ,
 	) ;
 	$content4assign = $content4edit + $content4assign + $content_row ;
 }
@@ -139,14 +143,15 @@ $xoopsTpl->assign( array(
 	'mod_config' => $xoopsModuleConfig ,
 	'category' => $category4assign ,
 	'content' => $content4assign ,
+	'content_base' => $content4assign_base ,
 	'content_histories' => pico_get_content_histories4assign( $mydirname , $content_id ) ,
-	'body_wysiwyg' => @$pico_wysiwyg_body ,
-	'preview' => @$preview4assign ,
+	'body_wysiwyg' => $pico_wysiwyg_body ,
+	'preview' => $preview4assign ,
 	'page' => 'contentmanager' ,
 	'formtitle' => _MD_PICO_LINK_EDITCONTENT ,
 	'cat_jumpbox_options' => pico_main_make_cat_jumpbox_options( $mydirname , $whr_read4cat , $cat_id ) ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico') ,
-	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . @$pico_wysiwyg_header ,
+	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />\n" . @$xoopsModuleConfig['htmlheader'] . "\n" . @$preview4assign['htmlheader'] . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . $pico_wysiwyg_header ,
 	'xoops_pagetitle' => _MD_PICO_CONTENTMANAGER ,
 	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => _MD_PICO_CONTENTMANAGER ) ) ) ,
 ) ) ;

@@ -124,6 +124,9 @@
 						<{if ! $content.approval}>
 							<strong style="color:#f00;"><{$smarty.const._MD_PICO_WAITINGAPPROVAL}></strong>
 						<{/if}>
+						<{if $content.created_time > time()}>
+							<strong style="color:#00f;"><{$smarty.const._MD_PICO_WAITINGRELEASE}></strong>
+						<{/if}>
 						<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><{$smarty.const._EDIT}></a> |
 						<input type="checkbox" name="action_selects[<{$content.id}>]" id="col_action_<{$content.id}>" value="1" />
 						<br />

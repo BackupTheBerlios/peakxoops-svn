@@ -27,6 +27,8 @@ foreach( $modules as $module ) {
 	} else if( stristr( @$tables[0] , 'tinycontent' ) ) {
 		// tinyd
 		$importable_modules[$mid] = 'tinyd:'.$module->getVar('name')." ($dirname)" ;
+	} else if( substr( @$tables[4] , -10 ) == '_mimetypes' && substr( @$tables[3] , -5 ) == '_meta' && substr( @$tables[2] , -6 ) == '_files' ) {
+		$importable_modules[$mid] = 'smartsection:'.$module->getVar('name')." ($dirname)" ;
 	}
 }
 
@@ -50,6 +52,9 @@ if( ! empty( $_POST['do_import'] ) && ! empty( $_POST['import_mid'] ) ) {
 			break ;
 		case 'tinyd' :
 			pico_import_from_tinyd( $mydirname , $import_mid ) ;
+			break ;
+		case 'smartsection' :
+			pico_import_from_smartsection( $mydirname , $import_mid ) ;
 			break ;
 	}
 

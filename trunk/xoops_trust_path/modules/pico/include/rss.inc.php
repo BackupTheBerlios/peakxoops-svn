@@ -2,7 +2,7 @@
 
 $whr_cid = empty( $cat_id ) ? '1' : 'o.cat_id='.intval($cat_id) ;
 
-$sql = "SELECT o.*,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_cid) AND o.visible ORDER BY o.modified_time DESC,o.content_id LIMIT 10" ;
+$sql = "SELECT o.*,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_cid) AND o.visible AND o.created_time <= UNIX_TIMESTAMP() ORDER BY o.modified_time DESC,o.content_id LIMIT 10" ;
 if( ! $result = $db->query( $sql ) ) {
 	echo $db->logger->dumpQueries() ;
 	exit ;

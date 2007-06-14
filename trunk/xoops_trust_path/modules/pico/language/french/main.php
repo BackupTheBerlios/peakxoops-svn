@@ -7,6 +7,13 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
+define('_MD_PICO_WAITINGRELEASE','waiting release');
+define('_MD_PICO_EXPIRED','Expired');
+define('_MD_PICO_LABEL_SPECIFY_DATETIME','Specify datetime');
+define('_MD_PICO_BTN_SUBMITSAVEAS','save as');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:39:06
 define('_MD_PICO_ONOFF','ON/OFF');
 define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');

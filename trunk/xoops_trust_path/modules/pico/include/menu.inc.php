@@ -38,7 +38,7 @@ if( ! empty( $xoopsModuleConfig['wraps_auto_register'] ) ) {
 
 foreach( array_keys( $categories4assign ) as $cat_id ) {
 	// contents loop
-	$sql = "SELECT o.* FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=$cat_id ORDER BY o.weight" ;
+	$sql = "SELECT o.* FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=$cat_id AND o.created_time <= UNIX_TIMESTAMP() ORDER BY o.weight" ;
 	if( ! $ors = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;

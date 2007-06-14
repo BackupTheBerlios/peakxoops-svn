@@ -214,7 +214,7 @@ function pico_main_trigger_event( $category , $item_id , $event , $extra_tags=ar
 	// Add some tag substitutions here
 	$tags = array();
 	// {X_ITEM_NAME} {X_ITEM_URL} {X_ITEM_TYPE} from lookup_func are disabled
-	$tags['X_MODULE'] = $xoopsModule->getVar('name');
+	$tags['X_MODULE'] = $xoopsModule->getVar('name','n');
 	$tags['X_MODULE_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/';
 	$tags['X_NOTIFY_CATEGORY'] = $category;
 	$tags['X_NOTIFY_EVENT'] = $event;
@@ -277,7 +277,7 @@ function pico_main_get_top_content_id_from_cat_id( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
 
-	list( $content_id ) = $db->fetchRow( $db->query( "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=".intval($cat_id)." AND o.visible ORDER BY o.weight,o.content_id LIMIT 1" ) ) ;
+	list( $content_id ) = $db->fetchRow( $db->query( "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=".intval($cat_id)." AND o.visible AND o.created_time <= UNIX_TIMESTAMP() ORDER BY o.weight,o.content_id LIMIT 1" ) ) ;
 
 	return intval( $content_id ) ;
 }

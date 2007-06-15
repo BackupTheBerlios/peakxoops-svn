@@ -12,7 +12,7 @@ $max_entries = intval( @$_GET['max_entries'] ) ;
 if( $max_entries > 50 ) $max_entries = 50 ;
 
 // fetch pipe_row
-$pipe_ids = empty( $_GET['pipe_ids'] ) ? array(0) : array_map( 'intval' , explode( ',' , $_GET['pipe_ids'] ) ) ;
+$pipe_ids = empty( $_GET['pipe_ids'] ) ? array(0) : explode( ',' , preg_replace( '/[^0-9,:]/' , '' ,  $_GET['pipe_ids'] ) ) ;
 if( sizeof( $pipe_ids ) == 1 ) {
 	// single pipe_id
 	$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_ids[0] ) ;

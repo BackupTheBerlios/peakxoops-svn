@@ -44,6 +44,7 @@ add pipes in "pipe" admin
 - added filter joints for exception
 - changed language name
 -- ja_utf8 (formerly japaneseutf) 0.30a
+- modified block option can each pipe_id has max entries 0.30a
 
 0.20 2007-05-11
 - changed the structure "altsys essential"
@@ -125,6 +126,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - 除外用フィルタージョイントの追加
 - 言語ファイル名前変更
 -- ja_utf8 (以前のjapaneseutf) 0.30a
+- ブロックのパイプ指定で、パイプIDに:数字を足すことで最大取得数を設定可能 0.30a
 
 0.20 2007-05-11
 - altsys必須となった

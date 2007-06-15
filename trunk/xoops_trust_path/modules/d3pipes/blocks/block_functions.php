@@ -6,7 +6,7 @@ function b_d3pipes_sync_show( $options )
 {
 	$mydirname = empty( $options[0] ) ? 'd3pipes' : $options[0] ;
 	$unique_id = empty( $options[1] ) ? uniqid( rand() ) : htmlspecialchars( $options[1] , ENT_QUOTES ) ; // just dummy
-	$pipe_ids = empty( $options[2] ) ? array(0) : array_map( 'intval' , explode( ',' , $options[2] ) ) ;
+	$pipe_ids = empty( $options[2] ) ? array(0) : array_map( 'trim' , explode( ',' , $options[2] ) ) ;
 	$max_entries = empty( $options[3] ) ? 0 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_sync.html' : trim( $options[4] ) ;
 
@@ -54,7 +54,7 @@ function b_d3pipes_async_show( $options )
 {
 	$mydirname = empty( $options[0] ) ? 'd3pipes' : $options[0] ;
 	$unique_id = empty( $options[1] ) ? uniqid( rand() ) : htmlspecialchars( $options[1] , ENT_QUOTES ) ;
-	$pipe_ids = empty( $options[2] ) ? array(0) : array_map( 'intval' , explode( ',' , $options[2] ) ) ;
+	$pipe_ids = empty( $options[2] ) ? array(0) : explode( ',' , preg_replace( '/[^0-9,:]/' , '' ,  $options[2] ) ) ;
 	$max_entries = empty( $options[3] ) ? 0 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_async.html' : trim( $options[4] ) ;
 
@@ -98,7 +98,7 @@ function b_d3pipes_async_edit( $options )
 {
 	$mydirname = empty( $options[0] ) ? 'd3pipes' : $options[0] ;
 	//$unique_id = empty( $options[1] ) ? uniqid(rand()) : $options[1] ;
-	$pipe_ids = empty( $options[2] ) ? array('') : array_map( 'intval' , explode( ',' , $options[2] ) ) ;
+	$pipe_ids = empty( $options[2] ) ? array('') : explode( ',' , preg_replace( '/[^0-9,:]/' , '' ,  $options[2] ) ) ;
 	$max_entries = empty( $options[3] ) ? 0 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? '' : trim( $options[4] ) ;
 

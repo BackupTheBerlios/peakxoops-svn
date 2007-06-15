@@ -4,7 +4,7 @@
 
 <p>
 	<label for="pipe_id"><{$smarty.const._MB_D3PIPES_PIPE_ID}></label>:
-	<input type="text" name="options[2]" id="pipe_id" value="<{","|implode:$pipe_ids}>" size="16" />
+	<input type="text" name="options[2]" id="pipe_id" value="<{","|implode:$pipe_ids|escape}>" size="16" />
 	<select name="pipe_select" id="pipe_select" onchange="xoopsGetElementById('pipe_id').value=xoopsGetElementById('pipe_id').value?xoopsGetElementById('pipe_id').value+','+this.value:this.value;">
 		<{html_options options=$pipe_options}>
 	</select>

@@ -13,12 +13,15 @@ class D3pipesParseLinkhtml extends D3pipesParseAbstract {
 			$this->errors[] = 'Invalid pattern for this Parser' ;
 		}
 		foreach( $matches as $match ) {
-			if( preg_match( '#[0-9]{2,4}[/.-][0-9]{1,2}[/.-][0-9]{1,2}#' , $match[1] , $regs ) ) {
-				$pubtime = strtotime( $regs[0] ) ;
+
+		var_dump( $match[0] ) ;
+
+			if( preg_match( '#[0-9]{2,4}[/.-][0-9]{1,2}[/.-][0-9]{1,2}#' , $match[1] ) ) {
+				$pubtime = strtotime( $match[1] ) ;
 				$link = $match[2] ;
 				$headline = $match[3] ;
-			} else if( preg_match( '#[0-9]{2,4}[/.-][0-9]{1,2}[/.-][0-9]{1,2}#' , $match[3] , $regs ) ) {
-				$pubtime = strtotime( $regs[0] ) ;
+			} else if( preg_match( '#[0-9]{2,4}[/.-][0-9]{1,2}[/.-][0-9]{1,2}#' , $match[3] ) ) {
+				$pubtime = strtotime( $match[3] ) ;
 				$link = $match[1] ;
 				$headline = $match[2] ;
 			} else {

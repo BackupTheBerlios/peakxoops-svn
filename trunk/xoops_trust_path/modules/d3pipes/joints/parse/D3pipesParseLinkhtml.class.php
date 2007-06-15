@@ -13,9 +13,6 @@ class D3pipesParseLinkhtml extends D3pipesParseAbstract {
 			$this->errors[] = 'Invalid pattern for this Parser' ;
 		}
 		foreach( $matches as $match ) {
-
-		var_dump( $match[0] ) ;
-
 			if( preg_match( '#[0-9]{2,4}[/.-][0-9]{1,2}[/.-][0-9]{1,2}#' , $match[1] ) ) {
 				$pubtime = strtotime( $match[1] ) ;
 				$link = $match[2] ;

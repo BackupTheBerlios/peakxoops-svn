@@ -33,6 +33,21 @@ add pipes in "pipe" admin
 
 [b]CHANGELOG[/b]
 
+0.31 2007-06-21 (update the module)
+- modified error handler can distinguish parse error from fetch error
+- modified RSS/Atom redirection
+- added Snoopy's setting (Proxy and curl path) into preferences
+- added a UNION joint without aggregation
+- added a block's option - Separated view
+- modified escaping rule that jsbackend.html can use single quote
+- added a block template for big view
+- divided files for blocks
+- divided functions for block editing
+- modified interfaces of block's options
+- added a preferences - life time of fetching cache
+- added pipe analyzer
+- added wizard for creating a pipe for RSS/Atom
+
 0.30 2007-06-05 (update the module)
 - modified interface of pipe admin
 - modified multiple pipe_id can be assinged for a block
@@ -114,6 +129,21 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.31 2007-06-21 ※要モジュールアップデート
+- 取得エラーと解析エラーを可能な限り判別可能にした
+- リダイレクト処理を改善した
+- Snoopyの設定(Proxyやcurlパス等)を追加した
+- 時間によるアグリゲーションを行わないUNIONジョイントを追加
+- ブロックオプションに「個別表示」を追加
+- jsbackend.htmlテンプレートでもシングルクオートを利用可能とした
+- 大きなブロック表示用テンプレートを追加
+- ブロック処理ファイルの分割
+- ブロック編集関数の分割
+- ブロックオプションインターフェースの改善
+- 外部取得キャッシュ時間設定の追加
+- パイプの途中経過を解析する機能の実装
+- RSS/Atom取得パイプ作成ウイザードの実装
 
 0.30 2007-06-05 ※要モジュールアップデート/Smartyプラグインのコピーを忘れずに（一つ追加になってます）
 - パイプ管理のインターフェースを多少マシにした

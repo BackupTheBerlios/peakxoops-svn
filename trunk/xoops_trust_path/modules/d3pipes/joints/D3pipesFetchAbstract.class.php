@@ -13,7 +13,7 @@ class D3pipesFetchAbstract extends D3pipesJointAbstract {
 	{
 		$this->mydirname = $mydirname ;
 		$this->pipe_id = intval( $pipe_id ) ;
-		$this->cache_life_time = 600 ;
+		$this->cache_life_time = 300 ; // minimum
 		$this->url = $option ;
 	}
 

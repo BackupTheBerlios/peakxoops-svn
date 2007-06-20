@@ -8,6 +8,8 @@ define('_MD_A_MYMENU_MYPREFERENCES','一般設定');
 define('_MD_A_D3PIPES_H2_PIPEADMINLIST','パイプ管理 - 一覧');
 define('_MD_A_D3PIPES_H2_PIPEADMINEDIT_FMT','パイプ管理 - パイプ番号%dの編集');
 define('_MD_A_D3PIPES_H2_PIPEADMINNEW','パイプ管理 - 新規パイプの作成');
+define('_MD_A_D3PIPES_H2_WIZARDFETCH','RSS/Atom取得パイプ作成ウイザード');
+define('_MD_A_D3PIPES_H2_WIZARDINNER','サイト内新着情報パイプ作成ウイザード');
 define('_MD_A_D3PIPES_H2_CACHEADMIN','キャッシュ管理');
 define('_MD_A_D3PIPES_H2_CLIPPINGADMIN','切り抜き管理');
 define('_MD_A_D3PIPES_H2_JOINTADMIN','ジョイント初期設定');
@@ -38,6 +40,14 @@ define('_MD_A_D3PIPES_TH_WEIGHT','処理順');
 define('_MD_A_D3PIPES_TH_JOINT','ジョイント');
 define('_MD_A_D3PIPES_TH_JOINTCLASS','クラス');
 define('_MD_A_D3PIPES_TH_OPTION','オプション');
+define('_MD_A_D3PIPES_TH_ANALYZE','デバッグ');
+
+define('_MD_A_D3PIPES_TH_WIZ_SITENAME','サイト名');
+define('_MD_A_D3PIPES_TH_WIZ_SITEURL','サイトのURL');
+define('_MD_A_D3PIPES_TH_WIZ_RSSURL','RSS/AtomのURL');
+define('_MD_A_D3PIPES_TH_WIZ_CLIPPINGYN','取得したエントリを保存する');
+define('_MD_A_D3PIPES_TH_WIZ_BTN_CONFIRM','内容確認');
+define('_MD_A_D3PIPES_TH_WIZ_BTN_REGISTER','登録');
 
 define('_MD_A_D3PIPES_LABEL_DELETEFETCHCACHE','外部XML取得キャッシュを削除する');
 define('_MD_A_D3PIPES_LABEL_CLEARLASTFETCH','全パイプの最終取得時間をクリアする');
@@ -48,7 +58,10 @@ define('_MD_A_D3PIPES_LABEL_FMT_DELETEOLDERTHAN','発行日が%s日以上前の切り抜きを
 define('_MD_A_D3PIPES_LABEL_TOTALCLIPPINGS','保存された切り抜きの総件数');
 define('_MD_A_D3PIPES_LABEL_SELECTEDCLIPPINGS','削除条件に合致した切り抜きの件数');
 
-define('_MD_A_D3PIPES_LINK_MAKENEWPIPE','新規パイプ作成');
+define('_MD_A_D3PIPES_LINK_MAKENEWPIPE','新規パイプ作成（上級者用）');
+define('_MD_A_D3PIPES_LINK_WIZARDFETCH','RSS/Atom取得パイプ作成ウイザード');
+define('_MD_A_D3PIPES_LINK_WIZARDINNER','サイト内新着情報パイプ作成ウイザード');
+define('_MD_A_D3PIPES_LINK_ANALYZETHEJOINT','途中経過');
 
 define('_MD_A_D3PIPES_BTN_UPDATE','更新');
 define('_MD_A_D3PIPES_BTN_SAVE','保存');
@@ -63,6 +76,7 @@ define('_MD_A_D3PIPES_MSG_PIPEDELETED','パイプを削除しました');
 define('_MD_A_D3PIPES_MSG_CACHEDELETED','キャッシュを削除しました');
 define('_MD_A_D3PIPES_MSG_CLIPPINGUPDATED','切り抜きを更新/削除しました');
 
+define('_MD_A_D3PIPES_CNFM_REGISTERASIS','以下の内容で登録しますか？');
 define('_MD_A_D3PIPES_CNFM_DELETE','本当に削除してよろしいですか？');
 define('_MD_A_D3PIPES_CNFM_PIPEDELETE','本当にパイプを削除しますか？ このパイプによって保存された切り抜きは削除されません。必要に応じて、「切り抜き管理」より操作してください');
 

@@ -15,6 +15,9 @@
 			<th><{$smarty.const._MD_A_D3PIPES_TH_JOINT}></th>
 			<th><{$smarty.const._MD_A_D3PIPES_TH_JOINTCLASS}></th>
 			<th><{$smarty.const._MD_A_D3PIPES_TH_OPTION}></th>
+			<{if $pipe_id>0}>
+				<th><{$smarty.const._MD_A_D3PIPES_TH_ANALYZE}></th>
+			<{/if}>
 		</tr>
 	<{foreach from=$pipe.joints item="joint" key="index"}>
 		<tr class="<{cycle values="odd,even"}>">
@@ -30,9 +33,19 @@
 				<input type="text" name="joint_classes[<{$index}>]" value="<{$joint.joint_class|escape}>" size="8" />
 			</td>
 			<td>
-				<input type="text" name="joint_option[<{$index}>]" value="<{$joint.option|escape}>" size="100" />
+				<input type="text" name="joint_option[<{$index}>]" value="<{$joint.option|escape}>" size="80" />
 				<div id="joint_notice_<{$index}>" style="height:16px;"><{$joint_notices[$joint.joint]}></div>
 			</td>
+
+			<{* link to pipe analyzer *}>
+			<{if $pipe_id>0}>
+			<td nowrap="nowrap">
+				<{if $joint.joint}>
+					<a href="<{$mod_url}>/index.php?page=pipe_analyze&amp;pipe_id=<{$pipe_id}>&amp;step=<{$index}>" target="_blank"><{$smarty.const._MD_A_D3PIPES_LINK_ANALYZETHEJOINT}></a>
+				<{/if}>
+			</td>
+			<{/if}>
+
 		</tr>
 	<{/foreach}>
 	</table>

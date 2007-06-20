@@ -35,6 +35,14 @@ define($constpref.'_ENTRIESAPIPE','パイプ個別表示やRSS/ATOMで表示するエントリ数'
 define($constpref.'_ARCB_FETCHED','切り抜きを自動削除する日数（取得日ベース）');
 define($constpref.'_ARCB_FETCHEDDSC','エントリを切り抜きとして保存した日から何日で削除するかを指定します。自動削除しない場合は0を指定します。また、コメントやハイライト属性がついたコメントは削除されません。あえて削除する場合は切り抜き管理から明示的に削除してください。');
 define($constpref.'_INTERNALENC','内部エンコーディング');
+define($constpref.'_FETCHCACHELT','外部取得キャッシュ期間 (秒)');
+define($constpref.'_REDIRECTWARN','取得先URIのリダイレクトについて警告する');
+define($constpref.'_SNP_PROXYHOST','外部取得に経由するProxyのホスト名');
+define($constpref.'_SNP_PROXYHOSTDSC','FQDNで指定。Proxyを利用しない場合は空欄にしてください');
+define($constpref.'_SNP_PROXYPORT','外部取得に経由するProxyのポート番号');
+define($constpref.'_SNP_PROXYUSER','外部取得に経由するProxyのユーザ名');
+define($constpref.'_SNP_PROXYPASS','外部取得に経由するProxyのパスワード');
+define($constpref.'_SNP_CURLPATH','curlのパス (デフォルトは/usr/bin/curl)');
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.php?page=main_cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');

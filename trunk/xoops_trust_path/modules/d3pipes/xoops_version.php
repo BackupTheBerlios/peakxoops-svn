@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.30 ;
+$modversion['version'] = 0.31 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -54,7 +54,7 @@ $modversion['blocks'][1] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_async_show' ,
 	'edit_func'		=> 'b_d3pipes_async_edit' ,
-	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html" ,
+	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html|mergesort" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -64,8 +64,8 @@ $modversion['blocks'][2] = array(
 	'name'			=> constant($constpref.'_BNAME_SYNC') ,
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_sync_show' ,
-	'edit_func'		=> 'b_d3pipes_async_edit' , // appropriation
-	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html" ,
+	'edit_func'		=> 'b_d3pipes_sync_edit' , // appropriation
+	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html|mergesort" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -121,6 +121,76 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> _CHARSET ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'fetch_cache_life_time' ,
+	'title'			=> $constpref.'_FETCHCACHELT' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 600 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'redirect_warning' ,
+	'title'			=> $constpref.'_REDIRECTWARN' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'snoopy_proxy_host' ,
+	'title'			=> $constpref.'_SNP_PROXYHOST' ,
+	'description'	=> $constpref.'_SNP_PROXYHOSTDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'snoopy_proxy_port' ,
+	'title'			=> $constpref.'_SNP_PROXYPORT' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 8080 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'snoopy_proxy_user' ,
+	'title'			=> $constpref.'_SNP_PROXYUSER' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'snoopy_proxy_pass' ,
+	'title'			=> $constpref.'_SNP_PROXYPASS' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'snoopy_curl_path' ,
+	'title'			=> $constpref.'_SNP_CURLPATH' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '/usr/bin/curl' ,
 	'options'		=> array()
 ) ;
 

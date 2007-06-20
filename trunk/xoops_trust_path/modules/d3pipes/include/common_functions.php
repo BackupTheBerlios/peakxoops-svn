@@ -95,6 +95,15 @@ function &d3pipes_common_get_joint_object_default( $mydirname , $joint_type , $o
 }
 
 
+function &d3pipes_common_get_joint_object( $mydirname , $joint_type , $joint_class , $option = '' )
+{
+	$class_name = 'D3pipes'.ucfirst($joint_type).ucfirst($joint_class) ;
+	require_once dirname(dirname(__FILE__)).'/joints/'.$joint_type.'/'.$class_name.'.class.php' ;
+	$ret =& new $class_name( $mydirname , 0 , $option ) ;
+	return $ret ;
+}
+
+
 function d3pipes_common_get_pipe4assign( $mydirname , $pipe_id )
 {
 	$db =& Database::getInstance() ;
@@ -177,7 +186,7 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 		$errors = array_merge( $errors , $obj->getErrors() ) ;
 	}
 
-	return array_slice( $data , 0 , $max_entries ) ;
+	return is_array( $data ) ? array_slice( $data , 0 , $max_entries ) : $data ;
 }
 
 

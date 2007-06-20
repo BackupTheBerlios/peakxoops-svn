@@ -90,6 +90,12 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 
 		$this->parse_option() ;
 
+		// check fetch error
+		if( strlen( $xml_source ) < 10 ) {
+			$this->errors[] = _MD_D3PIPES_ERR_ERRORBEFOREPARSE."\n($this->pipe_id)" ;
+			return array() ;
+		}
+
 		// prefilter
 		foreach( $this->params['minimum_elements'] as $search ) {
 			$xml_source = preg_replace_callback( $search , array( $this , 'filterInsideMinElement' ) , $xml_source ) ;

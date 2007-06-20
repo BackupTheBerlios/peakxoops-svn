@@ -1,4 +1,4 @@
-<div class="d3pipes_block_sync" id="<{$block.mydirname}>_block_sync">
+<div class="d3pipes_block_sync">
 
 	<{if $block.errors}>
 		<{foreach from=$block.errors item="error"}>
@@ -6,20 +6,45 @@
 		<{/foreach}>
 	<{/if}>
 
-	<ul>
-	<{foreach from=$block.entries item="entry"}>
-		<li>
-			<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
-			<{if $entry.clipping_id}>
-				<a href="<{$block.mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
-			<{else}>
-				<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
-			<{/if}>
-			<{if $entry.pipe.name}>
-				(<{$entry.pipe.name}>)
-			<{/if}>
-		</li>
-	<{/foreach}>
-	</ul>
+	<{if $block.pipes_entries}>
+		<{* SEPARATED VIEW *}>
+		<{foreach from=$block.pipes_entries item="pipe"}>
+			<div class="d3pipes_block_sync_separated">
+				<{$pipe.name}>
+				<{if $pipe.image && $pipe.url}>
+					<a href="<{$pipe.url}>"><img src="<{$pipe.image}>" alt="<{$pipe.name}>" /></a>
+				<{/if}>
+				<ul class="d3pipes_block_sync_separated">
+					<{foreach from=$pipe.entries item="entry"}>
+						<li>
+							<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
+							<{if $entry.clipping_id}>
+								<a href="<{$block.mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
+							<{else}>
+								<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
+							<{/if}>
+						</li>
+					<{/foreach}>
+				</ul>
+			</div>
+		<{/foreach}>
+	<{else}>
+		<{* AGGREGATED VIEW *}>
+		<ul class="d3pipes_block_sync_aggregated">
+			<{foreach from=$block.entries item="entry"}>
+				<li>
+					<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
+					<{if $entry.clipping_id}>
+						<a href="<{$block.mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
+					<{else}>
+						<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
+					<{/if}>
+					<{if $entry.pipe.name}>
+						(<{$entry.pipe.name}>)
+					<{/if}>
+				</li>
+			<{/foreach}>
+		</ul>
+	<{/if}>
 
 </div>

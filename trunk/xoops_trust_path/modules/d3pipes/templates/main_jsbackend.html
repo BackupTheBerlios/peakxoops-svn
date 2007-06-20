@@ -1,34 +1,47 @@
-<{* Don't use the character of singlequote (') in this templte *}>
-
-<{if $errors}>
-	<{foreach from=$errors item="error"}>
-		<div class="errorMsg"><{$error|escape|nl2br}></div>
-	<{/foreach}>
-<{/if}>
-
-<{* only for single pipe *}>
-<{if $pipe.name}>
-	<{$pipe.name}>
-	<{if $pipe.image && $pipe.url}>
-		<a href="<{$pipe.url}>"><img src="<{$pipe.image}>" alt="<{$pipe.name}>" /></a>
+	<{if $errors}>
+		<{foreach from=$errors item="error"}>
+			<div class="errorMsg"><{$error|escape|nl2br}></div>
+		<{/foreach}>
 	<{/if}>
-<{/if}>
-
-
-<ul>
-	<{foreach from=$entries item="entry"}>
-		<li>
-			<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
-			<{if $entry.clipping_id}>
-				<a href="<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
-			<{else}>
-				<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
-			<{/if}>
-
-			<{* only for multiple pipe *}>
-			<{if $entry.pipe.name}>
-				(<{$entry.pipe.name}>)
-			<{/if}>
-		</li>
-	<{/foreach}>
-</ul>
+	
+	<{if $pipes_entries}>
+		<{* SEPARATED VIEW *}>
+		<{foreach from=$pipes_entries item="pipe"}>
+			<div class="d3pipes_block_async_separated">
+				<{$pipe.name}>
+				<{if $pipe.image && $pipe.url}>
+					<a href="<{$pipe.url}>"><img src="<{$pipe.image}>" alt="<{$pipe.name}>" /></a>
+				<{/if}>
+				<ul class="d3pipes_block_async_separated">
+					<{foreach from=$pipe.entries item="entry"}>
+						<li>
+							<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
+							<{if $entry.clipping_id}>
+								<a href="<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
+							<{else}>
+								<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
+							<{/if}>
+						</li>
+					<{/foreach}>
+				</ul>
+			</div>
+		<{/foreach}>
+	<{else}>
+		<{* AGGREGATED VIEW *}>
+		<ul class="d3pipes_block_async_aggregated">
+			<{foreach from=$entries item="entry"}>
+				<li>
+					<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
+					<{if $entry.clipping_id}>
+						<a href="<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
+					<{else}>
+						<a href="<{$entry.link|escape}>"><{$entry.headline|escape}></a>
+					<{/if}>
+					<{if $entry.pipe.name}>
+						(<{$entry.pipe.name}>)
+					<{/if}>
+				</li>
+			<{/foreach}>
+		</ul>
+		<{* <{include file="db:`$mydirname`_inc_entries.html"}> *}>
+	<{/if}>

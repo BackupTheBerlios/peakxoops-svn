@@ -11,31 +11,18 @@ $unique_id = preg_replace( '/[^0-9a-z]/' , '' , $_GET['unique_id'] ) ;
 $max_entries = intval( @$_GET['max_entries'] ) ;
 if( $max_entries > 50 ) $max_entries = 50 ;
 
+// fetch union_class
+$union_class = $_GET['union_class'] == 'separated' ? 'separated' : 'mergesort' ;
+
 // fetch pipe_row
 $pipe_ids = empty( $_GET['pipe_ids'] ) ? array(0) : explode( ',' , preg_replace( '/[^0-9,:]/' , '' ,  $_GET['pipe_ids'] ) ) ;
-if( sizeof( $pipe_ids ) == 1 ) {
-	// single pipe_id
-	$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_ids[0] ) ;
 
-	// specialcheck for js
-	if( empty( $pipe4assign['block_disp'] ) ) {
-		echo "d3pipes_insert_html('{$mydirname}_async_block_{$unique_id}','"._MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK."');" ;
-		exit ;
-	}
-	
-	// fetch entries
-	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
-} else {
-	// multiple pipe_id (call union)
-	$pipe4assign = array() ;
-	
-	// Union object
-	$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $pipe_ids ) ) ;
-	$union_obj->setModConfigs( $xoopsModuleConfig ) ;
-	$entries = $union_obj->execute( array() , $max_entries ) ;
-
-	$errors = $union_obj->getErrors() ;
-}
+// Union object
+$union_obj =& d3pipes_common_get_joint_object( $mydirname , 'union' , $union_class , sizeof( $pipe_ids ) == 1 ? $pipe_ids[0].':'.$max_entries : implode( ',' , $pipe_ids ) ) ;
+$union_obj->setModConfigs( $xoopsModuleConfig ) ;
+$entries = $union_obj->execute( array() , $max_entries ) ;
+$pipes_entries = method_exists( $union_obj , 'getPipesEntries' ) ? $union_obj->getPipesEntries() : array() ;
+$errors = $union_obj->getErrors() ;
 
 // assign
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
@@ -50,14 +37,14 @@ $xoopsTpl->assign(
 		'xoops_breadcrumbs' => @$xoops_breadcrumbs ,
 		'xoops_pagetitle' => @$pagetitle4assign ,
 		'errors' => $errors ,
-		'pipe' => $pipe4assign ,
 		'entries' => $entries ,
+		'pipes_entries' => $pipes_entries ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
 		'xoops_module_header' => d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 
-$html = strtr( $xoopsTpl->fetch( 'db:'.$mydirname.'_main_jsbackend.html' ) , "\n\r'" , "   " ) ;
+$html = addslashes( strtr( $xoopsTpl->fetch( 'db:'.$mydirname.'_main_jsbackend.html' ) , "\n\r" , "  " ) ) ;
 
 echo "d3pipes_insert_html('{$mydirname}_async_block_{$unique_id}','$html');" ;
 

@@ -244,7 +244,9 @@ class XmobilePicoPluginHandler extends XmobilePluginHandler
 
 		// convert links from relative to absolute (wraps mode only)
 		if( $configs['use_wraps_mode'] ) {
-			$content_url = /*XOOPS_URL.*/'/modules/'.$mydirname.'/'.$content4assign['link'] ; // TODO
+			$parsed_url = parse_url( XOOPS_URL ) ;
+			$path = strlen( @$parsed_url['path'] ) > 1 ? $parsed_url['path'] : '' ;
+			$content_url = $path.'/modules/'.$mydirname.'/'.$content4assign['link'] ;
 			$wrap_base_url = substr( $content_url , 0 , strrpos( $content_url , '/' ) ) ;
 			$pattern = "/(href|src)\=(\"|\')?(?![a-z]+:|\/|\#)([^, \r\n\"\(\)'<>]+)/i" ;
 			$replacement = "\\1=\\2$wrap_base_url/\\3" ;

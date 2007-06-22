@@ -1,5 +1,8 @@
 <?php
 
+// rename/copy this file into (dirname).php
+
+
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 require_once XOOPS_TRUST_PATH.'/modules/pico/include/common_functions.php' ;

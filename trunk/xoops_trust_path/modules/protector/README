@@ -64,6 +64,23 @@ If you've been banned from Protector, just delete files under XOOPS_TRUST_PATH/m
 The setting and controller of "rescue password" has been eliminated.
 
 
+= How to install it into XOOPS Cube Legacy 2.1 =
+
+Almost the same as installing into XOOPS 2.0.x.
+There is just a different with the patching point in mainfile.php.
+Refer this.
+[code]
+    if (!defined('_LEGACY_PREVENT_LOAD_CORE_') && XOOPS_ROOT_PATH != '') {
+        include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;
+        @include_once XOOPS_ROOT_PATH.'/include/cubecore_init.php';
+        if (!isset($xoopsOption['nocommon']) && !defined('_LEGACY_PREVENT_EXEC_COMMON_')) {
+            include XOOPS_ROOT_PATH.'/include/common.php';
+        }
+        include XOOPS_TRUST_PATH.'/modules/protector/include/postcheck.inc.php' ;
+    }
+[/code]
+
+
 = UPGRADE from Protector 2.x =
 
 - remove two lines for Protector from your mainfile.php
@@ -240,14 +257,14 @@ Xoops Protector ¤ò¥¤¥ó¥¹¥È¡¼¥ë¸å¡¢¤ª»È¤¤¤ÎXOOPS¤Î mainfile.php ¤Î°ìÈÖ²¼¤Î¤¢¤¿¤ê¤
 ÆÃÃÊ°ã¤¤¤Ï¤¢¤ê¤Þ¤»¤ó¡£
 mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤¹¡£
 [code]
-    include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;
     if (!defined('_LEGACY_PREVENT_LOAD_CORE_') && XOOPS_ROOT_PATH != '') {
+        include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;
         @include_once XOOPS_ROOT_PATH.'/include/cubecore_init.php';
         if (!isset($xoopsOption['nocommon']) && !defined('_LEGACY_PREVENT_EXEC_COMMON_')) {
             include XOOPS_ROOT_PATH.'/include/common.php';
         }
+        include XOOPS_TRUST_PATH.'/modules/protector/include/postcheck.inc.php' ;
     }
-    include XOOPS_TRUST_PATH.'/modules/protector/include/postcheck.inc.php' ;
 [/code]
 
 

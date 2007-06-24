@@ -14,6 +14,10 @@
 	</div>
 	<{/if}>
 
+	<{if $xoops_isadmin}>
+	<div style="float:right;"><a href="<{$mod_url}>/admin/index.php?page=pipe&amp;pipe_id=<{$pipe.id}>">[<{$smarty.const._EDIT}>]</a></div>
+	<{/if}>
+
 	<h2><{$pipe.name}> - <{$smarty.const._MD_D3PIPES_H2_EACHPIPE}></h2>
 
 	<{if $pipe.url}>

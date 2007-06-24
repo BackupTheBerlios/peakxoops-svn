@@ -68,9 +68,11 @@ function d3pipes_insert_javascript4async()
 		</script>
 	' ;
 
-	$xoops_module_header = $GLOBALS['xoopsTpl']->get_template_vars( "xoops_module_header" ) ;
-	if( ! strstr( $xoops_module_header , 'd3pipes_add_script' ) ) {
-		$GLOBALS['xoopsTpl']->assign( 'xoops_module_header' , $head_script . $xoops_module_header ) ;
+	if( is_object( $GLOBALS['xoopsTpl'] ) ) {
+		$xoops_module_header = $GLOBALS['xoopsTpl']->get_template_vars( "xoops_module_header" ) ;
+		if( ! strstr( $xoops_module_header , 'd3pipes_add_script' ) ) {
+			$GLOBALS['xoopsTpl']->assign( 'xoops_module_header' , $head_script . $xoops_module_header ) ;
+		}
 	}
 }
 

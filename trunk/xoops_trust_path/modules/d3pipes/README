@@ -47,6 +47,7 @@ add pipes in "pipe" admin
 - added a preferences - life time of fetching cache
 - added pipe analyzer
 - added wizard for creating a pipe for RSS/Atom
+- modified a parse of Keithxml for CDATA part (thx Yeah) 0.31a
 
 0.30 2007-06-05 (update the module)
 - modified interface of pipe admin
@@ -144,6 +145,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - 外部取得キャッシュ時間設定の追加
 - パイプの途中経過を解析する機能の実装
 - RSS/Atom取得パイプ作成ウイザードの実装
+- KeithxmlでRSS2にCDATAパートがあると解析できなかったのを修正 (thx Yeah) 0.31a
 
 0.30 2007-06-05 ※要モジュールアップデート/Smartyプラグインのコピーを忘れずに（一つ追加になってます）
 - パイプ管理のインターフェースを多少マシにした

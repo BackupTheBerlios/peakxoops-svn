@@ -33,10 +33,12 @@ ob_end_clean() ;
 
 if( strstr( @$_SERVER['HTTP_USER_AGENT'] , 'MSIE' ) ) {
 	// for the idiot browser :-)
-	header( 'Content-type: text/html;charset=UTF-8' ) ;
+	@ini_set( 'default_charset' , 'UTF-8' ) ;
+	header( 'Content-type: text/html;' ) ;
 	echo '<pre>'.htmlspecialchars( $body ).'</pre>' ;
 } else {
-	header( 'Content-type: text/plain;charset=UTF-8' ) ;
+	@ini_set( 'default_charset' , '' ) ;
+	header( 'Content-type: text/plain;' ) ;
 	echo $body ;
 }
 exit ;

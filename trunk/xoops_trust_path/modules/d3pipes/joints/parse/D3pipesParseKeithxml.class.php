@@ -21,10 +21,6 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				'description'=>'description' ,
 				'content_encoded'=>'content:encoded' ,
 			) ,
-			'minimum_elements' => array(
-				'#(\<description\>)(.*)(\<\/description\>)#isU' ,
-				'#(\<content\:encoded\>)(.*)(\<\/content\:encoded\>)#isU' ,
-			) ,
 			'post_filter_func' => '' ,
 		) ,
 		'rss1' => array(
@@ -39,7 +35,6 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				'description'=>'description' ,
 				'content_encoded'=>'content:encoded' ,
 			) ,
-			'minimum_elements' => array() ,
 			'post_filter_func' => '' ,
 		) ,
 		'atom' => array(
@@ -54,7 +49,6 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				'fingerprint'=>'id' ,
 				'description'=>'content' ,
 			) ,
-			'minimum_elements' => array() ,
 			'post_filter_func' => 'atom_post_filter' ,
 		) ,
 	) ;
@@ -78,12 +72,6 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 	}
 
 
-	function filterInsideMinElement( $matches )
-	{
-		return $matches[1].strip_tags($matches[2]).$matches[3] ;
-	}
-
-
 	function execute( $xml_source , $max_entries = '' )
 	{
 		if( ! trim( $this->option ) ) $this->detect_xml_type( $xml_source ) ;
@@ -94,11 +82,6 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 		if( strlen( $xml_source ) < 10 ) {
 			$this->errors[] = _MD_D3PIPES_ERR_ERRORBEFOREPARSE."\n($this->pipe_id)" ;
 			return array() ;
-		}
-
-		// prefilter
-		foreach( $this->params['minimum_elements'] as $search ) {
-			$xml_source = preg_replace_callback( $search , array( $this , 'filterInsideMinElement' ) , $xml_source ) ;
 		}
 
 		$data = XML_unserialize( $xml_source ) ;
@@ -141,7 +124,11 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 							$item[ $api_tag ] = $this->dateToUnix( $entry[ $xml_tag ] ) ;
 							// $item[ $api_tag ] = $this->dateToUnix( '2007-10-10T12:34:56.7Z' ) ; // DEBUG
 						} else {
-							$item[ $api_tag ] = $entry[ $xml_tag ] ;
+							if( is_array( $entry[ $xml_tag ] ) ) {
+								$item[ $api_tag ] = str_replace( '<?xml version="1.0" ?>' , '' , XML_serialize( $entry[ $xml_tag ] ) ) ;
+							} else {
+								$item[ $api_tag ] = $entry[ $xml_tag ] ;
+							}
 						}
 						break ;
 					}

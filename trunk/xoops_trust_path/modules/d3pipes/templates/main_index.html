@@ -9,6 +9,9 @@
 				<{if $pipe.url}>
 					&nbsp; (<a href="<{$pipe.url}>"><{$pipe.url}></a>)
 				<{/if}>
+				<{if $xoops_isadmin}>
+					<a href="<{$mod_url}>/admin/index.php?page=pipe&amp;pipe_id=<{$pipe.id}>">[<{$smarty.const._EDIT}>]</a>
+				<{/if}>
 			</li>
 		<{/foreach}>
 	</ul>

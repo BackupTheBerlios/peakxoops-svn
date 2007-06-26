@@ -6,7 +6,7 @@
 */
 
 $modversion['name'] = _MI_COMMENTANY_NAME;
-$modversion['version'] = 0.13;
+$modversion['version'] = 0.14;
 $modversion['description'] = _MI_COMMENTANY_DESC;
 
 $modversion['credits'] = "minahito";

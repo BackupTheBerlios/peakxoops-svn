@@ -18,6 +18,8 @@ class CommentAnyTplHookCompiler extends '.$xoopsTpl->compiler_class.'
 		
 		if($pos=strpos($tmp_tpl_file,":"))
 			$tmp_tpl_file=substr($tmp_tpl_file,$pos+1);
+		if($pos=strpos($template_main,":"))
+			$template_main=substr($template_main,$pos+1);
 
 		if ($tmp_tpl_file==$template_main) {
 			if(!$flag) {

@@ -1,5 +1,8 @@
 [xlang:en]
 
+++ v0.13->v0.14
+* fixed a compatibility with core 2.0.16 from xoops.org
+
 ++ v0.12->v0.13
 * fixed a bug around com_anonpost
 
@@ -21,6 +24,10 @@
 
 [/xlang:en]
 [xlang:ja]
+
+
+++ v0.13->v0.14
+* 本家版2.0.16に対応
 
 ++ v0.12->v0.13
 * 「匿名によるコメント投稿」の設定を見るように修正

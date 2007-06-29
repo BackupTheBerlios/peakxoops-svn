@@ -10,6 +10,10 @@
 	<{/foreach}>
 	<{$gticket_hidden}>
 
+	<{foreach from=$error_messages item="error_message"}>
+		<{$error_message}><br />
+	<{/foreach}>
+
 	<{$smarty.const._MD_A_D3PIPES_CNFM_REGISTERASIS}>
 	<br />
 	<input type="submit" name="do_update" value="<{$smarty.const._MD_A_D3PIPES_TH_WIZ_BTN_REGISTER}>" />
@@ -48,10 +52,27 @@
 		</tr>
 		<tr>
 			<th>
+				<{$smarty.const._MD_A_D3PIPES_TH_WIZ_RSSENCODING}>
+			</th>
+			<td class="even">
+				<input type="text" name="rssencoding" value="<{$requests_raw.rssencoding|escape}>" size="20" />
+				<{$smarty.const._MD_A_D3PIPES_TH_WIZ_RSSENCODING_NOTE}>
+			</td>
+		</tr>
+		<tr>
+			<th>
 				<{$smarty.const._MD_A_D3PIPES_TH_WIZ_CLIPPINGYN}>
 			</th>
 			<td class="even">
 				<{html_radios name="clip" options=$yesno_options selected=$requests_raw.clip}>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<{$smarty.const._MD_A_D3PIPES_TH_WIZ_ALLOWHTMLYN}>
+			</th>
+			<td class="even">
+				<{html_radios name="allowhtml" options=$yesno_options selected=$requests_raw.allowhtml}>
 			</td>
 		</tr>
 	</table>

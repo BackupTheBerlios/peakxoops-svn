@@ -68,12 +68,37 @@ function d3pipes_common_get_default_joint_class( $mydirname , $joint_type )
 }
 
 
-function d3pipes_common_get_xml_cache_path( $mydirname , $url = '' )
+function d3pipes_common_cache_path_base( $mydirname )
 {
 	$salt = substr( md5( XOOPS_ROOT_PATH . XOOPS_DB_USER . XOOPS_DB_PREFIX ) , 0 , 6 ) ;
 	$base = XOOPS_TRUST_PATH.'/cache/'.$mydirname.'_'.$salt.'_' ;
 
-	return $url ? $base.md5($url) : $base ;
+	return $base ;
+}
+
+
+function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 )
+{
+	$base = d3pipes_common_cache_path_base( $mydirname ) ;
+	$prefix = substr( strrchr( $base , '/' ) , 1 ) ;
+	$prefix_length = strlen( $prefix ) ;
+	$basedir = substr( $base , 0 , - $prefix_length ) ;
+
+	if( $handler = @opendir( $basedir ) ) {
+		while( ( $file = readdir( $handler ) ) !== false ) {
+			if( strncmp( $file , $prefix , $prefix_length ) === 0 ) {
+				if( $pipe_id > 0 ) {
+					// only specified pipe's cache
+					if( intval( substr( $file , $prefix_length + 1 ) ) == $pipe_id ) {
+						@unlink( $basedir . $file ) ;
+					}
+				} else {
+					// all pipe's cache
+					@unlink( $basedir . $file ) ;
+				}
+			}
+		}
+	}
 }
 
 
@@ -135,6 +160,10 @@ function d3pipes_common_get_pipe4assign( $mydirname , $pipe_id )
 
 function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &$errors , $mod_configs )
 {
+	// var_dump( microtime() ) ;
+
+	if( empty( $pipe_row ) ) return array() ;
+
 	$db =& Database::getInstance() ;
 	$myts =& MyTextSanitizer::getInstance() ;
 
@@ -146,45 +175,34 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 
 	$objects = array() ;
 
-	// make objects of each joints
-	$is_started = false ;
-	$cache_obj_pos = 0 ;
-	$cache_obj = false ;
-	foreach( $joints as $joint ) {
-		if( in_array( $joint['joint'] , $start_joints ) ) $is_started = true ;
-		if( ! $is_started ) continue ;
-
+	// make objects and prefetch of each joints (reversed order)
+	$stage = sizeof( $joints ) ;
+	foreach( array_reverse( $joints ) as $joint ) {
+		-- $stage ;
 		$class_name = 'D3pipes'.ucfirst($joint['joint']).ucfirst($joint['joint_class']) ;
 		require_once $joints_dir.'/'.$joint['joint'].'/'.$class_name.'.class.php' ;
 		if( ! class_exists( $class_name ) ) die( 'Class '.$class_name.' does not exist' ) ;
-		$objects[] =& new $class_name( $mydirname , $pipe_id , $joint['option'] ) ;
-		if( $joint['joint'] == 'clip' ) {
-			$cache_obj_pos = sizeof( $objects ) - 1 ;
-			$cache_obj =& $objects[ $cache_obj_pos ] ;
-			$cache_time = $cache_obj->cache_time ;
-		}
+		$obj =& new $class_name( $mydirname , $pipe_id , $joint['option'] ) ;
+		$obj->setModConfigs( $mod_configs ) ;
+		$obj->setStage( $stage ) ;
+		$objects[ $stage ] =& $obj ;
+		if( $obj->isCached() ) break ;
 	}
+
 	if( empty( $objects ) ) return false ;
+	ksort( $objects ) ;
 
 	// chain data is initialized
 	$data = null ;
 
-	// cache is valid?
-	if( is_object( $cache_obj ) && $pipe_row['lastfetch_time'] + $cache_time > time() ) {
-		$objects = array_slice( $objects , $cache_obj_pos + 1) ;
-		$data = $cache_obj->getCaches( $max_entries ) ;
-	} else {
-		// updated lastfetch_time
-		$db->queryF( "UPDATE ".$db->prefix($mydirname."_pipes")." SET lastfetch_time=UNIX_TIMESTAMP() WHERE pipe_id=$pipe_id" ) ;
-	}
-
 	// joint chains
 	$errors = array() ;
 	foreach( $objects as $obj ) {
-		$obj->setModConfigs( $mod_configs ) ;
 		$data = $obj->execute( $data , $max_entries ) ;
 		$errors = array_merge( $errors , $obj->getErrors() ) ;
 	}
+
+	// var_dump( microtime() ) ;
 
 	return is_array( $data ) ? array_slice( $data , 0 , $max_entries ) : $data ;
 }

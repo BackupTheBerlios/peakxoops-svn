@@ -24,18 +24,26 @@ if( ( ! empty( $_POST['do_update'] ) || ! empty( $_POST['do_saveas'] ) ) && is_a
 	foreach( @$_POST['joint_weights'] as $i => $weight ) {
 		$i = intval( $i ) ;
 		$weight = intval( $weight ) ;
-		$joint_type = $myts->stripSlashesGPC( @$_POST['joint_joints'][$i] ) ;
+		@list( $joint_type , $joint_class ) = explode( '::' , $myts->stripSlashesGPC( @$_POST['joint_classes'][$i] ) ) ;
 		if( empty( $joint_type ) || ! isset( $all_joints[ $joint_type ] ) ) continue ;
-		$joint_class = preg_replace( '/[^0-9a-zA-Z_]/' , '' , strtolower( @$_POST['joint_classes'][$i] ) ) ;
+		$joint_class = preg_replace( '/[^0-9a-zA-Z_]/' , '' , @$joint_class ) ;
 		$valid_classes = d3pipes_admin_fetch_classes( $mydirname , $joint_type ) ;
 		if( ! isset( $valid_classes[ $joint_class ] ) ) {
 			$joint_class = d3pipes_common_get_default_joint_class( $mydirname , $joint_type ) ;
 			if( empty( $joint_class ) ) list( $joint_class ) = array_keys( $valid_classes ) ;
 		}
+
+		// merge options if necessary
+		if( empty( $_POST['joint_option'][$i] ) && ! empty( $_POST['joint_options'][$i] ) && is_array( $_POST['joint_options'][$i] ) ) {
+			$joint_option = join( '|' , array_map( array( $myts , 'stripSlashesGPC' ) , $_POST['joint_options'][$i] ) ) ;
+		} else {
+			$joint_option = $myts->stripSlashesGPC( @$_POST['joint_option'][$i] ) ;
+		}
+
 		$joints[ $weight ] = array(
 			'joint' => $joint_type ,
 			'joint_class' => $joint_class ,
-			'option' => $myts->stripSlashesGPC( @$_POST['joint_option'][$i] ) ,
+			'option' => $joint_option ,
 		) ;
 	}
 	ksort( $joints ) ;
@@ -64,6 +72,9 @@ if( ( ! empty( $_POST['do_update'] ) || ! empty( $_POST['do_saveas'] ) ) && is_a
 	}
 	$db->query( "UPDATE ".$db->prefix($mydirname."_pipes")." SET ".$set4sql.",modified_time=UNIX_TIMESTAMP(),lastfetch_time=0 WHERE `pipe_id`=$pipe_id" ) ;
 
+	// remove cache
+	d3pipes_common_delete_all_cache( $mydirname , $pipe_id ) ;
+
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=pipe" , 3 , _MD_A_D3PIPES_MSG_PIPEUPDATED ) ;
 	exit ;
 }
@@ -76,6 +87,9 @@ if( ! empty( $_POST['do_delete'] ) ) {
 
 	$pipe_id = intval( @$_POST['pipe_id'] ) ;
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_pipes")." WHERE pipe_id=$pipe_id" ) ;
+
+	// remove cache
+	d3pipes_common_delete_all_cache( $mydirname , $pipe_id ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=pipe" , 3 , _MD_A_D3PIPES_MSG_PIPEUPDATED ) ;
 	exit ;
@@ -145,6 +159,17 @@ if( $pipe_id == 0 ) {
 	$pipe4edit['joints'] = array_merge( $pipe4edit['joints'] , array_fill( 0 , 3 , $blank_joint ) ) ;
 }
 
+// joint_classes options
+$joint_classes_options = array() ;
+foreach( $all_joints as $joint_type => $joint_type_name ) {
+	$joint_classes_options[ $joint_type_name ] = array() ;
+	foreach( d3pipes_admin_fetch_classes( $mydirname , $joint_type ) as $joint_class ) {
+		$joint_classes_options[ $joint_type_name ][ $joint_type.'::'.$joint_class ] = defined( '_MD_D3PIPES_CLASS_'.strtoupper($joint_type.$joint_class) ) ? constant( '_MD_D3PIPES_CLASS_'.strtoupper($joint_type.$joint_class) ) : $joint_class ;
+	}
+}
+$joint_classes_options[ _NONE ] = array( '::' => '----' ) ;
+
+
 //
 // display stage
 //
@@ -161,8 +186,8 @@ $tpl->assign( array(
 	'pipe_id' => $pipe_id ,
 	'pipes' => $pipes4assign ,
 	'pipe' => $pipe4edit ,
-	'joints' => array( '' => '----' ) + $all_joints ,
-	'joint_notices' => array( '' => '' ) + d3pipes_admin_get_notice4joint( $mydirname , $all_joints ) ,
+	'all_joints' => $all_joints ,
+	'joint_classes_options' => $joint_classes_options ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'd3pipes_admin') ,
 ) ) ;
 $tpl->display( 'db:'.$mydirname.'_'.$template ) ;

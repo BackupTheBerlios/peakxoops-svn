@@ -42,7 +42,10 @@
 				<td><input type="checkbox" name="in_submenu[<{$pipe.id}>]" value="1" <{if $pipe.in_submenu}>checked="checked"<{/if}> title="<{$smarty.const._MD_A_D3PIPES_TITLE_INSUBMENU}>" /></td>
 				<td><{$pipe.modified_time_formatted}></td>
 				<td><{$pipe.lastfetch_time_formatted}></td>
-				<td><a href="<{$mod_url}>/admin/index.php?page=pipe&amp;pipe_id=<{$pipe.id}>"><{$smarty.const._EDIT}></a></td>
+				<td style="white-space: nowrap;">
+					<div style="float:left;padding:2px;"><a href="<{$mod_url}>/admin/index.php?page=pipe&amp;pipe_id=<{$pipe.id}>"><{$smarty.const._EDIT}></a></div>
+					<div style="float:left;padding:2px;"><a href="<{$mod_url}>/index.php?page=eachpipe&amp;pipe_id=<{$pipe.id}>"><{$smarty.const._MD_A_D3PIPES_TH_MAINDISP}></a></div>
+				</td>
 			</tr>
 		<{/foreach}>
 		</table>

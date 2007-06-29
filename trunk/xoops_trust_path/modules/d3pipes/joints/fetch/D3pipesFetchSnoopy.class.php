@@ -15,7 +15,7 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 			return '' ;
 		}
 
-		$cache_result = $this->fetch_cache() ;
+		$cache_result = $this->fetchCache() ;
 		if( $cache_result !== false ) {
 			list( $cached_time , $xml_source ) = $cache_result ;
 			if( $cached_time + $this->cache_life_time > time() ) {
@@ -47,7 +47,7 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 
 		// check fetch error
 		if( ! $fetch_result || ! ( $xml_source = $snoopy->results ) ) {
-			$this->touch_cache() ;
+			$this->touchCache() ;
 			$message = _MD_D3PIPES_ERR_CANTCONNECTINFETCH."\n" ;
 			if( ! empty( $snoopy->proxy_host ) ) {
 				$message .= _MD_D3PIPES_ERR_DOUBTFULPROXY."\n" ;
@@ -60,7 +60,7 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 		}
 
 		// check cache folder is writable
-		if( ! $this->store_cache( $xml_source ) ) {
+		if( ! $this->storeCache( $xml_source ) ) {
 			$this->errors[] = _MD_D3PIPES_ERR_CACHEFOLDERNOTWRITABLE."\nXOOPS_TRUST_PATH/cache ($this->pipe_id)" ;
 			return '' ;
 		}

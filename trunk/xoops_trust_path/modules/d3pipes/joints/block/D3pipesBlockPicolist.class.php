@@ -22,10 +22,11 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 		$this->block_options = array(
 			'disable_renderer' => true ,
 			0 => $this->target_dirname , // mydirname of pico
-			1 => @$params[1] , // category limitation
+			1 => preg_replace( '/[^0-9,]/' , '' , @$params[1] ) , // category limitation
 			2 => 'o.modified_time DESC' , // order by
-			3 => 10 , // max_entries
+			3 => empty( $params[2] ) ? 10 : intval( $params[2] ) , // max_entries
 			4 => '' , // template (nonsense)
+			5 => empty( $params[3] ) ? 0 : 1 , // display body
 		) ;
 
 		return true ;
@@ -38,15 +39,50 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 			$entries[] = array(
 				'pubtime' => $content['modified_time'] , // timestamp
 				'link' => $data['mod_url'].'/'.$content['link'] ,
-				'headline' => $content['subject'] ,
+				'headline' => $content['subject_raw'] ,
+				'category' => $this->unhtmlspecialchars( $content['cat_title'] ) ,
 				'fingerprint' => $data['mod_url'].'/'.$content['link'] ,
-				'description' => '' ,
+				'description' => $this->unhtmlspecialchars( $content['body'] ) ,
+				'content_encoded' => $this->unhtmlspecialchars( $content['body'] ) ,
 			) ;
 		}
 
 		return $entries ;
 	}
 
+	function renderOptions( $index , $current_value = null )
+	{
+		$index = intval( $index ) ;
+		$options = explode( '|' , $current_value ) ;
+
+		// options[0]  (dirname)
+		$module_handler =& xoops_gethandler( 'module' ) ;
+		$modules = $module_handler->getList( null , true ) ;
+
+		$ret_0 = '<select name="joint_options['.$index.'][0]">' ;
+		foreach( array_keys( $modules ) as $dirname ) {
+			$trustpath_file = XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ;
+			if( ! file_exists( $trustpath_file ) ) continue ;
+			$mytrustdirname = '' ;
+			require $trustpath_file ;
+			if( $mytrustdirname != 'pico' ) continue ;
+			$ret_0 .= '<option value="'.$dirname.'" '.($dirname==@$options[0]?'selected="selected"':'').'>'.$dirname.'</option>' ;
+		}
+		$ret_0 .= '</select>' ;
+
+		// options[1]  (cat_ids)
+		$options[1] = preg_replace( '/[^0-9,]/' , '' , @$options[1] ) ;
+		$ret_1 = _MD_D3PIPES_N4J_CID.'<input type="text" name="joint_options['.$index.'][1]" value="'.$options[1].'" size="8" />' ;
+
+		// options[2]  (max_entries)
+		$options[2] = empty( $options[2] ) ? 10 : intval( $options[2] ) ;
+		$ret_2 = _MD_D3PIPES_N4J_MAXENTRIES.'<input type="text" name="joint_options['.$index.'][2]" value="'.$options[2].'" size="2" style="text-align:right;" />' ;
+
+		// options[3]  (with body or not)
+		$ret_3 = _MD_D3PIPES_N4J_WITHDESCRIPTION.'<input type="checkbox" name="joint_options['.$index.'][3]" value="1" '.(empty($options[3])?'':'checked="checked"').' />' ;
+
+		return '<input type="hidden" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="" />'.$ret_0.' '.$ret_1.'<br />'.$ret_2.' '.$ret_3 ;
+	}
 
 }
 

@@ -2,6 +2,19 @@
 
 function d3pipes_admin_fetch_joints( $mydirname )
 {
+	$GLOBALS['joint_type_weights'] = array(
+		'fetch' => -10 ,
+		'parse' => -9 ,
+		'block' => -8 ,
+		'utf8to' => -7 ,
+		'utf8from' => -6 ,
+		'filter' => 0 ,
+		'reassign' => 0 ,
+		'clip' => 20 ,
+		'cache' => 21 ,
+		'union' => 40 ,
+	) ;
+
 	$ret = array() ;
 
 	$joints_base = XOOPS_TRUST_PATH.'/modules/d3pipes/joints' ;
@@ -15,7 +28,8 @@ function d3pipes_admin_fetch_joints( $mydirname )
 			$ret[ $dir ] = $lang_joint ;
 		}
 	}
-	ksort( $ret ) ;
+
+	uksort( $ret , create_function( '$a,$b' , 'return @$GLOBALS["joint_type_weights"][$a] > @$GLOBALS["joint_type_weights"][$b] ; ' ) ) ;
 
 	return $ret ;
 }
@@ -38,17 +52,6 @@ function d3pipes_admin_fetch_classes( $mydirname , $joint_type )
 	}
 
 	return $ret ;
-}
-
-
-function d3pipes_admin_get_notice4joint( $mydirname , $all_joints )
-{
-	$joint_notices = array() ;
-	foreach( array_keys( $all_joints ) as $joint ) {
-		$joint_notices[ $joint ] = defined( '_MD_D3PIPES_N4J_'.strtoupper($joint) ) ? constant( '_MD_D3PIPES_N4J_'.strtoupper($joint) ) : '' ;
-	}
-
-	return $joint_notices ;
 }
 
 

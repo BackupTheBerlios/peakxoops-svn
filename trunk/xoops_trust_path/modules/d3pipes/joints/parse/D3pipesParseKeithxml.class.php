@@ -8,7 +8,7 @@ if( ! class_exists( 'XML' ) ) {
 class D3pipesParseKeithxml extends D3pipesParseAbstract {
 
 	var $parse_parameters = array(
-		'rss2' => array(
+		'rss' => array(
 			'bases' => array(
 				'rss.channel.item' ,
 			) ,
@@ -23,7 +23,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 			) ,
 			'post_filter_func' => '' ,
 		) ,
-		'rss1' => array(
+		'rdf' => array(
 			'bases' => array(
 				'rdf:RDF.item' ,
 			) ,
@@ -61,11 +61,11 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 		$xml_type = trim( strtolower( $this->option ) ) ;
 
 		switch( $xml_type ) {
-			case 'rss' : $xml_type = 'rss2' ; break ;
-			case 'rdf' : $xml_type = 'rss1' ; break ;
+			case 'rss2' : $xml_type = 'rss' ; break ;
+			case 'rss1' : $xml_type = 'rdf' ; break ;
 		}
 		if( empty( $this->parse_parameters[ $xml_type ] ) ) {
-			$this->params =& $this->parse_parameters['rss2'] ;
+			$this->params =& $this->parse_parameters['rss'] ;
 		} else {
 			$this->params =& $this->parse_parameters[ $xml_type ] ;
 		}
@@ -124,11 +124,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 							$item[ $api_tag ] = $this->dateToUnix( $entry[ $xml_tag ] ) ;
 							// $item[ $api_tag ] = $this->dateToUnix( '2007-10-10T12:34:56.7Z' ) ; // DEBUG
 						} else {
-							if( is_array( $entry[ $xml_tag ] ) ) {
-								$item[ $api_tag ] = str_replace( '<?xml version="1.0" ?>' , '' , XML_serialize( $entry[ $xml_tag ] ) ) ;
-							} else {
-								$item[ $api_tag ] = $entry[ $xml_tag ] ;
-							}
+							$item[ $api_tag ] = $entry[ $xml_tag ] ;
 						}
 						break ;
 					}
@@ -161,7 +157,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 	{
 		if( is_array( $entry['link'] ) ) {
 			foreach( $entry['link'] as $key => $val ) {
-				if( isset( $val['type'] ) && $val['type'] == 'text/html' ) {
+				if( isset( $val['type'] ) && $val['type'] == 'text/html' && $val['rel'] != 'replies' ) {
 					$entry['link'] = $val['href'] ;
 				}
 			}
@@ -187,6 +183,24 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 		}
 		d3pipes_common_update_joint_option( $this->mydirname , $this->pipe_id , 'parse' , $this->option ) ;
 	}
+
+	function renderOptions( $index , $current_value = null )
+	{
+		$index = intval( $index ) ;
+
+		$allowed_formats = array_keys( $this->parse_parameters ) ;
+
+		if( ! in_array( $current_value , $allowed_formats ) ) $current_value = $allowed_formats[0] ;
+
+		$ret = '<select name="joint_option['.$index.']" id="joint_option_'.$index.'">' ;
+		foreach( $allowed_formats as $format ) {
+			$ret .= '<option value="'.$format.'" '.($format==$current_value?'selected="selected"':'').'>'.$format.'</option>' ;
+		}
+		$ret .= '</select>' ;
+
+		return $ret ;
+	}
+
 
 }
 

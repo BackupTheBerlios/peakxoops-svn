@@ -12,18 +12,8 @@ $db =& Database::getInstance() ;
 //
 
 if( ! empty( $_POST['do_deletefetchcache'] ) ) {
-	$base = d3pipes_common_get_xml_cache_path( $mydirname , '' ) ;
-	$prefix = substr( strrchr( $base , '/' ) , 1 ) ;
-	$prefix_length = strlen( $prefix ) ;
-	$basedir = substr( $base , 0 , - $prefix_length ) ;
 
-	if( $handler = @opendir( $basedir ) ) {
-		while( ( $file = readdir( $handler ) ) !== false ) {
-			if( strncmp( $file , $prefix , $prefix_length ) === 0 ) {
-				@unlink( $basedir . $file ) ;
-			}
-		}
-	}
+	d3pipes_common_delete_all_cache( $mydirname ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=cache" , 3 , _MD_A_D3PIPES_MSG_CACHEDELETED ) ;
 	exit ;

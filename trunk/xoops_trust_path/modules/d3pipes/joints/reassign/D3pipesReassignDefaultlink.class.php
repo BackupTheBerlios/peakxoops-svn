@@ -16,6 +16,12 @@ class D3pipesReassignDefaultlink extends D3pipesReassignAbstract {
 		return $entries ;
 	}
 
+	function renderOptions( $index , $current_value = null )
+	{
+		$index = intval( $index ) ;
+
+		return '<input type="text" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="'.htmlspecialchars($current_value,ENT_QUOTES).'" size="40" /><br />'._MD_D3PIPES_N4J_WRITEURL ;
+	}
 }
 
 ?>

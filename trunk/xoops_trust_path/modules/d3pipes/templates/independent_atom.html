@@ -17,7 +17,7 @@
 		<published><{"Y-m-d\TH:i:sO"|date:$entry.pubtime}></published>
 		<updated><{"Y-m-d\TH:i:sO"|date:$pipe.lastfetch_time}></updated>
 		<category><{$entry.category}></category>
-		<title tyle='text'><{$entry.headline|escape}></title>
+		<title type='text'><{$entry.headline|escape}></title>
 		<content type='html'><{$entry.description|escape}></content>
 		<link rel='alternate' type='text/html' href='<{$entry.link|escape}>'></link>
 	</entry>

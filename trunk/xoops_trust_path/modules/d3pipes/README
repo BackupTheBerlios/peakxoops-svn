@@ -26,12 +26,25 @@ Install it as normal D3 module.
 I recommend you to install altsys also.
 
 (If you did not)
-Make a directory XOOPS_TRUST_PATH/cache and change the mode writable
+Make a directory XOOPS_TRUST_PATH/cache and change the mode writable.
 
-add pipes in "pipe" admin
+add pipes in "pipe" admin.
+You'd better use "Wizard" till you become familiar with the pipe structure.
+
+Notice: Async block requires the privileges of not only "block access" but also "module access".
 
 
 [b]CHANGELOG[/b]
+
+0.32 2007-06-30 (Install common/lib/ also)
+- added a command for cron (ROOT/modules/dirname/bin/update_cache.sh)
+- added encoding judgement into RSS/Atom wizard
+- modified the logic of pipe parsing radically (reversal evaluation)
+- fixed Atom cannot be parsed in 0.31 (Keithxml)
+- added a new joint type of "cache"
+- removed caching feature from clip joints
+- added two reassign joint Allowhtml and Strigtags
+- added pipe operation by Ajax (Install common/lib)
 
 0.31 2007-06-21 (update the module)
 - modified error handler can distinguish parse error from fetch error
@@ -126,10 +139,23 @@ altsysとの併用を強く推奨します。
 XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 （まだ作っていない場合）
 
-あとは、パイプ管理からパイプを追加していくだけです。
+あとは、パイプ管理からパイプを追加していくだけです。パイプ作成に慣れない内は、ウイザードを使うのが良いでしょう。ウイザードが構成したパイプを編集しているうちに、ジョイントの構成にも慣れるでしょう。
+
+なお、非同期パイプ一覧を表示するには、ブロックアクセス権限の他に、モジュールアクセス権限も必要です。
 
 
 ●更新履歴
+
+0.32 2007-06-30 ※このバージョンからcommon/lib/が必要になりました
+- cron用キャッシュ更新コマンド追加 ROOT/modules/dirname/bin/update_cache.sh
+- RSS/Atom取得ウイザードにURLおよびエンコーディングチェック実装
+- RSS/Atom取得ウイザードにHTML表示を追加
+- キャッシュ処理・パイプパース順を大きく変更した（逆順評価による実装）
+- Atomを正常にパース出来ていなかったのを修正(Keithxml)
+- 任意の段階に挟むことのできるキャッシュジョイントの実装
+- 切り抜きジョイントからキャッシュ機能を削除
+- HTML許可・HTMLタグ削除という再割り当てジョイントの追加
+- Ajaxによるパイプ操作実装 （要common/lib)
 
 0.31 2007-06-21 ※要モジュールアップデート
 - 取得エラーと解析エラーを可能な限り判別可能にした

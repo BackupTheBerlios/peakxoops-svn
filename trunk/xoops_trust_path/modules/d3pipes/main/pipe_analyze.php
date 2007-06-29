@@ -16,9 +16,9 @@ $step = intval( @$_GET['step'] ) ;
 // cut joints after the step
 $pipe4assign['joints'] = array_slice( $pipe4assign['joints'] , 0 , $step + 1 ) ;
 
-// force to remove XML (fetch) cache
+// force to remove all cache about the pipe
 if( $pipe4assign['joints'][0]['joint'] == 'fetch' ) {
-	@unlink( d3pipes_common_get_xml_cache_path( $mydirname , $pipe4assign['joints'][0]['option'] ) ) ;
+	d3pipes_common_delete_all_cache( $mydirname , $pipe_id ) ;
 }
 
 // fetch entries

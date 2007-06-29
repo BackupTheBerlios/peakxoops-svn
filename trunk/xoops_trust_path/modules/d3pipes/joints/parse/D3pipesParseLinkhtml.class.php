@@ -10,7 +10,7 @@ class D3pipesParseLinkhtml extends D3pipesParseAbstract {
 
 		$result = preg_match_all( $this->option , $html_source , $matches , PREG_SET_ORDER ) ;
 		if( ! $result ) {
-			$this->errors[] = 'Invalid pattern for this Parser' ;
+			$this->errors[] = 'Invalid pattern for this Parser'."\n($this->pipe_id)" ;
 		}
 		foreach( $matches as $match ) {
 			if( preg_match( '#[0-9]{2,4}[/.-][0-9]{1,2}[/.-][0-9]{1,2}#' , $match[1] ) ) {
@@ -36,6 +36,13 @@ class D3pipesParseLinkhtml extends D3pipesParseAbstract {
 		}
 
 		return $items ;
+	}
+
+	function renderOptions( $index , $current_value = null )
+	{
+		$index = intval( $index ) ;
+
+		return '<input type="text" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="'.htmlspecialchars($current_value,ENT_QUOTES).'" size="40" /><br />'._MD_D3PIPES_N4J_WRITEPREG ;
 	}
 
 }

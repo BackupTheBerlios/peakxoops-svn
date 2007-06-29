@@ -19,33 +19,58 @@ class D3pipesFetchAbstract extends D3pipesJointAbstract {
 
 	function execute( $dummy = '' , $max_entries = '' ) {}
 
-	function fetch_cache()
+	function fetchCache()
 	{
-		$cache_file = $this->get_xml_cache_path() ;
+		$cache_file = $this->getCachePath() ;
 		if( ! file_exists( $cache_file ) ) return false ;
 		else return array( filemtime( $cache_file ) , file_get_contents( $cache_file ) ) ;
 	}
 
-	function store_cache( $xml_source )
+	function fetch_cache() { return $this->fetchCache() ; }
+
+
+	function storeCache( $xml_source )
 	{
-		$cache_file = $this->get_xml_cache_path() ;
+		$cache_file = $this->getCachePath() ;
 		$fp = @fopen( $cache_file , 'wb' ) ;
 		if( ! $fp ) return false ;
 		fwrite( $fp , $xml_source ) ;
 		fclose( $fp ) ;
+
+		// updated lastfetch_time
+		$db =& Database::getInstance() ;
+		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_pipes")." SET lastfetch_time=UNIX_TIMESTAMP() WHERE pipe_id=$this->pipe_id" ) ;
+
 		return true ;
 	}
 
-	function touch_cache()
+	function store_cache( $xml_source ) { return $this->storeCache( $xml_source ) ; }
+
+
+	function touchCache()
 	{
-		$cache_file = $this->get_xml_cache_path() ;
+		$cache_file = $this->getCachePath() ;
 		@touch( $cache_file ) ;
 		return true ;
 	}
 
-	function get_xml_cache_path()
+	function touch_cache() { return $this->touchCache() ; }
+
+
+	function getCachePath()
 	{
-		return d3pipes_common_get_xml_cache_path( $this->mydirname , $this->url ) ;
+		$base = d3pipes_common_cache_path_base( $this->mydirname ) ;
+		return $base . sprintf( '%05d_%02d_fetch' , $this->pipe_id , $this->stage ) ;
+	}
+
+	function renderOptions( $index , $current_value = null )
+	{
+		$index = intval( $index ) ;
+		if( substr( $current_value , 0 , 4 ) != 'http' ) {
+			$current_value = 'http://' ;
+		}
+
+		return '<input type="text" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="'.htmlspecialchars($current_value,ENT_QUOTES).'" size="40" /><br />'._MD_D3PIPES_N4J_FETCH ;
 	}
 
 }

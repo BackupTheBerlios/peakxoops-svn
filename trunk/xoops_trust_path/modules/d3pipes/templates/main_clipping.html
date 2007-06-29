@@ -19,7 +19,15 @@
 
 	<dl>
 		<dt><{$smarty.const._MD_D3PIPES_TH_DESCRIPTION}></dt>
-		<dd><{$entry.description|escape|trim|nl2br}></dd>
+		<dd>
+			<{if $entry.content_encoded}>
+				<{$entry.content_encoded}>
+			<{elseif $entry.allow_html}>
+				<{$entry.description}>
+			<{else}>
+				<{$entry.description|escape|trim|nl2br}>
+			<{/if}>
+		</dd>
 	</dl>
 
 	<{if $xoops_isadmin}>

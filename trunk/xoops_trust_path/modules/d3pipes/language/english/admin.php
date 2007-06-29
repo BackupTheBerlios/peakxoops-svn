@@ -45,11 +45,15 @@ define('_MD_A_D3PIPES_TH_ANALYZE','Analyze');
 define('_MD_A_D3PIPES_TH_WIZ_SITENAME','Site name');
 define('_MD_A_D3PIPES_TH_WIZ_SITEURL','Site URL');
 define('_MD_A_D3PIPES_TH_WIZ_RSSURL','RSS/Atom URL');
+define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING','Encoding of RSS/Atom');
+define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING_NOTE','leave blank if you don\'t know');
 define('_MD_A_D3PIPES_TH_WIZ_CLIPPINGYN','Clip fetched entries');
+define('_MD_A_D3PIPES_TH_WIZ_ALLOWHTMLYN','Allow HTML?');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_CONFIRM','confirm');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_REGISTER','register');
+define('_MD_A_D3PIPES_TH_WIZ_WARN_RSSURL','d3pipes cannot get a vaild XML from the URL specified');
 
-define('_MD_A_D3PIPES_LABEL_DELETEFETCHCACHE','Remove fetch(XML) cache');
+define('_MD_A_D3PIPES_LABEL_DELETEFSCACHE','Remove all of fetch/cache/clip cache under TRUST_PATH/cache');
 define('_MD_A_D3PIPES_LABEL_CLEARLASTFETCH','Clear the last modified times of all pipes');
 define('_MD_A_D3PIPES_LABEL_PROTECTBYCOMMENT','Protect clippings with comments');
 define('_MD_A_D3PIPES_LABEL_PROTECTBYHIGHLIGHT','Protect clippings with highlighted');
@@ -62,6 +66,7 @@ define('_MD_A_D3PIPES_LINK_MAKENEWPIPE','Create a new pipe');
 define('_MD_A_D3PIPES_LINK_WIZARDFETCH','Wizard - creating a pipe for RSS/Atom');
 define('_MD_A_D3PIPES_LINK_WIZARDINNER','Wizard - creating a pipe for news of this site');
 define('_MD_A_D3PIPES_LINK_ANALYZETHEJOINT','step debug');
+define('_MD_A_D3PIPES_LINK_PUBLICVIEW','Public view');
 
 define('_MD_A_D3PIPES_BTN_UPDATE','Update');
 define('_MD_A_D3PIPES_BTN_SAVE','Save');

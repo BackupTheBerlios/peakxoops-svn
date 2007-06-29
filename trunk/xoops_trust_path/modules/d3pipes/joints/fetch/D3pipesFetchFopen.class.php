@@ -13,7 +13,7 @@ class D3pipesFetchFopen extends D3pipesFetchAbstract {
 			return '' ;
 		}
 
-		$cache_result = $this->fetch_cache() ;
+		$cache_result = $this->fetchCache() ;
 		if( $cache_result !== false ) {
 			list( $cached_time , $xml_source ) = $cache_result ;
 			if( $cached_time + $this->cache_life_time > time() && $xml_source ) {
@@ -24,7 +24,7 @@ class D3pipesFetchFopen extends D3pipesFetchAbstract {
 		$fp = @fopen( $this->url , 'rb' ) ;
 		if( ! $fp ) {
 			// fetch error
-			$this->touch_cache() ;
+			$this->touchCache() ;
 			if( ! @ini_get( 'allow_url_fopen' ) ) {
 				$this->errors[] = _MD_D3PIPES_ERR_URLFOPENINFETCH ;
 			} else {
@@ -39,7 +39,7 @@ class D3pipesFetchFopen extends D3pipesFetchAbstract {
 		}
 		fclose( $fp ) ;
 
-		if( ! $this->store_cache( $xml_source ) ) {
+		if( ! $this->storeCache( $xml_source ) ) {
 			$this->errors[] = _MD_D3PIPES_ERR_CACHEFOLDERNOTWRITABLE."\nXOOPS_TRUST_PATH/cache ($this->pipe_id)" ;
 			return '' ;
 		}

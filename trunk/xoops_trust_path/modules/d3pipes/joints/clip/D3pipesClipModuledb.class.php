@@ -7,13 +7,14 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 	// store
 	function execute( $entries , $max_entries = 10 )
 	{
-		if( empty( $entries[0] ) ) return $entries ;
-
 		// delete expired clippings
 		$this->removeExpired() ;
 
 		$db =& Database::getInstance() ;
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
+
+		// count entries of current feed(return this number of entries instead of max_entries)
+		$current_entry_size = sizeof( $entries ) ;
 
 		// entries may be sorted by putime desc ...
 		$entries = array_reverse( $entries ) ;
@@ -31,21 +32,28 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 			$db->queryF( "INSERT INTO $clip_table (pipe_id,fingerprint,pubtime,link,headline,data,fetched_time) VALUES ($this->pipe_id,'$fingerprint4sql',$pubtime4sql,'$link4sql','$headline4sql','".mysql_real_escape_string(serialize($entry))."',UNIX_TIMESTAMP())" ) ;
 		}
 
-		return $this->getCaches( $max_entries ) ;
+		return $this->getLatestClippings( $max_entries ) ;
 	}
 
 	// fetch multiple entries
-	function getCaches( $max_entries = 10 )
+	function getLatestClippings( $max_entries )
 	{
 		$db =& Database::getInstance() ;
 
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
 
-		$result = $db->query( "SELECT clipping_id,data FROM $clip_table WHERE pipe_id=$this->pipe_id ORDER BY pubtime DESC,clipping_id DESC" ) ;
-		
+		$result = $db->query( "SELECT clipping_id,highlight,weight,comments_count ,fetched_time,data FROM $clip_table WHERE pipe_id=$this->pipe_id ORDER BY pubtime DESC,clipping_id DESC LIMIT ".max($this->entries_from_clip,$max_entries) ) ;
+
 		$entries = array() ;
-		while( list( $clipping_id , $entry_serialized ) = $db->fetchRow( $result ) ) {
-			$entries[] = unserialize( $entry_serialized ) + array( 'clipping_id' => $clipping_id ) ;
+		while( list( $clipping_id , $highlight , $weight , $comments_count , $fetched_time , $entry_serialized ) = $db->fetchRow( $result ) ) {
+			$entries[] = unserialize( $entry_serialized ) + array(
+				'clipping_id' => $clipping_id ,
+				'pipe_id' => $this->pipe_id ,
+				'clipping_highlight' => $highlight ,
+				'clipping_weight' => $weight ,
+				'clipping_fetched_time' => $fetched_time ,
+				'comments_count' => $comments_count ,
+			) ;
 		}
 
 		return $entries ;
@@ -111,7 +119,9 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 
 	function removeExpired()
 	{
-		if( empty( $this->mod_configs['removeclips_by_fetched'] ) ) return ;
+		$clip_life_time = isset( $this->clip_life_time ) ? intval( $this->clip_life_time ) : $this->mod_configs['removeclips_by_fetched'] * 86400 ;
+
+		if( empty( $clip_life_time ) ) return ;
 
 		$db =& Database::getInstance() ;
 
@@ -129,7 +139,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 			$whr_d3comment = '1' ;
 		}
 
-		$whr = 'c.fetched_time < UNIX_TIMESTAMP() - '.( $this->mod_configs['removeclips_by_fetched'] * 86400 ) ;
+		$whr = 'c.fetched_time < UNIX_TIMESTAMP() - '.$clip_life_time ;
 		$result = $db->query( "SELECT c.clipping_id FROM $clip_table c $d3comment_join4sql WHERE $whr AND ! highlight AND ($whr_d3comment)" ) ;
 		while( list( $clipping_id ) = $db->fetchRow( $result ) ) {
 			$db->queryF( "DELETE FROM $clip_table WHERE clipping_id=$clipping_id" ) ;

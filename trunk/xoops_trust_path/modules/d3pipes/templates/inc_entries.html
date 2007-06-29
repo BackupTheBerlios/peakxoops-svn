@@ -30,11 +30,7 @@
 					<a href="<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>"><{$entry.headline|escape}></a>
 					<{* d3forum comment integration *}>
 					<{if $mod_config.comment_dirname && $mod_config.comment_forum_id}>
-						<{if is_numeric($entry.comments_count)}>
-							(<{$entry.comments_count}>)
-						<{else}>
-							(<{d3forum_comment_postscount dirname=$mod_config.comment_dirname forum_id=$mod_config.comment_forum_id link_id=$entry.clipping_id}>)
-						<{/if}>
+						(<{$entry.comments_count}>)
 					<{/if}>
 				<{else}>
 					<{$entry.headline|escape}>
@@ -51,6 +47,8 @@
 					<div id="<{$entry.fingerprint|escape}>" style="display:none;">
 						<{if $entry.content_encoded}>
 							<{$entry.content_encoded}>
+						<{elseif $entry.allow_html}>
+							<{$entry.description}>
 						<{else}>
 							<{$entry.description|escape}>
 						<{/if}>

@@ -17,23 +17,26 @@ if( empty( $pipe4assign['main_disp'] ) ) {
 	exit ;
 }
 
-// fetch entries
+// parse the pipe once
 $entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModuleConfig['entries_per_eachpipe'] , $errors , $xoopsModuleConfig ) ;
 
-// pagenavigation
-$last_joint = $pipe4assign['joints'][ sizeof( $pipe4assign['joints'] ) - 1 ] ;
-if( $last_joint['joint'] == 'clip' && $last_joint['joint_class'] == 'moduledb' ) {
+// use "clipping" if "clip" joint exists in the pipe
+$use_clipping = false ;
+foreach( $pipe4assign['joints'] as $joint ) {
+	if( $joint['joint'] == 'clip' && $joint['joint_class'] == 'moduledb' ) $use_clipping = true ;
+}
+
+if( $use_clipping ) {
+	// use clipping (pos and num )
 	$pos = intval( @$_GET['pos'] ) ;
 	$clipping_count = d3pipes_main_get_clipping_count_moduledb( $mydirname , $pipe_id ) ;
 	require_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
 	$pagenav = new XoopsPageNav( $clipping_count , $xoopsModuleConfig['entries_per_eachpipe'] , $pos , 'pos' , "page=eachpipe&amp;pipe_id=$pipe_id" ) ;
 	$pagenav4assign = $pagenav->renderNav( 10 ) ;
-	//if( $pos > 0 ) {
-	// refetch entries
+	// reassign entries from clipping
 	$entries = d3pipes_main_get_clippings_moduledb( $mydirname , $pipe_id , $xoopsModuleConfig['entries_per_eachpipe'] , $pos ) ;
-	//}
 } else {
-	$pagenav4assign = '' ;
+	$pagenav4assign = '' ; // TODO
 }
 
 // pagetitle & xoops_breadcrumbs

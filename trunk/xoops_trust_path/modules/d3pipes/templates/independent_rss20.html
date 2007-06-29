@@ -16,6 +16,9 @@
 			<title><{$entry.headline|escape}></title>
 			<link><{$entry.link|escape}></link>
 			<description><{$entry.description|escape}></description>
+			<{if $entry.content_encoded}>
+				<content:encoded> <![CDATA[ <{$entry.content_encoded}> ]]> </content:encoded>
+			<{/if}>
 			<guid><{$entry.fingerprint|escape}></guid>
 			<pubDate><{"r"|date:$entry.pubtime}></pubDate>
 			<category><{$entry.category}></category>

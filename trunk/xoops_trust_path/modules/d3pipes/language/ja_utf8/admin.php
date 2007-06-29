@@ -45,11 +45,15 @@ define('_MD_A_D3PIPES_TH_ANALYZE','デバッグ');
 define('_MD_A_D3PIPES_TH_WIZ_SITENAME','サイト名');
 define('_MD_A_D3PIPES_TH_WIZ_SITEURL','サイトのURL');
 define('_MD_A_D3PIPES_TH_WIZ_RSSURL','RSS/AtomのURL');
+define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING','RSS/Atomのエンコーディング');
+define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING_NOTE','※判らなければ空欄');
 define('_MD_A_D3PIPES_TH_WIZ_CLIPPINGYN','取得したエントリを保存する');
+define('_MD_A_D3PIPES_TH_WIZ_ALLOWHTMLYN','可能な限り配信されたHTMLのまま表示する');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_CONFIRM','内容確認');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_REGISTER','登録');
+define('_MD_A_D3PIPES_TH_WIZ_WARN_RSSURL','RSS/AtomのURLからは有効なXMLが取得できないようです。');
 
-define('_MD_A_D3PIPES_LABEL_DELETEFETCHCACHE','外部XML取得キャッシュを削除する');
+define('_MD_A_D3PIPES_LABEL_DELETEFSCACHE','外部取得/キャッシュ/切り抜きジョイントのキャッシュをすべて削除する');
 define('_MD_A_D3PIPES_LABEL_CLEARLASTFETCH','全パイプの最終取得時間をクリアする');
 define('_MD_A_D3PIPES_LABEL_PROTECTBYCOMMENT','コメントのついた切り抜きは保護する');
 define('_MD_A_D3PIPES_LABEL_PROTECTBYHIGHLIGHT','注目マークのついた切り抜きは保護する');
@@ -62,6 +66,7 @@ define('_MD_A_D3PIPES_LINK_MAKENEWPIPE','新規パイプ作成（上級者用）
 define('_MD_A_D3PIPES_LINK_WIZARDFETCH','RSS/Atom取得パイプ作成ウイザード');
 define('_MD_A_D3PIPES_LINK_WIZARDINNER','サイト内新着情報パイプ作成ウイザード');
 define('_MD_A_D3PIPES_LINK_ANALYZETHEJOINT','途中経過');
+define('_MD_A_D3PIPES_LINK_PUBLICVIEW','公開側表示');
 
 define('_MD_A_D3PIPES_BTN_UPDATE','更新');
 define('_MD_A_D3PIPES_BTN_SAVE','保存');

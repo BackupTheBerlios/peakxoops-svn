@@ -9,15 +9,20 @@ if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constant
 
 function pico_get_categories_can_read( $mydirname ) { return pico_common_get_categories_can_read( $mydirname ) ; }
 
-function pico_common_get_categories_can_read( $mydirname )
+function pico_common_get_categories_can_read( $mydirname , $uid = null )
 {
-	global $xoopsUser ;
-
 	$db =& Database::getInstance() ;
 
-	if( is_object( $xoopsUser ) ) {
-		$uid = intval( $xoopsUser->getVar('uid') ) ;
-		$groups = $xoopsUser->getGroups() ;
+	if( $uid > 0 ) {
+		$user_handler =& xoops_gethandler( 'user' ) ;
+		$user =& $user_handler->get( $uid ) ;
+	} else {
+		$user = @$GLOBALS['xoopsUser'] ;
+	}
+
+	if( is_object( $user ) ) {
+		$uid = intval( $user->getVar('uid') ) ;
+		$groups = $user->getGroups() ;
 		if( ! empty( $groups ) ) {
 			$whr4cat = "`uid`=$uid || `groupid` IN (".implode(",",$groups).")" ;
 		} else {

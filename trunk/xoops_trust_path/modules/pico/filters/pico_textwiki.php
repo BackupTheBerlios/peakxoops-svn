@@ -4,6 +4,12 @@ define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
 
 function pico_textwiki( $mydirname , $text , $content_row )
 {
+	// add XOOPS_TRUST_PATH/PEAR/ into include_path
+	if( ! defined( 'PATH_SEPARATOR' ) ) define( 'PATH_SEPARATOR' , DIRECTORY_SEPARATOR == '/' ? ':' : ';' ) ;
+	if( ! strstr( ini_get('include_path') , XOOPS_TRUST_PATH . '/PEAR' ) ) {
+		ini_set( 'include_path' , ini_get('include_path') . PATH_SEPARATOR . XOOPS_TRUST_PATH . '/PEAR' ) ;
+	}
+
 	include_once "Text/Wiki.php";
 	// include_once "Text/sunday_Wiki.php";
 

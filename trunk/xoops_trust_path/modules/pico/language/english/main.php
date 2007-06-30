@@ -1,5 +1,9 @@
 <?php
 
+//
+// CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
+//
+
 define('_MD_PICO_TOP','TOP');
 define('_MD_PICO_ALLCONTENTS','All contents');
 define('_MD_PICO_DELETEDCONTENTS','Deleted contents');

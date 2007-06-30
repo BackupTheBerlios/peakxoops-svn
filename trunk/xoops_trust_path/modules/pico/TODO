@@ -11,6 +11,8 @@
 ・全ページを連続表示するページナビ
 ・rewriteモードでは、すべてREQUEST_URIから展開するロジック
 ・掲載期限(やる?)
+・[summary][/summary][pagebreak]実装
+
 
 
 ●実装済

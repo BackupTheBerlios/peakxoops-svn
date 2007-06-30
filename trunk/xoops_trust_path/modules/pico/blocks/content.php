@@ -37,9 +37,9 @@ function b_pico_content_show( $options )
 	if( $configs['use_wraps_mode'] ) {
 		$content_url = XOOPS_URL.'/modules/'.$mydirname.'/'.$content4assign['link'] ;
 		$wrap_base_url = substr( $content_url , 0 , strrpos( $content_url , '/' ) ) ;
-		$patterns = array( "/src\=\"(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/src\=\'(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/src\=(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=\"(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=\'(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" , "/href\=(?!http:|https:)([^, \r\n\"\(\)'<>]+)/i" ) ;
-		$replacements = array( "src=\"$wrap_base_url/\\1" , "src='$wrap_base_url/\\1" , "src=$wrap_base_url/\\1" , "href=\"$wrap_base_url/\\1" , "href='$wrap_base_url/\\1" , "href=$wrap_base_url/\\1" ) ;
-		$content4assign['body'] = preg_replace( $patterns , $replacements , $content4assign['body'] ) ;
+		$pattern = "/(\s+href|\s+src)\=(\"|\')?(?![a-z]+:|\/|\#)([^, \r\n\"\(\)'<>]+)/i" ;
+		$replacement = "\\1=\\2$wrap_base_url/\\3" ;
+		$content4assign['body'] = preg_replace( $pattern , $replacement , $content4assign['body'] ) ;
 	}
 
 	$block = array( 

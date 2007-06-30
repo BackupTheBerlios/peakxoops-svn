@@ -1,5 +1,9 @@
 <?php
 
+//
+// CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (don't overwrite it to ja_utf8)
+//
+
 define('_MD_PICO_TOP','トップ');
 define('_MD_PICO_ALLCONTENTS','全コンテンツ');
 define('_MD_PICO_DELETEDCONTENTS','削除済コンテンツ');
@@ -155,7 +159,7 @@ define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限')
 if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {
 	if( function_exists( 'mb_convert_encoding' ) && function_exists( 'mb_internal_encoding' ) ) {
 		function pico_convert_encoding_to_ie( $str , $from = 'auto' ) {
-			return mb_convert_encoding( $str , "EUC-JP" , mb_detect_encoding( $str , 'ASCII,JIS,UTF-8,EUC-JP,SJIS' ) ) ;
+			return mb_convert_encoding( $str , "UTF-8" , mb_detect_encoding( $str , 'ASCII,JIS,UTF-8,EUC-JP,SJIS' ) ) ;
 		}
 	} else {
 		function pico_convert_encoding_to_ie( $str ) {

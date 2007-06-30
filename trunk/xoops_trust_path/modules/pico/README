@@ -102,6 +102,13 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.37 beta (2007/07/01)
+- fixed preg pattern for the content block (thx sakurai)
+- fixed TextWiki cannot work in block
+- modified category's description can use HTML
+- modified permission function for xmobile plugin
+- fixed a typo in ja_utf8 (dqnchan)
+
 1.36 beta (2007/06/14)
 - modified controller about created/modified (thx moegiiro)
 - modified future timestamped content is not displayed yet
@@ -402,6 +409,13 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.37 beta (2007/07/01)
+- コンテンツ表示ブロックの書き換えパターン修正 (thx sakurai)
+- TextWikiフィルターで状況によってパスが通らないバグの修正
+- カテゴリー説明文をHTML許可に変更
+- xmobileプラグイン用の対応
+- ja_utf8 言語ファイル内に、EUC-JP直書き部分が残っていたのを修正 (dqnchan)
 
 1.36 beta (2007/06/15)
 - 作成日/更新日等の処理改善 (thx moegiiro)

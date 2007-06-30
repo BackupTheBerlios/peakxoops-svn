@@ -50,15 +50,20 @@ function pico_main_make_treeinformations( $data )
 
 
 // get permissions of current user
-function pico_main_get_category_permissions_of_current_user( $mydirname )
+function pico_main_get_category_permissions_of_current_user( $mydirname , $uid = null )
 {
-	global $xoopsUser ;
-
 	$db =& Database::getInstance() ;
 
-	if( is_object( $xoopsUser ) ) {
-		$uid = intval( $xoopsUser->getVar('uid') ) ;
-		$groups = $xoopsUser->getGroups() ;
+	if( $uid > 0 ) {
+		$user_handler =& xoops_gethandler( 'user' ) ;
+		$user =& $user_handler->get( $uid ) ;
+	} else {
+		$user = @$GLOBALS['xoopsUser'] ;
+	}
+
+	if( is_object( $user ) ) {
+		$uid = intval( $user->getVar('uid') ) ;
+		$groups = $user->getGroups() ;
 		if( ! empty( $groups ) ) $whr = "`uid`=$uid || `groupid` IN (".implode(",",$groups).")" ;
 		else $whr = "`uid`=$uid" ;
 	} else {

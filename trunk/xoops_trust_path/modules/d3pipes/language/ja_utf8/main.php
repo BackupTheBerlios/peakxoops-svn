@@ -12,6 +12,7 @@ define('_MD_D3PIPES_JOINT_PARSE','XML解析');
 define('_MD_D3PIPES_JOINT_CACHE','キャッシュ');
 define('_MD_D3PIPES_JOINT_UTF8TO','コード変換(UTF8から)');
 define('_MD_D3PIPES_JOINT_UTF8FROM','コード変換(UTF8へ)');
+define('_MD_D3PIPES_JOINT_REPLACE','テキスト置換');
 define('_MD_D3PIPES_JOINT_CLIP','ローカル保存');
 define('_MD_D3PIPES_JOINT_FILTER','絞り込み');
 define('_MD_D3PIPES_JOINT_REASSIGN','再割り当て');
@@ -34,6 +35,8 @@ define('_MD_D3PIPES_N4J_MAXENTRIES','最大件数');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','切抜きから次へ渡す最低エントリ数');
 define('_MD_D3PIPES_N4J_CLIPLIFETIME','切抜きの保存日数(空欄なら一般設定値)');
 define('_MD_D3PIPES_N4J_WITHDESCRIPTION','詳細情報も取得');
+define('_MD_D3PIPES_N4J_REPLACEFROM','検索パターン');
+define('_MD_D3PIPES_N4J_REPLACETO','置換パターン');
 
 define('_MD_D3PIPES_CLASS_FETCHSNOOPY','Snoopyによる取得 (推奨)');
 define('_MD_D3PIPES_CLASS_FETCHFOPEN','URL fopenによる取得');

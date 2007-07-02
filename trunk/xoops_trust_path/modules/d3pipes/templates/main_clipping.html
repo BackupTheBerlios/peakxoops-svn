@@ -9,12 +9,12 @@
 
 	<dl>
 		<dt><{$smarty.const._MD_D3PIPES_TH_HEADLINE}></dt>
-		<dd><{$entry.headline|escape}></dd>
+		<dd id="clipping_headline"><{$entry.headline|escape}></dd>
 	</dl>
 
 	<dl>
 		<dt><{$smarty.const._MD_D3PIPES_TH_LINKURL}></dt>
-		<dd><a href="<{$entry.link|escape}>"><{$entry.link|escape}></a></dd>
+		<dd><span id="clipping_link"><{$entry.link|escape}></span> <a href="<{$entry.link|escape}>"> <img src="<{$mod_imageurl}>/external.png" alt="<{$entry.headline|escape|string_format:$smarty.const._MD_D3PIPES_FMT_EXTERNALLINK}>" /> </a></dd>
 	</dl>
 
 	<dl>
@@ -50,3 +50,15 @@
 	<{/if}>
 
 </div>
+
+<{if xoops_isadmin}>
+<script type="text/javascript">
+// <![CDATA[
+
+	new Ajax.InPlaceEditor( 'clipping_headline' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=headline' , {cols: 80} ) ;
+	new Ajax.InPlaceEditor( 'clipping_link' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=link' , {cols: 80} ) ;
+
+
+// ]]>
+</script>
+<{/if}>

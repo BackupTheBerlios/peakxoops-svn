@@ -11,6 +11,13 @@ function d3pipes_main_get_link2maincss( $mydirname )
 }
 
 
+// get <link> to common/lib/*.js
+function d3pipes_main_get_script2commonlib( $mydirname )
+{
+	return '<script type="text/javascript" src="'.XOOPS_URL.'/common/lib/prototype.js"></script>'."\n".'<script type="text/javascript" src="'.XOOPS_URL.'/common/lib/scriptaculous.js"></script>'."\n" ;
+}
+
+
 function d3pipes_main_get_clipping_count_moduledb( $mydirname , $pipe_id )
 {
 	require_once dirname(dirname(__FILE__)).'/joints/clip/D3pipesClipModuledb.class.php' ;

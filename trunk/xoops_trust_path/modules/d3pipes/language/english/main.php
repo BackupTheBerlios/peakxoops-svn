@@ -12,6 +12,7 @@ define('_MD_D3PIPES_JOINT_PARSE','Parsing XML');
 define('_MD_D3PIPES_JOINT_CACHE','Cache');
 define('_MD_D3PIPES_JOINT_UTF8TO','Transfer encoding from UTF-8');
 define('_MD_D3PIPES_JOINT_UTF8FROM','Transfer encoding to UTF-8');
+define('_MD_D3PIPES_JOINT_REPLACE','Text replacement');
 define('_MD_D3PIPES_JOINT_CLIP','Clipping into local');
 define('_MD_D3PIPES_JOINT_FILTER','Filter entries by keywords');
 define('_MD_D3PIPES_JOINT_REASSIGN','Reassign');
@@ -34,6 +35,8 @@ define('_MD_D3PIPES_N4J_MAXENTRIES','Max entries');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','Entries from clippings');
 define('_MD_D3PIPES_N4J_CLIPLIFETIME','Lifetime of clippings (use preferences if blank)');
 define('_MD_D3PIPES_N4J_WITHDESCRIPTION','Get description also');
+define('_MD_D3PIPES_N4J_REPLACEFROM','search');
+define('_MD_D3PIPES_N4J_REPLACETO','replacement');
 
 define('_MD_D3PIPES_CLASS_FETCHSNOOPY','by Snoopy (recommended)');
 define('_MD_D3PIPES_CLASS_FETCHFOPEN','by URL fopen');

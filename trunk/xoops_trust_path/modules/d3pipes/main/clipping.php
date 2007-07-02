@@ -23,7 +23,6 @@ $pagetitle4assign = empty( $clipping['headline'] ) ? _MD_D3PIPES_H2_CLIPPING : h
 $xoops_breadcrumbs[] = array( 'name' => @$pipe4assign['name'] , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=eachpipe&amp;pipe_id='.$clipping['pipe_id'] ) ;
 $xoops_breadcrumbs[] = array( 'name' => $pagetitle4assign ) ;
 
-
 // assign
 $xoopsTpl->assign(
 	array(
@@ -37,7 +36,7 @@ $xoopsTpl->assign(
 		'clipping_id' => $clipping_id ,
 		'entry' => $clipping ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
-		'xoops_module_header' => d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => d3pipes_main_get_link2maincss( $mydirname ) . "\n" . d3pipes_main_get_script2commonlib( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 

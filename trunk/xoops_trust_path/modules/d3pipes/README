@@ -1,6 +1,6 @@
 [mlimg]
 [xlang:en]
-====  D3 Pipes  ===
+====  D3Pipes  ===
 
 A synthetic module for site syndications.
 
@@ -21,9 +21,13 @@ A synthetic module for site syndications.
 
 [b]USAGES[/b]
 
+Install altsys also. (essential)
+
+Copy "common/lib" (JavaScript Libraries) under XOOPS_ROOT_PATH
+http://xoops.peak.ne.jp/md/mydownloads/singlefile.php?lid=104
+
 Be sure smarty plugins (d3comment_*) are copied into class/smarty/plugins/
 Install it as normal D3 module.
-I recommend you to install altsys also.
 
 (If you did not)
 Make a directory XOOPS_TRUST_PATH/cache and change the mode writable.
@@ -35,6 +39,11 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 
 [b]CHANGELOG[/b]
+
+0.33 2007-07-03
+- added a joint type of "text replacement"
+- modified the spec of separators for joint's option
+- added InPlaceEditor into clipping view
 
 0.32 2007-06-30 (Install common/lib/ also)
 - added a command for cron (ROOT/modules/dirname/bin/update_cache.sh)
@@ -132,9 +141,15 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 ●使い方
 
+（事前準備）
+altsysをインストールしておいてください。
+
+common/libが入っていなかったらXOOPS_ROOT_PATH下にコピーしておいてください。
+http://xoops.peak.ne.jp/md/mydownloads/singlefile.php?lid=104
+
+（ファイルアップロードとインストール）
 普通のD3モジュールとしてインストールします。
-インストールする前に、Smartyプラグイン２つがちゃんとコピーされているか確認してください。
-altsysとの併用を強く推奨します。
+モジュール管理でインストールする前に、Smartyプラグイン２つがちゃんとコピーされているか確認してください。
 
 XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 （まだ作っていない場合）
@@ -145,6 +160,11 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.33 2007-07-03
+- テキスト置換ジョイントの実装
+- ジョイントオプションのセパレータをジョイント毎に変更可能にした
+- 切り抜きの一部をInPlaceEditor処理可能とした
 
 0.32 2007-06-30 ※このバージョンからcommon/lib/が必要になりました
 - cron用キャッシュ更新コマンド追加 ROOT/modules/dirname/bin/update_cache.sh

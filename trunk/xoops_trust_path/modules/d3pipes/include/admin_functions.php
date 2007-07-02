@@ -3,13 +3,14 @@
 function d3pipes_admin_fetch_joints( $mydirname )
 {
 	$GLOBALS['joint_type_weights'] = array(
-		'fetch' => -10 ,
-		'parse' => -9 ,
+		'fetch' => -20 ,
+		'parse' => -10 ,
 		'block' => -8 ,
 		'utf8to' => -7 ,
 		'utf8from' => -6 ,
 		'filter' => 0 ,
 		'reassign' => 0 ,
+		'replace' => 0 ,
 		'clip' => 20 ,
 		'cache' => 21 ,
 		'union' => 40 ,

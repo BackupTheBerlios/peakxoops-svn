@@ -32,7 +32,7 @@
 		<{/if}> *}>
 
 		<{if $category.can_post}>
-			<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
+			<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>&amp;ret=mm">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
 		<{/if}>
 
 		<!-- link to RSS -->
@@ -48,7 +48,7 @@
 				<em class="pico_notice">(<{$smarty.const._MD_PICO_WAITINGUPDATE}>)</em>
 			<{/if}>
 			<{if $category.can_edit}>
-				<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><img src="<{$mod_imageurl}>/icon_edit.gif" alt="<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>" /></a>
+				<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>&amp;ret=mm"><img src="<{$mod_imageurl}>/icon_edit.gif" alt="<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>" /></a>
 			<{/if}>
 			</li>
 		<{/foreach}>

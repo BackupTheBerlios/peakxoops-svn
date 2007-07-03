@@ -363,11 +363,12 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 	) ;
 
 	// vpath duplication check
-	while( 1 ) {
+	if( $ret['vpath'] ) while( 1 ) {
 		list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE vpath='".mysql_real_escape_string($ret['vpath'])."' AND content_id<>".intval($content_id) ) ) ;
 		if( empty( $count ) ) break ;
 		$ext = strrchr( $ret['vpath'] , '.' ) ;
-		$ret['vpath'] = str_replace( $ext , '.1'.$ext , $ret['vpath'] ) ;
+		if( $ext ) $ret['vpath'] = str_replace( $ext , '.1'.$ext , $ret['vpath'] ) ;
+		else $ret['vpath'] .= '.1' ;
 		$errors[] = _MD_PICO_ERR_DUPLICATEDVPATH ;
 	}
 

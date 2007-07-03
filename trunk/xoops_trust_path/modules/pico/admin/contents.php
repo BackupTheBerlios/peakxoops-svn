@@ -157,9 +157,9 @@ $contents4assign = array() ;
 while( $content_row = $db->fetchArray( $ors ) ) {
 	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
 
-
 	$content4assign = array(
 		'id' => intval( $content_row['content_id'] ) ,
+		'link' => pico_common_make_content_link4html( $xoopsModuleConfig , $content_row ) ,
 		'cat_title' => $myts->makeTboxData4Show( $content_row['cat_title'] ) ,
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] , 'm' ) ,
 		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] , 'm' ) ,

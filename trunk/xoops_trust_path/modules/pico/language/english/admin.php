@@ -15,6 +15,7 @@ define('_MD_A_PICO_LEGEND_CONTENTSTHS','VIS: visible &nbsp; NAVI:show in page na
 define('_MD_A_PICO_BTN_MOVE','MOVED');
 define('_MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED','selected items will be:');
 define('_MD_A_PICO_MSG_CONTENTSMOVED','Contents have been moved');
+define('_MD_A_PICO_LABEL_MAINDISP','View');
 define('_MD_A_PICO_BTN_DELETE','delete');
 define('_MD_A_PICO_CONFIRM_DELETE','Are you sure to delete them?');
 define('_MD_A_PICO_MSG_CONTENTSDELETED','Deleted successfully');

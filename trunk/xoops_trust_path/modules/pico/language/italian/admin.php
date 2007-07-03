@@ -2,6 +2,10 @@
 //traduzione italiana di evoc cadelsanto@gmail.com www.cadelsanto.org
 
 // contents list admin
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-07-04 04:55:43
+define('_MD_A_PICO_LABEL_MAINDISP','View');
+
 define('_MD_A_PICO_H2_CONTENTS','Indice');
 define('_MD_A_PICO_TH_CONTENTSID','ID');
 define('_MD_A_PICO_TH_CONTENTSSUBJECT','Soggetto');

@@ -1,6 +1,10 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-07-04 04:55:42
+define('_MD_A_PICO_LABEL_MAINDISP','View');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-02-28 05:49:30
 define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','Some contents have not been updated because of duplicated vpath (ID: %s)');
 

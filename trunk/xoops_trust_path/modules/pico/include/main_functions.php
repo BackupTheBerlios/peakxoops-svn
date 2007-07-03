@@ -541,14 +541,35 @@ function pico_main_read_wrapped_file( $mydirname , $path_info )
 }
 
 
-// get <link> to CSS for main
-function pico_main_get_link2maincss( $mydirname )
+// get return_uri from "ret" after editing
+function pico_main_parse_ret2uri( $mydirname , $ret )
 {
-	global $xoopsModuleConfig ;
+	if( ! preg_match( '/^([a-z]{2})([0-9-]*)$/' , $ret , $regs ) ) return false ;
+	$id = intval( $regs[2] ) ;
+	switch( $regs[1] ) {
+		case 'ac' :
+			return XOOPS_URL.'/modules/'.$mydirname.'/admin/index.php?page=contents&cat_id='.$id ;
+		case 'mc' :
+			return XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$id ;
+		case 'mm' :
+			return XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=menu' ;
+		default :
+			return false ;
+	}
+}
 
-	$css_uri4disp = htmlspecialchars( str_replace( '{mod_url}' , XOOPS_URL.'/modules/'.$mydirname , @$xoopsModuleConfig['css_uri'] ) , ENT_QUOTES ) ;
 
-	return '<link rel="stylesheet" type="text/css" media="all" href="'.$css_uri4disp.'" />'."\n" ;
+// get <link> to CSS for main
+function pico_main_render_moduleheader( $mydirname , $mod_config , $appendix_header4disp = '' )
+{
+	$css_uri4disp = htmlspecialchars( @$mod_config['css_uri'] , ENT_QUOTES ) ;
+
+	$header4disp = '<link rel="stylesheet" type="text/css" media="all" href="'.$css_uri4disp.'" />'."\n".@$mod_config['htmlheader']."\n".$appendix_header4disp."\n" ;
+
+	$searches = array( '{mod_url}' , '<{$mod_url}>' , '<{$mydirname}>' , '{X_SITEURL}' , '<{$xoops_url}>' ) ;
+	$replacements = array( XOOPS_URL.'/modules/'.$mydirname , XOOPS_URL.'/modules/'.$mydirname , $mydirname , XOOPS_URL.'/' , XOOPS_URL ) ;
+
+	return str_replace( $searches , $replacements , $header4disp ) ;
 }
 
 

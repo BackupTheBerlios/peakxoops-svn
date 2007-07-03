@@ -102,6 +102,10 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.38 beta (2007/07/04)
+- modified htmlheader can use <{$mod_url}>,<{$xoops_url}> etc.
+- modified to return to previous page after update/create a content
+
 1.37 beta (2007/07/01)
 - fixed preg pattern for the content block (thx sakurai)
 - fixed TextWiki cannot work in block
@@ -409,6 +413,10 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.38 beta (2007/07/04)
+- HTMLヘッダを表示する前に、Smartyっぽい変換処理を追加した
+- コンテンツ編集終了後、出来る限り元のページに戻るようにした
 
 1.37 beta (2007/07/01)
 - コンテンツ表示ブロックの書き換えパターン修正 (thx sakurai)

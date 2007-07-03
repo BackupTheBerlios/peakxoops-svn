@@ -15,6 +15,7 @@ define('_MD_A_PICO_LEGEND_CONTENTSTHS','表示:表示する &nbsp; Navi:ページナビに表
 define('_MD_A_PICO_BTN_MOVE','移動');
 define('_MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED','右端がチェックされた記事を:');
 define('_MD_A_PICO_MSG_CONTENTSMOVED','移動しました');
+define('_MD_A_PICO_LABEL_MAINDISP','表示');
 define('_MD_A_PICO_BTN_DELETE','削除');
 define('_MD_A_PICO_CONFIRM_DELETE','本当に削除してよろしいですか？');
 define('_MD_A_PICO_MSG_CONTENTSDELETED','削除しました');

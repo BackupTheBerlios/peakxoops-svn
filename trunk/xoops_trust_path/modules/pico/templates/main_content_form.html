@@ -12,7 +12,7 @@
 	</div>
 <{/if}>
 
-<form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
+<form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>&amp;ret=<{$smarty.get.ret|escape:"url"}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
 	<{$gticket_hidden}>
 	<input type="hidden" name="content_id" value="<{$content.id}>" />
 

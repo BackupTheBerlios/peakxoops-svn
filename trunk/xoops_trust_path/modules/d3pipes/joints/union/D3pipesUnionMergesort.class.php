@@ -15,7 +15,7 @@ class D3pipesUnionMergesort extends D3pipesUnionAbstract {
 			foreach( array_keys( $entries_tmp ) as $i ) {
 				$entries_tmp[ $i ][ 'pipe' ] = $pipe4assign ;
 			}
-			$entries = array_merge( $entries , $entries_tmp ) ;
+			$entries = is_array( $entries ) ? array_merge( $entries , $entries_tmp ) : $entries_tmp ;
 		}
 
 		// sort by pubtime DESC

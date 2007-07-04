@@ -193,7 +193,7 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 	ksort( $objects ) ;
 
 	// chain data is initialized
-	$data = null ;
+	$data = array() ;
 
 	// joint chains
 	$errors = array() ;

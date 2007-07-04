@@ -44,6 +44,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - added a joint type of "text replacement"
 - modified the spec of separators for joint's option
 - added InPlaceEditor into clipping view
+- fixed "union" cannot work with PHP5 (thx DJ_okamOTO) 0.33a
 
 0.32 2007-06-30 (Install common/lib/ also)
 - added a command for cron (ROOT/modules/dirname/bin/update_cache.sh)
@@ -165,6 +166,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - テキスト置換ジョイントの実装
 - ジョイントオプションのセパレータをジョイント毎に変更可能にした
 - 切り抜きの一部をInPlaceEditor処理可能とした
+- PHP5だとUnionが効いていなかったバグの修正 (thx DJ_okamOTO) 0.33a
 
 0.32 2007-06-30 ※このバージョンからcommon/lib/が必要になりました
 - cron用キャッシュ更新コマンド追加 ROOT/modules/dirname/bin/update_cache.sh

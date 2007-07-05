@@ -6,7 +6,8 @@ $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
 $index = intval( $_GET['index'] ) ;
-$option_value = $myts->stripSlashesGPC( @$_GET['option_value'] ) ;
+$option_value_utf8 = $myts->stripSlashesGPC( @$_GET['option_value'] ) ;
+$option_value = d3pipes_common_convert_encoding_utf8toie( $mydirname , $option_value_utf8 ) ;
 
 $all_joints = d3pipes_admin_fetch_joints( $mydirname ) ;
 $disabled_option_input = '<input type="text" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="'.htmlspecialchars($option_value,ENT_QUOTES).'" size="20" disabled="disabled" />' ;

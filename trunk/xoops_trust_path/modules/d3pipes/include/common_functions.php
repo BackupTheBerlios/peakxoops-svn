@@ -1,5 +1,19 @@
 <?php
 
+function d3pipes_common_convert_encoding_utf8toie( $mydirname , $string_utf8 )
+{
+	if( _CHARSET == 'UTF-8' ) {
+		return $string_utf8 ;
+	} else if( function_exists( 'mb_convert_encoding' ) ) {
+		return mb_convert_encoding( $string_utf8 , _CHARSET , 'UTF-8' ) ;
+	} else if( function_exists( 'iconv' ) ) {
+		return iconv( $string_utf8 , 'UTF-8' , _CHARSET ) ;
+	} else {
+		return utf8_decode( $string_utf8 ) ;
+	}
+}
+
+
 function d3pipes_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 {
 	$module_handler =& xoops_gethandler('module') ;

@@ -13,15 +13,7 @@ $db =& Database::getInstance() ;
 
 // get value (from UTF-8 to
 $value_utf8 = $myts->stripSlashesGPC( $_POST['value'] ) ;
-if( _CHARSET == 'UTF-8' ) {
-	$value = $value_utf8 ;
-} else if( function_exists( 'mb_convert_encoding' ) ) {
-	$value = mb_convert_encoding( $value_utf8 , _CHARSET , 'UTF-8' ) ;
-} else if( function_exists( 'iconv' ) ) {
-	$value = iconv( $value_utf8 , 'UTF-8' , _CHARSET ) ;
-} else {
-	$value = utf8_decode( $value_utf8 ) ;
-}
+$value = d3pipes_common_convert_encoding_utf8toie( $mydirname , $value_utf8 ) ;
 
 // get clipping
 $clipping_id = intval( $_GET['clipping_id'] ) ;

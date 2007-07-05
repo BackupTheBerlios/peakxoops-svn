@@ -14,6 +14,20 @@ function d3pipes_common_convert_encoding_utf8toie( $mydirname , $string_utf8 )
 }
 
 
+function d3pipes_common_convert_encoding_ietoutf8( $mydirname , $string_ie )
+{
+	if( _CHARSET == 'UTF-8' ) {
+		return $string_ie ;
+	} else if( function_exists( 'mb_convert_encoding' ) ) {
+		return mb_convert_encoding( $string_ie , 'UTF-8' , _CHARSET ) ;
+	} else if( function_exists( 'iconv' ) ) {
+		return iconv( $string_ie , _CHARSET , 'UTF-8' ) ;
+	} else {
+		return utf8_encode( $string_ie ) ;
+	}
+}
+
+
 function d3pipes_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 {
 	$module_handler =& xoops_gethandler('module') ;

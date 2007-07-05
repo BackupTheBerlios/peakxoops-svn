@@ -1,11 +1,13 @@
 <div class="d3pipes_admin_pipe_edit" id="<{$mydirname}>_admin_pipe_edit">
 
+<!-- link to public view of this pipe -->
 <{if $pipe.id > 0 }>
 	<div style="float:right;">
 		<a href="<{$mod_url}>/index.php?page=eachpipe&amp;pipe_id=<{$pipe.id}>"><{$smarty.const._MD_A_D3PIPES_LINK_PUBLICVIEW}></a>
 	</div>
 <{/if}>
 
+<!-- page title -->
 <h2><{$mod_name}> - 
 <{if $pipe_id>0}>
 	<{$pipe_id|string_format:$smarty.const._MD_A_D3PIPES_H2_PIPEADMINEDIT_FMT}>
@@ -15,6 +17,33 @@
 </h2>
 
 <form action="<{$mod_url}>/admin/index.php?page=pipe" id="joint_edit_form" method="post">
+
+	<!-- pipe properties -->
+	<div align="left" class="head" style="margin: 12px;">
+		<p>
+		<{$smarty.const._MD_A_D3PIPES_TH_PIPENAME}>: <input type="text" name="name" value="<{$pipe.name4xml}>" size="40" />
+		</p>
+		<p>
+		<{$smarty.const._MD_A_D3PIPES_TH_PIPEURL}>: <input type="text" name="url" value="<{$pipe.url4xml}>" size="60" />
+		</p>
+		<p>
+		<{$smarty.const._MD_A_D3PIPES_TH_PIPEIMAGE}>: <input type="text" name="image" value="<{$pipe.image4xml}>" size="60" />
+		</p>
+	</div>
+
+	<!-- buttons -->
+	<div align="center" style="margin: 12px;">
+		<input type="submit" name="do_update" value="<{$smarty.const._MD_A_D3PIPES_BTN_SAVE}>" />
+		<{if $pipe_id>0}>
+			<input type="submit" name="do_saveas" value="<{$smarty.const._MD_A_D3PIPES_BTN_SAVEASNEWPIPE}>" />
+			<input type="reset" value="<{$smarty.const._MD_A_D3PIPES_BTN_RESET}>" />
+			<input type="submit" name="do_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_D3PIPES_CNFM_PIPEDELETE}>');" />
+			<input type="hidden" name="pipe_id" value="<{$pipe_id}>" />
+		<{/if}>
+		<{$gticket_hidden}>
+	</div>
+
+	<!-- joints -->
 	<ul id="pipe_main">
 	<{foreach from=$pipe.joints item="joint" key="index"}>
 
@@ -54,29 +83,6 @@
 		</li>
 	<{/foreach}>
 	</ul>
-
-	<div align="left" class="head" style="margin: 12px;">
-		<p>
-		<{$smarty.const._MD_A_D3PIPES_TH_PIPENAME}>: <input type="text" name="name" value="<{$pipe.name4xml}>" size="40" />
-		</p>
-		<p>
-		<{$smarty.const._MD_A_D3PIPES_TH_PIPEURL}>: <input type="text" name="url" value="<{$pipe.url4xml}>" size="60" />
-		</p>
-		<p>
-		<{$smarty.const._MD_A_D3PIPES_TH_PIPEIMAGE}>: <input type="text" name="image" value="<{$pipe.image4xml}>" size="60" />
-		</p>
-	</div>
-
-	<div align="center" style="margin: 12px;">
-		<input type="submit" name="do_update" value="<{$smarty.const._MD_A_D3PIPES_BTN_SAVE}>" />
-		<{if $pipe_id>0}>
-			<input type="submit" name="do_saveas" value="<{$smarty.const._MD_A_D3PIPES_BTN_SAVEASNEWPIPE}>" />
-			<input type="reset" value="<{$smarty.const._MD_A_D3PIPES_BTN_RESET}>" />
-			<input type="submit" name="do_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_D3PIPES_CNFM_PIPEDELETE}>');" />
-			<input type="hidden" name="pipe_id" value="<{$pipe_id}>" />
-		<{/if}>
-		<{$gticket_hidden}>
-	</div>
 
 </form>
 
@@ -157,7 +163,7 @@ ul#pipe_main li {
   list-style: none outside;
   margin: 10px 0px;
   padding:0px;
-  height:60px;
+  height:5.5em;
   min-width:600px;
   border:1px solid #E8A400;
   background-color: #FFF4D8;
@@ -168,7 +174,7 @@ div.joint_element {
   float:left;
   padding: 2px;
   vertical-align: middle;
-  height: 56px;
+  height: 5.2em;
 }
 
 div.handle {

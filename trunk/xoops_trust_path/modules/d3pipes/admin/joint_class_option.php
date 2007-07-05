@@ -19,7 +19,14 @@ if( ! isset( $valid_classes[ $joint_class ] ) ) die( $disabled_option_input ) ;
 
 $obj =& d3pipes_common_get_joint_object( $mydirname , $joint_type , $joint_class ) ;
 
-echo $obj->renderOptions( $index , $option_value ) ;
+while( ob_get_level() ) {
+	ob_end_clean() ;
+}
+ini_set( 'default_encoding' , 'UTF-8' ) ;
+echo d3pipes_common_convert_encoding_ietoutf8( $mydirname , $obj->renderOptions( $index , $option_value ) ) ;
+if( ! 'ALTSYS_DONT_USE_ADMIN_IN_THEME' ) define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+unset( $xoopsUser ) ; // for preventing older admin_in_theme
 exit ;
+
 
 ?>

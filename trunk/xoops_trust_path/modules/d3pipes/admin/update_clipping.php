@@ -30,7 +30,13 @@ if( $clipping && isset( $field_defs[ $field ] ) ) {
 	$db->query( "UPDATE ".$db->prefix($mydirname."_clippings")." SET `$field`='".addslashes($value)."' WHERE clipping_id=$clipping_id" ) ;
 }
 
-echo htmlspecialchars( $value , ENT_QUOTES ) ;
+while( ob_get_level() ) {
+	ob_end_clean() ;
+}
+ini_set( 'default_encoding' , 'UTF-8' ) ;
+echo htmlspecialchars( d3pipes_common_convert_encoding_ietoutf8( $mydirname , $value ) , ENT_QUOTES ) ;
+if( ! 'ALTSYS_DONT_USE_ADMIN_IN_THEME' ) define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+unset( $xoopsUser ) ; // for preventing older admin_in_theme
 exit ;
 
 ?>

@@ -6,17 +6,31 @@ function altsys_admin_in_theme( $s )
 
 	$xoops_admin_contents = '' ;
 
+	if( defined( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' ) ) return $s ;
+
 	// check whether cp_functions.php is loaded
-	if( ! defined( 'XOOPS_CPFUNC_LOADED' ) ) return $s ;
+	if( ! defined( 'XOOPS_CPFUNC_LOADED' ) ) {
+		define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+		return $s ;
+	}
 
 	// redirect
-	if( strstr( $s , '<meta http-equiv="Refresh" ' ) ) return $s ;
+	if( strstr( $s , '<meta http-equiv="Refresh" ' ) ) {
+		define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+		return $s ;
+	}
 
-	list( , $tmp_s ) = explode( "<div class='content'>" , $s , 2 ) ;
-	if( empty( $tmp_s ) ) return $s ;
+	@list( , $tmp_s ) = explode( "<div class='content'>" , $s , 2 ) ;
+	if( empty( $tmp_s ) ) {
+		define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+		return $s ;
+	}
 
 	list( $tmp_s , $tmp_after ) = explode( "<td width='1%' background='".XOOPS_URL."/modules/system/images/bg_content.gif'>" , $tmp_s ) ;
-	if( empty( $tmp_after ) ) return $s ;
+	if( empty( $tmp_after ) ) {
+		define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+		return $s ;
+	}
 
 	$xoops_admin_contents = substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
 
@@ -28,13 +42,6 @@ function altsys_admin_in_theme_in_last( $contents = null )
 {
 	global $xoops_admin_contents , $xoopsConfig , $xoopsModule , $xoopsUser , $xoopsUserIsAdmin , $xoopsLogger , $altsysModuleConfig , $altsysModuleId ;
 
-	if( isset( $_SESSION['redirect_message'] ) ) {
-		$_SESSION['redirect_message_backup'] = $_SESSION['redirect_message'] ;
-	} else if( isset( $_SESSION['redirect_message_backup'] ) ) {
-		$_SESSION['redirect_message'] = $_SESSION['redirect_message_backup'] ;
-		unset( $_SESSION['redirect_message_backup'] ) ;
-	}
-
 	if( ! isset( $contents ) ) {
 		while( ob_get_level() ) {
 			ob_end_flush() ;
@@ -44,6 +51,7 @@ function altsys_admin_in_theme_in_last( $contents = null )
 	}
 
 	if( ! isset( $xoops_admin_contents ) ) return ;
+	if( defined( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' ) ) return ;
 
 	if( ! is_object( $xoopsUser ) ) exit ;
 

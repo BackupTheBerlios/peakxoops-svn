@@ -11,7 +11,12 @@ if( is_object( $xoopsUser ) ) {
 			require_once dirname(__FILE__).'/admin_in_theme_functions.php' ;
 
 			// for security with register_globals=1
-			unset( $GLOBALS['altsysAdminPageTitle'] , $GLOBALS['altsysXoopsBreadcrumbs'] ) ;
+			unset( $GLOBALS['altsysAdminPageTitle'] , $GLOBALS['altsysXoopsBreadcrumbs'] , $GLOBALS['xoops_admin_contents'] ) ;
+
+			// disable error handler without XOOPS 2.0.14/15/16
+			if( ! ( is_object( @$xoopsLogger ) && method_exists( $xoopsLogger , 'render' ) && in_array( $xoopsConfig['debug_mode'] , array( 1 , 2 ) ) ) ) {
+				restore_error_handler() ;
+			}
 
 			register_shutdown_function( 'altsys_admin_in_theme_in_last' ) ;
 			ob_start( 'altsys_admin_in_theme' ) ;

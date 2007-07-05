@@ -1,5 +1,9 @@
 [xlang:en]
 
+v0.54 (2007-07-06)
+- fixed admin_in_theme conflicts PHP debug of conventinal XOOPS2
+- fixed admin_in_theme conflicts redirect hack
+
 v0.53 (2007-06-05)
 - modified some interfaces
 - renamed language
@@ -95,6 +99,10 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.54 (2007-07-06)
+- 管理画面テーマを使うとエラー表示がなくなってしまったのを修正
+- 管理画面テーマとお手軽高速化Hackとの衝突を回避
 
 v0.53 (2007-06-05)
 - 細かな操作性向上

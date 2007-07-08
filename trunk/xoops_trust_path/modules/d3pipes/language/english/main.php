@@ -37,6 +37,7 @@ define('_MD_D3PIPES_N4J_CLIPLIFETIME','Lifetime of clippings (use preferences if
 define('_MD_D3PIPES_N4J_WITHDESCRIPTION','Get description also');
 define('_MD_D3PIPES_N4J_REPLACEFROM','search');
 define('_MD_D3PIPES_N4J_REPLACETO','replacement');
+define('_MD_D3PIPES_N4J_XSLTPATH','Path to XSLT (url or physical)');
 
 define('_MD_D3PIPES_CLASS_FETCHSNOOPY','by Snoopy (recommended)');
 define('_MD_D3PIPES_CLASS_FETCHFOPEN','by URL fopen');

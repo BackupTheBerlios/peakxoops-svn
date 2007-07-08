@@ -195,6 +195,26 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'tidy_path' ,
+	'title'			=> $constpref.'_TIDY_PATH' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '/usr/bin/tidy' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'xsltproc_path' ,
+	'title'			=> $constpref.'_XSLTPROC_PATH' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '/usr/bin/xsltproc' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'css_uri' ,
 	'title'			=> $constpref.'_CSS_URI' ,
 	'description'	=> $constpref.'_CSS_URIDSC' ,

@@ -44,6 +44,9 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - fixed common/lib rendering character converted wrongly
 - fixed common/lib rendering conflits admin_in_theme of altsys
 - modified template for pipe editing
+- added joints
+-- ReplaceTidy (0.34a)
+-- ReplaceXsltproc (0.34a)
 
 0.33 2007-07-03
 - added a joint type of "text replacement"
@@ -172,6 +175,9 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - common/lib によるオプションレンダリングが文字化けしていたのを修正
 - common/lib によるオプションレンダリングとaltsys管理画面用テーマとの衝突を回避
 - パイプ編集用テンプレートの微調整
+- ジョイントの追加
+-- ReplaceTidy (0.34a)
+-- ReplaceXsltproc (0.34a)
 
 0.33 2007-07-03
 - テキスト置換ジョイントの実装

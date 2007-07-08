@@ -37,6 +37,7 @@ define('_MD_D3PIPES_N4J_CLIPLIFETIME','切抜きの保存日数(空欄なら一般設定値)');
 define('_MD_D3PIPES_N4J_WITHDESCRIPTION','詳細情報も取得');
 define('_MD_D3PIPES_N4J_REPLACEFROM','検索パターン');
 define('_MD_D3PIPES_N4J_REPLACETO','置換パターン');
+define('_MD_D3PIPES_N4J_XSLTPATH','XSLTファイルのパス(URLも可)');
 
 define('_MD_D3PIPES_CLASS_FETCHSNOOPY','Snoopyによる取得 (推奨)');
 define('_MD_D3PIPES_CLASS_FETCHFOPEN','URL fopenによる取得');

@@ -4,6 +4,7 @@ require_once dirname(__FILE__).'/D3pipesJointAbstract.class.php' ;
 
 class D3pipesReplaceAbstract extends D3pipesJointAbstract {
 
+	var $option ;
 	var $pattern ;
 	var $replacement ;
 	var $separator = '||' ;
@@ -14,6 +15,7 @@ class D3pipesReplaceAbstract extends D3pipesJointAbstract {
 		$this->mydirname = $mydirname ;
 		$this->pipe_id = intval( $pipe_id ) ;
 		@list( $this->pattern , $this->replacement ) = explode( $this->separator , $option ) ;
+		$this->option = $option ;
 	}
 
 	function execute( $xml_source , $max_entries = '' ) {}

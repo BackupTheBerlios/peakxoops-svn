@@ -20,7 +20,13 @@ function altsys_admin_in_theme( $s )
 		return $s ;
 	}
 
-	@list( , $tmp_s ) = explode( "<div class='content'>" , $s , 2 ) ;
+	// outputs before cp_header()
+	@list( $former_outputs , $tmp_s ) = explode( "<!DOCTYPE" , $s , 2 ) ;
+	if( empty( $tmp_s ) ) {
+		$tmp_s = $s ;
+	}
+
+	@list( , $tmp_s ) = explode( "<div class='content'>" , $tmp_s , 2 ) ;
 	if( empty( $tmp_s ) ) {
 		define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
 		return $s ;
@@ -32,7 +38,7 @@ function altsys_admin_in_theme( $s )
 		return $s ;
 	}
 
-	$xoops_admin_contents = substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
+	$xoops_admin_contents = $former_outputs . substr( strrev( strstr( strrev( $tmp_s ) , strrev( '</div>' ) ) ) , 0 , -6 ) ;
 
 	return '' ;
 }

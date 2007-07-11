@@ -29,8 +29,8 @@
 
 	require_once XOOPS_TRUST_PATH.'/modules/xpwiki/include.php' ;
 	
-	$xpwiki = XpWiki::getSingleton($plugin['dirname']);
-	$xpwiki->init();
+	$xpwiki =& XpWiki::getSingleton($plugin['dirname']);
+	$xpwiki->init('#RenderMode');
 	
 	// to GMT
 	$range_start_s -= $xpwiki->cont['LOCALZONE'];

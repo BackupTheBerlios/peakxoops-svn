@@ -1,2 +1,2 @@
 - full-time XSS protection (super filter against GPC)
-
+- banIP time limitation

@@ -125,6 +125,7 @@ I thank Madfish for this excellent work!
 
 3.04 (2007/06/13)
 - added a check against the phpmailer command-injection vulnerability.
+- modified postcommon_post_need_multibyte (3.04a)
 
 3.03 (2007/06/03)
 - added a protection against installer attack
@@ -304,6 +305,7 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 
 3.04 (2007/06/13)
 - phpmailer¤Î¥³¥Ş¥ó¥É¼Â¹ÔÀÈ¼åÀ­¤ËÂĞ¤¹¤ë¥Á¥§¥Ã¥¯¤òÄÉ²Ã¤·¤¿
+- postcommon_post_need_multibyte ¤Î¥Á¥§¥Ã¥¯¤ò¤â¤¦¾¯¤·¶¯ÎÏ¤Ë¤·¤¿ (3.04a)
 
 3.03 (2007/06/03)
 - ¥¤¥ó¥¹¥È¡¼¥é¥¢¥¿¥Ã¥¯¤Ø¤ÎÂĞºö¤òÄÉ²Ã¤·¤¿

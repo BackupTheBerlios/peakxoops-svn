@@ -149,6 +149,8 @@ function purge( $redirect_to_top = false )
 
 	if( $redirect_to_top ) {
 		Header( 'Location: '.XOOPS_URL.'/' ) ;
+	} else {
+		echo 'Protector detects attacking actions' ;
 	}
 
 	exit ;

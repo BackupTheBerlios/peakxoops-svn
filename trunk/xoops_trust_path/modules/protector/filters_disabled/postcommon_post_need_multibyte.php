@@ -14,10 +14,19 @@ function protector_postcommon_post_need_multibyte()
 
 	$protector =& Protector::getInstance() ;
 
-	// dare to ignore arrays
-	foreach( $_POST as $data ) {
-		if( is_object( $data ) ) continue ;
-		if( strlen( $data ) > 100 ) {
+	$lengths = array(
+		0 => 100 , // default value
+		'message' => 2 ,
+		'com_text' => 2 ,
+		'excerpt' => 2 ,
+	) ;
+
+	foreach( $_POST as $key => $data ) {
+		// dare to ignore arrays/objects
+		if( ! is_string( $data ) ) continue ;
+
+		$check_length = isset( $lengths[ $key ] ) ? $lengths[ $key ] : $lengths[ 0 ] ;
+		if( strlen( $data ) > $check_length ) {
 			if( strlen( $data ) == mb_strlen( $data ) ) {
 				$protector->message .= "No multibyte character was found ($data)\n" ;
 				$protector->output_log( 'Singlebyte SPAM' , 0 , false , 128 ) ;

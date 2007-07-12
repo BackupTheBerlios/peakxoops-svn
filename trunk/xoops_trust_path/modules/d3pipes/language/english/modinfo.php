@@ -45,6 +45,7 @@ define($constpref.'_SNP_PROXYPASS','Password for proxy server');
 define($constpref.'_SNP_CURLPATH','curl path (default: /usr/bin/curl)');
 define($constpref.'_TIDY_PATH','tidy path (default: /usr/bin/tidy)');
 define($constpref.'_XSLTPROC_PATH','xsltproc path (default: /usr/bin/xsltproc)');
+define($constpref.'_CSS_URI','CSS URI');
 define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: {mod_url}/index.css');
 define($constpref.'_IMAGES_DIR','Directory for image files');
 define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');

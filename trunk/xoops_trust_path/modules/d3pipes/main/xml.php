@@ -21,8 +21,8 @@ $entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModul
 $utf8from_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'utf8from' , $xoopsModuleConfig['internal_encoding'] ) ;
 
 // assign
-require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$xoopsTpl =& new XoopsTpl() ;
+require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+$xoopsTpl =& new D3Tpl() ;
 $xoopsTpl->assign(
 	array(
 		'mydirname' => $mydirname ,

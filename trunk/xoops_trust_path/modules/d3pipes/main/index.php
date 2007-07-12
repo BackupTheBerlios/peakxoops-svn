@@ -7,16 +7,15 @@ $xoopsOption['template_main'] = $mydirname.'_main_index.html' ;
 // xoops header
 include XOOPS_ROOT_PATH.'/header.php';
 
-
 // fetch pipes as heading
-$result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." WHERE main_list" ) ;
+$result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." WHERE main_list ORDER BY weight" ) ;
 $headpipes4assign = array() ;
 while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
 	$headpipes4assign[] = d3pipes_common_get_pipe4assign( $mydirname , intval( $pipe_id ) ) ;
 }
 
 // get pipe_ids for latest headlines
-$result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." WHERE main_aggr" ) ;
+$result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." WHERE main_aggr ORDER BY weight" ) ;
 $union_options = array() ;
 while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
 	$union_options[] = $pipe_id.':'.$xoopsModuleConfig['index_each'] ;

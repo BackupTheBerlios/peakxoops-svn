@@ -19,8 +19,8 @@ function b_d3pipes_blockedit_common( $options , $type = 'async' )
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
-	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-	$tpl =& new XoopsTpl() ;
+	require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+	$tpl =& new D3Tpl() ;
 	$tpl->assign( array(
 		'mydirname' => $mydirname ,
 		'type' => $type ,

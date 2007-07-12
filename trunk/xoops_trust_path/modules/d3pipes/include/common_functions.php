@@ -139,6 +139,24 @@ function d3pipes_common_get_clipping( $mydirname , $clipping_id )
 }
 
 
+function d3pipes_common_get_joint_objects( $mydirname , $joint_type = '' )
+{
+	if( ! $joint_type ) return array() ;
+
+	$type_base = dirname(dirname(__FILE__)).'/joints/'.$joint_type ;
+	$dh = opendir( $type_base ) ;
+	$ret = array() ;
+	while( $file = readdir( $dh ) ) {
+		if( substr( $file , 0 , 7 + strlen( $joint_type ) ) != 'D3pipes'.ucfirst($joint_type) ) continue ;
+		if( substr( $file , -10 ) != '.class.php' ) continue ;
+		$class_name = substr( $file , 0 , -10 ) ;
+		require_once $type_base.'/'.$file ;
+		$ret[] =& new $class_name( $mydirname , 0 , '' ) ;
+	}
+	return $ret ;
+}
+
+
 function &d3pipes_common_get_joint_object_default( $mydirname , $joint_type , $option = '' )
 {
 	$class_name = 'D3pipes'.ucfirst($joint_type).ucfirst(d3pipes_common_get_default_joint_class( $mydirname , $joint_type )) ;

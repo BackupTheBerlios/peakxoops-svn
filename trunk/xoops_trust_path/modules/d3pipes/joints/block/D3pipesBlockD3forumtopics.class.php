@@ -5,6 +5,7 @@ require_once dirname(dirname(__FILE__)).'/D3pipesBlockAbstract.class.php' ;
 class D3pipesBlockD3forumtopics extends D3pipesBlockAbstract {
 
 	var $target_dirname = '' ;
+	var $trustdirname = 'd3forum' ;
 
 	function init()
 	{
@@ -38,13 +39,14 @@ class D3pipesBlockD3forumtopics extends D3pipesBlockAbstract {
 
 		$entries = array() ;
 		foreach( $data['topics'] as $topic ) {
-			$entries[] = array(
+			$entry = array(
 				'pubtime' => $topic['last_post_time'] , // timestamp
 				'link' => $data['mod_url'].'/index.php?topic_id='.$topic['id'] ,
 				'headline' => $topic['title'] ,
-				'fingerprint' => $data['mod_url'].'/index.php?topic_id='.$topic['id'] ,
 				'description' => '' ,
 			) ;
+			$entry['fingerprint'] = $entry['link'] ;
+			$entries[] = $entry ;
 		}
 
 		return $entries ;
@@ -56,16 +58,9 @@ class D3pipesBlockD3forumtopics extends D3pipesBlockAbstract {
 		$options = explode( '|' , $current_value ) ;
 
 		// options[0]  (dirname)
-		$module_handler =& xoops_gethandler( 'module' ) ;
-		$modules = $module_handler->getList( null , true ) ;
-
+		$dirnames = $this->getValidDirnames() ;
 		$ret_0 = '<select name="joint_options['.$index.'][0]">' ;
-		foreach( array_keys( $modules ) as $dirname ) {
-			$trustpath_file = XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ;
-			if( ! file_exists( $trustpath_file ) ) continue ;
-			$mytrustdirname = '' ;
-			require $trustpath_file ;
-			if( $mytrustdirname != 'd3forum' ) continue ;
+		foreach( $dirnames as $dirname ) {
 			$ret_0 .= '<option value="'.$dirname.'" '.($dirname==@$options[0]?'selected="selected"':'').'>'.$dirname.'</option>' ;
 		}
 		$ret_0 .= '</select>' ;

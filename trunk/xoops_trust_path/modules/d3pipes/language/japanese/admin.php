@@ -49,9 +49,14 @@ define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING','RSS/Atomのエンコーディング');
 define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING_NOTE','※判らなければ空欄');
 define('_MD_A_D3PIPES_TH_WIZ_CLIPPINGYN','取得したエントリを保存する');
 define('_MD_A_D3PIPES_TH_WIZ_ALLOWHTMLYN','可能な限り配信されたHTMLのまま表示する');
+define('_MD_A_D3PIPES_TH_WIZ_MODNAME','モジュール名');
+define('_MD_A_D3PIPES_TH_WIZ_DIRNAME','ディレクトリ');
+define('_MD_A_D3PIPES_TH_WIZ_JOINTS','利用可能なジョイント');
+define('_MD_A_D3PIPES_TH_WIZ_CREATEUNIONPIPE','これらを統合表示するパイプも作る');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_CONFIRM','内容確認');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_REGISTER','登録');
 define('_MD_A_D3PIPES_TH_WIZ_WARN_RSSURL','RSS/AtomのURLからは有効なXMLが取得できないようです。');
+define('_MD_A_D3PIPES_TITLE_WIZ_INNERUNION','サイト内新着一覧');
 
 define('_MD_A_D3PIPES_LABEL_DELETEFSCACHE','TRUST_PATH/cache下の外部取得・キャッシュ・切り抜き各ジョイントのキャッシュをすべて削除する');
 define('_MD_A_D3PIPES_LABEL_CLEARLASTFETCH','全パイプの最終取得時間をクリアする');

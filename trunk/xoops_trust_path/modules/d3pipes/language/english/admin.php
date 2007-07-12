@@ -49,9 +49,14 @@ define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING','Encoding of RSS/Atom');
 define('_MD_A_D3PIPES_TH_WIZ_RSSENCODING_NOTE','leave blank if you don\'t know');
 define('_MD_A_D3PIPES_TH_WIZ_CLIPPINGYN','Clip fetched entries');
 define('_MD_A_D3PIPES_TH_WIZ_ALLOWHTMLYN','Allow HTML?');
+define('_MD_A_D3PIPES_TH_WIZ_MODNAME','Modules');
+define('_MD_A_D3PIPES_TH_WIZ_DIRNAME','Dirnames');
+define('_MD_A_D3PIPES_TH_WIZ_JOINTS','Valid joints');
+define('_MD_A_D3PIPES_TH_WIZ_CREATEUNIONPIPE','Create a union pipe integrating these pipes');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_CONFIRM','confirm');
 define('_MD_A_D3PIPES_TH_WIZ_BTN_REGISTER','register');
 define('_MD_A_D3PIPES_TH_WIZ_WARN_RSSURL','d3pipes cannot get a vaild XML from the URL specified');
+define('_MD_A_D3PIPES_TITLE_WIZ_INNERUNION','New entries of this site');
 
 define('_MD_A_D3PIPES_LABEL_DELETEFSCACHE','Remove all of fetch/cache/clip cache under TRUST_PATH/cache');
 define('_MD_A_D3PIPES_LABEL_CLEARLASTFETCH','Clear the last modified times of all pipes');

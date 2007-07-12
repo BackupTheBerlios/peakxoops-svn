@@ -25,8 +25,8 @@ $pipes_entries = method_exists( $union_obj , 'getPipesEntries' ) ? $union_obj->g
 $errors = $union_obj->getErrors() ;
 
 // assign
-require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$xoopsTpl =& new XoopsTpl() ;
+require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+$xoopsTpl =& new D3Tpl() ;
 $xoopsTpl->assign(
 	array(
 		'mydirname' => $mydirname ,

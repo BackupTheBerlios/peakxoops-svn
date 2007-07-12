@@ -85,14 +85,16 @@ function d3pipes_oninstall_base( $module , $mydirname )
 				} else {
 					$tplid = $tplfile->getVar( 'tpl_id' ) ;
 					$ret[] = 'Template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b> added to the database. (ID: <b>'.$tplid.'</b>)<br />';
+					require_once XOOPS_TRUST_PATH.'/libs/altsys/include/altsys_functions.php' ;
+					altsys_clear_templates_c() ;
 					// generate compiled file
-					include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php' ;
+					/*include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php' ;
 					include_once XOOPS_ROOT_PATH.'/class/template.php' ;
 					if( ! xoops_template_touch( $tplid ) ) {
 						$ret[] = '<span style="color:#ff0000;">ERROR: Failed compiling template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b>.</span><br />';
 					} else {
 						$ret[] = 'Template <b>'.htmlspecialchars($mydirname.'_'.$file).'</b> compiled.</span><br />';
-					}
+					}*/
 				}
 			}
 		}

@@ -34,8 +34,8 @@ function b_d3pipes_async_show( $options )
 	) ;
 
 	if( empty( $options['disable_renderer'] ) ) {
-		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-		$tpl =& new XoopsTpl() ;
+		require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+		$tpl =& new D3Tpl() ;
 		$tpl->assign( 'block' , $block ) ;
 		$ret['content'] = $tpl->fetch( $this_template ) ;
 		return $ret ;

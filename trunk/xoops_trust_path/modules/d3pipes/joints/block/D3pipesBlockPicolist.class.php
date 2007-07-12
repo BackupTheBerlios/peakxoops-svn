@@ -5,6 +5,7 @@ require_once dirname(dirname(__FILE__)).'/D3pipesBlockAbstract.class.php' ;
 class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 
 	var $target_dirname = '' ;
+	var $trustdirname = 'pico' ;
 
 	function init()
 	{
@@ -36,15 +37,16 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 	{
 		$entries = array() ;
 		foreach( $data['contents'] as $content ) {
-			$entries[] = array(
+			$entry = array(
 				'pubtime' => $content['modified_time'] , // timestamp
 				'link' => $data['mod_url'].'/'.$content['link'] ,
 				'headline' => $content['subject_raw'] ,
 				'category' => $this->unhtmlspecialchars( $content['cat_title'] ) ,
-				'fingerprint' => $data['mod_url'].'/'.$content['link'] ,
 				'description' => $this->unhtmlspecialchars( $content['body'] ) ,
 				'content_encoded' => $this->unhtmlspecialchars( $content['body'] ) ,
 			) ;
+			$entry['fingerprint'] = $entry['link'] ;
+			$entries[] = $entry ;
 		}
 
 		return $entries ;
@@ -56,16 +58,9 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 		$options = explode( '|' , $current_value ) ;
 
 		// options[0]  (dirname)
-		$module_handler =& xoops_gethandler( 'module' ) ;
-		$modules = $module_handler->getList( null , true ) ;
-
+		$dirnames = $this->getValidDirnames() ;
 		$ret_0 = '<select name="joint_options['.$index.'][0]">' ;
-		foreach( array_keys( $modules ) as $dirname ) {
-			$trustpath_file = XOOPS_ROOT_PATH.'/modules/'.$dirname.'/mytrustdirname.php' ;
-			if( ! file_exists( $trustpath_file ) ) continue ;
-			$mytrustdirname = '' ;
-			require $trustpath_file ;
-			if( $mytrustdirname != 'pico' ) continue ;
+		foreach( $dirnames as $dirname ) {
 			$ret_0 .= '<option value="'.$dirname.'" '.($dirname==@$options[0]?'selected="selected"':'').'>'.$dirname.'</option>' ;
 		}
 		$ret_0 .= '</select>' ;

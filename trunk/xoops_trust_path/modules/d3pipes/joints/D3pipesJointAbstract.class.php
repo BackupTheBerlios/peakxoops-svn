@@ -45,6 +45,14 @@ class D3pipesJointAbstract {
 		return '<input type="text" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="'.htmlspecialchars($current_value,ENT_QUOTES).'" size="40" />' ;
 	}
 
+	function getMyname4disp()
+	{
+		$typeclass = substr( get_class( $this ) , strlen( 'D3pipes' ) ) ;
+
+		return defined( '_MD_D3PIPES_CLASS_'.strtoupper( $typeclass ) ) ? constant( '_MD_D3PIPES_CLASS_'.strtoupper( $typeclass ) ) : $typeclass ;
+	}
+
+
 }
 
 

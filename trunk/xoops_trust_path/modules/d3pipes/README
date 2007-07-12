@@ -21,7 +21,7 @@ A synthetic module for site syndications.
 
 [b]USAGES[/b]
 
-Install altsys also. (essential)
+Install altsys>=0.55 also. [b](essential)[/b]
 
 Copy "common/lib" (JavaScript Libraries) under XOOPS_ROOT_PATH
 http://xoops.peak.ne.jp/md/mydownloads/singlefile.php?lid=104
@@ -39,6 +39,21 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 
 [b]CHANGELOG[/b]
+
+0.50 2007-07-13 Install altsys >= 0.55
+- modified compatibility with XOOPS 2.0.16
+- added inner joints wizard
+- added joints for inner modules
+-- myAlbum-P
+-- myDownloads
+-- myLinks
+-- piCal
+-- plzXoo
+-- News
+-- Bulletin2
+-- System(comments)
+-- xhnewbb
+-- newbb1
 
 0.34 2007-07-06
 - fixed common/lib rendering character converted wrongly
@@ -152,7 +167,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 ●使い方
 
 （事前準備）
-altsysをインストールしておいてください。
+altsys-0.55以上をインストールしておいてください。altsysのバージョンが低くても正常に動作しません。必ず、0.55以上をインストールしてください。
 
 common/libが入っていなかったらXOOPS_ROOT_PATH下にコピーしておいてください。
 http://xoops.peak.ne.jp/md/mydownloads/singlefile.php?lid=104
@@ -170,6 +185,21 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.50 2007-07-13 ※要altsys-0.55以上
+- XOOPS 2.0.16との互換性改善
+- サイト内新着情報パイプ作成ウイザードの実装
+- 内部情報取得用ジョイント追加
+-- myAlbum-P
+-- myDownloads
+-- myLinks
+-- piCal
+-- plzXoo
+-- News
+-- Bulletin2
+-- System(comments)
+-- xhnewbb
+-- newbb1
 
 0.34 2007-07-06
 - common/lib によるオプションレンダリングが文字化けしていたのを修正

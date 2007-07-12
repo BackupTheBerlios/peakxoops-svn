@@ -96,8 +96,8 @@ function b_altsys_admin_menu_show( $options )
 		$block['modules'][] = $module4assign ;
 	}
 
-	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-	$tpl =& new XoopsTpl() ;
+	require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+	$tpl =& new D3Tpl() ;
 	$tpl->assign( 'block' , $block ) ;
 	$ret['content'] = $tpl->fetch( $this_template ) ;
 	return $ret ;

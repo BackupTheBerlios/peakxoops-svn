@@ -1,6 +1,7 @@
 <?php
 
 include_once XOOPS_ROOT_PATH.'/class/template.php';
+include_once dirname(__FILE__).'/altsys_functions.php' ;
 
 function tplsadmin_import_data( $tplset , $tpl_file , $tpl_source , $lastmodified = 0 )
 {
@@ -30,7 +31,7 @@ function tplsadmin_import_data( $tplset , $tpl_file , $tpl_source , $lastmodifie
 	while( list( $tpl_id ) = $db->fetchRow( $drs ) ) {
 		$db->queryF( "UPDATE ".$db->prefix("tplfile")." SET tpl_lastmodified='".addslashes($lastmodified)."',tpl_lastimported=UNIX_TIMESTAMP() WHERE tpl_id='$tpl_id'" ) ;
 		$db->queryF( "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($tpl_source)."' WHERE tpl_id='$tpl_id'" ) ;
-		xoops_template_touch( $tpl_id ) ;
+		altsys_template_touch( $tpl_id ) ;
 	}
 
 	return true ;
@@ -73,13 +74,13 @@ function tplsadmin_copy_templates_db2db( $tplset_from , $tplset_to , $whr_append
 			$db->query( substr( $sql , 0 , -1 ) . ')' ) ;
 			$tpl_id = $db->getInsertId() ;
 			$db->query( "INSERT INTO ".$db->prefix("tplsource")." SET tpl_id='$tpl_id', tpl_source='".addslashes($tpl_source)."'" ) ;
-			xoops_template_touch( $tpl_id ) ;
+			altsys_template_touch( $tpl_id ) ;
 		} else {
 			while( list( $tpl_id ) = $db->fetchRow( $drs ) ) {
 				// UPDATE mode
 				$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_refid='".addslashes($row['tpl_refid'])."',tpl_desc='".addslashes($row['tpl_desc'])."',tpl_lastmodified='".addslashes($row['tpl_lastmodified'])."',tpl_lastimported='".addslashes($row['tpl_lastimported'])."',tpl_type='".addslashes($row['tpl_type'])."' WHERE tpl_id='$tpl_id'" ) ;
 				$db->query( "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($tpl_source)."' WHERE tpl_id='$tpl_id'" ) ;
-				xoops_template_touch( $tpl_id ) ;
+				altsys_template_touch( $tpl_id ) ;
 			}
 		}
 	}
@@ -108,13 +109,13 @@ function tplsadmin_copy_templates_f2db( $tplset_to , $whr_append = '1' )
 			$db->query( $sql ) ;
 			$tpl_id = $db->getInsertId() ;
 			$db->query( "INSERT INTO ".$db->prefix("tplsource")." SET tpl_id='$tpl_id', tpl_source='".addslashes($tpl_source)."'" ) ;
-			xoops_template_touch( $tpl_id ) ;
+			altsys_template_touch( $tpl_id ) ;
 		} else {
 			while( list( $tpl_id ) = $db->fetchRow( $drs ) ) {
 				// UPDATE mode
 				$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_lastmodified='".addslashes($lastmodified)."' WHERE tpl_id='$tpl_id'" ) ;
 				$db->query( "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($tpl_source)."' WHERE tpl_id='$tpl_id'" ) ;
-				xoops_template_touch( $tpl_id ) ;
+				altsys_template_touch( $tpl_id ) ;
 			}
 		}
 	}

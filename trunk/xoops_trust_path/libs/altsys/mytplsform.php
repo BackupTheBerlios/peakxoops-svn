@@ -72,7 +72,7 @@ if( ! empty( $_POST['do_modifycont'] ) || ! empty( $_POST['do_modify'] ) ) {
 		$sql = "UPDATE ".$db->prefix("tplsource")." SET tpl_source='".addslashes($myts->stripSlashesGPC($_POST['tpl_source']))."' WHERE tpl_id=$tpl_id" ;
 		if( ! $db->query( $sql ) ) die( 'SQL Error' ) ;
 		$db->query( "UPDATE ".$db->prefix("tplfile")." SET tpl_lastmodified=UNIX_TIMESTAMP() WHERE tpl_id=$tpl_id" ) ;
-		xoops_template_touch( $tpl_id ) ;
+		altsys_template_touch( $tpl_id ) ;
 	}
 
 	// continue or end ?

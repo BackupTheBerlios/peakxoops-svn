@@ -18,6 +18,9 @@ if( is_object( $xoopsUser ) ) {
 				restore_error_handler() ;
 			}
 
+			// to prepend Notice with 2.0.14/15/16 with PHP4
+			if( ! defined( 'E_STRICT' ) ) define( 'E_STRICT' , 2048 ) ;
+
 			register_shutdown_function( 'altsys_admin_in_theme_in_last' ) ;
 			ob_start( 'altsys_admin_in_theme' ) ;
 		}

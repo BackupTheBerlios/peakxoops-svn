@@ -26,8 +26,8 @@ while( list( $name , $dirname , $count ) = $db->fetchRow( $mrs ) ) {
 }
 
 // display
-require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$tpl =& new XoopsTpl() ;
+require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+$tpl =& new D3Tpl() ;
 $tpl->assign( array(
 	'adminmenu' => $adminmenu ,
 	'highlight_color' => '#99ff99' ,

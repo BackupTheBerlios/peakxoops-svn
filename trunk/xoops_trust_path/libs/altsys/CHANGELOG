@@ -1,5 +1,8 @@
 [xlang:en]
 
+v0.55 (2007-07-12)
+- modified the compatibility against XOOPS 2.0.14/15/16
+
 v0.54 (2007-07-06)
 - fixed admin_in_theme conflicts PHP debug of conventinal XOOPS2
 - fixed admin_in_theme conflicts redirect hack
@@ -99,6 +102,9 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.55 (2007-07-12)
+- 本家版コア2.0.14/15/16との互換性改善
 
 v0.54 (2007-07-06)
 - 管理画面テーマを使うとエラー表示がなくなってしまったのを修正

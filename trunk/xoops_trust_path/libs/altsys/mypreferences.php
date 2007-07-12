@@ -210,7 +210,9 @@ if ($op == 'save') {
 						// need to do this to pass to xoops_template_touch function
 						$GLOBALS['xoopsConfig']['template_set'] = $newtplset;
 
-						for ($i = 0; $i < $dcount; $i++) {
+						altsys_clear_templates_c() ;
+
+/*						for ($i = 0; $i < $dcount; $i++) {
 							$found =& $tplfile_handler->find($newtplset, 'block', $dtemplates[$i]->getVar('tpl_refid'), null);
 							if (count($found) > 0) {
 								// template for the new theme found, compile it
@@ -219,7 +221,7 @@ if ($op == 'save') {
 								// not found, so compile 'default' template file
 								xoops_template_touch($dtemplates[$i]->getVar('tpl_id'));
 							}
-						}
+						}*/
 
 						// generate image cache files from image binary data, save them under cache/
 						$image_handler =& xoops_gethandler('imagesetimg');

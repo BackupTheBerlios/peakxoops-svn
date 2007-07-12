@@ -96,4 +96,27 @@ function altsys_get_link2modpreferences( $mid , $coretype )
 }
 
 
+function altsys_template_touch( $tpl_id )
+{
+	if( altsys_get_core_type() == ALTSYS_CORE_TYPE_X20S ) {
+		// need to delete all files under templates_c/
+		altsys_clear_templates_c() ;
+	} else {
+		// just touch the template
+		xoops_template_touch( $tpl_id ) ;
+	}
+}
+
+
+function altsys_clear_templates_c()
+{
+	$dh = opendir( XOOPS_COMPILE_PATH ) ;
+	while( $file = readdir( $dh ) ) {
+		if( substr( $file , 0 , 1 ) == '.' ) continue ;
+		@unlink( XOOPS_COMPILE_PATH.'/'.$file ) ;
+	}
+	closedir( $dh ) ;
+}
+
+
 ?>

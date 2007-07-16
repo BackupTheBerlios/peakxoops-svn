@@ -14,6 +14,8 @@ v.091 (2007-03-15)
 - fixed wrong entity in rss2_coming.php and rss2_today.php 0.91c
 - added plugins
 -- xpwiki (thx nao-pon) 0.91d
+- updated locales
+-- canada.php (thx lusher) 0.91e
 
 v.090 (2007-03-12)
 - marked as stable
@@ -394,6 +396,8 @@ v.091 (2007-03-15)
 - RSS出力コントローラで、無効なエンティティが出るのを修正 0.91c
 - プラグイン追加
 -- xpwiki (thx nao-pon) 0.91d
+- ロケール修正
+-- canada.php (thx lusher) 0.91e
 
 v.090 (2007-03-12)
 - 安定版への格上げ

@@ -29,6 +29,8 @@ define($constpref.'_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ 
 define($constpref.'_LOG_LEVEL','Logging level');
 define($constpref.'_LOG_LEVELDSC','');
 
+define($constpref.'_BANIP_TIME0','Banned IP suspension time (sec)');
+
 define($constpref.'_LOGLEVEL0','none');
 define($constpref.'_LOGLEVEL15','Quiet');
 define($constpref.'_LOGLEVEL63','quiet');
@@ -78,12 +80,14 @@ define($constpref.'_DOS_CRSAFEDSC','A perl regex pattern for User-Agent.<br />If
 define($constpref.'_OPT_NONE','None (only logging)');
 define($constpref.'_OPT_SAN','Sanitizing');
 define($constpref.'_OPT_EXIT','Blank Screen');
-define($constpref.'_OPT_BIP','Ban the IP');
+define($constpref.'_OPT_BIP','Ban the IP (No limit)');
+define($constpref.'_OPT_BIPTIME0','Ban the IP (moratorium)');
 
 define($constpref.'_DOSOPT_NONE','None (only logging)');
 define($constpref.'_DOSOPT_SLEEP','Sleep');
 define($constpref.'_DOSOPT_EXIT','Blank Screen');
-define($constpref.'_DOSOPT_BIP','Ban the IP');
+define($constpref.'_DOSOPT_BIP','Ban the IP (No limit)');
+define($constpref.'_DOSOPT_BIPTIME0','Ban the IP (moratorium)');
 define($constpref.'_DOSOPT_HTA','DENY by .htaccess(Experimental)');
 
 define($constpref.'_BIP_EXCEPT','Groups never registered as Bad IP');

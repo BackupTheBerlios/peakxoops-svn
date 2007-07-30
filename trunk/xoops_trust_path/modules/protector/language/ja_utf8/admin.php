@@ -24,6 +24,7 @@ define( "_AM_MSG_IPFILESUPDATED" , "IPリストファイルを書き換えまし
 define( "_AM_MSG_BADIPSCANTOPEN" , "拒否IPリストファイルが開けません" ) ;
 define( "_AM_MSG_GROUP1IPSCANTOPEN" , "管理者用IPリストファイルが開けません" ) ;
 define( "_AM_MSG_REMOVED" , "削除しました" ) ;
+define( "_AM_FMT_CONFIGSNOTWRITABLE" , "configsディレクトリが書込許可されていません: %s" ) ;
 
 
 // prefix_manager.php

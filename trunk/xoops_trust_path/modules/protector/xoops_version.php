@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 3.04 ;
+$modversion['version'] = 3.10 ;
 $modversion['credits'] = "PEAK Corp." ;
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -55,6 +55,15 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'int' ,
 	'default'		=>  255 ,
 	'options'		=> array( $constpref.'_LOGLEVEL0' => 0 , $constpref.'_LOGLEVEL15' => 15 , $constpref.'_LOGLEVEL63' => 63 , $constpref.'_LOGLEVEL255' => 255 )
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'banip_time0' ,
+	'title'			=> $constpref.'_BANIP_TIME0' ,
+	'description'	=> '' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 86400 * 3 ,
+	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'reliable_ips' ,
@@ -117,7 +126,7 @@ $modversion['config'][] = array(
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 3 ,
-	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIP' => 7 )
+	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIPTIME0' => 7 , $constpref.'_OPT_BIP' => 15 )
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'isocom_action' ,
@@ -126,7 +135,7 @@ $modversion['config'][] = array(
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 0 ,
-	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_SAN' => 1 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIP' => 7 )
+	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_SAN' => 1 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIPTIME0' => 7 , $constpref.'_OPT_BIP' => 15 )
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'union_action' ,
@@ -135,7 +144,7 @@ $modversion['config'][] = array(
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 1 ,
-	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_SAN' => 1 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIP' => 7 )
+	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_SAN' => 1 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIPTIME0' => 7 , $constpref.'_OPT_BIP' => 15 )
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'id_forceintval' ,
@@ -198,7 +207,7 @@ $modversion['config'][] = array(
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> "exit" ,
-	'options'		=> array( $constpref.'_DOSOPT_NONE' => 'none' , $constpref.'_DOSOPT_SLEEP' => 'sleep' , $constpref.'_DOSOPT_EXIT' => 'exit' , $constpref.'_DOSOPT_BIP' => 'bip' , $constpref.'_DOSOPT_HTA' => 'hta' )
+	'options'		=> array( $constpref.'_DOSOPT_NONE' => 'none' , $constpref.'_DOSOPT_SLEEP' => 'sleep' , $constpref.'_DOSOPT_EXIT' => 'exit' , $constpref.'_DOSOPT_BIPTIME0' => 'biptime0' , $constpref.'_DOSOPT_BIP' => 'bip' , $constpref.'_DOSOPT_HTA' => 'hta' )
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'dos_crcount' ,
@@ -216,7 +225,7 @@ $modversion['config'][] = array(
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> "exit" ,
-	'options'		=> array( $constpref.'_DOSOPT_NONE' => 'none' , $constpref.'_DOSOPT_SLEEP' => 'sleep' , $constpref.'_DOSOPT_EXIT' => 'exit' , $constpref.'_DOSOPT_BIP' => 'bip' , $constpref.'_DOSOPT_HTA' => 'hta' )
+	'options'		=> array( $constpref.'_DOSOPT_NONE' => 'none' , $constpref.'_DOSOPT_SLEEP' => 'sleep' , $constpref.'_DOSOPT_EXIT' => 'exit' , $constpref.'_DOSOPT_BIPTIME0' => 'biptime0' , $constpref.'_DOSOPT_BIP' => 'bip' , $constpref.'_DOSOPT_HTA' => 'hta' )
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'dos_crsafe' ,

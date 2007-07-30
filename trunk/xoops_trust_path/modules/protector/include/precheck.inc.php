@@ -27,30 +27,23 @@ function protector_prepare()
 
 	// bad_ips
 	$bad_ips = Protector::get_bad_ips() ;
-	foreach( $bad_ips as $bad_ip ) {
-		if( $bad_ip && substr( @$_SERVER['REMOTE_ADDR'] , 0 , strlen( $bad_ip ) ) == $bad_ip ) {
-			die( 'You are registered as BAD_IP by Protector.' ) ;
-		}
+	$bad_ip_match = Protector::ip_match( $bad_ips ) ;
+	if( $bad_ip_match ) {
+		die( 'You are registered as BAD_IP by Protector.' ) ;
 	}
 
-	// Preferences (for performance, I dare to use an irregular method)
-	$conn = @mysql_connect( XOOPS_DB_HOST , XOOPS_DB_USER , XOOPS_DB_PASS ) ;
-	if( ! $conn ) die( 'db connection failed.' ) ;
-	if( ! mysql_select_db( XOOPS_DB_NAME , $conn ) ) die( 'db selection failed.' ) ;
-
 	// Protector object
-	$protector =& Protector::getInstance( $conn ) ;
+	$protector =& Protector::getInstance() ;
 	$conf = $protector->getConf() ;
 
 	// global enabled or disabled
 	if( ! empty( $conf['global_disabled'] ) ) return true ;
 
 	// reliable ips
-	$conf['reliable_ips'] = 'a:1:{i:0;s:0:\"\";}';
-	$reliable_ips = @unserialize( $conf['reliable_ips'] ) ;
+	$reliable_ips = @unserialize( @$conf['reliable_ips'] ) ;
 	if( ! is_array( $reliable_ips ) ) {
 		// for the environment of (buggy core version && magic_quotes_gpc)
-		$reliable_ips = @unserialize( stripslashes( $conf['reliable_ips'] ) ) ;
+		$reliable_ips = @unserialize( stripslashes( @$conf['reliable_ips'] ) ) ;
 		if( ! is_array( $reliable_ips ) ) $reliable_ips = array() ;
 	}
 	$is_reliable = false ;
@@ -77,12 +70,17 @@ function protector_prepare()
 
 	// Variables contamination
 	if( ! $protector->check_contami_systemglobals() ) {
-		if( ( $conf['contami_action'] & 4 ) ) {
-			$protector->_should_be_banned = true ;
+		if( @$conf['contami_action'] & 4 ) {
+			if( @$conf['contami_action'] & 8 ) {
+				$protector->_should_be_banned = true ;
+			} else {
+				$protector->_should_be_banned_time0 = true ;
+			}
 			$_GET = $_POST = array() ;
 		}
+
 		$protector->output_log( $protector->last_error_type ) ;
-		if( $conf['contami_action'] & 2 ) $protector->purge() ;
+		if( @$conf['contami_action'] & 2 ) $protector->purge() ;
 	}
 
 	// prepare for DoS

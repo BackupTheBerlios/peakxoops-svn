@@ -123,6 +123,16 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.10 beta (2007/07/30)
+- modified precheck getting config via local cache
+- modified precheck does not connect MySQL as possible
+- fixed "reliable IP" does not work well
+- modified mainfile patch can be inserted before protector installation
+- added a logic to check some folder's permission on installing protector
+- modified IP denying pattern. 'full', 'foward match', and 'preg match'
+- added denied IP moratorium
+- added a warning if the directory for configs is not writable
+
 3.04 (2007/06/13)
 - added a check against the phpmailer command-injection vulnerability.
 - modified postcommon_post_need_multibyte (3.04a)
@@ -302,6 +312,16 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.10 beta (2007/07/30)
+- precheck¤Îconfig¤Ï¡¢¥í¡¼¥«¥ë¥­¥ã¥Ã¥·¥å¤«¤é¼èÆÀ¤¹¤ë¤è¤¦¤Ë¤·¤¿
+- MySQL¤Ø¤ÎÆó½Å¥³¥Í¥¯¥·¥ç¥ó¤ò¶ËÎÏÇÓ½ü¤·¤¿
+- ¿®ÍÑ¤Ç¤­¤ëIP¤¬°ìÉô¤Çµ¡Ç½¤·¤Æ¤¤¤Ê¤¤¥Ð¥°¤Î½¤Àµ
+- ¥¤¥ó¥¹¥È¡¼¥ë¤Èmainfile¥Ñ¥Ã¥Á¤Î½çÈÖ¤¬µÕ¤Ç¤â¥¨¥é¡¼¤¬½Ð¤Ê¤¤¤è¤¦¤Ë¤·¤¿
+- ¥Û¥À½Î¥¤¥ó¥¹¥È¡¼¥é¤À¤È¥Õ¥©¥ë¥À¤Î¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤ò»öÁ°¤Ë¥Á¥§¥Ã¥¯¤¹¤ë¥í¥¸¥Ã¥¯¤ÎÄÉ²Ã
+- µñÈÝIP¤ò¡Ö°ìÃ×¡×¡ÖÁ°Êý°ìÃ×¡×¡ÖÀµµ¬É½¸½¡×¤Î¤¤¤º¤ì¤Ç¤âÉ½µ­¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
+- µñÈÝIP¤Ë»þ´ÖÀ©¸Â¤òÀß¤±¤¿
+- configs¥Ç¥£¥ì¥¯¥È¥ê¤¬½ñ¹þ¶Ø»ß¤Ë¤Ê¤Ã¤Æ¤¤¤ë¾ì¹ç¤ÎWarning¤òÄÉ²Ã
 
 3.04 (2007/06/13)
 - phpmailer¤Î¥³¥Þ¥ó¥É¼Â¹ÔÀÈ¼åÀ­¤ËÂÐ¤¹¤ë¥Á¥§¥Ã¥¯¤òÄÉ²Ã¤·¤¿

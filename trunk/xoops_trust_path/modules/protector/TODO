@@ -1,2 +1,4 @@
 - full-time XSS protection (super filter against GPC)
-- banIP time limitation
+
+- RBLに登録されたIPからの書込（ホワイトリスト？）
+- 変数汚染の拒否IP登録が正常にされていない気がする（要確認）

@@ -18,11 +18,19 @@ function protector_postcommon()
 		}
 	}
 
-	// Protector class
+	// configs writable check
+	if( @$_SERVER['REQUEST_URI'] == '/admin.php' && ! is_writable( dirname(dirname(__FILE__)).'/configs' ) ) {
+		trigger_error( 'You should turn the directory ' . dirname(dirname(__FILE__)).'/configs writable' , E_USER_WARNING ) ;
+	}
+
+	// Protector object
 	require_once dirname(dirname(__FILE__)).'/class/protector.php' ;
 	$db =& Database::getInstance() ;
-	$protector =& Protector::getInstance( $db->conn ) ;
+	$protector =& Protector::getInstance() ;
+	$protector->setConn( $db->conn ) ;
+	$protector->updateConfFromDb() ;
 	$conf = $protector->getConf() ;
+	if( empty( $conf ) ) return true ; // not installed yet
 
 	// phpmailer vulnerability
 	// http://larholm.com/2007/06/11/phpmailer-0day-remote-execution/
@@ -41,16 +49,14 @@ function protector_postcommon()
 	if( is_object( $xoopsUser ) && in_array( 1 , $xoopsUser->getGroups() ) ) {
 		$group1_ips = Protector::get_group1_ips() ;
 		if( implode( '' , $group1_ips ) ) {
-			foreach( $group1_ips as $group1_ip ) {
-				if( $group1_ip && substr( @$_SERVER['REMOTE_ADDR'] , 0 , strlen( $group1_ip ) ) == $group1_ip ) $group1_allow = 1 ;
-			}
+			$group1_allow = Protector::ip_match( $group1_ips ) ;
 			if( empty( $group1_allow ) ) die( 'This account is disabled for your IP by Protector' ) ;
 		}
 	}
 
 	// reliable ips
-	$reliable_ips = unserialize( $conf['reliable_ips'] ) ;
-	foreach( $reliable_ips as $reliable_ip ) {
+	$reliable_ips = @unserialize( @$conf['reliable_ips'] ) ;
+	if( is_array( $reliable_ips ) ) foreach( $reliable_ips as $reliable_ip ) {
 		if( ! empty( $reliable_ip ) && preg_match( '/'.$reliable_ip.'/' , $_SERVER['REMOTE_ADDR'] ) ) {
 			return true ;
 		}
@@ -59,7 +65,7 @@ function protector_postcommon()
 	// user information (uid and can be banned)
 	if( is_object( @$xoopsUser ) ) {
 		$uid = $xoopsUser->getVar('uid') ;
-		$can_ban = count( array_intersect( $xoopsUser->getGroups() , unserialize( $conf['bip_except'] ) ) ) ? false : true ;
+		$can_ban = count( @array_intersect( $xoopsUser->getGroups() , @unserialize( @$conf['bip_except'] ) ) ) ? false : true ;
 	} else {
 		// login failed check
 		if( ( ! empty( $_POST['uname'] ) && ! empty( $_POST['pass'] ) ) || ( ! empty( $_COOKIE['autologin_uname'] ) && ! empty( $_COOKIE['autologin_pass'] ) ) ) {
@@ -72,11 +78,13 @@ function protector_postcommon()
 	// If precheck has already judged that he should be banned
 	if( $can_ban && $protector->_should_be_banned ) {
 		$protector->register_bad_ips() ;
+	} else if( $can_ban && $protector->_should_be_banned_time0 ) {
+		$protector->register_bad_ips( time() + $protector->_conf['banip_time0'] ) ;
 	}
 
 	// DOS/CRAWLER skipping based on 'dirname' or getcwd()
 	$dos_skipping = false ;
-	$skip_dirnames = explode( '|' , $conf['dos_skipmodules'] ) ;
+	$skip_dirnames = explode( '|' , @$conf['dos_skipmodules'] ) ;
 	if( ! is_array( $skip_dirnames ) ) $skip_dirnames = array() ;
 	if( is_object( @$xoopsModule ) ) {
 		if( in_array( $xoopsModule->getVar('dirname') , $skip_dirnames ) ) {
@@ -114,15 +122,17 @@ function protector_postcommon()
 	$_SESSION['protector_last_ip'] = $_SERVER['REMOTE_ADDR'] ;
 
 	// SQL Injection "Isolated /*"
-	if( ! $protector->check_sql_isolatedcommentin( $conf['isocom_action'] & 1 ) ) {
-		if( ( $conf['isocom_action'] & 4 ) && $can_ban ) $protector->register_bad_ips() ;
+	if( ! $protector->check_sql_isolatedcommentin( @$conf['isocom_action'] & 1 ) ) {
+		if( ( $conf['isocom_action'] & 8 ) && $can_ban ) $protector->register_bad_ips() ;
+		else if( ( $conf['isocom_action'] & 4 ) && $can_ban ) $protector->register_bad_ips( time() + $protector->_conf['banip_time0'] ) ;
 		$protector->output_log( 'ISOCOM' , $uid , true , 32 ) ;
 		if( $conf['isocom_action'] & 2 ) $protector->purge() ;
 	}
 
 	// SQL Injection "UNION"
-	if( ! $protector->check_sql_union( $conf['union_action'] & 1 ) ) {
-		if( ( $conf['union_action'] & 4 ) && $can_ban ) $protector->register_bad_ips() ;
+	if( ! $protector->check_sql_union( @$conf['union_action'] & 1 ) ) {
+		if( ( $conf['union_action'] & 8 ) && $can_ban ) $protector->register_bad_ips() ;
+		else if( ( $conf['union_action'] & 4 ) && $can_ban ) $protector->register_bad_ips( time() + $protector->_conf['banip_time0'] ) ;
 		$protector->output_log( 'UNION' , $uid , true , 32 ) ;
 		if( $conf['union_action'] & 2 ) $protector->purge() ;
 	}

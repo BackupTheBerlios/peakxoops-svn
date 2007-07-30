@@ -29,6 +29,8 @@ define($constpref.'_RELIABLE_IPSDSC','DoS等の攻撃検知を行わない生IPアドレスを、|
 define($constpref.'_LOG_LEVEL','ログレベル');
 define($constpref.'_LOG_LEVELDSC','');
 
+define($constpref.'_BANIP_TIME0','期限付IP拒否の期限(秒)');
+
 define($constpref.'_LOGLEVEL0','ログ出力一切なし');
 define($constpref.'_LOGLEVEL15','危険性の高いものだけログを取る');
 define($constpref.'_LOGLEVEL63','危険性の低いものはログしない');
@@ -78,12 +80,14 @@ define($constpref.'_DOS_CRSAFEDSC','無条件でクロール許可するエージェント名を、pe
 define($constpref.'_OPT_NONE','なし (ログのみ取る)');
 define($constpref.'_OPT_SAN','無害化');
 define($constpref.'_OPT_EXIT','強制終了');
-define($constpref.'_OPT_BIP','拒否IP登録');
+define($constpref.'_OPT_BIP','拒否IP登録(無期限)');
+define($constpref.'_OPT_BIPTIME0','拒否IP登録(期限付)');
 
 define($constpref.'_DOSOPT_NONE','なし (ログのみ取る)');
 define($constpref.'_DOSOPT_SLEEP','Sleep(非推奨)');
 define($constpref.'_DOSOPT_EXIT','exit');
-define($constpref.'_DOSOPT_BIP','拒否IPリストに載せる');
+define($constpref.'_DOSOPT_BIP','拒否IPリストに載せる(無期限)');
+define($constpref.'_DOSOPT_BIPTIME0','拒否IPリストに載せる(期限付)');
 define($constpref.'_DOSOPT_HTA','.htaccessにDENY登録(試験的実装)');
 
 define($constpref.'_BIP_EXCEPT','拒否IP登録の保護グループ');

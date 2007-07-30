@@ -33,17 +33,13 @@ if( ! empty( $_POST['action'] ) ) {
 
 		$error_msg = '' ;
 
-		$bad_ips = empty( $_POST['bad_ips'] ) ? array() : explode( "\n" , trim( $_POST['bad_ips'] ) ) ;
-		foreach( array_keys( $bad_ips ) as $i ) {
-			$bad_ips[$i] = trim( $bad_ips[$i] ) ;
+		$lines = empty( $_POST['bad_ips'] ) ? array() : explode( "\n" , trim( $_POST['bad_ips'] ) ) ;
+		$bad_ips = array() ;
+		foreach( $lines as $line ) {
+			@list( $bad_ip , $jailed_time ) = explode( ':' , $line , 2 ) ;
+			$bad_ips[ trim( $bad_ip ) ] = empty( $jailed_time ) ? 0x7fffffff : intval( $jailed_time ) ;
 		}
-		$fp = @fopen( $protector->get_filepath4badips() , 'w' ) ;
-		if( $fp ) {
-			@flock( $fp , LOCK_EX ) ;
-			fwrite( $fp , serialize( array_unique( $bad_ips ) ) . "\n" ) ;
-			@flock( $fp , LOCK_UN ) ;
-			fclose( $fp ) ;
-		} else {
+		if( ! $protector->write_file_badips( $bad_ips ) ) {
 			$error_msg .= _AM_MSG_BADIPSCANTOPEN ;
 		}
 
@@ -113,10 +109,19 @@ include dirname(__FILE__).'/mymenu.php' ;
 // title
 echo "<h3 style='text-align:left;'>".$xoopsModule->name()."</h3>\n" ;
 
+// configs writable check
+if( ! is_writable( dirname(dirname(__FILE__)).'/configs' ) ) {
+	printf( "<p style='color:red;font-weight:bold;'>"._AM_FMT_CONFIGSNOTWRITABLE."</p>\n" , dirname(dirname(__FILE__)).'/configs' ) ;
+}
+
 // bad_ips
-$bad_ips = $protector->get_bad_ips() ;
-usort( $bad_ips , 'protector_ip_cmp' ) ;
-$bad_ips4disp = htmlspecialchars(implode("\n",$bad_ips),ENT_QUOTES) ;
+$bad_ips = $protector->get_bad_ips( true ) ;
+uksort( $bad_ips , 'protector_ip_cmp' ) ;
+$bad_ips4disp = '' ;
+foreach( $bad_ips as $bad_ip => $jailed_time ) {
+	$line = $jailed_time ? $bad_ip . ':' . $jailed_time : $bad_ip ;
+	$bad_ips4disp .= htmlspecialchars( $line , ENT_QUOTES ) . "\n" ;
+}
 
 // group1_ips
 $group1_ips = $protector->get_group1_ips() ;

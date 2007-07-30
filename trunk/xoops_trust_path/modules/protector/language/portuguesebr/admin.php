@@ -1,5 +1,9 @@
 <?php 
 // mymenu
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-07-30 05:37:50
+define('_AM_FMT_CONFIGSNOTWRITABLE','Turn the configs directory writable: %s');
+
 define('_MD_A_MYMENU_MYTPLSADMIN','');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','Permissões');
 define('_MD_A_MYMENU_MYPREFERENCES','Preferências');

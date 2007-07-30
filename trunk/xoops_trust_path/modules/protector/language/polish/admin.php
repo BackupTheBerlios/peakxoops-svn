@@ -2,6 +2,10 @@
 
 // index.php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-07-30 05:37:51
+define('_AM_FMT_CONFIGSNOTWRITABLE','Turn the configs directory writable: %s');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-02-24 17:45:41
 define('_MD_A_MYMENU_MYTPLSADMIN','');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','Permissions');

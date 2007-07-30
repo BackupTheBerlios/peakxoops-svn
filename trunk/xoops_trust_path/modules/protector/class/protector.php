@@ -4,8 +4,9 @@ class Protector {
 
 var $mydirname ;
 
-var $_conn ;
+var $_conn = null ;
 var $_conf = array() ;
+var $_conf_serialized = '' ;
 
 var $_bad_globals = array() ;
 
@@ -33,6 +34,7 @@ var $_safe_union = true ;
 
 var $_spamcount_uri = 0 ;
 
+var $_should_be_banned_time0 = false ;
 var $_should_be_banned = false ;
 
 var $_dos_stage = null ;
@@ -41,22 +43,14 @@ var $last_error_type = 'UNKNOWN' ;
 
 
 // Constructor
-function Protector( $conn )
+function Protector()
 {
 	$this->mydirname = 'protector' ;
 
-	$this->_conn = $conn ;
-	$constpref = '_MI_' . strtoupper( $this->mydirname ) ;
-
-	// Preferences (for performance, I dare to use an irregular method)
-	$result = @mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '".$constpref."%'" , $conn ) ;
-	if( ! $result || mysql_num_rows( $result ) < 5 ) {
-		die( 'DB connection failed, or wrong XOOPS_DB_PREFIX in mainfile.php, or broken config table, or broken Protector installation.' ) ;
-	}
-	$this->_conf = array() ;
-	while( list( $key , $val ) = mysql_fetch_row( $result ) ) {
-		$this->_conf[ $key ] = $val ;
-	}
+	// Preferences from configs/cache
+	$this->_conf_serialized = @file_get_contents( $this->get_filepath4confighcache() ) ;
+	$this->_conf = @unserialize( $this->_conf_serialized ) ;
+	if( empty( $this->_conf ) ) $this->_conf = array() ;
 
 	if( ! empty( $this->_conf['global_disabled'] ) ) return true ;
 
@@ -93,7 +87,7 @@ function _initial_recursive( $val , $key )
 		}
 	} else {
 		// check nullbyte attack
-		if( $this->_conf['san_nullbyte'] && strstr( $val , chr(0) ) ) {
+		if( @$this->_conf['san_nullbyte'] && strstr( $val , chr(0) ) ) {
 			$val = str_replace( chr(0) , ' ' , $val ) ;
 			$this->replace_doubtful( $key , $val ) ;
 			$this->message .= "Injecting Null-byte '$val' found.\n" ;
@@ -109,13 +103,46 @@ function _initial_recursive( $val , $key )
 }
 
 
-function &getInstance( $conn = null )
+function &getInstance()
 {
 	static $instance ;
 	if( ! isset( $instance ) ) {
-		$instance = new Protector( $conn ) ;
+		$instance = new Protector() ;
 	}
 	return $instance ;
+}
+
+
+function updateConfFromDb()
+{
+	$constpref = '_MI_' . strtoupper( $this->mydirname ) ;
+
+	if( empty( $this->_conn ) ) return false ;
+
+	$result = @mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '".$constpref."%'" , $this->_conn ) ;
+	if( ! $result || mysql_num_rows( $result ) < 5 ) {
+		return false ;
+	}
+	$db_conf = array() ;
+	while( list( $key , $val ) = mysql_fetch_row( $result ) ) {
+		$db_conf[ $key ] = $val ;
+	}
+	$db_conf_serialized = serialize( $db_conf ) ;
+
+	// update config cache
+	if( $db_conf_serialized != $this->_conf_serialized ) {
+		$fp = fopen( $this->get_filepath4confighcache() , 'w' ) ;
+		fwrite( $fp , $db_conf_serialized ) ;
+		fclose( $fp ) ;
+		$this->_conf = $db_conf ;
+	}
+	return true ;
+}
+
+
+function setConn( $conn )
+{
+	$this->_conn = $conn ;
 }
 
 
@@ -163,7 +190,11 @@ function output_log( $type = 'UNKNOWN' , $uid = 0 , $unique_check = false , $lev
 
 	if( ! ( $this->_conf['log_level'] & $level ) ) return true ;
 
-	if( empty( $this->_conn ) ) return false ;
+	if( empty( $this->_conn ) ) {
+		$this->_conn = @mysql_connect( XOOPS_DB_HOST , XOOPS_DB_USER , XOOPS_DB_PASS ) ;
+		if( ! $this->_conn ) die( 'db connection failed.' ) ;
+		if( ! mysql_select_db( XOOPS_DB_NAME , $this->_conn ) ) die( 'db selection failed.' ) ;
+	}
 
 	$ip = @$_SERVER['REMOTE_ADDR'] ;
 	$agent = @$_SERVER['HTTP_USER_AGENT'] ;
@@ -183,33 +214,54 @@ function output_log( $type = 'UNKNOWN' , $uid = 0 , $unique_check = false , $lev
 }
 
 
-function register_bad_ips( $ip = null )
+function write_file_badips( $bad_ips )
 {
-	if( empty( $ip ) ) $ip = @$_SERVER['REMOTE_ADDR'] ;
-	if( empty( $ip ) ) return false ;
-
-	$bad_ips = $this->get_bad_ips() ;
-	$bad_ips[] = $ip ;
+	asort( $bad_ips ) ;
 
 	$fp = @fopen( $this->get_filepath4badips() , 'w' ) ;
 	if( $fp ) {
 		@flock( $fp , LOCK_EX ) ;
-		fwrite( $fp , serialize( array_unique( $bad_ips ) ) . "\n" ) ;
+		fwrite( $fp , serialize( $bad_ips ) . "\n" ) ;
 		@flock( $fp , LOCK_UN ) ;
 		fclose( $fp ) ;
+		return true ;
+	} else {
+		return false ;
 	}
-
-	return true ;
 }
 
 
-function get_bad_ips()
+function register_bad_ips( $jailed_time = 0 , $ip = null )
+{
+	if( empty( $ip ) ) $ip = @$_SERVER['REMOTE_ADDR'] ;
+	if( empty( $ip ) ) return false ;
+
+	$bad_ips = $this->get_bad_ips( true ) ;
+	$bad_ips[ $ip ] = $jailed_time ? $jailed_time : 0x7fffffff ;
+
+	return $this->write_file_badips( $bad_ips ) ;
+}
+
+
+function get_bad_ips( $with_jailed_time = false )
 {
 	list( $bad_ips_serialized ) = @file( Protector::get_filepath4badips() ) ;
 	$bad_ips = empty( $bad_ips_serialized ) ? array() : @unserialize( $bad_ips_serialized ) ;
-	if( ! is_array( $bad_ips ) ) $bad_ips = array() ;
+	if( ! is_array( $bad_ips ) || isset( $bad_ips[0] ) ) $bad_ips = array() ;
 
-	return $bad_ips ;
+	// expire jailed_time
+	$pos = 0 ;
+	foreach( $bad_ips as $bad_ip => $jailed_time ) {
+		if( $jailed_time >= time() ) break ;
+		$pos ++ ;
+	}
+	$bad_ips = array_slice( $bad_ips , $pos ) ;
+
+	if( $with_jailed_time ) {
+		return $bad_ips ;
+	} else {
+		return array_keys( $bad_ips ) ;
+	}
 }
 
 
@@ -232,6 +284,45 @@ function get_group1_ips()
 function get_filepath4group1ips()
 {
 	return XOOPS_TRUST_PATH . '/modules/protector/configs/group1ips' . substr( md5( XOOPS_ROOT_PATH . XOOPS_DB_USER . XOOPS_DB_PREFIX ) , 0 , 6 ) ;
+}
+
+
+function get_filepath4confighcache()
+{
+	return XOOPS_TRUST_PATH . '/modules/protector/configs/configcache' . substr( md5( XOOPS_ROOT_PATH . XOOPS_DB_USER . XOOPS_DB_PREFIX ) , 0 , 6 ) ;
+}
+
+
+function ip_match( $ips )
+{
+	foreach( $ips as $ip ) {
+		if( $ip ) {
+			switch( substr( $ip , -1 ) ) {
+				case '.' :
+					// foward match
+					if( substr( @$_SERVER['REMOTE_ADDR'] , 0 , strlen( $ip ) ) == $ip ) return true ;
+					break ;
+				case '0' :
+				case '1' :
+				case '2' :
+				case '3' :
+				case '4' :
+				case '5' :
+				case '6' :
+				case '7' :
+				case '8' :
+				case '9' :
+					// full match
+					if( @$_SERVER['REMOTE_ADDR'] == $ip ) return true ;
+					break ;
+				default :
+					// perl regex
+					if( @preg_match( $ip , @$_SERVER['REMOTE_ADDR'] ) ) return true ;
+					break ;
+			}
+		}
+	}
+	return false ;
 }
 
 
@@ -625,6 +716,9 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 			case 'exit' :
 				$this->output_log( $this->last_error_type , $uid , true , 16 ) ;
 				exit ;
+			case 'biptime0' :
+				if( $can_ban ) $this->register_bad_ips( time() + $this->_conf['banip_time0'] ) ;
+				break ;
 			case 'bip' :
 				if( $can_ban ) $this->register_bad_ips() ;
 				break ;
@@ -662,6 +756,9 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 			case 'exit' :
 				$this->output_log( $this->last_error_type , $uid , true , 16 ) ;
 				exit ;
+			case 'biptime0' :
+				if( $can_ban ) $this->register_bad_ips( time() + $this->_conf['banip_time0'] ) ;
+				break ;
 			case 'bip' :
 				if( $can_ban ) $this->register_bad_ips() ;
 				break ;
@@ -677,87 +774,6 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 
 	return true ;
 }
-
-
-/* function check_dos_attack_prepare()
-{
-	$ip = $_SERVER['REMOTE_ADDR'] ;
-	$uri = $_SERVER['REQUEST_URI'] ;
-	$ip4sql = addslashes( $ip ) ;
-	$uri4sql = addslashes( $uri ) ;
-	if( empty( $ip ) || $ip == '' ) return true ;
-
-	$result = mysql_query( "DELETE FROM ".XOOPS_DB_PREFIX.'_'.$this->mydirname."_access WHERE expire < UNIX_TIMESTAMP()" , $this->_conn ) ;
-
-	// for older version before updated this module 
-	if( $result === false ) {
-		$this->_done_dos = true ;
-		return true ;
-	}
-
-	// record access log
-	mysql_query( "INSERT INTO ".XOOPS_DB_PREFIX."_".$this->mydirname."_access SET ip='$ip4sql',request_uri='$uri4sql',expire=UNIX_TIMESTAMP()+'".intval($this->_conf['dos_expire'])."'" , $this->_conn ) ;
-
-	// F5 attack check (High load & same URI)
-	$result = mysql_query( "SELECT COUNT(*) FROM ".XOOPS_DB_PREFIX."_".$this->mydirname."_access WHERE ip='$ip4sql' AND request_uri='$uri4sql'" , $this->_conn ) ;
-	$f5_count = mysql_result( $result , 0 , 0 ) ;
-	if( $f5_count > $this->_conf['dos_f5count'] ) {
-
-		// extends the expires of the IP with 5 minutes at least
-		$result = mysql_query( "UPDATE ".XOOPS_DB_PREFIX."_".$this->mydirname."_access SET expire=UNIX_TIMESTAMP()+300 WHERE ip='$ip4sql' AND expire<UNIX_TIMESTAMP()+300" , $this->_conn ) ;
-
-		// actions for F5 Attack
-		$this->_done_dos = true ;
-		$this->last_error_type = 'DoS' ;
-		switch( $this->_conf['dos_f5action'] ) {
-			case 'exit' :
-				$this->output_log( $this->last_error_type , 0 , true ) ;
-				exit ;
-			case 'bip' :
-				sleep( 5 ) ; // only the lowest protection here
-				$this->_should_be_banned = true ;
-				break ;
-			case 'sleep' :
-				sleep( 5 ) ;
-				break ;
-		}
-		return false ;
-	}
-
-	// Check its Agent
-	if( preg_match( $this->_conf['dos_crsafe'] , $_SERVER['HTTP_USER_AGENT'] ) ) {
-		// welcomed crawler
-		$this->_done_dos = true ;
-		return true ;
-	}
-
-	// Crawler check (High load & different URI)
-	$result = mysql_query( "SELECT COUNT(*) FROM ".XOOPS_DB_PREFIX."_".$this->mydirname."_access WHERE ip='$ip4sql'" , $this->_conn ) ;
-	$crawler_count = mysql_result( $result , 0 , 0 ) ;
-	if( $crawler_count > $this->_conf['dos_crcount'] ) {
-
-		// actions for bad Crawler
-		$this->_done_dos = true ;
-		$this->last_error_type = 'CRAWLER' ;
-		switch( $this->_conf['dos_craction'] ) {
-			case 'exit' :
-				$this->output_log( $this->last_error_type , 0 , true ) ;
-				exit ;
-			case 'bip' :
-				sleep( 5 ) ; // only the lowest protection here
-				$this->_should_be_banned = true ;
-				break ;
-			case 'sleep' :
-				sleep( 5 ) ;
-				break ;
-		}
-		return false ;
-
-	}
-
-	$this->_done_dos = true ;
-	return true ;
-} */
 
 
 // 
@@ -784,7 +800,7 @@ function check_brute_force()
 	$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix($this->mydirname."_access")." WHERE ip='$ip4sql' AND malicious_actions like 'BRUTE FORCE:%'" ) ;
 	list( $bf_count ) = $xoopsDB->fetchRow( $result ) ;
 	if( $bf_count > $this->_conf['bf_count'] ) {
-		$this->register_bad_ips() ;
+		$this->register_bad_ips( time() + $this->_conf['banip_time0'] ) ;
 		$this->last_error_type = 'BruteForce' ;
 		$this->message .= "Trying to login as '".addslashes($victim_uname)."' found.\n" ;
 		$this->output_log( 'BRUTE FORCE' , 0 , true , 1 ) ;
@@ -902,7 +918,7 @@ function disable_features()
 		}
 		// disable preview of system's blocksadmin
 		if( substr( @$_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'blocksadmin' || $_POST['fct'] == 'blocksadmin') && isset( $_POST['previewblock'] ) /* && strpos( $_SERVER['HTTP_REFERER'] , XOOPS_URL.'/modules/system/admin.php' ) !== 0 */ ) {
-			die( "Danger! don't use this preview. Use 'blocks admin module' instead.(by Protector)" ) ;
+			die( "Danger! don't use this preview. Use 'altsys module' instead.(by Protector)" ) ;
 		}
 		// tpl preview
 		if( substr( @$_SERVER['SCRIPT_NAME'] , -24 ) == 'modules/system/admin.php' && ( $_GET['fct'] == 'tplsets' || $_POST['fct'] == 'tplsets') ) {

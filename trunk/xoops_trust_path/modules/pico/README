@@ -102,6 +102,10 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.39 beta (2007/08/06)
+- fixed parsing dynamic contents can be occurred on listing contents
+- fixed a violation of entities in RSS
+
 1.38 beta (2007/07/04)
 - modified htmlheader can use <{$mod_url}>,<{$xoops_url}> etc.
 - modified to return to previous page after update/create a content
@@ -413,6 +417,10 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.39 beta (2007/08/06)
+- コンテンツ個別表示以外でのbody処理をやらないようにした
+- RSS出力における実体参照違反の修正
 
 1.38 beta (2007/07/04)
 - HTMLヘッダを表示する前に、Smartyっぽい変換処理を追加した

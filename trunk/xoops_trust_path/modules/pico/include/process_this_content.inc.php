@@ -28,14 +28,14 @@ if( $count <= 0 ) {
 }
 
 // assigning
-$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $category4assign ) ;
+$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $category4assign , true ) ;
 
 // get next content of the category
 list( $next_content_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT o.content_id FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (o.weight>".$content4assign['weight']." OR o.content_id>$content_id AND o.weight=".$content4assign['weight'].") AND o.cat_id=$cat_id AND ($whr4visible) AND o.show_in_navi ORDER BY o.weight,o.content_id LIMIT 1" ) ) ;
 if( empty( $next_content_id ) ) {
 	$next_content4assign = array() ;
 } else {
-	$next_content4assign = pico_common_get_content4assign( $mydirname , $next_content_id , $xoopsModuleConfig , $category4assign ) ;
+	$next_content4assign = pico_common_get_content4assign( $mydirname , $next_content_id , $xoopsModuleConfig , $category4assign , false ) ;
 }
 
 // get prev content of the category
@@ -43,7 +43,7 @@ list( $prev_content_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT o.conten
 if( empty( $prev_content_id ) ) {
 	$prev_content4assign = array() ;
 } else {
-	$prev_content4assign = pico_common_get_content4assign( $mydirname , $prev_content_id , $xoopsModuleConfig , $category4assign ) ;
+	$prev_content4assign = pico_common_get_content4assign( $mydirname , $prev_content_id , $xoopsModuleConfig , $category4assign , false ) ;
 }
 
 // make link for "tell to a friend"

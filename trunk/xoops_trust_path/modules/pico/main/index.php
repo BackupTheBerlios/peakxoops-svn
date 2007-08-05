@@ -42,7 +42,7 @@ if( empty( $content_id ) ) {
 		$xoopsOption['template_main'] = $mydirname.'_independent_rss20.html' ;
 		include XOOPS_ROOT_PATH.'/header.php';
 		require dirname(dirname(__FILE__)).'/include/rss.inc.php' ;
-		$pagetitle4assign = $xoopsModule->getVar('name') ;
+		$pagetitle4assign = htmlspecialchars($xoopsModule->getVar('name','n'),ENT_QUOTES) ;
 	} else if( empty( $cat_id ) && @$_GET['cat_id'] !== "0" && @$xoopsModuleConfig['show_menuinmoduletop'] || @$_GET['page'] == 'menu' ) {
 		// auto-made menu
 		$xoopsOption['template_main'] = $mydirname.'_main_menu.html' ;

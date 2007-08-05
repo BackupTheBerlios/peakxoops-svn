@@ -31,7 +31,7 @@ function b_pico_content_show( $options )
 	list( $content_id ) = $db->fetchRow( $result ) ;
 
 	// assigning
-	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $configs , array() ) ;
+	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $configs , array() , true ) ;
 
 	// convert links from relative to absolute (wraps mode only)
 	if( $configs['use_wraps_mode'] ) {

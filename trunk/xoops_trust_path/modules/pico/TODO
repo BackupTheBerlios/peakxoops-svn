@@ -12,6 +12,7 @@
 ・rewriteモードでは、すべてREQUEST_URIから展開するロジック
 ・掲載期限(やる?)
 ・[summary][/summary][pagebreak]実装
+・グループ/ユーザの選択肢から各カテゴリーの権限を確認する
 
 
 

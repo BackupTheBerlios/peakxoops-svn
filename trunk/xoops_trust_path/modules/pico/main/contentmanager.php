@@ -96,7 +96,7 @@ if( $db->getRowsNum( $ors ) <= 0 ) {
 	exit ;
 }
 $content_row = $db->fetchArray( $ors ) ;
-$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $cat_row ) ;
+$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $cat_row , false ) ;
 $content4assign_base = $content4assign ;
 $preview4assign = array() ;
 

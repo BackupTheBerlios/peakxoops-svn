@@ -19,7 +19,7 @@ define("_AM_EXPIRED","Expired");
 
 define("_AM_ADDMTOPIC","Create a category");
 define("_AM_TOPICNAME","Category name");
-define("_AM_MAX40CHAR","(max. 40 characters)");
+define("_AM_MAX40CHAR","(max. 255 characters)");
 define("_AM_TOPICIMG","Category icon");
 define("_AM_IMGNAEXLOC","Image filename under %s");
 

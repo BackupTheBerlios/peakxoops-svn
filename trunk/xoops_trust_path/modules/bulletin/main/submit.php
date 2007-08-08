@@ -7,7 +7,7 @@ if(!$gperm->group_perm(1)){
 }
 
 // トピックがない場合
-$BTopic = new BulletinTopic();
+$BTopic = new BulletinTopic( $mydirname );
 if( !$BTopic->topicExists() ){
 	die(_MD_NO_TOPICS);
 	exit;
@@ -43,7 +43,7 @@ $storyid = isset( $_POST['storyid'] ) ? intval($_POST['storyid']) : $storyid ;
 $return = isset( $_GET['return'] ) ? intval($_GET['return']) : 0 ;
 $return = isset( $_POST['return'] ) ? intval($_POST['return']) : $return ;
 
-$story = new Bulletin( $storyid );
+$story = new Bulletin( $mydirname , $storyid );
 
 // 編集権限が無い場合
 if( $storyid > 0 && !$isadmin ){
@@ -330,7 +330,7 @@ if( $op == 'delete' ){
 			die( _MD_EMPTYNODELETE );
 			exit();
 		}
-		$story = new Bulletin( $storyid );
+		$story = new Bulletin( $mydirname , $storyid );
 		if (!$story){
 			die( _MD_EMPTYNODELETE );
 			exit();

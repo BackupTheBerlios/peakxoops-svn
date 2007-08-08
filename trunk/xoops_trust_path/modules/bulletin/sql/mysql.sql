@@ -4,7 +4,7 @@
 
 CREATE TABLE `stories` (
   `storyid` int(8) unsigned NOT NULL auto_increment,
-  `uid` int(5) unsigned NOT NULL default '0',
+  `uid` mediumint(8) unsigned NOT NULL default 0,
   `title` varchar(255) NOT NULL default '',
   `created` int(10) unsigned NOT NULL default '0',
   `published` int(10) unsigned NOT NULL default '0',
@@ -29,9 +29,9 @@ CREATE TABLE `stories` (
   KEY `ihome` (`ihome`),
   KEY `uid` (`uid`),
   KEY `published_ihome` (`published`,`ihome`),
-  KEY `title` (`title`(40)),
+  KEY `title` (`title`),
   KEY `created` (`created`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -41,11 +41,13 @@ CREATE TABLE `stories` (
 CREATE TABLE `topics` (
   `topic_id` smallint(4) unsigned NOT NULL auto_increment,
   `topic_pid` smallint(4) unsigned NOT NULL default '0',
-  `topic_imgurl` varchar(20) NOT NULL default '',
-  `topic_title` varchar(50) NOT NULL default '',
-  PRIMARY KEY  (`topic_id`),
+  `topic_imgurl` varchar(255) NOT NULL default '',
+  `topic_title` varchar(255) NOT NULL default '',
+  `topic_created` int(10) unsigned NOT NULL default 0,
+  `topic_modified` int(10) unsigned NOT NULL default 0,
+  PRIMARY KEY (`topic_id`),
   KEY `pid` (`topic_pid`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) TYPE=MyISAM;
 
 #
 # Table structure for table `relation`
@@ -54,5 +56,7 @@ CREATE TABLE `topics` (
 CREATE TABLE `relation` (
   `storyid` int(8) NOT NULL default '0',
   `linkedid` int(8) NOT NULL default '0',
-  `dirname` varchar(25) NOT NULL default ''
+  `dirname` varchar(25) NOT NULL default '',
+  KEY (`storyid`),
+  PRIMARY KEY (`storyid`,`linkedid`,`dirname`)
 ) TYPE=MyISAM;

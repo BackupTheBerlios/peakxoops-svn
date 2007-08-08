@@ -2,16 +2,13 @@
 
 require_once XOOPS_ROOT_PATH."/class/xoopstopic.php";
 
-if (!defined('DB_BULLETIN_STORIES')) define('DB_BULLETIN_STORIES',"{$mydirname}_stories");
-if (!defined('DB_BULLETIN_TOPICS')) define('DB_BULLETIN_TOPICS',"{$mydirname}_topics");
-if (!defined('BULLETIN_DIR')) define('BULLETIN_DIR',$mydirname);
-
 class BulletinTopic extends XoopsTopic{
 	
-	function BulletinTopic($topicid=0)
+	function BulletinTopic( $mydirname , $topicid=0 )
 	{
 		$this->db =& Database::getInstance();
-		$this->table = $this->db->prefix(DB_BULLETIN_TOPICS);
+		$this->mydirname = $mydirname ;
+		$this->table = $this->db->prefix( "{$mydirname}_topics" );
 		$this->ts =& MyTextSanitizer::getInstance();
 		
 		if ( is_array($topicid) ) {
@@ -37,7 +34,7 @@ class BulletinTopic extends XoopsTopic{
 
 	function makePankuzu($topic_id=0, $ret = array())
 	{
-		$result = ( "SELECT `topic_pid`, `topic_title` FROM ".$this->db->prefix(DB_BULLETIN_TOPICS)." WHERE `topic_id` = ".intval($topic_id) );
+		$result = ( "SELECT `topic_pid`, `topic_title` FROM ".$this->table." WHERE `topic_id` = ".intval($topic_id) );
 		$result = $this->db->query($result);
 		list($topic_pid, $topic_title) = $this->db->fetchRow($result);
 		$ret[] = array('topic_id' => $topic_id, 'topic_title' => $topic_title);
@@ -60,13 +57,14 @@ class BulletinTopic extends XoopsTopic{
 		return $pankuzu;
 	}
 
+
 	// GIJ
 	function getAllChildId( $topic_ids = null )
 	{
 		$db =& $this->db ;
 		
 		if( empty( $topic_ids ) ) $topic_ids = array( $this->topic_id ) ;
-		$result = $db->query( "SELECT distinct topic_id FROM ".$db->prefix(DB_BULLETIN_TOPICS)." WHERE topic_pid IN (".implode(',',$topic_ids).")" ) ;
+		$result = $db->query( "SELECT distinct topic_id FROM ".$this->table." WHERE topic_pid IN (".implode(',',$topic_ids).")" ) ;
 		$children = array() ;
 		while( list( $child_id ) = $db->fetchRow( $result ) ) $children[] = $child_id ;
 		if( empty( $children ) ) return array() ;
@@ -74,5 +72,40 @@ class BulletinTopic extends XoopsTopic{
 			return array_merge( $children , $this->getAllChildId( $children ) ) ;
 		}
 	}
+
+
+	// GIJ
+	// トピックのセレクトボックスを返す
+	function makeTopicSelBox( $none = false , $seltopic = null , $selname = '', $onchange = '' )
+	{
+		$seltopic = is_null( $seltopic ) ? intval( $this->topic_id ) : intval( $seltopic ) ;
+
+		ob_start();
+
+		$tree = new XoopsTree( $this->table , "topic_id" , "topic_pid" ) ;
+		$tree->makeMySelBox( "topic_title" , "topic_title" , $seltopic , $none , $selname , $onchange ) ;
+
+		$ret = ob_get_contents();
+		ob_end_clean();	
+
+		//$ret = str_replace('topic_id','topicid', $ret); // non-sense code?
+		return $ret;
+	}
+
+
+	// override
+	function store()
+	{
+		$mode = empty( $this->topic_id ) ? 'insert' : 'udpate' ;
+		parent::store() ;
+		if( $mode == 'insert' ) {
+			$this->topic_id = $this->db->getInsertId() ;
+			$this->db->query( "UPDATE ".$this->table." SET topic_created=UNIX_TIMESTAMP(),topic_modified=UNIX_TIMESTAMP() WHERE topic_id=".$this->topic_id ) ;
+		} else {
+			$this->db->query( "UPDATE ".$this->table." SET topic_modified=UNIX_TIMESTAMP() WHERE topic_id=".$this->topic_id ) ;
+		}
+	}
+
+
 }
 ?>

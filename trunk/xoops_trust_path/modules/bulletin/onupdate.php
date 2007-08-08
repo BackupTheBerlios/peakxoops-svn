@@ -75,7 +75,13 @@ function bulletin_onupdate_base( $module, $prev_version , $mydirname )
 				}
 			}
 		}
-
+	}
+	// update table structure from 2.04
+	$check_rs = $db->query( "SELECT topic_created FROM ".$db->prefix($mydirname.'_topics') ) ;
+	if( empty( $check_rs ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname.'_topics')." ADD `topic_created` int(10) unsigned NOT NULL default 0, ADD `topic_modified` int(10) unsigned NOT NULL default 0, MODIFY `topic_imgurl` varchar(255) NOT NULL default '', MODIFY `topic_title` varchar(255) NOT NULL default ''" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname.'_stories')." MODIFY `uid` mediumint(8) unsigned NOT NULL default 0" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname.'_relation')." ADD KEY (`storyid`), ADD PRIMARY KEY (`storyid`,`linkedid`,`dirname`)" ) ;
 	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)

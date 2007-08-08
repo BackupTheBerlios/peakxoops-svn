@@ -7,12 +7,11 @@ $myts =& MyTextSanitizer::getInstance();
 if (function_exists('mb_http_output')) {
 	mb_http_output('pass');
 }
-header ('Content-Type:text/xml; charset=utf-8');
 $tpl = new XoopsTpl();
 $tpl->xoops_setCaching(2);
 $tpl->xoops_setCacheTime(0);
 if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
-	$articles = Bulletin::getAllPublished(10, 0);
+	$articles = Bulletin::getAllPublished( $mydirname , 10 , 0 ) ;
 	if (is_array($articles)) {
 		$tpl->assign('channel_title', bulletin_utf8_encode(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
 		$tpl->assign('channel_link', XOOPS_URL.'/');
@@ -40,7 +39,12 @@ if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
 		$tpl->assign('image_height', $height);
 		$count = $articles;
 		foreach ($articles as $article) {
-			$content = $article->getVar('hometext') . $article->getDividedBodytext() ;
+			$content4html = $article->getVar('hometext') . $article->getDividedBodytext() ;
+			$hometext = $article->getVar('hometext','n') ;
+			if( function_exists( 'easiestml' ) ) {
+				$content4html = easiestml( $content4html ) ;
+				$hometext = easiestml( $hometext ) ;
+			}
 			$tpl->append('items', array(
 				'title' => htmlspecialchars(bulletin_utf8_encode($article->getVar('title', 'n')), ENT_QUOTES), 
 				'category' => htmlspecialchars(bulletin_utf8_encode($article->newstopic->topic_title), ENT_QUOTES), 
@@ -48,12 +52,14 @@ if (!$tpl->is_cached("db:{$mydirname}_rss.html")) {
 				'guid' => $mydirurl.'/index.php?page=article&amp;storyid='.$article->getVar('storyid'), 
 //				'pubdate' => formatTimestamp($article->getVar('published'), 'rss'), 
 				'pubdate' => date( 'r' , $article->getVar('published') ) , // GIJ
-				'description' => bulletin_utf8_encode(htmlspecialchars(strip_tags($myts->xoopsCodeDecode($article->getVar('hometext','n'))), ENT_QUOTES)),
-//				'content' => bulletin_utf8_encode($content))), // GIJ
+				'description' => bulletin_utf8_encode(htmlspecialchars(strip_tags($myts->xoopsCodeDecode($hometext)), ENT_QUOTES)),
+				'content' => bulletin_utf8_encode($content4html),
 			) ) ;
 		}
 	}
 }
+
+header ('Content-Type:text/xml; charset=utf-8');
 $tpl->display("db:{$mydirname}_rss.html");
 
 
@@ -62,7 +68,7 @@ function bulletin_utf8_encode($text) // GIJ
 {
     if (XOOPS_USE_MULTIBYTES == 1) {
         if (function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($text, 'UTF-8', 'auto');
+            return mb_convert_encoding($text, 'UTF-8', _CHARSET ) ; // GIJ
         }
         return $text;
     }

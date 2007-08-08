@@ -18,9 +18,9 @@ function fetchSummary( $external_link_id )
 	$mytrustdirpath = dirname(dirname(__FILE__)) ;
 	require_once $mytrustdirpath.'/class/bulletin.php' ;
 
-	if( Bulletin::isPublishedExists( $storyid ) ){
+	if( Bulletin::isPublishedExists( $mydirname , $storyid ) ){
 
-		$article = new Bulletin( $storyid ) ;
+		$article = new Bulletin( $mydirname , $storyid ) ;
 		$subject4assign = $article->getVar( 'title' ) ;
 		$summary = $article->getVar('hometext') ;
 		if( function_exists( 'easiestml' ) ) {

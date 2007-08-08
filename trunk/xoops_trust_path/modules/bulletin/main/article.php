@@ -4,7 +4,7 @@ $storyid   = isset($_GET['storyid']) ? intval($_GET['storyid']) : 0 ;
 $storypage = isset($_GET['storypage']) ? intval($_GET['storypage']) : 0 ;
 
 // 記事が存在しない場合
-if( !Bulletin::isPublishedExists($storyid) ){
+if( !Bulletin::isPublishedExists( $mydirname , $storyid) ){
 	redirect_header($mydirurl.'/index.php',2,_MD_NOSTORY);
 	exit();
 }
@@ -14,7 +14,7 @@ $xoopsOption['template_main'] = "{$mydirname}_article.html";
 
 require_once XOOPS_ROOT_PATH.'/header.php';
 
-$article = new Bulletin($storyid);
+$article = new Bulletin( $mydirname , $storyid);
 
 $story['id']       = $storyid;
 $story['posttime'] = formatTimestamp($article->getVar('published'), $bulletin_date_format);
@@ -85,7 +85,7 @@ if($bulletin_use_relations){
 
 // カテゴリの最新記事
 if($bulletin_disp_list_of_cat && $bulletin_stories_of_cat > 0){
-	$category_storeis = Bulletin::getAllPublished($bulletin_stories_of_cat, 0, $article->getVar('topicid'), 0);
+	$category_storeis = Bulletin::getAllPublished( $mydirname , $bulletin_stories_of_cat, 0, $article->getVar('topicid'), 0);
 	foreach($category_storeis as $category_story){
 		$category_story_asign['storyid']  = $category_story->getVar('storyid');
 		$category_story_asign['title']    = $category_story->getVar('title');

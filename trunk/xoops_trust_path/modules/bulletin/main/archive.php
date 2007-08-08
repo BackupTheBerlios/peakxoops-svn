@@ -8,7 +8,7 @@ $xoopsOption['template_main'] = "{$mydirname}_archive.html";
 
 require_once XOOPS_ROOT_PATH.'/header.php';
 
-$result = Bulletin::getPublishedDays();
+$result = Bulletin::getPublishedDays( $mydirname ) ;
 
 if (!$result) {
 	redirect_header($mydirurl.'/index.php',3,_MD_NO_ARCIVES);
@@ -79,7 +79,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	$monthend   = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
 	$monthend   = ($monthend > time()) ? time() : $monthend;
 	
-	$article = Bulletin::getArchives($monthstart,$monthend);
+	$article = Bulletin::getArchives( $mydirname , $monthstart,$monthend);
 	$scount = count($article);
 
 	for ( $i = 0; $i < $scount; $i++ ) {

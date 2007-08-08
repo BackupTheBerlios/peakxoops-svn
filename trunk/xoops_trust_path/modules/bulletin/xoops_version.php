@@ -10,13 +10,13 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = $mydirname;
-$modversion['version']     = 2.04; // GIJ hacked ver 013
+$modversion['version']     = 2.10; // GIJ hacked
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
 $modversion['license']     = 'GPL see LICENSE';
 $modversion['official']    = 0;
-$modversion['image']       = 'module_icon.php';
+$modversion['image']       = file_exists( $mydirpath.'/module_icon.png' ) ? 'module_icon.png' : 'module_icon.php' ;
 $modversion['dirname']     = $mydirname;
 
 // Any tables can't be touched by modulesadmin.
@@ -58,7 +58,7 @@ $modversion['blocks'][$i]['name']        = constant($constpref.'_BNAME4');
 $modversion['blocks'][$i]['description'] = constant($constpref.'_BDESC4');
 $modversion['blocks'][$i]['show_func']   = "b_bulletin_new_show";
 $modversion['blocks'][$i]['edit_func']   = "b_bulletin_new_edit";
-$modversion['blocks'][$i]['options']     = "$mydirname|published DESC|10|25|0";
+$modversion['blocks'][$i]['options']     = "$mydirname|published DESC|10|255|0";
 $modversion['blocks'][$i]['template']    = "{$mydirname}_block_new.html";
 $modversion['blocks'][$i]['can_clone']   = true ;
 $i++;
@@ -67,7 +67,7 @@ $modversion['blocks'][$i]['name']        = constant($constpref.'_BNAME5');
 $modversion['blocks'][$i]['description'] = constant($constpref.'_BDESC5');
 $modversion['blocks'][$i]['show_func']   = "b_bulletin_category_new_show";
 $modversion['blocks'][$i]['edit_func']   = "b_bulletin_category_new_edit";
-$modversion['blocks'][$i]['options']     = "$mydirname|published DESC|3|25|0|0|1";
+$modversion['blocks'][$i]['options']     = "$mydirname|published DESC|5|255|0|0|1";
 $modversion['blocks'][$i]['template']    = "{$mydirname}_block_category_new.html";
 $modversion['blocks'][$i]['can_clone']   = true ;
 $i++;

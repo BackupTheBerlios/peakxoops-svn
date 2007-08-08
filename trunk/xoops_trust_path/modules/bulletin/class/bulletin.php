@@ -6,18 +6,20 @@ require_once XOOPS_ROOT_PATH."/class/xoopsobject.php";
 require_once "$mytrustdirpath/class/relation.php";
 require_once "$mytrustdirpath/class/bulletinTopic.php";
 
-if (!defined('DB_BULLETIN_STORIES')) define('DB_BULLETIN_STORIES',"{$mydirname}_stories");
-if (!defined('DB_BULLETIN_TOPICS')) define('DB_BULLETIN_TOPICS',"{$mydirname}_topics");
-if (!defined('BULLETIN_DIR')) define('BULLETIN_DIR',$mydirname);
-
 class Bulletin extends XoopsObject{
 
 	var $relation ;
+	var $newstopic = null ;
+	var $table = '' ;
 
 	// コントラスタ
-	function Bulletin($id=null)
+	function Bulletin( $mydirname , $id=null )
 	{
 		$this->db =& Database::getInstance();
+		$this->mydirname = $mydirname ;
+		$this->topic_table = $this->db->prefix( "{$mydirname}_topics" ) ;
+		$this->table = $this->db->prefix( "{$mydirname}_stories" ) ;
+
 		$this->initVar("storyid", XOBJ_DTYPE_INT, null, false);
 		$this->initVar("uid", XOBJ_DTYPE_INT, null, false);
 		$this->initVar("title", XOBJ_DTYPE_TXTBOX, null, false, 255);
@@ -46,13 +48,12 @@ class Bulletin extends XoopsObject{
 		$this->initVar("text", XOBJ_DTYPE_TXTAREA, null, false);
 		$this->initVar("dirname", XOBJ_DTYPE_TXTBOX, null, false, 25);
 
-		$this->relation = new relation(BULLETIN_DIR);
-		$this->topics = new BulletinTopic();
+		$this->relation = new relation( $this->mydirname ) ;
+		$this->topics = new BulletinTopic( $this->mydirname );
 
 		if ( !empty($id) ) {
 			if ( is_array($id) ) {
 				$this->assignVars($id);
-				$this->newstopic = $this->topic();
 				$this->vars['dohtml']['value'] = $this->getVar('html');
 				$this->vars['dosmiley']['value'] = $this->getVar('smiley');
 				$this->vars['dobr']['value'] = $this->getVar('br');
@@ -63,7 +64,6 @@ class Bulletin extends XoopsObject{
 				$this->vars['doxcode']['changed'] = false;
 			} else {
 				$this->load(intval($id));
-				$this->newstopic = $this->topic();
 				$this->vars['dohtml']['value'] = $this->getVar('html');
 				$this->vars['dosmiley']['value'] = $this->getVar('smiley');
 				$this->vars['dobr']['value'] = $this->getVar('br');
@@ -74,13 +74,14 @@ class Bulletin extends XoopsObject{
 				$this->vars['doxcode']['changed'] = false;
 			}
 		}
-		
+
+		$this->newstopic = $this->topic() ;
 	}
 	
 	// 基本処理
 	function topic()
 	{
-		return new XoopsTopic($this->db->prefix(DB_BULLETIN_TOPICS), $this->getVar('topicid'));
+		return new BulletinTopic( $this->mydirname , $this->getVar('topicid')); // GIJ
 	}
 	
 	// 基本処理
@@ -94,11 +95,11 @@ class Bulletin extends XoopsObject{
 			$$k = $v;
 		}
 		if ( empty($storyid) ) {
-			$storyid = $this->db->genId($this->db->prefix(DB_BULLETIN_STORIES)."_storyid_seq");
+			$storyid = $this->db->genId($this->table."_storyid_seq");
 			
-			$sql = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, html, smiley, hometext, bodytext, counter, topicid, ihome, type, topicimg, comments, br, xcode, block) VALUES (%u, %u, %s, %u, %u, %u, %s, %u, %u, %s, %s, %u, %u, %u, %u, %u, %u, %u, %u, %u)", $this->db->prefix(DB_BULLETIN_STORIES), $storyid, $uid, $this->db->quoteString($title), time(), $published, $expired, $this->db->quoteString($hostname), $html, $smiley, $this->db->quoteString($hometext), $this->db->quoteString($bodytext), $counter, $topicid, $ihome, $type, $topicimg, $comments, $br, $xcode, $block);
+			$sql = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, html, smiley, hometext, bodytext, counter, topicid, ihome, type, topicimg, comments, br, xcode, block) VALUES (%u, %u, %s, %u, %u, %u, %s, %u, %u, %s, %s, %u, %u, %u, %u, %u, %u, %u, %u, %u)", $this->table , $storyid, $uid, $this->db->quoteString($title), time(), $published, $expired, $this->db->quoteString($hostname), $html, $smiley, $this->db->quoteString($hometext), $this->db->quoteString($bodytext), $counter, $topicid, $ihome, $type, $topicimg, $comments, $br, $xcode, $block);
 		} else {
-			$sql = sprintf("UPDATE %s SET uid=%u, title=%s, created=%u, published=%u, expired=%u, hostname=%s, html=%u, smiley=%u, hometext=%s, bodytext=%s, counter=%u, topicid=%u, ihome=%u, type=%u, topicimg=%u, comments=%u, br=%u, xcode=%u, block=%u WHERE storyid=%u", $this->db->prefix(DB_BULLETIN_STORIES), $uid, $this->db->quoteString($title), $created, $published, $expired, $this->db->quoteString($hostname), $html, $smiley, $this->db->quoteString($hometext), $this->db->quoteString($bodytext), $counter, $topicid, $ihome, $type, $topicimg, $comments, $br, $xcode, $block, $storyid);
+			$sql = sprintf("UPDATE %s SET uid=%u, title=%s, created=%u, published=%u, expired=%u, hostname=%s, html=%u, smiley=%u, hometext=%s, bodytext=%s, counter=%u, topicid=%u, ihome=%u, type=%u, topicimg=%u, comments=%u, br=%u, xcode=%u, block=%u WHERE storyid=%u", $this->table , $uid, $this->db->quoteString($title), $created, $published, $expired, $this->db->quoteString($hostname), $html, $smiley, $this->db->quoteString($hometext), $this->db->quoteString($bodytext), $counter, $topicid, $ihome, $type, $topicimg, $comments, $br, $xcode, $block, $storyid);
 		}
 		//echo $sql;
 		if ( !$result = $this->db->query($sql) ) {
@@ -117,7 +118,7 @@ class Bulletin extends XoopsObject{
 	// 基本処理
 	function load($id)
 	{
-		$sql = "SELECT * FROM ".$this->db->prefix(DB_BULLETIN_STORIES)." WHERE storyid=".intval($id)."";
+		$sql = "SELECT * FROM ".$this->table." WHERE storyid=".intval($id)."";
 		$myrow = $this->db->fetchArray($this->db->query($sql));
 		$this->assignVars($myrow);
 	}
@@ -125,15 +126,17 @@ class Bulletin extends XoopsObject{
 	// 基本処理
 	function delete()
 	{
-		$sql = sprintf("DELETE FROM %s WHERE storyid = %u", $this->db->prefix(DB_BULLETIN_STORIES), $this->getVar("storyid"));
+		$sql = sprintf("DELETE FROM %s WHERE storyid = %u", $this->table , $this->getVar("storyid"));
         	if ( !$this->db->query($sql) ) {
 			return false;
 		}
 		return true;
 	}
-	
+
+
+	// class method
 	// 基本処理
-	function &getAll($criteria=array(), $asobject=true, $orderby="published DESC", $limit=0, $start=0)
+	function &getAll( $mydirname , $criteria=array() , $asobject=true, $orderby="published DESC", $limit=0, $start=0)
 	{
 		$db =& Database::getInstance();
 		$ret = array();
@@ -146,24 +149,26 @@ class Bulletin extends XoopsObject{
 			$where_query = substr($where_query, 0, -4);
 		}
 		if ( !$asobject ) {
-			$sql = "SELECT storyid FROM ".$db->prefix(DB_BULLETIN_STORIES)."$where_query ORDER BY $orderby";
+			$sql = "SELECT storyid FROM ".$db->prefix($mydirname.'_stories')."$where_query ORDER BY $orderby";
 			$result = $db->query($sql,intval($limit),intval($start));
 			while ( $myrow = $db->fetchArray($result) ) {
 				$ret[] = $myrow['storyid'];
 			}
 		} else {
-			$sql = "SELECT * FROM ".$db->prefix(DB_BULLETIN_STORIES)."".$where_query." ORDER BY $orderby";
+			$sql = "SELECT * FROM ".$db->prefix($mydirname.'_stories')."".$where_query." ORDER BY $orderby";
 			$result = $db->query($sql,$limit,$start);
 			while ( $myrow = $db->fetchArray($result) ) {
-				$ret[] = new Bulletin($myrow);
+				$ret[] = new Bulletin( $mydirname , $myrow);
 			}
 		}
 		//echo $sql;
 		return $ret;
 	}
 
+
+	// class method
 	// 基本処理
-	function &countAll($criteria=array())
+	function &countAll( $mydirname , $criteria=array())
 	{
 		$db =& Database::getInstance();
 		$where_query = "";
@@ -175,16 +180,18 @@ class Bulletin extends XoopsObject{
 			$where_query = substr($where_query, 0, -4);
 		}
 		
-		$sql = "SELECT COUNT(*) FROM ".$db->prefix(DB_BULLETIN_STORIES)."".$where_query;
+		$sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname.'_stories')." ".$where_query;
 		$result = $db->query($sql);
 		list($ret) = $db->fetchRow($result);
 		
 		//echo $sql;
 		return $ret;
 	}
-	
+
+
+	// class method
 	// 掲載中の記事一覧を取得
-	function getAllPublished($limit4sql=0, $start4sql=0, $topic4sql=0, $ihome=1, $asobject=true, $topic_recursive=false)
+	function getAllPublished( $mydirname , $limit4sql=0, $start4sql=0, $topic4sql=0, $ihome=1, $asobject=true, $topic_recursive=false)
 	{
 		$topic4sql = intval($topic4sql);
 		$limit4sql = intval($limit4sql);
@@ -198,7 +205,7 @@ class Bulletin extends XoopsObject{
 		
 		if ( !empty($topic4sql) ) {
 			if( $topic_recursive ) {
-				$topic =& new BulletinTopic( intval( $topic4sql ) ) ;
+				$topic =& new BulletinTopic( $mydirname , intval( $topic4sql ) ) ;
 				$topics = $topic->getAllChildId() ;
 				$topics[] = intval( $topic4sql ) ;
 				$criteria[] = "topicid IN (".implode(',',$topics).")";
@@ -212,11 +219,13 @@ class Bulletin extends XoopsObject{
 			}
 		}
 
-		return Bulletin::getAll($criteria, $asobject, "published DESC", $limit4sql, $start4sql);
+		return Bulletin::getAll( $mydirname , $criteria, $asobject, "published DESC", $limit4sql, $start4sql);
 	}
-	
+
+
+	// class method
 	// アーカイブ用記事一覧を取得
-	function getArchives($monstart4sql=null, $monend4sql=null, $limit4sql=0, $start4sql=0, $asobject=true)
+	function getArchives( $mydirname , $monstart4sql=null, $monend4sql=null, $limit4sql=0, $start4sql=0, $asobject=true)
 	{
 		$monstart4sql = intval($monstart4sql);
 		$monend4sql   = intval($monend4sql);
@@ -230,32 +239,38 @@ class Bulletin extends XoopsObject{
 		$criteria[] = "published > 0";
 		$criteria[] = "published <= ".time();
 		$criteria[] = "(expired = 0 OR expired > ".time().")";
-		return Bulletin::getAll($criteria, $asobject, "published DESC", $limit4sql, $start4sql);
+		return Bulletin::getAll( $mydirname , $criteria, $asobject, "published DESC", $limit4sql, $start4sql);
 	}
-	
+
+
+	// class method
 	// 承認待ちの記事一覧を取得
-	function getAllSubmitted($limit4sql=0, $asobject=true)
+	function getAllSubmitted( $mydirname , $limit4sql=0, $asobject=true)
 	{
 		$limit4sql = intval($limit4sql);
 
 		$criteria = array();
 		$criteria[] = "type = 0";
-		return Bulletin::getAll($criteria, $asobject, "created DESC", $limit4sql, 0);
+		return Bulletin::getAll( $mydirname , $criteria, $asobject, "created DESC", $limit4sql, 0);
 	}
-	
+
+
+	// class method
 	// 掲載予定の記事一覧を取得
-	function getAllAutoStory($limit4sql=0, $asobject=true)
+	function getAllAutoStory( $mydirname , $limit4sql=0, $asobject=true)
 	{
 		$limit4sql = intval($limit4sql);
 
 		$criteria = array();
 		$criteria[] = "type > 0";
 		$criteria[] = "published > ".time();
-		return Bulletin::getAll($criteria, $asobject, "published DESC", $limit4sql, 0);
+		return Bulletin::getAll( $mydirname , $criteria, $asobject, "published DESC", $limit4sql, 0);
 	}
-	
+
+
+	// class method
 	// 期限切れの記事一覧を取得
-	function getAllExpired($limit4sql=0, $start4sql=0, $topic4sql=0, $ihome=0, $asobject=true)
+	function getAllExpired( $mydirname , $limit4sql=0, $start4sql=0, $topic4sql=0, $ihome=0, $asobject=true)
 	{
 		$limit4sql = intval($limit4sql);
 		$start4sql = intval($start4sql);
@@ -272,11 +287,13 @@ class Bulletin extends XoopsObject{
 				$criteria[] = "ihome=1";
 			}
 		}
-		return Bulletin::getAll($criteria, $asobject, "expired DESC", $limit4sql, $start4sql);
+		return Bulletin::getAll( $mydirname , $criteria, $asobject, "expired DESC", $limit4sql, $start4sql);
 	}
-	
+
+
+	// class method
 	// 日付をもとに記事一覧を取得
-	function getAllToday($limit4sql=0, $start4sql=0, $caldate, $asobject=true)
+	function getAllToday( $mydirname , $limit4sql=0, $start4sql=0, $caldate, $asobject=true)
 	{
 		$limit4sql    = intval($limit4sql);
 		$start4sql    = intval($start4sql);
@@ -295,20 +312,23 @@ class Bulletin extends XoopsObject{
 			$criteria[] = "$startday4sql <= published";
 			$criteria[] = "published < $endday4sql";
 
-			return Bulletin::getAll($criteria, $asobject, "published DESC", $limit4sql, $start4sql);
+			return Bulletin::getAll( $mydirname , $criteria, $asobject, "published DESC", $limit4sql, $start4sql);
 		}else{
 		
 			return false;
 		}
 	}
 
+
+	// class method
 	// トピックに属する記事すべてを取得
-	function getAllByTopic($topicid)
+	function getAllByTopic( $mydirname , $topicid )
 	{
 		$criteria = array();
 		$criteria[] = "topicid=".intval($topicid);
-		return Bulletin::getAll($criteria, true);
+		return Bulletin::getAll( $mydirname , $criteria, true);
 	}
+
 
 	// トピック画像を取得する
 	function imglink($topic_path)
@@ -319,18 +339,21 @@ class Bulletin extends XoopsObject{
 		return false;
 	}
 
+
 	// ユーザの本名を取得する
 	function getRealname()
 	{
 		return XoopsUser::getUnameFromId($this->getVar('uid'), 1);
 	}
-	
+
+
 	// unameを取得する
 	function getUname()
 	{
 		return XoopsUser::getUnameFromId($this->getVar('uid'));
 	}
-	
+
+
 	// ユーザが存在するか
 	function isActiveUser()
 	{
@@ -356,7 +379,8 @@ class Bulletin extends XoopsObject{
 		
 		return $ret;
 	}
-	
+
+
 	// トピック画像を表ｦするかどうか
 	function showTopicimg()
 	{
@@ -369,24 +393,28 @@ class Bulletin extends XoopsObject{
 		
 		return false;
 	}
-	
+
+
 	// トピックのタイトルを取得
 	function topic_title()
 	{
-		return $this->newstopic->topic_title();
+		if( is_object( $this->newstopic ) ) return $this->newstopic->topic_title();
+		else return '' ;
 	}
-	
+
+
 	// 閲覧数を加算
 	function updateCounter()
 	{
-		$sql = sprintf("UPDATE %s SET counter = counter+1 WHERE storyid = %u", $this->db->prefix(DB_BULLETIN_STORIES), $this->getVar('storyid'));
+		$sql = sprintf("UPDATE %s SET counter = counter+1 WHERE storyid = %u", $this->table , $this->getVar('storyid'));
 		//echo $sql;
 		if ( !$result = $this->db->queryF($sql) ) {
 			return false;
 		}
 		return true;
 	}
-	
+
+
 	// hometextを得る
 	function hometext()
 	{
@@ -394,9 +422,11 @@ class Bulletin extends XoopsObject{
 		$xcodes = 1;
 		return $this->getVar('hometext', 'show');
 	}
-	
+
+
+	// class method
 	// 記事が存在するかどうか
-	function isPublishedExists($storyid=0)
+	function isPublishedExists( $mydirname , $storyid=0)
 	{
 		$storyid = intval($storyid);
 		
@@ -405,7 +435,7 @@ class Bulletin extends XoopsObject{
 		}
 		
 		$db =& Database::getInstance();
-		$sql = "SELECT COUNT(*) FROM ".$db->prefix(DB_BULLETIN_STORIES)." WHERE type > 0 AND published > 0 AND published <= ".time()." AND (expired = 0 OR expired > ".time().") AND storyid =".$storyid;
+		$sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname.'_stories')." WHERE type > 0 AND published > 0 AND published <= ".time()." AND (expired = 0 OR expired > ".time().") AND storyid =".$storyid;
 		$result = $db->query($sql);
 		list($count) = $db->fetchRow($result);
 		
@@ -416,30 +446,17 @@ class Bulletin extends XoopsObject{
 		return false;
 	}
 
-	// トピックのセレクトボックスを返す
-	function makeTopicSelBox($none=0, $seltopic=-1, $selname="", $onchange=""){
-	
-		$db =& Database::getInstance();
-		$xt = new XoopsTopic($db->prefix(DB_BULLETIN_TOPICS));
-		
-		ob_start();
-		$xt->makeTopicSelBox($none, $seltopic, $selname, $onchange);
-		$ret = ob_get_contents();
-		ob_end_clean();	
 
-		$ret = str_replace('topic_id','topicid', $ret);
-		return $ret;
-	}
-
+	/*
 	function getTreeCategories($topic_pid = 0, $so = 0 ,$cat_tree = array()){
 	
 		$db =& Database::getInstance();
 
-		$result = ( "SELECT `topic_id`, `topic_title` FROM ".$db->prefix(DB_BULLETIN_TOPICS)." WHERE `topic_pid` = '$topic_pid'" );
+		$result = ( "SELECT `topic_id`, `topic_title` FROM ".$this->topic_table." WHERE `topic_pid` = '$topic_pid'" );
 		$result = $db->query($result);
 		while(list($topic_id, $topic_title) = $db->fetchRow($result) ){
 			$cat_tree[] = array( 'topic_id' => $topic_id, 'title' => $topic_title, 'fukasa' => $so );
-			$result2 = $db->query( "SELECT COUNT(*) FROM ".$db->prefix(DB_BULLETIN_TOPICS)." WHERE `topic_pid` = '$topic_id'" );
+			$result2 = $db->query( "SELECT COUNT(*) FROM ".$this->topic_table." WHERE `topic_pid` = '$topic_id'" );
 			list($count) = $db->fetchRow($result2);
 			if($count > 0){
 				$cat_tree = Bulletin::getTreeCategories($topic_id, $so+1, $cat_tree);
@@ -449,8 +466,10 @@ class Bulletin extends XoopsObject{
 
 	}
 
-	function makeCategoryArrayForSelect($pad_string = '--'){
 
+	// class method
+	function makeCategoryArrayForSelect( $mydirname , $pad_string = '--' )
+	{
 		$ts =& MyTextSanitizer::getInstance();
 		$cat_tree = Bulletin::getTreeCategories();
 		$ret = array();
@@ -458,10 +477,12 @@ class Bulletin extends XoopsObject{
 			$ret[$cat['topic_id']] = str_repeat($pad_string, $cat['fukasa']).' '.$ts->htmlspecialchars($cat['title']);
 		}
 		return $ret;
-	}
+	} */
 
+
+	// class method
 	// 掲載中の記事数を数える
-	function countPublished($topicid=0,$topic_recursive=false)
+	function countPublished( $mydirname , $topicid=0,$topic_recursive=false)
 	{
 		$criteria = array();
 		$criteria[] = 'type > 0';
@@ -470,7 +491,7 @@ class Bulletin extends XoopsObject{
 		$criteria[] = '(expired = 0 OR expired > '.time().')';
 		if ( !empty($topicid) ) {
 			if( $topic_recursive ) {
-				$topic =& new BulletinTopic( intval( $topicid ) ) ;
+				$topic =& new BulletinTopic( $mydirname , intval( $topicid ) ) ;
 				$topics = $topic->getAllChildId() ;
 				$topics[] = intval( $topicid ) ;
 				$criteria[] = "topicid IN (".implode(',',$topics).")";
@@ -480,28 +501,34 @@ class Bulletin extends XoopsObject{
 		} else {
 			$criteria[] = 'ihome=1';
 		}
-		return Bulletin::countAll($criteria);
+		return Bulletin::countAll( $mydirname , $criteria);
 	}
-	
+
+
+	// class method
 	// 承認待ちの記事数を数える
-	function countSubmitted()
+	function countSubmitted( $mydirname )
 	{
 		$criteria = array();
 		$criteria[] = "type=0";
-		return Bulletin::countAll($criteria);
+		return Bulletin::countAll( $mydirname , $criteria);
 	}
-	
+
+
+	// class method
 	// 掲載予定の記事数を数える
-	function countAutoStory()
+	function countAutoStory( $mydirname )
 	{
 		$criteria = array();
 		$criteria[] = 'type > 0';
 		$criteria[] = "published > ".time();
-		return Bulletin::countAll($criteria);
+		return Bulletin::countAll( $mydirname , $criteria);
 	}
-	
+
+
+	// class method
 	// 期限切れの記事数を数える
-	function countExpired($topic4sql=0, $ihome=0)
+	function countExpired( $mydirname , $topic4sql=0, $ihome=0)
 	{
 		$topic4sql = intval($topic4sql);
 		
@@ -516,11 +543,13 @@ class Bulletin extends XoopsObject{
 				$criteria[] = "ihome=1";
 			}
 		}
-		return Bulletin::countAll($criteria);
+		return Bulletin::countAll( $mydirname , $criteria);
 	}
-	
+
+
+	// class method
 	// その日の記事数を数える
-	function countPublishedByDate($caldate)
+	function countPublishedByDate( $mydirname , $caldate)
 	{
 		if( preg_match('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', $caldate, $datearr) ){
 			$year  = $datearr[1];
@@ -536,27 +565,30 @@ class Bulletin extends XoopsObject{
 			$criteria[] = '(expired = 0 OR expired > '.time().')';
 			$criteria[] = $startday4sql.' <= published';
 			$criteria[] = 'published < '.$endday4sql;
-			return Bulletin::countAll($criteria);
+			return Bulletin::countAll( $mydirname , $criteria);
 		}
 		
 		return false;
 	}
-	
+
+
 	// コメント数を加算
 	function updateComments($total)
 	{
-		$sql = sprintf("UPDATE %s SET comments = %u WHERE storyid = %u", $this->db->prefix(DB_BULLETIN_STORIES), $total, $this->getVar('storyid'));
+		$sql = sprintf("UPDATE %s SET comments = %u WHERE storyid = %u", $this->table , $total, $this->getVar('storyid'));
 		if ( !$result = $this->db->queryF($sql) ) {
 			return false;
 		}
 		return true;
 	}
-	
+
+
+	// class method
 	// 記事が投稿のタイムスタンプを配列で返す
-	function getPublishedDays($limit=0, $start=0)
+	function getPublishedDays( $mydirname , $limit=0 , $start=0 )
 	{
 		$db =& Database::getInstance();
-		$sql = "SELECT published FROM ".$db->prefix(DB_BULLETIN_STORIES)." WHERE type > 0 AND published>0 AND published<=".time()." AND expired <= ".time()." ORDER BY published ASC";
+		$sql = "SELECT published FROM ".$db->prefix($mydirname.'_stories')." WHERE type > 0 AND published>0 AND published<=".time()." AND expired <= ".time()." ORDER BY published ASC";
 		$result = $db->query($sql,intval($limit),intval($start));
 		$ret = array();
 		while ( list($myrow) = $db->fetchRow($result) ) {
@@ -564,7 +596,8 @@ class Bulletin extends XoopsObject{
 		}
 		return $ret;
 	}
-	
+
+
 	// hometext の文字数をカウントする
 	function strlenHometext(){
 		
@@ -588,7 +621,8 @@ class Bulletin extends XoopsObject{
 		return $result;
 	
 	}
-	
+
+
 	// bodytext の文字数をカウントする
 	function strlenBodytext(){
 		
@@ -613,14 +647,16 @@ class Bulletin extends XoopsObject{
 		
 		return $result;
 	}
-	
+
+
 	// hometext と bodytext の文字数の総和を求める
 	function strlenHomeAndBody(){
 	
 		return $this->strlenHometext() + $this->strlenBodytext();
 	
 	}
-	
+
+
 	// [pagebreak]を任意の文字列に変換する
 	function getDividedBodytext($dividing_str = '<br style="page-break-after:always;" />'){
 	
@@ -628,27 +664,27 @@ class Bulletin extends XoopsObject{
 	
 	}
 
+
 	// $text と $hometext と $bodytext に分解する
-	function devideHomeTextAndBodyText(){
-
+	function devideHomeTextAndBodyText()
+	{
 		$text_arr = explode('[pagebreak]', $this->getVar('text', 'n'));
-
 		$this->setVar('hometext', array_shift($text_arr));
 		$this->setVar('bodytext', implode('[pagebreak]', $text_arr));
-
 	}
 
-	// $hometext と $bodytext を $text に統一する
-	function unifyHomeTextAndBodyText(){
 
+	// $hometext と $bodytext を $text に統一する
+	function unifyHomeTextAndBodyText()
+	{
 		$text = $this->getVar('hometext', 'n');
 		$bodytext = $this->getVar('bodytext', 'n');
 		if( !empty($bodytext) ){
 			$text .= "[pagebreak]" . $bodytext;
 		}
 		$this->setVar('text', $text );
-
 	}
+
 
 	function getRelated(){
 	
@@ -659,12 +695,13 @@ class Bulletin extends XoopsObject{
 			$sql = sprintf("SELECT storyid, title, published, uid, topicid, counter, comments FROM %s WHERE storyid = %u AND type > 0 AND published > 0 AND published <= %u AND (expired = 0 OR expired > %u)", $this->db->prefix("{$relation['dirname']}_stories"), intval($relation['linkedid']), time(), time());
 			$result = $this->db->fetchArray($this->db->query($sql));
 			$result['dirname'] = $relation['dirname'];
-			$ret[] = new Bulletin($result);
+			$ret[] = new Bulletin( $this->mydirname , $result);
 		}
 		
 		return $ret;
 	}
-	
+
+
 	function getRelatedTitle($storyid, $dirname){
 		$dirname = addslashes($dirname);
 		$sql = sprintf("SELECT title FROM %s WHERE storyid = %u", $this->db->prefix("{$dirname}_stories"), intval($storyid));

@@ -3,14 +3,14 @@
 $storyid = isset($_GET['storyid']) ? intval($_GET['storyid']) : 0;
 
 // 記事が存在しない場合
-if( !Bulletin::isPublishedExists($storyid) ){
+if( !Bulletin::isPublishedExists( $mydirname , $storyid) ){
 	redirect_header($mydirurl.'/index.php',2,_MD_NOSTORY);
 	exit();
 }
 
 require_once XOOPS_ROOT_PATH.'/class/template.php';
 
-$article = new Bulletin($storyid);
+$article = new Bulletin( $mydirname , $storyid);
 
 $datetime = formatTimestamp($article->getVar('published'), $bulletin_date_format);
 

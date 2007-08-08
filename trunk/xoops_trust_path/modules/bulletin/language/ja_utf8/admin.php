@@ -19,7 +19,7 @@ define('_AM_EXPIRED','掲載期限');
 
 define('_AM_ADDMTOPIC','カテゴリの作成');
 define('_AM_TOPICNAME','カテゴリ名');
-define('_AM_MAX40CHAR','（最大20文字（全角））');
+define('_AM_MAX40CHAR','（最大255文字（全角））');
 define('_AM_TOPICIMG','カテゴリアイコン');
 define('_AM_IMGNAEXLOC','%s 下にある画像ファイル名');
 

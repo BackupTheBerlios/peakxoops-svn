@@ -18,8 +18,10 @@ if( $storyid > 0 ){
 }
 
 $form->addElement(new XoopsFormText(_MD_TITLE, 'title', 50, 255, $story->getVar('title', 'f') ), true); // GIJ
-$topic_select = new XoopsFormSelect(_MD_TOPIC, 'topicid', $story->getVar('topicid') );
-$topic_select->addOptionArray(Bulletin::makeCategoryArrayForSelect());
+//$topic_select = new XoopsFormSelect(_MD_TOPIC, 'topicid', $story->getVar('topicid') );
+//$topic_select->addOptionArray(Bulletin::makeCategoryArrayForSelect( $mydirname ));
+$bt = new BulletinTopic( $mydirname ) ; // GIJ
+$topic_select = new XoopsFormLabel( _MD_TOPIC , $bt->makeTopicSelBox( false , $story->getVar('topicid') , 'topicid' ) ) ; // GIJ
 $form->addElement($topic_select);
 
 $topicalign_select = new XoopsFormSelect(_MD_TOPIC_IMAGE, 'topicimg', $story->getVar('topicimg') );

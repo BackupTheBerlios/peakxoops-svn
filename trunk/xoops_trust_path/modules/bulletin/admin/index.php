@@ -36,7 +36,7 @@ if ($op == 'preview' || $op == 'save') {
 
 // トピックがひとつもない
 if( $op == 'form' ) {
-	$BTopic = new BulletinTopic();
+	$BTopic = new BulletinTopic( $mydirname );
 	if( !$BTopic->topicExists() ){
 		redirect_header('index.php?op=topicsmanager', 3, _AM_NO_TOPICS);
 		exit;
@@ -74,7 +74,7 @@ case 'listall':
 	switch( $statu ){
 	case 'newsubmission':
 	
-		$total = Bulletin::countSubmitted();
+		$total = Bulletin::countSubmitted( $mydirname );
 		$story_list = newSubmissions('newSubmissions', $limit, $start);
 		$table_title = _AM_WAITING_ARTICLES;
 		$mode = 'newsubmission';
@@ -82,7 +82,7 @@ case 'listall':
 	
 	case 'autostory':
 	
-		$total = Bulletin::countAutoStory();
+		$total = Bulletin::countAutoStory( $mydirname );
 		$story_list = newSubmissions('autoStories', $limit, $start);
 		$table_title = _AM_AUTOARTICLES;
 		$mode = 'autostory';
@@ -90,7 +90,7 @@ case 'listall':
 		
 	case 'expstory':
 	
-		$total = Bulletin::countExpired();
+		$total = Bulletin::countExpired( $mydirname );
 		$story_list = newSubmissions('Expired', $limit, $start);
 		$table_title = _AM_EXPARTS;
 		$mode = '';
@@ -98,7 +98,7 @@ case 'listall':
 	
 	default:
 	
-		$total = Bulletin::countPublished();
+		$total = Bulletin::countPublished( $mydirname );
 		$story_list = newSubmissions('Published', $limit, $start);
 		$table_title = _AM_PUB_ARTICLES;
 		$mode = '';
@@ -148,19 +148,21 @@ case 'topicsmanager':
 	include dirname(__FILE__).'/mymenu.php' ;
 	$template = 'bulletin_topicsmanager.html';
 
-	$BTopic = new BulletinTopic();
+	$BTopic = new BulletinTopic( $mydirname );
 	$topics_array = XoopsLists :: getImgListAsArray( $xoopsModuleConfig['topicon_path'] );
 	$images = array();
 	foreach($topics_array as $v) $images[]['image'] = htmlspecialchars($v);
 	$topics_exists = ( $BTopic->topicExists() ) ? 1 : 0 ;
-	ob_start();
-	$BTopic->makeTopicSelBox( 1, 0, 'topic_pid' );
-	$topicselbox = ob_get_contents();
-	ob_end_clean();
-	ob_start();
-	$BTopic->makeTopicSelBox();
-	$topicselbox2 = ob_get_contents();
-	ob_end_clean();
+	//ob_start();
+	//$BTopic->makeTopicSelBox( 1, 0, 'topic_pid' );
+	//$topicselbox = ob_get_contents();
+	//ob_end_clean();
+	//ob_start();
+	//$BTopic->makeTopicSelBox();
+	//$topicselbox2 = ob_get_contents();
+	//ob_end_clean();
+	$topicselbox = $BTopic->makeTopicSelBox( true , 0 ,  'topic_pid' ) ;
+	$topicselbox2 = $BTopic->makeTopicSelBox() ;
 
 	$asssigns = array(
 		'images' => $images,
@@ -174,7 +176,7 @@ case 'topicsmanager':
 case 'modTopic':
 	$template = 'bulletin_modtopic.html';
 
-	$BTopic = new BulletinTopic($_GET['topic_id']);
+	$BTopic = new BulletinTopic( $mydirname , $_GET['topic_id'] ) ;
 	$topics_array = XoopsLists :: getImgListAsArray( $xoopsModuleConfig['topicon_path'] );
 	xoops_cp_header();
 	include dirname(__FILE__).'/mymenu.php' ;
@@ -184,10 +186,11 @@ case 'modTopic':
 		$images[] = array('image' => htmlspecialchars($v), 'option' => $BTopic->topic_imgurl() ? 'selected="selected"' : '');
 	}
 
-	ob_start();
-	$BTopic->makeTopicSelBox( 1, $BTopic->topic_pid(), 'topic_pid' );
-	$topicselbox = ob_get_contents();
-	ob_end_clean();
+	//ob_start();
+	//$BTopic->makeTopicSelBox( 1, $BTopic->topic_pid(), 'topic_pid' );
+	//$topicselbox = ob_get_contents();
+	//ob_end_clean();
+	$topicselbox = $BTopic->makeTopicSelBox( true , $BTopic->topic_pid() ,  'topic_pid' ) ;
 	$asssigns = array(
 		'images' => $images,
 		'topic_id' => $BTopic->topic_id(),
@@ -201,7 +204,7 @@ case 'modTopic':
 
 case 'addTopic':
 
-	$BTopic = new BulletinTopic();
+	$BTopic = new BulletinTopic( $mydirname );
 	
 	$BTopic->setTopicPid( $_POST['topic_pid'] );
 	
@@ -237,7 +240,7 @@ case 'delTopic':
 		include dirname(__FILE__).'/mymenu.php' ;
 		$template = 'bulletin_deltopic.html';
 
-		$BTopic = new BulletinTopic( $_GET['topic_id'] );
+		$BTopic = new BulletinTopic( $mydirname , $_GET['topic_id'] );
 		
 		// すべてのサブトピックを取得
 		$topic_arr = $BTopic->getAllChildTopics();
@@ -263,7 +266,7 @@ case 'delTopic':
 
 	}else{
 	
-		$BTopic = new BulletinTopic( $_POST['topic_id'] );
+		$BTopic = new BulletinTopic( $mydirname , $_POST['topic_id'] );
 		
 		// すべてのサブトピックを取得
 		$topic_arr = $BTopic->getAllChildTopics();
@@ -278,7 +281,7 @@ case 'delTopic':
 			if( $move_topics[$eachtopic->topic_id()] == 0 ){
 			
 				// すべての記事を取得
-				$story_arr = Bulletin::getAllByTopic( $eachtopic->topic_id() );
+				$story_arr = Bulletin::getAllByTopic( $mydirname , $eachtopic->topic_id() );
 				foreach( $story_arr as $eachstory ){
 					if ( false != $eachstory->delete() ){
 						//コメントを削除
@@ -291,7 +294,7 @@ case 'delTopic':
 			}else{
 			
 				// すべての記事を取得
-				$story_arr = Bulletin::getAllByTopic( $eachtopic->topic_id() );
+				$story_arr = Bulletin::getAllByTopic( $mydirname , $eachtopic->topic_id() );
 				foreach( $story_arr as $eachstory ){
 					$eachstory->setVar('topicid', $move_topics[$eachtopic->topic_id()]);
 					$eachstory->store();
@@ -310,11 +313,11 @@ case 'delTopic':
 
 case 'modTopicS':
 
-	$BTopic = new BulletinTopic($_POST['topic_id']);
+	$BTopic = new BulletinTopic( $mydirname , $_POST['topic_id'] ) ;
 	if ( $_POST['topic_pid'] == $_POST['topic_id'] )
 	{
 		echo "ERROR: Cannot select this topic for parent topic!";
-		exit();
+		exit(); // TODO check parent tree or not
 	}
 	$BTopic -> setTopicPid( $_POST['topic_pid'] );
 	if ( empty( $_POST['topic_title'] ) )
@@ -347,7 +350,7 @@ case 'convert':
 
 		while( $topic = $xoopsDB->fetchArray($result)){
 		
-			$sql = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title) VALUES (%u, %u, %s, %s)", $xoopsDB->prefix(DB_BULLETIN_TOPICS), $topic['topic_id'], $topic['topic_pid'], $xoopsDB->quoteString($topic['topic_imgurl']), $xoopsDB->quoteString($topic['topic_title']));
+			$sql = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, topic_created, topic_modified) VALUES (%u, %u, %s, %s, UNIX_TIMESTAMP(), UNIX_TIMESTAMP())", $xoopsDB->prefix("{$mydirname}_topics"), $topic['topic_id'], $topic['topic_pid'], $xoopsDB->quoteString($topic['topic_imgurl']), $xoopsDB->quoteString($topic['topic_title']));
 
 			if($xoopsDB->query($sql)){
 				echo '<br />Topic "'.htmlspecialchars($topic['topic_title']).'" was successfully converted.';
@@ -371,7 +374,7 @@ case 'convert':
 			else if( $story['topicalign'] == 'L' ) $topicimg = 2;
 			else $topicimg = 0;
 
-			$new_story = new Bulletin();
+			$new_story = new Bulletin( $mydirname );
 			$new_story->setVar('uid', $story['uid']);
 			$new_story->setVar('title', $story['title']);
 			$new_story->setVar('created', $story['created']);
@@ -442,18 +445,20 @@ exit;
 
 function newSubmissions($action, $limit=5, $start=0)
 {
+	global $mydirname ;
+
 	switch($action){
 	case 'newSubmissions':
-		$articles = Bulletin::getAllSubmitted();
+		$articles = Bulletin::getAllSubmitted( $mydirname );
 		break;
 	case 'autoStories':
-		$articles = Bulletin::getAllAutoStory();
+		$articles = Bulletin::getAllAutoStory( $mydirname );
 		break;
 	case 'Published':
-		$articles = Bulletin::getAllPublished( $limit, $start, 0, 0 );
+		$articles = Bulletin::getAllPublished( $mydirname , $limit, $start, 0, 0 );
 		break;
 	case 'Expired':
-		$articles = Bulletin::getAllExpired( $limit, $start, 0, 0 );
+		$articles = Bulletin::getAllExpired( $mydirname , $limit, $start, 0, 0 );
 		break;
 	}
 	

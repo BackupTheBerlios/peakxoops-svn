@@ -18,7 +18,8 @@ if ( $bulletin_displaynav == 1 ) {
 	$xoopsTpl->assign('displaynav', true);
 	
 	// セレクタをアサイン
-	$xoopsTpl->assign('topic_select', Bulletin::makeTopicSelBox(1, $storytopic, 'storytopic'));
+	$bt = new BulletinTopic( $mydirname ) ;
+	$xoopsTpl->assign('topic_select', $bt->makeTopicSelBox( true , $storytopic , 'storytopic' ) ) ;
 	
 	// オプションをアサイン
 	for ( $i = 5; $i <= 30; $i = $i + 5 ) {
@@ -34,11 +35,11 @@ if ( $bulletin_displaynav == 1 ) {
 
 // カレンダからのリンク（日付指定が有った場合）
 if( !empty($caldate) && preg_match('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', $caldate, $datearr) ){
-	$articles = Bulletin::getAllToday($storynum, $start, $caldate);
+	$articles = Bulletin::getAllToday( $mydirname , $storynum, $start, $caldate);
 	$xoopsTpl->assign('displaynav', false);
 }else{
 // 通常表示の場合
-	$articles = Bulletin::getAllPublished($storynum, $start, $storytopic, 1, true, true);
+	$articles = Bulletin::getAllPublished( $mydirname , $storynum, $start, $storytopic, 1, true, true);
 }
 
 $scount = count($articles);
@@ -94,10 +95,10 @@ for ( $i = 0; $i < $scount; $i++ ) {
 
 // ページナビ
 if( !empty($caldate) && preg_match('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', $caldate, $datearr) ){
-	$totalcount = Bulletin::countPublishedByDate($caldate);
+	$totalcount = Bulletin::countPublishedByDate( $mydirname , $caldate);
 	$query      = 'caldate='.$caldate;
 }else{
-	$totalcount = Bulletin::countPublished($storytopic,true);
+	$totalcount = Bulletin::countPublished( $mydirname , $storytopic,true);
 	$query      = 'storytopic='.$storytopic;
 }
 if ( $totalcount > $scount ) {
@@ -117,7 +118,7 @@ if($bulletin_assing_rssurl_head){
 
 // GIJ
 $breadcrumbs = array( array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ) ;
-$topic =& new BulletinTopic( $storytopic ) ;
+$topic =& new BulletinTopic( $mydirname , $storytopic ) ;
 if( $storytopic ) {
 	$pankuzu4assign = $topic->makePankuzuForHTML( $storytopic ) ;
 	foreach( $pankuzu4assign as $p4a ) {

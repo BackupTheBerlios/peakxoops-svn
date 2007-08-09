@@ -106,6 +106,7 @@ pico is fast enough if you use content's cache.
 - added a class for xmobile's plugin
 - numbered as stable version
 - fixed a class for xmoble plugin (thx yue) 1.40a
+- modified search function for xmobile (thx SATT) 1.40b
 
 1.39 beta (2007/08/06)
 - fixed parsing dynamic contents can be occurred on listing contents
@@ -426,7 +427,8 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 1.40 (2007/08/08)
 - xmobileプラグイン用クラスの追加
 - 安定版としてのリリース
-- xmobleプラグイン用クラスのパーミッション処理の修正 (thx yue) 1.40a
+- xmobileプラグイン用クラスのパーミッション処理の修正 (thx yue) 1.40a
+- xmobileの場合の検索結果を振り分け (thx SATT) 1.40b
 
 1.39 beta (2007/08/06)
 - コンテンツ個別表示以外でのbody処理をやらないようにした

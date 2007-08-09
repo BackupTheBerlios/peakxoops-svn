@@ -24,6 +24,14 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 	$config_handler =& xoops_gethandler('config');
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
+	// check xmobile or not
+	$is_xmobile = false ;
+	if( function_exists( 'debug_backtrace' ) && ( $backtrace = debug_backtrace() ) ) {
+		if( strstr( $backtrace[2]['file'] , '/xmobile/actions/' ) ) {
+			$is_xmobile = true ;
+		}
+	}
+
 	// XOOPS Search module
 	$showcontext = empty( $_GET['showcontext'] ) ? 0 : 1 ;
 	$select4con = $showcontext ? "o.`body_cached` AS text" : "'' AS text" ;
@@ -66,7 +74,7 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 		$whr_kw = 1 ;
 	}
 
-	$sql = "SELECT o.`content_id`,o.`vpath`,o.`subject`,o.`created_time`,o.`poster_uid`,$select4con FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_kw) AND ($whr_uid) AND ($whr_read4content) ORDER BY 1" ;
+	$sql = "SELECT o.`content_id`,o.`cat_id`,o.`vpath`,o.`subject`,o.`created_time`,o.`poster_uid`,$select4con FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_kw) AND ($whr_uid) AND ($whr_read4content) ORDER BY 1" ;
 	$result = $db->query( $sql , $limit , $offset ) ;
 	$ret = array() ;
 	$context = '' ;
@@ -81,7 +89,7 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 
 		$ret[] = array(
 			'image' => '' ,
-			'link' => pico_common_make_content_link4html( $configs , $content_row ) ,
+			'link' => $is_xmobile ? 'index.php?cat_id='.$content_row['cat_id'].'&content_id='.$content_row['content_id'] : pico_common_make_content_link4html( $configs , $content_row ) ,
 			'title' => $content_row['subject'] ,
 			'time' => $content_row['created_time'] ,
 			'uid' => empty( $configs['search_by_uid'] ) ? 0 : $content_row['poster_uid'] ,

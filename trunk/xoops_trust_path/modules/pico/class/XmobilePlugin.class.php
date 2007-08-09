@@ -220,7 +220,7 @@ class XmobilePicoPluginHandlerAbstract extends XmobilePluginHandler
 		$configs = $config_handler->getConfigList( $module->mid() ) ;
 	
 		// categories can be read by current viewer (check by category_permissions)
-		$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
+		$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname , $this->sessionHandler->uid ) ) . ')' ;
 	
 		$sql = "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND o.content_id='$content_id' AND o.visible AND o.created_time <= UNIX_TIMESTAMP()" ;
 		if( ! $result = $db->query( $sql ) ) return array() ;

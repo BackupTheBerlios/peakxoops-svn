@@ -1,6 +1,11 @@
 <?php
 
 // definitions for editing blocks
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-08-11 06:35:30
+define('_MB_D3FORUM_FORUMLIMIT','Specify forums');
+define('_MB_D3FORUM_FORUMLIMITDSC','Same as category speification');
+
 define("_MB_D3FORUM_DISPLAY","تعداد %s نمایش داده شود");
 define("_MB_D3FORUM_DISPLAYF","در اندازه ی کامل نمایش داده شود"); 
 define("_MB_D3FORUM_MARKISUP","تاپیک های علامت گذاری شده( مارک دار) بالاتر از همه قرار بگیرند"); 

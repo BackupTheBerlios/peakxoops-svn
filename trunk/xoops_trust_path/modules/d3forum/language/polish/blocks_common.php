@@ -1,6 +1,11 @@
 <?php
 
 // definitions for editing blocks
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-08-11 06:35:31
+define('_MB_D3FORUM_FORUMLIMIT','Specify forums');
+define('_MB_D3FORUM_FORUMLIMITDSC','Same as category speification');
+
 define("_MB_D3FORUM_DISPLAY","Wy¶wietl %s obiektów");
 define("_MB_D3FORUM_DISPLAYF","Wy¶wietl w pe³nym rozmiarze");
 define("_MB_D3FORUM_MARKISUP","Zaznaczone tematy s± wy¿ej");

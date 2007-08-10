@@ -39,7 +39,7 @@ $category4assign = array(
 	'weight' => 0 ,
 	'desc' => '' ,
 	'options' => '' , //$options4html ,
-	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $d3forum_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
+	'option_desc' => d3forum_main_get_categoryoptions4edit( $d3forum_configs_can_be_override ) ,
 ) ;
 
 

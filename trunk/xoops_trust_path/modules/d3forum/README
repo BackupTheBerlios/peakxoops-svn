@@ -26,6 +26,16 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.74 alpha (2007-08-11)
+- fixed wrong " escaping in [ code] block with XCL2.1 (thx sippu)
+- added an option selecting forum into blocks
+- added a sorting option "average"
+- modified listtopics templates for some sites without voting feature
+- added an input form for topic_external_link_id ihnto topicmanager
+- modified forum/category form about overriding option
+- updated language files
+-- persian (thx voltan)
+
 0.73 alpha (2007-06-05)
 - modified AntiSPAM class japanese
 - modified some templates
@@ -145,6 +155,16 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.74 alpha (2007-08-11)
+- XCL2.1だと[ code]内の"が\"になってしまっているバグを修正 (thx sippu)
+- トピック・投稿一覧ブロックに、フォーラム指定を追加
+- トピックソートに平均点を追加
+- 投票機能を使わない時の表示方法を修正
+- トピック管理で、topic_external_link_idを編集可能とした
+- オプションオーバーライドをpicoと同等に判りやすくした
+- 言語ファイル更新
+-- persian (thx voltan)
 
 0.73 alpha (2007-06-05)
 - AntiSPAMクラスjapaneseの動作改善

@@ -8,17 +8,17 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-18 17:34:37
-define($constpref.'_ADMENU_MYLANGADMIN','Languages');
-define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
-define($constpref.'_ANTISPAM_GROUPS','Groups should be checked anti-SPAM');
-define($constpref.'_ANTISPAM_GROUPSDSC','Usually set all blank.');
+define($constpref.'_ADMENU_MYLANGADMIN','زبان');
+define($constpref.'_SHOW_BREADCRUMBS','نمایش مسیر (breadcrumbs)');
+define($constpref.'_ANTISPAM_GROUPS','گروه های که باید با آنتی اسپم چک شوند');
+define($constpref.'_ANTISPAM_GROUPSDSC','معمولا همه بلاک ها تنظیم شوند.');
 define($constpref.'_ANTISPAM_CLASS','Class name of anti-SPAM');
-define($constpref.'_ANTISPAM_CLASSDSC','Default value is "default". If you disable anti-SPAM against guests even, set it blank');
+define($constpref.'_ANTISPAM_CLASSDSC','مقدار پیش فرض "پیشفرض" است . اگر شما آنتی اسپم را برای مهمان ها خاموش کرده اید, این مورد را خالی بگذارید');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-26 11:39:16
-define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
-define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions');
-define($constpref.'_ADMENU_MYPREFERENCES','Preferences');
+define($constpref.'_ADMENU_MYTPLSADMIN','تمپلیت ها');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','بلاک ها / دسترسی ها');
+define($constpref.'_ADMENU_MYPREFERENCES','ویژگی ها');
 
 define( $constpref.'_LOADED' , 1 ) ;
 
@@ -30,7 +30,7 @@ define($constpref."_DESC","ماژول انجمن برای زوپس");
 
 // Names of blocks for this module (Not all module has blocks)
 define($constpref."_BNAME_LIST_TOPICS","تاپیک ها");
-define($constpref."_BDESC_LIST_TOPICS","This block can be used for multi-purpose. Of course, you can put it multiplly.");
+define($constpref."_BDESC_LIST_TOPICS","این بلاک برای چند هدف قابل استفاده است. Of course, you can put it multiplly.");
 define($constpref."_BNAME_LIST_POSTS","پست ها");
 define($constpref."_BNAME_LIST_FORUMS","انجمن ها");
 
@@ -59,23 +59,23 @@ define($constpref.'_HOT_THRESHOLD','Hot Topic Threshold');
 define($constpref.'_HOT_THRESHOLDDSC','');
 define($constpref.'_TOPICS_PER_PAGE','تعداد تاپیک های که در هر صفحه از انجمن نمایش داده میشود');
 define($constpref.'_TOPICS_PER_PAGEDSC','');
-define($constpref.'_VIEWALLBREAK','Topics per a page in the view crossing forums');
+define($constpref.'_VIEWALLBREAK','تاپیک های هر صفحه در محل تقاطع انجمن ها نمایش داده شوند');
 define($constpref.'_VIEWALLBREAKDSC','');
 define($constpref.'_SELFEDITLIMIT','محدوده ی زمانی برای ویرایش پست توسط اعضا ( ثانیه)');
 define($constpref.'_SELFEDITLIMITDSC','زمانی  را که کاربر به طور معمولی میتواند پستش را ویرایش کند انتخواب کنید. با انتخواب عدد 0 کاربر توان ویرایش پست خود را نخواهد داشت.');
 define($constpref.'_SELFDELLIMIT','محدوده ی زمانی برای حذف پست توسط اعضا (ثانیه)');
 define($constpref.'_SELFDELLIMITDSC','زمانی را که کاربر میتواند به طور معمولی پست خود را پاک کند انتخواب کنید. با انتخواب 0امکان پاک کردن پست توسط کاربر را بگیرید. در هر صورت پست های اصلی پاک نخواهد شد.');
-define($constpref.'_CSS_URI','URI of CSS file for this module');
-define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: index.css');
-define($constpref.'_IMAGES_DIR','Directory for image files');
-define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
+define($constpref.'_CSS_URI','آدرس فایل های CSS این ماژول');
+define($constpref.'_CSS_URIDSC','پچ های وابسته و مطلق قابل تنظیم. پیشفرض: index.css');
+define($constpref.'_IMAGES_DIR','شاخه فایل های تصویری');
+define($constpref.'_IMAGES_DIRDSC','پچ های وابسته در شاخه ماژول  تنظیم شوند . پیشفرض: images');
 define($constpref.'_ANONYMOUS_NAME','نام کاربر مهمان');
 define($constpref.'_ANONYMOUS_NAMEDSC','');
 define($constpref.'_ICON_MEANINGS','آیکن های پیام ها');
 define($constpref.'_ICON_MEANINGSDSC','همه ی آیکن ها را تعیین کنید. هر کدوم از نام ها را با (|) از بقیه جدا کنید. نام اولین عکس مرتبط "posticon0.gif" است.');
 define($constpref.'_ICON_MEANINGSDEF','none|normal|unhappy|happy|raise it|lower it|report|question');
 define($constpref.'_GUESTVOTE_IVL','رای دادن مهمان ها');
-define($constpref.'_GUESTVOTE_IVLDSC','با انتخواب صفر امکان رای دادن مهمان ها غیر فعال میشود. The other this number means time(sec.) to allow second post from the same IP.');
+define($constpref.'_GUESTVOTE_IVLDSC','با انتخواب صفر امکان رای دادن مهمان ها غیر فعال میشود. با انتخواب  عدد های دیگر زمانی را که هر IP میتواند رای دهد ( ثانیه) مشخص کنید.');
 
 
 
@@ -127,10 +127,10 @@ define($constpref.'_NOTIFY_GLOBAL_NEWFORUMCAP', 'وقتی انجمن جدیدی 
 define($constpref.'_NOTIFY_GLOBAL_NEWFORUMSBJ', '[{X_SITENAME}] {X_MODULE}:انجمن جدید');
 
 define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULL', 'پست جدید (متن کامل)');
-define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULLCAP', 'Notify me of any new posts (include full text in message).');
+define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULLCAP', 'هر پست جدیدی را به من اطلاع بده (تمام پست را در پیام بنویس).');
 define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULLSBJ', '[{X_SITENAME}] {POST_TITLE}');
 define($constpref.'_NOTIFY_GLOBAL_WAITING', 'New waiting');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCAP', 'Notify me of new posts waiting approval. For admins only');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCAP', 'وقتی یک پست منتظر تایید است اطلاع بده . فقط برای مدیر');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGSBJ', '[{X_SITENAME}] {X_MODULE}: New waiting');
 
 }

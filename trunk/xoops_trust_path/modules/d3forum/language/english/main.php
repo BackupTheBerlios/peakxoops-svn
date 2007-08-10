@@ -64,6 +64,7 @@ define('_MD_D3FORUM_POSTER','Poster');
 define('_MD_D3FORUM_VIEWS','Views');
 define('_MD_D3FORUM_LEGEND','Legend');
 define('_MD_D3FORUM_TOPICTITLE','Topic title');
+define('_MD_D3FORUM_TOPICEXTERNALLINKID','External Link ID (Comment)');
 define('_MD_D3FORUM_TOP','Top');
 define('_MD_D3FORUM_WHOLE','Whole');
 define('_MD_D3FORUM_ALT_MARKEDYES','Marked');
@@ -109,6 +110,9 @@ define('_MD_D3FORUM_ERR_TOOMANYDIVEND','Too many [/quote] or </div>');
 
 // D3forumAntispam classes
 define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','Post again after turning JavaScript of your browser.');
+define('_MD_D3FORUM_LABEL_JAPANESEINPUTYOMI','');
+define('_MD_D3FORUM_ERR_JAPANESENOTINPUT','');
+define('_MD_D3FORUM_ERR_JAPANESEINCORRECT','');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
@@ -129,6 +133,8 @@ define('_MD_D3FORUM_ODR_VOTESDSC','Votes desc');
 define('_MD_D3FORUM_ODR_VOTESASC','Votes asc');
 define('_MD_D3FORUM_ODR_POINTSDSC','Points desc');
 define('_MD_D3FORUM_ODR_POINTSASC','Points asc');
+define('_MD_D3FORUM_ODR_AVGDSC','Avg desc');
+define('_MD_D3FORUM_ODR_AVGASC','Avg asc');
 
 // extract options
 define('_MD_D3FORUM_OPT_SOLVEDYES','Solved');
@@ -301,6 +307,8 @@ define('_MD_D3FORUM_TH_CATEGORYWEIGHT','Category weight');
 define('_MD_D3FORUM_TH_CATEGORYPARENT','Parent category');
 define('_MD_D3FORUM_TH_CATEGORYDESC','Category desc');
 define('_MD_D3FORUM_TH_CATEGORYOPTIONS','Category options');
+define('_MD_D3FORUM_ONOFF','ON/OFF');
+define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
 
 define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','(under this category)');
 define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','(under this forum)');

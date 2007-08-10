@@ -2,24 +2,35 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-08-11 06:35:30
+define('_MD_D3FORUM_TOPICEXTERNALLINKID','External Link ID (Comment)');
+define('_MD_D3FORUM_LABEL_JAPANESEINPUTYOMI','');
+define('_MD_D3FORUM_ERR_JAPANESENOTINPUT','');
+define('_MD_D3FORUM_ERR_JAPANESEINCORRECT','');
+define('_MD_D3FORUM_ODR_AVGDSC','Avg desc');
+define('_MD_D3FORUM_ODR_AVGASC','Avg asc');
+define('_MD_D3FORUM_ONOFF','ON/OFF');
+define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-18 17:34:37
-define('_MD_D3FORUM_ERR_INVALIDEXTERNALLINKID','You have commented to invalid target');
-define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','View more comments...');
-define('_MD_D3FORUM_ERR_TOOMANYDIVBEGIN','Too many [quote] or <div>');
-define('_MD_D3FORUM_ERR_TOOMANYDIVEND','Too many [/quote] or </div>');
-define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','Post again after turning JavaScript of your browser.');
-define('_MD_D3FORUM_ERR_NOMESSAGE','You have posted empty message');
-define('_MD_D3FORUM_ERR_GUESTPASSMISMATCH','Invaild password');
+define('_MD_D3FORUM_ERR_INVALIDEXTERNALLINKID','شما در یک محل اشتباه پیام گذاشته اید');
+define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','دیدن پیام های بیشتر...');
+define('_MD_D3FORUM_ERR_TOOMANYDIVBEGIN','Too many [quote] یا <div>');
+define('_MD_D3FORUM_ERR_TOOMANYDIVEND','Too many [/quote] یا </div>');
+define('_MD_D3FORUM_ERR_TURNJAVASCRIPTON','بعد از برگردانند جاوا اسکیریپدر مرور گر خود دوباره پست کنید .');
+define('_MD_D3FORUM_ERR_NOMESSAGE','شما یک پیام خالی ارسال کرده اید');
+define('_MD_D3FORUM_ERR_GUESTPASSMISMATCH','پسورد اشتباه است');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-07 13:42:10
-define('_MD_D3FORUM_MSG_CONFIRMOK','Are you OK?');
-define('_MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM','Move this topic into the other forum');
-define('_MD_D3FORUM_BTN_COPYTOPICTOOTHERFORUM','Copy this topic into the other forum');
-define('_MD_D3FORUM_BTN_MOVEFORUMTOOTHERFORUM','Move this forum into the other forum');
-define('_MD_D3FORUM_BTN_COPYFORUMTOOTHERFORUM','Copy this forum into the other forum');
+define('_MD_D3FORUM_MSG_CONFIRMOK','آیا موافقید؟');
+define('_MD_D3FORUM_BTN_MOVETOPICTOOTHERFORUM','انتقال این تاپیک به یک انجمن دیگر');
+define('_MD_D3FORUM_BTN_COPYTOPICTOOTHERFORUM','کپی کردن این تاپیک در یک انجمن دیگر');
+define('_MD_D3FORUM_BTN_MOVEFORUMTOOTHERFORUM','انتقال این انجمن به یک انجمن دیگر');
+define('_MD_D3FORUM_BTN_COPYFORUMTOOTHERFORUM','کپی کردن یک انجمن در یک انجمن دیگر');
 
-define('_MD_D3FORUM_ON','Posted on');
-define('_MD_D3FORUM_LASTMODIFIED','Last modified');
+define('_MD_D3FORUM_ON','ارسال شده در');
+define('_MD_D3FORUM_LASTMODIFIED','آخرین ویرایش');
 define('_MD_D3FORUM_BY','فرستاده شده به وسیله ی');
 define('_MD_D3FORUM_POSTERFROM','انجمن');
 define('_MD_D3FORUM_POSTERJOINED','عضو شوید');
@@ -29,7 +40,7 @@ define('_MD_D3FORUM_TOPICSCOUNT','تاپیک ها');
 define('_MD_D3FORUM_POSTSCOUNT','پست ها');
 define('_MD_D3FORUM_JUMPTOBOTTOM','برو به پایین');
 define('_MD_D3FORUM_JUMPTOTOP','برو به صفحه ی اصلی');
-define('_MD_D3FORUM_POSTSTREE','Posts tree');
+define('_MD_D3FORUM_POSTSTREE','نمایش درختی');
 define('_MD_D3FORUM_BTN_JUMPTOFORUM','برو به انجمن');
 define('_MD_D3FORUM_BTN_JUMPTOCATEGORY','برو به شاخه ی');
 define('_MD_D3FORUM_BTN_UPDATE','به روز رسانی');
@@ -51,9 +62,9 @@ define('_MD_D3FORUM_LABEL_SEARCH','جستجو');
 define('_MD_D3FORUM_BTN_SEARCH','جستجو');
 define('_MD_D3FORUM_LINK_ADVSEARCH','جستجوی پیشرفته');
 define('_MD_D3FORUM_SUBJECT','موضوع');
-define('_MD_D3FORUM_BODY','Body');
+define('_MD_D3FORUM_BODY','بدنه');
 define('_MD_D3FORUM_ALT_INVISIBLE','(نامرئی)');
-define('_MD_D3FORUM_ALT_UNAPPROVAL','(not approved)');
+define('_MD_D3FORUM_ALT_UNAPPROVAL','(بدون موافقت کردن)');
 define('_MD_D3FORUM_LINK_NEXTTOPIC','تاپیک بعدی');
 define('_MD_D3FORUM_LINK_PREVTOPIC','تاپیک قبلی');
 define('_MD_D3FORUM_LINK_NEXTPOST','پست بعدی');
@@ -88,14 +99,14 @@ define('_MD_D3FORUM_MARKEDYES_DESC','You have checked this topic as <em class="d
 define('_MD_D3FORUM_MARKEDNO_DESC','You can check this topic as <em class="d3f_attn" title="MARKED topics are displayed in the top of list">MARKED</em>');
 define('_MD_D3FORUM_ALT_SOLVEDYES','تاپیک حل شده');
 define('_MD_D3FORUM_ALT_SOLVEDNO','تاپیک حل نشده');
-define('_MD_D3FORUM_SOLVEDYES_DESC','This topic is<em class="d3f_attn" title="SOLVED topics are treated as closed topics by admins or moderators">SOLVED</em>');
-define('_MD_D3FORUM_SOLVEDNO_DESC','This topic is <em class="d3f_attn" title="Responses are welcome">UNSOLVED</em>');
+define('_MD_D3FORUM_SOLVEDYES_DESC','این تاپیک<em class="d3f_attn" title="SOLVED topics are treated as closed topics by admins or moderators">حل شده است</em>');
+define('_MD_D3FORUM_SOLVEDNO_DESC','این تاپیک <em class="d3f_attn" title="پاسخ دهنده خوش آمدید">حل نشده است</em>');
 define('_MD_D3FORUM_MARK_TURNON','این تاپیک را نشانه دار کن');
 define('_MD_D3FORUM_MARK_TURNOFF','نشان این تاپیک را بردار');
-define('_MD_D3FORUM_SOLVED_TURNON','Turn solved on');
-define('_MD_D3FORUM_SOLVED_TURNOFF','Turn solved off');
-define('_MD_D3FORUM_A_TOPOFTHETOPIC','Top of the posts'); //jidaikobo
-define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','Bottom of the posts'); //jidaikobo
+define('_MD_D3FORUM_SOLVED_TURNON','روشن کردن حل شده ها');
+define('_MD_D3FORUM_SOLVED_TURNOFF','خاموش کردن حل شده ها');
+define('_MD_D3FORUM_A_TOPOFTHETOPIC','بالای صفحه'); //jidaikobo
+define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','پایین صفحه'); //jidaikobo
 
 // comment integration
 define('_MD_D3FORUM_POSTASCOMMENTTOP','فرستادن پیام جدید');
@@ -163,7 +174,7 @@ define('_MD_D3FORUM_LASTVISIT','آخرین بازدید شما');
 
 // topic attributes (done)
 define('_MD_D3FORUM_TOPICLOCKED','تاپیک قفل شده');
-define('_MD_D3FORUM_TOPICLOCKED_DESC','This topic is<em class="d3f_attn" title="You cannot reply nor edit posts">LOCKED</em> by administrators or moderators');
+define('_MD_D3FORUM_TOPICLOCKED_DESC','این تاپیک<em class="d3f_attn" title="شما نه میتوانید ویرایش کنید نه پاسخ دهید">بسته شده </em>توسط ناظر یا وب مستر ');
 define('_MD_D3FORUM_TOPICSTICKY','تاپیک چسبان');
 define('_MD_D3FORUM_TOPICPOPULAR','تاپیک محبوب');
 define('_MD_D3FORUM_TOPICNEWPOSTS','تاپیک دارای پست جدید');
@@ -192,7 +203,7 @@ define('_MD_D3FORUM_ERR_CREATEFORUM','شما نمیتوانید انجمن  جد
 define('_MD_D3FORUM_ERR_CREATECATEGORY','شما نمیتوانید شاخه ی جدید بسازید');
 
 // postform (done)
-define('_MD_D3FORUM_LABEL_INPUTHELPER','Input Helper ON/OFF');
+define('_MD_D3FORUM_LABEL_INPUTHELPER','ادیتور خاموش/ روشن');
 define('_MD_D3FORUM_LABEL_ADVANCEDOPTIONS','انتخواب های پیشرفته');
 define('_MD_D3FORUM_REFERENCEPOST','Reference');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','Post from preview');
@@ -252,7 +263,7 @@ define('_MD_D3FORUM_CUTPASTEPOSTS','بریدن و چسباندن پست ها (Cu
 define('_MD_D3FORUM_ERR_NOSPECIFICID',' post_id یا forum_id باید تایین شود') ;
 define('_MD_D3FORUM_ERR_PIDNOTEXIST','توجه (post_id) انتخوابی شما وجود ندارد') ;
 define('_MD_D3FORUM_ERR_CUTPASTENOTADMINOFDESTINATION','شما نمیتوانید انجمن مقصد را مدیریت کنید') ;
-define('_MD_D3FORUM_ERR_PIDLOOP','parent/child loop error') ;
+define('_MD_D3FORUM_ERR_PIDLOOP','خطا در حلقه والد / وابسته') ;
 define('_MD_D3FORUM_CHILDREN_COUNT','وابسته ها') ;
 define('_MD_D3FORUM_PARENT_POSTID','اصلی post_id') ;
 define('_MD_D3FORUM_CUTPASTEBYPOSTID_DEST','post_id مقصد') ;
@@ -268,7 +279,7 @@ define('_MD_D3FORUM_CUTPASTESUCCESS','این پست با موفقیت از مح�
 // vote to post
 define('_MD_D3FORUM_ERR_VOTEPERM','شما میتوانید  به این رای دهید');
 define('_MD_D3FORUM_ERR_VOTEINVALID','رای خود را وارد کنید');
-define('_MD_D3FORUM_MSG_VOTEDOUBLE','You can vote once per a post');
+define('_MD_D3FORUM_MSG_VOTEDOUBLE','شما فقط به پست ها میتوانید رای دهید');
 define('_MD_D3FORUM_MSG_VOTEACCEPTED','از رای شما سپاسگذاریم!');
 define('_MD_D3FORUM_MSG_VOTEDISABLED','شما نمیتوانید در این انجمن رای دهید');
 define('_MD_D3FORUM_VOTECOUNT','رای ها');
@@ -287,7 +298,7 @@ define('_MD_D3FORUM_TH_FORUMTITLE','عنوان انجمن');
 define('_MD_D3FORUM_TH_FORUMWEIGHT','وزن (چینش) انجمن');
 define('_MD_D3FORUM_TH_FORUMDESC','توضیحات انجمن');
 define('_MD_D3FORUM_TH_FORUMOPTIONS','اختیارات (تنظیمات) انجمن');
-define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','Format for comment-integration');
+define('_MD_D3FORUM_TH_EXTERNALLINKFORMAT','قالب بندی برای یک پارچه کردن پیام ها');
 define('_MD_D3FORUM_HELP_EXTERNALLINKFORMAT','leave blank for ordinary forums. If you write URI with %s started from  {XOOPS_URL}/modules/ , it will be the template linking to the sources. Native comment-integrated modules will set this field automatically.');
 
 // makecategory and categorymanager

@@ -167,7 +167,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 	function xoopsCodeDecodeSafe( $text )
 	{
 		if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
-			$text = htmlspecialchars( $text , ENT_QUOTES ) ;
+			$text = htmlspecialchars( str_replace( '\"' , '"' , $text ) , ENT_QUOTES ) ;
 		}
 
 		$patterns[] = "/\[color=(['\"]?)([a-zA-Z0-9]*)\\1](.*)\[\/color\]/sU";

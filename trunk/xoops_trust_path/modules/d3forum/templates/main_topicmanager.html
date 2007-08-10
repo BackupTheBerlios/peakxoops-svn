@@ -28,6 +28,14 @@
 		<th class="d3f_head"><label for="forum_id"><{$smarty.const._MD_D3FORUM_FORUM}></label></th>
 		<td class="odd"><select name="forum_id" id="forum_id"><{$forum_jumpbox_options}></select></td>
 	</tr>
+
+	<{if $forum.external_link_format}>
+	<tr>
+		<th class="d3f_head"><label for="topic_external_link_id"><{$smarty.const._MD_D3FORUM_TOPICEXTERNALLINKID}></label></th>
+		<td class="odd"><input type="text" name="topic_external_link_id" id="topic_external_link_id" size="20" value="<{$topic.external_link_id}>" /></td>
+	</tr>
+	<{/if}>
+
 	<tr>
 		<th class="d3f_head"><{$smarty.const._MD_D3FORUM_REPLIES}></th>
 		<td class="odd"><{$topic.replies}></td>

@@ -94,7 +94,7 @@ $xoopsOption['template_main'] = $mydirname.'_main_topicmanager.html' ;
 include XOOPS_ROOT_PATH."/header.php";
 
 // make edit data (special patch)
-$topic4assign['title4edit'] = $myts->makeTboxData4Edit( $topic_row['topic_title'] , 1 ) ;
+$topic4assign['title4edit'] = htmlspecialchars( $topic_row['topic_title'] , ENT_QUOTES ) ;
 
 $xoopsTpl->assign( array(
 	'mydirname' => $mydirname ,

@@ -271,6 +271,8 @@ function d3forum_trigger_event( $category , $item_id , $event , $extra_tags=arra
 {
 	global $xoopsModule , $xoopsConfig , $mydirname , $mydirpath , $mytrustdirname , $mytrustdirpath ;
 
+	$notification_handler =& xoops_gethandler('notification') ;
+
 	$mid = $xoopsModule->getVar('mid') ;
 
 	// language file
@@ -323,7 +325,6 @@ function d3forum_trigger_event( $category , $item_id , $event , $extra_tags=arra
 		}
 		$criteria->add($user_criteria);
 	}
-	$notification_handler =& xoops_gethandler('notification') ;
 	$notifications =& $notification_handler->getObjects($criteria);
 	if (empty($notifications)) {
 		return;
@@ -332,7 +333,7 @@ function d3forum_trigger_event( $category , $item_id , $event , $extra_tags=arra
 	// Add some tag substitutions here
 	$tags = array();
 	// {X_ITEM_NAME} {X_ITEM_URL} {X_ITEM_TYPE} from lookup_func are disabled
-	$tags['X_MODULE'] = $xoopsModule->getVar('name');
+	$tags['X_MODULE'] = $xoopsModule->getVar('name','n');
 	$tags['X_MODULE_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/';
 	$tags['X_NOTIFY_CATEGORY'] = $category;
 	$tags['X_NOTIFY_EVENT'] = $event;
@@ -410,5 +411,22 @@ function &d3forum_main_get_comment_object( $mydirname , $external_link_format )
 }
 
 
+// get samples of category options
+function d3forum_main_get_categoryoptions4edit( $d3forum_configs_can_be_override )
+{
+	global $xoopsModuleConfig ;
+
+	$lines = array() ;
+	foreach( $d3forum_configs_can_be_override as $key => $type ) {
+		if( isset( $xoopsModuleConfig[ $key ] ) ) {
+			$val = $xoopsModuleConfig[ $key ] ;
+			if( $type == 'int' || $type == 'bool' ) {
+				$val = intval( $val ) ;
+			}
+			$lines[] = htmlspecialchars( $key . ':' . $val , ENT_QUOTES ) ;
+		}
+	}
+	return implode( '<br />' , $lines ) ;
+}
 
 ?>

@@ -9,7 +9,7 @@ $forum_id = intval( $topic_row['forum_id'] ) ;
 $isadminormod = (boolean) @$forum_permissions[ $forum_id ]['is_moderator'] || $isadmin ;
 $topic4assign = array(
 	'id' => $topic_row['topic_id'] ,
-	'external_link_id' => $topic_row['topic_external_link_id'] ,
+	'external_link_id' => htmlspecialchars( $topic_row['topic_external_link_id'] , ENT_QUOTES ) ,
 	'title' => $myts->makeTboxData4Show( $topic_row['topic_title'] , $topic_row['number_entity'] , $topic_row['special_entity'] ) ,
 	'replies' => intval( $topic_row['topic_posts_count'] ) - 1 ,
 	'views' => intval( $topic_row['topic_views'] ) ,
@@ -44,7 +44,7 @@ if( $isadminormod ) {
 
 
 // where for comment-integration next&prev
-$whr_external_link_id = $topic4assign['external_link_id'] ? "topic_external_link_id='".addslashes($topic4assign['external_link_id'])."'" : "1" ;
+$whr_external_link_id = $topic_row['topic_external_link_id'] ? "topic_external_link_id='".addslashes($topic_row['topic_external_link_id'])."'" : "1" ;
 
 // get next "topic" of the forum
 list( $next_topic_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT MAX(topic_id) FROM ".$xoopsDB->prefix($mydirname."_topics")." WHERE topic_id<$topic_id AND forum_id=$forum_id AND ($whr_topic_invisible) AND ($whr_external_link_id)" ) ) ;

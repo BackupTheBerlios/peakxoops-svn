@@ -95,7 +95,7 @@ $forum4assign = array(
 	'external_link_format' => htmlspecialchars( $forum_row['forum_external_link_format'] , ENT_QUOTES ) ,
 	'desc' => htmlspecialchars( $forum_row['forum_desc'] , ENT_QUOTES ) ,
 	'options' => $options4html ,
-	'option_desc' => nl2br( htmlspecialchars( implode( "\n" , array_keys( $d3forum_configs_can_be_override ) ) , ENT_QUOTES ) ) ,
+	'option_desc' => d3forum_main_get_categoryoptions4edit( $d3forum_configs_can_be_override ) ,
 ) ;
 
 

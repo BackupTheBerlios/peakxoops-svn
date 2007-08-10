@@ -48,11 +48,16 @@
 		<tr valign="top" align="left">
 			<th class="d3f_head">
 				<{$smarty.const._MD_D3FORUM_TH_CATEGORYOPTIONS}>
-				<br />
-				<span class="categoryoptiondesc"><{$category.option_desc}></span>
 			</th>
 			<td class="even">
-				<textarea name="options" id="category_options" cols="50" rows="15"><{$category.options}></textarea>
+				<input type="checkbox" id="category_option_controller_onoff" onclick="if(this.checked){xoopsGetElementById('category_option_controller').style.display='block';}else{xoopsGetElementById('category_option_controller').style.display='none';};"  <{if $category.options}>checked="checked"<{/if}> /><label for="category_option_controller_onoff"><{$smarty.const._MD_D3FORUM_ONOFF}></label>
+				<div id="category_option_controller" <{if ! $category.options}>style="display:none;"<{/if}>>
+					<textarea name="options" id="category_options" cols="50" rows="10"><{$category.options}></textarea>
+					<br />
+					<{$smarty.const._MD_D3FORUM_HOWTO_OVERRIDEOPTIONS}>:
+					<br />
+					<span class="categoryoptiondesc"><{$category.option_desc}></span>
+				</div>
 			</td>
 		</tr>
 

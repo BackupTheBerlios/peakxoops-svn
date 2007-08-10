@@ -85,8 +85,10 @@
 	<th abbr="<{$smarty.const._MD_D3FORUM_REPLIES}>"><{$smarty.const._MD_D3FORUM_REPLIES}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{$smarty.const._MD_D3FORUM_VIEWS}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_VOTECOUNT}>"><{$smarty.const._MD_D3FORUM_VOTECOUNT}></th>
+	<{if $mod_config.use_vote}>
 	<th abbr="<{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>"><{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}></th>
 	<th abbr="<{$smarty.const._MD_D3FORUM_FIRSTPOST}>"><{$smarty.const._MD_D3FORUM_FIRSTPOST}></th>
+	<{/if}>
 	<th abbr="<{$smarty.const._MD_D3FORUM_LASTPOST}>"><{$smarty.const._MD_D3FORUM_LASTPOST}></th>
 </tr>
 </thead>
@@ -121,8 +123,10 @@
 	<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a><{$topic.topic_page_jump}></td>
 	<td><{$topic.replies}></td>
 	<td><{$topic.views}></td>
+	<{if $mod_config.use_vote}>
 	<td><{$topic.votes_count}></td>
 	<td><{$topic.votes_avg|string_format:"%.2f"}></td>
+	<{/if}>
 	<td class="d3f_posters"><{$topic.first_post_time_formatted}><br />
 	<{$topic.first_post_uname}> <a href="<{$mod_url}>/index.php?post_id=<{$topic.first_post_id}>"><img src="<{$mod_imageurl}>/posticon<{$topic.first_post_icon}>.gif" alt="<{$topic.first_post_subject}>" /></a></td>
 	<td class="d3f_posters"><{if $topic.replies>0}><{$topic.last_post_time_formatted}><br />

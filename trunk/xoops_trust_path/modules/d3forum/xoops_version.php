@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.73 ;
+$modversion['version'] = 0.74 ;
 $modversion['credits'] = "PEAK Corp. and JIDAIKOBO";
 $modversion['author'] = "GIJ=CHECKMATE and JIDAIKOBO" ;
 $modversion['help'] = "" ;
@@ -54,7 +54,7 @@ $modversion['blocks'][1] = array(
 	'description'	=> constant($constpref.'_BDESC_LIST_TOPICS') ,
 	'show_func'		=> 'b_d3forum_list_topics_show' ,
 	'edit_func'		=> 'b_d3forum_list_topics_edit' ,
-	'options'		=> "$mydirname|10|1|time|1|0|" ,
+	'options'		=> "$mydirname|10|1|time|1|0||" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -65,7 +65,7 @@ $modversion['blocks'][2] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3forum_list_posts_show' ,
 	'edit_func'		=> 'b_d3forum_list_posts_edit' ,
-	'options'		=> "$mydirname|10|time|0|" ,
+	'options'		=> "$mydirname|10|time|0||" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;

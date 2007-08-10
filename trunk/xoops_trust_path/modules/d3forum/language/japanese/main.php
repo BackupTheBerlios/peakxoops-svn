@@ -64,6 +64,7 @@ define('_MD_D3FORUM_POSTER','投稿者');
 define('_MD_D3FORUM_VIEWS','閲覧');
 define('_MD_D3FORUM_LEGEND','Legend');
 define('_MD_D3FORUM_TOPICTITLE','トピックタイトル');
+define('_MD_D3FORUM_TOPICEXTERNALLINKID','コメントリンクID');
 define('_MD_D3FORUM_TOP','トップ');
 define('_MD_D3FORUM_WHOLE','全体');
 define('_MD_D3FORUM_ALT_MARKEDYES','注目トピック');
@@ -132,6 +133,8 @@ define('_MD_D3FORUM_ODR_VOTESDSC','投票数降順');
 define('_MD_D3FORUM_ODR_VOTESASC','投票数昇順');
 define('_MD_D3FORUM_ODR_POINTSDSC','得票数降順');
 define('_MD_D3FORUM_ODR_POINTSASC','得票数昇順');
+define('_MD_D3FORUM_ODR_AVGDSC','平均点降順');
+define('_MD_D3FORUM_ODR_AVGASC','平均点昇順');
 
 // extract options
 define('_MD_D3FORUM_OPT_SOLVEDYES','解決済');
@@ -304,6 +307,8 @@ define('_MD_D3FORUM_TH_CATEGORYWEIGHT','表示優先順');
 define('_MD_D3FORUM_TH_CATEGORYPARENT','親カテゴリー');
 define('_MD_D3FORUM_TH_CATEGORYDESC','カテゴリー説明文');
 define('_MD_D3FORUM_TH_CATEGORYOPTIONS','カテゴリーオプション');
+define('_MD_D3FORUM_ONOFF','表示/非表示');
+define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','一般設定での設定値をこのカテゴリーまたはフォーラムについてだけ変更したい場合は、<br />(オプション名):(オプション値)<br />という形で、１行に１設定ずつ記述してください。<br />例）<br />show_breadcrumbs:1 <br /><br />変更可能なオプションと現在値は以下の通りです。');
 
 define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','（このカテゴリーの下に）');
 define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','（このフォーラムの下に）');

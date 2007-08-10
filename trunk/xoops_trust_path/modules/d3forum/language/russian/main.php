@@ -2,6 +2,17 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-08-11 06:35:30
+define('_MD_D3FORUM_TOPICEXTERNALLINKID','External Link ID (Comment)');
+define('_MD_D3FORUM_LABEL_JAPANESEINPUTYOMI','');
+define('_MD_D3FORUM_ERR_JAPANESENOTINPUT','');
+define('_MD_D3FORUM_ERR_JAPANESEINCORRECT','');
+define('_MD_D3FORUM_ODR_AVGDSC','Avg desc');
+define('_MD_D3FORUM_ODR_AVGASC','Avg asc');
+define('_MD_D3FORUM_ONOFF','ON/OFF');
+define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-18 17:34:37
 define('_MD_D3FORUM_ERR_INVALIDEXTERNALLINKID','You have commented to invalid target');
 define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','View more comments...');

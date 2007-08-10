@@ -433,9 +433,12 @@ function d3forum_update_topic_from_post( $mydirname , $topic_id , $forum_id , $f
 	$topic_locked = intval( @$_POST['topic_locked'] ) ;
 	$topic_invisible = intval( @$_POST['topic_invisible'] ) ;
 	$topic_solved = intval( @$_POST['topic_solved'] ) ;
+	if( ! empty( $external_link_format ) ) {
+		$external_link_id = $myts->stripSlashesGPC( @$_POST['topic_external_link_id'] ) ;
+	}
 
 	// do update
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_topics")." SET $sql4set topic_title='$topic_title4sql', forum_id='$new_forum_id', topic_sticky='$topic_sticky', topic_locked='$topic_locked', topic_invisible='$topic_invisible', topic_solved='$topic_solved' WHERE topic_id=$topic_id" ) ) die( "DB ERROR IN UPDATE topic".__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_topics")." SET $sql4set topic_title='$topic_title4sql', forum_id='$new_forum_id', topic_sticky='$topic_sticky', topic_locked='$topic_locked', topic_invisible='$topic_invisible', topic_solved='$topic_solved', topic_external_link_id='".addslashes($external_link_id)."' WHERE topic_id=$topic_id" ) ) die( "DB ERROR IN UPDATE topic".__LINE__ ) ;
 
 	// call back to the target of comment
 	if( ! empty( $external_link_format ) && ! empty( $external_link_id ) ) {

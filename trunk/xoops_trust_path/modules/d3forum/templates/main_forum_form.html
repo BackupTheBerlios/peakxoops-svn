@@ -63,11 +63,16 @@
 		<tr valign="top" align="left">
 			<th class="d3f_head">
 				<{$smarty.const._MD_D3FORUM_TH_FORUMOPTIONS}>
-				<br />
-				<span class="forumoptiondesc"><{$forum.option_desc}></span>
 			</th>
 			<td class="even">
-				<textarea name="options" id="forum_options" cols="50" rows="15"><{$forum.options}></textarea>
+				<input type="checkbox" id="forum_option_controller_onoff" onclick="if(this.checked){xoopsGetElementById('forum_option_controller').style.display='block';}else{xoopsGetElementById('forum_option_controller').style.display='none';};"  <{if $forum.options}>checked="checked"<{/if}> /><label for="forum_option_controller_onoff"><{$smarty.const._MD_D3FORUM_ONOFF}></label>
+				<div id="forum_option_controller" <{if ! $forum.options}>style="display:none;"<{/if}>>
+					<textarea name="options" id="forum_options" cols="50" rows="10"><{$forum.options}></textarea>
+					<br />
+					<{$smarty.const._MD_D3FORUM_HOWTO_OVERRIDEOPTIONS}>:
+					<br />
+					<span class="forumoptiondesc"><{$forum.option_desc}></span>
+				</div>
 			</td>
 		</tr>
 

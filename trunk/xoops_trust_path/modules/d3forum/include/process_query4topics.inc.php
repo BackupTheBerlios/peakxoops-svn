@@ -77,6 +77,8 @@
 		10 => _MD_D3FORUM_ODR_VOTESASC ,
 		11 => _MD_D3FORUM_ODR_POINTSDSC ,
 		12 => _MD_D3FORUM_ODR_POINTSASC ,
+		13 => _MD_D3FORUM_ODR_AVGDSC ,
+		14 => _MD_D3FORUM_ODR_AVGASC ,
 	) ;
 	$odr_sqls = array(
 		1 => 't.topic_last_post_time desc' ,
@@ -91,6 +93,8 @@
 		10 => 't.topic_votes_count' ,
 		11 => 't.topic_votes_sum desc' ,
 		12 => 't.topic_votes_sum' ,
+		13 => 't.topic_votes_sum/(t.topic_votes_count+0.0001) desc' ,
+		14 => 't.topic_votes_sum/(t.topic_votes_count+0.0001)' ,
 	) ;
 	if( ! empty( $odr_options[ @$_GET['odr'] ] ) ) {
 		$query4assign['odr'] = intval( $_GET['odr'] ) ;

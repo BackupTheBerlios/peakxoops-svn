@@ -40,6 +40,11 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+
+0.51 2007-08-12
+- added xml output for index aggregation
+- modified keithxml not to sort any entries
+
 0.50 2007-07-13 Install altsys >= 0.55
 - modified compatibility with XOOPS 2.0.16
 - added inner joints wizard
@@ -185,6 +190,10 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.51 2007-08-12
+- モジュールトップ集約そのままのXML出力を追加した
+- Keithxmlパーサ自身では、エントリのソートを行わないように仕様変更した
 
 0.50 2007-07-13 ※要altsys-0.55以上
 - XOOPS 2.0.16との互換性改善

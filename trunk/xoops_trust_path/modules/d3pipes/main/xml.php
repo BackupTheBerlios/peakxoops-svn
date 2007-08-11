@@ -4,18 +4,22 @@ require dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 
 $rss_styles = array( 'rss20' , 'rss10' , 'atom' ) ;
 
-// fetch pipe_row
+// fetch pipe_id
 $pipe_id = intval( @$_GET['pipe_id'] ) ;
-$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_id ) ;
 
-// specialcheck for xml
-if( empty( $pipe4assign['main_rss'] ) ) {
-	redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/' , 3 , _MD_D3PIPES_ERR_INVALIDPIPEID ) ;
-	exit ;
+if( $pipe_id == 0 ) {
+	// index pipe (main_aggr)
+	$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors ) ;
+} else {
+	// single pipe
+	$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_id ) ;
+	if( empty( $pipe4assign['main_rss'] ) ) {
+		redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/' , 3 , _MD_D3PIPES_ERR_INVALIDPIPEID ) ;
+		exit ;
+	}
+	// fetch entries
+	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModuleConfig['entries_per_eachpipe'] , $errors , $xoopsModuleConfig ) ;
 }
-
-// fetch entries
-$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModuleConfig['entries_per_eachpipe'] , $errors , $xoopsModuleConfig ) ;
 
 // Utf8from object
 $utf8from_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'utf8from' , $xoopsModuleConfig['internal_encoding'] ) ;

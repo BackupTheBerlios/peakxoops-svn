@@ -1,5 +1,27 @@
 <?php
 
+function d3pipes_main_fetch_entries_main_aggr( $mydirname , &$errors )
+{
+	global $xoopsModuleConfig ;
+
+	$db =& Database::getInstance() ;
+
+	// get pipe_ids for latest headlines (main_aggr)
+	$result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." WHERE main_aggr ORDER BY weight" ) ;
+	$union_options = array() ;
+	while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
+		$union_options[] = $pipe_id.':'.$xoopsModuleConfig['index_each'] ;
+	}
+	
+	// Union object
+	$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $union_options ) ) ;
+	$union_obj->setModConfigs( $xoopsModuleConfig ) ;
+	$entries = $union_obj->execute( array() , $xoopsModuleConfig['index_total'] ) ;
+	$errors = $union_obj->getErrors() ;
+	return $entries ;
+}
+
+
 // get <link> to CSS for main
 function d3pipes_main_get_link2maincss( $mydirname )
 {

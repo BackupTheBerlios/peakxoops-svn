@@ -27,7 +27,8 @@ class D3pipesUnionMergesort extends D3pipesUnionAbstract {
 
 	function pubtime_sort( $a , $b )
 	{
-		return @$a['pubtime'] > @$b['pubtime'] ? -1 : 1 ;
+		if( @$a['pubtime'] == @$b['pubtime'] ) return intval( @$a['headline'] ) < intval( @$b['headline'] ) ? -1 : 1 ;
+		else return @$a['pubtime'] > @$b['pubtime'] ? -1 : 1 ;
 	}
 
 }

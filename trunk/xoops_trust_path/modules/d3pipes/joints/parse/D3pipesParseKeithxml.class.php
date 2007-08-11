@@ -139,9 +139,9 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 		}
 
 		// sort pubtime DESC if pubtime exists
-		if( ! empty( $items[0]['pubtime'] ) ) {
-			usort( $items , array( $this , 'pubtime_sort' ) ) ;
-		}
+		//if( ! empty( $items[0]['pubtime'] ) ) {
+		//	usort( $items , array( $this , 'pubtime_sort' ) ) ;
+		//}
 
 		return $items ;
 	}
@@ -149,7 +149,8 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 
 	function pubtime_sort( $a , $b )
 	{
-		return @$a['pubtime'] > @$b['pubtime'] ? -1 : 1 ;
+		if( @$a['pubtime'] == @$b['pubtime'] ) return 0 ;
+		else return @$a['pubtime'] > @$b['pubtime'] ? -1 : 1 ;
 	}
 
 

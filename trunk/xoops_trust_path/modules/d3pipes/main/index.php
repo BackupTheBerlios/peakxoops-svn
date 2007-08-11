@@ -14,18 +14,7 @@ while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
 	$headpipes4assign[] = d3pipes_common_get_pipe4assign( $mydirname , intval( $pipe_id ) ) ;
 }
 
-// get pipe_ids for latest headlines
-$result = $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_pipes")." WHERE main_aggr ORDER BY weight" ) ;
-$union_options = array() ;
-while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
-	$union_options[] = $pipe_id.':'.$xoopsModuleConfig['index_each'] ;
-}
-
-// Union object
-$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $union_options ) ) ;
-$union_obj->setModConfigs( $xoopsModuleConfig ) ;
-$entries = $union_obj->execute( array() , $xoopsModuleConfig['index_total'] ) ;
-$errors = $union_obj->getErrors() ;
+$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors ) ;
 
 // pagetitle & xoops_breadcrumbs
 $pagetitle4assign = $xoopsModule->getVar('name') ;

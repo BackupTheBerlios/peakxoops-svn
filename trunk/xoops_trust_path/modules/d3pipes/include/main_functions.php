@@ -33,6 +33,15 @@ function d3pipes_main_get_link2maincss( $mydirname )
 }
 
 
+// get <link> for RSS alternate
+function d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign )
+{
+	global $xoopsModule ;
+
+	return '<link rel="alternate" type="application/rss+xml" title="'.(empty($pipe4assign['name'])?$xoopsModule->getVar('name'):$pipe4assign['name']).' RSS" href="'.XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=xml&amp;style=rss20&amp;pipe_id='.$pipe_id.'" />' ;
+}
+
+
 // get <link> to common/lib/*.js
 function d3pipes_main_get_script2commonlib( $mydirname )
 {

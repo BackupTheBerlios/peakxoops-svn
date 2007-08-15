@@ -4,7 +4,7 @@ function protector_postcommon_post_deny_by_rbl()
 {
 	// RBL servers (don't enable too many servers)
 	$rbls = array(
-		'niku.2ch.net' ,
+#		'niku.2ch.net' ,
 		'sbl-xbl.spamhaus.org' ,
 #		'list.dsbl.org' ,
 #		'bl.spamcop.net' ,

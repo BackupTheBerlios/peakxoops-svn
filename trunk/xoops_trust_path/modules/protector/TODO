@@ -2,3 +2,7 @@
 
 - RBLに登録されたIPからの書込（ホワイトリスト？）
 - 変数汚染の拒否IP登録が正常にされていない気がする（要確認）
+
+- IP拒否時のプラグイン
+- http://www.xugj.org/modules/d3forum/index.php?topic_id=457
+

@@ -123,6 +123,9 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.12 beta (2007/08/16)
+- fixed for controllers with $xoopsOption['nocommon']=true
+
 3.11 beta (2007/08/16)
 - modified ordering precheck and postcheck
 - removed a rbl server from postcommon_post_deny_by_rbl.php
@@ -319,12 +322,14 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 ¡üÊÑ¹¹ÍúÎò
 
-3.11 beta
+3.12 beta (2007/08/16)
+- $xoopsOption['nocommon'] ¤¬Æ°ºî¤·¤Æ¤¤¤Ê¤«¤Ã¤¿¥Ð¥°¤Î½¤Àµ
+
+3.11 beta (2007/08/16)
 - mainfile.php ¤Ø¤Î¥Ñ¥Ã¥Á¤Çprecheck¤Èpostcheck¤ò¼è¤ê°ã¤¨¤Æ¤âÆ°¤¯¤è¤¦¤ËÂÐ±þ
 - RBL¥Õ¥£¥ë¥¿¡¼¤Î¥Ç¥Õ¥©¥ë¥È¤«¤éniku.2ch.net¤òºï½ü
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
 -- ¥Õ¥é¥ó¥¹¸ì (thx Christian)
-
 
 3.10 beta (2007/07/30)
 - precheck¤Îconfig¤Ï¡¢¥í¡¼¥«¥ë¥­¥ã¥Ã¥·¥å¤«¤é¼èÆÀ¤¹¤ë¤è¤¦¤Ë¤·¤¿

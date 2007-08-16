@@ -5,7 +5,7 @@ function protector_postcommon()
 	global $xoopsUser , $xoopsModule ;
 
 	// patch for 2.2.x from xoops.org (I know this is not so beautiful...)
-	if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 && stristr( @$_SERVER['REQUEST_URI'] , 'modules/system/admin.php?fct=preferences' ) ) {
+	if( substr( @XOOPS_VERSION , 6 , 3 ) > 2.0 && stristr( @$_SERVER['REQUEST_URI'] , 'modules/system/admin.php?fct=preferences' ) ) {
 		$module_handler =& xoops_gethandler( 'module' ) ;
 		$module =& $module_handler->get( intval( @$_GET['mod'] ) ) ;
 		if( is_object( $module ) ) {

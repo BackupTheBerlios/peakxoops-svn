@@ -6,3 +6,5 @@
 - IP拒否時のプラグイン
 - http://www.xugj.org/modules/d3forum/index.php?topic_id=457
 
+$xoopsOption['nocommon'] の時のpostcheck処理がまったく行われないことの影響チェック
+

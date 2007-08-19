@@ -2,16 +2,17 @@
 - ASYNCブロック用バックエンド部のnocommon化
 
 - OPML
-- カテゴリー
-- xoopsheadline, xhld のインポート
-- 更新Pingジョイント
-- Sortジョイント
+- Category
+- Import from xoopsheadline, xhld
+- Joint for renewal (更新) Ping
 
 - サイト内新着ウイザードの実装
 - JSON出力
 
+- ある程度、新d3forumが浸透した時点で、class/D3pipesD3commentContent.class.php を修正 ($this->getPostsCount() を使うようにする)
+
+
 
 <link rel="alternate" type="application/rss+xml" title="<{$site_name}>" href="../backend.php" />
 この行の修正
-
 

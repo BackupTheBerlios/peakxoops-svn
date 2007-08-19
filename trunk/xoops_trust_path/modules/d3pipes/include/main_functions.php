@@ -34,7 +34,7 @@ function d3pipes_main_get_link2maincss( $mydirname )
 
 
 // get <link> for RSS alternate
-function d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign )
+function d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign = null )
 {
 	global $xoopsModule ;
 

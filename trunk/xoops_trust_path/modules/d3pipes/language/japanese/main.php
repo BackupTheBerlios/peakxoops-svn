@@ -3,8 +3,8 @@
 define('_MD_D3PIPES_H2_INDEX','インデックス');
 define('_MD_D3PIPES_H2_LATESTHEADLINES','最新記事一覧');
 define('_MD_D3PIPES_H2_EACHPIPE','記事一覧');
+define('_MD_D3PIPES_H2_CLIPLIST','切り抜き一覧');
 define('_MD_D3PIPES_H2_CLIPPING','切り抜き詳細');
-
 
 define('_MD_D3PIPES_JOINT_FETCH','外部から取得');
 define('_MD_D3PIPES_JOINT_BLOCK','ブロック関数からの取得/解析');
@@ -16,6 +16,7 @@ define('_MD_D3PIPES_JOINT_REPLACE','テキスト置換');
 define('_MD_D3PIPES_JOINT_CLIP','ローカル保存');
 define('_MD_D3PIPES_JOINT_FILTER','絞り込み');
 define('_MD_D3PIPES_JOINT_REASSIGN','再割り当て');
+define('_MD_D3PIPES_JOINT_SORT','エントリの順序');
 define('_MD_D3PIPES_JOINT_UNION','他パイプの連結');
 
 define('_MD_D3PIPES_N4J_FETCH','RSS/ATOM等のURLを記入');
@@ -54,6 +55,9 @@ define('_MD_D3PIPES_CLASS_REASSIGNALLOWHTML','HTML表示許可');
 define('_MD_D3PIPES_CLASS_REASSIGNSTRIPTAGS','HTMLタグ削除');
 define('_MD_D3PIPES_CLASS_REASSIGNDEFAULTLINK','記事リンクURL設定');
 define('_MD_D3PIPES_CLASS_CACHETRUSTPATH','この時点のキャッシュ(trust/cache)');
+define('_MD_D3PIPES_CLASS_SORTPUBTIMEDSC','発行日時新着順ソート');
+define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','エントリ名辞書順昇順ソート');
+define('_MD_D3PIPES_CLASS_SORTHEADLINEINTASC','エントリ名数字順昇順ソート');
 define('_MD_D3PIPES_CLASS_UNIONMERGESORT','新着順アグリゲーション');
 define('_MD_D3PIPES_CLASS_UNIONSEPARATED','並列化（ソート無）');
 
@@ -65,12 +69,17 @@ define('_MD_D3PIPES_TH_DESCRIPTION','記事詳細');
 define('_MD_D3PIPES_TH_ACTIONTOCLIPPING','この切り抜きへの操作');
 
 define('_MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING','注目マークをつける');
+define('_MD_D3PIPES_LABEL_DELETECLIPPING','切り抜きを削除する');
+define('_MD_D3PIPES_LABEL_VISIBLECLIPPING','この切り抜きを表示する');
 
 define('_MD_D3PIPES_BTN_UPDATE','更新する');
 
+define('_MD_D3PIPES_FMT_LINKTOCLIPLIST','切り抜き一覧へ (切り抜き総数 %s件)');
 define('_MD_D3PIPES_FMT_EXTERNALLINK','%sへの外部リンク');
 
 define('_MD_D3PIPES_MSG_CLIPPINGUPDATED','切り抜きを更新しました');
+define('_MD_D3PIPES_MSG_CLIPPINGDELETED','切り抜きを削除しました');
+define('_MD_D3PIPES_MSG_CLIPPINGCANNOTDELETED','コメントが存在するために削除できません。先にコメントを削除してください');
 
 define('_MD_D3PIPES_ERR_INVALIDCLIPPINGID','該当する切り抜きはありません');
 define('_MD_D3PIPES_ERR_INVALIDPIPEID','該当するパイプがありません');

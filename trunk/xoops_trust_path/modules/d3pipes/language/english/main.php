@@ -3,8 +3,8 @@
 define('_MD_D3PIPES_H2_INDEX','Index');
 define('_MD_D3PIPES_H2_LATESTHEADLINES','The latest entries');
 define('_MD_D3PIPES_H2_EACHPIPE','List entries of the pipe');
+define('_MD_D3PIPES_H2_CLIPLIST','List of clippings');
 define('_MD_D3PIPES_H2_CLIPPING','Detail of the clipping');
-
 
 define('_MD_D3PIPES_JOINT_FETCH','Fetching from outside');
 define('_MD_D3PIPES_JOINT_BLOCK','Fetching/Parsing from blocks');
@@ -16,6 +16,7 @@ define('_MD_D3PIPES_JOINT_REPLACE','Text replacement');
 define('_MD_D3PIPES_JOINT_CLIP','Clipping into local');
 define('_MD_D3PIPES_JOINT_FILTER','Filter entries by keywords');
 define('_MD_D3PIPES_JOINT_REASSIGN','Reassign');
+define('_MD_D3PIPES_JOINT_SORT','Sorting');
 define('_MD_D3PIPES_JOINT_UNION','Union pipes');
 
 define('_MD_D3PIPES_N4J_FETCH','Input URI of RSS/ATOM');
@@ -54,6 +55,9 @@ define('_MD_D3PIPES_CLASS_REASSIGNALLOWHTML','Allow HTML');
 define('_MD_D3PIPES_CLASS_REASSIGNSTRIPTAGS','Strip HTML tags');
 define('_MD_D3PIPES_CLASS_REASSIGNDEFAULTLINK','Specify URL of link');
 define('_MD_D3PIPES_CLASS_CACHETRUSTPATH','Make cache under trust/cache/');
+define('_MD_D3PIPES_CLASS_SORTPUBTIMEDSC','Published time DESC');
+define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','Dictionary order ASC');
+define('_MD_D3PIPES_CLASS_SORTHEADLINEINTASC','Integer order ASC');
 define('_MD_D3PIPES_CLASS_UNIONMERGESORT','Aggregation and Sort');
 define('_MD_D3PIPES_CLASS_UNIONSEPARATED','Parallel without Sort');
 
@@ -65,12 +69,17 @@ define('_MD_D3PIPES_TH_DESCRIPTION','Description');
 define('_MD_D3PIPES_TH_ACTIONTOCLIPPING','Action to this clipping');
 
 define('_MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING','Highlight it');
+define('_MD_D3PIPES_LABEL_DELETECLIPPING','Delete this clipping');
+define('_MD_D3PIPES_LABEL_VISIBLECLIPPING','Display this clipping');
 
 define('_MD_D3PIPES_BTN_UPDATE','Update');
 
+define('_MD_D3PIPES_FMT_LINKTOCLIPLIST','Go to list of clippings (Total: %s entries)');
 define('_MD_D3PIPES_FMT_EXTERNALLINK','External link to %s');
 
 define('_MD_D3PIPES_MSG_CLIPPINGUPDATED','The clipping updated successfully');
+define('_MD_D3PIPES_MSG_CLIPPINGDELETED','The clipping deleted successfully');
+define('_MD_D3PIPES_MSG_CLIPPINGCANNOTDELETED','This clipping cannot be deleted because of existing comment(s). Remove/move comment(s) first.');
 
 define('_MD_D3PIPES_ERR_INVALIDCLIPPINGID','Invalid clipping ID');
 define('_MD_D3PIPES_ERR_INVALIDPIPEID','Invalid pipe ID');

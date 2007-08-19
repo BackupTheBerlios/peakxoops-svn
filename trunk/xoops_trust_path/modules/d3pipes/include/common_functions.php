@@ -105,7 +105,7 @@ function d3pipes_common_cache_path_base( $mydirname )
 }
 
 
-function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 )
+function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 , $with_fetch = true )
 {
 	$base = d3pipes_common_cache_path_base( $mydirname ) ;
 	$prefix = substr( strrchr( $base , '/' ) , 1 ) ;
@@ -115,6 +115,9 @@ function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 )
 	if( $handler = @opendir( $basedir ) ) {
 		while( ( $file = readdir( $handler ) ) !== false ) {
 			if( strncmp( $file , $prefix , $prefix_length ) === 0 ) {
+				// save 'fetch' cache if necessary
+				if( ! $with_fetch && substr( $file , -5 ) == 'fetch' ) continue ;
+
 				if( $pipe_id > 0 ) {
 					// only specified pipe's cache
 					if( intval( substr( $file , $prefix_length + 1 ) ) == $pipe_id ) {

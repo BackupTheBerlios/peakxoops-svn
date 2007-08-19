@@ -35,8 +35,18 @@
 		<dt><{$smarty.const._MD_D3PIPES_TH_ACTIONTOCLIPPING}></dt>
 		<dd>
 			<form action="<{$mod_url}>/index.php?page=update_clipping" method="post">
+				<!-- highlight -->
 				<input type="checkbox" name="highlight_clipping" id="highlight_clipping" value="1" <{if $entry.clipping_highlight}>checked="checked"<{/if}> /><label for="highlight_clipping"><{$smarty.const._MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING}></label>
 				<br />
+
+				<!-- visible (invisible==soft delete) -->
+				<input type="checkbox" name="visible_clipping" id="visible_clipping" value="1" <{if $entry.visible}>checked="checked"<{/if}> /><label for="visible_clipping"><{$smarty.const._MD_D3PIPES_LABEL_VISIBLECLIPPING}></label>
+				<br />
+
+				<!-- hard delete -->
+				<input type="checkbox" name="delete_clipping" id="delete_clipping" value="1" /><label for="delete_clipping"><{$smarty.const._MD_D3PIPES_LABEL_DELETECLIPPING}></label>
+				<br />
+
 				<input type="hidden" name="clipping_id" value="<{$clipping_id}>" />
 				<input type="submit" value="<{$smarty.const._MD_D3PIPES_BTN_UPDATE}>" />
 			</form>

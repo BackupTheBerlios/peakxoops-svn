@@ -42,10 +42,10 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
 
-		$result = $db->query( "SELECT clipping_id,highlight,weight,comments_count ,fetched_time,data FROM $clip_table WHERE pipe_id=$this->pipe_id ORDER BY pubtime DESC,clipping_id DESC LIMIT ".max($this->entries_from_clip,$max_entries) ) ;
+		$result = $db->query( "SELECT clipping_id,highlight,weight,comments_count ,fetched_time,can_search,data FROM $clip_table WHERE pipe_id=$this->pipe_id AND can_search ORDER BY pubtime DESC,clipping_id DESC LIMIT ".max($this->entries_from_clip,$max_entries) ) ;
 
 		$entries = array() ;
-		while( list( $clipping_id , $highlight , $weight , $comments_count , $fetched_time , $entry_serialized ) = $db->fetchRow( $result ) ) {
+		while( list( $clipping_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $entry_serialized ) = $db->fetchRow( $result ) ) {
 			$entries[] = unserialize( $entry_serialized ) + array(
 				'clipping_id' => $clipping_id ,
 				'pipe_id' => $this->pipe_id ,
@@ -53,6 +53,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 				'clipping_weight' => $weight ,
 				'clipping_fetched_time' => $fetched_time ,
 				'comments_count' => $comments_count ,
+				'visible' => $visible ,
 			) ;
 		}
 
@@ -68,17 +69,20 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
 
 		$clipping_id = intval( $clipping_id ) ;
-		list( $pipe_id , $highlight , $weight , $comments_count , $fetched_time , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,comments_count,fetched_time,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
+		list( $pipe_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,comments_count,fetched_time,can_search,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
 
-		if( empty( $data_serialized ) ) return false ;
-		else return unserialize( $data_serialized ) + array(
+		$clipping = array(
 			'clipping_id' => intval( $clipping_id ) ,
 			'pipe_id' => intval( $pipe_id ) ,
 			'clipping_highlight' => $highlight ,
 			'clipping_weight' => $weight ,
 			'clipping_fetched_time' => $fetched_time ,
 			'comments_count' => $comments_count ,
+			'visible' => $visible ,
 		) ;
+
+		if( empty( $data_serialized ) || empty( $visible ) ) return $clipping ;
+		else return unserialize( $data_serialized ) + $clipping ;
 	}
 
 
@@ -94,7 +98,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$pipe_id = intval( $pipe_id ) ;
 		$num = intval( $num ) ;
 		$pos = intval( $pos ) ;
-		$result = $db->query( "SELECT clipping_id FROM $clip_table WHERE pipe_id=$pipe_id ORDER BY pubtime DESC LIMIT $pos,$num" ) ;
+		$result = $db->query( "SELECT clipping_id FROM $clip_table WHERE pipe_id=$pipe_id AND can_search ORDER BY pubtime DESC LIMIT $pos,$num" ) ;
 		while( list( $clipping_id ) = $db->fetchRow( $result ) ) {
 			$entries[] = $this->getClipping( $clipping_id ) ;
 		}

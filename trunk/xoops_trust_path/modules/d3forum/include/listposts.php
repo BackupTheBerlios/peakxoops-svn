@@ -48,6 +48,7 @@ while( $post_row = $db->fetchArray( $prs ) ) {
 	$posts[] = array(
 		'id' => intval( $post_row['post_id'] ) ,
 		'subject' => $myts->makeTboxData4Show( $post_row['subject'] , $post_row['number_entity'] , $post_row['special_entity'] ) ,
+		'subject_raw' => $post_row['subject'] ,
 		'pid' => intval( $post_row['pid'] ),
 		'post_time' => intval( $post_row['post_time'] ) ,
 		'post_time_formatted' => formatTimestamp( $post_row['post_time'] , 'm' ) ,

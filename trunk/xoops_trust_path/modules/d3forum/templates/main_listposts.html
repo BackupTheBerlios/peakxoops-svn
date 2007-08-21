@@ -42,7 +42,7 @@
 
 <!-- quick reply form -->
 <{if $first_post.can_reply}>
-	<{include file="db:`$mydirname`_inc_post_form_quick.html" uname=$xoops_uname h2_title=$smarty.const._MD_D3FORUM_POSTASSAMETOPIC quick_form_mode="sametopic"}>
+	<{include file="db:`$mydirname`_inc_post_form_quick.html" uname=$xoops_uname h2_title=$smarty.const._MD_D3FORUM_POSTASSAMETOPIC quick_form_mode="sametopic" subject_raw=$first_post.subject_raw}>
 <{/if}>
 
 <!-- forum jump -->

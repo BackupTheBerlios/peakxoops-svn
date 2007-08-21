@@ -296,7 +296,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 			'mod_config' => $xoopsModuleConfig ,
 			'uid' => $uid ,
 			'uname' => is_object( $xoopsUser ) ? $xoopsUser->getVar('uname') : '' ,
-			'subject_raw' => $subject_raw ? sprintf( _MD_D3FORUM_FMT_COMMENTSUBJECT , $subject_raw ) : '' ,
+			'subject_raw' => $subject_raw ,
 			'postorder' => $postorder ,
 			'icon_meanings' => $d3forum_icon_meanings ,
 			'category' => $category4assign ,

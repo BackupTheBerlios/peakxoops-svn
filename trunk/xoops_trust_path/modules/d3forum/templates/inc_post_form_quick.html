@@ -18,7 +18,7 @@
 			<tr valign="top" align="left">
 				<td class="head"><{$smarty.const._MD_D3FORUM_SUBJECT}></td>
 				<td class="even">
-					<input type="text" name="subject" id="subject" size="60" maxlength="255" value="<{$subject_raw|escape}>" />
+					<input type="text" name="subject" id="subject" size="60" maxlength="255" value="<{$subject_raw|string_format:$smarty.const._MD_D3FORUM_FMT_COMMENTSUBJECT|escape}>" />
 				</td>
 			</tr>
 	

@@ -29,7 +29,7 @@
 
 <!-- quick reply form -->
 <{if $post.can_reply}>
-	<{include file="db:`$mydirname`_inc_post_form_quick.html" uname=$xoops_uname h2_title=$smarty.const._MD_D3FORUM_REPLYTHISPOST quick_form_mode="reply"}>
+	<{include file="db:`$mydirname`_inc_post_form_quick.html" uname=$xoops_uname h2_title=$smarty.const._MD_D3FORUM_REPLYTHISPOST quick_form_mode="reply" subject_raw=$post.subject_raw}>
 <{/if}>
 
 <!-- start post tree -->

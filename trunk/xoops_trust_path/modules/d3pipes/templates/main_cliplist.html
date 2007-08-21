@@ -1,6 +1,6 @@
 <div class="d3pipes_eachpipe" id="<{$mydirname}>_eachpipe">
 
-	<{if $errors}>
+	<{if $errors && $xoops_isadmin}>
 		<{foreach from=$errors item="error"}>
 			<div class="errorMsg"><{$error|escape|nl2br}></div>
 		<{/foreach}>

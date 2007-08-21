@@ -20,8 +20,6 @@ if( empty( $pipe4assign['main_disp'] ) ) {
 // parse the pipe once
 $entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , 0x7fff /* No limit */ , $errors , $xoopsModuleConfig ) ;
 
-var_dump( $entries[2]['comments_count'] ) ;
-
 // pagetitle & xoops_breadcrumbs
 $pagetitle4assign = empty( $pipe4assign['name'] ) ? _MD_D3PIPES_H2_EACHPIPE : $pipe4assign['name'] ;
 $xoops_breadcrumbs[] = array( 'name' => $pagetitle4assign ) ;

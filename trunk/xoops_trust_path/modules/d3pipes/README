@@ -50,6 +50,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - added a feature turn clipping's visibility on/off
 - divided from eachpipe into eachpipe and cliplist
 - modified a function on updating comments
+- fixed some typos 0.52a
 
 0.51 2007-08-12
 - added xml output for index aggregation
@@ -211,6 +212,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - 切り抜きの可視/不可視コントロール
 - パイプ個別表示と切り抜き一覧を機能的に分けた
 - コメントアップデート処理の改善
+- typoなど微修正 0.52a
 
 0.51 2007-08-12
 - モジュールトップ集約そのままのXML出力を追加した

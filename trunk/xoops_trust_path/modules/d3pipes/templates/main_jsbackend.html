@@ -1,4 +1,4 @@
-	<{if $errors}>
+	<{if $errors && $xoops_isadmin}>
 		<{foreach from=$errors item="error"}>
 			<div class="errorMsg"><{$error|escape|nl2br}></div>
 		<{/foreach}>

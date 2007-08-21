@@ -18,7 +18,7 @@ if( ! $isadminormod ) die( _MD_D3FORUM_ERR_MODERATETOPIC ) ;
 
 if( $uid && @$xoopsModuleConfig['use_solved'] ) {
 	// flip topic_solved
-	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix($mydirname."_topics")." SET topic_solved = ! topic_solved WHERE topic_id=$topic_id" ) ;
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_solved = ! topic_solved WHERE topic_id=$topic_id" ) ;
 }
 
 $allowed_identifiers = array( 'post_id' , 'topic_id' , 'forum_id' ) ;

@@ -2,6 +2,12 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-08-22 05:26:54
+define('_MD_D3FORUM_DOPOST','Post');
+define('_MD_D3FORUM_POSTASSAMETOPIC','Post into this topic');
+define('_MD_D3FORUM_REPLYTHISPOST','Reply to this post');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-08-11 06:35:31
 define('_MD_D3FORUM_TOPICEXTERNALLINKID','External Link ID (Comment)');
 define('_MD_D3FORUM_LABEL_JAPANESEINPUTYOMI','');

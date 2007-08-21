@@ -97,15 +97,15 @@ if( ! isset( $_GET['submit'] ) ) {
 	) ;
 	$sortby = in_array( @$_GET['sortby'] , $allowed_sortbys ) ? $_GET['sortby'] : "p.post_time desc" ;
 
-	$sql = 'SELECT u.uid,u.uname,p.post_id,p.subject,p.post_time,p.icon,LENGTH(p.post_text) AS body_length,p.votes_count,p.votes_sum,t.topic_id,t.topic_title,t.topic_views,t.topic_posts_count,f.forum_id,f.forum_title,c.cat_id,c.cat_title FROM '.$xoopsDB->prefix($mydirname.'_posts').' p LEFT JOIN '.$xoopsDB->prefix('users').' u ON p.uid=u.uid LEFT JOIN '.$xoopsDB->prefix($mydirname.'_topics').' t ON p.topic_id = t.topic_id LEFT JOIN '.$xoopsDB->prefix($mydirname.'_forums').' f ON t.forum_id = f.forum_id LEFT JOIN '.$xoopsDB->prefix($mydirname.'_categories')." c ON f.cat_id = c.cat_id WHERE ($whr_keyword) AND ($whr_forum) AND ($whr_uname) AND ($whr_read4forum) AND ($whr_read4cat) ORDER BY $sortby" ;
+	$sql = 'SELECT u.uid,u.uname,p.post_id,p.subject,p.post_time,p.icon,LENGTH(p.post_text) AS body_length,p.votes_count,p.votes_sum,t.topic_id,t.topic_title,t.topic_views,t.topic_posts_count,f.forum_id,f.forum_title,c.cat_id,c.cat_title FROM '.$db->prefix($mydirname.'_posts').' p LEFT JOIN '.$db->prefix('users').' u ON p.uid=u.uid LEFT JOIN '.$db->prefix($mydirname.'_topics').' t ON p.topic_id = t.topic_id LEFT JOIN '.$db->prefix($mydirname.'_forums').' f ON t.forum_id = f.forum_id LEFT JOIN '.$db->prefix($mydirname.'_categories')." c ON f.cat_id = c.cat_id WHERE ($whr_keyword) AND ($whr_forum) AND ($whr_uname) AND ($whr_read4forum) AND ($whr_read4cat) ORDER BY $sortby" ;
 
 	// TODO :-)
-	if( ! $result = $xoopsDB->query( $sql , 100 , 0 ) ) {
+	if( ! $result = $db->query( $sql , 100 , 0 ) ) {
 		die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 	}
 	$results4assign = array() ;
-	$hits_count = $xoopsDB->getRowsNum( $result ) ;
-	while ( $row = $xoopsDB->fetchArray( $result ) ) {
+	$hits_count = $db->getRowsNum( $result ) ;
+	while ( $row = $db->fetchArray( $result ) ) {
 		$results4assign[] = array(
 			'forum_title' => $myts->makeTboxData4Show($row['cat_title']) ,
 			'forum_id' => intval( $row['cat_id'] ) ,

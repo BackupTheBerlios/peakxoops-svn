@@ -54,6 +54,28 @@ function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
 }
 
 
+// returns posts count
+function getPostsCount( $forum_id , $link_id )
+{
+	$db =& Database::getInstance() ;
+
+	list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($this->d3forum_dirname."_posts")." p LEFT JOIN ".$db->prefix($this->d3forum_dirname."_topics")." t ON t.topic_id=p.topic_id WHERE t.forum_id=$forum_id AND t.topic_external_link_id='$link_id'" ) ) ;
+
+	return intval( $count ) ;
+}
+
+
+// returns topics count
+function getTopicsCount( $forum_id , $link_id )
+{
+	$db =& Database::getInstance() ;
+
+	list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($this->d3forum_dirname."_topics")." t WHERE t.forum_id=$forum_id AND t.topic_external_link_id='$link_id'" ) ) ;
+
+	return intval( $count ) ;
+}
+
+
 }
 
 ?>

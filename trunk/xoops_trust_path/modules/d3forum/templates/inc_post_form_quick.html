@@ -1,9 +1,11 @@
 	<!-- comment input form -->
-	<h2 class="head"><{$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP}></h2>
+	<h2 class="head"><{$h2_title|default:$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP}></h2>
 	
 	<form name="postform" id="postform" action="<{$mod_url}>/index.php?page=post" method="post" onsubmit="return xoopsFormValidate_postform();">
 		<p style="display:none;">
-		<input type="hidden" name="mode" id="mode" value="newtopic" />
+		<input type="hidden" name="mode" id="mode" value="<{$quick_form_mode|default:"sametopic"}>" />
+		<input type="hidden" name="pid" id="pid" value="<{$post.id}>" />
+		<input type="hidden" name="topic_id" id="topic_id" value="<{$topic.id}>" />
 		<input type="hidden" name="forum_id" id="forum_id" value="<{$forum.id}>" />
 		<input type="hidden" name="external_link_id" id="external_link_id" value="<{$external_link_id|escape}>" />
 		<input type="hidden" name="smiley" id="smiley" value="1" />
@@ -53,8 +55,10 @@
 				<td class="head"></td>
 				<td class="even">
 					<{$antispam.html_in_form}>
-					<input type="submit" class="formButton" name="contents_submit"  id="contents_submit" value="<{$smarty.const._SUBMIT}>" />
+					<input type="submit" class="formButton" name="contents_submit"  id="contents_submit" value="<{$smarty.const._MD_D3FORUM_DOPOST}>" />
+					<{if $external_link_id}>
 					<a href="<{$mod_url}>/index.php?page=newtopic&amp;forum_id=<{$forum.id}>&amp;external_link_id=<{$external_link_id|escape:"url"}>&amp;subject=<{$subject_raw|escape:"url"}>"><{$smarty.const._MD_D3FORUM_LINK_RICHERCOMMENTFORM}></a>
+					<{/if}>
 				</td>
 			</tr>
 		</table>

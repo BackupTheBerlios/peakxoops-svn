@@ -10,7 +10,7 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php
 
 // count children
 include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
-$mytree = new XoopsTree( $xoopsDB->prefix($mydirname."_categories") , "cat_id" , "pid" ) ;
+$mytree = new XoopsTree( $db->prefix($mydirname."_categories") , "cat_id" , "pid" ) ;
 $children = $mytree->getAllChildId( $cat_id ) ;
 
 // special check for categorymanager

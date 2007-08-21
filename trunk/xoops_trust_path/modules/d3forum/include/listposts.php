@@ -34,9 +34,9 @@ if( ! include dirname(__FILE__).'/process_this_category.inc.php' ) die( _MD_D3FO
 $max_post_time = 0 ;
 $last_post_offset = 0 ;
 $posts = array() ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY order_in_tree,post_id" ;
-if( ! $prs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
-while( $post_row = $xoopsDB->fetchArray( $prs ) ) {
+$sql = "SELECT * FROM ".$db->prefix($mydirname."_posts")." WHERE topic_id=$topic_id ORDER BY order_in_tree,post_id" ;
+if( ! $prs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+while( $post_row = $db->fetchArray( $prs ) ) {
 
 	// get poster's information ($poster_*), $can_reply, $can_edit, $can_delete
 	include dirname(__FILE__).'/process_eachpost.inc.php' ;

@@ -27,6 +27,11 @@
 <{include file="db:`$mydirname`_inc_eachpost.html" caller="viewpost" inner_link_format="`$mod_url`/index.php?post_id=%s"}>
 </div>
 
+<!-- quick reply form -->
+<{if $post.can_reply}>
+	<{include file="db:`$mydirname`_inc_post_form_quick.html" uname=$xoops_uname h2_title=$smarty.const._MD_D3FORUM_REPLYTHISPOST quick_form_mode="reply"}>
+<{/if}>
+
 <!-- start post tree -->
 <h2 class="head d3f_tree d3f_head"><{$smarty.const._MD_D3FORUM_POSTSTREE}></h2>
 

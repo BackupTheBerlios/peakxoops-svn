@@ -429,4 +429,32 @@ function d3forum_main_get_categoryoptions4edit( $d3forum_configs_can_be_override
 	return implode( '<br />' , $lines ) ;
 }
 
+
+// hook topic_id/external_link_id into $_POST['mode'] = 'reply' , $_POST['post_id']
+function d3forum_main_posthook_sametopic( $mydirname )
+{
+	$db =& Database::getInstance() ;
+
+	if( ! empty( $_POST['external_link_id'] ) ) {
+		// search the first post of the latest topic with the external_link_id
+		$external_link_id = intval( @$_POST['external_link_id'] ) ;
+		$forum_id = intval( @$_POST['forum_id'] ) ;
+		$result = $db->query( "SELECT topic_first_post_id,topic_locked FROM ".$db->prefix($mydirname."_topics")." WHERE topic_external_link_id=$external_link_id AND forum_id=$forum_id AND ! topic_invisible ORDER BY topic_last_post_time DESC LIMIT 1" ) ;
+	} else if( ! empty( $_POST['topic_id'] ) ) {
+		// search the first post of the topic with the topic_id
+		$topic_id = intval( @$_POST['topic_id'] ) ;
+		$result = $db->query( "SELECT topic_first_post_id,topic_locked FROM ".$db->prefix($mydirname."_topics")." WHERE topic_id=$topic_id AND ! topic_invisible" ) ;
+	}
+
+	if( empty( $result ) ) return ;
+
+	list( $pid , $topic_locked ) = $db->fetchRow( $result ) ;
+	if( $pid > 0 && ! $topic_locked ) {
+		// hook to reply
+		$_POST['mode'] = 'reply' ;
+		$_POST['pid'] = $pid ;
+	}
+}
+
+
 ?>

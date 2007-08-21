@@ -26,6 +26,12 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.75 alpha (2007-08-22)
+- added quick post form into viewpost
+- added quick post form into listposts
+- modified a comment from quick form will be a member of existing topics
+- modified D3comment class adding methods like getPostsCount()
+
 0.74 alpha (2007-08-11)
 - fixed wrong " escaping in [ code] block with XCL2.1 (thx sippu)
 - added an option selecting forum into blocks
@@ -155,6 +161,12 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.75 alpha (2007-08-22)
+- 投稿詳細内クイック投稿フォームの実装
+- 投稿一覧内クイック投稿フォームの実装
+- コメント投稿のクイックフォームからは、直前のトピックの子となるようにした
+- コメントコールバッククラスにd3forum側の投稿数などをカウントするメソッドを実装
 
 0.74 alpha (2007-08-11)
 - XCL2.1だと[ code]内の"が\"になってしまっているバグを修正 (thx sippu)

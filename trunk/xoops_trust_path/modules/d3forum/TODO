@@ -16,12 +16,12 @@
 ●現在のTODO（優先度順不同）
 post_text_waiting, subject_waiting の実装
 history の実装
-クイック投稿フォーム（クイックからならtrunkを太らせる）
 系統表示ビュー（あるpostの直系の親だけを一覧できるビュー）
 d3forum_make_treeinformations( $data )
 f1s を保存するようにして、取得時にORDERかけるだけで、あとからusort()かける必要をなくす (ul_in, ul_out, prev_id, next_id)
 RSS
 モジュールをまたぐエクスポートだと、コメントコールバックがかからない不具合の修正
+（というより、コメントコールバックを「同期」するべきか）
 newbb2のインポートスクリプトのインポート
 ユーザ＆グループから、権限を表示・変更できるコントローラ
 xmobileプラグイン
@@ -50,10 +50,10 @@ Smartyプラグインが各モジュールの $xoopsModuleConfig をルックアップする
 ※テーブル構造を変えたときには、必ず、include/import_functions.php も書き換える
 
 
-$rs = $xoopsDB->query( "SELECT post_id FROM xoops_d3forum_posts" ) ;
-while( list( $post_id ) = $xoopsDB->fetchRow( $rs ) ) {
-	list( $post_text ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT post_text FROM xoops_d3forum_posts_text WHERE post_id=$post_id" ) ) ;
-	$xoopsDB->queryF( "UPDATE xoops_d3forum_posts SET post_text='".addslashes($post_text)."' WHERE post_id=$post_id" ) ;
+$rs = $db->query( "SELECT post_id FROM xoops_d3forum_posts" ) ;
+while( list( $post_id ) = $db->fetchRow( $rs ) ) {
+	list( $post_text ) = $db->fetchRow( $db->query( "SELECT post_text FROM xoops_d3forum_posts_text WHERE post_id=$post_id" ) ) ;
+	$db->queryF( "UPDATE xoops_d3forum_posts SET post_text='".addslashes($post_text)."' WHERE post_id=$post_id" ) ;
 }
 
 
@@ -123,19 +123,19 @@ ADD number_entity tinyint(1) NOT NULL default 0 AFTER br,
 ADD special_entity tinyint(1) NOT NULL default 0 AFTER br ;
 
 
-$rs = $xoopsDB->query( "SELECT topic_id, topic_last_post_id FROM xoops_d3forum_topics" ) ;
-while( list( $topic_id , $last_post_id ) = $xoopsDB->fetchRow( $rs ) ) {
-	list( $uid ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT uid FROM xoops_d3forum_posts WHERE post_id=$last_post_id" ) ) ;
-	$xoopsDB->queryF( "UPDATE xoops_d3forum_topics SET topic_last_uid='$uid' WHERE topic_id=$topic_id" ) ;
-	list( $post_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT MIN(post_id) FROM xoops_d3forum_posts WHERE topic_id=$topic_id" ) ) ;
-	list( $post_time ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT post_time FROM xoops_d3forum_posts WHERE post_id=$post_id" ) ) ;
-	$xoopsDB->queryF( "UPDATE xoops_d3forum_topics SET topic_first_post_id='$post_id', topic_first_post_time='$post_time' WHERE topic_id=$topic_id" ) ;
+$rs = $db->query( "SELECT topic_id, topic_last_post_id FROM xoops_d3forum_topics" ) ;
+while( list( $topic_id , $last_post_id ) = $db->fetchRow( $rs ) ) {
+	list( $uid ) = $db->fetchRow( $db->query( "SELECT uid FROM xoops_d3forum_posts WHERE post_id=$last_post_id" ) ) ;
+	$db->queryF( "UPDATE xoops_d3forum_topics SET topic_last_uid='$uid' WHERE topic_id=$topic_id" ) ;
+	list( $post_id ) = $db->fetchRow( $db->query( "SELECT MIN(post_id) FROM xoops_d3forum_posts WHERE topic_id=$topic_id" ) ) ;
+	list( $post_time ) = $db->fetchRow( $db->query( "SELECT post_time FROM xoops_d3forum_posts WHERE post_id=$post_id" ) ) ;
+	$db->queryF( "UPDATE xoops_d3forum_topics SET topic_first_post_id='$post_id', topic_first_post_time='$post_time' WHERE topic_id=$topic_id" ) ;
 }
 
-$rs = $xoopsDB->query( "SELECT forum_id,forum_last_post_id FROM xoops_d3forum_forums" ) ;
-while( list( $forum_id,$last_post_id ) = $xoopsDB->fetchRow( $rs ) ) {
-	list( $post_time ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT post_time FROM xoops_d3forum_posts WHERE post_id=$last_post_id" ) ) ;
-	$xoopsDB->queryF( "UPDATE xoops_d3forum_forums SET forum_last_post_time='$post_time' WHERE forum_id=$forum_id" ) ;
+$rs = $db->query( "SELECT forum_id,forum_last_post_id FROM xoops_d3forum_forums" ) ;
+while( list( $forum_id,$last_post_id ) = $db->fetchRow( $rs ) ) {
+	list( $post_time ) = $db->fetchRow( $db->query( "SELECT post_time FROM xoops_d3forum_posts WHERE post_id=$last_post_id" ) ) ;
+	$db->queryF( "UPDATE xoops_d3forum_forums SET forum_last_post_time='$post_time' WHERE forum_id=$forum_id" ) ;
 }
 
 ALTER TABLE xoops_d3forum_forum_access CHANGE user_id uid mediumint(8) default NULL;

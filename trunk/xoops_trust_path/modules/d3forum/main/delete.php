@@ -6,10 +6,10 @@ require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $post_id = intval( @$_GET['post_id'] ) ;
 
 // get this "post" from given $post_id
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_posts")." WHERE post_id=$post_id" ;
-if( ! $prs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
-if( $xoopsDB->getRowsNum( $prs ) <= 0 ) die( _MD_D3FORUM_ERR_READPOST ) ;
-$post_row = $xoopsDB->fetchArray( $prs ) ;
+$sql = "SELECT * FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ;
+if( ! $prs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+if( $db->getRowsNum( $prs ) <= 0 ) die( _MD_D3FORUM_ERR_READPOST ) ;
+$post_row = $db->fetchArray( $prs ) ;
 $topic_id = intval( $post_row['topic_id'] ) ;
 
 // get&check this topic ($topic4assign, $topic_row, $forum_id), count topic_view up, get $prev_topic, $next_topic
@@ -29,7 +29,7 @@ if( empty( $can_delete ) ) die( _MD_D3FORUM_ERR_DELETEPOST ) ;
 
 // count children
 include_once XOOPS_ROOT_PATH."/class/xoopstree.php" ;
-$mytree = new XoopsTree( $xoopsDB->prefix($mydirname."_posts") , "post_id" , "pid" ) ;
+$mytree = new XoopsTree( $db->prefix($mydirname."_posts") , "post_id" , "pid" ) ;
 $children = $mytree->getAllChildId( $post_id ) ;
 
 // special permission check for delete

@@ -1,12 +1,12 @@
 <?php
 
 // count total topics
-$sql = 'SELECT COUNT(*) FROM '.$xoopsDB->prefix($mydirname.'_topics') ;
-list( $total_topics_count ) = $xoopsDB->fetchRow( $xoopsDB->query( $sql ) ) ;
+$sql = 'SELECT COUNT(*) FROM '.$db->prefix($mydirname.'_topics') ;
+list( $total_topics_count ) = $db->fetchRow( $db->query( $sql ) ) ;
 
 // count total posts
-$sql = 'SELECT COUNT(*) FROM '.$xoopsDB->prefix($mydirname.'_posts') ;
-list( $total_posts_count ) = $xoopsDB->fetchRow( $xoopsDB->query( $sql ) ) ;
+$sql = 'SELECT COUNT(*) FROM '.$db->prefix($mydirname.'_posts') ;
+list( $total_posts_count ) = $db->fetchRow( $db->query( $sql ) ) ;
 
 // get last visit
 if( $uid > 0 ) {
@@ -19,24 +19,24 @@ if( empty( $last_visit ) ) $last_visit = time() ;
 // categories loop
 $categories4assign = array() ;
 $previous_depth = -1 ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_categories")." c WHERE ($whr_read4cat) ORDER BY cat_order_in_tree" ;
-if( ! $crs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
-while( $cat_row = $xoopsDB->fetchArray( $crs ) ) {
+$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE ($whr_read4cat) ORDER BY cat_order_in_tree" ;
+if( ! $crs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+while( $cat_row = $db->fetchArray( $crs ) ) {
 
 	$cat_id = intval( $cat_row['cat_id'] ) ;
 
 	// forums loop
 	$forums = array() ;
-	$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_forums")." f WHERE f.cat_id=".$cat_id." AND ($whr_read4forum) ORDER BY f.forum_weight, f.forum_id" ;
-	if( ! $frs = $xoopsDB->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
-	while( $forum_row = $xoopsDB->fetchArray( $frs ) ) {
+	$sql = "SELECT * FROM ".$db->prefix($mydirname."_forums")." f WHERE f.cat_id=".$cat_id." AND ($whr_read4forum) ORDER BY f.forum_weight, f.forum_id" ;
+	if( ! $frs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+	while( $forum_row = $db->fetchArray( $frs ) ) {
 
 		$forum_id = intval( $forum_row['forum_id'] ) ;
 
 		// get last visit each forums
 		if( $uid > 0 ) {
-			$sql = 'SELECT u2t.u2t_time FROM '.$xoopsDB->prefix($mydirname.'_posts').' p LEFT JOIN '.$xoopsDB->prefix($mydirname.'_users2topics').' u2t ON u2t.topic_id=p.topic_id WHERE p.post_id='.intval($forum_row['forum_last_post_id']).' AND u2t.uid='.$uid ;
-			list( $u2t_time ) = $xoopsDB->fetchRow( $xoopsDB->query( $sql ) ) ;
+			$sql = 'SELECT u2t.u2t_time FROM '.$db->prefix($mydirname.'_posts').' p LEFT JOIN '.$db->prefix($mydirname.'_users2topics').' u2t ON u2t.topic_id=p.topic_id WHERE p.post_id='.intval($forum_row['forum_last_post_id']).' AND u2t.uid='.$uid ;
+			list( $u2t_time ) = $db->fetchRow( $db->query( $sql ) ) ;
 		}
 		if( empty( $u2t_time ) ) $u2t_time = 0 ;
 

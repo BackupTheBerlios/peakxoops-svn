@@ -15,8 +15,8 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php
 
 if( $uid && @$xoopsModuleConfig['allow_mark'] ) {
 	// flip u2t_marked
-	$xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix($mydirname."_users2topics")." SET u2t_marked = ! u2t_marked WHERE uid=$uid AND topic_id=$topic_id" ) ;
-	if( ! $xoopsDB->getAffectedRows() ) $xoopsDB->queryF( 'INSERT INTO '.$xoopsDB->prefix($mydirname.'_users2topics')." SET uid=$uid,topic_id=$topic_id,u2t_marked=1" ) ;
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_users2topics")." SET u2t_marked = ! u2t_marked WHERE uid=$uid AND topic_id=$topic_id" ) ;
+	if( ! $db->getAffectedRows() ) $db->queryF( 'INSERT INTO '.$db->prefix($mydirname.'_users2topics')." SET uid=$uid,topic_id=$topic_id,u2t_marked=1" ) ;
 }
 
 $allowed_identifiers = array( 'post_id' , 'topic_id' , 'forum_id' ) ;

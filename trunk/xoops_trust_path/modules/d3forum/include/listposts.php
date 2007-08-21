@@ -95,6 +95,9 @@ while( $post_row = $db->fetchArray( $prs ) ) {
 	) ;
 }
 
+// save "the first post"
+$first_post = $posts[0] ;
+
 // rebuild tree informations
 $posts = d3forum_make_treeinformations( $posts ) ;
 
@@ -130,6 +133,7 @@ $xoopsTpl->assign(
 		'topic' => $topic4assign ,
 		'next_topic' => $next_topic4assign ,
 		'prev_topic' => $prev_topic4assign ,
+		'first_post' => $first_post ,
 		'posts' => $posts ,
 		'page' => 'listposts' ,
 		'ret_name' => 'topic_id' ,

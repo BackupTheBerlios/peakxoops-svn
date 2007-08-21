@@ -41,7 +41,7 @@
 <{include file="db:`$mydirname`_inc_postorder_links.html"}>
 
 <!-- quick reply form -->
-<{if ! $topic.locked}>
+<{if $first_post.can_reply}>
 	<{include file="db:`$mydirname`_inc_post_form_quick.html" uname=$xoops_uname h2_title=$smarty.const._MD_D3FORUM_POSTASSAMETOPIC quick_form_mode="sametopic"}>
 <{/if}>
 

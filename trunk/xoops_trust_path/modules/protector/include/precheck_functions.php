@@ -8,16 +8,16 @@ function protector_prepare()
 	// Protector class
 	require_once dirname(dirname(__FILE__)).'/class/protector.php' ;
 
+	// Protector object
+	$protector =& Protector::getInstance() ;
+	$conf = $protector->getConf() ;
+
 	// bad_ips
 	$bad_ips = Protector::get_bad_ips() ;
 	$bad_ip_match = Protector::ip_match( $bad_ips ) ;
 	if( $bad_ip_match ) {
-		die( 'You are registered as BAD_IP by Protector.' ) ;
+		$protector->call_filter( 'precommon_badip' , 'You are registered as BAD_IP by Protector.' ) ;
 	}
-
-	// Protector object
-	$protector =& Protector::getInstance() ;
-	$conf = $protector->getConf() ;
 
 	// global enabled or disabled
 	if( ! empty( $conf['global_disabled'] ) ) return true ;

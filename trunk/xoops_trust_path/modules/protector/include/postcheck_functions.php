@@ -144,17 +144,12 @@ function protector_postcommon()
 		}
 
 		// filter plugins for POST on postcommon stage
-		$filters_base = XOOPS_TRUST_PATH.'/modules/protector/filters_enabled' ;
-		$dh = opendir( $filters_base ) ;
-		while( ( $file = readdir( $dh ) ) !== false ) {
-			if( substr( $file , 0 , 16 ) == 'postcommon_post_' ) {
-				@include_once $filters_base.'/'.$file ;
-				if( function_exists( 'protector_'.substr($file,0,-4) ) ) {
-					call_user_func( 'protector_'.substr($file,0,-4) ) ;
-				}
-			}
-		}
-		closedir( $dh ) ;
+		$protector->call_filter( 'postcommon_post' ) ;
+	}
+
+	// register.php Protection
+	if( $_SERVER['SCRIPT_FILENAME'] == XOOPS_ROOT_PATH.'/register.php' ) {
+		$protector->call_filter( 'postcommon_register' ) ;
 	}
 
 }

@@ -123,6 +123,14 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.13 beta (2007/08/22)
+- modified the filter structure from function to class
+- added filtering point (badip, register)
+- added filter plugins
+-- postcommon_register_insert_js_check (against registering SPAM)
+-- precommon_badip_message (displays a message on rejecting the IP)
+-- precommon_badip_redirection (redirects somewhere on rejecting the IP)
+
 3.12 beta (2007/08/16)
 - fixed for controllers with $xoopsOption['nocommon']=true
 
@@ -321,6 +329,14 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.13 beta (2007/08/22)
+- ¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ò¥°¥í¡¼¥Ð¥ë´Ø¿ô¤«¤é¥¯¥é¥¹¤ËÊÑ¹¹
+- ¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤Î¥Ý¥¤¥ó¥È¤òÄÉ²Ã (badip, register)
+- ¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥óÄÉ²Ã
+-- ¥æ¡¼¥¶ÅÐÏ¿»þ¤ËJavaScript¥Á¥§¥Ã¥¯¤òÆþ¤ì¤ë¥Õ¥£¥ë¥¿¡¼(¥æ¡¼¥¶ÅÐÏ¿SPAMÂÐºö)
+-- µñÈÝIP»þ¤Ë¥á¥Ã¥»¡¼¥¸¤òÉ½¼¨¤¹¤ë¥Õ¥£¥ë¥¿¡¼
+-- µñÈÝIP»þ¤Ë¥ê¥À¥¤¥ì¥¯¥È¤¹¤ë¥Õ¥£¥ë¥¿¡¼
 
 3.12 beta (2007/08/16)
 - $xoopsOption['nocommon'] ¤¬Æ°ºî¤·¤Æ¤¤¤Ê¤«¤Ã¤¿¥Ð¥°¤Î½¤Àµ

@@ -935,5 +935,16 @@ function disable_features()
 }
 
 
+function call_filter( $type , $dying_message = '' )
+{
+	require_once dirname(__FILE__).'/ProtectorFilter.php' ;
+	$filter_handler =& ProtectorFilterHandler::getInstance() ;
+	if( ! $filter_handler->execute( $type ) && $dying_message ) {
+		die( $dying_message ) ;
+	}
+}
+
+
+
 }
 ?>

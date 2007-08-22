@@ -1,3 +1,11 @@
+<{if $entry.allow_html}>
+	<{assign var="entry_headline4disp" value=$entry.headline}>
+	<{assign var="entry_description4disp" value=$entry.description}>
+<{else}>
+	<{assign var="entry_headline4disp" value=$entry.headline|escape}>
+	<{assign var="entry_description4disp" value=$entry.description|escape|trim|nl2br}>
+<{/if}>
+
 <div class="d3pipes_clipping" id="<{$mydirname}>_clipping">
 
 	<h2><{$smarty.const._MD_D3PIPES_H2_CLIPPING}></h2>
@@ -9,7 +17,7 @@
 
 	<dl>
 		<dt><{$smarty.const._MD_D3PIPES_TH_HEADLINE}></dt>
-		<dd id="clipping_headline"><{$entry.headline|escape}></dd>
+		<dd id="clipping_headline"><{$entry_headline4disp}></dd>
 	</dl>
 
 	<dl>
@@ -22,10 +30,8 @@
 		<dd>
 			<{if $entry.content_encoded}>
 				<{$entry.content_encoded}>
-			<{elseif $entry.allow_html}>
-				<{$entry.description}>
 			<{else}>
-				<{$entry.description|escape|trim|nl2br}>
+				<{$entry_description4disp}>
 			<{/if}>
 		</dd>
 	</dl>

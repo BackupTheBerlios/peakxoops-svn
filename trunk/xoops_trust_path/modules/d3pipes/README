@@ -45,6 +45,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - added joints
 -- ReassignHtmlentitydecode (Fix extra htmlentitied entries)
 -- ReassignTruncate (using xoops_substr() to each field)
+- modified template as "allow_html" also effects displaying headline 0.53a
 
 0.52 2007-08-20 (update the module)
 - added joints
@@ -213,6 +214,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - 再割り当てジョイントを２つ追加
 -- ReassignHtmlentitydecode (余分にHTMLエンティティされているフィードの修正)
 -- ReassignTruncate (文字列長の切り落とし)
+- HTML許可設定がエントリタイトルにも影響するようにテンプレートを修正 0.53a
 
 0.52 2007-08-20 ※要モジュールアップデート
 - ソートジョイントの実装

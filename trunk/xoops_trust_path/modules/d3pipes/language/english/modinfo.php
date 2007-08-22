@@ -37,6 +37,8 @@ define($constpref.'_ARCB_FETCHEDDSC','Specify days clippings should be removed. 
 define($constpref.'_INTERNALENC','Internal encoding');
 define($constpref.'_FETCHCACHELT','Fech cache life time (sec)');
 define($constpref.'_REDIRECTWARN','Alert if rss/atom URI will be redirected');
+define($constpref.'_SNP_MAXREDIRS','Max redirections for Snoopy');
+define($constpref.'_SNP_MAXREDIRSDSC','After building pipes successfully, set this option 0');
 define($constpref.'_SNP_PROXYHOST','Hostname of proxy server');
 define($constpref.'_SNP_PROXYHOSTDSC','specify it by FQDN. Normally leave blank here');
 define($constpref.'_SNP_PROXYPORT','Port of proxy server');

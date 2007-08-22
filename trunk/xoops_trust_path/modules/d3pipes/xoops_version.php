@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.52 ;
+$modversion['version'] = 0.53 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -141,6 +141,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'snoopy_maxredirs' ,
+	'title'			=> $constpref.'_SNP_MAXREDIRS' ,
+	'description'	=> $constpref.'_SNP_MAXREDIRSDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '5' ,
 	'options'		=> array()
 ) ;
 

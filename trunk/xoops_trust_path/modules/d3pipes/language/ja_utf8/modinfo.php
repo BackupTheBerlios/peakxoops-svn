@@ -31,13 +31,15 @@ define($constpref.'_BNAME_SYNC','同期パイプ一覧ブロック') ;
 // configs
 define($constpref.'_INDEXTOTAL','モジュールトップで表示する最新ヘッドラインの総数');
 define($constpref.'_INDEXEACH','モジュールトップで表示する最新ヘッドラインに１パイプから引っ張ってくる最大数');
-define($constpref.'_ENTRIESAPIPE','パイプ個別表示やRSS/ATOMで表示するエントリ数');
+define($constpref.'_ENTRIESAPIPE','切り抜き一覧表示やRSS/ATOMで表示するエントリ数');
 define($constpref.'_ARCB_FETCHED','切り抜きを自動削除する日数（取得日ベース）');
 define($constpref.'_ARCB_FETCHEDDSC','エントリを切り抜きとして保存した日から何日で削除するかを指定します。自動削除しない場合は0を指定します。また、コメントやハイライト属性がついたコメントは削除されません。あえて削除する場合は切り抜き管理から明示的に削除してください。');
 define($constpref.'_INTERNALENC','内部エンコーディング');
 define($constpref.'_FETCHCACHELT','外部取得キャッシュ期間 (秒)');
 define($constpref.'_REDIRECTWARN','取得先URIのリダイレクトについて警告する');
-define($constpref.'_SNP_PROXYHOST','外部取得に経由するProxyのホスト名 (FQDN)');
+define($constpref.'_SNP_MAXREDIRS','取得先URIの最大リダイレクト回数');
+define($constpref.'_SNP_MAXREDIRSDSC','意図しないリダイレクトを避けるためにも、ある程度運用が安定してきたら、ここを0にすることをお勧めします');
+define($constpref.'_SNP_PROXYHOST','外部取得に経由するProxyのホスト名');
 define($constpref.'_SNP_PROXYHOSTDSC','FQDNで指定。Proxyを利用しない場合は空欄にしてください');
 define($constpref.'_SNP_PROXYPORT','外部取得に経由するProxyのポート番号');
 define($constpref.'_SNP_PROXYUSER','外部取得に経由するProxyのユーザ名');

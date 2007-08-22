@@ -37,11 +37,11 @@ class D3pipesFetchSnoopy extends D3pipesFetchAbstract {
 		$fetch_result = $snoopy->fetch( $this->url ) ;
 
 		// check redirect
-		if( $fetch_result && $snoopy->_redirectaddr ) {
+		if( $fetch_result && $snoopy->_redirectaddr && $this->mod_configs['snoopy_maxredirs'] > 0 ) {
 			if( ! empty( $this->mod_configs['redirect_warning'] ) ) {
 				$this->errors[] = _MD_D3PIPES_ERR_REDIRECTED."\n(".$this->pipe_id.")\n".$this->url." ->\n".$snoopy->_redirectaddr ;
 			}
-			$snoopy->maxredirs = 5 ;
+			$snoopy->maxredirs = $this->mod_configs['snoopy_maxredirs'] ;
 			$fetch_result = $snoopy->fetch( $this->url ) ;
 		}
 

@@ -37,6 +37,8 @@ define($constpref.'_ARCB_FETCHEDDSC','エントリを切り抜きとして保存した日から何日
 define($constpref.'_INTERNALENC','内部エンコーディング');
 define($constpref.'_FETCHCACHELT','外部取得キャッシュ期間 (秒)');
 define($constpref.'_REDIRECTWARN','取得先URIのリダイレクトについて警告する');
+define($constpref.'_SNP_MAXREDIRS','取得先URIの最大リダイレクト回数');
+define($constpref.'_SNP_MAXREDIRSDSC','意図しないリダイレクトを避けるためにも、ある程度運用が安定してきたら、ここを0にすることをお勧めします');
 define($constpref.'_SNP_PROXYHOST','外部取得に経由するProxyのホスト名');
 define($constpref.'_SNP_PROXYHOSTDSC','FQDNで指定。Proxyを利用しない場合は空欄にしてください');
 define($constpref.'_SNP_PROXYPORT','外部取得に経由するProxyのポート番号');

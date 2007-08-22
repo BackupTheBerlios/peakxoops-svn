@@ -40,6 +40,8 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.53 2007-08-23
+- added a configuration about snoopy max_redirs
 
 0.52 2007-08-20 (update the module)
 - added joints
@@ -202,6 +204,9 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.53 2007-08-23
+- Snoopyの最大リダイレクト回数設定を追加した
 
 0.52 2007-08-20 ※要モジュールアップデート
 - ソートジョイントの実装

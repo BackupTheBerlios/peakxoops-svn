@@ -42,6 +42,9 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 0.53 2007-08-23
 - added a configuration about snoopy max_redirs
+- added joints
+-- ReassignHtmlentitydecode (Fix extra htmlentitied entries)
+-- ReassignTruncate (using xoops_substr() to each field)
 
 0.52 2007-08-20 (update the module)
 - added joints
@@ -207,12 +210,15 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 0.53 2007-08-23
 - Snoopyの最大リダイレクト回数設定を追加した
+- 再割り当てジョイントを２つ追加
+-- ReassignHtmlentitydecode (余分にHTMLエンティティされているフィードの修正)
+-- ReassignTruncate (文字列長の切り落とし)
 
 0.52 2007-08-20 ※要モジュールアップデート
 - ソートジョイントの実装
--- SortPubtimedsc
--- SortHeadlinestr
--- SortHeadlineint
+-- SortPubtimedsc (発行日降順)
+-- SortHeadlinestr (エントリタイトル文字列昇順)
+-- SortHeadlineint (エントリタイトル数字昇順)
 - 切り抜きの削除実装
 - 切り抜きの可視/不可視コントロール
 - パイプ個別表示と切り抜き一覧を機能的に分けた

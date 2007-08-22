@@ -54,6 +54,8 @@ define('_MD_D3PIPES_CLASS_REASSIGNCONTENTENCODED','description to content');
 define('_MD_D3PIPES_CLASS_REASSIGNALLOWHTML','Allow HTML');
 define('_MD_D3PIPES_CLASS_REASSIGNSTRIPTAGS','Strip HTML tags');
 define('_MD_D3PIPES_CLASS_REASSIGNDEFAULTLINK','Specify URL of link');
+define('_MD_D3PIPES_CLASS_REASSIGNHTMLENTITYDECODE','Fix extra htmlentity');
+define('_MD_D3PIPES_CLASS_REASSIGNTRUNCATE','Truncate');
 define('_MD_D3PIPES_CLASS_CACHETRUSTPATH','Make cache under trust/cache/');
 define('_MD_D3PIPES_CLASS_SORTPUBTIMEDSC','Published time DESC');
 define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','Dictionary order ASC');

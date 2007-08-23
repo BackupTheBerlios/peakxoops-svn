@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'/D3pipesJointAbstract.class.php' ;
 class D3pipesSortAbstract extends D3pipesJointAbstract {
 
 	// constructor
-	function D3pipesFilterAbstract( $mydirname , $pipe_id , $option )
+	function D3pipesSortAbstract( $mydirname , $pipe_id , $option )
 	{
 		$this->mydirname = $mydirname ;
 		$this->pipe_id = intval( $pipe_id ) ;

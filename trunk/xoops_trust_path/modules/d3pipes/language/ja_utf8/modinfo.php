@@ -47,6 +47,10 @@ define($constpref.'_SNP_PROXYPASS','外部取得に経由するProxyのパスワ
 define($constpref.'_SNP_CURLPATH','curlのパス (デフォルトは/usr/bin/curl)');
 define($constpref.'_TIDY_PATH','tidyのパス (デフォルトは/usr/bin/tidy)');
 define($constpref.'_XSLTPROC_PATH','xsltprocのパス (デフォルトは/usr/bin/xsltproc)');
+define($constpref.'_UPING_SERVERS','更新Pingサーバ');
+define($constpref.'_UPING_SERVERSDSC','httpから始まるRPCエンドポイントを１行に１つずつ記述します<br />URLの最後に、スペースで区切ったEを入れた場合、extendedPingで送信します。');
+define($constpref.'_UPING_SERVERSDEF',"http://blogsearch.google.co.jp/ping/RPC2 E\nhttp://api.my.yahoo.co.jp/RPC2\nhttp://rpc.technorati.com/rpc/ping\nhttp://ping.bloggers.jp/rpc/\nhttp://www.blogpeople.net/servlet/weblogUpdates E");
+// http://rpc.weblogs.com/
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.php?page=main_cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');

@@ -13,6 +13,7 @@ function d3pipes_admin_fetch_joints( $mydirname )
 		'replace' => 0 ,
 		'clip' => 20 ,
 		'cache' => 21 ,
+		'ping' => 22 ,
 		'sort' => 30 ,
 		'union' => 40 ,
 	) ;

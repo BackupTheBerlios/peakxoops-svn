@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.53 ;
+$modversion['version'] = 0.54 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -221,6 +221,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> '/usr/bin/xsltproc' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'update_ping_servers' ,
+	'title'			=> $constpref.'_UPING_SERVERS' ,
+	'description'	=> $constpref.'_UPING_SERVERSDSC'  ,
+	'formtype'		=> 'textarea' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> constant($constpref.'_UPING_SERVERSDEF') ,
 	'options'		=> array()
 ) ;
 

@@ -5,6 +5,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'MYALBUM_AM_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-08-24 18:18:02
+define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
+define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
+
 // Appended by Xoops Language Checker -GIJOE- in 2004-05-17 18:42:55
 define('_AM_TH_DATE','Uppdaterad senast');
 define('_AM_TH_BATCHUPDATE','Uppdatera markerade foto tillsammans');

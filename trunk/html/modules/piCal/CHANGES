@@ -11,6 +11,7 @@ v.091 (2007-03-15)
 - fixed templates for minical_ex blocks 0.91a
 - added language files
 -- danish (thx Anders) 0.91b
+-- ja_utf8 0.91f
 - fixed wrong entity in rss2_coming.php and rss2_today.php 0.91c
 - added plugins
 -- xpwiki (thx nao-pon) 0.91d
@@ -393,6 +394,7 @@ v.091 (2007-03-15)
 - テンプレートの微修正 0.91a
 - 言語ファイル追加
 -- danish (thx Anders) 0.91b
+-- ja_utf8 0.91f
 - RSS出力コントローラで、無効なエンティティが出るのを修正 0.91c
 - プラグイン追加
 -- xpwiki (thx nao-pon) 0.91d

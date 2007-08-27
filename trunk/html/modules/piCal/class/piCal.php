@@ -7,7 +7,7 @@
 
 if( ! class_exists( 'piCal' ) ) {
 
-define( 'PICAL_COPYRIGHT' , "<a href='http://www.peak.ne.jp/xoops/' target='_blank'>piCal-0.8</a>" ) ;
+define( 'PICAL_COPYRIGHT' , "<a href='http://xoops.peak.ne.jp/' target='_blank'>piCal-0.8</a>" ) ;
 define( 'PICAL_EVENT_TABLE' , 'pical_event' ) ;
 define( 'PICAL_CAT_TABLE' , 'pical_cat' ) ;
 

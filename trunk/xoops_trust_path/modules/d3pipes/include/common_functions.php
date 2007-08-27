@@ -105,7 +105,7 @@ function d3pipes_common_cache_path_base( $mydirname )
 }
 
 
-function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 , $with_fetch = true )
+function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 , $with_fetch = true , $with_ping = true )
 {
 	$base = d3pipes_common_cache_path_base( $mydirname ) ;
 	$prefix = substr( strrchr( $base , '/' ) , 1 ) ;
@@ -117,6 +117,9 @@ function d3pipes_common_delete_all_cache( $mydirname , $pipe_id = 0 , $with_fetc
 			if( strncmp( $file , $prefix , $prefix_length ) === 0 ) {
 				// save 'fetch' cache if necessary
 				if( ! $with_fetch && substr( $file , -5 ) == 'fetch' ) continue ;
+
+				// save 'ping' cache if necessary
+				if( ! $with_ping && substr( $file , -4 ) == 'ping' ) continue ;
 
 				if( $pipe_id > 0 ) {
 					// only specified pipe's cache
@@ -207,7 +210,7 @@ function d3pipes_common_get_pipe4assign( $mydirname , $pipe_id )
 
 
 
-function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &$errors , $mod_configs )
+function 3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &$errors , $mod_configs )
 {
 	// var_dump( microtime() ) ;
 

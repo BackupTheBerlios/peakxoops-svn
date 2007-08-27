@@ -59,7 +59,7 @@ function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
 
 	// remove all cache of the pipe
 	list( $pipe_id ) = $db->fetchRow( $db->query( "SELECT pipe_id FROM ".$db->prefix($mydirname."_clippings")." WHERE clipping_id=$clipping_id" ) ) ;
-	d3pipes_common_delete_all_cache( $mydirname , $pipe_id , false ) ;
+	d3pipes_common_delete_all_cache( $mydirname , $pipe_id , false , false ) ;
 
 	return true ;
 }

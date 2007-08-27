@@ -20,7 +20,7 @@ $config_handler =& xoops_gethandler('config');
 $configs = $config_handler->getConfigList( $module->mid() ) ;
 
 // force to remove all cache of all pipes
-d3pipes_common_delete_all_cache( $mydirname ) ;
+d3pipes_common_delete_all_cache( $mydirname , 0 , true , false ) ;
 
 // pipes loop
 $db =& Database::getInstance() ;

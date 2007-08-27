@@ -210,7 +210,7 @@ function d3pipes_common_get_pipe4assign( $mydirname , $pipe_id )
 
 
 
-function 3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &$errors , $mod_configs )
+function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &$errors , $mod_configs )
 {
 	// var_dump( microtime() ) ;
 

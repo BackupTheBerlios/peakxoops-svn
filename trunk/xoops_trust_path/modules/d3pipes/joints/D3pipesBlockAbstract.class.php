@@ -41,6 +41,10 @@ class D3pipesBlockAbstract extends D3pipesJointAbstract {
 
 		$block = call_user_func( $this->func_name , $this->block_options ) ;
 
+		// update lastfetch_time
+		$db =& Database::getInstance() ;
+		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_pipes")." SET lastfetch_time=UNIX_TIMESTAMP() WHERE pipe_id=$this->pipe_id" ) ;
+
 		return $this->reassign( $block ) ;
 	}
 

@@ -9,6 +9,11 @@ $pipe_id = intval( @$_GET['pipe_id'] ) ;
 
 if( $pipe_id == 0 ) {
 	// index pipe (main_aggr)
+	$pipe4assign = array(
+		'link' => XOOPS_URL.'/' ,
+		'name4xml' => htmlspecialchars( $xoopsConfig['sitename'] , ENT_QUOTES ) . ' - ' . $xoopsModule->getVar('name') ,
+		'lastfetch_time' => time() ,
+	) ;
 	$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors ) ;
 } else {
 	// single pipe

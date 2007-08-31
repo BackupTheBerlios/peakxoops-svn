@@ -8,12 +8,6 @@
 		<{* SEPARATED VIEW *}>
 		<{foreach from=$pipes_entries item="pipe"}>
 
-			<{if $entry.allow_html}>
-				<{assign var="entry_headline4disp" value=$entry.headline}>
-			<{else}>
-				<{assign var="entry_headline4disp" value=$entry.headline|escape}>
-			<{/if}>
-
 			<div class="d3pipes_block_async_separated">
 				<{$pipe.name}>
 				<{if $pipe.image && $pipe.url}>
@@ -21,6 +15,13 @@
 				<{/if}>
 				<ul class="d3pipes_block_async_separated">
 					<{foreach from=$pipe.entries item="entry"}>
+
+						<{if $entry.allow_html}>
+							<{assign var="entry_headline4disp" value=$entry.headline}>
+						<{else}>
+							<{assign var="entry_headline4disp" value=$entry.headline|escape}>
+						<{/if}>
+
 						<li>
 							<{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}>
 							<{if $entry.clipping_id}>

@@ -40,6 +40,11 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.55 2007-08-31
+- fixed separated view broken in 0.53
+- fixed xml title for module aggregated view (thx kilica)
+- modified lastfetch can be updated by block joints (thx kilica)
+
 0.54 2007-08-24
 - added a joint update ping
 - added a configuration about ping servers
@@ -212,6 +217,11 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.55 2007-08-31
+- 0.53で並列ブロック表記がおかしくなっていたのを修正
+- モジュール全体のアグリゲーションフィールドのアサイン修正 (thx kilica)
+- ブロックジョイントでも最終取得日時を更新するようにした (thx kilica)
 
 0.54 2007-08-24
 - 更新Pingジョイントを追加

@@ -4,14 +4,15 @@
 	<id><{$mod_url}>/</id>
 	<updated><{"Y-m-d\TH:i:sO"|date:$pipe.lastfetch_time}></updated>
 	<title type='text'><{$pipe.name4xml}></title>
-	<{if $pipe.link}>
+<{if $pipe.link}>
 	<link rel='alternate' type='text/html' href='<{$pipe.link|escape}>'></link>
-	<{/if}>
+<{/if}>
 	<link rel='self' type='application/atom+xml' href='<{$mod_url}>/index.php?page=xml&amp;style=atom&amp;pipe_id=<{$pipe.id}>'></link>
 	<author><email><{$xoops_config.adminmail}></email></author>
 	<generator>XOOPS - d3pipes</generator>
 
 	<{foreach from=$entries item="entry"}>
+
 	<entry>
 		<id><{$entry.fingerprint|escape}></id>
 		<published><{"Y-m-d\TH:i:sO"|date:$entry.pubtime}></published>

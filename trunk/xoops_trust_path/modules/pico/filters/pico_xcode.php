@@ -2,7 +2,7 @@
 
 define('_MD_PICO_FILTERS_XCODEINITWEIGHT',25);
 
-function pico_xcode( $mydirname , $text , $content_row )
+function pico_xcode( $mydirname , $text , $content4assign )
 {
 	require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 	$myts =& PicoTextSanitizer::getInstance() ;

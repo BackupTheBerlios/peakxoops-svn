@@ -1,5 +1,5 @@
-Hello {X_UNAME},
+سلام {X_UNAME},
 
-A new content has been registered at {X_SITENAME}
+یک محتوای جدید ثبت شده در {X_SITENAME}
 
 Forum URL: {FORUM_URL}

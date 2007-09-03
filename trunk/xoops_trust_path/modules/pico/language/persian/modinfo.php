@@ -15,13 +15,13 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
-define($constpref.'_BNAME_SUBCATEGORIES','Subcategories');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT','new content');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP','Notify if a new content is registered. (approved contents only)');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ','[{X_SITENAME}] {X_MODULE} : New content');
+define($constpref.'_BNAME_SUBCATEGORIES','زیر شاخه ها');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT','سندی جدید');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP','اگر یک سند جدید ثبت شد اطلاع بده. (فقط برای سند ها مجاز باشد)');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ','[{X_SITENAME}] {X_MODULE} : سندی جدید');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:39:06
-define($constpref.'_COM_VIEW','View of Comment-integration');
+define($constpref.'_COM_VIEW','دیدن نظر های یکپارچه');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-07 17:48:20
 define($constpref.'_ADMENU_MYLANGADMIN','تنظیمات زبان');
@@ -38,7 +38,7 @@ define($constpref.'_SEARCHBYUIDDSC','قرار دادن لیست اسناد  در
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:22
 define($constpref.'_HISTORY_P_C','چه تعداد اصلاح (سند) در پایگاه داده ها ذخیره شود');
 define($constpref.'_MLT_HISTORY','کمترین عمر هر اصلاح ( ثانیه)');
-define($constpref.'_BRCACHE','زمان نگاه داری فایل کش برای  فایل های تصویری (only with wraps mode)');
+define($constpref.'_BRCACHE','زمان نگاه داری فایل کش برای  فایل های تصویری (فقط در حالت wraps)');
 define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 means disabled)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
@@ -59,7 +59,7 @@ define($constpref.'_FILTERSPDSC','فیلتر های ورودی را به وسی�
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","pico");
+define($constpref."_NAME","پیکو");
 
 // A brief description of this module
 define($constpref."_DESC","ماژولی برای ساخت اسناد استاتیک");

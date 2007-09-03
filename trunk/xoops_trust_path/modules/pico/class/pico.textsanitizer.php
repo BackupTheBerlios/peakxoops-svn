@@ -153,6 +153,7 @@ class PicoTextSanitizer extends MyTextSanitizer
 
 	function codeConv($text, $xcode = 1, $image = 1){
 		if( $xcode != 0 ) {
+			// bug fix
 			$text = preg_replace_callback( "/\[code](.*)\[\/code\]/sU" , array( $this , 'myCodeSanitizer' ) , $text ) ;
 		}
 		return $text ;
@@ -165,6 +166,11 @@ class PicoTextSanitizer extends MyTextSanitizer
 
 	function xoopsCodeDecodeSafe( $text )
 	{
+		// Though I know this is bad judgement ...
+		if( preg_match( '/[<>\'\"]/' , $text ) ) {
+			$text = htmlspecialchars( str_replace( '\"' , '"' , $text ) , ENT_QUOTES ) ;
+		}
+
 		$patterns[] = "/\[color=(['\"]?)([a-zA-Z0-9]*)\\1](.*)\[\/color\]/sU";
 		$replacements[] = '<span style="color: #\\2;">\\3</span>';
 		$patterns[] = "/\[size=(['\"]?)([a-z0-9-]*)\\1](.*)\[\/size\]/sU";

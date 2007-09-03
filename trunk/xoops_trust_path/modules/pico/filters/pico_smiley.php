@@ -2,7 +2,7 @@
 
 define('_MD_PICO_FILTERS_SMILEYINITWEIGHT',30);
 
-function pico_smiley( $mydirname , $text , $content_row )
+function pico_smiley( $mydirname , $text , $content4assign )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 

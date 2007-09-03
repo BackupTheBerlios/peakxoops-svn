@@ -252,14 +252,14 @@ function pico_common_get_content4assign( $mydirname , $content_id , $mod_config 
 		'votes_avg' => $content_row['votes_count'] ? $content_row['votes_sum'] / doubleval( $content_row['votes_count'] ) : 0 ,
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
 		'subject_raw' => $content_row['subject'] ,
-		'body' => $process_body ? pico_common_filter_body( $mydirname , $content_row , $content_row['use_cache'] ) : $content_row['body_cached'] ,
+		// 'body' => $content_row['body'] ,
 		'body_raw' => $content_row['body'] ,
 		'can_edit' => @$category_row['can_edit'] ,
 		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
-	) ;
-	$content4assign += $content_row ;
-	
-	return $content4assign ;
+	) + $content_row ;
+
+	// only 'body' is parsed after creating new content_row (for xoopstpl filter)
+	return array( 'body' => $process_body ? pico_common_filter_body( $mydirname , $content4assign , $content_row['use_cache'] ) : $content_row['body_cached'] ) + $content4assign ;
 }
 
 

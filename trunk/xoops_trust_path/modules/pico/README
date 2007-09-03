@@ -102,6 +102,13 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.50 (2007/09/04)
+- added HTML validated formmail
+- fixed missing sync after content updated (thx rockle)
+- added permission checker for hodajuku distribution
+- updated language files
+-- persian (thx voltan)
+
 1.40 (2007/08/08)
 - added a class for xmobile's plugin
 - numbered as stable version
@@ -423,6 +430,13 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.50 (2007/09/04)
+- SmartyテンプレートをValidationにも使うフォームメールを実装
+- 記事編集後のsync忘れを修正 (thx rockle)
+- ホダ塾ディストリビューション用にパーミッションチェッカを追加
+- 言語ファイル更新
+-- persian (thx voltan)
 
 1.40 (2007/08/08)
 - xmobileプラグイン用クラスの追加

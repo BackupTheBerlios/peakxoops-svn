@@ -2,7 +2,7 @@
 
 define('_MD_PICO_FILTERS_TEXTWIKIINITWEIGHT',15);
 
-function pico_textwiki( $mydirname , $text , $content_row )
+function pico_textwiki( $mydirname , $text , $content4assign )
 {
 	// add XOOPS_TRUST_PATH/PEAR/ into include_path
 	if( ! defined( 'PATH_SEPARATOR' ) ) define( 'PATH_SEPARATOR' , DIRECTORY_SEPARATOR == '/' ? ':' : ';' ) ;

@@ -9,14 +9,14 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
-define('_MD_PICO_WAITINGRELEASE','waiting release');
-define('_MD_PICO_EXPIRED','Expired');
-define('_MD_PICO_LABEL_SPECIFY_DATETIME','Specify datetime');
-define('_MD_PICO_BTN_SUBMITSAVEAS','save as');
+define('_MD_PICO_WAITINGRELEASE','منتظر برای انتشار');
+define('_MD_PICO_EXPIRED','منقضی شد');
+define('_MD_PICO_LABEL_SPECIFY_DATETIME','مشخص کردن مدت زمان');
+define('_MD_PICO_BTN_SUBMITSAVEAS','ذخیره در یک سند جدید');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:39:06
 define('_MD_PICO_ONOFF','ON/OFF');
-define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','اگر شما ویژگی ها را لغو کردید, بنویسید یک خط مثل:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-02 18:27:44
 define('_MD_PICO_JUMPTOTOPOFPICOBODY','برو به بالای صفحه');
@@ -33,7 +33,7 @@ define('_MD_PICO_DIFF2NOW','diff to now');
 define('_MD_PICO_DIFFFROMPREV','diff from previous');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:22
-define('_MD_PICO_DELETEDCONTENTS','Deleted contents');
+define('_MD_PICO_DELETEDCONTENTS','حذف سند ها');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
 define('_MD_PICO_BYTE','byte');
@@ -48,7 +48,7 @@ define('_MD_PICO_MODIFIED','ویرایش  شده در');
 define('_MD_PICO_VIEWED','بازدید ها');
 define('_MD_PICO_NEXT','بعدی');
 define('_MD_PICO_PREV','قبلی');
-define('_MD_PICO_CATEGORYINDEX','top of the category');
+define('_MD_PICO_CATEGORYINDEX','بالا این شاخه');
 define('_MD_PICO_NOSUBJECT','(بدون عنوان)');
 define('_MD_PICO_WAITINGAPPROVAL','waiting approval');
 define('_MD_PICO_WAITINGREGISTER','waiting new');
@@ -71,14 +71,14 @@ define('_MD_PICO_LINK_CATEGORYPERMISSIONS','دسترسی');
 define('_MD_PICO_LINK_BATCHCONTENTS','دسته');
 define('_MD_PICO_LINK_PUBLICCATEGORYINDEX','فهرست عمومی شاخه');
 
-define('_MD_PICO_LINK_PRINTERFRIENDLY','Printer friendly');
+define('_MD_PICO_LINK_PRINTERFRIENDLY','پرینتر دوستانه');
 define('_MD_PICO_LINK_TELLAFRIEND','تماس با دوستان');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','یک مقاله در %s پیدا شد');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"من مقاله ی مورد علاقه ی شما را در %s پیدا کرده ام");
 
 
 define('_MD_PICO_ERR_SQL','یک خطای SQL رخ داده در:');
-define('_MD_PICO_ERR_DUPLICATEDVPATH','The virtual path is duplicated');
+define('_MD_PICO_ERR_DUPLICATEDVPATH','این پچ مجازی تکثیر شد');
 define('_MD_PICO_ERR_PIDLOOP','خطا حلقه اصلی/ وابسته');
 
 define('_MD_PICO_MSG_UPDATED','با موفقیت به روز شد');

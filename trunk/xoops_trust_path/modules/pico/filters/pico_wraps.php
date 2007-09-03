@@ -2,15 +2,15 @@
 
 define('_MD_PICO_FILTERS_WRAPSINITWEIGHT',0);
 
-function pico_wraps( $mydirname , $text , $content_row )
+function pico_wraps( $mydirname , $text , $content4assign )
 {
-	if( empty( $content_row['vpath'] ) ) return $text ;
+	if( empty( $content4assign['vpath'] ) ) return $text ;
 
 	if( ! function_exists( 'pico_convert_encoding_to_ie' ) ) {
 		@include_once XOOPS_TRUST_PATH.'/modules/pico/language/'.@$GLOBALS['xoopsConfig']['language'].'/main.php' ;
 	}
 
-	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
+	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content4assign['vpath']) ;
 
 	if( file_exists( $wrap_full_path ) ) {
 		ob_start() ;

@@ -485,6 +485,9 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set $time4sql modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
+	// rebuild category tree
+	pico_sync_cattree( $mydirname ) ;
+
 	return $content_id ;
 }
 

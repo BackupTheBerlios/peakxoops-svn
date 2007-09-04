@@ -40,6 +40,10 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.56 2007-09-05
+- modified KeithXML extracting attributes of <item>
+- modified parser for RSS1.0 using rdf:about as fingerprint
+
 0.55 2007-09-01
 - fixed block_sync_big.html (thx Nobelium)
 - fixed separated view broken in 0.53
@@ -218,6 +222,10 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.56 2007-09-05
+- KeithXMLで、<item>の属性を展開するようにした
+- RSS1.0では、rdf:about をfingerprintとするようにした
 
 0.55 2007-09-01
 - block_sync_big.htmlテンプレートのリンクがおかしかったのを修正 (thx Nobelium)

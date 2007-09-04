@@ -31,7 +31,7 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				'pubtime'=>'dc:date' ,
 				'link'=>'link' ,
 				'headline'=>'title' ,
-				'fingerprint'=>'link' ,
+				'fingerprint'=>'rdf:about|link' ,
 				'description'=>'description' ,
 				'content_encoded'=>'content:encoded' ,
 			) ,
@@ -114,6 +114,15 @@ class D3pipesParseKeithxml extends D3pipesParseAbstract {
 				// just an item/entry
 				$entry = $loop_base ;
 				$single_item = true ;
+			}
+
+			// import $attributes into $entry
+			if( ! empty( $attributes[ $entry_key ] ) ) {
+				foreach( $attributes[ $entry_key ] as $key => $val ) {
+					if( empty( $entry[ $key ] ) ) {
+						$entry[ $key ] = $val ;
+					}
+				}
 			}
 
 			$item = array() ;

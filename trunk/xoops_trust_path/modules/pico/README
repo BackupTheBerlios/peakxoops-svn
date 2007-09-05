@@ -108,6 +108,7 @@ pico is fast enough if you use content's cache.
 - added permission checker for hodajuku distribution
 - updated language files
 -- persian (thx voltan)
+- modified session for form process will be cleared on managing content 1.50a
 
 1.40 (2007/08/08)
 - added a class for xmobile's plugin
@@ -437,6 +438,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - ホダ塾ディストリビューション用にパーミッションチェッカを追加
 - 言語ファイル更新
 -- persian (thx voltan)
+- コンテンツ編集時にはセッションをクリアするように変更 1.50a
 
 1.40 (2007/08/08)
 - xmobileプラグイン用クラスの追加

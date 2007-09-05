@@ -4,11 +4,24 @@ require_once XOOPS_TRUST_PATH.'/modules/pico/class/FormProcessByHtml.class.php' 
 
 function smarty_function_formmail( $params , &$smarty )
 {
+	global $xoopsModule ;
+
 	// get tpl_vars ($mod_url or $content) they are "for disp"
 	$mydirname = $smarty->_tpl_vars['mydirname'] ;
 	$mod_url = $smarty->_tpl_vars['mod_url'] ;
 	$content4disp = $smarty->_tpl_vars['content'] ;
 	$session_index = $mydirname . '_formmail_' . $content4disp['id'] ;
+
+	// session clear in contentmanager or makecontent
+	if( in_array( $_GET['page'] , array( 'contentmanager' , 'makecontent' ) ) ) {
+		unset( $_SESSION[ $session_index ] ) ;
+		return ;
+	}
+
+	// check this contents is in main area of pico
+	if( ! is_object( @$xoopsModule ) ) return ;
+	if( $xoopsModule->getVar('dirname') != 'pico' ) return ;
+	if( intval( @$GLOBALS['content_id'] ) != $content4disp['id'] ) return ;
 
 	// read language files for formmail
 	$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;

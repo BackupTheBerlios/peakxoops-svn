@@ -17,6 +17,8 @@ x 管理画面メニューフック
 
 altsys自体の言語定数オーバーライドシステム
 
+gzip圧縮転送と管理画面テーマとのバッティングを調べる
+
 
 = Premissions =
 mypreferences -> module_admin of the module

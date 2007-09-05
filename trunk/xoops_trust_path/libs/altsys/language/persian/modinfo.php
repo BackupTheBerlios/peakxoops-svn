@@ -5,12 +5,12 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
-define('_MI_ALTSYS_ENABLEFORCECLONE','Force all blocks to be clonable');
-define('_MI_ALTSYS_ENABLEFORCECLONEDSC','You should know there are blocks cause errors if multiple instances is displayed on a page');
+define('_MI_ALTSYS_ENABLEFORCECLONE','اجبار تمام بلاك ها به تكثير شدن');
+define('_MI_ALTSYS_ENABLEFORCECLONEDSC','شما بايد بدانيد چندين خطا  در كش  بلاك ها وجود خواهد داشت اگر شما از چند بلاك يك شكل در يك صفحه استفاده كنيد');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-10 17:21:59
-define('_MI_ALTSYS_MENU_MYLANGADMIN','Languages');
-define('_MI_ALTSYS_MENU_ADVANCEDLANGADMIN','Advanced Languages');
+define('_MI_ALTSYS_MENU_MYLANGADMIN','زبان ها');
+define('_MI_ALTSYS_MENU_ADVANCEDLANGADMIN','زبان هاي پيشرفته');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-26 17:09:10
 define('_MI_ALTSYS_BNAME_ADMIN_MENU','منوی مدیریت');
@@ -19,7 +19,7 @@ define('_MI_ALTSYS_IMAGES_DIRDSC','مسیر وابسته برای ارسال ع�
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-21 05:34:59
 define('_MI_ALTSYS_ADMIN_IN_THEME','قالب بخش مدیریت');
-define('_MI_ALTSYS_ADMIN_IN_THEMEDSC','نام  قالبی که در قسمت مدیریت نمایش داده میشود تنظیم کنید. این خط را فقط بعد از اینکه  وارد کردید در common.php در mainfile.php وارد کنید <br />include XOOPS_TRUST_PATH.\'/libs/altsys/include/admin_in_theme.inc.php\';<br /> برای فعال کردن این گزینه. این گزینه فقط در زوپس 2.0 کار میکند');
+define('_MI_ALTSYS_ADMIN_IN_THEMEDSC','اين گزينه براي  انتخواب قالب منو مديريت به كار ميرود . خط زير را بايد به فايل mainfile.php اضافه كنيد . درست بعد از خطي كه براي شناساندن فايل common.php  اضافه شده است .( include XOOPS_ROOT_PATH."/include/common.php";)  توجه داشته باشيد در زبان فارسي ممكنه است اندكي شكل منوي مديريت را به هم بريزد. <br /><br />include XOOPS_TRUST_PATH.\'/libs/altsys/include/admin_in_theme.inc.php\';	<br /><br />اين قابليت فقط در زوپس 2.0 كار ميكند');
 
 define( '_MI_ALTSYS_MODULENAME' , 'آلت سیس' ) ;
 define( '_MI_ALTSYS_MODULEDESC' , 'مدیریت ساده ی سیستم' ) ;

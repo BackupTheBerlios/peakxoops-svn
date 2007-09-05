@@ -2,7 +2,7 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
-define('_MD_A_MYBLOCKSADMIN_LINK_FORCECLONE','Force clone');
+define('_MD_A_MYBLOCKSADMIN_LINK_FORCECLONE','تكثير اجباري');
 
 define( '_MD_A_MYBLOCKSADMIN_PERMUPDATED' , 'دسترسی ها با موفقیت به روز شد' ) ;
 define( '_MD_A_MYBLOCKSADMIN_BLOCKADMIN' , 'مدیریت بلاک ها' ) ;

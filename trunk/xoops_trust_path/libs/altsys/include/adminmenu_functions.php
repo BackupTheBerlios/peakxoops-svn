@@ -55,7 +55,7 @@ function altsys_adminmenu_insert_mymenu_x20( &$module )
 	// insert blocksadmin
 	if( $dirname != 'altsys' ) {
 		$blocksadmin_title = defined( '_MD_A_MYMENU_MYBLOCKSADMIN' ) ? _MD_A_MYMENU_MYBLOCKSADMIN : 'blocksadmin' ;
-		$insert .= '<img src=\''.XOOPS_URL.'/images/pointer.gif\' width=\'8\' height=\'8\' alt=\'\' />&nbsp;<a href=\''.XOOPS_URL.'/modules/'.$dirname.'/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin\' onmouseover=\'moveLayerY("L'.$popup_no.'", currentY,event) ; popUpL'.$popup_no.'();\'>'.$blocksadmin_title.'</a><br />'."\n" ;
+		$insert .= '<img src=\''.XOOPS_URL.'/images/pointer.gif\' width=\'8\' height=\'8\' alt=\'\' />&nbsp;<a href=\''.XOOPS_URL.'/modules/'.$dirname.'/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin\'>'.$blocksadmin_title.'</a><br />'."\n" ;
 	}
 
 	// insert tplsadmin
@@ -63,7 +63,7 @@ function altsys_adminmenu_insert_mymenu_x20( &$module )
 	list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix("tplfile")." WHERE tpl_module='$dirname'" ) ) ;
 	if( $count > 0 ) {
 		$tplsadmin_title = defined( '_MD_A_MYMENU_MYTPLSADMIN' ) ? _MD_A_MYMENU_MYTPLSADMIN : 'tplsadmin' ;
-		$insert = '<img src=\''.XOOPS_URL.'/images/pointer.gif\' width=\'8\' height=\'8\' alt=\'\' />&nbsp;<a href=\''.XOOPS_URL.'/modules/'.$dirname.'/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin\' onmouseover=\'moveLayerY("L'.$popup_no.'", currentY,event) ; popUpL'.$popup_no.'();\'>'.$tplsadmin_title.'</a><br />'."\n".$insert ;
+		$insert = '<img src=\''.XOOPS_URL.'/images/pointer.gif\' width=\'8\' height=\'8\' alt=\'\' />&nbsp;<a href=\''.XOOPS_URL.'/modules/'.$dirname.'/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin\'>'.$tplsadmin_title.'</a><br />'."\n".$insert ;
 	}
 
 	// do insertion

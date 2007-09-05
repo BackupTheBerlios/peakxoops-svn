@@ -22,31 +22,31 @@ define( '_TPLSADMIN_DD_REMOVEHOOKS' , 'This removes comments/div tags/logics imp
 define( '_TPLSADMIN_CNF_REMOVEHOOKS' , 'Are you OK for normlizing?' ) ;
 
 
-define( '_TPLSADMIN_MSG_CLEARCACHE' , 'Template caches are removed' ) ;
+define( '_TPLSADMIN_MSG_CLEARCACHE' , 'كش تمپليت پاك شد' ) ;
 define( '_TPLSADMIN_MSG_CREATECOMPILECACHEFIRST' , 'There are no compiled template caches. Create complied template caches by displaying public sides of your site, first' ) ;
 
-define( '_TPLSADMIN_CNF_DELETEOK' , 'Delete OK?' ) ;
+define( '_TPLSADMIN_CNF_DELETEOK' , 'آيا حذف شود؟' ) ;
 
 
 define( '_TPLSADMIN_DT_GETTPLSVARSINFO_DW' , 'Get info of template variables as DreamWeaver Extensions' ) ;
 define( '_TPLSADMIN_DD_GETTPLSVARSINFO_DW' , 'Open Macromedia Extension Manager, first.<br />Extract the download archive.<br />Execute the files which extensions are .mxi and you will meet installing dialogs.<br />The snippets for template variables of your site will be usable after restarting Dream Weaver.' ) ;
 
-define( '_TPLSADMIN_DT_GETTEMPLATES' , 'Download templates' ) ;
+define( '_TPLSADMIN_DT_GETTEMPLATES' , 'دانلود تمپليت' ) ;
 define( '_TPLSADMIN_DD_GETTEMPLATES' , 'Select a set before pushing either button' ) ;
 
-define( '_TPLSADMIN_FMT_MSG_PUTTEMPLATES' , '%d templates are imported.' ) ;
-define( '_TPLSADMIN_DT_PUTTEMPLATES' , 'Upload templates' ) ;
+define( '_TPLSADMIN_FMT_MSG_PUTTEMPLATES' , '%d تمپليت وارد شد.' ) ;
+define( '_TPLSADMIN_DT_PUTTEMPLATES' , 'بارگذاري تمپليت' ) ;
 define( '_TPLSADMIN_DD_PUTTEMPLATES' , 'Select a set you want to upload/overwrite before uploading zip/tgz archive including template files (.html). You need not to check depths of the paths in the archive.' ) ;
 
 
-define( '_TPLSADMIN_ERR_NOTUPLOADED' , 'No files are uploaded.' ) ;
-define( '_TPLSADMIN_ERR_EXTENSION' , 'This extension cannot be recognized.' ) ;
-define( '_TPLSADMIN_ERR_INVALIDARCHIVE' , 'The archive is not extractable.' ) ;
+define( '_TPLSADMIN_ERR_NOTUPLOADED' , 'هيچ فايلي آپلود نشده' ) ;
+define( '_TPLSADMIN_ERR_EXTENSION' , 'اين پسوند قابل تشخيص نيست .' ) ;
+define( '_TPLSADMIN_ERR_INVALIDARCHIVE' , 'اين آرشيو قابل استخراج شدن نيست.' ) ;
 define( '_TPLSADMIN_ERR_INVALIDTPLSET' , 'Invalid set name has been specified.' ) ;
 
 define( '_TPLSADMIN_ERR_NOTPLSVARSINFO' , 'There are no template vars info files.' ) ;
 
-define( '_TPLSADMIN_NUMCAP_COMPILEDCACHES' , 'Compiled template caches' ) ;
+define( '_TPLSADMIN_NUMCAP_COMPILEDCACHES' , 'كش هاي تمپليت جمه آوري شد' ) ;
 define( '_TPLSADMIN_NUMCAP_TPLSVARS' , 'Template vars info files' ) ;
 
 

@@ -43,6 +43,8 @@ Notice: Async block requires the privileges of not only "block access" but also 
 0.56 2007-09-05
 - modified KeithXML extracting attributes of <item>
 - modified parser for RSS1.0 using rdf:about as fingerprint
+- fixed some warnings and notices (thx souhalt) 0.56a
+- modified W3C-DTF violated (missing cologne) feeds can be parsed 0.56a
 
 0.55 2007-09-01
 - fixed block_sync_big.html (thx Nobelium)
@@ -226,6 +228,8 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 0.56 2007-09-05
 - KeithXMLで、<item>の属性を展開するようにした
 - RSS1.0では、rdf:about をfingerprintとするようにした
+- いくつかの状況で出てしまっていたWarningとNoticeを潰した (thx souhalt) 0.56a
+- タイムゾーン表現に:が含まれていないW3C-DTF違反のフィードに対応した 0.56a
 
 0.55 2007-09-01
 - block_sync_big.htmlテンプレートのリンクがおかしかったのを修正 (thx Nobelium)

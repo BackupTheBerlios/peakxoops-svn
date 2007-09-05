@@ -214,6 +214,8 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 {
 	// var_dump( microtime() ) ;
 
+	$errors = array() ;
+
 	if( empty( $pipe_row ) ) return array() ;
 
 	$db =& Database::getInstance() ;
@@ -248,7 +250,6 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 	$data = array() ;
 
 	// joint chains
-	$errors = array() ;
 	foreach( $objects as $obj ) {
 		$data = $obj->execute( $data , $max_entries ) ;
 		$errors = array_merge( $errors , $obj->getErrors() ) ;

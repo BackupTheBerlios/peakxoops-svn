@@ -20,8 +20,12 @@ $pipe_ids = empty( $_GET['pipe_ids'] ) ? array(0) : explode( ',' , preg_replace(
 if( sizeof( $pipe_ids ) == 1 ) {
 	// single pipe
 	$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , intval( $pipe_ids[0] ) ) ;
-	if( empty( $pipe4assign ) ) die( 'Invalid pipe_id' ) ;
-	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
+	if( empty( $pipe4assign ) ) {
+		$entries = array() ;
+		$errors = array( 'Invalid pipe_id' ) ;
+	} else {
+		$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
+	}
 	$pipes_entries = array() ;
 } else {
 	// Union object

@@ -40,15 +40,11 @@ class D3pipesParseAbstract extends D3pipesJointAbstract {
 			// GMT
 			$localdatetime = substr( $w3cDT , 0 , $pos ) ;
 		} else if( ( $pos = strrpos( $w3cDT , '+' ) ) > 0 ) {
-			$hourmin = explode( ':' , substr( $w3cDT , $pos + 1 ) ) ;
-			if( ! empty( $hourmin[0] ) ) $tzoffset -= $hourmin[0] * 3600 ;
-			if( ! empty( $hourmin[1] ) ) $tzoffset -= $hourmin[1] * 60 ;
+			$tzoffset -= $this->parseTimezoneOffset( substr( $w3cDT , $pos + 1 ) ) ;
 			$localdatetime = substr( $w3cDT , 0 , $pos ) ;
 			$this->previous_tzoffset = $tzoffset ;
 		} else if( ( $pos = strrpos( $w3cDT , '-' ) ) > 7 ) {
-			$hourmin = explode( ':' , substr( $w3cDT , $pos + 1 ) ) ;
-			if( ! empty( $hourmin[0] ) ) $tzoffset += $hourmin[0] * 3600 ;
-			if( ! empty( $hourmin[1] ) ) $tzoffset += $hourmin[1] * 60 ;
+			$tzoffset += $this->parseTimezoneOffset( substr( $w3cDT , $pos + 1 ) ) ;
 			$localdatetime = substr( $w3cDT , 0 , $pos ) ;
 			$this->previous_tzoffset = $tzoffset ;
 		} else {
@@ -61,6 +57,20 @@ class D3pipesParseAbstract extends D3pipesJointAbstract {
 		if( $localunixtime == -1 ) return time() ;
 		else return $localunixtime + $tzoffset ;
 	}
+
+
+	function parseTimezoneOffset( $text )
+	{
+		if( strstr( $text , ':' ) ) {
+			list( $hour , $min ) = explode( ':' , $text ) ;
+		} else {
+			$hour = substr( $text , 0 , 2 ) ;
+			$min = substr( $text , 2 , 2 ) ;
+		}
+
+		return @$hour * 3600 + @$min * 60 ;
+	}
+
 }
 
 

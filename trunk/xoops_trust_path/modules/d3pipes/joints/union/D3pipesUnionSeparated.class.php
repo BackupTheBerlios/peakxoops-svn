@@ -14,6 +14,7 @@ class D3pipesUnionSeparated extends D3pipesUnionAbstract {
 	
 		foreach( $this->union_ids as $union_ids ) {
 			$pipe4assign = d3pipes_common_get_pipe4assign( $this->mydirname , $union_ids['pipe_id'] ) ;
+			if( empty( $pipe4assign ) ) continue ;
 			$entries_tmp = d3pipes_common_fetch_entries( $this->mydirname , $pipe4assign , min( $union_ids['num'] , $max_entries ) , $errors , $this->mod_configs ) ;
 			$this->errors = array_merge( $this->errors , $errors ) ;
 			$this->_pipes_entries[] = $pipe4assign + array( 'entries' => $entries_tmp ) ;

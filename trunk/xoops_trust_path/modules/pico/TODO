@@ -1,3 +1,14 @@
+●HTML Validated form関連
+
+・checkbox , radio 実装
+・select multiple 実装
+・hiddenの処理
+・View毎のテンプレート <{capture}>のname属性
+・カスタムValidator
+
+・すべてプラグインで処理するように（実装の整理）
+
+
 ●TODO
 
 ・申請内容とのdiff表示
@@ -7,7 +18,6 @@
 ・categoriesに冗長フィールド追加
   投票総数・得票総数・最終更新日
   (1.2->1.3/1.4のタイミング)
-・もうちょっと気の効いたSmartyプラグインの実装
 ・全ページを連続表示するページナビ
 ・rewriteモードでは、すべてREQUEST_URIから展開するロジック
 ・掲載期限(やる?)

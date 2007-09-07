@@ -3,6 +3,7 @@
 class FormProcessByHtml
 {
 	var $fields = array() ;
+	var $form_html = '' ;
 
 	function FormProcessByHtml()
 	{
@@ -19,9 +20,10 @@ class FormProcessByHtml
 	{
 		// initialize
 		$this->fields = array() ;
+		$this->form_html = $form_html ;
 
 		// get name="..." from the form
-		preg_match_all( '#<[^>]+name=([\'"]?)([0-9a-zA-Z_-]+(|\[\]))\\1[^>]*>#iU' , $form_html , $matches , PREG_SET_ORDER ) ;
+		preg_match_all( '#<[^>]+name=([\'"]?)([0-9a-zA-Z_-]+(|\[\]))\\1[^>]*>#iU' , $this->form_html , $matches , PREG_SET_ORDER ) ;
 		$tags = array() ;
 		foreach( $matches as $match ) {
 			$tags[ $match[2] ] = $match[0] ;
@@ -30,16 +32,57 @@ class FormProcessByHtml
 		// parse HTML and file label
 		foreach( $tags as $field_name => $tag ) {
 
-			$type = 'string' ;
-
-			// get type
-			if( substr( $field_name , -2 ) == '[]' ) {
-				$field_name = substr( $field_name , 0 , -2 ) ;
-				$type = 'array' ;
+			// tag kind
+			if( strncasecmp( $tag , '<textarea' , 9 ) === 0 ) {
+				$tag_kind = 'textarea' ;
+			} else if( strncasecmp( $tag , '<select' , 7 ) === 0 ) {
+				$tag_kind = 'select' ;
+			} else if( stristr( $tag , 'type="checkbox"' ) ) {
+				$tag_kind = 'checkbox' ;
+			} else if( stristr( $tag , 'type="radio"' ) ) {
+				$tag_kind = 'radio' ;
+			} else if( stristr( $tag , 'type="hidden"' ) ) {
+				$tag_kind = 'hidden' ;
+			} else if( stristr( $tag , 'type="text"' ) ) {
+				$tag_kind = 'text' ;
+			} else if( stristr( $tag , 'type="submit"' ) ) {
+				$tag_kind = 'submit' ;
+			} else {
+				continue ;
 			}
 
-			// get label (`name` instead `id` TODO?)
-			if( preg_match( '#for\=([\'"]?)'.preg_quote($field_name).'\\1\>(.*)\<\/label\>#iU' , $form_html , $regs ) ) {
+			// get id of the tag
+			$id = '' ;
+			if( preg_match( '/id\s*\=\s*"([^"]+)"/' , $tag , $regs ) ) {
+				$id = trim( $regs[1] ) ;
+			}
+
+			// get classes of the tag
+			$classes = array() ;
+			if( preg_match( '/class\s*\=\s*"([^"]+)"/' , $tag , $regs ) ) {
+				$classes = array_map( 'trim' , explode( ' ' , trim( $regs[1] ) ) ) ;
+			}
+
+			// required
+			$required = in_array( 'required' , $classes ) ? true : false ;
+
+			// type
+			$type = 'string' ;
+			foreach( array( 'int' , 'double' , 'singlebytes' , 'email' , 'telephone' , 'array' ) as $eachtype ) {
+				if( in_array( $eachtype , $classes ) ) {
+					$type = $eachtype ;
+					break ;
+				}
+			}
+
+			// judge whether the field is array or not
+			/* if( substr( $field_name , -2 ) == '[]' ) {
+				$field_name = substr( $field_name , 0 , -2 ) ;
+				$type = 'array' ;
+			} */
+
+			// get label
+			if( preg_match( '#for\s*\=\s*([\'"]?)'.preg_quote($id).'\\1\>(.*)\<\/label\>#iU' , $this->form_html , $regs ) ) {
 				$label = @$regs[2] ;
 			} else {
 				$label = $field_name ;
@@ -47,7 +90,11 @@ class FormProcessByHtml
 
 			$this->fields[ $field_name ] = array(
 				'tag' => $tag ,
+				'tag_kind' => $tag_kind ,
+				'id' => $id ,
+				'classes' => $classes ,
 				'label' => $label ,
+				'required' => $required ,
 				'type' => $type ,
 				'errors' => array() ,
 			) ;
@@ -76,22 +123,55 @@ class FormProcessByHtml
 		foreach( $this->fields as $field_name => $attribs ) {
 			$value = $this->stripMQGPC( @$_POST[ $field_name ] ) ;
 
-			// missing required (auto required check by its name) '_required'
-			if( strstr( $field_name , '_required' ) && empty( $value ) ) {
-				$this->fields[ $field_name ]['errors'][] = 'missing required' ;
+			// missing required
+			if( $attribs['required'] == true && $value === '' ) {
+				$this->fields[ $field_name ]['errors'][] = in_array( $attribs['tag_kind'] , array( 'text' , 'textarea' ) ) ? 'missing required' : 'missing selected' ;
 			}
 
-			// email (auto email check by its name) 'email'
-			if( strstr( $field_name , 'email' ) && ! empty( $value ) && ! $this->checkEmailAddress( $value ) ) {
-				$this->fields[ $field_name ]['errors'][] = 'invalid email' ;
+			// tag_kind validation
+			if( $attribs['tag_kind'] == 'select' && ! $this->validateSelectOption( $attribs['tag'] , $value ) ) {
+				$this->fields[ $field_name ]['errors'][] = 'missing selected' ;
 			}
 
-			// type conversions array<=>string
+			// default type conversion array=>string
 			if( is_array( $value ) && $attribs['type'] != 'array' ) {
 				$value = implode( ',' , $value ) ;
 			}
-			if( ! is_array( $value ) && $attribs['type'] == 'array' ) {
-				$value = array( $value ) ;
+
+			// type checks & conversions
+			switch( $attribs['type'] ) {
+				case 'int' :
+					$value = intval( $value ) ;
+					break ;
+
+				case 'double' :
+					$value = doubleval( $value ) ;
+					break ;
+
+				case 'telephone' :
+					$value = $this->convertZenToHan( $value ) ;
+					$value = preg_replace( '/[^()0-9+.-]/' , '' , $value ) ;
+					break ;
+
+				case 'email' :
+					$value = $this->convertZenToHan( $value ) ;
+					if( ! empty( $value ) && ! $this->checkEmailAddress( $value ) ) {
+						$this->fields[ $field_name ]['errors'][] = 'invalid email' ;
+					}
+					break ;
+
+				case 'singlebytes' :
+					$value = $this->convertZenToHan( $value ) ;
+					break ;
+
+				case 'array' :
+					if( ! is_array( $value ) ) {
+						$value = array( $value ) ;
+					}
+					break ;
+
+				default :
+					break ;
 			}
 
 			$this->fields[ $field_name ]['value'] = $value ;
@@ -132,18 +212,23 @@ class FormProcessByHtml
 	}
 
 
-	function replaceValues( $form_html )
+	function replaceValues( $form_html = null )
 	{
+		if( empty( $form_html ) ) $form_html = $this->form_html ;
+	
 		foreach( $this->fields as $field_name => $attribs ) {
-			if( stristr( $attribs['tag'] , 'type="text"' ) ) {
-				// text box
-				$form_html = $this->replaceValueTextbox( $form_html , $attribs ) ;
-			} else if( substr( $attribs['tag'] , 0 , 9 ) == '<textarea' ) {
-				// textarea
-				$form_html = $this->replaceContentTextarea( $form_html , $attribs ) ;
-			} else if( substr( $attribs['tag'] , 0 , 7 ) == '<select' ) {
-				// select box
-				$form_html = $this->replaceSelectedOptions( $form_html , $attribs ) ;
+			switch( $attribs['tag_kind'] ) {
+				case 'textarea' :
+					$form_html = $this->replaceContentTextarea( $form_html , $attribs ) ;
+					break ;
+				case 'select' :
+					$form_html = $this->replaceSelectedOptions( $form_html , $attribs ) ;
+					break ;
+				case 'text' :
+					$form_html = $this->replaceValueTextbox( $form_html , $attribs ) ;
+					break ;
+				default :
+					break ;
 			}
 		}
 		return $form_html ;
@@ -188,6 +273,17 @@ class FormProcessByHtml
 	}
 
 
+	function validateSelectOption( $tag , $value )
+	{
+		$value4html = htmlspecialchars($value,ENT_QUOTES) ;
+
+		list( $before , $options_html_tmp ) = explode( $tag , $this->form_html , 2 ) ;
+		list( $options_html , $after ) = explode( '</select>' , $options_html_tmp , 2 ) ;
+		if( strstr( $options_html , 'value="'.$value4html.'"' ) ) return true ;
+		else false ;
+	}
+
+
 	function renderForMail( $field_separator = "\n" , $mid_separator = "\n" )
 	{
 		$ret = '' ;
@@ -196,6 +292,15 @@ class FormProcessByHtml
 		}
 		
 		return $ret ;
+	}
+
+
+	function convertZenToHan( $text )
+	{
+		if( function_exists( 'mb_convert_kana' ) ) {
+			return mb_convert_kana( $text , 'as' ) ;
+		}
+		return $text ;
 	}
 
 
@@ -221,18 +326,14 @@ class FormProcessByHtml
 			if (sizeof($domain_array) < 2) {
 				return false; // Not enough parts to domain
 			}
-		for ($i = 0; $i < sizeof($domain_array); $i++) {
-			if (!ereg("^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9]+))$", $domain_array[$i])) {
-				return false;
+			for ($i = 0; $i < sizeof($domain_array); $i++) {
+				if (!ereg("^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9]+))$", $domain_array[$i])) {
+					return false;
+				}
 			}
 		}
+		return true;
 	}
-	return true;
-}
-
-
-
-
 }
 
 ?>

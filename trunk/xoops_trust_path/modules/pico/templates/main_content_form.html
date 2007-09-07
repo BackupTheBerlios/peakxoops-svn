@@ -150,7 +150,7 @@
 			<th class="head"><{$smarty.const._MD_PICO_CREATED}></th>
 			<td class="even">
 				<{$content_base.poster_uname}>
-				<{$smarty.const._DATESTRING|date:$content_base.created_time}>
+				<{$content_base.created_time_formatted}>
 				<{if $category.isadminormod}>
 					<{if $content.specify_created_time}>
 						<{assign var="specify_created_time_checked" value="checked='checked'"}>
@@ -158,7 +158,7 @@
 						<{assign var="created_time_style" value="display:none;"}>
 					<{/if}>
 					<input type="checkbox" name="specify_created_time" id="specify_created_time" value="1" onclick="if(this.checked){xoopsGetElementById('created_time').style.display='inline';}else{xoopsGetElementById('created_time').style.display='none'}" <{$specify_created_time_checked}> /><label for="specify_created_time" ><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}></label>
-					<input type="text" name="created_time" id="created_time" size="24" value="<{$smarty.const._DATESTRING|date:$content.created_time|escape}>" style="<{$created_time_style}>" />
+					<input type="text" name="created_time" id="created_time" size="24" value="<{$content.created_time_formatted|escape}>" style="<{$created_time_style}>" />
 				<{/if}>
 			</td>
 		</tr>
@@ -167,7 +167,7 @@
 			<th class="head"><{$smarty.const._MD_PICO_MODIFIED}></th>
 			<td class="even">
 				<{$content_base.modifier_uname}>
-				<{$smarty.const._DATESTRING|date:$content_base.modified_time}>
+				<{$content_base.modified_time_formatted}>
 				<{if $category.isadminormod}>
 					<{if $content.specify_modified_time}>
 						<{assign var="specify_modified_time_checked" value="checked='checked'"}>
@@ -175,7 +175,7 @@
 						<{assign var="modified_time_style" value="display:none;"}>
 					<{/if}>
 					<input type="checkbox" name="specify_modified_time" id="specify_modified_time" value="1" onclick="if(this.checked){xoopsGetElementById('modified_time').style.display='inline';}else{xoopsGetElementById('modified_time').style.display='none'}" <{$specify_modified_time_checked}> /><label for="specify_modified_time" ><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}></label>
-					<input type="text" name="modified_time" id="modified_time" size="24" value="<{$smarty.const._DATESTRING|date:$content.modified_time|escape}>" style="<{$modified_time_style}> " />
+					<input type="text" name="modified_time" id="modified_time" size="24" value="<{$content.modified_time_formatted|escape}>" style="<{$modified_time_style}> " />
 				<{/if}>
 			</td>
 		</tr>

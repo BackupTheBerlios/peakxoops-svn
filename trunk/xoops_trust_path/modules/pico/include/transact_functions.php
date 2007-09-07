@@ -396,10 +396,14 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		$ret['specify_created_time'] = empty( $_POST['specify_created_time'] ) ? 0 : 1 ;
 		$ret['specify_modified_time'] = empty( $_POST['specify_modified_time'] ) ? 0 : 1 ;
 		if( $ret['specify_created_time'] && strtotime( @$_POST['created_time'] ) != -1 ) {
-			$ret['created_time'] = strtotime( $_POST['created_time'] ) ;
+			$created_time_safe = preg_replace( '#[^0-9a-zA-Z:+/-]#' , '' , $_POST['created_time'] ) ;
+			$ret['created_time_formatted'] = $created_time_safe ;
+			$ret['created_time'] = pico_common_get_server_timestamp( strtotime( $_POST['created_time'] ) ) ;
 		}
 		if( $ret['specify_modified_time'] && strtotime( @$_POST['modified_time'] ) != -1 ) {
-			$ret['modified_time'] = strtotime( $_POST['modified_time'] ) ;
+			$modified_time_safe = preg_replace( '#[^0-9a-zA-Z:+/-]#' , '' , $_POST['modified_time'] ) ;
+			$ret['modified_time_formatted'] = $modified_time_safe ;
+			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
 		}
 	}
 
@@ -415,7 +419,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	$db =& Database::getInstance() ;
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
-	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] ) ;
+	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
 	// only adminormod can set htmlheader
 	if( ! $isadminormod ) {
@@ -457,7 +461,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	$db =& Database::getInstance() ;
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
-	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] ) ;
+	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
 	// only adminormod can set htmlheader
 	if( ! $isadminormod ) {

@@ -182,26 +182,26 @@ class PicoFormProcessBySmartyBase
 		// process post (then redirect)
 		if( ! empty( $_POST ) ) {
 			if( isset( $_POST[ $this->getTokenName() ] ) ) {
-				if( $this->validateToken() && isset( $_SESSION[ $this->session_index ]['data'] ) ) {
-					$this->form_processor->importSession( $_SESSION[ $this->session_index ]['data'] ) ;
+				if( $this->validateToken() && isset( $_SESSION[ $this->session_index ]['fields'] ) ) {
+					$this->form_processor->importSession( $_SESSION[ $this->session_index ]['fields'] ) ;
 					$errors = $this->form_processor->getErrors() ;
 					if( empty( $errors ) ) {
 						$this->executeLast() ;
 						// clear data part of session
-						unset( $_SESSION[ $this->session_index ]['data'] ) ;
+						unset( $_SESSION[ $this->session_index ]['fields'] ) ;
 						$_SESSION[ $this->session_index ]['step'] = 'finished' ;
 					}
 				}
 			} else {
-				$_SESSION[ $this->session_index ]['data'] = $this->form_processor->fetchPost() ;
+				$_SESSION[ $this->session_index ]['fields'] = $this->form_processor->fetchPost() ;
 				$_SESSION[ $this->session_index ]['step'] = 'confirm' ;
 			}
 			$this->reload() ;
 		}
 
 		// process get
-		if( isset( $_SESSION[ $this->session_index ]['data'] ) ) {
-			$this->form_processor->importSession( $_SESSION[ $this->session_index ]['data'] ) ;
+		if( isset( $_SESSION[ $this->session_index ]['fields'] ) ) {
+			$this->form_processor->importSession( $_SESSION[ $this->session_index ]['fields'] ) ;
 			$errors = $this->form_processor->getErrors() ;
 			if( empty( $errors ) ) {
 				$this->processConfirm() ; // confirm
@@ -226,6 +226,9 @@ class PicoFormProcessBySmartyBase
 				$this->displayDefault() ;
 				break ;
 		}
+
+		//var_dump( $_SESSION[ $this->session_index ]['fields']['favorite_fruit'] ) ;
+
 	}
 
 

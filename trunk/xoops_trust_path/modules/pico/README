@@ -102,6 +102,12 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.51 (2007/09/08)
+- modified "formmail" Smarty plugin radically
+- modified the class FormProcessByHtml can parse radio/checkbox
+- modified modified time will be synchronized the wrapped file
+- fixed timezone problem in created/modified contents (thx mirror)
+
 1.50 (2007/09/04)
 - added HTML validated formmail
 - fixed missing sync after content updated (thx rockle)
@@ -431,6 +437,12 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.51 (2007/09/08)
+- Formmail Smarty プラグインの大幅な構造変更
+- FormProcessByHtml で、radioやcheckboxも対応できるようにした
+- ラップ時の更新日時はファイルのタイムスタンプを参考にするように修正
+- 更新・編集日時指定のタイムゾーン計算が抜けていたのを修正 (thx mirror)
 
 1.50 (2007/09/04)
 - SmartyテンプレートをValidationにも使うフォームメールを実装

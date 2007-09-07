@@ -3,7 +3,6 @@
 ・checkbox , radio 実装
 ・select multiple 実装
 ・hiddenの処理
-・View毎のテンプレート <{capture}>のname属性
 ・カスタムValidator
 
 ・すべてプラグインで処理するように（実装の整理）

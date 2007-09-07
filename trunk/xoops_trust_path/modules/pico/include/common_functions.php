@@ -54,7 +54,7 @@ function pico_common_filter_body( $mydirname , $content_row , $use_cache = false
 		if( @filemtime( $wrap_full_path ) > @$content_row['modified_time'] ) {
 			$can_use_cache = false ;
 			$db =& Database::getInstance() ;
-			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET modified_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content_row['content_id']) ) ;
+			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($content_row['content_id']) ) ;
 		}
 	}
 
@@ -293,6 +293,17 @@ function pico_common_get_cat_options( $mydirname )
 	}
 
 	return $cat_options ;
+}
+
+
+// convert timezone user -> server
+function pico_common_get_server_timestamp( $time )
+{
+	global $xoopsConfig, $xoopsUser;
+
+	$offset = is_object( @$xoopsUser ) ? $xoopsUser->getVar('timezone_offset') : $xoopsConfig['default_TZ'] ;
+
+	return $time - ( $offset - $xoopsConfig['server_TZ'] ) * 3600 ;
 }
 
 

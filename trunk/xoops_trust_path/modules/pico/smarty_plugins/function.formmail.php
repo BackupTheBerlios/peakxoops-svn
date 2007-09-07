@@ -4,8 +4,9 @@ require_once XOOPS_TRUST_PATH.'/modules/pico/class/FormProcessByHtml.class.php' 
 require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoFormProcessBySmartyBase.class.php' ;
 
 
-// for debug
+// for debug (checking out ranged)
 //if( ! empty( $_POST ) ) $_POST['selbox'] = '3' ;
+//if( ! empty( $_POST ) ) $_POST['favorite_fruit'][] = 'kiwi' ;
 
 function smarty_function_formmail( $params , &$smarty )
 {

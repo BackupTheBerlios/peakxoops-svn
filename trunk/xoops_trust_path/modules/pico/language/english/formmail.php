@@ -15,6 +15,7 @@ define('_MD_PICO_FORMMAIL_ERRFMT_MISSING_REQUIRED','<li>Missing %s is required</
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_EMAIL','<li>Invalid email address : `%s`</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_GENERAL','<li>Invalid format : `%s`</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_MISSING_SELECTED','<li>Select one for %s</li>') ;
+define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_OPTION','<li>Invalid option is found in %s</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_ATLEAST_ONE','<li>Select at least one for %s</li>') ;
 
 

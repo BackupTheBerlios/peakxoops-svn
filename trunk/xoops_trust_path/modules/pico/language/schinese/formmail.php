@@ -1,5 +1,9 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-08 06:44:13
+define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_OPTION','<li>Invalid option is found in %s</li>');
+
 define('_MD_PICO_FORMMAIL_MSG_ERRORANONYMOUS','Error(s) in form') ;
 define('_MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY','sent successfully') ;
 

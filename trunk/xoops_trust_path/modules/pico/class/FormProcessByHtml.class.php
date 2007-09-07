@@ -22,15 +22,28 @@ class FormProcessByHtml
 		$this->fields = array() ;
 		$this->form_html = $form_html ;
 
-		// get name="..." from the form
+		// get name="..." from the form   (single value or linear array)
 		preg_match_all( '#<[^>]+name=([\'"]?)([0-9a-zA-Z_-]+(|\[\]))\\1[^>]*>#iU' , $this->form_html , $matches , PREG_SET_ORDER ) ;
 		$tags = array() ;
 		foreach( $matches as $match ) {
-			$tags[ $match[2] ] = $match[0] ;
+			$tags[] = array( $match[0] , $match[2] ) ;
 		}
 
 		// parse HTML and file label
-		foreach( $tags as $field_name => $tag ) {
+		foreach( $tags as $tag_and_name ) {
+
+			list( $tag , $field_name ) = $tag_and_name ;
+
+			// judge whether the field is array or not
+			if( substr( $field_name , -2 ) == '[]' ) {
+				$field_name = substr( $field_name , 0 , -2 ) ;
+				$type = 'array' ;
+			} else {
+				$type = 'string' ;
+			}
+
+			// initialize options
+			$options = array() ;
 
 			// tag kind
 			if( strncasecmp( $tag , '<textarea' , 9 ) === 0 ) {
@@ -39,8 +52,20 @@ class FormProcessByHtml
 				$tag_kind = 'select' ;
 			} else if( stristr( $tag , 'type="checkbox"' ) ) {
 				$tag_kind = 'checkbox' ;
+				if( isset( $this->fields[ $field_name ] ) ) {
+					$this->fields[ $field_name ]['options'][] = $this->fildValueFromTag( $tag ) ;
+					continue ;
+				} else {
+					$options[] = $this->fildValueFromTag( $tag ) ;
+				}
 			} else if( stristr( $tag , 'type="radio"' ) ) {
 				$tag_kind = 'radio' ;
+				if( isset( $this->fields[ $field_name ] ) ) {
+					$this->fields[ $field_name ]['options'][] = $this->fildValueFromTag( $tag ) ;
+					continue ;
+				} else {
+					$options[] = $this->fildValueFromTag( $tag ) ;
+				}
 			} else if( stristr( $tag , 'type="hidden"' ) ) {
 				$tag_kind = 'hidden' ;
 			} else if( stristr( $tag , 'type="text"' ) ) {
@@ -57,6 +82,12 @@ class FormProcessByHtml
 				$id = trim( $regs[1] ) ;
 			}
 
+			// get title of the tag
+			$title = '' ;
+			if( preg_match( '/title\s*\=\s*"([^"]+)"/' , $tag , $regs ) ) {
+				$title = trim( $regs[1] ) ;
+			}
+
 			// get classes of the tag
 			$classes = array() ;
 			if( preg_match( '/class\s*\=\s*"([^"]+)"/' , $tag , $regs ) ) {
@@ -66,26 +97,20 @@ class FormProcessByHtml
 			// required
 			$required = in_array( 'required' , $classes ) ? true : false ;
 
-			// type
-			$type = 'string' ;
-			foreach( array( 'int' , 'double' , 'singlebytes' , 'email' , 'telephone' , 'array' ) as $eachtype ) {
-				if( in_array( $eachtype , $classes ) ) {
-					$type = $eachtype ;
-					break ;
+			// detailed type judgement
+			if( $type == 'string' ) {
+				foreach( array( 'int' , 'double' , 'singlebytes' , 'email' , 'telephone' , 'array' ) as $eachtype ) {
+					if( in_array( $eachtype , $classes ) ) {
+						$type = $eachtype ;
+						break ;
+					}
 				}
 			}
 
-			// judge whether the field is array or not
-			/* if( substr( $field_name , -2 ) == '[]' ) {
-				$field_name = substr( $field_name , 0 , -2 ) ;
-				$type = 'array' ;
-			} */
-
-			// get label
-			if( preg_match( '#for\s*\=\s*([\'"]?)'.preg_quote($id).'\\1\>(.*)\<\/label\>#iU' , $this->form_html , $regs ) ) {
-				$label = @$regs[2] ;
-			} else {
-				$label = $field_name ;
+			// get label other than radio/checkbox
+			$label = empty( $title ) ? $field_name : $title ;
+			if( ! in_array( $tag_kind , array( 'radio' , 'checkbox' ) ) && preg_match( '#for\s*\=\s*([\'"]?)'.preg_quote($id).'\\1\>(.*)\<\/label\>#iU' , $this->form_html , $regs ) ) {
+				$label = strip_tags( @$regs[2] ) ;
 			}
 
 			$this->fields[ $field_name ] = array(
@@ -96,6 +121,7 @@ class FormProcessByHtml
 				'label' => $label ,
 				'required' => $required ,
 				'type' => $type ,
+				'options' => $options ,
 				'errors' => array() ,
 			) ;
 		}
@@ -124,13 +150,21 @@ class FormProcessByHtml
 			$value = $this->stripMQGPC( @$_POST[ $field_name ] ) ;
 
 			// missing required
-			if( $attribs['required'] == true && $value === '' ) {
+			if( $attribs['required'] == true && ( $value === '' || $value === null ) ) {
 				$this->fields[ $field_name ]['errors'][] = in_array( $attribs['tag_kind'] , array( 'text' , 'textarea' ) ) ? 'missing required' : 'missing selected' ;
 			}
 
-			// tag_kind validation
+			// tag_kind validation (range check)
 			if( $attribs['tag_kind'] == 'select' && ! $this->validateSelectOption( $attribs['tag'] , $value ) ) {
-				$this->fields[ $field_name ]['errors'][] = 'missing selected' ;
+				$this->fields[ $field_name ]['errors'][] = 'invalid option' ;
+			}
+			if( in_array( $attribs['tag_kind'] , array( 'radio' , 'checkbox' ) ) && ! empty( $value ) ) {
+				$values_tmp = is_array( $value ) ? $value : array( $value ) ;
+				foreach( $values_tmp as $value_tmp ) {
+					if( ! in_array( $value_tmp , $attribs['options'] ) ) {
+						$this->fields[ $field_name ]['errors'][] = 'invalid option' ;
+					}
+				}
 			}
 
 			// default type conversion array=>string
@@ -221,11 +255,17 @@ class FormProcessByHtml
 				case 'textarea' :
 					$form_html = $this->replaceContentTextarea( $form_html , $attribs ) ;
 					break ;
+				case 'text' :
+					$form_html = $this->replaceValueTextbox( $form_html , $attribs ) ;
+					break ;
 				case 'select' :
 					$form_html = $this->replaceSelectedOptions( $form_html , $attribs ) ;
 					break ;
-				case 'text' :
-					$form_html = $this->replaceValueTextbox( $form_html , $attribs ) ;
+				case 'radio' :
+					$form_html = $this->replaceCheckedRadios( $form_html , $attribs , $field_name ) ;
+					break ;
+				case 'checkbox' :
+					$form_html = $this->replaceCheckedCheckboxes( $form_html , $attribs , $field_name ) ;
 					break ;
 				default :
 					break ;
@@ -273,6 +313,47 @@ class FormProcessByHtml
 	}
 
 
+	function replaceCheckedRadios( $form_html , $attribs , $field_name )
+	{
+		$value4html = htmlspecialchars($attribs['value'],ENT_QUOTES) ;
+
+		preg_match_all( '/<input\s+type\="radio"[^>]*name\="'.preg_quote($field_name).'"[^>]*>/' , $form_html , $matches , PREG_PATTERN_ORDER ) ;
+
+		$ret = $form_html ;
+		foreach( $matches[0] as $match_from ) {
+			$match_to = str_replace( 'checked="checked"' , '' , $match_from ) ;
+			if( strstr( $match_from , 'value="'.$value4html.'"' ) ) {
+				$match_to = str_replace( 'value="'.$value4html.'"' , 'value="'.$value4html.'" checked="checked"' , $match_to ) ;
+			}
+			$ret = str_replace( $match_from , $match_to , $ret ) ;
+		}
+		return $ret ;
+	}
+
+
+	function replaceCheckedCheckboxes( $form_html , $attribs , $field_name )
+	{
+		$values = $attribs['value'] ;
+		if( ! is_array( $values ) ) $values = array( $values ) ;
+
+		preg_match_all( '/<input\s+type\="checkbox"[^>]*name\="'.preg_quote($field_name).($attribs['type']=='array'?'\[\]':'').'"[^>]*>/' , $form_html , $matches , PREG_PATTERN_ORDER ) ;
+
+		$ret = $form_html ;
+		foreach( $matches[0] as $match_from ) {
+			$match_to = str_replace( 'checked="checked"' , '' , $match_from ) ;
+			foreach( $values as $value ) {
+				$value4html = htmlspecialchars($value,ENT_QUOTES) ;
+				if( strstr( $match_from , 'value="'.$value4html.'"' ) ) {
+					$match_to = str_replace( 'value="'.$value4html.'"' , 'value="'.$value4html.'" checked="checked"' , $match_to ) ;
+					break ;
+				}
+			}
+			$ret = str_replace( $match_from , $match_to , $ret ) ;
+		}
+		return $ret ;
+	}
+
+
 	function validateSelectOption( $tag , $value )
 	{
 		$value4html = htmlspecialchars($value,ENT_QUOTES) ;
@@ -288,7 +369,12 @@ class FormProcessByHtml
 	{
 		$ret = '' ;
 		foreach( $this->fields as $field_name => $attribs ) {
-			$ret .= $field_separator . $attribs['label'] . $mid_separator . $attribs['value'] ;
+			$ret .= $field_separator . $attribs['label'] . $mid_separator ;
+			if( $attribs['type'] == 'array' ) {
+				$ret .= implode( ',' , $attribs['value'] ) ;
+			} else {
+				$ret .= $attribs['value'] ;
+			}
 		}
 		
 		return $ret ;
@@ -301,6 +387,16 @@ class FormProcessByHtml
 			return mb_convert_kana( $text , 'as' ) ;
 		}
 		return $text ;
+	}
+
+
+	function fildValueFromTag( $tag )
+	{
+		if( preg_match( '/value\s*\=\s*"([^"]+)"/' , $tag , $regs ) ) {
+			return trim( $regs[1] ) ;
+		} else {
+			return 'on' ;
+		}
 	}
 
 

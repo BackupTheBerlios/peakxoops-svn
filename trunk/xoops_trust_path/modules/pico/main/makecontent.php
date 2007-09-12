@@ -79,6 +79,8 @@ $content4assign = array(
 	'approval' => $category4assign['post_auto_approved'] ,
 	'created_time' => time() ,
 	'modified_time' => time() ,
+	'created_time_formatted' => formatTimestamp( time() ) ,
+	'modified_time_formatted' => formatTimestamp( time() ) ,
 ) ;
 $content4assign_base = $content4assign ;
 $preview4assign = array() ;

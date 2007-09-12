@@ -71,6 +71,7 @@ define($constpref.'_BNAME_MENU','メニュー');
 define($constpref.'_BNAME_CONTENT','コンテンツ内容');
 define($constpref.'_BNAME_LIST','コンテンツ一覧');
 define($constpref.'_BNAME_SUBCATEGORIES','サブカテゴリー一覧');
+define($constpref.'_BNAME_MYWAITINGS','自身の承認待ち');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');

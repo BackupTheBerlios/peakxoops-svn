@@ -71,6 +71,7 @@ define($constpref.'_BNAME_MENU','Menu');
 define($constpref.'_BNAME_CONTENT','Content');
 define($constpref.'_BNAME_LIST','List');
 define($constpref.'_BNAME_SUBCATEGORIES','Subcategories');
+define($constpref.'_BNAME_MYWAITINGS','My waiting posts');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'global');

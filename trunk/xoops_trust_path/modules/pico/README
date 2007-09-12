@@ -102,9 +102,17 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.52 (2007/09/13) update the module
+- modified class FormProcess getting labels of checkbox/radio from <legend>
+- modified class FormProcess can treat <select multiple>
+- modified class FormProcess can treat hidden <input>
+- modified waiting contents can be edited by poster him/herself.
+- added a block displaying waiting requests from the user
+
 1.51 (2007/09/08)
 - modified "formmail" Smarty plugin radically
 - modified the class FormProcessByHtml can parse radio/checkbox
+- modified that the validation rule uses class (thx genet!)
 - modified modified time will be synchronized the wrapped file
 - fixed timezone problem in created/modified contents (thx mirror)
 
@@ -438,9 +446,18 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+
+1.52 (2007/09/13) ※要モジュールアップデート
+- FormProcessクラスでcheckbox/radioのラベルを<legend>から取るようにした
+- FormProcessクラスのmultiple select対応
+- FormProcessクラスのhidden対応
+- 未承認記事でも登録者本人は編集できるようにした
+- 自身の承認待ちブロック追加
+
 1.51 (2007/09/08)
 - Formmail Smarty プラグインの大幅な構造変更
 - FormProcessByHtml で、radioやcheckboxも対応できるようにした
+- Validationルールにclassを利用するに用に仕様変更した (thx genet!)
 - ラップ時の更新日時はファイルのタイムスタンプを参考にするように修正
 - 更新・編集日時指定のタイムゾーン計算が抜けていたのを修正 (thx mirror)
 

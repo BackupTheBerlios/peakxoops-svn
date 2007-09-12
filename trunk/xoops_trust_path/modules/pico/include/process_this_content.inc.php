@@ -17,7 +17,7 @@ if( empty( $category_permissions[$cat_id]['can_readfull'] ) ) {
 }
 
 // visible check
-$whr4visible = $isadminormod ? '1' : 'visible AND created_time <= UNIX_TIMESTAMP()' ;
+$whr4visible = $isadminormod ? '1' : '(visible OR poster_uid='.intval($uid).' AND poster_uid>0) AND created_time <= UNIX_TIMESTAMP()' ;
 
 // confirm this "content" exists from given $content_id
 $sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id='$content_id' AND ($whr4visible)" ;

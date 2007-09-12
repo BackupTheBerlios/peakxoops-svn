@@ -227,7 +227,9 @@ class PicoFormProcessBySmartyBase
 				break ;
 		}
 
-		//var_dump( $_SESSION[ $this->session_index ]['fields']['favorite_fruit'] ) ;
+		//var_dump( $_SESSION[ $this->session_index ]['fields']['favorite_fruits'] ) ;
+		//var_dump( $_SESSION[ $this->session_index ]['fields']['selbox'] ) ;
+		//var_dump( $_SESSION[ $this->session_index ]['fields'] ) ;
 
 	}
 

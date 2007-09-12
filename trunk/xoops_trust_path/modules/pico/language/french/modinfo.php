@@ -14,6 +14,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-12 17:00:58
+define($constpref.'_BNAME_MYWAITINGS','My waiting posts');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
 define($constpref.'_BNAME_SUBCATEGORIES','Subcategories');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT','new content');

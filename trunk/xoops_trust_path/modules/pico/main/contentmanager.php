@@ -122,7 +122,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 	// filter overriding for edit instead of view
 	$content4edit = array(
 		'vpath' => htmlspecialchars( $content_row['vpath'] , ENT_QUOTES ) ,
-		'subject' => htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
+		'subject' => $content_row['approval'] == 0 && ! $content_row['visible'] ? htmlspecialchars( $content_row['subject_waiting'] , ENT_QUOTES ) : htmlspecialchars( $content_row['subject'] , ENT_QUOTES ) ,
 		'subject_waiting' => htmlspecialchars( $content_row['subject_waiting'] , ENT_QUOTES ) ,
 		'htmlheader' => htmlspecialchars( $content_row['htmlheader'] , ENT_QUOTES ) ,
 		'htmlheader_waiting' => htmlspecialchars( $content_row['htmlheader_waiting'] , ENT_QUOTES ) ,

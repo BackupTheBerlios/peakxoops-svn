@@ -1,18 +1,14 @@
 ●HTML Validated form関連
 
-・checkbox , radio 実装
-・select multiple 実装
-・hiddenの処理
-・カスタムValidator
-
-・すべてプラグインで処理するように（実装の整理）
+・カスタムvalidator
+・カスタムtype
 
 
 ●TODO
 
+・RSSがmodifiedでハードコードされているのを修正
 ・申請内容とのdiff表示
 ・PDF
-・携帯対応
 ・pukiWikiレンダラー
 ・categoriesに冗長フィールド追加
   投票総数・得票総数・最終更新日
@@ -69,6 +65,8 @@
 ・強制フィルター
 ・mod_rewriteによる静的URI(wrapsモードおよびnormalモード)
 ・コンテンツ編集履歴機能
+・Xmobileによる携帯対応
+
 
 
 ●権限・表示ON/OFF関係の仕様

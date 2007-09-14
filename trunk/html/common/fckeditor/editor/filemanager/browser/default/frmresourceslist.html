@@ -54,6 +54,13 @@ oListManager.GetFileRowHtml = function( fileName, fileUrl, fileSize )
 	// Get the file icon.
 	var sIcon = oIcons.GetIcon( fileName ) ;
 
+	// GIJ begin
+	var sExtension = fileName.substr( fileName.lastIndexOf('.') + 1 ).toLowerCase() ;
+	if( sExtension == 'gif' || sExtension == 'png' || sExtension == 'jpg' || sExtension == 'jpeg' ) {
+		return '<tr><td width="16"></td><td>&nbsp;' + sLink + '<img alt="" title="' + fileName + '" src="' + fileUrl + '" height="48" border="0" /></a></td><td align="right" nowrap="nowrap">&nbsp;' + fileSize + ' KB' + '</td></tr>' ;
+	}
+	// GIJ end
+
 	return '<tr>' +
 			'<td width="16">' +
 				sLink + 

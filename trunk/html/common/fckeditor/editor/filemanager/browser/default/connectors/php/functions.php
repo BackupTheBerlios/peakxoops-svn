@@ -64,6 +64,11 @@ function GetFoldersAndFiles( $currentFolder , $type )
 			// folder
 			$aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) . '" />' ;
 		} else {
+			// uid prefix check
+			if( ! empty( $GLOBALS['fck_check_user_prefix'] ) ) {
+				if( ! strstr( $sFile , $GLOBALS['fck_user_prefix'] ) ) continue ;
+			}
+
 			// file
 			if( ! empty( $GLOBALS['fck_resource_type_extensions'][$type] ) ) {
 				// file limitation by extension and resource type
@@ -76,7 +81,10 @@ function GetFoldersAndFiles( $currentFolder , $type )
 				$iFileSize = round( $iFileSize / 1024 ) ;
 				if( $iFileSize < 1 ) $iFileSize = 1 ;
 			}
-			$aFiles[] = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" />' ;
+			// filemtime
+			$iFileMtime = filemtime( $sServerDir . $sFile ) ;
+
+			$aFiles[ '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" mtime="' . $iFileMtime . '" />' ] = $iFileMtime ;
 		}
 	}
 
@@ -90,10 +98,10 @@ function GetFoldersAndFiles( $currentFolder , $type )
 	echo '</Folders>' ;
 
 	// Send the files
-	rsort( $aFiles ) ;
+	arsort( $aFiles ) ;
 	echo '<Files>' ;
 
-	foreach ( $aFiles as $sFiles )
+	foreach ( array_keys( $aFiles ) as $sFiles )
 		echo $sFiles ;
 
 	echo '</Files>' ;
@@ -108,6 +116,9 @@ function CreateFolder( $currentFolder )
 	$sNewFolderName = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , @$_GET['NewFolderName'] ) ;
 	if( empty( $sNewFolderName ) ) {
 		$sErrorNumber = '102' ;
+	} else if( empty( $GLOBALS['fck_isadmin'] ) ) {
+		// permission check (only admin create folder)
+		$sErrorNumber = '103' ;
 	} else if( ini_get( 'safe_mode' ) ) {
 		$sErrorNumber = '103' ;
 		$sErrorMsg = 'Your server runs under safe_mode. Thus, you have to make directories by yourself' ;
@@ -148,7 +159,7 @@ function FileUpload( $currentFolder = '/' )
 	}
 	
 	// Create new file name (don't use ['name'] other than the extension)
-	$new_filename = FCK_FILE_PREFIX . date( 'YmdHis' ) . substr( md5( uniqid( rand() , true ) ) , 16 ) . '.' . $extension ;
+	$new_filename = @$GLOBALS['fck_user_prefix'] . FCK_FILE_PREFIX . date( 'YmdHis' ) . substr( md5( uniqid( rand() , true ) ) , 0 , 8 ) . '.' . $extension ;
 	$new_filefullpath = FCK_UPLOAD_PATH.$currentFolder.$new_filename ;
 	$new_fileurl = FCK_UPLOAD_URL.$currentFolder.$new_filename ;
 	
@@ -163,6 +174,12 @@ function FileUpload( $currentFolder = '/' )
 		if( ! is_array( @$check_result ) || empty( $check_result['mime'] ) || stristr( $check_result['mime'] , $fck_allowed_extensions[ $extension ] ) === false ) {
 			@unlink( $new_filefullpath ) ;
 			SendResultsHTML( '202', '', '', 'File extension does not match the file contents' ) ;
+		} else {
+			// resize or make thumbnail etc.
+			if( defined( 'FCK_FUNCTION_AFTER_IMGUPLOAD' ) && function_exists( FCK_FUNCTION_AFTER_IMGUPLOAD ) ) {
+				$func_name = FCK_FUNCTION_AFTER_IMGUPLOAD ;
+				$func_name( $new_filefullpath ) ;
+			}
 		}
 	}
 

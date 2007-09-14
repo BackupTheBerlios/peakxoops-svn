@@ -6,9 +6,10 @@ define( 'FCK_IS_BROWSER_CONNECTOR' , 1 ) ;
 require '../../../../../../../../mainfile.php' ;
 
 require_once dirname(__FILE__).'/functions.php' ;
-@include dirname(__FILE__).'/config_and_auth.inc.php' ;
-if( ! defined( 'FCK_UPLOAD_PATH' ) ) {
-	@include dirname(__FILE__).'/config_and_auth.inc.dist.php' ;
+if( file_exists( dirname(__FILE__).'/config_and_auth.inc.php' ) ) {
+	include dirname(__FILE__).'/config_and_auth.inc.php' ;
+} else {
+	include dirname(__FILE__).'/config_and_auth.inc.dist.php' ;
 }
 
 // Get the main request informaiton.

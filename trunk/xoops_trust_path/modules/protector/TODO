@@ -4,3 +4,6 @@
 
 $xoopsOption['nocommon'] の時のpostcheck処理がまったく行われないことの影響チェック
 
+
+- http://htmlpurifier.org/
+

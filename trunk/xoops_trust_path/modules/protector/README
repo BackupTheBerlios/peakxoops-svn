@@ -123,6 +123,17 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.14 beta (2007/09/17)
+- imported HTMLPurifier (special thx! Edward Z. Yang) PHP5 only
+- added filtering point (spamcheck, crawler, f5attack, bruteforce, purge)
+- added filter plugins
+-- postcommon_post_htmlpurify4guest (guest's post will be purified) only PHP5
+-- spamcheck_overrun_message
+-- crawler_overrun_message
+-- f5attack_overrun_message
+-- bruteforce_overrun_message
+-- prepurge_exit_message
+
 3.13 beta (2007/08/22)
 - modified the filter structure from function to class
 - added filtering point (badip, register)
@@ -330,9 +341,20 @@ RBLд╦┼╨╧┐д╡дьд┐IPдлдщд╬┼ъ╣╞д╧д╣д┘д╞SPAMд└д╚╚╜─ъд╖д▐д╣бг╠фдд╣чдяд╗дм╞■дыд┐дсбв┼ъ╣
 
 б№╩╤╣╣═·╬Є
 
+3.14 beta (2007/09/17)
+- HTMLPurifier╞│╞■ (special thx! Edward Z. Yang) виPHP4д╟д╧д▐д╚дтд╦╞░днд▐д╗дє
+- е╒егеые┐б╝е▌едеєе╚дЄ─╔▓├ (spamcheck, crawler, f5attack, bruteforce, purge)
+- е╒егеые┐б╝е╫еще░едеє─╔▓├
+-- е▓е╣е╚┼ъ╣╞д╬д╣д┘д╞дЄHTMLPurifierд╦─╠▓сд╡д╗дые╒егеые┐б╝ (PHP5└ь═╤)
+-- SPAM╚╜─ъд╡дьд┐╗■д╦есе├е╗б╝е╕дЄ╔╜╝ид╣дыб╩еъе└едеьепе╚д╣дыб╦е╒егеые┐б╝
+-- ░н╝┴епеэб╝ещ╚╜─ъд╡дьд┐╗■д╦есе├е╗б╝е╕дЄ╔╜╝ид╣дыб╩еъе└едеьепе╚д╣дыб╦е╒егеые┐б╝
+-- F5еве┐е├еп╚╜─ъд╡дьд┐╗■д╦есе├е╗б╝е╕дЄ╔╜╝ид╣дыб╩еъе└едеьепе╚д╣дыб╦е╒егеые┐б╝
+-- е╓еыб╝е╚е╒ейб╝е╣╗■д╦есе├е╗б╝е╕дЄ╔╜╝ид╣дыб╩еъе└едеьепе╚д╣дыб╦е╒егеые┐б╝
+-- д╜д╬┬╛╟╙└═╜ш═¤д╡дьды─╛┴░д╦есе├е╗б╝е╕дЄ╔╜╝ид╣дыб╩еъе└едеьепе╚д╣дыб╦е╒егеые┐б╝
+
 3.13 beta (2007/08/22)
 - е╒егеые┐б╝е╫еще░едеєдЄе░еэб╝е╨еы┤╪┐Їдлдщепеще╣д╦╩╤╣╣
-- е╒егеые┐б╝е╫еще░едеєд╬е▌едеєе╚дЄ─╔▓├ (badip, register)
+- е╒егеые┐б╝е▌едеєе╚дЄ─╔▓├ (badip, register)
 - е╒егеые┐б╝е╫еще░едеє─╔▓├
 -- ецб╝е╢┼╨╧┐╗■д╦JavaScriptе┴езе├епдЄ╞■дьдые╒егеые┐б╝(ецб╝е╢┼╨╧┐SPAM┬╨║Ў)
 -- ╡ё╚▌IP╗■д╦есе├е╗б╝е╕дЄ╔╜╝ид╣дые╒егеые┐б╝

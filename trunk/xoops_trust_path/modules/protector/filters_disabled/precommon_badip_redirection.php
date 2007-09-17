@@ -10,8 +10,6 @@ class protector_precommon_badip_redirection extends ProtectorFilterAbstract {
 	{
 		header( 'Location: '.PROTECTOR_BADIP_REDIRECTION_URI ) ;
 		exit ;
-		
-		return true ;
 	}
 
 }

@@ -175,12 +175,14 @@ function purge( $redirect_to_top = false )
 	}
 
 	if( $redirect_to_top ) {
-		Header( 'Location: '.XOOPS_URL.'/' ) ;
+		header( 'Location: '.XOOPS_URL.'/' ) ;
+		exit ;
 	} else {
-		echo 'Protector detects attacking actions' ;
+		$ret = $this->call_filter( 'prepurge_exit' ) ;
+		if( $ret == false ) {
+			die( 'Protector detects attacking actions' ) ;
+		}
 	}
-
-	exit ;
 }
 
 
@@ -708,6 +710,9 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 		// extends the expires of the IP with 5 minutes at least (pending)
 		// $result = $xoopsDB->queryF( "UPDATE ".$xoopsDB->prefix($this->mydirname."_access")." SET expire=UNIX_TIMESTAMP()+300 WHERE ip='$ip4sql' AND expire<UNIX_TIMESTAMP()+300" ) ;
 
+		// call the filter first
+		$ret = $this->call_filter( 'f5attack_overrun' ) ;
+
 		// actions for F5 Attack
 		$this->_done_dos = true ;
 		$this->last_error_type = 'DoS' ;
@@ -747,6 +752,9 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 	$xoopsDB->queryF( $sql4insertlog ) ;
 
 	if( $crawler_count > $this->_conf['dos_crcount'] ) {
+
+		// call the filter first
+		$ret = $this->call_filter( 'crawler_overrun' ) ;
 
 		// actions for bad Crawler
 		$this->_done_dos = true ;
@@ -804,7 +812,8 @@ function check_brute_force()
 		$this->last_error_type = 'BruteForce' ;
 		$this->message .= "Trying to login as '".addslashes($victim_uname)."' found.\n" ;
 		$this->output_log( 'BRUTE FORCE' , 0 , true , 1 ) ;
-		exit ;
+		$ret = $this->call_filter( 'bruteforce_overrun' ) ;
+		if( $ret == false ) exit ;
 	}
 	// delayed insert
 	$xoopsDB->queryF( $sql4insertlog ) ;
@@ -834,7 +843,8 @@ function spam_check( $points4deny , $uid )
 	if( $this->_spamcount_uri >= $points4deny ) {
 		$this->message .= @$_SERVER['REQUEST_URI']." SPAM POINT: $this->_spamcount_uri\n" ;
 		$this->output_log( 'URI SPAM' , $uid , false , 128 ) ;
-		exit ;
+		$ret = $this->call_filter( 'spamcheck_overrun' ) ;
+		if( $ret == false ) exit ;
 	}
 }
 
@@ -939,9 +949,12 @@ function call_filter( $type , $dying_message = '' )
 {
 	require_once dirname(__FILE__).'/ProtectorFilter.php' ;
 	$filter_handler =& ProtectorFilterHandler::getInstance() ;
-	if( ! $filter_handler->execute( $type ) && $dying_message ) {
+	$ret = $filter_handler->execute( $type ) ;
+	if( $ret == false && $dying_message ) {
 		die( $dying_message ) ;
 	}
+
+	return $ret ;
 }
 
 

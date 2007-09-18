@@ -1,6 +1,12 @@
 <?php
 
-if( @$xoopsModuleConfig['body_editor'] == 'common_fckeditor' ) {
+if( empty( $_POST['body_editor'] ) ) {
+	$body_editor = @$xoopsModuleConfig['body_editor'] ;
+} else {
+	$body_editor = $_POST['body_editor'] ;
+}
+
+if( $body_editor == 'common_fckeditor' ) {
 
 	// FCKeditor in common/fckeditor/
 	$pico_wysiwyg_header = '
@@ -17,7 +23,7 @@ if( @$xoopsModuleConfig['body_editor'] == 'common_fckeditor' ) {
 	' ;
 	$pico_wysiwyg_body = '<textarea id="'.$pico_wysiwygs['name'].'" name="'.$pico_wysiwygs['name'].'">'.htmlspecialchars($pico_wysiwygs['value'],ENT_QUOTES).'</textarea><script>fckeditor_exec();</script>' ;
 
-} else if( @$xoopsModuleConfig['body_editor'] == 'common_spaw' && file_exists( XOOPS_ROOT_PATH.'/common/spaw/spaw_control.class.php' ) ) {
+} else if( $body_editor == 'common_spaw' && file_exists( XOOPS_ROOT_PATH.'/common/spaw/spaw_control.class.php' ) ) {
 
 	// older spaw in common/spaw/
 	include XOOPS_ROOT_PATH.'/common/spaw/spaw_control.class.php' ;

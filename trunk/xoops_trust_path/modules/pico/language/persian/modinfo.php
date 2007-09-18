@@ -15,6 +15,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-18 10:36:04
+define($constpref.'_HTMLPR_EXCEPT','Groups can avoid purification by HTMLPurifier');
+define($constpref.'_HTMLPR_EXCEPTDSC','Post from users who are not belonged these groups will be forced to purified as sanitized HTML by HTMLPurifier in Protector>=3.14. This purification cannot work with PHP4');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-12 17:00:58
 define($constpref.'_BNAME_MYWAITINGS','My waiting posts');
 

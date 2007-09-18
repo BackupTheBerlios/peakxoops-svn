@@ -299,6 +299,8 @@ function pico_updatecategory( $mydirname , $cat_id )
 // get requests for content's sql (parse options)
 function pico_get_requests4content( $mydirname , &$errors , $auto_approval = true , $isadminormod = false , $content_id = 0 )
 {
+	global $xoopsUser ;
+
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
 
@@ -404,6 +406,26 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$modified_time_safe = preg_replace( '#[^0-9a-zA-Z:+/-]#' , '' , $_POST['modified_time'] ) ;
 			$ret['modified_time_formatted'] = $modified_time_safe ;
 			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
+		}
+	}
+
+	// HTML Purifier in Protector (only for PHP5)
+	//'htmlpurify_except' ,
+	if( substr( PHP_VERSION , 0 , 1 ) != 4 && file_exists( XOOPS_TRUST_PATH.'/modules/protector/library/HTMLPurifier.auto.php' ) ) {
+		if( is_object( $xoopsUser ) ) {
+			$purifier_enable = sizeof( array_intersect( $xoopsUser->getGroups() , @$mod_config['htmlpurify_except'] ) ) == 0 ;
+		} else {
+			$purifier_enable = true ;
+		}
+		$purifier_enable = $purifier_enable && ! isset( $filters['htmlspecialchars'] ) ;
+		if( $purifier_enable ) {
+			require_once XOOPS_TRUST_PATH.'/modules/protector/library/HTMLPurifier.auto.php' ;
+			$config = HTMLPurifier_Config::createDefault();
+			$config->set('Cache', 'SerializerPath', XOOPS_TRUST_PATH.'/modules/protector/configs');
+			$config->set('Core', 'Encoding', _CHARSET);
+			//$config->set('HTML', 'Doctype', 'HTML 4.01 Transitional');
+			$purifier = new HTMLPurifier($config);
+			$ret['body'] = $purifier->purify( $ret['body'] ) ;
 		}
 	}
 

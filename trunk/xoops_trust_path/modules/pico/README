@@ -102,6 +102,14 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.53 (2007/09/18) update the module
+- added a config for auto HTML cleaner by HTMLPurifier (PHP5 & Protector>=3.14)
+- added a switch to wysiwyg editor
+- modified formmail can specify "to" addresses
+- added language files
+-- portuguese (thx Mikhail)
+-- pt_utf8 (thx Mikhail)
+
 1.52 (2007/09/13) update the module
 - modified class FormProcess getting labels of checkbox/radio from <legend>
 - modified class FormProcess can treat <select multiple>
@@ -446,6 +454,14 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+
+1.53 (2007/09/18) ※要モジュールアップデート
+- HTML投稿の自動正規化設定を追加 (要 PHP5 / Protector>=3.14)
+- WYSIWYGエディタへの一時切替スイッチをつけた
+- formmailプラグインで"to"指定を可能にした
+- 言語ファイル追加
+-- portuguese (thx Mikhail)
+-- pt_utf8 (thx Mikhail)
 
 1.52 (2007/09/13) ※要モジュールアップデート
 - FormProcessクラスでcheckbox/radioのラベルを<legend>から取るようにした

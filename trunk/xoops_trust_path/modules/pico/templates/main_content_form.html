@@ -15,6 +15,7 @@
 <form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>&amp;ret=<{$smarty.get.ret|escape:"url"}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
 	<{$gticket_hidden}>
 	<input type="hidden" name="content_id" value="<{$content.id}>" />
+	<input type="hidden" name="body_editor" id="body_editor" value="" />
 
 	<table class="outer pico_form_table">
 
@@ -72,7 +73,7 @@
 		<{/if}>
 
 		<tr valign="top" align="left">
-			<th class="head"><label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label></th>
+			<th class="head"><label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label><{if $mod_config.body_editor != "common_fckeditor"}><input type="submit" class="formButton" name="contentman_preview"  id="contentman_swith_to_fckeditor" value="fckeditor" onclick="xoopsGetElementById('body_editor').value='common_fckeditor'" /><{/if}></th>
 			<td class="even">
 				<{if $body_wysiwyg}>
 					<{$body_wysiwyg}>

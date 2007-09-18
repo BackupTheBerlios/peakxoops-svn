@@ -58,6 +58,8 @@ define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: 
 define($constpref.'_IMAGES_DIR','Directory for image files');
 define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
 define($constpref.'_BODY_EDITOR','Editor for body');
+define($constpref.'_HTMLPR_EXCEPT','Groups can avoid purification by HTMLPurifier');
+define($constpref.'_HTMLPR_EXCEPTDSC','Post from users who are not belonged these groups will be forced to purified as sanitized HTML by HTMLPurifier in Protector>=3.14. This purification cannot work with PHP4');
 define($constpref.'_HISTORY_P_C','How many revisions are stored in DB');
 define($constpref.'_MLT_HISTORY','Minimum lifetime of each revisions (sec)');
 define($constpref.'_BRCACHE','Cache life time for image files (only with wraps mode)');

@@ -58,6 +58,8 @@ define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイル�
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
 define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
 define($constpref.'_BODY_EDITOR','本文編集エディタ');
+define($constpref.'_HTMLPR_EXCEPT','HTMLPurifierによる強制書き換えをしないグループ');
+define($constpref.'_HTMLPR_EXCEPTDSC','ここに指定されて「いない」グループによるHTML投稿は、Protector3.14以上に付属しているHTMLPurifierによって強制的に正しく無毒なHTMLに書き換えられます。ただし、HTMLPurifier自体、PHPバージョンが5以上でないと機能しません。');
 define($constpref.'_HISTORY_P_C','履歴機能を何世代まで保存するか');
 define($constpref.'_MLT_HISTORY','履歴の一世代として保存する最小時間(sec)');
 define($constpref.'_BRCACHE','画像ファイルのブラウザキャッシュ (wrapsモード時のみ)');

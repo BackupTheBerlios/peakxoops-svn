@@ -338,6 +338,16 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'htmlpurify_except' ,
+	'title'			=> $constpref.'_HTMLPR_EXCEPT' ,
+	'description'	=> $constpref.'_HTMLPR_EXCEPTDSC' ,
+	'formtype'		=> 'group_multi' ,
+	'valuetype'		=> 'array' ,
+	'default'		=> array(1,2,4) ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'histories_per_content' ,
 	'title'			=> $constpref.'_HISTORY_P_C' ,
 	'description'	=> '' ,

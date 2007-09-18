@@ -58,6 +58,8 @@ define($constpref.'_CSS_URIDSC','д│д╬ете╕ехб╝еы└ь═╤д╬CSSе╒ебедеыд╬URIдЄ┴ъ┬╨е╤е╣д
 define($constpref.'_IMAGES_DIR','едесб╝е╕е╒ебедеые╟егеьепе╚еъ');
 define($constpref.'_IMAGES_DIRDSC','д│д╬ете╕ехб╝еы═╤д╬едесб╝е╕дм│╩╟╝д╡дьд┐е╟егеьепе╚еъдЄете╕ехб╝еые╟егеьепе╚еъдлдщд╬┴ъ┬╨е╤е╣д╟╗╪─ъд╖д▐д╣бге╟е╒ейеые╚д╧imagesд╟д╣бг');
 define($constpref.'_BODY_EDITOR','╦▄╩╕╩╘╜╕еие╟еге┐');
+define($constpref.'_HTMLPR_EXCEPT','HTMLPurifierд╦дшды╢п└й╜ёдн┤╣дидЄд╖д╩дде░еыб╝е╫');
+define($constpref.'_HTMLPR_EXCEPTDSC','д│д│д╦╗╪─ъд╡дьд╞б╓ддд╩ддб╫е░еыб╝е╫д╦дшдыHTML┼ъ╣╞д╧бвProtector3.14░╩╛хд╦╔╒┬░д╖д╞дддыHTMLPurifierд╦дшд├д╞╢п└й┼кд╦└╡д╖дп╠╡╞╟д╩HTMLд╦╜ёдн┤╣дидщдьд▐д╣бгд┐д└д╖бвHTMLPurifier╝л┬╬бвPHPе╨б╝е╕ечеєдм5░╩╛хд╟д╩ддд╚╡б╟╜д╖д▐д╗дєбг');
 define($constpref.'_HISTORY_P_C','═·╬Є╡б╟╜дЄ▓┐└д┬хд▐д╟╩▌┬╕д╣дыдл');
 define($constpref.'_MLT_HISTORY','═·╬Єд╬░ь└д┬хд╚д╖д╞╩▌┬╕д╣ды║╟╛о╗■┤╓(sec)');
 define($constpref.'_BRCACHE','▓ш┴№е╒ебедеыд╬е╓ещеже╢енеуе├е╖ех (wrapsетб╝е╔╗■д╬д▀)');

@@ -273,7 +273,7 @@ class FormProcessByHtml
 		$query = file_get_contents( 'php://input' ) ;
 		$key_vals = explode( '&' , $query ) ;
 		foreach( $key_vals as $key_val ) {
-			@list( $key , $val ) = array_map( 'rawurldecode' , explode( '=' , $key_val ) ) ;
+			@list( $key , $val ) = array_map( 'urldecode' , explode( '=' , $key_val ) ) ;
 			@list( $key_pref , ) = explode( '[' , $key ) ;
 			if( $key_pref != $key ) {
 				// don't parse explicit array with []

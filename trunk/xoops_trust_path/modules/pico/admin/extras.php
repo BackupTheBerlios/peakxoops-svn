@@ -135,7 +135,7 @@ function pico_admin_make_summary4extras( $data )
 			$ret = implode( ',' , $data ) ;
 		} else {
 			foreach( $data as $key => $val ) {
-				$ret .= easiestml( $key ) . ':' . pico_admin_make_summary4extras( $val ) . "\n" ;
+				$ret .= pico_admin_easiestml( $key ) . ':' . pico_admin_make_summary4extras( $val ) . "\n" ;
 			}
 		}
 	} else {
@@ -145,8 +145,14 @@ function pico_admin_make_summary4extras( $data )
 	return $ret ;
 }
 
-if( ! function_exists( 'easiestml' ) ) {
-	function easiestml( $s ) { return $s ; }
+
+function pico_admin_easiestml( $s )
+{
+	if( function_exists( 'easiestml' ) ) {
+		return easiestml( $s ) ;
+	} else {
+		return $s ;
+	}
 }
 
 

@@ -144,6 +144,13 @@
 				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}></label>
 				<br />
 
+				<{if $category.isadminormod}>
+				<!-- locked -->
+				<input type="checkbox" name="locked" id="locked" value="1" <{if $content.locked}>checked="checked"<{/if}> />
+				<label for="locked"><{$smarty.const._MD_PICO_LABEL_LOCKED}></label>
+				<br />
+				<{/if}>
+
 			</td>
 		</tr>
 

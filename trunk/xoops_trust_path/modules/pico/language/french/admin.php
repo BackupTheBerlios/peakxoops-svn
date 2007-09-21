@@ -2,6 +2,18 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
+define('_MD_A_PICO_H2_EXTRAS','Extras');
+define('_MD_A_PICO_TH_ID','ID');
+define('_MD_A_PICO_TH_TYPE','Type');
+define('_MD_A_PICO_TH_SUMMARY','Summary');
+define('_MD_A_PICO_LINK_POPUP','popup');
+define('_MD_A_PICO_TH_EXTRASACTIONS','Actions');
+define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','selected items will be:');
+define('_MD_A_PICO_BTN_CSVOUTPUT','CSV output');
+define('_MD_A_PICO_MSG_DELETED','Deleted successfully');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-07-04 04:55:43
 define('_MD_A_PICO_LABEL_MAINDISP','View');
 

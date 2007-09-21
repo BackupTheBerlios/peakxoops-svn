@@ -17,6 +17,7 @@ define($constpref."_DESC","静的コンテンツ作成モジュール");
 define( $constpref.'_ADMENU_CONTENTSADMIN' , 'コンテンツ一括管理' ) ;
 define( $constpref.'_ADMENU_CATEGORYACCESS' , 'カテゴリーアクセス権限' ) ;
 define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
+define( $constpref.'_ADMENU_EXTRAS' , '拡張機能' ) ;
 define( $constpref.'_ADMENU_MYLANGADMIN' , '言語定数管理' ) ;
 define( $constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
 define( $constpref.'_ADMENU_MYBLOCKSADMIN' , 'ブロック管理/モジュールアクセス権限' ) ;

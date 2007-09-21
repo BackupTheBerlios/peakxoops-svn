@@ -30,6 +30,12 @@ if( $count <= 0 ) {
 // assigning
 $content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $category4assign , true ) ;
 
+// locked check
+if( ! empty( $content4assign['locked'] ) && ! $isadminormod ) {
+	$content4assign['can_edit'] = false ;
+	$content4assign['can_delete'] = false ;
+}
+
 // get next content of the category
 list( $next_content_id ) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT o.content_id FROM ".$xoopsDB->prefix($mydirname."_contents")." o WHERE (o.weight>".$content4assign['weight']." OR o.content_id>$content_id AND o.weight=".$content4assign['weight'].") AND o.cat_id=$cat_id AND ($whr4visible) AND o.show_in_navi ORDER BY o.weight,o.content_id LIMIT 1" ) ) ;
 if( empty( $next_content_id ) ) {

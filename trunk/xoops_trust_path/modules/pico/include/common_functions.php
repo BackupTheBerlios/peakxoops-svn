@@ -255,6 +255,7 @@ function pico_common_get_content4assign( $mydirname , $content_id , $mod_config 
 		// 'body' => $content_row['body'] ,
 		'body_raw' => $content_row['body'] ,
 		'can_edit' => @$category_row['can_edit'] ,
+		'can_delete' => @$category_row['can_delete'] ,
 		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
 	) + $content_row ;
 

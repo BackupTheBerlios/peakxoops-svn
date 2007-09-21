@@ -102,6 +102,18 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.54 (2007/09/22) update the module
+- modified all contents will be hit by search even off-cache contents
+- modified the default value for content cache off
+- added extras feature for DB storing plugins
+- added contents locking
+- modified class PicoFormProcessBySmartyBase radically
+- added confirming mail for smarty_plugins like formmail
+- added parameters for smarty_plugins like formmail
+- added smarty_plugin
+-- formmail4fleamarket
+-- survey
+
 1.53 (2007/09/18) update the module
 - added a config for auto HTML cleaner by HTMLPurifier (PHP5 & Protector>=3.14)
 - added a switch to wysiwyg editor
@@ -454,6 +466,17 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.54 (2007/09/22) ※要モジュールアップデート
+- 本文キャッシュがOFFでも検索にひっかかるようにした
+- 本文キャッシュのデフォルトをOFFに変更した
+- DB保存拡張機能用テーブル追加
+- 記事ロックの実装
+- クラスPicoFormProcessBySmartyBaseの設計変更
+- 自動返信機能の実装
+- メール生成用各種パラメータの実装
+- 専用smarty_pluginの追加
+-- formmail4fleamarket （フリマ用）
+-- survey （アンケート用）
 
 1.53 (2007/09/18) ※要モジュールアップデート
 - HTML投稿の自動正規化設定を追加 (要 PHP5 / Protector>=3.14)

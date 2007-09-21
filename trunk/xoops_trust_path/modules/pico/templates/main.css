@@ -7,7 +7,7 @@ div.pico_breadcrumbs{
 	margin				:0 -2px;
 	padding				:15px 8px;}
 
-div.pico_menu h1 { margin: 18px 0 0 0; padding: 3px; background-color:#eee; }
+div.pico_menu h1 { margin: 18px 0 0 0; padding: 3px; background-color:#eee;}
 div.pico_menu h2 { margin: 18px 0 0 10px; padding: 3px; background-color:#eee; }
 div.pico_menu h3 { margin: 18px 0 0 20px; padding: 3px; background-color:#eee; }
 div.pico_menu h4 { margin: 18px 0 0 30px; padding: 3px; background-color:#eee; }
@@ -21,7 +21,7 @@ div.pico_menu div.level5 { margin-left: 40px; }
 em.pico_notice { font-weight: bold; font-style: normal; color: #FF0000; }
 
 
-div.pico_controllers_in_menu { float: right; }
+div.pico_controllers_in_menu { float: right; position: relative; top : -1.5em;}
 
 div.bottom_of_content_body { clear: right; }
 

@@ -15,6 +15,10 @@ $adminmenu = array(
 		'title' => constant( $constpref.'_ADMENU_IMPORT' ) ,
 		'link' => 'admin/index.php?page=import' ,
 	) ,
+	array(
+		'title' => constant( $constpref.'_ADMENU_EXTRAS' ) ,
+		'link' => 'admin/index.php?page=extras' ,
+	) ,
 ) ;
 
 $adminmenu4altsys = array(

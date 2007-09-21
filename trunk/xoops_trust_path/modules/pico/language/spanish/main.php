@@ -8,6 +8,12 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
+define('_MD_PICO_CSVENCODING','UTF-8');
+define('_MD_PICO_ERR_LOCKEDCONTENT','The content is locked');
+define('_MD_PICO_LABEL_LOCKED','Lock (only moderators can edit/delete it)');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
 define('_MD_PICO_WAITINGRELEASE','waiting release');
 define('_MD_PICO_EXPIRED','Expired');

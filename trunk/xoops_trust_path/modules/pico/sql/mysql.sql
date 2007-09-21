@@ -54,6 +54,7 @@ CREATE TABLE contents (
   modifier_ip varchar(15) NOT NULL default '',
   subject varchar(255) NOT NULL default '',
   subject_waiting varchar(255) NOT NULL default '',
+  locked tinyint(1) NOT NULL default 0,
   visible tinyint(1) NOT NULL default 1,
   approval tinyint(1) NOT NULL default 1,
   use_cache tinyint(1) NOT NULL default 1,
@@ -70,6 +71,7 @@ CREATE TABLE contents (
   body_waiting mediumtext,
   body_cached mediumtext,
   filters text,
+  redundants text,
   PRIMARY KEY (content_id),
   UNIQUE KEY (vpath),
   KEY (poster_uid),
@@ -113,5 +115,18 @@ CREATE TABLE content_histories (
   KEY (created_time),
   KEY (modified_time),
   KEY (modifier_uid)
+) TYPE=MyISAM;
+
+CREATE TABLE content_extras (
+  content_extra_id int(10) unsigned NOT NULL auto_increment,
+  content_id int(10) unsigned NOT NULL default 0,
+  extra_type varchar(255) NOT NULL default '',
+  created_time int(10) NOT NULL default 0,
+  modified_time int(10) NOT NULL default 0,
+  data mediumtext,
+  PRIMARY KEY (content_extra_id),
+  KEY (content_id),
+  KEY (extra_type),
+  KEY (created_time)
 ) TYPE=MyISAM;
 

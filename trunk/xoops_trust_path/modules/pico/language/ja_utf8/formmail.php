@@ -4,6 +4,7 @@ define('_MD_PICO_FORMMAIL_MSG_ERRORANONYMOUS','入力項目に不備がありま
 define('_MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY','送信完了しました') ;
 
 define('_MD_PICO_FORMMAIL_MAILSUBJECT','%s への問い合わせ') ;
+define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','%s への問い合わせ（確認メール）') ;
 define('_MD_PICO_FORMMAIL_MAILFLDSEP',"\n---------------------------------------------------------------\n") ;
 define('_MD_PICO_FORMMAIL_MAILMIDSEP',"\n--------\n") ;
 

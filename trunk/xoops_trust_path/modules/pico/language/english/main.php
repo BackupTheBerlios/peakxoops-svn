@@ -50,6 +50,7 @@ define('_MD_PICO_LINK_TELLAFRIEND','Tell a friend');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','Article found in %s');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"I've just found an interestiong article\nSubject:%s");
 define('_MD_PICO_JUMPTOTOPOFPICOBODY',"Jump to the top");
+define('_MD_PICO_CSVENCODING','UTF-8');
 
 
 define('_MD_PICO_ERR_SQL','SQL Error Occurred in: ');
@@ -63,6 +64,7 @@ define('_MD_PICO_ERR_CREATECATEGORY','You cannot create a category');
 define('_MD_PICO_ERR_CATEGORYMANAGEMENT','You are not a manager of the category');
 define('_MD_PICO_ERR_READCONTENT','You cannot access the specified content');
 define('_MD_PICO_ERR_CREATECONTENT','You cannot create a content');
+define('_MD_PICO_ERR_LOCKEDCONTENT','The content is locked');
 define('_MD_PICO_ERR_EDITCONTENT','You cannot edit the content');
 define('_MD_PICO_ERR_DELETECONTENT','You cannot delete the content');
 define('_MD_PICO_ERR_PERMREADFULL','You cannot read full of the contents');
@@ -90,7 +92,8 @@ define('_MD_PICO_TH_FILTERS','filters');
 define('_MD_PICO_TH_WEIGHT','weight');
 define('_MD_PICO_TH_CONTENTOPTIONS','options');
 define('_MD_PICO_LABEL_USECACHE','use cache');
-define('_MD_PICO_NOTE_USECACHEDSC','Disable it for dynamic contents. Enable it for searchable');
+define('_MD_PICO_NOTE_USECACHEDSC','Enable it only for static contents');
+define('_MD_PICO_LABEL_LOCKED','Lock (only moderators can edit/delete it)');
 define('_MD_PICO_LABEL_SPECIFY_DATETIME','Specify datetime');
 define('_MD_PICO_LABEL_VISIBLE','Visible');
 define('_MD_PICO_LABEL_SHOWINNAVI','Show in navigation');

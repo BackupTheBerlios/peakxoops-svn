@@ -13,6 +13,12 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
 //
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:48
+define('_MD_PICO_CSVENCODING','UTF-8');
+define('_MD_PICO_ERR_LOCKEDCONTENT','The content is locked');
+define('_MD_PICO_LABEL_LOCKED','Lock (only moderators can edit/delete it)');
+
 define("_MD_PICO_TOP","Principal");
 define("_MD_PICO_ALLCONTENTS","Todos os artigos");
 define("_MD_PICO_DELETEDCONTENTS","Conteúdo removido");

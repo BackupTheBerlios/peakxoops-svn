@@ -21,7 +21,7 @@ function pico_xoopstpl( $mydirname , $text , $content4assign )
 	$tpl->assign( 'content' , $content4assign ) ;
 
 	// assign special session
-	$session_prefix = $mydirname . '_' . $content4assign['id'] . '_' ;
+	$session_prefix = $mydirname . '_' . @$content4assign['id'] . '_' ;
 	$session4assign = array() ;
 	foreach( array_keys( @$_SESSION ) as $index ) {
 		if( strncmp( $index , $session_prefix , strlen( $session_prefix ) ) === 0 ) {
@@ -30,7 +30,7 @@ function pico_xoopstpl( $mydirname , $text , $content4assign )
 	}
 	$tpl->assign( 'session' , $session4assign ) ;
 
-	$temp_file = XOOPS_COMPILE_PATH.'/'.substr(md5(XOOPS_DB_PREFIX.$content4assign['id']),16).$mydirname.'_temp_resource' ;
+	$temp_file = XOOPS_COMPILE_PATH.'/'.substr(md5(XOOPS_DB_PREFIX.@$content4assign['id']),16).$mydirname.'_temp_resource' ;
 	if( ! $text || $text != @file_get_contents( $temp_file ) ) {
 		$fw = fopen( $temp_file , 'wb' ) ;
 		fwrite( $fw , $text ) ;

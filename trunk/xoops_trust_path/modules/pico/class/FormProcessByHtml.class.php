@@ -466,6 +466,16 @@ class FormProcessByHtml
 	}
 
 
+	function renderForDB()
+	{
+		$ret = array() ;
+		foreach( $this->fields as $field_name => $attribs ) {
+			$ret[ $attribs['label'] ] = $attribs['value'] ;
+		}
+		return $ret ;
+	}
+
+
 	function convertZenToHan( $text )
 	{
 		if( function_exists( 'mb_convert_kana' ) ) {

@@ -67,6 +67,13 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_categories")." (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP')" ) ;
 	}
 
+	// 1.3/1.4 -> 1.5
+	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_content_extras") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_content_extras")." ( content_extra_id int(10) unsigned NOT NULL auto_increment, content_id int(10) unsigned NOT NULL default 0, extra_type varchar(255) NOT NULL default '', created_time int(10) NOT NULL default 0, modified_time int(10) NOT NULL default 0, data mediumtext, PRIMARY KEY (content_extra_id), KEY (content_id), KEY (extra_type), KEY (created_time) ) TYPE=MyISAM" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." ADD `locked` tinyint(1) NOT NULL default 0 AFTER subject_waiting, ADD `redundants` text AFTER filters" ) ;
+	}
+
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;
 	$tpl_path = dirname(__FILE__).'/templates' ;

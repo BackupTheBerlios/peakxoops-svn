@@ -1,6 +1,10 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
+define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(confirm) An inquiry about %s');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-08 06:44:13
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_OPTION','<li>Invalid option is found in %s</li>');
 

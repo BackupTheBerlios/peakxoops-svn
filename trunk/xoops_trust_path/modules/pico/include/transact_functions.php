@@ -393,7 +393,7 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		) ;
 	}
 
-	// created_time,modified_time
+	// created_time,modified_time,locked
 	if( $isadminormod ) {
 		$ret['specify_created_time'] = empty( $_POST['specify_created_time'] ) ? 0 : 1 ;
 		$ret['specify_modified_time'] = empty( $_POST['specify_modified_time'] ) ? 0 : 1 ;
@@ -407,6 +407,7 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$ret['modified_time_formatted'] = $modified_time_safe ;
 			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
 		}
+		$ret['locked'] = empty( $_POST['locked'] ) ? 0 : 1 ;
 	}
 
 	// HTML Purifier in Protector (only for PHP5)
@@ -467,6 +468,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_uid='$uid',modifier_uid='$uid',poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
+	pico_transact_reset_body_cached( $mydirname , $new_content_id ) ;
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
@@ -510,11 +512,23 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	// do update
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set $time4sql modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	pico_transact_reset_body_cached( $mydirname , $content_id ) ;
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
 
 	return $content_id ;
+}
+
+
+// sync body_cached as body (HTML tags are stripped) for searching
+function pico_transact_reset_body_cached( $mydirname , $content_id )
+{
+	$db =& Database::getInstance() ;
+	list( $body ) = $db->fetchRow( $db->query( "SELECT body FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ) ;
+	if( empty( $body ) ) return ;
+	$body4sql = mysql_real_escape_string( strip_tags( $body ) ) ;
+	$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='$body4sql' WHERE content_id=$content_id" ) ;
 }
 
 

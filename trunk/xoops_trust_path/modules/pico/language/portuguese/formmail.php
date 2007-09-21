@@ -9,6 +9,10 @@
 // ## Website........: http://xoopscube.com.br
 // ############################################################### //
 // *************************************************************** //
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:48
+define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(confirm) An inquiry about %s');
+
 define("_MD_PICO_FORMMAIL_BLOCK_ERROR_BEGIN","<div class='errorMsg'><ul>Você não escreveu todos os dados do formulário");
 define("_MD_PICO_FORMMAIL_BLOCK_ERROR_END","</ul></div>");
 define("_MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM","<div class='confirmMsg'>Confirma?<br /><input type='submit' value='Prosseguir' /></div>");

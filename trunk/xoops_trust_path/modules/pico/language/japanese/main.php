@@ -51,6 +51,7 @@ define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','%sで見つけた記事');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"興味深い記事を見つけました\n記事タイトル:%s");
 define('_MD_PICO_JUMPTOTOPOFPICOBODY',"この記事の1行目に飛ぶ");
 define('_MD_PICO_MAILTOENCODING','Shift_JIS'); // don't define it for singlebyte
+define('_MD_PICO_CSVENCODING','Shift_JIS');
 
 define('_MD_PICO_ERR_SQL','SQLエラーが発生しました。行: ');
 define('_MD_PICO_ERR_DUPLICATEDVPATH','仮想パスが重複しています');
@@ -63,6 +64,7 @@ define('_MD_PICO_ERR_CREATECATEGORY','カテゴリー作成権限がありません');
 define('_MD_PICO_ERR_CATEGORYMANAGEMENT','カテゴリー管理権限がありません');
 define('_MD_PICO_ERR_READCONTENT','指定されたコンテンツは存在しません');
 define('_MD_PICO_ERR_CREATECONTENT','コンテンツ作成権限がありません');
+define('_MD_PICO_ERR_LOCKEDCONTENT','コンテンツがロックされています');
 define('_MD_PICO_ERR_EDITCONTENT','コンテンツ編集権限がありません');
 define('_MD_PICO_ERR_DELETECONTENT','コンテンツ削除権限がありません');
 define('_MD_PICO_ERR_PERMREADFULL','このコンテンツの全文を表示する権限がありません');
@@ -90,7 +92,8 @@ define('_MD_PICO_TH_FILTERS','本文フィルター');
 define('_MD_PICO_TH_WEIGHT','表示順');
 define('_MD_PICO_TH_CONTENTOPTIONS','オプション');
 define('_MD_PICO_LABEL_USECACHE','本文キャッシュ');
-define('_MD_PICO_NOTE_USECACHEDSC','※閲覧条件によって内容が異なるコンテンツの場合にはOFFにしてください。ただし、ここがONでない記事は検索対象となりません。');
+define('_MD_PICO_NOTE_USECACHEDSC','※静的なコンテンツで速度が問題になりそうな時だけここをONにしてください。');
+define('_MD_PICO_LABEL_LOCKED','ロック（モデレータ・管理者以外による変更禁止）');
 define('_MD_PICO_LABEL_SPECIFY_DATETIME','日時を指定する');
 define('_MD_PICO_LABEL_VISIBLE','表示');
 define('_MD_PICO_LABEL_SHOWINNAVI','ページナビに表示する');

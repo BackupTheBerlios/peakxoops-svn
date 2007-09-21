@@ -38,11 +38,14 @@ require dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ;
 require dirname(dirname(__FILE__)).'/include/process_this_content.inc.php' ;
 
 // special check for contentmanager
-if( ! $category4assign['can_edit'] && ! $category4assign['can_delete'] ) die( _MD_PICO_ERR_EDITCONTENT ) ;
+if( ! $content4assign['can_edit'] && ! $content4assign['can_delete'] ) {
+	if( $content4assign['locked'] ) die( _MD_PICO_ERR_LOCKEDCONTENT ) ;
+	else die( _MD_PICO_ERR_EDITCONTENT ) ;
+}
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( isset( $_POST['contentman_post'] ) && $category4assign['can_edit'] ) {
+if( isset( $_POST['contentman_post'] ) && $content4assign['can_edit'] ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
@@ -77,7 +80,7 @@ if( isset( $_POST['contentman_copyfromwaiting'] ) && $category4assign['isadminor
 	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	exit ;
 }
-if( isset( $_POST['contentman_delete'] ) && $category4assign['can_delete'] ) {
+if( isset( $_POST['contentman_delete'] ) && $content4assign['can_delete'] ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}

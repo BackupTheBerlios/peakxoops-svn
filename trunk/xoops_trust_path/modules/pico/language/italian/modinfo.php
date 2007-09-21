@@ -10,6 +10,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
+define($constpref.'_ADMENU_EXTRAS','Extra');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-18 10:36:05
 define($constpref.'_HTMLPR_EXCEPT','Groups can avoid purification by HTMLPurifier');
 define($constpref.'_HTMLPR_EXCEPTDSC','Post from users who are not belonged these groups will be forced to purified as sanitized HTML by HTMLPurifier in Protector>=3.14. This purification cannot work with PHP4');

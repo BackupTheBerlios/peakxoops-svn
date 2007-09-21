@@ -15,6 +15,20 @@ class PicoFormProcessBySmartyBase
 	var $form_body4disp ;
 	var $extra_form = '' ;
 	var $error_html = '' ;
+	var $mail_body_pre = '' ; // public
+	var $mail_body_post = '' ; // public
+	var $mail_subject = null ; // public
+	var $toEmails = array() ; // public
+	var $fromEmail = null ; // public
+	var $fromName = null ; // public
+	var $canPostAgain = true ; // public
+	var $finished_message = null ; // public
+	var $confirm_message = null ; // public
+	var $cc_field_name = '' ; // public
+	var $cc_mail_body_pre = '' ; // public
+	var $cc_mail_body_post = '' ; // public
+	var $cc_mail_subject = null ; // public
+
 
 	function PicoFormProcessBySmartyBase()
 	{
@@ -35,7 +49,75 @@ class PicoFormProcessBySmartyBase
 		$this->content4disp = $smarty->_tpl_vars['content'] ;
 		$this->content_uri = pico_common_unhtmlspecialchars( XOOPS_URL.'/modules/'.$this->mydirname.'/'.$this->content4disp['link'] ) ;
 		$this->session_index = $this->mydirname . '_' . $this->content4disp['id'] . '_' . $this->mypluginname ;
+	}
 
+
+	function parseParameters( $params )
+	{
+		// mail_body_pre
+		if( ! empty( $params['mail_body_pre'] ) ) {
+			$this->mail_body_pre = $params['mail_body_pre'] ;
+		}
+	
+		// mail_body_post
+		if( ! empty( $params['mail_body_post'] ) ) {
+			$this->mail_body_post = $params['mail_body_post'] ;
+		}
+	
+		// mail_body_post
+		if( isset( $params['mail_subject'] ) ) {
+			$this->mail_subject = $params['mail_subject'] ;
+		}
+	
+		// toEmails
+		if( ! empty( $params['to'] ) ) {
+			$this->toEmails = explode( ',' , $params['to'] ) ;
+		}
+
+		// fromEmail
+		if( ! empty( $params['from'] ) ) {
+			$this->fromEmail = $params['from'] ;
+		}
+
+		// fromName
+		if( ! empty( $params['from_name'] ) ) {
+			$this->fromName = $params['from_name'] ;
+		}
+
+		// canPostAgain
+		if( isset( $params['can_post_again'] ) ) {
+			$this->canPostAgain = (boolean)$params['can_post_again'] ;
+		}
+
+		// finished_message
+		if( isset( $params['finished_message'] ) ) {
+			$this->finished_message = $params['finished_message'] ;
+		}
+
+		// confirm_message
+		if( isset( $params['confirm_message'] ) ) {
+			$this->confirm_message = $params['confirm_message'] ;
+		}
+
+		// field name for sending "confirm mail"
+		if( isset( $params['cc_field_name'] ) ) {
+			$this->cc_field_name = $params['cc_field_name'] ;
+		}
+
+		// cc_mail_body_pre
+		if( ! empty( $params['cc_mail_body_pre'] ) ) {
+			$this->cc_mail_body_pre = $params['cc_mail_body_pre'] ;
+		}
+	
+		// cc_mail_body_post
+		if( ! empty( $params['cc_mail_body_post'] ) ) {
+			$this->cc_mail_body_post = $params['cc_mail_body_post'] ;
+		}
+
+		// cc_mail_subject
+		if( ! empty( $params['cc_mail_subject'] ) ) {
+			$this->cc_mail_subject = $params['cc_mail_subject'] ;
+		}
 	}
 
 
@@ -66,7 +148,7 @@ class PicoFormProcessBySmartyBase
 		$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
 		require_once( $langmanpath ) ;
 		$langman =& D3LanguageManager::getInstance() ;
-		$langman->read( $filename . '.php' , $mydirname , 'pico' ) ;
+		$langman->read( $filename . '.php' , $this->mydirname , 'pico' ) ;
 	}
 
 
@@ -128,13 +210,22 @@ class PicoFormProcessBySmartyBase
 	function processConfirm()
 	{
 		// display confirm
-		$this->extra_form = '<form action="'.htmlspecialchars($this->content_uri,ENT_QUOTES).'" method="post">'._MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM.'<input type="hidden" name="'.$this->getTokenName().'" value="'.$this->getTokenValue().'" /></form>' ;
+		$this->extra_form = isset( $this->confirm_message ) ? $this->confirm_message : '<form action="'.htmlspecialchars($this->content_uri,ENT_QUOTES).'" method="post">'._MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM.'<input type="hidden" name="'.$this->getTokenName().'" value="'.$this->getTokenValue().'" /></form>' ;
 	}
 
 
 	function displayFinished()
 	{
-		echo '<div class="resultMsg form_finished">'._MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY.'</div>' ;
+		if( isset( $this->finished_message ) ) {
+			echo $this->finished_message ;
+		} else {
+			echo '<div class="resultMsg form_finished">'._MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY.'</div>' ;
+		}
+
+		if( $this->canPostAgain ) {
+			// clear the session
+			unset( $_SESSION[ $this->session_index ]['step'] ) ;
+		}
 	}
 
 
@@ -240,6 +331,87 @@ class PicoFormProcessBySmartyBase
 		// send a mail
 		// store into db
 		// etc.
+	}
+
+
+	// methods for inside executeLast()
+	function sendMail()
+	{
+		$mail_body = $this->makeMailBody() ;
+		$cc_mail_body = $this->makeCCMailBody() ;
+		$subject = $this->makeMailSubject() ;
+		$cc_subject = $this->makeCCMailSubject() ;
+
+		// easiestml
+		if( function_exists( 'easiestml' ) ) {
+			$mail_body = easiestml( $mail_body ) ;
+			$cc_mail_body = easiestml( $cc_mail_body ) ;
+			$subject = easiestml( $subject ) ;
+			$cc_subject = easiestml( $cc_subject ) ;
+		}
+
+		// check toEmails
+		if( empty( $this->toEmails ) ) {
+			die( 'No emails should be sent. set "to" parameter.' ) ;
+		}
+
+		// send mail (server to admin/poster)
+		$xoopsMailer =& getMailer() ;
+		$xoopsMailer->useMail() ;
+		$xoopsMailer->setToEmails( array_unique( $this->toEmails ) ) ;
+		if( ! empty( $this->fromEmail ) ) {
+			$xoopsMailer->setFromEmail( $this->fromEmail ) ;
+		}
+		if( ! empty( $this->fromName ) ) {
+			$xoopsMailer->setFromName( $this->fromName ) ;
+		}
+		$xoopsMailer->setSubject( $subject ) ;
+		$xoopsMailer->setBody( $mail_body ) ;
+		$xoopsMailer->send() ;
+
+		// send mail (server to visitor)
+		if( ! empty( $this->cc_field_name ) && ! empty( $this->form_processor->fields[ $this->cc_field_name ] ) ) {
+			$xoopsMailer->toEmails = array() ; // TODO
+			$xoopsMailer->setToEmails( $this->form_processor->fields[ $this->cc_field_name ] ) ;
+			$xoopsMailer->setSubject( $cc_subject ) ;
+			$xoopsMailer->setBody( $cc_mail_body ) ;
+			$xoopsMailer->send() ;
+		}
+	}
+
+
+	// mail utilities
+	function makeMailBody()
+	{
+		return $this->mail_body_pre . $this->content4disp['subject_raw'] . "\n" . 'URL: ' . $this->content_uri . "\n" . $this->form_processor->renderForMail( _MD_PICO_FORMMAIL_MAILFLDSEP , _MD_PICO_FORMMAIL_MAILMIDSEP ) . $this->mail_body_post ;
+	}
+
+	function makeCCMailBody()
+	{
+		return $this->cc_mail_body_pre . $this->content4disp['subject_raw'] . "\n" . 'URL: ' . $this->content_uri . "\n" . $this->form_processor->renderForMail( _MD_PICO_FORMMAIL_MAILFLDSEP , _MD_PICO_FORMMAIL_MAILMIDSEP ) . $this->cc_mail_body_post ;
+	}
+
+	function makeMailSubject()
+	{
+		return isset( $this->mail_subject ) ? $this->mail_subject : sprintf( _MD_PICO_FORMMAIL_MAILSUBJECT , $this->content4disp['subject_raw'] ) ;
+	}
+
+	function makeCCMailSubject()
+	{
+		return isset( $this->cc_mail_subject ) ? $this->cc_mail_subject : sprintf( _MD_PICO_FORMMAIL_CCMAILSUBJECT , $this->content4disp['subject_raw'] ) ;
+	}
+
+
+	function storeDB()
+	{
+		$db =& Database::getInstance() ;
+	
+		$content_id = intval( $this->content4disp['id'] ) ;
+		$extra_type4sql = addslashes( 'smarty_plugin::' . $this->mypluginname ) ;
+		$data4sql = addslashes( serialize( $this->form_processor->renderForDB() ) ) ;
+		$sql = "INSERT INTO ".$db->prefix($this->mydirname."_content_extras")." SET `content_id`=$content_id, `extra_type`='$extra_type4sql', `data`='$data4sql', created_time=UNIX_TIMESTAMP(), modified_time=UNIX_TIMESTAMP()" ;
+
+		$db->queryF( $sql ) ;
 	}
 
 }

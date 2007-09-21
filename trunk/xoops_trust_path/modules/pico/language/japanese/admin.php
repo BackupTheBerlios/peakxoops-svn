@@ -2,7 +2,7 @@
 
 // contents list admin
 define('_MD_A_PICO_H2_CONTENTS','コンテンツ一括管理');
-define('_MD_A_PICO_TH_CONTENTSID','ID');
+define('_MD_A_PICO_TH_CONTENTSID','記事番号');
 define('_MD_A_PICO_TH_CONTENTSSUBJECT','記事名');
 define('_MD_A_PICO_TH_CONTENTSWEIGHT','表示順');
 define('_MD_A_PICO_TH_CONTENTSVISIBLE','表示');
@@ -46,6 +46,17 @@ define('_MD_A_PICO_H2_SYNCALL','冗長情報の同期');
 define('_MD_A_PICO_BTN_DOSYNCALL','同期実行');
 define('_MD_A_PICO_MSG_SYNCALLDONE','同期完了しました');
 define('_MD_A_PICO_HELP_SYNCALL','カテゴリーのツリー構造・コンテンツにおける投票数など、速度をかせぐために持たせている冗長情報がおかしくなった時に実行してください');
+
+// extras
+define('_MD_A_PICO_H2_EXTRAS','拡張機能');
+define('_MD_A_PICO_TH_ID','ID');
+define('_MD_A_PICO_TH_TYPE','TYPE');
+define('_MD_A_PICO_TH_SUMMARY','サマリ');
+define('_MD_A_PICO_LINK_POPUP','ポップアップ');
+define('_MD_A_PICO_TH_EXTRASACTIONS','アクション');
+define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','右端がチェックされた項目を:');
+define('_MD_A_PICO_BTN_CSVOUTPUT','CSV出力');
+define('_MD_A_PICO_MSG_DELETED','削除しました');
 
 
 ?>

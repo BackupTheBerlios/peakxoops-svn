@@ -4,6 +4,7 @@ define('_MD_PICO_FORMMAIL_MSG_ERRORANONYMOUS','Error(s) in form') ;
 define('_MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY','sent successfully') ;
 
 define('_MD_PICO_FORMMAIL_MAILSUBJECT','An inquiry about %s') ;
+define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(confirm) An inquiry about %s') ;
 define('_MD_PICO_FORMMAIL_MAILFLDSEP',"\n---------------------------------------------------------------\n") ;
 define('_MD_PICO_FORMMAIL_MAILMIDSEP',"\n--------\n") ;
 

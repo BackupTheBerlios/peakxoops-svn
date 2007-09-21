@@ -1,0 +1,82 @@
+<!-- reference http://edo-freiheit.sakura.ne.jp/eblog/2007/04/post_17.html -->
+<style type="text/css">
+.toolTip{ position: relative; }
+.toolTip span{
+display: block;
+border: solid 2px #999;
+background-color: #eee;
+color: #666;
+text-decoration: none;
+position: absolute;
+top: 20px;
+right: 20px;
+padding: 5px;
+visibility: hidden;
+width: 250px;
+}
+a.toolTip:hover,a.toolTip:hover span{ visibility: visible; z-index: 100; }
+</style>
+
+<h3><{$mod_name}></h3>
+
+<!-- extras form -->
+<h2 class="head"><{$smarty.const._MD_A_PICO_H2_EXTRAS}></h2>
+<form name="extras" action="<{$mod_url}>/admin/index.php?page=extras&amp;cat_id=<{$cat_id}>" method="post" style="margin:20px 0px;">
+	<{$gticket_hidden}>
+	<table class="outer">
+		<tr>
+			<th>
+				<{$smarty.const._MD_A_PICO_TH_ID}>
+			</th>
+			<th>
+				<{$smarty.const._MD_A_PICO_TH_CONTENTSSUBJECT}>
+			</th>
+			<th>
+				<{$smarty.const._MD_PICO_CREATED}>
+			</th>
+			<th>
+				<{$smarty.const._MD_A_PICO_TH_TYPE}>
+			</th>
+			<th>
+				<{$smarty.const._MD_A_PICO_TH_SUMMARY}>
+			</th>
+			<th>
+				<{$smarty.const._MD_A_PICO_TH_EXTRASACTIONS}>
+				<input type="checkbox" onclick="with(document.extras){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_action_')>=0){elements[i].checked=this.checked;}}}">
+			</th>
+		</tr>
+		<{foreach from=$extras item="extra"}>
+			<tr class="<{cycle values="even,odd"}>">
+				<td style="text-align:right;">
+					<{$extra.id}>
+				</td>
+				<td align="left">
+					<a href="<{$mod_url}>/<{$extra.link}>">
+						<{$extra.content_subject}>
+					</a>
+				</td>
+				<td align="left">
+					<{$extra.created_time_formatted}>
+				</td>
+				<td align="left">
+					<{$extra.extra_type_formatted}>
+				</td>
+				<td align="left">
+					<{$extra.data_summary_short_raw|escape}>
+				</td>
+				<td align="left">
+					<input type="checkbox" name="action_selects[<{$extra.id}>]" id="col_action_<{$extra.id}>" value="1" />
+					<a href="#" class="toolTip"><{$smarty.const._MD_A_PICO_LINK_POPUP}><span><{$extra.data_summary_raw|escape|nl2br}></span></a>
+				</td>
+			</tr>
+		<{/foreach}>
+		<tr>
+			<th colspan="9" style="text-align:right;">
+				<{$smarty.const._MD_A_PICO_LABEL_EXTRASRIGHTCHECKED}>
+				<input type="submit" name="extras_delete" value="<{$smarty.const._MD_A_PICO_BTN_DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_DELETE}>');" />
+				<input type="submit" name="extras_output" value="<{$smarty.const._MD_A_PICO_BTN_CSVOUTPUT}>" />
+			</th>
+		</tr>
+	</table>
+</form>
+

@@ -31,6 +31,7 @@ $GLOBALS['pico_tables'] = array(
 		'modifier_ip' ,
 		'subject' ,
 		'subject_waiting' ,
+		'locked' ,
 		'visible' ,
 		'approval' ,
 		'use_cache' ,
@@ -47,6 +48,7 @@ $GLOBALS['pico_tables'] = array(
 		'body_waiting' ,
 		'body_cached' ,
 		'filters' ,
+		'redundants' ,
 	) ,
 	'content_votes' => array(
 		'vote_id' ,
@@ -71,6 +73,14 @@ $GLOBALS['pico_tables'] = array(
 		'htmlheader' ,
 		'body' ,
 		'filters' ,
+	) ,
+	'content_extras' => array(
+		'content_extra_id' ,
+		'content_id' ,
+		'extra_type' ,
+		'created_time' ,
+		'modified_time' ,
+		'data' ,
 	) ,
 ) ;
 

@@ -525,9 +525,9 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 function pico_transact_reset_body_cached( $mydirname , $content_id )
 {
 	$db =& Database::getInstance() ;
-	list( $body ) = $db->fetchRow( $db->query( "SELECT body FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ) ;
+	list( $use_cache , $body ) = $db->fetchRow( $db->query( "SELECT use_cache,body FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ) ;
 	if( empty( $body ) ) return ;
-	$body4sql = mysql_real_escape_string( strip_tags( $body ) ) ;
+	$body4sql = $use_cache ? '' : mysql_real_escape_string( strip_tags( $body ) ) ;
 	$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='$body4sql' WHERE content_id=$content_id" ) ;
 }
 

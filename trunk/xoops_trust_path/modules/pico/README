@@ -113,6 +113,10 @@ pico is fast enough if you use content's cache.
 - added smarty_plugin
 -- formmail4fleamarket
 -- survey
+- fixed wrong caching (thx Sow) 1.54a
+- added language files 1.54a
+-- fr_utf8 (thx gigamaster)
+
 
 1.53 (2007/09/18) update the module
 - added a config for auto HTML cleaner by HTMLPurifier (PHP5 & Protector>=3.14)
@@ -477,6 +481,9 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - 専用smarty_pluginの追加
 -- formmail4fleamarket （フリマ用）
 -- survey （アンケート用）
+- 本文キャッシュ処理がおかしくなっていたのを修正 (thx Sow) 1.54a
+- 言語ファイル追加 1.54a
+-- fr_utf8 (thx gigamaster)
 
 1.53 (2007/09/18) ※要モジュールアップデート
 - HTML投稿の自動正規化設定を追加 (要 PHP5 / Protector>=3.14)

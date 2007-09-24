@@ -123,6 +123,9 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+- added language files
+-- fr_utf8 (gigamaster)
+
 3.14 beta (2007/09/17)
 - imported HTMLPurifier (special thx! Edward Z. Yang) PHP5 only
 - added filtering point (spamcheck, crawler, f5attack, bruteforce, purge)
@@ -340,6 +343,9 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+- ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
+-- fr_utf8 (gigamaster)
 
 3.14 beta (2007/09/17)
 - HTMLPurifierÆ³Æş (special thx! Edward Z. Yang) ¢¨PHP4¤Ç¤Ï¤Ş¤È¤â¤ËÆ°¤­¤Ş¤»¤ó

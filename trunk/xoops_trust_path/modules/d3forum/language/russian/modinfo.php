@@ -7,6 +7,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:46
+define($constpref.'_ADMENU_POSTHISTORIES','Histories');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-18 17:34:37
 define($constpref.'_ADMENU_MYLANGADMIN','Languages');
 define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');

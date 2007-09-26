@@ -52,6 +52,10 @@ function d3forum_onupdate_base( $module , $mydirname )
 	if( ( $result = $db->query( $check_sql ) ) && ( $myrow = $db->fetchArray( $result ) ) && substr( @$myrow['Type'] , 0 , 3 ) == 'int' ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_topics")." MODIFY topic_external_link_id varchar(255) NOT NULL default ''" ) ;
 	}
+	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_post_histories") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_post_histories")." ( history_id int(10) unsigned NOT NULL auto_increment, post_id int(10) unsigned NOT NULL default 0, history_time int(10) NOT NULL default 0, data text, PRIMARY KEY (history_id), KEY (post_id) ) TYPE=MyISAM" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

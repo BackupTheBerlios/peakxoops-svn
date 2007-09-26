@@ -437,9 +437,9 @@ function d3forum_main_posthook_sametopic( $mydirname )
 
 	if( ! empty( $_POST['external_link_id'] ) ) {
 		// search the first post of the latest topic with the external_link_id
-		$external_link_id = intval( @$_POST['external_link_id'] ) ;
+		$external_link_id4sql = addslashes( @$_POST['external_link_id'] ) ;
 		$forum_id = intval( @$_POST['forum_id'] ) ;
-		$result = $db->query( "SELECT topic_first_post_id,topic_locked FROM ".$db->prefix($mydirname."_topics")." WHERE topic_external_link_id=$external_link_id AND forum_id=$forum_id AND ! topic_invisible ORDER BY topic_last_post_time DESC LIMIT 1" ) ;
+		$result = $db->query( "SELECT topic_first_post_id,topic_locked FROM ".$db->prefix($mydirname."_topics")." WHERE topic_external_link_id='$external_link_id4sql' AND forum_id=$forum_id AND ! topic_invisible ORDER BY topic_last_post_time DESC LIMIT 1" ) ;
 	} else if( ! empty( $_POST['topic_id'] ) ) {
 		// search the first post of the topic with the topic_id
 		$topic_id = intval( @$_POST['topic_id'] ) ;

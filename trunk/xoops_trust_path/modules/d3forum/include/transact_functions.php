@@ -41,6 +41,7 @@ function d3forum_delete_post_recursive( $mydirname , $post_id )
 		$db->query( "UPDATE ".$db->prefix("users")." SET posts=posts-1 WHERE uid=$uid" ) ;
 	} */
 
+	d3forum_transact_make_post_history( $mydirname , $post_id , true ) ;
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ;
 	$db->query( "DELETE FROM ".$db->prefix($mydirname."_post_votes")." WHERE post_id=$post_id" ) ;
 	
@@ -498,7 +499,7 @@ function d3forum_get_requests4sql_forum( $mydirname )
 }
 
 
-// create forum from post
+// create a forum
 function d3forum_makeforum( $mydirname , $cat_id , $isadmin )
 {
 	$db =& Database::getInstance() ;
@@ -517,7 +518,7 @@ function d3forum_makeforum( $mydirname , $cat_id , $isadmin )
 }
 
 
-// update forum from post
+// update a forum
 function d3forum_updateforum( $mydirname , $forum_id , $isadmin )
 {
 	$db =& Database::getInstance() ;
@@ -577,7 +578,7 @@ function d3forum_get_requests4sql_category( $mydirname )
 }
 
 
-// create forum from post
+// create a category
 function d3forum_makecategory( $mydirname )
 {
 	global $xoopsUser ;
@@ -616,7 +617,7 @@ function d3forum_makecategory( $mydirname )
 }
 
 
-// update forum from post
+// update a category
 function d3forum_updatecategory( $mydirname , $cat_id )
 {
 	$db =& Database::getInstance() ;
@@ -638,6 +639,33 @@ function d3forum_updatecategory( $mydirname , $cat_id )
 	d3forum_sync_cattree( $mydirname ) ;
 
 	return $cat_id ;
+}
+
+
+// make a new history entry for a post
+function d3forum_transact_make_post_history( $mydirname , $post_id , $full_backup = false )
+{
+	$db =& Database::getInstance() ;
+	$post_id = intval( $post_id ) ;
+
+	$result = $db->query( "SELECT * FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ;
+	if( ! $result || $db->getRowsNum( $result ) == 0 ) return ;
+	$post_row = $db->fetchArray( $result ) ;
+	$data = array() ;
+	$indexes = $full_backup ? array_keys( $post_row ) : array( 'subject' , 'post_text' ) ;
+	foreach( $indexes as $index ) {
+		$data[ $index ] = $post_row[ $index ] ;
+	}
+
+	// check the latest data in history
+	$result = $db->query( "SELECT data FROM ".$db->prefix($mydirname."_post_histories")." WHERE post_id=$post_id ORDER BY history_time DESC" ) ;
+	if( $db->getRowsNum( $result ) > 0 ) {
+		list( $old_data_serialized ) = $db->fetchRow( $result ) ;
+		$old_data = unserialize( $old_data_serialized ) ;
+		if( $old_data == $data ) return ;
+	}
+
+	if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_post_histories")." SET post_id=$post_id, history_time=UNIX_TIMESTAMP(), data='".mysql_real_escape_string( serialize( $data ) )."'" ) ) die( "DB ERROR ON making post_history".__LINE__ ) ;
 }
 
 

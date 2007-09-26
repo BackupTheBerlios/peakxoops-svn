@@ -4,6 +4,11 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:46
+define('_MD_D3FORUM_LINK_FORUMACCESS','Set permissions for this forum');
+define('_MD_D3FORUM_LINK_CATEGORYACCESS','Set permissions for this category');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-08-22 05:26:54
 define('_MD_D3FORUM_DOPOST','Post');
 define('_MD_D3FORUM_POSTASSAMETOPIC','Post into this topic');

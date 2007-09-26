@@ -126,6 +126,12 @@ $GLOBALS['d3forum_tables'] = array(
 		'vote_time' ,
 		'vote_ip' ,
 	) ,
+	'post_histories' => array(
+		'history_id' ,
+		'post_id' ,
+		'history_time' ,
+		'data' ,
+	) ,
 ) ;
 
 

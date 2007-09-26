@@ -23,6 +23,7 @@ define($constpref."_BNAME_LIST_FORUMS","フォーラム一覧");
 define($constpref.'_ADMENU_CATEGORYACCESS','カテゴリー権限設定');
 define($constpref.'_ADMENU_FORUMACCESS','フォーラム権限設定');
 define($constpref.'_ADMENU_ADVANCEDADMIN','アドバンス管理');
+define($constpref.'_ADMENU_POSTHISTORIES','投稿編集/削除履歴');
 define($constpref.'_ADMENU_MYLANGADMIN' , '言語定数管理' ) ;
 define($constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN' , 'ブロック管理/アクセス権限' ) ;

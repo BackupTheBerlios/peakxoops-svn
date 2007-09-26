@@ -6,6 +6,10 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:47
+define($constpref.'_ADMENU_POSTHISTORIES','Histories');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-05 03:58:10
 define($constpref.'_ADMENU_MYLANGADMIN','Languages');
 define($constpref.'_ADMENU_MYTPLSADMIN','Templates');

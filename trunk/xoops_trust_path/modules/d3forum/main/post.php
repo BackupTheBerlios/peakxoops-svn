@@ -254,6 +254,7 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 		}
 
 		// update post specified post_id
+		d3forum_transact_make_post_history( $mydirname , $post_id ) ;
 		if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_posts")." SET $set4sql WHERE post_id=$post_id" ) ) die( "DB ERROR IN UPDATE post" ) ;
 		d3forum_sync_topic( $mydirname , $topic_id , true , ! (boolean)$post_row['pid'] ) ;
 	} else if( $mode == 'reply' ) {

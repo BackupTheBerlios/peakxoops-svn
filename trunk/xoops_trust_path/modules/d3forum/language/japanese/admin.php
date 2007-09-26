@@ -44,5 +44,8 @@ define('_MD_A_D3FORUM_ERR_SQLONIMPORT','インポートに失敗しました。インポート元と
 define('_MD_A_D3FORUM_HELP_IMPORTFROM','インポート可能なのは、newbb1・xhnewbbおよび他のd3forumモジュールです。可能な限りオリジナル情報を損なわない形でインポートしますが、完全な再現はできません。各種権限・モデレータについてチェックしてください。なおインポートの成功・不成功にかかわらず、現在のモジュール内の情報は全削除されます。');
 define('_MD_A_D3FORUM_HELP_COMIMPORTFROM','XOOPSコメントをコメント統合としてインポートします。コメント統合を有効にするためには、このインポートとは別に、コメント統合対象モジュールでなんらかの処理を行う必要があります。（テンプレート書換えや、一般設定の変更など）');
 
+// post_histories
+define('_MD_A_D3FORUM_H2_POSTHISTORIES','投稿編集/削除履歴');
+define('_MD_A_D3FORUM_LINK_REFERDELETED','削除済');
 
 ?>

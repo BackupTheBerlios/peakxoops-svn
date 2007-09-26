@@ -1,5 +1,10 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:47
+define('_MD_A_D3FORUM_H2_POSTHISTORIES','Histories of editing/deleting posts');
+define('_MD_A_D3FORUM_LINK_REFERDELETED','Deleted');
+
 define('_MD_A_MYMENU_MYTPLSADMIN',	'Szablony');
 define('_MD_A_MYMENU_MYBLOCKSADMIN'	,'Bloki/Uprawnienia');
 define('_MD_A_MYMENU_MYPREFERENCES'	,'Ustawienia');

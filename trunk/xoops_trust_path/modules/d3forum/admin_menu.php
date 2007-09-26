@@ -15,6 +15,10 @@ $adminmenu = array(
 		'title' => constant( $constpref.'_ADMENU_ADVANCEDADMIN' ) ,
 		'link' => 'admin/index.php?page=advanced_admin' ,
 	) ,
+	array(
+		'title' => constant( $constpref.'_ADMENU_POSTHISTORIES' ) ,
+		'link' => 'admin/index.php?page=post_histories' ,
+	) ,
 ) ;
 
 $adminmenu4altsys = array(

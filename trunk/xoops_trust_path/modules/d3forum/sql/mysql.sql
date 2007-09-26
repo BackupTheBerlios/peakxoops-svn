@@ -186,3 +186,13 @@ CREATE TABLE post_votes (
   KEY (post_id),
   KEY (vote_ip)
 ) TYPE=MyISAM;
+
+
+CREATE TABLE post_histories (
+  history_id int(10) unsigned NOT NULL auto_increment,
+  post_id int(10) unsigned NOT NULL default 0,
+  history_time int(10) NOT NULL default 0,
+  data text,
+  PRIMARY KEY (history_id),
+  KEY (post_id)
+) TYPE=MyISAM;

@@ -44,5 +44,8 @@ define('_MD_A_D3FORUM_ERR_SQLONIMPORT','Faild to import. You have to check the v
 define('_MD_A_D3FORUM_HELP_IMPORTFROM','You can import from newbb1,xhnewbb, and the other d3forum instances. And you should know this is not a perfect copy. Especially you should check permissions. You also have to know all data in this module will be lost when you execute to import.');
 define('_MD_A_D3FORUM_HELP_COMIMPORTFROM','XOOPS Comments will be imported as d3forum message. Also you have to enable comment-integration feature to use them. (Editing templates or modify preferences etc.)');
 
+// post_histories
+define('_MD_A_D3FORUM_H2_POSTHISTORIES','Histories of editing/deleting posts');
+define('_MD_A_D3FORUM_LINK_REFERDELETED','Deleted');
 
 ?>

@@ -23,6 +23,7 @@ define($constpref."_BNAME_LIST_FORUMS","Forums");
 define($constpref.'_ADMENU_CATEGORYACCESS','Permissions of Categories');
 define($constpref.'_ADMENU_FORUMACCESS','Permissions of Forums');
 define($constpref.'_ADMENU_ADVANCEDADMIN','Advanced');
+define($constpref.'_ADMENU_POSTHISTORIES','Histories');
 define($constpref.'_ADMENU_MYLANGADMIN','Languages');
 define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
 define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocks/Permissions');

@@ -285,6 +285,7 @@ define('_MD_D3FORUM_VOTEPOINTDSCWORST','役に立たなかった');
 define('_MD_D3FORUM_FORUMMANAGER','フォーラム管理');
 define('_MD_D3FORUM_LINK_MAKEFORUM','フォーラム作成');
 define('_MD_D3FORUM_LINK_FORUMMANAGER','フォーラム編集');
+define('_MD_D3FORUM_LINK_FORUMACCESS','このフォーラムについての権限を設定する');
 define('_MD_D3FORUM_MSG_FORUMMADE','フォーラムを作成しました');
 define('_MD_D3FORUM_MSG_FORUMUPDATED','フォーラムを更新しました');
 define('_MD_D3FORUM_MSG_FORUMDELETED','フォーラムを削除しました');
@@ -301,7 +302,8 @@ define('_MD_D3FORUM_BTN_COPYFORUMTOOTHERFORUM','このフォーラムを他フ�
 define('_MD_D3FORUM_CATEGORYMANAGER','カテゴリー管理');
 define('_MD_D3FORUM_LINK_MAKECATEGORY','カテゴリー作成');
 define('_MD_D3FORUM_LINK_MAKESUBCATEGORY','サブカテゴリー作成');
-define('_MD_D3FORUM_LINK_CATEGORYMANAGER','カテゴリー編集');
+define('_MD_D3FORUM_LINK_CATEGORYMANAGER','このカテゴリーを編集する');
+define('_MD_D3FORUM_LINK_CATEGORYACCESS','このカテゴリーについての権限を設定する');
 define('_MD_D3FORUM_MSG_CATEGORYMADE','カテゴリーを作成しました');
 define('_MD_D3FORUM_MSG_CATEGORYUPDATED','カテゴリーを更新しました');
 define('_MD_D3FORUM_MSG_CATEGORYDELETED','カテゴリーを削除しました');

@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = $mydirname;
-$modversion['version']     = 2.10; // GIJ hacked
+$modversion['version']     = 2.11; // GIJ hacked
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';

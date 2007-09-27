@@ -13,7 +13,7 @@ function bulletin_get_submenu( $mydirname )
 	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' , 'sub' => array() ) ) ;
 
 	// categories query
-	$sql = "SELECT topic_id,topic_pid,topic_title FROM ".$db->prefix($mydirname."_topics")." WHERE 1" ;
+	$sql = "SELECT topic_id,topic_pid,topic_title FROM ".$db->prefix($mydirname."_topics")." ORDER BY topic_title" ;
 	$crs = $db->query( $sql ) ;
 	if( $crs ) while( $cat_row = $db->fetchArray( $crs ) ) {
 		$topic_id = intval( $cat_row['topic_id'] ) ;

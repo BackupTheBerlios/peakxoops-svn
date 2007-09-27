@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.76 ;
+$modversion['version'] = 0.77 ;
 $modversion['credits'] = "PEAK Corp. and JIDAIKOBO";
 $modversion['author'] = "GIJ=CHECKMATE and JIDAIKOBO" ;
 $modversion['help'] = "" ;
@@ -263,6 +263,16 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> 'images' ,
 	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'body_editor' ,
+	'title'			=> $constpref.'_BODY_EDITOR' ,
+	'description'	=> $constpref.'_BODY_EDITORDSC' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'xoopsdhtml' ,
+	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' /*, 'common/spaw' => 'common_spaw' */, 'common/fckeditor' => 'common_fckeditor' )
 ) ;
 
 $modversion['config'][] = array(

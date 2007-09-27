@@ -61,6 +61,8 @@ define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは {mod_url}/index.php?page=main_css です。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
 define($constpref.'_IMAGES_DIRDSC','このモジュール用のイメージが格納されたディレクトリをモジュールディレクトリからの相対パスで指定します。デフォルトはimagesです。');
+define($constpref.'_BODY_EDITOR','本文編集エディタ');
+define($constpref.'_BODY_EDITORDSC','WYSIWYGエディタは、HTMLタグを許可するフォーラムでのみ有効になります。HTMLタグを許可しないフォーラムでは無条件でxoopsdhtmlとなります。');
 define($constpref.'_ANONYMOUS_NAME','ゲストユーザのデフォルト名');
 define($constpref.'_ANONYMOUS_NAMEDSC','ゲスト用投稿フォームに最初に入力されている名前です。「匿名さん、お腹いっぱい」等');
 define($constpref.'_ICON_MEANINGS','投稿（アイコン）の意味づけ');

@@ -26,6 +26,11 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.77 alpha (2007-09-27)
+- modified posts allowing HTML must be filtered by HTMLPurifier
+- added WYSIWYG editor (common/fckxoops)
+- modified the target for redirectiion after posting by quick form
+
 0.76 alpha (2007-09-26) update this module
 - added post's histories feature
 - modified templates of menu
@@ -171,6 +176,10 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 ●変更履歴
 
+0.77 alpha (2007-09-27)
+- HTML許可時には無条件でHTMLPurifierを通過するようにした
+- common/fckxoops での編集を可能にした (HTML許可時のみ)
+- クイック投稿フォームからのリダイレクト先をトピック内投稿一覧に変更した
 
 0.76 alpha (2007-09-26) 要モジュールアップデート
 - 編集・削除ヒストリ機能追加（専用テーブルも追加）

@@ -61,6 +61,8 @@ define($constpref.'_CSS_URI','URI of CSS file for this module');
 define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','Directory for image files');
 define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module directory. default: images');
+define($constpref.'_BODY_EDITOR','Body Editor');
+define($constpref.'_BODY_EDITORDSC','WYSIWYG editor will be enabled under only forums allowing HTML. With forums escaping HTML specialchars, xoopsdhtml will be displayed automatically.');
 define($constpref.'_ANONYMOUS_NAME','Anonymous Name');
 define($constpref.'_ANONYMOUS_NAMEDSC','');
 define($constpref.'_ICON_MEANINGS','Meanings of icons');

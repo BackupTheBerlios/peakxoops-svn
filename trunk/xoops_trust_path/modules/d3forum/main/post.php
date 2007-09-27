@@ -1,9 +1,13 @@
 <?php
 
 include dirname(dirname(__FILE__)).'/include/common_prepend.php' ;
+require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 
 // hook $mode=='sametopic' into $_POST['mode'] = 'reply' , $_POST['post_id']
-if( @$_POST['mode'] == 'sametopic' ) d3forum_main_posthook_sametopic( $mydirname ) ;
+if( @$_POST['mode'] == 'sametopic' ) {
+	d3forum_main_posthook_sametopic( $mydirname ) ;
+	$mode_sametopic = true ;
+}
 
 if( @$_POST['mode'] == 'edit' && ! empty( $_POST['post_id'] ) ) {
 
@@ -120,6 +124,7 @@ if( $icon < 0 || $icon >= sizeof( $d3forum_icon_meanings ) ) $icon = 0 ;
 if( empty( $xoopsModuleConfig['allow_html'] ) ) $html = 0 ;
 if( empty( $xoopsModuleConfig['allow_sig'] ) ) $allow_sig = 0 ;
 $hide_uid = ! empty( $_POST['hide_uid'] ) && ! empty( $xoopsModuleConfig['allow_hideuid'] ) && $uid ? 1 : 0 ;
+if( $html ) $message = d3forum_transact_htmlpurify( $message ) ;
 
 // Validate message
 $preview_message4html = $myts->displayTarea( $message , $html , $smiley , $xcode , @$xoopsModuleConfig['allow_textimg'] , $br , 0 , $number_entity , $special_entity ) ;
@@ -192,8 +197,6 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 	//
 	// POST
 	//
-
-	require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 
 	// make set part of INSERT or UPDATE
 	$set4sql = "modified_time=UNIX_TIMESTAMP(), modifier_ip='".addslashes(@$_SERVER['REMOTE_ADDR'])."'" ;
@@ -408,6 +411,9 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 	} else if( ! empty( $topic_invisible ) ) {
 		// redirect the forum for invisible topic
 		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" , 2 , _MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL ) ;
+	} else if( ! empty( $mode_sametopic ) ) {
+		// display the topic
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?topic_id=$topic_id#post_id$post_id" , 2 , $redirect_message ) ;
 	} else {
 		// display the post
 		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 2 , $redirect_message ) ;

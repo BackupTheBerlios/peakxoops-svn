@@ -3,6 +3,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'd3forum';
 $constpref = '_MI_' . strtoupper( $mydirname );
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-27 16:50:42
+define($constpref.'_BODY_EDITOR','Body Editor');
+define($constpref.'_BODY_EDITORDSC','WYSIWYG editor will be enabled under only forums allowing HTML. With forums escaping HTML specialchars, xoopsdhtml will be displayed automatically.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:48
 define($constpref.'_ADMENU_POSTHISTORIES','Histories');
 define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');

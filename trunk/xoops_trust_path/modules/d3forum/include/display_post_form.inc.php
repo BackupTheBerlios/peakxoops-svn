@@ -58,6 +58,10 @@ if( d3forum_common_is_necessary_antispam( $xoopsUser , $xoopsModuleConfig ) ) {
 	$antispam4assign = array() ;
 }
 
+// WYSIWYG (some editor needs global scope ... orz)
+$d3forum_wysiwygs = array( 'name' => 'message' , 'value' => d3forum_common_unhtmlspecialchars( $message4html ) ) ;
+include dirname(dirname(__FILE__)).'/include/wysiwyg_editors.inc.php' ;
+
 // dare to set 'template_main' after header.php (for disabling cache)
 include XOOPS_ROOT_PATH.'/header.php' ;
 $xoopsOption['template_main'] = $mydirname.'_main_post_form.html' ;
@@ -129,8 +133,9 @@ $xoopsTpl->assign( array(
 	'forum' => $forum4assign ,
 	'topic' => @$topic4assign ,
 	'post' => $mode == 'edit' ? @$post4assign : array() ,
+	'body_wysiwyg' => $d3forum_wysiwyg_body ,
 	'antispam' => $antispam4assign ,
-	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+	'xoops_module_header' => "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"".str_replace('{mod_url}',XOOPS_URL.'/modules/'.$mydirname,$xoopsModuleConfig['css_uri'])."\" />" . $xoopsTpl->get_template_vars( "xoops_module_header" ) . "\n" . $d3forum_wysiwyg_header ,
 	'xoops_pagetitle' => $formTitle ,
 	'xoops_breadcrumbs' => array_merge( $xoops_breadcrumbs , array( array( 'name' => $formTitle ) ) ) ,
 ) ) ;

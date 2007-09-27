@@ -669,4 +669,20 @@ function d3forum_transact_make_post_history( $mydirname , $post_id , $full_backu
 }
 
 
+// return purified HTML
+function d3forum_transact_htmlpurify( $text )
+{
+	if( substr( PHP_VERSION , 0 , 1 ) != 4 && file_exists( XOOPS_TRUST_PATH.'/modules/protector/library/HTMLPurifier.auto.php' ) ) {
+		require_once XOOPS_TRUST_PATH.'/modules/protector/library/HTMLPurifier.auto.php' ;
+		$config = HTMLPurifier_Config::createDefault();
+		$config->set('Cache', 'SerializerPath', XOOPS_TRUST_PATH.'/modules/protector/configs');
+		$config->set('Core', 'Encoding', _CHARSET);
+		//$config->set('HTML', 'Doctype', 'HTML 4.01 Transitional');
+		$purifier = new HTMLPurifier($config);
+		$text = $purifier->purify( $text ) ;
+	}
+	return $text ;
+}
+
+
 ?>

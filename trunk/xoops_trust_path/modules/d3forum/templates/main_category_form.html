@@ -70,6 +70,15 @@
 			</td>
 		</tr>
 
+		<tr valign="top" align="left">
+			<th class="d3f_head">
+				<{$smarty.const._MD_D3FORUM_BATCH_ACTIONS}>
+			</th>
+			<td class="even">
+				<input type="checkbox" name="batch_action_turnsolvedon" id="batch_action_turnsolvedon" value="1" onclick="if(this.checked){alert('<{$smarty.const._MD_D3FORUM_BA_MSG_CONFIRM}>');}" /><label for="batch_action_turnsolvedon"><{$smarty.const._MD_D3FORUM_BA_TURNSOLVEDON}></label>
+			</td>
+		</tr>
+
 	</table>
 
 <p class="d3f_submit"><input type="submit" name="categoryman_post" value="<{$smarty.const._SUBMIT}>" />

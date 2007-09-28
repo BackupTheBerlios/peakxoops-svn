@@ -51,9 +51,12 @@ $message4html = '' ;
 $topic_id = $topic_row['topic_id'] ;
 $u2t_marked = intval( $topic_row['u2t_marked'] ) ;
 $solved = $isadminormod ? 1 : intval( $topic_row['topic_solved'] ) ;
-$hide_uid = 0 ;
 $invisible = 0 ;
 $approval = 1 ;
+$post_default_options = array_map( 'trim' , explode( ',' , strtolower( @$xoopsModuleConfig['default_options'] ) ) ) ;
+foreach( array( 'smiley' , 'xcode' , 'br' , 'number_entity' , 'special_entity' , 'html' , 'attachsig' , 'hide_uid' /*, 'notify' , 'u2t_marked'*/ ) as $key ) {
+	$$key = in_array( $key , $post_default_options ) ? 1 : 0 ;
+}
 
 $quote4html = "[quote sitecite=modules/".$mydirname."/index.php?post_id=".$pid."]\n".sprintf(_MD_D3FORUM_USERWROTE,$reference_name4html)."\n".$myts->makeTareaData4Edit( $post_row['post_text'] , $post_row['number_entity'] )."[/quote]";
 $formTitle = _MD_D3FORUM_POSTREPLY ;

@@ -669,6 +669,31 @@ function d3forum_transact_make_post_history( $mydirname , $post_id , $full_backu
 }
 
 
+// turning topic_solved of all topics in the category on (batch action)
+function d3forum_transact_turnsolvedon_in_category( $mydirname , $cat_id )
+{
+	$db =& Database::getInstance() ;
+	$cat_id = intval( $cat_id ) ;
+
+	$sql = "SELECT forum_id FROM ".$db->prefix($mydirname."_forums")." WHERE cat_id=$cat_id" ;
+	$result = $db->query( $sql ) ;
+	while( list( $forum_id ) = $db->fetchRow( $result ) ) {
+		d3forum_transact_turnsolvedon_in_forum( $mydirname , $forum_id ) ;
+	}
+}
+
+
+// turning topic_solved of all topics in the forum on (batch action)
+function d3forum_transact_turnsolvedon_in_forum( $mydirname , $forum_id )
+{
+	$db =& Database::getInstance() ;
+	$forum_id = intval( $forum_id ) ;
+
+	$sql = "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_solved=1 WHERE forum_id=$forum_id" ;
+	if( ! $db->query( $sql ) ) die( 'ERROR IN TURNSOLVEDON '.__LINE__ ) ;
+}
+
+
 // return purified HTML
 function d3forum_transact_htmlpurify( $text )
 {

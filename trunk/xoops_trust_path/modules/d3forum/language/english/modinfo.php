@@ -33,6 +33,8 @@ define($constpref.'_ADMENU_MYPREFERENCES','Preferences');
 define($constpref.'_TOP_MESSAGE','Message in forum top');
 define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">Forum Top</h1><p class="d3f_welcome">To start viewing messages, select the category and forum that you want to visit from the selection below.</p>');
 define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
+define($constpref.'_DEFAULT_OPTIONS','Default checked in post form');
+define($constpref.'_DEFAULT_OPTIONSDSC','List checked options separated by comma(,).<br />eg) smiley,xcode,br,number_entity<br />You can add these options: special_entity html attachsig u2t_marked');
 define($constpref.'_ALLOW_HTML','Allow HTML');
 define($constpref.'_ALLOW_HTMLDSC','Don\'t turn this on casually. It cause Script Insertion vulnerability if malicious user can post.');
 define($constpref.'_ALLOW_TEXTIMG','Allow to dipslay external images in the post');

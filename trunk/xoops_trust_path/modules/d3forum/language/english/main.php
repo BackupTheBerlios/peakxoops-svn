@@ -318,6 +318,11 @@ define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a
 define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','(under this category)');
 define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','(under this forum)');
 
+// batch actions
+define('_MD_D3FORUM_BATCH_ACTIONS','Batch Actions');
+define('_MD_D3FORUM_BA_TURNSOLVEDON','Turn all topics as solved');
+define('_MD_D3FORUM_BA_MSG_CONFIRM','Notice: this action effects all topics/posts inside the category/forum');
+
 // multi-byte spaces separated by ,
 // (don't define for single space languages)
 //define('_MD_D3FORUM_MULTIBYTESPACES',' ') ;

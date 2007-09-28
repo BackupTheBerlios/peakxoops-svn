@@ -1,5 +1,11 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-28 15:55:33
+define('_MD_D3FORUM_BATCH_ACTIONS','Batch Actions');
+define('_MD_D3FORUM_BA_TURNSOLVEDON','Turn all topics as solved');
+define('_MD_D3FORUM_BA_MSG_CONFIRM','Notice: this action effects all topics/posts inside the category/forum');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:48
 define('_MD_D3FORUM_LINK_FORUMACCESS','Set permissions for this forum');
 define('_MD_D3FORUM_LINK_CATEGORYACCESS','Set permissions for this category');

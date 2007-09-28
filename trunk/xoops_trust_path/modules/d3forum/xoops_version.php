@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = constant($constpref.'_NAME') ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.77 ;
+$modversion['version'] = 0.78 ;
 $modversion['credits'] = "PEAK Corp. and JIDAIKOBO";
 $modversion['author'] = "GIJ=CHECKMATE and JIDAIKOBO" ;
 $modversion['help'] = "" ;
@@ -102,6 +102,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'default_options' ,
+	'title'			=> $constpref.'_DEFAULT_OPTIONS' ,
+	'description'	=> $constpref.'_DEFAULT_OPTIONSDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'smiley,xcode,br,number_entity' ,
 	'options'		=> array()
 ) ;
 

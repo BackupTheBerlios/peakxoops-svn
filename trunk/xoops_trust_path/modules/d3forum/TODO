@@ -15,7 +15,6 @@
 
 ●現在のTODO（優先度順不同）
 post_text_waiting, subject_waiting の実装
-history の実装
 系統表示ビュー（あるpostの直系の親だけを一覧できるビュー）
 d3forum_make_treeinformations( $data )
 f1s を保存するようにして、取得時にORDERかけるだけで、あとからusort()かける必要をなくす (ul_in, ul_out, prev_id, next_id)

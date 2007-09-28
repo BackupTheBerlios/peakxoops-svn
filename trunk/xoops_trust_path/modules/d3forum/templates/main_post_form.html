@@ -120,7 +120,7 @@
 			<td class="even">
 
 				<!-- approval -->
-				<{if $forum.isadminormod && ! $approval}>
+				<{if $forum.isadminormod && $mode == "edit" && ! $post.approval}>
 				<input type="checkbox" name="approval" id="approval" value="1" <{$approval_checked}> /><label for="approval"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></label>
 				<br />
 				<{/if}>
@@ -216,7 +216,9 @@
 function xoopsFormValidate_postform() {
 	myform = window.document.postform;
 	if ( myform.subject.value.replace(/^\s+|\s+$/g,"") == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_SUBJECT|string_format:$smarty.const._FORM_ENTER}>"); myform.subject.focus(); return false; }
+	<{if ! $body_wysiwyg}>
 	if ( myform.message.value.replace(/^\s+|\s+$/g,"") == "" ) { window.alert("<{$smarty.const._MD_D3FORUM_ERR_NOMESSAGE}>"); myform.message.focus(); return false; }
+	<{/if}>
 	<{$antispam.js_in_validate_function}>
 	return true;
 }

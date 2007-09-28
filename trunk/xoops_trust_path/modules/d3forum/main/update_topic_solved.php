@@ -16,15 +16,18 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php
 // special check for update_topic_solved
 if( ! $isadminormod ) die( _MD_D3FORUM_ERR_MODERATETOPIC ) ;
 
-if( $uid && @$xoopsModuleConfig['use_solved'] ) {
+if( empty( $xoopsModuleConfig['use_solved'] ) ) {
+	// force topic_solved=1 if "solved" is disable
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_solved=1 WHERE topic_id=$topic_id" ) ;
+} else {
 	// flip topic_solved
 	$db->queryF( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_solved = ! topic_solved WHERE topic_id=$topic_id" ) ;
 }
 
-$allowed_identifiers = array( 'post_id' , 'topic_id' , 'forum_id' ) ;
+$allowed_identifiers = array( 'post_id' , 'topic_id' , 'forum_id' , 'cat_ids' ) ;
 
 if( in_array( $_GET['ret_name'] , $allowed_identifiers ) ) {
-	$ret_request = $_GET['ret_name'] . '=' . intval( $_GET['ret_val'] ) ;
+	$ret_request = $_GET['ret_name'] . '=' . preg_replace( '/[^0-9,]/' , '' , $_GET['ret_val'] ) ;
 } else {
 	$ret_request = "topic_id=$topic_id" ;
 }

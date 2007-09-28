@@ -318,6 +318,11 @@ define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','一般設定での設定値をこのカテゴリーま
 define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','（このカテゴリーの下に）');
 define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','（このフォーラムの下に）');
 
+// batch actions
+define('_MD_D3FORUM_BATCH_ACTIONS','一斉処理');
+define('_MD_D3FORUM_BA_TURNSOLVEDON','全トピックを解決済とする');
+define('_MD_D3FORUM_BA_MSG_CONFIRM','送信前に、本当にこの一斉処理を行って良いか確認してください');
+
 // multi-byte spaces separated by ,
 // (don't define for single space languages)
 define('_MD_D3FORUM_MULTIBYTESPACES','　') ;

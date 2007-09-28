@@ -63,11 +63,15 @@
 	<{if $topic.locked}>
 		<img src="<{$mod_imageurl}>/topic_status_locked1.gif" alt="<{$smarty.const._MD_D3FORUM_TOPICLOCKED}>" />
 	<{/if}>
-	<{if $mod_config.use_solved && $forum.isadminormod && ! $topic.solved}>
-		<a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_name=forum_id&amp;ret_val=<{$forum.id}>" title="<{$smarty.const._MD_D3FORUM_SOLVED_TURNON}>"><img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="<{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}>" /></a>
+	<{if ! $topic.solved}>
+		<{if $topic.forum_isadminormod}>
+			<a href="<{$mod_url}>/index.php?page=update_topic_solved&amp;topic_id=<{$topic.id}>&amp;ret_name=cat_ids&amp;ret_val=<{$cat_ids}>" title="<{$smarty.const._MD_D3FORUM_SOLVED_TURNON}>"><img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="<{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}>" /></a>
+		<{else}>
+			<img src="<{$mod_imageurl}>/topic_status_solved0.gif" alt="<{$smarty.const._MD_D3FORUM_ALT_SOLVEDNO}>" />
+		<{/if}>
 	<{/if}>
-	<{if $mod_config.allow_mark && $uid && $topic.u2t_marked}>
-		<a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_name=forum_id&amp;ret_val=<{$forum.id}>" title="<{$smarty.const._MD_D3FORUM_MARK_TURNOFF}>"><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="<{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}>" /></a>
+	<{if $uid && $topic.u2t_marked}>
+		<a href="<{$mod_url}>/index.php?page=update_u2t_marked&amp;topic_id=<{$topic.id}>&amp;ret_name=cat_ids&amp;ret_val=<{$cat_ids}>" title="<{$smarty.const._MD_D3FORUM_MARK_TURNOFF}>"><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="<{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}>" /></a>
 	<{/if}>
 	<a href="<{$mod_url}>/index.php?topic_id=<{$topic.id}>"><{$topic.title}></a><{$topic.topic_page_jump}>
 	<br />

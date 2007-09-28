@@ -29,10 +29,12 @@ $post_id = 0 ;
 $subject4html = htmlspecialchars( @$_GET['subject'] , ENT_QUOTES ) ;
 $message4html = '' ;
 $topic_id = 0 ;
-$u2t_marked = @$xoopsModuleCongif['allow_mark'] ? 1 : 0 ;
-$hide_uid = 0 ;
 $invisible = 0 ;
 $approval = 1 ;
+$post_default_options = array_map( 'trim' , explode( ',' , strtolower( @$xoopsModuleConfig['default_options'] ) ) ) ;
+foreach( array( 'smiley' , 'xcode' , 'br' , 'number_entity' , 'special_entity' , 'html' , 'attachsig' , 'hide_uid' , 'notify' , 'u2t_marked' ) as $key ) {
+	$$key = in_array( $key , $post_default_options ) ? 1 : 0 ;
+}
 
 $formTitle = $external_link_id ? _MD_D3FORUM_POSTASCOMMENTTOP : _MD_D3FORUM_POSTASNEWTOPIC ;
 $mode = 'newtopic' ;

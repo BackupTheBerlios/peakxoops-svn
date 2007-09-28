@@ -1,6 +1,7 @@
 <?php
 
 $d3forum_configs_can_be_override = array(
+	'default_options' => 'text' ,
 	'allow_html' => 'bool' ,
 	'allow_textimg' => 'bool' ,
 	'allow_sig' => 'bool' ,

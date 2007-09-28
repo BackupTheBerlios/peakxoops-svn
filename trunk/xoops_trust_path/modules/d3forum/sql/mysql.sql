@@ -95,7 +95,7 @@ CREATE TABLE topics (
   topic_posts_count int(10) NOT NULL default 0,
   topic_locked tinyint(1) NOT NULL default 0,
   topic_sticky tinyint(1) NOT NULL default 0,
-  topic_solved tinyint(1) NOT NULL default 0,
+  topic_solved tinyint(1) NOT NULL default 1,
   topic_invisible tinyint(1) NOT NULL default 0,
   topic_votes_sum int(10) unsigned NOT NULL default 0,
   topic_votes_count int(10) unsigned NOT NULL default 0,

@@ -26,6 +26,15 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.78 alpha (2007-09-28) update this module
+- added a configuration of default_options
+- changed default meaning of solved (solved=0 must mean unsolved)
+- added a batch action "turn all topics as solved" into category manager
+- added solved controller into listtopics_over_categories
+- added marking controller into listtopics_over_categories
+- fixed a wrong behavior of a checkbox for appoval
+- fixed a wrong error of "empty message" with a WYSIWYG editor
+
 0.77 alpha (2007-09-27)
 - modified posts allowing HTML must be filtered by HTMLPurifier
 - added WYSIWYG editor (common/fckxoops)
@@ -175,6 +184,16 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+
+0.78 alpha (2007-09-28) 要モジュールアップデート
+- 投稿オプションの初期値を追加した
+- 解決済の処理を根本的に変更した（利用しない==全部解決済み）
+- カテゴリーマネージャに解決済バッチ処理を追加
+- トピック一覧からの解決済変更実装
+- トピック一覧からの注目変更実装
+- 投稿の承認チェックボックスの表示条件がおかしかったのを修正
+- WYSIWYGエディタがONだと「本文がありません」となってしまう不具合の修正
 
 0.77 alpha (2007-09-27)
 - HTML許可時には無条件でHTMLPurifierを通過するようにした

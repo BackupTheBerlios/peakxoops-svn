@@ -23,6 +23,7 @@ if( isset( $_POST['categoryman_post'] ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
 	d3forum_updatecategory( $mydirname , $cat_id ) ;
+	if( ! empty(  $_POST['batch_action_turnsolvedon'] ) ) d3forum_transact_turnsolvedon_in_category( $mydirname , $cat_id ) ;
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?cat_id=$cat_id" , 2 , _MD_D3FORUM_MSG_CATEGORYUPDATED ) ;
 	exit ;
 }

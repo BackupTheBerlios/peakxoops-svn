@@ -4,6 +4,11 @@ $constpref = '_MI_' . strtoupper( $mydirname );
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-09-28 15:55:33
+define($constpref.'_DEFAULT_OPTIONS','Default checked in post form');
+define($constpref.'_DEFAULT_OPTIONSDSC','List checked options separated by comma(,).<br />eg) smiley,xcode,br,number_entity<br />You can add these options: special_entity html attachsig u2t_marked');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-27 16:50:42
 define($constpref.'_BODY_EDITOR','Body Editor');
 define($constpref.'_BODY_EDITORDSC','WYSIWYG editor will be enabled under only forums allowing HTML. With forums escaping HTML specialchars, xoopsdhtml will be displayed automatically.');

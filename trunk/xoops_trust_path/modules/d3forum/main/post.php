@@ -180,7 +180,7 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 	$notify = empty( $_POST['notify'] ) ? 0 : 1 ;
 	$solved = empty( $_POST['solved'] ) ? 0 : 1 ;
 	$u2t_marked = empty( $_POST['u2t_marked'] ) ? 0 : 1 ;
-	$approval = @$_POST['approval'] || @$post_row['approval'] ;
+	$approval = empty( $_POST['approval'] ) ? 0 : 1 ;
 
 	$formTitle = _MD_D3FORUM_FORMTITLEINPREVIEW ;
 	switch( $mode ) {
@@ -377,7 +377,9 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 	}
 
 	// topic_solved of the topic
-	if( ! empty( $xoopsModuleConfig['use_solved'] ) ) {
+	if( empty( $xoopsModuleConfig['use_solved'] ) ) {
+		$db->query( "UPDATE ".$db->prefix($mydirname."_topics")." SET topic_solved=1 WHERE topic_id=$topic_id" ) ;
+	} else {
 		if( $isadminormod ) {
 			// adminormod can turn "solved" both on and off
 			$solved = empty( $_POST['solved'] ) ? 0 : 1 ;

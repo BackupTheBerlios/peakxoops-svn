@@ -75,6 +75,7 @@ while( $topic_row = $db->fetchArray( $trs ) ) {
 		'title' => $myts->makeTboxData4Show( $topic_row['topic_title'] , $topic_row['fp_number_entity'] , $topic_row['fp_special_entity'] ) ,
 		'forum_id' => $topic_row['forum_id'] ,
 		'forum_title' => $myts->makeTboxData4Show( $topic_row['forum_title'] ) ,
+		'forum_isadminormod' => (boolean)$forum_permissions[ $topic_row['forum_id'] ]['is_moderator'] || $isadmin ,
 		'cat_id' => $topic_row['cat_id'] ,
 		'cat_title' => $myts->makeTboxData4Show( $topic_row['cat_title'] ) ,
 		'replies' => intval( $topic_row['topic_posts_count'] ) - 1 ,

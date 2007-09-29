@@ -38,7 +38,7 @@ define('_MD_SETEXPDATETIME','D&eacute;finir la date d\'expiration');
 define('_MD_SETEXPDATETIME_DESC','* Si vous ne sp&eacute;cifiez pas une date, cette option reste sans effet.'); 
 define('_MD_APPROVE','Approuver cet article');
 define('_MD_DATE_FORMAT','%d %m %y %h : %i : %s');
-define('_MD_DBPUDATED','Mise &agrave; jour de la base de donn&eacute;es avec succès!'); 
+define('_MD_DBPUDATED','Mise &agrave; jour de la base de donn&eacute;es avec succÃ¨s!'); 
 define('_MD_POSTEDBY','Poster'); 
 define('_MD_RELATION','Autres Articles'); 
 define('_MD_ADD_RELATION','Ajouter d\'autres articles'); 

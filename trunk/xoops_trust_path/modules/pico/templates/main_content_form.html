@@ -158,6 +158,9 @@
 			<th class="head"><{$smarty.const._MD_PICO_CREATED}></th>
 			<td class="even">
 				<{$content_base.poster_uname}>
+				<{if $category.isadminormod && $page == 'contentmanager'}>
+					<input type="text" name="poster_uid" id="poster_uid" size="4" value="<{$content.poster_uid}>" />
+				<{/if}>
 				<{$content_base.created_time_formatted}>
 				<{if $category.isadminormod}>
 					<{if $content.specify_created_time}>
@@ -175,6 +178,9 @@
 			<th class="head"><{$smarty.const._MD_PICO_MODIFIED}></th>
 			<td class="even">
 				<{$content_base.modifier_uname}>
+				<{if $category.isadminormod && $page == 'contentmanager'}>
+					<input type="text" name="modifier_uid" id="modifier_uid" size="4" value="<{$content.modifier_uid}>" />
+				<{/if}>
 				<{$content_base.modified_time_formatted}>
 				<{if $category.isadminormod}>
 					<{if $content.specify_modified_time}>

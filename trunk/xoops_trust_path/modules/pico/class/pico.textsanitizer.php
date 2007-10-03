@@ -6,7 +6,7 @@ class PicoTextSanitizer extends MyTextSanitizer
 {
 	var $nbsp = 0 ;
 
-	function MyAlbumTextSanitizer()
+	function PicoTextSanitizer()
 	{
 		parent::MyTextSanitizer() ;
 	}

@@ -3,16 +3,20 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-10-04 05:27:54
+define('_MD_A_PICO_LINK_DETAIL','Detail');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:46
-define('_MD_A_PICO_H2_EXTRAS','Extras');
+define('_MD_A_PICO_H2_EXTRAS','اضافی ها');
 define('_MD_A_PICO_TH_ID','ID');
-define('_MD_A_PICO_TH_TYPE','Type');
-define('_MD_A_PICO_TH_SUMMARY','Summary');
-define('_MD_A_PICO_LINK_POPUP','popup');
-define('_MD_A_PICO_TH_EXTRASACTIONS','Actions');
-define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','selected items will be:');
-define('_MD_A_PICO_BTN_CSVOUTPUT','CSV output');
-define('_MD_A_PICO_MSG_DELETED','Deleted successfully');
+define('_MD_A_PICO_TH_TYPE','نوع');
+define('_MD_A_PICO_TH_SUMMARY','خلاصه');
+define('_MD_A_PICO_LINK_POPUP','پاپ آپ');
+define('_MD_A_PICO_TH_EXTRASACTIONS','عملکرد ها');
+define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','تغییرات موارد انتخواب شده:');
+define('_MD_A_PICO_BTN_CSVOUTPUT','خروجی CSV');
+define('_MD_A_PICO_MSG_DELETED','با موفقیت حذف شد');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-07-04 04:55:42
 define('_MD_A_PICO_LABEL_MAINDISP','بازدید');

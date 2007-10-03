@@ -22,6 +22,7 @@ class PicoFormProcessBySmartySurvey extends PicoFormProcessBySmartyBase
 
 	function executeLast()
 	{
+		$this->sendMail() ;
 		$this->storeDB() ;
 	}
 

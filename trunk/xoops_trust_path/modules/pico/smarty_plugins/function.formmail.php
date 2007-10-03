@@ -16,6 +16,7 @@ function smarty_function_formmail( $params , &$smarty )
 		}
 	}
 
+	if( $controller->countValidToEmails() <= 0 ) die( 'Set a valid email address by adding to="(email)" inside &lt;{'.$controller->mypluginname.'}&gt;' ) ;
 	$controller->execute( $params , $smarty ) ;
 }
 
@@ -30,6 +31,7 @@ class PicoFormProcessBySmartyFormmail extends PicoFormProcessBySmartyBase
 	function executeLast()
 	{
 		$this->sendMail() ;
+		//$this->storeDB() ;
 	}
 
 }

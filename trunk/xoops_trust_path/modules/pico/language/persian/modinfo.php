@@ -18,14 +18,14 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:46
-define($constpref.'_ADMENU_EXTRAS','Extra');
+define($constpref.'_ADMENU_EXTRAS','اضافی');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-18 10:36:04
-define($constpref.'_HTMLPR_EXCEPT','Groups can avoid purification by HTMLPurifier');
-define($constpref.'_HTMLPR_EXCEPTDSC','Post from users who are not belonged these groups will be forced to purified as sanitized HTML by HTMLPurifier in Protector>=3.14. This purification cannot work with PHP4');
+define($constpref.'_HTMLPR_EXCEPT','گروه های که میتوانند از پالایش به وسیله پالایشگر HTML اجتناب کنند');
+define($constpref.'_HTMLPR_EXCEPTDSC','پست های که به وسیله کاربرانی که جز گروه های مشخص شده رو به رو نیستند ارسال شده است باید  مطابق اصول امنیتی HTML به وسیله پالایشگر HTML  ، پالایش شود  در پروتکتو >=3.14. این ویرایشگر در PHP4 کار نمیکند');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-12 17:00:58
-define($constpref.'_BNAME_MYWAITINGS','My waiting posts');
+define($constpref.'_BNAME_MYWAITINGS','پست های منتظر تایید من');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
 define($constpref.'_BNAME_SUBCATEGORIES','زیر شاخه ها');
@@ -52,7 +52,7 @@ define($constpref.'_SEARCHBYUIDDSC','قرار دادن لیست اسناد  در
 define($constpref.'_HISTORY_P_C','چه تعداد اصلاح (سند) در پایگاه داده ها ذخیره شود');
 define($constpref.'_MLT_HISTORY','کمترین عمر هر اصلاح ( ثانیه)');
 define($constpref.'_BRCACHE','زمان نگاه داری فایل کش برای  فایل های تصویری (فقط در حالت wraps)');
-define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 means disabled)');
+define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 به معنی غیر فعال است)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
 define($constpref.'_SUBMENU_SC','نمایش اسناد در یک زیر منو ');
@@ -60,7 +60,7 @@ define($constpref.'_SUBMENU_SCDSC','به طور پیش فرض فقط شاخه ه
 define($constpref.'_SITEMAP_SC','نمایش اسناد در ماژول نقشه ی سایت');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-07 04:39:59
-define($constpref.'_USE_REWRITE','enable mod_rewrite mode');
+define($constpref.'_USE_REWRITE','فعال کردن روش mod_rewrite');
 define($constpref.'_USE_REWRITEDSC','Depends your environment. If you turn this on, rename .htaccess.rewrite_wraps(with wraps) or htaccess.rewrite_normal(without wraps) to .htaccess under XOOPS_ROOT_PATH/modules/(dirname)/');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-03-06 04:56:32

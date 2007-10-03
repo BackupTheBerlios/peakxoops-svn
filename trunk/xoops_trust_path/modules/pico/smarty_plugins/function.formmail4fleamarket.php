@@ -18,6 +18,7 @@ function smarty_function_formmail4fleamarket( $params , &$smarty )
 		$controller->toEmails[] = $poster->getVar( 'email' , 'n' ) ;
 	}
 
+	if( $controller->countValidToEmails() <= 0 ) die( 'Set a valid email address by adding to="(email)" inside &lt;{'.$controller->mypluginname.'}&gt;' ) ;
 	$controller->execute( $params , $smarty ) ;
 }
 

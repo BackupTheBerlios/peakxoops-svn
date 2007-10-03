@@ -64,7 +64,7 @@ class PicoFormProcessBySmartyBase
 			$this->mail_body_post = $params['mail_body_post'] ;
 		}
 	
-		// mail_body_post
+		// mail_body_subject
 		if( isset( $params['mail_subject'] ) ) {
 			$this->mail_subject = $params['mail_subject'] ;
 		}
@@ -350,26 +350,25 @@ class PicoFormProcessBySmartyBase
 			$cc_subject = easiestml( $cc_subject ) ;
 		}
 
-		// check toEmails
-		if( empty( $this->toEmails ) ) {
-			die( 'No emails should be sent. set "to" parameter.' ) ;
-		}
-
-		// send mail (server to admin/poster)
+		// mail initialize
 		$xoopsMailer =& getMailer() ;
 		$xoopsMailer->useMail() ;
-		$xoopsMailer->setToEmails( array_unique( $this->toEmails ) ) ;
 		if( ! empty( $this->fromEmail ) ) {
 			$xoopsMailer->setFromEmail( $this->fromEmail ) ;
 		}
 		if( ! empty( $this->fromName ) ) {
 			$xoopsMailer->setFromName( $this->fromName ) ;
 		}
-		$xoopsMailer->setSubject( $subject ) ;
-		$xoopsMailer->setBody( $mail_body ) ;
-		$xoopsMailer->send() ;
 
-		// send mail (server to visitor)
+		// send main mail (server to admin/poster)
+		if( ! empty( $this->toEmails ) ) {
+			$xoopsMailer->setToEmails( array_unique( $this->toEmails ) ) ;
+			$xoopsMailer->setSubject( $subject ) ;
+			$xoopsMailer->setBody( $mail_body ) ;
+			$xoopsMailer->send() ;
+		}
+
+		// send confirming mail (server to visitor)
 		if( ! empty( $this->cc_field_name ) && ! empty( $this->form_processor->fields[ $this->cc_field_name ] ) ) {
 			$xoopsMailer->toEmails = array() ; // TODO
 			$xoopsMailer->setToEmails( $this->form_processor->fields[ $this->cc_field_name ] ) ;
@@ -401,6 +400,17 @@ class PicoFormProcessBySmartyBase
 		return isset( $this->cc_mail_subject ) ? $this->cc_mail_subject : sprintf( _MD_PICO_FORMMAIL_CCMAILSUBJECT , $this->content4disp['subject_raw'] ) ;
 	}
 
+	function countValidToEmails()
+	{
+		// simple check
+		$ret = 0 ;
+		foreach( $this->toEmails as $mail ) {
+			if( preg_match('/^[a-zA-Z0-9_\.\-]+?@[A-Za-z0-9_\.\-]+$/',$mail) ) {
+				$ret ++ ;
+			}
+		}
+		return $ret ;
+	}
 
 	function storeDB()
 	{

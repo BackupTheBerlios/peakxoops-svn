@@ -4,6 +4,10 @@
 // contents list admin
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-10-04 05:27:54
+define('_MD_A_PICO_LINK_DETAIL','Detail');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
 define('_MD_A_PICO_H2_EXTRAS','Extras');
 define('_MD_A_PICO_TH_ID','ID');

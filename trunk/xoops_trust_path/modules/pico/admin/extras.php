@@ -17,7 +17,7 @@ $db =& Database::getInstance() ;
 // extras output
 if( ! empty( $_POST['extras_output'] ) && is_array( @$_POST['action_selects'] ) ) {
 	$extra_rows = array() ;
-	$columns = array( 'id' => 0 ) ;
+	$columns = array( 'id' => 0 , 'content_id' => 0 , 'type' => '' , 'created' => '' , 'modified' => '' ) ;
 	foreach( $_POST['action_selects'] as $extra_id => $value ) {
 		if( empty( $value ) ) continue ;
 		$extra_id = intval( $extra_id ) ;
@@ -26,6 +26,10 @@ if( ! empty( $_POST['extras_output'] ) && is_array( @$_POST['action_selects'] ) 
 		if( ! is_array( $data ) ) $data = array( $extra_row['data'] ) ;
 		$extra_rows[] = array(
 			'id' => intval( $extra_row['content_extra_id'] ) ,
+			'content_id' => intval( $extra_row['content_id'] ) ,
+			'type' => $extra_row['extra_type'] ,
+			'created' => formatTimestamp( $extra_row['created_time'] ) ,
+			'modified' => formatTimestamp( $extra_row['modified_time'] ) ,
 		) + $data ;
 		$columns += $data ;
 	}
@@ -82,8 +86,11 @@ if( ! empty( $_POST['extras_delete'] ) && ! empty( $_POST['action_selects'] ) ) 
 // form stage
 //
 
+$extra_id = intval( @$_GET['extra_id'] ) ;
+$whr_extra_id = $extra_id ? "ce.content_extra_id=$extra_id" : '1' ;
+
 // fetch extras
-$ers = $db->query( "SELECT ce.*,o.vpath,o.subject AS content_subject FROM ".$db->prefix($mydirname."_content_extras")." ce LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=ce.content_id ORDER BY ce.created_time DESC" ) ;
+$ers = $db->query( "SELECT ce.*,o.vpath,o.subject AS content_subject FROM ".$db->prefix($mydirname."_content_extras")." ce LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=ce.content_id WHERE $whr_extra_id ORDER BY ce.created_time DESC" ) ;
 
 $extras4assign = array() ;
 while( $extra_row = $db->fetchArray( $ers ) ) {
@@ -118,7 +125,11 @@ $tpl->assign( array(
 	'extras' => $extras4assign ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico_admin') ,
 ) ) ;
-$tpl->display( 'db:'.$mydirname.'_admin_extras.html' ) ;
+if( $extra_id ) {
+	$tpl->display( 'db:'.$mydirname.'_admin_extras_detail.html' ) ;
+} else {
+	$tpl->display( 'db:'.$mydirname.'_admin_extras.html' ) ;
+}
 xoops_cp_footer();
 
 

@@ -1,11 +1,14 @@
 <?php
 
+require_once dirname(__FILE__).'/FormProcessValidatorAbstract.class.php' ;
+
 class FormProcessByHtml
 {
 	var $fields = array() ;
 	var $form_html = '' ;
 	var $column_separator = ',' ;
 	var $types = array( 'int' , 'double' , 'singlebytes' , 'email' , 'telephone' ) ;
+	var $validator_dir ;
 
 	function FormProcessByHtml()
 	{
@@ -15,6 +18,14 @@ class FormProcessByHtml
 
 	function __construct()
 	{
+		// register validators
+		$this->validator_dir = dirname(__FILE__) . '/validators' ;
+		if( $handler = @opendir( $this->validator_dir ) ) {
+			while( ( $file = readdir( $handler ) ) !== false ) {
+				if( substr( $file , 0 , 1 ) == '.' ) continue ;
+				$this->types[] = substr( $file , 0 , -4 ) ;
+			}
+		}
 	}
 
 
@@ -221,16 +232,33 @@ class FormProcessByHtml
 			// type checks & conversions
 			switch( $attribs['type'] ) {
 				case 'int' :
-					$value = intval( $value ) ;
+					$value = $this->convertZenToHan( trim( $value ) ) ;
+					if( ! empty( $value ) ) {
+						if( is_numeric( $value ) ) {
+							$value = intval( $value ) ;
+						} else {
+							$this->fields[ $field_name ]['errors'][] = 'invalid number' ;
+						}
+					}
 					break ;
 
 				case 'double' :
-					$value = doubleval( $value ) ;
+					$value = $this->convertZenToHan( trim( $value ) ) ;
+					if( ! empty( $value ) ) {
+						if( is_numeric( $value ) ) {
+							$value = doubleval( $value ) ;
+						} else {
+							$this->fields[ $field_name ]['errors'][] = 'invalid number' ;
+						}
+					}
 					break ;
 
+
 				case 'telephone' :
-					$value = $this->convertZenToHan( $value ) ;
-					$value = preg_replace( '/[^()0-9+.-]/' , '' , $value ) ;
+					$value = $this->convertZenToHan( trim( $value ) ) ;
+					if( ! empty( $value ) && preg_match( '/[^()0-9+.-]/' , $value ) ) {
+						$this->fields[ $field_name ]['errors'][] = 'invalid general' ;
+					}
 					break ;
 
 				case 'email' :
@@ -245,6 +273,12 @@ class FormProcessByHtml
 					break ;
 
 				default :
+					if( in_array( $attribs['type'] , $this->types ) ) {
+						// custom validator
+						require_once $this->validator_dir.'/'.$attribs['type'].'.php' ;
+						$func_name = 'formprocess_validator_'.$attribs['type'] ;
+						$value = $func_name( $value , $field_name , $this ) ;
+					}
 					break ;
 			}
 

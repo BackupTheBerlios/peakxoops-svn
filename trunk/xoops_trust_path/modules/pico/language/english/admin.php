@@ -52,7 +52,7 @@ define('_MD_A_PICO_H2_EXTRAS','Extras');
 define('_MD_A_PICO_TH_ID','ID');
 define('_MD_A_PICO_TH_TYPE','Type');
 define('_MD_A_PICO_TH_SUMMARY','Summary');
-define('_MD_A_PICO_LINK_POPUP','popup');
+define('_MD_A_PICO_LINK_DETAIL','Detail');
 define('_MD_A_PICO_TH_EXTRASACTIONS','Actions');
 define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','selected items will be:');
 define('_MD_A_PICO_BTN_CSVOUTPUT','CSV output');

@@ -10,6 +10,10 @@
 // ############################################################### //
 // *************************************************************** //
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-10-04 05:27:55
+define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_NUMBER','<li>Input only number in %s</li>');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:48
 define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(confirm) An inquiry about %s');
 

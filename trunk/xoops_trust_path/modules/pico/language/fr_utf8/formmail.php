@@ -1,5 +1,9 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-10-04 05:27:56
+define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_NUMBER','<li>Input only number in %s</li>');
+
 define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(confirmer) Et vérifier %s');
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_OPTION','<li>Option invalide trouvée sur %s</li>');
 define('_MD_PICO_FORMMAIL_MSG_ERRORANONYMOUS','Erreur(s) dans le formulaire') ;

@@ -102,6 +102,14 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.55 (2007/10/03)
+- modified contentmanager that moderators can change poster,modifier
+- modified admin/extras (CSV etc.)
+- modified survey plugin can send mail if necessary
+- modified parsing types of "int" and "double"
+- fixed typo in PicoTextSanitizer (thx enhiro)
+- added a feature of custom validator for formprocessing system
+
 1.54 (2007/09/22) update the module
 - modified all contents will be hit by search even off-cache contents
 - modified the default value for content cache off
@@ -469,6 +477,14 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.55 (2007/10/03)
+- 投稿者・更新者を指定できるようにした
+- 拡張機能の改善(CSVフィールド等)
+- survey でも必要に応じてメール送信指定できるように仕様変更した
+- intやdoubleのValidationを強制変換から、エラーを表示するように仕様変更した
+- テキストサニタイザのメソッド名typoを修正 (thx enhiro)
+- カスタムValidator実装
 
 1.54 (2007/09/22) ※要モジュールアップデート
 - 本文キャッシュがOFFでも検索にひっかかるようにした

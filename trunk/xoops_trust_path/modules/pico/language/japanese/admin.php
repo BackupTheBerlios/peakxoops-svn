@@ -52,7 +52,7 @@ define('_MD_A_PICO_H2_EXTRAS','拡張機能');
 define('_MD_A_PICO_TH_ID','ID');
 define('_MD_A_PICO_TH_TYPE','TYPE');
 define('_MD_A_PICO_TH_SUMMARY','サマリ');
-define('_MD_A_PICO_LINK_POPUP','ポップアップ');
+define('_MD_A_PICO_LINK_DETAIL','詳細');
 define('_MD_A_PICO_TH_EXTRASACTIONS','アクション');
 define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','右端がチェックされた項目を:');
 define('_MD_A_PICO_BTN_CSVOUTPUT','CSV出力');

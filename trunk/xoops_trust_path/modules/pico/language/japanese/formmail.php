@@ -14,6 +14,7 @@ define('_MD_PICO_FORMMAIL_BLOCK_ERROR_END','</ul></div>') ;
 
 define('_MD_PICO_FORMMAIL_ERRFMT_MISSING_REQUIRED','<li>必須項目 %s に入力がありません</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_EMAIL','<li>%s のメールアドレス形式が正しくありません</li>') ;
+define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_NUMBER','<li>%s には数字のみを入力してください</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_GENERAL','<li>%s の形式が正しくありません</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_MISSING_SELECTED','<li>%s を選択してください</li>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_OPTION','<li>%s にあり得ない選択肢が選ばれています</li>') ;

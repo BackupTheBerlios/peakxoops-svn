@@ -393,7 +393,7 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		) ;
 	}
 
-	// created_time,modified_time,locked
+	// created_time,modified_time,poster_uid,modifier_uid,locked
 	if( $isadminormod ) {
 		$ret['specify_created_time'] = empty( $_POST['specify_created_time'] ) ? 0 : 1 ;
 		$ret['specify_modified_time'] = empty( $_POST['specify_modified_time'] ) ? 0 : 1 ;
@@ -408,6 +408,8 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
 		}
 		$ret['locked'] = empty( $_POST['locked'] ) ? 0 : 1 ;
+		if( ! empty( $_POST['poster_uid'] ) ) $ret['poster_uid'] = intval( $_POST['poster_uid'] ) ;
+		if( ! empty( $_POST['modifier_uid'] ) ) $ret['modifier_uid'] = intval( $_POST['modifier_uid'] ) ;
 	}
 
 	// HTML Purifier in Protector (only for PHP5)
@@ -466,7 +468,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	// do insert
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_uid='$uid',modifier_uid='$uid',poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_uid='$uid', modifier_uid='$uid', poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
 	pico_transact_reset_body_cached( $mydirname , $new_content_id ) ;
 
@@ -511,7 +513,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	// do update
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET $set $time4sql modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET modifier_uid='$uid', $set $time4sql modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	pico_transact_reset_body_cached( $mydirname , $content_id ) ;
 
 	// rebuild category tree

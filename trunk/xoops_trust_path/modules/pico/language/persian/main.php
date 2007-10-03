@@ -11,8 +11,8 @@
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:46
 define('_MD_PICO_CSVENCODING','UTF-8');
-define('_MD_PICO_ERR_LOCKEDCONTENT','The content is locked');
-define('_MD_PICO_LABEL_LOCKED','Lock (only moderators can edit/delete it)');
+define('_MD_PICO_ERR_LOCKEDCONTENT','این صفحه قفل است');
+define('_MD_PICO_LABEL_LOCKED','قفل (فقط مدیر میتواند  ویرایش / حذف کند)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
 define('_MD_PICO_WAITINGRELEASE','منتظر برای انتشار');
@@ -159,9 +159,9 @@ define('_MD_PICO_FILTERS_EVALDESC','It will be the parameter of eval() function'
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSTITLE','آزاد کردن کراکتر های HTML خاص');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSDESC','اگر شما از کد های BB استفاده میکنید .  ابتدا باید محل قرار گیری را مشخص کنید');
 define('_MD_PICO_FILTERS_TEXTWIKITITLE','PEAR TextWiki');
-define('_MD_PICO_FILTERS_TEXTWIKIDESC','Rendered by TextWiki rule');
+define('_MD_PICO_FILTERS_TEXTWIKIDESC','به وسیله دستور های TextWiki تحویل بده');
 define('_MD_PICO_FILTERS_XOOPSTPLTITLE','اسمارتی(زوپسTpl)');
-define('_MD_PICO_FILTERS_XOOPSTPLDESC','Rendered as a Smarty template');
+define('_MD_PICO_FILTERS_XOOPSTPLDESC','مثل تمپلیت های اسمارتی ارائه بده');
 define('_MD_PICO_FILTERS_NL2BRTITLE','خط جدید خودکار');
 define('_MD_PICO_FILTERS_NL2BRDESC','LF will be replaced into &lt;br /&gt;');
 define('_MD_PICO_FILTERS_SMILEYTITLE','لبخند ها');

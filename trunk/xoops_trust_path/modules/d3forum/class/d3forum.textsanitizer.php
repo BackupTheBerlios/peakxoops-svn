@@ -6,7 +6,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 {
 	var $nbsp = 0 ;
 
-	function MyAlbumTextSanitizer()
+	function D3forumTextSanitizerTextSanitizer()
 	{
 		parent::MyTextSanitizer() ;
 	}

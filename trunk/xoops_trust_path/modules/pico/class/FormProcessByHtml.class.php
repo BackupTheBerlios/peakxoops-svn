@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/FormProcessValidatorAbstract.class.php' ;
-
 class FormProcessByHtml
 {
 	var $fields = array() ;

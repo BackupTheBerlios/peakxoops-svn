@@ -6,7 +6,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 {
 	var $nbsp = 0 ;
 
-	function D3forumTextSanitizerTextSanitizer()
+	function D3forumTextSanitizer()
 	{
 		parent::MyTextSanitizer() ;
 	}

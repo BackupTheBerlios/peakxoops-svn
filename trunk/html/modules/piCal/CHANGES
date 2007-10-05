@@ -17,6 +17,8 @@ v.091 (2007-03-15)
 -- xpwiki (thx nao-pon) 0.91d
 - updated locales
 -- canada.php (thx lusher) 0.91e
+- added locales
+-- utf8_japan.php 0.91g
 
 v.090 (2007-03-12)
 - marked as stable
@@ -400,6 +402,8 @@ v.091 (2007-03-15)
 -- xpwiki (thx nao-pon) 0.91d
 - ロケール修正
 -- canada.php (thx lusher) 0.91e
+- ロケール追加
+-- utf8_japan.php 0.91g
 
 v.090 (2007-03-12)
 - 安定版への格上げ

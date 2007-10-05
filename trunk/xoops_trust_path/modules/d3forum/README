@@ -36,6 +36,7 @@ jidaikobo -template coding-
 - fixed a wrong error of "empty message" with a WYSIWYG editor
 - modified mysql.sql removing "NOT NULL" from text fields (thx moegiiro) 0.78a
 - fixed typo of method name in textsanitizer (thx enhiro) 0.78a
+- fixed typo in some templates (thx enhiro) 0.78b
 
 0.77 alpha (2007-09-27)
 - modified posts allowing HTML must be filtered by HTMLPurifier
@@ -198,6 +199,7 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 - WYSIWYGエディタがONだと「本文がありません」となってしまう不具合の修正
 - mysql.sql 内のtext NOT NULL,を修正 (thx moegiiro) 0.78a
 - テキストサニタイザのメソッド名typoを修正 (thx enhiro) 0.78a
+- テンプレートの細かなtypoを修正 (thx enhiro) 0.78b
 
 0.77 alpha (2007-09-27)
 - HTML許可時には無条件でHTMLPurifierを通過するようにした

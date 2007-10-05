@@ -4,7 +4,6 @@
 $colors = array(
 	'd3f_lines'					=> '#aaaaaa' ,
 	'd3f_bg'						=> '#ffffff' ,
-	'd3f_head'					=> '#000000' ,
 	'd3f_tree_indicator'			=> '#d0d0d0' ,
 	'd3f_bottom_tree_bg'			=> '#eeeeee' ,
 	'd3f_bottom_tree_current'		=> '#990000' ,
@@ -133,7 +132,7 @@ div.d3f_breadcrumbs{
 .d3f_head h2 a{
 	text-decoration		:none;}
 .d3f_head h2 a:link{color	:<{$color.d3f_head_link}>;}
-.d3f_head h2 a:active{olor	:<{$color.d3f_head_active}>;}
+.d3f_head h2 a:active{color	:<{$color.d3f_head_active}>;}
 .d3f_head h2 a:visited{color:<{$color.d3f_head_visited}>;}
 .d3f_head h2 a:hover{color	:<{$color.d3f_head_hover}>;}
 .d3f_head h2.invisible {

@@ -1,9 +1,7 @@
 <?php
 
 
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:46
-define('_MD_A_D3FORUM_H2_POSTHISTORIES','Histories of editing/deleting posts');
-define('_MD_A_D3FORUM_LINK_REFERDELETED','Deleted');
+
 
 define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocks/Permissions');
@@ -11,7 +9,7 @@ define('_MD_A_MYMENU_MYPREFERENCES','Préférences');
 
 // forum_access and category_access
 define('_MD_A_D3FORUM_LABEL_SELECTFORUM','Choisissez un forum');
-define('_MD_A_D3FORUM_LABEL_SELECTCATEGORY','Choisissez une categorie');
+define('_MD_A_D3FORUM_LABEL_SELECTCATEGORY','Choisissez une catégorie');
 define('_MD_A_D3FORUM_H2_GROUPPERMS','Permissions des groupes');
 define('_MD_A_D3FORUM_H2_USERPERMS','Permissions des utilisateurs');
 define('_MD_A_D3FORUM_TH_CAN_READ','Lire');
@@ -43,13 +41,14 @@ define('_MD_A_D3FORUM_LABEL_SELECTMODULE','Choississez le module');
 define('_MD_A_D3FORUM_BTN_DOIMPORT','Importez');
 define('_MD_A_D3FORUM_CONFIRM_DOIMPORT','Êtes-vous sûr?');
 define('_MD_A_D3FORUM_MSG_IMPORTDONE','Importé avec succès');
-define('_MD_A_D3FORUM_MSG_COMIMPORTDONE','Les commentaires de modules XOOPS sont importés comme commentaire-intégration');
+define('_MD_A_D3FORUM_MSG_COMIMPORTDONE','Les commentaires de modules XOOPS sont importés comme intégration-commentaires');
 define('_MD_A_D3FORUM_ERR_INVALIDMID','Vous avez spécifié un module à importer invalide');
 define('_MD_A_D3FORUM_ERR_SQLONIMPORT','Echec lors de l\'importation. Vous devez vérifier les versions de chaque module');
-define('_MD_A_D3FORUM_HELP_IMPORTFROM','Vous pouvez importer de newbb1,xhnewbb, et autres versions de d3forum.  Et vous devez savoir que ce n\'est pas une copie parfaite.
-En particulier, vous devriez vérifier des permissions. Vous devez également savoir que toutes les données dans ce module seront perdues quand vous exécutez l\'importation.');
-define('_MD_A_D3FORUM_HELP_COMIMPORTFROM','Les commentaires de XOOPS seront importés comme des contributions de d3forum. En outre vous devez permettre au dispositif d\'commenter-intégration
-de les employer. (en éditant les templates ou modifiez les préférences etc...)');
+define('_MD_A_D3FORUM_HELP_IMPORTFROM','Vous pouvez importer de newbb1, xhnewbb, et autres versions de d3forum.  Et vous devez savoir que ce n\'est pas une copie parfaite. Vous devriez vérifier, en particulier, les permissions. Vous devez également savoir que toutes les données dans ce module seront perdues lorsque vous exécutez l\'importation.');
+define('_MD_A_D3FORUM_HELP_COMIMPORTFROM','Les commentaires de XOOPS seront importés comme des contributions de d3forum. En outre vous devez permettre au dispositif d\'intégration-commenteraires de les employer (en éditant les templates ou modifiant les préférences etc...)');
 
+// post_histories
+define('_MD_A_D3FORUM_H2_POSTHISTORIES','Historique de l\'édition/suppression de messages');
+define('_MD_A_D3FORUM_LINK_REFERDELETED','Supprimé');
 
 ?>

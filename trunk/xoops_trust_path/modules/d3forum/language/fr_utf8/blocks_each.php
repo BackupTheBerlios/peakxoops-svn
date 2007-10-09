@@ -15,18 +15,18 @@ define( $constpref.'_LOADED' , 1 ) ;
 // definitions for displaying blocks 
 define($constpref."_FORUM","Forum");
 define($constpref."_TOPIC","Sujet");
-define($constpref."_REPLIES","Réponses");
+define($constpref."_REPLIES","RÃ©ponses");
 define($constpref."_VIEWS","Lectures");
 define($constpref."_VOTESCOUNT","Votes");
 define($constpref."_VOTESSUM","Points");
-define($constpref."_LASTPOST","Dernières contributions");
-define($constpref."_LASTUPDATED","Dérnières mises à jour");
+define($constpref."_LASTPOST","DerniÃ¨res contributions");
+define($constpref."_LASTUPDATED","DÃ©rniÃ¨res mises Ã  jour");
 define($constpref."_LINKTOSEARCH","Rechercher dans le forum");
-define($constpref."_LINKTOLISTCATEGORIES","Index Catégories");
+define($constpref."_LINKTOLISTCATEGORIES","Index CatÃ©gories");
 define($constpref."_LINKTOLISTFORUMS","Index Forum");
 define($constpref."_LINKTOLISTTOPICS","Index Sujet");
-define($constpref.'_ALT_UNSOLVED','Sujet Non résolu');
-define($constpref.'_ALT_MARKED','Sujet Marqué');
+define($constpref.'_ALT_UNSOLVED','Sujet Non rÃ©solu');
+define($constpref.'_ALT_MARKED','Sujet MarquÃ©');
 
 }
 

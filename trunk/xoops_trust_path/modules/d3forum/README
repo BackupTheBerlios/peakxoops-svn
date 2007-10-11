@@ -26,6 +26,13 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.80 beta (2007-10-11)
+- fixed Script Insertion in guest_url (thx kentaro)
+- updated language files
+-- french (thx gigamaster)
+- added language files
+-- fr_utf8 (thx gigamaster)
+
 0.78 alpha (2007-09-28) update this module
 - added a configuration of default_options
 - changed default meaning of solved (solved=0 must mean unsolved)
@@ -188,6 +195,8 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 ●変更履歴
 
+0.80 beta (2007-10-11)
+- ゲストURLのScriptInsertion修正 (thx kentaro)
 - 言語ファイル更新
 -- french (thx gigamaster)
 - 言語ファイル追加

@@ -226,6 +226,7 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 		} else {
 			$guest_trip = '' ;
 		}
+		$guest_url = preg_match( '#^https?\://#' , $guest_url ) ? $guest_url : '' ;
 		foreach( array('guest_name','guest_email','guest_url','guest_trip') as $key ) {
 			$set4sql .= ",$key='".addslashes($$key)."'" ;
 		}

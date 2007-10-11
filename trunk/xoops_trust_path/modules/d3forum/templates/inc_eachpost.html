@@ -69,7 +69,7 @@
 <{else}>
 	<{if $post.guest_url || $post.guest_trip}>
 	<{* <{$post.guest_email}> *}>
-	<{if $post.guest_url}><a href="<{$post.guest_url}>" title="<{$post.guest_url}>"><{$smarty.const._MD_D3FORUM_TH_GUESTURL}></a><{/if}>
+	<{* <{if $post.guest_url}><a href="<{$post.guest_url}>" title="<{$post.guest_url}>"><{$smarty.const._MD_D3FORUM_TH_GUESTURL}></a><{/if}> *}>
 	<{if $post.guest_trip}><{$smarty.const._MD_D3FORUM_TH_GUESTTRIP}>: <{$post.guest_trip}><{/if}>
 	<{/if}>
 <{/if}>

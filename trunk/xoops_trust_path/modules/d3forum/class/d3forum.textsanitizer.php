@@ -65,6 +65,14 @@ class D3forumTextSanitizer extends MyTextSanitizer
 	}
 
 	// override
+	function makeTboxUrl4Show( $text )
+	{
+		$text = $this->makeTboxData4Show( $text ) ;
+		if( preg_match( '#^https?\://#' , $text ) ) return $text ;
+		else return '' ;
+	}
+
+	// override
 	function makeTboxData4Edit( $text, $number_entity = 0 )
 	{
 		$text = $this->htmlSpecialChars( $text ) ;

@@ -55,7 +55,7 @@ function b_d3forum_list_forums_show( $options )
 		'lang_linktolisttopics' => constant($constpref.'_LINKTOLISTTOPICS') ,
 	) ;
 
-//	$cat4assign = array() ;
+	$cat4assign = array() ;
 //	$prev_cat_id = 0 ;
 	while( $forum_row = $db->fetchArray( $result ) ) {
 		$cat_id = intval( $forum_row['cat_id'] ) ;

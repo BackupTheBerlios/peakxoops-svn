@@ -1,6 +1,6 @@
 <?php
 
-function d3pipes_main_fetch_entries_main_aggr( $mydirname , &$errors )
+function d3pipes_main_fetch_entries_main_aggr( $mydirname , &$errors , $max_entries )
 {
 	global $xoopsModuleConfig ;
 
@@ -16,7 +16,7 @@ function d3pipes_main_fetch_entries_main_aggr( $mydirname , &$errors )
 	// Union object
 	$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $union_options ) ) ;
 	$union_obj->setModConfigs( $xoopsModuleConfig ) ;
-	$entries = $union_obj->execute( array() , $xoopsModuleConfig['index_total'] ) ;
+	$entries = $union_obj->execute( array() , $max_entries ) ;
 	$errors = $union_obj->getErrors() ;
 	return $entries ;
 }
@@ -38,7 +38,7 @@ function d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign = null 
 {
 	global $xoopsModule ;
 
-	return '<link rel="alternate" type="application/rss+xml" title="'.(empty($pipe4assign['name'])?$xoopsModule->getVar('name'):$pipe4assign['name']).' RSS" href="'.XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=xml&amp;style=rss20&amp;pipe_id='.$pipe_id.'" />' ;
+	return empty( $pipe4assign['main_rss'] ) && $pipe_id > 0 ? '' : '<link rel="alternate" type="application/rss+xml" title="'.(empty($pipe4assign['name'])?$xoopsModule->getVar('name'):$pipe4assign['name']).' RSS" href="'.XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=xml&amp;style=rss20&amp;pipe_id='.$pipe_id.'" />'."\n" ;
 }
 
 

@@ -42,11 +42,13 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
 
-		$result = $db->query( "SELECT clipping_id,highlight,weight,comments_count ,fetched_time,can_search,data FROM $clip_table WHERE pipe_id=$this->pipe_id AND can_search ORDER BY pubtime DESC,clipping_id DESC LIMIT ".max($this->entries_from_clip,$max_entries) ) ;
+		$result = $db->query( "SELECT clipping_id,highlight,weight,comments_count ,fetched_time,can_search,link,fingerprint,data FROM $clip_table WHERE pipe_id=$this->pipe_id AND can_search ORDER BY pubtime DESC,clipping_id DESC LIMIT ".max($this->entries_from_clip,$max_entries) ) ;
 
 		$entries = array() ;
-		while( list( $clipping_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $entry_serialized ) = $db->fetchRow( $result ) ) {
-			$entries[] = unserialize( $entry_serialized ) + array(
+		while( list( $clipping_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $link , $fingerprint , $entry_serialized ) = $db->fetchRow( $result ) ) {
+			$entries[] = array(
+				'link' => $link ,
+				'fingerprint' => $fingerprint ,
 				'clipping_id' => $clipping_id ,
 				'pipe_id' => $this->pipe_id ,
 				'clipping_highlight' => $highlight ,
@@ -54,7 +56,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 				'clipping_fetched_time' => $fetched_time ,
 				'comments_count' => $comments_count ,
 				'visible' => $visible ,
-			) ;
+			) + unserialize( $entry_serialized ) ;
 		}
 
 		return $entries ;
@@ -69,9 +71,11 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$clip_table = $db->prefix( $this->mydirname.'_clippings' ) ;
 
 		$clipping_id = intval( $clipping_id ) ;
-		list( $pipe_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,comments_count,fetched_time,can_search,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
+		list( $pipe_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $link , $fingerprint , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,comments_count,fetched_time,can_search,link,fingerprint,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
 
 		$clipping = array(
+			'link' => $link ,
+			'fingerprint' => $fingerprint ,
 			'clipping_id' => intval( $clipping_id ) ,
 			'pipe_id' => intval( $pipe_id ) ,
 			'clipping_highlight' => $highlight ,
@@ -82,7 +86,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		) ;
 
 		if( empty( $data_serialized ) || empty( $visible ) ) return $clipping ;
-		else return unserialize( $data_serialized ) + $clipping ;
+		else return $clipping + unserialize( $data_serialized ) ;
 	}
 
 

@@ -17,7 +17,11 @@
 	<{foreach from=$entries item="entry"}>
 		<item rdf:about="<{$entry.fingerprint|escape}>">
 			<title><{$entry.headline|escape}></title>
+			<{if $link_prefer == 'clipping' && $entry.clipping_id}>
+			<link><{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}></link>
+			<{else}>
 			<link><{$entry.link|escape}></link>
+			<{/if}>
 			<description><{$entry.description|escape}></description>
 			<dc:date><{"Y-m-d\TH:i:sO"|date:$entry.pubtime}></dc:date>
 		</item>

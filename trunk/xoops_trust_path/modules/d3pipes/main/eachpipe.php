@@ -18,7 +18,7 @@ if( empty( $pipe4assign['main_disp'] ) ) {
 }
 
 // parse the pipe once
-$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , 0x7fff /* No limit */ , $errors , $xoopsModuleConfig ) ;
+$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModuleConfig['entries_per_eachpipe'] , $errors , $xoopsModuleConfig ) ;
 
 // pagetitle & xoops_breadcrumbs
 $pagetitle4assign = empty( $pipe4assign['name'] ) ? _MD_D3PIPES_H2_EACHPIPE : $pipe4assign['name'] ;
@@ -39,7 +39,7 @@ $xoopsTpl->assign(
 		'pipe' => $pipe4assign ,
 		'entries' => $entries ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
-		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign ) . "\n" . d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign ) . d3pipes_main_get_link2maincss( $mydirname ) . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 

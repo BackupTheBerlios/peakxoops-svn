@@ -21,11 +21,11 @@ if( empty( $pipe4assign['main_disp'] ) ) {
 $pos = intval( @$_GET['pos'] ) ;
 $clipping_count = d3pipes_main_get_clipping_count_moduledb( $mydirname , $pipe_id ) ;
 require_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
-$pagenav = new XoopsPageNav( $clipping_count , $xoopsModuleConfig['entries_per_eachpipe'] , $pos , 'pos' , "page=cliplist&amp;pipe_id=$pipe_id" ) ;
+$pagenav = new XoopsPageNav( $clipping_count , $xoopsModuleConfig['entries_per_cliplist'] , $pos , 'pos' , "page=cliplist&amp;pipe_id=$pipe_id" ) ;
 $pagenav4assign = $pagenav->renderNav( 10 ) ;
 
 // entries from clipping
-$entries = d3pipes_main_get_clippings_moduledb( $mydirname , $pipe_id , $xoopsModuleConfig['entries_per_eachpipe'] , $pos ) ;
+$entries = d3pipes_main_get_clippings_moduledb( $mydirname , $pipe_id , $xoopsModuleConfig['entries_per_cliplist'] , $pos ) ;
 
 
 // pagetitle & xoops_breadcrumbs
@@ -48,7 +48,7 @@ $xoopsTpl->assign(
 		'pipe' => $pipe4assign ,
 		'entries' => $entries ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
-		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign ) . "\n" . d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign ) . d3pipes_main_get_link2maincss( $mydirname ) . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 

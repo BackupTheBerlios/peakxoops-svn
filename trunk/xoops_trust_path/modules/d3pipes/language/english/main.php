@@ -27,13 +27,14 @@ define('_MD_D3PIPES_N4J_UTF8TO','Normally, input internal encoding');
 define('_MD_D3PIPES_N4J_UTF8FROM','Normally, input the encoding of the XML');
 define('_MD_D3PIPES_N4J_FILTER','Input patterns/keywords to filter');
 define('_MD_D3PIPES_N4J_REASSIGN','Input rules for re-assignment');
-define('_MD_D3PIPES_N4J_UNION','Input numbers of pipes separated by comma(,)');
+define('_MD_D3PIPES_N4J_UNION','Input pipe_id:entries separated by comma(,).');
 
 define('_MD_D3PIPES_N4J_WRITEURL','Input URL');
 define('_MD_D3PIPES_N4J_WRITEPREG','Input regex by perl format');
 define('_MD_D3PIPES_N4J_WRITEPOSIX','Input regex by POSIX format');
 define('_MD_D3PIPES_N4J_CID','Category ID');
 define('_MD_D3PIPES_N4J_MAXENTRIES','Max entries');
+define('_MD_D3PIPES_N4J_EACHENTRIES','Entries a pipe');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','Entries from clippings');
 define('_MD_D3PIPES_N4J_CLIPLIFETIME','Lifetime of clippings (use preferences if blank)');
 define('_MD_D3PIPES_N4J_WITHDESCRIPTION','Get description also');

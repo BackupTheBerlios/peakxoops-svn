@@ -31,7 +31,10 @@ define($constpref.'_BNAME_SYNC','同期パイプ一覧ブロック') ;
 // configs
 define($constpref.'_INDEXTOTAL','モジュールトップで表示する最新ヘッドラインの総数');
 define($constpref.'_INDEXEACH','モジュールトップで表示する最新ヘッドラインに１パイプから引っ張ってくる最大数');
-define($constpref.'_ENTRIESAPIPE','切り抜き一覧表示やRSS/ATOMで表示するエントリ数');
+define($constpref.'_ENTRIESAPIPE','個々のパイプページで表示するエントリ数');
+define($constpref.'_ENTRIESAPAGE','各パイプの切り抜き一覧表示１ページに表示するエントリ数');
+define($constpref.'_ENTRIESARSS','各パイプのRSS/ATOMで出力するエントリ数');
+define($constpref.'_ENTRIESSMAP','サイトマップXML出力での最大エントリ数');
 define($constpref.'_ARCB_FETCHED','切り抜きを自動削除する日数（取得日ベース）');
 define($constpref.'_ARCB_FETCHEDDSC','エントリを切り抜きとして保存した日から何日で削除するかを指定します。自動削除しない場合は0を指定します。また、コメントやハイライト属性がついたコメントは削除されません。あえて削除する場合は切り抜き管理から明示的に削除してください。');
 define($constpref.'_INTERNALENC','内部エンコーディング');

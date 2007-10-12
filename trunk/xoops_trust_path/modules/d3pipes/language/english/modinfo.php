@@ -31,7 +31,10 @@ define($constpref.'_BNAME_SYNC','List entries (Sync)') ;
 // configs
 define($constpref.'_INDEXTOTAL','Total entries in the top of this module');
 define($constpref.'_INDEXEACH','Max entries from a pipe in the top of this module');
-define($constpref.'_ENTRIESAPIPE','Max entries a view/RSS of each pipes');
+define($constpref.'_ENTRIESAPIPE','Entries a view of each pipes');
+define($constpref.'_ENTRIESAPAGE','Entries a page in clipping list');
+define($constpref.'_ENTRIESARSS','Entries a RSS/Atom');
+define($constpref.'_ENTRIESSMAP','Entries of sitemap xml for google etc');
 define($constpref.'_ARCB_FETCHED','Auto expire by fetched time (days)');
 define($constpref.'_ARCB_FETCHEDDSC','Specify days clippings should be removed. 0 means disable auto-expire. Clippings with comment/highlight are never removed.');
 define($constpref.'_INTERNALENC','Internal encoding');

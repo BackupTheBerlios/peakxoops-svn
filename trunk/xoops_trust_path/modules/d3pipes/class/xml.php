@@ -81,7 +81,7 @@ class XML{
 		$this->stack    = array();
 		$this->parent   = &$this->document;
 		// return xml_parse(&$this->parser, &$data, true) ? $this->document : NULL; // GIJ
-		$ret = xml_parse($this->parser, $data, true) ? $this->document : NULL;
+		$ret = @xml_parse($this->parser, $data, true) ? $this->document : NULL;
 		return $ret ;
 	}
 	function open(&$parser, $tag, $attributes){

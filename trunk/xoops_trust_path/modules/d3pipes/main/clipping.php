@@ -37,7 +37,7 @@ $xoopsTpl->assign(
 		'clipping_id' => $clipping_id ,
 		'entry' => $clipping ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
-		'xoops_module_header' => d3pipes_main_get_link2maincss( $mydirname ) . "\n" . d3pipes_main_get_script2commonlib( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , $pipe_id , $pipe4assign ) . d3pipes_main_get_link2maincss( $mydirname ) . d3pipes_main_get_script2commonlib( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 

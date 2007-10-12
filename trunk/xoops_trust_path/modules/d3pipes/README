@@ -40,6 +40,15 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.57 2007-10-13
+- added sitemap xml
+- added configurations for entries count (eachpipe,cliplist,rss)
+- addded a RSS linked to clipping
+- fixed needless header for rss+xml (thx rockle)
+- fixed typo in clipping html (thx rockle)
+- fixed permission problem in update_cache.sh
+- modified update_cache.sh (Overwrite this file in ROOT side)
+
 0.56 2007-09-05
 - modified KeithXML extracting attributes of <item>
 - modified parser for RSS1.0 using rdf:about as fingerprint
@@ -224,6 +233,15 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.57 2007-10-13
+- google用sitemap出力機能の追加(サイトルートから出力する方法は検討中)
+- 個別パイプ・切り抜き一覧・RSSのそれぞれで、出力エントリ数を指定できるようにした
+- 切り抜きへリンクするRSSを出力できるようにした
+- 不要なrss+xmlヘッダをアサインしないようにした (thx rockle)
+- 切り抜き編集用のJSが管理者以外でも有効になっていたtypoを修正した (thx rockle)
+- update_cache.sh が作成するキャッシュのパーミッションを修正した
+- update_cache.sh を変更した（ROOT側のこのファイルだけ要更新）
 
 0.56 2007-09-05
 - KeithXMLで、<item>の属性を展開するようにした

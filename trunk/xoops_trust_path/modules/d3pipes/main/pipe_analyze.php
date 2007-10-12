@@ -22,7 +22,7 @@ if( $pipe4assign['joints'][0]['joint'] == 'fetch' ) {
 }
 
 // fetch entries
-$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModuleConfig['entries_per_eachpipe'] , $errors , $xoopsModuleConfig ) ;
+$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , 0x7fff /* No limit */ , $errors , $xoopsModuleConfig ) ;
 
 ob_start() ;
 var_dump( $entries ) ;

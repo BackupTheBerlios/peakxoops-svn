@@ -27,13 +27,14 @@ define('_MD_D3PIPES_N4J_UTF8TO','通常は、内部エンコーディングを�
 define('_MD_D3PIPES_N4J_UTF8FROM','通常は、XMLのエンコーディングを記入');
 define('_MD_D3PIPES_N4J_FILTER','正規表現など絞り込むためのパターンを記入');
 define('_MD_D3PIPES_N4J_REASSIGN','再割り当てのルールを記入');
-define('_MD_D3PIPES_N4J_UNION','統合するパイプ番号すべてをカンマ区切りで記入');
+define('_MD_D3PIPES_N4J_UNION','統合するパイプ番号をカンマで区切る(コロンで取得数個別指定も可)');
 
 define('_MD_D3PIPES_N4J_WRITEURL','URLを記入');
 define('_MD_D3PIPES_N4J_WRITEPREG','perl正規表現を記入');
 define('_MD_D3PIPES_N4J_WRITEPOSIX','POSIX正規表現を記入');
 define('_MD_D3PIPES_N4J_CID','カテゴリーID');
 define('_MD_D3PIPES_N4J_MAXENTRIES','最大件数');
+define('_MD_D3PIPES_N4J_EACHENTRIES','各パイプからの取得数');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','切抜きから次へ渡す最低エントリ数');
 define('_MD_D3PIPES_N4J_CLIPLIFETIME','切抜きの保存日数(空欄なら一般設定値)');
 define('_MD_D3PIPES_N4J_WITHDESCRIPTION','詳細情報も取得');

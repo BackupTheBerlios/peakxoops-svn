@@ -14,7 +14,7 @@ while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
 	$headpipes4assign[] = d3pipes_common_get_pipe4assign( $mydirname , intval( $pipe_id ) ) ;
 }
 
-$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors ) ;
+$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors , $xoopsModuleConfig['index_total'] ) ;
 
 // pagetitle & xoops_breadcrumbs
 $pagetitle4assign = $xoopsModule->getVar('name') ;
@@ -33,7 +33,7 @@ $xoopsTpl->assign(
 		'headpipes' => $headpipes4assign ,
 		'entries' => $entries ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
-		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , 0 ) . "\n" . d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
+		'xoops_module_header' => d3pipes_main_get_link2rss( $mydirname , 0 ) . d3pipes_main_get_link2maincss( $mydirname ) . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
 

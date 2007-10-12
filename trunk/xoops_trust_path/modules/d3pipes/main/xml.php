@@ -2,7 +2,11 @@
 
 require dirname(dirname(__FILE__)).'/include/common_prepend.inc.php' ;
 
-$rss_styles = array( 'rss20' , 'rss10' , 'atom' ) ;
+// GET
+$rss_styles = array( 'rss20' , 'rss10' , 'atom' , 'sitemap' ) ;
+$style = in_array( @$_GET['style'] , $rss_styles ) ? $_GET['style'] : $rss_styles[0] ;
+$max_entries = $style == 'sitemap' ? $xoopsModuleConfig['entries_per_sitemap'] : $xoopsModuleConfig['entries_per_rss'] ;
+$link_prefer = @$_GET['link'] == 'clipping' ? 'clipping' : 'original' ;
 
 // fetch pipe_id
 $pipe_id = intval( @$_GET['pipe_id'] ) ;
@@ -14,7 +18,7 @@ if( $pipe_id == 0 ) {
 		'name4xml' => htmlspecialchars( $xoopsConfig['sitename'] , ENT_QUOTES ) . ' - ' . $xoopsModule->getVar('name') ,
 		'lastfetch_time' => time() ,
 	) ;
-	$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors ) ;
+	$entries = d3pipes_main_fetch_entries_main_aggr( $mydirname , $errors , $max_entries ) ;
 } else {
 	// single pipe
 	$pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $pipe_id ) ;
@@ -23,7 +27,13 @@ if( $pipe_id == 0 ) {
 		exit ;
 	}
 	// fetch entries
-	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $xoopsModuleConfig['entries_per_eachpipe'] , $errors , $xoopsModuleConfig ) ;
+	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
+}
+
+// get lastmodified of all over of entries
+$entries_lastmodified = 0 ;
+foreach( $entries as $entry ) {
+	$entries_lastmodified = max( $entries_lastmodified , $entry['pubtime'] ) ;
 }
 
 // Utf8from object
@@ -44,7 +54,10 @@ $xoopsTpl->assign(
 		'errors' => $errors ,
 		'pipe' => $utf8from_obj->execute( $pipe4assign ) ,
 		'entries' => $utf8from_obj->execute( $entries ) ,
+		'entries_lastmodified' => $entries_lastmodified ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
+		'style' => $style ,
+		'link_prefer' => $link_prefer ,
 		'xoops_module_header' => d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)
 ) ;
@@ -52,7 +65,6 @@ $xoopsTpl->assign(
 if( function_exists( 'mb_http_output' ) ) mb_http_output( 'pass' ) ;
 header( 'Content-Type:text/xml; charset=utf-8' ) ;
 
-$style = in_array( @$_GET['style'] , $rss_styles ) ? $_GET['style'] : $rss_styles[0] ;
 $xoopsTpl->display( 'db:'.$mydirname.'_independent_'.$style.'.html' ) ;
 
 exit ;

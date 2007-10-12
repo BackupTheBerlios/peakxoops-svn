@@ -8,6 +8,9 @@
 - サイト内新着ウイザードの実装
 - JSON出力
 
+- 異なるモジュールインスタンスのパイプ同士のUnion
+- google sitemapを、サイトルートから出力するための方法…
+
 - ある程度、新d3forumが浸透した時点で、class/D3pipesD3commentContent.class.php を修正 ($this->getPostsCount() を使うようにする)
 
 

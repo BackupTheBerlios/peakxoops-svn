@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.56 ;
+$modversion['version'] = 0.57 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -101,6 +101,36 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 20 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'entries_per_cliplist' ,
+	'title'			=> $constpref.'_ENTRIESAPAGE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 20 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'entries_per_rss' ,
+	'title'			=> $constpref.'_ENTRIESARSS' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 20 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'entries_per_sitemap' ,
+	'title'			=> $constpref.'_ENTRIESSMAP' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1000 ,
 	'options'		=> array()
 ) ;
 

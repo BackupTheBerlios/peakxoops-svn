@@ -20,7 +20,11 @@
 		<category><{$entry.category}></category>
 		<title type='text'><{$entry.headline|escape}></title>
 		<content type='html'><{$entry.description|escape}></content>
+		<{if $link_prefer == 'clipping' && $entry.clipping_id}>
+		<link rel='alternate' type='text/html' href='<{$mod_url}>/index.php?page=clipping&amp;clipping_id=<{$entry.clipping_id}>'></link>
+		<{else}>
 		<link rel='alternate' type='text/html' href='<{$entry.link|escape}>'></link>
+		<{/if}>
 	</entry>
 	<{/foreach}>
 

@@ -133,6 +133,7 @@ if( isset( $_POST['contentman_preview'] ) ) {
 		'body_waiting' => htmlspecialchars( $content_row['body_waiting'] , ENT_QUOTES ) ,
 		'filters' => htmlspecialchars( $content_row['filters'] , ENT_QUOTES ) ,
 		'filter_infos' => pico_main_get_filter_infos( $content_row['filters'] , $category4assign['isadminormod'] ) ,
+		'modifier_uid' => $uid ,
 	) ;
 	$content4assign = $content4edit + $content4assign + $content_row ;
 }

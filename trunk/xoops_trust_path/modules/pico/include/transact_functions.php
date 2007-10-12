@@ -408,8 +408,8 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
 		}
 		$ret['locked'] = empty( $_POST['locked'] ) ? 0 : 1 ;
-		if( ! empty( $_POST['poster_uid'] ) ) $ret['poster_uid'] = intval( $_POST['poster_uid'] ) ;
-		if( ! empty( $_POST['modifier_uid'] ) ) $ret['modifier_uid'] = intval( $_POST['modifier_uid'] ) ;
+		if( ! empty( $_POST['poster_uid'] ) ) $ret['poster_uid'] = pico_main_get_uid( $_POST['poster_uid'] ) ;
+		if( ! empty( $_POST['modifier_uid'] ) ) $ret['modifier_uid'] = pico_main_get_uid( $_POST['modifier_uid'] ) ;
 	}
 
 	// HTML Purifier in Protector (only for PHP5)
@@ -433,6 +433,25 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 	}
 
 	return $ret ;
+}
+
+
+// get uid from free form (numeric=uid, not numeric=uname)
+function pico_main_get_uid( $text )
+{
+	$user_handler =& xoops_gethandler( 'user' ) ;
+
+	$text = trim( $text ) ;
+	if( is_numeric( $text ) ) {
+		$uid = intval( $text ) ;
+		$user =& $user_handler->get( $uid ) ;
+		if( is_object( $user ) ) return $uid ;
+		else return '' ;
+	} else {
+		$users =& $user_handler->getObjects( new Criteria( 'uname' , addslashes( $text ) ) ) ; // ???
+		if( is_object( @$users[0] ) ) return $users[0]->getVar('uid') ;
+		else return '' ;
+	}
 }
 
 
@@ -468,7 +487,8 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	// do insert
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_uid='$uid', modifier_uid='$uid', poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	$sql = "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_uid='$uid', modifier_uid='$uid', poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ;
+	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
 	pico_transact_reset_body_cached( $mydirname , $new_content_id ) ;
 
@@ -489,8 +509,8 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
 	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
-	// only adminormod can set htmlheader
 	if( ! $isadminormod ) {
+		// only adminormod can set htmlheader
 		$requests['htmlheader_waiting'] = $requests['htmlheader'] ;
 		$ignore_requests[] = 'htmlheader' ;
 	}
@@ -513,7 +533,8 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	// do update
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET modifier_uid='$uid', $set $time4sql modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	$sql = "UPDATE ".$db->prefix($mydirname."_contents")." SET modifier_uid='$uid', $set $time4sql modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ;
+	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	pico_transact_reset_body_cached( $mydirname , $content_id ) ;
 
 	// rebuild category tree

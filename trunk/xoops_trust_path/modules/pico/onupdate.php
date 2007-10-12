@@ -73,6 +73,11 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_content_extras")." ( content_extra_id int(10) unsigned NOT NULL auto_increment, content_id int(10) unsigned NOT NULL default 0, extra_type varchar(255) NOT NULL default '', created_time int(10) NOT NULL default 0, modified_time int(10) NOT NULL default 0, data mediumtext, PRIMARY KEY (content_extra_id), KEY (content_id), KEY (extra_type), KEY (created_time) ) TYPE=MyISAM" ) ;
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." ADD `locked` tinyint(1) NOT NULL default 0 AFTER subject_waiting, ADD `redundants` text AFTER filters" ) ;
 	}
+	$check_sql = "SHOW CREATE TABLE ".$db->prefix($mydirname."_content_histories") ;
+	list( , $create_sql ) = $db->fetchRow( ( $db->queryF( $check_sql ) ) ) ;
+	if( stristr( $create_sql , '`body` text' ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_content_histories")." MODIFY `htmlheader` mediumtext, MODIFY `body` mediumtext" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

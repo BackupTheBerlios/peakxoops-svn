@@ -157,7 +157,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><{$smarty.const._MD_PICO_CREATED}></th>
 			<td class="even">
-				<{$content_base.poster_uname}>
+				<{$content_base.poster_uname}>(<{$content_base.poster_uid}>)
 				<{if $category.isadminormod && $page == 'contentmanager'}>
 					<input type="text" name="poster_uid" id="poster_uid" size="4" value="<{$content.poster_uid}>" />
 				<{/if}>
@@ -177,7 +177,7 @@
 		<tr valign="top" align="left">
 			<th class="head"><{$smarty.const._MD_PICO_MODIFIED}></th>
 			<td class="even">
-				<{$content_base.modifier_uname}>
+				<{$content_base.modifier_uname}>(<{$content_base.modifier_uid}>)
 				<{if $category.isadminormod && $page == 'contentmanager'}>
 					<input type="text" name="modifier_uid" id="modifier_uid" size="4" value="<{$content.modifier_uid}>" />
 				<{/if}>

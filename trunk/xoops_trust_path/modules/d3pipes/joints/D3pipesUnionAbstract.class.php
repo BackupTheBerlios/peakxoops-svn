@@ -16,6 +16,7 @@ class D3pipesUnionAbstract extends D3pipesJointAbstract {
 		$this->pipe_id = intval( $pipe_id ) ;
 		if( trim( $options[0] ) == '' ) $union_idnums = array() ;
 		else $union_idnums = array_map( 'trim' , explode( ',' , $options[0] ) ) ;
+		if( empty( $options[1] ) ) $options[1] = 10 ;
 
 		foreach( $union_idnums as $idnum ) {
 			@list( $pipe_id , $num ) = explode( ':' , $idnum ) ;

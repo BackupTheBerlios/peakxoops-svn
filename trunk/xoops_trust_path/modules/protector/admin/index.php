@@ -25,12 +25,12 @@ $conf = $protector->getConf() ;
 
 if( ! empty( $_POST['action'] ) ) {
 
-	if( $_POST['action'] == 'update_ips' ) {
-		// Ticket check
-		if ( ! $xoopsGTicket->check( true , 'protector_admin' ) ) {
-			redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
-		}
+	// Ticket check
+	if ( ! $xoopsGTicket->check( true , 'protector_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
 
+	if( $_POST['action'] == 'update_ips' ) {
 		$error_msg = '' ;
 
 		$lines = empty( $_POST['bad_ips'] ) ? array() : explode( "\n" , trim( $_POST['bad_ips'] ) ) ;
@@ -62,16 +62,33 @@ if( ! empty( $_POST['action'] ) ) {
 		exit ;
 
 	} else if( $_POST['action'] == 'delete' && isset( $_POST['ids'] ) && is_array( $_POST['ids'] ) ) {
-		// Ticket check
-		if ( ! $xoopsGTicket->check( true , 'protector_admin' ) ) {
-			redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
-		}
-
-		// remove records
+		// remove selected records
 		foreach( $_POST['ids'] as $lid ) {
 			$lid = intval( $lid ) ;
 			$db->query( "DELETE FROM $log_table WHERE lid='$lid'" ) ;
 		}
+		redirect_header( "index.php" , 2 , _AM_MSG_REMOVED ) ;
+		exit ;
+
+	} else if( $_POST['action'] == 'deleteall' ) {
+		// remove all records
+		$db->query( "DELETE FROM $log_table" ) ;
+		redirect_header( "index.php" , 2 , _AM_MSG_REMOVED ) ;
+		exit ;
+
+	} else if( $_POST['action'] == 'compactlog' ) {
+		// compactize records (removing duplicated records (ip,type)
+		$result = $db->query( "SELECT `lid`,`ip`,`type` FROM $log_table ORDER BY lid DESC" ) ;
+		$buf = array() ;
+		$ids = array() ;
+		while( list( $lid , $ip , $type ) = $db->fetchRow( $result ) ) {
+			if( isset( $buf[ $ip . $type ] ) ) {
+				$ids[] = $lid ;
+			} else {
+				$buf[ $ip . $type ] = true ;
+			}
+		}
+		$db->query( "DELETE FROM $log_table WHERE lid IN (".implode(',',$ids).")" ) ;
 		redirect_header( "index.php" , 2 , _AM_MSG_REMOVED ) ;
 		exit ;
 	}
@@ -174,6 +191,7 @@ echo "
     <tr>
       <td align='left'>
         <select name='num' onchange='submit();'>$num_options</select>
+        <input type='submit' value='"._SUBMIT."'>
       </td>
       <td align='right'>
         $nav_html
@@ -233,6 +251,11 @@ echo "
     <td colspan='8' align='left'>"._AM_LABEL_REMOVE."<input type='button' value='"._AM_BUTTON_REMOVE."' onclick='if(confirm(\""._AM_JS_REMOVECONFIRM."\")){document.MainForm.action.value=\"delete\"; submit();}' /></td>
   </tr>
 </table>
+<div align='right'>
+"._AM_LABEL_COMPACTLOG."<input type='button' value='"._AM_BUTTON_COMPACTLOG."' onclick='if(confirm(\""._AM_JS_COMPACTLOGCONFIRM."\")){document.MainForm.action.value=\"compactlog\"; submit();}' />
+&nbsp;
+"._AM_LABEL_REMOVEALL."<input type='button' value='"._AM_BUTTON_REMOVEALL."' onclick='if(confirm(\""._AM_JS_REMOVEALLCONFIRM."\")){document.MainForm.action.value=\"deleteall\"; submit();}' />
+</div>
 </form>
 </td></tr></table>
 " ;

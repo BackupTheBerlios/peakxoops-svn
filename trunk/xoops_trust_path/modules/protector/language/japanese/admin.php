@@ -17,6 +17,12 @@ define( "_AM_TH_BADIPS" , '拒否IPリスト<br /><br /><span style="font-weight:norm
 
 define( "_AM_TH_GROUP1IPS" , '管理者グループ(1)の許可IP<br /><br /><span style="font-weight:normal;">１行１IPアドレスで記述してください（前方一致）。<br />192.168. とすれば、192.168.*からのみ管理者になれます。空欄なら全許可。</span>' ) ;
 
+define( "_AM_LABEL_COMPACTLOG" , "ログをコンパクト化する" ) ;
+define( "_AM_BUTTON_COMPACTLOG" , "コンパクト化実行" ) ;
+define( "_AM_JS_COMPACTLOGCONFIRM" , "IPと種別の重複したレコードを削除します" ) ;
+define( "_AM_LABEL_REMOVEALL" , "全レコードを削除する:" ) ;
+define( "_AM_BUTTON_REMOVEALL" , "全削除実行" ) ;
+define( "_AM_JS_REMOVEALLCONFIRM" , "ログを無条件で削除します。本当によろしいですか？" ) ;
 define( "_AM_LABEL_REMOVE" , "チェックしたレコードを削除する:" ) ;
 define( "_AM_BUTTON_REMOVE" , "削除実行" ) ;
 define( "_AM_JS_REMOVECONFIRM" , "本当に削除してよろしいですか？" ) ;

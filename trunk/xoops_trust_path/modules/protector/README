@@ -123,8 +123,11 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.15 beta (2007/10/18)
+- added "compact log"
+- added "remove all log"
 - added language files
--- fr_utf8 (gigamaster)
+-- fr_utf8 (thx gigamaster)
 
 3.14 beta (2007/09/17)
 - imported HTMLPurifier (special thx! Edward Z. Yang) PHP5 only
@@ -344,8 +347,11 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 
 ¡üÊÑ¹¹ÍúÎò
 
+3.15 beta (2007/10/18)
+- ¥í¥°¤Î¥³¥ó¥Ñ¥¯¥È²½ÄÉ²Ã
+- ¥í¥°¤ÎÁ´ºï½üÄÉ²Ã
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
--- fr_utf8 (gigamaster)
+-- fr_utf8 (thx gigamaster)
 
 3.14 beta (2007/09/17)
 - HTMLPurifierÆ³Æş (special thx! Edward Z. Yang) ¢¨PHP4¤Ç¤Ï¤Ş¤È¤â¤ËÆ°¤­¤Ş¤»¤ó

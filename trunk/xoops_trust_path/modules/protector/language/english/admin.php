@@ -17,6 +17,12 @@ define( "_AM_TH_BADIPS" , 'Bad IPs<br /><br /><span style="font-weight:normal;">
 
 define( "_AM_TH_GROUP1IPS" , 'Allowed IPs for Group=1<br /><br /><span style="font-weight:normal;">Write each IP a line.<br />192.168. means 192.168.*<br />blank means all IPs are allowed</span>' ) ;
 
+define( "_AM_LABEL_COMPACTLOG" , "Compact log" ) ;
+define( "_AM_BUTTON_COMPACTLOG" , "Compact it!" ) ;
+define( "_AM_JS_COMPACTLOGCONFIRM" , "Duplicated (IP,Type) records will be removed" ) ;
+define( "_AM_LABEL_REMOVEALL" , "Remove all records" ) ;
+define( "_AM_BUTTON_REMOVEALL" , "Remove all!" ) ;
+define( "_AM_JS_REMOVEALLCONFIRM" , "All logs are removed absolutely. Are you really OK?" ) ;
 define( "_AM_LABEL_REMOVE" , "Remove the records checked:" ) ;
 define( "_AM_BUTTON_REMOVE" , "Remove!" ) ;
 define( "_AM_JS_REMOVECONFIRM" , "Remove OK?" ) ;

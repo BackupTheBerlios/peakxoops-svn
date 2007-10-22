@@ -24,7 +24,7 @@ if( ! empty( $_POST['group_update'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id AND groupid>0" ) ;
+	$db->queryF( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id AND groupid>0" ) ;
 	$result = $db->query( "SELECT groupid FROM ".$db->prefix("groups") ) ;
 	while( list( $gid ) = $db->fetchRow( $result ) ) {
 		if( ! empty( $_POST['can_read'][$gid] ) ) {
@@ -32,7 +32,7 @@ if( ! empty( $_POST['group_update'] ) ) {
 			foreach( $pico_category_permissions as $perm_name ) {
 				$perms[$perm_name] = empty( $_POST[$perm_name][$gid] ) ? 0 : 1 ;
 			}
-			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,groupid,permissions) VALUES ($cat_id,$gid,'".mysql_real_escape_string(serialize($perms))."')" ) ;
+			$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,groupid,permissions) VALUES ($cat_id,$gid,'".mysql_real_escape_string(serialize($perms))."')" ) ;
 		}
 	}
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_PICO_MSG_UPDATED ) ;
@@ -44,7 +44,7 @@ if( ! empty( $_POST['user_update'] ) ) {
 	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
-	$db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id AND uid>0" ) ;
+	$db->queryF( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id AND uid>0" ) ;
 
 	if( is_array( @$_POST['can_read'] ) ) foreach( $_POST['can_read'] as $uid => $can_read ) {
 		$uid = intval( $uid ) ;
@@ -53,7 +53,7 @@ if( ! empty( $_POST['user_update'] ) ) {
 			foreach( $pico_category_permissions as $perm_name ) {
 				$perms[$perm_name] = empty( $_POST[$perm_name][$uid] ) ? 0 : 1 ;
 			}
-			$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,uid,permissions) VALUES ($cat_id,$uid,'".mysql_real_escape_string(serialize($perms))."')" ) ;
+			$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,uid,permissions) VALUES ($cat_id,$uid,'".mysql_real_escape_string(serialize($perms))."')" ) ;
 		}
 	}
 	
@@ -76,7 +76,7 @@ if( ! empty( $_POST['user_update'] ) ) {
 		foreach( $pico_category_permissions as $perm_name ) {
 			$perms[$perm_name] = empty( $_POST['new_'.$perm_name][$i] ) ? 0 : 1 ;
 		}
-		$db->query( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,uid,permissions) VALUES ($cat_id,$uid,'".mysql_real_escape_string(serialize($perms))."')" ) ;
+		$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,uid,permissions) VALUES ($cat_id,$uid,'".mysql_real_escape_string(serialize($perms))."')" ) ;
 	}
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_PICO_MSG_UPDATED ) ;

@@ -80,7 +80,7 @@ if( empty( $xoopsOption['template_main'] ) ) {
 	$pagetitle4assign = $content4assign['subject'] ;
 	$xoops_breadcrumbs[] = array( 'name' => $content4assign['subject'] ) ;
 	// count up 'viewed'
-	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET viewed=viewed+1 WHERE content_id='$content_id'" ) ;
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET viewed=viewed+1 WHERE content_id='$content_id' AND modifier_ip<>'".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."'" ) ;
 }
 
 

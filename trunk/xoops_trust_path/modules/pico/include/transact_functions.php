@@ -461,8 +461,10 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
+	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
+	$requests += array( 'poster_uid' => $uid , 'modifier_uid' => $uid ) ;
 	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
 	// only adminormod can set htmlheader
@@ -486,8 +488,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	if( empty( $requests['modified_time'] ) ) $time4sql .= "modified_time=UNIX_TIMESTAMP()," ;
 
 	// do insert
-	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	$sql = "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_uid='$uid', modifier_uid='$uid', poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ;
+	$sql = "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ;
 	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 	$new_content_id = $db->getInsertId() ;
 	pico_transact_reset_body_cached( $mydirname , $new_content_id ) ;

@@ -102,6 +102,11 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.56 (2007/10/23)
+- modified the viewed counter checks IP is different from modifier's IP
+- changed the policy checking referer disabled
+- fixed "save as" does not work (thx PhotoSiteLinks)
+
 1.55 (2007/10/03)
 - modified contentmanager that moderators can change poster,modifier
 - modified admin/extras (CSV etc.)
@@ -479,6 +484,10 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.56 (2007/10/23)
+- 最終修正者IPと同じならカウンターをアップしないようにしてみた
+- GTicketが有効ならリファラーOFFでも極力更新するようポリシー変更
+- 別レコードとして保存が効いていなかったバグを修正 (thx PhotoSiteLinks)
 
 1.55 (2007/10/03)
 - 投稿者・更新者を指定できるようにした

@@ -32,6 +32,8 @@ jidaikobo -template coding-
 -- french (thx gigamaster)
 - added language files
 -- fr_utf8 (thx gigamaster)
+- modified [ siteimg] is displayed as internal image (thx ask35) 0.80a
+- fixed {TOPIC_TITLE} is not assigned (thx ask35) 0.80a
 
 0.78 alpha (2007-09-28) update this module
 - added a configuration of default_options
@@ -201,6 +203,8 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 -- french (thx gigamaster)
 - 言語ファイル追加
 -- fr_utf8 (thx gigamaster)
+- 外部画像表示がOFFでも[ siteimg]が表示されるように変更 (thx ask35) 0.80a
+- {TOPIC_TITLE} がアサインされていなかったのを修正 (thx ask35) 0.80a
 
 0.78 alpha (2007-09-28) 要モジュールアップデート
 - 投稿オプションの初期値を追加した

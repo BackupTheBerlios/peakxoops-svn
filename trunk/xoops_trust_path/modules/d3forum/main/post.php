@@ -334,7 +334,7 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 		'POST_TITLE' => $subject ,
 		'POST_BODY' => $message ,
 		'POST_URL' => XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" ,
-		'TOPIC_TITLE' => @$topic_row['topic_title'] ,
+		'TOPIC_TITLE' => empty( $topic_row ) ? $subject : $topic_row['topic_title'] ,
 		'TOPIC_URL' => XOOPS_URL."/modules/$mydirname/index.php?topic_id=$topic_id" ,
 		'FORUM_TITLE' => $forum_row['forum_title'] ,
 		'FORUM_URL' => XOOPS_URL."/modules/$mydirname/index.php?forum_id=$forum_id" ,

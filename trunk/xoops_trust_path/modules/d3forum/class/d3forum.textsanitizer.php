@@ -118,14 +118,8 @@ class D3forumTextSanitizer extends MyTextSanitizer
 		// [siteimg]
 		$patterns[] = "/\[siteimg align=(['\"]?)(left|center|right)\\1]([^\"\(\)\?\&'<>]*)\[\/siteimg\]/sU";
 		$patterns[] = "/\[siteimg]([^\"\(\)\?\&'<>]*)\[\/siteimg\]/sU";
-		if( $image ) {
-			$replacements[] = '<img src="'.XOOPS_URL.'/\\3" align="\\2" alt="" />';
-	
-			$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
-		} else {
-			$replacements[] = '<a href"'.XOOPS_URL.'/\\3" target="_blank">'.XOOPS_URL.'/\\3</a>';
-			$replacements[] = '<a href"'.XOOPS_URL.'/\\1" target="_blank">'.XOOPS_URL.'/\\1</a>';
-		}
+		$replacements[] = '<img src="'.XOOPS_URL.'/\\3" align="\\2" alt="" />';
+		$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
 
 		// [1.1.3.1] etc.
 		$patterns[] = '/\[(1(\.\d)*)]/' ;

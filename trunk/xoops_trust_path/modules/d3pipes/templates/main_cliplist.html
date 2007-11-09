@@ -24,6 +24,10 @@
 	<p><a href="<{$pipe.url}>"><{$pipe.url}></a></p>
 	<{/if}>
 
+	<{if $pipe.description}>
+	<div class="d3pipes_description"><{$pipe.description}></div>
+	<{/if}>
+
 	<div class="clipping_pagenav"><{$clipping_pagenav}></div>
 
 	<{include file="db:`$mydirname`_inc_entries.html"}>

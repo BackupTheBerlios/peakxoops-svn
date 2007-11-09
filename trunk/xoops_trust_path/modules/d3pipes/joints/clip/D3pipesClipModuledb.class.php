@@ -73,6 +73,8 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$clipping_id = intval( $clipping_id ) ;
 		list( $pipe_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $link , $fingerprint , $data_serialized ) = $db->fetchRow( $db->query( "SELECT pipe_id,highlight,weight,comments_count,fetched_time,can_search,link,fingerprint,data FROM $clip_table WHERE clipping_id=$clipping_id" ) ) ;
 
+		if( empty( $pipe_id ) ) return false ;
+
 		$clipping = array(
 			'link' => $link ,
 			'fingerprint' => $fingerprint ,

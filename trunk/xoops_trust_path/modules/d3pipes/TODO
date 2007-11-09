@@ -14,6 +14,8 @@
 - ある程度、新d3forumが浸透した時点で、class/D3pipesD3commentContent.class.php を修正 ($this->getPostsCount() を使うようにする)
 
 
+- entry.pipe のアサインをどうするか
+
 
 <link rel="alternate" type="application/rss+xml" title="<{$site_name}>" href="../backend.php" />
 この行の修正

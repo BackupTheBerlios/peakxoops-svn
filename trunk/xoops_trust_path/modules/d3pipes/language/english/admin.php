@@ -20,6 +20,7 @@ define('_MD_A_D3PIPES_TH_PIPETYPE','Type');
 define('_MD_A_D3PIPES_TH_PIPENAME','Name');
 define('_MD_A_D3PIPES_TH_PIPEURL','URL');
 define('_MD_A_D3PIPES_TH_PIPEIMAGE','Image');
+define('_MD_A_D3PIPES_TH_PIPEDESCRIPTION','Desc');
 define('_MD_A_D3PIPES_TH_PIPEWEIGHT','Weight');
 define('_MD_A_D3PIPES_TH_MAINDISP','DISP');
 define('_MD_A_D3PIPES_TITLE_MAINDISP','can be displayed as a part of main');

@@ -24,6 +24,10 @@
 	<p><a href="<{$pipe.url}>"><{$pipe.url}></a></p>
 	<{/if}>
 
+	<{if $pipe.description}>
+	<div class="d3pipes_description"><{$pipe.description}></div>
+	<{/if}>
+
 	<{if $clipping_count > 0}>
 		<div class="d3pipes_link_cliplist"><a href="<{$mod_url}>/index.php?page=cliplist&amp;pipe_id=<{$pipe.id}>"><{$clipping_count|string_format:$smarty.const._MD_D3PIPES_FMT_LINKTOCLIPLIST}></a></div>
 	<{/if}>

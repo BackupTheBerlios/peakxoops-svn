@@ -21,13 +21,16 @@
 	<!-- pipe properties -->
 	<div align="left" class="head" style="margin: 12px;">
 		<p>
-		<{$smarty.const._MD_A_D3PIPES_TH_PIPENAME}>: <input type="text" name="name" value="<{$pipe.name4xml}>" size="40" />
+		<label for="pipename"><{$smarty.const._MD_A_D3PIPES_TH_PIPENAME}></label>: <input type="text" name="name" id="pipename" value="<{$pipe.name4xml}>" size="40" />
 		</p>
 		<p>
-		<{$smarty.const._MD_A_D3PIPES_TH_PIPEURL}>: <input type="text" name="url" value="<{$pipe.url4xml}>" size="60" />
+		<label for="pipeurl"><{$smarty.const._MD_A_D3PIPES_TH_PIPEURL}></label>: <input type="text" name="url" id="pipeurl" value="<{$pipe.url4xml}>" size="60" />
 		</p>
 		<p>
-		<{$smarty.const._MD_A_D3PIPES_TH_PIPEIMAGE}>: <input type="text" name="image" value="<{$pipe.image4xml}>" size="60" />
+		<label for="pipeimage"><{$smarty.const._MD_A_D3PIPES_TH_PIPEIMAGE}></label>: <input type="text" name="image" id="pipeimage" value="<{$pipe.image4xml}>" size="60" />
+		</p>
+		<p>
+		<label for="pipedescription"><{$smarty.const._MD_A_D3PIPES_TH_PIPEDESCRIPTION}></label>: <textarea name="description" id="pipedescription" style="width:480px; height:80px;"><{$pipe.description_raw|escape}></textarea>
 		</p>
 	</div>
 

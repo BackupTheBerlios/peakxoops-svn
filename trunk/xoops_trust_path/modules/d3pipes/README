@@ -40,6 +40,15 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.58 2007-11-10
+- fixed invalid clipping_id does not make redirect (thx Nobelium)
+- added description for each pipes
+- fixed wrong assign rss+xml in clipping (thx rockel)
+- added language files
+-- persian (thx voltan and irmtfan)
+-- french (thx gigamaster)
+-- fr_utf8 (thx gigamaster)
+
 0.57 2007-10-13
 - added sitemap xml
 - added configurations for entries count (eachpipe,cliplist,rss)
@@ -234,6 +243,15 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.58 2007-11-10
+- 切り抜きへの不正なアクセスがリダイレクトされていなかったのを修正 (thx Nobelium)
+- パイプに詳細フィールドを追加
+- 不要なrss+xmlヘッダが切り抜き詳細で表示されていたのを修正 (thx rockel)
+- 言語ファイル追加
+-- persian (thx voltan and irmtfan)
+-- french (thx gigamaster)
+-- fr_utf8 (thx gigamaster)
 
 0.57 2007-10-13
 - google用sitemap出力機能の追加(サイトルートから出力する方法は検討中)

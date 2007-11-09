@@ -64,14 +64,14 @@ if( ( ! empty( $_POST['do_update'] ) || ! empty( $_POST['do_saveas'] ) ) && is_a
 	}
 
 	// make sql
-	$set4sql = "`joints`='".mysql_real_escape_string(serialize(array_values($joints)))."',name='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['name']))."',url='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['url']))."',image='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['image']))."'" ;
+	$set4sql = "`joints`='".mysql_real_escape_string(serialize(array_values($joints)))."',name='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['name']))."',url='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['url']))."',image='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['image']))."',description='".mysql_real_escape_string($myts->stripSlashesGPC(@$_POST['description']))."'" ;
 	
 	$pipe_id = intval( @$_POST['pipe_id'] ) ;
 	if( $pipe_id == 0 || ! empty( $_POST['do_saveas'] ) ) {
-		$db->query( "INSERT INTO ".$db->prefix($mydirname."_pipes")." (created_time) VALUES (UNIX_TIMESTAMP())" ) ;
+		$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_pipes")." (created_time) VALUES (UNIX_TIMESTAMP())" ) ;
 		$pipe_id = $db->getInsertId() ;
 	}
-	$db->query( "UPDATE ".$db->prefix($mydirname."_pipes")." SET ".$set4sql.",modified_time=UNIX_TIMESTAMP(),lastfetch_time=0 WHERE `pipe_id`=$pipe_id" ) ;
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_pipes")." SET ".$set4sql.",modified_time=UNIX_TIMESTAMP(),lastfetch_time=0 WHERE `pipe_id`=$pipe_id" ) ;
 
 	// remove cache
 	d3pipes_common_delete_all_cache( $mydirname , $pipe_id ) ;
@@ -87,7 +87,7 @@ if( ! empty( $_POST['do_delete'] ) ) {
 	}
 
 	$pipe_id = intval( @$_POST['pipe_id'] ) ;
-	$db->query( "DELETE FROM ".$db->prefix($mydirname."_pipes")." WHERE pipe_id=$pipe_id" ) ;
+	$db->queryF( "DELETE FROM ".$db->prefix($mydirname."_pipes")." WHERE pipe_id=$pipe_id" ) ;
 
 	// remove cache
 	d3pipes_common_delete_all_cache( $mydirname , $pipe_id ) ;
@@ -110,7 +110,7 @@ if( ! empty( $_POST['do_batchupdate'] ) ) {
 		foreach( array( 'main_disp' , 'main_list' , 'main_aggr' , 'main_rss' , 'block_disp' , 'in_submenu' ) as $key ) {
 			$flags4sql .= ",`$key`=".( empty( $_POST[$key][$pipe_id] ) ? '0' : '1' ) ;
 		}
-		$db->query( "UPDATE ".$db->prefix($mydirname."_pipes")." SET name='$name4sql',weight='$weight4sql' $flags4sql WHERE pipe_id=$pipe_id" ) ;
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_pipes")." SET name='$name4sql',weight='$weight4sql' $flags4sql WHERE pipe_id=$pipe_id" ) ;
 	}
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=pipe" , 3 , _MD_A_D3PIPES_MSG_PIPEUPDATED ) ;

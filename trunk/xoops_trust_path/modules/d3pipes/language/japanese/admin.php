@@ -20,6 +20,7 @@ define('_MD_A_D3PIPES_TH_PIPETYPE','種別');
 define('_MD_A_D3PIPES_TH_PIPENAME','名称');
 define('_MD_A_D3PIPES_TH_PIPEURL','URL');
 define('_MD_A_D3PIPES_TH_PIPEIMAGE','画像');
+define('_MD_A_D3PIPES_TH_PIPEDESCRIPTION','詳細');
 define('_MD_A_D3PIPES_TH_PIPEWEIGHT','順番');
 define('_MD_A_D3PIPES_TH_MAINDISP','表示');
 define('_MD_A_D3PIPES_TITLE_MAINDISP','メインパートとして表示可能');

@@ -10,12 +10,14 @@ include XOOPS_ROOT_PATH.'/header.php';
 // get clipping (raw data)
 $clipping_id = intval( @$_GET['clipping_id'] ) ;
 $clipping = d3pipes_common_get_clipping( $mydirname , $clipping_id ) ;
+
 if( $clipping === false ) {
 	redirect_header( XOOPS_URL.'/modules/'.$mydirname.'/' , 3 , _MD_D3PIPES_ERR_INVALIDCLIPPINGID ) ;
 	exit ;
 }
 
 // get pipe4assign
+$pipe_id = intval( $clipping['pipe_id'] ) ;
 $pipe4assign = d3pipes_common_get_pipe4assign( $mydirname , $clipping['pipe_id'] ) ;
 
 // pagetitle & xoops_breadcrumbs

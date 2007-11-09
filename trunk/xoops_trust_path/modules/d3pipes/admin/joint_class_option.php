@@ -22,9 +22,10 @@ $obj =& d3pipes_common_get_joint_object( $mydirname , $joint_type , $joint_class
 while( ob_get_level() ) {
 	ob_end_clean() ;
 }
-ini_set( 'default_charset' , 'UTF-8' ) ;
+@ini_set( 'default_charset' , 'UTF-8' ) ;
+@header( 'Content-Type: text/html; charset=UTF-8' ) ;
 echo d3pipes_common_convert_encoding_ietoutf8( $mydirname , $obj->renderOptions( $index , $option_value ) ) ;
-if( ! 'ALTSYS_DONT_USE_ADMIN_IN_THEME' ) define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
+if( ! defined( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' ) ) define( 'ALTSYS_DONT_USE_ADMIN_IN_THEME' , 1 ) ;
 unset( $xoopsUser ) ; // for preventing older admin_in_theme
 exit ;
 

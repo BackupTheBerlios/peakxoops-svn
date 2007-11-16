@@ -33,6 +33,7 @@
 	<{if $xoops_isadmin}>
 		<li><a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYACCESS}></a></li>
 	<{/if}>
+	<li><a href="<{$mod_url}>/index.php?page=rss&amp;cat_ids=<{$category.id}>&amp;odr=1"><{$smarty.const._MD_D3FORUM_LINK_CATEGORYRSS}></a></li>
 </ul>
 <{/if}>
 
@@ -66,13 +67,8 @@
 	<dt><a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>"><{$forum.title}></a>
 	&nbsp;<{if $forum.isadminormod}> [<a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a>]<{/if}></dt>
 		<dd><{$forum.desc}></dd>
-		<dd class="d3f_td_topicinfo"><{$smarty.const._MD_D3FORUM_MODERATOR}>:&nbsp;
-			<{foreach from=$forum.moderate_groups item=moderator}>
-				<{$moderator.gname}>
-			<{/foreach}>
-			<{foreach from=$forum.moderate_users item=moderator}>
-				<a href="<{$xoops_url}>/userinfo.php?uid=<{$moderator.uid}>"><{$moderator.uname}></a>
-			<{/foreach}>
+		<dd class="d3f_td_topicinfo">
+			<{include file="db:`$mydirname`_inc_moderators.html" target=$forum}>
 			<{if $forum.external_link_format}>
 				[<{$smarty.const._MD_D3FORUM_FORUMASCOMMENT}>]
 			<{elseif $forum.can_post}>

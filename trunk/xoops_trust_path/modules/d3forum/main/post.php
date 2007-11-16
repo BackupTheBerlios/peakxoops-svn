@@ -124,6 +124,7 @@ if( $icon < 0 || $icon >= sizeof( $d3forum_icon_meanings ) ) $icon = 0 ;
 if( empty( $xoopsModuleConfig['allow_html'] ) ) $html = 0 ;
 if( empty( $xoopsModuleConfig['allow_sig'] ) ) $allow_sig = 0 ;
 $hide_uid = ! empty( $_POST['hide_uid'] ) && ! empty( $xoopsModuleConfig['allow_hideuid'] ) && $uid ? 1 : 0 ;
+$message = $myts->censorString( $message ) ;
 if( $html ) $message = d3forum_transact_htmlpurify( $message ) ;
 
 // Validate message

@@ -172,4 +172,25 @@ function d3forum_common_unhtmlspecialchars( $text )
 	return strtr( $text , array_flip( get_html_translation_table( HTML_SPECIALCHARS , ENT_QUOTES ) ) ) ;
 }
 
+
+function d3forum_common_utf8_encode_recursive( &$data )
+{
+	if( is_array( $data ) ) {
+		foreach( array_keys( $data ) as $key ) {
+			d3forum_common_utf8_encode_recursive( $data[ $key ] ) ;
+		}
+	} else if( ! is_numeric( $data ) ) {
+		if( XOOPS_USE_MULTIBYTES == 1 ) {
+			if( function_exists( 'mb_convert_encoding' ) ) {
+				$data = mb_convert_encoding( $data , 'UTF-8' , _CHARSET ) ;
+			} else if( function_exists( 'iconv' ) ) {
+				$data = iconv( _CHARSET , 'UTF-8' , $data ) ;
+			}
+		} else {
+			$data = utf8_encode( $data ) ;
+		}
+	}
+}
+
+
 ?>

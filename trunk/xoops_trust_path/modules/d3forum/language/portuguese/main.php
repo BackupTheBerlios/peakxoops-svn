@@ -1,6 +1,12 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-11-16 18:15:36
+define('_MD_D3FORUM_LINK_ALLRSS','RSS over all categories');
+define('_MD_D3FORUM_LINK_CATEGORYRSS','RSS of this category');
+define('_MD_D3FORUM_LINK_FORUMRSS','RSS of this forum');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-28 15:55:32
 define('_MD_D3FORUM_BATCH_ACTIONS','Batch Actions');
 define('_MD_D3FORUM_BA_TURNSOLVEDON','Turn all topics as solved');

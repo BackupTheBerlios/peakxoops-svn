@@ -53,6 +53,9 @@ define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','このレコードに所属し�
 define('_MD_D3FORUM_POSTASNEWTOPIC','新規トピックとして投稿する');
 define('_MD_D3FORUM_POSTASSAMETOPIC','このトピックに投稿する');
 define('_MD_D3FORUM_REPLYTHISPOST','この投稿に返信する');
+define('_MD_D3FORUM_LINK_ALLRSS','このフォーラム全体のRSSを取得する');
+define('_MD_D3FORUM_LINK_CATEGORYRSS','このカテゴリーのRSSを取得する');
+define('_MD_D3FORUM_LINK_FORUMRSS','このフォーラムのRSSを取得する');
 define('_MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM','このフォーラムに新規トピックを投稿できます');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','このフォーラムには投稿できません');
 define('_MD_D3FORUM_CANTCREATENEWTOPICTHISFORUM','このフォーラムに新しいトピックを立てることはできません');

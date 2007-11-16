@@ -375,8 +375,10 @@ function d3forum_cutpasteposts( $mydirname , $post_id , $pid , $new_forum_id , $
 		list( $pid , $topic_id , $subject ) = $db->fetchRow( $db->query( "SELECT pid,topic_id,subject FROM ".$db->prefix($mydirname."_posts")." WHERE post_id=$post_id" ) ) ;
 
 		if( $pid ) {
+			// get external_link_id of the current topic
+			list( $external_link_id ) = $db->fetchRow( $db->query( "SELECT topic_external_link_id FROM ".$db->prefix($mydirname."_topics")." WHERE topic_id=$topic_id" ) ) ;
 			// create a new topic and copy subject to topic_title in sync
-			if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_topics")." SET forum_id=$new_forum_id, topic_title='".addslashes($subject)."'" ) ) die( "DB ERROR in INSERT topic" ) ;
+			if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_topics")." SET forum_id=$new_forum_id, topic_title='".addslashes($subject)."', topic_external_link_id='".addslashes($external_link_id)."'" ) ) die( "DB ERROR in INSERT topic" ) ;
 			$new_topic_id = $db->getInsertId() ;
 			$new_topic_created = true ;
 			if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_posts")." SET pid=0 WHERE post_id=$post_id" ) ) die( "DB ERROR in UPDATE post" ) ;

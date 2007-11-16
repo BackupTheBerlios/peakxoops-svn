@@ -35,6 +35,7 @@ $post_default_options = array_map( 'trim' , explode( ',' , strtolower( @$xoopsMo
 foreach( array( 'smiley' , 'xcode' , 'br' , 'number_entity' , 'special_entity' , 'html' , 'attachsig' , 'hide_uid' , 'notify' , 'u2t_marked' ) as $key ) {
 	$$key = in_array( $key , $post_default_options ) ? 1 : 0 ;
 }
+if( is_object( @$GLOBALS['xoopsUser'] ) ) $attachsig |= $GLOBALS['xoopsUser']->getVar('attachsig') ;
 
 $formTitle = $external_link_id ? _MD_D3FORUM_POSTASCOMMENTTOP : _MD_D3FORUM_POSTASNEWTOPIC ;
 $mode = 'newtopic' ;

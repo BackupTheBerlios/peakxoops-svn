@@ -26,6 +26,12 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.81 beta (2007-11-16)
+- modified post form reflects "Always attach my signature" of user data
+- modified new posts will be checked by "censor string"
+- fixed cutandpaste loses external_link_id
+- added RSS outputs
+
 0.80 beta (2007-10-11)
 - fixed Script Insertion in guest_url (thx kentaro)
 - updated language files
@@ -196,6 +202,12 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.81 beta (2007-11-16)
+- 「投稿に署名を必ず追加する」の反映
+- 禁止用語設定に対応（表示ではなく受取時に変換）
+- コメント統合でトピック分割するとexternal_link_idが保存されないバグを修正
+- RSS出力を追加
 
 0.80 beta (2007-10-11)
 - ゲストURLのScriptInsertion修正 (thx kentaro)

@@ -1,6 +1,12 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-11-16 18:15:37
+define('_MD_D3FORUM_LINK_ALLRSS','RSS over all categories');
+define('_MD_D3FORUM_LINK_CATEGORYRSS','RSS of this category');
+define('_MD_D3FORUM_LINK_FORUMRSS','RSS of this forum');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-10-09 13:04:30
 define('_MD_D3FORUM_LINK_CATEGORYACCESS','Set permissions for this category');
 

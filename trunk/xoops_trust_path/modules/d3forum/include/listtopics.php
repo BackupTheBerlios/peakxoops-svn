@@ -29,7 +29,7 @@ if( $topic_hits > $num ) {
 }
 
 // main query
-$sql = "SELECT t.*, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$db->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$db->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND ($whr_solved) AND ($whr_txt) AND ($whr_external_link_id) ORDER BY $odr_query LIMIT $pos,$num" ;
+$sql = "SELECT t.*, lp.post_text AS lp_post_text, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$db->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$db->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND ($whr_solved) AND ($whr_txt) AND ($whr_external_link_id) ORDER BY $odr_query LIMIT $pos,$num" ;
 if( ! $trs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 
 // topics loop
@@ -55,6 +55,7 @@ while( $topic_row = $db->fetchArray( $trs ) ) {
 		'last_post_time_formatted' => formatTimestamp( $topic_row['topic_last_post_time'] , 'm' ) ,
 		'last_post_id' => intval( $topic_row['topic_last_post_id'] ) ,
 		'last_post_icon' => intval( $topic_row['lp_icon'] ) ,
+		'last_post_text_raw' => $topic_row['lp_post_text'] ,
 		'last_post_subject' => $myts->makeTboxData4Show( $topic_row['lp_subject'] , $topic_row['lp_number_entity'] , $topic_row['lp_special_entity'] ) ,
 		'last_post_uid' => intval( $topic_row['topic_last_uid'] ) ,
 		'last_post_uname' => $last_post_uname4html ,
@@ -99,7 +100,6 @@ $xoopsTpl->assign(
 		'xoops_breadcrumbs' => $xoops_breadcrumbs ,
 	)
 ) ;
-
 
 // TODO
 // ページ分割処理

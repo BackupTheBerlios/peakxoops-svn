@@ -53,6 +53,9 @@ define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','§≥§Œ•Ï•≥°º•…§ÀΩÍ¬∞§∑§∆§§§Î•«°º•
 define('_MD_D3FORUM_POSTASNEWTOPIC','ø∑µ¨•»•‘•√•Ø§»§∑§∆≈Íπ∆§π§Î');
 define('_MD_D3FORUM_POSTASSAMETOPIC','§≥§Œ•»•‘•√•Ø§À≈Íπ∆§π§Î');
 define('_MD_D3FORUM_REPLYTHISPOST','§≥§Œ≈Íπ∆§À ÷øÆ§π§Î');
+define('_MD_D3FORUM_LINK_ALLRSS','§≥§Œ•’•©°º•È•‡¡¥¬Œ§ŒRSS§ÚºË∆¿§π§Î');
+define('_MD_D3FORUM_LINK_CATEGORYRSS','§≥§Œ•´•∆•¥•Í°º§ŒRSS§ÚºË∆¿§π§Î');
+define('_MD_D3FORUM_LINK_FORUMRSS','§≥§Œ•’•©°º•È•‡§ŒRSS§ÚºË∆¿§π§Î');
 define('_MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM','§≥§Œ•’•©°º•È•‡§Àø∑µ¨•»•‘•√•Ø§Ú≈Íπ∆§«§≠§ﬁ§π');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','§≥§Œ•’•©°º•È•‡§À§œ≈Íπ∆§«§≠§ﬁ§ª§Û');
 define('_MD_D3FORUM_CANTCREATENEWTOPICTHISFORUM','§≥§Œ•’•©°º•È•‡§Àø∑§∑§§•»•‘•√•Ø§ÚŒ©§∆§Î§≥§»§œ§«§≠§ﬁ§ª§Û');

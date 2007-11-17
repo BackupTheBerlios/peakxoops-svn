@@ -162,12 +162,14 @@ function FileUpload( $currentFolder = '/' )
 	$new_filename = @$GLOBALS['fck_user_prefix'] . FCK_FILE_PREFIX . date( 'YmdHis' ) . substr( md5( uniqid( rand() , true ) ) , 0 , 8 ) . '.' . $extension ;
 	$new_filefullpath = FCK_UPLOAD_PATH.$currentFolder.$new_filename ;
 	$new_fileurl = FCK_UPLOAD_URL.$currentFolder.$new_filename ;
-	
+
 	// move temporary
-	if( ! move_uploaded_file( $_FILES[FCK_UPLOAD_NAME]['tmp_name'] , $new_filefullpath ) ) {
-		SendResultsHTML( '202' ) ;
-	}
-	
+	$prev_mask = @umask( 0022 ) ;
+	$upload_result = move_uploaded_file( $_FILES[FCK_UPLOAD_NAME]['tmp_name'] , $new_filefullpath ) ;
+	@umask( $prev_mask ) ;
+	if( ! $upload_result ) SendResultsHTML( '202' ) ;
+	@chmod( $new_filefullpath , 0644 ) ;
+
 	// check the file is valid
 	if( $fck_allowed_extensions[ $extension ] ) {
 		$check_result = @getimagesize( $new_filefullpath ) ;

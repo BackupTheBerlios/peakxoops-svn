@@ -28,7 +28,7 @@ if( $count <= 0 ) {
 }
 
 // assigning
-$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $category4assign , true ) ;
+$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xoopsModuleConfig , $category4assign , @$_GET['page'] == 'contentmanager' ? false : true ) ;
 
 // locked check
 if( ! empty( $content4assign['locked'] ) && ! $isadminormod ) {

@@ -62,11 +62,13 @@ function pico_sync_cattree( $mydirname )
 	$db =& Database::getInstance() ;
 
 	// rebuild tree informations
-	list( $tree_array , $contents_total , $subcategories_total ) = pico_makecattree_recursive( $mydirname , 0 ) ;
+	list( $tree_array , $subcattree , $contents_total , $subcategories_total ) = pico_makecattree_recursive( $mydirname , 0 ) ;
 	//array_shift( $tree_array ) ;
 	$paths = array() ;
 	$previous_depth = 0 ;
+
 	if( ! empty( $tree_array ) ) foreach( $tree_array as $key => $val ) {
+		// build the absolute path of the category
 		$depth_diff = $val['depth'] - $previous_depth ;
 		$previous_depth = $val['depth'] ;
 		if( $depth_diff > 0 ) {
@@ -82,8 +84,14 @@ function pico_sync_cattree( $mydirname )
 
 		// redundant array
 		$redundants = array(
+			'cat_id' => $val['cat_id'] ,
+			'depth' => $val['depth'] ,
+			'cat_title' => $val['cat_title'] ,
+			'contents_count' => $val['contents_count'] ,
 			'contents_total' => $val['contents_total'] ,
+			'subcategories_count' => $val['subcategories_count'] ,
 			'subcategories_total' => $val['subcategories_total'] ,
+			'subcattree_raw' => $val['subcattree_raw'] ,
 		) ;
 
 		$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_depth_in_tree=".intval($val['depth']).", cat_order_in_tree=".($key).", cat_path_in_tree='".mysql_real_escape_string(serialize($paths))."', cat_redundants='".mysql_real_escape_string(serialize($redundants))."' WHERE cat_id=".$val['cat_id'] ) ;
@@ -96,7 +104,7 @@ function pico_makecattree_recursive( $mydirname , $cat_id , $order = 'cat_weight
 	$db =& Database::getInstance() ;
 
 	// get number of contents of this category
-	list( $contents_count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE cat_id=$cat_id" ) ) ;
+	list( $contents_count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE cat_id=$cat_id AND visible" ) ) ;
 
 	$sql = "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE pid=$cat_id ORDER BY $order" ;
 	$result = $db->query( $sql ) ;
@@ -104,14 +112,28 @@ function pico_makecattree_recursive( $mydirname , $cat_id , $order = 'cat_weight
 		return array( $parray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] ) ;
 	} */
 	$myindex = sizeof( $parray ) ;
-	$parray[ $myindex ] = array( 'cat_id' => $cat_id , 'depth' => $depth , 'cat_title' => $cat_title , 'contents_total' => intval( $contents_count ) , 'subcategories_total' => $db->getRowsNum( $result ) ) ;
+	$myarray = array( 'cat_id' => $cat_id , 'depth' => $depth , 'cat_title' => $cat_title , 'contents_count' => intval( $contents_count ) , 'contents_total' => 0 , 'subcategories_count' => $db->getRowsNum( $result ) , 'subcategories_total' => 0 , 'subcattree_raw' => array() ) ;
+	$parray[ $myindex ] = $myarray ;
+//	$parray[ $myindex ]['subcattree_raw'][] = $parray ;
+
+	$contents_total = intval( $myarray['contents_count'] ) ;
+	$subcategories_total = intval( $myarray['subcategories_count'] ) ;
 
 	while( list( $new_cat_id , $new_cat_title ) = $db->fetchRow( $result ) ) {
-		list( $parray , $contents_smallsum , $subcategories_smallsum ) = pico_makecattree_recursive( $mydirname , $new_cat_id , $order , $parray , $depth + 1 , $new_cat_title ) ;
-		$parray[ $myindex ]['contents_total'] += $contents_smallsum ;
-		$parray[ $myindex ]['subcategories_total'] += $subcategories_smallsum ;
+		list( $parray , $subarray , $contents_smallsum , $subcategories_smallsum ) = pico_makecattree_recursive( $mydirname , $new_cat_id , $order , $parray , $depth + 1 , $new_cat_title ) ;
+		$myarray['subcattree_raw'][] = $subarray ;
+		$contents_total += $contents_smallsum ;
+		$subcategories_total += $subcategories_smallsum ;
 	}
-	return array( $parray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] ) ;
+
+	$parray[ $myindex ]['contents_total'] = $contents_total ;
+	$myarray['contents_total'] = $contents_total ;
+	$parray[ $myindex ]['subcategories_total'] = $subcategories_total ;
+	$myarray['subcategories_total'] = $subcategories_total ;
+
+	$parray[ $myindex ]['subcattree_raw'] = $myarray['subcattree_raw'] ;
+
+	return array( $parray , $myarray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] ) ;
 }
 
 

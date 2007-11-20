@@ -32,7 +32,7 @@ CREATE TABLE categories (
   cat_created_time int(10) NOT NULL default 0,
   cat_modified_time int(10) NOT NULL default 0,
   cat_vpath_mtime int(10) NOT NULL default 0,
-  cat_redundants text,
+  cat_redundants mediumtext,
   PRIMARY KEY (cat_id),
   UNIQUE KEY (cat_vpath),
   KEY (cat_weight),

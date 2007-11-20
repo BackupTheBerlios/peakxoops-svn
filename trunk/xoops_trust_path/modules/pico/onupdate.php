@@ -59,7 +59,7 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." MODIFY htmlheader mediumtext, MODIFY htmlheader_waiting mediumtext, MODIFY body mediumtext, MODIFY body_waiting mediumtext, MODIFY body_cached mediumtext" ) ;
 	}
 
-	// 1.1/1.2 -> 1.3
+	// 1.1/1.2 -> 1.3/1.4
 	$check_sql = "SELECT cat_redundants FROM ".$db->prefix($mydirname."_categories") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." MODIFY cat_id smallint(5) unsigned NOT NULL, ADD cat_redundants text AFTER cat_vpath_mtime" ) ;
@@ -67,7 +67,7 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "INSERT INTO ".$db->prefix($mydirname."_categories")." (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP')" ) ;
 	}
 
-	// 1.3/1.4 -> 1.5
+	// 1.3/1.4 -> 1.5/1.6
 	$check_sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_content_extras") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_content_extras")." ( content_extra_id int(10) unsigned NOT NULL auto_increment, content_id int(10) unsigned NOT NULL default 0, extra_type varchar(255) NOT NULL default '', created_time int(10) NOT NULL default 0, modified_time int(10) NOT NULL default 0, data mediumtext, PRIMARY KEY (content_extra_id), KEY (content_id), KEY (extra_type), KEY (created_time) ) TYPE=MyISAM" ) ;
@@ -78,6 +78,9 @@ function pico_onupdate_base( $module , $mydirname )
 	if( stristr( $create_sql , '`body` text' ) ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_content_histories")." MODIFY `htmlheader` mediumtext, MODIFY `body` mediumtext" ) ;
 	}
+	$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." MODIFY `cat_redundants` mediumtext" ) ;
+
+	// 1.5/1.6 -> 1.7/1.8
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

@@ -102,6 +102,12 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.57 (2007/11/20)
+- modified field cat_redundants from text to mediumtext
+- added pico_subcattree for getting redundants from a specified cat_id
+- added contents_count,subcategories_count,subcattree_raw into cat_redundants
+- fixed contentmanager can be hanged up by Smarty error like wrong plugin etc.
+
 1.56 (2007/10/23)
 - modified the viewed counter checks IP is different from modifier's IP
 - changed the policy checking referer disabled

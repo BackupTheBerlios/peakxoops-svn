@@ -74,7 +74,7 @@ class relation {
 
 	function getRelations($storyid)
 	{
-		$sql = sprintf("SELECT * FROM %s WHERE storyid=%u", $this->relation_table, intval($storyid) );
+		$sql = sprintf("SELECT * FROM %s WHERE storyid=%u ORDER BY dirname ASC,linkedid DESC", $this->relation_table, intval($storyid) );
 		$result = $this->db->query($sql);
 		$ret = array();
 		while($myrow = $this->db->fetchArray($result)){
@@ -141,7 +141,7 @@ class relation {
 				return false;
 			}
 		}
-		return ture;
+		return true;
 	}
 
 }

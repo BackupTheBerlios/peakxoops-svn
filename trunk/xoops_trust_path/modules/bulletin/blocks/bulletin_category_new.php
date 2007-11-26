@@ -151,14 +151,16 @@ function b_bulletin_category_new_show($options) {
 		$block['topics'][] = $topic;
 	}
 
-	$block['lang_postedby'] = _POSTEDBY;
-	$block['lang_on'] = _ON;
-	$block['lang_reads'] = _READS;
-	$block['lang_morelink'] = _MB_BULLETIN_MORE;
-	$block['lang_readmore'] = _MB_BULLETIN_READMORE;
-	$block['mydirurl'] = XOOPS_URL.'/modules/'.$mydirname;;
-	$block['mydirname'] = $mydirname;
-	$block['type'] = $selected_order;
+	if( ! empty( $block ) ) {
+		$block['lang_postedby'] = _POSTEDBY;
+		$block['lang_on'] = _ON;
+		$block['lang_reads'] = _READS;
+		$block['lang_morelink'] = _MB_BULLETIN_MORE;
+		$block['lang_readmore'] = _MB_BULLETIN_READMORE;
+		$block['mydirurl'] = XOOPS_URL.'/modules/'.$mydirname;;
+		$block['mydirname'] = $mydirname;
+		$block['type'] = $selected_order;
+	}
 
 	return $block;
 }

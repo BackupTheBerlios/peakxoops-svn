@@ -29,6 +29,12 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 =CHANEGLOG=
 
+HD-2.12 (2007-11-27)
+- modified relation sorted
+- modified news blocks don't create blank blocks
+- added language files
+-- persian (thx voltan)
+
 HD-2.11 (2007-09-28)
 - modified order of submenu
 - added this README

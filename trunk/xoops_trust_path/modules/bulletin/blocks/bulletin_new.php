@@ -111,13 +111,15 @@ function b_bulletin_new_show($options) {
 
 	}
 
-	$block['lang_postedby'] = _POSTEDBY;
-	$block['lang_on']       = _ON;
-	$block['lang_reads']    = _READS;
-	$block['lang_readmore'] = _MB_BULLETIN_READMORE;
-	$block['type']  = $selected_order;
-	$block['mydirurl'] = XOOPS_URL.'/modules/'.$mydirname;;
-	$block['mydirname'] = $mydirname;
+	if( ! empty( $block ) ) {
+		$block['lang_postedby'] = _POSTEDBY;
+		$block['lang_on']       = _ON;
+		$block['lang_reads']    = _READS;
+		$block['lang_readmore'] = _MB_BULLETIN_READMORE;
+		$block['type']  = $selected_order;
+		$block['mydirurl'] = XOOPS_URL.'/modules/'.$mydirname;;
+		$block['mydirname'] = $mydirname;
+	}
 
 	return $block;
 }

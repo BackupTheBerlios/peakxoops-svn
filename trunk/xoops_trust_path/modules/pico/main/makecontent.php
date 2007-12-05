@@ -15,6 +15,17 @@ if( ! empty( $_SESSION[$mydirname.'_preview'] ) ) {
 	unset( $_SESSION[$mydirname.'_preview'] ) ;
 }
 
+// deciding action
+$allowed_actions = array( 'contentman_preview' , 'contentman_post' ) ;
+$action = '' ;
+foreach( $allowed_actions as $allowed_action ) {
+	if( ! empty( $_POST[ $allowed_action ] ) ) {
+		$action = substr( $allowed_action , 11 ) ;
+		break ;
+	}
+}
+if( empty( $action ) && ! empty( $_POST ) ) $action = 'preview' ;
+
 $xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
 include XOOPS_ROOT_PATH."/header.php";
 
@@ -28,7 +39,7 @@ if( ! $category4assign['can_post'] ) die( _MD_PICO_ERR_CREATECONTENT ) ;
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( isset( $_POST['contentman_post'] ) ) {
+if( $action == 'post' ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
@@ -40,6 +51,10 @@ if( isset( $_POST['contentman_post'] ) ) {
 		$ret_uri4html = htmlspecialchars( $ret_uri , ENT_QUOTES ) ;
 	} else {
 		$ret_uri4html = $content_uri4html ;
+	}
+	// calling a delegate
+	if( class_exists( 'XCube_DelegateUtils' ) ) {
+		XCube_DelegateUtils::call( 'ModuleClass.Pico.Contentman.InsertSuccess' , $mydirname , $content_id , $category4assign , $ret_uri4html ) ;
 	}
 	if( $category4assign['post_auto_approved'] ) {
 		// Notify for new content
@@ -87,7 +102,7 @@ $content4assign = array(
 $content4assign_base = $content4assign ;
 $preview4assign = array() ;
 
-if( isset( $_POST['contentman_preview'] ) ) {
+if( $action == 'preview' ) {
 	// preview (override content4assign by request4assign)
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());

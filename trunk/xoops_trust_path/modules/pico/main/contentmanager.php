@@ -17,6 +17,17 @@ if( ! empty( $_SESSION[$mydirname.'_preview'] ) ) {
 	unset( $_SESSION[$mydirname.'_preview'] ) ;
 }
 
+// deciding action
+$allowed_actions = array( 'contentman_preview' , 'contentman_post' , 'contentman_copyfromwaiting' , 'contentman_delete' ) ;
+$action = '' ;
+foreach( $allowed_actions as $allowed_action ) {
+	if( ! empty( $_POST[ $allowed_action ] ) ) {
+		$action = substr( $allowed_action , 11 ) ;
+		break ;
+	}
+}
+if( empty( $action ) && ! empty( $_POST ) ) $action = 'preview' ;
+
 $xoopsOption['template_main'] = $mydirname.'_main_content_form.html' ;
 include XOOPS_ROOT_PATH."/header.php";
 
@@ -45,10 +56,11 @@ if( ! $content4assign['can_edit'] && ! $content4assign['can_delete'] ) {
 
 // TRANSACTION PART
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-if( isset( $_POST['contentman_post'] ) && $content4assign['can_edit'] ) {
+if( $action == 'post' && $content4assign['can_edit'] ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
+
 	// update the content
 	pico_updatecontent( $mydirname , $content_id , $category4assign['post_auto_approved'] , $category4assign['isadminormod'] ) ;
 	$content_uri4html = XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) ;
@@ -57,6 +69,10 @@ if( isset( $_POST['contentman_post'] ) && $content4assign['can_edit'] ) {
 		$ret_uri4html = htmlspecialchars( $ret_uri , ENT_QUOTES ) ;
 	} else {
 		$ret_uri4html = $content_uri4html ;
+	}
+	// calling a delegate
+	if( class_exists( 'XCube_DelegateUtils' ) ) {
+		XCube_DelegateUtils::call( 'ModuleClass.Pico.Contentman.UpdateSuccess' , $mydirname , $content_id , $category4assign , $ret_uri4html ) ;
 	}
 	if( $category4assign['post_auto_approved'] ) {
 		// message "modified"
@@ -71,7 +87,7 @@ if( isset( $_POST['contentman_post'] ) && $content4assign['can_edit'] ) {
 	}
 	exit ;
 }
-if( isset( $_POST['contentman_copyfromwaiting'] ) && $category4assign['isadminormod'] ) {
+if( $action == 'copyfromwaiting' && $category4assign['isadminormod'] ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
@@ -80,7 +96,7 @@ if( isset( $_POST['contentman_copyfromwaiting'] ) && $category4assign['isadminor
 	redirect_header( XOOPS_URL."/modules/$mydirname/".pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) , 2 , _MD_PICO_MSG_CONTENTUPDATED ) ;
 	exit ;
 }
-if( isset( $_POST['contentman_delete'] ) && $content4assign['can_delete'] ) {
+if( $action == 'delete' && $content4assign['can_delete'] ) {
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
 	}
@@ -103,7 +119,7 @@ $content4assign = pico_common_get_content4assign( $mydirname , $content_id , $xo
 $content4assign_base = $content4assign ;
 $preview4assign = array() ;
 
-if( isset( $_POST['contentman_preview'] ) ) {
+if( $action == 'preview' ) {
 	// preview (override content4assign by request4assign)
 	if ( ! $xoopsGTicket->check( true , 'pico' ) ) {
 		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());

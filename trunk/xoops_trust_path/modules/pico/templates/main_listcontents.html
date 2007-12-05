@@ -8,9 +8,6 @@
 	<!-- link to menu -->
 	<a href="<{$mod_url}>/index.php?page=menu">[<{$smarty.const._MD_PICO_MENU}>]</a>
 	
-	<!-- link to RSS -->
-	<a href="<{$mod_url}>/index.php?page=rss&amp;cat_id=<{$category.id}>">[RSS]</a>
-	
 	<{if $category.isadminormod}>
 	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
 	<{/if}>
@@ -31,6 +28,9 @@
 	<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>&amp;ret=mc<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
 	<{/if}>
 
+	<!-- link to RSS -->
+	<a href="<{$mod_url}>/index.php?page=rss&amp;cat_id=<{$category.id}>">[RSS]</a>
+	
 </div>
 
 <{if $category.id == 0}><p><{$mod_config.top_message}></p><{/if}>

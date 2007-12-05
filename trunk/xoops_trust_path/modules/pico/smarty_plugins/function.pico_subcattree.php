@@ -12,6 +12,11 @@ function smarty_function_pico_subcattree( $params , &$smarty )
 	}
 
 	if( empty( $mydirname ) ) $mydirname = $smarty->get_template_vars( 'mydirname' ) ;
+	if( empty( $mydirname ) ) {
+		echo 'error '.__FUNCTION__.' [specify dirname]';
+		return ;
+	}
+
 	$db =& Database::getInstance() ;
 	$sql = "SELECT c.cat_redundants FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$cat_id" ;
 	list( $redundants_serialized ) = $db->fetchRow( $db->query( $sql ) ) ;

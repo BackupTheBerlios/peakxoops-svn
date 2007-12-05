@@ -106,7 +106,11 @@ pico is fast enough if you use content's cache.
 - modified field cat_redundants from text to mediumtext
 - added pico_subcattree for getting redundants from a specified cat_id
 - added contents_count,subcategories_count,subcattree_raw into cat_redundants
+- modified contents_* don't count invisible content
 - fixed contentmanager can be hanged up by Smarty error like wrong plugin etc.
+- added pico_list 1.57a
+- added pico_category_search 1.57a
+- added XC-delegate ModuleClass.Pico.Contentman.InsertSuccess 1.57a
 
 1.56 (2007/10/23)
 - modified the viewed counter checks IP is different from modifier's IP
@@ -494,7 +498,11 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - カテゴリー冗長用情報フィールドをtextからmediumtextに変更
 - カテゴリー冗長情報を取得するだけのプラグインpico_subcattreeを追加
 - カテゴリーの冗長情報として直下記事数・サブカテゴリー構造などを追加
+- 冗長情報の記事数に非表示コンテンツは含まないようにした
 - 誤ったプラグインで登録するとそれだけで編集手段がなくなってしまうバグを修正
+- カテゴリーに所属するコンテンツの一覧表示を行うプラグインpico_list追加 1.57a
+- カテゴリーを検索して中身を一覧表示するプラグインpico_category_search追加 1.57a
+- XCデリゲートとしてModuleClass.Pico.Contentman.InsertSuccessを追加 1.57a
 
 1.56 (2007/10/23)
 - 最終修正者IPと同じならカウンターをアップしないようにしてみた

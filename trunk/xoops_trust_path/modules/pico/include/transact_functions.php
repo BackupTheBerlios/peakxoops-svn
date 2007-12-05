@@ -266,7 +266,7 @@ function pico_makecategory( $mydirname )
 	}
 
 	list( $new_cat_id ) = $db->fetchRow( $db->query( "SELECT MAX(cat_id)+1 FROM ".$db->prefix($mydirname."_categories") ) ) ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`='',cat_id=$new_cat_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`='',cat_id=$new_cat_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// permissions are set same as the parent category. (also moderator)
 	$sql = "SELECT uid,groupid,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id={$requests['pid']}" ;
@@ -511,7 +511,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	// do insert
 	$sql = "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached=''" ;
-	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_content_id = $db->getInsertId() ;
 	pico_transact_reset_body_cached( $mydirname , $new_content_id ) ;
 
@@ -557,7 +557,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	// do update
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	$sql = "UPDATE ".$db->prefix($mydirname."_contents")." SET modifier_uid='$uid', $set $time4sql modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='' WHERE content_id=$content_id" ;
-	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 	pico_transact_reset_body_cached( $mydirname , $content_id ) ;
 
 	// rebuild category tree

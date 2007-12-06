@@ -4,9 +4,10 @@ if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
 // configurations
 define( 'FCK_UPLOAD_NAME' , 'NewFile' ) ;
-define( 'FCK_UPLOAD_PATH' , XOOPS_UPLOAD_PATH.'/fckeditor' ) ;
-define( 'FCK_UPLOAD_URL' , XOOPS_UPLOAD_URL.'/fckeditor' ) ;
+define( 'FCK_UPLOAD_PATH_BASE' , XOOPS_UPLOAD_PATH.'/fckeditor' ) ;
+define( 'FCK_UPLOAD_URL_BASE' , XOOPS_UPLOAD_URL.'/fckeditor' ) ;
 define( 'FCK_FILE_PREFIX' , '' ) ; // not in use now
+define( 'FCK_DIGITS4USERDIR' , 0 ) ;
 define( 'FCK_USER_PREFIX' , 'uid%06d_' ) ;
 define( 'FCK_CHECK_USER_PREFIX4NORMAL' , true ) ;
 define( 'FCK_CHECK_USER_PREFIX4ADMIN' , false ) ;
@@ -24,8 +25,8 @@ $fck_resource_type_extensions = array(
 $fck_allowed_extensions = array() ;
 
 // check directory for uploading
-if( ! is_dir( FCK_UPLOAD_PATH ) ) {
-	SendError( '1', '', '', 'Create '.htmlspecialchars(FCK_UPLOAD_URL).' first' ) ;
+if( ! is_dir( FCK_UPLOAD_PATH_BASE ) ) {
+	SendError( '1', '', '', 'Create '.htmlspecialchars(FCK_UPLOAD_URL_BASE).' first' ) ;
 }
 
 
@@ -71,6 +72,9 @@ if( empty( $fck_isadmin ) ) {
 	) ;
 	$fck_user_prefix = sprintf( FCK_USER_PREFIX , $xoopsUser->getVar('uid') ) ;
 	$fck_check_user_prefix = FCK_CHECK_USER_PREFIX4NORMAL ;
+	$uid_dir = FCK_DIGITS4USERDIR > 0 ? '/' . sprintf( '%0'.FCK_DIGITS4USERDIR.'d' , $xoopsUser->getVar('uid') % pow( 10 , FCK_DIGITS4USERDIR ) ) : '' ;
+	define( 'FCK_UPLOAD_PATH' , FCK_UPLOAD_PATH_BASE.$uid_dir ) ;
+	define( 'FCK_UPLOAD_URL' , FCK_UPLOAD_URL_BASE.$uid_dir ) ;
 } else {
 	// permissions for admin (Only admin of system module can upload)
 	$fck_allowed_extensions = array(
@@ -92,6 +96,8 @@ if( empty( $fck_isadmin ) ) {
 	) ;
 	$fck_user_prefix = sprintf( FCK_USER_PREFIX , $xoopsUser->getVar('uid') ) ;
 	$fck_check_user_prefix = FCK_CHECK_USER_PREFIX4ADMIN ;
+	define( 'FCK_UPLOAD_PATH' , FCK_UPLOAD_PATH_BASE ) ;
+	define( 'FCK_UPLOAD_URL' , FCK_UPLOAD_URL_BASE ) ;
 }
 
 

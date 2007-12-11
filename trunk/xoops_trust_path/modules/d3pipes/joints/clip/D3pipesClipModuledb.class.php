@@ -46,6 +46,8 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 
 		$entries = array() ;
 		while( list( $clipping_id , $highlight , $weight , $comments_count , $fetched_time , $visible , $link , $fingerprint , $entry_serialized ) = $db->fetchRow( $result ) ) {
+			$entry_row = @unserialize( $entry_serialized ) ;
+			if( ! is_array( $entry_row ) ) $entry_row = array() ;
 			$entries[] = array(
 				'link' => $link ,
 				'fingerprint' => $fingerprint ,
@@ -56,7 +58,7 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 				'clipping_fetched_time' => $fetched_time ,
 				'comments_count' => $comments_count ,
 				'visible' => $visible ,
-			) + unserialize( $entry_serialized ) ;
+			) + $entry_row ;
 		}
 
 		return $entries ;

@@ -40,11 +40,11 @@ function b_sitemap_bluesbb(){
 			$sitemap['parent'][$j]['child'][$i]['id'] = $topic_row['topic_id'];
 			$sitemap['parent'][$j]['child'][$i]['title'] = $myts->htmlSpecialChars($topic_row['topic_name']);
 			$sitemap['parent'][$j]['child'][$i]['image'] = 2;
-			$sitemap['parent'][$j]['child'][$i]['url'] = "viewtopic.php?topic=".$topic_row['topic_id'];
+			$sitemap['parent'][$j]['child'][$i]['url'] = "topic.php?top=".$topic_row['topic_id'];
 		}else{
 			$sitemap['parent'][$i]['id'] = $topic_row['topic_id'];
 			$sitemap['parent'][$i]['title'] = $myts->htmlSpecialChars($topic_row['topic_name']);
-			$sitemap['parent'][$i]['url'] = "viewtopic.php?topic=".$topic_row['topic_id'];
+			$sitemap['parent'][$i]['url'] = "topic.php?top=".$topic_row['topic_id'];
 		}
 		$i++;
 	}

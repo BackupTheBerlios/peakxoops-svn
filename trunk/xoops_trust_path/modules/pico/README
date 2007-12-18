@@ -4,7 +4,6 @@
 
 [b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
-This is developping version.
 Don't forget updating this module after overwritting older version.
 And you have to "sync" once on upgrading from 1.1x/1.2x
 
@@ -397,9 +396,7 @@ pico is fast enough if you use content's cache.
 ====  静的コンテンツ用モジュール pico  ===
 
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
-開発当初から想定していた機能を一通り実装したこともあり、現時点では1.40を安定版としています。
-
-こちらの1.5xは機能向上を目的とした開発版です。やる気のある方はぜひこちらをお試しください。開発版なので、特には書きませんが、バージョンアップ時のモジュールアップデートはほぼ必須です。
+開発当初から想定していた機能を一通り実装したこともあり、現時点では1.60を安定版としています。
 
 また、1.1/1.2 からアップデートした際には、モジュールアップデート後に、管理画面の「インポート/同期」から「同期」を最低1度実行してください。
 

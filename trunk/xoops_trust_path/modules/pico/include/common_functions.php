@@ -189,7 +189,7 @@ function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 
 	if( ! ( $caller == 'sitemap_plugin' && ! @$mod_config['sitemap_showcontents'] ) && ! ( $caller == 'xoops_version' && ! @$mod_config['submenu_showcontents'] ) ) {
 		// contents query
-		$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND created_time <= UNIX_TIMESTAMP() AND $whr_read ORDER BY weight" ) ;
+		$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND created_time <= UNIX_TIMESTAMP() AND $whr_read ORDER BY weight,content_id" ) ;
 		if( $ors ) while( $content_row = $db->fetchArray( $ors ) ) {
 			$cat_id = intval( $content_row['cat_id'] ) ;
 			$categories[ $cat_id ]['sub'][] = array(

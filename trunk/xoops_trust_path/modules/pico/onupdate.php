@@ -81,6 +81,11 @@ function pico_onupdate_base( $module , $mydirname )
 	$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." MODIFY `cat_redundants` mediumtext" ) ;
 
 	// 1.5/1.6 -> 1.7/1.8
+	$check_sql = "SELECT extension FROM ".$db->prefix($mydirname."_contents") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." ADD permission_id int(10) unsigned NOT NULL default 0 AFTER `content_id`, ADD expiring_time int(10) NOT NULL default 0 AFTER `modified_time`, ADD last_cached_time int(10) NOT NULL default 0 AFTER `modified_time`, ADD `extra_fields` mediumtext AFTER `filters`, ADD `for_search` mediumtext AFTER `redundants`, MODIFY `redundants` mediumtext, ADD KEY (`modified_time`), ADD KEY (`expiring_time`), ADD KEY (`permission_id`)" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD `cat_permission_id` int(10) unsigned NOT NULL AFTER `cat_id`, ADD KEY (`cat_permission_id`)" ) ;
+	}
 
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;

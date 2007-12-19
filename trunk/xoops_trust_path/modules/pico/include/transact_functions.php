@@ -2,6 +2,8 @@
 
 // this file can be included from transaction procedures
 
+define( 'PICO_EXTRA_FIELDS_PREFIX' , 'extra_fields_' ) ;
+
 // delete a content
 function pico_delete_content( $mydirname , $content_id )
 {
@@ -453,6 +455,15 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$ret['body'] = $purifier->purify( $ret['body'] ) ;
 		}
 	}
+
+	// extra_fields
+	$extra_fields = array() ;
+	foreach( $_POST as $key => $val ) {
+		if( strncmp( $key , PICO_EXTRA_FIELDS_PREFIX , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) === 0 ) {
+			$extra_fields[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) ] = $myts->stripSlashesGPC( $val ) ;
+		}
+	}
+	$ret['extra_fields'] = serialize( $extra_fields ) ;
 
 	return $ret ;
 }

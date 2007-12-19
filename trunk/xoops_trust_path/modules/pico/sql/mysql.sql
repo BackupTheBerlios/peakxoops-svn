@@ -19,6 +19,7 @@ INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL
 
 CREATE TABLE categories (
   cat_id smallint(5) unsigned NOT NULL,
+  cat_permission_id int(10) unsigned NOT NULL default 0,
   cat_vpath varchar(255),
   pid smallint(5) unsigned NOT NULL default 0,
   cat_title varchar(255) NOT NULL default '',
@@ -35,6 +36,7 @@ CREATE TABLE categories (
   cat_redundants mediumtext,
   PRIMARY KEY (cat_id),
   UNIQUE KEY (cat_vpath),
+  KEY (cat_permission_id),
   KEY (cat_weight),
   KEY (pid)
 ) TYPE=MyISAM;
@@ -43,11 +45,14 @@ INSERT INTO categories (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP');
 
 CREATE TABLE contents (
   content_id int(10) unsigned NOT NULL auto_increment,
+  permission_id int(10) unsigned NOT NULL default 0,
   vpath varchar(255),
   cat_id smallint(5) unsigned NOT NULL default 0,
   weight smallint(5) NOT NULL default 0,
   created_time int(10) NOT NULL default 0,
   modified_time int(10) NOT NULL default 0,
+  expiring_time int(10) NOT NULL default 0,
+  last_cached_time int(10) NOT NULL default 0,
   poster_uid mediumint(8) unsigned NOT NULL default 0,
   poster_ip varchar(15) NOT NULL default '',
   modifier_uid mediumint(8) unsigned NOT NULL default 0,
@@ -71,12 +76,17 @@ CREATE TABLE contents (
   body_waiting mediumtext,
   body_cached mediumtext,
   filters text,
-  redundants text,
+  extra_fields mediumtext,
+  redundants mediumtext,
+  for_search mediumtext,
   PRIMARY KEY (content_id),
   UNIQUE KEY (vpath),
   KEY (poster_uid),
   KEY (subject),
   KEY (created_time),
+  KEY (modified_time),
+  KEY (expiring_time),
+  KEY (permission_id),
   KEY (cat_id),
   KEY (visible),
   KEY (votes_sum),

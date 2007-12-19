@@ -2,7 +2,7 @@
 
 // subcategory loop
 $subcategories4assign = array() ;
-$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_categories")." c WHERE $whr_read4cat AND c.pid=$cat_id ORDER BY cat_weight" ;
+$sql = "SELECT * FROM ".$xoopsDB->prefix($mydirname."_categories")." c WHERE $whr_read4cat AND c.pid=$cat_id ORDER BY cat_weight,cat_id" ;
 if( ! $srs = $xoopsDB->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 while( $subcat_row = $xoopsDB->fetchArray( $srs ) ) {
 

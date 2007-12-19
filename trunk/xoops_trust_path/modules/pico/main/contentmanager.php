@@ -130,6 +130,7 @@ if( $action == 'preview' ) {
 	$content4assign['id'] = $content_id ;
 	$content4assign['filter_infos'] = pico_main_get_filter_infos( $request['filters'] , $category4assign['isadminormod'] ) ;
 	$content4assign['body_raw'] = $request['body'] ;
+	$content4assign['extra_fields'] = $request['extra_fields'] ;
 
 	$preview4assign = array(
 		'errors' => $errors ,

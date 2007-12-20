@@ -254,7 +254,7 @@ function DeleteFile( $currentFolder = '/' , $type )
 	// get physical path of the targeted file
 	if( $trust_mode ) {
 		list( , $sDeleteFile ) = explode( '=' , @$_GET['file_url'] , 2 ) ;
-		$sDeleteFile = preg_replace( '/[^a-zA-Z0-9_.-]/' , '' , $sDeleteFile ) ;
+		$sDeleteFile = preg_replace( '/[^a-zA-Z0-9_.-]/' , '' , basename( $sDeleteFile ) ) ;
 		$sServerDir = FCK_TRUSTUPLOAD_PATH . $currentFolder ;
 	} else {
 		$sDeleteFile = preg_replace('/[^a-zA-Z0-9_.-]/', '', basename( @$_GET['file_url'] ) ) ;

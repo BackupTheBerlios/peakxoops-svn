@@ -28,7 +28,7 @@ function GetFolders( $currentFolder , $type )
 	$sServerDir = $trust_mode ? FCK_TRUSTUPLOAD_PATH . $currentFolder : FCK_UPLOAD_PATH . $currentFolder ;
 	$oCurrentFolder = opendir( $sServerDir ) ;
 
-	while( $sFile = readdir( $oCurrentFolder ) )
+	while( ( $sFile = readdir( $oCurrentFolder ) ) !== false )
 	{
 		if ( $sFile != '.' && $sFile != '..' && is_dir( $sServerDir . $sFile ) )
 			$aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) . '" />' ;
@@ -67,7 +67,7 @@ function GetFoldersAndFiles( $currentFolder , $type )
 
 	$oCurrentFolder = opendir( $sServerDir ) ;
 
-	while( $sFile = readdir( $oCurrentFolder ) ) {
+	while( ( $sFile = readdir( $oCurrentFolder ) ) !== false ) {
 		if( substr( $sFile , 0 , 1 ) == '.' ) continue ;
 
 		if( is_dir( $sServerDir . $sFile ) ) {
@@ -102,7 +102,7 @@ function GetFoldersAndFiles( $currentFolder , $type )
 			if( $trust_mode ) {
 				// separate filename into 'display name' and 'url'
 				$sFileDisplayName = DecodeFileName( substr( $sFile , strlen( $GLOBALS['fck_user_prefix'] ) ) ) ;
-				$sFileUrl = FCK_TRUSTUPLOAD_URL.$sFile ;
+				$sFileUrl = FCK_TRUSTUPLOAD_URL.$currentFolder.$sFile ;
 				$sXmlEntry = '<File name="' . $sFileDisplayName . '" url="' . $sFileUrl . '" size="' . $iFileSize . '" mtime="' . $iFileMtime . '" can_delete="' . $iCanDelete . '" />' ;
 			} else {
 				$sXmlEntry = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" mtime="' . $iFileMtime . '" can_delete="' . $iCanDelete . '" />' ;
@@ -310,6 +310,8 @@ function ConvertToXmlAttribute( $value )
 
 function SetXmlHeaders()
 {
+	while( ob_get_level() ) ob_end_clean() ;
+
 	// Prevent the browser from caching the result.
 	// Date in the past
 	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT') ;

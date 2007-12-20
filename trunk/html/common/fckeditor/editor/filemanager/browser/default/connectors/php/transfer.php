@@ -15,7 +15,7 @@ if( file_exists( dirname(__FILE__).'/config_and_auth.inc.php' ) ) {
 // Get the main request informaiton.
 $file = preg_replace( '?[^0-9a-zA-Z_/-]?' , '' , @$_GET['file'] ) ;
 
-$full_path = FCK_TRUSTUPLOAD_PATH.'/'.$file ;
+$full_path = FCK_TRUSTUPLOAD_PATH_BASE.$file ;
 $original_file_name = DecodeFileName( substr( strrchr( basename( $file ) , '_' ) , 1 ) ) ;
 $ext = strtolower( substr( strrchr( $original_file_name , '.' ) , 1 ) ) ;
 
@@ -35,6 +35,11 @@ while( ob_get_level() ) {
 if( headers_sent() ) {
 	restore_error_handler() ;
 	die( "Can't send headers. check language files etc." ) ;
+}
+
+// check file existance
+if( ! file_exists( $full_path ) ) {
+	die( 'Invalid file: '.htmlspecialchars($full_path,ENT_QUOTES) ) ;
 }
 
 // headers for browser cache

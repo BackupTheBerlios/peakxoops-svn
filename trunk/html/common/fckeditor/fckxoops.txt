@@ -15,21 +15,35 @@
 all of connectors or uploaders other than php are removed.
 and php connector and uploader have been modified radically. (for preventing fatal vulnerability)
 
-- the file name stored in the server is independent from local file name
+- two repositories for images and files
+Image files (jpeg,gif,png) will be stored inside DocumentRoot.
+Files other than images will be stored outside of DocumentRoot (XOOPS_TRUST_PATH).
 
-- abondon directories per resource types
-in this version, resource type means the extraction from files
+- the file name stored in the server is independent from local file name
+Image files will be renamed newly.
+File names of other than images will be encoded like pukiwiki.
 
 - consider safe_mode
 if you want to create folder under safe_mode, you have to make the directory manually via FTP etc.
 
-- permission of browsing and uploading
-only admin of XOOPS can use browser and uploader with default phpconfig_and_auth.inc.php
+- permission of uploading
+only admin of XOOPS can upload with default phpconfig_and_auth.inc.php
 
 - uploading by normal users
 If you want to allow normal users can upload image files, modify $fck_uploadable_groups in phpconfig_and_auth.inc.php
 A normal user can browse only files uploaded by him/herself.
 A normal user cannot create a new folder.
+
+- permission of listing files
+Admins can get a list of all uploaded files.
+Normal users can get a list of files uploaded by him/herself.
+
+- permission of accessing each files
+All visitors within guests can access any uploaded files if he/she knows its url.
+
+- permission of removing files
+Admins can delete all of uploaded files.
+Normal users can delete files uploaded by him/herself within 3600sec. (default)
 
 - resize original/making thumnail
 If you want special action about uploaded files, modify phpconfig_and_auth.inc.php as you like.
@@ -66,13 +80,14 @@ fckxoops¤ÎÀßÄê¤Ï¡¢°ì±þ¡¢editor/filemanager/browser/default/connectors/phpconfig_
 php°Ê³°¤Î¥³¥Í¥¯¥¿¡¦¥¢¥Ã¥×¥í¡¼¥À¤Ï¤¹¤Ù¤Æºï½ü¤·¤Æ¤Þ¤¹¡£
 ¤Þ¤¿¡¢¥ª¥ê¥¸¥Ê¥ë¤Îphp¤Î¥³¥Í¥¯¥¿¡¦¥¢¥Ã¥×¥í¡¼¥À¤Ë¤ÏÂç¤­¤ÊÀÈ¼åÀ­¤¬¤¢¤ê¡¢Â¾¤Ë¤â¤¤¤í¤¤¤íÌäÂê¤¬¤¢¤Ã¤¿¤¿¤á¡¢¤Û¤Ü¤Þ¤ë¤Þ¤ë½ñ¤­Ä¾¤·¤Æ¤Þ¤¹¡£
 
+¡¦¥Õ¥¡¥¤¥ëÊÝ´É¾ì½ê
+¥¤¥á¡¼¥¸¥Õ¥¡¥¤¥ë¤ÏDocumentRootÆâ¤ËÃÖ¤­¤Þ¤¹¤¬¡¢¤½¤ì°Ê³°¤Î¥Õ¥¡¥¤¥ë¤Ï¡¢TRUST_PATHÆâ¤ËÃÖ¤­¤Þ¤¹¡£
+
 ¡¦¥Õ¥¡¥¤¥ëÌ¾¤ÎÈóÊÝÂ¸
 ¥¢¥Ã¥×¥í¡¼¥É¤¹¤ëºÝ¤Ë¡¢¥í¡¼¥«¥ë¤Î¥Õ¥¡¥¤¥ëÌ¾¤Ï°Ý»ý¤·¤Þ¤»¤ó¡£
-¿·¤·¤¯¥Õ¥¡¥¤¥ëÌ¾¤¬ºîÀ®¤µ¤ì¤Þ¤¹¡£
+ROOTÆâ¤ËÃÖ¤«¤ì¤ë¥¤¥á¡¼¥¸¥Õ¥¡¥¤¥ë¤Ë¤Ä¤¤¤Æ¤Ï¡¢¿·¤·¤¯¥Õ¥¡¥¤¥ëÌ¾¤¬ºîÀ®¤µ¤ì¤Þ¤¹¡£
 °ì±þ¡¢È½¤ê¤ä¤¹¤¯¤¹¤ë¤¿¤á¤Ë¡¢ÆüÉÕ¤ò¥Õ¥¡¥¤¥ëÌ¾¤Ë´Þ¤á¤Æ¤¤¤Þ¤¹¡£
-
-¡¦¥ê¥½¡¼¥¹¥¿¥¤¥×Ëè¤Î¥Ç¥£¥ì¥¯¥È¥ê¤Î¿¶¤êÊ¬¤±µ¡Ç½ºï½ü
-¤³¤Î¿¶¤êÊ¬¤±¤Ï»È¤¤¤Å¤é¤¯¤Ê¤ë¤À¤±¤Ç¡¢°ÕÌ£¤¬¤Ê¤¤¤È»×¤ï¤ì¤¿¤¿¤á¡¢¤½¤Îµ¡Ç½¤ò¥Ð¥Ã¥µ¥êºï½ü¤·¤Æ¤Þ¤¹¡£¡Ö¹Ê¤ê¹þ¤ß¡×¤Ç¤¢¤ì¤Ð°ÕÌ£¤¬¤¢¤ë¤Î¤Ç¡¢°ì±þ¼ÂÁõ¤·¤Æ¤Þ¤¹¡£
+ROOT³°¤ËÃÖ¤«¤ì¤ë¤½¤ÎÂ¾¤Î¥Õ¥¡¥¤¥ë¤Ë¤Ä¤¤¤Æ¤Ï¡¢¸µ¤Î¥Õ¥¡¥¤¥ëÌ¾¤òpukiwiki¥¨¥ó¥³¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ëÌ¾¤ÇÊÝÂ¸¤·¤Þ¤¹¡£¡Ê¼ÂºÝ¤Ë¤Ï¡¢uid¤Ë¤è¤ëprefix¤â¤Ä¤¯¡Ë
 
 ¡¦safe_modeÂÐ±þ
 safe_modeÀ©¸Â¤Ç¥Ï¥Þ¤ë¤³¤È¤òÈò¤±¤ë¤¿¤á¡¢safe_mode¤Î¾ì¹ç¤Ï¡¢¥Ç¥£¥ì¥¯¥È¥ê¤òºî¤ë¤³¤È¤¬½ÐÍè¤Ê¤¤¤è¤¦¤Ë¤·¤Æ¤¤¤Þ¤¹¡£
@@ -85,6 +100,20 @@ safe_mode¥µ¡¼¥Ð¤Î¾ì¹ç¤Ï¡¢FTPÅù¤Çuploads/fckeditor/¤Î²¼¤Ë¡¢Å¬µ¹¥Õ¥©¥ë¥À¤òºîÀ®¤·¤Æ
 ¡¦¥Î¡¼¥Þ¥ë¥æ¡¼¥¶¤Î¥¢¥Ã¥×¥í¡¼¥É¸¢¸Â
 phpconfig_and_auth.inc.php ¤Ç $fck_uploadable_groups ¤ÎÀßÄê¤òÊÑ¹¹¤¹¤ì¤Ð¡¢´ÉÍý¼Ô¤Ç¤Ï¤Ê¤¤ÄÌ¾ï¤Î¥æ¡¼¥¶¤â¥¢¥Ã¥×¥í¡¼¥É¤¬¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤ê¤Þ¤¹¡£¤³¤Î¾ì¹ç¡¢¼«Ê¬¤¬¥¢¥Ã¥×¥í¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ë°Ê³°¤Ï¡¢¥µ¡¼¥Ð¡¼¥Ö¥é¥¦¥¶¤Ç¸«¤ë¤³¤È¤¬½ÐÍè¤Þ¤»¤ó¡£¥Õ¥©¥ë¥À¤Ë¤è¤ë¿¶¤êÊ¬¤±¤Ç¤Ï¤Ê¤¯¡¢¥Õ¥¡¥¤¥ëprefix¤Ë¤è¤ë¿¶¤êÊ¬¤±¤Ç¤¹¡£¤Ê¤ª¡¢¥Î¡¼¥Þ¥ë¥æ¡¼¥¶¤Ï¥Õ¥©¥ë¥À¤ÎºîÀ®¸¢¸Â¤â¤¢¤ê¤Þ¤»¤ó¡£
 
+¡¦¥Õ¥¡¥¤¥ë¥ê¥¹¥È¸¢¸Â
+´ÉÍý¼Ô¤ÏÁ´Éô¤Î¥Õ¥¡¥¤¥ë¤¬¥ê¥¹¥ÈÉ½¼¨¤µ¤ì¤Þ¤¹¡£
+°ìÈÌ¥æ¡¼¥¶¤Ï¡¢¼«Ê¬¤¬¥¢¥Ã¥×¥í¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ë¤·¤«¥ê¥¹¥ÈÉ½¼¨¤µ¤ì¤Þ¤»¤ó¡£
+
+¡¦¥Õ¥¡¥¤¥ë±ÜÍ÷¸¢¸Â
+¥ê¥ó¥¯¤Ê¤É¤Ç¥Õ¥¡¥¤¥ëURL¤¬ÌÀ¤é¤«¤Ë¤Ê¤Ã¤Æ¤¤¤ë¤â¤Î¤Ë¤Ä¤¤¤Æ¤Ï¡¢¥²¥¹¥È¤â´Þ
+¤á¤¿Á´¤Æ¤Î¥æ¡¼¥¶¤¬±ÜÍ÷¡¦¥À¥¦¥ó¥í¡¼¥É¤Ç¤­¤Þ¤¹¡£
+
+¡¦¥Õ¥¡¥¤¥ëºï½ü¸¢¸Â
+´ÉÍý¼Ô¤Ï¾ï¤ËÁ´¤Æ¤Î¥Õ¥¡¥¤¥ë¤òºï½ü²ÄÇ½¤Ç¤¹¡£
+¡Ê°ì±þ¡¢µ¤µÙ¤áÄøÅÙ¤Ë¥È¡¼¥¯¥ó¤ÏËä¤á¹þ¤ó¤Ç¤¢¤ê¤Þ¤¹¡Ë
+°ìÈÌ¥æ¡¼¥¶¤Ï¡¢¼«Ê¬¤¬¥¢¥Ã¥×¥í¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ë¤·¤«ºï½ü¤Ç¤­¤Þ¤»¤ó¡£
+¤Þ¤¿¡¢¥¢¥Ã¥×¥í¡¼¥É¤·¤Æ¤«¤é°ìÄê»þ´Ö(¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï3600ÉÃ)·Ð¤Ä¤È¡¢¼«Ê¬¤¬¥¢¥Ã¥×¥í¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ë¤âºï½ü¤Ç¤­¤Ê¤¯¤Ê¤ê¤Þ¤¹¡£
+
 ¡¦¥¢¥Ã¥×¥í¡¼¥É¤µ¤ì¤¿²èÁü¤Î¥ê¥µ¥¤¥º/¥µ¥à¥Í¥¤¥ëºîÀ®
 ¤³¤ì¤â¡¢phpconfig_and_auth.inc.php ¤Î½ñ¤­Êý°ì¤Ä¤Ç¡¢¤É¤Î¤è¤¦¤Ë¤Ç¤â¤Ç¤­¤Þ¤¹¡£fck_resize_by_imagemagick() ¤ò»²¹Í¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£¡ÊImageMagick¤ò»È¤Ã¤Æ¡¢480x480¤È¤¤¤¦¥Ü¥Ã¥¯¥¹Æâ¤ËÇ¼¤á¤ë½èÍý¤ò¹Ô¤¦¡Ë
 
@@ -93,10 +122,35 @@ phpconfig_and_auth.inc.php ¤Ç $fck_uploadable_groups ¤ÎÀßÄê¤òÊÑ¹¹¤¹¤ì¤Ð¡¢´ÉÍý¼Ô¤
 ¡¦¥Ö¥é¥¦¥º¸¢¸Â/¥¢¥Ã¥×¥í¡¼¥É¸¢¸Â¤ÎºÙ¤«¤Ê¼ÂÁõ
 ¡¦²èÁü¤Î¼«Æ°¥µ¥à¥Í¡¼¥ëºîÀ®¡Ê¥ê¥ó¥¯¤È²èÁü¤ÎÎ¾Êý¤Ë¼«Æ°ÆþÎÏ¤µ¤ì¤ë¤è¤¦¤Ë¡Ä¡Ë
 ¡¦Attachman¥â¥¸¥å¡¼¥ë¤È¤ÎÏ¢·È
-¡¦XOOPS_TRUST_PATHÂ¦¤ËÊÝÂ¸¤¹¤ëµ¡Ç½¡Ê¤â¤Á¤í¤óÅ¾Á÷¥¹¥¯¥ê¥×¥È¤â¡Ë
 
 
 ¡üFCKeditor ¤Îcommon²½ºî¶Èµ­Ï¿
+
+(2007-12-20) 2.3.2-005
+- ¥Õ¥¡¥¤¥ëºï½üµ¡Ç½¤Î¼ÂÁõ (thx aramaki)
+-- °ìÈÌ¥æ¡¼¥¶¤Ï¼«Ê¬¼«¿È¤Î¥Õ¥¡¥¤¥ë¤ò°ìÄê»þ´ÖÆâ¤À¤±ºï½ü²ÄÇ½ (default 3600sec)
+- XOOPS_TRUST_PATH/uploads/ ²¼¤Ø¤Î¥¢¥Ã¥×¥í¡¼¥É¡¦Å¾Á÷¥À¥¦¥ó¥í¡¼¥É¤Î¼ÂÁõ
+-- ¥¢¥Ã¥×¥í¡¼¥É»þ¡¢³ÈÄ¥»Ò¤¬jpeg,gif,png¤Î¤ß¡¢XOOPS_UPLOAD_PATH²¼¤Ø¤È¿¶¤êÊ¬¤±¤ë
+-- ¥ê¥¹¥È»þ¡¢File¥ê¥½¡¼¥¹¤Ë¤Ä¤¤¤Æ¤Ï¡¢TRUST²¼¤ò¸«¤ë¤è¤¦¤Ë¤·¤¿
+- ¥Õ¥¡¥¤¥ëÌ¾ÊÝÂ¸¡¦ÆüËÜ¸ìÂÐ±þ (File¥ê¥½¡¼¥¹¤Î¤ß)
+-- ¥Õ¥¡¥¤¥ëÌ¾¤Î¥¨¥ó¥³¡¼¥É¥ë¡¼¥ë¤Ïpukiwiki¤ò¥Ñ¥¯¤Ã¤¿
+-- ¥¨¥ó¥³¡¼¥ÉÁ°¤Ë¥Õ¥¡¥¤¥ëÌ¾¤ÏUTF-8¤Ë¤·¤Æ¤ª¤¯¡£Content-Disposition»þ¤ËIE¤Î¤ßSJIS¤Ø
+- ¤Ê¤ë¤Ù¤¯Å¬ÀÚ¤Ê¥¨¥é¡¼¤¬½ÐÎÏ¤µ¤ì¤ë¤è¤¦¤Ë²þÁ±¤·¤¿
+- config¥Õ¥¡¥¤¥ë¤Î¹½À®ÊÑ¹¹¡Êµì¥Ð¡¼¥¸¥ç¥ó¤ÎÍøÍÑ¼Ô¤Ï¥Þ¡¼¥¸¤¹¤ëÉ¬Í×¤¢¤ê¡Ë
+
+(2007-12-06) 2.3.2-004
+- uidËè¤Ë¥Ç¥£¥ì¥¯¥È¥ê¤Ë¿¶¤êÊ¬¤±¤ëÀßÄê¤ÎÄÉ²Ã¡£config¤ò½ñ¤­´¹¤¨¤Æ¡¢¥Õ¥©¥ë¥À¤ò10¸Ä¤Þ¤¿¤Ï100¸Ä¼«Ê¬¤Çºî¤ê¡¢chmod 777¤¹¤ë¡£(safe_modeÂÐ±þ¤Î¤¿¤á)
+
+(2007-11-18) 2.3.2-003
+- ¥¢¥Ã¥×¥í¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ë¤Î¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤ò644¤ËÊÑ¹¹¤¹¤ë¥³¡¼¥É¤ÎÄÉ²Ã
+
+(2007-09-14) 2.3.2-002
+- editor/filemanager/browser/default/frmresourceslist.html ¤ò¤¤¤¸¤Ã¤Æ²èÁü¤Ê¤é²èÁü¤½¤Î¤â¤Î¤òÉ½¼¨¤¹¤ë¤è¤¦¤ËHack¤·¤¿
+- ¥ê¥µ¥¤¥º¤Ê¤É¤Î½èÍý¤òÄÉ²Ã¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
+- ¥Î¡¼¥Þ¥ë¸¢¸Â¤ÎÀßÄê¤ò²ÄÇ½¤È¤·¤¿
+- ¥Õ¥©¥ë¥ÀºîÀ®¤Ï´ÉÍý¼Ô¤À¤±¤¬¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
+- ¥Î¡¼¥Þ¥ë¸¢¸Â¤Ç¤Ï¼«Ê¬¤¬¥¢¥Ã¥×¤·¤¿¥Õ¥¡¥¤¥ë¤À¤±¤¬¥Ö¥é¥¦¥º¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
+
 (2006-12-14) 2.3.2-001
 - FCKeditor ºÇ¿·ÈÇ¤Î¥À¥¦¥ó¥í¡¼¥É/²òÅà
 - FCKeditor/Ä¾²¼¤«¤é¡¢editor/ *.js *.xml *.txt °Ê³°¤ò¤¹¤Ù¤Æºï½ü
@@ -108,15 +162,6 @@ var _QuickUploadLanguage	= 'php' ; // ¥ª¥ê¥¸¥Ê¥ë¤Ïasp
 - editor/filemanager/browser/default/connectors/php/ Ä¾²¼¤ÎPHP¥Õ¥¡¥¤¥ë¤ò¤Þ¤ë¤Þ¤ëºî¤êÄ¾¤·
 - editor/filemanager/upload/php/ Ä¾²¼¤ÎPHP¥Õ¥¡¥¤¥ë¤ò¤Þ¤ë¤Þ¤ëºî¤êÄ¾¤·
 - upload¤Èbrowse¤¬Î¾Êý¤È¤âÆ±¤¸config¤òÍøÍÑ¤Ç¤­¤ë¤è¤¦¤Ë
-(2007-09-14) 2.3.2-002
-- editor/filemanager/browser/default/frmresourceslist.html ¤ò¤¤¤¸¤Ã¤Æ²èÁü¤Ê¤é²èÁü¤½¤Î¤â¤Î¤òÉ½¼¨¤¹¤ë¤è¤¦¤ËHack¤·¤¿
-- ¥ê¥µ¥¤¥º¤Ê¤É¤Î½èÍý¤òÄÉ²Ã¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
-- ¥Î¡¼¥Þ¥ë¸¢¸Â¤ÎÀßÄê¤ò²ÄÇ½¤È¤·¤¿
-- ¥Õ¥©¥ë¥ÀºîÀ®¤Ï´ÉÍý¼Ô¤À¤±¤¬¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
-- ¥Î¡¼¥Þ¥ë¸¢¸Â¤Ç¤Ï¼«Ê¬¤¬¥¢¥Ã¥×¤·¤¿¥Õ¥¡¥¤¥ë¤À¤±¤¬¥Ö¥é¥¦¥º¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
-(2007-11-18) 2.3.2-003
-- ¥¢¥Ã¥×¥í¡¼¥É¤·¤¿¥Õ¥¡¥¤¥ë¤Î¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤ò644¤ËÊÑ¹¹¤¹¤ë¥³¡¼¥É¤ÎÄÉ²Ã
-(2007-12-06) 2.3.2-004
-- uidËè¤Ë¥Ç¥£¥ì¥¯¥È¥ê¤Ë¿¶¤êÊ¬¤±¤ëÀßÄê¤ÎÄÉ²Ã¡£config¤ò½ñ¤­´¹¤¨¤Æ¡¢¥Õ¥©¥ë¥À¤ò10¸Ä¤Þ¤¿¤Ï100¸Ä¼«Ê¬¤Çºî¤ê¡¢chmod 777¤¹¤ë¡£(safe_modeÂÐ±þ¤Î¤¿¤á)
+
 
 [/xlang:ja]

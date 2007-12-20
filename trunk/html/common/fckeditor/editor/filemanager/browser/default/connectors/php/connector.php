@@ -28,6 +28,11 @@ switch ( $sCommand )
 	case 'FileUpload' :
 		FileUpload( $sCurrentFolder ) ;
 		break ;
+	case 'DeleteFile' :
+		CreateXmlHeader( 'DeleteFile' , $sCurrentFolder ) ;
+		DeleteFile( $sCurrentFolder , $sType ) ;
+		CreateXmlFooter() ;
+		break ;
 	case 'GetFoldersAndFiles' :
 		CreateXmlHeader( 'GetFoldersAndFiles' , $sCurrentFolder ) ;
 		GetFoldersAndFiles( $sCurrentFolder , $sType ) ;
@@ -35,13 +40,13 @@ switch ( $sCommand )
 		break ;
 	case 'CreateFolder' :
 		CreateXmlHeader( 'CreateFolder' , $sCurrentFolder ) ;
-		CreateFolder( $sCurrentFolder ) ;
+		CreateFolder( $sCurrentFolder , $sType ) ;
 		CreateXmlFooter() ;
 		break ;
 	default :
 	case 'GetFolders' :
 		CreateXmlHeader( 'GetFolders' , $sCurrentFolder ) ;
-		GetFolders( $sCurrentFolder ) ;
+		GetFolders( $sCurrentFolder , $sType ) ;
 		CreateXmlFooter() ;
 		break ;
 }

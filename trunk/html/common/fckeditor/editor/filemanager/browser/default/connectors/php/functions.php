@@ -18,12 +18,14 @@
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-function GetFolders( $currentFolder )
+function GetFolders( $currentFolder , $type )
 {
+	$trust_mode = $type == 'File' ;
+
 	// Array that will hold the folders names.
 	$aFolders	= array() ;
 
-	$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
+	$sServerDir = $trust_mode ? FCK_TRUSTUPLOAD_PATH . $currentFolder : FCK_UPLOAD_PATH . $currentFolder ;
 	$oCurrentFolder = opendir( $sServerDir ) ;
 
 	while( $sFile = readdir( $oCurrentFolder ) )
@@ -48,12 +50,20 @@ function GetFolders( $currentFolder )
 
 function GetFoldersAndFiles( $currentFolder , $type )
 {
+	$trust_mode = $type == 'File' ;
+
 	// Map the virtual path to the local server path.
-	$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
+	$sServerDir = $trust_mode ? FCK_TRUSTUPLOAD_PATH . $currentFolder : FCK_UPLOAD_PATH . $currentFolder ;
 
 	// Arrays that will hold the folders and files names.
 	$aFolders = array() ;
 	$aFiles = array() ;
+
+	// check the directory exists
+	if( ! is_dir( $sServerDir ) ) {
+		echo '<Folders /><Files /><CustomError message="Create folder '.htmlspecialchars($sServerDir,ENT_QUOTES).' first" />' ;
+		return ;
+	}
 
 	$oCurrentFolder = opendir( $sServerDir ) ;
 
@@ -69,22 +79,37 @@ function GetFoldersAndFiles( $currentFolder , $type )
 				if( ! strstr( $sFile , $GLOBALS['fck_user_prefix'] ) ) continue ;
 			}
 
-			// file
+			// extension check
 			if( ! empty( $GLOBALS['fck_resource_type_extensions'][$type] ) ) {
 				// file limitation by extension and resource type
 				$extension = strtolower( substr( strrchr( $sFile , '.' ) , 1 ) ) ;
 				if( ! in_array( $extension , $GLOBALS['fck_resource_type_extensions'][$type] ) ) continue ;
 			}
+
 			// filesize
 			$iFileSize = filesize( $sServerDir . $sFile ) ;
 			if( $iFileSize > 0 ) {
 				$iFileSize = round( $iFileSize / 1024 ) ;
 				if( $iFileSize < 1 ) $iFileSize = 1 ;
 			}
+
 			// filemtime
 			$iFileMtime = filemtime( $sServerDir . $sFile ) ;
 
-			$aFiles[ '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" mtime="' . $iFileMtime . '" />' ] = $iFileMtime ;
+			// can_delete
+			$iCanDelete = intval( CheckCanDelete( $sServerDir . $sFile ) ) ;
+
+			if( $trust_mode ) {
+				// separate filename into 'display name' and 'url'
+				$sFileDisplayName = DecodeFileName( substr( $sFile , strlen( $GLOBALS['fck_user_prefix'] ) ) ) ;
+				$sFileUrl = FCK_TRUSTUPLOAD_URL.$sFile ;
+				$sXmlEntry = '<File name="' . $sFileDisplayName . '" url="' . $sFileUrl . '" size="' . $iFileSize . '" mtime="' . $iFileMtime . '" can_delete="' . $iCanDelete . '" />' ;
+			} else {
+				$sXmlEntry = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" mtime="' . $iFileMtime . '" can_delete="' . $iCanDelete . '" />' ;
+			}
+
+			$aFiles[ $sXmlEntry ] = $iFileMtime ;
+
 		}
 	}
 
@@ -105,11 +130,16 @@ function GetFoldersAndFiles( $currentFolder , $type )
 		echo $sFiles ;
 
 	echo '</Files>' ;
+
+	// Send ticket (easy ticket)
+	echo '<Ticket value="'.md5(session_id()).'" />' ;
 }
 
 
-function CreateFolder( $currentFolder )
+function CreateFolder( $currentFolder , $type )
 {
+	$trust_mode = $type == 'File' ;
+
 	$sErrorNumber	= '0' ;
 	$sErrorMsg		= '' ;
 
@@ -120,12 +150,12 @@ function CreateFolder( $currentFolder )
 		// permission check (only admin create folder)
 		$sErrorNumber = '103' ;
 	} else if( ini_get( 'safe_mode' ) ) {
-		$sErrorNumber = '103' ;
+		$sErrorNumber = '1' ;
 		$sErrorMsg = 'Your server runs under safe_mode. Thus, you have to make directories by yourself' ;
 	} else {
 
 		// Map the virtual path to the local server path of the current folder.
-		$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
+		$sServerDir = $trust_mode ? FCK_TRUSTUPLOAD_PATH . $currentFolder : FCK_UPLOAD_PATH . $currentFolder ;
 
 		if( is_writable( $sServerDir ) && ! file_exists( $sServerDir . $sNewFolderName ) ) {
 			$oldumask = umask( 0 ) ;
@@ -137,7 +167,7 @@ function CreateFolder( $currentFolder )
 	}
 
 	// Create the "Error" node.
-	echo '<Error number="' . $sErrorNumber . '" originalDescription="' . ConvertToXmlAttribute( $sErrorMsg ) . '" />' ;
+	echo '<Error number="' . $sErrorNumber . '" text="' . ConvertToXmlAttribute( $sErrorMsg ) . '" />' ;
 }
 
 
@@ -145,23 +175,47 @@ function FileUpload( $currentFolder = '/' )
 {
 	global $fck_allowed_extensions ;
 
+	// Check upload permission
+	if( empty( $GLOBALS['fck_canupload'] ) ) {
+		SendResultsHTML( '202' , '' , 'You are not permitted to upload any files' , '' ) ;
+	}
+
 	// Check if the file has been correctly uploaded.
 	if ( empty( $_FILES[FCK_UPLOAD_NAME] ) || empty( $_FILES[FCK_UPLOAD_NAME]['tmp_name'] ) || empty( $_FILES[FCK_UPLOAD_NAME]['name'] ) || ! is_uploaded_file( $_FILES[FCK_UPLOAD_NAME]['tmp_name'] ) ) {
-		SendResultsHTML( '202' , '' , '' , 'failed to upload' ) ;
+		SendResultsHTML( '202' , '' , 'failed to upload' , '' ) ;
 	}
-	
+
 	// Get extension from the uploaded file
 	$extension = strtolower( substr( strrchr( $_FILES[FCK_UPLOAD_NAME]['name'] , '.' ) , 1 ) ) ;
-	
+
 	// White list check
 	if( ! in_array( $extension , array_keys( $fck_allowed_extensions ) ) ) {
-		SendResultsHTML( '1', '', '', 'Invalid file extension. allowed ('.htmlspecialchars(implode('|',$fck_allowed_extensions)).') only' ) ;
+		SendResultsHTML( '1', '', 'Invalid file extension. allowed ('.htmlspecialchars(implode(',',array_keys($fck_allowed_extensions))).') only' , '' ) ;
 	}
-	
-	// Create new file name (don't use ['name'] other than the extension)
-	$new_filename = @$GLOBALS['fck_user_prefix'] . FCK_FILE_PREFIX . date( 'YmdHis' ) . substr( md5( uniqid( rand() , true ) ) , 0 , 8 ) . '.' . $extension ;
-	$new_filefullpath = FCK_UPLOAD_PATH.$currentFolder.$new_filename ;
-	$new_fileurl = FCK_UPLOAD_URL.$currentFolder.$new_filename ;
+
+	// Image mode (inside DocumentRoot) or Trust mode (outside DocumentRoot)
+	$trust_mode = empty( $fck_allowed_extensions[ $extension ] ) ;
+
+	// Create new file name
+	if( $trust_mode ) {
+		// create encoded name
+		$original_file_name4encode = mb_convert_encoding( $_FILES[FCK_UPLOAD_NAME]['name'] , 'UTF-8' , 'auto' ) ;
+		$new_filename = @$GLOBALS['fck_user_prefix'] . FCK_FILE_PREFIX . EncodeFileName( $original_file_name4encode ) ;
+		$sServerDir = FCK_TRUSTUPLOAD_PATH . $currentFolder ;
+		$new_filefullpath = $sServerDir . $new_filename ;
+		$new_fileurl = FCK_TRUSTUPLOAD_URL.$currentFolder.$new_filename ;
+	} else {
+		// create random name
+		$new_filename = @$GLOBALS['fck_user_prefix'] . FCK_FILE_PREFIX . date( 'YmdHis' ) . substr( md5( uniqid( rand() , true ) ) , 0 , 8 ) . '.' . $extension ;
+		$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
+		$new_filefullpath = $sServerDir . $new_filename ;
+		$new_fileurl = FCK_UPLOAD_URL.$currentFolder.$new_filename ;
+	}
+
+	// check the directory exists
+	if( ! is_dir( $sServerDir ) ) {
+		SendResultsHTML( '1', '', 'Create the directory '.$sServerDir.' first' , '' ) ;
+	}
 
 	// move temporary
 	$prev_mask = @umask( 0022 ) ;
@@ -170,12 +224,12 @@ function FileUpload( $currentFolder = '/' )
 	if( ! $upload_result ) SendResultsHTML( '202' ) ;
 	@chmod( $new_filefullpath , 0644 ) ;
 
-	// check the file is valid
-	if( $fck_allowed_extensions[ $extension ] ) {
+	// check the file is valid (image mode only)
+	if( ! $trust_mode ) {
 		$check_result = @getimagesize( $new_filefullpath ) ;
 		if( ! is_array( @$check_result ) || empty( $check_result['mime'] ) || stristr( $check_result['mime'] , $fck_allowed_extensions[ $extension ] ) === false ) {
 			@unlink( $new_filefullpath ) ;
-			SendResultsHTML( '202', '', '', 'File extension does not match the file contents' ) ;
+			SendResultsHTML( '202', '', 'File extension does not match the file contents' , '' ) ;
 		} else {
 			// resize or make thumbnail etc.
 			if( defined( 'FCK_FUNCTION_AFTER_IMGUPLOAD' ) && function_exists( FCK_FUNCTION_AFTER_IMGUPLOAD ) ) {
@@ -187,6 +241,64 @@ function FileUpload( $currentFolder = '/' )
 
 	// success and exit
 	SendResultsHTML( 0 , $new_fileurl , $new_filename ) ;
+}
+
+
+function DeleteFile( $currentFolder = '/' , $type )
+{
+	$trust_mode = $type == 'File' ;
+
+	$sErrorNumber	= '0' ;
+	$sErrorMsg		= '' ;
+
+	// get physical path of the targeted file
+	if( $trust_mode ) {
+		list( , $sDeleteFile ) = explode( '=' , @$_GET['file_url'] , 2 ) ;
+		$sDeleteFile = preg_replace( '/[^a-zA-Z0-9_.-]/' , '' , $sDeleteFile ) ;
+		$sServerDir = FCK_TRUSTUPLOAD_PATH . $currentFolder ;
+	} else {
+		$sDeleteFile = preg_replace('/[^a-zA-Z0-9_.-]/', '', basename( @$_GET['file_url'] ) ) ;
+		$sServerDir = FCK_UPLOAD_PATH . $currentFolder ;
+	}
+	$sServerDeleteFile = $sServerDir . $sDeleteFile ;
+
+	if( $_GET['Ticket'] != md5( session_id() ) ) {
+		// easy Ticket check
+		$sErrorNumber = '1' ;
+		$sErrorMsg = 'Ticket error' ;
+	} else if( empty( $sDeleteFile ) ) {
+		// File not specified 
+		$sErrorNumber = '1' ;
+		$sErrorMsg = 'Invalid file name' ;
+	} else if( ! CheckCanDelete( $sServerDeleteFile ) ) {
+		// admin or owned
+		$sErrorNumber = '1' ;
+		$sErrorMsg = 'You are not permitted to delete the file' ;
+	} else {
+		// all ok
+		$result = @unlink( $sServerDeleteFile ) ;
+		if( ! $result ) {
+			$sErrorNumber = '1' ;
+			$sErrorMsg = 'Cannot delete the file. check permissions etc.' ;
+		}
+	}
+
+	// Create the "Error" node.
+	echo '<Error number="' . $sErrorNumber . '" text="' . ConvertToXmlAttribute( $sErrorMsg ) . '" />' ;
+}
+
+
+function CheckCanDelete( $file_full_path )
+{
+	$mtime = filemtime( $file_full_path ) ;
+
+	if( $GLOBALS['fck_isadmin'] ) {
+		return true ;
+	} else if( $mtime + FCK_USER_SELFDELETE_LIMIT > time() && ( empty( $GLOBALS['fck_check_user_prefix'] ) || strstr( basename( $file_full_path ) , $GLOBALS['fck_user_prefix'] ) ) ) {
+		return true ;
+	} else {
+		return false ;
+	}
 }
 
 
@@ -274,5 +386,20 @@ function SendError( $number , $fileUrl = '' , $fileName = '' ,  $text = '' )
 		SendResultsHTML( $number , $fileUrl , $fileName , $text ) ;
 	}
 }
+
+
+// filename encoder (from pukiwiki)
+function EncodeFileName($key)
+{
+	return ($key == '') ? '' : strtoupper(join('',unpack('H*0',$key)));
+}
+
+// filename decoder (from pukiwiki)
+function DecodeFileName($key)
+{
+	return ($key == '') ? '' : substr(pack('H*','20202020'.$key),4);
+}
+
+
 
 ?>

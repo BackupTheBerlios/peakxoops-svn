@@ -43,6 +43,8 @@ Notice: Async block requires the privileges of not only "block access" but also 
 0.59 2007-12-12
 - fixed a fatal error on failed unserializing (thx sunuken)
 - added a root controller sitemap.php for google sitemap
+- added block joints
+-- xpwiki (thx nao-pon) 0.59a
 
 0.58 2007-11-10
 - fixed invalid clipping_id does not make redirect (thx Nobelium)
@@ -251,6 +253,8 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 0.59 2007-12-12
 - unserializeに失敗した場合にfatal errorが発生していたのを修正 (thx sunuken)
 - google sitemap出力用のルートコントローラを追加
+- 内部情報取得用ジョイント追加
+-- xpwiki (thx nao-pon) 0.59a
 
 0.58 2007-11-10
 - 切り抜きへの不正なアクセスがリダイレクトされていなかったのを修正 (thx Nobelium)

@@ -15,6 +15,10 @@ function b_pico_list_allowed_order()
 		'o.votes_sum DESC' ,
 		'o.votes_count' ,
 		'o.votes_count DESC' ,
+		'o.weight,o.created_time' ,
+		'o.weight,o.created_time DESC' ,
+		'o.weight,o.content_id' ,
+		'o.weight,o.content_id DESC' ,
 	) ;
 }
 
@@ -26,7 +30,7 @@ function b_pico_list_show( $options )
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
 	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
 	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
-	$contents_num = empty( $options[3] ) ? 10 : intval( $options[3] ) ;
+	$limit_params = empty( $options[3] ) ? '10' : join(',',array_map('intval',explode(',',$options[3]))) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
 	$display_body = empty( $options[5] ) ? false : true ;
 
@@ -53,7 +57,7 @@ function b_pico_list_show( $options )
 		$categories4assign = implode(',',$categories) ;
 	}
 
-	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,o.use_cache,o.body_cached,o.body,o.filters,o.extra_fields,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible AND o.created_time <= UNIX_TIMESTAMP() ORDER BY $selected_order,o.content_id LIMIT $contents_num" ;
+	$sql = "SELECT o.content_id,o.vpath,o.subject,o.created_time,o.modified_time,o.poster_uid,o.use_cache,o.body_cached,o.body,o.filters,o.extra_fields,c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_read4content) AND ($whr_categories) AND o.visible AND o.created_time <= UNIX_TIMESTAMP() ORDER BY $selected_order,o.content_id LIMIT $limit_params" ;
 	if( ! $result = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;
@@ -104,7 +108,7 @@ function b_pico_list_edit( $options )
 	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
 	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
 	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
-	$contents_num = empty( $options[3] ) ? 10 : intval( $options[3] ) ;
+	$limit_params = empty( $options[3] ) ? '10' : join(',',array_map('intval',explode(',',$options[3]))) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
 	$display_body = empty( $options[5] ) ? false : true ;
 
@@ -118,7 +122,7 @@ function b_pico_list_edit( $options )
 		'categories_imploded' => implode( ',' , $categories ) ,
 		'order_options' => b_pico_list_allowed_order() ,
 		'selected_order' => $selected_order ,
-		'contents_num' => $contents_num ,
+		'contents_num' => $limit_params ,
 		'this_template' => $this_template ,
 		'display_body' => $display_body ,
 	) ) ;

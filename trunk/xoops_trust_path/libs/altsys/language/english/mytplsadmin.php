@@ -23,4 +23,7 @@ define( '_MYTPLSADMIN_BTN_NEWTPLSET' , 'create' ) ;
 
 define( '_MYTPLSADMIN_DBUPDATED' , 'Templates updated successfully' ) ;
 
+define( '_MYTPLSADMIN_CUSTOMTEMPLATE' , 'Custom template' ) ;
+define( '_MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE' , 'Create a new custom template' ) ;
+
 ?>

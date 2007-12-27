@@ -153,9 +153,9 @@ if( ! empty( $_POST['do_update'] ) ) {
 			// rewrite script for cache
 			// comment-out the line of define()
 			if( empty( $constpref ) ) {
-				$from = '/.*define\(.*(["\'])'.preg_quote($name).'(\\1).*\;.*/' ;
+				$from = '/.*define\s?\(\s*(["\'])'.preg_quote($name).'(\\1).*\;.*/' ;
 			} else {
-				$from = '/.*define\(\s*\$constpref\s*\.\s*(["\'])'.preg_quote(substr($name,strlen($constpref))).'(\\1).*\;.*/' ;
+				$from = '/.*define\s?\(\s*\$constpref\s*\.\s*(["\'])'.preg_quote(substr($name,strlen($constpref))).'(\\1).*\;.*/' ;
 			}
 			$to = '//$0'."\ndefine('".addslashes($name)."','".addslashes($user_value)."');" ;
 			$file_contents = preg_replace( $from , $to , $file_contents ) ;

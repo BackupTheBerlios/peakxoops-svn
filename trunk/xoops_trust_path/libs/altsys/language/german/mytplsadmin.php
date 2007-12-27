@@ -1,5 +1,10 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-12-28 04:46:28
+define('_MYTPLSADMIN_CUSTOMTEMPLATE','Custom template');
+define('_MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE','Create a new custom template');
+
 define( '_MYTPLSADMIN_CREATE_NEW_TPLSET' , 'Erstelle ein neues Template-Set' ) ;
 define( '_MYTPLSADMIN_CAPTION_BASE' , 'auf Basis von' ) ;
 define( '_MYTPLSADMIN_CAPTION_SETNAME' , 'Name' ) ;

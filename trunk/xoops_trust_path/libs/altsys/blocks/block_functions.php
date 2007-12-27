@@ -51,6 +51,7 @@ function b_altsys_admin_menu_show( $options )
 		$adminmenu4altsys = array() ;
 		unset( $adminmenu_use_altsys ) ;
 		@include XOOPS_ROOT_PATH.'/modules/'.$dirname.'/'.@$modinfo['adminmenu'] ;
+		// from admin_menu.php etc.
 		$adminmenu = array_merge( $adminmenu , $adminmenu4altsys ) ;
 		foreach( $adminmenu as $sub ) {
 			$link = empty( $sub['altsys_link'] ) ? $sub['link'] : $sub['altsys_link'] ;
@@ -60,6 +61,23 @@ function b_altsys_admin_menu_show( $options )
 				'url' => XOOPS_URL.'/modules/'.$dirname.'/'.htmlspecialchars( $link , ENT_QUOTES ) ,
 			) ;
 		}
+
+		// for modules overriding Module.class.php (eg. Analyzer for XC)
+		if( empty( $submenus4assign ) && defined( 'XOOPS_CUBE_LEGACY' ) && ! empty( $modinfo['cube_style'] ) ) {
+			$module_handler =& xoops_gethandler('module');
+			$module =& $module_handler->get($mid);
+			$moduleObj =& Legacy_Utils::createModule($module);
+			$modinfo['adminindex'] = $moduleObj->getAdminIndex() ;
+			$modinfo['adminindex_absolute'] = true ;
+			foreach( $moduleObj->getAdminMenu() as $sub ) {
+				if( @$sub['show'] === false ) continue ;
+				$submenus4assign[] = array(
+					'title' => $myts->makeTboxData4Show( $sub['title'] ) ,
+					'url' => strncmp( $sub['link'] , 'http' , 4 ) === 0 ? htmlspecialchars( $sub['link'] , ENT_QUOTES ) : XOOPS_URL.'/modules/'.$dirname.'/'.htmlspecialchars( $sub['link'] , ENT_QUOTES ) ,
+				) ;
+			}
+		}
+
 		// add preferences
 		if( empty( $adminmenu4altsys ) && $mod->getVar('hasconfig') && ! in_array( $mod->getVar('dirname') , array( 'system' , 'legacy' ) ) ) {
 			$submenus4assign[] = array(
@@ -67,6 +85,7 @@ function b_altsys_admin_menu_show( $options )
 				'url' => htmlspecialchars( altsys_get_link2modpreferences( $mid , $coretype ) , ENT_QUOTES ) ,
 			) ;
 		}
+
 		// add help
 		if( defined( 'XOOPS_CUBE_LEGACY' ) && ! empty( $modinfo['cube_style'] ) && ! empty( $modinfo['help'] ) ) {
 			$submenus4assign[] = array(
@@ -89,6 +108,7 @@ function b_altsys_admin_menu_show( $options )
 			'hasconfig' => $mod->getVar( 'hasconfig' ) ,
 			'weight' => $mod->getVar( 'weight' ) ,
 			'adminindex' => htmlspecialchars( @$modinfo['adminindex'] , ENT_QUOTES ) ,
+			'adminindex_absolute' => @$modinfo['adminindex_absolute'] ,
 			'submenu' => $submenus4assign ,
 			'selected' => $mid == $mid_selected ? true : false ,
 			'dot_suffix' => $mid == $mid_selected ? 'selected_opened' : 'closed' ,

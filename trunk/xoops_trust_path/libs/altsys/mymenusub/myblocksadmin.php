@@ -31,15 +31,15 @@ foreach( $modules4menu as $m4menu ) {
 	if( $m4menu->getVar('dirname') == $current_dirname ) {
 		$adminmenu[] = array(
 			'selected' => true ,
-			'title' => $m4menu->getVar('name') . $block_desc ,
-			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname') ,
+			'title' => $m4menu->getVar('name','n') . $block_desc ,
+			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname','n') ,
 		) ;
 		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => $m4menu->getVar('name') ) ;
 	} else {
 		$adminmenu[] = array(
 			'selected' => false ,
-			'title' => $m4menu->getVar('name') . $block_desc ,
-			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname') ,
+			'title' => $m4menu->getVar('name','n') . $block_desc ,
+			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname','n') ,
 		) ;
 	}
 }

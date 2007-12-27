@@ -422,7 +422,7 @@ function do_clone( $bid )
 	}
 	$cblock->setVar('bid', 0);
 	$cblock->setVar('block_type', $block_type == 'C' ? 'C' : 'D' );
-	$cblock->setVar('func_num', 255);
+	$cblock->setVar('func_num', $this->find_func_num_vacancy( $block->getVar('mid') ) ) ;
 	$newid = $cblock->store() ;
 	if( ! $newid ) {
 		return $cblock->getHtmlErrors() ;
@@ -446,16 +446,30 @@ function do_clone( $bid )
 }
 
 
+function find_func_num_vacancy( $mid )
+{
+	$db =& Database::getInstance() ;
+	$func_num = 256 ;
+	do {
+		$func_num -- ;
+		list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix("newblocks")." WHERE mid=".intval($mid)." AND func_num=".$func_num ) ) ;
+	} while( $count > 0 ) ;
+
+	return $func_num > 128 ? $func_num : 255 ;
+}
+
+
 function do_edit( $bid )
 {
 	$bid = intval( $bid ) ;
 
 	if( $bid <= 0 ) {
+		// new custom block
 		$new_block = new XoopsBlock() ;
 		$new_block->setNew() ;
 		$new_block->setVar( 'name' , $this->get_blockname_from_ctype( 'C' ) ) ;
 		$new_block->setVar( 'block_type' , 'C' ) ;
-		$new_block->setVar( 'func_num' , 255 ) ;
+		$new_block->setVar( 'func_num' , 0 ) ;
 		$bid = $new_block->store() ;
 	}
 

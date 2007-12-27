@@ -1,5 +1,12 @@
 [xlang:en]
 
+v0.56 (2007-12-28)
+- added a feature of custom template file (not custom "template set")
+- modified cloned blocks have independent "func_num" each other
+- modified compatibility with some XCL special modules about admin_in_theme
+- added XOOPS_ROOT_PATH/my_language overriding
+-- remove // from SetupAltsysLangMgr.class.php if you want to enable it
+
 v0.55 (2007-07-12)
 - modified the compatibility against XOOPS 2.0.14/15/16
 - added a class D3Tpl extends XoopsTpl
@@ -109,6 +116,13 @@ v0.10 (2006-05-19)
 [/xlang:en]
 [xlang:ja]
 
+
+v0.56 (2007-12-28)
+- カスタムテンプレートの実装
+- 複製ブロックのfunc_numがなるべくダブらないようにした
+- 管理画面テーマで Module.class.php でオーバーライドするモジュールに対応した
+- XOOPS_ROOT_PATH/my_language による言語オーバーライドを隠し機能として用意した
+-- 有効にするには、SetupAltsysLangMgr.class.php の最初の // を削除してください
 
 v0.55 (2007-07-12)
 - 本家版コア2.0.14/15/16との互換性改善

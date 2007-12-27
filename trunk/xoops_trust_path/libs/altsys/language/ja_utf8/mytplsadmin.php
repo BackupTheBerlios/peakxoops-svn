@@ -24,4 +24,7 @@ define( '_MYTPLSADMIN_BTN_NEWTPLSET' , '新規作成' ) ;
 
 define( '_MYTPLSADMIN_DBUPDATED' , 'テンプレートを更新しました' ) ;
 
+define( '_MYTPLSADMIN_CUSTOMTEMPLATE' , 'カスタムテンプレート' ) ;
+define( '_MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE' , '新規カスタムテンプレート作成' ) ;
+
 ?>

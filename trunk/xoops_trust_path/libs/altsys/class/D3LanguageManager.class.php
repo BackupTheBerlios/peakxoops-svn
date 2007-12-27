@@ -40,6 +40,16 @@ function read( $resource , $mydirname , $mytrustdirname = null , $read_once = tr
 	$cache_file = $this->getCacheFileName( $resource , $mydirname ) ;
 	$root_file = XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/language/'.$this->language.'/'.$resource ;
 
+	// language override by XOOPS_ROOT_PATH/my_language
+	if( defined( 'ALTSYS_MYLANGUAGE_ROOT_PATH' ) ) {
+		$mylang_file = ALTSYS_MYLANGUAGE_ROOT_PATH.'/modules/'.$mydirname.'/'.$this->language.'/'.$resource ;
+		if( file_exists( $mylang_file ) ) {
+			require_once $mylang_file ;
+		}
+		$original_error_level = error_reporting() ;
+		error_reporting( $original_error_level & ~ E_NOTICE ) ;
+	}
+
 	if( empty( $mytrustdirname ) ) {
 		// conventional module
 		$default_file = XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/language/'.$this->default_language.'/'.$resource ;
@@ -70,6 +80,10 @@ function read( $resource , $mydirname , $mytrustdirname = null , $read_once = tr
 			if( $read_once ) require_once $default_file ;
 			else require $default_file ;
 		}
+	}
+
+	if( defined( 'ALTSYS_MYLANGUAGE_ROOT_PATH' ) ) {
+		error_reporting( $original_error_level ) ;
 	}
 }
 

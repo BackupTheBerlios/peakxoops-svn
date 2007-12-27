@@ -42,6 +42,13 @@ if( ! empty( $target_module ) && is_object( $target_module ) ) {
 	$target_dirname4sql = addslashes( $target_dirname ) ;
 	$target_mname = $target_module->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $target_module->getVar('version') / 100.0 ) ;
 	//$query4redirect = '?dirname='.urlencode(strip_tags($_GET['dirname'])) ;
+} else if( @$_GET['dirname'] == '_custom' ) {
+	// custom template
+	$target_mid = 0 ;
+	$target_dirname = '_custom' ;
+	$target_dirname4sql = '_custom' ;
+	$target_mname = _MYTPLSADMIN_CUSTOMTEMPLATE ;
+	//$query4redirect = '' ;
 } else {
 	// not specified by dirname (for 3rd party modules as mytplsadmin)
 	$target_mid = $xoopsModule->getVar( 'mid' ) ;
@@ -130,7 +137,7 @@ if( is_array( @$_POST['del_do'] ) ) foreach( $_POST['del_do'] as $tplset_from_tm
 	}
 
 	$tplset_from = $myts->stripSlashesGPC( $tplset_from_tmp ) ;
-	if( $tplset_from == 'default' ) die( _MYTPLSADMIN_ERR_CANTREMOVEDEFAULT ) ;
+	if( $tplset_from == 'default' && $target_dirname != '_custom' ) die( _MYTPLSADMIN_ERR_CANTREMOVEDEFAULT ) ;
 	if( empty( $_POST["{$tplset_from}_check"] ) ) die( _MYTPLSADMIN_ERR_NOTPLFILE ) ;
 
 	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
@@ -189,6 +196,10 @@ altsys_include_mymenu() ;
 
 echo "<h3 style='text-align:left;'>"._MYTPLSADMIN_H3_MODULE." : $target_mname</h3>\n" ;
 
+// link to create a new custom template
+if( $target_dirname == '_custom' ) {
+	echo "<a href='index.php?mode=admin&lib=altsys&page=mytplsform&tpl_tplset=default'>"._MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE."</a>\n" ;
+}
 
 // beggining of table & form
 echo "
@@ -209,7 +220,6 @@ $fingerprint_styles = array( '' , 'background-color:#00FF00' , 'background-color
 while( list( $tpl_file , $tpl_desc , $type , $count ) = $db->fetchRow( $frs ) ) {
 
 	$evenodd = @$evenodd == 'even' ? 'odd' : 'even' ;
-	$fingerprint_style_count = 0 ;
 
 	// information about the template
 	echo "
@@ -229,8 +239,10 @@ while( list( $tpl_file , $tpl_desc , $type , $count ) = $db->fetchRow( $frs ) ) 
 		$fingerprint = tplsadmin_get_fingerprint( file( $basefilepath ) ) ;
 		$fingerprints[ $fingerprint ] = 1 ;
 		echo "<td class='$evenodd'>".formatTimestamp(filemtime($basefilepath),'m').'<br />'.substr($fingerprint,0,16)."<br /><input type='checkbox' name='basecheck[$tpl_file]' value='1' /></td>\n" ;
+		$fingerprint_style_count = 0 ;
 	} else {
 		echo "<td class='$evenodd'><br /></td>" ;
+		$fingerprint_style_count = -1 ;
 	}
 
 	// db template columns
@@ -285,7 +297,7 @@ echo "
 	foreach( $tplsets as $tplset ) {
 		$tplset4disp = htmlspecialchars( $tplset , ENT_QUOTES ) ;
 		echo "\t\t<td class='head'>
-			".($tplset=='default'?"":"<input name='del_do[{$tplset4disp}]' type='submit' value='"._DELETE."' onclick='return confirm(\""._MYTPLSADMIN_CNF_DELETE_SELECTED_TEMPLATES."\");' /><br /><br />")."
+			" . ( $tplset == 'default' && $target_dirname != '_custom' ? "" : "<input name='del_do[{$tplset4disp}]' type='submit' value='"._DELETE."' onclick='return confirm(\""._MYTPLSADMIN_CNF_DELETE_SELECTED_TEMPLATES."\");' /><br /><br />" ) . "
 			"._MYTPLSADMIN_CAPTION_COPYTO.":
 			<select name='copy_to[{$tplset4disp}]'>
 				$tplset_options

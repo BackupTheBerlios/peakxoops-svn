@@ -7,6 +7,7 @@ var $language = 'english' ;
 var $salt ;
 var $cache_path ;
 var $cache_prefix = 'lang' ;
+var $my_language = false ;
 
 
 function D3LanguageManager()
@@ -14,6 +15,10 @@ function D3LanguageManager()
 	$this->language = preg_replace( '/[^0-9a-zA-Z_-]/' , '' , @$GLOBALS['xoopsConfig']['language'] ) ;
 	$this->salt = substr( md5( XOOPS_ROOT_PATH . XOOPS_DB_USER . XOOPS_DB_PREFIX ) , 0 , 6 ) ;
 	$this->cache_path = XOOPS_TRUST_PATH.'/cache' ;
+
+	if( defined( 'ALTSYS_MYLANGUAGE_ROOT_PATH' ) && file_exists( ALTSYS_MYLANGUAGE_ROOT_PATH ) ) {
+		$this->my_language = ALTSYS_MYLANGUAGE_ROOT_PATH ;
+	}
 }
 
 
@@ -40,9 +45,9 @@ function read( $resource , $mydirname , $mytrustdirname = null , $read_once = tr
 	$cache_file = $this->getCacheFileName( $resource , $mydirname ) ;
 	$root_file = XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/language/'.$this->language.'/'.$resource ;
 
-	// language override by XOOPS_ROOT_PATH/my_language
-	if( defined( 'ALTSYS_MYLANGUAGE_ROOT_PATH' ) ) {
-		$mylang_file = ALTSYS_MYLANGUAGE_ROOT_PATH.'/modules/'.$mydirname.'/'.$this->language.'/'.$resource ;
+	// language overriding by XOOPS_ROOT_PATH/my_language
+	if( $this->my_language ) {
+		$mylang_file = $this->my_language.'/modules/'.$mydirname.'/'.$this->language.'/'.$resource ;
 		if( file_exists( $mylang_file ) ) {
 			require_once $mylang_file ;
 		}
@@ -82,7 +87,7 @@ function read( $resource , $mydirname , $mytrustdirname = null , $read_once = tr
 		}
 	}
 
-	if( defined( 'ALTSYS_MYLANGUAGE_ROOT_PATH' ) ) {
+	if( $this->my_language ) {
 		error_reporting( $original_error_level ) ;
 	}
 }

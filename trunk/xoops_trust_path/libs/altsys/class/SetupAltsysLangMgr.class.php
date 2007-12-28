@@ -2,7 +2,7 @@
 
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
-//define('ALTSYS_MYLANGUAGE_ROOT_PATH', XOOPS_ROOT_PATH . '/my_language');
+define('ALTSYS_MYLANGUAGE_ROOT_PATH', XOOPS_ROOT_PATH . '/my_language');
 
 
 class SetupAltsysLangMgr extends XCube_ActionFilter

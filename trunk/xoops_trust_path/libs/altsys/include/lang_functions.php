@@ -21,16 +21,11 @@ function altsys_mylangadmin_get_constant_names( $langfile_unique_path , $mydirna
 	// We have to parse the file if it has been already included ...
 	if( empty( $langfile_names ) && ( $reqonce_ret === true || defined( $langfile_fingerprint ) ) ) {
 		$already_read = true ;
-		$file_contents = file_get_contents( $langfile_unique_path ) ;
-		preg_match_all( '/.*define\(\s*(["\'])([0-9a-zA-Z_]+)(\\1)/iU' , $file_contents , $matches ) ;
-		$langfile_names = array() ;
-		foreach( $matches[2] as $name ) {
-			if( defined( $name ) ) $langfile_names[] = $name ;
-		}
+		$langfile_names = altsys_mylangadmin_get_constant_names_by_pcre( $langfile_unique_path ) ;
 	}
 
 	// modinfo.php of D3 module
-	if( empty( $langfile_names ) && file_exists( XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/mytrustdirname.php' ) && substr( $langfile_unique_path , -11 ) == 'modinfo.php' ) {
+	if( empty( $langfile_names ) && file_exists( XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/mytrustdirname.php' ) /* && substr( $langfile_unique_path , -11 ) == 'modinfo.php' */ ) {
 		// get $constpref
 		$constpref = '' ;
 		require $langfile_unique_path ;
@@ -44,6 +39,36 @@ function altsys_mylangadmin_get_constant_names( $langfile_unique_path , $mydirna
 
 
 	return array( $langfile_names , $constpref , $already_read ) ;
+}
+
+
+function altsys_mylangadmin_get_constant_names_by_pcre( $langfile_path )
+{
+	if( ! file_exists( $langfile_path ) ) return array() ;
+	$file_contents = file_get_contents( $langfile_path ) ;
+	preg_match_all( '/\n\s*define\(\s*(["\'])([0-9a-zA-Z_]+)\\1/iU' , $file_contents , $matches ) ;
+	$langfile_names = array() ;
+	foreach( $matches[2] as $name ) {
+		// if( defined( $name ) ) 
+		$langfile_names[] = $name ;
+	}
+
+	return $langfile_names ;
+}
+
+
+function altsys_mylangadmin_get_constants_by_pcre( $langfile_path )
+{
+	if( ! file_exists( $langfile_path ) ) return array() ;
+
+	$file_contents = file_get_contents( $langfile_path ) ;
+	preg_match_all( '/\n\s*define\(\s*(["\'])([0-9a-zA-Z_]+)\\1\s*\,\s*(["\'])([^\\3]+)\\3/iU' , $file_contents , $matches ) ;
+	$constants = array() ;
+	foreach( $matches[2] as $i => $name ) {
+		$constants[ $name ] = $matches[4][$i] ;
+	}
+
+	return $constants ;
 }
 
 

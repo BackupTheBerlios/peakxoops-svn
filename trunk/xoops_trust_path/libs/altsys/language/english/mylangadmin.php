@@ -9,6 +9,9 @@ define( '_MYLANGADMIN_TH_CONSTANTNAME' , 'Constant Name' ) ;
 define( '_MYLANGADMIN_TH_DEFAULTVALUE' , 'Default Value' ) ;
 define( '_MYLANGADMIN_TH_USERVALUE' , 'User Value' ) ;
 
+define( '_MYLANGADMIN_NOTE_ADDEDBYMYLANG' , '(a constant added by user)' ) ;
+define( '_MYLANGADMIN_DT_MYLANGFILENAME' , 'Partially overriding file name' ) ;
+
 define( '_MYLANGADMIN_DT_CACHEFILENAME' , 'Cache file name' ) ;
 define( '_MYLANGADMIN_DT_CACHESTATUS' , 'Caching status' ) ;
 define( '_MYLANGADMIN_CREATED' , 'Created' ) ;

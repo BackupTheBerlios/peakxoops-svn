@@ -2,6 +2,11 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2007-12-29 06:46:08
+define('_MYLANGADMIN_NOTE_ADDEDBYMYLANG','(a constant added by user)');
+define('_MYLANGADMIN_DT_MYLANGFILENAME','Partially overriding file name');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
 define('_MYLANGADMIN_MSG_NOTICE4ALREADYREAD','Since this file has been already read by system, this column means current value');
 

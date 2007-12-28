@@ -116,12 +116,28 @@ $langfile_unique_path = "$lang_base_dir/$target_file" ;
 // get constants defined by the target_file
 list( $langfile_names , $constpref , $already_read ) = altsys_mylangadmin_get_constant_names( $langfile_unique_path , $target_dirname ) ;
 
-// get user_values should be overrided
+// get user_values should be overridden
 $langfile_constants = array() ;
 foreach( $langfile_names as $name ) {
 	list( $value ) = $db->fetchRow( $db->query( "SELECT value FROM ".$db->prefix("altsys_language_constants")." WHERE mid=$target_mid AND language='$target_lang4sql' AND name='".addslashes($name)."'" ) ) ;
 	$langfile_constants[ $name ] = $value ;
 }
+
+// constants defined in XOOPS_ROOT_PATH/my_language/(dirname)/...
+if( $langman->my_language ) {
+	$mylang_unique_path = $langman->my_language.'/modules/'.$target_dirname.'/'.$target_lang.'/'.$target_file ;
+	$mylang_constants = array_map( 'htmlspecialchars' , altsys_mylangadmin_get_constants_by_pcre( $mylang_unique_path ) ) ;
+	foreach( $mylang_constants as $key => $val ) {
+		if( ! in_array( $key , array_keys( $langfile_constants ) ) ) {
+			$langfile_constants[ $key ] = null ;
+			define( $key , _MYLANGADMIN_NOTE_ADDEDBYMYLANG ) ;
+		}
+	}
+} else {
+	$mylang_unique_path = '' ;
+	$mylang_constants = array() ;
+}
+
 
 //
 // transaction stage
@@ -240,6 +256,9 @@ $tpl->assign( array(
 	'target_file' => $target_file ,
 	'lang_files' => $lang_files ,
 	'langfile_constants' => $langfile_constants ,
+	'mylang_constants' => $mylang_constants ,
+	'use_my_language' => strlen( $langman->my_language ) > 0 ,
+	'mylang_file_name' => htmlspecialchars( $mylang_unique_path , ENT_QUOTES ) ,
 	'cache_file_name' => htmlspecialchars( $cache_file_name , ENT_QUOTES ) ,
 	'cache_file_mtime' => intval( $cache_file_mtime ) ,
 	'timezone_offset' => xoops_getUserTimestamp( 0 ) ,

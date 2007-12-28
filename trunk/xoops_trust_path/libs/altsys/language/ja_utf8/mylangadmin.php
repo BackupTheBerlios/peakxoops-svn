@@ -9,6 +9,9 @@ define( '_MYLANGADMIN_TH_CONSTANTNAME' , '定数名' ) ;
 define( '_MYLANGADMIN_TH_DEFAULTVALUE' , 'デフォルト値' ) ;
 define( '_MYLANGADMIN_TH_USERVALUE' , '上書き設定値' ) ;
 
+define( '_MYLANGADMIN_NOTE_ADDEDBYMYLANG' , '(※独自に追加された定数)' ) ;
+define( '_MYLANGADMIN_DT_MYLANGFILENAME' , '差分オーバーライドファイル名' ) ;
+
 define( '_MYLANGADMIN_DT_CACHEFILENAME' , 'キャッシュファイル名' ) ;
 define( '_MYLANGADMIN_DT_CACHESTATUS' , 'キャッシュ状況' ) ;
 define( '_MYLANGADMIN_CREATED' , '作成済' ) ;

@@ -34,6 +34,7 @@ HD-2.12 (2007-11-27)
 - modified news blocks don't create blank blocks
 - added language files
 -- persian (thx voltan)
+- fixed search.php missing condition for expiration (thx toshi) 2.12a
 
 HD-2.11 (2007-09-28)
 - modified order of submenu

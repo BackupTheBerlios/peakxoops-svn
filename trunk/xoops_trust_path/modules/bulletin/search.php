@@ -14,9 +14,9 @@ function bulletin_search_base( $mydirname , $queryarray , $andor , $limit , $off
 
 	$showcontext = isset( $_GET['showcontext'] ) ? $_GET['showcontext'] : 0 ;
 	if( $showcontext == 1 && function_exists('search_make_context')){
-		$sql = "SELECT storyid,uid,title,published,hometext,bodytext,html,smiley FROM ".$xoopsDB->prefix($mydirname."_stories")." WHERE published > 0 AND published <= ".time()."";
+		$sql = "SELECT storyid,uid,title,published,hometext,bodytext,html,smiley FROM ".$xoopsDB->prefix($mydirname."_stories")." WHERE published > 0 AND published <= ".time()." AND (expired = 0 OR expired >= ".time()." )";
 	}else{
-		$sql = "SELECT storyid,uid,title,published FROM ".$xoopsDB->prefix($mydirname."_stories")." WHERE published > 0 AND published <= ".time()."";
+		$sql = "SELECT storyid,uid,title,published FROM ".$xoopsDB->prefix($mydirname."_stories")." WHERE published > 0 AND published <= ".time()." AND (expired = 0 OR expired >= ".time()." )";
 	}
 	
 	if ( $userid != 0 ) {

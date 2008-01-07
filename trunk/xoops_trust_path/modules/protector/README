@@ -123,6 +123,11 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.16 beta (2008/01/08)
+- added a filter postcommon_post_deny_by_httpbl for antispam by honeypotproject
+- updated language files
+-- polish (thx kurak_bu)
+
 3.15 beta (2007/10/18)
 - added "compact log"
 - added "remove all log"

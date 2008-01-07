@@ -6,107 +6,110 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-07-30 16:31:32
+// Appended by Xoops Language Checker -GIJOE- in 2007-11-13 03:43:32
 define($constpref.'_BANIP_TIME0','Banned IP suspension time (sec)');
-define($constpref.'_OPT_BIPTIME0','Ban the IP (moratorium)');
-define($constpref.'_DOSOPT_BIPTIME0','Ban the IP (moratorium)');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-29 03:36:15
-define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions');
 
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Xoops Protector");
+define($constpref."_NAME","XOOPS Protector");
 
 // A brief description of this module
-define($constpref."_DESC","Modu³ zabezpieczaj±cy Xoopsa, przed ró¿nymi rodzajami ataków z sieci, takich jak: DoS , SQL Injection i ska¿eniem zmiennych.");
+define($constpref."_DESC","Modu³ zabezpieczaj±cy Xoopsa, przed ró¿nymi
+rodzajami ataków z sieci, takich jak: DoS , SQL Injection i ska¿eniem
+zmiennych.");
 
 // Menu
 define($constpref."_ADMININDEX","Centrum zabezpieczeñ");
-define($constpref."_ADVISORY","Porady bezpieczeñstwa");
-define($constpref."_PREFIXMANAGER","Manager Prefixu");
+define($constpref."_ADVISORY","Porady nt. bezpieczeñstwa");
+define($constpref."_PREFIXMANAGER","Menad¿er prefiksu");
+define($constpref.'_ADMENU_MYBLOCKSADMIN','Uprawnienia') ;
 
 // Configs
 define($constpref.'_GLOBAL_DISBL','Tymczasowo wy³±czony');
-define($constpref.'_GLOBAL_DISBLDSC','Wszystkie zabezpieczenia zostan± wy³±czone.<br />nie zapomnij w³±czyæ ich ponownie, gdy uporasz siê z problemem');
+define($constpref.'_GLOBAL_DISBLDSC','Mo¿esz czasowo wy³±czyæ Protectora, je¶li masz jakie¶ problemy z jego funcjonowaniem. Nie zapomnij w³±czyæ go na powrót, gdy ju¿ naprawisz problem. Domy¶lnie ustawiony na nie.');
 
 define($constpref.'_RELIABLE_IPS','IP godne zaufania');
-define($constpref.'_RELIABLE_IPSDSC','Wprowad¼ adresy IP godne zaufania oddzielaj±c je | . ^ zastóÑuje pocz±tek ci±gu cyfr, $ zastóÑuje koniec ci±gu cyfr.');
-
+define($constpref.'_RELIABLE_IPSDSC','Wpisz numery IP, które uznajesz za godne zaufania np. swoje w³asne. Te IP nie bêd± banowane przez Protectora, dziêki czemu uchronisz siê przed zablokowaniem dostêpu dla siebie. Poszczególne numery IP oddzielaj pionow± kresk±. ^ zastêpuje pocz±tek numeru, $ zastêpuje koniec numeru.');
 define($constpref.'_LOG_LEVEL','Poziom logowania');
 define($constpref.'_LOG_LEVELDSC','');
 
-define($constpref.'_LOGLEVEL0','brak');
-define($constpref.'_LOGLEVEL15','Ciche');
-define($constpref.'_LOGLEVEL63','ciche');
-define($constpref.'_LOGLEVEL255','pe³ne');
+define($constpref.'_LOGLEVEL0','¯aden');
+define($constpref.'_LOGLEVEL15','Ukryty');
+define($constpref.'_LOGLEVEL63','Cichy (bardziej ni¿ ukryty).');
+define($constpref.'_LOGLEVEL255','Pe³ny');
 
-define($constpref.'_HIJACK_TOPBIT','Zabezpieczenie bit…u IP dla sesji.');
-define($constpref.'_HIJACK_TOPBITDSC','Zabezpieczenie przed kradzie¿± sesji:<br />Domy¶lnie 32(bit). (Wszystkie bity zabezpieczone)<br />Je¶li Twoje IP nie jest sta³e, ustaw zakres IP.<br />(n.p.) Je¶li Twoje IP mo¿e zmieniaæ siê w zakresie 192.168.0.0-192.168.0.255, ustaw tutaj 24 bity');
-define($constpref.'_HIJACK_DENYGP','Grupy, kt…óre nie mog± zmieniæ IP podczas sesji');
-define($constpref.'_HIJACK_DENYGPDSC','zabezpieczenie przed porwaniem sesji:<br />Zaznacz grupê, kt…óra nie mo¿e zmieniæ IP w czasie sesji.<br />(Nale¿y zaznaczyæ co najmniej Administrator…u.)');
-define($constpref.'_SAN_NULLBYTE','Czyszczenie pustych bajt…ów');
-define($constpref.'_SAN_NULLBYTEDSC','Znak zakoñczenia "\\0" jest zwykle u¿ywany w spreparowanych niszcz±cych kodach.<br />pusty bajt bóÅzie zmieniony na spacjê.<br />(nale¿y bezwzglóÅnie ustawiæ t± opcjê na w³±czon±)');
-define($constpref.'_DIE_NULLBYTE','Wyjd¼ je¶li stwierdzone zostan± puste bajty');
-define($constpref.'_DIE_NULLBYTEDSC','Znak zakoñczenia "\\0" jest zwykle u¿ywany podczas atak…u na serwisy.<br />(nale¿y suatwiæ t± opcjê w³±czon±)');
-define($constpref.'_DIE_BADEXT','Wyjd¼ je¶li stwierdzono pr…óbê uploadowania podejrzanego pliku');
-define($constpref.'_DIE_BADEXTDSC','Je¶li kto¶ bóÅzie pr…óbowa³ wys³aæ na serwer plik ze z³ym rozszerzeniem n.p.: .php , nast±pi wyj¶cie z XOOPS.<br />Je¶li czóÔto wysy³asz pliki php na u¿ytek n.p.: B-Wiki lub PukiWikiModule, wy³±cz t± opcjê.');
-define($constpref.'_CONTAMI_ACTION','Dzia³anie w przypadku wykrycia pr…óby ska¿enia zmiennych');
-define($constpref.'_CONTAMI_ACTIONDS','Wybierz dzia³anie, jakie system podejmie po pr…óbie ska¿enia zmiennych globalnych w XOOPS.<br />(sugerowane dzia³anie to Bia³a Strona)');
-define($constpref.'_ISOCOM_ACTION','Wybierz dzia³anie, jakie system podejmie po wykryciu pr…óby przekazania odseparowanych komentarzy ');
-define($constpref.'_ISOCOM_ACTIONDSC','Przeciwdzia³anie SQL Injection:<br />Wybierz dzia³anie gdy bóÅzie wprowadzony odseparowany znak "/*".<br />"Neutralizowanie" polega na dodaniu nastóÑnego znaku "*/".<br />(sygerowana opcja to Neutralizowanie)');
-define($constpref.'_UNION_ACTION','Wybierz dzia³anie gdy nastapi pr…óba dodania instrukcji UNION lub podobnej.');
-define($constpref.'_UNION_ACTIONDSC','Przeciwdzia³anie SQL Injection:<br />wybierz dzia³anie gdy w zapytaniu pojawi siê sk³adnia podobna instrukcji UNION w SQL.<br />"Neutralizowanie" w tym przypadku polega na zmianie wyra¿enia "union" na "uni-on".<br />(sugerowana opcja to Neutralizowanie)');
+define($constpref.'_HIJACK_TOPBIT','Chronione bity numeru IP w sesji');
+define($constpref.'_HIJACK_TOPBITDSC','Ta funkcja chroni przed przechwytywaniem sesji, ograniczaj±c ilo¶æ bitów IP, które mog± siê zmieniæ w trakcie sesji. Domy¶lnie 32 bitów - wszystkie bity chronione (IP nie mo¿e siê zmieniæ). Je¶li masz dynamiczne IP, zmieniaj±ce siê w okre¶lonym zakresie, mo¿esz ustawiæ ilo¶æ chronionych bitów tak, by mniej wiêcej dopasowaæ do zakresu. Na przyk³ad, je¶li twoje IP mo¿e siê zmieniaæ w zakresie od 192.168.0.0 do 192.168.0.255, ustaw 24 bity. Gdyby cracker zna³ IP twojej sesji, ale próbowa³ siê wedrzeæ spoza tego zakresu (powiedzmy, z 192.168.2.50), nie uda mu siê. Autor modu³u sugeruje warto¶æ 16 bitów jako optymaln± dla ogólnego u¿ycia.');
+define($constpref.'_HIJACK_DENYGP','Grupy nieuprawnione do zmieniania
+swojego IP w trakcie sesji');
+define($constpref.'_HIJACK_DENYGPDSC','Wska¼nik chroni±cy przed przechwytywaniem. Wybrane grupy nie mog± zmieniaæ IP w trakcie trwania sesji. Domy¶lnie wymienia grupê webmasters i poleca siê tego nie zmieniaæ, bo konsekwencje przechwycenia sesji administratora mog³yby byæ naprawdê powa¿ne.)');
+define($constpref.'_SAN_NULLBYTE','Sterylizowanie pustych bajtów');
+define($constpref.'_SAN_NULLBYTEDSC','Znak koñcz±cy "\\0" jest czêsto u¿ywany we wrogich atakach. Pusty bajt zmieni siê w spacjê, je¶li ta opcja jest w³±czona (co jest domy¶lne, i stanowczo poleca siê pozostawiæ j± w³±czon±).');
+define($constpref.'_DIE_NULLBYTE','Wyjd¼ je¶li stwierdzone zostan±
+puste bajty');
+define($constpref.'_DIE_NULLBYTEDSC','Znak zakoñczenia "\\0" jest zwykle u¿ywany podczas atak-u na serwisy.<br />(nale¿y suatwiæ t± opcjê w³±czon±)');
+define($constpref.'_DIE_BADEXT','Wyjd¼ je¶li wgrywane s± podejrzane
+pliki (tak/nie)');
+define($constpref.'_DIE_BADEXTDSC','Je¶li kto¶ próbuje wgraæ pliki z niebezpiecznymi rozszerzeniami, jak .php ,Protector zamknie XOOPSa. Je¶li czêsto do³±czasz pliki php do B-Wiki albo PukiWikiMod, byæ mo¿e bêdziesz musia³ wy³±czyæ tê funkcjê.');
+define($constpref.'_CONTAMI_ACTION','Dzia³anie w przypadku wykrycia
+próby ska¿enia zmiennych');
+define($constpref.'_CONTAMI_ACTIONDS','Wybierz dzia³anie, jakie ma byæ podjête, gdy kto¶ próbuje skaziæ globalne zmienne systemu w Twoim XOOPSie. Mo¿liwo¶ci:)');
+define($constpref.'_ISOCOM_ACTION','Dzia³anie w przypadku wykrycia
+izolowanego otwarcia komentarza.');
+define($constpref.'_ISOCOM_ACTIONDSC','Ochrona przed ska¿eniem SQL. Okre¶l dzia³anie wobec znalezienia izolowanego "/*". Mo¿liwo¶ci:');
+define($constpref.'_UNION_ACTION','Dzia³anie w przypadku wykrycia próby dodania instrukcji UNION lub podobnej.');
+define($constpref.'_UNION_ACTIONDSC','Ochrona przed ska¿eniem SQL. Okre¶l dzia³anie wobec znalezienia sk³adni UNION w SQL. Mo¿liwo¶ci:');
 define($constpref.'_ID_INTVAL','Wymuszanie liczby ca³kowitej dla zapytañ zawieraj±cych zmienne typu id');
-define($constpref.'_ID_INTVALDSC','Wszystkie zapytania zawieraj±ce "*id" bóÅ± traktowane jak liczba ca³kowita.<br />Ta opcja ochroni nas przed niekt…órymi typami atak…u typu XSS i SQL Injections.<br />Zaleca siê w³±czenie tej opcj ale mo¿e ona spowodowaæ zak³ucenie dzia³ania niekt…órych modu³…u.');
-define($constpref.'_FILE_DOTDOT','Zabezpieczenie przed wóÅrowaniem po katalogach');
-define($constpref.'_FILE_DOTDOTDSC','Usuwa ".." z wszystkich zapytañ wygl±daj±cych jak szperanie po katalogach');
+define($constpref.'_ID_INTVALDSC','Ta opcja mia³a chroniæ przed problemem w starszej wersji modu³u weblog. Teraz ten b³±d zosta³ naprawiony.<br />Wszystkie ¿±dania z nazwami takimi jak "*id" bêd± traktowane jak liczby ca³kowite. Ta opcja chroni przed niektórymi rodzajami ataków XSS i SQL. Poleca siê j± w³±czyæ, choæ mo¿e siê zdarzyæ, ¿e bêdzie powodowaæ problemy z niektórymi modu³ami. Domy¶lnie ustawiona na off.');
+define($constpref.'_FILE_DOTDOT','Ochrona przed w³amywaniem siê do folderów');
+define($constpref.'_FILE_DOTDOTDSC','Ta funkcja eliminuje ".." z wszystkich zapytañ, które wygl±daj± na próby w³amywania siê do folderów. Mo¿liwe opcje to w³±czenie (tak) lub wy³±czenie (nie). Domy¶lnie ustawiona na on (w³±czone).');
 
-define($constpref.'_BF_COUNT','Zabezpieczenie przed atakiem Brute Force');
-define($constpref.'_BF_COUNTDSC','Ustal ilo¶æ dozwolonych pr…ób logowania u¿ytkownika w ci±gu 10 minut. Je¶li kto¶ bóÅzie pr…óbowa³ logowaæ siê wióÄej razy w tym czasie, jego IP zostanie zbanowane.');
+define($constpref.'_BF_COUNT','Ochrona przed atakami na si³ê (Brute Force)');
+define($constpref.'_BF_COUNTDSC','Tutaj mo¿esz okre¶liæ ilo¶æ dopuszczalnych prób zalogowania w ci±gu 10 minut. Je¶li kto¶ poda z³e dane wiêcej razy, ni¿ wynosi limit, jego IP zostanie zbanowane. Ta funkcja chroni przed próbami z³amania hase³ dostêpu metod± prób i b³êdów. Domy¶lnie ustawiona warto¶æ wynosi 10.');
 
-define($constpref.'_DOS_SKIPMODS','Modu³y nie podlegaj±ce zabezpieczeniu anty DoS');
-define($constpref.'_DOS_SKIPMODSDSC','wpisz nazwy katalog…u wy³±czonych modu³…u oddzielone |. Opcja u¿yteczna dla modu³u czata itp.');
+define($constpref.'_DOS_SKIPMODS','Modu³y wy³±czone z ochrony przed
+DoS/Crawler');
+define($constpref.'_DOS_SKIPMODSDSC','Protector mo¿e banowaæ IP inicjuj±ce ataki DoS lub robaki, które zabieraj± du¿e zasoby (patrz ni¿ej). Mo¿esz jednak wy³±czyæ poszczególne modu³y z tej ochrony, wpisuj±c tutaj nazwy ich katalogów. Kolejne modu³y oddzielaj pionow± kresk±. Funkcja przydaje siê do modu³ów takich jak np. czat.');
+define($constpref.'_DOS_EXPIRE','Czas dozorowania masowych od¶wie¿añ (w sek.)');
+define($constpref.'_DOS_EXPIREDSC','Ta warto¶æ okre¶la czas obserwowania licznych/czêstych od¶wie¿añ (atak F5) i robaków zajmuj±cych transfer. Domy¶lnie 60 sekund. .');
 
-define($constpref.'_DOS_EXPIRE','Licznik czasu dla wielokrotnego prze³adowania strony (sec)');
-define($constpref.'_DOS_EXPIREDSC','Warto¶æ czasu w sekundach, podczas kt…órego system monitoruje, czy prze³adowania strony nie s± atakiem F5 lub dzia³aniem nieprzyjaznego robota (Crawlera).');
+define($constpref.'_DOS_F5COUNT','Próg dla ataków F5');
+define($constpref.'_DOS_F5COUNTDSC','Funkcja przeciwko atakom DoS. Wpisana warto¶æ okre¶la liczbê od¶wie¿eñ (w okresie czasu dozorowania wpisanego powy¿ej), jaka musi byæ wykonana, zanim dane IP zostanie uznane za przeprowadzaj±ce wrogi atak. Domy¶lnie: 10.');
+define($constpref.'_DOS_F5ACTION','Dzia³anie w obliczu ataku F5');
 
-define($constpref.'_DOS_F5COUNT','Licznik ods³on dla ataku F5');
-define($constpref.'_DOS_F5COUNTDSC','Ochrona przed atakiem DoS.<br />Powyzej tej warto¶ci prze³adowañ system uzna, ¿e ma do czynienia z atakiem F5 (DoS).');
-define($constpref.'_DOS_F5ACTION','Dzia³anie po wykryciu pr…óby ataku F5');
-
-define($constpref.'_DOS_CRCOUNT','Licznik ods³on dla Crawler…u (robot…u przeci±¿aj±cych system)');
-define($constpref.'_DOS_CRCOUNTDSC','Zabezpieczenie przed robotami przeci±¿aj±cymi system.<br />Ta warto¶æ okre¶la kiedy liczba ods³on dla robota zostanie uznana za przegióÄie.');
-define($constpref.'_DOS_CRACTION','Akcja przeciwko "móÄz±cym" robotom');
+define($constpref.'_DOS_CRCOUNT','Próg dla robaków');
+define($constpref.'_DOS_CRCOUNTDSC','Funkcja ochrony przed robakami konsumuj±cymi zasoby i botami. Wpisana tutaj warto¶æ okre¶la ilo¶æ prób dostêpu, powy¿ej której robak zostaje uznany za ¼le zachowuj±cego siê, tzn. zajmuj±cego zbyt wiele zasobów. Domy¶lnie 30 od¶wie¿eñ.');
+define($constpref.'_DOS_CRACTION','Dzia³anie przeciwko robakom konsumuj±cym');
 
 define($constpref.'_DOS_CRSAFE','Roboty indeksuj±ce wy³±czone spod kontroli');
-define($constpref.'_DOS_CRSAFEDSC','Etykieta w pearlu dla maszyn indeksuj±cych.<br />Je¶li bóÅzie siê pokrywaæ, crawler nigdy nie zostanie uznany za "móÄz±cy".<br />eg) /(msnbot|Googlebot|Yahoo! Slurp)/i');
+define($constpref.'_DOS_CRSAFEDSC','Googlebot|Yahoo! Slurp)/i');
 
-define($constpref.'_OPT_NONE','Nic (tylko logowanie)');
-define($constpref.'_OPT_SAN','Neutralizowanie');
-define($constpref.'_OPT_EXIT','Bia³a Strona');
+define($constpref.'_OPT_NONE','¯adne (tylko log).');
+define($constpref.'_OPT_SAN','Naprawa');
+define($constpref.'_OPT_EXIT','Bia³a Strona/Pusty ekran');
 define($constpref.'_OPT_BIP','Banuj IP');
+define($constpref.'_OPT_BIPTIME0','Banuj IP (moratorium)');
 
-define($constpref.'_DOSOPT_NONE','Nic (tylko logowanie)');
+define($constpref.'_DOSOPT_NONE','¯adne (tylko log).');
 define($constpref.'_DOSOPT_SLEEP','U¶pienie');
 define($constpref.'_DOSOPT_EXIT','Bia³y Ekran');
 define($constpref.'_DOSOPT_BIP','Banuj IP');
-define($constpref.'_DOSOPT_HTA','ZABROÑ (DENY) w pliku .htaccess(Experymentalnie)');
+define($constpref.'_DOSOPT_BIPTIME0','Banuj IP (moratorium)');
+define($constpref.'_DOSOPT_HTA','Odrzuæ przez .htaccess (funkcja w fazie eksperymentalnej)');
 
-define($constpref.'_BIP_EXCEPT','Grupy, kt…óre nigdy nie zostan± dodane jako Z³e IP');
-define($constpref.'_BIP_EXCEPTDSC','Uzytkownicy nale¿±cy do zaznaczonej grupy(grup) nigdy nie bóÅ± mieli banowanego IP.<br />(ustaw co najmniej Administrator…u.)');
+define($constpref.'_BIP_EXCEPT','Grupy, których IP nigdy nie zostanie zakwalifikowane jako z³e');
+define($constpref.'_BIP_EXCEPTDSC','U¿ytkownik nale¿±cy do wymienionych tutaj grup nigdy nie zostanie zbanowany. Domy¶lnie wpisana grupa webmasters, i zaleca siê tak zostawiæ.');
 
-define($constpref.'_DISABLES','Wy³±cz niebezpieczne rzeczy w XOOPS');
+define($constpref.'_DISABLES','Wy³±cz niebezpieczne funkcje XOOPSa');
 
-define($constpref.'_BIGUMBRELLA','W³±cz anty-XSS (BigUmbrella)');
-define($constpref.'_BIGUMBRELLADSC','Ochrania przed atakami XSS. Oczywi¶cie 100% skuteczno¶ci nie masz nigdy.');
+define($constpref.'_BIGUMBRELLA','W³±cz anti-XSS (BigUmbrella) ');
+define($constpref.'_BIGUMBRELLADSC','Ta funkcja chroni przed niektórymi atakami XSS (cross-site scripting). Nie ma jednak 100% skuteczno¶ci. Domy¶lnie ustawiona na nie (off), w³±czenie jej to raczej niez³y pomys³.');
 
-define($constpref.'_SPAMURI4U','anti-SPAM: URL dla u¿ytkowników');
-define($constpref.'_SPAMURI4UDSC','Liczba dozwolonych adresów URL przesy³anych metod± POST (formularze,forum...) przez u¿ytkowników innych ni¿ admin. Je¿eli u¿ytkownik prze¶le wiêksz± liczbê adresów URL post zostanie zakwalifikowany jako spam. Je¿eli wpiszesz 0 -zero- funkcja jest wy³±czona.');
-define($constpref.'_SPAMURI4G','anti-SPAM: URL dla anonimowych/go¶ci');
-define($constpref.'_SPAMURI4GDSC','Liczba dozwolonych adresów URL przesy³anych metod± POST (formularze,forum...) przez osoby niezarejestrowane. Je¿eli go¶æ prze¶le wiêksz± liczbê adresów URL post zostanie zakwalifikowany jako spam. Je¿eli wpiszesz 0 -zero- funkcja jest wy³±czona Zaleca siê ustawienie warto¶ci na 5.');
+define($constpref.'_SPAMURI4U','anti-SPAM: ilo¶æ adresów URL dla normalnych u¿ytkowników ');
+define($constpref.'_SPAMURI4UDSC','Mo¿esz okre¶liæ dozwolon± liczbê adresów URL zawartych w danych formularza POST dla zarejestrowanych u¿ytkowników (np. w postach na forum i komentarzach), nie bêd±cych administratorami. Je¶li POST zawiera zbyt wiele adresów URL, zostanie uznany za spam. Domy¶lnie: 10. Je¶li chcesz wy³±czyæ tê funkcjê, ustaw warto¶æ 0. ');
+define($constpref.'_SPAMURI4G','anti-SPAM: ilo¶æ adresów URL dla go¶ci');
+define($constpref.'_SPAMURI4GDSC','Jak wy¿ej, ale dla anonimowych u¿ytkowników (go¶ci). Domy¶lnie: 5. Wpisz 0 je¶li chcesz wy³±czyæ tê funkcjê.');
 
 }
 

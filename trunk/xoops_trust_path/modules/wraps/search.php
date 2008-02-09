@@ -19,6 +19,9 @@ function wraps_global_search_base( $mydirname , $keywords , $andor , $limit , $o
 		return array() ;
 	}
 
+	// check if .htaccess exists (mod_rewrite on/off)
+	$rewrite_mode = file_exists( XOOPS_ROOT_PATH . '/modules/' . $mydirname . '/.htaccess' ) ;
+
 	$db =& Database::getInstance() ;
 
 	// XOOPS Search module
@@ -64,7 +67,7 @@ function wraps_global_search_base( $mydirname , $keywords , $andor , $limit , $o
 
 		$ret[] = array(
 			"image" => "" ,
-			"link" => "index.php/$filename" ,
+			"link" => $rewrite_mode ? $filename : 'index.php/'.$filename ,
 			"title" => $title ,
 			"time" => $mtime ,
 			"uid" => "0" ,

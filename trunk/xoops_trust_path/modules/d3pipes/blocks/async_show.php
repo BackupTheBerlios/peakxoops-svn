@@ -55,7 +55,7 @@ function d3pipes_insert_javascript4async()
 		{
 			script = document.createElement("script");
 			script.setAttribute("type", "text/javascript");
-			script.setAttribute("src", url);
+			script.setAttribute("src", url + "&time=" + (new Date().getTime()) );
 			script.setAttribute("charset", "'._CHARSET.'");
 			document.getElementsByTagName("head").item(0).appendChild(script);
 		}

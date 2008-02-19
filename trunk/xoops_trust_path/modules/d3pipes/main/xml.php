@@ -28,6 +28,17 @@ if( $pipe_id == 0 ) {
 	}
 	// fetch entries
 	$entries = d3pipes_common_fetch_entries( $mydirname , $pipe4assign , $max_entries , $errors , $xoopsModuleConfig ) ;
+
+	// check lastfetch_time
+	if( empty( $pipe4assign['lastfetch_time'] ) ) {
+		$lastfetch_time = 0 ;
+		foreach( $entries as $entry ) {
+			$lastfetch_time = max( @$entry['pipe']['lastfetch_time'] , $lastfetch_time ) ;
+		}
+		$pipe4assign['lastfetch_time'] = empty( $lastfetch_time ) ? time() : $lastfetch_time ;
+	}
+
+
 }
 
 // get lastmodified of all over of entries

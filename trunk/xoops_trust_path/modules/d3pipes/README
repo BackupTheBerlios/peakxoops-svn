@@ -40,6 +40,11 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+
+0.60 2008-02-20
+- fixed updated field in atom (thx yumipoyo)
+- added a plugin for sitemap (thx GEM)
+
 0.59 2007-12-12
 - fixed a fatal error on failed unserializing (thx sunuken)
 - added a root controller sitemap.php for google sitemap
@@ -249,6 +254,10 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.60 2008-02-20
+- 集約パイプのatom/updatedフィールドの値がおかしかったのを修正 (thx yumipoyo)
+- sitemapモジュール用のプラグインを追加 (thx GEM)
 
 0.59 2007-12-12
 - unserializeに失敗した場合にfatal errorが発生していたのを修正 (thx sunuken)

@@ -122,7 +122,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 		$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
 
 		// [1.1.3.1] etc.
-		$patterns[] = '/\[(1(\.\d)*)]/' ;
+		$patterns[] = '/\[(1(\.\d)+)]/' ;
 		$replacements[] = '<a href="#post_path\\1">\\0</a>' ;
 
 		// [quote sitecite=]

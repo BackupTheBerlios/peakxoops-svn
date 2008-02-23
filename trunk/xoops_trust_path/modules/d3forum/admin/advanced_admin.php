@@ -10,30 +10,10 @@ $myts =& D3forumTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
 
-$module_handler =& xoops_gethandler( 'module' ) ;
-$modules =& $module_handler->getObjects() ;
-$importable_modules = array() ;
-foreach( $modules as $module ) {
-	$mid = $module->getVar('mid') ;
-	$dirname = $module->getVar('dirname') ;
-	$dirpath = XOOPS_ROOT_PATH.'/modules/'.$dirname ;
-	$mytrustdirname = '' ;
-	if( file_exists( $dirpath.'/mytrustdirname.php' ) ) {
-		include $dirpath.'/mytrustdirname.php' ;
-	}
-	if( $mytrustdirname == 'd3forum' && $dirname != $mydirname ) {
-		// d3forum
-		$importable_modules[$mid] = 'd3forum:'.$module->getVar('name')."($dirname)" ;
-	} else if( $dirname == 'xhnewbb' ) {
-		// xhnewbb
-		$importable_modules[$mid] = 'xhnewbb:'.$module->getVar('name')."($dirname)" ;
-	} else if( $dirname == 'newbb' ) {
-		// newbb
-		$importable_modules[$mid] = 'newbb1:'.$module->getVar('name')."($dirname)" ;
-	}
-}
+$importable_modules = d3forum_import_getimportablemodules( $mydirname ) ;
 
-$modules =& $module_handler->getObjects( new Criteria('hascomments',1) ) ;
+$module_handler =& xoops_gethandler( 'module' ) ;
+$modules = $module_handler->getObjects( new Criteria('hascomments',1) ) ;
 $comment_handler =& xoops_gethandler( 'comment' ) ;
 $comimportable_modules = array() ;
 foreach( $modules as $module ) {
@@ -117,6 +97,9 @@ if( ! empty( $_POST['do_import'] ) && ! empty( $_POST['import_mid'] ) ) {
 	if( empty( $importable_modules[ $import_mid ] ) ) die( _MD_A_D3FORUM_ERR_INVALIDMID ) ;
 	list( $fromtype , ) = explode( ':' , $importable_modules[ $import_mid ] ) ;
 	switch( $fromtype ) {
+		case 'cbb3' :
+			d3forum_import_from_cbb3( $mydirname , $import_mid ) ;
+			break ;
 		case 'newbb1' :
 			d3forum_import_from_newbb1( $mydirname , $import_mid ) ;
 			break ;

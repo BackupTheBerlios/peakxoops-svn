@@ -135,6 +135,46 @@ $GLOBALS['d3forum_tables'] = array(
 ) ;
 
 
+function d3forum_import_getimportablemodules( $mydirname )
+{
+	$db =& Database::getInstance() ;
+	$module_handler =& xoops_gethandler( 'module' ) ;
+	$modules = $module_handler->getObjects() ;
+
+	$ret = array() ;
+
+	foreach( $modules as $module ) {
+		$mid = $module->getVar('mid') ;
+		$dirname = $module->getVar('dirname') ;
+		$dirpath = XOOPS_ROOT_PATH.'/modules/'.$dirname ;
+		$mytrustdirname = '' ;
+		if( file_exists( $dirpath.'/mytrustdirname.php' ) ) {
+			include $dirpath.'/mytrustdirname.php' ;
+		}
+		if( $mytrustdirname == 'd3forum' && $dirname != $mydirname ) {
+			// d3forum
+			$ret[$mid] = 'd3forum:'.$module->getVar('name')."($dirname)" ;
+		} else if( $dirname == 'xhnewbb' ) {
+			// xhnewbb
+			$ret[$mid] = 'xhnewbb:'.$module->getVar('name')."($dirname)" ;
+		} else if( $dirname == 'newbb' ) {
+			$judge_sql = "SELECT COUNT(*) FROM ".$db->prefix("bb_votedata") ;
+			$judge_result = $db->query( $judge_sql ) ;
+			if( $judge_result ) {
+				// CBB3?
+				$ret[$mid] = 'cbb3:'.$module->getVar('name')."($dirname)" ;
+			} else {
+				// newbb1
+				$ret[$mid] = 'newbb1:'.$module->getVar('name')."($dirname)" ;
+			}
+		}
+	}
+
+	return $ret ;
+}
+
+
+
 function d3forum_import_errordie()
 {
 	$db =& Database::getInstance() ;
@@ -146,6 +186,79 @@ function d3forum_import_errordie()
 
 
 
+function d3forum_import_from_cbb3( $mydirname , $import_mid )
+{
+	$db =& Database::getInstance() ;
+	$from_prefix = 'bb' ;
+
+	// get group_ids
+	$group_handler =& xoops_gethandler( 'group' ) ;
+	$group_objects = $group_handler->getObjects() ;
+	$group_ids = array() ;
+	foreach( $group_objects as $group_object ) {
+		$group_ids[] = $group_object->getVar('groupid') ;
+	}
+
+	// categories
+	$table_name = 'categories' ;
+	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$from_table = $db->prefix( $from_prefix.'_'.$table_name ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (cat_id,cat_title,cat_desc,cat_weight) SELECT cat_id,cat_title,cat_description,cat_order FROM `$from_table`" ) ;
+	if( ! $irs ) d3forum_import_errordie() ;
+
+	// category_access (TODO: get permissions from group_permission table 'category_access')
+	$crs = $db->query( "SELECT cat_id FROM `$from_table`" ) ;
+	$table_name = 'category_access' ;
+	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	while( list( $cat_id ) = $db->fetchRow( $crs ) ) {
+		foreach( $group_ids as $groupid ) {
+			$irs = $db->query( "INSERT INTO `$to_table` VALUES ($cat_id,null,$groupid,1,1,1,1,0,0)" ) ;
+			if( ! $irs ) d3forum_import_errordie() ;
+		}
+	}
+
+	// forums
+	$table_name = 'forums' ;
+	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$from_table = $db->prefix( $from_prefix.'_'.$table_name ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (forum_id,forum_title,forum_desc,forum_weight,cat_id) SELECT forum_id,forum_name,forum_desc,forum_order,cat_id FROM `$from_table`" ) ;
+	if( ! $irs ) d3forum_import_errordie() ;
+
+	// forum_access (TODO: get permissions from group_permission table 'forum_access')
+	$frs = $db->query( "SELECT forum_id FROM `$from_table`" ) ;
+	$table_name = 'forum_access' ;
+	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	while( list( $forum_id ) = $db->fetchRow( $frs ) ) {
+		foreach( $group_ids as $groupid ) {
+			$irs = $db->query( "INSERT INTO `$to_table` VALUES ($forum_id,null,$groupid,1,1,1,1,0)" ) ;
+			if( ! $irs ) d3forum_import_errordie() ;
+		}
+	}
+
+	// topics
+	$table_name = 'topics' ;
+	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$from_table = $db->prefix( $from_prefix.'_'.$table_name ) ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (topic_id,topic_title,topic_views,forum_id,topic_locked,topic_sticky,topic_solved,topic_invisible) SELECT topic_id,topic_title,topic_views,forum_id,topic_status,topic_sticky,1,approved FROM `$from_table`" ) ;
+	if( ! $irs ) d3forum_import_errordie() ;
+
+	// posts
+	$table_name = 'posts' ;
+	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
+	$from_table = $db->prefix( $from_prefix.'_'.$table_name ) ;
+	$from_text_table = $db->prefix( $from_prefix.'_'.'posts_text') ;
+	$db->query( "DELETE FROM `$to_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (post_id,pid,topic_id,post_time,modified_time,uid,poster_ip,modifier_ip,subject,html,smiley,xcode,br,number_entity,special_entity,icon,attachsig,invisible,approval,post_text) SELECT p.post_id,pid,topic_id,post_time,post_time,uid,poster_ip,poster_ip,subject,dohtml,dosmiley,doxcode,dobr,1,1,IF(SUBSTRING(icon,5,1),SUBSTRING(icon,5,1),1),attachsig,0,approved,pt.post_text FROM `$from_table` p LEFT JOIN `$from_text_table` pt ON p.post_id=pt.post_id" ) ;
+	if( ! $irs ) d3forum_import_errordie() ;
+
+	// vote (TODO)
+}
+
 function d3forum_import_from_newbb1( $mydirname , $import_mid )
 {
 	$db =& Database::getInstance() ;
@@ -153,7 +266,7 @@ function d3forum_import_from_newbb1( $mydirname , $import_mid )
 
 	// get group_ids
 	$group_handler =& xoops_gethandler( 'group' ) ;
-	$group_objects =& $group_handler->getObjects() ;
+	$group_objects = $group_handler->getObjects() ;
 	$group_ids = array() ;
 	foreach( $group_objects as $group_object ) {
 		$group_ids[] = $group_object->getVar('groupid') ;
@@ -256,7 +369,7 @@ function d3forum_import_from_xhnewbb( $mydirname , $import_mid )
 
 	// get group_ids
 	$group_handler =& xoops_gethandler( 'group' ) ;
-	$group_objects =& $group_handler->getObjects() ;
+	$group_objects = $group_handler->getObjects() ;
 	$group_ids = array() ;
 	foreach( $group_objects as $group_object ) {
 		$group_ids[] = $group_object->getVar('groupid') ;

@@ -26,6 +26,16 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+
+0.82 beta (2008-02-24)
+- added import from cbb (not implemented - permissions, votes)
+- fixed invalid html in some templates (thx hi-debow)
+- modified [1] won't be converted as a link automatically
+- updated language files
+-- persian (thx stranger)
+- added language files
+-- spanish (thx debianus)
+
 0.81 beta (2007-11-16)
 - modified post form reflects "Always attach my signature" of user data
 - modified new posts will be checked by "censor string"

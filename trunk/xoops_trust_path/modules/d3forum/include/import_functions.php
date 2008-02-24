@@ -244,7 +244,7 @@ function d3forum_import_from_cbb3( $mydirname , $import_mid )
 	$to_table = $db->prefix( $mydirname.'_'.$table_name ) ;
 	$from_table = $db->prefix( $from_prefix.'_'.$table_name ) ;
 	$db->query( "DELETE FROM `$to_table`" ) ;
-	$irs = $db->query( "INSERT INTO `$to_table` (topic_id,topic_title,topic_views,forum_id,topic_locked,topic_sticky,topic_solved,topic_invisible) SELECT topic_id,topic_title,topic_views,forum_id,topic_status,topic_sticky,1,approved FROM `$from_table`" ) ;
+	$irs = $db->query( "INSERT INTO `$to_table` (topic_id,topic_title,topic_views,forum_id,topic_locked,topic_sticky,topic_solved,topic_invisible) SELECT topic_id,topic_title,topic_views,forum_id,topic_status,topic_sticky,1,!approved FROM `$from_table`" ) ;
 	if( ! $irs ) d3forum_import_errordie() ;
 
 	// posts

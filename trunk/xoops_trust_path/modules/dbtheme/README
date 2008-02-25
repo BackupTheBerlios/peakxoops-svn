@@ -49,6 +49,9 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 
 [b]CHANGES[/b]
 
+0.50 2008-02-25
+- changed spec using render system Legacy_DbthemeRenderSystem by preload
+
 0.34 2007-05-23
 - fixed the dependency of dirname "dbtheme" in oninstall and onupdate
 
@@ -107,7 +110,7 @@ altsys¤È¤ÎÊ»ÍÑ¤¬ÂçÁ°Äó¤Ç¤¹¤Î¤Ç¡¢¤â¤·Æþ¤Ã¤Æ¤¤¤Ê¤«¤Ã¤¿¤é¤Þ¤ºaltsys¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·
 
 DBTHEME¥â¥¸¥å¡¼¥ë¼«ÂÎ¤Ï¡¢ÉáÄÌ¤ÎD3¥â¥¸¥å¡¼¥ë¤È¤·¤Æ¥¤¥ó¥¹¥È¡¼¥ë¤·¤Þ¤¹¡£¡Ê°ÊÁ°¤Î¥Ð¡¼¥¸¥ç¥ó¤Ç¤ÏSmarty¥×¥é¥°¥¤¥ó¤âÉ¬Í×¤Ç¤·¤¿¤¬¡¢º£¤ÏÉÔÍ×¤Ç¤¹¡Ë
 
-¥â¥¸¥å¡¼¥ë¥¤¥ó¥¹¥È¡¼¥ëÄ¾¸å¤Ë¡¢¥â¥¸¥å¡¼¥ë´ÉÍý²èÌÌ¤ÇÉ½¼¨½ç¤ò0¤Ë¤·¤Æ¤ª¤¯¤Î¤ò¤ª´«¤á¤·¤Þ¤¹¡£
+¥â¥¸¥å¡¼¥ë¥¤¥ó¥¹¥È¡¼¥ëÄ¾¸å¤Ë¡¢¥â¥¸¥å¡¼¥ë´ÉÍý²èÌÌ¤ÇÉ½¼¨½ç¤ò0¤Ë¤·¤Æ¤ª¤¯¤Î¤ò¤ª´«¤á¤·¤Þ¤¹¡£¡Ê¤Û¤È¤ó¤É¤Î´Ä¶­¤Ç¼«Æ°Åª¤Ë¤½¤¦¤Ê¤ë¤Î¤Ç¡¢¤½¤Î¾ì¹ç¡¢¤³¤Î¼ê½ç¤ÏÉÔÍ×¤Ç¤¹¡Ë
 
 ¥Æ¡¼¥Þ¥Õ¥Ã¥¯¥Ö¥í¥Ã¥¯¤ò¡¢¥Æ¡¼¥Þ¤òÃÖ¤­´¹¤¨¤¿¤¤¥Ú¡¼¥¸¤ËÉ½¼¨¤·¤Æ¤¯¤À¤µ¤¤¡£¥Æ¡¼¥Þ¤È¤·¤ÆÍøÍÑ¤¹¤ëDB¥Æ¥ó¥×¥ì¡¼¥È¤Ï¡¢¥Æ¡¼¥Þ¥Õ¥Ã¥¯¥Ö¥í¥Ã¥¯¤Î¥ª¥×¥·¥ç¥ó¤ÇÀßÄê¤·¤Þ¤¹¡£
 
@@ -116,12 +119,19 @@ DBTHEME¥â¥¸¥å¡¼¥ë¼«ÂÎ¤Ï¡¢ÉáÄÌ¤ÎD3¥â¥¸¥å¡¼¥ë¤È¤·¤Æ¥¤¥ó¥¹¥È¡¼¥ë¤·¤Þ¤¹¡£¡Ê°ÊÁ°¤Î¥Ð¡
 ¤Ê¤ª¡¢Legacy 2.1 ¤Î¾ì¹ç¤Î¤ß¡¢settings/site_custom.ini.php ¤Ë°Ê²¼¤Îµ­½Ò¤¬É¬Í×¤Ç¤¹¡£
 
 [RenderSystems]
-Legacy_RenderSystem=Legacy_DbthemeRenderSystem
+Legacy_DbthemeRenderSystem=Legacy_DbthemeRenderSystem
 
 [Legacy_DbthemeRenderSystem]
 root=XOOPS_TRUST_PATH
 path=/modules/dbtheme/class
 class=Legacy_DbthemeRenderSystem
+
+¤³¤ì¤Ë¤è¤ê¡¢¥ì¥ó¥À¡¼¥·¥¹¥Æ¥à¤È¤·¤ÆLegacy_DbthemeRenderSystem¤òÍøÍÑ¤¹¤ë¥Æ¡¼¥Þ¤Î¾ì¹ç¤Ë¤Î¤ßDbtheme¥·¥¹¥Æ¥à¤¬Í­¸ú¤Ë¤Ê¤ê¡¢ÉÔÍ×¤ÊÉûºîÍÑ¤òÈò¤±¤é¤ì¤Þ¤¹¡£
+
+ÄÌ¾ï¤ÎLegacy_RenderSystem¤òÍøÍÑ¤¹¤ë¥Æ¡¼¥Þ¤Ë¤Ä¤¤¤Æ¤âDbthemeµ¡Ç½¤òÍ­¸ú¤Ë¤¹¤ë¾ì¹ç¤Ï¡¢[RenderSystems]¹Ô¤Ë°Ê²¼¤Î¤è¤¦¤Ëµ­½Ò¤·¤Þ¤¹¡£
+
+[RenderSystems]
+Legacy_RenderSystem=Legacy_DbthemeRenderSystem
 
 
 ¡ü¥Æ¥ó¥×¥ì¡¼¥È¤Ë¤Ä¤¤¤Æ¤ÎÃí°Õ
@@ -145,6 +155,9 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 
 ¡ü¹¹¿·ÍúÎò
 
+
+0.50 2008-02-25
+- preload¤Ë¤è¤Ã¤Æ¥Æ¡¼¥Þ¤«¤é¥ì¥ó¥À¥é¡¼¤òÊÑ¹¹¤¹¤ë¤è¤¦¤Ë»ÅÍÍÊÑ¹¹
 
 0.34 2007-05-23
 - oninstall¤ª¤è¤ÓonupdateÆâ¤Ë¡¢"dbtheme" ¤¬Ä¾½ñ¤­¤Ë¤Ê¤Ã¤Æ¤¤¤¿¤Î¤ò½¤Àµ

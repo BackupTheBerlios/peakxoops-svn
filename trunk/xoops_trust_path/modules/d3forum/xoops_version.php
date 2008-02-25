@@ -36,6 +36,7 @@ $modversion['search']['func'] = $mydirname.'_global_search' ;
 
 // Menu
 $modversion['hasMain'] = 1 ;
+$modversion['read_any'] = true ;
 
 // Submenu (just for mainmenu)
 $modversion['sub'] = array() ;

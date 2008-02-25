@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/D3pipesJointAbstract.class.php' ;
 
 class D3pipesClipAbstract extends D3pipesJointAbstract {
 
-	var $max_entries_from_clip = 100 ; // private
+	var $max_entries_from_clip = 10000 ; // private
 	var $entries_from_clip ; // public
 	var $clip_life_time ; // public
 

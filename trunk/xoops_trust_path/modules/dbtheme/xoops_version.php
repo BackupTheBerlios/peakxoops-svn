@@ -34,6 +34,7 @@ $modversion['hasSearch'] = 0 ;
 
 // Menu
 $modversion['hasMain'] = 1 ;
+$modversion['read_any'] = true ; // nonsense for other than XCL2.1
 
 // Submenu
 $modversion['sub'] = array() ;
@@ -51,6 +52,8 @@ $modversion['blocks'][1] = array(
 	'options'		=> "$mydirname|{$mydirname}_theme.html" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
+	'visible_any'	=> true , // nonsense for other than XCL2.1
+	'show_all_module' => true , // nonsense for other than XCL2.1
 ) ;
 
 // Comments
@@ -63,7 +66,7 @@ $modversion['config'][1] = array(
 	'description'	=> $constpref.'_BASETHEMEDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> @$GLOBALS['xoopsConfig']['theme_set'] ,
+	'default'		=> file_exists( XOOPS_ROOT_PATH.'/themes/newbase0db' ) ? 'newbase0db' : @$GLOBALS['xoopsConfig']['theme_set'] ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(

@@ -8,7 +8,7 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","DB theme");
+define($constpref."_NAME","テーマ編集");
 
 // A brief description of this module
 define($constpref."_DESC","管理画面上でテーマを編集できるようにするモジュール");

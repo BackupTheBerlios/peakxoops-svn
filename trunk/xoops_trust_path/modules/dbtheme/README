@@ -164,6 +164,7 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 - テーマフックブロックを自動で表示するように仕様変更 (XCL2.1のみ)
 - 各種パーミッションを自動設定するように仕様変更 (XCL2.1のみ)
 - newbase0dbがテーマとして用意されていたら自動でそれを選択するように仕様変更
+- japaneseutf を ja_utf8にリネーム 0.50a
 
 0.34 2007-05-23
 - oninstallおよびonupdate内に、"dbtheme" が直書きになっていたのを修正

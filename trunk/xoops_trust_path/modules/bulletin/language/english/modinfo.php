@@ -10,7 +10,7 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Bulletin");
+define($constpref."_NAME","News");
 
 // A brief description of this module
 define($constpref."_DESC","Creates a Slashdot-like news system, where users can post comments freely.");

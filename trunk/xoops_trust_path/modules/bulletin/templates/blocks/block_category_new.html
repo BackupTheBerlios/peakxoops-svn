@@ -24,15 +24,7 @@
 
   <{if $topic.stories}>
 
-    <table style="border:0px">
-      <tr>
-        <td style="width:80px;">
-          <{if $topic.topic_url}>
-            <a href="<{$block.mydirurl}>/index.php?storytopic=<{$topic.id}>"><img src="<{$topic.topic_url}>" alt="<{$topic.title}>" hspace="10" vspace="10" /></a>
-          <{/if}>
-        </td>
-        <td>
-          <ul>
+          <ul class="bulletin_block_category_new">
             <{foreach item=story from=$topic.stories}>
               <li><a href="<{$block.mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$story.title}></a>
               <{if strstr( $block.type , "counter" )}>
@@ -43,9 +35,7 @@
               </li>
             <{/foreach}>
           </ul>
-        </td>
-      </tr>
-    </table>
+
   <{/if}>
 
   <{if $topic.morelink}>

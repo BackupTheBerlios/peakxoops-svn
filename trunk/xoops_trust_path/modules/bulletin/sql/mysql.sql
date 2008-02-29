@@ -49,6 +49,8 @@ CREATE TABLE `topics` (
   KEY `pid` (`topic_pid`)
 ) TYPE=MyISAM;
 
+INSERT INTO `topics` VALUES (1,0,'','TOP',UNIX_TIMESTAMP(),0);
+
 #
 # Table structure for table `relation`
 #

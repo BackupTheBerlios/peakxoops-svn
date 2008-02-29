@@ -9,8 +9,8 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
-$modversion['name']        = $mydirname;
-$modversion['version']     = 2.12; // HD Version
+$modversion['name']        = constant($constpref.'_NAME');
+$modversion['version']     = 2.13; // HD Version
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -80,6 +80,7 @@ $modversion['blocks'][$i]['template']    = "{$mydirname}_block_comments.html";
 
 // Menu
 $modversion['hasMain'] = 1;
+$modversion['read_any'] = true ; // nonsense for other than XCL2.1
 /*$modversion['sub'][1]['name'] = constant($constpref.'_SMNAME1');
 $modversion['sub'][1]['url']  = 'index.php?page=submit';
 $modversion['sub'][2]['name'] = constant($constpref.'_SMNAME2');

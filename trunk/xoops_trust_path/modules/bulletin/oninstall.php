@@ -23,6 +23,18 @@ function bulletin_oninstall_base( $module , $mydirname )
 		if( ! is_array( $ret ) ) $ret = array() ;
 	}
 
+	// transations on module installation
+	$bulletin_posting_permissions = array( 1 , 2 , 3 , 7 ) ;
+	$gperm_handler = xoops_gethandler('groupperm') ;
+	foreach( $bulletin_posting_permissions as $itemid ) {
+		$gperm =& $gperm_handler->create() ;
+		$gperm->setVar( 'gperm_groupid' , 1 ) ;
+		$gperm->setVar( 'gperm_name' , 'bulletin_permit' );
+		$gperm->setVar( 'gperm_modid' , $mid ) ;
+		$gperm->setVar( 'gperm_itemid' , $itemid ) ;
+		$gperm_handler->insert( $gperm ) ;
+	}
+
 	// TABLES (loading mysql.sql)
 	$sql_file_path = dirname(__FILE__).'/sql/mysql.sql' ;
 	$prefix_mod = $db->prefix() . '_' . $mydirname ;

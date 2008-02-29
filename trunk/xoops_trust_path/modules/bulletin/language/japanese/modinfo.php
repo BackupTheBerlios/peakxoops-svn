@@ -10,7 +10,7 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref.'_NAME','ブリティン');
+define($constpref.'_NAME','ニュース');
 
 // A brief description of this module
 define($constpref.'_DESC','ユーザが自由にコメントできる、スラッシュドット風のニュース記事システムを構築します');

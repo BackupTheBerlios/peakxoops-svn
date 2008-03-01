@@ -54,6 +54,8 @@ Since DBTHEME module is designed as D3 module, you can intall the module as much
 - modified the theme hooking block is turned on automatically (only for XCL2.1)
 - modified access permissions are turned on automatically (only for XCL2.1)
 - modified selected theme is 'newbase0db' automatically if it exists
+- renamed language from japaneseutf to ja_utf8 0.50a
+- fixed theme for dbtheme is not imported automaticaly 0.50b
 
 0.34 2007-05-23
 - fixed the dependency of dirname "dbtheme" in oninstall and onupdate
@@ -165,6 +167,7 @@ XOOPS_TRUST_PATH/modules/dbtheme/templates/
 - 各種パーミッションを自動設定するように仕様変更 (XCL2.1のみ)
 - newbase0dbがテーマとして用意されていたら自動でそれを選択するように仕様変更
 - japaneseutf を ja_utf8にリネーム 0.50a
+- インストール時のテーマ取り込み処理のミスを修正 0.50b
 
 0.34 2007-05-23
 - oninstallおよびonupdate内に、"dbtheme" が直書きになっていたのを修正

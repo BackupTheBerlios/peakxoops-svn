@@ -82,8 +82,9 @@ function dbtheme_oninstall_base( $module , $mydirname )
 	}
 	/*************** END DBTHEME SPECIFIC PART ******************/
 
-
-	$tpl_path = XOOPS_ROOT_PATH.'/themes/'.$GLOBALS['xoopsConfig']['theme_set'] ;
+	// TEMPLATES
+	//$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;
+	//$tpl_path = dirname(__FILE__).'/templates' ;
 	if( $handler = @opendir( $tpl_path . '/' ) ) {
 		while( ( $file = readdir( $handler ) ) !== false ) {
 			if( substr( $file , 0 , 1 ) == '.' ) continue ;

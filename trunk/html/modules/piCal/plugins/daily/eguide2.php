@@ -1,6 +1,6 @@
 <?php
 
-	// a plugin for eguide 1.6 by nobu
+	// a plugin for eguide 2.x by nobu
 
 	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -39,8 +39,8 @@ AND status=0 $cond ORDER BY edate" ) ;
 
 
 if (!function_exists("eguide_marker")) {
-function eguide_marker($full) {
-    global $marker;
+function eguide_marker($full, $dirname) {
+    static $marker;
     if (empty($marker)) {
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->getByDirname('eguide');
@@ -58,7 +58,7 @@ function eguide_marker($full) {
 
 	while( list( $title , $id , $sub, $edate , $description , $full, $close, $style) = $db->fetchRow( $result ) ) {
 		if (($edate-$close)<$now) $full = -1;
-		$mark = eguide_marker($full);
+		$mark = eguide_marker($full, $plugin['dirname']);
 		$server_time = $edate;
 
 		$user_time = $server_time + $tzoffset_s2u ;
@@ -75,7 +75,7 @@ function eguide_marker($full) {
 		$tmp_array = array(
 			'dotgif' => $plugin['dotgif'] ,
 			'dirname' => $plugin['dirname'] ,
-			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/event.php?$param" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
+			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/event.php?$param&amp;caldate={$this->year}-{$this->month}-$target_date" ,
 			'id' => $id ,
 			'server_time' => $server_time ,
 			'user_time' => $user_time ,

@@ -1,6 +1,6 @@
 <?php
 
-	// a plugin for eguide 2.0 by nobu
+	// a plugin for eguide 2.x by nobu
 
 	if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
@@ -27,7 +27,7 @@
         $cond = isset($_GET['eid'])?" AND e.eid=".intval($_GET['eid']):"";
 	$result = $db->query( "SELECT title,e.eid,exid,
 IF(exdate,exdate,edate) edate,summary, 
-IF(x.reserved,x.reserved,o.reserved)/persons*100, closetime FROM ".
+IF(x.reserved,x.reserved,o.reserved)/persons*100, closetime, o.reservation FROM ".
 			      $db->prefix("eguide")." e LEFT JOIN ".
 			      $db->prefix("eguide_opt")." o ON e.eid=o.eid LEFT JOIN ".
 			      $db->prefix("eguide_extent")." x ON e.eid=eidref 
@@ -37,8 +37,8 @@ AND IF(exdate,exdate,edate) BETWEEN $range_start_s AND $range_end_s
 AND status=0 $cond ORDER BY edate" ) ;
 
 if (!function_exists("eguide_marker")) {
-function eguide_marker($full) {
-    global $marker;
+function eguide_marker($full, $dirname) {
+    static $marker;
     if (empty($marker)) {
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->getByDirname('eguide');
@@ -54,9 +54,9 @@ function eguide_marker($full) {
 }
 }
 
-while( list( $title , $id , $sub, $edate , $description , $full, $close) = $db->fetchRow( $result ) ) {
+while( list( $title , $id , $sub, $edate , $description , $full, $close, $resv) = $db->fetchRow( $result ) ) {
 		if (($edate-$close)<$now) $full = -1;
-		$mark = eguide_marker($full);
+		$mark = $resv?eguide_marker($full, $plugin['dirname']):'';
 		$server_time = $edate ;
 		$user_time = $server_time + $tzoffset_s2u ;
 		if( date( 'n' , $user_time ) != $this->month ) continue ;
@@ -66,7 +66,7 @@ while( list( $title , $id , $sub, $edate , $description , $full, $close) = $db->
 		$tmp_array = array(
 			'dotgif' => $plugin['dotgif'] ,
 			'dirname' => $plugin['dirname'] ,
-			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/event.php?$param" , // &amp;caldate={$this->year}-{$this->month}-$target_date" ,
+			'link' => XOOPS_URL."/modules/{$plugin['dirname']}/event.php?$param&amp;caldate={$this->year}-{$this->month}-$target_date" ,
 			'id' => $id ,
 			'server_time' => $server_time ,
 			'user_time' => $user_time ,

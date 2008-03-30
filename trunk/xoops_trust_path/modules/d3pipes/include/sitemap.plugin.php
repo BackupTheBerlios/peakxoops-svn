@@ -13,7 +13,7 @@ function b_sitemap_d3pipes( $mydirname ) {
 		$ret["parent"][] = array(
 			"id" => intval( $pipe_id ) ,
 			"title" => $myts->makeTboxData4Show( $name ) ,
-			"url" => "index.php?page=eachpipe&pipe_id=".intval( $pipe_id ) ,
+			"url" => "index.php?page=eachpipe&amp;pipe_id=".intval( $pipe_id ) ,
 		) ;
 	}
 

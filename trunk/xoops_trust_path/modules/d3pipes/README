@@ -48,6 +48,8 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - fixed typo in pulgin for sitemap (thx yumipoyo) 0.60b
 - modified considering dc:subject as a category 0.60b
 - fixed update_cache.sh owners problem 0.60b
+- added joints
+-- FilterFuture_except - filter future entries out 0.60b
 
 0.59 2007-12-12
 - fixed a fatal error on failed unserializing (thx sunuken)
@@ -266,6 +268,8 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - sitemapモジュール用プラグインのtypoを修正 (thx yumipoyo) 0.60b
 - dc:subjectによるカテゴリー対応追加 0.60b
 - cronによる update_cache.sh 実行で、オーナーの問題がでるのを修正した 0.60b
+- フィルタージョイント追加
+-- FilterFuture_except 未来のエントリを除外する 0.60b
 
 0.59 2007-12-12
 - unserializeに失敗した場合にfatal errorが発生していたのを修正 (thx sunuken)

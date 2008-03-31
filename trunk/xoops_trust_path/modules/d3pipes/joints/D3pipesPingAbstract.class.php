@@ -33,6 +33,7 @@ class D3pipesPingAbstract extends D3pipesJointAbstract {
 	function storeMd5( $entries )
 	{
 		$md5_file = $this->getCachePath() ;
+		@unlink( $md5_file ) ;
 		$fp = @fopen( $md5_file , 'wb' ) ;
 		if( ! $fp ) return false ;
 		fwrite( $fp , md5( serialize( $entries ) ) ) ;

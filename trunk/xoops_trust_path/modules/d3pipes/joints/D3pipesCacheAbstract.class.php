@@ -41,6 +41,7 @@ class D3pipesCacheAbstract extends D3pipesJointAbstract {
 	function storeCache( $entries )
 	{
 		$cache_file = $this->getCachePath() ;
+		@unlink( $cache_file ) ;
 		$fp = @fopen( $cache_file , 'wb' ) ;
 		if( ! $fp ) return false ;
 		fwrite( $fp , serialize( $entries ) ) ;

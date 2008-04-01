@@ -1,6 +1,7 @@
 <?php
 
-include_once dirname(__FILE__).'/include/altsys_functions.php' ;
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
+require_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
 if( empty( $xoopsModule ) ) {
 	$moduleperm_handler =& xoops_gethandler( 'module' ) ;
@@ -8,6 +9,10 @@ if( empty( $xoopsModule ) ) {
 }
 
 require XOOPS_ROOT_PATH.'/include/cp_functions.php' ;
+
+// breadcrumbs
+$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php' , $GLOBALS['xoopsModule']->getVar( 'name' ) ) ;
 
 // get page
 $page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;

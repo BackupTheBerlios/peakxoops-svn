@@ -9,7 +9,7 @@ $db =& Database::getInstance() ;
 // get custom templates
 list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(t.tpl_module) AS tpl_count FROM ".$db->prefix("tplfile")." t WHERE t.tpl_type='custom'" ) ) ;
 if( $current_dirname == '_custom' ) {
-	$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => _MYTPLSADMIN_CUSTOMTEMPLATE ) ;
+//	$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => _MYTPLSADMIN_CUSTOMTEMPLATE ) ;
 	$custom_selected = true ;
 } else {
 	$custom_selected = false ;
@@ -34,7 +34,7 @@ while( list( $name , $dirname , $count ) = $db->fetchRow( $mrs ) ) {
 			'title' => $name . " ($count)" ,
 			'link' => '?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$dirname ,
 		) ;
-		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => htmlspecialchars( $name , ENT_QUOTES ) ) ;
+		//$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => htmlspecialchars( $name , ENT_QUOTES ) ) ;
 	} else {
 		$adminmenu[] = array(
 			'selected' => false ,

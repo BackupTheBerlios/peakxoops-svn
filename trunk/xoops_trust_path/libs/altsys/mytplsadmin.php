@@ -5,6 +5,7 @@
 //                      GIJOE <http://www.peak.ne.jp/>                       //
 // ------------------------------------------------------------------------- //
 
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
 include_once dirname(__FILE__)."/include/gtickets.php" ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 include_once dirname(__FILE__)."/include/tpls_functions.php" ;
@@ -193,6 +194,13 @@ xoops_cp_header() ;
 
 // mymenu
 altsys_include_mymenu() ;
+
+// breadcrumbs
+$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+if( $breadcrumbsObj->hasPaths() ) {
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin' , _MI_ALTSYS_MENU_MYTPLSADMIN ) ;
+	$breadcrumbsObj->appendPath( '' , $target_mname ) ;
+}
 
 echo "<h3 style='text-align:left;'>"._MYTPLSADMIN_H3_MODULE." : $target_mname</h3>\n" ;
 

@@ -1,11 +1,24 @@
 [xlang:en]
 
+v0.57 (2008-04-01)
+- modified public top altsys
+- fixed typo in langman (thx nobunobu)
+- fixed templates_c/index.html can be removed (thx nobunobu)
+- added module's language files under the theme for XCL2.1
+- added pagetype's language files under the theme for XCL2.1
+- fixed menu duplication with admin in theme and XCL2.1 (thx nobunobu)
+- added a class named AltsysBreadcrumbs
+- modified xoops_breadcrumbs for "admin in theme"
+- added language files
+-- spanish (thx debianus)
+
 v0.56 (2007-12-28)
 - added a feature of custom template file (not custom "template set")
 - modified cloned blocks have independent "func_num" each other
 - modified compatibility with some XCL special modules about admin_in_theme
-- added XOOPS_ROOT_PATH/my_language overriding
--- remove // from SetupAltsysLangMgr.class.php if you want to enable it
+- added partially overriding language constants by XOOPS_ROOT_PATH/my_language
+- modified mylangadmin displays which constants are overridden partially 0.56a
+- modified compatibility with NBFrame 0.56a
 
 v0.55 (2007-07-12)
 - modified the compatibility against XOOPS 2.0.14/15/16
@@ -116,6 +129,17 @@ v0.10 (2006-05-19)
 [/xlang:en]
 [xlang:ja]
 
+v0.57 (2008-04-01)
+- Altsysを開始モジュールとしてしまった場合の対処を追加
+- 言語マネージャのtypo修正 (thx nobunobu)
+- テンプレートキャッシュ内ファイルの誤削除修正 (thx nobunobu)
+- XCL2.1用言語マネージャフックpreloadのテーマ下言語ファイル対応
+- XCL2.1用言語マネージャフックpreloadのmy_language/下ページタイプ言語ファイル対応
+- XCL2.1の管理画面テーマで、メニュー項目が重複するバグの修正 (thx nobunobu)
+- AltsysBreadcrumbs クラスの新設
+- Altsys内のxoops_breadcrumbsを比較的真面目に作った
+- 言語ファイル追加
+-- spanish (thx debianus)
 
 v0.56 (2007-12-28)
 - カスタムテンプレートの実装

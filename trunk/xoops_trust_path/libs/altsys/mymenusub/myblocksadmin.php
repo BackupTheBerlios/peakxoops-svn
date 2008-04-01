@@ -34,7 +34,7 @@ foreach( $modules4menu as $m4menu ) {
 			'title' => $m4menu->getVar('name','n') . $block_desc ,
 			'link' => '?mode=admin&lib=altsys&page=myblocksadmin&dirname='.$m4menu->getVar('dirname','n') ,
 		) ;
-		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => $m4menu->getVar('name') ) ;
+		//$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => $m4menu->getVar('name') ) ;
 	} else {
 		$adminmenu[] = array(
 			'selected' => false ,

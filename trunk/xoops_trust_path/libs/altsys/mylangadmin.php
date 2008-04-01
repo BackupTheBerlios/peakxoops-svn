@@ -5,6 +5,7 @@
 //                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
 include_once dirname(__FILE__)."/include/gtickets.php" ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 include_once dirname(__FILE__).'/include/lang_functions.php' ;
@@ -244,6 +245,13 @@ xoops_cp_header() ;
 
 // mymenu
 altsys_include_mymenu() ;
+
+// breadcrumbs
+$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+if( $breadcrumbsObj->hasPaths() ) {
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mylangadmin' , _MI_ALTSYS_MENU_MYLANGADMIN ) ;
+	$breadcrumbsObj->appendPath( '' , $target_mname ) ;
+}
 
 require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
 $tpl =& new D3Tpl() ;

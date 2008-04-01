@@ -28,6 +28,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
+require_once dirname(dirname(__FILE__)).'/class/AltsysBreadcrumbs.class.php' ;
 include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 
 	$xoopsOption['theme_use_smarty'] = 1;
@@ -69,8 +70,9 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 			$xoopsTpl->assign(array('xoops_pagetitle' => $target_module->getVar('name'), 'xoops_modulename' => $target_module->getVar('name'), 'xoops_dirname' => $target_module->getVar('dirname')));
 
 			// xoops_breadcrumbs
-			if( is_array( @$GLOBALS['altsysXoopsBreadcrumbs'] ) ) {
-				$xoops_breadcrumbs = $GLOBALS['altsysXoopsBreadcrumbs'] ;
+			$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+			if( $breadcrumbsObj->hasPaths() ) {
+				$xoops_breadcrumbs = $breadcrumbsObj->getXoopsbreadcrumbs() ;
 			} else {
 				$mod_url = XOOPS_URL.'/modules/'.$target_module->getVar('dirname') ;
 				$mod_path = XOOPS_ROOT_PATH.'/modules/'.$target_module->getVar('dirname') ;
@@ -92,10 +94,12 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 					$xoops_breadcrumbs[] = array( 'name' => htmlspecialchars( $GLOBALS['altsysAdminPageTitle'] , ENT_QUOTES ) ) ;
 				} else if( ! empty( $modinfo['adminmenu'] ) ) {
 					@include $mod_path.'/'.$modinfo['adminmenu'] ;
-					foreach( $adminmenu as $eachmenu ) {
-						if( strstr( $_SERVER['REQUEST_URI'] , $eachmenu['link'] ) ) {
-							$xoops_breadcrumbs[] = array( 'name' => $eachmenu['title'] ) ;
-							break ;
+					if( is_array( @$adminmenu ) ) {
+						foreach( $adminmenu as $eachmenu ) {
+							if( strstr( $_SERVER['REQUEST_URI'] , $eachmenu['link'] ) ) {
+								$xoops_breadcrumbs[] = array( 'name' => $eachmenu['title'] ) ;
+								break ;
+							}
 						}
 					}
 				}

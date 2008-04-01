@@ -113,6 +113,7 @@ function altsys_clear_templates_c()
 	$dh = opendir( XOOPS_COMPILE_PATH ) ;
 	while( $file = readdir( $dh ) ) {
 		if( substr( $file , 0 , 1 ) == '.' ) continue ;
+		if( substr( $file , -4 ) != '.php' ) continue ;
 		@unlink( XOOPS_COMPILE_PATH.'/'.$file ) ;
 	}
 	closedir( $dh ) ;

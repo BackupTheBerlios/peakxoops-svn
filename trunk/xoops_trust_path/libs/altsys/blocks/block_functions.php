@@ -76,24 +76,25 @@ function b_altsys_admin_menu_show( $options )
 					'url' => strncmp( $sub['link'] , 'http' , 4 ) === 0 ? htmlspecialchars( $sub['link'] , ENT_QUOTES ) : XOOPS_URL.'/modules/'.$dirname.'/'.htmlspecialchars( $sub['link'] , ENT_QUOTES ) ,
 				) ;
 			}
+		} else if( empty( $adminmenu4altsys ) ) {
+
+			// add preferences
+			if( $mod->getVar('hasconfig') && ! in_array( $mod->getVar('dirname') , array( 'system' , 'legacy' ) ) ) {
+				$submenus4assign[] = array(
+					'title' => _PREFERENCES ,
+					'url' => htmlspecialchars( altsys_get_link2modpreferences( $mid , $coretype ) , ENT_QUOTES ) ,
+				) ;
+			}
+
+			// add help
+			if( defined( 'XOOPS_CUBE_LEGACY' ) && ! empty( $modinfo['help'] ) ) {
+				$submenus4assign[] = array(
+					'title' => _HELP ,
+					'url' => XOOPS_URL.'/modules/legacy/admin/index.php?action=Help&amp;dirname='.$dirname ,
+				) ;
+			}
 		}
 
-		// add preferences
-		if( empty( $adminmenu4altsys ) && $mod->getVar('hasconfig') && ! in_array( $mod->getVar('dirname') , array( 'system' , 'legacy' ) ) ) {
-			$submenus4assign[] = array(
-				'title' => _PREFERENCES ,
-				'url' => htmlspecialchars( altsys_get_link2modpreferences( $mid , $coretype ) , ENT_QUOTES ) ,
-			) ;
-		}
-
-		// add help
-		if( defined( 'XOOPS_CUBE_LEGACY' ) && ! empty( $modinfo['cube_style'] ) && ! empty( $modinfo['help'] ) ) {
-			$submenus4assign[] = array(
-				'title' => _HELP ,
-				'url' => XOOPS_URL.'/modules/legacy/admin/index.php?action=Help&amp;dirname='.$dirname ,
-			) ;
-		}
-		
 		$module4assign = array(
 			'mid' => $mid ,
 			'dirname' => $dirname ,

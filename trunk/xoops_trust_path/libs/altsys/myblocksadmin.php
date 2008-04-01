@@ -5,6 +5,7 @@
 //                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
 include_once dirname(__FILE__).'/include/gtickets.php' ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 include_once dirname(__FILE__).'/include/MyBlocksAdmin.class.php' ;
@@ -31,15 +32,25 @@ if( ! empty( $_GET['dirname'] ) ) {
 }
 
 if( ! empty( $target_module ) && is_object( $target_module ) ) {
-	// specified by dirname
+	// specified by dirname (as ALTSYS module)
 	$target_mid = $target_module->getVar( 'mid' ) ;
 	$target_mname = $target_module->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $target_module->getVar('version') / 100.0 ) ;
 	$target_dirname = $target_module->getVar( 'dirname' ) ;
+	// breadcrumbs
+	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin' , '_MI_ALTSYS_MENU_MYBLOCKSADMIN' ) ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname='.$target_dirname , $target_mname ) ;
 } else if( $xoopsModule->getVar('dirname') == 'altsys' ) {
+	// default as ALTSYS module
 	$target_mid = 0 ;
 	$target_mname = '' ;
 	$target_dirname = '__CustomBlocks__' ;
+	// breadcrumbs
+	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin' , '_MI_ALTSYS_MENU_MYBLOCKSADMIN' ) ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname='.$target_dirname , '_MI_ALTSYS_MENU_CUSTOMBLOCKS' ) ;
 } else {
+	// the other modules
 	$target_mid = $xoopsModule->getVar( 'mid' ) ;
 	$target_mname = $xoopsModule->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $xoopsModule->getVar('version') / 100.0 ) ;
 	$target_dirname = '' ;
@@ -140,6 +151,9 @@ switch( @$_GET['op'] ) {
 		break ;
 	case 'delete' :
 		$myba->form_delete( intval( @$_GET['bid'] ) ) ;
+		// breadcrumbs
+		$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+		$breadcrumbsObj->appendPath( '' , _DELETE ) ;
 		break ;
 	case 'list' :
 	default :

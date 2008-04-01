@@ -5,6 +5,7 @@
 //                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
 include_once dirname(__FILE__)."/include/gtickets.php" ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 include_once dirname(__FILE__)."/include/tpls_functions.php" ;
@@ -27,6 +28,7 @@ $myts =& MyTextSanitizer::getInstance() ;
 
 // language file
 altsys_include_language_file( 'mytplsform' ) ;
+altsys_include_language_file( 'mytplsadmin' ) ;
 
 // check $xoopsModule
 if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
@@ -55,6 +57,12 @@ if( empty( $_GET['tpl_file'] ) || $_GET['tpl_file'] == '_custom' ) {
 		'tpl_type' => 'custom' ,
 		'tpl_source' => '' ,
 	) ;
+
+	// breadcrumbs
+	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin' , '_MI_ALTSYS_MENU_MYTPLSADMIN' ) ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin&amp;dirname=_custom' , _MYTPLSADMIN_CUSTOMTEMPLATE ) ;
+	$breadcrumbsObj->appendPath( '' , '_MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE' ) ;
 } else {
 	// tpl_file from $_GET
 	$edit_mode = 'modify' ;
@@ -65,6 +73,21 @@ if( empty( $_GET['tpl_file'] ) || $_GET['tpl_file'] == '_custom' ) {
 	// get information from tplfile table
 	$sql = "SELECT * FROM ".$db->prefix("tplfile")." f NATURAL LEFT JOIN ".$db->prefix("tplsource")." s WHERE f.tpl_file='$tpl_file4sql' ORDER BY f.tpl_tplset='$tpl_tplset4sql' DESC,f.tpl_tplset='default' DESC" ;
 	$tpl = $db->fetchArray( $db->query( $sql ) ) ;
+
+	// get module info
+	if( $tpl['tpl_module'] == '_custom' ) {
+		$target_mname = _MYTPLSADMIN_CUSTOMTEMPLATE ;
+	} else {
+		$module_handler =& xoops_gethandler( 'module' ) ;
+		$target_module =& $module_handler->getByDirname( $tpl['tpl_module'] ) ;
+		$target_mname = is_object( $target_module ) ? $target_module->getVar( 'name' ) : '' ;
+	}
+
+	// breadcrumbs
+	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin' , '_MI_ALTSYS_MENU_MYTPLSADMIN' ) ;
+	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin&amp;dirname='.htmlspecialchars($tpl['tpl_module']) , $target_mname ) ;
+	$breadcrumbsObj->appendPath( '' , _MD_A_MYTPLSFORM_EDIT ) ;
 }
 
 // error in specifying tpl_file
@@ -127,6 +150,8 @@ if( ! empty( $_POST['do_create'] ) ) {
 //****************//
 xoops_cp_header() ;
 $mymenu_fake_uri = 'index.php?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$mydirname ;
+
+// mymenu
 altsys_include_mymenu() ;
 
 echo "<h3 style='text-align:left;'>"._MD_A_MYTPLSFORM_EDIT." : ".htmlspecialchars($tpl['tpl_type'],ENT_QUOTES)." : ".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)." (".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES).")</h3>\n" ;

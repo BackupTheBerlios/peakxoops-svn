@@ -15,7 +15,7 @@ while( list( $name , $dirname , $count ) = $db->fetchRow( $mrs ) ) {
 			'title' => $name . " ($count)" ,
 			'link' => '?mode=admin&lib=altsys&page=mylangadmin&dirname='.$dirname ,
 		) ;
-		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => htmlspecialchars( $name , ENT_QUOTES ) ) ;
+		//$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'name' => htmlspecialchars( $name , ENT_QUOTES ) ) ;
 	} else {
 		$adminmenu[] = array(
 			'selected' => false ,

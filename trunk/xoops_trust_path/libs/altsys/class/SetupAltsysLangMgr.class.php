@@ -24,14 +24,54 @@ require_once XOOPS_ROOT_PATH . "/modules/legacy/kernel/Legacy_LanguageManager.cl
 
 class AltsysLangMgr_LanguageManager extends Legacy_LanguageManager
 {
-	function _loadLanguage($dirname, $fileBodyName)
+	var $langman = null ;
+	var $theme_lang_checked = false ;
+
+	function prepare()
 	{
 		$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
 		if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
 		require_once( $langmanpath ) ;
-		$langman =& D3LanguageManager::getInstance() ;
-		$langman->language = $this->mLanguageName ;
-		$langman->read( $fileBodyName.'.php' , $dirname ) ;
+		$this->langman =& D3LanguageManager::getInstance() ;
+		$this->langman->language = $this->mLanguageName ;
+
+		parent::prepare();
+	}
+
+	function _loadLanguage($dirname, $fileBodyName)
+	{
+		// read/check once (selected_theme)/language/(lang).php
+		if( ! $this->theme_lang_checked ) {
+			$root =& XCube_Root::getSingleton() ;
+			if( ! empty( $root->mContext->mXoopsConfig['theme_set'] ) ) {
+				$langdir = XOOPS_THEME_PATH.'/'.$root->mContext->mXoopsConfig['theme_set'].'/language' ;
+				if( file_exists( $langdir ) ) {
+					$langfile = $langdir.'/'.$this->mLanguageName.'.php' ;
+					$engfile = $langdir.'/english.php' ;
+					if( file_exists( $langfile ) ) require_once $langfile ;
+					else if( file_exists( $engfile ) ) require_once $engfile ;
+				}
+				$this->theme_lang_checked = true ;
+			}
+		}
+		
+		// read normal
+		$this->langman->read( $fileBodyName.'.php' , $dirname ) ;
+	}
+
+	function loadPageTypeMessageCatalog($type)
+	{
+		// I dare not to use langman...
+		if( strpos( $type , '.' ) === false && $this->langman->my_language ) {
+			$mylang_file = $this->langman->my_language.'/'.$this->mLanguageName.'/'.$type.'.php' ;
+			if( file_exists( $mylang_file ) ) {
+				require_once $mylang_file ;
+			}
+		}
+		$original_error_level = error_reporting() ;
+		error_reporting( $original_error_level & ~ E_NOTICE ) ;
+		parent::loadPageTypeMessageCatalog($type);
+		error_reporting( $original_error_level ) ;
 	}
 
 	function loadGlobalMessageCatalog()

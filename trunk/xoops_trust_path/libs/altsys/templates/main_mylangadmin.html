@@ -5,10 +5,10 @@
 	<input type="hidden" name="dirname" value="<{$target_dirname}>" />
 	<select name="target_lang" onchange="submit();">
 		<{html_options values=$languages output=$languages4disp selected=$target_lang}>
-	</select}>
+	</select>
 	<select name="target_file" onchange="submit();">
 		<{html_options values=$lang_files output=$lang_files selected=$target_file}>
-	</select}>
+	</select>
 	<input type="submit" value="<{$smarty.const._SUBMIT}>" />
 </form>
 

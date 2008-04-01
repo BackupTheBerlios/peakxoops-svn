@@ -5,6 +5,7 @@
 //                     GIJOE <http://www.peak.ne.jp/>                        //
 // ------------------------------------------------------------------------- //
 
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
 include_once dirname(__FILE__).'/include/gtickets.php' ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
@@ -146,6 +147,10 @@ if ($op == 'showmod') {
 
 	// GIJ patch start
 	altsys_include_mymenu() ;
+	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+	if( $breadcrumbsObj->hasPaths() ) {
+		$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mypreferences' , _PREFERENCES ) ;
+	}
 	echo "<h3 style='text-align:left;'>".$module->getvar('name').' &nbsp; '._PREFERENCES."</h3>\n" ;
 	// GIJ patch end
 

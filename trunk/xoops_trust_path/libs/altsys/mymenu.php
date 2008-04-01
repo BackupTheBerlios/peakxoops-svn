@@ -21,14 +21,14 @@ $mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake
 $mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
 
 // xoops_breadcrumbs
-$GLOBALS['altsysXoopsBreadcrumbs'] = array( array( 'url' => XOOPS_URL.'/modules/altsys/admin/index.php' , 'name' => $xoopsModule->getVar('name') ) ) ;
+// $GLOBALS['altsysXoopsBreadcrumbs'] = array( array( 'url' => XOOPS_URL.'/modules/altsys/admin/index.php' , 'name' => $xoopsModule->getVar('name') ) ) ;
 
 // highlight
 foreach( array_keys( $adminmenu ) as $i ) {
 	if( $mymenu_link == $adminmenu[$i]['link'] ) {
 		$adminmenu[$i]['selected'] = true ;
 		$adminmenu_hilighted = true ;
-		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
+//		$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
 	} else {
 		$adminmenu[$i]['selected'] = false ;
 	}
@@ -37,7 +37,7 @@ if( empty( $adminmenu_hilighted ) ) {
 	foreach( array_keys( $adminmenu ) as $i ) {
 		if( stristr( $mymenu_uri , $adminmenu[$i]['link'] ) ) {
 			$adminmenu[$i]['selected'] = true ;
-			$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
+//			$GLOBALS['altsysXoopsBreadcrumbs'][] = array( 'url' => XOOPS_URL."/modules/altsys/".htmlspecialchars($adminmenu[$i]['link'],ENT_QUOTES) , 'name' => htmlspecialchars( $adminmenu[$i]['title'] , ENT_QUOTES ) ) ;
 			break ;
 		}
 	}

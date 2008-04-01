@@ -5,6 +5,7 @@
 //                       GIJOE <http://www.peak.ne.jp/>                      //
 // ------------------------------------------------------------------------- //
 
+require_once dirname(__FILE__).'/class/AltsysBreadcrumbs.class.php' ;
 include_once dirname(__FILE__).'/include/gtickets.php' ;
 include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
@@ -14,7 +15,6 @@ include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 
 // language file
 altsys_include_language_file( 'compilehookadmin' ) ;
-
 
 //
 // DEFINITIONS
@@ -207,7 +207,13 @@ while( list( $tplset , $tpl_count ) = $xoopsDB->fetchRow( $srs ) ) {
 //
 
 xoops_cp_header() ;
+
+// mymenu
 altsys_include_mymenu() ;
+
+// breadcrumbs
+$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=compilehookadmin' , _MI_ALTSYS_MENU_COMPILEHOOKADMIN ) ;
 
 echo "
 	<style>

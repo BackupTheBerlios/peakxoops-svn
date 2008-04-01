@@ -307,8 +307,8 @@ function update_block($bid, $bside, $bweight, $bvisible, $btitle, $bcontent, $bc
 				}
 			}
 		} else {
-			if ($xoopsTpl->is_cached('db:system_dummy.html', 'block'.$bid)) {
-				if (!$xoopsTpl->clear_cache('db:system_dummy.html', 'block'.$bid)) {
+			if ($xoopsTpl->is_cached('db:system_dummy.html', 'blk_'.$bid)) {
+				if (!$xoopsTpl->clear_cache('db:system_dummy.html', 'blk_'.$bid)) {
 					$msg = 'Unable to clear cache for block ID'.$bid;
 				}
 			}
@@ -356,7 +356,7 @@ function do_delete( $bid )
 	/* removing template also (not necessary in this version)
 	if( $myblock->getVar('template') != '' && ! defined('XOOPS_ORETEKI') ) {
 		$tplfile_handler =& xoops_gethandler('tplfile') ;
-		$btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'] , 'block' , $bid ) ;
+		$btemplate =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'] , 'blk_' , $bid ) ;
 		if( count( $btemplate ) > 0 ) {
 			$tplman->delete( $btemplate[0] ) ;
 		}
@@ -509,17 +509,26 @@ function form_edit( $bid , $mode = 'edit' )
 			$form_title = _MD_A_MYBLOCKSADMIN_CLONEFORM ;
 			$button_value = _MD_A_MYBLOCKSADMIN_BTN_CLONE ;
 			$next_op = 'clone_ok' ;
+			// breadcrumbs
+			$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+			$breadcrumbsObj->appendPath( '' , _MD_A_MYBLOCKSADMIN_CLONEFORM ) ;
 			break ;
 		case 'new' :
 			$form_title = _MD_A_MYBLOCKSADMIN_NEWFORM ;
 			$button_value = _MD_A_MYBLOCKSADMIN_BTN_NEW ;
 			$next_op = 'new_ok' ;
+			// breadcrumbs
+			$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+			$breadcrumbsObj->appendPath( '' , _MD_A_MYBLOCKSADMIN_NEWFORM ) ;
 			break ;
 		case 'edit' :
 		default :
 			$form_title = _MD_A_MYBLOCKSADMIN_EDITFORM ;
 			$button_value = _MD_A_MYBLOCKSADMIN_BTN_EDIT ;
 			$next_op = 'edit_ok' ;
+			// breadcrumbs
+			$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+			$breadcrumbsObj->appendPath( '' , _MD_A_MYBLOCKSADMIN_EDITFORM ) ;
 			break ;
 	}
 

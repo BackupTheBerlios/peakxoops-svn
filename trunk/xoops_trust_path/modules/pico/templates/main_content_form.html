@@ -23,8 +23,7 @@
 			<th class="head"><label for="cat_id"><{$smarty.const._MD_PICO_CATEGORY}></label></th>
 			<td class="even">
 				<select name="cat_id" id="cat_id">
-					<option value="">(<{$smarty.const._MD_PICO_TOP}>)</option>
-					<{$cat_jumpbox_options}>
+					<{html_options options=$categories_can_post selected=$category.id}>
 				</select>
 			</td>
 		</tr>
@@ -141,7 +140,7 @@
 				<input type="checkbox" name="use_cache" id="use_cache" value="1" <{if $content.use_cache}>checked="checked"<{/if}> />
 				<label for="use_cache"><{$smarty.const._MD_PICO_LABEL_USECACHE}></label>
 				<br />
-				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}></label>
+				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}>
 				<br />
 
 				<{if $category.isadminormod}>

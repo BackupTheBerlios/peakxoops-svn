@@ -2,36 +2,37 @@
 
 function b_pico_content_show( $options )
 {
-	global $xoopsUser ;
-
-	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
+	// options
+	$mytrustdirname = basename(dirname(dirname(__FILE__))) ;
+	$mydirname = empty( $options[0] ) ? $mytrustdirname : $options[0] ;
 	$content_id = intval( @$options[1] ) ;
 	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_content.html' : trim( $options[2] ) ;
 
+	// mydirname check
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
-	$db =& Database::getInstance();
-	$myts =& MyTextSanitizer::getInstance();
-	$uid = is_object( @$xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
+	// $contentObj
+	$contentObj =& new PicoContent( $mydirname , $content_id ) ;
+	$content_data = $contentObj->getData() ;
 
-	$module_handler =& xoops_gethandler('module');
-	$module =& $module_handler->getByDirname($mydirname);
-	$config_handler =& xoops_gethandler('config');
-	$configs = $config_handler->getConfigList( $module->mid() ) ;
+	// permission check
+	if( empty( $content_data['can_read'] ) || empty( $content_data['can_readfull'] ) ) {
+		return array() ;
+	}
 
-	// categories can be read by current viewer (check by category_permissions)
-	$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname ) ) . ')' ;
+	// check existence
+	if( $contentObj->isError() ) {
+		return array( 'content' => 'invalid block id' ) ;
+	}
 
-	$sql = "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND o.content_id='$content_id' /* AND o.visible */ AND o.created_time <= UNIX_TIMESTAMP()" ;
-	if( ! $result = $db->query( $sql ) ) return array() ;
-	if( ! $db->getRowsNum( $result ) ) return array() ;
+	// module config (overridden)
+	$configs = $contentObj->categoryObj->getOverriddenModConfig() ;
 
+	// constpref
 	$constpref = '_MB_' . strtoupper( $mydirname ) ;
 
-	list( $content_id ) = $db->fetchRow( $result ) ;
-
 	// assigning
-	$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $configs , array() , true ) ;
+	$content4assign = $contentObj->getData4html() ;
 
 	// convert links from relative to absolute (wraps mode only)
 	if( $configs['use_wraps_mode'] ) {
@@ -42,7 +43,9 @@ function b_pico_content_show( $options )
 		$content4assign['body'] = preg_replace( $pattern , $replacement , $content4assign['body'] ) ;
 	}
 
+	// make an array named 'block'
 	$block = array( 
+		'mytrustdirname' => $mytrustdirname ,
 		'mydirname' => $mydirname ,
 		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$configs['images_dir'] ,
@@ -51,12 +54,14 @@ function b_pico_content_show( $options )
 	) ;
 
 	if( empty( $options['disable_renderer'] ) ) {
+		// render it
 		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 		$tpl =& new XoopsTpl() ;
 		$tpl->assign( 'block' , $block ) ;
 		$ret['content'] = $tpl->fetch( $this_template ) ;
 		return $ret ;
 	} else {
+		// just assign it
 		return $block ;
 	}
 }
@@ -65,16 +70,18 @@ function b_pico_content_show( $options )
 
 function b_pico_content_edit( $options )
 {
-	$mydirname = empty( $options[0] ) ? 'pico' : $options[0] ;
+	// options
+	$mytrustdirname = basename(dirname(dirname(__FILE__))) ;
+	$mydirname = empty( $options[0] ) ? $mytrustdirname : $options[0] ;
 	$content_id = intval( @$options[1] ) ;
 	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_content.html' : trim( $options[2] ) ;
 
+	// mydirname check
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
+	// get content_title
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
-
-	// get content_title
 	$contents = array( 0 => '--' ) ;
 	$result = $db->query( "SELECT content_id,subject,c.cat_depth_in_tree FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id ORDER BY c.cat_order_in_tree,o.weight" ) ;
 	while( list( $id , $sbj , $depth ) = $db->fetchRow( $result ) ) {

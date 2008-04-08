@@ -11,7 +11,6 @@ define('_MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY','envoyé avec succès') ;
 define('_MD_PICO_FORMMAIL_MAILSUBJECT','Un formulaire sur %s') ;
 define('_MD_PICO_FORMMAIL_MAILFLDSEP',"\n---------------------------------------------------------------\n") ;
 define('_MD_PICO_FORMMAIL_MAILMIDSEP',"\n--------\n") ;
-define('_MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM','<div class="confirmMsg">Êtes vous sûr?<br /><input type="submit" value="Go!" /></div>') ;
 define('_MD_PICO_FORMMAIL_BLOCK_ERROR_BEGIN','<div class="errorMsg"><ul>Votre information est incomplète') ;
 define('_MD_PICO_FORMMAIL_BLOCK_ERROR_END','</ul></div>') ;
 define('_MD_PICO_FORMMAIL_ERRFMT_MISSING_REQUIRED','<li>Le champ %s est requit</li>') ;

@@ -422,12 +422,12 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		$ret['specify_created_time'] = empty( $_POST['specify_created_time'] ) ? 0 : 1 ;
 		$ret['specify_modified_time'] = empty( $_POST['specify_modified_time'] ) ? 0 : 1 ;
 		if( $ret['specify_created_time'] && strtotime( @$_POST['created_time'] ) != -1 ) {
-			$created_time_safe = preg_replace( '#[^0-9a-zA-Z:+/-]#' , '' , $_POST['created_time'] ) ;
+			$created_time_safe = preg_replace( '#[^\s0-9a-zA-Z:+/-]#' , '' , $_POST['created_time'] ) ;
 			$ret['created_time_formatted'] = $created_time_safe ;
 			$ret['created_time'] = pico_common_get_server_timestamp( strtotime( $_POST['created_time'] ) ) ;
 		}
 		if( $ret['specify_modified_time'] && strtotime( @$_POST['modified_time'] ) != -1 ) {
-			$modified_time_safe = preg_replace( '#[^0-9a-zA-Z:+/-]#' , '' , $_POST['modified_time'] ) ;
+			$modified_time_safe = preg_replace( '#[^\s0-9a-zA-Z:+/-]#' , '' , $_POST['modified_time'] ) ;
 			$ret['modified_time_formatted'] = $modified_time_safe ;
 			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
 		}

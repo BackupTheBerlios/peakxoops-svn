@@ -20,7 +20,7 @@
 					(<{$smarty.const._MD_PICO_TOP}>)
 				<{else}>
 					<select name="pid" id="category_pid">
-						<{$cat_jumpbox_options}>
+						<{html_options options=$categories_can_makesubcategory selected=$category.pid}>
 					</select>
 				<{/if}>
 			</td>
@@ -67,7 +67,7 @@
 				<{$smarty.const._MD_PICO_SUBCATEGORY_COUNT}>
 			</th>
 			<td class="even">
-				<{$children_count}>
+				<{$category.children_count}>
 			</td>
 		</tr>
 

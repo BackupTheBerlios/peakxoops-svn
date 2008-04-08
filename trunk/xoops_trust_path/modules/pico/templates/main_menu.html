@@ -40,7 +40,6 @@
 	</div>
 
 	<div class="level<{$category.depth_in_tree|min:5}>">
-		<{if $content.subject}>
 		<ul class="pico_list_contents_in_menu">
 		<{foreach item=content from=$category.contents}>
 			<li><a href="<{$mod_url}>/<{$content.link}>" title="<{$smarty.const._MD_PICO_CREATED}>:<{$content.created_time_formatted}>"><{$content.subject}></a>
@@ -53,7 +52,6 @@
 			</li>
 		<{/foreach}>
 		</ul>
-	<{/if}>
 	</div>
 <{/foreach}>
 

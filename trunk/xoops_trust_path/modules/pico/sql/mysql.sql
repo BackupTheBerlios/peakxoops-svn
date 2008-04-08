@@ -51,7 +51,7 @@ CREATE TABLE contents (
   weight smallint(5) NOT NULL default 0,
   created_time int(10) NOT NULL default 0,
   modified_time int(10) NOT NULL default 0,
-  expiring_time int(10) NOT NULL default 0,
+  expiring_time int(10) NOT NULL default 0x7fffffff,
   last_cached_time int(10) NOT NULL default 0,
   poster_uid mediumint(8) unsigned NOT NULL default 0,
   poster_ip varchar(15) NOT NULL default '',

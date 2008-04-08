@@ -19,7 +19,6 @@ define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(confirm) An inquiry about %s');
 
 define("_MD_PICO_FORMMAIL_BLOCK_ERROR_BEGIN","<div class='errorMsg'><ul>Você não escreveu todos os dados do formulário");
 define("_MD_PICO_FORMMAIL_BLOCK_ERROR_END","</ul></div>");
-define("_MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM","<div class='confirmMsg'>Confirma?<br /><input type='submit' value='Prosseguir' /></div>");
 define("_MD_PICO_FORMMAIL_ERRFMT_ATLEAST_ONE","<li>Selecione ao menos um de %s</li>");
 define("_MD_PICO_FORMMAIL_ERRFMT_INVALID_EMAIL","<li>Endereço de correio eletrônico inválido: `%s`</li>");
 define("_MD_PICO_FORMMAIL_ERRFMT_INVALID_GENERAL","<li>Invalid format : `%s`</li>");

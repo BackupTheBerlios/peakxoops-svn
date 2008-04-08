@@ -24,6 +24,8 @@ class PicoFormProcessBySmartyBase
 	var $canPostAgain = true ; // public
 	var $finished_message = null ; // public
 	var $confirm_message = null ; // public
+	var $from_field_name = '' ; // public
+	var $fromname_field_name = '' ; // public
 	var $cc_field_name = '' ; // public
 	var $cc_mail_body_pre = '' ; // public
 	var $cc_mail_body_post = '' ; // public
@@ -99,6 +101,16 @@ class PicoFormProcessBySmartyBase
 			$this->confirm_message = $params['confirm_message'] ;
 		}
 
+		// field name for "from"
+		if( isset( $params['from_field_name'] ) ) {
+			$this->from_field_name = $params['from_field_name'] ;
+		}
+
+		// field name for "fromname"
+		if( isset( $params['fromname_field_name'] ) ) {
+			$this->fromname_field_name = $params['fromname_field_name'] ;
+		}
+
 		// field name for sending "confirm mail"
 		if( isset( $params['cc_field_name'] ) ) {
 			$this->cc_field_name = $params['cc_field_name'] ;
@@ -134,7 +146,7 @@ class PicoFormProcessBySmartyBase
 		// check this contents is in main area of pico
 		if( ! is_object( @$xoopsModule ) ) return false ;
 		if( $xoopsModule->getVar('dirname') != $this->mydirname ) return false ;
-		if( intval( @$GLOBALS['content_id'] ) != $this->content4disp['id'] ) return false ;
+		// if( intval( @$GLOBALS['content_id'] ) != $this->content4disp['id'] ) return false ;
 
 		return true ;
 	}
@@ -272,7 +284,9 @@ class PicoFormProcessBySmartyBase
 
 		// process post (then redirect)
 		if( ! empty( $_POST ) ) {
-			if( isset( $_POST[ $this->getTokenName() ] ) ) {
+			if( ! empty( $_POST[ 'cancel' ] ) ) {
+				unset( $_SESSION[ $this->session_index ] ) ;
+			} else if( isset( $_POST[ $this->getTokenName() ] ) ) {
 				if( $this->validateToken() && isset( $_SESSION[ $this->session_index ]['fields'] ) ) {
 					$this->form_processor->importSession( $_SESSION[ $this->session_index ]['fields'] ) ;
 					$errors = $this->form_processor->getErrors() ;
@@ -350,31 +364,41 @@ class PicoFormProcessBySmartyBase
 			$cc_subject = easiestml( $cc_subject ) ;
 		}
 
-		// mail initialize
-		$xoopsMailer =& getMailer() ;
-		$xoopsMailer->useMail() ;
-		if( ! empty( $this->fromEmail ) ) {
-			$xoopsMailer->setFromEmail( $this->fromEmail ) ;
-		}
-		if( ! empty( $this->fromName ) ) {
-			$xoopsMailer->setFromName( $this->fromName ) ;
-		}
-
 		// send main mail (server to admin/poster)
 		if( ! empty( $this->toEmails ) ) {
-			$xoopsMailer->setToEmails( array_unique( $this->toEmails ) ) ;
-			$xoopsMailer->setSubject( $subject ) ;
-			$xoopsMailer->setBody( $mail_body ) ;
-			$xoopsMailer->send() ;
+			// initialize
+			$toMailer =& getMailer() ;
+			$toMailer->useMail() ;
+			$toMailer->setFromEmail( $this->fromEmail ) ;
+			$toMailer->setFromName( $this->fromName ) ;
+
+			// "from" overridden by form data
+			if( ! empty( $this->from_field_name ) && ! empty( $this->form_processor->fields[ $this->from_field_name ]['value'] ) ) {
+				$toMailer->setFromEmail( $this->form_processor->fields[ $this->from_field_name ]['value'] ) ;
+			}
+			if( ! empty( $this->fromname_field_name ) && ! empty( $this->form_processor->fields[ $this->fromname_field_name ]['value'] ) ) {
+				// field data
+				$toMailer->setFromName( $this->form_processor->fields[ $this->fromname_field_name ]['value'] ) ;
+			}
+
+			$toMailer->setToEmails( array_unique( $this->toEmails ) ) ;
+			$toMailer->setSubject( $subject ) ;
+			$toMailer->setBody( $mail_body ) ;
+			$toMailer->send() ;
 		}
 
 		// send confirming mail (server to visitor)
-		if( ! empty( $this->cc_field_name ) && ! empty( $this->form_processor->fields[ $this->cc_field_name ] ) ) {
-			$xoopsMailer->toEmails = array() ; // TODO
-			$xoopsMailer->setToEmails( $this->form_processor->fields[ $this->cc_field_name ] ) ;
-			$xoopsMailer->setSubject( $cc_subject ) ;
-			$xoopsMailer->setBody( $cc_mail_body ) ;
-			$xoopsMailer->send() ;
+		if( ! empty( $this->cc_field_name ) && ! empty( $this->form_processor->fields[ $this->cc_field_name ]['value'] ) ) {
+			// initialize
+			$ccMailer =& getMailer() ;
+			$ccMailer->useMail() ;
+			$ccMailer->setFromEmail( $this->fromEmail ) ;
+			$ccMailer->setFromName( $this->fromName ) ;
+
+			$ccMailer->setToEmails( $this->form_processor->fields[ $this->cc_field_name ]['value'] ) ;
+			$ccMailer->setSubject( $cc_subject ) ;
+			$ccMailer->setBody( $cc_mail_body ) ;
+			$ccMailer->send() ;
 		}
 	}
 

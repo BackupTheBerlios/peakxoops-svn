@@ -41,18 +41,19 @@ class PicoTextSanitizer extends MyTextSanitizer
 	// override
 	function &displayTarea( $text , $html = 0 , $smiley = 1 , $xcode = 1 , $image = 1 , $br = 1 , $nbsp = 0 , $number_entity = 0 , $special_entity = 0 )
 	{
+		$this->nbsp = $nbsp ;
+
 		if( empty( $xcode ) ) {
 			if( empty( $html ) ) $text = htmlspecialchars( $text , ENT_QUOTES ) ;
 			if( ! empty( $br ) ) $text = nl2br( $text ) ;
-			return $text ;
 		} else {
-			$this->nbsp = $nbsp ;
 			$text = $this->prepareXcode( $text ) ;
 			$text = $this->postCodeDecode( parent::displayTarea( $text , $html , $smiley , 1 , $image , $br ) , $image ) ;
-			if( $number_entity ) $text = $this->reviveNumberEntity( $text ) ;
-			if( $special_entity ) $text = $this->reviveSpecialEntity( $text ) ;
-			return  $text ;
 		}
+
+		if( $number_entity ) $text = $this->reviveNumberEntity( $text ) ;
+		if( $special_entity ) $text = $this->reviveSpecialEntity( $text ) ;
+		return  $text ;
 	}
 
 	// override
@@ -132,9 +133,10 @@ class PicoTextSanitizer extends MyTextSanitizer
 		return preg_replace($patterns, $replacements, $text);
 	}
 
+	// override
 	function &nl2Br( $text )
 	{
-		$text = preg_replace("/(\015\012)|(\015)|(\012)/","<br />",$text);
+		$text = parent::nl2Br( $text ) ;
 		if( $this->nbsp ) {
 			$patterns = array( '  ' , '\"' ) ;
 			$replaces = array( ' &nbsp;' , '"' ) ;
@@ -151,10 +153,13 @@ class PicoTextSanitizer extends MyTextSanitizer
 		return preg_replace($patterns, $replacements, $text);
 	}
 
+	// override
 	function codeConv($text, $xcode = 1, $image = 1){
-		if( $xcode != 0 ) {
+		if( $xcode != 0 && ! defined( 'XOOPS_CUBE_LEGACY' ) ) {
 			// bug fix
 			$text = preg_replace_callback( "/\[code](.*)\[\/code\]/sU" , array( $this , 'myCodeSanitizer' ) , $text ) ;
+		} else {
+			$text = parent::codeConv( $text , $xcode , $image ) ;
 		}
 		return $text ;
 	}
@@ -188,7 +193,6 @@ class PicoTextSanitizer extends MyTextSanitizer
 		
 		return preg_replace( $patterns , $replacements , $text ) ;
 	}
-
 }
 
 ?>

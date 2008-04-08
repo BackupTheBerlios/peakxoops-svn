@@ -42,7 +42,7 @@ define($constpref.'_SEARCHBYUIDDSC','Contents will be listed in user profile of 
 define($constpref.'_USE_TAFMODULE','Use "tellafriend" module');
 define($constpref.'_FILTERS','Default filter set');
 define($constpref.'_FILTERSDSC','input filter names separated with | (pipe)');
-define($constpref.'_FILTERSDEFAULT','htmlspecialchars|xcode|smiley|nl2br');
+define($constpref.'_FILTERSDEFAULT','xcode|smiley|nl2br');
 define($constpref.'_FILTERSF','Forced filters');
 define($constpref.'_FILTERSFDSC','input filter names separated with ,(comma). filter:LAST means the filter is passed in the last phase. The other filters are passed in the first phase.');
 define($constpref.'_FILTERSP','Prohibited filters');

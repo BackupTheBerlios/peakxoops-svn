@@ -8,7 +8,7 @@
 				&nbsp;
 				<{$content.created_time_formatted}>
 			</a>
-			<{if $content.body}>
+			<{if $block.display_body && $content.body}>
 				<br />
 				<{$content.body|strip_tags|truncate:"100"}>
 			<{/if}>

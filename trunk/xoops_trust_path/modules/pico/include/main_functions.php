@@ -504,7 +504,7 @@ function pico_main_parse_path_info( $mydirname )
 }
 
 
-// parse and get path_info
+// parse and get path_info (deprecated)
 function pico_main_read_wrapped_file( $mydirname , $path_info )
 {
 	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.$path_info ;
@@ -533,6 +533,7 @@ function pico_main_read_wrapped_file( $mydirname , $path_info )
 		'link' => 'index.php'.$path_info ,
 		'created_time' => $mtime ,
 		'created_time_formatted' => formatTimestamp( $mtime ) ,
+		'subject_raw' => pico_common_unhtmlspecialchars( $subject ) ,
 		'subject' => $subject ,
 		'body' => $body ,
 		'can_edit' => false ,
@@ -570,25 +571,6 @@ function pico_main_render_moduleheader( $mydirname , $mod_config , $appendix_hea
 	$replacements = array( XOOPS_URL.'/modules/'.$mydirname , XOOPS_URL.'/modules/'.$mydirname , $mydirname , XOOPS_URL.'/' , XOOPS_URL ) ;
 
 	return str_replace( $searches , $replacements , $header4disp ) ;
-}
-
-
-// get samples of category options
-function pico_main_get_categoryoptions4edit( $pico_configs_can_be_override )
-{
-	global $xoopsModuleConfig ;
-
-	$lines = array() ;
-	foreach( $pico_configs_can_be_override as $key => $type ) {
-		if( isset( $xoopsModuleConfig[ $key ] ) ) {
-			$val = $xoopsModuleConfig[ $key ] ;
-			if( $type == 'int' || $type == 'bool' ) {
-				$val = intval( $val ) ;
-			}
-			$lines[] = htmlspecialchars( $key . ':' . $val , ENT_QUOTES ) ;
-		}
-	}
-	return implode( '<br />' , $lines ) ;
 }
 
 

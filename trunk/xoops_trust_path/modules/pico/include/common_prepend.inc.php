@@ -1,8 +1,46 @@
 <?php
 
-require_once dirname(__FILE__).'/main_functions.php' ;
-require_once dirname(__FILE__).'/common_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/include/main_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoUriMapper.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoPermission.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoModelContent.class.php' ;
+require_once XOOPS_TRUST_PATH.'/libs/altsys/class/AltsysBreadcrumbs.class.php' ;
+
+// add XOOPS_TRUST_PATH/PEAR/ into include_path
+if( ! defined( 'PATH_SEPARATOR' ) ) define( 'PATH_SEPARATOR' , DIRECTORY_SEPARATOR == '/' ? ':' : ';' ) ;
+ini_set( 'include_path' , ini_get('include_path') . PATH_SEPARATOR . XOOPS_TRUST_PATH . '/PEAR' ) ;
+
+// breadcrumbs
+$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/'.$mydirname.'/index.php' , $xoopsModule->getVar( 'name' ) ) ;
+
+// get request
+$uriMapper =& new PicoUriMapper( $mydirname , $xoopsModuleConfig ) ;
+$uriMapper->initGet() ;
+$picoRequest = $uriMapper->parseRequest() ; // clean data
+
+// permissions
+$picoPermission =& PicoPermission::getInstance() ;
+$permissions = $picoPermission->getPermissions( $mydirname ) ;
+
+// current category object
+$currentCategoryObj =& new PicoCategory( $mydirname , $picoRequest['cat_id'] , $permissions ) ;
+if( $currentCategoryObj->isError() ) {
+	redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCATEGORY ) ;
+	exit ;
+}
+
+// override $xoopsModuleConfig
+$xoopsModuleConfig = $currentCategoryObj->getOverriddenModConfig() ;
+
+// append paths from each categories into breadcrumbs
+$breadcrumbsObj->appendPath( $currentCategoryObj->getBreadcrumbs() ) ;
+
+
+/*
 $myts =& PicoTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
@@ -24,11 +62,7 @@ $category_permissions = pico_main_get_category_permissions_of_current_user( $myd
 $whr_read4cat = 'c.`cat_id` IN (' . implode( "," , array_keys( $category_permissions ) ) . ')' ;
 $whr_read4content = 'o.`cat_id` IN (' . implode( "," , array_keys( $category_permissions ) ) . ')' ;
 
-// add XOOPS_TRUST_PATH/PEAR/ into include_path
-if( ! defined( 'PATH_SEPARATOR' ) ) define( 'PATH_SEPARATOR' , DIRECTORY_SEPARATOR == '/' ? ':' : ';' ) ;
-ini_set( 'include_path' , ini_get('include_path') . PATH_SEPARATOR . XOOPS_TRUST_PATH . '/PEAR' ) ;
-
 // init xoops_breadcrumbs
 $xoops_breadcrumbs[0] = array( 'url' => XOOPS_URL.'/modules/'.$mydirname.'/index.php' , 'name' => $xoopsModule->getVar( 'name' ) ) ;
-
+*/
 ?>

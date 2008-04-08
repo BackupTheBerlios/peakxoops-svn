@@ -175,7 +175,7 @@ function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 	$categories = array( 0 => array( 'pid' => -1 , 'name' => '' , 'url' => '' , 'sub' => array() ) ) ;
 
 	// categories query
-	$sql = "SELECT cat_id,pid,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_read) ORDER BY cat_order_in_tree" ;
+	$sql = "SELECT cat_id,pid,cat_title,cat_vpath FROM ".$db->prefix($mydirname."_categories")." WHERE ($whr_read) ORDER BY cat_order_in_tree" ;
 	$crs = $db->query( $sql ) ;
 	if( $crs ) while( $cat_row = $db->fetchArray( $crs ) ) {
 		$cat_id = intval( $cat_row['cat_id'] ) ;

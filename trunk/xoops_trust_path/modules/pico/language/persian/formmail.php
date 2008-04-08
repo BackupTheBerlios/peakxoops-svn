@@ -19,7 +19,6 @@ define('_MD_PICO_FORMMAIL_MAILSUBJECT','پرسش درباره ی %s') ;
 define('_MD_PICO_FORMMAIL_MAILFLDSEP',"\n---------------------------------------------------------------\n") ;
 define('_MD_PICO_FORMMAIL_MAILMIDSEP',"\n--------\n") ;
 
-define('_MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM','<div class="confirmMsg">آیا موافقید؟<br /><input type="submit" value="ارسال!" /></div>') ;
 define('_MD_PICO_FORMMAIL_BLOCK_ERROR_BEGIN','<div class="errorMsg"><ul>موارد پر شده ناقص است') ;
 define('_MD_PICO_FORMMAIL_BLOCK_ERROR_END','</ul></div>') ;
 

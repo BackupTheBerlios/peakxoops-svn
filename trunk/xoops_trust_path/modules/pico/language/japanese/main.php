@@ -89,6 +89,8 @@ define('_MD_PICO_TH_HTMLHEADER_WAITING','申請中のHTMLヘッダー');
 define('_MD_PICO_TH_BODY','本文');
 define('_MD_PICO_TH_BODY_WAITING','申請中の本文');
 define('_MD_PICO_TH_FILTERS','本文フィルター');
+define('_MD_PICO_TH_TAGS','タグ');
+define('_MD_PICO_TH_TAGSDSC','複数のタグを指定する時はスペースで区切る');
 define('_MD_PICO_TH_WEIGHT','表示順');
 define('_MD_PICO_TH_CONTENTOPTIONS','オプション');
 define('_MD_PICO_LABEL_USECACHE','本文キャッシュ');
@@ -128,6 +130,11 @@ define('_MD_PICO_VOTECOUNT','投票数');
 define('_MD_PICO_VOTEPOINTAVG','平均点');
 define('_MD_PICO_VOTEPOINTDSCBEST','役に立った');
 define('_MD_PICO_VOTEPOINTDSCWORST','役に立たなかった');
+
+// query contents
+define('_MD_PICO_FMT_QUERYTAGTITLE','タグ: %s');
+define('_MD_PICO_FMT_QUERYTAGDESC','「%s」というタグを持つコンテンツの一覧');
+define('_MD_PICO_ERR_NOCONTENTMATCHED','該当するコンテンツはありません');
 
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','phpコード');

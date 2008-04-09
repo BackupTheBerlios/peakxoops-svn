@@ -4,13 +4,14 @@ require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
-// get $cat_id
+// get info of the category
 $cat_id = intval( @$_GET['cat_id'] ) ;
-list( $cat_id , $cat_title ) = $db->fetchRow( $db->query( "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
+list( $cat_id , $pid , $cat_title , $redundants_serialized , $cat_permission_id ) = $db->fetchRow( $db->query( "SELECT cat_id,pid,cat_title,cat_redundants,cat_permission_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) ;
 if( empty( $cat_id ) ) {
 	$cat_id = 0 ;
 	$cat_title = _MD_PICO_TOP ;
 }
+$redundants = @unserialize( $redundants_serialized ) ;
 
 include_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 include dirname(dirname(__FILE__)).'/include/category_permissions.inc.php' ;
@@ -18,6 +19,28 @@ include dirname(dirname(__FILE__)).'/include/category_permissions.inc.php' ;
 //
 // transaction stage
 //
+
+// independent permission update
+if( ! empty( $_POST['independentpermission_update'] ) && $cat_id != 0 ) {
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+	if( ! empty( $_POST['independentpermission'] ) ) {
+		// update permission_id of categories has the same permission_id and childlen of the category
+		$whr_cid = ! empty( $redundants['subcategories_ids_cs'] ) ? "cat_id IN (".$redundants['subcategories_ids_cs'].$cat_id.")" : 'cat_id='.$cat_id ;
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_permission_id=$cat_id WHERE cat_permission_id=$cat_permission_id AND ($whr_cid)" ) ;
+	} else {
+		// remove all category_permissions of the cat_id
+		$db->queryF( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id" ) ;
+		// get cat_permission_id of the parent category
+		list( $cat_permission_id ) = $db->fetchRow( $db->query( "SELECT cat_permission_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$pid" ) ) ;
+		// update permission_id of categories which permission_id is the cat_id
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_permission_id=".intval($cat_permission_id)." WHERE cat_permission_id=$cat_id" ) ;
+	}
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=category_access&amp;cat_id=$cat_id" , 3 , _MD_PICO_MSG_UPDATED ) ;
+	exit ;
+}
+
 
 // group update
 if( ! empty( $_POST['group_update'] ) ) {
@@ -105,7 +128,7 @@ $groups4assign = array() ;
 foreach( $groups as $group ) {
 	$gid = $group->getVar('groupid') ;
 
-	$cprs = $db->query( "SELECT permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE groupid=".$group->getVar('groupid')." AND cat_id=$cat_id" ) ;
+	$cprs = $db->query( "SELECT permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE groupid=".$group->getVar('groupid')." AND cat_id=$cat_permission_id" ) ;
 	if( $db->getRowsNum( $cprs ) > 0 ) {
 		list( $serialized_gpermissions ) = $db->fetchRow( $cprs ) ;
 		$gpermissions = unserialize( $serialized_gpermissions ) ;
@@ -123,7 +146,7 @@ foreach( $groups as $group ) {
 
 // create user form
 $users4assign = array() ;
-$cprs = $db->query( "SELECT u.uid,u.uname,cp.permissions FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("users")." u ON cp.uid=u.uid WHERE cp.cat_id=$cat_id AND cp.groupid IS NULL ORDER BY u.uid ASC" ) ;
+$cprs = $db->query( "SELECT u.uid,u.uname,cp.permissions FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("users")." u ON cp.uid=u.uid WHERE cp.cat_id=$cat_permission_id AND cp.groupid IS NULL ORDER BY u.uid ASC" ) ;
 $user_trs = '' ;
 while( list( $uid , $uname , $serialized_upermissions ) = $db->fetchRow( $cprs ) ) {
 
@@ -162,6 +185,7 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'cat_id' => $cat_id ,
+	'cat_permission_id' => $cat_permission_id ,
 	'cat_link' => pico_common_make_category_link4html( $xoopsModuleConfig , $cat_id , $mydirname ) ,
 	'cat_title' => htmlspecialchars( $cat_title , ENT_QUOTES ) ,
 	'cat_options' => $cat_options ,

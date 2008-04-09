@@ -13,6 +13,7 @@ $pico_configs_can_be_override = array(
 	'use_vote' => 'bool' ,
 	'guest_vote_interval' => 'int' ,
 	'htmlheader' => 'text' ,
+	'allow_each_htmlheader' => 'bool' ,
 	'css_uri' => 'text' ,
 	'images_dir' => 'text' ,
 	'body_editor' => 'text' ,

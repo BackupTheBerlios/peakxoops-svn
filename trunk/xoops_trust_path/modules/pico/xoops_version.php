@@ -103,6 +103,17 @@ $modversion['blocks'][5] = array(
 	'can_clone'		=> true ,
 ) ;
 
+$modversion['blocks'][6] = array(
+	'file'			=> 'blocks.php' ,
+	'name'			=> constant($constpref.'_BNAME_TAGS') ,
+	'description'	=> '' ,
+	'show_func'		=> 'b_pico_tags_show' ,
+	'edit_func'		=> 'b_pico_tags_edit' ,
+	'options'		=> "$mydirname|30|count|label|" ,
+	'template'		=> '' , // use "module" template instead
+	'can_clone'		=> true ,
+) ;
+
 // Comments
 $modversion['hasComments'] = 0 ;
 
@@ -304,6 +315,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textarea' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'allow_each_htmlheader' ,
+	'title'			=> $constpref.'_ALLOWEACHHEAD' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 

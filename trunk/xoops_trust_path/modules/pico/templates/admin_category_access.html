@@ -16,6 +16,22 @@
 	[<a href="<{$mod_url}>/<{$cat_link}>"><{$smarty.const._MD_PICO_LINK_PUBLICCATEGORYINDEX}></a>]
 </p>
 
+<{if $cat_id != 0 }>
+<!-- cat_permission_id == cat_id -->
+<h2 class="head"><{$smarty.const._MD_A_PICO_H2_INDEPENDENTPERMISSION}></h2>
+<form name="independentpermission" action="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$cat_id}>" method="post" style="margin:20px 0px">
+	<{$gticket_hidden}>
+	<label for="independentpermission"><{$smarty.const._MD_A_PICO_LABEL_INDEPENDENTPERMISSION}></label>
+	<input type="checkbox" name="independentpermission" id="independentpermission" value="1" <{if $cat_id == $cat_permission_id}>checked="checked"<{/if}> />
+	<input type="submit" name="independentpermission_update" value="<{$smarty.const._SUBMIT}>" />
+</form>
+<{/if}>
+
+<{if $cat_id != $cat_permission_id && $cat_id != 0 }>
+	<!-- link to the parent for the permission -->
+	<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$cat_permission_id}>"><{$smarty.const._MD_A_PICO_LINK_CATPERMISSIONID}></a>
+<{else}>
+
 <!-- group form -->
 <h2 class="head"><{$smarty.const._MD_A_PICO_H2_GROUPPERMS}></h2>
 <form name="groupperms" action="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$cat_id}>" method="post" style="margin:20px 0px">
@@ -117,3 +133,5 @@
 	<br />
 	<{$smarty.const._MD_A_PICO_NOTICE_ADDUSERS}>
 </form>
+
+<{/if}>

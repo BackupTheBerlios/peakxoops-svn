@@ -76,6 +76,7 @@ CREATE TABLE contents (
   body_waiting mediumtext,
   body_cached mediumtext,
   filters text,
+  tags text,
   extra_fields mediumtext,
   redundants mediumtext,
   for_search mediumtext,
@@ -139,4 +140,18 @@ CREATE TABLE content_extras (
   KEY (extra_type),
   KEY (created_time)
 ) TYPE=MyISAM;
+
+CREATE TABLE tags (
+  label varchar(255) NOT NULL default '',
+  weight int(10) unsigned NOT NULL default 0,
+  count int(10) unsigned NOT NULL default 0,
+  content_ids mediumtext,
+  created_time int(10) NOT NULL default 0,
+  modified_time int(10) NOT NULL default 0,
+  PRIMARY KEY (label),
+  KEY (count),
+  KEY (weight),
+  KEY (created_time)
+) TYPE=MyISAM;
+
 

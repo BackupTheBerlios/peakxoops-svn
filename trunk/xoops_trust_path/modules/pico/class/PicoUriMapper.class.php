@@ -65,6 +65,10 @@ function parseRequest()
 	} else if( @$_GET['page'] == 'rss' || substr( $_SERVER['REQUEST_URI'] , -9 ) == '?page=rss' ) {
 		$this->request['controller'] = 'latestcontents' ;
 		$this->request['view'] = 'rss' ;
+	} else if( ! empty( $_GET['tag'] ) ) {
+		$this->request['tag'] = $_GET['tag'] ;
+		$this->request['controller'] = 'querycontents' ;
+		$this->request['view'] = 'list' ;
 	} else if( $content_id > 0 || ! empty( $this->request['path_info'] ) ) {
 		$this->request['view'] = 'detail' ;
 	} else if( $cat_id > 0 ) {

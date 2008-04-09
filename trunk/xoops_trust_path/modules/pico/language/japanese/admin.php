@@ -26,6 +26,9 @@ define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','²¾ÁÛ¥Ñ¥¹¤Î½ÅÊ£¤Ê¤É¤Î¸¶°ø¤Ç¡¢¤¤¤¯¤Ä¤
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','¥«¥Æ¥´¥ê¡¼¤òÁªÂò');
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','ÆÈÎ©¥Ñ¡¼¥ß¥Ã¥·¥ç¥óÀßÄê');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','¤³¤Î¥«¥Æ¥´¥ê¡¼ÆÈ¼«¤Î¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤òÀßÄê¤¹¤ë');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','¿Æ¸¢¸Â¤ò³ÎÇ§¤¹¤ë');
 define('_MD_A_PICO_H2_GROUPPERMS','¥°¥ë¡¼¥×Ëè¤Î¸¢¸Â');
 define('_MD_A_PICO_H2_USERPERMS','¥æ¡¼¥¶¡¼Ëè¤Î¸¢¸Â');
 define('_MD_A_PICO_TH_UID','¥æ¡¼¥¶ID');

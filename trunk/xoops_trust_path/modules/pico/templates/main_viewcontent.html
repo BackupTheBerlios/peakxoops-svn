@@ -24,6 +24,15 @@
 	<{html_options options=$categories_can_read selected=$category.id}>
 </select> *}>
 
+<!-- tags -->
+<{if $content.tags_array}>
+	<div class="pico_tags">
+		<{foreach from=$content.tags_array item="tag"}>
+			<{$tag}>
+		<{/foreach}>
+	</div>
+<{/if}>
+
 <!-- content (body) -->
 <a name="top_of_pico_body" id="top_of_pico_body"></a>
 <div class="pico_body" id="<{$mydirname}>_body">

@@ -26,6 +26,9 @@ define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','仮想パスの重複などの原�
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','カテゴリーを選択');
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','独立パーミッション設定');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','このカテゴリー独自のパーミッションを設定する');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','親権限を確認する');
 define('_MD_A_PICO_H2_GROUPPERMS','グループ毎の権限');
 define('_MD_A_PICO_H2_USERPERMS','ユーザー毎の権限');
 define('_MD_A_PICO_TH_UID','ユーザID');

@@ -1,3 +1,6 @@
+パーミッションシステムの修正
+
+
 削除すべき関数
 
 pico_common_get_content4assign()

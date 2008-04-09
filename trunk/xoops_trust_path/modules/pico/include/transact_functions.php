@@ -64,7 +64,7 @@ function pico_sync_cattree( $mydirname )
 	$db =& Database::getInstance() ;
 
 	// rebuild tree informations
-	list( $tree_array , $subcattree , $contents_total , $subcategories_total ) = pico_makecattree_recursive( $mydirname , 0 ) ;
+	list( $tree_array , $subcattree , $contents_total , $subcategories_total , $subcategories_ids_cs ) = pico_makecattree_recursive( $mydirname , 0 ) ;
 	//array_shift( $tree_array ) ;
 	$paths = array() ;
 	$previous_depth = 0 ;
@@ -93,6 +93,7 @@ function pico_sync_cattree( $mydirname )
 			'contents_total' => $val['contents_total'] ,
 			'subcategories_count' => $val['subcategories_count'] ,
 			'subcategories_total' => $val['subcategories_total'] ,
+			'subcategories_ids_cs' => $val['subcategories_ids_cs'] ,
 			'subcattree_raw' => $val['subcattree_raw'] ,
 		) ;
 
@@ -114,7 +115,7 @@ function pico_makecattree_recursive( $mydirname , $cat_id , $order = 'cat_weight
 		return array( $parray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] ) ;
 	} */
 	$myindex = sizeof( $parray ) ;
-	$myarray = array( 'cat_id' => $cat_id , 'depth' => $depth , 'cat_title' => $cat_title , 'contents_count' => intval( $contents_count ) , 'contents_total' => 0 , 'subcategories_count' => $db->getRowsNum( $result ) , 'subcategories_total' => 0 , 'subcattree_raw' => array() ) ;
+	$myarray = array( 'cat_id' => $cat_id , 'depth' => $depth , 'cat_title' => $cat_title , 'contents_count' => intval( $contents_count ) , 'contents_total' => 0 , 'subcategories_count' => $db->getRowsNum( $result ) , 'subcategories_ids_cs' => '' , 'subcategories_total' => 0 , 'subcattree_raw' => array() ) ;
 	$parray[ $myindex ] = $myarray ;
 //	$parray[ $myindex ]['subcattree_raw'][] = $parray ;
 
@@ -122,20 +123,22 @@ function pico_makecattree_recursive( $mydirname , $cat_id , $order = 'cat_weight
 	$subcategories_total = intval( $myarray['subcategories_count'] ) ;
 
 	while( list( $new_cat_id , $new_cat_title ) = $db->fetchRow( $result ) ) {
-		list( $parray , $subarray , $contents_smallsum , $subcategories_smallsum ) = pico_makecattree_recursive( $mydirname , $new_cat_id , $order , $parray , $depth + 1 , $new_cat_title ) ;
+		list( $parray , $subarray , $contents_smallsum , $subcategories_smallsum , $subcateroeis_ids_cs_sub ) = pico_makecattree_recursive( $mydirname , $new_cat_id , $order , $parray , $depth + 1 , $new_cat_title ) ;
 		$myarray['subcattree_raw'][] = $subarray ;
 		$contents_total += $contents_smallsum ;
 		$subcategories_total += $subcategories_smallsum ;
+		$myarray['subcategories_ids_cs'] .= $new_cat_id . ',' . $subcateroeis_ids_cs_sub ;
 	}
 
 	$parray[ $myindex ]['contents_total'] = $contents_total ;
 	$myarray['contents_total'] = $contents_total ;
 	$parray[ $myindex ]['subcategories_total'] = $subcategories_total ;
 	$myarray['subcategories_total'] = $subcategories_total ;
+	$parray[ $myindex ]['subcategories_ids_cs'] = $myarray['subcategories_ids_cs'] ;
 
 	$parray[ $myindex ]['subcattree_raw'] = $myarray['subcattree_raw'] ;
 
-	return array( $parray , $myarray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] ) ;
+	return array( $parray , $myarray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] , $myarray['subcategories_ids_cs'] ) ;
 }
 
 
@@ -160,6 +163,34 @@ function pico_sync_content_votes( $mydirname , $content_id )
 }
 
 
+// store tags from contents
+function pico_sync_tags( $mydirname )
+{
+	$db =& Database::getInstance() ;
+
+	$result = $db->query( "SELECT content_id,tags FROM ".$db->prefix($mydirname."_contents") ) ;
+	$all_tags_array = array() ;
+	while( list( $content_id , $tags ) = $db->fetchRow( $result ) ) {
+		foreach( explode( ' ' , $tags ) as $tag ) {
+			if( trim( $tag ) == '' ) continue ;
+			$all_tags_array[ $tag ][] = $content_id ;
+		}
+	}
+
+	foreach( $all_tags_array as $tag => $content_ids ) {
+		$label4sql = mysql_real_escape_string( $tag ) ;
+		$content_ids4sql = implode( ',' , $content_ids ) ;
+		$count = sizeof( $content_ids ) ;
+		$result = $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_tags" )." SET label='$label4sql',weight=0,count='$count',content_ids='$content_ids4sql',created_time=UNIX_TIMESTAMP(),modified_time=UNIX_TIMESTAMP()" ) ;
+		if( ! $result ) {
+			$db->queryF( "UPDATE ".$db->prefix($mydirname."_tags" )." SET weight=0,count=$count,content_ids='$content_ids4sql',modified_time=UNIX_TIMESTAMP() WHERE label='$label4sql'" ) ;
+		}
+	}
+
+	return true ;
+}
+
+
 // sync content_votes and category's tree
 function pico_sync_all( $mydirname )
 {
@@ -174,7 +205,11 @@ function pico_sync_all( $mydirname )
 	$result = $db->query( "SELECT content_id FROM ".$db->prefix($mydirname."_contents") ) ;
 	while( list( $content_id ) = $db->fetchRow( $result ) ) {
 		pico_sync_content_votes( $mydirname , intval( $content_id ) ) ;
+		//pico_sync_content( $mydirname , intval( $content_id ) ) ;
 	}
+
+	// sync tags
+	pico_sync_tags( $mydirname ) ;
 
 	// d3forum comment integration
 	if( ! empty( $configs['comment_dirname'] ) && $configs['comment_forum_id'] > 0 ) {
@@ -267,18 +302,24 @@ function pico_makecategory( $mydirname )
 		}
 	}
 
+	// get cat_permission_id of the parent category
+	list( $cat_permission_id ) = $db->fetchRow( $db->query( "SELECT cat_permission_id FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=".intval( @$requests['pid'] ) ) ) ;
+
+	// get $new_cat_id
 	list( $new_cat_id ) = $db->fetchRow( $db->query( "SELECT MAX(cat_id)+1 FROM ".$db->prefix($mydirname."_categories") ) ) ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`='',cat_id=$new_cat_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
+
+	// insert it
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`='',cat_id=$new_cat_id,cat_permission_id=$cat_permission_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// permissions are set same as the parent category. (also moderator)
-	$sql = "SELECT uid,groupid,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id={$requests['pid']}" ;
+/*	$sql = "SELECT uid,groupid,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id={$requests['pid']}" ;
 	if( ! $result = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 	while( $row = $db->fetchArray( $result ) ) {
 		$uid4sql = empty( $row['uid'] ) ? 'null' : intval( $row['uid'] ) ;
 		$groupid4sql = empty( $row['groupid'] ) ? 'null' : intval( $row['groupid'] ) ;
 		$sql = "INSERT INTO ".$db->prefix($mydirname."_category_permissions")." (cat_id,uid,groupid,permissions) VALUES ($new_cat_id,$uid4sql,$groupid4sql,'".mysql_real_escape_string($row['permissions'])."')" ;
 		if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	}
+	}*/
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
@@ -381,12 +422,23 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		'htmlheader' => $myts->stripSlashesGPC( @$_POST['htmlheader'] ) ,
 		'body' => $myts->stripSlashesGPC( @$_POST['body'] ) ,
 		'filters' => implode( '|' , array_keys( $filters ) ) ,
+		'tags' => trim( $myts->stripSlashesGPC( @$_POST['tags'] ) ) ,
 		'weight' => intval( @$_POST['weight'] ) ,
 		'use_cache' => empty( $_POST['use_cache'] ) ? 0 : 1 ,
 		'show_in_navi' => empty( $_POST['show_in_navi'] ) ? 0 : 1 ,
 		'show_in_menu' => empty( $_POST['show_in_menu'] ) ? 0 : 1 ,
 		'allow_comment' => empty( $_POST['allow_comment'] ) ? 0 : 1 ,
 	) ;
+
+	// tags (finding a custom tag filter for each languages)
+	$custom_tag_filter_file = dirname(dirname(__FILE__)).'/language/'.$GLOBALS['xoopsConfig']['language'].'/tag_filter.phtml' ;
+	if( file_exists( $custom_tag_filter_file ) ) {
+		require_once $custom_tag_filter_file ;
+		$tags_array = pico_custom_tag_filter( $ret['tags'] ) ;
+	} else {
+		$tags_array = preg_split( '/\s+/' , preg_replace( '/[\x00-\x2f:-@\x5b-\x60\x7b-\x7f]/' , ' ' , $ret['tags'] ) ) ;
+	}
+	$ret['tags'] = trim( implode( ' ' , array_unique( $tags_array ) ) ) ;
 
 	// vpath duplication check
 	if( $ret['vpath'] ) while( 1 ) {
@@ -529,6 +581,9 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
 
+	// update tags
+	pico_sync_tags( $mydirname ) ;
+
 	return $new_content_id ;
 }
 
@@ -542,7 +597,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
 	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
-	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'cat_id' ) ;
+	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'tags' , 'cat_id' ) ;
 	if( ! $isadminormod ) {
 		// only adminormod can set htmlheader
 		$requests['htmlheader_waiting'] = $requests['htmlheader'] ;
@@ -573,6 +628,9 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
+
+	// update tags
+	pico_sync_tags( $mydirname ) ;
 
 	return $content_id ;
 }

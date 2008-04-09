@@ -54,6 +54,7 @@ define($constpref.'_USE_VOTE','投票機能を利用する');
 define($constpref.'_GUESTVOTE_IVL','ゲスト投票の時間制限');
 define($constpref.'_GUESTVOTE_IVLDSC','同一のIPからは、この時間（秒数）内は投票することができません');
 define($constpref.'_HTMLHEADER','コンテンツ共通HTMLヘッダ');
+define($constpref.'_ALLOWEACHHEAD','コンテンツ毎のHTMLヘッダを許可する');
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.php?page=main_cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');
@@ -75,6 +76,7 @@ define($constpref.'_BNAME_CONTENT','コンテンツ内容');
 define($constpref.'_BNAME_LIST','コンテンツ一覧');
 define($constpref.'_BNAME_SUBCATEGORIES','サブカテゴリー一覧');
 define($constpref.'_BNAME_MYWAITINGS','自身の承認待ち');
+define($constpref.'_BNAME_TAGS','タグ一覧');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');

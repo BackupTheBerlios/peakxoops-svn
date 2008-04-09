@@ -32,6 +32,10 @@ if( $picoRequest['controller'] == 'content' ) {
 	// latestcontents under the category (mainly for rss)
 	require_once dirname(dirname(__FILE__)).'/class/PicoControllerGetLatestcontents.class.php' ;
 	$controller =& new PicoControllerGetLatestcontents( $currentCategoryObj ) ;
+} else if( $picoRequest['controller'] == 'querycontents' ) {
+	// querycontents (tag etc)
+	require_once dirname(dirname(__FILE__)).'/class/PicoControllerQueryContents.class.php' ;
+	$controller =& new PicoControllerQueryContents( $currentCategoryObj ) ;
 } else {
 	// menu
 	require_once dirname(dirname(__FILE__)).'/class/PicoControllerGetMenu.class.php' ;

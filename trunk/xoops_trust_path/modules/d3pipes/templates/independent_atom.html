@@ -8,7 +8,7 @@
 	<link rel='alternate' type='text/html' href='<{$pipe.link|escape}>'></link>
 <{/if}>
 	<link rel='self' type='application/atom+xml' href='<{$mod_url}>/index.php?page=xml&amp;style=atom&amp;pipe_id=<{$pipe.id}>'></link>
-	<author><email><{$xoops_config.adminmail}></email></author>
+	<author><name><{$xoops_config.slogan|escape}></name></author>
 	<generator>XOOPS - d3pipes</generator>
 
 	<{foreach from=$entries item="entry"}>

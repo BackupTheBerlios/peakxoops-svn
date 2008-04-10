@@ -71,6 +71,16 @@ function altsys_admin_in_theme_in_last( $contents = null )
 	// set the theme
 	$xoopsConfig['theme_set'] = $altsysModuleConfig['admin_in_theme'] ;
 
+	// language files under the theme
+	$original_error_level = error_reporting() ;
+	error_reporting( $original_error_level & ~ E_NOTICE ) ;
+	if( file_exists( XOOPS_THEME_PATH.'/'.$xoopsConfig['theme_set'].'/language/'.$xoopsConfig['language'].'.php' ) ) {
+		include_once XOOPS_THEME_PATH.'/'.$xoopsConfig['theme_set'].'/language/'.$xoopsConfig['language'].'.php' ;
+	} else if( file_exists( XOOPS_THEME_PATH.'/'.$xoopsConfig['theme_set'].'/language/english.php' ) ) {
+		include_once XOOPS_THEME_PATH.'/'.$xoopsConfig['theme_set'].'/language/english.php' ;
+	}
+	error_reporting( $original_error_level ) ;
+
 	include dirname(__FILE__).'/admin_in_theme_header.inc.php' ;
 
 /*	// include adminmenu

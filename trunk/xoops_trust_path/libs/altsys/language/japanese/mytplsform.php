@@ -1,5 +1,6 @@
 <?php
 
+define( '_MD_A_MYTPLSFORM_TPLSADMIN' , 'テンプレート管理' ) ;
 define( '_MD_A_MYTPLSFORM_EDIT' , 'テンプレート編集' ) ;
 define( '_MD_A_MYTPLSFORM_UPDATED' , 'テンプレートを更新しました' ) ;
 define( '_MD_A_MYTPLSFORM_CREATED' , 'テンプレートを作成しました' ) ;

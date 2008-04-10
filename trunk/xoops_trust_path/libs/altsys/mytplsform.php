@@ -76,6 +76,7 @@ if( empty( $_GET['tpl_file'] ) || $_GET['tpl_file'] == '_custom' ) {
 
 	// get module info
 	if( $tpl['tpl_module'] == '_custom' ) {
+		$target_module = null ;
 		$target_mname = _MYTPLSADMIN_CUSTOMTEMPLATE ;
 	} else {
 		$module_handler =& xoops_gethandler( 'module' ) ;
@@ -85,8 +86,17 @@ if( empty( $_GET['tpl_file'] ) || $_GET['tpl_file'] == '_custom' ) {
 
 	// breadcrumbs
 	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
-	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin' , '_MI_ALTSYS_MENU_MYTPLSADMIN' ) ;
-	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin&amp;dirname='.htmlspecialchars($tpl['tpl_module']) , $target_mname ) ;
+	if( $mydirname != 'altsys' && is_object( $target_module ) ) {
+		// mytplsform in each modules
+		$mod_url = XOOPS_URL.'/modules/'.$target_module->getVar('dirname') ;
+		$modinfo = $target_module->getInfo() ;
+		$breadcrumbsObj->appendPath( $mod_url.'/'.@$modinfo['adminindex'] , $target_mname ) ;
+		$breadcrumbsObj->appendPath( $mod_url.'/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin' , _MD_A_MYTPLSFORM_TPLSADMIN ) ;
+	} else {
+		// mytplsform in altsys
+		$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin' , '_MI_ALTSYS_MENU_MYTPLSADMIN' ) ;
+		$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsadmin&amp;dirname='.htmlspecialchars($tpl['tpl_module']) , $target_mname ) ;
+	}
 	$breadcrumbsObj->appendPath( '' , _MD_A_MYTPLSFORM_EDIT ) ;
 }
 

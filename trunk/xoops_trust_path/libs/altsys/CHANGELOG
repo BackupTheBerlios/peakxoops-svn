@@ -1,5 +1,10 @@
 [xlang:en]
 
+v0.58 (2008-04-10)
+- fixed wrong breadcrumbs as my*admin
+- modified "admin in theme" read language files under the theme
+- added setup_xoops_trust_path.php
+
 v0.57 (2008-04-01)
 - modified public top altsys
 - fixed typo in langman (thx nobunobu)
@@ -128,6 +133,11 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.58 (2008-04-10)
+- パンくず関連のバグ修正
+- 管理画面テーマのテーマ下言語ファイル対応
+- XOOPS_TRUST_PATHを設定していない場合の対応追加
 
 v0.57 (2008-04-01)
 - Altsysを開始モジュールとしてしまった場合の対処を追加

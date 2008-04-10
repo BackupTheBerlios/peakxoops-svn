@@ -31,7 +31,7 @@ if( ! empty( $_GET['dirname'] ) ) {
 	$target_module =& $module_handler->getByDirname( $dirname ) ;
 }
 
-if( ! empty( $target_module ) && is_object( $target_module ) ) {
+if( $mydirname == 'altsys' && is_object( @$target_module ) ) {
 	// specified by dirname (as ALTSYS module)
 	$target_mid = $target_module->getVar( 'mid' ) ;
 	$target_mname = $target_module->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $target_module->getVar('version') / 100.0 ) ;
@@ -40,7 +40,7 @@ if( ! empty( $target_module ) && is_object( $target_module ) ) {
 	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
 	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin' , '_MI_ALTSYS_MENU_MYBLOCKSADMIN' ) ;
 	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname='.$target_dirname , $target_mname ) ;
-} else if( $xoopsModule->getVar('dirname') == 'altsys' ) {
+} else if( $mydirname == 'altsys' ) {
 	// default as ALTSYS module
 	$target_mid = 0 ;
 	$target_mname = '' ;
@@ -50,10 +50,15 @@ if( ! empty( $target_module ) && is_object( $target_module ) ) {
 	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin' , '_MI_ALTSYS_MENU_MYBLOCKSADMIN' ) ;
 	$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname='.$target_dirname , '_MI_ALTSYS_MENU_CUSTOMBLOCKS' ) ;
 } else {
-	// the other modules
+	// myblocksadmin in each modules
 	$target_mid = $xoopsModule->getVar( 'mid' ) ;
 	$target_mname = $xoopsModule->getVar( 'name' ) . "&nbsp;" . sprintf( "(%2.2f)" , $xoopsModule->getVar('version') / 100.0 ) ;
 	$target_dirname = '' ;
+	$mod_url = XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname') ;
+	$modinfo = $xoopsModule->getInfo() ;
+	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
+	$breadcrumbsObj->appendPath( $mod_url.'/'.@$modinfo['adminindex'] , $target_mname ) ;
+	$breadcrumbsObj->appendPath( $mod_url.'/admin/index.php?mode=admin&amp;lib=altsys&amp;page=myblocksadmin' , _MD_A_MYBLOCKSADMIN_BLOCKADMIN ) ;
 }
 
 // check access right (needs system_admin of BLOCK)

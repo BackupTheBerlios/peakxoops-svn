@@ -1,5 +1,6 @@
 <?php
 
+define( '_MD_A_MYTPLSFORM_TPLSADMIN' , 'Templates' ) ;
 define( '_MD_A_MYTPLSFORM_EDIT' , 'Editing the template' ) ;
 define( '_MD_A_MYTPLSFORM_UPDATED' , 'The template is updated successfully' ) ;
 define( '_MD_A_MYTPLSFORM_CREATED' , 'A template is created successfully' ) ;

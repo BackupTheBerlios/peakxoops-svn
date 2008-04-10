@@ -2,6 +2,11 @@
 
 if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 
+if( ! defined( 'XOOPS_TRUST_PATH' ) || XOOPS_TRUST_PATH == '' ) {
+	header( 'Location: '.XOOPS_URL.'/modules/altsys/setup_xoops_trust_path.php' ) ;
+	exit ;
+}
+
 define('ALTSYS_MYLANGUAGE_ROOT_PATH', XOOPS_ROOT_PATH . '/my_language');
 
 

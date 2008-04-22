@@ -11,6 +11,10 @@
 // *************************************************************** //
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
+define('_MD_PICO_FORMMAIL_BLOCK_POSTCONFIRM','<div class="confirmMsg">Are you OK?<br /><input type="submit" value="Go!" /> <input type="submit" name="cancel" value="Cancel" /></div>');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-10-04 05:27:55
 define('_MD_PICO_FORMMAIL_ERRFMT_INVALID_NUMBER','<li>Input only number in %s</li>');
 

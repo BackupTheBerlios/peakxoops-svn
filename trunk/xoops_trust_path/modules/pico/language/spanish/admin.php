@@ -4,6 +4,12 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:11
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','Independent Permission');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','Set permissions for this category independently from the parent category');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','Check the parental permissions');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-10-04 05:27:54
 define('_MD_A_PICO_LINK_DETAIL','Detail');
 

@@ -3,6 +3,12 @@
 // definitions for editing blocks
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
+define('_MB_PICO_TAGSNUM','Display');
+define('_MB_PICO_TAGSLISTORDER','Order for displaying');
+define('_MB_PICO_TAGSSQLORDER','Order for extracting');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:02
 define('_MB_PICO_PARENTCAT','Parent category');
 define('_MB_PICO_PARENTCATDSC','Subcategories directly belonging to this parent category will be displayed. you can specify parent categories multiply by numbers separated with comma.');

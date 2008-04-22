@@ -5,6 +5,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:13
+define($constpref.'_ALLOWEACHHEAD','specify HTML headers for each contents');
+define($constpref.'_BNAME_TAGS','Tags');
+
 define($constpref.'_ADMENU_EXTRAS','Extra');
 define($constpref.'_HTMLPR_EXCEPT','Les groupes qui peuvent éviter la correction par HTMLPurifier');
 define($constpref.'_HTMLPR_EXCEPTDSC','Les publications des utilisateurs qui n\'appartiennent pas à ces groupes seront

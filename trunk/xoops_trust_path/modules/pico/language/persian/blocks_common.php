@@ -3,6 +3,12 @@
 // definitions for editing blocks
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:11
+define('_MB_PICO_TAGSNUM','Display');
+define('_MB_PICO_TAGSLISTORDER','Order for displaying');
+define('_MB_PICO_TAGSSQLORDER','Order for extracting');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
 define('_MB_PICO_PARENTCAT','شاخه مادر');
 define('_MB_PICO_PARENTCATDSC','زیر شاخه های که مستقیما وابسته اند به این شاخه مادر نمایش داده میشوند. شما عدد شاخه های مادر را مشخص کنید و آنها را با کاما از هم جدا کنید .');

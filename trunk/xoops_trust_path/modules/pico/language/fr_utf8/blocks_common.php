@@ -2,6 +2,12 @@
 
 // definitions for editing blocks
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:13
+define('_MB_PICO_TAGSNUM','Display');
+define('_MB_PICO_TAGSLISTORDER','Order for displaying');
+define('_MB_PICO_TAGSSQLORDER','Order for extracting');
+
 define('_MB_PICO_PARENTCAT','Catégorie Parent');
 define('_MB_PICO_PARENTCATDSC','Les sous-catégories de chaque catégorie Parent seront affichées. Vous pouvez indiquer de multiples catégories Parent avec leur nombres séparés par une virgule.');
 define('_MB_PICO_DISPLAYBODY','Afficher également le corps du document (body)');

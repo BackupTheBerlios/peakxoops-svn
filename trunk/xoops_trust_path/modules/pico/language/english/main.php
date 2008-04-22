@@ -89,6 +89,8 @@ define('_MD_PICO_TH_HTMLHEADER_WAITING','Waiting HTML headers');
 define('_MD_PICO_TH_BODY','body');
 define('_MD_PICO_TH_BODY_WAITING','Waiting body');
 define('_MD_PICO_TH_FILTERS','filters');
+define('_MD_PICO_TH_TAGS','Tags');
+define('_MD_PICO_TH_TAGSDSC','separate tags by a space');
 define('_MD_PICO_TH_WEIGHT','weight');
 define('_MD_PICO_TH_CONTENTOPTIONS','options');
 define('_MD_PICO_LABEL_USECACHE','use cache');
@@ -129,6 +131,11 @@ define('_MD_PICO_VOTECOUNT','Votes');
 define('_MD_PICO_VOTEPOINTAVG','Average');
 define('_MD_PICO_VOTEPOINTDSCBEST','Useful');
 define('_MD_PICO_VOTEPOINTDSCWORST','Useless');
+
+// query contents
+define('_MD_PICO_FMT_QUERYTAGTITLE','Tag: %s');
+define('_MD_PICO_FMT_QUERYTAGDESC','Contents tagged %s');
+define('_MD_PICO_ERR_NOCONTENTMATCHED','No contents');
 
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','php code');

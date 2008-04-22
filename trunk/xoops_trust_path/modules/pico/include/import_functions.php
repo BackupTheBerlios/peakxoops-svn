@@ -58,6 +58,7 @@ $GLOBALS['pico_tables'] = array(
 		'body_waiting' ,
 		'body_cached' ,
 		'filters' ,
+		'tags' ,
 		'extra_fields' ,
 		'redundants' ,
 		'for_search' ,
@@ -93,6 +94,14 @@ $GLOBALS['pico_tables'] = array(
 		'created_time' ,
 		'modified_time' ,
 		'data' ,
+	) ,
+	'tags' => array(
+		'label' ,
+		'weight' ,
+		'count' ,
+		'content_ids' ,
+		'created_time' ,
+		'modified_time' ,
 	) ,
 ) ;
 

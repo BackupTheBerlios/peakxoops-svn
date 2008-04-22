@@ -54,6 +54,7 @@ define($constpref.'_USE_VOTE','use the feature of VOTE');
 define($constpref.'_GUESTVOTE_IVL','Vote from guests');
 define($constpref.'_GUESTVOTE_IVLDSC','Set this 0, to disable voting from guest. The other this number means time(sec.) to allow second post from the same IP.');
 define($constpref.'_HTMLHEADER','common HTML header');
+define($constpref.'_ALLOWEACHHEAD','specify HTML headers for each contents');
 define($constpref.'_CSS_URI','URI of CSS file for this module');
 define($constpref.'_CSS_URIDSC','relative or absolute path can be set. default: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','Directory for image files');
@@ -75,6 +76,7 @@ define($constpref.'_BNAME_CONTENT','Content');
 define($constpref.'_BNAME_LIST','List');
 define($constpref.'_BNAME_SUBCATEGORIES','Subcategories');
 define($constpref.'_BNAME_MYWAITINGS','My waiting posts');
+define($constpref.'_BNAME_TAGS','Tags');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'global');

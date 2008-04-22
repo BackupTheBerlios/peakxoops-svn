@@ -9,6 +9,12 @@
 // ## Website........: http://xoopscube.com.br
 // ############################################################### //
 // *************************************************************** //
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
+define('_MB_PICO_TAGSNUM','Display');
+define('_MB_PICO_TAGSLISTORDER','Order for displaying');
+define('_MB_PICO_TAGSSQLORDER','Order for extracting');
+
 define("_MB_PICO_CATLIMIT","Especifique as categorias");
 define("_MB_PICO_CATLIMITDSC","Em branco significa todas as categorias, e 0 (zero) significa a categoria principal. Você pode especificar categorias com números separados por vírgulas.");
 define("_MB_PICO_CONTENTSNUM","Número de itens a serem mostrados");

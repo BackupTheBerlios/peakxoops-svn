@@ -3,6 +3,14 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
+define('_MD_PICO_TH_TAGS','Tags');
+define('_MD_PICO_TH_TAGSDSC','separate tags by a space');
+define('_MD_PICO_FMT_QUERYTAGTITLE','Tag: %s');
+define('_MD_PICO_FMT_QUERYTAGDESC','Contents tagged %s');
+define('_MD_PICO_ERR_NOCONTENTMATCHED','No contents');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
 define('_MD_PICO_CSVENCODING','UTF-8');
 define('_MD_PICO_ERR_LOCKEDCONTENT','The content is locked');

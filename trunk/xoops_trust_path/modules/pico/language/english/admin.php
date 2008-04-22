@@ -26,6 +26,9 @@ define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','Some contents have not been updated
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','Select a category');
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','Independent Permission');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','Set permissions for this category independently from the parent category');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','Check the parental permissions');
 define('_MD_A_PICO_H2_GROUPPERMS','Permissions about each groups');
 define('_MD_A_PICO_H2_USERPERMS','Permissions about each users');
 define('_MD_A_PICO_TH_UID','uid');

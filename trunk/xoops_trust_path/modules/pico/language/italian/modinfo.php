@@ -11,6 +11,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
+define($constpref.'_ALLOWEACHHEAD','specify HTML headers for each contents');
+define($constpref.'_BNAME_TAGS','Tags');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:47
 define($constpref.'_ADMENU_EXTRAS','Extra');
 

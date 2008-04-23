@@ -123,6 +123,9 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.17 beta (2008/04/24)
+- modified URLs with the same hostname as XOOPS_URL are not counted as URI SPAM
+
 3.16 beta (2008/01/08)
 - added a filter postcommon_post_deny_by_httpbl for antispam by honeypotproject
 - updated language files
@@ -352,6 +355,14 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 ¡üÊÑ¹¹ÍúÎò
 
+3.17 beta (2008/04/24)
+- URI SPAMÈ½Äê¤Ç¡¢¼«¥Û¥¹¥È¤ÈÆ±°ì¤Î¾ì¹ç¤ÏÄÌ²á¤¹¤ë¤è¤¦¤Ë¤·¤¿
+
+3.16 beta (2008/01/08)
+- SPAM¥Õ¥£¥ë¥¿¡¼ÄÉ²Ã postcommon_post_deny_by_httpbl (honeypotproject.org¤ÎBLÍøÍÑ)
+- ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
+-- polish (thx kurak_bu)
+
 3.15 beta (2007/10/18)
 - ¥í¥°¤Î¥³¥ó¥Ñ¥¯¥È²½ÄÉ²Ã
 - ¥í¥°¤ÎÁ´ºï½üÄÉ²Ã
@@ -477,7 +488,7 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 ------------------------------------------------------------
 
 GIJ=CHECKMATE <gij@peak.ne.jp>
-2004-2007
+2004-2008
 
 PEAK XOOPS  http://xoops.peak.ne.jp/
 

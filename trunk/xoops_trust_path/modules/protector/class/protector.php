@@ -827,10 +827,21 @@ function _spam_check_point_recursive( $val )
 			$this->_spam_check_point_recursive( $subval ) ;
 		}
 	} else {
+		// http_host
+		$path_array = parse_url( XOOPS_URL ) ;
+		$http_host = empty( $path_array['host'] ) ? 'www.xoops.org' : $path_array['host'] ;
+
 		// count URI up
-		$this->_spamcount_uri += count( preg_split( '#https?\:\/\/#i' , $val ) ) - 1 ;
+		$count = -1 ;
+		foreach( preg_split( '#https?\:\/\/#i' , $val ) as $fragment ) {
+			if( strncmp( $fragment , $http_host , strlen( $http_host ) ) !== 0 ) {
+				$count ++ ;
+			}
+		}
+		if( $count > 0 ) $this->_spamcount_uri += $count ;
+
 		// count BBCode likd [url=www....] up (without [url=http://...])
-		$this->_spamcount_uri += count( preg_split( '/\[url=(?!http|\\"http|\\\'http)/i' , $val ) ) - 1 ;
+		$this->_spamcount_uri += count( preg_split( '/\[url=(?!http|\\"http|\\\'http|'.$http_host.')/i' , $val ) ) - 1 ;
 	}
 }
 

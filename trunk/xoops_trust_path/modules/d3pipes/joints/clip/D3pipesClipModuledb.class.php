@@ -20,6 +20,12 @@ class D3pipesClipModuledb extends D3pipesClipAbstract {
 		$entries = array_reverse( $entries ) ;
 
 		foreach( $entries as $i => $entry ) {
+
+			// some rss have entries with identical <link> ...
+			if( @$entry['fingerprint'] == @$entry['link'] ) {
+				$entry['fingerprint'] .= @$entry['pubtime'] ;
+			}
+
 			$fingerprint4sql = mysql_real_escape_string( @$entry['fingerprint'] ) ;
 			if( empty( $fingerprint4sql ) ) continue ;
 			list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM $clip_table WHERE fingerprint='$fingerprint4sql' AND pipe_id=$this->pipe_id" ) ) ;

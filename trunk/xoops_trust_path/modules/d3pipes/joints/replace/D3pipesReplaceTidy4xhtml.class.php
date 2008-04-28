@@ -2,12 +2,12 @@
 
 require_once dirname(dirname(__FILE__)).'/D3pipesReplaceAbstract.class.php' ;
 
-class D3pipesReplaceTidy extends D3pipesReplaceAbstract {
+class D3pipesReplaceTidy4xhtml extends D3pipesReplaceAbstract {
 
 	function execute( $data , $max_entries = '' )
 	{
 		if( is_array( $data ) ) {
-			die( 'This joint can be used only for HTML text '.class_name($this) ) ;
+			die( 'This joint can be used only for XHTML text '.class_name($this) ) ;
 		}
 
 		$process = proc_open( escapeshellcmd($this->mod_configs['tidy_path']).' -asxhtml -utf8 --doctype transitional' , array( array('pipe','r') , array('pipe','w') , array('pipe','r') ) , $pipes ) ;

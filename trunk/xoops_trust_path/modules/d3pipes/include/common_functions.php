@@ -28,6 +28,13 @@ function d3pipes_common_convert_encoding_ietoutf8( $mydirname , $string_ie )
 }
 
 
+function d3pipes_common_filter_ietoutf8( $string_ie )
+{
+	if( is_string( $string_ie ) ) return d3pipes_common_convert_encoding_ietoutf8( '' , $string_ie ) ;
+	return $string_ie ;
+}
+
+
 function d3pipes_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 {
 	$module_handler =& xoops_gethandler('module') ;

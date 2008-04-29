@@ -59,6 +59,7 @@ $xoopsTpl->assign(
 		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 		'xoops_config' => $xoopsConfig ,
+		'xoops_config_utf8' => array_map( 'd3pipes_common_filter_ietoutf8' , $xoopsConfig ) ,
 		'mod_config' => @$xoopsModuleConfig ,
 		'xoops_breadcrumbs' => @$xoops_breadcrumbs ,
 		'xoops_pagetitle' => @$pagetitle4assign ,

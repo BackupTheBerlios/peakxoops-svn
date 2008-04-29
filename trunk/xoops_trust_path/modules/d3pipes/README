@@ -47,6 +47,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 -- D3pipesReplaceTidy4xhtml
 - removed joints
 -- D3pipesReplaceTidy
+- fixed <webmaster> is encoded other than UTF-8 (thx neko88) 0.61a
 
 0.60 2008-02-20
 - fixed updated field in atom (thx yumipoyo)
@@ -276,6 +277,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 -- D3pipesReplaceTidy4xhtml (XHTMLに強制変更する)
 - 置換ジョイント削除
 -- D3pipesReplaceTidy (実際には4xhtmlと名称変更になっただけ)
+- <webmaster>項目がUTF-8になっていないバグを修正 (thx neko88) 0.61a
 
 0.60 2008-02-20
 - 集約パイプのatom/updatedフィールドの値がおかしかったのを修正 (thx yumipoyo)

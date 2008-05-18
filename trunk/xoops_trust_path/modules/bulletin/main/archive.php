@@ -119,6 +119,7 @@ $xoopsTpl->assign( 'xoops_breadcrumbs' , array(
 	array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ,
 	array( 'name' => _MD_NEWSARCHIVES ) ,
 ) ) ; // GIJ
+$xoopsTpl->assign( 'mod_config' , $xoopsModuleConfig ) ;
 
 require_once XOOPS_ROOT_PATH.'/footer.php';
 ?>

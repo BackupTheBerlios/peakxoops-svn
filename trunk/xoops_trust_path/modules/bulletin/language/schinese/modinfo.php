@@ -8,6 +8,15 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 // a flag for this language file has already been read or not.
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-05-19 05:51:18
+define($constpref.'_CONFIG145','feed RSS into backend.php (only for XCL)');
+define($constpref.'_CONFIG145_D','');
+define($constpref.'_COM_DIRNAME','dirname of d3forum integrated as the comment system');
+define($constpref.'_COM_FORUM_ID','forum_id of d3forum integrated');
+define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-15 04:44:32
 define($constpref.'_CONFIG19','use common/fckeditor');
 define($constpref.'_CONFIG19_D','Posters can use FCKeditor on XOOPS if he/she is allowed to use HTML');

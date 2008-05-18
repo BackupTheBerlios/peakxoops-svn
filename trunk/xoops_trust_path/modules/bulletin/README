@@ -29,6 +29,12 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 =CHANEGLOG=
 
+HD-2.14 (2008-05-19)
+- modified comment-integration with d3forum easy (update d3forum into the latest)
+- removed codes variable include/require
+- added preload feeding RSS into backend.php (XCL only)
+- fixed some bugs
+
 HD-2.13 (2008-03-01)
 - modified "easy to use" as possible
 

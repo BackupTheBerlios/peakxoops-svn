@@ -21,7 +21,7 @@ $op = isset($_GET['op']) && $_GET['op'] == 'delete' ? 'delete' : $op;
 $errors = array();
 
 // チケットのチェック
-require_once "$mytrustdirpath/include/gtickets.php";
+require_once dirname(dirname(__FILE__))."/include/gtickets.php";
 if ( !empty($_POST['preview']) ) {
 	if ( ! $xoopsGTicket->check() ) {
 		$errors['ticket'] = 'Ticket Error';
@@ -300,11 +300,13 @@ if( $op == 'form' ){
 
 	require_once XOOPS_ROOT_PATH.'/header.php';
 	if( !empty($errors) ) xoops_error($errors);
-	require $mytrustdirpath.'/include/storyform.inc.php';
+	require dirname(dirname(__FILE__)).'/include/storyform.inc.php';
 	$xoopsTpl->assign( 'xoops_breadcrumbs' , array(
 		array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ,
 		array( 'name' => _MD_SUBMITNEWS ) ,
 	) ) ; // GIJ
+	$xoopsTpl->assign( 'mod_config' , $xoopsModuleConfig ) ;
+
 	require_once XOOPS_ROOT_PATH.'/footer.php';
 }
 

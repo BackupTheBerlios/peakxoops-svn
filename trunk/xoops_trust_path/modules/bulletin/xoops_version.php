@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = constant($constpref.'_NAME');
-$modversion['version']     = 2.13; // HD Version
+$modversion['version']     = 2.14; // HD Version
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -209,6 +209,13 @@ $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
 $i++;
+$modversion['config'][$i]['name']        = 'feed_as_backend';
+$modversion['config'][$i]['title']       = $constpref.'_CONFIG145';
+$modversion['config'][$i]['description'] = $constpref.'_CONFIG145_D';
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 1;
+$i++;
 $modversion['config'][$i]['name']        = 'use_relations';
 $modversion['config'][$i]['title']       = $constpref.'_CONFIG15';
 $modversion['config'][$i]['description'] = $constpref.'_CONFIG15_D';
@@ -243,6 +250,47 @@ $modversion['config'][$i]['description'] = $constpref.'_CONFIG19_D';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_dirname' ,
+	'title'			=> $constpref.'_COM_DIRNAME' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'd3forum' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_forum_id' ,
+	'title'			=> $constpref.'_COM_FORUM_ID' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '0' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_view' ,
+	'title'			=> $constpref.'_COM_VIEW' ,
+	'description'	=> '' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'listposts_flat' ,
+	'options'		=> array( '_FLAT' => 'listposts_flat' , '_THREADED' => 'listtopics' )
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_posts_num' ,
+	'title'			=> $constpref.'_COM_POSTSNUM' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '10' ,
+	'options'		=> array()
+) ;
+
 
 // Notification
 $modversion['hasNotification'] = 1;

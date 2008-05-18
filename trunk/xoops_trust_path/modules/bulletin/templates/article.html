@@ -49,9 +49,11 @@
 <{/if}>
 <br />
 
-<{*
-<{d3forum_comment dirname="(dirname)" forum_id="(number)" class="BulletinD3commentStory" mytrustdirname="bulletin" id=$story.id subject=$story.title}>
-*}>
+<{if $mod_config.comment_dirname != '' && $mod_config.comment_forum_id > 0}>
+
+<{d3comment class="BulletinD3commentStory" mydirname=$mydirname}>
+
+<{else}>
 
 <!-- begin comments area -->
 <div style="text-align: center;">
@@ -71,6 +73,8 @@
 <!-- end comments loop -->
 </div>
 <!-- end comments area -->
+
+<{/if}>
 
 <{include file='db:system_notification_select.html'}>
 

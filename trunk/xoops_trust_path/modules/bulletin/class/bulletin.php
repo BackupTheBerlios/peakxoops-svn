@@ -3,8 +3,8 @@
 require_once XOOPS_ROOT_PATH."/class/xoopstopic.php";
 require_once XOOPS_ROOT_PATH."/class/xoopsuser.php";
 require_once XOOPS_ROOT_PATH."/class/xoopsobject.php";
-require_once "$mytrustdirpath/class/relation.php";
-require_once "$mytrustdirpath/class/bulletinTopic.php";
+require_once dirname(__FILE__).'/relation.php' ;
+require_once dirname(__FILE__).'/bulletinTopic.php' ;
 
 class Bulletin extends XoopsObject{
 

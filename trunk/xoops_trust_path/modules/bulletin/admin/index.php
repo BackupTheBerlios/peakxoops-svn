@@ -6,17 +6,17 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 // 言語ファイル読み込み
 if ( file_exists( $mytrustdirpath.'/language/'.$xoopsConfig['language'].'/modinfo.php') ) {
-	require_once $mytrustdirpath.'/language/'.$xoopsConfig['language'].'/modinfo.php';
+	require_once dirname(dirname(__FILE__)).'/language/'.$xoopsConfig['language'].'/modinfo.php';
 } else {
-	require_once $mytrustdirpath.'/language/english/modinfo.php';
+	require_once dirname(dirname(__FILE__)).'/language/english/modinfo.php';
 }
 
 require_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
 require_once XOOPS_ROOT_PATH.'/class/template.php';
 require_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 require_once XOOPS_ROOT_PATH.'/class/xoopsform/grouppermform.php';
-require_once $mytrustdirpath.'/class/bulletin.php';
-require_once $mytrustdirpath.'/class/bulletinTopic.php';
+require_once dirname(dirname(__FILE__)).'/class/bulletin.php';
+require_once dirname(dirname(__FILE__)).'/class/bulletinTopic.php';
 
 // サニタイザー
 $myts =& MyTextSanitizer::getInstance();

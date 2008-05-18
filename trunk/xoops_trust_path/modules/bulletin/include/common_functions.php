@@ -48,5 +48,18 @@ function bulletin_restruct_categories( $categories , $parent )
 }
 
 
+function bulletin_utf8_encode( $text )
+{
+	if (XOOPS_USE_MULTIBYTES == 1) {
+		if (function_exists('mb_convert_encoding')) {
+			return mb_convert_encoding($text, 'UTF-8', _CHARSET ) ;
+		}
+		return $text;
+	}
+	return utf8_encode($text);
+}
+
+
+
 
 ?>

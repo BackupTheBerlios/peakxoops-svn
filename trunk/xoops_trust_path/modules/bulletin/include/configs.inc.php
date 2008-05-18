@@ -34,6 +34,6 @@
 	// sanitizer
 	$myts =& MyTextSanitizer::getInstance();
 
-	require_once "function.php";
+	require_once dirname(__FILE__).'/function.php' ;
 
 ?>

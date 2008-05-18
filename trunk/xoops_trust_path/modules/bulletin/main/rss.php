@@ -63,16 +63,4 @@ header ('Content-Type:text/xml; charset=utf-8');
 $tpl->display("db:{$mydirname}_rss.html");
 
 
-
-function bulletin_utf8_encode($text) // GIJ
-{
-    if (XOOPS_USE_MULTIBYTES == 1) {
-        if (function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($text, 'UTF-8', _CHARSET ) ; // GIJ
-        }
-        return $text;
-    }
-    return utf8_encode($text);
-}
-
 ?>

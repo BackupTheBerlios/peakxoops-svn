@@ -127,6 +127,7 @@ if( $storytopic ) {
 	}
 }
 $xoopsTpl->assign( 'xoops_breadcrumbs' , $breadcrumbs ) ;
+$xoopsTpl->assign( 'mod_config' , $xoopsModuleConfig ) ;
 
 require_once XOOPS_ROOT_PATH.'/footer.php';
 ?>

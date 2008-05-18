@@ -8,8 +8,7 @@ function b_bulletin_calendar_show($options) {
 
 	$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
 
-//	require XOOPS_ROOT_PATH.'/modules/'.$mydirname.'/include/configs.inc.php';
-	require_once $mytrustdirpath.'/class/bulletin_cal.php';
+	require_once dirname(dirname(__FILE__)).'/class/bulletin_cal.php';
 	
 	$block = array();
 	

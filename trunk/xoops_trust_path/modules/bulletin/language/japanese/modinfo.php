@@ -73,6 +73,8 @@ define($constpref.'_CONFIG13','Tell A Friendモジュールを利用する');
 define($constpref.'_CONFIG13_D', '');
 define($constpref.'_CONFIG14','RSSのリンクを表示する');
 define($constpref.'_CONFIG14_D', '');
+define($constpref.'_CONFIG145','RSSをbackend.phpにもfeedする(XCLのみ)');
+define($constpref.'_CONFIG145_D', '');
 // 2.00 added
 define($constpref.'_CONFIG15','関連記事機能を有効にする');
 define($constpref.'_CONFIG15_D', '');
@@ -84,6 +86,11 @@ define($constpref.'_CONFIG18','カテゴリのパンくずリストを表示する');
 define($constpref.'_CONFIG18_D', '');
 define($constpref.'_CONFIG19','common/fckeditorを利用する');
 define($constpref.'_CONFIG19_D', 'HTMLが許可されている編集者にはFCKeditor on XOOPSを利用できるようにします。');
+
+define($constpref.'_COM_DIRNAME','コメント統合するd3forumのdirname');
+define($constpref.'_COM_FORUM_ID','コメント統合するフォーラムの番号');
+define($constpref.'_COM_VIEW','コメント統合の表示方法');
+define($constpref.'_COM_POSTSNUM','コメント統合のフラット表示における最大表示件数');
 
 // Text for notifications
 define($constpref.'_GLOBAL_NOTIFY', 'モジュール全体');

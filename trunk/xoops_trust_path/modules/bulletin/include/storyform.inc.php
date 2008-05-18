@@ -1,7 +1,7 @@
 <?php
 
 require XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-require_once $mytrustdirpath."/class/formselecttime.php";
+require_once dirname(dirname(__FILE__))."/class/formselecttime.php";
 
 $time = time();
 

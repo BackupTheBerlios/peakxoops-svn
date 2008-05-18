@@ -7,6 +7,15 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 // a flag for this language file has already been read or not.
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-05-19 05:51:18
+define($constpref.'_CONFIG145','feed RSS into backend.php (only for XCL)');
+define($constpref.'_CONFIG145_D','');
+define($constpref.'_COM_DIRNAME','dirname of d3forum integrated as the comment system');
+define($constpref.'_COM_FORUM_ID','forum_id of d3forum integrated');
+define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

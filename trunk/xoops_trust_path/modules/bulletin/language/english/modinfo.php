@@ -73,6 +73,8 @@ define($constpref."_CONFIG13","Use Tell A Friend module?");
 define($constpref."_CONFIG13_D","");
 define($constpref."_CONFIG14","Display RSS link?");
 define($constpref."_CONFIG14_D","");
+define($constpref.'_CONFIG145','feed RSS into backend.php (only for XCL)');
+define($constpref.'_CONFIG145_D', '');
 // 2.00 added
 define($constpref."_CONFIG15","Enable related articles feature?");
 define($constpref."_CONFIG15_D","");
@@ -81,9 +83,14 @@ define($constpref."_CONFIG16_D","Displays a list of articles in the same categor
 define($constpref."_CONFIG17","Number of recent storeis in the same category.");
 define($constpref."_CONFIG17_D","");
 define($constpref."_CONFIG18","Display category bread crumb?");
-define($constpref."_CONFIG18_D","A category tree is displayed in each articles.");define($constpref.'_CONFIG19','use common/fckeditor');
+define($constpref."_CONFIG18_D","A category tree is displayed in each articles.");
+define($constpref.'_CONFIG19','use common/fckeditor');
 define($constpref.'_CONFIG19_D', 'Posters can use FCKeditor on XOOPS if he/she is allowed to use HTML');
 
+define($constpref.'_COM_DIRNAME','dirname of d3forum integrated as the comment system');
+define($constpref.'_COM_FORUM_ID','forum_id of d3forum integrated');
+define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
 
 // Text for notifications
 define($constpref."_GLOBAL_NOTIFY","Global");

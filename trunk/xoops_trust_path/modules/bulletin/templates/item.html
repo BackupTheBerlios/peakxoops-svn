@@ -31,7 +31,20 @@
 <{if $story.readmore}>
 <a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$smarty.const._MD_READMORE}></a> | <{$story.bytes}> | 
 <{/if}>
-<a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$story.comentstotal}><{* <{d3forum_comment_topicscount dirname=(dirname) forum_id=(number) link_id=$story.id}> *}></a>
+
+<{if $mod_config.comment_dirname != '' && $mod_config.comment_forum_id > 0}>
+
+	<{d3comment class="BulletinD3commentStory" mydirname=$mydirname mode="count" var="comments_count"}>
+
+	<{if $comments_count}>
+		<a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$comments_count|string_format:$smarty.const._MB_BULLETIN_NUMCOMMENTS}></a>
+	<{else}>
+		<{$smarty.const._MB_BULLETIN_COMMENTS}>
+	<{/if}>
+
+<{else}>
+	<a href="<{$mydirurl}>/index.php?page=article&amp;storyid=<{$story.id}>"><{$story.comentstotal}></a>
+<{/if}>
 </span>
   </div>
 </div>

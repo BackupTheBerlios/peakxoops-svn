@@ -169,7 +169,7 @@ function &d3forum_common_get_antispam_object( $mod_config )
 
 function d3forum_common_unhtmlspecialchars( $text )
 {
-	return strtr( $text , array_flip( get_html_translation_table( HTML_SPECIALCHARS , ENT_QUOTES ) ) ) ;
+	return strtr( $text , array_flip( get_html_translation_table( HTML_SPECIALCHARS , ENT_QUOTES ) ) + array( '&#039;' => "'" ) ) ;
 }
 
 

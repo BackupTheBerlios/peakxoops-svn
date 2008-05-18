@@ -27,6 +27,11 @@ jidaikobo -template coding-
 [b]CHANGES[/b]
 
 
+0.83 beta (2008-05-19)
+- added smarty plugin function.d3comment.php (don't forget copy it)
+- modified comment-integration the CLASS has a larger privileges
+- fixed small bugs
+
 0.82 beta (2008-02-24)
 - added import from cbb (not implemented - permissions, votes) (thx MrTheme)
 - fixed invalid html in some templates (thx hi-debow)
@@ -213,6 +218,11 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.83 beta (2008-05-19)
+- コメント統合プラグインをfunction.d3comment.php にまとめた （コピー忘れ注意！）
+- コメント統合において、コメント統合用クラスへ大きく権限委譲した
+- いくつかの細かいバグ修正
 
 0.82 beta (2008-02-24)
 - CBBからのインポートを実装した（ただし権限と投票は未実装）(thx MrTheme)

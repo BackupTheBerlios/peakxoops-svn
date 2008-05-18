@@ -26,7 +26,7 @@ if( $external_link_id ) {
 // specific variables for newtopic
 $pid = 0 ;
 $post_id = 0 ;
-$subject4html = htmlspecialchars( @$_GET['subject'] , ENT_QUOTES ) ;
+$subject4html = htmlspecialchars( $myts->stripslashesGPC( @$_GET['subject'] ) , ENT_QUOTES ) ;
 $message4html = '' ;
 $topic_id = 0 ;
 $invisible = 0 ;

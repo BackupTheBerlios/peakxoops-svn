@@ -382,31 +382,33 @@ function d3forum_get_comment_description( $mydirname , $external_link_format , $
 function &d3forum_main_get_comment_object( $mydirname , $external_link_format )
 {
 	include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
-	@list( $external_dirname , $class_name , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
-	if( empty( $class_name ) ) {
+	@list( $external_dirname , $classname , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
+	if( empty( $classname ) ) {
 		$obj =& new D3commentAbstract( $mydirname , $external_dirname ) ;
 		return $obj ;
 	}
 
-	// find and read d3comment class file
-	if( empty( $external_dirname ) ) {
-		// other than module
-		include_once dirname(dirname(__FILE__))."/class/{$class_name}.class.php" ;
-	} else if( empty( $external_trustdirname ) ) {
-		// other than D3 module
-		include_once XOOPS_ROOT_PATH.'/modules/'.$external_dirname.'/class/'.$class_name.'.class.php' ;
-	} else {
-		// D3 module
-		include_once XOOPS_TRUST_PATH.'/modules/'.$external_trustdirname.'/class/'.$class_name.'.class.php' ;
+	// search the class file
+	$class_bases = array(
+		XOOPS_ROOT_PATH.'/modules/'.$external_dirname.'/class' ,
+		XOOPS_TRUST_PATH.'/modules/'.$external_trustdirname.'/class' ,
+		XOOPS_TRUST_PATH.'/modules/d3forum/class' ,
+	) ;
+
+	foreach( $class_bases as $class_base ) {
+		if( file_exists( $class_base.'/'.$classname.'.class.php' ) ) {
+			require_once $class_base.'/'.$classname.'.class.php' ;
+			break ;
+		}
 	}
 
 	// check the class
-	if( ! $class_name || ! class_exists( $class_name ) ) {
+	if( ! $classname || ! class_exists( $classname ) ) {
 		$obj =& new D3commentAbstract( $mydirname , $external_dirname ) ;
 		return $obj ;
 	}
 
-	$obj =& new $class_name( $mydirname , $external_dirname ) ;
+	$obj =& new $classname( $mydirname , $external_dirname ) ;
 	return $obj ;
 }
 

@@ -1,6 +1,11 @@
 <?php
 
-function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params , $mode = 'post' )
+require_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
+require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
+
+
+// old interface
+function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params , $mode = 'post' , &$smarty )
 {
 	global $xoopsUser , $xoopsConfig ;
 
@@ -39,18 +44,21 @@ function d3forum_display_comment_topicscount( $mydirname , $forum_id , $params ,
 	$sql = "SELECT $select FROM ".$db->prefix($mydirname."_topics")." t WHERE t.forum_id=$forum_id AND ! t.topic_invisible AND topic_external_link_id='".addslashes($external_link_id)."'" ;
 	if( ! $trs = $db->query( $sql ) ) die( 'd3forum_comment_error in '.__LINE__ ) ;
 	list( $count ) = $db->fetchRow( $trs ) ;
-	echo intval( $count ) ;
+
+	// return $count as "var" or echo directly
+	$var_name = @$params['item'] . @$params['assign'] . @$params['var'] ;
+	if( is_object( $smarty ) && ! empty( $var_name ) ) {
+		$smarty->assign( $var_name , intval( $count ) ) ;
+	} else {
+		echo intval( $count ) ;
+	}
 }
 
 
+// old interface
 function d3forum_display_comment( $mydirname , $forum_id , $params )
 {
 	global $xoopsUser , $xoopsConfig , $xoopsModule ;
-
-	$mydirpath = XOOPS_ROOT_PATH.'/modules/'.$mydirname ;
-	$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
-
-	$db =& Database::getInstance() ;
 
 	// check the d3forum exists and is active
 	$module_hanlder =& xoops_gethandler( 'module' ) ;
@@ -66,38 +74,32 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 		return ;
 	}
 
-	// language files
-	$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
-	if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
-	require_once( $langmanpath ) ;
-	$langman =& D3LanguageManager::getInstance() ;
-	$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
-
-	// local $xoopsModuleConfig
-	$config_handler =& xoops_gethandler( 'config' ) ;
-	$xoopsModuleConfig =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
+	// subject_raw
+	$params['subject_raw'] = empty( $params['subject_escaped'] ) ? @$params['subject'] : d3forum_common_unhtmlspecialchars( @$params['subject'] ) ;
 
 	// read d3comment class and make the object
+	// for using d3forum_comment plugin with d3com class
 	if( ! empty( $params['class'] ) ) {
 		$class_name = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['class'] ) ;
-		include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
-		if( is_object( $GLOBALS['xoopsModule'] ) ) {
+		$external_dirname = @$params['mydirname'] ;
+		$external_trustdirname = @$params['mytrustdirname'] ;
+
+		// auto external_dirname
+		if( $external_dirname == '' && is_object( $GLOBALS['xoopsModule'] ) ) {
 			$external_dirname = $GLOBALS['xoopsModule']->getVar('dirname') ;
-			if( empty( $params['mytrustdirname'] ) ) {
-				// other than D3 module
-				$external_trustdirname = '' ;
-				include_once XOOPS_ROOT_PATH."/modules/$external_dirname/class/{$class_name}.class.php" ;
-			} else {
-				// D3 module
-				$external_trustdirname = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $params['mytrustdirname'] ) ;
-				include_once XOOPS_TRUST_PATH."/modules/$external_trustdirname/class/{$class_name}.class.php" ;
-			}
+		}
+
+		// search and include the class file
+		if( $external_trustdirname && file_exists( XOOPS_TRUST_PATH."/modules/$external_trustdirname/class/{$class_name}.class.php" ) ) {
+			require_once XOOPS_TRUST_PATH."/modules/$external_trustdirname/class/{$class_name}.class.php" ;
+		} else if( $external_dirname && file_exists( XOOPS_ROOT_PATH."/modules/$external_dirname/class/{$class_name}.class.php" ) ) {
+			require_once XOOPS_ROOT_PATH."/modules/$external_dirname/class/{$class_name}.class.php" ;
 		} else {
-			// other than module
 			include_once dirname(dirname(__FILE__))."/class/{$class_name}.class.php" ;
 			$external_dirname = '' ;
 			$external_trustdirname = '' ;
 		}
+
 		if( class_exists( $class_name ) ) {
 			$d3com =& new $class_name( $mydirname , $external_dirname ) ;
 			$external_link_id = $d3com->external_link_id( $params ) ;
@@ -115,6 +117,43 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 		}
 	}
 
+	$params['external_link_id'] = $external_link_id ;
+	$params['external_dirname'] = $external_dirname ;
+	$params['external_trustdirname'] = $external_trustdirname ;
+
+	$smarty = null ;
+	d3forum_render_comments( $mydirname , $forum_id , $params , $smarty ) ;
+}
+
+
+function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
+{
+	global $xoopsUser , $xoopsConfig , $xoopsModule ;
+
+	$mydirpath = XOOPS_ROOT_PATH.'/modules/'.$mydirname ;
+	$mytrustdirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+	$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
+
+	$db =& Database::getInstance() ;
+
+	// extract $external_* from $parms
+	$external_link_id = $params['external_link_id'] ;
+	$external_dirname = $params['external_dirname'] ;
+	$external_trustdirname = $params['external_trustdirname'] ;
+
+	// language files
+	$langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;
+	if( ! file_exists( $langmanpath ) ) die( 'install the latest altsys' ) ;
+	require_once( $langmanpath ) ;
+	$langman =& D3LanguageManager::getInstance() ;
+	$langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
+
+	// local $xoopsModuleConfig
+	$module_hanlder =& xoops_gethandler( 'module' ) ;
+	$module =& $module_hanlder->getByDirname( $mydirname ) ;
+	$config_handler =& xoops_gethandler( 'config' ) ;
+	$xoopsModuleConfig =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
+
 	include dirname(__FILE__).'/common_prepend.php' ;
 
 	$forum_id = intval( $forum_id ) ;
@@ -127,7 +166,7 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 	//include dirname(__FILE__).'/process_query4topics.inc.php' ;
 
 	// force UPDATE forums.forum_external_link_format "(dirname)::(classname)::(trustdirname)"
-	if( empty( $forum_row['forum_external_link_format'] ) && is_object( $d3com ) ) {
+	if( empty( $forum_row['forum_external_link_format'] ) && ! empty( $params['class'] ) ) {
 		$db->queryF( "UPDATE ".$db->prefix($mydirname."_forums")." SET forum_external_link_format='".addslashes($external_dirname.'::'.$params['class'].'::'.$external_trustdirname)."' WHERE forum_id=$forum_id" ) ;
 	}
 
@@ -210,15 +249,13 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 		$this_template = 'db:'.$mydirname.'_comment_listposts_flat.html' ;
 		$posts_num = @$params['posts_num'] > 0 ? intval( $params['posts_num'] ) : 10 ;
 		$posts = array() ;
-		$sql = "SELECT p.* FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON p.topic_id=t.topic_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND t.topic_external_link_id='".addslashes($external_link_id)."' ORDER BY post_time DESC LIMIT $posts_num" ;
+		$sql = "SELECT p.*,t.topic_locked FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON p.topic_id=t.topic_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND t.topic_external_link_id='".addslashes($external_link_id)."' ORDER BY post_time DESC LIMIT $posts_num" ;
 		if( ! $prs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 		while( $post_row = $db->fetchArray( $prs ) ) {
 		
 			// get poster's information ($poster_*), $can_reply, $can_edit, $can_delete
+			$topic_row = array( 'topic_locked' => $post_row['topic_locked'] ) ;
 			include dirname(__FILE__).'/process_eachpost.inc.php' ;
-		
-			// get row of last_post
-			if( $post_row['post_time'] > $max_post_time ) $last_post_offset = sizeof( $posts ) ;
 		
 			// posts array
 			$posts[] = array(
@@ -283,9 +320,6 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 		$antispam4assign = array() ;
 	}
 
-	// subject pre filter
-	$subject_raw = empty( $params['subject_escaped'] ) ? @$params['subject'] : d3forum_common_unhtmlspecialchars( @$params['subject'] ) ;
-
 	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
 	$tpl->assign(
@@ -296,16 +330,16 @@ function d3forum_display_comment( $mydirname , $forum_id , $params )
 			'mod_config' => $xoopsModuleConfig ,
 			'uid' => $uid ,
 			'uname' => is_object( $xoopsUser ) ? $xoopsUser->getVar('uname') : '' ,
-			'subject_raw' => $subject_raw ,
+			'subject_raw' => $params['subject_raw'] ,
 			'postorder' => $postorder ,
 			'icon_meanings' => $d3forum_icon_meanings ,
 			'category' => $category4assign ,
 			'forum' => $forum4assign ,
 			'topics' => $topics ,
-			'topic_hits' => intval( $topic_hits ) ,
+			'topic_hits' => intval( @$topic_hits ) ,
 			'posts' => $posts ,
-			'odr_options' => $odr_options ,
-			'solved_options' => $solved_options ,
+			'odr_options' => @$odr_options ,
+			'solved_options' => @$solved_options ,
 //			'query' => $query4assign ,
 //			'pagenav' => @$pagenav ,
 			'external_link_id' => $external_link_id ,

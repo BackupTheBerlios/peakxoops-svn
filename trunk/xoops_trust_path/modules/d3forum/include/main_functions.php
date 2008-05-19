@@ -384,7 +384,7 @@ function &d3forum_main_get_comment_object( $mydirname , $external_link_format )
 	include_once dirname(dirname(__FILE__)).'/class/D3commentAbstract.class.php' ;
 	@list( $external_dirname , $classname , $external_trustdirname ) = explode( '::' , $external_link_format ) ;
 	if( empty( $classname ) ) {
-		$obj =& new D3commentAbstract( $mydirname , $external_dirname ) ;
+		$obj =& new D3commentAbstract( $mydirname , '' ) ;
 		return $obj ;
 	}
 

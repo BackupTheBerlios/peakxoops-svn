@@ -22,7 +22,9 @@ function D3commentAbstract( $d3forum_dirname , $target_dirname , $target_trustdi
 		$module_hanlder =& xoops_gethandler( 'module' ) ;
 		$config_handler =& xoops_gethandler( 'config' ) ;
 		$module =& $module_hanlder->getByDirname( $this->mydirname ) ;
-		$this->mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
+		if( is_object( $module ) ) {
+			$this->mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar( 'mid' ) ) ;
+		}
 	}
 
 	if( empty( $d3forum_dirname ) ) $this->setD3forumDirname() ;

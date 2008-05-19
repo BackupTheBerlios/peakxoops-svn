@@ -5,6 +5,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-05-20 05:59:23
+define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

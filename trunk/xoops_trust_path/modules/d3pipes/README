@@ -40,6 +40,10 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.63 2008-05-20
+- added an option "link to clipping or lint to entry directly" into block
+- modified comment-integration (update d3forum into 0.83 or higher)
+
 0.62 2008-05-01
 - reverted D3pipesClipModuledb never change fingerprints
 - added joints
@@ -274,6 +278,10 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.63 2008-05-20
+- ブロックのリンクを外部にするか内部にするかを選択するオプションを追加
+- コメント統合クラスを最新方式に変更 (要d3forum-0.83以上)
 
 0.62 2008-05-01
 - ローカル保存ジョイントで、fingerprintを書き換えるのをやめた

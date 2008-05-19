@@ -1,6 +1,10 @@
 <?php
 
 // definitions for editing blocks
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-05-20 05:41:54
+define('_MB_D3PIPES_LINK2CLIPPING','Link to clipping view if the entry is clipped');
+
 define('_MB_D3PIPES_PIPE_ID','شماره لوله.');
 define('_MB_D3PIPES_PIPE_ID_NOTICE','pipe_ids های مشخص شده را با استفاده از ویرگول (,) از هم جدا کنید. You can also use drop down located right side.');
 define('_MB_D3PIPES_PIPE_ID_NOTICE2','اگر میخواهید تعداد نمایش از یک لوله را محدود کنید :(شماره) را بعد از pipe_id اضافه کنید. eg) 1:2,2:4 means "max two entires from pipe_id=1, max four entries from pipe_id=2');

@@ -8,6 +8,7 @@ function b_d3pipes_async_show( $options )
 	$max_entries = empty( $options[3] ) ? 0 : intval( $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_async.html' : trim( $options[4] ) ;
 	$union_class = @$options[5] == 'separated' ? 'separated' : 'mergesort' ;
+	$link2clipping = empty( $options[6] ) ? false : true ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
@@ -30,6 +31,7 @@ function b_d3pipes_async_show( $options )
 		'pipe_ids' => $pipe_ids ,
 		'max_entries' => $max_entries ,
 		'union_class' => $union_class ,
+		'link2clipping' => $link2clipping ,
 		'lang_async_noscript' => constant($constpref."_ASYNC_NOSCRIPT") ,
 	) ;
 

@@ -11,5 +11,6 @@ define('_MB_D3PIPES_THISTEMPLATE_NOTICE','モジュール標準として用意�
 define('_MB_D3PIPES_UNIONCLASS','表示方式');
 define('_MB_D3PIPES_UNIONOPTION_MERGESORT','全パイプのアグリゲーション');
 define('_MB_D3PIPES_UNIONOPTION_SEPARATED','各パイプの個別表示');
+define('_MB_D3PIPES_LINK2CLIPPING','ローカル保存があれば内部リンクにする');
 
 ?>

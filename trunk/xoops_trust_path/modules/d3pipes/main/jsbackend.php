@@ -14,6 +14,9 @@ if( $max_entries > 50 ) $max_entries = 50 ;
 // fetch union_class
 $union_class = $_GET['union_class'] == 'separated' ? 'separated' : 'mergesort' ;
 
+// fetch link2clipping
+$link2clipping = empty( $_GET['link2clipping'] ) ? false : true ;
+
 // fetch pipe_row
 $pipe_ids = empty( $_GET['pipe_ids'] ) ? array(0) : explode( ',' , preg_replace( '/[^0-9,:]/' , '' ,  $_GET['pipe_ids'] ) ) ;
 
@@ -51,6 +54,7 @@ $xoopsTpl->assign(
 		'errors' => $errors ,
 		'entries' => $entries ,
 		'pipes_entries' => $pipes_entries ,
+		'link2clipping' => $link2clipping ,
 		'timezone_offset' => xoops_getUserTimestamp( 0 ) ,
 		'xoops_module_header' => d3pipes_main_get_link2maincss( $mydirname ) . "\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ,
 	)

@@ -42,3 +42,11 @@
 		<{html_options options=$union_options selected=$union_class}>
 	</select>
 </p>
+
+<p>
+	<{$smarty.const._MB_D3PIPES_LINK2CLIPPING}>:
+	<label for="link2clipping_yes"><{$smarty.const._YES}></label>
+	<input type="radio" name="options[6]" id="link2clipping_yes" value="1" <{if $link2clipping}>checked="checked"<{/if}> />
+	<label for="link2clipping_no"><{$smarty.const._NO}></label>
+	<input type="radio" name="options[6]" id="link2clipping_no" value="0" <{if ! $link2clipping}>checked="checked"<{/if}> />
+</p>

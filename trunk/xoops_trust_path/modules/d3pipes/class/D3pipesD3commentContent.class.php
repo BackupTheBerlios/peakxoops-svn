@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/d3forum/class/D3commentAbstract.class.php' ;
 
 // a class for d3forum comment integration
 class D3pipesD3commentContent extends D3commentAbstract {
@@ -63,6 +64,24 @@ function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
 
 	return true ;
 }
+
+
+// get id from <{$clipping_id}>
+function external_link_id( $params )
+{
+	$clipping_id = $this->smarty->get_template_vars( 'clipping_id' ) ;
+	return intval( $clipping_id ) ;
+}
+
+
+// get escaped subject from <{$entry.headline}>
+function getSubjectRaw( $params )
+{
+	$entry = $this->smarty->get_template_vars( 'entry' ) ;
+	return $this->unhtmlspecialchars( $entry['headline'] , ENT_QUOTES ) ;
+}
+
+
 
 
 

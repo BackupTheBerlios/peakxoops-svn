@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.62 ;
+$modversion['version'] = 0.63 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -54,7 +54,7 @@ $modversion['blocks'][1] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_async_show' ,
 	'edit_func'		=> 'b_d3pipes_async_edit' ,
-	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html|mergesort" ,
+	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html|mergesort|1" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -65,7 +65,7 @@ $modversion['blocks'][2] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_sync_show' ,
 	'edit_func'		=> 'b_d3pipes_sync_edit' , // appropriation
-	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html|mergesort" ,
+	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html|mergesort|1" ,
 	'template'		=> '' , // use "module" template instead
 	'can_clone'		=> true ,
 ) ;
@@ -290,7 +290,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> '' ,
+	'default'		=> 'd3forum' ,
 	'options'		=> array()
 ) ;
 
@@ -303,6 +303,27 @@ $modversion['config'][] = array(
 	'default'		=> '0' ,
 	'options'		=> array()
 ) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_view' ,
+	'title'			=> $constpref.'_COM_VIEW' ,
+	'description'	=> '' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'listposts_flat' ,
+	'options'		=> array( '_FLAT' => 'listposts_flat' , '_THREADED' => 'listtopics' )
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_posts_num' ,
+	'title'			=> $constpref.'_COM_POSTSNUM' ,
+	'description'	=> '' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '10' ,
+	'options'		=> array()
+) ;
+
 
 
 // Notification

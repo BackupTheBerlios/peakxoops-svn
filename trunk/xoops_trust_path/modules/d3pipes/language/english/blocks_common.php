@@ -11,5 +11,6 @@ define('_MB_D3PIPES_THISTEMPLATE_NOTICE','You can use these templates alternativ
 define('_MB_D3PIPES_UNIONCLASS','表示方式');
 define('_MB_D3PIPES_UNIONOPTION_MERGESORT','Aggregated view from all pipes');
 define('_MB_D3PIPES_UNIONOPTION_SEPARATED','Separated view per each pipes');
+define('_MB_D3PIPES_LINK2CLIPPING','Link to clipping view if the entry is clipped');
 
 ?>

@@ -70,7 +70,7 @@ function pico_main_get_category_permissions_of_current_user( $mydirname , $uid =
 		$whr = "`groupid`=".intval(XOOPS_GROUP_ANONYMOUS) ;
 	}
 
-	$sql = "SELECT cat_id,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE ($whr)" ;
+	$sql = "SELECT c.cat_id,cp.permissions FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id  WHERE ($whr)" ;
 	$result = $db->query( $sql ) ;
 	if( $result ) while( list( $cat_id , $serialized_permissions ) = $db->fetchRow( $result ) ) {
 		$permissions = unserialize( $serialized_permissions ) ;
@@ -96,7 +96,8 @@ function pico_main_get_category_moderate_groups4show( $mydirname , $cat_id )
 	$cat_id = intval( $cat_id ) ;
 
 	$ret = array() ;
-	$sql = "SELECT g.groupid, g.name FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("groups")." g ON cp.groupid=g.groupid WHERE cp.groupid IS NOT NULL AND cat_id=".$cat_id." AND cp.permissions LIKE '%s:12:\"is\\_moderator\";i:1;%'" ;
+	$sql = "SELECT g.groupid, g.name FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id LEFT JOIN ".$db->prefix("groups")." g ON cp.groupid=g.groupid WHERE cp.groupid IS NOT NULL AND c.cat_id=".$cat_id." AND cp.permissions LIKE '%s:12:\"is\\_moderator\";i:1;%'" ;
+
 	$mrs = $db->query( $sql ) ;
 	while( list( $mod_gid , $mod_gname ) = $db->fetchRow( $mrs ) ) {
 		$ret[] = array(
@@ -117,7 +118,8 @@ function pico_main_get_category_moderate_users4show( $mydirname , $cat_id )
 	$cat_id = intval( $cat_id ) ;
 
 	$ret = array() ;
-	$sql = "SELECT u.uid, u.uname FROM ".$db->prefix($mydirname."_category_permissions")." cp LEFT JOIN ".$db->prefix("users")." u ON cp.uid=u.uid WHERE cp.uid IS NOT NULL AND cat_id=".$cat_id." AND cp.permissions LIKE '%s:12:\"is\\_moderator\";i:1;%'" ;
+	$sql = "SELECT u.uid, u.uname FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id LEFT JOIN ".$db->prefix("users")." u ON cp.uid=u.uid WHERE cp.uid IS NOT NULL AND c.cat_id=".$cat_id." AND cp.permissions LIKE '%s:12:\"is\\_moderator\";i:1;%'" ;
+
 	$mrs = $db->query( $sql ) ;
 	while( list( $mod_uid , $mod_uname ) = $db->fetchRow( $mrs ) ) {
 		$ret[] = array(
@@ -248,15 +250,26 @@ function pico_main_get_moderators( $mydirname , $cat_id )
 	$cat_id = intval( $cat_id ) ;
 	$cat_uids = array() ;
 
-	$sql = "SELECT `uid` FROM ".$db->prefix($mydirname."_category_permissions")." WHERE `cat_id`=$cat_id AND `uid` IS NOT NULL AND permissions LIKE '%is\\_moderator\";i:1%'" ;
+	// get uid directly
+	$sql = "SELECT `uid` FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id WHERE c.`cat_id`=$cat_id AND `uid` IS NOT NULL AND permissions LIKE '%is\\_moderator\";i:1%'" ;
 	$result = $db->query( $sql ) ;
 	while( list( $uid ) = $db->fetchRow( $result ) ) {
 		$cat_uids[] = $uid ;
 	}
-	$sql = "SELECT distinct g.uid FROM ".$db->prefix($mydirname."_category_permissions")." x , ".$db->prefix("groups_users_link")." g WHERE x.groupid=g.groupid AND x.`cat_id`=$cat_id AND x.`groupid` IS NOT NULL AND permissions LIKE '%is\\_moderator\";i:1%'" ;
+
+	// get uid via groupid
+	$sql = "SELECT distinct cp.groupid FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id WHERE c.`cat_id`=$cat_id AND cp.`groupid` IS NOT NULL AND permissions LIKE '%is\\_moderator\";i:1%'" ;
 	$result = $db->query( $sql ) ;
-	while( list( $uid ) = $db->fetchRow( $result ) ) {
-		$cat_uids[] = $uid ;
+	$groupids = array() ;
+	while( list( $groupid ) = $db->fetchRow( $result ) ) {
+		$groupids[] = $groupid ;
+	}
+	if( ! empty( $groupids ) ) {
+		$sql = "SELECT distinct uid FROM ".$db->prefix("groups_users_link")." WHERE groupid IN (".implode(",",$groupids).")" ;
+		$result = $db->query( $sql ) ;
+		while( list( $uid ) = $db->fetchRow( $result ) ) {
+			$cat_uids[] = $uid ;
+		}
 	}
 
 	return array_unique( $cat_uids ) ;

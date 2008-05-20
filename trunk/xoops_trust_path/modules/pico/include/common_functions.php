@@ -33,7 +33,8 @@ function pico_common_get_categories_can_read( $mydirname , $uid = null )
 	}
 
 	// get categories
-	$sql = "SELECT distinct cat_id FROM ".$db->prefix($mydirname."_category_permissions")." WHERE ($whr4cat)" ;
+	$sql = "SELECT distinct c.cat_id FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id WHERE ($whr4cat)" ;
+
 	$result = $db->query( $sql ) ;
 	if( $result ) while( list( $cat_id ) = $db->fetchRow( $result ) ) {
 		$cat_ids[] = intval( $cat_id ) ;

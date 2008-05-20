@@ -64,6 +64,7 @@ function getTemplateName()
 function getAssign()
 {
 	foreach( $this->contentObjs as $index => $contentObj ) {
+		if( ! is_object( $contentObj ) ) continue ;
 		if( $contentObj->need_filter_body ) {
 			$this->assign[$index]['body'] = $contentObj->filterBody( $this->assign[$index] ) ;
 		}

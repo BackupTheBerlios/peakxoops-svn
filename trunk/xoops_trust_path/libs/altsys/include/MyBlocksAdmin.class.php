@@ -226,15 +226,13 @@ function list_blocks( $target_mid , $target_dirname )
 
 function get_block_configs()
 {
-	global $mydirpath ;
+	if( @$_GET['dirname'] == '__CustomBlocks__' ) return array() ;
 
-	$error_reporting_level = error_reporting( 0 ) ;
 	if( preg_match( '/^[0-9a-zA-Z_-]+$/' , @$_GET['dirname'] ) ) {
 		include XOOPS_ROOT_PATH.'/modules/'.$_GET['dirname'].'/xoops_version.php' ;
-	} else {
-		include $mydirpath.'/xoops_version.php' ;
+	} else if( empty( $_REQUEST['mydirpath'] ) && ! empty( $GLOBALS['mydirpath'] ) ) {
+		include $GLOBALS['mydirpath'].'/xoops_version.php' ;
 	}
-	error_reporting( $error_reporting_level ) ;
 	if( empty( $modversion['blocks'] ) ) return array() ;
 	else return $modversion['blocks'] ;
 }

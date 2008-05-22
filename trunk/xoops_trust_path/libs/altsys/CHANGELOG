@@ -1,5 +1,10 @@
 [xlang:en]
 
+v0.59 (2008-05-22)
+- fixed css for admin with XCL2.1 and "admin in theme"
+- modified the compatibility of blocksadmin with XCL2.1
+- updated gtickets.php
+
 v0.58 (2008-04-10)
 - fixed wrong breadcrumbs as my*admin
 - modified "admin in theme" read language files under the theme
@@ -133,6 +138,11 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.59 (2008-05-22)
+- XCL2.1における管理画面テーマで、CSSが読み込まれない問題の改善
+- XCL2.1におけるブロック管理の相性問題改善
+- gtickets.php の更新
 
 v0.58 (2008-04-10)
 - パンくず関連のバグ修正

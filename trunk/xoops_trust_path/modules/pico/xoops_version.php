@@ -399,6 +399,36 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'extra_images_dir' ,
+	'title'			=> $constpref.'_EFIMAGES_DIR' ,
+	'description'	=> $constpref.'_EFIMAGES_DIRDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'uploads/'.$mydirname ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'extra_images_size' ,
+	'title'			=> $constpref.'_EFIMAGES_SIZE' ,
+	'description'	=> $constpref.'_EFIMAGES_SIZEDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '480x480 160x160' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'image_magick_path' ,
+	'title'			=> $constpref.'_IMAGICK_PATH' ,
+	'description'	=> $constpref.'_IMAGICK_PATHDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'comment_dirname' ,
 	'title'			=> $constpref.'_COM_DIRNAME' ,
 	'description'	=> '' ,

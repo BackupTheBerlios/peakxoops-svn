@@ -306,7 +306,7 @@ function getBlankContentRow( $categoryObj )
 		'body_cached' => '' ,
 		'filters' => $mod_config['filters'] ,
 		'tags' => '' ,
-		'extra_fields' => '' ,
+		'extra_fields' => serialize( array() ) ,
 		'redundants' => '' ,
 		'for_search' => '' ,
 	) ;

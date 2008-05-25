@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(dirname(__FILE__)).'/class/PicoExtraFields.class.php' ;
-
 // this file can be included from transaction procedures
 
 // delete a content
@@ -508,8 +506,10 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		}
 	}
 
-	// extra_fields
-	$ef_obj =& new PicoExtraFields( $mydirname , $mod_config , $auto_approval , $isadminormod , $content_id ) ;
+	// extra_fields (read ef class and create the object)
+	$ef_class = empty( $mod_config['extra_fields_class'] ) ? 'PicoExtraFields' : preg_replace( '/[^0-9a-zA-Z_]/' , '' , $mod_config['extra_fields_class'] ) ;
+	require_once dirname(dirname(__FILE__)).'/class/'.$ef_class.'.class.php' ;
+	$ef_obj =& new $ef_class( $mydirname , $mod_config , $auto_approval , $isadminormod , $content_id ) ;
 	$ret['extra_fields'] = $ef_obj->getSerializedRequestsFromPost() ;
 
 	return $ret ;

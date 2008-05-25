@@ -66,6 +66,8 @@ define($constpref.'_HISTORY_P_C','履歴機能を何世代まで保存するか'
 define($constpref.'_MLT_HISTORY','履歴の一世代として保存する最小時間(sec)');
 define($constpref.'_BRCACHE','画像ファイルのブラウザキャッシュ (wrapsモード時のみ)');
 define($constpref.'_BRCACHEDSC' , 'HTML以外のファイルをブラウザにキャッシュする時間を秒で指定（0で無効化）');
+define($constpref.'_EF_CLASS' , 'extra_fields処理クラス名');
+define($constpref.'_EF_CLASSDSC' , 'extra_fields処理をオーバーライドしたい時に指定。デフォルトはPicoExtraFields');
 define($constpref.'_EFIMAGES_DIR' , 'extra_fields画像ファイルのパス');
 define($constpref.'_EFIMAGES_DIRDSC' , 'XOOPS_ROOT_PATHからの相対パスを指定する。この機能を利用する場合には、指定されたフォルダを先に作っておき、さらに書込可能としておく必要がある。デフォルトは uploads/(モジュールdirname)');
 define($constpref.'_EFIMAGES_SIZE' , 'extra_fields画像ファイルのサイズ(pixel)');

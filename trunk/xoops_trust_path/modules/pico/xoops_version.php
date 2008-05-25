@@ -399,6 +399,16 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'extra_fields_class' ,
+	'title'			=> $constpref.'_EF_CLASS' ,
+	'description'	=> $constpref.'_EF_CLASSDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'PicoExtraFields' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'extra_images_dir' ,
 	'title'			=> $constpref.'_EFIMAGES_DIR' ,
 	'description'	=> $constpref.'_EFIMAGES_DIRDSC' ,

@@ -66,6 +66,8 @@ define($constpref.'_HISTORY_P_C','How many revisions are stored in DB');
 define($constpref.'_MLT_HISTORY','Minimum lifetime of each revisions (sec)');
 define($constpref.'_BRCACHE','Cache life time for image files (only with wraps mode)');
 define($constpref.'_BRCACHEDSC','Files other than HTML will be cached by web browser in this second (0 means disabled)');
+define($constpref.'_EF_CLASS' , 'class for extra_fields');
+define($constpref.'_EF_CLASSDSC' , 'Change it if you want to override the handler for extra_fields. default value is PicoExtraFields');
 define($constpref.'_EFIMAGES_DIR' , 'directory for extra_fields');
 define($constpref.'_EFIMAGES_DIRDSC' , 'set relative path from XOOPS_ROOT_PATH. Create and chmod 777 the directory first. default) uploads/(module dirname)');
 define($constpref.'_EFIMAGES_SIZE' , 'pixels for extra images');

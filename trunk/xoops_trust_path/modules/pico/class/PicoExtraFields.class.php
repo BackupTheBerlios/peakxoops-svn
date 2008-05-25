@@ -2,8 +2,12 @@
 
 define( 'PICO_EXTRA_FIELDS_PREFIX' , 'extra_fields_' ) ;
 define( 'PICO_EXTRA_IMAGES_PREFIX' , 'extra_images_' ) ;
-define( 'PICO_EXTRA_IMAGES_FMT_MAIN' , 'main_%s.gif' ) ; // %s is replaced by $id
-define( 'PICO_EXTRA_IMAGES_FMT_SMALL' , 'small_%s.gif' ) ;
+// %1$s: field_name   %2$s: size_key  %3$s: image_id
+define( 'PICO_EXTRA_IMAGES_FMT' , '%s_%s_%s' ) ;
+define( 'PICO_EXTRA_IMAGES_REMOVAL_COMMAND' , 'remove.gif' ) ;
+
+
+// you can override this class by specifying your sub class into the preferences
 
 class PicoExtraFields {
 
@@ -12,7 +16,9 @@ var $mod_config ;
 var $auto_approval ;
 var $isadminormod ;
 var $content_id ;
-var $images_dir_full_path ;
+var $images_path ;
+var $image_sizes ;
+
 
 function PicoExtraFields( $mydirname , $mod_config , $auto_approval , $isadminormod , $content_id )
 {
@@ -22,6 +28,12 @@ function PicoExtraFields( $mydirname , $mod_config , $auto_approval , $isadminor
 	$this->isadminormod = $isadminormod ;
 	$this->content_id = $content_id ;
 	$this->images_path = XOOPS_ROOT_PATH.'/'.$mod_config['extra_images_dir'] ;
+	$this->image_sizes = array() ;
+	$size_combos = preg_split( '/\s+/' , $this->mod_config['extra_images_size'] ) ;
+	foreach( $size_combos as $size_combo ) {
+		$this->image_sizes[] = array_map( 'intval' , preg_split( '/\D+/' , $size_combo ) ) ;
+	}
+
 }
 
 
@@ -68,53 +80,107 @@ function uploadImage( &$extra_fields , $file , $field_name )
 		die( 'create upload directory for pico first' ) ;
 	}
 
-	// image sizes
-	$sizes = preg_split( '/\D+/' , $this->mod_config['extra_images_size'] ) ;
-	$main_width = $sizes[0] > 10 ? intval( $sizes[0] ) : 480 ;
-	$main_height = $sizes[1] > 10 ? intval( $sizes[1] ) : 480 ;
-	$small_width = $sizes[2] > 10 ? intval( $sizes[2] ) : 160 ;
-	$small_height = $sizes[3] > 10 ? intval( $sizes[3] ) : 160 ;
+	// command for removing. upload "remove.gif"
+	if( $file['name'] == PICO_EXTRA_IMAGES_REMOVAL_COMMAND ) {
+		foreach( array_keys( $this->image_sizes ) as $size_key ) {
+			unlink( $this->getImageFullPath( $field_name , $size_key , $extra_fields[ $field_name ] ) ) ;
+		}
+		$extra_fields[ $field_name ] = '' ;
+		return true ;
+	}
 
-	// create file names
-	$salt = defined( 'XOOPS_SALT' ) ? XOOPS_SALT : XOOPS_DB_PREFIX . XOOPS_DB_USER ;
-	$id = substr( md5( time() . $salt ) , 8 , 16 ) ;
+	// create id
+	$id = $this->createId( $extra_fields , $file , $field_name ) ;
+
+	// create temp file name
 	$tmp_image = $this->images_path.'/tmp_'.$id ;
-	$main_image = $this->images_path.'/'.sprintf( PICO_EXTRA_IMAGES_FMT_MAIN , $id ) ;
-	$small_image = $this->images_path.'/'.sprintf( PICO_EXTRA_IMAGES_FMT_SMALL , $id ) ;
 
 	// set mask
 	$prev_mask = @umask( 0022 ) ;
 
 	// move temporary
 	$upload_result = move_uploaded_file( $file['tmp_name'] , $tmp_image ) ;
+	if( ! $upload_result ) {
+		die( 'check the permission/owner of the directory '.htmlspecialchars( $this->mod_config['extra_images_dir'] , ENT_QUOTES ) ) ;
+	}
+	@chmod( $tmp_image , 0644 ) ;
 
 	// check the file is image or not
 	$check_result = @getimagesize( $tmp_image ) ;
 	if( ! is_array( $check_result ) || empty( $check_result['mime'] ) ) {
+		@unlink( $tmp_image ) ;
 		die( 'An invalid image file is uploaded' ) ;
 	}
 
-	// create main image
-	exec( $this->mod_config['image_magick_path']."convert -geometry {$main_width}x{$main_height} $tmp_image $main_image" ) ;
+	// set image_id ( = $id . $ext )
+	$image_id = $id . '.' . $this->getExtFromMime( $check_result['mime'] ) ;
 
-	// create small image
-	exec( $this->mod_config['image_magick_path']."convert -geometry {$small_width}x{$small_height} $tmp_image $small_image" ) ;
+	// resize loop
+	foreach( $this->image_sizes as $size_key => $sizes ) {
+		$image_path = $this->getImageFullPath( $field_name , $size_key , $image_id ) ;
+		exec( $this->mod_config['image_magick_path']."convert -geometry {$sizes[0]}x{$sizes[1]} $tmp_image $image_path" ) ;
+		@chmod( $image_path , 0644 ) ;
+	}
 
 	// force remove remove temporary
 	@unlink( $tmp_image ) ;
 
-	// try to remove old file
-	if( ! empty( $extra_fields[ $field_name ] ) ) {
-		@unlink( $this->images_path.'/'.sprintf( PICO_EXTRA_IMAGES_FMT_MAIN , $extra_fields[ $field_name ] ) ) ;
-		@unlink( $this->images_path.'/'.sprintf( PICO_EXTRA_IMAGES_FMT_SMALL , $extra_fields[ $field_name ] ) ) ;
-	}
+	// gabage collection (TODO)
+	$this->removeUnlinkedImages( $id ) ;
 
 	// restore mask
 	@umask( $prev_mask ) ;
 
 	// set extra_fields
-	$extra_fields[ $field_name ] = $id ;
+	$extra_fields[ $field_name ] = $image_id ;
 }
+
+
+function createId( $extra_fields , $file , $field_name )
+{
+	$salt = defined( 'XOOPS_SALT' ) ? XOOPS_SALT : XOOPS_DB_PREFIX . XOOPS_DB_USER ;
+	return substr( md5( time() . $salt ) , 8 , 16 ) ;
+}
+
+
+function getImageFullPath( $field_name , $size_key , $image_id )
+{
+	return $this->images_path.'/'.sprintf( PICO_EXTRA_IMAGES_FMT , $field_name , $size_key , $image_id ) ;
+}
+
+
+function getExtFromMime( $mime )
+{
+	switch( strtolower( $mime ) ) {
+		case 'image/gif' :
+			return 'gif' ;
+		case 'image/png' :
+			return 'png' ;
+		default :
+			return 'jpg' ;
+	}
+}
+
+
+function removeUnlinkedImages( $current_id )
+{
+	$glob_pattern = '*'.substr($current_id,-1).'.*' ; // 1/16 random match
+	//$glob_pattern = '*' ;
+
+	$db =& Database::getInstance() ;
+
+	foreach( glob( $this->images_path.'/'.$glob_pattern ) as $filename ) {
+		if( strstr( $filename , $current_id ) ) continue ;
+		if( preg_match( '/([0-9a-f]{16}\.[a-z]{3})$/' , $filename , $regs ) ) {
+			$image_id = $regs[1] ;
+			list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($this->mydirname."_contents")." WHERE extra_fields LIKE '%".addslashes($image_id)."%'" ) ) ;
+			if( $count <= 0 ) {
+				unlink( $filename ) ;
+			}
+		}
+	}
+}
+
 
 
 }

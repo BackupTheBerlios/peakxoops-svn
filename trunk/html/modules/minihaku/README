@@ -7,9 +7,9 @@ A simple subset of hakusen module.
 Usage:
 
 - Install as a module
-- append a line into mainfile.php
+- append a line into mainfile.php (the red line)
 [code]
-	include XOOPS_ROOT_PATH.'/modules/minihaku/include/mainfilehook.php' ;
+[color=ff0000]	include XOOPS_ROOT_PATH.'/modules/minihaku/include/mainfilehook.php' ;[/color]
 }
 ?>
 [/code]
@@ -33,9 +33,9 @@ eg)
 使い方:
 
 - モジュールとしてインストール
-- mainfile.php の後ろの方に１行だけ追加
+- mainfile.php の後ろの方に１行だけ追加（赤い行）
 [code]
-	include XOOPS_ROOT_PATH.'/modules/minihaku/include/mainfilehook.php' ;
+[color=ff0000]	include XOOPS_ROOT_PATH.'/modules/minihaku/include/mainfilehook.php' ;[/color]
 }
 ?>
 [/code]
@@ -56,11 +56,14 @@ usersテーブルにフィールドを増やすこと自体は、DBに対して、ALTER TABLEを直接発行し
 いわゆるコントローラっぽいものは一切用意していません。つまり、判る人にだけ判ればいいや、てな作りになってますが、基本的に、テンプレートとincldue/config.phpだけをいじれば良いはずです。特定のキーが入力された時だけ、あるグループに所属させる、なんてことも簡単にできるようにはしてあります。
 
 
+1.09 2007-12-11
+- ユーザ登録のメール送信部で、全リクエストをメールテンプレートにアサインするようにした {REQUEST_name} など
+- ユーザ登録成功時の処理に、フックポイントを追加した
+
 1.08 2007-01-10
 - config.php 内で $stop_error_extras 配列を利用できるようにした (thx jidaikobo)
 - 一般設定をアサインするようにした（ユーザ名の最大・最小文字数などを表示するため）
 - 一般設定の利用許諾文表示設定を反映するようにした (thx eyesonly)
-- エラー表示方法をちょっと改善した (thx jidaikobo) 1.08a
 
 1.07 2006-09-24
 - 環境によってインストールできないバグを修正 (thx kojima)

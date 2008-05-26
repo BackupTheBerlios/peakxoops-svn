@@ -105,6 +105,11 @@ if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && empty( $
 		$member_handler->addUserToGroup( intval( $group ) , $newid ) ;
 	}
 
+	// register hook
+	if( file_exists( dirname(__FILE__).'/on_register_success.php' ) ) {
+		include dirname(__FILE__).'/on_register_success.php' ;
+	}
+
 	$xoopsOption['template_main'] = 'minihaku_register_success.html' ;
 	if ($xoopsConfigUser['activation_type'] == 1) {
 		// bug ?
@@ -118,6 +123,9 @@ if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && empty( $
 		$xoopsMailer->assign('SITENAME', $xoopsConfig['sitename']);
 		$xoopsMailer->assign('ADMINMAIL', $xoopsConfig['adminmail']);
 		$xoopsMailer->assign('SITEURL', XOOPS_URL."/");
+		foreach( $allowed_requests as $key => $val ) {
+			$xoopsMailer->assign( 'REQUEST_'.strtoupper($key) , $val ) ;
+		}
 		$xoopsMailer->setToUsers(new XoopsUser($newid));
 		$xoopsMailer->setFromEmail($xoopsConfig['adminmail']);
 		$xoopsMailer->setFromName($xoopsConfig['sitename']);
@@ -137,6 +145,9 @@ if( ! empty( $_POST['do_register'] ) && empty( $stop_reason_extras ) && empty( $
 		$xoopsMailer->assign('SITENAME', $xoopsConfig['sitename']);
 		$xoopsMailer->assign('ADMINMAIL', $xoopsConfig['adminmail']);
 		$xoopsMailer->assign('SITEURL', XOOPS_URL."/");
+		foreach( $allowed_requests as $key => $val ) {
+			$xoopsMailer->assign( 'REQUEST_'.strtoupper($key) , $val ) ;
+		}
 		$member_handler =& xoops_gethandler('member');
 		$xoopsMailer->setToGroups($member_handler->getGroup($xoopsConfigUser['activation_group']));
 		$xoopsMailer->setFromEmail($xoopsConfig['adminmail']);

@@ -8,6 +8,7 @@
 - renamed language files
 -- ja_utf8 (formerly japaneseutf)
 - modified search result with rewrite mode (1.22a)
+- updated gtickets.php (1.22b)
 
 1.21 (2007/05/12)
 - changed the structure "altsys essential"
@@ -78,6 +79,7 @@
 - 言語ファイル名変更
 -- ja_utf8 (旧japaneseutf)
 - 検索結果のURIがrewriteモードのON/OFFを反映するようにした (1.22a)
+- gtickets.php を更新した (1.22b)
 
 1.21 (2007/05/12)
 - 正式にaltsys必須とした

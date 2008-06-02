@@ -29,6 +29,11 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 =CHANEGLOG=
 
+
+
+- fixed boundary bug in archive view (thx wahyu)
+- fixed imgurl for topics cannnot removed (thx Tom_G3X)
+
 HD-2.14 (2008-05-19)
 - modified comment-integration with d3forum easy (update d3forum into the latest)
 - removed codes variable include/require

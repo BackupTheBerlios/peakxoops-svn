@@ -112,7 +112,7 @@ class D3pipesBlockAbstract extends D3pipesJointAbstract {
 	function renderOptions( $index , $current_value = null )
 	{
 		$index = intval( $index ) ;
-		$options = explode( '|' , $current_value ) ;
+		$options = explode( '|' , $current_value , 3 ) ;
 
 		// options[0]  (dirname)
 		$dirnames = $this->getValidDirnames() ;
@@ -125,7 +125,11 @@ class D3pipesBlockAbstract extends D3pipesJointAbstract {
 		// options[1]  (max_entries)
 		$options[1] = empty( $options[1] ) ? 10 : intval( $options[1] ) ;
 		$ret_1 = _MD_D3PIPES_N4J_MAXENTRIES.'<input type="text" name="joint_options['.$index.'][1]" value="'.$options[1].'" size="2" style="text-align:right;" />' ;
-		return '<input type="hidden" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="" />'.$ret_0.' '.$ret_1 ;
+		// options[2],[3]... (extra options)
+		$extra_options = empty( $options[2] ) ? '' : $options[2] ;
+		$ret_2 = _MD_D3PIPES_N4J_EXTRAOPTIONS.'<input type="text" name="joint_options['.$index.'][2]" value="'.htmlspecialchars($extra_options,ENT_QUOTES).'" size="20" />' ;
+
+		return '<input type="hidden" name="joint_option['.$index.']" id="joint_option_'.$index.'" value="" />'.$ret_0.' &nbsp; '.$ret_1.'<br />'.$ret_2 ;
 	}
 
 }

@@ -25,7 +25,7 @@ class D3pipesBlockPicallist extends D3pipesBlockAbstract {
 		$this->block_options = array(
 			0 => $this->target_dirname , // mydirname
 			1 => empty( $params[1] ) ? 10 : intval( $params[1] ) , // entries
-			2 => 0 , // cid
+			2 => empty( $params[2] ) ? 0 : intval( $params[2] ) , // cid
 		) ;
 
 		return true ;

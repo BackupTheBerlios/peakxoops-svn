@@ -235,9 +235,12 @@ function filterBody( $content4assign )
 		$text = $func_name( $this->mydirname , $text , $content4assign ) ;
 	}
 
-	// store the result into body_cached and for_search field
-	$for_search = $this->data['subject_raw'] . ' ' . strip_tags( $text ) ;
-	$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($this->data['content_id']) ) ;
+	// store the result into body_cached and for_search field just after modification of the content
+	if( empty( $this->data['for_search'] ) ) {
+		$for_search = $this->data['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$this->data['extra_fields'] ) ) ) ;
+		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($this->data['content_id']) ) ;
+
+	}
 
 	return $text ;
 }

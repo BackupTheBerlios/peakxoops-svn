@@ -323,6 +323,14 @@ function pico_common_unhtmlspecialchars( $data )
 }
 
 
+function pico_common_unserialize( $serialized_data )
+{
+	$ret = @unserialize( $serialized_data ) ;
+	if( empty( $ret ) ) $ret = array() ;
+	return $ret ;
+}
+
+
 if( ! function_exists( 'htmlspecialchars_ent' ) ) {
 function htmlspecialchars_ent( $string )
 {

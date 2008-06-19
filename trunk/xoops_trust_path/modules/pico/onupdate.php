@@ -84,6 +84,7 @@ function pico_onupdate_base( $module , $mydirname )
 	$check_sql = "SELECT extension FROM ".$db->prefix($mydirname."_contents") ;
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_contents")." ADD permission_id int(10) unsigned NOT NULL default 0 AFTER `content_id`, ADD expiring_time int(10) NOT NULL default 0x7fffffff AFTER `modified_time`, ADD last_cached_time int(10) NOT NULL default 0 AFTER `modified_time`, ADD `extra_fields` mediumtext AFTER `filters`, ADD `for_search` mediumtext AFTER `redundants`, MODIFY `redundants` mediumtext, ADD `tags` text AFTER `filters`, ADD KEY (`modified_time`), ADD KEY (`expiring_time`), ADD KEY (`permission_id`)" ) ;
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_content_histories")." ADD tags text, ADD extra_fields mediumtext" ) ;
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD `cat_permission_id` int(10) unsigned NOT NULL AFTER `cat_id`, ADD KEY (`cat_permission_id`)" ) ;
 		$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET `cat_permission_id`=`cat_id`" ) ;
 		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_tags")." ( label varchar(255) NOT NULL default '', weight int(10) unsigned NOT NULL default 0, count int(10) unsigned NOT NULL default 0, content_ids mediumtext, created_time int(10) NOT NULL default 0, modified_time int(10) NOT NULL default 0, PRIMARY KEY (label), KEY (count), KEY (weight), KEY (created_time) ) TYPE=MyISAM" ) ;

@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__FILE__).'/common_functions.php' ;
+
 function pico_get_content_history_profile( $mydirname , $content_history_id , $content_id = null )
 {
 	$db =& Database::getInstance() ;
@@ -17,6 +19,9 @@ function pico_get_content_history_profile( $mydirname , $content_history_id , $c
 	// get and process $cat_id
 	$cat_id = pico_main_get_cat_id_from_content_id( $mydirname , $content_id ) ;
 
+	// unserialize and visualize extra_fields
+	$ef4display = print_r( pico_common_unserialize( $history_row['extra_fields'] ) , true ) ;
+
 return array( $cat_id , $content_id , 
 "content_id: {$history_row['content_id']}
 subject:    {$history_row['subject']}
@@ -25,12 +30,16 @@ vpath:      {$history_row['vpath']}
 created:    ".formatTimestamp($history_row['created_time'],'m')." ({$history_row['poster_ip']}) {$history_row['poster_uname']}({$history_row['poster_uid']})
 modified:   ".formatTimestamp($history_row['modified_time'],'m')." ({$history_row['modifier_ip']}) {$history_row['modifier_uname']}({$history_row['modifier_uid']})
 filters:    {$history_row['filters']}
+tags:    {$history_row['tags']}
 
 htmlheader:
 {$history_row['htmlheader']}
 
 body:
 {$history_row['body']}
+
+extra_fields:
+$ef4display
 " ) ;
 }
 

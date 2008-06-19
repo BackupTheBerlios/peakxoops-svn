@@ -749,7 +749,7 @@ function pico_transact_backupcontent( $mydirname , $content_id , $forced = false
 	}
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters) SELECT content_id,vpath,cat_id,modified_time,UNIX_TIMESTAMP(),modifier_uid,modifier_ip,$uid,'".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields) SELECT content_id,vpath,cat_id,modified_time,UNIX_TIMESTAMP(),modifier_uid,modifier_ip,$uid,'".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters,tags,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 }
 
 

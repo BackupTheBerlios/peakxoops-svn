@@ -121,6 +121,8 @@ CREATE TABLE content_histories (
   htmlheader mediumtext,
   body mediumtext,
   filters text,
+  tags text,
+  extra_fields mediumtext,
   PRIMARY KEY (content_history_id),
   KEY (content_id),
   KEY (created_time),

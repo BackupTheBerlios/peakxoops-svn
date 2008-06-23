@@ -45,6 +45,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - modified comment-integration (update d3forum into 0.83 or higher)
 - added joints
 -- D3pipesBlockD3bloglist (thx hodaka)
+-- D3pipesBlockD3downloadslist (thx photositelinks) 0.63d
 - fixed typo in block_sync_big.html (thx toychee,neko88) 0.63a
 - modified block joints can be added extra parameters 0.63b
 - fixed D3pipesBlockXpwikipages.class.php missing require abstract class 0.63c
@@ -289,6 +290,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - コメント統合クラスを最新方式に変更 (要d3forum-0.83以上)
 - ブロックジョイント追加
 -- D3pipesBlockD3bloglist (thx hodaka)
+-- D3pipesBlockD3downloadslist (thx photositelinks) 0.63d
 - block_sync_big.html のtypo修正 (thx toychee,neko88) 0.63a
 - ブロックジョイントに追加オプションを指定可能とした 0.63b
 - D3pipesBlockXpwikipages.class.php が場合によってはfatalを起こすのを修正 0.63c

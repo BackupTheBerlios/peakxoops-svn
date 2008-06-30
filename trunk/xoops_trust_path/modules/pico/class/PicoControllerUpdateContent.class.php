@@ -67,7 +67,7 @@ function execute( $request )
 
 	// calling a delegate
 	if( class_exists( 'XCube_DelegateUtils' ) ) {
-		XCube_DelegateUtils::call( 'ModuleClass.Pico.Contentman.UpdateSuccess' , $this->mydirname , $request['content_id'] , $cat_data , $ret_uri4html ) ;
+		XCube_DelegateUtils::raiseEvent( 'ModuleClass.Pico.Contentman.UpdateSuccess' , $this->mydirname , $request['content_id'] , $cat_data , $ret_uri4html ) ;
 	}
 
 	

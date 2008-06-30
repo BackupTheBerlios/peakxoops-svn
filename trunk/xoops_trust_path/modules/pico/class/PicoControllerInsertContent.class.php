@@ -53,7 +53,7 @@ function execute( $request )
 
 	// calling a delegate
 	if( class_exists( 'XCube_DelegateUtils' ) ) {
-		XCube_DelegateUtils::call( 'ModuleClass.Pico.Contentman.InsertSuccess' , $this->mydirname , $content_id , $cat_data , $ret_uri4html ) ;
+		XCube_DelegateUtils::raiseEvent( 'ModuleClass.Pico.Contentman.InsertSuccess' , $this->mydirname , $content_id , $cat_data , $ret_uri4html ) ;
 	}
 
 	if( $cat_data['post_auto_approved'] ) {

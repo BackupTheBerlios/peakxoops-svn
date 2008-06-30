@@ -58,7 +58,14 @@ function isNeedHeaderFooter()
 
 function getTemplateName()
 {
-	return $this->template_name ;
+	$template_name = $this->template_name ;
+
+	// calling a delegate for replacing the main template
+	if( class_exists( 'XCube_DelegateUtils' ) ) {
+		XCube_DelegateUtils::raiseEvent( 'ModuleClass.Pico.Controller.GetTemplateName' , $this->mydirname , new XCube_Ref( $template_name ) ) ;
+	}
+
+	return $template_name ;
 }
 
 function getAssign()

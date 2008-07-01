@@ -125,6 +125,8 @@ I thank Madfish for this excellent work!
 
 3.17 beta (2008/04/24)
 - modified URLs with the same hostname as XOOPS_URL are not counted as URI SPAM
+- update language files
+-- persian (thx stranger and voltan) 3.17a
 
 3.16 beta (2008/01/08)
 - added a filter postcommon_post_deny_by_httpbl for antispam by honeypotproject
@@ -357,6 +359,8 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 
 3.17 beta (2008/04/24)
 - URI SPAMÈ½Äê¤Ç¡¢¼«¥Û¥¹¥È¤ÈÆ±°ì¤Î¾ì¹ç¤ÏÄÌ²á¤¹¤ë¤è¤¦¤Ë¤·¤¿
+- ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
+-- persian (thx stranger and voltan) 3.17a
 
 3.16 beta (2008/01/08)
 - SPAM¥Õ¥£¥ë¥¿¡¼ÄÉ²Ã postcommon_post_deny_by_httpbl (honeypotproject.org¤ÎBLÍøÍÑ)

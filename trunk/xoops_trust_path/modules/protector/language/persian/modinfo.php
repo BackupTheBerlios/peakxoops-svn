@@ -1,112 +1,110 @@
 <?php
+/* Translated by stranger @ www.impresscms.ir since version : 3.16
+   Voltan had made another translation for version : 3.02 but this work is totally different (due to too many translating mistakes of him ...)
+*/
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'protector' ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
-
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-07-30 16:31:33
-define($constpref.'_BANIP_TIME0','Banned IP suspension time (sec)');
-define($constpref.'_OPT_BIPTIME0','Ban the IP (moratorium)');
-define($constpref.'_DOSOPT_BIPTIME0','Ban the IP (moratorium)');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-29 03:36:15
-define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions');
-
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","ماژول امنيتي پروتکتور");
+define($constpref."_NAME","محافظ سایت");
 
 // A brief description of this module
-define($constpref."_DESC","اين ماژول سايت زوپس شما را در برابر حملات ويروسي و لینک های داس نفوذ به پایگاه داده ها و ... محافظت ميکند.");
+define($constpref."_DESC","این ماژول سایت شما را در برابر حملات مختلف و پیچیده ای مانند DoS ، نفوذ SQL و سایر متغیر های آلوده محافظت می کند.");
 
 // Menu
-define($constpref."_ADMININDEX","مرکز حفاظت");
-define($constpref."_ADVISORY","مشاوره ی امنیتی");
-define($constpref."_PREFIXMANAGER","مدیریت پیشوند نام جدول های پایگاه داده ها");
+define($constpref."_ADMININDEX","منطقه حفاظتی");
+define($constpref."_ADVISORY","مشاور امنیتی");
+define($constpref."_PREFIXMANAGER","مدیریت پیشوندها");
+define($constpref.'_ADMENU_MYBLOCKSADMIN','دسترسی ها') ;
 
 // Configs
-define($constpref.'_GLOBAL_DISBL','غیر فعال کردن موقت حفاظت');
-define($constpref.'_GLOBAL_DISBLDSC','تمام حفاظت ها به طور موقت غیر فعال میشود.<br />فراموش نکنید بعد از رفع نقص دوباره این گزینه را فعال کنید');
+define($constpref.'_GLOBAL_DISBL','غیرفعال کردن موقت');
+define($constpref.'_GLOBAL_DISBLDSC','تمامی فعالیت های حفاظتی موقتا غیرفعال می شوند.<br />فراموش نکنید که پس از رفع مشکل این گزینه را غیر فعال کنید');
 
-define($constpref.'_RELIABLE_IPS','IP های قابل اطمینان');
-define($constpref.'_RELIABLE_IPSDSC','IP های که به آن ها اطمینان دارید به وصیله ی| از هم جدا کنید .علامت ^ ابتدای رشته های همسان را مشخص میکند, علامت $ انتهای رشته های همسان را مشخص میکند.'); 
+define($constpref.'_RELIABLE_IPS','IP های معتبر');
+define($constpref.'_RELIABLE_IPSDSC','IP های معتبر خود را با | از هم جدا کنید. دستور ^ ابتدای ریشه های همسان را پیدا می کند، دستور $ انتهای ریشه های همسان را پیدا می کند.');
 
-define($constpref.'_LOG_LEVEL','درجه ثبت کردن وقایع');
+define($constpref.'_LOG_LEVEL','میزان ثبت گزارشات');
 define($constpref.'_LOG_LEVELDSC','');
 
-define($constpref.'_LOGLEVEL0','none');
-define($constpref.'_LOGLEVEL15','Quiet');
-define($constpref.'_LOGLEVEL63','quiet');
-define($constpref.'_LOGLEVEL255','full');
+define($constpref.'_BANIP_TIME0','مدت زمان تعلیق IP های غیر معتبر (ثانیه)');
 
-define($constpref.'_HIJACK_TOPBIT','تعداد بیت های IP که در هر جلسه محافظت میشود');
-define($constpref.'_HIJACK_TOPBITDSC','Anti Session Hi-Jacking( مقابله با دزدی جلسه):<br />به طور پیش فرض 32(bit). (تمام بیت ها حفاظت شده است)<br />وقتی IP شما پایدار نیست, محدوده ی IP خود را باعددی مشخص از بیت ها تنظیم کنید.<br /> اگر IP شما در محدوده ای بین 192.168.0.0 تا 192.168.0.255 میتواند تغییر کنید عدد 24 ( بیت) را انتخواب کنید <br /><br />Session Hi-Jacking(دزدی جلسه): در اصل ترکیب ماهرانه ای است از دو نوع حمله ی دزدین IP و استراق سمع با این روش حمله یک مهاجم خودش را به جای شما جا زده و اقدام به ادامه دادن کار ها و فعالیت های شما در سایت مطابق خواسته ی خود میکند البته در حدی که شما دسترسی دارید');
-define($constpref.'_HIJACK_DENYGP','گره های که IP اجازه ی تغییر در جلسه ( بین کاربر و زوپس) را ندارد');
-define($constpref.'_HIJACK_DENYGPDSC','Anti Session Hi-Jacking( مقابله با دزدی جلسه)::<br />گروه های که IP شان در جلسه بین زوپس و کاربر نباید تغییر کند انتخواب کنید.<br />(پیشنهاد میشود فقط برای وب مستر ها روشن باشد.)<br /><br />Session Hi-Jacking(دزدی جلسه): در اصل ترکیب ماهرانه ای است از دو نوع حمله ی دزدین IP و استراق سمع با این روش حمله یک مهاجم خودش را به جای شما جا زده و اقدام به ادامه دادن کار ها و فعالیت های شما در سایت مطابق خواسته ی خود میکند البته در حدی که شما دسترسی دارید');
-define($constpref.'_SAN_NULLBYTE','پاک سازی بایت ها خالی');
-define($constpref.'_SAN_NULLBYTEDSC','اگر در کارکتر های پایان بخش به طور مکرر از "\\0" استفاده شده بود  این حرکت  یک حمله ثبت شود<br />بایت های خالی با  فشار دادن کلید  space تغییر میکند<br />(به شدت توصیه میشود این گزینه روشن باشد)');
-define($constpref.'_DIE_NULLBYTE','اگر بایت های خالی پیدا شد کاربر از سایت  بیرون انداخته شود');
-define($constpref.'_DIE_NULLBYTEDSC','The terminating character "\\0" is often used in malicious attacks.<br />(قویا توصیه میشود این گزینه روشن باشد)');
-define($constpref.'_DIE_BADEXT','اگر کاربر فایل   بد  بارگذای کرد از سایت بیرون انداخته شود');
-define($constpref.'_DIE_BADEXTDSC','اگر به فایل بارگذاری شده به وسیله ی کاربر لینک .php بدی الحاق شده بود  , این ماژول کاربر را از سایت زوپس شما بیرون می اندازد.<br />اگر شما بکرات فایل های php  به ماژول های PukiWiki و B-Wiki اضافه میکنید این گزینه را خاموش کنید');
-define($constpref.'_CONTAMI_ACTION','نوع عملکرد اگر یک  آلودگی پیدا شد');
-define($constpref.'_CONTAMI_ACTIONDS','Select the action when someone tries to contaminate system global variables into your XOOPS.<br />(پیشنهاد میشود بر روی صفحه ی سفید قرار دهید)');
-define($constpref.'_ISOCOM_ACTION','Action if an isolated comment-in is found');
-define($constpref.'_ISOCOM_ACTIONDSC','جلوگیری ازوارد کردن داده های خطر ناک به SQL:<br />این گزینه را فعال کنید  برای وقتی که  علامت ها "/*" به صورت منفرد پیدا شد<br />معنی " پاک سازی داده ها از کد های خطرناک "در اینجا این است که علامت های "*/" جداگانه در جدول های پایگاه داده ها اضافه شوند<br />(سفارش میشود تنظیمها بر روی ((پاک سازی داده ها از کد های خطرناک)) باشد)');
-define($constpref.'_UNION_ACTION','Action if a UNION is found');
-define($constpref.'_UNION_ACTIONDSC','جلوگیری از وارد کردن داده های خطر ناک به SQL:<br />نوع عملکرد را وقتی ترکیب هم جنسی از پیوند به SQL پیدا شد مشخص کنید<br />معنی "پاک سازی داده ها از کد های خطرناک" این است کهunion" " را به "uni-on" تغییر میدهد . یعنی اتحاد ترکیبات هم  جنس را  از بین میبرد و مانع ورود داده های خطر ناک به پایگاه داده ها گردد<br />(سفارش میشود تنظیمها بر روی ((پاک سازی داده ها از کد های خطرناک)) باشد)');
-define($constpref.'_ID_INTVAL','مقدار های عددی را حتما به متغیر های عددی تفسیر کن');
-define($constpref.'_ID_INTVALDSC','تمام در خواست های که نام "*id" را دارند یک عدد صحیح در نظر گرفته شود.یعنی مانع قرار دادن هر چیز به جای عدد در جلوی  id  میشود<br />این گزینه از فرم شما در برابر   وارد کردن بعضی  از داده های XSS و SQL محافظت میکند<br />این گزینه در حالت پیش فرض روشن میباشد اما ممکن است  باعث بروز مشکل در برخی از ماژول ها شود.');
-define($constpref.'_FILE_DOTDOT','Protection from Directroy Traversals');
-define($constpref.'_FILE_DOTDOTDSC','It eliminates ".." from all requests looks like Directory Traversals');
+define($constpref.'_LOGLEVEL0','هیچ');
+define($constpref.'_LOGLEVEL15','آرام');
+define($constpref.'_LOGLEVEL63','بی صدا');
+define($constpref.'_LOGLEVEL255','کامل');
 
-define($constpref.'_BF_COUNT','Anti Brute Force');
-define($constpref.'_BF_COUNTDSC','تعداد دفعاتی را که کاربر مهمان میتواند نام کاربری و پسورد خود رادر مدت 10 دقیقه وارد کند  مشخص کنید اگر او بعد از گذشت این زمان موفق به ورود (login) نشد IP او توسط سیستم بسته شده است<br /><br />این روش هک روشی است که در آن هکر یک سری کلمات را به عنوان پسورددر نرم افزار هک وارد کرده و این کلمات به ترتیب به عنوان پسورد کاربر چک میشود');
+define($constpref.'_HIJACK_TOPBIT','تعداد بیت های IP ها برای هر نشست');
+define($constpref.'_HIJACK_TOPBITDSC','مقابله با دزدی جلسه :<br />پیش فرض 32(بیت) می باشد. (تمام بیت ها حفاظت می شوند)br />وقتی IP شما پایدار نیست, محدوده ی IP خود را باعددی مشخص از بیت ها تنظیم کنید..<br />(برای مثال) اگر IP شما در محدوده ای بین 192.168.0.0 تا 192.168.0.255 میتواند تغییر کنید عدد 24 ( بیت) را بنویسید');
+define($constpref.'_HIJACK_DENYGP','گروه هایی که IP آنها در یک نشست نباید تغییر کند');
+define($constpref.'_HIJACK_DENYGPDSC','مقابله با دزدی جلسه :<br />گروه هایی را که IP آنها در یک نشست نباید تغییر کند را انتخاب کنید.<br />این نوع تهاجم در اصل ترکیب ماهرانه ی دو تهاجم: دزدیدن IP شما و استراق سمع اطلاعات شما می باشد، با این روش مهاجم خود را جای شما زده و اقدام به ربودن اطلاعات شما کرده و دسترسی به حساب کاربری را خواهد داشت. با این نوع حمله مهاجم می تواند تا آن حد که شما در سایت دسترسی دارید، در سایت شما اقدا به خرابکاری کند.<br />(پیشنهاد می کنم برای مدیران سایت روشن باشد.)');
+define($constpref.'_SAN_NULLBYTE','پاکسازی بایت های خالی');
+define($constpref.'_SAN_NULLBYTEDSC','اگر کاراکتر پایانی "\\0" باشد معمولا نوعی حمله محسوب می شود.<br />با روشن کردن این گزینه بایت های خالی به فاصله تغییر می یابند.<br />(به شدت توصیه می کنم که بگذارید روشن باشد)');
+define($constpref.'_DIE_NULLBYTE','اگر بایت های خالی پیدا شد، کاربر از سایت بیرون انداخته شود');
+define($constpref.'_DIE_NULLBYTEDSC','اگر کاراکتر پایانی "\\0" باشد معمولا نوعی حمله محسوب می شود.<br />(به شدت توصیه می کنم که بگذارید روشن باشد)');
+define($constpref.'_DIE_BADEXT','اگر کاربر فایل غیرمجاز بارگذاری کرد از سایت بیرون انداخته شود');
+define($constpref.'_DIE_BADEXTDSC','اگر کسی تلاش کند پرونده هایی با پیشوندهای غیر مجاز مانند .php را بارگذاری کند، این ماژول آن کاربر را از سایت بیرون می اندازد.<br />اگر شما از ماژول هایی مانند B-Wiki یا PukiWikiMod استفاده می کنید که نیاز به بارگذاری دایم فایل های php دارند، این گزینه را خاموش کنید.');
+define($constpref.'_CONTAMI_ACTION','عملکرد در صورت یافتن آلودگی');
+define($constpref.'_CONTAMI_ACTIONDS','لطفا عملی را کی می خواهید سیستم در مقابل کاربری که سعی در وارد کردن ارزش های آلوده به سیستم دارد را انتخاب کنید.<br />(گزینه پیشنهادی انتخاب صفحه سفید می باشد)');
+define($constpref.'_ISOCOM_ACTION','عملکرد در صورت یافتن نظرات محافظت شده');
+define($constpref.'_ISOCOM_ACTIONDSC','جلوگیری از نفوذ به SQL :<br />عمکلکردی را انتخاب کنید تا در صورتی که یک "/*" محافظت شده پیدا شد، اعمال شود.<br />"پاکسازی" یعنی اضافه کردن یک "*/" دیگر، در انتها.<br />(گزینه پیشنهادی انتخاب پاکسازی می باشد)');
+define($constpref.'_UNION_ACTION','عملکرد در صورتی که یک UNION پیدا شد');
+define($constpref.'_UNION_ACTIONDSC','جلوگیری از نفوذ به SQL :<br />عمکلکردی را انتخاب کنید تا در صورتی که یک ترکیب مانند UNION در SQL پیدا شد، اعمال شود.<br />"پاکسازی" یعنی تغییر "union" به "uni-on" برای حفاظت بیشتر.<br />(گزینه پیشنهادی انتخاب پاکسازی می باشد)');
+define($constpref.'_ID_INTVAL','تغییر متغیر های عددی به ارزش هایی مانند شماره شناسه (id)');
+define($constpref.'_ID_INTVALDSC','تمامی درخواست های نامگذاری شده با "*id" به صورت یک عدد لحاظ می شود.<br />این گزینه شما را از حمله هایی از نوع XSS یا نفوذ به SQL محافظت می کند<br />درست است که من پیشنهاد می کنم این گزینه روشن باشد،ولی ممکن است با بعضی ماژول ها ناسازگار باشد.');
+define($constpref.'_FILE_DOTDOT','جلوگیری از پیمایش شاخه (پوشه) ها');
+define($constpref.'_FILE_DOTDOTDSC','تمامی ".." ها را از درخواست هایی که شبیه به پیمایش شاخه (پوشه) ها باشد را حذف می کند');
 
-define($constpref.'_DOS_SKIPMODS','ماژول های که در برابر حملات DoS/Crawler چک نمیشوند');
-define($constpref.'_DOS_SKIPMODSDSC','نام ماژول ها را با | از هم جدا کنید.همچنین این اجازه برای ماژول ها ی چپ مفید خواهد بود.<br />منظور از Crawler روبات های خزنده ی موتور های جستجوگر میباشد');
+define($constpref.'_BF_COUNT','جلوگیری از ورود بی رحمانه');
+define($constpref.'_BF_COUNTDSC','لطفا تعداد دفعاتی که کاربران میهمان مجاز به تلاش برای ورود به سایت هستند را انتخاب کنید. اگر کسی بعد از این تعداد تلاش نتواند وارد سایت شود IP او بسته خواهد شد.');
 
-define($constpref.'_DOS_EXPIRE','Watch time for high loadings (sec)');
-define($constpref.'_DOS_EXPIREDSC','This value specifies the watch time for high-frequent reloading (F5 attack) and high loading crawlers.');
+define($constpref.'_DOS_SKIPMODS','ماژول هایی که می خواهید در برابر کنترل گر داس/خزنده ها (DoS/Crawlers) چک نشوند');
+define($constpref.'_DOS_SKIPMODSDSC','نام ماژول ها را با یک | از هم جدا کنید. این گزینه به درد ماژول های گفتگو و چت می خورد.');
 
-define($constpref.'_DOS_F5COUNT','تعداد ریفریش ها با F5 که یک حمله حساب میشود');
-define($constpref.'_DOS_F5COUNTDSC','از حملات DoS پیشگیری میکند.<br />تعداد مجاز ((دوباره بارگذاری کردن)) صفحات را مشخص کنید  بیش از این تعداد حمله  حساب میشود.');
-define($constpref.'_DOS_F5ACTION','عکس العمل در برابر حمله با F5');
+define($constpref.'_DOS_EXPIRE','مدت زمان مجاز برای بارگیری (لود) بیش از حدمجاز (ثانیه)');
+define($constpref.'_DOS_EXPIREDSC','این ارزش مشخص کننده زمان صبر کردن محافظ برای لود شدن های بسیار بالا در آن واحد (تهاجم با F5) خزنده هایی با بارگیری بیش از حد مجاز می باشد.');
 
-define($constpref.'_DOS_CRCOUNT','شمار غیر صحیح روبات های خزنده');
-define($constpref.'_DOS_CRCOUNTDSC','جلو گیری کردن از لود بیش از حد  به وسیله ی روبات های خزنده ی موتور های جستجو.<br />عدد وارد شده تعداد  مناسب ورود ربات های جستگور به سایت میباشد تعداد بیش از این یک حرکت غلط حساب میشود.');
-define($constpref.'_DOS_CRACTION','عکس العمل در برابر لود بیش از حد به وسیله ی روبات های خزنده ی موتور های جستجو');
+define($constpref.'_DOS_F5COUNT','شمارنده برای تهاجم با F5');
+define($constpref.'_DOS_F5COUNTDSC','جلوگیری از حملات DoS.<br />این ارزش مشخص کننده تعداد دفعات باز بینی یا بارگیری (لود) مجاز مجدد صفحه می باشد.');
+define($constpref.'_DOS_F5ACTION','عملکرد در مقابل تهاجم با F5');
 
-define($constpref.'_DOS_CRSAFE','Welcomed User-Agent');
-define($constpref.'_DOS_CRSAFEDSC','A perl regex pattern for User-Agent.<br />If it matches, the crawler is never considered as a high loading crawler.<br />eg) /(msnbot|Googlebot|Yahoo! Slurp)/i');
+define($constpref.'_DOS_CRCOUNT','حداکثر روبات های خزنده مجاز');
+define($constpref.'_DOS_CRCOUNTDSC','جلوگیری از لود بیش از حد توسط روبات های خزنده<br />این ارزش مشخص کننده تعداد دفعات مجاز برای دسترسی روبات ها به سایتتان می باشد.');
+define($constpref.'_DOS_CRACTION','عملکرد در مقابل بارگیری بیش از حد مجاز روبات های جستجوگر');
 
-define($constpref.'_OPT_NONE','هیچکدام( فقط گزارش)');
-define($constpref.'_OPT_SAN','پاک سازی داده ها از کد های خطرناک ');
-define($constpref.'_OPT_EXIT','صفحه ی سفید');
-define($constpref.'_OPT_BIP','بستن IP');
+define($constpref.'_DOS_CRSAFE','روبات های خزنده مجاز');
+define($constpref.'_DOS_CRSAFEDSC','الگویی بکار رفته برای جدا سازی روبات های خزنده.<br />اگرخزنده در لیست روبرو باشد، تحت هیچ شرایطی جزو روبات های با لود بیش از حد مجاز قرار نمی گیرد.<br />(مثال) /(msnbot|Googlebot|Yahoo! Slurp)/i');
 
-define($constpref.'_DOSOPT_NONE','هیچکدام( فقط گزارش)');
-define($constpref.'_DOSOPT_SLEEP','Sleep');
-define($constpref.'_DOSOPT_EXIT','صفحه ی سفید');
-define($constpref.'_DOSOPT_BIP','بستن IP');
-define($constpref.'_DOSOPT_HTA','دفع کردن به وسیله .htaccess(آزمایشی)');
+define($constpref.'_OPT_NONE','هیچ کاری نکن (فقط ثبت گزارش)');
+define($constpref.'_OPT_SAN','پاکسازی');
+define($constpref.'_OPT_EXIT','صفحه سفید');
+define($constpref.'_OPT_BIP','بستن IP (بی پایان)');
+define($constpref.'_OPT_BIPTIME0','بستن IP (مدت دار)');
 
-define($constpref.'_BIP_EXCEPT','گروه های که هیچ وقت جز IP بد ثبت نمیشوند');
-define($constpref.'_BIP_EXCEPTDSC','کاربرانی که جز گروه انتخوابی شما هستند هیچ وقت بن نمیشوند.<br />(پیشنهاد میشود فقط برای وب مستر ها روشن باشد)');
+define($constpref.'_DOSOPT_NONE','هیچ کاری نکن (فقط ثبت گزارش)');
+define($constpref.'_DOSOPT_SLEEP','خوابیدن');
+define($constpref.'_DOSOPT_EXIT','صفحه سفید');
+define($constpref.'_DOSOPT_BIP','بستن IP (بی پایان)');
+define($constpref.'_DOSOPT_BIPTIME0','بستن IP (مدت دار)');
+define($constpref.'_DOSOPT_HTA','دفع با .htaccess (آزمایشی)');
 
-define($constpref.'_DISABLES','خصوصيات خطرناک در زوپس رو غير فعال کن');
+define($constpref.'_BIP_EXCEPT','گروهی که هیچ وقت در لیست IP های غیرمجاز قرار نمی گیرد');
+define($constpref.'_BIP_EXCEPTDSC','کاربران گروه(های) انتخابی شما هیچ وقت دسترسیشان به سایت بسته نمی شود.<br />(پیشنهاد می کنم برای مدیران روشن باشد.)');
 
-define($constpref.'_BIGUMBRELLA','فعال کردن anti-XSS( محافظ بزرگ)');
-define($constpref.'_BIGUMBRELLADSC','این گزینه از شما در برابر اکثر حمله های که  بر اساس آسیب پذیری XSS برنامه ریزی شده اند محافظت میکند. اما 100% نیست<br /><br />حملات XSS شبیه به حملات تزیق اسکریپ میباشد و هدف اصلی از آن هک کردن سایت نیست بلکه حمله به کاربران است در این نوع حمله مهاجم کد های خطر ناکی را در صفحات سایت وارد میکند که این کد ها کامپیوتر کاربر را آلوده میکند');
+define($constpref.'_DISABLES','غیرفعال کردن خصوصیات خطرناک در سایت');
 
-define($constpref.'_SPAMURI4U','anti-SPAM: تعداد لینک ها برای کابر معمولی');
-define($constpref.'_SPAMURI4UDSC','اگر به تعداد عدد مشخص شده در کادر مقابل لینک در پست کاربر پیدا شد با پست او به عنوان هرز نامه برخورد گردد. با انتخاب صفر این گزینه را غیر فعال کنید.');
-define($constpref.'_SPAMURI4G','anti-SPAM: تعدا لینک ها برای گروه ها');
-define($constpref.'_SPAMURI4GDSC','اگر به تعداد عدد مشخص شده در کادر مقابل لینک در پست گروه ها پیدا شد با پست او به عنوان هرز نامه برخورد گردد. با انتخاب صفر این گزینه را غیر فعال کنید.');
+define($constpref.'_BIGUMBRELLA',' فعال کردن محافظت در برابر تهاجم با XSS (چتر بزرگ محافظت)');
+define($constpref.'_BIGUMBRELLADSC','این گزینه از شما در برابر اکثر تهاجمات XSS محافظت می کند. اما 100% نمی تواند شما را تضمین کند.<br />تهاجمات XSS شبیه به تهاجم های تزیق اسکریپ میباشد و هدف اصلی از آن هک کردن سایت نیست بلکه حمله به کاربران است در این نوع حمله مهاجم کد های خطر ناکی را در صفحات سایت وارد میکند که این کد ها رایانه ی بازدیدکنندگان را آلوده میکند.');
+
+define($constpref.'_SPAMURI4U','محافظ-هرزنامه : آدرس ها برای کاربران عضو');
+define($constpref.'_SPAMURI4UDSC','اگر تعداد لینک هایی که در پیام های کاربر عضوی بغیر از مدیران سایت بیش از حد مجاز اعلام شده باشد، آن پیام به عنوان یک هرزنامه در نظر گرفته می شود. 0 به معنای غیر فعال کردن این گزینه می باشد.');
+define($constpref.'_SPAMURI4G','محافظ-هرزنامه : آدرس ها برای کاربران میهمان');
+define($constpref.'_SPAMURI4GDSC','اگر تعداد لینک هایی که در پیام های کاربر میهمانی بیش از حد مجاز اعلام شده باشد، آن پیام به عنوان یک هرزنامه در نظر گرفته می شود. 0 به معنای غیر فعال کردن این گزینه می باشد.');
 
 }
 

@@ -30,7 +30,7 @@ function b_pico_tags_show( $options )
 			'rank' => $rank ++ ,
 		) ;
 	}
-	ksort( $tags , SORT_STRING ) ;
+	//ksort( $tags , SORT_STRING ) ;
 	$tags4assign = array_values( $tags ) ;
 
 	// module config

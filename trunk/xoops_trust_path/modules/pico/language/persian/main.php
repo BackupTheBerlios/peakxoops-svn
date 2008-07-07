@@ -1,73 +1,33 @@
 <?php
 
-
-
-
-
-
-
-
-
-
-
-// Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:11
-define('_MD_PICO_TH_TAGS','Tags');
-define('_MD_PICO_TH_TAGSDSC','separate tags by a space');
-define('_MD_PICO_FMT_QUERYTAGTITLE','Tag: %s');
-define('_MD_PICO_FMT_QUERYTAGDESC','Contents tagged %s');
-define('_MD_PICO_ERR_NOCONTENTMATCHED','No contents');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:46
-define('_MD_PICO_CSVENCODING','UTF-8');
-define('_MD_PICO_ERR_LOCKEDCONTENT','این صفحه قفل است');
-define('_MD_PICO_LABEL_LOCKED','قفل (فقط مدیر میتواند  ویرایش / حذف کند)');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-06-15 05:03:01
-define('_MD_PICO_WAITINGRELEASE','منتظر برای انتشار');
-define('_MD_PICO_EXPIRED','منقضی شد');
-define('_MD_PICO_LABEL_SPECIFY_DATETIME','مشخص کردن مدت زمان');
-define('_MD_PICO_BTN_SUBMITSAVEAS','ذخیره در یک سند جدید');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-05-29 16:39:06
-define('_MD_PICO_ONOFF','ON/OFF');
-define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','اگر شما ویژگی ها را لغو کردید, بنویسید یک خط مثل:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-05-02 18:27:44
-define('_MD_PICO_JUMPTOTOPOFPICOBODY','برو به بالای صفحه');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-04-21 04:44:07
-define('_MD_PICO_CONTENTS_TOTAL','مجموع اسناد');
-define('_MD_PICO_SUBCATEGORIES_TOTAL','مجموع زیر شاخه ها');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-23 05:52:07
-define('_MD_PICO_DOWNLOADIT','دانلود سند');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-20 06:23:18
-define('_MD_PICO_DIFF2NOW','diff to now');
-define('_MD_PICO_DIFFFROMPREV','diff from previous');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-13 04:23:22
-define('_MD_PICO_DELETEDCONTENTS','حذف سند ها');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-03-10 07:13:28
-define('_MD_PICO_BYTE','byte');
-define('_MD_PICO_HISTORY','آرشیو تغییرات');
-define('_MD_PICO_REFERIT','مراجعه به سند');
+//
+// CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
+//
 
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه ها');
+define('_MD_PICO_DELETEDCONTENTS','حذف سند ها');
 define('_MD_PICO_MENU','منو');
 define('_MD_PICO_CREATED','ساخته شده در');
 define('_MD_PICO_MODIFIED','ویرایش  شده در');
+define('_MD_PICO_BYTE','بایت');
+define('_MD_PICO_HISTORY','آرشیو تغییرات');
+define('_MD_PICO_DIFF2NOW','تفاوت با فعلی');
+define('_MD_PICO_DIFFFROMPREV','تفاوت با قبلی');
+define('_MD_PICO_REFERIT','مراجعه به سند');
+define('_MD_PICO_DOWNLOADIT','دانلود سند');
 define('_MD_PICO_VIEWED','بازدید ها');
 define('_MD_PICO_NEXT','بعدی');
 define('_MD_PICO_PREV','قبلی');
 define('_MD_PICO_CATEGORYINDEX','بالا این شاخه');
 define('_MD_PICO_NOSUBJECT','(بدون عنوان)');
-define('_MD_PICO_WAITINGAPPROVAL','waiting approval');
-define('_MD_PICO_WAITINGREGISTER','waiting new');
-define('_MD_PICO_WAITINGUPDATE','waiting update');
+define('_MD_PICO_WAITINGRELEASE','منتظر برای انتشار');
+define('_MD_PICO_EXPIRED','منقضی شد');
+define('_MD_PICO_WAITINGAPPROVAL','در انتظار تایید');
+define('_MD_PICO_WAITINGREGISTER','در انتظار جدید');
+define('_MD_PICO_WAITINGUPDATE','در انتظار به روز رسانی');
 define('_MD_PICO_REGISTERED_AUTOMATICALLY','اتوماتیک');
+define('_MD_PICO_ONOFF','روشن / خاموش');
 
 define('_MD_PICO_CATEGORY','شاخه');
 define('_MD_PICO_CATEGORIES','شاخه ها');
@@ -89,6 +49,8 @@ define('_MD_PICO_LINK_PRINTERFRIENDLY','پرینتر دوستانه');
 define('_MD_PICO_LINK_TELLAFRIEND','تماس با دوستان');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','یک مقاله در %s پیدا شد');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"من مقاله ی مورد علاقه ی شما را در %s پیدا کرده ام");
+define('_MD_PICO_JUMPTOTOPOFPICOBODY','برو به بالای صفحه');
+define('_MD_PICO_CSVENCODING','UTF-8');
 
 
 define('_MD_PICO_ERR_SQL','یک خطای SQL رخ داده در:');
@@ -97,11 +59,12 @@ define('_MD_PICO_ERR_PIDLOOP','خطا حلقه اصلی/ وابسته');
 
 define('_MD_PICO_MSG_UPDATED','با موفقیت به روز شد');
 
-define('_MD_PICO_ERR_READCATEGORY','شما به شاخه ی انتخوابی دسترسی ندارید');
+define('_MD_PICO_ERR_READCATEGORY','شما به شاخه ی انتخابی دسترسی ندارید');
 define('_MD_PICO_ERR_CREATECATEGORY','شما نمیتوانید شاخه بسازید');
 define('_MD_PICO_ERR_CATEGORYMANAGEMENT','شما نمیتوانید این شاخه را مدیریت کنید');
-define('_MD_PICO_ERR_READCONTENT','شما به سند انتخوابی دسترسی ندارید');
+define('_MD_PICO_ERR_READCONTENT','شما به سند انتخابی دسترسی ندارید');
 define('_MD_PICO_ERR_CREATECONTENT','شما نمیتوانید سند بسازید');
+define('_MD_PICO_ERR_LOCKEDCONTENT','این صفحه قفل است');
 define('_MD_PICO_ERR_EDITCONTENT','شما نمتوانید این سند را ویرایش کنید');
 define('_MD_PICO_ERR_DELETECONTENT','شما نمیتوانید این سند را حذف کنید');
 define('_MD_PICO_ERR_PERMREADFULL','شما نمیتوانید همه ی این سند را مطالعه کنید');
@@ -130,6 +93,8 @@ define('_MD_PICO_TH_WEIGHT','وزن چینش');
 define('_MD_PICO_TH_CONTENTOPTIONS','تنظیمات');
 define('_MD_PICO_LABEL_USECACHE','استفاده از کش');
 define('_MD_PICO_NOTE_USECACHEDSC','برای پیام های دینامک غیر فعال و برای پیام های قابل جستجو فعال باشد');
+define('_MD_PICO_LABEL_LOCKED','قفل (فقط مدیر میتواند  ویرایش / حذف کند)');
+define('_MD_PICO_LABEL_SPECIFY_DATETIME','مشخص کردن مدت زمان');
 define('_MD_PICO_LABEL_VISIBLE','قابل استفاده');
 define('_MD_PICO_LABEL_SHOWINNAVI','نمایش در راهبر');
 define('_MD_PICO_LABEL_SHOWINMENU','نمایش در منو');
@@ -139,15 +104,19 @@ define('_MD_PICO_TH_CATEGORYDESC','توضیحات');
 define('_MD_PICO_TH_CATEGORYPARENT','منبا( منشا)');
 define('_MD_PICO_TH_CATEGORYWEIGHT','وزن چینش');
 define('_MD_PICO_TH_CATEGORYOPTIONS','تنظیمات');
+define('_MD_PICO_CONTENTS_TOTAL','مجموع اسناد');
+define('_MD_PICO_SUBCATEGORIES_TOTAL','مجموع زیر شاخه ها');
 define('_MD_PICO_SUBCATEGORY_COUNT','تعداد زیر شاخه');
 define('_MD_PICO_MSG_CONFIRMDELETECATEGORY','تمام پیام های این شاخه پاک میشود آیا موافقید؟');
 define('_MD_PICO_MSG_CONFIRMDELETECONTENT','آیا موافقید؟');
-define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','شاخه ی اصلی یک شاخه ی خاص میباشد. شما میتوانید  تنظیمات آن را در ویژگی های ماژول تغییر دهید.');
+//define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','شاخه ی اصلی یک شاخه ی خاص میباشد. شما میتوانید  تنظیمات آن را در ویژگی های ماژول تغییر دهید.');
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','نمایش کادر متن');
 define('_MD_PICO_LABEL_INPUTHELPER','ادیتور خاموش/ روشن');
 define('_MD_PICO_BTN_SUBMITEDITING','ثبت این فرم');
+define('_MD_PICO_BTN_SUBMITSAVEAS','ذخیره در یک سند جدید');
 define('_MD_PICO_BTN_COPYFROMWAITING','ثبت اطلاعات منتظر ');
 define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','اطلاعات شما در این صفحه ویرایش میشود. آیا موافقید؟');
+define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','اگر شما ویژگی ها را لغو کردید, بنویسید یک خط مثل:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
 
 
 // vote to post
@@ -163,7 +132,7 @@ define('_MD_PICO_VOTEPOINTDSCWORST','غیر مفید ');
 
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','کد های php');
-define('_MD_PICO_FILTERS_EVALDESC','It will be the parameter of eval() function');
+define('_MD_PICO_FILTERS_EVALDESC','این پارامتر تابع eval() خواهد بود ');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSTITLE','آزاد کردن کراکتر های HTML خاص');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSDESC','اگر شما از کد های BB استفاده میکنید .  ابتدا باید محل قرار گیری را مشخص کنید');
 define('_MD_PICO_FILTERS_TEXTWIKITITLE','PEAR TextWiki');

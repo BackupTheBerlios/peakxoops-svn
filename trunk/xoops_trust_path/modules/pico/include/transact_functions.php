@@ -166,8 +166,15 @@ function pico_sync_tags( $mydirname )
 {
 	$db =& Database::getInstance() ;
 
-	$result = $db->query( "SELECT content_id,tags FROM ".$db->prefix($mydirname."_contents") ) ;
+	// get all tags in tags table
 	$all_tags_array = array() ;
+	$result = $db->query( "SELECT label FROM ".$db->prefix($mydirname."_tags") ) ;
+	while( list( $label ) = $db->fetchRow( $result ) ) {
+		$all_tags_array[ $label ] = array() ;
+	}
+
+	// count tags from contents table
+	$result = $db->query( "SELECT content_id,tags FROM ".$db->prefix($mydirname."_contents") ) ;
 	while( list( $content_id , $tags ) = $db->fetchRow( $result ) ) {
 		foreach( explode( ' ' , $tags ) as $tag ) {
 			if( trim( $tag ) == '' ) continue ;
@@ -175,6 +182,7 @@ function pico_sync_tags( $mydirname )
 		}
 	}
 
+	// delete/insert or update tags table
 	foreach( $all_tags_array as $tag => $content_ids ) {
 		$label4sql = mysql_real_escape_string( $tag ) ;
 		$content_ids4sql = implode( ',' , $content_ids ) ;

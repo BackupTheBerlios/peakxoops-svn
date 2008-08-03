@@ -30,7 +30,9 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 =CHANEGLOG=
 
 
-
+HD-2.15 (2008-08-04)
+- removed content:encoded from rss.html
+- modified some language files suin.jp to xoops.suinyeze.com
 - fixed boundary bug in archive view (thx wahyu)
 - fixed imgurl for topics cannnot removed (thx Tom_G3X)
 

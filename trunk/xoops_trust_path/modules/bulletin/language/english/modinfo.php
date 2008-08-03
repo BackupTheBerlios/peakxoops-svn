@@ -1,4 +1,4 @@
-<?php /* English Translation by Marcelo Yuji Himoro <http://yuji.ws> & Suin <http://suin.jp>*/
+<?php /* English Translation by Marcelo Yuji Himoro <http://yuji.ws> & Suin <http://xoops.suinyeze.com/>*/
 // Module Info
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'bulletin' ;

@@ -58,10 +58,10 @@ define('_AM_DESTINATION_OF_STORIES','カテゴリに属する記事の送り先');
 define('_AM_FOLLOW_TOPICS_IS_DELETED','以下のカテゴリは削除されます。');
 
 
-define('_AM_CREDIT','Bulletin(www.suin.jp)');
+define('_AM_CREDIT','Bulletin(xoops.suinyeze.com)');
 // 以下の行は翻訳者の名前やURLなどに変更できます。以下は管理画面に表示されます。
 // It is able to change a following line into the TRANSLATER's name and website. Follow appears at admin page.
-define('_AM_TRANSLATER','Japanese patch(www.suin.jp)');
+define('_AM_TRANSLATER','Japanese patch(xoops.suinyeze.com)');
 // example : define('_AM_TRANSLATER','English patch(www.english-tranlater.com)');
 
 ?>

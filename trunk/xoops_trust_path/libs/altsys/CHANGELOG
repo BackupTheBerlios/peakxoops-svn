@@ -1,5 +1,8 @@
 [xlang:en]
 
+v0.60 (2008-08-07)
+- fixed warning by assert() in Text_Diff
+
 v0.59 (2008-05-22)
 - fixed css for admin with XCL2.1 and "admin in theme"
 - modified the compatibility of blocksadmin with XCL2.1
@@ -140,6 +143,9 @@ v0.10 (2006-05-19)
 
 [/xlang:en]
 [xlang:ja]
+
+v0.60 (2008-08-07)
+- Text_Diffが吐くassert()によるWarningをとりあえず消した
 
 v0.59 (2008-05-22)
 - XCL2.1における管理画面テーマで、CSSが読み込まれない問題の改善

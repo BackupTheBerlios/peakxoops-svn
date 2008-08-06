@@ -362,7 +362,7 @@ $modversion['config'][] = array(
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'text' ,
 	'default'		=> 'xoopsdhtml' ,
-	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'common/spaw' => 'common_spaw' , 'common/fckeditor' => 'common_fckeditor' )
+	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'common/fckeditor' => 'common_fckeditor' )
 ) ;
 
 $modversion['config'][] = array(

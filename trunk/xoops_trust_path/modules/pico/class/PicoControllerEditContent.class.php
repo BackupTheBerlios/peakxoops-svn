@@ -80,11 +80,6 @@ function execute( $request )
 	}
 	$this->assign['xoops_breadcrumbs'] = $breadcrumbsObj->getXoopsbreadcrumbs() ;
 
-	// editor (wysiwyg etc)
-	$editor_assigns = $this->getEditorAssigns( 'body' , $content_data['body_raw'] ) ;
-	$this->assign['body_wysiwyg'] = $editor_assigns['body'] ;
-	$this->html_header .= $editor_assigns['header'] ;
-
 	// misc assigns
 	$this->assign['content_histories'] = pico_get_content_histories4assign( $this->mydirname , $content_data['id'] ) ;
 	$this->assign['page'] = $page ;
@@ -94,6 +89,20 @@ function execute( $request )
 	// views
 	$this->template_name = $this->mydirname.'_main_content_form.html' ;
 	$this->is_need_header_footer = true ;
+
+	// preview
+	$this->processPreview( $request ) ;
+
+	// editor (wysiwyg etc)
+	$editor_assigns = $this->getEditorAssigns( 'body' , $this->assign['content']['body_raw'] ) ;
+	$this->assign['body_wysiwyg'] = $editor_assigns['body'] ;
+	$this->html_header .= $editor_assigns['header'] ;
+}
+
+
+// virtual
+function processPreview()
+{
 }
 
 

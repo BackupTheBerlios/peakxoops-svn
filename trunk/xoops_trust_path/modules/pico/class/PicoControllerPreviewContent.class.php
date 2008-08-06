@@ -22,7 +22,7 @@ class PicoControllerPreviewContent extends PicoControllerEditContent {
 //var $template_name = '' ;
 //var $html_header = '' ;
 
-function execute( $request )
+function processPreview( $request )
 {
 	// Ticket Check
 	if ( ! $GLOBALS['xoopsGTicket']->check( true , 'pico' ) ) {
@@ -34,7 +34,7 @@ function execute( $request )
 	$myts =& PicoTextSanitizer::getInstance() ;
 
 	// assigning other than preview/request
-	parent::execute( $request ) ;
+	// parent::execute( $request ) ;
 	// permission check (can_edit) done
 
 	// request

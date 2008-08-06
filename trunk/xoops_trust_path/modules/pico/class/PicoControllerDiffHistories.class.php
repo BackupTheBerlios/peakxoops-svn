@@ -63,11 +63,14 @@ function execute( $request )
 
 	// get diff
 	$diff_from_file4disp = '' ;
+	$original_error_level = error_reporting() ;
+	error_reporting( $original_error_level & ~ E_NOTICE & ~ E_WARNING ) ;
 	$diff =& new Text_Diff( explode("\n",$older_profile[2]) , explode("\n",$newer_profile[2]) ) ;
 	//$renderer =& new Text_Diff_Renderer_unified();
 	//$diff_str = htmlspecialchars( $renderer->render( $diff ) , ENT_QUOTES ) ;
 	$renderer =& new Text_Diff_Renderer_inline();
 	$this->assign['diff_str'] = $renderer->render( $diff ) ;
+	error_reporting( $original_error_level ) ;
 
 	// breadcrumbs
 	$breadcrumbsObj->appendPath( '' , 'DIFF' ) ;

@@ -10,6 +10,8 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 This HD version needs altsys essentially.
 Install "altsys" before install it.
 
+Don't forget copying html/class/smarty/plugins/function.d3comment.php too.
+
 [/xlang:en]
 [xlang:ja]
 ====  bulletinHD ホダ塾ディストリビューション版bulletin2  ===
@@ -18,6 +20,8 @@ Install "altsys" before install it.
 http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 2.04-009以降、altsys必須モジュールとなりました。先にaltsysをインストールしておいてください。
+
+HD-2.14以降では、d3commentプラグイン必須となりました。アーカイブ内のhtml/class/smarty/plugins/function.d3comment.php もコピーしてください。
 
 １年近く、ハック版としてメンテしてきましたが、ホダ塾ディストリビューションに収録するに当たって、問題のありそうなコードをかなり大元から書き直しました。
 
@@ -35,6 +39,7 @@ HD-2.15 (2008-08-04)
 - modified some language files suin.jp to xoops.suinyeze.com
 - fixed boundary bug in archive view (thx wahyu)
 - fixed imgurl for topics cannnot removed (thx Tom_G3X)
+- added the file for d3comment into the archive 2.15a
 
 HD-2.14 (2008-05-19)
 - modified comment-integration with d3forum easy (update d3forum into the latest)

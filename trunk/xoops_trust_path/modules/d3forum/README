@@ -26,6 +26,17 @@ jidaikobo -template coding-
 
 [b]CHANGES[/b]
 
+0.84 beta (2008-08-18)
+- fixed the post_id is passed for onUpdate() in comment-integration (thx toychee)
+- fixed a notice in output RSS
+- modified some exit()s to redirect_header()s (thx dekki)
+- modified comment-integration can notify new 'comment' from X2 (thx naao)
+- fixed external_link_id without external_link_fmt would be blank
+- added total topics/counts as redundant information for categories (thx suin)
+- modified default subject in the notifications
+- modified the history controller for admin
+- modified xoops_version for XCL2.1 friendly
+- modified d3forum.textsanitizer XCL2.1 preload friendly
 
 0.83 beta (2008-05-19)
 - added smarty plugin function.d3comment.php (don't forget copy it)
@@ -219,6 +230,18 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 
 ●変更履歴
+
+0.84 beta (2008-08-18)
+- コメント統合で常にpost_idがonUpdate()に渡るように修正 (thx toychee)
+- コメント統合で標準イベント通知である「コメント追加」に対応した (thx naao)
+- RSS出力時のNotice修正
+- exitで強制終了するうちのいくつかをuser.phpへのリダイレクトに変更 (thx dekki)
+- コメント統合用ではないフォーラムにコピーされたトピックの処理を修正
+- 総トピック数/投稿数の実装 (thx suin)
+- イベント通知で、極力投稿題名をSubjectに渡すように修正
+- 投稿履歴画面を使いやすくした
+- xoops_versionにXCL2.1風の定義をいつか追加した
+- textsanitizerのオーバーライドがXCL2.1用preloadとなるべく当たらないようにした
 
 0.83 beta (2008-05-19)
 - コメント統合プラグインをfunction.d3comment.php にまとめた （コピー忘れ注意！）

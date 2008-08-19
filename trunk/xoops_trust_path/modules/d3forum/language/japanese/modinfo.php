@@ -91,46 +91,46 @@ define($constpref.'_NOTCAT_GLOBALDSC', 'フォーラムモジュール全体における通知オプ
 // Each Notifications
 define($constpref.'_NOTIFY_TOPIC_NEWPOST', 'トピック内投稿');
 define($constpref.'_NOTIFY_TOPIC_NEWPOSTCAP', 'このトピックに投稿があった場合に通知する');
-define($constpref.'_NOTIFY_TOPIC_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}:{TOPIC_TITLE} トピック内投稿');
+define($constpref.'_NOTIFY_TOPIC_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}:{TOPIC_TITLE} トピック内投稿 {POST_TITLE}');
 
 define($constpref.'_NOTIFY_FORUM_NEWPOST', 'フォーラム内投稿');
 define($constpref.'_NOTIFY_FORUM_NEWPOSTCAP', 'このフォーラムに投稿があった場合に通知する');
-define($constpref.'_NOTIFY_FORUM_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}:{FORUM_TITLE} フォーラム内投稿');
+define($constpref.'_NOTIFY_FORUM_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}:{FORUM_TITLE} フォーラム内投稿 {POST_TITLE}');
 
 define($constpref.'_NOTIFY_FORUM_NEWTOPIC', 'フォーラム内新トピック');
 define($constpref.'_NOTIFY_FORUM_NEWTOPICCAP', 'このフォーラムにおいて新規トピックが立てられた場合に通知する');
-define($constpref.'_NOTIFY_FORUM_NEWTOPICSBJ', '[{X_SITENAME}] {X_MODULE}:{FORUM_TITLE} フォーラム内新トピック');
+define($constpref.'_NOTIFY_FORUM_NEWTOPICSBJ', '[{X_SITENAME}] {X_MODULE}:{FORUM_TITLE} フォーラム内新トピック {TOPIC_TITLE}');
 
 define($constpref.'_NOTIFY_CAT_NEWPOST', 'カテゴリ内投稿');
 define($constpref.'_NOTIFY_CAT_NEWPOSTCAP', 'このカテゴリに投稿があった場合に通知する');
-define($constpref.'_NOTIFY_CAT_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内投稿');
+define($constpref.'_NOTIFY_CAT_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内投稿 {POST_TITLE}');
 
 define($constpref.'_NOTIFY_CAT_NEWTOPIC', 'カテゴリ内新トピック');
 define($constpref.'_NOTIFY_CAT_NEWTOPICCAP', 'このカテゴリにおいて新規トピックが立てられた場合に通知する');
-define($constpref.'_NOTIFY_CAT_NEWTOPICSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内新トピック');
+define($constpref.'_NOTIFY_CAT_NEWTOPICSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内新トピック {TOPIC_TITLE}');
 
 define($constpref.'_NOTIFY_CAT_NEWFORUM', 'カテゴリ内新フォーラム');
 define($constpref.'_NOTIFY_CAT_NEWFORUMCAP', 'このカテゴリにおいて新フォーラムが立てられた場合に通知する');
-define($constpref.'_NOTIFY_CAT_NEWFORUMSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内新フォーラム');
+define($constpref.'_NOTIFY_CAT_NEWFORUMSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内新フォーラム {FORUM_TITLE}');
 
 define($constpref.'_NOTIFY_GLOBAL_NEWPOST', '新投稿全体');
 define($constpref.'_NOTIFY_GLOBAL_NEWPOSTCAP', 'このモジュール全体のいずれかに投稿があった場合に通知する');
-define($constpref.'_NOTIFY_GLOBAL_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}: 投稿');
+define($constpref.'_NOTIFY_GLOBAL_NEWPOSTSBJ', '[{X_SITENAME}] {X_MODULE}: 投稿 {POST_TITLE}');
 
 define($constpref.'_NOTIFY_GLOBAL_NEWTOPIC', '新トピック全体');
 define($constpref.'_NOTIFY_GLOBAL_NEWTOPICCAP', 'このモジュール全体のいずれかに新規トピックが立てられた場合に通知する');
-define($constpref.'_NOTIFY_GLOBAL_NEWTOPICSBJ', '[{X_SITENAME}] {X_MODULE}: 新トピック');
+define($constpref.'_NOTIFY_GLOBAL_NEWTOPICSBJ', '[{X_SITENAME}] {X_MODULE}: 新トピック {TOPIC_TITLE}');
 
 define($constpref.'_NOTIFY_GLOBAL_NEWFORUM', '新フォーラム全体');
 define($constpref.'_NOTIFY_GLOBAL_NEWFORUMCAP', 'このモジュール全体のいずれかに新フォーラムが立てられた場合に通知する');
-define($constpref.'_NOTIFY_GLOBAL_NEWFORUMSBJ', '[{X_SITENAME}] {X_MODULE}: 新フォーラム');
+define($constpref.'_NOTIFY_GLOBAL_NEWFORUMSBJ', '[{X_SITENAME}] {X_MODULE}: 新フォーラム {FORUM_TITLE}');
 
 define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULL', '投稿全文');
 define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULLCAP', '投稿全文を通知します。（対象はモジュール全体）');
 define($constpref.'_NOTIFY_GLOBAL_NEWPOSTFULLSBJ', '[{X_SITENAME}] {POST_TITLE}');
 define($constpref.'_NOTIFY_GLOBAL_WAITING', '承認待ち');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCAP', '承認を要する投稿・編集が行われた場合に通知します。管理者専用');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGSBJ', '[{X_SITENAME}] {X_MODULE}: 承認待ち');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGSBJ', '[{X_SITENAME}] {X_MODULE}: 承認待ち {POST_TITLE}');
 
 }
 

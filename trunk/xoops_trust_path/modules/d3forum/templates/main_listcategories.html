@@ -37,7 +37,7 @@
 <h2><a href="<{$mod_url}>/index.php?cat_id=<{$category.id}>"><img src="<{$mod_imageurl}>/category_<{$category.bit_new}>.gif" alt="" width="16" height="16" /> <{$category.title}></a></h2>
 	<p>
 	<{include file="db:`$mydirname`_inc_moderators.html" target=$category}>
-	<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$category.topics_count}> <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$category.posts_count}> 
+	<{$smarty.const._MD_D3FORUM_TOTALTOPICSCOUNT}>: <{$category.topics_count_in_tree}> <{$smarty.const._MD_D3FORUM_TOTALPOSTSCOUNT}>: <{$category.posts_count_in_tree}> 
 	<{if $category.last_post_time}><{$smarty.const._MD_D3FORUM_LASTPOST}>: <{$category.last_post_time_formatted}><{/if}></p>
 </div>
 <{if $category.desc}><p class="d3f_info"><{$category.desc}></p><{/if}>
@@ -46,7 +46,7 @@
 <h3 class="d3f_head_h3"><{$smarty.const._MD_D3FORUM_SUBCATEGORIES}></h3>
 <ul class="d3f_subcategories">
 <{foreach item="subcategory" from=$category.subcategories}>
-	<li><a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>" title="<{$subcategory.desc}>"><img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" /> <{$subcategory.title}></a> (<{$smarty.const._MD_D3FORUM_TOPICSCOUNT}>: <{$subcategory.topics_count}>, <{$smarty.const._MD_D3FORUM_POSTSCOUNT}>: <{$subcategory.posts_count}>)</li>
+	<li><a href="<{$mod_url}>/index.php?cat_id=<{$subcategory.id}>" title="<{$subcategory.desc}>"><img src="<{$mod_imageurl}>/category_<{$subcategory.bit_new}>.gif" alt="<{$subcategory.title}>" width="16" height="16" /> <{$subcategory.title}></a> (<{$smarty.const._MD_D3FORUM_TOTALTOPICSCOUNT}>: <{$subcategory.topics_count_in_tree}>, <{$smarty.const._MD_D3FORUM_TOTALPOSTSCOUNT}>: <{$subcategory.posts_count_in_tree}>)</li>
 <{/foreach}>
 </ul>
 <{/if}>

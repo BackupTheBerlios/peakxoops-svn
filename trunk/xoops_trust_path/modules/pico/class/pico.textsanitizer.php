@@ -111,18 +111,12 @@ class PicoTextSanitizer extends MyTextSanitizer
 		// [siteimg]
 		$patterns[] = "/\[siteimg align=(['\"]?)(left|center|right)\\1]([^\"\(\)\?\&'<>]*)\[\/siteimg\]/sU";
 		$patterns[] = "/\[siteimg]([^\"\(\)\?\&'<>]*)\[\/siteimg\]/sU";
-		if( $image ) {
-			$replacements[] = '<img src="'.XOOPS_URL.'/\\3" align="\\2" alt="" />';
-	
-			$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
-		} else {
-			$replacements[] = '<a href"'.XOOPS_URL.'/\\3" target="_blank">'.XOOPS_URL.'/\\3</a>';
-			$replacements[] = '<a href"'.XOOPS_URL.'/\\1" target="_blank">'.XOOPS_URL.'/\\1</a>';
-		}
+		$replacements[] = '<img src="'.XOOPS_URL.'/\\3" align="\\2" alt="" />';
+		$replacements[] = '<img src="'.XOOPS_URL.'/\\1" alt="" />';
 
-		// [1.1.3.1] etc.
+/*		// [1.1.3.1] etc.
 		$patterns[] = '/\[(1(\.\d)*)]/' ;
-		$replacements[] = '<a href="#post_path\\1">\\0</a>' ;
+		$replacements[] = '<a href="#post_path\\1">\\0</a>' ;*/
 
 		// [quote sitecite=]
 		$patterns[] = "/\[quote sitecite=([^\"'<>]*)\]/sU";
@@ -178,16 +172,16 @@ class PicoTextSanitizer extends MyTextSanitizer
 
 		$patterns[] = "/\[color=(['\"]?)([a-zA-Z0-9]*)\\1](.*)\[\/color\]/sU";
 		$replacements[] = '<span style="color: #\\2;">\\3</span>';
-		$patterns[] = "/\[size=(['\"]?)([a-z0-9-]*)\\1](.*)\[\/size\]/sU";
-		$replacements[] = '<span style="font-size: \\2;">\\3</span>';
-		$patterns[] = "/\[font=(['\"]?)([^;<>\*\(\)\"']*)\\1](.*)\[\/font\]/sU";
-		$replacements[] = '<span style="font-family: \\2;">\\3</span>';
+//		$patterns[] = "/\[size=(['\"]?)([a-z0-9-]*)\\1](.*)\[\/size\]/sU";
+//		$replacements[] = '<span style="font-size: \\2;">\\3</span>';
+//		$patterns[] = "/\[font=(['\"]?)([^;<>\*\(\)\"']*)\\1](.*)\[\/font\]/sU";
+//		$replacements[] = '<span style="font-family: \\2;">\\3</span>';
 		$patterns[] = "/\[b](.*)\[\/b\]/sU";
-		$replacements[] = '<b>\\1</b>';
+		$replacements[] = '<strong>\\1</strong>';
 		$patterns[] = "/\[i](.*)\[\/i\]/sU";
 		$replacements[] = '<i>\\1</i>';
 		$patterns[] = "/\[u](.*)\[\/u\]/sU";
-		$replacements[] = '<u>\\1</u>';
+		$replacements[] = '<span style="text-decoration:underline">\\1</span>';
 		$patterns[] = "/\[d](.*)\[\/d\]/sU";
 		$replacements[] = '<del>\\1</del>';
 		

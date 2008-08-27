@@ -41,7 +41,7 @@
 
 <!-- print icon -->
 <{if $mod_config.show_printicon}>
-	<div class="pico_print_icon"><a href="<{$mod_url}>/<{$content.link}><{if $mod_config.use_wraps_mode}>?<{else}>&amp;<{/if}>page=print"><img src="<{$mod_imageurl}>/icon_print.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
+	<div class="pico_print_icon"><a href="<{$mod_url}>/<{$content.link}><{if $mod_config.use_wraps_mode || $mod_config.use_rewrite}>?<{else}>&amp;<{/if}>page=print"><img src="<{$mod_imageurl}>/icon_print.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
 <{/if}>
 
 <!-- tell a friend -->

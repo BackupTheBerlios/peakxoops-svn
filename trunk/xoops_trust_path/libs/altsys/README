@@ -6,7 +6,6 @@
 
 The unified module of blocksadmin, tplsadmin, etc around the system.
 
-This module has a status of beta.
 I'm appreciated your bug reports :-)
 
 I'll maintain this module instead of blocksadmin, tplsadmin, avaman etc.
@@ -38,7 +37,7 @@ from 0.2x/0.3x:
 - modifying adminmenu in the left side of XOOPS 2.0.x easier
 - displaying admin controll panels in any conventional themes
 - supporting three types of template auto-updating into the DB
-- modifying operations/developments of any versions of core (X2,XC2.1,X2.2 etc.) efficient
+- modifying operations/developments of any versions of core (X2,XCL2.1,X2.2 etc.) efficient
 
 
 [b]DB template auto-updating feature[/b]
@@ -147,8 +146,7 @@ But, there are a hardle to enable this feature.
 »È¤¤¤Å¤é¤¤¥·¥¹¥Æ¥à¥â¥¸¥å¡¼¥ë¤ÎÂå¤ï¤ê¤È¤·¤Æºî¤Ã¤Æ¤­¤¿blocksadmin¤ätplsadmin¤È¤¤¤Ã¤¿¥³¥¢¤Ë´Ø¤¹¤ëÁàºî¤òÅı¹ç¤·¤¿¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 
 Duplicatable V3¥â¥¸¥å¡¼¥ë¤«¤é¡¢¥é¥¤¥Ö¥é¥ê¤È¤·¤ÆÍøÍÑ¤Ç¤­¤ë·Á¤Ë¤·¤¿¤¿¤á¡¢¹½Â¤¤«¤éÂç¤­¤¯¸«Ä¾¤·¤Æ¤¤¤Ş¤¹¡£
-
-¸½ºß¤Ï¦ÂÈÇ¤Ç¤¹¡£²¿¤è¤ê¥Ğ¥°Êó¹ğ¤ò´¿·Ş¤·¤Ş¤¹¡£
+¥Ğ¥°Êó¹ğ¤òÂç´¿·Ş¤·¤Ş¤¹¡£
 
 º£¸å¤Ï¡¢avaman¤âµÛ¼ı¤·¡¢»ä¼«¿È¤Î¥á¥ó¥Æ¥Ê¥ó¥¹¤ò³Ú¤Ë¤·¤¿¤¤¤È»×¤¤¤Ş¤¹¡£
 
@@ -181,7 +179,7 @@ Duplicatable V3¥â¥¸¥å¡¼¥ë¤«¤é¡¢¥é¥¤¥Ö¥é¥ê¤È¤·¤ÆÍøÍÑ¤Ç¤­¤ë·Á¤Ë¤·¤¿¤¿¤á¡¢¹½Â¤¤«¤éÂ
 - X2´ÉÍı²èÌÌ¤Î´ÉÍı¥á¥Ë¥å¡¼ÉôÊ¬¤òÉ½¼¨²şÁ±¤Ç¤­¤Ş¤¹
 - ´ÉÍı²èÌÌ¤òÄÌ¾ï¥Æ¡¼¥Ş¤ÇÉ½¼¨¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ş¤¹¡Ê´ÉÍı²èÌÌ¥Æ¡¼¥Şµ¡Ç½»²¾È¡Ë
 - ¥Æ¥ó¥×¥ì¡¼¥È¼«Æ°¹¹¿·µ¡Ç½¤òÄó¶¡¤·¤Ş¤¹¡Ê¥Æ¥ó¥×¥ì¡¼¥È¼«Æ°¹¹¿·µ¡Ç½»²¾È¡Ë
-- X2, XC2.1, X2.2Åù¡¢¤¢¤é¤æ¤ë¥³¥¢¤ÎÁàºîÀ­¡¦³«È¯¸úÎ¨¤ò¸ş¾å¤·¤Ş¤¹
+- X2, XCL2.1, X2.2Åù¡¢¤¢¤é¤æ¤ë¥³¥¢¤ÎÁàºîÀ­¡¦³«È¯¸úÎ¨¤ò¸ş¾å¤·¤Ş¤¹
 
 
 ¡ü¥Æ¥ó¥×¥ì¡¼¥È¼«Æ°¹¹¿·µ¡Ç½

@@ -2,6 +2,7 @@
 
 v0.60 (2008-08-07)
 - fixed warning by assert() in Text_Diff
+- fixed notices missing modinfo.php (thx shige-p)
 
 v0.59 (2008-05-22)
 - fixed css for admin with XCL2.1 and "admin in theme"
@@ -146,6 +147,7 @@ v0.10 (2006-05-19)
 
 v0.60 (2008-08-07)
 - Text_Diffが吐くassert()によるWarningをとりあえず消した
+- modinfo.phpを読み込まないケースでNoticeが出ていたのを修正 (thx shige-p)
 
 v0.59 (2008-05-22)
 - XCL2.1における管理画面テーマで、CSSが読み込まれない問題の改善

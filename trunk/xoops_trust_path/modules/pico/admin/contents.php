@@ -163,6 +163,7 @@ while( $content_row = $db->fetchArray( $ors ) ) {
 		'cat_title' => $myts->makeTboxData4Show( $content_row['cat_title'] ) ,
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] , 'm' ) ,
 		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] , 'm' ) ,
+		'expiring_time_formatted' => formatTimestamp( $content_row['expiring_time'] , 'm' ) ,
 		'poster_uname' => $content_row['poster_uid'] ? $myts->makeTboxData4Show( $content_row['poster_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
 		'modifier_uname' => $content_row['modifier_uid'] ? $myts->makeTboxData4Show( $content_row['modifier_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
 		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,

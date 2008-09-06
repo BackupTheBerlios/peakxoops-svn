@@ -5,6 +5,13 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:31
+define('_MD_A_PICO_H2_CLEARBODYCACHE','Clear body cache');
+define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','clear');
+define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','all caches for contents have just been cleared');
+define('_MD_A_PICO_HELP_CLEARBODYCACHE','Just execute it when some caching troubles are occurred eg) after moving site.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
 define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','Independent Permission');
 define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','Set permissions for this category independently from the parent category');

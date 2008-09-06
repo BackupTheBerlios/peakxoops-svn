@@ -17,7 +17,7 @@ function pico_get_content_history_profile( $mydirname , $content_history_id , $c
 	}
 
 	// get and process $cat_id
-	$cat_id = pico_main_get_cat_id_from_content_id( $mydirname , $content_id ) ;
+	$cat_id = pico_common_get_cat_id_from_content_id( $mydirname , $content_id ) ;
 
 	// unserialize and visualize extra_fields
 	$ef4display = print_r( pico_common_unserialize( $history_row['extra_fields'] ) , true ) ;

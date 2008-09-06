@@ -197,6 +197,15 @@ function pico_sync_tags( $mydirname )
 }
 
 
+// clear body caches of all contents
+function pico_clear_body_cache( $mydirname )
+{
+	$db =& Database::getInstance() ;
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='', for_search='', last_cached_time=0" ) ;
+	return true ;
+}
+
+
 // sync content_votes and category's tree
 function pico_sync_all( $mydirname )
 {
@@ -479,6 +488,7 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 	if( $isadminormod ) {
 		$ret['specify_created_time'] = empty( $_POST['specify_created_time'] ) ? 0 : 1 ;
 		$ret['specify_modified_time'] = empty( $_POST['specify_modified_time'] ) ? 0 : 1 ;
+		$ret['specify_expiring_time'] = empty( $_POST['specify_expiring_time'] ) ? 0 : 1 ;
 		if( $ret['specify_created_time'] && strtotime( @$_POST['created_time'] ) != -1 ) {
 			$created_time_safe = preg_replace( '#[^\s0-9a-zA-Z:+/-]#' , '' , $_POST['created_time'] ) ;
 			$ret['created_time_formatted'] = $created_time_safe ;
@@ -488,6 +498,11 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$modified_time_safe = preg_replace( '#[^\s0-9a-zA-Z:+/-]#' , '' , $_POST['modified_time'] ) ;
 			$ret['modified_time_formatted'] = $modified_time_safe ;
 			$ret['modified_time'] = pico_common_get_server_timestamp( strtotime( $_POST['modified_time'] ) ) ;
+		}
+		if( $ret['specify_expiring_time'] && strtotime( @$_POST['expiring_time'] ) != -1 ) {
+			$expiring_time_safe = preg_replace( '#[^\s0-9a-zA-Z:+/-]#' , '' , $_POST['expiring_time'] ) ;
+			$ret['expiring_time_formatted'] = $expiring_time_safe ;
+			$ret['expiring_time'] = pico_common_get_server_timestamp( strtotime( $_POST['expiring_time'] ) ) ;
 		}
 		$ret['locked'] = empty( $_POST['locked'] ) ? 0 : 1 ;
 		if( ! empty( $_POST['poster_uid'] ) ) $ret['poster_uid'] = pico_main_get_uid( $_POST['poster_uid'] ) ;
@@ -553,7 +568,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
 	$requests += array( 'poster_uid' => $uid , 'modifier_uid' => $uid ) ;
-	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
+	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['specify_expiring_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] , $requests['expiring_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
 	// only adminormod can set htmlheader
 	if( ! $isadminormod ) {
@@ -574,6 +589,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	$time4sql = '' ;
 	if( empty( $requests['created_time'] ) ) $time4sql .= "created_time=UNIX_TIMESTAMP()," ;
 	if( empty( $requests['modified_time'] ) ) $time4sql .= "modified_time=UNIX_TIMESTAMP()," ;
+	if( empty( $requests['expiring_time'] ) ) $time4sql .= "expiring_time=0x7fffffff," ;
 
 	// do insert
 	$sql = "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='',for_search=''" ;
@@ -599,7 +615,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	$db =& Database::getInstance() ;
 
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
-	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] ) ;
+	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['specify_expiring_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] , $requests['expiring_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'tags' , 'cat_id' ) ;
 	if( ! $isadminormod ) {
 		// only adminormod can set htmlheader

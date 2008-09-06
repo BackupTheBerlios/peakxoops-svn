@@ -1,13 +1,12 @@
 <?php
 
+require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
+
 // a class for d3forum comment integration
 class PicoD3commentContent extends D3commentAbstract {
 
 function fetchSummary( $external_link_id )
 {
-	include_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
-
-	$db =& Database::getInstance() ;
 	$myts =& MyTextsanitizer::getInstance() ;
 
 	$module_handler =& xoops_gethandler( 'module' ) ;
@@ -15,22 +14,29 @@ function fetchSummary( $external_link_id )
 	$config_handler =& xoops_gethandler('config');
 	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
+	// external_link_id means $content_id
 	$content_id = intval( $external_link_id ) ;
 	$mydirname = $this->mydirname ;
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
-	// query
-	$content_row = $db->fetchArray( $db->query( "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id AND allow_comment AND visible AND created_time <= UNIX_TIMESTAMP() AND approval" ) ) ;
-	if( empty( $content_row ) ) return '' ;
+	// get categoryObject and contentObject
+	list( $categoryObj , $contentObj ) = pico_common_get_objects_from_content_id( $mydirname , $content_id ) ;
+
+	// existence check
+	if( ! is_object( $categoryObj ) || ! is_object( $contentObj ) ) return '' ;
+
+	// permission check
+	$content_data = $contentObj->getData() ;
+	if( empty( $content_data['can_read'] ) ) return '' ;
 
 	// dare to convert it irregularly
-	$summary = str_replace( '&amp;' , '&' , htmlspecialchars( xoops_substr( strip_tags( $content_row['body_cached'] ) , 0 , 255 ) , ENT_QUOTES ) ) ;
+	$summary = str_replace( '&amp;' , '&' , htmlspecialchars( xoops_substr( strip_tags( $content_data['body_cached'] ) , 0 , 255 ) , ENT_QUOTES ) ) ;
 
 	return array(
 		'dirname' => $mydirname ,
 		'module_name' => $module->getVar( 'name' ) ,
-		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_content_link4html( $configs , $content_row ) ,
+		'subject' => $myts->makeTboxData4Show( $content_data['subject_raw'] ) ,
+		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_content_link4html( $configs , $content_data ) ,
 		'summary' => $summary ,
 	) ;
 }
@@ -38,14 +44,20 @@ function fetchSummary( $external_link_id )
 
 function validate_id( $link_id )
 {
+	// assume that link_id as content_id
 	$content_id = intval( $link_id ) ;
 	$mydirname = $this->mydirname ;
 
-	$db =& Database::getInstance() ;
-	
-	list( $count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id AND allow_comment AND visible AND created_time <= UNIX_TIMESTAMP() AND approval" ) ) ;
-	if( $count <= 0 ) return false ;
-	else return $content_id ;
+	// get categoryObject and contentObject
+	list( $categoryObj , $contentObj ) = pico_common_get_objects_from_content_id( $mydirname , $content_id ) ;
+
+	// existence check
+	if( ! is_object( $categoryObj ) || ! is_object( $contentObj ) ) return false ;
+	// permission check
+	$content_data = $contentObj->getData() ;
+	if( empty( $content_data['can_read'] ) ) return false ;
+
+	return $content_id ;
 }
 
 

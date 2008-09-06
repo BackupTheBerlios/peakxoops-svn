@@ -4,8 +4,12 @@
 
 [b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
+This 1.7x branch is under developping.
+
+If you want stable version, try 1.6x
+
 Don't forget updating this module after overwritting older version.
-And you have to "sync" once on upgrading from 1.1x/1.2x
+And you have to "sync" once on upgrading from 1.5x/1.6x
 
 Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
 
@@ -59,7 +63,7 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 
 [b]USAGE:[/b]
 
-(0) Install altsys before using pico.
+(0) Install altsys(>=0.61) before using pico.
 
 (1) copy html/modules/pico into your modules/
 
@@ -101,8 +105,40 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.70 (2008-09-07)
+- changed altsys-0.61 essential
+- restructed almost codes
+- added a feature of extra fields
+- added configurations about images for extra fields
+- modified d3forum.textsanitizer XCL2.1 preload friendly
+- modified xoops_version for XCL2.1 friendly
+- added a feature changing poster_uid/modifier_uid
+- added a feature of TAG
+- added a block for tags
+- added a configuration HTML header can be edited
+- modified timing for caching
+- added a field for searching
+- finished supporting common/spaw
+- fixed a problem of body leaking at searching (thx toshi)
+- added a controller clearing body caches
+
+1.62 (2008/08/27)
+- fixed templates wrong link on use_rewrite (thx taked2)
+- fixed missing some escapes in RSS (thx tom_moppet)
+
+1.61 (2008/06/12)
+- fixed a typo in main_content_form (thx jidaikobo)
+- fixed typos in language files (thx jidaikobo)
+- updated gticket2
+- fixed search.php can hit invisible or waiting contents (thx sacchan)
+- updated language files
+-- persian (thx voltan) 1.61a
+
 1.60 (2007/12/19)
 - marked as a stable version
+- added a parameter "from_field_name" into PicoFormProcessBySmartyBase 1.60a
+- added a parameter "fromname_field_name" into PicoFormProcessBySmartyBase 1.60a
+- added "cancel" into PicoFormProcessBySmartyBase 1.60a
 
 1.57 (2007/11/20)
 - modified field cat_redundants from text to mediumtext
@@ -400,7 +436,7 @@ pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
 
 こちらは、1.6の次の世代である1.7x系列です。まだ開発版ですが、やる気のある方はぜひこちらをキャッチアップしてください。
 
-また、1.1/1.2 からアップデートした際には、モジュールアップデート後に、管理画面の「インポート/同期」から「同期」を最低1度実行してください。
+また、1.5/1.6 からアップデートした際には、モジュールアップデート後に、管理画面の「インポート/同期」から「同期」を最低1度実行してください。
 
 
 以下、安定版・開発版共通。
@@ -458,7 +494,7 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 
 [b]USAGE:[/b]
 
-(0) pico1.3から、altsysが必須となりました。picoより先にaltsysをインストールしてください。
+(0) pico1.3から、altsysが必須となりました。picoより先にaltsys-0.61以上をインストールしてください。
 
 (1) アーカイブを展開して、html/modules/pico を moduels の下にコピー
 
@@ -496,13 +532,40 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
-1.70
+1.70 (2008-09-07)
+- altsys-0.61以上が必須となった
+- リクエスト処理など、全体的な作りを大幅に変更した
 - 任意追加フィールド機能の実装
-- formmail系のキャンセル機能実装
+- 任意追加フィールドの画像関連の設定追加
 - XCL2.1テキストフィルター系Preloadがなるべくちゃんと動作するように調整
+- XCL2.1用に細かなオプションを追加指定
+- poster_uid/modifier_uidの変更機能追加
+- タグフィールド追加
+- タグ一覧ブロック追加
+- HTMLヘッダを指定できるかどうかの設定を追加
+- キャッシュタイミングを保存するようにした
+- 検索専用フィールドの追加
+- common/spawのサポートを終了
+- 全文閲覧権限のないコンテンツの検索時本文表示問題を修正 (thx toshi)
+- 管理画面から本文キャッシュを削除する機能の追加
+
+1.62 (2008/08/27)
+- rewriteモードでプリンターへのリンクが切れていたのを修正 (thx taked2)
+- RSSなどでサイト名のエスケープ忘れを修正 (thx tom_moppet)
+
+1.61 (2008/06/12)
+- main_content_form内の余計な</label>を削除 (thx jidaikobo)
+- 言語定数内のtypo修正 (thx jidaikobo)
+- gticket2の更新
+- 検索で非表示や表示待ちのコンテンツがヒットしてしまうバグの修正 (thx sacchan)
+- 言語ファイル更新
+-- persian (thx voltan) 1.61a
 
 1.60 (2007/12/19)
 - 安定版としていったんマークした
+- フォーム処理にfrom_field_nameのパラメータを追加した 1.60a
+- フォーム処理にfromname_field_nameのパラメータを追加した 1.60a
+- フォーム処理にキャンセル処理を追加した 1.60a
 
 1.57 (2007/11/20)
 - カテゴリー冗長用情報フィールドをtextからmediumtextに変更

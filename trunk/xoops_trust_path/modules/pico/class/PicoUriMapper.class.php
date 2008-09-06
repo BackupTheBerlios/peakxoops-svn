@@ -36,7 +36,7 @@ function parseRequest()
 	if( intval( @$_REQUEST['content_id'] ) > 0 ) {
 		// 1st check $_REQUEST['content_id']
 		$content_id = intval( @$_REQUEST['content_id'] ) ;
-		$cat_id = pico_main_get_cat_id_from_content_id( $this->mydirname , $content_id ) ;
+		$cat_id = pico_common_get_cat_id_from_content_id( $this->mydirname , $content_id ) ;
 	} else {
 		// 2nd check path_info
 		$path_info = $this->getPathInfo() ;
@@ -182,7 +182,7 @@ function parsePathInfo( $path_info )
 	// check path_info obeys the ruled for autonaming for contents (3rd)
 	if( preg_match( _MD_PICO_AUTONAME4PREGEX , $path_info , $regs ) ) {
 		$content_id = intval( @$regs[1] ) ;
-		return array( $content_id , pico_main_get_cat_id_from_content_id( $this->mydirname , $content_id ) ) ;
+		return array( $content_id , pico_common_get_cat_id_from_content_id( $this->mydirname , $content_id ) ) ;
 	}
 
 	// check path_info obeys the ruled for autonaming for category (4th)

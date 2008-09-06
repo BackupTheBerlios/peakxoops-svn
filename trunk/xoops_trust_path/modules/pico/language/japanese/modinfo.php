@@ -89,6 +89,10 @@ define($constpref.'_BNAME_TAGS','е┐е░░ь═ў');
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'ете╕ехб╝еы┴┤┬╬');
 define($constpref.'_NOTCAT_GLOBALDSC', 'д│д╬picoете╕ехб╝еы┴┤┬╬д╦дкд▒ды─╠├╬еке╫е╖ечеє');
+define($constpref.'_NOTCAT_CATEGORY', 'еле╞е┤еъб╝╞т');
+define($constpref.'_NOTCAT_CATEGORYDSC', 'д│д╬еле╞е┤еъб╝д╦дкд▒ды─╠├╬еке╫е╖ечеє');
+define($constpref.'_NOTCAT_CONTENT', 'е│еєе╞еєе─');
+define($constpref.'_NOTCAT_CONTENTDSC', 'д│д╬е│еєе╞еєе─д╦дкд▒ды─╠├╬еке╫е╖ечеє');
 
 // Each Notifications
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', '╛╡╟з┬╘д┴');
@@ -96,7 +100,13 @@ define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'е│еєе╞еєе─д╬┐╖╡м┼╨╧┐бж╩╤╣
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : ╛╡╟з┬╘д┴');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT', '┐╖╡ме│еєе╞еєе─');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP', 'е│еєе╞еєе─д╬┐╖╡м┼╨╧┐дмдвд├д┐╛ь╣чд╦─╠├╬д╖д▐д╣б╩╠д╛╡╟зд╟двдьд╨─╠├╬д╖д▐д╗дєб╦');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : ┐╖╡ме│еєе╞еєе─');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : ┐╖╡ме│еєе╞еєе─ {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT', '┐╖╡ме│еєе╞еєе─');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP', 'е│еєе╞еєе─д╬┐╖╡м┼╨╧┐дмдвд├д┐╛ь╣чд╦─╠├╬д╖д▐д╣б╩╠д╛╡╟зд╟двдьд╨─╠├╬д╖д▐д╗дєб╦');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} еле╞е┤еъ╞т┐╖╡ме│еєе╞еєе─ {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CONTENT_COMMENT', '┐╖╡ме│есеєе╚');
+define($constpref.'_NOTIFY_CONTENT_COMMENTCAP', 'д│д╬е│еєе╞еєе─д╪д╬е│есеєе╚┼╨╧┐дмдвд├д┐╛ь╣чд╦─╠├╬д╖д▐д╣б╩╠д╛╡╟зд╟двдьд╨─╠├╬д╖д▐д╗дєб╦');
+define($constpref.'_NOTIFY_CONTENT_COMMENTSBJ', '[{X_SITENAME}] {X_MODULE} : е│есеєе╚д╬┼ъ╣╞дмдвдъд▐д╖д┐');
 
 }
 

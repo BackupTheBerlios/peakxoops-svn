@@ -12,13 +12,13 @@
 	<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
 	<{/if}>
 	
-	<{* <{if $xoops_isadmin}>
+	<{if $xoops_isadmin}>
 		<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
 	<{/if}>
 	
 	<{if $xoops_isadmin}>
 		<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
-	<{/if}> *}>
+	<{/if}>
 	
 	<{if $category.can_makesubcategory}>
 	<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
@@ -70,7 +70,7 @@
 <ul class="pico_list_contents">
 <{foreach from=$contents item="content"}>
 	<li><a href="<{$mod_url}>/<{$content.link}>">
-	<{if $content.visible}>
+	<{if $content.public}>
 		<{$content.subject}>
 	<{elseif $category.isadminormod}>
 		<em class="pico_notice"><{$content.subject}></em>

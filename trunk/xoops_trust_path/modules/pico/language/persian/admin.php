@@ -1,6 +1,16 @@
 <?php
 
 // contents list admin
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:30
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','Independent Permission');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','Set permissions for this category independently from the parent category');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','Check the parental permissions');
+define('_MD_A_PICO_H2_CLEARBODYCACHE','Clear body cache');
+define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','clear');
+define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','all caches for contents have just been cleared');
+define('_MD_A_PICO_HELP_CLEARBODYCACHE','Just execute it when some caching troubles are occurred eg) after moving site.');
+
 define('_MD_A_PICO_H2_CONTENTS','لیست اسناد');
 define('_MD_A_PICO_TH_CONTENTSID','ID');
 define('_MD_A_PICO_TH_CONTENTSSUBJECT','موضوع');

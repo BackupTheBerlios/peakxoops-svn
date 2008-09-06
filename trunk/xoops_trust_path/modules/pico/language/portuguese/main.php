@@ -15,6 +15,15 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:32
+define('_MD_PICO_EXPIRING','Expiring');
+define('_MD_PICO_FMT_PUBLIC','Public');
+define('_MD_PICO_FMT_PRIVATE','Private');
+define('_MD_PICO_FMT_PUBLICCOUNT','Public: %s items');
+define('_MD_PICO_FMT_PRIVATECOUNT','Private: %s items');
+define('_MD_PICO_INVISIBLE','Invisible');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:12
 define('_MD_PICO_TH_TAGS','Tags');
 define('_MD_PICO_TH_TAGSDSC','separate tags by a space');

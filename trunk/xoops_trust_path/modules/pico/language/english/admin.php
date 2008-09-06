@@ -49,6 +49,10 @@ define('_MD_A_PICO_H2_SYNCALL','Synchronize redundant informations');
 define('_MD_A_PICO_BTN_DOSYNCALL','Do synchronize');
 define('_MD_A_PICO_MSG_SYNCALLDONE','Synchronized successfully');
 define('_MD_A_PICO_HELP_SYNCALL','Execute it if your categories or contents display contradictory data.');
+define('_MD_A_PICO_H2_CLEARBODYCACHE','Clear body cache');
+define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','clear');
+define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','all caches for contents have just been cleared');
+define('_MD_A_PICO_HELP_CLEARBODYCACHE','Just execute it when some caching troubles are occurred eg) after moving site.');
 
 // extras
 define('_MD_A_PICO_H2_EXTRAS','Extras');

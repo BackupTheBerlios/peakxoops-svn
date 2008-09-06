@@ -39,13 +39,13 @@ function execute( $request )
 
 		// contents loop
 		$contentObjs = $categoryObj->getContents( true ) ;
-		$invisible_contents_counter = 0 ;
+		$private_contents_counter = 0 ;
 		foreach( $contentObjs as $contentObj ) {
 			$content_data = $contentObj->getData() ;
-			if( ! $content_data['visible'] ) $invisible_contents_counter ++ ;
-			else if( $content_data['show_in_menu'] ) $categories4assign[ $cat_id ]['contents'][] = $contentObj->getData4html() ;
+			if( ! $content_data['public'] ) $private_contents_counter ++ ;
+			else if( $content_data['show_in_menu'] && $content_data['can_read'] ) $categories4assign[ $cat_id ]['contents'][] = $contentObj->getData4html() ;
 		}
-		$categories4assign[ $cat_id ]['invisible_contents_counter'] = $invisible_contents_counter ;
+		$categories4assign[ $cat_id ]['private_contents_counter'] = $private_contents_counter ;
 	}
 	$this->assign['categories'] = $categories4assign ;
 

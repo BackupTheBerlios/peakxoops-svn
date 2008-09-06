@@ -488,6 +488,20 @@ $modversion['notification'] = array(
 			'description' => constant($constpref.'_NOTCAT_GLOBALDSC') ,
 			'subscribe_from' => 'index.php' ,
 		) ,
+		array(
+			'name' => 'category' ,
+			'title' => constant($constpref.'_NOTCAT_CATEGORY') ,
+			'description' => constant($constpref.'_NOTCAT_CATEGORYDSC') ,
+			'subscribe_from' => 'index.php' ,
+			'item_name' => 'cat_id' ,
+		) ,
+		array(
+			'name' => 'content' ,
+			'title' => constant($constpref.'_NOTCAT_CONTENT') ,
+			'description' => constant($constpref.'_NOTCAT_CONTENTDSC') ,
+			'subscribe_from' => 'index.php' ,
+			'item_name' => 'content_id' ,
+		) ,
 	) ,
 	'event' => array(
 		array(
@@ -507,6 +521,24 @@ $modversion['notification'] = array(
 			'description' => constant($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP') ,
 			'mail_template' => 'global_newcontent' ,
 			'mail_subject' => constant($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ') ,
+		) ,
+		array(
+			'name' => 'newcontent' ,
+			'category' => 'category' ,
+			'title' => constant($constpref.'_NOTIFY_CATEGORY_NEWCONTENT') ,
+			'caption' => constant($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP') ,
+			'description' => constant($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP') ,
+			'mail_template' => 'category_newcontent' ,
+			'mail_subject' => constant($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ') ,
+		) ,
+		array(
+			'name' => 'comment' ,
+			'category' => 'content' ,
+			'title' => constant($constpref.'_NOTIFY_CONTENT_COMMENT') ,
+			'caption' => constant($constpref.'_NOTIFY_CONTENT_COMMENTCAP') ,
+			'description' => constant($constpref.'_NOTIFY_CONTENT_COMMENTCAP') ,
+			'mail_template' => 'content_comment' ,
+			'mail_subject' => constant($constpref.'_NOTIFY_CONTENT_COMMENTSBJ') ,
 		) ,
 	) ,
 ) ;

@@ -216,6 +216,22 @@
 			</td>
 		</tr>
 
+		<{if $category.isadminormod}>
+		<tr valign="top" align="left">
+			<th class="head"><{$smarty.const._MD_PICO_EXPIRING}></th>
+			<td class="even">
+				<{$content_base.expiring_time_formatted}>
+					<{if $content.specify_expiring_time}>
+						<{assign var="specify_expiring_time_checked" value="checked='checked'"}>
+					<{else}>
+						<{assign var="expiring_time_style" value="display:none;"}>
+					<{/if}>
+					<input type="checkbox" name="specify_expiring_time" id="specify_expiring_time" value="1" onclick="if(this.checked){xoopsGetElementById('expiring_time').style.display='inline';}else{xoopsGetElementById('expiring_time').style.display='none'}" <{$specify_expiring_time_checked}> /><label for="specify_expiring_time" ><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}></label>
+					<input type="text" name="expiring_time" id="expiring_time" size="24" value="<{$content.expiring_time_formatted|escape}>" style="<{$expiring_time_style}> " />
+			</td>
+		</tr>
+		<{/if}>
+
 	</table>
 
 	<p class="pico_submit">

@@ -2,13 +2,43 @@
 
 // this file can be included from d3forum's blocks or getSublink().
 
+require_once dirname(dirname(__FILE__)).'/class/PicoPermission.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoModelContent.class.php' ;
+
 @include_once dirname(__FILE__).'/constants.php' ;
 if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constants.dist.php' ;
 
 
+// get $cat_id from $content_id
+function pico_common_get_cat_id_from_content_id( $mydirname , $content_id )
+{
+	$db =& Database::getInstance() ;
 
+	list( $cat_id ) = $db->fetchRow( $db->query( "SELECT cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) ;
+
+	return intval( $cat_id ) ;
+}
+
+
+// get both $categoryObj and $contentObj from specified content_id
+function pico_common_get_objects_from_content_id( $mydirname , $content_id )
+{
+	$picoPermission =& PicoPermission::getInstance() ;
+	$permissions = $picoPermission->getPermissions( $mydirname ) ;
+	$cat_id = pico_common_get_cat_id_from_content_id( $mydirname , $content_id ) ;
+	$categoryObj =& new PicoCategory( $mydirname , intval( $cat_id ) , $permissions ) ;
+	$contentObj =& new PicoContent( $mydirname , $content_id , $categoryObj ) ;
+
+	return array( $categoryObj , $contentObj ) ;
+}
+
+
+
+// deprecated
 function pico_get_categories_can_read( $mydirname ) { return pico_common_get_categories_can_read( $mydirname ) ; }
 
+// deprecated
 function pico_common_get_categories_can_read( $mydirname , $uid = null )
 {
 	$db =& Database::getInstance() ;
@@ -45,69 +75,10 @@ function pico_common_get_categories_can_read( $mydirname , $uid = null )
 }
 
 
-function pico_common_filter_body( $mydirname , $content_row , $use_cache = false )
-{
-	$can_use_cache = $use_cache && $content_row['body_cached'] ;
-
-	// wraps special check (compare filemtime with modified_time )
-	if( strstr( $content_row['filters'] , 'wraps' ) && $content_row['vpath'] ) {
-		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$content_row['vpath']) ;
-		if( @filemtime( $wrap_full_path ) > @$content_row['modified_time'] ) {
-			$can_use_cache = false ;
-			$db =& Database::getInstance() ;
-			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($content_row['content_id']) ) ;
-		}
-	}
-
-	if( $can_use_cache ) {
-		return $content_row['body_cached'] ;
-	}
-
-	// process each filters
-	$text = $content_row['body'] ;
-	$filters = explode( '|' , $content_row['filters'] ) ;
-	foreach( array_keys( $filters ) as $i ) {
-		$filter = trim( $filters[ $i ] ) ;
-		if( empty( $filter ) ) continue ;
-		// xcode special check
-		if( $filter == 'xcode' ) {
-			$nl2br = $smiley = 0 ;
-			for( $j = $i + 1 ; $j < $i + 3 ; $j ++ ) {
-				if( @$filters[ $j ] == 'nl2br' ) {
-					$nl2br = 1 ;
-					$filters[ $j ] = '' ;
-				} else if( @$filters[ $j ] == 'smiley' ) {
-					$smiley = 1 ;
-					$filters[ $j ] = '' ;
-				}
-			}
-			require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
-			$myts =& PicoTextSanitizer::getInstance() ;
-			$text = $myts->displayTarea( $text , 1 , $smiley , 1 , 1 , $nl2br ) ;
-			continue ;
-		}
-		$func_name = 'pico_'.$filter ;
-		$file_path = dirname(dirname(__FILE__)).'/filters/pico_'.$filter.'.php' ;
-		if( function_exists( $func_name ) ) {
-			$text = $func_name( $mydirname , $text , $content_row ) ;
-		} else if( file_exists( $file_path ) ) {
-			require_once $file_path ;
-			$text = $func_name( $mydirname , $text , $content_row ) ;
-		}
-	}
-
-	// store the result into body_cached field
-	if( $use_cache ) {
-		$db =& Database::getInstance() ;
-		$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."' WHERE content_id=".intval($content_row['content_id']) ) ;
-	}
-
-	return $text ;
-}
-
-
+// deprecated
 function pico_make_content_link4html( $mod_config , $content_row , $mydirname = null ) { return pico_common_make_content_link4html( $mod_config , $content_row , $mydirname ) ; }
 
+// deprecated
 function pico_common_make_content_link4html( $mod_config , $content_row , $mydirname = null )
 {
 	if( ! empty( $mod_config['use_wraps_mode'] ) ) {
@@ -190,7 +161,7 @@ function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 
 	if( ! ( $caller == 'sitemap_plugin' && ! @$mod_config['sitemap_showcontents'] ) && ! ( $caller == 'xoops_version' && ! @$mod_config['submenu_showcontents'] ) ) {
 		// contents query
-		$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND created_time <= UNIX_TIMESTAMP() AND $whr_read ORDER BY weight,content_id" ) ;
+		$ors = $db->query( "SELECT cat_id,content_id,vpath,subject FROM ".$db->prefix($mydirname."_contents" )." WHERE show_in_menu AND visible AND created_time <= UNIX_TIMESTAMP() AND expiring_time > UNIX_TIMESTAMP() AND $whr_read ORDER BY weight,content_id" ) ;
 		if( $ors ) while( $content_row = $db->fetchArray( $ors ) ) {
 			$cat_id = intval( $content_row['cat_id'] ) ;
 			$categories[ $cat_id ]['sub'][] = array(
@@ -224,44 +195,6 @@ function pico_common_restruct_categories( $categories , $parent )
 	}
 
 	return $ret ;
-}
-
-
-function pico_common_get_content4assign( $mydirname , $content_id , $mod_config , $category_row = null , $process_body = false )
-{
-	$content_id = intval( $content_id ) ;
-
-	$myts =& MyTextSanitizer::getInstance() ;
-	$db =& Database::getInstance() ;
-	$user_handler =& xoops_gethandler( 'user' ) ;
-
-	$content_row = $db->fetchArray( $db->query( "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".$content_id ) ) ;
-
-	// poster & modifier uname
-	$poster =& $user_handler->get( $content_row['poster_uid'] ) ;
-	$poster_uname = is_object( $poster ) ? $poster->getVar('uname') : @_MD_PICO_REGISTERED_AUTOMATICALLY ;
-	$modifier =& $user_handler->get( $content_row['modifier_uid'] ) ;
-	$modifier_uname = is_object( $modifier ) ? $modifier->getVar('uname') : @_MD_PICO_REGISTERED_AUTOMATICALLY ;
-
-	$content4assign = array(
-		'id' => intval( $content_row['content_id'] ) ,
-		'link' => pico_common_make_content_link4html( $mod_config , $content_row ) ,
-		'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
-		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
-		'poster_uname' => $poster_uname ,
-		'modifier_uname' => $modifier_uname ,
-		'votes_avg' => $content_row['votes_count'] ? $content_row['votes_sum'] / doubleval( $content_row['votes_count'] ) : 0 ,
-		'subject' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
-		'subject_raw' => $content_row['subject'] ,
-		// 'body' => $content_row['body'] ,
-		'body_raw' => $content_row['body'] ,
-		'can_edit' => @$category_row['can_edit'] ,
-		'can_delete' => @$category_row['can_delete'] ,
-		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
-	) + $content_row ;
-
-	// only 'body' is parsed after creating new content_row (for xoopstpl filter)
-	return array( 'body' => $process_body ? pico_common_filter_body( $mydirname , $content4assign , $content_row['use_cache'] ) : $content_row['body_cached'] ) + $content4assign ;
 }
 
 

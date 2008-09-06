@@ -1,5 +1,9 @@
 <?php
 
+require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoPermission.class.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoModelCategory.class.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoModelContent.class.php' ;
+
 //////////////////////////////////////////////////////////////////////////
 class XmobilePicoPluginAbstract extends XmobilePlugin
 {
@@ -222,14 +226,21 @@ class XmobilePicoPluginHandlerAbstract extends XmobilePluginHandler
 		// categories can be read by current viewer (check by category_permissions)
 		$whr_read4content = 'o.`cat_id` IN (' . implode( "," , pico_common_get_categories_can_read( $mydirname , $this->sessionHandler->uid ) ) . ')' ;
 	
-		$sql = "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND o.content_id='$content_id' AND o.visible AND o.created_time <= UNIX_TIMESTAMP()" ;
+		$sql = "SELECT o.cat_id FROM ".$db->prefix($mydirname."_contents")." o WHERE ($whr_read4content) AND o.content_id='$content_id' AND o.visible AND o.created_time <= UNIX_TIMESTAMP() AND o.expiring_time > UNIX_TIMESTAMP()" ;
 		if( ! $result = $db->query( $sql ) ) return array() ;
 		if( ! $db->getRowsNum( $result ) ) return array() ;
 
-		list( $content_id ) = $db->fetchRow( $result ) ;
+		list( $cat_id ) = $db->fetchRow( $result ) ;
+
+		$picoPermission =& PicoPermission::getInstance() ;
+		$permissions = $picoPermission->getPermissions( $mydirname ) ;
+
+		// current category object (this "current" means "targeted")
+		$currentCategoryObj =& new PicoCategory( $mydirname , intval( $cat_id ) , $permissions ) ;
 
 		// assigning
-		$content4assign = pico_common_get_content4assign( $mydirname , $content_id , $configs , array() , true ) ;
+		$contentObj =& new PicoContent( $mydirname , $request['content_id'] , $currentCategoryObj ) ;
+		$content4assign = $contentObj->getData4html( true ) ;
 
 		// convert links from relative to absolute (wraps mode only)
 		if( $configs['use_wraps_mode'] ) {

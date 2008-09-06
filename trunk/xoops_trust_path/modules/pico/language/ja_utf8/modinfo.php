@@ -89,6 +89,10 @@ define($constpref.'_BNAME_TAGS','タグ一覧');
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');
 define($constpref.'_NOTCAT_GLOBALDSC', 'このpicoモジュール全体における通知オプション');
+define($constpref.'_NOTCAT_CATEGORY', 'カテゴリー内');
+define($constpref.'_NOTCAT_CATEGORYDSC', 'このカテゴリーにおける通知オプション');
+define($constpref.'_NOTCAT_CONTENT', 'コンテンツ');
+define($constpref.'_NOTCAT_CONTENTDSC', 'このコンテンツにおける通知オプション');
 
 // Each Notifications
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', '承認待ち');
@@ -97,6 +101,12 @@ define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT', '新規コンテンツ');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP', 'コンテンツの新規登録があった場合に通知します（未承認であれば通知しません）');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : 新規コンテンツ');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT', '新規コンテンツ');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP', 'コンテンツの新規登録があった場合に通知します（未承認であれば通知しません）');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内新規コンテンツ {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CONTENT_COMMENT', '新規コメント');
+define($constpref.'_NOTIFY_CONTENT_COMMENTCAP', 'このコンテンツへのコメント登録があった場合に通知します（未承認であれば通知しません）');
+define($constpref.'_NOTIFY_CONTENT_COMMENTSBJ', '[{X_SITENAME}] {X_MODULE} : コメントの投稿がありました');
 
 }
 

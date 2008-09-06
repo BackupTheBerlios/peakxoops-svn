@@ -5,6 +5,29 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:30
+define($constpref.'_ALLOWEACHHEAD','specify HTML headers for each contents');
+define($constpref.'_EF_CLASS','class for extra_fields');
+define($constpref.'_EF_CLASSDSC','Change it if you want to override the handler for extra_fields. default value is PicoExtraFields');
+define($constpref.'_EFIMAGES_DIR','directory for extra_fields');
+define($constpref.'_EFIMAGES_DIRDSC','set relative path from XOOPS_ROOT_PATH. Create and chmod 777 the directory first. default) uploads/(module dirname)');
+define($constpref.'_EFIMAGES_SIZE','pixels for extra images');
+define($constpref.'_EFIMAGES_SIZEDSC','(main_width)x(main_height) (small_width)x(small_height) default) 480x480 150x150');
+define($constpref.'_IMAGICK_PATH','Path for ImageMagick binaries');
+define($constpref.'_IMAGICK_PATHDSC','Leave blank normal, or set it like /usr/X11R6/bin/');
+define($constpref.'_BNAME_TAGS','Tags');
+define($constpref.'_NOTCAT_CATEGORY','category');
+define($constpref.'_NOTCAT_CATEGORYDSC','notifications under this category');
+define($constpref.'_NOTCAT_CONTENT','content');
+define($constpref.'_NOTCAT_CONTENTDSC','notifications about this content');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT','new content');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP','Notify if a new content is registered. (approved contents only)');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ','[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} a new content {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CONTENT_COMMENT','new comment');
+define($constpref.'_NOTIFY_CONTENT_COMMENTCAP','Notify if a new comment is posted. (approved comments only)');
+define($constpref.'_NOTIFY_CONTENT_COMMENTSBJ','[{X_SITENAME}] {X_MODULE} : a new comment');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

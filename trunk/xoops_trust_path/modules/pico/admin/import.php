@@ -64,12 +64,26 @@ if( ! empty( $_POST['do_import'] ) && ! empty( $_POST['import_mid'] ) ) {
 } else if( ! empty( $_POST['do_syncall'] ) ) {
 	set_time_limit( 0 ) ;
 
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
 	pico_sync_all( $mydirname ) ;
 
 	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=import" , 3 , _MD_A_PICO_MSG_SYNCALLDONE ) ;
 	exit ;
-}
+} else if( ! empty( $_POST['do_clearbodycache'] ) ) {
+	set_time_limit( 0 ) ;
 
+	if ( ! $xoopsGTicket->check( true , 'pico_admin' ) ) {
+		redirect_header(XOOPS_URL.'/',3,$xoopsGTicket->getErrors());
+	}
+
+	pico_clear_body_cache( $mydirname ) ;
+
+	redirect_header( XOOPS_URL."/modules/$mydirname/admin/index.php?page=import" , 3 , _MD_A_PICO_MSG_CLEARBODYCACHEDONE ) ;
+	exit ;
+}
 
 
 

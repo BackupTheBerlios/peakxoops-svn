@@ -1,5 +1,5 @@
 Hello {X_UNAME},
 
-A new content has been registered at {X_SITENAME}
+A new content has been registered at {X_SITENAME}:{X_MODULE}
 
-Forum URL: {FORUM_URL}
+URL: {CONTENT_URL}

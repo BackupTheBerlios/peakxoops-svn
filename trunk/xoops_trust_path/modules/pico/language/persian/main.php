@@ -4,6 +4,20 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
 //
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:30
+define('_MD_PICO_EXPIRING','Expiring');
+define('_MD_PICO_FMT_PUBLIC','Public');
+define('_MD_PICO_FMT_PRIVATE','Private');
+define('_MD_PICO_FMT_PUBLICCOUNT','Public: %s items');
+define('_MD_PICO_FMT_PRIVATECOUNT','Private: %s items');
+define('_MD_PICO_INVISIBLE','Invisible');
+define('_MD_PICO_TH_TAGS','Tags');
+define('_MD_PICO_TH_TAGSDSC','separate tags by a space');
+define('_MD_PICO_FMT_QUERYTAGTITLE','Tag: %s');
+define('_MD_PICO_FMT_QUERYTAGDESC','Contents tagged %s');
+define('_MD_PICO_ERR_NOCONTENTMATCHED','No contents');
+
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه ها');
 define('_MD_PICO_DELETEDCONTENTS','حذف سند ها');

@@ -34,6 +34,7 @@ function execute( $request )
 
 	// initialize
 	$cat_data = $this->currentCategoryObj->getData() ;
+	$picoPermission =& PicoPermission::getInstance() ;
 
 	// permission check
 	if( empty( $cat_data['can_post'] ) ) {
@@ -43,6 +44,10 @@ function execute( $request )
 	// insert a content
 	$content_id = pico_makecontent( $this->mydirname , $cat_data['post_auto_approved'] , $cat_data['isadminormod'] ) ;
 	$content_uri4html = XOOPS_URL."/modules/$this->mydirname/".pico_common_make_content_link4html( $this->mod_config , $content_id , $this->mydirname ) ;
+
+	// get contentObj
+	$this->contentObj =& new PicoContent( $this->mydirname , $content_id , $this->currentCategoryObj ) ;
+	$content_data = $this->contentObj->getData() ;
 
 	// return uri
 	if( ! empty( $_GET['ret'] ) && ( $ret_uri = pico_main_parse_ret2uri( $this->mydirname , $_GET['ret'] ) ) ) {
@@ -56,16 +61,31 @@ function execute( $request )
 		XCube_DelegateUtils::raiseEvent( 'ModuleClass.Pico.Contentman.InsertSuccess' , $this->mydirname , $content_id , $cat_data , $ret_uri4html ) ;
 	}
 
+	// create extra_tags for notifications
+	$extra_tags = array(
+		'CONTENT_URL' => pico_common_unhtmlspecialchars( $content_uri4html ) ,
+		'APPROVAL_URL' => XOOPS_URL."/modules/$this->mydirname/index.php?page=contentmanager&content_id=$content_id" ,
+		'CAT_TITLE' => $cat_data['cat_title'] ,
+		'CONTENT_SUBJECT' => $content_data['subject_raw'] ,
+	) ;
+
+	// users2notify (can_readfull only)
+	$users2notify = $picoPermission->getUidsFromCatid( $this->mydirname , $cat_data['id'] , 'can_readfull' ) ;
+
 	if( $cat_data['post_auto_approved'] ) {
-		// Notify for new content
-		pico_main_trigger_event( 'global' , 0 , 'newcontent' , array( 'CONTENT_URL' => pico_common_unhtmlspecialchars( $content_uri4html ) ) , array() , 0 ) ;
+		// Notify for new content 'global'
+		pico_main_trigger_event( $this->mydirname , 'global' , 0 , 'newcontent' , $extra_tags , $users2notify , 0 ) ;
+		// Notify for new content 'category' of all parental categories
+		foreach( array_keys( $cat_data['paths_raw'] ) as $cat_id ) {
+			pico_main_trigger_event( $this->mydirname , 'category' , $cat_id , 'newcontent' , $extra_tags , $users2notify , 0 ) ;
+		}
 		// message "registered"
 		redirect_header( $ret_uri4html , 2 , _MD_PICO_MSG_CONTENTMADE ) ;
 	} else {
 		// Notify for new waiting content (only for admin or mod)
 		$users2notify = pico_main_get_moderators( $this->mydirname , $cat_data['id'] ) ;
 		if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
-		pico_main_trigger_event( 'global' , 0 , 'waitingcontent' , array( 'CONTENT_URL' => XOOPS_URL."/modules/$this->mydirname/index.php?page=contentmanager&content_id=$content_id" ) , $users2notify ) ;
+		pico_main_trigger_event( $this->mydirname , 'global' , 0 , 'waitingcontent' , $extra_tags , $users2notify ) ;
 		// message "waiting approval"
 		redirect_header( $ret_uri4html , 2 , _MD_PICO_MSG_CONTENTWAITINGREGISTER ) ;
 	}

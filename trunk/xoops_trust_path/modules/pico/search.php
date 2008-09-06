@@ -75,9 +75,8 @@ function pico_global_search_base( $mydirname , $keywords , $andor , $limit , $of
 
 	$ret = array() ;
 	foreach( $contents4assign as $content ) {
-
 		// get context for module "search"
-		if( function_exists( 'search_make_context' ) && $showcontext ) {
+		if( function_exists( 'search_make_context' ) && $showcontext && $content['can_readfull'] ) {
 			$full_context = strip_tags( @$content['body_cached'] ) ;
 			if( function_exists( 'easiestml' ) ) $full_context = easiestml( $full_context ) ;
 			$context = search_make_context( $full_context , $keywords ) ;

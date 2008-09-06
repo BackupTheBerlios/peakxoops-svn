@@ -49,6 +49,10 @@ define('_MD_A_PICO_H2_SYNCALL','冗長情報の同期');
 define('_MD_A_PICO_BTN_DOSYNCALL','同期実行');
 define('_MD_A_PICO_MSG_SYNCALLDONE','同期完了しました');
 define('_MD_A_PICO_HELP_SYNCALL','カテゴリーのツリー構造・コンテンツにおける投票数など、速度をかせぐために持たせている冗長情報がおかしくなった時に実行してください');
+define('_MD_A_PICO_H2_CLEARBODYCACHE','本文キャッシュのクリア');
+define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','クリア実行');
+define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','全コンテンツの本文キャッシュをクリアしました');
+define('_MD_A_PICO_HELP_CLEARBODYCACHE','サイトを移動するなどして、コンテンツ本文の表示や検索結果がおかしくなっている時にだけ実行してください。正常な時に実行すると、パフォーマンスの低下や検索ミスなどの原因になります。');
 
 // extras
 define('_MD_A_PICO_H2_EXTRAS','拡張機能');

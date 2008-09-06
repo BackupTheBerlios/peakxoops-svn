@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(__FILE__).'/pico.textsanitizer.php' ;
 require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
 require_once dirname(__FILE__).'/PicoPermission.class.php' ;
 
@@ -46,8 +47,8 @@ function getCategoryLatestContents( &$categoryObj , $num = 10 , $fetch_from_subc
 	$target_categories = array_intersect( array_merge( $child_categories , array( $cat_data['id'] ) ) , $readable_categories ) ;
 
 	$whr_cid = 'cat_id IN ('.implode(',',$target_categories).')' ;
-	$sql = "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE ($whr_cid) AND visible AND created_time <= UNIX_TIMESTAMP() ORDER BY modified_time DESC, content_id LIMIT $num" ;
-	
+	$sql = "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE ($whr_cid) AND visible AND created_time <= UNIX_TIMESTAMP() AND expiring_time > UNIX_TIMESTAMP() ORDER BY modified_time DESC, content_id LIMIT $num" ;
+
 	if( ! $result = $db->query( $sql ) ) {
 		if( $GLOBALS['xoopsUser']->isAdmin() ) echo $db->logger->dumpQueries() ;
 		exit ;
@@ -130,17 +131,21 @@ function PicoContent( $mydirname , $content_id , $categoryObj = null , $allow_ma
 	}
 	$cat_data = $this->categoryObj->getData() ;
 
+	$is_public = $content_row['visible'] && $content_row['created_time'] <= time() && $content_row['expiring_time'] > time() ;
+
 	$this->data = array(
 		'id' => intval( $content_row['content_id'] ) ,
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
 		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
+		'expiring_time_formatted' => formatTimestamp( $content_row['expiring_time'] ) ,
 		'subject_raw' => $content_row['subject'] ,
 		'body_raw' => $content_row['body'] ,
 		'isadminormod' => $cat_data['isadminormod'] ,
-		'can_read' => $cat_data['isadminormod'] || $cat_data['can_read'] && $content_row['visible'] && $content_row['created_time'] <= time() ,
-		'can_readfull' => $cat_data['isadminormod'] || $cat_data['can_readfull'] ,
-		'can_edit' => $cat_data['isadminormod'] || $cat_data['can_edit'] && ! $content_row['locked'] ,
-		'can_delete' => $cat_data['isadminormod'] || $cat_data['can_delete'] && ! $content_row['locked'] ,
+		'public' => $is_public ,
+		'can_read' => $cat_data['isadminormod'] || $cat_data['can_read'] && $is_public ,
+		'can_readfull' => $cat_data['isadminormod'] || $cat_data['can_readfull'] && $is_public ,
+		'can_edit' => $cat_data['isadminormod'] || $cat_data['can_edit'] && ! $content_row['locked'] && $is_public ,
+		'can_delete' => $cat_data['isadminormod'] || $cat_data['can_delete'] && ! $content_row['locked'] && $is_public ,
 	) + $content_row ;
 }
 
@@ -182,7 +187,7 @@ function getData4html( $process_body = false )
 	// process body
 	if( $this->data['last_cached_time'] < $this->data['modified_time'] || $process_body && ! $this->data['use_cache'] ) {
 		if( is_object( @$GLOBALS['xoopsTpl'] ) ) {
-			$ret4html['body'] = $this->filterBody( $ret4html ) ;
+			$ret4html['body'] = $this->filterBody( $this->data ) ;
 		} else {
 			// process filterBody() after including XOOPS_ROOT_PATH/header.php
 			$this->need_filter_body = true ;
@@ -192,21 +197,21 @@ function getData4html( $process_body = false )
 	return $ret4html ;
 }
 
-function filterBody( $content4assign )
+function filterBody( $content_data )
 {
 	$db =& Database::getInstance() ;
 
 	// wraps special check (compare filemtime with modified_time )
-	/*if( strstr( $this->data['filters'] , 'wraps' ) && $this->data['vpath'] ) {
-		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$this->data['vpath']) ;
-		if( @filemtime( $wrap_full_path ) > @$this->data['modified_time'] ) {
-			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($this->data['content_id']) ) ;
+	/*if( strstr( $content_data['filters'] , 'wraps' ) && $content_data['vpath'] ) {
+		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$content_data['vpath']) ;
+		if( @filemtime( $wrap_full_path ) > @$content_data['modified_time'] ) {
+			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($content_data['content_id']) ) ;
 		}
 	}*/
 
 	// process each filters
-	$text = $this->data['body'] ;
-	$filters = explode( '|' , $this->data['filters'] ) ;
+	$text = $content_data['body_raw'] ;
+	$filters = explode( '|' , $content_data['filters'] ) ;
 	foreach( array_keys( $filters ) as $i ) {
 		$filter = trim( $filters[ $i ] ) ;
 		if( empty( $filter ) ) continue ;
@@ -232,13 +237,13 @@ function filterBody( $content4assign )
 		if( ! function_exists( $func_name ) ) {
 			require_once $file_path ;
 		}
-		$text = $func_name( $this->mydirname , $text , $content4assign ) ;
+		$text = $func_name( $this->mydirname , $text , $content_data ) ;
 	}
 
 	// store the result into body_cached and for_search field just after modification of the content
-	if( empty( $this->data['for_search'] ) ) {
-		$for_search = $this->data['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$this->data['extra_fields'] ) ) ) ;
-		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($this->data['content_id']) ) ;
+	if( empty( $content_data['for_search'] ) ) {
+		$for_search = $content_data['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$content_data['extra_fields'] ) ) ) ;
+		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content_data['content_id']) ) ;
 
 	}
 
@@ -320,7 +325,7 @@ function &getPrevContent()
 {
 	$db =& Database::getInstance() ;
 
-	list( $prev_content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE (weight<".$this->data['weight']." OR content_id<$this->id AND weight=".$this->data['weight'].") AND cat_id=".$this->data['cat_id']." AND visible AND created_time<=UNIX_TIMESTAMP() AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
+	list( $prev_content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE (weight<".$this->data['weight']." OR content_id<$this->id AND weight=".$this->data['weight'].") AND cat_id=".$this->data['cat_id']." AND visible AND created_time <= UNIX_TIMESTAMP() AND expiring_time > UNIX_TIMESTAMP() AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
 
 	$ret = null ;
 	if( ! empty( $prev_content_id ) ) {
@@ -333,7 +338,7 @@ function &getNextContent()
 {
 	$db =& Database::getInstance() ;
 
-	list( $next_content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE (weight>".$this->data['weight']." OR content_id>$this->id AND weight=".$this->data['weight'].") AND cat_id=".$this->data['cat_id']." AND visible AND created_time<=UNIX_TIMESTAMP() AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
+	list( $next_content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE (weight>".$this->data['weight']." OR content_id>$this->id AND weight=".$this->data['weight'].") AND cat_id=".$this->data['cat_id']." AND visible AND created_time <= UNIX_TIMESTAMP() AND expiring_time > UNIX_TIMESTAMP() AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
 
 	$ret = null ;
 	if( ! empty( $next_content_id ) ) {

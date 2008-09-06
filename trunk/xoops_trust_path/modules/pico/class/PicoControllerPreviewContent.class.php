@@ -39,6 +39,8 @@ function processPreview( $request )
 
 	// request
 	$request = pico_get_requests4content( $this->mydirname , $errors = array() , $cat_data['post_auto_approved'] , $cat_data['isadminormod'] , $this->assign['content']['id'] ) ;
+	$request['body_raw'] = $request['body'] ;
+	$request['subject_raw'] = $request['subject'] ;
 	$request4assign = array_map( 'htmlspecialchars_ent' , $request ) ;
 	$this->assign['request'] = $request4assign ;
 
@@ -48,12 +50,15 @@ function processPreview( $request )
 	$this->assign['content']['body_raw'] = $request['body'] ;
 	$this->assign['content']['extra_fields'] = $request['extra_fields'] ;
 
+	// temporary $contentObj
+	$tmpContentObj =& new PicoContent( $this->mydirname , 0 , $this->currentCategoryObj , true ) ;
+
 	// preview
 	$this->assign['preview'] = array(
 		'errors' => $errors ,
 		'htmlheader' => $request['htmlheader'] , // remove it?
 		'subject' => $myts->makeTboxData4Show( $request['subject'] ) ,
-		'body' => pico_common_filter_body( $this->mydirname , $request + array('content_id'=>0) ) ,
+		'body' => $tmpContentObj->filterBody( $request ) ,
 	) ;
 }
 

@@ -13,8 +13,11 @@ $langman =& D3LanguageManager::getInstance() ;
 $langman->read( 'main.php' , $mydirname , $mytrustdirname ) ;
 
 // get page name (new in 2008-03-24)
-preg_match( '/[?&]page\=([a-zA-Z0-9_-]+)/' , @$_SERVER['REQUEST_URI'] , $regs ) ;
-$page = @$regs[1] ;
+$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
+if( empty( $page ) ) {
+	preg_match( '/[?&]page\=([a-zA-Z0-9_-]+)/' , @$_SERVER['REQUEST_URI'] , $regs ) ;
+	$page = @$regs[1] ;
+}
 
 // fork each pages
 if( file_exists( "$mytrustdirpath/main/$page.php" ) ) {

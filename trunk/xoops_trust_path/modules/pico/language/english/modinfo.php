@@ -89,6 +89,10 @@ define($constpref.'_BNAME_TAGS','Tags');
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'global');
 define($constpref.'_NOTCAT_GLOBALDSC', 'notifications about this module');
+define($constpref.'_NOTCAT_CATEGORY', 'category');
+define($constpref.'_NOTCAT_CATEGORYDSC', 'notifications under this category');
+define($constpref.'_NOTCAT_CONTENT', 'content');
+define($constpref.'_NOTCAT_CONTENTDSC', 'notifications about this content');
 
 // Each Notifications
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', 'waitings');
@@ -96,7 +100,13 @@ define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'Notify if new posts or mo
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: waiting');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT', 'new content');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP', 'Notify if a new content is registered. (approved contents only)');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : New content');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : a new content {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT', 'new content');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP', 'Notify if a new content is registered. (approved contents only)');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} a new content {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CONTENT_COMMENT', 'new comment');
+define($constpref.'_NOTIFY_CONTENT_COMMENTCAP', 'Notify if a new comment is posted. (approved comments only)');
+define($constpref.'_NOTIFY_CONTENT_COMMENTSBJ', '[{X_SITENAME}] {X_MODULE} : a new comment');
 
 }
 

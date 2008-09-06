@@ -16,13 +16,14 @@
 <{foreach item=category from=$categories}>
 
 	<h<{$category.depth_in_tree|min:5}>><a href="<{$mod_url}>/<{$category.link}>"><{$category.title}></a>
-	<{if $category.isadminormod && $category.invisible_contents_counter}>
- <em class="pico_notice">(<{$category.invisible_contents_counter}>)</em>
-	<{/if}>
 	</h<{$category.depth_in_tree|min:5}>>
 
 	<!-- controllers for each categories -->
 	<div class="pico_controllers_in_menu">
+		<{if $category.isadminormod && $category.private_contents_counter}>
+			<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$category.private_contents_counter|string_format:$smarty.const._MD_PICO_FMT_PRIVATECOUNT}>]</a>
+		<{/if}>
+
 		<{if $category.isadminormod}>
 			<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
 		<{/if}>
@@ -31,6 +32,10 @@
 			<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>]</a>
 		<{/if}> *}>
 
+		<{if $xoops_isadmin}>
+			<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>]</a>
+		<{/if}>
+	
 		<{if $category.can_post}>
 			<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$category.id}>&amp;ret=mm">[<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>]</a>
 		<{/if}>

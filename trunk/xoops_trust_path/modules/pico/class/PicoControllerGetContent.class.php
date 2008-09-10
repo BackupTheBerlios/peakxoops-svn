@@ -96,6 +96,11 @@ function execute( $request )
 			$this->is_need_header_footer = true ;
 			break ;
 	}
+
+	// htmlheader
+	if( ! empty( $this->mod_config['allow_each_htmlheader'] ) ) {
+		$this->html_header .= $content_data['htmlheader'] ;
+	}
 }
 
 

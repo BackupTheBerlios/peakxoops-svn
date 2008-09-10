@@ -1,15 +1,13 @@
 <?php
 
 // contents list admin
-
-// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:30
-define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','Independent Permission');
-define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','Set permissions for this category independently from the parent category');
-define('_MD_A_PICO_LINK_CATPERMISSIONID','Check the parental permissions');
-define('_MD_A_PICO_H2_CLEARBODYCACHE','Clear body cache');
-define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','clear');
-define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','all caches for contents have just been cleared');
-define('_MD_A_PICO_HELP_CLEARBODYCACHE','Just execute it when some caching troubles are occurred eg) after moving site.');
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','دسترسی مستقل');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','تنظیم دسترسی های این شاخه مستقل از شاخه والد');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','برسی دسترسی های وابسته');
+define('_MD_A_PICO_H2_CLEARBODYCACHE','خالی کردن کش بدنه');
+define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','خالی کن');
+define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','تمام کش های  سند ها حذف شد');
+define('_MD_A_PICO_HELP_CLEARBODYCACHE','وقتی این گزینه را اجرا کنید که بعضی از کش ها مشکل ایجاد کرده باشند مثلا ) بعد از انتقال سایت.');
 
 define('_MD_A_PICO_H2_CONTENTS','لیست اسناد');
 define('_MD_A_PICO_TH_CONTENTSID','ID');
@@ -36,6 +34,9 @@ define('_MD_A_PICO_MSG_FMT_DUPLICATEDVPATH','بعضی از اسناد به دل�
 
 // category_access
 define('_MD_A_PICO_LABEL_SELECTCATEGORY','شاخه ی مورد نظر را انتخاب کنید');
+define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','دسترسی مستقل');
+define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','تنظیم دسترسی های این شاخه مستقل از شاخه والد');
+define('_MD_A_PICO_LINK_CATPERMISSIONID','برسی دسترسی های وابسته');
 define('_MD_A_PICO_H2_GROUPPERMS','دسترسی ها برای هر گروه');
 define('_MD_A_PICO_H2_USERPERMS','دسترسی ها برای هر کاربر');
 define('_MD_A_PICO_TH_UID','id کاربر');
@@ -56,6 +57,10 @@ define('_MD_A_PICO_H2_SYNCALL','هم زمان کردن اطلاعات افزود
 define('_MD_A_PICO_BTN_DOSYNCALL','هم زمان کن!');
 define('_MD_A_PICO_MSG_SYNCALLDONE','اطلاعات با موفقیت هم زمان شد');
 define('_MD_A_PICO_HELP_SYNCALL','اگه شاخه ها یا سند ی شما اطلاعات متناقض نمایش میدهد این گزینه را  اجرا کنید');
+define('_MD_A_PICO_H2_CLEARBODYCACHE','خالی کردن کش بدنه');
+define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','خالی کن');
+define('_MD_A_PICO_MSG_CLEARBODYCACHEDONE','تمام کش های  سند ها حذف شد');
+define('_MD_A_PICO_HELP_CLEARBODYCACHE','وقتی این گزینه را اجرا کنید که بعضی از کش ها مشکل ایجاد کرده باشند مثلا ) بعد از انتقال سایت.');
 
 // extras
 define('_MD_A_PICO_H2_EXTRAS','اضافی ها');

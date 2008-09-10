@@ -52,6 +52,11 @@ function b_pico_list_show( $options )
 		$contents4assign = $content_handler->getContents4assign( 'o.cat_id IN ('.implode(',',$categories).')' , $selected_order , 0 , $limit , false ) ;
 	}
 
+	// compatibility for 1.5/1.6
+	foreach( array_keys( $contents4assign ) as $i ) {
+		$contents4assign[$i]['body'] = $display_body ? $contents4assign[$i]['body_cached'] : '' ;
+	}
+
 	// module config (not overridden yet)
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->getByDirname($mydirname);

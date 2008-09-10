@@ -1,20 +1,20 @@
-Hello {X_UNAME},
+سلام {X_UNAME},
 
-A new comment has been posted at {X_SITENAME}
+یک نظر جدید ارسال شد در {X_SITENAME}
 
 {X_COMMENT_URL}
 
 -----------
 
-You are receiving this message because you selected to be notified when this story was approved.
+شما این پیام را دریافت کرده اید چون درخواست داشته اید هنگام ارسال نظر جدید به شما اطلاع بدهیم.
 
-If you wish not to receive further notifications, visit the link below:
+اگر شما میخواهید که دیگر این پیام را دریافت نکنید به لینک زیر بروید:
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+لطفا به این پیام پاسخ ندهید.
 
 -----------
 {X_SITENAME} ({X_SITEURL}) 
-WEBMASTER
+وبمستر
 {X_ADMINMAIL}
 -----------

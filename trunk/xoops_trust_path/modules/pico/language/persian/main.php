@@ -4,26 +4,13 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
 //
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:30
-define('_MD_PICO_EXPIRING','Expiring');
-define('_MD_PICO_FMT_PUBLIC','Public');
-define('_MD_PICO_FMT_PRIVATE','Private');
-define('_MD_PICO_FMT_PUBLICCOUNT','Public: %s items');
-define('_MD_PICO_FMT_PRIVATECOUNT','Private: %s items');
-define('_MD_PICO_INVISIBLE','Invisible');
-define('_MD_PICO_TH_TAGS','Tags');
-define('_MD_PICO_TH_TAGSDSC','separate tags by a space');
-define('_MD_PICO_FMT_QUERYTAGTITLE','Tag: %s');
-define('_MD_PICO_FMT_QUERYTAGDESC','Contents tagged %s');
-define('_MD_PICO_ERR_NOCONTENTMATCHED','No contents');
-
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه ها');
 define('_MD_PICO_DELETEDCONTENTS','حذف سند ها');
 define('_MD_PICO_MENU','منو');
 define('_MD_PICO_CREATED','ساخته شده در');
 define('_MD_PICO_MODIFIED','ویرایش  شده در');
+define('_MD_PICO_EXPIRING','انقضا');
 define('_MD_PICO_BYTE','بایت');
 define('_MD_PICO_HISTORY','آرشیو تغییرات');
 define('_MD_PICO_DIFF2NOW','تفاوت با فعلی');
@@ -35,8 +22,13 @@ define('_MD_PICO_NEXT','بعدی');
 define('_MD_PICO_PREV','قبلی');
 define('_MD_PICO_CATEGORYINDEX','بالا این شاخه');
 define('_MD_PICO_NOSUBJECT','(بدون عنوان)');
+define('_MD_PICO_FMT_PUBLIC','منتشر شده');
+define('_MD_PICO_FMT_PRIVATE','خصوصی');
+define('_MD_PICO_FMT_PUBLICCOUNT','منتشر شده: %s مورد');
+define('_MD_PICO_FMT_PRIVATECOUNT','خصوصی: %s مورد');
 define('_MD_PICO_WAITINGRELEASE','منتظر برای انتشار');
 define('_MD_PICO_EXPIRED','منقضی شد');
+define('_MD_PICO_INVISIBLE','مخفی');
 define('_MD_PICO_WAITINGAPPROVAL','در انتظار تایید');
 define('_MD_PICO_WAITINGREGISTER','در انتظار جدید');
 define('_MD_PICO_WAITINGUPDATE','در انتظار به روز رسانی');
@@ -103,6 +95,8 @@ define('_MD_PICO_TH_HTMLHEADER_WAITING','سرتیتر های HTML منتظر');
 define('_MD_PICO_TH_BODY','متن سند');
 define('_MD_PICO_TH_BODY_WAITING','متن منتظر');
 define('_MD_PICO_TH_FILTERS','فیلتر ها');
+define('_MD_PICO_TH_TAGS','کلمات کلیدی');
+define('_MD_PICO_TH_TAGSDSC','کلمات کلیدی را به فاصله ( space ) از هم جدا کنید.');
 define('_MD_PICO_TH_WEIGHT','وزن چینش');
 define('_MD_PICO_TH_CONTENTOPTIONS','تنظیمات');
 define('_MD_PICO_LABEL_USECACHE','استفاده از کش');
@@ -143,6 +137,11 @@ define('_MD_PICO_VOTECOUNT','رای ها');
 define('_MD_PICO_VOTEPOINTAVG','میانگین');
 define('_MD_PICO_VOTEPOINTDSCBEST','مفید');
 define('_MD_PICO_VOTEPOINTDSCWORST','غیر مفید ');
+
+// query contents
+define('_MD_PICO_FMT_QUERYTAGTITLE','تگ: %s');
+define('_MD_PICO_FMT_QUERYTAGDESC','اسناد شامل کلمه کلیدی %s');
+define('_MD_PICO_ERR_NOCONTENTMATCHED','بدون نظر');
 
 // filters
 define('_MD_PICO_FILTERS_EVALTITLE','کد های php');

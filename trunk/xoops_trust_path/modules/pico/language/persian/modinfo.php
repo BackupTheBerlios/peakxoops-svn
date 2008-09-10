@@ -5,29 +5,6 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:30
-define($constpref.'_ALLOWEACHHEAD','specify HTML headers for each contents');
-define($constpref.'_EF_CLASS','class for extra_fields');
-define($constpref.'_EF_CLASSDSC','Change it if you want to override the handler for extra_fields. default value is PicoExtraFields');
-define($constpref.'_EFIMAGES_DIR','directory for extra_fields');
-define($constpref.'_EFIMAGES_DIRDSC','set relative path from XOOPS_ROOT_PATH. Create and chmod 777 the directory first. default) uploads/(module dirname)');
-define($constpref.'_EFIMAGES_SIZE','pixels for extra images');
-define($constpref.'_EFIMAGES_SIZEDSC','(main_width)x(main_height) (small_width)x(small_height) default) 480x480 150x150');
-define($constpref.'_IMAGICK_PATH','Path for ImageMagick binaries');
-define($constpref.'_IMAGICK_PATHDSC','Leave blank normal, or set it like /usr/X11R6/bin/');
-define($constpref.'_BNAME_TAGS','Tags');
-define($constpref.'_NOTCAT_CATEGORY','category');
-define($constpref.'_NOTCAT_CATEGORYDSC','notifications under this category');
-define($constpref.'_NOTCAT_CONTENT','content');
-define($constpref.'_NOTCAT_CONTENTDSC','notifications about this content');
-define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT','new content');
-define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP','Notify if a new content is registered. (approved contents only)');
-define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ','[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} a new content {CONTENT_SUBJECT}');
-define($constpref.'_NOTIFY_CONTENT_COMMENT','new comment');
-define($constpref.'_NOTIFY_CONTENT_COMMENTCAP','Notify if a new comment is posted. (approved comments only)');
-define($constpref.'_NOTIFY_CONTENT_COMMENTSBJ','[{X_SITENAME}] {X_MODULE} : a new comment');
-
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
@@ -77,6 +54,7 @@ define($constpref.'_USE_VOTE','فعال سازی قابلیت رای دادن');
 define($constpref.'_GUESTVOTE_IVL','رای دادن مهمان ها');
 define($constpref.'_GUESTVOTE_IVLDSC',' با انتخاب 0 امکان رای دادن مهمان ها را بگیرید. بقیه ی اعداد زمان(ثانیه) رای دادن هر ip میباشد');
 define($constpref.'_HTMLHEADER','سرفصل HTML مشترک');
+define($constpref.'_ALLOWEACHHEAD','سر فصل HTML اختصاصی برای هر سند');
 define($constpref.'_CSS_URI','آدرس فایل های CSS در ماژول');
 define($constpref.'_CSS_URIDSC','مسیر داخلی( داخل ماژول) یا خارجی( از جای دیگر) قابل تنضیم است. مسیر پیش فرض: {mod_url}/index.php?page=main_css');
 define($constpref.'_IMAGES_DIR','محل قرار گیری تصاویر');
@@ -88,6 +66,14 @@ define($constpref.'_HISTORY_P_C','چه تعداد اصلاح (سند) در پا�
 define($constpref.'_MLT_HISTORY','کمترین عمر هر اصلاح ( ثانیه)');
 define($constpref.'_BRCACHE','زمان نگاه داری فایل کش برای  فایل های تصویری (فقط در حالت wraps)');
 define($constpref.'_BRCACHEDSC','فایل های به غیر از آن HTML توسط مرور گر شما در مدت زمان مشخص شده بر حسب ثانیه کش میشوند (0 به معنی غیر فعال است)');
+define($constpref.'_EF_CLASS','کلاس برای extra_fields');
+define($constpref.'_EF_CLASSDSC','وقتی این گزینه را تغییر دهید که به یک handler ( دسته گذار ) مفید تر برای extra_fields نیاز دارید. مقدار پیش فرض : PicoExtraFields');
+define($constpref.'_EFIMAGES_DIR','شاخه extra_fields');
+define($constpref.'_EFIMAGES_DIRDSC','یک مسیر در XOOPS_ROOT_PATH را مشخص کنید. ابتدا آن را بسازید و به آن دسترسی 777 بدهید. شاخه پیش فرض) uploads/(module dirname)');
+define($constpref.'_EFIMAGES_SIZE','ابعدا تصویر اضافی');
+define($constpref.'_EFIMAGES_SIZEDSC','(عرض اصلی)x(ارتفاع اصلی) (عرض کوچیک)x(ارتفاع کوچیک) مقدار پیش فرض) 480x480 150x150');
+define($constpref.'_IMAGICK_PATH','مسیر کتابخانه گرافیکی ImageMagick');
+define($constpref.'_IMAGICK_PATHDSC','در حالت عادی این قسمت را خالی بگذارید, و یا آن را مشابه مثال رو به رو تنظیم کنید /usr/X11R6/bin/');
 define($constpref.'_COM_DIRNAME','یکسان سازی پیام ها: نام انجمن در d3forum');
 define($constpref.'_COM_FORUM_ID','یکسان سازی پیام ها:ID انجمن ');
 define($constpref.'_COM_VIEW','دیدن نظر های یکپارچه');
@@ -98,18 +84,29 @@ define($constpref.'_BNAME_CONTENT','سند');
 define($constpref.'_BNAME_LIST','لیست');
 define($constpref.'_BNAME_SUBCATEGORIES','زیر شاخه ها');
 define($constpref.'_BNAME_MYWAITINGS','پست های منتظر تایید من');
+define($constpref.'_BNAME_TAGS','کلمات کلیدی');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'سراسری');
-define($constpref.'_NOTCAT_GLOBALDSC', 'اطلاع رساني درباره اين ماژول');
+define($constpref.'_NOTCAT_GLOBALDSC', 'اطلاع رسانی در مورد این ماژول');
+define($constpref.'_NOTCAT_CATEGORY','شاخه');
+define($constpref.'_NOTCAT_CATEGORYDSC',' اطلاع رسانی در مورد این شاخه');
+define($constpref.'_NOTCAT_CONTENT','سند');
+define($constpref.'_NOTCAT_CONTENTDSC', ' اطلاع رسانی در مورد این سند');
 
 // Each Notifications
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENT', 'منتظر ها برای تایید');
-define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'چنانچه تغيير و يا پستي منتظر تاييد است به من خبر بده(فقط براي اطلاع رساني مديران و وبمستران)');
+define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'چنانچه تغيير و يا پستي منتظر تاييد است من را با خبر کن(فقط براي اطلاع رساني مديران و وبمستران)');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}: waiting');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT','سندی جدید');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP','اگر یک سند جدید ثبت شد اطلاع بده. (فقط برای سند ها مجاز باشد)');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP','اگر یک سند جدید ثبت شد من را با خبر کن. (فقط برای سند ها مجاز باشد)');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ','[{X_SITENAME}] {X_MODULE} : سندی جدید');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT','سند جدید');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP','وقتی یک سند جدید ثبت شد من را با خبر کن. (فقط نظر های تایید شده)');
+define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ','[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} یک سند جدید {CONTENT_SUBJECT}');
+define($constpref.'_NOTIFY_CONTENT_COMMENT','نظر جدید');
+define($constpref.'_NOTIFY_CONTENT_COMMENTCAP','وقتی یک نظر جدید فرستاده شد من را با خبر کن. (فقط نظر های تایید شده)');
+define($constpref.'_NOTIFY_CONTENT_COMMENTSBJ','[{X_SITENAME}] {X_MODULE} : یک نظر جدید');
 
 }
 

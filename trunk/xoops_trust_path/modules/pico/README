@@ -42,7 +42,7 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - contents controller for admin
 - dynamic submenu
 - native d3forum comment-integration
-- Wysiwyg Editor (common/spaw and common/fckeditor)
+- Wysiwyg Editor (common/fckeditor only)
 - import from TinyD per a module
 - import from pico per a module
 - import from pico per a content
@@ -59,6 +59,11 @@ Of course, you can upgrade your contents from TinyD to pico easily.
 - static URI by mod_rewrite (both wraps mode and normal mode)
 - refer histories of contents
 - language constants override system
+- Xmobile plugin
+- any number of extra fields or images as you like
+- tag
+- hierarchical permission system (succeeding or independent as you like)
+- waiting/expiring contents
 
 
 [b]USAGE:[/b]
@@ -104,6 +109,12 @@ pico is fast enough if you use content's cache.
 
 
 [b]HISTORY:[/b]
+
+1.71 (2008-09-10)
+- fixed htmlheaders for each contents are not rendered (thx neko88)
+- fixed compatibility of the listing block (thx neko88)
+- updated language files
+-- persian (thx voltan)
 
 1.70 (2008-09-07)
 - changed altsys-0.61 essential
@@ -472,7 +483,7 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・管理者用記事一覧管理
 ・サブメニュー（ただし、メインメニューで自分自身が選択されている場合のみ）
 ・d3forum nativeコメント統合
-・Wysiwyg Editor (common/spaw と common/fckeditorの両対応)
+・Wysiwyg Editor (common/fckeditor対応)
 ・TinyDからのインポート（モジュールまるごと）
 ・他のpicoからのインポート（モジュールまるごと）
 ・他のpicoへのエクスポート（記事単位）
@@ -490,6 +501,11 @@ D3モジュールなので、XOOPS_TRUST_PATH についての設定が必要です。
 ・mod_rewriteによる静的URI(wrapsモードおよびnormalモード)
 ・コンテンツ編集履歴機能
 ・言語定数オーバーライドシステム
+・Xmobileによる携帯対応
+・任意追加フィールド機能（画像フィールド機能）
+・タグ機能
+・上位カテゴリーの設定を継承するカテゴリー権限システム
+・公開待ち・期限切れ機能
 
 
 [b]USAGE:[/b]
@@ -532,6 +548,12 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.71 (2008-09-10)
+- コンテンツごとのHTMLヘッダが渡されていないバグの修正 (thx neko88)
+- 一覧ブロックの前バージョンとの互換性改善 (thx neko88)
+- 言語ファイル更新
+-- persian (thx voltan)
+
 1.70 (2008-09-07)
 - altsys-0.61以上が必須となった
 - リクエスト処理など、全体的な作りを大幅に変更した
@@ -548,6 +570,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - common/spawのサポートを終了
 - 全文閲覧権限のないコンテンツの検索時本文表示問題を修正 (thx toshi)
 - 管理画面から本文キャッシュを削除する機能の追加
+- 期限切れ機能の実装
 
 1.62 (2008/08/27)
 - rewriteモードでプリンターへのリンクが切れていたのを修正 (thx taked2)

@@ -49,6 +49,7 @@ Notice: Async block requires the privileges of not only "block access" but also 
 - fixed typo in block_sync_big.html (thx toychee,neko88) 0.63a
 - modified block joints can be added extra parameters 0.63b
 - fixed D3pipesBlockXpwikipages.class.php missing require abstract class 0.63c
+- fixed _MD_D3PIPES_N4J_EXTRAOPTIONS is not assigned other than japanese 0.63d
 
 0.62 2008-05-01
 - reverted D3pipesClipModuledb never change fingerprints
@@ -294,6 +295,7 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 - block_sync_big.html のtypo修正 (thx toychee,neko88) 0.63a
 - ブロックジョイントに追加オプションを指定可能とした 0.63b
 - D3pipesBlockXpwikipages.class.php が場合によってはfatalを起こすのを修正 0.63c
+- 定数 _MD_D3PIPES_N4J_EXTRAOPTIONS がjapanese以外で未定義だったのを修正 0.63d
 
 0.62 2008-05-01
 - ローカル保存ジョイントで、fingerprintを書き換えるのをやめた

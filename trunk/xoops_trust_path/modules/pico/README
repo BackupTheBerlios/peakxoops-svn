@@ -114,7 +114,9 @@ pico is fast enough if you use content's cache.
 - fixed htmlheaders for each contents are not rendered (thx neko88)
 - fixed compatibility of the listing block (thx neko88)
 - updated language files
--- persian (thx voltan)
+-- persian (thx voltan and stranger)
+- fixed formmail cannot work (thx ditamine) 1.71a
+- fixed category info is not assigned for content page (thx ditamine) 1.71a
 
 1.70 (2008-09-07)
 - changed altsys-0.61 essential
@@ -552,7 +554,9 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - コンテンツごとのHTMLヘッダが渡されていないバグの修正 (thx neko88)
 - 一覧ブロックの前バージョンとの互換性改善 (thx neko88)
 - 言語ファイル更新
--- persian (thx voltan)
+-- persian (thx voltan and stranger)
+- formmailプラグインが機能していなかったのを修正 (thx ditamine) 1.71a
+- カテゴリー情報のアサイン忘れを修正 (thx ditamine) 1.71a
 
 1.70 (2008-09-07)
 - altsys-0.61以上が必須となった

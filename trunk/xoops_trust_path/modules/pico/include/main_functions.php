@@ -412,7 +412,7 @@ function pico_main_parse_path_info( $mydirname )
 			} else {
 				header( 'Content-Type: application/octet-stream' ) ;
 			}
-			set_time_limit( 0 ) ;
+			@set_time_limit( 0 ) ;
 			$fp = fopen( $wrap_full_path , "rb" ) ;
 			while( ! feof( $fp ) ) {
 				echo fread( $fp , 65536 ) ;

@@ -9,7 +9,7 @@ define( $constpref.'_LOADED' , 1 ) ;
 
 // definitions for displaying blocks 
 define($constpref."_CATEGORY","شاخه");
-define($constpref."_TOPCATEGORY","شاخه ی اصلی");
+define($constpref."_TOPCATEGORY","شاخه‌ی اصلی");
 
 }
 

@@ -187,7 +187,7 @@ function getData4html( $process_body = false )
 	// process body
 	if( $this->data['last_cached_time'] < $this->data['modified_time'] || $process_body && ! $this->data['use_cache'] ) {
 		if( is_object( @$GLOBALS['xoopsTpl'] ) ) {
-			$ret4html['body'] = $this->filterBody( $this->data ) ;
+			$ret4html['body'] = $this->filterBody( $ret4html ) ;
 		} else {
 			// process filterBody() after including XOOPS_ROOT_PATH/header.php
 			$this->need_filter_body = true ;
@@ -197,21 +197,21 @@ function getData4html( $process_body = false )
 	return $ret4html ;
 }
 
-function filterBody( $content_data )
+function filterBody( $cotnent4assign )
 {
 	$db =& Database::getInstance() ;
 
 	// wraps special check (compare filemtime with modified_time )
-	/*if( strstr( $content_data['filters'] , 'wraps' ) && $content_data['vpath'] ) {
-		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$content_data['vpath']) ;
-		if( @filemtime( $wrap_full_path ) > @$content_data['modified_time'] ) {
-			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($content_data['content_id']) ) ;
+	/*if( strstr( $cotnent4assign['filters'] , 'wraps' ) && $cotnent4assign['vpath'] ) {
+		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$cotnent4assign['vpath']) ;
+		if( @filemtime( $wrap_full_path ) > @$cotnent4assign['modified_time'] ) {
+			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($cotnent4assign['content_id']) ) ;
 		}
 	}*/
 
 	// process each filters
-	$text = $content_data['body_raw'] ;
-	$filters = explode( '|' , $content_data['filters'] ) ;
+	$text = $cotnent4assign['body_raw'] ;
+	$filters = explode( '|' , $cotnent4assign['filters'] ) ;
 	foreach( array_keys( $filters ) as $i ) {
 		$filter = trim( $filters[ $i ] ) ;
 		if( empty( $filter ) ) continue ;
@@ -237,13 +237,13 @@ function filterBody( $content_data )
 		if( ! function_exists( $func_name ) ) {
 			require_once $file_path ;
 		}
-		$text = $func_name( $this->mydirname , $text , $content_data ) ;
+		$text = $func_name( $this->mydirname , $text , $cotnent4assign ) ;
 	}
 
 	// store the result into body_cached and for_search field just after modification of the content
-	if( empty( $content_data['for_search'] ) ) {
-		$for_search = $content_data['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$content_data['extra_fields'] ) ) ) ;
-		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content_data['content_id']) ) ;
+	if( empty( $cotnent4assign['for_search'] ) ) {
+		$for_search = $cotnent4assign['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$cotnent4assign['extra_fields'] ) ) ) ;
+		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($cotnent4assign['content_id']) ) ;
 
 	}
 

@@ -3,8 +3,8 @@
 define('_MD_PICO_FORMMAIL_MSG_ERRORANONYMOUS','خطا در فرم') ;
 define('_MD_PICO_FORMMAIL_MSG_SENTSUCCESSFULLY','با موفقیت ارسال شد') ;
 
-define('_MD_PICO_FORMMAIL_MAILSUBJECT','پرسش درباره ی %s') ;
-define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(تایید کردن) پرسش در باره ی %s');
+define('_MD_PICO_FORMMAIL_MAILSUBJECT','پرسش درباره‌ی %s') ;
+define('_MD_PICO_FORMMAIL_CCMAILSUBJECT','(تایید کردن) پرسش در باره‌ی %s');
 define('_MD_PICO_FORMMAIL_MAILFLDSEP',"\n---------------------------------------------------------------\n") ;
 define('_MD_PICO_FORMMAIL_MAILMIDSEP',"\n--------\n") ;
 

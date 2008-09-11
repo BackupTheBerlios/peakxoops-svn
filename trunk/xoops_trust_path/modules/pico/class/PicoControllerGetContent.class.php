@@ -32,6 +32,7 @@ function execute( $request )
 	}
 
 	$cat_data = $this->currentCategoryObj->getData() ;
+	$this->assign['category'] = $this->currentCategoryObj->getData4html() ;
 	$content_data = $contentObj->getData() ;
 	$this->assign['content'] = $contentObj->getData4html( true ) ;
 	$this->contentObjs['content'] =& $contentObj ;

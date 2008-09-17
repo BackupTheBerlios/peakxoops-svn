@@ -4,6 +4,10 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-17 13:09:55
+define('_MB_PICO_PROCESSBODY','Process body of the content dynamically');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-04-23 04:51:11
 define('_MB_PICO_TAGSNUM','Display');
 define('_MB_PICO_TAGSLISTORDER','Order for displaying');

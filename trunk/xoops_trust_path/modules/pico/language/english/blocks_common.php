@@ -10,6 +10,7 @@ define("_MB_PICO_CONTENTSNUM","Number of items to be displayed");
 define("_MB_PICO_THISTEMPLATE","Template(resource) of the block");
 define("_MB_PICO_DISPLAYBODY","Display content body also");
 define("_MB_PICO_CONTENT_ID","Content ID");
+define("_MB_PICO_PROCESSBODY","Process body of the content dynamically");
 define("_MB_PICO_TAGSNUM","Display");
 define("_MB_PICO_TAGSLISTORDER","Order for displaying");
 define("_MB_PICO_TAGSSQLORDER","Order for extracting");

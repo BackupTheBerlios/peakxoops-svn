@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.71 ;
+$modversion['version'] = 1.72 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -67,7 +67,7 @@ $modversion['blocks'][2] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_pico_content_show' ,
 	'edit_func'		=> 'b_pico_content_edit' ,
-	'options'		=> "$mydirname|1|" ,
+	'options'		=> "$mydirname|1||1" ,
 	'template'		=> '' , // use "module" template instead
 	'visible_any'	=> true ,
 	'can_clone'		=> true ,

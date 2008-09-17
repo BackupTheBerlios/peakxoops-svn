@@ -10,6 +10,7 @@ define("_MB_PICO_CONTENTSNUM","表示件数");
 define("_MB_PICO_THISTEMPLATE","このブロックのテンプレート");
 define("_MB_PICO_DISPLAYBODY","本文表示する");
 define("_MB_PICO_CONTENT_ID","コンテンツ番号");
+define("_MB_PICO_PROCESSBODY","本文を動的生成する");
 define("_MB_PICO_TAGSNUM","タグ表示数");
 define("_MB_PICO_TAGSLISTORDER","タグ表示順");
 define("_MB_PICO_TAGSSQLORDER","タグ抽出順");

@@ -7,6 +7,7 @@ function b_pico_content_show( $options )
 	$mydirname = empty( $options[0] ) ? $mytrustdirname : $options[0] ;
 	$content_id = intval( @$options[1] ) ;
 	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_content.html' : trim( $options[2] ) ;
+	$process_body = empty( $options[3] ) ? false : true ;
 
 	// mydirname check
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
@@ -31,8 +32,8 @@ function b_pico_content_show( $options )
 	// constpref
 	$constpref = '_MB_' . strtoupper( $mydirname ) ;
 
-	// assigning
-	$content4assign = $contentObj->getData4html() ;
+	// assigning (process_body)
+	$content4assign = $contentObj->getData4html( $process_body ) ;
 
 	// convert links from relative to absolute (wraps mode only)
 	if( $configs['use_wraps_mode'] ) {
@@ -75,6 +76,7 @@ function b_pico_content_edit( $options )
 	$mydirname = empty( $options[0] ) ? $mytrustdirname : $options[0] ;
 	$content_id = intval( @$options[1] ) ;
 	$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_content.html' : trim( $options[2] ) ;
+	$process_body = empty( $options[3] ) ? false : true ;
 
 	// mydirname check
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
@@ -95,6 +97,7 @@ function b_pico_content_edit( $options )
 		'contents' => $contents ,
 		'content_id' => $content_id ,
 		'this_template' => $this_template ,
+		'process_body' => $process_body ,
 	) ) ;
 	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_content.html' ) ;
 }

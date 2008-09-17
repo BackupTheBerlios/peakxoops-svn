@@ -11,6 +11,10 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-17 13:18:18
+define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','Are you OK to save as?');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:31
 define('_MD_PICO_EXPIRING','Expiring');
 define('_MD_PICO_FMT_PUBLIC','Public');

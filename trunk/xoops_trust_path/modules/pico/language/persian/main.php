@@ -4,6 +4,10 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
 //
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-09-17 13:18:17
+define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','Are you OK to save as?');
+
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه‌ها');
 define('_MD_PICO_DELETEDCONTENTS','حذف سند‌ها');

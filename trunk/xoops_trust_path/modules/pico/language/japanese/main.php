@@ -117,6 +117,7 @@ define('_MD_PICO_SUBCATEGORIES_TOTAL','総サブカテゴリー数');
 define('_MD_PICO_SUBCATEGORY_COUNT','サブカテゴリー数');
 define('_MD_PICO_MSG_CONFIRMDELETECATEGORY','このカテゴリーに含まれるコンテンツもすべて削除されますがよろしいですか？');
 define('_MD_PICO_MSG_CONFIRMDELETECONTENT','コンテンツを削除してよろしいですか？');
+define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','コンテンツを複製してよろしいですか？');
 //define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','トップカテゴリーは特別なカテゴリーです。設定変更は管理画面の一般設定で行います');
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','HTMLヘッダカスタマイズ部表示');
 define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');

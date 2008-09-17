@@ -240,7 +240,7 @@
 		<{if ! $content.approval && $category.isadminormod && $page != 'makecontent'}>
 			<input type="submit" name="contentman_copyfromwaiting" value="<{$smarty.const._MD_PICO_BTN_COPYFROMWAITING}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMCOPYFROMWAITING}>')" />
 		<{elseif $page == 'contentmanager'}>
-			<input type="submit" class="formButton" name="contentman_post"  id="contentman_saveas" value="<{$smarty.const._MD_PICO_BTN_SUBMITSAVEAS}>" onclick="document.contentform.action='<{$mod_url}>/index.php?page=makecontent&amp;content_id=0';return true;" />
+			<input type="submit" class="formButton" name="contentman_post"  id="contentman_saveas" value="<{$smarty.const._MD_PICO_BTN_SUBMITSAVEAS}>" onclick="document.contentform.action='<{$mod_url}>/index.php?page=makecontent&amp;content_id=0';return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMSAVEASCONTENT}>');" />
 		<{/if}>
 		<{if $page == 'contentmanager' && $category.can_delete}>
 			<input type="submit" name="contentman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMDELETECONTENT}>')" />

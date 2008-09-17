@@ -123,9 +123,16 @@ I thank Madfish for this excellent work!
 
 = CHANGES =
 
+3.20 (2008/09/17)
+- numbered as a stable version
+- updated language files
+-- arabic (onasre)
+- fixed language files
+-- de_utf8
+
 3.17 beta (2008/04/24)
 - modified URLs with the same hostname as XOOPS_URL are not counted as URI SPAM
-- update language files
+- updated language files
 -- persian (thx stranger and voltan) 3.17a
 - added language files
 -- de_utf8 (thx wuddel) 3.17a
@@ -358,6 +365,13 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.20 (2008/09/17)
+- °ÂÄêÈÇ¤È¤·¤Æ¥Ğ¡¼¥¸¥ç¥óÈÖ¹æ¤ò¤Õ¤êÄ¾¤·¤¿
+- ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
+-- arabic (onasre)
+- ¸À¸ì¥Õ¥¡¥¤¥ë½¤Àµ
+-- de_utf8
 
 3.17 beta (2008/04/24)
 - URI SPAMÈ½Äê¤Ç¡¢¼«¥Û¥¹¥È¤ÈÆ±°ì¤Î¾ì¹ç¤ÏÄÌ²á¤¹¤ë¤è¤¦¤Ë¤·¤¿

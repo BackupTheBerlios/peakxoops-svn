@@ -8,12 +8,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-07-30 16:31:33
-define($constpref.'_BANIP_TIME0','Banned IP suspension time (sec)');
-define($constpref.'_OPT_BIPTIME0','Ban the IP (moratorium)');
-define($constpref.'_DOSOPT_BIPTIME0','Ban the IP (moratorium)');
+define($constpref.'_BANIP_TIME0','„œ…  «·„‰⁄  ··„ÿ—ÊœÌ‰ .. »«·ÀÊ«‰Ì');
+define($constpref.'_OPT_BIPTIME0','Êﬁ›  ‰‘«ÿ «·⁄÷Ê „ƒﬁ «');
+define($constpref.'_DOSOPT_BIPTIME0','Êﬁ›  ‰‘«ÿ «·⁄÷Ê „ƒﬁ «');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-04-08 04:24:49
-define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','«· ’«—ÌÕ');
 
 define( $constpref.'_LOADED' , 1 ) ;
 

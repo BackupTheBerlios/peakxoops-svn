@@ -4,15 +4,15 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-10-18 05:36:25
-define('_AM_LABEL_COMPACTLOG','Compact log');
-define('_AM_BUTTON_COMPACTLOG','Compact it!');
-define('_AM_JS_COMPACTLOGCONFIRM','Duplicated (IP,Type) records will be removed');
-define('_AM_LABEL_REMOVEALL','Remove all records');
-define('_AM_BUTTON_REMOVEALL','Remove all!');
-define('_AM_JS_REMOVEALLCONFIRM','All logs are removed absolutely. Are you really OK?');
+define('_AM_LABEL_COMPACTLOG','Õ–› ›ﬁÿ «·”Ã· «·„ ﬂ—— ··«Ì»Ì Ê«·‰Ê⁄');
+define('_AM_BUTTON_COMPACTLOG','Õ–› «·„ ﬂ——');
+define('_AM_JS_COMPACTLOGCONFIRM','Õ–› «·”Ã·«  «· Ì  Õ ÊÌ  ﬂ—«— »‰›” «·«Ì»Ì');
+define('_AM_LABEL_REMOVEALL','Õ–› ﬂ· «·”Ã·« ');
+define('_AM_BUTTON_REMOVEALL','Õ–› «·ﬂ·ø');
+define('_AM_JS_REMOVEALLCONFIRM','”Ì „ Õ–› ﬂ· «·”Ã·« ø ');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-07-30 05:37:51
-define('_AM_FMT_CONFIGSNOTWRITABLE','Turn the configs directory writable: %s');
+define('_AM_FMT_CONFIGSNOTWRITABLE','«⁄ÿ „·› «·ﬂÊ‰›Ã «· ’—ÌÕ 777: %s');
 
 define('_MD_A_MYMENU_MYTPLSADMIN','');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','«· ’«—ÌÕ');

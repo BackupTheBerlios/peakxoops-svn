@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 define('_MD_PROTECTOR_YOUAREBADIP','Diese IP wurden als Böse-IP vom Protector registriert.') ;
 define('_MD_PROTECTOR_TURNJAVASCRIPTON','JavaScript einschalten') ;

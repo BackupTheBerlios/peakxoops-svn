@@ -179,9 +179,41 @@ class PicoFormProcessBySmartyBase
 	}
 
 
+	function isMobile()
+	{
+		if( class_exists( 'Wizin_User' ) ) {
+			// WizMobile (gusagi)
+			$user =& Wizin_User::getSingleton();
+			return $user->bIsMobile ;
+		} else if( defined( 'HYP_K_TAI_RENDER' ) ) {
+			// hyp_common ktai-renderer (nao-pon)
+			return true ;
+		} else {
+			return false ;
+		}
+	}
+
+
+	function getInputEncoding()
+	{
+		if( class_exists( 'Wizin_User' ) ) {
+			// WizMobile (gusagi)
+			$user =& Wizin_User::getSingleton();
+			return $user->sEncoding ;
+		} else if( defined( 'HYP_K_TAI_RENDER' ) ) {
+			// hyp_common ktai-renderer (nao-pon)
+			// judging by input
+			$input = urldecode( file_get_contents( 'php://input' ) ) ;
+			return mb_detect_encoding( urldecode( file_get_contents( 'php://input' ) ) , array( 'SJIS-Win' , 'SJIS' , 'EUCJP-Win' , 'EUC-JP' , 'UTF-8' ) ) ;
+		} else {
+			return null ;
+		}
+	}
+
+
 	function reload()
 	{
-		if( ! headers_sent() ) {
+		if( ! headers_sent() && ! $this->isMobile() ) {
 			header( 'Location: ' . $this->content_uri ) ;
 		} else {
 			redirect_header( htmlspecialchars( $this->content_uri , ENT_QUOTES ) , 3 , '&nbsp;' ) ;
@@ -298,11 +330,13 @@ class PicoFormProcessBySmartyBase
 					}
 				}
 			} else {
-				$_SESSION[ $this->session_index ]['fields'] = $this->form_processor->fetchPost() ;
+				$_SESSION[ $this->session_index ]['fields'] = $this->form_processor->fetchPost( $this->getInputEncoding() ) ;
 				$_SESSION[ $this->session_index ]['step'] = 'confirm' ;
+				//error_log( print_r( $_SESSION , 1 ) , 3 , '/tmp/error_log' ) ;
 			}
 			$this->reload() ;
 		}
+		//error_log( print_r( $_SESSION , 1 ) , 3 , '/tmp/error_log' ) ;
 
 		// process get
 		if( isset( $_SESSION[ $this->session_index ]['fields'] ) ) {

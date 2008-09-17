@@ -166,11 +166,11 @@ class FormProcessByHtml
 	}
 
 
-	function fetchPost()
+	function fetchPost( $input_encoding = null )
 	{
 		$myts =& MyTextSanitizer::getInstance() ;
 
-		$_post = $this->_getPostAsArray() ;
+		$_post = $this->_getPostAsArray( $input_encoding ) ;
 
 		foreach( $this->fields as $field_name => $attribs ) {
 			$value = @$_post[ $field_name ] ;
@@ -297,8 +297,19 @@ class FormProcessByHtml
 	}
 
 
+	function convertEncodingToIE( $string , $input_encoding )
+	{
+		if( function_exists( 'mb_convert_encoding' ) ) {
+			return mb_convert_encoding( $string , _CHARSET , $input_encoding ) ;
+		} else if( function_exists( 'iconv' ) ) {
+			return iconv( $string , $input_encoding , _CHARSET ) ;
+		}
+		return $string ;
+	}
+
+
 	// fetch post data from RAW DATA
-	function _getPostAsArray()
+	function _getPostAsArray( $input_encoding = null )
 	{
 		$ret = array() ;
 	
@@ -306,6 +317,10 @@ class FormProcessByHtml
 		$key_vals = explode( '&' , $query ) ;
 		foreach( $key_vals as $key_val ) {
 			@list( $key , $val ) = array_map( 'urldecode' , explode( '=' , $key_val ) ) ;
+			if( $input_encoding ) {
+				$key = $this->convertEncodingToIE( $key , $input_encoding ) ;
+				$val = $this->convertEncodingToIE( $val , $input_encoding ) ;
+			}
 			@list( $key_pref , ) = explode( '[' , $key ) ;
 			if( $key_pref != $key ) {
 				// don't parse explicit array with []

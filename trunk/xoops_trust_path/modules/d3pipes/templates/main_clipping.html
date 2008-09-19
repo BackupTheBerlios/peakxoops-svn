@@ -12,7 +12,7 @@
 
 	<dl>
 		<dt><{$smarty.const._MD_D3PIPES_TH_PUBTIME}></dt>
-		<dd><{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}></dd>
+		<dd id="clipping_pubtime"><{$smarty.const._MEDIUMDATESTRING|date:$entry.pubtime+$timezone_offset}></dd>
 	</dl>
 
 	<dl>
@@ -29,9 +29,21 @@
 		<dt><{$smarty.const._MD_D3PIPES_TH_DESCRIPTION}></dt>
 		<dd>
 			<{if $entry.content_encoded}>
-				<{$entry.content_encoded}>
+				<div id="clipping_content_encoded"><{$entry.content_encoded}></div>
+				<{if $xoops_isadmin}>
+					<script type="text/javascript">new Ajax.InPlaceEditor( 'clipping_content_encoded' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=content_encoded' , {cols: 80, rows: 20, hasHTMLLineBreaks: false } ) ;
+					</script>
+				<{/if}>
 			<{else}>
 				<{$entry_description4disp}>
+				<{if $xoops_isadmin}>
+					<div id="edit_description">
+						<input type="button" id="button_edit_description" value="<{$smarty.const._EDIT}>" />
+						<div id="clipping_description" style="display:none;"><{$entry.description}></div>
+						<script type="text/javascript">new Ajax.InPlaceEditor( 'clipping_description' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=description' , {cols: 80, rows: 20, externalControl: 'button_edit_description', hasHTMLLineBreaks: false, onComplete: function() {document.getElementById('edit_description').style.display='none';} } ) ;
+						</script>
+					</div>
+				<{/if}>
 			<{/if}>
 		</dd>
 	</dl>
@@ -56,6 +68,7 @@
 				<input type="hidden" name="clipping_id" value="<{$clipping_id}>" />
 				<input type="submit" value="<{$smarty.const._MD_D3PIPES_BTN_UPDATE}>" />
 			</form>
+
 		</dd>
 	</dl>
 	<{/if}>
@@ -72,9 +85,15 @@
 <script type="text/javascript">
 // <![CDATA[
 
+	Object.extend(Ajax.InPlaceEditor.prototype, {
+		convertHTMLLineBreaks: function(string) {
+		return string;
+	}
+	});
+
+	new Ajax.InPlaceEditor( 'clipping_pubtime' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=pubtime' , {cols: 20} ) ;
 	new Ajax.InPlaceEditor( 'clipping_headline' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=headline' , {cols: 80} ) ;
 	new Ajax.InPlaceEditor( 'clipping_link' , '<{$mod_url}>/admin/index.php?page=update_clipping&clipping_id=<{$entry.clipping_id}>&field=link' , {cols: 80} ) ;
-
 
 // ]]>
 </script>

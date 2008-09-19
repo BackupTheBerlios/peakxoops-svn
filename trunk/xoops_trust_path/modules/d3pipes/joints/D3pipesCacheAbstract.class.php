@@ -34,7 +34,7 @@ class D3pipesCacheAbstract extends D3pipesJointAbstract {
 		$cache_file = $this->getCachePath() ;
 		if( ! file_exists( $cache_file ) ) return false ;
 		$body_serialized = file_get_contents( $cache_file ) ;
-		$body = $body_serialized ? unserialize( $body_serialized ) : array() ;
+		$body = $body_serialized ? d3pipes_common_unserialize( $body_serialized ) : array() ;
 		return array( filemtime( $cache_file ) , $body ) ;
 	}
 

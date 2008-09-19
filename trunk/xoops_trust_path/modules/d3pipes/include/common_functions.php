@@ -271,4 +271,33 @@ function d3pipes_common_fetch_entries( $mydirname , $pipe_row , $max_entries , &
 }
 
 
+function d3pipes_common_unserialize( $serialized_data )
+{
+	if( empty( $serialized_data ) ) return array() ;
+
+	// rightly formatted data
+	$data = @unserialize( $serialized_data ) ;
+	if( is_array( $data ) ) return $data ;
+
+	// only linear arrays can be parsed
+	$elements = preg_split( '/(s\:\d+\:\"|b\:\d+\;|i\:\d+\;)/' , $serialized_data , -1 , PREG_SPLIT_DELIM_CAPTURE ) ;
+
+	$canonical_sdata = '' ;
+	foreach( array_keys( $elements ) as $i ) {
+		if( preg_match( '/^s\:(\d+)\:\"$/' , $elements[$i] , $regs ) ) {
+			$length = strlen( $elements[$i+1] ) - 2 ;
+			$canonical_sdata .= str_replace( $regs[1] , $length , $elements[$i] ) ;
+		} else {
+			$canonical_sdata .= $elements[$i] ;
+		}
+	}
+	//var_dump( $serialized_data ) ;
+	//var_dump( $canonical_sdata ) ;
+
+	$data = @unserialize( $canonical_sdata ) ;
+	if( is_array( $data ) ) return $data ;
+	else return array() ;
+}
+
+
 ?>

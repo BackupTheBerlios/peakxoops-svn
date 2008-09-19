@@ -40,6 +40,11 @@ Notice: Async block requires the privileges of not only "block access" but also 
 
 [b]CHANGELOG[/b]
 
+0.64 2008-09-20
+- added editing pubtime via ajax
+- added editing description/content:encoded via ajax
+- modified unserializer for entry data
+
 0.63 2008-05-20
 - added an option "link to clipping or lint to entry directly" into block
 - modified comment-integration (update d3forum into 0.83 or higher)
@@ -285,6 +290,11 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 
 ●更新履歴
+
+0.64 2008-09-20
+- 発行日時(pubtime)をAjax経由で書き換えるコントローラの追加
+- descriptionまたはcontent:encodedをAjaxで書き換えるコントローラの追加
+- 文字列長が間違っていてもなんとかunserializeできるような関数の作成
 
 0.63 2008-05-20
 - ブロックのリンクを外部にするか内部にするかを選択するオプションを追加

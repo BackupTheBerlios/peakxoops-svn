@@ -78,4 +78,23 @@ function d3pipes_admin_judge_type_of_pipe( $joints )
 	}
 }
 
+
+function d3pipes_admin_disp2raw( $value , $type )
+{
+	switch( $type ) {
+		case 'text' :
+			// fix a bug(?) of InPlaceEditor
+			$value = str_replace( '<br>' , '<br />' , $value ) ;
+			break ;
+		case 'time' :
+			$value = strtotime( $value ) ;
+			if( empty( $value ) ) $value = time() ;
+			$tz_offset = xoops_getUserTimestamp( 0 ) ;
+			$value -= $tz_offset ;
+			break ;
+	}
+
+	return $value ;
+}
+
 ?>

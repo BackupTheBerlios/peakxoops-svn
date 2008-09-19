@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__FILE__).'/include/common_functions.php' ;
+
 eval( '
 
 function '.$mydirname.'_global_search( $keywords , $andor , $limit , $offset , $userid )
@@ -57,7 +59,7 @@ function d3pipes_global_search_base( $mydirname , $keywords , $andor , $limit , 
 
 		// get context for module "search"
 		if( function_exists( 'search_make_context' ) && $showcontext ) {
-			$data = unserialize( $serialized_data ) ;
+			$data = d3pipes_common_unserialize( $serialized_data ) ;
 			$text = @$data['description'] ;
 			$full_context = strip_tags( $text ) ;
 			if( function_exists( 'easiestml' ) ) $full_context = easiestml( $full_context ) ;

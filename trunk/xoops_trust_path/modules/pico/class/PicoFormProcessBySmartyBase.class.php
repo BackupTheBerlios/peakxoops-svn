@@ -202,9 +202,9 @@ class PicoFormProcessBySmartyBase
 			return $user->sEncoding ;
 		} else if( defined( 'HYP_K_TAI_RENDER' ) && HYP_K_TAI_RENDER ) {
 			// hyp_common ktai-renderer (nao-pon)
-			// judging by input
-			$input = urldecode( file_get_contents( 'php://input' ) ) ;
-			return mb_detect_encoding( urldecode( file_get_contents( 'php://input' ) ) , array( 'SJIS-Win' , 'SJIS' , 'EUCJP-Win' , 'EUC-JP' , 'UTF-8' ) ) ;
+			return HYP_POST_ENCODING ;
+			// judging by input (old code)
+			// return mb_detect_encoding( urldecode( file_get_contents( 'php://input' ) ) , array( 'SJIS-Win' , 'SJIS' , 'EUCJP-Win' , 'EUC-JP' , 'UTF-8' ) ) ;
 		} else {
 			return null ;
 		}

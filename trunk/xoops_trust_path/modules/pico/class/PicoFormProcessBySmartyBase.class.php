@@ -185,7 +185,7 @@ class PicoFormProcessBySmartyBase
 			// WizMobile (gusagi)
 			$user =& Wizin_User::getSingleton();
 			return $user->bIsMobile ;
-		} else if( defined( 'HYP_K_TAI_RENDER' ) ) {
+		} else if( defined( 'HYP_K_TAI_RENDER' ) && HYP_K_TAI_RENDER ) {
 			// hyp_common ktai-renderer (nao-pon)
 			return true ;
 		} else {
@@ -200,7 +200,7 @@ class PicoFormProcessBySmartyBase
 			// WizMobile (gusagi)
 			$user =& Wizin_User::getSingleton();
 			return $user->sEncoding ;
-		} else if( defined( 'HYP_K_TAI_RENDER' ) ) {
+		} else if( defined( 'HYP_K_TAI_RENDER' ) && HYP_K_TAI_RENDER ) {
 			// hyp_common ktai-renderer (nao-pon)
 			// judging by input
 			$input = urldecode( file_get_contents( 'php://input' ) ) ;

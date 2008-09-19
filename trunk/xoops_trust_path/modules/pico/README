@@ -113,6 +113,7 @@ pico is fast enough if you use content's cache.
 1.72 (2008-09-17)
 - fixed formmail feature cannot work with mobile renderers
 - added a flag for process_body into content block (thx jidaikobo) 1.72a
+- fixed the condition for hyp_common's mobile (thx nao-pon) 1.72b
 
 1.71 (2008-09-10)
 - fixed htmlheaders for each contents are not rendered (thx neko88)
@@ -558,6 +559,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 1.72 (2008/09/17)
 - フォームメール機能がWizMobileや携帯対応レンダーで動作しなかったのを修正
 - コンテンツ内容ブロックに本文処理オプションを追加 (thx jidaikobo) 1.72a
+- 携帯対応レンダーのコードを修正 (thx nao-pon) 1.72b
 
 1.71 (2008-09-10)
 - コンテンツごとのHTMLヘッダが渡されていないバグの修正 (thx neko88)

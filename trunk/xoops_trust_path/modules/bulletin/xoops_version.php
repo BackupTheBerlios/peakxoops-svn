@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = constant($constpref.'_NAME');
-$modversion['version']     = 2.15; // HD Version
+$modversion['version']     = 2.16; // HD Version
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -113,10 +113,10 @@ $i = 1;
 $modversion['config'][$i]['name']        = 'storyhome';
 $modversion['config'][$i]['title']       = $constpref.'_CONFIG1';
 $modversion['config'][$i]['description'] = $constpref.'_CONFIG1_D';
-$modversion['config'][$i]['formtype']    = 'select';
+$modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 5;
-$modversion['config'][$i]['options']     = array('5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25, '30' => 30);
+$modversion['config'][$i]['options']     = array();
 $i++;
 $modversion['config'][$i]['name']        = 'displaynav';
 $modversion['config'][$i]['title']       = $constpref.'_CONFIG2';

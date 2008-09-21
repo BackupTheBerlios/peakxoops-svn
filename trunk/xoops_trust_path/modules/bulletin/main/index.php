@@ -21,13 +21,13 @@ if ( $bulletin_displaynav == 1 ) {
 	$bt = new BulletinTopic( $mydirname ) ;
 	$xoopsTpl->assign('topic_select', $bt->makeTopicSelBox( true , $storytopic , 'storytopic' ) ) ;
 	
-	// オプションをアサイン
+/*	// オプションをアサイン
 	for ( $i = 5; $i <= 30; $i = $i + 5 ) {
 		$option = array();
 		$option['sel']    = ($i == $storynum) ? ' selected="selected"' : '' ;
 		$option['option'] = $i ;
 		$xoopsTpl->append('option', $option);
-	}
+	}*/
 	
 } else {
 	$xoopsTpl->assign('displaynav', false);

@@ -9,12 +9,12 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 // a flag for this language file has already been read or not.
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-05-19 05:51:18
-define($constpref.'_CONFIG145','feed RSS into backend.php (only for XCL)');
+define($constpref.'_CONFIG145','خوراک های RSS درون فایل backend.php (فقط در زوپس کیوب)');
 define($constpref.'_CONFIG145_D','');
-define($constpref.'_COM_DIRNAME','dirname of d3forum integrated as the comment system');
-define($constpref.'_COM_FORUM_ID','forum_id of d3forum integrated');
-define($constpref.'_COM_VIEW','View of comment-integration');
-define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
+define($constpref.'_COM_DIRNAME','نام d3forum برای استفاده در سیستم یکسان سازی نظر ها');
+define($constpref.'_COM_FORUM_ID','forum_id در d3forum برای یکسان سازی نظر ها');
+define($constpref.'_COM_VIEW','نمایش نظر یکسان شده');
+define($constpref.'_COM_POSTSNUM','بیشترین تعداد پست های نمایش داده شده در نظر های یکسان');
 
 define( $constpref.'_LOADED' , 1 ) ;
 
@@ -56,7 +56,7 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','بلاک /دسترسی ها');
 define($constpref."_CONFIG1","تعداد اخبار نمایش داده شده در صفحه اصلی");
 define($constpref."_CONFIG1_D","تعداد اخبار نمایش داده شده در صفحه اصلی ماژول را مشخص کنید.");
 define($constpref."_CONFIG2","نمایش  جعبه آگاهی رسانی؟");
-define($constpref."_CONFIG2_D","با انتخواب 'بله' جعبه گزینه های آگاهی رسانی برای هر صفحه خبری نمایش داده میشود.");
+define($constpref."_CONFIG2_D","با انتخاب 'بله' جعبه گزینه های آگاهی رسانی برای هر صفحه خبری نمایش داده میشود.");
 define($constpref."_CONFIG3","ارتفاع کادر  ارسال / ویرایش خبر");
 define($constpref."_CONFIG3_D","تعداد خط های ارسال خبر را در صفحه submit.php مشخص کنید.");
 define($constpref."_CONFIG4","عرض کادر ارسال / ویرایش خبر");

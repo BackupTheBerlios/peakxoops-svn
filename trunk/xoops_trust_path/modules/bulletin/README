@@ -33,6 +33,11 @@ HD-2.14以降では、d3commentプラグイン必須となりました。アーカイブ内のhtml/class/s
 
 =CHANEGLOG=
 
+HD-2.16 (2008-09-21)
+- modified storynum selection can be changed just by the template
+- fixed missing mail_template/story_comment.tpl
+- updated language files
+-- persian (thx voltan)
 
 HD-2.15 (2008-08-04)
 - removed content:encoded from rss.html

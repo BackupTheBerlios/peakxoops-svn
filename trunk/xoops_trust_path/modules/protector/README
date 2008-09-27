@@ -129,6 +129,8 @@ I thank Madfish for this excellent work!
 -- arabic (onasre)
 - fixed language files
 -- de_utf8
+- added language files
+-- italian (thx Defcon1) 3.20a
 
 3.17 beta (2008/04/24)
 - modified URLs with the same hostname as XOOPS_URL are not counted as URI SPAM
@@ -203,7 +205,7 @@ I thank Madfish for this excellent work!
 - added language files
 -- persian (thx voltan)
 -- russian (thx West) 3.02a
--- arabic (thx onasure) 3.02b
+-- arabic (thx onasre) 3.02b
 -- japaneseutf 3.02c
 
 3.01 (2007/02/10)
@@ -372,6 +374,8 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 -- arabic (onasre)
 - ¸À¸ì¥Õ¥¡¥¤¥ë½¤Àµ
 -- de_utf8
+- ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
+-- italian (thx Defcon1) 3.20a
 
 3.17 beta (2008/04/24)
 - URI SPAMÈ½Äê¤Ç¡¢¼«¥Û¥¹¥È¤ÈÆ±°ì¤Î¾ì¹ç¤ÏÄÌ²á¤¹¤ë¤è¤¦¤Ë¤·¤¿
@@ -446,7 +450,7 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
 -- persian (thx voltan)
 -- russian (thx West) 3.02a
--- arabic (thx onasure) 3.02b
+-- arabic (thx onasre) 3.02b
 -- japaneseutf 3.02c
 
 3.01 (2007/02/10)
@@ -498,8 +502,8 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
  - PepeMty (¥¹¥Ú¥¤¥ó¸ì¥Õ¥¡¥¤¥ë)
  - kurak_bu (¥Ý¡¼¥é¥ó¥É¸ì¥Õ¥¡¥¤¥ë)
  - wuddel (¥É¥¤¥Ä¸ì)
- - voltan (¥Ú¥ë¥·¥ã¸ì)
- - onasure (¥¢¥é¥Ó¥¢¸ì)
+ - voltan&stranger (¥Ú¥ë¥·¥ã¸ì)
+ - onasre (¥¢¥é¥Ó¥¢¸ì)
 
 
 ¤Þ¤¿¡¢¤³¤Î¥â¥¸¥å¡¼¥ëºîÀ®¤Ë¤¢¤¿¤ê¡¢ÍÍ¡¹¤Ê¤´»ØÆ³¡¦¤´ÊÜÚ¥¤ò¤¤¤¿¤À¤¤¤¿¡¢zx¥Á¡¼¥à¤Î³§ÍÍ¡¢¤È¤ê¤ï¤±JM2¤µ¤ó¡¢minahito¤µ¤ó¤Ë¡¢¿´¤è¤ê´¶¼Õ¤¤¤¿¤·¤Þ¤¹¡£

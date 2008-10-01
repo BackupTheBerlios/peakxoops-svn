@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/D3pipesJointAbstract.class.php' ;
 
 class D3pipesUtf8fromAbstract extends D3pipesJointAbstract {
 
-	var $src_encoding ;
+	var $src_encoding = 'auto' ;
 
 	// constructor
 	function D3pipesUtf8fromAbstract( $mydirname , $pipe_id , $option )
@@ -14,7 +14,14 @@ class D3pipesUtf8fromAbstract extends D3pipesJointAbstract {
 		$this->src_encoding = $option ;
 	}
 	
-	function execute( $string , $max_entries = '' ) {}
+	function execute( $string , $max_entries = '' ) {
+		// remove encoding="(other than UTF8)" in xml declaration
+		if( is_string( $string ) ) {
+			$string = preg_replace( '/encoding\=(["\']?)'.preg_quote($this->src_encoding).'\\1/i' , '' , $string , 1 ) ;
+		}
+
+		return $this->convert( $string ) ;
+	}
 
 	function renderOptions( $index , $current_value = null )
 	{

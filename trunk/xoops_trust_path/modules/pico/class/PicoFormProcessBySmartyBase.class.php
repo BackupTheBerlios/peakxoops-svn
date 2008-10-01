@@ -31,6 +31,8 @@ class PicoFormProcessBySmartyBase
 	var $cc_mail_body_post = '' ; // public
 	var $cc_mail_subject = null ; // public
 
+	var $ignore_field_names = array( 'cancel' ) ; // public
+	var $cancel_field_name = 'cancel' ; // public
 
 	function PicoFormProcessBySmartyBase()
 	{
@@ -312,11 +314,11 @@ class PicoFormProcessBySmartyBase
 
 		// Form Processor
 		$this->form_processor =& new FormProcessByHtml() ;
-		$this->form_processor->setFieldsByForm( $this->form_body ) ;
+		$this->form_processor->setFieldsByForm( $this->form_body , $this->ignore_field_names ) ;
 
 		// process post (then redirect)
 		if( ! empty( $_POST ) ) {
-			if( ! empty( $_POST[ 'cancel' ] ) ) {
+			if( ! empty( $_POST[ $this->cancel_field_name ] ) ) {
 				unset( $_SESSION[ $this->session_index ] ) ;
 			} else if( isset( $_POST[ $this->getTokenName() ] ) ) {
 				if( $this->validateToken() && isset( $_SESSION[ $this->session_index ]['fields'] ) ) {

@@ -27,7 +27,7 @@ class FormProcessByHtml
 	}
 
 
-	function setFieldsByForm( $form_html )
+	function setFieldsByForm( $form_html , $ignore_names = array() )
 	{
 		// initialize
 		$this->fields = array() ;
@@ -54,6 +54,9 @@ class FormProcessByHtml
 				$field_name = $field_name_raw ;
 				$array_type = '' ;
 			}
+
+			// ignore the form with specified name like cancel button
+			if( in_array( $field_name , $ignore_names ) ) continue ;
 
 			// options for radio/checkbox or multiple text with the same "name"
 			$options = array() ;

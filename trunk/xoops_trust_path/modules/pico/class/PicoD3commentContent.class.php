@@ -35,7 +35,7 @@ function fetchSummary( $external_link_id )
 	return array(
 		'dirname' => $mydirname ,
 		'module_name' => $module->getVar( 'name' ) ,
-		'subject' => $myts->makeTboxData4Show( $content_data['subject_raw'] ) ,
+		'subject' => $myts->makeTboxData4Show( $content_data['subject_raw'] , 1 , 1 ) ,
 		'uri' => XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_content_link4html( $configs , $content_data ) ,
 		'summary' => $summary ,
 	) ;

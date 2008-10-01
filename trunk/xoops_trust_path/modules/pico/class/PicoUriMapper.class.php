@@ -52,6 +52,34 @@ function parseRequest()
 		}
 	}
 
+	// set the parameter of $this->request  (controller/view/content_id etc.)
+	$this->judgeController( $cat_id , $content_id ) ;
+
+	// cat_id modification (makecontent/contentmanager etc.)
+	if( defined( 'PICO_URI_MAPPER_ALLOW_CAT_ID_OVERWRITING' ) && isset( $_REQUEST['cat_id'] ) ) {
+		$cat_id = intval( @$_REQUEST['cat_id'] ) ;
+	}
+
+	// content_id modification (contentmanager)
+	if( defined( 'PICO_URI_MAPPER_ALLOW_CONTENT_ID_OVERWRITING' ) && isset( $_REQUEST['content_id'] ) ) {
+		$content_id = intval( @$_REQUEST['content_id'] ) ;
+	}
+
+	// for notification
+	if( $content_id ) $_GET['content_id'] = $content_id ;
+	if( $cat_id ) $_GET['cat_id'] = $cat_id ;
+
+	// set request
+	$this->request['content_id'] = $content_id ;
+	$this->request['cat_id'] = $cat_id ;
+
+	return $this->request ;
+}
+
+
+// override it if you want to add another URI mapping rules
+function judgeController( &$cat_id , &$content_id )
+{
 	// default controller
 	if( empty( $this->request['controller'] ) ) {
 		$this->request['controller'] = 'content' ;
@@ -81,26 +109,6 @@ function parseRequest()
 		$this->request['controller'] = 'category' ;
 		$this->request['view'] = 'list' ;
 	}
-
-	// cat_id modification (makecontent/contentmanager etc.)
-	if( defined( 'PICO_URI_MAPPER_ALLOW_CAT_ID_OVERWRITING' ) && isset( $_REQUEST['cat_id'] ) ) {
-		$cat_id = intval( @$_REQUEST['cat_id'] ) ;
-	}
-
-	// content_id modification (contentmanager)
-	if( defined( 'PICO_URI_MAPPER_ALLOW_CONTENT_ID_OVERWRITING' ) && isset( $_REQUEST['content_id'] ) ) {
-		$content_id = intval( @$_REQUEST['content_id'] ) ;
-	}
-
-	// for notification
-	if( $content_id ) $_GET['content_id'] = $content_id ;
-	if( $cat_id ) $_GET['cat_id'] = $cat_id ;
-
-	// set request
-	$this->request['content_id'] = $content_id ;
-	$this->request['cat_id'] = $cat_id ;
-
-	return $this->request ;
 }
 
 

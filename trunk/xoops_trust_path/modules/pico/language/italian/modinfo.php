@@ -13,6 +13,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-10-01 12:11:21
+define($constpref.'_URIM_CLASS','class mapping URI');
+define($constpref.'_URIM_CLASSDSC','Change it if you want to override the URI mapper. The default value is PicoUriMapper');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:31
 define($constpref.'_EF_CLASS','class for extra_fields');
 define($constpref.'_EF_CLASSDSC','Change it if you want to override the handler for extra_fields. default value is PicoExtraFields');

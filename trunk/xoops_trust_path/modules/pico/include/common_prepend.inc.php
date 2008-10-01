@@ -17,9 +17,13 @@ ini_set( 'include_path' , ini_get('include_path') . PATH_SEPARATOR . XOOPS_TRUST
 $breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
 $breadcrumbsObj->appendPath( XOOPS_URL.'/modules/'.$mydirname.'/index.php' , $xoopsModule->getVar( 'name' ) ) ;
 
-// get request
-$uriMapper =& new PicoUriMapper( $mydirname , $xoopsModuleConfig ) ;
+// URI Mapper
+$mapper_class = empty( $xoopsModuleConfig['uri_mapper_class'] ) ? 'PicoUriMapper' : $xoopsModuleConfig['uri_mapper_class'] ;
+require_once dirname(dirname(__FILE__)).'/class/'.$mapper_class.'.class.php' ;
+$uriMapper =& new $mapper_class( $mydirname , $xoopsModuleConfig ) ;
 $uriMapper->initGet() ;
+
+// get requests
 $picoRequest = $uriMapper->parseRequest() ; // clean data
 
 // permissions

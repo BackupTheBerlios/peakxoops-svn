@@ -177,10 +177,10 @@ function getData4html( $process_body = false )
 		'poster_uname' => $poster_uname ,
 		'modifier_uname' => $modifier_uname ,
 		'votes_avg' => $this->data['votes_count'] ? $this->data['votes_sum'] / doubleval( $this->data['votes_count'] ) : 0 ,
-		'subject' => $myts->makeTboxData4Show( $this->data['subject'] ) ,
+		'subject' => $myts->makeTboxData4Show( $this->data['subject'] , 1 , 1 ) ,
 		'body' => $this->data['body_cached'] ,
 		'tags_array' => $this->data['tags'] ? explode( ' ' , htmlspecialchars( $this->data['tags'] , ENT_QUOTES ) ) : array() ,
-		'cat_title' => $myts->makeTboxData4Show( $cat_data['cat_title'] ) ,
+		'cat_title' => $myts->makeTboxData4Show( $cat_data['cat_title'] , 1 , 1 ) ,
 		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
 	) + $this->data ;
 

@@ -68,6 +68,8 @@ define($constpref.'_BRCACHE','画像ファイルのブラウザキャッシュ (
 define($constpref.'_BRCACHEDSC' , 'HTML以外のファイルをブラウザにキャッシュする時間を秒で指定（0で無効化）');
 define($constpref.'_EF_CLASS' , 'extra_fields処理クラス名');
 define($constpref.'_EF_CLASSDSC' , 'extra_fields処理をオーバーライドしたい時に指定。デフォルトはPicoExtraFields');
+define($constpref.'_URIM_CLASS' , 'URIマッピング処理クラス名');
+define($constpref.'_URIM_CLASSDSC' , 'URIマッパーをオーバーライドしたい時に指定。デフォルトはPicoUriMapper');
 define($constpref.'_EFIMAGES_DIR' , 'extra_fields画像ファイルのパス');
 define($constpref.'_EFIMAGES_DIRDSC' , 'XOOPS_ROOT_PATHからの相対パスを指定する。この機能を利用する場合には、指定されたフォルダを先に作っておき、さらに書込可能としておく必要がある。デフォルトは uploads/(モジュールdirname)');
 define($constpref.'_EFIMAGES_SIZE' , 'extra_fields画像ファイルのサイズ(pixel)');

@@ -5,6 +5,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-10-01 12:11:21
+define($constpref.'_URIM_CLASS','class mapping URI');
+define($constpref.'_URIM_CLASSDSC','Change it if you want to override the URI mapper. The default value is PicoUriMapper');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

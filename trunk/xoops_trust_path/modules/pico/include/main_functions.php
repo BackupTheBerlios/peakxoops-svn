@@ -144,7 +144,7 @@ function pico_main_make_cat_jumpbox_options( $mydirname , $whr4cat , $cat_select
 	if( $result = $db->query( $sql ) ) {
 		while( list( $cat_id , $cat_title , $cat_depth ) = $db->fetchRow( $result ) ) {
 			$selected = $cat_id == $cat_selected ? 'selected="selected"' : '' ;
-			$ret .= "<option value='$cat_id' $selected>".str_repeat('--',$cat_depth).$myts->makeTboxData4Show($cat_title)."</option>\n" ;
+			$ret .= "<option value='$cat_id' $selected>".str_repeat('--',$cat_depth).$myts->makeTboxData4Show($cat_title,1,1)."</option>\n" ;
 		}
 	} else {
 		$ret = "<option value=\"-1\">ERROR</option>\n";

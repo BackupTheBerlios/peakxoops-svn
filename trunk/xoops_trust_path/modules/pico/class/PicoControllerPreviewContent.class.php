@@ -57,7 +57,7 @@ function processPreview( $request )
 	$this->assign['preview'] = array(
 		'errors' => $errors ,
 		'htmlheader' => $request['htmlheader'] , // remove it?
-		'subject' => $myts->makeTboxData4Show( $request['subject'] ) ,
+		'subject' => $myts->makeTboxData4Show( $request['subject'] , 1 , 1 ) ,
 		'body' => $tmpContentObj->filterBody( $this->assign['content'] ) ,
 	) ;
 }

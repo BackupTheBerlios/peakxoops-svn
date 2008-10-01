@@ -152,7 +152,7 @@ function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 	if( $crs ) while( $cat_row = $db->fetchArray( $crs ) ) {
 		$cat_id = intval( $cat_row['cat_id'] ) ;
 		$categories[ $cat_id ] = array(
-			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
+			'name' => $myts->makeTboxData4Show( $cat_row['cat_title'] , 1 , 1 ) ,
 			'url' => pico_common_make_category_link4html( $mod_config , $cat_row ) ,
 			'is_category' => true ,
 			'pid' => $cat_row['pid'] ,
@@ -165,7 +165,7 @@ function pico_common_get_submenu( $mydirname , $caller = 'xoops_version' )
 		if( $ors ) while( $content_row = $db->fetchArray( $ors ) ) {
 			$cat_id = intval( $content_row['cat_id'] ) ;
 			$categories[ $cat_id ]['sub'][] = array(
-				'name' => $myts->makeTboxData4Show( $content_row['subject'] ) ,
+				'name' => $myts->makeTboxData4Show( $content_row['subject'] , 1 , 1 ) ,
 				'url' => pico_common_make_content_link4html( $mod_config , $content_row ) ,
 				'is_category' => false ,
 			) ;

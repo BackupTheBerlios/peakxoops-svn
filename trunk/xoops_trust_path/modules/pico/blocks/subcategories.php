@@ -54,7 +54,7 @@ function b_pico_subcategories_show( $options )
 		$cat4assign[] = array( 
 			'id' => intval( $cat_row['cat_id'] ) ,
 			'link' => pico_common_make_category_link4html( $configs , $cat_row ) ,
-			'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
+			'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] , 1 , 1 ) ,
 		) ;
 	}
 	$block['categories'] = $cat4assign ;

@@ -68,6 +68,8 @@ define($constpref.'_BRCACHE','▓ш┴№е╒ебедеыд╬е╓ещеже╢енеуе├е╖ех (wrapsетб╝е╔╗■д╬д
 define($constpref.'_BRCACHEDSC' , 'HTML░╩│░д╬е╒ебедеыдЄе╓ещеже╢д╦енеуе├е╖ехд╣ды╗■┤╓дЄ╔├д╟╗╪─ъб╩0д╟╠╡╕·▓╜б╦');
 define($constpref.'_EF_CLASS' , 'extra_fields╜ш═¤епеще╣╠╛');
 define($constpref.'_EF_CLASSDSC' , 'extra_fields╜ш═¤дЄекб╝е╨б╝ещеде╔д╖д┐дд╗■д╦╗╪─ъбге╟е╒ейеые╚д╧PicoExtraFields');
+define($constpref.'_URIM_CLASS' , 'URIе▐е├е╘еєе░╜ш═¤епеще╣╠╛');
+define($constpref.'_URIM_CLASSDSC' , 'URIе▐е├е╤б╝дЄекб╝е╨б╝ещеде╔д╖д┐дд╗■д╦╗╪─ъбге╟е╒ейеые╚д╧PicoUriMapper');
 define($constpref.'_EFIMAGES_DIR' , 'extra_fields▓ш┴№е╒ебедеыд╬е╤е╣');
 define($constpref.'_EFIMAGES_DIRDSC' , 'XOOPS_ROOT_PATHдлдщд╬┴ъ┬╨е╤е╣дЄ╗╪─ъд╣дыбгд│д╬╡б╟╜дЄ═°═╤д╣ды╛ь╣чд╦д╧бв╗╪─ъд╡дьд┐е╒ейеые└дЄ└шд╦║юд├д╞дкднбвд╡дщд╦╜ё╣■▓─╟╜д╚д╖д╞дкдп╔м═╫дмдвдыбге╟е╒ейеые╚д╧ uploads/(ете╕ехб╝еыdirname)');
 define($constpref.'_EFIMAGES_SIZE' , 'extra_fields▓ш┴№е╒ебедеыд╬е╡еде║(pixel)');

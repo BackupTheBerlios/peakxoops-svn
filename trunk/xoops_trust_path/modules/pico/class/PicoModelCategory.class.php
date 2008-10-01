@@ -142,7 +142,7 @@ function getData4html()
 
 	return array(
 		'link' => pico_common_make_category_link4html( $this->mod_config , $this->data ) ,
-		'title' => $myts->makeTboxData4Show( $this->data['cat_title'] ) ,
+		'title' => $myts->makeTboxData4Show( $this->data['cat_title'] , 1 , 1 ) ,
 		'desc' => $myts->displayTarea( $this->data['cat_desc'] , 1 ) ,
 		'weight' => intval( $this->data['cat_weight'] ) ,
 	) + $this->data ;

@@ -239,7 +239,7 @@ class XmobilePicoPluginHandlerAbstract extends XmobilePluginHandler
 		$currentCategoryObj =& new PicoCategory( $mydirname , intval( $cat_id ) , $permissions ) ;
 
 		// assigning
-		$contentObj =& new PicoContent( $mydirname , $request['content_id'] , $currentCategoryObj ) ;
+		$contentObj =& new PicoContent( $mydirname , $content_id , $currentCategoryObj ) ;
 		$content4assign = $contentObj->getData4html( true ) ;
 
 		// convert links from relative to absolute (wraps mode only)

@@ -114,6 +114,7 @@ pico is fast enough if you use content's cache.
 - modified URI mapper class can be overridden (update the module)
 - modified the subject is rendered with entity enabled
 - fixed 'cancel' is appended into the formmail feature
+- fixed xmobile plugin (thx shige-p) 1.73a
 
 1.72 (2008-09-17)
 - fixed formmail feature cannot work with mobile renderers
@@ -565,6 +566,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - URIマッパークラスを置換可能とした（要モジュールアップデート）
 - ページ名で文字実体参照と数値文字参照を許可した
 - フォームメール機能でcancelボタンの情報が送られてしまうのを修正
+- xmobileプラグインのtypoを修正 (thx shige-p) 1.73a
 
 1.72 (2008/09/17)
 - フォームメール機能がWizMobileや携帯対応レンダラーで動作しなかったのを修正

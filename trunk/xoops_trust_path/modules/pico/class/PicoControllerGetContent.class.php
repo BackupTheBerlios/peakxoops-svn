@@ -56,7 +56,7 @@ function execute( $request )
 	$this->contentObjs['next_content'] =& $nextContentObj ;
 
 	// link for "tell to friends"
-	if( ! $this->mod_config['use_taf_module'] ) {
+	if( $this->mod_config['use_taf_module'] ) {
 		$this->assign['content']['tellafriend_uri'] = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( XOOPS_URL."/modules/$this->mydirname/".pico_common_make_content_link4html( $this->mod_config , $content_data ) ).'&amp;subject='.rawurlencode(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,@$GLOBALS['xoopsConfig']['sitename'])) ;
 	} else {
 		$this->assign['content']['tellafriend_uri'] = 'mailto:?subject='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,@$GLOBALS['xoopsConfig']['sitename'])).'&amp;body='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $content_data['subject'])).'%0A'.XOOPS_URL."/modules/$this->mydirname/".rawurlencode(pico_common_make_content_link4html( $this->mod_config , $content_data )) ;

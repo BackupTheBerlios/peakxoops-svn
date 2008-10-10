@@ -116,6 +116,7 @@ pico is fast enough if you use content's cache.
 - fixed 'cancel' is appended into the formmail feature
 - fixed xmobile plugin (thx shige-p) 1.73a
 - fixed Smarty filter missing $xoops_imageurl etc. on XCL (thx gusagi) 1.73b
+- fixed the flag for "Use tellafriend" is reversed (thx shige-p) 1.73b
 
 1.72 (2008-09-17)
 - fixed formmail feature cannot work with mobile renderers
@@ -569,6 +570,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - フォームメール機能でcancelボタンの情報が送られてしまうのを修正
 - xmobileプラグインのtypoを修正 (thx shige-p) 1.73a
 - XCL+Smartyフィルターで$xoops_imageurl等のアサイン修正 (thx gusagi) 1.73b
+- 「Tellafriendを使う」オプションが反転していたのを修正 (thx shige-p) 1.73b
 
 1.72 (2008/09/17)
 - フォームメール機能がWizMobileや携帯対応レンダラーで動作しなかったのを修正

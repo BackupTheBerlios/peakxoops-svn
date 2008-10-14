@@ -131,6 +131,7 @@ I thank Madfish for this excellent work!
 -- de_utf8
 - added language files
 -- italian (thx Defcon1) 3.20a
+- added a method isMobile() into ProtectorFilterAbstract 3.20b
 
 3.17 beta (2008/04/24)
 - modified URLs with the same hostname as XOOPS_URL are not counted as URI SPAM
@@ -376,6 +377,7 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 -- de_utf8
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
 -- italian (thx Defcon1) 3.20a
+- ·ÈÂÓÈ½Äê¥á¥½¥Ã¥É isMobile() ¤òProtectorFilterAbstract¥¯¥é¥¹¤ËÄÉ²Ã 3.20b
 
 3.17 beta (2008/04/24)
 - URI SPAMÈ½Äê¤Ç¡¢¼«¥Û¥¹¥È¤ÈÆ±°ì¤Î¾ì¹ç¤ÏÄÌ²á¤¹¤ë¤è¤¦¤Ë¤·¤¿

@@ -30,7 +30,7 @@
 		</tr>
 
 		<!-- vpath -->
-		<{if $mod_config.user_wraps_mode || strstr($content.filters,"wraps")}>
+		<{if $mod_config.use_wraps_mode || strstr($content.filters,"wraps")}>
 		<tr valign="top" align="left">
 			<th class="head"><label for="vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
 			<td class="even">

@@ -76,10 +76,15 @@ function getContents4assign( $whr_append = '1' , $order = 'weight' , $offset = 0
 	}
 
 	$ret = array() ;
+	$waiting = $offset ;
 	while( list( $content_id ) = $db->fetchRow( $ors ) ) {
 		if( sizeof( $ret ) >= $limit ) break ;
 		$objTemp = new PicoContent( $this->mydirname , $content_id ) ;
-		if( $return_prohibited_also || $objTemp->data['can_read'] ) $ret[ $content_id ] = $objTemp->getData4html() ;
+		if( $return_prohibited_also || $objTemp->data['can_read'] ) {
+			if( -- $waiting < 0 ) {
+				$ret[ $content_id ] = $objTemp->getData4html() ;
+			}
+		}
 		unset( $objTemp ) ;
 	}
 

@@ -118,6 +118,7 @@ pico is fast enough if you use content's cache.
 - fixed Smarty filter missing $xoops_imageurl etc. on XCL (thx gusagi) 1.73b
 - fixed the flag for "Use tellafriend" is reversed (thx shige-p) 1.73b
 - fixed a typo (vpath on/off) in main_content_form.html (thx mkbl) 1.73c
+- added offset feature (offset,limit) into list blocks 1.73d
 
 1.72 (2008-09-17)
 - fixed formmail feature cannot work with mobile renderers
@@ -573,6 +574,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - XCL+Smartyフィルターで$xoops_imageurl等のアサイン修正 (thx gusagi) 1.73b
 - 「Tellafriendを使う」オプションが反転していたのを修正 (thx shige-p) 1.73b
 - フォームテンプレートの仮想パス入力欄の判定typoを修正 (thx mkbl) 1.73c
+- コンテンツ一覧ブロックで(offset,limit)形式のオプション指定を追加 1.73d
 
 1.72 (2008/09/17)
 - フォームメール機能がWizMobileや携帯対応レンダラーで動作しなかったのを修正

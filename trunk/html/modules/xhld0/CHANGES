@@ -2,6 +2,9 @@
 CHANGES:
 
 
+v.3.08 2008-10-30
+  - fixed JVN#20502807 / secunia#32361
+
 v.3.07 2006-10-01
   - fixed class Snoopy redeclaration
   - modified assigning xoops_pagetitle as each feed (3.07a)
@@ -254,6 +257,9 @@ v2.00 2004-7-9
 [/xlang:en][xlang:ja]
 
 更新履歴:
+
+v.3.08 2008-10-30
+  - JVN#20502807 / secunia#32361 の修正
 
 v.3.07 2006-10-01
   - モジュール内に取り込んだSnoopyが二重定義エラーになってしまっていたバグを修正

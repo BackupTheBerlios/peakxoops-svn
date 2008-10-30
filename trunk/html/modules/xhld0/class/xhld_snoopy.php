@@ -1027,8 +1027,7 @@ class XhldSnoopy
 		
 		$headerfile = tempnam($temp_dir, "sno");
 
-		$safer_URI = strtr( $URI, "\"", " " ); // strip quotes from the URI to avoid shell access
-		exec($this->curl_path." -D \"$headerfile\"".$cmdline_params." \"".$safer_URI."\"",$results,$return);
+		exec($this->curl_path." -k -D \"$headerfile\"".$cmdline_params." \"".escapeshellcmd($URI)."\"",$results,$return);
 		
 		if($return)
 		{

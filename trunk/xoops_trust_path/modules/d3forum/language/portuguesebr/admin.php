@@ -4,11 +4,6 @@
 // PORTAL X-TRAD - http://www.x-trad.org/
 // traduzido por artsgeral
  
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:47
-define('_MD_A_D3FORUM_H2_POSTHISTORIES','Histories of editing/deleting posts');
-define('_MD_A_D3FORUM_LINK_REFERDELETED','Deleted');
-
 define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','Blocos/Permissão');
 define('_MD_A_MYMENU_MYPREFERENCES','Preferências');
@@ -52,6 +47,10 @@ define('_MD_A_D3FORUM_ERR_INVALIDMID','Você especificou o módulo errado a ser im
 define('_MD_A_D3FORUM_ERR_SQLONIMPORT','Falha na importação. Você tem que verificar as versões do cada os módulos.');
 define('_MD_A_D3FORUM_HELP_IMPORTFROM','Você pode importar de newbb1, de xhnewbb, e dos outros exemplos de d3forum. E você deve saber que esta não é uma cópia perfeita. Especialmente, você deve verificar permissões. Você também tem que saber que todos os dados neste módulo estarão perdidos quando você executar a importação.');
 define('_MD_A_D3FORUM_HELP_COMIMPORTFROM','Os comentários do XOOPS serão importados como a mensagens de d3forum. Também você tem que permitir a característica da integração do comentário para usá-las. (Editando moldes ou modificar as preferências etc.)');
+
+// post_histories
+define('_MD_A_D3FORUM_H2_POSTHISTORIES','Histórico das edições e das mensagens apagadas');
+define('_MD_A_D3FORUM_LINK_REFERDELETED','Apagada');
 
 
 ?>

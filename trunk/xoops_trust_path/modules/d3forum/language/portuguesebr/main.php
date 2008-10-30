@@ -4,31 +4,11 @@
 // PORTAL X-TRAD - http://www.x-trad.org/
 // traduzido por artsgeral
 
-
-
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-11-16 18:15:36
-define('_MD_D3FORUM_LINK_ALLRSS','RSS over all categories');
-define('_MD_D3FORUM_LINK_CATEGORYRSS','RSS of this category');
-define('_MD_D3FORUM_LINK_FORUMRSS','RSS of this forum');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-28 15:55:32
-define('_MD_D3FORUM_BATCH_ACTIONS','Batch Actions');
-define('_MD_D3FORUM_BA_TURNSOLVEDON','Turn all topics as solved');
-define('_MD_D3FORUM_BA_MSG_CONFIRM','Notice: this action effects all topics/posts inside the category/forum');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:47
-define('_MD_D3FORUM_PARENTPOST','Parent');
-define('_MD_D3FORUM_CHILDPOSTS','Children');
-define('_MD_D3FORUM_NOCHILDPOSTS','No child');
-define('_MD_D3FORUM_LINK_FORUMACCESS','Set permissions for this forum');
-define('_MD_D3FORUM_LINK_CATEGORYACCESS','Set permissions for this category');
-
 define('_MD_D3FORUM_ON','Data da mensagem');
-define('_MD_D3FORUM_LASTMODIFIED','Últ. modificação');
+define('_MD_D3FORUM_LASTMODIFIED','Última modificação');
 define('_MD_D3FORUM_BY','Postado por');
 define('_MD_D3FORUM_POSTERFROM','De');
-define('_MD_D3FORUM_POSTERJOINED','Unindo'); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,,
+define('_MD_D3FORUM_POSTERJOINED','Juntando-se');
 define('_MD_D3FORUM_POSTERPOSTS','Mensagens');
 define('_MD_D3FORUM_POSTERISONLINE','Online');
 define('_MD_D3FORUM_TOPICSCOUNT','Tópicos');
@@ -60,7 +40,7 @@ define('_MD_D3FORUM_LINK_ADVSEARCH','Pesquisa Avançada');
 define('_MD_D3FORUM_SUBJECT','Assunto');
 define('_MD_D3FORUM_BODY','Mensagem');
 define('_MD_D3FORUM_ALT_INVISIBLE','(invisível)');
-define('_MD_D3FORUM_ALT_UNAPPROVAL','(não aprovar)');
+define('_MD_D3FORUM_ALT_UNAPPROVAL','(não aprovado)');
 define('_MD_D3FORUM_LINK_NEXTTOPIC','Próximo tópico');
 define('_MD_D3FORUM_LINK_PREVTOPIC','Tópico anterior');
 define('_MD_D3FORUM_LINK_NEXTPOST','Próxima mensagem');
@@ -75,9 +55,13 @@ define('_MD_D3FORUM_MSG_CONFIRMOK','Está Certo?');
 define('_MD_D3FORUM_MSG_CONFIRMDELETE','Você tem certeza que quer apagar isto?');
 define('_MD_D3FORUM_MSG_CONFIRMDELETERECURSIVE','Todos os dados que pertencem a este registro serão apagados também. Você esta certo que quer apagar?');
 define('_MD_D3FORUM_POSTASNEWTOPIC','Abrir um novo tópico');
-define('_MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM','NOVO TÓPICO');
+
+define('_MD_D3FORUM_POSTASNEWTOPICTOTHISFORUM','Você pode abrir um tópico neste fórum');
 define('_MD_D3FORUM_POSTASSAMETOPIC','Mensagem neste tópico');
 define('_MD_D3FORUM_REPLYTHISPOST','Responder a está mensagem');
+define('_MD_D3FORUM_LINK_ALLRSS','RSS de todas as categorias');
+define('_MD_D3FORUM_LINK_CATEGORYRSS','RSS desta categoria');
+define('_MD_D3FORUM_LINK_FORUMRSS','RSS de todo o fórum');
 define('_MD_D3FORUM_CANTPOSTTHISFORUM','Você não pode postar neste fórum');
 define('_MD_D3FORUM_CANTCREATENEWTOPICTHISFORUM','Você não pode abrir um novo tópico neste fórum');
 define('_MD_D3FORUM_GUESTSCANPOST_DESC','Visitantes podem postar neste fórum');
@@ -96,12 +80,12 @@ define('_MD_D3FORUM_TOP','Inicio');
 define('_MD_D3FORUM_WHOLE','Todos');
 define('_MD_D3FORUM_ALT_MARKEDYES','Marcado');
 define('_MD_D3FORUM_ALT_MARKEDNO','Não Marcado');
-define('_MD_D3FORUM_MARKEDYES_DESC','Você optou por este tópico estar como MARCADO');
-define('_MD_D3FORUM_MARKEDNO_DESC','Você pode registrar este tópico como MARCADO');
+define('_MD_D3FORUM_MARKEDYES_DESC','Você marcou este tópico como <em class="d3f_attn" title="Tópicos MARCADOS são mostrados no topo da lista">MARCADO</em>');
+define('_MD_D3FORUM_MARKEDNO_DESC','Você pode marcar este tópico como <em class="d3f_attn" title="Tópicos MARCADOS são mostrados no topo da lista">MARCADO</em>');
 define('_MD_D3FORUM_ALT_SOLVEDYES','Tópico solucionado');
 define('_MD_D3FORUM_ALT_SOLVEDNO','Tópico não-solucionado');
-define('_MD_D3FORUM_SOLVEDYES_DESC','Este tópico está como SOLUCIONADO');
-define('_MD_D3FORUM_SOLVEDNO_DESC','Este tópico está SEM SOLUÇÃO');
+define('_MD_D3FORUM_SOLVEDYES_DESC','Este tópico está <em class="d3f_attn" title="Os tópicos solucionados são tratados como tópicos fechados pelo administrador ou moderador">Solucionado</em>');
+define('_MD_D3FORUM_SOLVEDNO_DESC','Este tópico está <em class="d3f_attn" title="Contribuições são bem-vindas">NÃO RESOLVIDO</em>');
 define('_MD_D3FORUM_MARK_TURNON','Marcar este tópico');
 define('_MD_D3FORUM_MARK_TURNOFF','Desmarcar este tópico');
 define('_MD_D3FORUM_SOLVED_TURNON','Registrar como Solucionado');
@@ -143,13 +127,13 @@ define('_MD_D3FORUM_ERR_JAPANESEINCORRECT','');
 
 // inc_eachpost.html
 define('_MD_D3FORUM_UNIQUEPATHPREFIX','msg#');
-//define('_MD_D3FORUM_PARENTPOST','');
-//define('_MD_D3FORUM_CHILDPOSTS','');
-//define('_MD_D3FORUM_NOCHILDPOSTS','');
+define('_MD_D3FORUM_PARENTPOST','Pai');
+define('_MD_D3FORUM_CHILDPOSTS','Filho');
+define('_MD_D3FORUM_NOCHILDPOSTS','Sem filho');
 
 // order options
-define('_MD_D3FORUM_ODR_LASTPOSTDSC','Últ. mensagem primeiro');
-define('_MD_D3FORUM_ODR_LASTPOSTASC','Últ. mensagem no final');
+define('_MD_D3FORUM_ODR_LASTPOSTDSC','Última mensagen primeiro');
+define('_MD_D3FORUM_ODR_LASTPOSTASC','Última mensagem no final');
 define('_MD_D3FORUM_ODR_CREATETOPICDSC','Tópico mais novo primeiro');
 define('_MD_D3FORUM_ODR_CREATETOPICASC','Tópico mais novo no fim');
 define('_MD_D3FORUM_ODR_REPLIESDSC','Com mais respostas primeiro');
@@ -188,12 +172,12 @@ define('_MD_D3FORUM_LASTVISIT','Sua última visita foi');
 
 // topic attributes (done)
 define('_MD_D3FORUM_TOPICLOCKED','Tópico fechado');
-define('_MD_D3FORUM_TOPICLOCKED_DESC','Este tópico estáFECHADO pelos administradores ou moderadores');
+define('_MD_D3FORUM_TOPICLOCKED_DESC','Este tópico está<em class="d3f_attn" title="Você não pode responder nem editar as mensagens">LOCKED</em> pelo administrador ou moderador');
 define('_MD_D3FORUM_TOPICSTICKY','Tópico fixo');
 define('_MD_D3FORUM_TOPICPOPULAR','Tópico popular');
 define('_MD_D3FORUM_TOPICNEWPOSTS','Tópico com novas mensagens');
 define('_MD_D3FORUM_TOPICNONEWPOSTS','Tópico sem novas mensagens');
-define('_MD_D3FORUM_TOPICINVISIBLE','Tópico invisível (Somente administradores e moderadores)');
+define('_MD_D3FORUM_TOPICINVISIBLE','Tópico invisível (Somente administradores e moderadores podem ler)');
 
 // PERMISSION ERRORS (check done)
 define('_MD_D3FORUM_ERR_SPECIFYFORUM','O fórum deve estar especificado');
@@ -222,7 +206,7 @@ define('_MD_D3FORUM_LABEL_ADVANCEDOPTIONS','Opções Avançadas');
 define('_MD_D3FORUM_REFERENCEPOST','Referência');
 define('_MD_D3FORUM_FORMTITLEINPREVIEW','Visualizar a mensagem');
 define('_MD_D3FORUM_MSG_THANKSPOST','Obrigado por sua participação!');
-define('_MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL','Obrigado por sua participação! Espere até que sua mensagem seja aprovado.');
+define('_MD_D3FORUM_MSG_THANKSPOSTNEEDAPPROVAL','Obrigado por sua participação! Espere até que sua mensagem seja aprovada.');
 define('_MD_D3FORUM_MSG_THANKSEDIT','Modificação realizada com sucesso');
 define('_MD_D3FORUM_USERWROTE','%s escrever:');
 define('_MD_D3FORUM_BTN_QUOTE','Citar');
@@ -257,7 +241,7 @@ define('_MD_D3FORUM_ERR_NOMESSAGE','Você postou uma mensagem sem conteúdo');
 
 // topicmanager (check done)
 define('_MD_D3FORUM_TOPICMANAGER','Gerenciar topico');
-define('_MD_D3FORUM_TOPICMANAGER_DESC','Você pode mudar no tópico\ título, status do fechamento, status de visível, e etc.');
+define('_MD_D3FORUM_TOPICMANAGER_DESC','Você pode mudar o título do tópico\'s, status do fechamento, status de visível, e etc.');
 define('_MD_D3FORUM_TOPICMANAGERDONE','Tópico foi modificado com sucesso');
 define('_MD_D3FORUM_TH_STICKY','Rótulo');
 define('_MD_D3FORUM_TH_LOCK','Travado');
@@ -292,7 +276,7 @@ define('_MD_D3FORUM_CUTPASTEBYFORUMIDSBJ','Mover para outro forum') ;
 define('_MD_D3FORUM_CUTPASTEBYFORUMIDDSC','Este tópico pertencerá ao forum especificado. A id do topico será mantido.') ;
 define('_MD_D3FORUM_CUTPASTETOPICDIVSBJ','Dividir o tópico(a mensagem)') ;
 define('_MD_D3FORUM_CUTPASTETOPICDIVDSC','Esta mensagem será um novo tópico no forum, especificado como nova id do topico') ;
-define('_MD_D3FORUM_CUTPASTESUCCESS','A mensagem foi copiado e/ou colado com sucesso') ;
+define('_MD_D3FORUM_CUTPASTESUCCESS','A mensagem foi recortada e/ou colada com sucesso') ;
 
 // vote to post
 define('_MD_D3FORUM_ERR_VOTEPERM','Você não pode votar');
@@ -309,6 +293,7 @@ define('_MD_D3FORUM_VOTEPOINTDSCWORST','Inutil');
 define('_MD_D3FORUM_FORUMMANAGER','Gerenciar Forum');
 define('_MD_D3FORUM_LINK_MAKEFORUM','Criar forum');
 define('_MD_D3FORUM_LINK_FORUMMANAGER','Modificar o forum');
+define('_MD_D3FORUM_LINK_FORUMACCESS','Configurar as permissões deste fórum');
 define('_MD_D3FORUM_MSG_FORUMMADE','Forum criado com sucesso');
 define('_MD_D3FORUM_MSG_FORUMUPDATED','Forum modificado com sucesso');
 define('_MD_D3FORUM_MSG_FORUMDELETED','Forum apagado com sucesso');
@@ -326,6 +311,7 @@ define('_MD_D3FORUM_CATEGORYMANAGER','Gerenciar Categoria');
 define('_MD_D3FORUM_LINK_MAKECATEGORY','Criar Categoria');
 define('_MD_D3FORUM_LINK_MAKESUBCATEGORY','Criar sub-categoria');
 define('_MD_D3FORUM_LINK_CATEGORYMANAGER','Modificar a categoria');
+define('_MD_D3FORUM_LINK_CATEGORYACCESS','Configurar permissões desta categoria');
 define('_MD_D3FORUM_MSG_CATEGORYMADE','A categoria foi criada com sucesso');
 define('_MD_D3FORUM_MSG_CATEGORYUPDATED','A categoria foi modificada com sucesso');
 define('_MD_D3FORUM_MSG_CATEGORYDELETED','A categoria foi apagada com sucesso');
@@ -335,10 +321,15 @@ define('_MD_D3FORUM_TH_CATEGORYPARENT','Categoria principal');
 define('_MD_D3FORUM_TH_CATEGORYDESC','Descrição da Categoria');
 define('_MD_D3FORUM_TH_CATEGORYOPTIONS','Opções da Categoria');
 define('_MD_D3FORUM_ONOFF','ON/OFF');
-define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','Se você exceder as preferências, escrever uma linha como:<br />(option name):(option value)<br />Exemplo:<br />show_breadcrumbs:1 <br /><br />Opções excedentes e valores atuais:');
-
+define('_MD_D3FORUM_HOWTO_OVERRIDEOPTIONS','Se você exceder as preferências, escrever uma linha como:<br />(Opção de nome):(opção de valor)<br />ex)<br />show_breadcrumbs:1 <br /><br />Opções excedentes e valores atuais:');
 define('_MD_D3FORUM_SUFFIX_UNDERTHISCATEGORY','(sob esta categoria)');
 define('_MD_D3FORUM_SUFFIX_UNDERTHISFORUM','(sob este forum)');
+
+
+// batch actions
+define('_MD_D3FORUM_BATCH_ACTIONS','Ações em Lote');
+define('_MD_D3FORUM_BA_TURNSOLVEDON','Tornar todos os lotes resolvidos');
+define('_MD_D3FORUM_BA_MSG_CONFIRM','Nota: está ação afeta todos os tópicos e mensagens dentro da categoria ou fórum');
 
 // multi-byte spaces separated by ,
 // (don't define for single space languages)

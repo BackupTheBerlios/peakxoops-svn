@@ -9,20 +9,6 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
-
-
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-28 15:55:32
-define($constpref.'_DEFAULT_OPTIONS','Default checked in post form');
-define($constpref.'_DEFAULT_OPTIONSDSC','List checked options separated by comma(,).<br />eg) smiley,xcode,br,number_entity<br />You can add these options: special_entity html attachsig u2t_marked');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-27 16:50:41
-define($constpref.'_BODY_EDITOR','Body Editor');
-define($constpref.'_BODY_EDITORDSC','WYSIWYG editor will be enabled under only forums allowing HTML. With forums escaping HTML specialchars, xoopsdhtml will be displayed automatically.');
-
-// Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:47
-define($constpref.'_ADMENU_POSTHISTORIES','Histories');
-
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
@@ -41,6 +27,7 @@ define($constpref."_BNAME_LIST_FORUMS","Forums");  //
 define($constpref.'_ADMENU_CATEGORYACCESS','Permissões das Categorias');
 define($constpref.'_ADMENU_FORUMACCESS','Permissões dos Forums');
 define($constpref.'_ADMENU_ADVANCEDADMIN','Avançado');
+define($constpref.'_ADMENU_POSTHISTORIES','Historias');
 define($constpref.'_ADMENU_MYLANGADMIN','Linguagem');
 define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
 define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocos/Permissões');
@@ -50,6 +37,8 @@ define($constpref.'_ADMENU_MYPREFERENCES','Preferencias');
 define($constpref.'_TOP_MESSAGE','Mensagem no inicio do forum');  //
 define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">Inicio do Forum</h1><p class="d3f_welcome">Para começar a visualizar as mensagens, selecionar uma  categoria ou o forum de que você queira visitar na seleção abaixo.</p>');  //
 define($constpref.'_SHOW_BREADCRUMBS','Visualizar breadcrumbs');
+define($constpref.'_DEFAULT_OPTIONS','Checkbox padrão no formulário de mensagens');
+define($constpref.'_DEFAULT_OPTIONSDSC','Listar as opções de checkbox separadas por vírgula(,).<br />ex) smiley,xcode,br,number_entity<br />Você pode adicionar estas opções: special_entity html attachsig u2t_marked');
 define($constpref.'_ALLOW_HTML','Permitir HTML'); //
 define($constpref.'_ALLOW_HTMLDSC','Não coloque SIM, ocasionalmente. Pois isto pode conter uma vunerabilidade e que um usuario coloque um script malicioso.'); //
 define($constpref.'_ALLOW_TEXTIMG','Permitir visualzar as imagens externas na mensagem'); //
@@ -64,7 +53,7 @@ define($constpref.'_ALLOW_MARK','usar a característica de MARCAR TÓPICO');   //
 define($constpref.'_ALLOW_HIDEUID','Permitir um usuário registrado pode postar sem seu nome'); //
 define($constpref.'_POSTS_PER_TOPIC','Máximo de mensagens por tópico');  //
 define($constpref.'_POSTS_PER_TOPICDSC','O tópico tem um limite de suas mensagens'); //
-define($constpref.'_HOT_THRESHOLD','TOPICO QUENTE');//
+define($constpref.'_HOT_THRESHOLD','Tópico Quente');//
 define($constpref.'_HOT_THRESHOLDDSC','Mensagens nescessarias para se tornar um TOPICO QUENTE');
 define($constpref.'_TOPICS_PER_PAGE','Máximo de tópicos por pagina, mostrada no forum.'); //
 define($constpref.'_TOPICS_PER_PAGEDSC','');
@@ -78,6 +67,8 @@ define($constpref.'_CSS_URI','Usar arquivo URI ou CSS para este módulo'); //
 define($constpref.'_CSS_URIDSC','o trajeto relativo ou absoluto pode ser ajustado por padrão: index.css'); //
 define($constpref.'_IMAGES_DIR','Diretório para arquivos de imagem'); //
 define($constpref.'_IMAGES_DIRDSC','o trajeto relativo deve ser ajustado no diretório do módulo, por padrão: imagens'); //
+define($constpref.'_BODY_EDITOR','Corpo do Editor');
+define($constpref.'_BODY_EDITORDSC','O editor WYSIWYG será habilitado somente nos fóruns onde for permitido o HTML. Com fóruns escapando dos caracteres especiais do HTML, o xoopsdhtml será mostrado automáticamnte.');
 define($constpref.'_ANONYMOUS_NAME','Nome para Convidados');
 define($constpref.'_ANONYMOUS_NAMEDSC','');
 define($constpref.'_ICON_MEANINGS','Significado dos ícones');

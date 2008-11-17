@@ -1,6 +1,13 @@
 <?php
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-18 04:46:02
+define('_MD_D3PIPES_N4J_KEEPPIPEINFO','Keep pipe info');
+define('_MD_D3PIPES_N4J_TARGETMODULE','Target module');
+define('_MD_D3PIPES_CLASS_UNIONTHEOTHERD3PIPES','From the other d3pipes');
+define('_MD_D3PIPES_LINK_SITEMAPS','Sitemaps');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-10 10:57:46
 define('_MD_D3PIPES_N4J_EXTRAOPTIONS','Extra options');
 

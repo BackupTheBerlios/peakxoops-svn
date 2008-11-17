@@ -27,7 +27,7 @@ define('_MD_D3PIPES_N4J_UTF8TO','Normally, input internal encoding');
 define('_MD_D3PIPES_N4J_UTF8FROM','Normally, input the encoding of the XML');
 define('_MD_D3PIPES_N4J_FILTER','Input patterns/keywords to filter');
 define('_MD_D3PIPES_N4J_REASSIGN','Input rules for re-assignment');
-define('_MD_D3PIPES_N4J_UNION','Input pipe_id:entries separated by comma(,).');
+define('_MD_D3PIPES_N4J_UNION','pipe ids sep. by comma');
 
 define('_MD_D3PIPES_N4J_WRITEURL','Input URL');
 define('_MD_D3PIPES_N4J_WRITEPREG','Input regex by perl format');
@@ -35,6 +35,8 @@ define('_MD_D3PIPES_N4J_WRITEPOSIX','Input regex by POSIX format');
 define('_MD_D3PIPES_N4J_CID','Category ID');
 define('_MD_D3PIPES_N4J_MAXENTRIES','Max entries');
 define('_MD_D3PIPES_N4J_EACHENTRIES','Entries a pipe');
+define('_MD_D3PIPES_N4J_KEEPPIPEINFO','Keep pipe info');
+define('_MD_D3PIPES_N4J_TARGETMODULE','Target module');
 define('_MD_D3PIPES_N4J_EXTRAOPTIONS','Extra options');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','Entries from clippings');
 define('_MD_D3PIPES_N4J_CLIPLIFETIME','Lifetime of clippings (use preferences if blank)');
@@ -66,6 +68,7 @@ define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','Dictionary order ASC');
 define('_MD_D3PIPES_CLASS_SORTHEADLINEINTASC','Integer order ASC');
 define('_MD_D3PIPES_CLASS_UNIONMERGESORT','Aggregation and Sort');
 define('_MD_D3PIPES_CLASS_UNIONSEPARATED','Parallel without Sort');
+define('_MD_D3PIPES_CLASS_UNIONTHEOTHERD3PIPES','From the other d3pipes');
 
 define('_MD_D3PIPES_TH_PUBTIME','published time');
 define('_MD_D3PIPES_TH_PIPENAME','name');
@@ -79,6 +82,8 @@ define('_MD_D3PIPES_LABEL_DELETECLIPPING','Delete this clipping');
 define('_MD_D3PIPES_LABEL_VISIBLECLIPPING','Display this clipping');
 
 define('_MD_D3PIPES_BTN_UPDATE','Update');
+
+define('_MD_D3PIPES_LINK_SITEMAPS','Sitemaps');
 
 define('_MD_D3PIPES_FMT_LINKTOCLIPLIST','Go to list of clippings (Total: %s entries)');
 define('_MD_D3PIPES_FMT_EXTERNALLINK','External link to %s');

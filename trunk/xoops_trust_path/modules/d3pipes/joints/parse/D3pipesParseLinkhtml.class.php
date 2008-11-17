@@ -9,7 +9,7 @@ class D3pipesParseLinkhtml extends D3pipesParseAbstract {
 		$items = array() ;
 
 		$result = preg_match_all( $this->option , $html_source , $matches , PREG_SET_ORDER ) ;
-		if( ! $result ) {
+		if( $result === false ) {
 			$this->errors[] = 'Invalid pattern for this Parser'."\n($this->pipe_id)" ;
 		}
 		foreach( $matches as $match ) {

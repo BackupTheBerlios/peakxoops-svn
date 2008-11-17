@@ -13,9 +13,11 @@ class D3pipesParseAbstract extends D3pipesJointAbstract {
 		$this->pipe_id = intval( $pipe_id ) ;
 		$this->option = $option ;
 	}
-	
+
+	// virtual
 	function execute( $xml_source , $max_entries = '' ) {}
 
+	// utility
 	function dateToUnix( $date_formatted )
 	{
 		if( preg_match( '/^[a-zA-Z]/' , trim( $date_formatted ) ) ) {
@@ -58,7 +60,7 @@ class D3pipesParseAbstract extends D3pipesJointAbstract {
 		else return $localunixtime + $tzoffset ;
 	}
 
-
+	// utility
 	function parseTimezoneOffset( $text )
 	{
 		if( strstr( $text , ':' ) ) {

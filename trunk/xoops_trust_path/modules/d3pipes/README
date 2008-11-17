@@ -38,7 +38,26 @@ You'd better use "Wizard" till you become familiar with the pipe structure.
 Notice: Async block requires the privileges of not only "block access" but also "module access".
 
 
+[b]SITEMAPS[/b]
+
+If you want Sitemaps feature for google etc., just copy html/sitemap.php of the archive into XOOPS_ROOT_PATH/
+
+All you have to do is just specify the URL (URL/sitemap.php) as the sitemap of your site to "Google Webmasters" etc.
+
+You can get the URLs for Sitemaps easily just by accessing the top of d3pipes as the administrator of the site.
+
+Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had maintained a long time ago.
+
+
 [b]CHANGELOG[/b]
+
+0.65 2008-11-18
+- modified Sitemaps feature easy as possible
+- added a joint to merge entries from the other d3pipes (UnionTheotherd3pipes)
+- fixed missing assignment "pipe" from clipping detail controller
+- added "initial_pipes" attributes for each entries
+- added option "keep pipe info" for union joints
+- added "keep pipe info" as a preference and block's options
 
 0.64 2008-09-20
 - added editing pubtime via ajax
@@ -289,6 +308,15 @@ XOOPS_TRUST_PATH 直下に cache ディレクトリを作り、書込を許可します。
 
 なお、非同期パイプ一覧を表示するには、ブロックアクセス権限の他に、モジュールアクセス権限も必要です。
 
+●サイトマップ機能
+
+ずいぶん前に実装だけしながらドキュメントで何も言及していなかった機能です。
+htmlフォルダ直下にある sitemap.php を mainfile.php と同じ階層にコピーしてください。
+あとは、Googleなどに、サイトマップとして XOOPS_URL/sitemap.php を指定するだけです。
+
+管理者としてd3pipesの公開側にアクセスすると、[Sitemaps] というリンクがありますので、それをそのままコピー＆ペーストするのも良いでしょう。
+
+以前メンテナンスしていたsitemapモジュールと混同されそうですが、そのモジュールとは何の関係もありません。d3pipesだけあれば機能します。
 
 ●更新履歴
 

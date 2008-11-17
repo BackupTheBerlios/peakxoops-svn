@@ -12,5 +12,6 @@ define('_MB_D3PIPES_UNIONCLASS','表示方式');
 define('_MB_D3PIPES_UNIONOPTION_MERGESORT','全パイプのアグリゲーション');
 define('_MB_D3PIPES_UNIONOPTION_SEPARATED','各パイプの個別表示');
 define('_MB_D3PIPES_LINK2CLIPPING','ローカル保存があれば内部リンクにする');
+define('_MB_D3PIPES_KEEP_PIPEINFO','可能な限り上位のパイプ情報を表示する');
 
 ?>

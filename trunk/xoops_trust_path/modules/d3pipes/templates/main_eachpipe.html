@@ -15,7 +15,10 @@
 	<{/if}>
 
 	<{if $xoops_isadmin}>
-	<div style="float:right;"><a href="<{$mod_url}>/admin/index.php?page=pipe&amp;pipe_id=<{$pipe.id}>">[<{$smarty.const._EDIT}>]</a></div>
+	<div style="float:right;">
+		<a href="<{$mod_url}>/admin/index.php?page=pipe&amp;pipe_id=<{$pipe.id}>">[<{$smarty.const._EDIT}>]</a>
+		<a href="<{$xoops_url}>/sitemap.php?dirname=<{$mydirname}>&amp;pipe_id=<{$pipe.id}>">[<{$smarty.const._MD_D3PIPES_LINK_SITEMAPS}>]</a>
+	</div>
 	<{/if}>
 
 	<h2><{$pipe.name}> - <{$smarty.const._MD_D3PIPES_H2_EACHPIPE}></h2>

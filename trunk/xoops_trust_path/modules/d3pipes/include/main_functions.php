@@ -12,9 +12,9 @@ function d3pipes_main_fetch_entries_main_aggr( $mydirname , &$errors , $max_entr
 	while( list( $pipe_id ) = $db->fetchRow( $result ) ) {
 		$union_options[] = $pipe_id.':'.$xoopsModuleConfig['index_each'] ;
 	}
-	
+
 	// Union object
-	$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $union_options ) ) ;
+	$union_obj =& d3pipes_common_get_joint_object_default( $mydirname , 'union' , implode( ',' , $union_options ) . '||' . (empty($xoopsModuleConfig['index_keeppipe'])?0:1) ) ;
 	$union_obj->setModConfigs( $xoopsModuleConfig ) ;
 	$entries = $union_obj->execute( array() , $max_entries ) ;
 	$errors = $union_obj->getErrors() ;

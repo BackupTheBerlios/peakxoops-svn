@@ -31,6 +31,7 @@ define($constpref.'_BNAME_SYNC','同期パイプ一覧ブロック') ;
 // configs
 define($constpref.'_INDEXTOTAL','モジュールトップで表示する最新ヘッドラインの総数');
 define($constpref.'_INDEXEACH','モジュールトップで表示する最新ヘッドラインに１パイプから引っ張ってくる最大数');
+define($constpref.'_INDEXKEEPPIPE','モジュールトップでは可能な限り上位のパイプ名を表示する');
 define($constpref.'_ENTRIESAPIPE','個々のパイプページで表示するエントリ数');
 define($constpref.'_ENTRIESAPAGE','各パイプの切り抜き一覧表示１ページに表示するエントリ数');
 define($constpref.'_ENTRIESARSS','各パイプのRSS/ATOMで出力するエントリ数');

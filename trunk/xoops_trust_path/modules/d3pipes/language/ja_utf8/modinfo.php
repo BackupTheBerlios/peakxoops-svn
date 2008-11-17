@@ -31,6 +31,7 @@ define($constpref.'_BNAME_SYNC','同期パイプ一覧ブロック') ;
 // configs
 define($constpref.'_INDEXTOTAL','モジュールトップで表示する最新ヘッドラインの総数');
 define($constpref.'_INDEXEACH','モジュールトップで表示する最新ヘッドラインに１パイプから引っ張ってくる最大数');
+define($constpref.'_INDEXKEEPPIPE','モジュールトップでは可能な限り上位のパイプ名を表示する');
 define($constpref.'_ENTRIESAPIPE','個々のパイプページで表示するエントリ数');
 define($constpref.'_ENTRIESAPAGE','各パイプの切り抜き一覧表示１ページに表示するエントリ数');
 define($constpref.'_ENTRIESARSS','各パイプのRSS/ATOMで出力するエントリ数');
@@ -53,7 +54,6 @@ define($constpref.'_XSLTPROC_PATH','xsltprocのパス (デフォルトは/usr/bi
 define($constpref.'_UPING_SERVERS','更新Pingサーバ');
 define($constpref.'_UPING_SERVERSDSC','httpから始まるRPCエンドポイントを１行に１つずつ記述します<br />URLの最後に、スペースで区切ったEを入れた場合、extendedPingで送信します。');
 define($constpref.'_UPING_SERVERSDEF',"http://blogsearch.google.co.jp/ping/RPC2 E\nhttp://api.my.yahoo.co.jp/RPC2\nhttp://rpc.technorati.com/rpc/ping\nhttp://ping.bloggers.jp/rpc/\nhttp://www.blogpeople.net/servlet/weblogUpdates E");
-// http://rpc.weblogs.com/
 define($constpref.'_CSS_URI','モジュール用CSSのURI');
 define($constpref.'_CSS_URIDSC','このモジュール専用のCSSファイルのURIを相対パスまたは絶対パスで指定します。デフォルトは{mod_url}/index.php?page=main_cssです。');
 define($constpref.'_IMAGES_DIR','イメージファイルディレクトリ');

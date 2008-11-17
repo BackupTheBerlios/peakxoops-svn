@@ -2,6 +2,10 @@
 
 // definitions for editing blocks
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-18 04:46:02
+define('_MB_D3PIPES_KEEP_PIPEINFO','Displays upper pipes as possible');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-05-20 05:41:54
 define('_MB_D3PIPES_LINK2CLIPPING','Link to clipping view if the entry is clipped');
 

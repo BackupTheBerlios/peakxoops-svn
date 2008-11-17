@@ -27,7 +27,7 @@ define('_MD_D3PIPES_N4J_UTF8TO','通常は、内部エンコーディングを�
 define('_MD_D3PIPES_N4J_UTF8FROM','通常は、XMLのエンコーディングを記入');
 define('_MD_D3PIPES_N4J_FILTER','正規表現など絞り込むためのパターンを記入');
 define('_MD_D3PIPES_N4J_REASSIGN','再割り当てのルールを記入');
-define('_MD_D3PIPES_N4J_UNION','統合するパイプ番号をカンマで区切る(コロンで取得数個別指定も可)');
+define('_MD_D3PIPES_N4J_UNION','統合するパイプ番号(カンマ区切り)');
 
 define('_MD_D3PIPES_N4J_WRITEURL','URLを記入');
 define('_MD_D3PIPES_N4J_WRITEPREG','perl正規表現を記入');
@@ -35,6 +35,8 @@ define('_MD_D3PIPES_N4J_WRITEPOSIX','POSIX正規表現を記入');
 define('_MD_D3PIPES_N4J_CID','カテゴリーID');
 define('_MD_D3PIPES_N4J_MAXENTRIES','最大件数');
 define('_MD_D3PIPES_N4J_EACHENTRIES','各パイプからの取得数');
+define('_MD_D3PIPES_N4J_KEEPPIPEINFO','パイプ情報の保存');
+define('_MD_D3PIPES_N4J_TARGETMODULE','対象モジュール');
 define('_MD_D3PIPES_N4J_EXTRAOPTIONS','追加オプション');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','切抜きから次へ渡す最低エントリ数');
 define('_MD_D3PIPES_N4J_CLIPLIFETIME','切抜きの保存日数(空欄なら一般設定値)');
@@ -66,6 +68,7 @@ define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','エントリ名辞書順昇順ソ
 define('_MD_D3PIPES_CLASS_SORTHEADLINEINTASC','エントリ名数字順昇順ソート');
 define('_MD_D3PIPES_CLASS_UNIONMERGESORT','新着順アグリゲーション');
 define('_MD_D3PIPES_CLASS_UNIONSEPARATED','並列化（ソート無）');
+define('_MD_D3PIPES_CLASS_UNIONTHEOTHERD3PIPES','他d3pipesからの連結');
 
 define('_MD_D3PIPES_TH_PUBTIME','発行日時');
 define('_MD_D3PIPES_TH_PIPENAME','パイプ名');
@@ -79,6 +82,8 @@ define('_MD_D3PIPES_LABEL_DELETECLIPPING','切り抜きを削除する');
 define('_MD_D3PIPES_LABEL_VISIBLECLIPPING','この切り抜きを表示する');
 
 define('_MD_D3PIPES_BTN_UPDATE','更新する');
+
+define('_MD_D3PIPES_LINK_SITEMAPS','Sitemaps');
 
 define('_MD_D3PIPES_FMT_LINKTOCLIPLIST','切り抜き一覧へ (切り抜き総数 %s件)');
 define('_MD_D3PIPES_FMT_EXTERNALLINK','%sへの外部リンク');

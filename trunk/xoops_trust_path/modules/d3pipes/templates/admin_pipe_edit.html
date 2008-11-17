@@ -52,15 +52,6 @@
 
 		<li id="index_<{$index}>">
 
-			<{* link to pipe analyzer *}>
-			<{if $pipe_id>0}>
-				<{if $joint.joint}>
-					<div class="joint_element debug">
-						<a href="<{$mod_url}>/index.php?page=pipe_analyze&amp;pipe_id=<{$pipe_id}>&amp;step=<{$index}>" target="_blank"><{$smarty.const._MD_A_D3PIPES_LINK_ANALYZETHEJOINT}></a>
-					</div>
-				<{/if}>
-			<{/if}>
-
 			<div class="joint_element handle">
 				<{$smarty.const._MD_A_D3PIPES_TH_WEIGHT}><br />
 				<input type="text" name="joint_weights[<{$index}>]" value="<{$index*10}>" size="3" style="text-align:right;" id="joint_weights_<{$index}>" />
@@ -69,10 +60,20 @@
 			<div class="joint_element">
 				<label for="joint_classes_<{$index}>" id="joint_classes_label_<{$index}>"><{$all_joints[$joint.joint]}></label>
 				<br />
+
+				<{* joint class *}>
 				<{assign var="joint_class_default" value="%s::%s"|sprintf:$joint.joint:$joint.joint_class}>
 				<select name="joint_classes[<{$index}>]" id="joint_classes_<{$index}>" onchange="d3pipes_update_jointclasses(<{$index}>,false)">
 					<{html_options options=$joint_classes_options selected=$joint_class_default}>
 				</select>
+				<br />
+
+				<{* link to pipe analyzer *}>
+				<{if $pipe_id>0}>
+					<{if $joint.joint}>
+						<a href="<{$mod_url}>/index.php?page=pipe_analyze&amp;pipe_id=<{$pipe_id}>&amp;step=<{$index}>" target="_blank"><{$smarty.const._MD_A_D3PIPES_LINK_ANALYZETHEJOINT}></a>
+					<{/if}>
+				<{/if}>
 			</div>
 
 			<div class="joint_element">
@@ -166,7 +167,7 @@ ul#pipe_main li {
   list-style: none outside;
   margin: 10px 0px;
   padding:0px;
-  height:5.5em;
+  height:7.5em;
   min-width:600px;
   border:1px solid #E8A400;
   background-color: #FFF4D8;
@@ -177,7 +178,7 @@ div.joint_element {
   float:left;
   padding: 2px;
   vertical-align: middle;
-  height: 5.2em;
+  height: 7.2em;
 }
 
 div.handle {

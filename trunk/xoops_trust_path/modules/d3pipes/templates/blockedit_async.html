@@ -50,3 +50,11 @@
 	<label for="link2clipping_no"><{$smarty.const._NO}></label>
 	<input type="radio" name="options[6]" id="link2clipping_no" value="0" <{if ! $link2clipping}>checked="checked"<{/if}> />
 </p>
+
+<p>
+	<{$smarty.const._MB_D3PIPES_KEEP_PIPEINFO}>:
+	<label for="keep_pipeinfo_yes"><{$smarty.const._YES}></label>
+	<input type="radio" name="options[7]" id="keep_pipeinfo_yes" value="1" <{if $keep_pipeinfo}>checked="checked"<{/if}> />
+	<label for="keep_pipeinfo_no"><{$smarty.const._NO}></label>
+	<input type="radio" name="options[7]" id="keep_pipeinfo_no" value="0" <{if ! $keep_pipeinfo}>checked="checked"<{/if}> />
+</p>

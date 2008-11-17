@@ -9,7 +9,7 @@ class D3pipesReplacePcre extends D3pipesReplaceAbstract {
 		if( is_array( $data ) ) {
 			return array_map( array( $this , 'execute' ) , $data ) ;
 		} else {
-			return preg_replace( $this->pattern , $this->replacement , $data ) ;
+			return preg_replace( $this->pattern , str_replace( '\n' , "\n" , $this->replacement ) , $data ) ;
 		}
 	}
 

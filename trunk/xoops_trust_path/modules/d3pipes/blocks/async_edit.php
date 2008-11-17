@@ -17,6 +17,7 @@ function b_d3pipes_blockedit_common( $options , $type = 'async' )
 	$this_template = empty( $options[4] ) ? '' : trim( $options[4] ) ;
 	$union_class = @$options[5] == 'separated' ? 'separated' : 'mergesort' ;
 	$link2clipping = empty( $options[6] ) ? false : true ;
+	$keep_pipeinfo = empty( $options[7] ) ? false : true ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
@@ -32,6 +33,7 @@ function b_d3pipes_blockedit_common( $options , $type = 'async' )
 		'this_template' => $this_template ,
 		'union_class' => $union_class ,
 		'link2clipping' => $link2clipping ,
+		'keep_pipeinfo' => $keep_pipeinfo ,
 		'union_options' => array( 'separated' => _MB_D3PIPES_UNIONOPTION_SEPARATED , 'mergesort' => _MB_D3PIPES_UNIONOPTION_MERGESORT ) ,
 	) ) ;
 	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_async.html' ) ;

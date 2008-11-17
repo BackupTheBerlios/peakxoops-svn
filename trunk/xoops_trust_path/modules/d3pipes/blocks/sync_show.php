@@ -9,6 +9,7 @@ function b_d3pipes_sync_show( $options )
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_sync.html' : trim( $options[4] ) ;
 	$union_class = @$options[5] == 'separated' ? 'separated' : 'mergesort' ;
 	$link2clipping = empty( $options[6] ) ? false : true ;
+	$keep_pipeinfo = empty( $options[7] ) ? false : true ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
@@ -20,7 +21,7 @@ function b_d3pipes_sync_show( $options )
 	$constpref = '_MB_' . strtoupper( $mydirname ) ;
 
 	// Union object
-	$union_obj =& d3pipes_common_get_joint_object( $mydirname , 'union' , $union_class , sizeof( $pipe_ids ) == 1 ? $pipe_ids[0].':'.$max_entries : implode( ',' , $pipe_ids ) ) ;
+	$union_obj =& d3pipes_common_get_joint_object( $mydirname , 'union' , $union_class , sizeof( $pipe_ids ) == 1 ? $pipe_ids[0].':'.$max_entries : implode( ',' , $pipe_ids ) . '||' . ($keep_pipeinfo?1:0) ) ;
 	$union_obj->setModConfigs( $configs ) ;
 	$entries = $union_obj->execute( array() , $max_entries ) ;
 	$pipes_entries = method_exists( $union_obj , 'getPipesEntries' ) ? $union_obj->getPipesEntries() : array() ;
@@ -40,6 +41,7 @@ function b_d3pipes_sync_show( $options )
 		'max_entries' => $max_entries ,
 		'union_class' => $union_class ,
 		'link2clipping' => $link2clipping ,
+		'keep_pipeinfo' => $keep_pipeinfo ,
 		'errors' => $errors ,
 		'entries' => $entries ,
 		'pipes_entries' => $pipes_entries ,

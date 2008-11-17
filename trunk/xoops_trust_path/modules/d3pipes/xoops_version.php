@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 0.64 ;
+$modversion['version'] = 0.65 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -55,7 +55,7 @@ $modversion['blocks'][1] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_async_show' ,
 	'edit_func'		=> 'b_d3pipes_async_edit' ,
-	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html|mergesort|1" ,
+	'options'		=> "$mydirname|".uniqid(rand())."|1|10|db:{$mydirname}_block_async.html|mergesort|1|0" ,
 	'template'		=> '' , // use "module" template instead
 	'visible_any'	=> true ,
 	'can_clone'		=> true ,
@@ -67,7 +67,7 @@ $modversion['blocks'][2] = array(
 	'description'	=> '' ,
 	'show_func'		=> 'b_d3pipes_sync_show' ,
 	'edit_func'		=> 'b_d3pipes_sync_edit' , // appropriation
-	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html|mergesort|1" ,
+	'options'		=> "$mydirname||1|10|db:{$mydirname}_block_sync.html|mergesort|1|0" ,
 	'template'		=> '' , // use "module" template instead
 	'visible_any'	=> true ,
 	'can_clone'		=> true ,
@@ -94,6 +94,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 5 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'index_keeppipe' ,
+	'title'			=> $constpref.'_INDEXKEEPPIPE' ,
+	'description'	=> '' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 

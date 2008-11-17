@@ -31,6 +31,7 @@ define($constpref.'_BNAME_SYNC','List entries (Sync)') ;
 // configs
 define($constpref.'_INDEXTOTAL','Total entries in the top of this module');
 define($constpref.'_INDEXEACH','Max entries from a pipe in the top of this module');
+define($constpref.'_INDEXKEEPPIPE','Displays upper pipes as possible in the top of this module');
 define($constpref.'_ENTRIESAPIPE','Entries a view of each pipes');
 define($constpref.'_ENTRIESAPAGE','Entries a page in clipping list');
 define($constpref.'_ENTRIESARSS','Entries a RSS/Atom');

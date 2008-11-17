@@ -36,7 +36,12 @@ if( ( ! empty( $_POST['do_update'] ) || ! empty( $_POST['do_saveas'] ) ) && is_a
 		// merge options if necessary
 		if( empty( $_POST['joint_option'][$i] ) && ! empty( $_POST['joint_options'][$i] ) && is_array( $_POST['joint_options'][$i] ) ) {
 			$separator = empty( $_POST['joint_option_separator'][$i] ) ? '|' : $_POST['joint_option_separator'][$i] ;
-			$joint_option = join( $separator , array_map( array( $myts , 'stripSlashesGPC' ) , $_POST['joint_options'][$i] ) ) ;
+			$max_index = empty( $_POST['joint_option_max_index'][$i] ) ? max( array_keys( $_POST['joint_options'][$i] ) ) : intval( $_POST['joint_option_max_index'][$i] ) ;
+			$joint_options = array() ;
+			for( $o = 0 ; $o <= $max_index ; $o ++ ) {
+				$joint_options[$o] = $myts->stripSlashesGPC( @$_POST['joint_options'][$i][$o] ) ;
+			}
+			$joint_option = join( $separator , $joint_options ) ;
 		} else {
 			$joint_option = $myts->stripSlashesGPC( @$_POST['joint_option'][$i] ) ;
 		}

@@ -17,6 +17,10 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:55
+define('_MD_PICO_NUM','displays');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-17 13:18:19
 define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','Are you OK to save as?');
 

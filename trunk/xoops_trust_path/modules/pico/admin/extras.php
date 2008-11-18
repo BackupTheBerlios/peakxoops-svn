@@ -5,8 +5,10 @@ require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/import_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/history_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
-$myts =& MyTextSanitizer::getInstance() ;
+require_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
+$myts =& PicoTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
 
@@ -22,7 +24,7 @@ if( ! empty( $_POST['extras_output'] ) && is_array( @$_POST['action_selects'] ) 
 		if( empty( $value ) ) continue ;
 		$extra_id = intval( $extra_id ) ;
 		$extra_row = $db->fetchArray( $db->query( "SELECT ce.*,o.vpath,o.subject AS content_subject FROM ".$db->prefix($mydirname."_content_extras")." ce LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=ce.content_id WHERE content_extra_id=$extra_id" ) ) ;
-		$data = unserialize( $extra_row['data'] ) ;
+		$data = pico_common_unserialize( $extra_row['data'] ) ;
 		if( ! is_array( $data ) ) $data = array( $extra_row['data'] ) ;
 		$extra_rows[] = array(
 			'id' => intval( $extra_row['content_extra_id'] ) ,
@@ -86,15 +88,32 @@ if( ! empty( $_POST['extras_delete'] ) && ! empty( $_POST['action_selects'] ) ) 
 // form stage
 //
 
+// requests for form
 $extra_id = intval( @$_GET['extra_id'] ) ;
-$whr_extra_id = $extra_id ? "ce.content_extra_id=$extra_id" : '1' ;
+$content_id = intval( @$_GET['content_id'] ) ;
+$txt = preg_replace( '/[%_]/' , '' , $myts->stripSlashesGPC( @$_GET['txt'] ) ) ;
+$pos = empty( $_GET['pos'] ) ? 0 : intval( $_GET['pos'] ) ;
+$num = empty( $_GET['num'] ) ? 30 : intval( $_GET['num'] ) ;
+$order = in_array( @$_GET['order'] , array( 'ce.created_time' , 'ce.created_time' , 'ce.extra_type' , 'c.content_id' ) ) ? $_GET['order'] : 'ce.created_time DESC' ;
+// create WHERE part
+$whr_extra_id = $extra_id > 0 ? "ce.content_extra_id=$extra_id" : '1' ;
+$whr_content_id = $content_id > 0 ? "ce.content_id=$content_id" : '1' ;
+$whr_txt = $txt ? "ce.data LIKE '%".addslashes($txt)."%'" : '1' ;
 
-// fetch extras
-$ers = $db->query( "SELECT ce.*,o.vpath,o.subject AS content_subject FROM ".$db->prefix($mydirname."_content_extras")." ce LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=ce.content_id WHERE $whr_extra_id ORDER BY ce.created_time DESC" ) ;
+// pre query
+list( $hit ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_content_extras")." ce LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=ce.content_id WHERE $whr_extra_id AND $whr_content_id AND $whr_txt" ) ) ;
+
+// pagenav
+$pagenav = '' ;
+$pagenav_obj = new XoopsPageNav( $hit , $num , $pos , 'pos', "page=extras&amp;num=$num&amp;content_id=$content_id&amp;order=".urlencode($order)."&amp;txt=".urlencode($txt) ) ;
+$pagenav = $pagenav_obj->renderNav() ;
+
+// main query
+$ers = $db->query( "SELECT ce.*,o.vpath,o.subject AS content_subject FROM ".$db->prefix($mydirname."_content_extras")." ce LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=ce.content_id WHERE $whr_extra_id AND $whr_content_id AND $whr_txt ORDER BY $order LIMIT $pos,$num" ) ;
 
 $extras4assign = array() ;
 while( $extra_row = $db->fetchArray( $ers ) ) {
-	$data = unserialize( $extra_row['data'] ) ;
+	$data = pico_common_unserialize( $extra_row['data'] ) ;
 	if( empty( $data ) ) $data = $extra_row['data'] ;
 	$extra4assign = array(
 		'id' => intval( $extra_row['content_extra_id'] ) ,
@@ -123,6 +142,11 @@ $tpl->assign( array(
 	'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$xoopsModuleConfig['images_dir'] ,
 	'mod_config' => $xoopsModuleConfig ,
 	'extras' => $extras4assign ,
+	'num' => $num ,
+	'order' => $order ,
+	'pagenav' => $pagenav ,
+	'content_id' => $content_id ,
+	'txt_raw' => $txt ,
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'pico_admin') ,
 ) ) ;
 if( $extra_id ) {

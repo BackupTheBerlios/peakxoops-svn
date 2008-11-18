@@ -256,10 +256,27 @@ function pico_common_unhtmlspecialchars( $data )
 }
 
 
+function pico_common_serialize( $data )
+{
+	return var_export( $data , true ) ;
+}
+
+
 function pico_common_unserialize( $serialized_data )
 {
-	$ret = @unserialize( $serialized_data ) ;
-	if( empty( $ret ) ) $ret = array() ;
+	if( empty( $serialized_data ) ) return array() ;
+
+	$ret = array() ;
+	if( substr( trim( $serialized_data ) , 0 , 5 ) == 'array' ) {
+		// assume this is a string made from var_export( $var , true ) ;
+		@eval( '$ret='.$serialized_data.';' ) ;
+	} else {
+		// try PHP built-in unserialize()
+		$ret = @unserialize( $serialized_data ) ;
+	}
+
+	if( ! is_array( $ret ) ) $ret = array() ;
+
 	return $ret ;
 }
 

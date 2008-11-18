@@ -60,10 +60,18 @@ define('_MD_A_PICO_TH_ID','ID');
 define('_MD_A_PICO_TH_TYPE','TYPE');
 define('_MD_A_PICO_TH_SUMMARY','サマリ');
 define('_MD_A_PICO_LINK_DETAIL','詳細');
+define('_MD_A_PICO_LINK_EXTRACT','絞込');
+define('_MD_A_PICO_LABEL_SEARCHBYPHRASE','文字列検索');
 define('_MD_A_PICO_TH_EXTRASACTIONS','アクション');
 define('_MD_A_PICO_LABEL_EXTRASRIGHTCHECKED','右端がチェックされた項目を:');
 define('_MD_A_PICO_BTN_CSVOUTPUT','CSV出力');
 define('_MD_A_PICO_MSG_DELETED','削除しました');
+
+// tags
+define('_MD_A_PICO_H2_TAGS','タグ管理');
+define('_MD_A_PICO_TH_TAG','タグ');
+define('_MD_A_PICO_TH_USED','利用数');
+define('_MD_A_PICO_LABEL_ORDER','並び順');
 
 
 ?>

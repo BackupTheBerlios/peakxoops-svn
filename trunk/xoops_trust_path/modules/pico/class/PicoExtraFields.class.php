@@ -1,7 +1,9 @@
 <?php
 
 define( 'PICO_EXTRA_FIELDS_PREFIX' , 'extra_fields_' ) ;
+define( 'PICO_EXTRA_FIELDS_PREFIX_SHORT' , 'ef_' ) ;
 define( 'PICO_EXTRA_IMAGES_PREFIX' , 'extra_images_' ) ;
+define( 'PICO_EXTRA_IMAGES_PREFIX_SHORT' , 'ei_' ) ;
 // %1$s: field_name   %2$s: size_key  %3$s: image_id
 define( 'PICO_EXTRA_IMAGES_FMT' , '%s_%s_%s' ) ;
 define( 'PICO_EXTRA_IMAGES_REMOVAL_COMMAND' , 'remove.gif' ) ;
@@ -46,6 +48,8 @@ function getSerializedRequestsFromPost()
 	foreach( $_POST as $key => $val ) {
 		if( strncmp( $key , PICO_EXTRA_FIELDS_PREFIX , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) === 0 ) {
 			$ret[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) ] = $myts->stripSlashesGPC( $val ) ;
+		} elseif( strncmp( $key , PICO_EXTRA_FIELDS_PREFIX_SHORT , strlen( PICO_EXTRA_FIELDS_PREFIX_SHORT ) ) === 0 ) {
+			$ret[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX_SHORT ) ) ] = $myts->stripSlashesGPC( $val ) ;
 		}
 	}
 
@@ -54,7 +58,7 @@ function getSerializedRequestsFromPost()
 		$this->uploadImages( $ret ) ;
 	}
 
-	return serialize( $ret ) ;
+	return pico_common_serialize( $ret ) ;
 }
 
 
@@ -63,6 +67,8 @@ function uploadImages( &$extra_fields )
 	foreach( $_FILES as $key => $file ) {
 		if( strncmp( $key , PICO_EXTRA_IMAGES_PREFIX , strlen( PICO_EXTRA_IMAGES_PREFIX ) ) === 0 ) {
 			$this->uploadImage( $extra_fields , $file , substr( $key , strlen( PICO_EXTRA_IMAGES_PREFIX ) ) ) ;
+		} else if( strncmp( $key , PICO_EXTRA_IMAGES_PREFIX_SHORT , strlen( PICO_EXTRA_IMAGES_PREFIX_SHORT ) ) === 0 ) {
+			$this->uploadImage( $extra_fields , $file , substr( $key , strlen( PICO_EXTRA_IMAGES_PREFIX_SHORT ) ) ) ;
 		}
 	}
 }

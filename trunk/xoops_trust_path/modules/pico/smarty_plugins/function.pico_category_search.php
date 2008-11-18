@@ -48,9 +48,9 @@ function smarty_function_pico_category_search( $params , &$smarty )
 				'link' => pico_common_make_category_link4html( $configs , $cat_row ) ,
 				'title' => $myts->makeTboxData4Show( $cat_row['cat_title'] ) ,
 				'desc' => $myts->displayTarea( $cat_row['cat_desc'] , 1 ) ,
-				'paths_raw' => @unserialize( $cat_row['cat_path_in_tree'] ) ,
-				'paths_value' => array_values( @unserialize( $cat_row['cat_path_in_tree'] ) ) ,
-				'redundants' => @unserialize( $cat_row['cat_redundants'] ) ,
+				'paths_raw' => pico_common_unserialize( $cat_row['cat_path_in_tree'] ) ,
+				'paths_value' => array_values( pico_common_unserialize( $cat_row['cat_path_in_tree'] ) ) ,
+				'redundants' => pico_common_unserialize( $cat_row['cat_redundants'] ) ,
 			) + $cat_row ;
 	
 			$categories4assign[] = $category4assign ;

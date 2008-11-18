@@ -17,6 +17,7 @@ define($constpref."_DESC","静的コンテンツ作成モジュール");
 define( $constpref.'_ADMENU_CONTENTSADMIN' , 'コンテンツ一括管理' ) ;
 define( $constpref.'_ADMENU_CATEGORYACCESS' , 'カテゴリーアクセス権限' ) ;
 define( $constpref.'_ADMENU_IMPORT' , 'インポート/同期' ) ;
+define( $constpref.'_ADMENU_TAGS' , 'タグ管理' ) ;
 define( $constpref.'_ADMENU_EXTRAS' , '拡張機能' ) ;
 define( $constpref.'_ADMENU_MYLANGADMIN' , '言語定数管理' ) ;
 define( $constpref.'_ADMENU_MYTPLSADMIN' , 'テンプレート管理' ) ;
@@ -102,7 +103,7 @@ define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTCAP', 'コンテンツの新規�
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : 承認待ち');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENT', '新規コンテンツ');
 define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTCAP', 'コンテンツの新規登録があった場合に通知します（未承認であれば通知しません）');
-define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : 新規コンテンツ');
+define($constpref.'_NOTIFY_GLOBAL_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE} : 新規コンテンツ {CONTENT_SUBJECT}');
 define($constpref.'_NOTIFY_CATEGORY_NEWCONTENT', '新規コンテンツ');
 define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTCAP', 'コンテンツの新規登録があった場合に通知します（未承認であれば通知しません）');
 define($constpref.'_NOTIFY_CATEGORY_NEWCONTENTSBJ', '[{X_SITENAME}] {X_MODULE}:{CAT_TITLE} カテゴリ内新規コンテンツ {CONTENT_SUBJECT}');

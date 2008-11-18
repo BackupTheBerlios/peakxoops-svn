@@ -95,7 +95,7 @@ function pico_sync_cattree( $mydirname )
 			'subcattree_raw' => $val['subcattree_raw'] ,
 		) ;
 
-		$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_depth_in_tree=".intval($val['depth']).", cat_order_in_tree=".($key).", cat_path_in_tree='".mysql_real_escape_string(serialize($paths))."', cat_redundants='".mysql_real_escape_string(serialize($redundants))."' WHERE cat_id=".$val['cat_id'] ) ;
+		$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_depth_in_tree=".intval($val['depth']).", cat_order_in_tree=".($key).", cat_path_in_tree='".mysql_real_escape_string(pico_common_serialize($paths))."', cat_redundants='".mysql_real_escape_string(pico_common_serialize($redundants))."' WHERE cat_id=".$val['cat_id'] ) ;
 	}
 }
 
@@ -189,7 +189,7 @@ function pico_sync_tags( $mydirname )
 		$count = sizeof( $content_ids ) ;
 		$result = $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_tags" )." SET label='$label4sql',weight=0,count='$count',content_ids='$content_ids4sql',created_time=UNIX_TIMESTAMP(),modified_time=UNIX_TIMESTAMP()" ) ;
 		if( ! $result ) {
-			$db->queryF( "UPDATE ".$db->prefix($mydirname."_tags" )." SET weight=0,count=$count,content_ids='$content_ids4sql',modified_time=UNIX_TIMESTAMP() WHERE label='$label4sql'" ) ;
+			$db->queryF( "UPDATE ".$db->prefix($mydirname."_tags" )." SET count=$count,content_ids='$content_ids4sql',modified_time=UNIX_TIMESTAMP() WHERE label='$label4sql'" ) ;
 		}
 	}
 
@@ -243,8 +243,38 @@ function pico_sync_all( $mydirname )
 	$db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET cat_vpath=null WHERE cat_vpath=''" ) ;
 	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET vpath=null WHERE vpath=''" ) ;
 
+	// serialize_type conversion from PHP built-in serialize() to var_export()
+	pico_convert_serialized_data( $mydirname ) ;
+
 	// sync category's tree
 	pico_sync_cattree( $mydirname ) ;
+}
+
+
+// serialize_type conversion from PHP built-in serialize() to var_export()
+function pico_convert_serialized_data( $mydirname )
+{
+	$db =& Database::getInstance() ;
+
+	// update data in content_extras
+	$sql = "SELECT content_extra_id,data FROM ".$db->prefix($mydirname."_content_extras")." WHERE data NOT LIKE 'array%'" ;
+	$result = $db->query( $sql ) ;
+	if( $db->getRowsNum( $result ) > 0 ) {
+		while( list( $id , $data ) = $db->fetchRow( $result ) ) {
+			$data4sql = mysql_real_escape_string( pico_common_serialize( pico_common_unserialize( $data ) ) ) ;
+			$db->query( "UPDATE ".$db->prefix($mydirname."_content_extras")." SET data='$data4sql' WHERE content_extra_id=$id" ) ;
+		}
+	}
+
+	// update extra_fields in contents
+	$sql = "SELECT content_id,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE extra_fields NOT LIKE 'array%' OR extra_fields IS NULL" ;
+	$result = $db->query( $sql ) ;
+	if( $db->getRowsNum( $result ) > 0 ) {
+		while( list( $id , $data ) = $db->fetchRow( $result ) ) {
+			$data4sql = mysql_real_escape_string( pico_common_serialize( pico_common_unserialize( $data ) ) ) ;
+			$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET extra_fields='$data4sql' WHERE content_id=$id" ) ;
+		}
+	}
 }
 
 
@@ -297,7 +327,7 @@ function pico_get_requests4category( $mydirname , $cat_id = null )
 		'cat_weight' => intval( @$_POST['cat_weight'] ) ,
 		'cat_vpath' => $cat_vpath ,
 		'pid' => $pid ,
-		'cat_options' => serialize( $cat_options ) ,
+		'cat_options' => pico_common_serialize( $cat_options ) ,
 	) ;
 }
 

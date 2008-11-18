@@ -4,6 +4,7 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE
 //
 
+define('_MD_PICO_NUM','件数');
 define('_MD_PICO_TOP','トップ');
 define('_MD_PICO_ALLCONTENTS','全コンテンツ');
 define('_MD_PICO_DELETEDCONTENTS','削除済コンテンツ');

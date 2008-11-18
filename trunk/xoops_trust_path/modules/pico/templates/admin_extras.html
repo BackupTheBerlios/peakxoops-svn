@@ -2,6 +2,28 @@
 
 <!-- extras form -->
 <h2 class="head"><{$smarty.const._MD_A_PICO_H2_EXTRAS}></h2>
+
+<form method="get" action="<{$mod_url}>/admin/index.php" class="pico_pagenav">
+	<input type="hidden" name="page" value="extras" />
+	<label>
+		<{$smarty.const._MD_PICO_NUM}>
+		<select name="num">
+			<{assign var="nums" value=","|explode:"10,30,100,300,1000"}>
+			<{html_options values=$nums output=$nums selected=$num}>
+		</select>
+	</label>
+	<label>
+		<{$smarty.const._MD_A_PICO_TH_ID}>
+		<input type="text" size="4" name="content_id" value="<{$content_id}>" />
+	</label>
+	<label>
+		<{$smarty.const._MD_A_PICO_LABEL_SEARCHBYPHRASE}>
+		<input type="text" size="6" name="txt" value="<{$txt_raw|escape}>" />
+	</label>
+	<input type="submit" value="<{$smarty.const._GO}>" />
+	<{$pagenav}>
+</form>
+
 <form name="extras" action="<{$mod_url}>/admin/index.php?page=extras&amp;cat_id=<{$cat_id}>" method="post" style="margin:20px 0px;">
 	<{$gticket_hidden}>
 	<table class="outer">
@@ -35,6 +57,8 @@
 					<a href="<{$mod_url}>/<{$extra.link}>">
 						<{$extra.content_subject}>
 					</a>
+					[<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$extra.content_id}>"><{$smarty.const._EDIT}></a>]
+					[<a href="<{$mod_url}>/admin/index.php?page=extras&amp;content_id=<{$extra.content_id}>&amp;num=<{$num}>"><{$smarty.const._MD_A_PICO_LINK_EXTRACT}></a>]
 				</td>
 				<td align="left">
 					<{$extra.created_time_formatted}>

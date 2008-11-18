@@ -27,6 +27,7 @@
 ・[summary][/summary][pagebreak]実装
 ・全文閲覧権限のない状況と、RSSのdescriptionやコメント統合サマリ部との関係
 ・各種コントローラ内から、WHERE条件に "visible AND created_time <= UNIX_TIMESTAMP()" 等を直書きしているSQLの根絶
+・パーミッションについても、var_export形式にする (それと同時に、クエリのLIKEパターンがシリアライズ形式に依存している部分を修正する）
 
 
 

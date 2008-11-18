@@ -151,6 +151,7 @@ function PicoContent( $mydirname , $content_id , $categoryObj = null , $allow_ma
 		'can_readfull' => $cat_data['isadminormod'] || $cat_data['can_readfull'] && $is_public ,
 		'can_edit' => $cat_data['isadminormod'] || $cat_data['can_edit'] && ! $content_row['locked'] && $is_public ,
 		'can_delete' => $cat_data['isadminormod'] || $cat_data['can_delete'] && ! $content_row['locked'] && $is_public ,
+		'ef' => pico_common_unserialize( $content_row['extra_fields'] ) ,
 	) + $content_row ;
 }
 
@@ -319,7 +320,7 @@ function getBlankContentRow( $categoryObj )
 		'body_cached' => '' ,
 		'filters' => $mod_config['filters'] ,
 		'tags' => '' ,
-		'extra_fields' => serialize( array() ) ,
+		'extra_fields' => pico_common_serialize( array() ) ,
 		'redundants' => '' ,
 		'for_search' => '' ,
 	) ;

@@ -110,6 +110,14 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.74 (2008/11/19)
+- added tags manager
+- modified extras manager
+- added options for tags blocks
+- changed string formats to serialize extra data (do sync once)
+- changed string formats to serialize extra fields (do sync once)
+- changed string formats to serialize redundant data
+
 1.73 (2008/10/01)
 - modified URI mapper class can be overridden (update the module)
 - modified the subject is rendered with entity enabled
@@ -565,6 +573,14 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.74 (2008/11/19)
+- タグ管理を追加
+- 拡張機能管理に絞り込み等を追加
+- タグブロックにいくつかオプションを追加
+- 拡張データのシリアライズ方法を変更 (一度、同期を行ってください)
+- 拡張フィールドのシリアライズ方法を変更
+- コンテンツやカテゴリーの冗長情報のシリアライズ方法を変更
 
 1.73 (2008/10/01)
 - URIマッパークラスを置換可能とした（要モジュールアップデート）

@@ -5,8 +5,9 @@ require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/import_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/history_functions.php' ;
+require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
-$myts =& MyTextSanitizer::getInstance() ;
+$myts =& PicoTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
 
@@ -166,11 +167,11 @@ while( $content_row = $db->fetchArray( $ors ) ) {
 		'expiring_time_formatted' => formatTimestamp( $content_row['expiring_time'] , 'm' ) ,
 		'poster_uname' => $content_row['poster_uid'] ? $myts->makeTboxData4Show( $content_row['poster_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
 		'modifier_uname' => $content_row['modifier_uid'] ? $myts->makeTboxData4Show( $content_row['modifier_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
-		'subject' => $myts->makeTboxData4Show( $content_row['subject'] , 1 , 1 ) ,
+		'subject' => $myts->makeTboxData4Edit( $content_row['subject'] ) ,
 		'vpath' => htmlspecialchars( $content_row['vpath'] ) ,
 		'wrap_file' => is_file( $wrap_full_path ) ? array( 'mtime_formatted' => formatTimestamp( filemtime( $wrap_full_path ) , 'm' ) , 'size' => filesize( $wrap_full_path ) ) : false ,
 		'histories' => $content_row['is_deleted'] ? pico_get_content_histories4assign( $mydirname , intval( $content_row['content_id'] ) ) : array() ,
-
+		'ef' => pico_common_unserialize( $content_row['extra_fields'] ) ,
 	) ;
 	$contents4assign[] = $content4assign + $content_row ;
 }

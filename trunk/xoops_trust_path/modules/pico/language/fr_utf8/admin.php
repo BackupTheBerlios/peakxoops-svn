@@ -3,6 +3,15 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:56
+define('_MD_A_PICO_LINK_EXTRACT','Extract');
+define('_MD_A_PICO_LABEL_SEARCHBYPHRASE','Search by phrase');
+define('_MD_A_PICO_H2_TAGS','Tag Manager');
+define('_MD_A_PICO_TH_TAG','Tag');
+define('_MD_A_PICO_TH_USED','Used');
+define('_MD_A_PICO_LABEL_ORDER','Order');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-07 05:14:32
 define('_MD_A_PICO_H2_CLEARBODYCACHE','Clear body cache');
 define('_MD_A_PICO_BTN_DOCLEARBODYCACHE','clear');

@@ -12,7 +12,7 @@
 	</div>
 <{/if}>
 
-<form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>&amp;ret=<{$smarty.get.ret|escape:"url"}>" method="post" onsubmit="return xoopsFormValidate_contentform();">
+<form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>&amp;ret=<{$smarty.get.ret|escape:"url"}>" method="post" onsubmit="return xoopsFormValidate_contentform();" enctype="multipart/form-data">
 	<{$gticket_hidden}>
 	<input type="hidden" name="content_id" value="<{$content.id}>" />
 	<input type="hidden" name="body_editor" id="body_editor" value="" />
@@ -50,6 +50,46 @@
 			<th class="head"><label for="subject"><{$smarty.const._MD_PICO_TH_SUBJECT}></label></th>
 			<td class="even">
 				<input type="text" name="subject" id="subject" size="80" maxlength="255" value="<{$content.subject}>" />
+			</td>
+		</tr>
+
+		<!-- extra fields sample (TEXTBOX) -->
+		<tr valign="top" align="left">
+			<th class="head"><label for="pronunciation">pronunciation</label></th>
+			<td class="odd">
+				<input type="text" name="ef_pronunciation" id="pronunciation" size="80" maxlength="255" value="<{$content.ef.pronunciation|escape}>" />
+			</td>
+		</tr>
+
+		<!-- extra fields sample (RADIO) -->
+		<tr valign="top" align="left">
+			<th class="head">gender</th>
+			<td class="even">
+				<input type="radio" name="ef_gender" id="gender_male" value="1"<{if $content.ef.gender == 1}> checked="checked"<{/if}> /> <label for="gender_male">male</label>
+				<input type="radio" name="ef_gender" id="gender_female" value="2"<{if $content.ef.gender == 2}> checked="checked"<{/if}> /> <label for="gender_female">female</label>
+			</td>
+		</tr>
+
+		<!-- extra fields sample (SELECT) -->
+		<{assign var="countries" value=","|explode:"---,USA,UK,France,Japan"}>
+		<tr valign="top" align="left">
+			<th class="head">country</th>
+			<td class="odd">
+				<select id="address1" name="ef_address1">
+					<{html_options values=$countries output=$countries selected=$content.ef.address1}>
+				</select>
+			</td>
+		</tr>
+
+		<!-- extra images sample -->
+		<tr valign="top" align="left">
+			<th class="head">myphoto</th>
+			<td class="even">
+				<input type="file" name="ei_myphoto" />
+				<input type="hidden" name="ef_myphoto" value="<{$content.ef.myphoto|escape}>" />
+				<{if $content.ef.myphoto}>
+					<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$content.ef.myphoto|escape}>"><img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$content.ef.myphoto|escape}>" /></a>
+				<{/if}>
 			</td>
 		</tr>
 

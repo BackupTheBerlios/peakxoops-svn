@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
@@ -11,9 +12,8 @@ if( empty( $cat_id ) ) {
 	$cat_id = 0 ;
 	$cat_title = _MD_PICO_TOP ;
 }
-$redundants = @unserialize( $redundants_serialized ) ;
+$redundants = pico_common_unserialize( $redundants_serialized ) ;
 
-include_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
 include dirname(dirname(__FILE__)).'/include/category_permissions.inc.php' ;
 
 //
@@ -131,7 +131,7 @@ foreach( $groups as $group ) {
 	$cprs = $db->query( "SELECT permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE groupid=".$group->getVar('groupid')." AND cat_id=$cat_permission_id" ) ;
 	if( $db->getRowsNum( $cprs ) > 0 ) {
 		list( $serialized_gpermissions ) = $db->fetchRow( $cprs ) ;
-		$gpermissions = unserialize( $serialized_gpermissions ) ;
+		$gpermissions = pico_common_unserialize( $serialized_gpermissions ) ;
 	} else {
 		$gpermissions = array() ;
 	}
@@ -151,7 +151,7 @@ $user_trs = '' ;
 while( list( $uid , $uname , $serialized_upermissions ) = $db->fetchRow( $cprs ) ) {
 
 	$uid = intval( $uid ) ;
-	$upermissions = unserialize( $serialized_upermissions ) ;
+	$upermissions = pico_common_unserialize( $serialized_upermissions ) ;
 
 	$users4assign[] = array(
 		'uid' => $uid ,

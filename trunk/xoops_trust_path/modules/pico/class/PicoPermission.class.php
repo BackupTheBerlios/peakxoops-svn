@@ -62,7 +62,7 @@ function queryPermissions( $mydirname )
 	$sql = "SELECT cat_id,permissions FROM ".$this->db->prefix($mydirname."_category_permissions")." WHERE ($whr)" ;
 	$result = $this->db->query( $sql ) ;
 	if( $result ) while( list( $cat_id , $serialized_permissions ) = $this->db->fetchRow( $result ) ) {
-		$permissions = unserialize( $serialized_permissions ) ;
+		$permissions = pico_common_unserialize( $serialized_permissions ) ;
 		if( is_array( @$ret[ $cat_id ] ) ) {
 			foreach( $permissions as $perm_name => $value ) {
 				@$ret[ $cat_id ][ $perm_name ] |= $value ;

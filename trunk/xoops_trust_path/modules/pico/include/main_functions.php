@@ -73,7 +73,7 @@ function pico_main_get_category_permissions_of_current_user( $mydirname , $uid =
 	$sql = "SELECT c.cat_id,cp.permissions FROM ".$db->prefix($mydirname."_categories")." c LEFT JOIN ".$db->prefix($mydirname."_category_permissions")." cp ON c.cat_permission_id=cp.cat_id  WHERE ($whr)" ;
 	$result = $db->query( $sql ) ;
 	if( $result ) while( list( $cat_id , $serialized_permissions ) = $db->fetchRow( $result ) ) {
-		$permissions = unserialize( $serialized_permissions ) ;
+		$permissions = pico_common_unserialize( $serialized_permissions ) ;
 		if( is_array( @$ret[ $cat_id ] ) ) {
 			foreach( $permissions as $perm_name => $value ) {
 				@$ret[ $cat_id ][ $perm_name ] |= $value ;

@@ -17,6 +17,7 @@ define($constpref."_DESC","a module for staic contents");
 define( $constpref.'_ADMENU_CONTENTSADMIN' , 'Contents list' ) ;
 define( $constpref.'_ADMENU_CATEGORYACCESS' , 'Permissions of Categories' ) ;
 define( $constpref.'_ADMENU_IMPORT' , 'Import/Sync' ) ;
+define( $constpref.'_ADMENU_TAGS' , 'Tags' ) ;
 define( $constpref.'_ADMENU_EXTRAS' , 'Extra' ) ;
 define( $constpref.'_ADMENU_MYLANGADMIN' , 'Languages' ) ;
 define( $constpref.'_ADMENU_MYTPLSADMIN' , 'Templates' ) ;

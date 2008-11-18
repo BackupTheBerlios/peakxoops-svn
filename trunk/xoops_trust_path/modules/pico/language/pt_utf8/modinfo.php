@@ -19,6 +19,10 @@ if(defined("FOR_XOOPS_LANG_CHECKER") || ! defined($constpref."_LOADED") ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:55
+define($constpref.'_ADMENU_TAGS','Tags');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-10-01 12:11:22
 define($constpref.'_URIM_CLASS','class mapping URI');
 define($constpref.'_URIM_CLASSDSC','Change it if you want to override the URI mapper. The default value is PicoUriMapper');

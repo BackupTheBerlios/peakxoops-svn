@@ -16,6 +16,10 @@ $adminmenu = array(
 		'link' => 'admin/index.php?page=import' ,
 	) ,
 	array(
+		'title' => constant( $constpref.'_ADMENU_TAGS' ) ,
+		'link' => 'admin/index.php?page=tags' ,
+	) ,
+	array(
 		'title' => constant( $constpref.'_ADMENU_EXTRAS' ) ,
 		'link' => 'admin/index.php?page=extras' ,
 	) ,

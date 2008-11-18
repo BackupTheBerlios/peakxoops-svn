@@ -20,7 +20,7 @@ function smarty_function_pico_subcattree( $params , &$smarty )
 	$db =& Database::getInstance() ;
 	$sql = "SELECT c.cat_redundants FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$cat_id" ;
 	list( $redundants_serialized ) = $db->fetchRow( $db->query( $sql ) ) ;
-	$redundants = @unserialize( $redundants_serialized ) ;
+	$redundants = pico_common_unserialize( $redundants_serialized ) ;
 	if( empty( $redundants ) ) $redundants = array() ;
 
 	$smarty->assign( $var_name , $redundants ) ;

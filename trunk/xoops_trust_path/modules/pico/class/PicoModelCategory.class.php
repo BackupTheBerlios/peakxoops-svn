@@ -115,9 +115,9 @@ function PicoCategory( $mydirname , $cat_id , $permissions , $allow_makenew = fa
 		'can_delete' => ( $this->isadminormod || @$this->permission['can_delete'] ) ,
 		'post_auto_approved' => ( $this->isadminormod || @$this->permission['post_auto_approved'] ) ,
 		'can_makesubcategory' => ( $this->isadminormod || @$this->permission['can_makesubcategory'] ) ,
-		'cat_options' => @unserialize( $cat_row['cat_options'] ) ,
-		'paths_raw' => @unserialize( $cat_row['cat_path_in_tree'] ) ,
-		'redundants' => @unserialize( $cat_row['cat_redundants'] ) ,
+		'cat_options' => pico_common_unserialize( $cat_row['cat_options'] ) ,
+		'paths_raw' => pico_common_unserialize( $cat_row['cat_path_in_tree'] ) ,
+		'redundants' => pico_common_unserialize( $cat_row['cat_redundants'] ) ,
 	) + $cat_row ;
 
 	// array guarantee

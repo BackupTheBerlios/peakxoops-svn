@@ -5,8 +5,19 @@
 	<input type="text" size="20" name="options[1]" id="limit" value="<{$limit}>" />
 </p>
 
-<input type="hidden" name="options[2]" value="<{$listorder}>" />
-<input type="hidden" name="options[3]" value="<{$sqlorder}>" />
+<p>
+	<label for="listorder"><{$smarty.const._MB_PICO_TAGSLISTORDER}></label>:
+	<select name="options[2]" id="listorder" />
+		<{html_options options=$order_options selected=$listorder}>
+	</select>
+</p>
+
+<p>
+	<label for="sqlorder"><{$smarty.const._MB_PICO_TAGSSQLORDER}></label>:
+	<select name="options[3]" id="sqlorder" />
+		<{html_options options=$order_options selected=$sqlorder}>
+	</select>
+</p>
 
 <p>
 	<label for="this_template"><{$smarty.const._MB_PICO_THISTEMPLATE}></label>:

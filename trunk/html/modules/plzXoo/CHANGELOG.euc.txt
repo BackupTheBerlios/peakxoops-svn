@@ -1,5 +1,8 @@
 [xlang:en]
 
+-=v1.01alt --> v1.02alt=-
+* fixed typos causes fatal with PHP5.2
+
 -=v1.00alt --> v1.01alt=-
 * fixed answer indexing
 * fixed displaying search result with context
@@ -91,6 +94,9 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v1.01alt --> v1.02alt=-
+* PHP5.2でfatalが出るtypoを修正
 
 -=v1.00alt --> v1.01alt=-
 * 回答検索処理がおかしかったのを修正

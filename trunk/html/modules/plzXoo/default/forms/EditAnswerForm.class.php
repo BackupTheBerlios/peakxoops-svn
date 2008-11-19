@@ -17,7 +17,7 @@ class EditAnswerForm extends exActionFormEx
 			$this->ticket_->setSession();
 		}
 		else
-			exOnetimeTicket::unsetSession($this);
+			exOnetimeTicket::unsetSession(strtolower(get_class($this)));
 
 		$this->body_ = $_POST['body'];
 		if(!$this->body_) {

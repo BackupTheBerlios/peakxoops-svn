@@ -17,7 +17,7 @@ class AnswerResponseEditForm extends exActionFormEx
 			$this->ticket_->setSession();
 		}
 		else
-			exOnetimeTicket::unsetSession($this);
+			exOnetimeTicket::unsetSession(strtolower(get_class($this)));
 
 		$this->comment_ = trim($_POST['comment']);
 		//if(!$this->validateMaxLength($this->comment_, 255)) {

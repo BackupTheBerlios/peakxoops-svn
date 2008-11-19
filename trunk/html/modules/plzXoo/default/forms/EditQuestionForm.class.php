@@ -24,7 +24,7 @@ class EditQuestionForm extends exActionFormEx
 			$this->ticket_->setSession();
 		}
 		else
-			exOnetimeTicket::unsetSession($this);
+			exOnetimeTicket::unsetSession(strtolower(get_class($this)));
 
 		$this->subject_ = trim(@$_POST['subject']);
 		if(!$this->subject_) {

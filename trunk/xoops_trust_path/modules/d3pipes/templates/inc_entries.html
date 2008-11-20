@@ -23,7 +23,7 @@
 			</td>
 			<{if $display_pipe_name_column}>
 				<td>
-					<a href="<{$mod_url}>/index.php?page=eachpipe&amp;pipe_id=<{$entry.pipe.id}>"><{$entry.pipe.name}></a>
+					<a href="<{$xoops_url}>/modules/<{$entry.pipe.dirname}>/index.php?page=eachpipe&amp;pipe_id=<{$entry.pipe.id}>"><{$entry.pipe.name}></a>
 					<{if $entry.pipe.url}>
 						<a href="<{$entry.pipe.url}>"> <img src="<{$mod_imageurl}>/external.png" alt="<{$entry.pipe.name|escape|string_format:$smarty.const._MD_D3PIPES_FMT_EXTERNALLINK}>" /> </a>
 					<{/if}>
@@ -51,7 +51,7 @@
 
 				<!-- description on/off -->
 				<{if $entry.fingerprint && $entry.description}>
-					<a href="javascript:void(0);" onclick="obj=document.getElementById('<{$entry.fingerprint|escape}>');obj.style.display=obj.style.display=='block'?'none':'block';"> <img src="<{$mod_imageurl}>/description_closed.gif" alt="+" /> </a>
+					<a href="javascript:void(0);" onclick="obj=document.getElementById('<{$entry.fingerprint|escape}>');obj.style.display=obj.style.display=='block'?'none':'block'; img=document.getElementById('closeopen_<{$entry.fingerprint|escape}>');img.src=obj.style.display=='block'?'<{$mod_imageurl}>/description_opened.gif':'<{$mod_imageurl}>/description_closed.gif';"> <img src="<{$mod_imageurl}>/description_closed.gif" id="closeopen_<{$entry.fingerprint|escape}>" alt="+" /> </a>
 					<div id="<{$entry.fingerprint|escape}>" style="display:none;">
 						<{if $entry.content_encoded}>
 							<{$entry.content_encoded}>

@@ -34,7 +34,7 @@
 
 	<{if $errors && $xoops_isadmin}>
 		<{foreach from=$errors item="error"}>
-			<div class="errorMsg"><{$error|escape|nl2br}></div>
+			<div class="errorMsg"><{$error|escape|nl2br|regex_replace:"/\((\d+)\)/":"<a href='`$mod_url`/admin/index.php?page=pipe&amp;pipe_id=\\1'>(\\1)</a>"}></div>
 		<{/foreach}>
 	<{/if}>
 

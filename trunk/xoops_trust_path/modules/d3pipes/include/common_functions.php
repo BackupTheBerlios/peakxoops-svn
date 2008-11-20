@@ -198,6 +198,7 @@ function d3pipes_common_get_pipe4assign( $mydirname , $pipe_id )
 	if( empty( $pipe_row ) ) return false ;
 
 	$pipe4assign = array(
+		'dirname' => $mydirname ,
 		'id' => intval( $pipe_id ) ,
 		'name' => $myts->makeTboxData4Show( $pipe_row['name'] ) ,
 		'name4xml' => htmlspecialchars( $pipe_row['name'] , ENT_QUOTES ) ,

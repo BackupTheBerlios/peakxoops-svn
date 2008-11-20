@@ -58,6 +58,9 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 - added "initial_pipe" attributes for each entries
 - added option "keep pipe info" for union joints
 - added "keep pipe info" as a preference and block's options
+- fixed wrong dirname displying for pipes from the other modules (thx ume8) 0.65a
+- modified utf8from joints modified encoding field in the XML declaration 0.65a
+- modified some interfaces a little better 0.65a
 
 0.64 2008-09-20
 - added editing pubtime via ajax
@@ -331,6 +334,9 @@ html¥Õ¥©¥ë¥ÀÄ¾²¼¤Ë¤¢¤ë sitemap.php ¤ò mainfile.php ¤ÈÆ±¤¸³¬ÁØ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤
 - ºÇ½é¤ÎÏ¢·ë»þ¤Ë¤Î¤ß initial_pipe Â°À­¤òÉÕÍ¿¤¹¤ë¤è¤¦¤Ë¤·¤¿
 - ¡Ö¥Ñ¥¤¥×¾ðÊó¤òÊÝÂ¸¤¹¤ë¡×¥ª¥×¥·¥ç¥ó¤òÏ¢·ë¥¸¥ç¥¤¥ó¥È¤ËÄÉ²Ã¤·¤¿
 - ¥â¥¸¥å¡¼¥ë¥È¥Ã¥×¤ä¥Ö¥í¥Ã¥¯¤Ë¡Ö¾å°Ì¥Ñ¥¤¥×Ì¾¤òÉ½¼¨¤¹¤ë¡×¥ª¥×¥·¥ç¥ó¤òÄÉ²Ã
+- Â¾¤Îd3pipes¤«¤é»ý¤Ã¤Æ¤­¤¿¥Ñ¥¤¥×¤Îdirname¸íÉ½¼¨¤ò½¤Àµ (thx ume8) 0.65a
+- UTF-8¤Ø¤ÎÊÑ´¹¥¸¥ç¥¤¥ó¥È¤Çencoding="UTF-8"¤ò¶¯À©¤·¤Æ¤¤¤¹¤ë¤è¤¦¤Ë¤·¤¿ 0.65a
+- ºÙ¤«¤Ê»È¤¤¾¡¼ê¤Î²þÁ± 0.65a
 
 0.64 2008-09-20
 - È¯¹ÔÆü»þ(pubtime)¤òAjax·ÐÍ³¤Ç½ñ¤­´¹¤¨¤ë¥³¥ó¥È¥í¡¼¥é¤ÎÄÉ²Ã

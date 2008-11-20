@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 3.20 ;
+$modversion['version'] = 3.21 ;
 $modversion['credits'] = "PEAK Corp." ;
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -45,6 +45,15 @@ $modversion['config'][1] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "0" ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'default_lang' ,
+	'title'			=> $constpref.'_DEFAULT_LANG' ,
+	'description'	=> $constpref.'_DEFAULT_LANGDSC' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> @$GLOBALS['xoopsConfig']['language'] ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
@@ -171,6 +180,15 @@ $modversion['config'][] = array(
 	'formtype'		=> 'text' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> "10" ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'bwlimit_count' ,
+	'title'			=> $constpref.'_BWLIMIT_COUNT' ,
+	'description'	=> $constpref.'_BWLIMIT_COUNTDSC' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(

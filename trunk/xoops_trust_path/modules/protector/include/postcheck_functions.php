@@ -42,10 +42,10 @@ function protector_postcommon()
 
 	// group1_ips (groupid=1)
 	if( is_object( $xoopsUser ) && in_array( 1 , $xoopsUser->getGroups() ) ) {
-		$group1_ips = Protector::get_group1_ips() ;
-		if( implode( '' , $group1_ips ) ) {
-			$group1_allow = Protector::ip_match( $group1_ips ) ;
-			if( empty( $group1_allow ) ) die( 'This account is disabled for your IP by Protector' ) ;
+		$group1_ips = $protector->get_group1_ips( true ) ;
+		if( implode( '' , array_keys( $group1_ips ) ) ) {
+			$group1_allow = $protector->ip_match( $group1_ips ) ;
+			if( empty( $group1_allow ) ) die( 'This account is disabled for your IP by Protector.<br />Clear cookie if you want to access this site as a guest.' ) ;
 		}
 	}
 

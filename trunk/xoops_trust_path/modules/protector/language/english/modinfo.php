@@ -23,6 +23,9 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions') ;
 define($constpref.'_GLOBAL_DISBL','Temporary disabled');
 define($constpref.'_GLOBAL_DISBLDSC','All protections are disabled in temporary.<br />Don\'t forget turn this off after shooting the trouble');
 
+define($constpref.'_DEFAULT_LANG','Default language');
+define($constpref.'_DEFAULT_LANGDSC','Specify the language set to display messages before processing common.php');
+
 define($constpref.'_RELIABLE_IPS','Reliable IPs');
 define($constpref.'_RELIABLE_IPSDSC','set IPs you can rely separated with | . ^ matches the head of string, $ matches the tail of string.');
 
@@ -59,6 +62,9 @@ define($constpref.'_FILE_DOTDOTDSC','It eliminates ".." from all requests looks 
 
 define($constpref.'_BF_COUNT','Anti Brute Force');
 define($constpref.'_BF_COUNTDSC','Set count you allow guest try to login within 10 minutes. If someone fails to login more than this number, her/his IP will be banned.');
+
+define($constpref.'_BWLIMIT_COUNT','Bandwidth limitation');
+define($constpref.'_BWLIMIT_COUNTDSC','Specify the max access to mainfile.php during watching time. This value should be 0 for normal environments which have enough CPU bandwidth. The number fewer than 10 will be ignored.');
 
 define($constpref.'_DOS_SKIPMODS','Modules out of DoS/Crawler checker');
 define($constpref.'_DOS_SKIPMODSDSC','set the dirnames of the modules separated with |. This option will be useful with chatting module etc.');

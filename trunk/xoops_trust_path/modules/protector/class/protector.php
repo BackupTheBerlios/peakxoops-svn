@@ -39,6 +39,8 @@ var $_should_be_banned = false ;
 
 var $_dos_stage = null ;
 
+var $ip_matched_info = null ;
+
 var $last_error_type = 'UNKNOWN' ;
 
 
@@ -216,20 +218,35 @@ function output_log( $type = 'UNKNOWN' , $uid = 0 , $unique_check = false , $lev
 }
 
 
-function write_file_badips( $bad_ips )
+function write_file_bwlimit( $expire )
 {
-	asort( $bad_ips ) ;
+	$expire = min( intval( $expire ) , time() + 300 ) ;
 
-	$fp = @fopen( $this->get_filepath4badips() , 'w' ) ;
+	$fp = @fopen( $this->get_filepath4bwlimit() , 'w' ) ;
 	if( $fp ) {
 		@flock( $fp , LOCK_EX ) ;
-		fwrite( $fp , serialize( $bad_ips ) . "\n" ) ;
+		fwrite( $fp , $expire . "\n" ) ;
 		@flock( $fp , LOCK_UN ) ;
 		fclose( $fp ) ;
 		return true ;
 	} else {
 		return false ;
 	}
+}
+
+
+function get_bwlimit()
+{
+	list( $expire ) = @file( Protector::get_filepath4bwlimit() ) ;
+	$expire = min( intval( $expire ) , time() + 300 ) ;
+
+	return $expire ;
+}
+
+
+function get_filepath4bwlimit()
+{
+	return XOOPS_TRUST_PATH . '/modules/protector/configs/bwlimit' . substr( md5( XOOPS_ROOT_PATH . XOOPS_DB_USER . XOOPS_DB_PREFIX ) , 0 , 6 ) ;
 }
 
 
@@ -273,11 +290,15 @@ function get_filepath4badips()
 }
 
 
-function get_group1_ips()
+function get_group1_ips( $with_info = false )
 {
 	list( $group1_ips_serialized ) = @file( Protector::get_filepath4group1ips() ) ;
 	$group1_ips = empty( $group1_ips_serialized ) ? array() : @unserialize( $group1_ips_serialized ) ;
 	if( ! is_array( $group1_ips ) ) $group1_ips = array() ;
+
+	if( $with_info ) {
+		$group1_ips = array_flip( $group1_ips ) ;
+	}
 
 	return $group1_ips ;
 }
@@ -297,12 +318,15 @@ function get_filepath4confighcache()
 
 function ip_match( $ips )
 {
-	foreach( $ips as $ip ) {
+	foreach( $ips as $ip => $info ) {
 		if( $ip ) {
 			switch( substr( $ip , -1 ) ) {
 				case '.' :
 					// foward match
-					if( substr( @$_SERVER['REMOTE_ADDR'] , 0 , strlen( $ip ) ) == $ip ) return true ;
+					if( substr( @$_SERVER['REMOTE_ADDR'] , 0 , strlen( $ip ) ) == $ip ) {
+						$this->ip_matched_info = $info ;
+						return true ;
+					}
 					break ;
 				case '0' :
 				case '1' :
@@ -315,15 +339,22 @@ function ip_match( $ips )
 				case '8' :
 				case '9' :
 					// full match
-					if( @$_SERVER['REMOTE_ADDR'] == $ip ) return true ;
+					if( @$_SERVER['REMOTE_ADDR'] == $ip ) {
+						$this->ip_matched_info = $info ;
+						return true ;
+					}
 					break ;
 				default :
 					// perl regex
-					if( @preg_match( $ip , @$_SERVER['REMOTE_ADDR'] ) ) return true ;
+					if( @preg_match( $ip , @$_SERVER['REMOTE_ADDR'] ) ) {
+						$this->ip_matched_info = $info ;
+						return true ;
+					}
 					break ;
 			}
 		}
 	}
+	$this->ip_matched_info = null ;
 	return false ;
 }
 
@@ -690,7 +721,7 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 	// gargage collection
 	$result = $xoopsDB->queryF( "DELETE FROM ".$xoopsDB->prefix($this->mydirname."_access")." WHERE expire < UNIX_TIMESTAMP()" ) ;
 
-	// for older version before updated this module 
+	// for older versions before updating this module 
 	if( $result === false ) {
 		$this->_done_dos = true ;
 		return true ;
@@ -698,6 +729,15 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 
 	// sql for recording access log (INSERT should be placed after SELECT)
 	$sql4insertlog = "INSERT INTO ".$xoopsDB->prefix($this->mydirname."_access")." SET ip='$ip4sql',request_uri='$uri4sql',expire=UNIX_TIMESTAMP()+'".intval($this->_conf['dos_expire'])."'" ;
+
+	// bandwidth limitation
+	if( @$this->_conf['bwlimit_count'] >= 10 ) {
+		$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix($this->mydirname."_access") ) ;
+		list( $bw_count ) = $xoopsDB->fetchRow( $result ) ;
+		if( $bw_count > $this->_conf['bwlimit_count'] ) {
+			$this->write_file_bwlimit( time() + $this->_conf['dos_expire'] ) ;
+		}
+	}
 
 	// F5 attack check (High load & same URI)
 	$result = $xoopsDB->query( "SELECT COUNT(*) FROM ".$xoopsDB->prefix($this->mydirname."_access")." WHERE ip='$ip4sql' AND request_uri='$uri4sql'" ) ;

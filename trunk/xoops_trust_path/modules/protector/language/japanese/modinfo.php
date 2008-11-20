@@ -23,6 +23,9 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','евепе╗е╣╕в╕┬') ;
 define($constpref.'_GLOBAL_DISBL','╞░║юд╬░ь╗■┼к├ц├╟');
 define($constpref.'_GLOBAL_DISBLDSC','двдщдцды╦╔╕ц╞░║юдЄ░ь╗■┼кд╦╠╡╕·▓╜д╖д▐д╣бг<br />╠ф┬ъдм▓Є╖шд╡дьд┐дщ╠╡╕·▓╜дЄ▓Є╜№д╣дыд│д╚дЄдк╦║дьд╩дп');
 
+define($constpref.'_DEFAULT_LANG','е╡еде╚д╬е╟е╒ейеые╚╕└╕ь');
+define($constpref.'_DEFAULT_LANGDSC','common╜ш═¤┴░д╬╢п└й╜к╬╗есе├е╗б╝е╕дЄ╔╜╝ид╣ды╕└╕ьдЄ╗╪─ъд╖д▐д╣');
+
 define($constpref.'_RELIABLE_IPS','┐о═╤д╟дндыIP');
 define($constpref.'_RELIABLE_IPSDSC','DoS┼∙д╬╣╢╖т╕б├╬дЄ╣╘дяд╩дд└╕IPеве╔еье╣дЄбв| д╟╢ш└┌д├д╞╡н╜╥д╖д▐д╣бг^д╧└ш╞мдЄбв$д╧╦Ў╚°дЄ╔╜д╖д▐д╣бг');
 
@@ -59,6 +62,9 @@ define($constpref.'_FILE_DOTDOTDSC','DirectoryTraversalдЄ╗юд▀д╞дддыд╚╚╜├╟д╡дьд┐е
 
 define($constpref.'_BF_COUNT','Brute Force┬╨║Ў');
 define($constpref.'_BF_COUNTDSC','е╤е╣еяб╝е╔┴э┼Ўд┐дъд╦┬╨╣│д╖д▐д╣бг10╩м┤╓├цбвд│д│д╟╗╪─ъд╖д┐▓є┐Ї░╩╛хбвеэе░едеєд╦╝║╟╘д╣дыд╚бвд╜д╬IPдЄ╡ё╚▌д╖д▐д╣бг');
+
+define($constpref.'_BWLIMIT_COUNT','е╡б╝е╨д╪д╬▓с╔щ▓┘┬╨║Ў');
+define($constpref.'_BWLIMIT_COUNTDSC','┤╞╗ы╗■┤╓╞тд╦╡Ў▓─д╣ды║╟┬чевепе╗е╣┐ЇдЄ╗╪─ъд╖д▐д╣бгCPU┬╙░шд╩д╔дм╔╧╝хд╩┤─╢нд╟бве╡б╝е╨д╪д╬▓с╔щ▓┘дЄ╚Єд▒д┐дд╗■д╦д╬д▀╗╪─ъд╖д╞дпд└д╡ддбг░┬┴┤д╬д┐дсд╦10╠д╦■д╬┐Ї├═д╬╛ь╣чд╧╠╡╗ыд╡дьд▐д╣');
 
 define($constpref.'_DOS_SKIPMODS','DoS┤╞╗ыд╬┬╨╛▌длдщ│░д╣ете╕ехб╝еы');
 define($constpref.'_DOS_SKIPMODSDSC','│░д╖д┐ддете╕ехб╝еыд╬dirnameдЄ|д╟╢ш└┌д├д╞╞■╬╧д╖д╞дпд└д╡ддбге┴еуе├е╚╖╧ете╕ехб╝еыд╩д╔д╦═н╕·д╟д╣');

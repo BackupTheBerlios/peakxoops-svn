@@ -5,6 +5,13 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-21 04:44:31
+define($constpref.'_DEFAULT_LANG','Default language');
+define($constpref.'_DEFAULT_LANGDSC','Specify the language set to display messages before processing common.php');
+define($constpref.'_BWLIMIT_COUNT','Bandwidth limitation');
+define($constpref.'_BWLIMIT_COUNTDSC','Specify the max access to mainfile.php during watching time. This value should be 0 for normal environments which have enough CPU bandwidth. The number fewer than 10 will be ignored.');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

@@ -7,8 +7,11 @@ class ProtectorFilterAbstract {
 	function ProtectorFilterAbstract()
 	{
 		$this->protector =& Protector::getInstance() ;
-		$lang = empty( $GLOBALS['xoopsConfig']['language'] ) ? 'english' : $GLOBALS['xoopsConfig']['language'] ;
+		$lang = empty( $GLOBALS['xoopsConfig']['language'] ) ? @$this->protector->_conf['default_lang'] : $GLOBALS['xoopsConfig']['language'] ;
 		@include_once dirname(dirname(__FILE__)).'/language/'.$lang.'/main.php' ;
+		if( ! defined( '_MD_PROTECTOR_YOUAREBADIP' ) ) {
+			include_once dirname(dirname(__FILE__)).'/language/english/main.php' ;
+		}
 	}
 
 	function isMobile()

@@ -7,6 +7,13 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-11-21 04:44:31
+define($constpref.'_DEFAULT_LANG','Default language');
+define($constpref.'_DEFAULT_LANGDSC','Specify the language set to display messages before processing common.php');
+define($constpref.'_BWLIMIT_COUNT','Bandwidth limitation');
+define($constpref.'_BWLIMIT_COUNTDSC','Specify the max access to mainfile.php during watching time. This value should be 0 for normal environments which have enough CPU bandwidth. The number fewer than 10 will be ignored.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-07-30 16:31:33
 define($constpref.'_BANIP_TIME0','Banned IP suspension time (sec)');
 define($constpref.'_OPT_BIPTIME0','Ban the IP (moratorium)');

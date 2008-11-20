@@ -23,6 +23,9 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','アクセス権限') ;
 define($constpref.'_GLOBAL_DISBL','動作の一時的中断');
 define($constpref.'_GLOBAL_DISBLDSC','あらゆる防御動作を一時的に無効化します。<br />問題が解決されたら無効化を解除することをお忘れなく');
 
+define($constpref.'_DEFAULT_LANG','サイトのデフォルト言語');
+define($constpref.'_DEFAULT_LANGDSC','common処理前の強制終了メッセージを表示する言語を指定します');
+
 define($constpref.'_RELIABLE_IPS','信用できるIP');
 define($constpref.'_RELIABLE_IPSDSC','DoS等の攻撃検知を行わない生IPアドレスを、| で区切って記述します。^は先頭を、$は末尾を表します。');
 
@@ -59,6 +62,9 @@ define($constpref.'_FILE_DOTDOTDSC','DirectoryTraversalを試みていると判�
 
 define($constpref.'_BF_COUNT','Brute Force対策');
 define($constpref.'_BF_COUNTDSC','パスワード総当たりに対抗します。10分間中、ここで指定した回数以上、ログインに失敗すると、そのIPを拒否します。');
+
+define($constpref.'_BWLIMIT_COUNT','サーバへの過負荷対策');
+define($constpref.'_BWLIMIT_COUNTDSC','監視時間内に許可する最大アクセス数を指定します。CPU帯域などが貧弱な環境で、サーバへの過負荷を避けたい時にのみ指定してください。安全のために10未満の数値の場合は無視されます');
 
 define($constpref.'_DOS_SKIPMODS','DoS監視の対象から外すモジュール');
 define($constpref.'_DOS_SKIPMODSDSC','外したいモジュールのdirnameを|で区切って入力してください。チャット系モジュールなどに有効です');

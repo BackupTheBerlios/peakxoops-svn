@@ -12,9 +12,17 @@ function protector_prepare()
 	$protector =& Protector::getInstance() ;
 	$conf = $protector->getConf() ;
 
+	// bandwidth limitation
+	if( @$conf['bwlimit_count'] >= 10 ) {
+		$bwexpire = $protector->get_bwlimit() ;
+		if( $bwexpire > time() ) {
+			$protector->call_filter( 'precommon_bwlimit' , 'This site is very crowed now. try later.' ) ;
+		}
+	}
+
 	// bad_ips
-	$bad_ips = Protector::get_bad_ips() ;
-	$bad_ip_match = Protector::ip_match( $bad_ips ) ;
+	$bad_ips = $protector->get_bad_ips( true ) ;
+	$bad_ip_match = $protector->ip_match( $bad_ips ) ;
 	if( $bad_ip_match ) {
 		$protector->call_filter( 'precommon_badip' , 'You are registered as BAD_IP by Protector.' ) ;
 	}

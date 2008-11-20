@@ -53,11 +53,11 @@
 			</td>
 		</tr>
 
-		<{*
+<{*
 		<!-- extra fields sample (TEXTBOX) -->
 		<tr valign="top" align="left">
 			<th class="head"><label for="pronunciation">pronunciation</label></th>
-			<td class="odd">
+			<td class="even">
 				<input type="text" name="ef_pronunciation" id="pronunciation" size="80" maxlength="255" value="<{$content.ef.pronunciation|escape}>" />
 			</td>
 		</tr>
@@ -75,7 +75,7 @@
 		<{assign var="countries" value=","|explode:"---,USA,UK,France,Japan"}>
 		<tr valign="top" align="left">
 			<th class="head">country</th>
-			<td class="odd">
+			<td class="even">
 				<select id="address1" name="ef_address1">
 					<{html_options values=$countries output=$countries selected=$content.ef.address1}>
 				</select>
@@ -93,7 +93,7 @@
 				<{/if}>
 			</td>
 		</tr>
-		*}>
+*}>
 
 		<!-- subject reference for a waiting content -->
 		<{if $content.subject_waiting && $page != 'makecontent'}>

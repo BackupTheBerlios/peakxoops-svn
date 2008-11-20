@@ -49,6 +49,7 @@ function processPreview( $request )
 	$this->assign['content']['filter_infos'] = pico_main_get_filter_infos( $request['filters'] , $cat_data['isadminormod'] ) ;
 	$this->assign['content']['body_raw'] = $request['body'] ;
 	$this->assign['content']['extra_fields'] = $request['extra_fields'] ;
+	$this->assign['content']['ef'] = pico_common_unserialize( $request['extra_fields'] ) ;
 
 	// temporary $contentObj
 	$tmpContentObj =& new PicoContent( $this->mydirname , 0 , $this->currentCategoryObj , true ) ;

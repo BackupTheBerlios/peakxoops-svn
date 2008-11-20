@@ -118,6 +118,7 @@ pico is fast enough if you use content's cache.
 - changed string formats to serialize extra fields (do sync once)
 - changed string formats to serialize redundant data
 - fixed undefined function pico_common_unserialize() (thx jidaikobo) 1.74a
+- fixed extra_fields sample is enabled in the template 1.74b
 
 1.73 (2008/10/01)
 - modified URI mapper class can be overridden (update the module)
@@ -583,6 +584,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - 拡張フィールドのシリアライズ方法を変更
 - コンテンツやカテゴリーの冗長情報のシリアライズ方法を変更
 - pico_common_unserialize() の未定義問題を修正 (thx jidaikobo) 1.74a
+- extra_fieldsのサンプルコードが有効になっていたのを修正 1.74b
 
 1.73 (2008/10/01)
 - URIマッパークラスを置換可能とした（要モジュールアップデート）

@@ -127,6 +127,8 @@ I thank Madfish for this excellent work!
 - added a preferences for bandwidth limitation
 - enabled precommon_badip_message.php as default
 - modified messages by precommon filter
+- updated language files
+-- spanish (thx Colossus) 3.21a
 
 3.20 (2008/09/17)
 - numbered as a stable version
@@ -378,6 +380,8 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 - °ìÈÌÀßÄê¤ËÂÓ°èÀ©¸Â¤òÄÉ²Ã
 - IP BAN¤ò¶ô¤Ã¤¿Áê¼ê¤Ë²ò½ü»ş´Ö¤òÃÎ¤é¤»¤ë¥á¥Ã¥»¡¼¥¸¤ò¥Ç¥Õ¥©¥ë¥È¤Ë¤·¤¿
 - precommon¥Õ¥£¥ë¥¿¡¼¤Ç¤â¸À¸ì»ØÄê¤ò²ÄÇ½¤Ë¤·¤¿
+- ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
+-- spanish (thx Colossus) 3.21a
 
 3.20 (2008/09/17)
 - °ÂÄêÈÇ¤È¤·¤Æ¥Ğ¡¼¥¸¥ç¥óÈÖ¹æ¤ò¤Õ¤êÄ¾¤·¤¿

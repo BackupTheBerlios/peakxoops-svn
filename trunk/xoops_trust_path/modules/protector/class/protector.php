@@ -250,6 +250,23 @@ function get_filepath4bwlimit()
 }
 
 
+function write_file_badips( $bad_ips )
+{
+	asort( $bad_ips ) ;
+
+	$fp = @fopen( $this->get_filepath4badips() , 'w' ) ;
+	if( $fp ) {
+		@flock( $fp , LOCK_EX ) ;
+		fwrite( $fp , serialize( $bad_ips ) . "\n" ) ;
+		@flock( $fp , LOCK_UN ) ;
+		fclose( $fp ) ;
+		return true ;
+	} else {
+		return false ;
+	}
+}
+
+
 function register_bad_ips( $jailed_time = 0 , $ip = null )
 {
 	if( empty( $ip ) ) $ip = @$_SERVER['REMOTE_ADDR'] ;

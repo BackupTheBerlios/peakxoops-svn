@@ -129,6 +129,7 @@ I thank Madfish for this excellent work!
 - modified messages by precommon filter
 - updated language files
 -- spanish (thx Colossus) 3.21a
+- fixed fatal typo in protector.php 3.21a
 
 3.20 (2008/09/17)
 - numbered as a stable version
@@ -382,6 +383,7 @@ RBL¤ËÅĞÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Ş¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æş¤ë¤¿¤á¡¢Åê¹
 - precommon¥Õ¥£¥ë¥¿¡¼¤Ç¤â¸À¸ì»ØÄê¤ò²ÄÇ½¤Ë¤·¤¿
 - ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
 -- spanish (thx Colossus) 3.21a
+- µñÈİIP¥ê¥¹¥È¤ò¹¹¿·½ĞÍè¤Ê¤¯¤Ê¤Ã¤Æ¤¤¤¿¤Î¤ò½¤Àµ 3.21a
 
 3.20 (2008/09/17)
 - °ÂÄêÈÇ¤È¤·¤Æ¥Ğ¡¼¥¸¥ç¥óÈÖ¹æ¤ò¤Õ¤êÄ¾¤·¤¿

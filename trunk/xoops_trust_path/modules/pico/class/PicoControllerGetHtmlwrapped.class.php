@@ -27,10 +27,12 @@ function execute( $request )
 
 	// check existence
 	if( empty( $this->assign['content'] ) ) {
-		die('here');
 		redirect_header( XOOPS_URL."/modules/$this->mydirname/index.php" , 2 , _MD_PICO_ERR_READCONTENT ) ;
 		exit ;
 	}
+
+	$cat_data = $this->currentCategoryObj->getData() ;
+	$this->assign['category'] = $this->currentCategoryObj->getData4html() ;
 
 	// permission check
 	if( empty( $this->assign['content']['can_read'] ) || empty( $this->assign['content']['can_readfull'] ) ) {
@@ -42,7 +44,26 @@ function execute( $request )
 		exit ;
 	}
 
-	// tellafriedsÍÑ½èÍı
+	// auto-register
+	if( ! empty( $this->mod_config['wraps_auto_register'] ) && @$cat_data['cat_vpath']{0} == '/' ) {
+		$register_class = empty( $this->mod_config['auto_register_class'] ) ? 'PicoAutoRegisterWraps' : $this->mod_config['auto_register_class'] ;
+		require_once dirname(__FILE__).'/'.$register_class.'.class.php' ;
+		$register_obj =& new $register_class( $this->mydirname , $this->mod_config ) ;
+		$affected_rows = $register_obj->registerByCatvpath( $cat_data ) ;
+		if( $affected_rows > 0 ) {
+			// reload if the content is updated
+			header( 'Location: '.pico_common_unhtmlspecialchars($this->assign['mod_url']).'/'.pico_common_unhtmlspecialchars($this->assign['content']['link']) ) ;
+			exit ;
+		}
+	}
+
+	// link for "tell to friends"
+	// (TODO?)
+	if( $this->mod_config['use_taf_module'] ) {
+		$this->assign['content']['tellafriend_uri'] = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( pico_common_unhtmlspecialchars( $this->assign['mod_url'] . '/' . $this->assign['content']['link'] ) ).'&amp;subject='.rawurlencode(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,@$GLOBALS['xoopsConfig']['sitename'])) ;
+	} else {
+		$this->assign['content']['tellafriend_uri'] = 'mailto:?subject='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDSUBJECT,@$GLOBALS['xoopsConfig']['sitename'])).'&amp;body='.pico_main_escape4mailto(sprintf(_MD_PICO_FMT_TELLAFRIENDBODY, $this->assign['content']['subject'])).'%0A'.rawurlencode( pico_common_unhtmlspecialchars( $this->assign['mod_url'] . '/' . $this->assign['content']['link'] ) ) ;
+	}
 
 	// breadcrumbs
 	$breadcrumbsObj =& AltsysBreadcrumbs::getInstance() ;
@@ -93,9 +114,11 @@ function readWrappedFile( $request )
 
 	$cat_data = $this->currentCategoryObj->getData() ;
 
+	$link = empty( $this->mod_config['use_rewrite'] ) ? 'index.php'.$request['path_info'] : substr( $request['path_info'] , 1 ) ;
+
 	return array(
 		'id' => 0 ,
-		'link' => 'index.php'.$request['path_info'] ,
+		'link' => $link ,
 		'created_time' => $mtime ,
 		'created_time_formatted' => formatTimestamp( $mtime ) ,
 		'subject_raw' => pico_common_unhtmlspecialchars( $subject ) ,
@@ -107,11 +130,6 @@ function readWrappedFile( $request )
 		'can_vote' => false ,
 	) ;
 }
-
-
-
-
-
 
 
 }

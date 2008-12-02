@@ -25,10 +25,13 @@ function execute( $request )
 	$categories = $categoryHandler->getAllCategories() ;
 
 	// auto-register
-	if( ! empty( $this->mod_config['wraps_auto_register'] ) ) {
-		require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-		foreach( $categories as $categoryObj ) {
-			pico_auto_register_from_cat_vpath( $mydirname , $categoryObj->getData() ) ;
+	foreach( $categories as $categoryObj ) {
+		$mod_config = $categoryObj->getOverriddenModConfig() ;
+		$register_class = empty( $mod_config['auto_register_class'] ) ? 'PicoAutoRegisterWraps' : $mod_config['auto_register_class'] ;
+		require_once dirname(__FILE__).'/'.$register_class.'.class.php' ;
+		if( ! empty( $mod_config['wraps_auto_register'] ) ) {
+			$register_obj =& new $register_class( $this->mydirname , $mod_config ) ;
+			$register_obj->registerByCatvpath( $categoryObj->getData() ) ;
 		}
 	}
 

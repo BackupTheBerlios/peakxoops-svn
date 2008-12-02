@@ -45,7 +45,7 @@
 <{/if}>
 
 <!-- tell a friend -->
-<{if $mod_config.show_tellafriend && $content.id}>
+<{if $mod_config.show_tellafriend && $content.tellafriend_uri}>
 	<div class="pico_tellafriend_icon"><a href="<{$content.tellafriend_uri}>" target="_top"><img src="<{$mod_imageurl}>/icon_tellafriend.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_TELLAFRIEND}>" /></a></div>
 <{/if}>
 

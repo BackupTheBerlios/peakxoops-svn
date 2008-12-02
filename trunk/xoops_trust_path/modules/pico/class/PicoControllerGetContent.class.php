@@ -47,6 +47,19 @@ function execute( $request )
 		exit ;
 	}
 
+	// auto-register
+	if( ! empty( $this->mod_config['wraps_auto_register'] ) && @$cat_data['cat_vpath']{0} == '/' && $content_data['poster_uid'] == 0 && $content_data['vpath'] != '' ) {
+		$register_class = empty( $this->mod_config['auto_register_class'] ) ? 'PicoAutoRegisterWraps' : $this->mod_config['auto_register_class'] ;
+		require_once dirname(__FILE__).'/'.$register_class.'.class.php' ;
+		$register_obj =& new $register_class( $this->mydirname , $this->mod_config ) ;
+		$is_updated = $register_obj->updateContent( $content_data['content_id'] , $content_data['vpath'] ) ;
+		if( $is_updated > 0 ) {
+			// reload if the content is updated
+			header( 'Location: '.pico_common_unhtmlspecialchars($this->assign['mod_url']).'/'.pico_common_unhtmlspecialchars($this->assign['content']['link']) ) ;
+			exit ;
+		}
+	}
+
 	// prev/next content
 	$prevContentObj =& $contentObj->getPrevContent() ;
 	$this->assign['prev_content'] = is_object( $prevContentObj ) ? $prevContentObj->getData4html() : array() ;

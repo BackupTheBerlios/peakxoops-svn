@@ -110,6 +110,15 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.75 (2008/12/03)
+- modified "auto registrar class" can be overridden per category
+- added auto-remover by "auto registrar class"
+- added auto-updater by "auto registrar class"
+- modified flags for auto-registering can be overriden per category
+- fixed some fields for the contents stored into wrong fields of the histries
+- fixed the preview for makecontent with wraps (thx mathmay)
+- modified htmlwapped controller can assign tellafriend
+
 1.74 (2008/11/19)
 - added tags manager
 - modified extras manager
@@ -575,6 +584,15 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.75 (2008/12/03)
+- ラップファイル自動削除処理追加
+- ラップファイル自動更新処理追加
+- ラップファイル自動登録処理クラスをオーバーライド可能とした（カテゴリー単位）
+- ラップファイル自動登録の可否を、カテゴリー単位でオーバーライド可能とした
+- コンテンツヒストリの保存ルールがおかしかったのを修正
+- wrapsモードでコンテンツ作成時のプレビューがおかしくなるのを修正 (thx mathmay)
+- 単純ページラップで友達に知らせる機能が効かなくなっていたのを改善
 
 1.74 (2008/11/19)
 - タグ管理を追加

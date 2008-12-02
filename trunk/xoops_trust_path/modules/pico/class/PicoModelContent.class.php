@@ -92,6 +92,19 @@ function getContents4assign( $whr_append = '1' , $order = 'weight' , $offset = 0
 }
 
 
+function getAutoRegisteredContents( $cat_id )
+{
+	$db =& Database::getInstance() ;
+
+	$result = $db->query( "SELECT content_id,vpath FROM ".$db->prefix($this->mydirname."_contents")." WHERE cat_id=$cat_id AND vpath IS NOT NULL AND poster_uid=0" ) ;
+	$ret = array() ;
+	while( list( $content_id , $vpath ) = $db->fetchRow( $result ) ) {
+		$ret[ $content_id ] = $vpath ;
+	}
+	return $ret ;
+}
+
+
 }
 
 

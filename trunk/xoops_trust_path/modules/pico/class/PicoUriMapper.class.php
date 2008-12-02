@@ -41,9 +41,15 @@ function parseRequest()
 		// 2nd check path_info
 		$path_info = $this->getPathInfo() ;
 		if( $path_info ) {
-			list( $content_id , $cat_id ) = $this->parsePathInfo( $path_info ) ;
-			if( is_null( $content_id ) ) {
-				list( $content_id , $cat_id ) = $this->processWrapPath( $path_info ) ;
+			//if( @$_GET['page'] == 'makecontent' ) {
+			if( defined( 'PICO_URI_MAPPER_ALLOW_CAT_ID_OVERWRITING' ) ) {
+				$content_id = 0 ;
+				$cat_id = 0 ;
+			} else {
+				list( $content_id , $cat_id ) = $this->parsePathInfo( $path_info ) ;
+				if( is_null( $content_id ) ) {
+					list( $content_id , $cat_id ) = $this->processWrapPath( $path_info ) ;
+				}
 			}
 		} else {
 			// 3rd check $_REQUEST['cat_id']
@@ -204,6 +210,12 @@ function parsePathInfo( $path_info )
 
 function processWrapPath( $path_info )
 {
+	// check wraps mode enabled
+	if( empty( $this->config['use_wraps_mode'] ) ) {
+		redirect_header( XOOPS_URL."/modules/$this->mydirname/index.php" , 2 , _MD_PICO_ERR_READCONTENT ) ;
+		exit ;
+	}
+
 	// check wrap file 
 	$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.$path_info ;
 	if( ! file_exists( $wrap_full_path ) ) {
@@ -211,7 +223,6 @@ function processWrapPath( $path_info )
 		header( 'HTTP/1.0 404 Not Found' ) ;
 		die( "The requested file ".htmlspecialchars($path_info)." is not found" ) ;
 	}
-
 
 	$path_info_is_dir = is_dir( $wrap_full_path ) ;
 	$ext = strtolower( substr( strrchr( $path_info , '.' ) , 1 ) ) ;
@@ -232,12 +243,6 @@ function processWrapPath( $path_info )
 		if( $path_info_is_dir ) {
 			// just return $cat_id
 			return array( 0 , intval( $cat_id ) ) ;
-		} else if( ! empty( $this->config['wraps_auto_register'] ) ) {
-			// register it as a new content
-			require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-			$new_content_id = pico_auto_register_wrapped_file( $this->mydirname , $path_info , $cat_id ) ;
-			// return new content_id just created
-			return array( intval( $new_content_id ) , intval( $cat_id ) ) ;
 		} else {
 			// just HTML wrapping (without content_id)
 			$this->request['path_info'] = $path_info ;

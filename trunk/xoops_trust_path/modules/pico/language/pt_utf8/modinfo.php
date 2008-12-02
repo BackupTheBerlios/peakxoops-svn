@@ -20,6 +20,10 @@ if(defined("FOR_XOOPS_LANG_CHECKER") || ! defined($constpref."_LOADED") ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-12-02 16:22:09
+define($constpref.'_AUTOREGISTCLASS','class name to register/unregister HTML wrapped files');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:55
 define($constpref.'_ADMENU_TAGS','Tags');
 

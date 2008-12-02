@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.74 ;
+$modversion['version'] = 1.75 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -152,6 +152,16 @@ $modversion['config'][] = array(
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
 	'default'		=> 0 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'auto_register_class' ,
+	'title'			=> $constpref.'_AUTOREGISTCLASS' ,
+	'description'	=> '' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'PicoAutoRegisterWraps' ,
 	'options'		=> array()
 ) ;
 

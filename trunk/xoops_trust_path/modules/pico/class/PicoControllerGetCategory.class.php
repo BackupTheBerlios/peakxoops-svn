@@ -37,9 +37,11 @@ function execute( $request )
 	}
 
 	// auto-register
-	if( ! empty( $this->mod_config['wraps_auto_register'] ) ) {
-		require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-		pico_auto_register_from_cat_vpath( $mydirname , $this->currentCategoryObj->getData() ) ;
+	if( ! empty( $this->mod_config['wraps_auto_register'] ) && @$cat_data['cat_vpath']{0} == '/' ) {
+		$register_class = empty( $this->mod_config['auto_register_class'] ) ? 'PicoAutoRegisterWraps' : $this->mod_config['auto_register_class'] ;
+		require_once dirname(__FILE__).'/'.$register_class.'.class.php' ;
+		$register_obj =& new $register_class( $this->mydirname , $this->mod_config ) ;
+		$register_obj->registerByCatvpath( $cat_data ) ;
 	}
 
 	// contents

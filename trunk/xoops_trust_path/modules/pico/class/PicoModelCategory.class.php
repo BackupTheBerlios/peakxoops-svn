@@ -66,6 +66,15 @@ function &get( $cat_id )
 }
 
 
+function touchVpathMtime( $cat_id , $mtime = null )
+{
+	$db =& Database::getInstance() ;
+
+	$mtime = empty( $mtime ) ? time() : intval( $mtime ) ;
+	$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_categories")." SET `cat_vpath_mtime`=$mtime WHERE cat_id=$cat_id" ) ;
+}
+
+
 }
 
 

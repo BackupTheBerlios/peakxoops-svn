@@ -17,6 +17,8 @@ $pico_configs_can_be_override = array(
 	'css_uri' => 'text' ,
 	'images_dir' => 'text' ,
 	'body_editor' => 'text' ,
+	'wraps_auto_register' => 'bool' ,
+	'auto_register_class' => 'text' ,
 	'comment_dirname' => 'text' ,
 	'comment_forum_id' => 'int' ,
 ) ;

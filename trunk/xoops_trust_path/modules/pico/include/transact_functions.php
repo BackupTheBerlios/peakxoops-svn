@@ -11,7 +11,7 @@ function pico_delete_content( $mydirname , $content_id )
 	pico_transact_backupcontent( $mydirname , $content_id , true ) ;
 
 	// delete content
-	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
@@ -44,10 +44,10 @@ function pico_delete_category( $mydirname , $cat_id , $delete_also_contents = tr
 	$notification_handler->unsubscribeByItem( $xoopsModule->getVar( 'mid' ) , 'category' , $cat_id ) ;
 
 	// delete category
-	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "DELETE FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// delete category_permissions
-	if( ! $db->query( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "DELETE FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
@@ -234,7 +234,7 @@ function pico_sync_all( $mydirname )
 			$forum_id = intval( $configs['comment_forum_id'] ) ;
 			$result = $db->query( "SELECT topic_external_link_id,COUNT(*) FROM ".$db->prefix($target_dirname."_topics")." WHERE topic_external_link_id>0 AND forum_id=$forum_id AND ! topic_invisible GROUP BY topic_external_link_id" ) ;
 			while( list( $content_id , $comments_count ) = $db->fetchRow( $result ) ) {
-				$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET comments_count=$comments_count WHERE content_id=$content_id" ) ;
+				$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET comments_count=$comments_count WHERE content_id=$content_id" ) ;
 			}
 		}
 	}
@@ -262,7 +262,7 @@ function pico_convert_serialized_data( $mydirname )
 	if( $db->getRowsNum( $result ) > 0 ) {
 		while( list( $id , $data ) = $db->fetchRow( $result ) ) {
 			$data4sql = mysql_real_escape_string( pico_common_serialize( pico_common_unserialize( $data ) ) ) ;
-			$db->query( "UPDATE ".$db->prefix($mydirname."_content_extras")." SET data='$data4sql' WHERE content_extra_id=$id" ) ;
+			$db->queryF( "UPDATE ".$db->prefix($mydirname."_content_extras")." SET data='$data4sql' WHERE content_extra_id=$id" ) ;
 		}
 	}
 
@@ -272,7 +272,7 @@ function pico_convert_serialized_data( $mydirname )
 	if( $db->getRowsNum( $result ) > 0 ) {
 		while( list( $id , $data ) = $db->fetchRow( $result ) ) {
 			$data4sql = mysql_real_escape_string( pico_common_serialize( pico_common_unserialize( $data ) ) ) ;
-			$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET extra_fields='$data4sql' WHERE content_id=$id" ) ;
+			$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET extra_fields='$data4sql' WHERE content_id=$id" ) ;
 		}
 	}
 }
@@ -354,7 +354,7 @@ function pico_makecategory( $mydirname )
 	list( $new_cat_id ) = $db->fetchRow( $db->query( "SELECT MAX(cat_id)+1 FROM ".$db->prefix($mydirname."_categories") ) ) ;
 
 	// insert it
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`='',cat_id=$new_cat_id,cat_permission_id=$cat_permission_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_categories")." SET $set `cat_path_in_tree`='',`cat_unique_path`='',cat_id=$new_cat_id,cat_permission_id=$cat_permission_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// permissions are set same as the parent category. (also moderator)
 /*	$sql = "SELECT uid,groupid,permissions FROM ".$db->prefix($mydirname."_category_permissions")." WHERE cat_id={$requests['pid']}" ;
@@ -397,7 +397,7 @@ function pico_updatecategory( $mydirname , $cat_id )
 	// loop check
 	if( in_array( $requests['pid'] , $children ) ) die( _MD_PICO_ERR_PIDLOOP ) ;
 
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_categories")." SET ".substr($set,0,-1)." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
+	if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET ".substr($set,0,-1)." WHERE cat_id=$cat_id" ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH ) ;
 
 	// rebuild category tree
 	pico_sync_cattree( $mydirname ) ;
@@ -623,7 +623,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 	// do insert
 	$sql = "INSERT INTO ".$db->prefix($mydirname."_contents")." SET $set $time4sql poster_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='',for_search=''" ;
-	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 	$new_content_id = $db->getInsertId() ;
 	pico_transact_reset_body_cached( $mydirname , $new_content_id ) ;
 
@@ -672,7 +672,7 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 	// do update
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	$sql = "UPDATE ".$db->prefix($mydirname."_contents")." SET modifier_uid='$uid', $set $time4sql modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',body_cached='',for_search='' WHERE content_id=$content_id" ;
-	if( ! $db->query( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_DUPLICATEDVPATH . ' or ' . _MD_PICO_ERR_SQL.__LINE__ ) ;
 	pico_transact_reset_body_cached( $mydirname , $content_id ) ;
 
 	// rebuild category tree
@@ -692,65 +692,7 @@ function pico_transact_reset_body_cached( $mydirname , $content_id )
 	list( $use_cache , $body ) = $db->fetchRow( $db->query( "SELECT use_cache,body FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ) ;
 	if( empty( $body ) ) return ;
 	$body4sql = $use_cache ? '' : mysql_real_escape_string( strip_tags( $body ) ) ;
-	$db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='$body4sql' WHERE content_id=$content_id" ) ;
-}
-
-
-// register a file of "wraps/dirname/$path" into contents table automatically
-function pico_auto_register_wrapped_file( $mydirname , $path , $cat_id = 0 )
-{
-	$db =& Database::getInstance() ;
-
-	$file_info = pico_main_read_wrapped_file( $mydirname , $path ) ;
-	$cat_id = intval( $cat_id ) ;
-
-	$content_row = $db->fetchArray( $db->query( "SELECT content_id,cat_id,modified_time FROM ".$db->prefix($mydirname."_contents")." WHERE `vpath`='".mysql_real_escape_string($path)."'" ) ) ;
-	if( empty( $content_row ) ) {
-		// insert a new record into the category
-		list( $weight ) = $db->fetchRow( $db->query( "SELECT MAX(weight) FROM ".$db->prefix($mydirname."_contents")." WHERE `cat_id`=$cat_id" ) ) ;
-	
-		if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_contents")." SET `cat_id`=$cat_id,`vpath`='".mysql_real_escape_string($path)."',`subject`='".mysql_real_escape_string($file_info['subject'])."',`body`='',`created_time`={$file_info['created_time']},`modified_time`={$file_info['created_time']},poster_uid=0,modifier_uid=0,poster_ip='',modifier_ip='',use_cache=1,weight=".($weight+1).",filters='wraps',show_in_navi=1,show_in_menu=1,allow_comment=0,visible=1,approval=1,htmlheader='',htmlheader_waiting='',body_waiting='',body_cached='',for_search=''" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-		$content_id = $db->getInsertId() ;
-
-		// rebuild category tree
-		pico_sync_cattree( $mydirname ) ;
-	} else if( $content_row['modified_time'] < $file_info['created_time'] ) {
-		// clear body_cache
-		$content_id = intval( $content_row['content_id'] ) ;
-		if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET `modified_time`={$file_info['created_time']},body_cached='',for_search='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	} else {
-		$content_id = 0 ;
-	}
-
-	return $content_id ;
-}
-
-
-// register files under "wraps/dirname/$cat_vpath" automatically
-function pico_auto_register_from_cat_vpath( $mydirname , $category_row )
-{
-	$db =& Database::getInstance() ;
-
-	if( ord( @$category_row['cat_vpath'] ) == 0x2f ) {
-		$wrap_dir = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$mydirname.str_replace('..','',$category_row['cat_vpath']) ;
-		if( is_dir( $wrap_dir ) && filemtime( $wrap_dir ) > $category_row['cat_vpath_mtime'] ) {
-			$dh = opendir( $wrap_dir ) ;
-			$files = array() ;
-			while( ( $file = readdir( $dh ) ) !== false ) {
-				if( preg_match( _MD_PICO_AUTOREGIST4PREGEX , $file ) ) {
-					$files[] = $file ;
-				}
-			}
-			closedir( $dh ) ;
-
-			sort( $files ) ;
-			foreach( $files as $file ) {
-				pico_auto_register_wrapped_file( $mydirname , $category_row['cat_vpath'].'/'.$file , intval( $category_row['cat_id'] ) ) ;
-			}
-
-			if( ! $db->queryF( "UPDATE ".$db->prefix($mydirname."_categories")." SET `cat_vpath_mtime`=UNIX_TIMESTAMP() WHERE cat_id=".intval($category_row['cat_id']) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-		}
-	}
+	$db->queryF( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_cached='$body4sql' WHERE content_id=$content_id" ) ;
 }
 
 
@@ -784,10 +726,11 @@ function pico_transact_backupcontent( $mydirname , $content_id , $forced = false
 
 	// fetch the latest history first
 	list( $last_ch_id ) = $db->fetchRow( $db->query( "SELECT MAX(content_history_id) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_id=".intval($content_id) ) ) ;
-	list( $last_ch_modified , $last_ch_md5bodies ) = $db->fetchRow( $db->query( "SELECT modified_time,MD5(concat(subject,htmlheader,body)) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_history_id=".intval($last_ch_id) ) ) ;	list( $current_md5bodies ) = $db->fetchRow( $db->query( "SELECT MD5(concat(subject,htmlheader,body)) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) ;
+	list( $last_ch_modified , $last_ch_4search ) = $db->fetchRow( $db->query( "SELECT `modified_time`,MD5(`for_search`) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_history_id=".intval($last_ch_id) ) ) ;
+	list( $current_4search ) = $db->fetchRow( $db->query( "SELECT MD5(`for_search`) FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) ;
 
-	// compare MD5 of subject,htmlheader,body (it is not saved if identical)
-	if( ! $forced && $current_md5bodies == $last_ch_md5bodies ) return ;
+	// compare for_search fileld (it is not saved if identical)
+	if( ! $forced && $current_4search == $last_ch_4search ) return ;
 
 	// min life time of each history
 	if( $minlifetime_per_history > 0 && $last_ch_modified > time() - $minlifetime_per_history ) return ;
@@ -797,13 +740,14 @@ function pico_transact_backupcontent( $mydirname , $content_id , $forced = false
 		do {
 			list( $ch_count , $min_ch_id ) = $db->fetchRow( $db->query( "SELECT COUNT(*),MIN(content_history_id) FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_id=".intval($content_id) ) ) ;
 			if( $ch_count >= $histories_per_content ) {
-				$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_history_id=".intval($min_ch_id) ) ;
+				$db->queryF( "DELETE FROM ".$db->prefix($mydirname."_content_histories")." WHERE content_history_id=".intval($min_ch_id) ) ;
 			}
 		} while( $ch_count >= $histories_per_content ) ;
 	}
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
-	if( ! $db->query( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields) SELECT content_id,vpath,cat_id,modified_time,UNIX_TIMESTAMP(),modifier_uid,modifier_ip,$uid,'".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters,tags,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields) SELECT content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+//	if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields) SELECT content_id,vpath,cat_id,created_time,modified_time,modifier_uid,modifier_ip,$uid,'".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters,tags,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 }
 
 

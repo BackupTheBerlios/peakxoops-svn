@@ -142,7 +142,7 @@ if( $myalbum_imagingpipe == PIPEID_IMAGICK ) {
 	foreach( $netpbm_pipes as $pipe ) {
 		$ret_array = array() ;
 		exec( "{$myalbum_netpbmpath}$pipe --version 2>&1" , $ret_array ) ;
-		if( count( $ret_array ) < 1 ) echo "<font color='#FF0000'><b>Error: {$myalbum_netpbmpath}pnmscale can't be executed</b></font><br />\n" ;
+		if( count( $ret_array ) < 2 ) echo "<font color='#FF0000'><b>Error: {$myalbum_netpbmpath}$pipe can't be executed</b></font><br />\n" ;
 		else echo " &nbsp; {$ret_array[0]} &nbsp; <font color='#00FF00'><b>ok</b></font><br />" ;
 	}
 } else {

@@ -117,7 +117,8 @@ pico is fast enough if you use content's cache.
 - modified flags for auto-registering can be overriden per category
 - fixed some fields for the contents stored into wrong fields of the histries
 - fixed the preview for makecontent with wraps (thx mathmay)
-- modified htmlwapped controller can assign tellafriend
+- modified simple html-wapping controller can assign tellafriend
+- fixed html-wrapping controller can work without wraps mode
 
 1.74 (2008/11/19)
 - added tags manager
@@ -593,6 +594,7 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - コンテンツヒストリの保存ルールがおかしかったのを修正
 - wrapsモードでコンテンツ作成時のプレビューがおかしくなるのを修正 (thx mathmay)
 - 単純ページラップで友達に知らせる機能が効かなくなっていたのを改善
+- wrapsモードがoffでも単純ページラップが有効になっていたのを修正
 
 1.74 (2008/11/19)
 - タグ管理を追加

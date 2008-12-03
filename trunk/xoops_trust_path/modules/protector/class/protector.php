@@ -853,6 +853,8 @@ function check_brute_force()
 	if( empty( $ip ) || $ip == '' ) return true ;
 
 	$victim_uname = empty( $_COOKIE['autologin_uname'] ) ? $_POST['uname'] : $_COOKIE['autologin_uname'] ;
+	// some UA send 'deleted' as a value of the deleted cookie.
+	if( $victim_uname == 'deleted' ) return ;
 	$mal4sql = addslashes( "BRUTE FORCE: $victim_uname" ) ;
 
 	// gargage collection

@@ -71,7 +71,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'text' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 86400 * 3 ,
+	'default'		=> 86400 ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(

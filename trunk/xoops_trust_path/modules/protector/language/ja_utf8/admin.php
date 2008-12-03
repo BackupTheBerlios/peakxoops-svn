@@ -43,6 +43,8 @@ define( "_AM_TXT_HOWTOCHANGEDB" , "prefixを変更する場合は、%s/mainfile.
 // advisory.php
 define("_AM_ADV_NOTSECURE","非推奨");
 
+define("_AM_ADV_TRUSTPATHPUBLIC","上にNGという画像が表示されていたり、リンク先でエラーが出ないようならXOOPS_TRUST_PATHの設置方法に問題があります。XOOPS_TRUST_PATHはDocumentRoot外に設置するのが基本ですが、そうできない場合でもXOOPS_TRUST_PATH直下にDENY FROM ALLの一行を持つ.htaccessを追加するなどして、XOOPS_TRUST_PATH内に直接アクセスできないようにする必要があります。");
+define("_AM_ADV_TRUSTPATHPUBLICLINK","TRUST_PATH内のPHPファイルに直アクセスできないことの確認（リンク先が404,403,500エラーなら正常）");
 define("_AM_ADV_REGISTERGLOBALS","この設定は、様々な変数汚染攻撃を招きます<br />もし、.htaccessを置けるサーバであれば、XOOPSインストールディレクトリの.htaccessを作るか編集するかして下さい");
 define("_AM_ADV_ALLOWURLFOPEN","この設定だと、外部の任意のスクリプトを実行される危険性があります<br />この設定変更にはサーバの管理者権限が必要です<br />ご自身で管理しているサーバであれば、php.iniやhttpd.confを編集して下さい<br />そうでない場合は、サーバ管理者にお願いしてみて下さい");
 define("_AM_ADV_USETRANSSID","セッションIDが自動的にリンクに表示される設定となっています。<br />セッションハイジャックを防ぐためにも、XOOPSインストールディレクトリに.htaccessを作るか編集するかして下さい<br /><b>php_flag session.use_trans_sid off</b>");

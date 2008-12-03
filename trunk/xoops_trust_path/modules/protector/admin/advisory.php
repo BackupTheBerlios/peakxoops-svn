@@ -9,6 +9,19 @@ include dirname(__FILE__).'/mymenu.php' ;
 // open table for ADVISORY
 echo "<br />\n<div style='border: 2px solid #2F5376;padding:8px;width:95%;' class='bg4'>\n" ;
 
+// calculate the relative path between XOOPS_ROOT_PATH and XOOPS_TRUST_PATH
+$root_paths = explode( '/' , XOOPS_ROOT_PATH ) ;
+$trust_paths = explode( '/' , XOOPS_TRUST_PATH ) ;
+foreach( $root_paths as $i => $rpath ) {
+	if( $rpath != $trust_paths[ $i ] ) break ;
+}
+$relative_path = str_repeat( '../' , count( $root_paths ) - $i ) . implode( '/' , array_slice( $trust_paths , $i ) ) ;
+
+// the path of XOOPS_TRUST_PATH accessible check
+echo "<dl><dt>'XOOPS_TRUST_PATH' : " ;
+echo "<img src='".XOOPS_URL.'/'.htmlspecialchars($relative_path)."/modules/protector/public_check.png' width='40' height='20' alt='' style='border:1px solid black;' /><br /><a href='".XOOPS_URL.'/'.htmlspecialchars($relative_path)."/modules/protector/public_check.php'>"._AM_ADV_TRUSTPATHPUBLICLINK."</a></dt>\n" ;
+echo "<dd>"._AM_ADV_TRUSTPATHPUBLIC."</dd></dl>" ;
+
 // register_globals
 echo "<dl><dt>'register_globals' : " ;
 $safe = ! ini_get( "register_globals" ) ;

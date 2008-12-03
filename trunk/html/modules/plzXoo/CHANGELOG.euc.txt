@@ -1,5 +1,10 @@
 [xlang:en]
 
+-=v1.02alt --> v1.03alt=-
+* added language files
+** ja_utf8
+** portuguesebr (thx leco1)
+
 -=v1.01alt --> v1.02alt=-
 * fixed typos causes fatal with PHP5.2
 
@@ -94,6 +99,11 @@
 
 [/xlang:en]
 [xlang:ja]
+
+-=v1.02alt --> v1.03alt=-
+* 言語ファイル追加
+** ja_utf8
+** portuguesebr (thx leco1)
 
 -=v1.01alt --> v1.02alt=-
 * PHP5.2でfatalが出るtypoを修正

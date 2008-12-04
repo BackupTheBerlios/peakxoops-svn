@@ -38,27 +38,31 @@ if ($op == 'showmod') {
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->get($mod);
 
-	// language files (modinfo.php)
+	// language
 	$language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
-	if( file_exists( "$mydirpath/language/$language/modinfo.php" ) ) {
-		// user customized language file
-		include_once "$mydirpath/language/$language/modinfo.php" ;
-	} else if( file_exists( "$mytrustdirpath/language/$language/modinfo.php" ) ) {
-		// default language file
-		include_once "$mytrustdirpath/language/$language/modinfo.php" ;
-	} else {
-		// fallback english
-		include_once "$mytrustdirpath/language/english/modinfo.php" ;
+
+	// load modinfo.php if necessary (judged by a specific constant is defined)
+	if( defined( '_MYMENU_CONSTANT_IN_MODINFO' ) && ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
+		if( file_exists( "$mydirpath/language/$language/modinfo.php" ) ) {
+			// user customized language file
+			include_once "$mydirpath/language/$language/modinfo.php" ;
+		} else if( file_exists( "$mytrustdirpath/language/$language/modinfo.php" ) ) {
+			// default language file
+			include_once "$mytrustdirpath/language/$language/modinfo.php" ;
+		} else {
+			// fallback english
+			include_once "$mytrustdirpath/language/english/modinfo.php" ;
+		}
 	}
 
 	// if has comments feature, need comment lang file
-	if ($module->getVar('hascomments') == 1) {
+	if ($module->getVar('hascomments') == 1 && ! defined( '_CM_TITLE' ) ) {
 		include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/comment.php';
 	}
 
 	// RMV-NOTIFY
 	// if has notification feature, need notification lang file
-	if ($module->getVar('hasnotification') == 1) {
+	if ($module->getVar('hasnotification') == 1 && ! defined( '_NOT_NOTIFICATIONOPTIONS' ) ) {
 		include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/notification.php';
 	}
 

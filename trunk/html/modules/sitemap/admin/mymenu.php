@@ -10,10 +10,13 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 	if( ! isset( $module ) || ! is_object( $module ) ) $module = $xoopsModule ;
 	else if( ! is_object( $xoopsModule ) ) die( '$xoopsModule is not set' )  ;
 
-	if( file_exists("../language/".$xoopsConfig['language']."/modinfo.php") ) {
-		include_once("../language/".$xoopsConfig['language']."/modinfo.php");
-	} else {
-		include_once("../language/english/modinfo.php");
+	// load modinfo.php if necessary (judged by a specific constant is defined)
+	if( defined( '_MYMENU_CONSTANT_IN_MODINFO' ) && ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
+		if( file_exists("../language/".$xoopsConfig['language']."/modinfo.php") ) {
+			include_once("../language/".$xoopsConfig['language']."/modinfo.php");
+		} else {
+			include_once("../language/english/modinfo.php");
+		}
 	}
 
 	include( './menu.php' ) ;
@@ -44,6 +47,9 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 				// mypreferences
 				$title = defined( '_MD_A_MYMENU_MYPREFERENCES' ) ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES ;
 				array_push( $adminmenu , array( 'title' => $title , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences' ) ) ;
+			} else if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
+				// Cube Legacy without altsys
+				array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getvar('mid') ) ) ;
 			} else {
 				// system->preferences
 				array_push( $adminmenu , array( 'title' => _PREFERENCES , 'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$module->mid() ) ) ;

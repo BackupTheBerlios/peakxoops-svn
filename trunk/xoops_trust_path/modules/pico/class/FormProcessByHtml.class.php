@@ -133,6 +133,7 @@ class FormProcessByHtml
 				foreach( preg_split( '#</fieldset>#i' , $form_html ) as $fieldsetblock ) {
 					if( strstr( $fieldsetblock , $tag ) && preg_match( '#<legend[^>]*>([^<]+)</legend>#' , $fieldsetblock , $sub_regs ) ) {
 						$label = strip_tags( @$sub_regs[1] ) ;
+						break ;
 					}
 				}
 			}

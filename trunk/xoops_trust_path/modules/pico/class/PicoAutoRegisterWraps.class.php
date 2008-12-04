@@ -33,8 +33,8 @@ function updateContent( $content_id , $vpath )
 		pico_transact_backupcontent( $this->mydirname , $content_id ) ;
 
 		// update the content
-		$set4subject = $file_info['subject'] ? "`subject`='".mysql_real_escape_string($file_info['subject'])."'" : '' ;
-		$sql = "UPDATE ".$db->prefix($this->mydirname."_contents")." SET $set4subject ,`modified_time`={$file_info['mtime']},body_cached='',for_search='',`last_cached_time`=0,modifier_uid=0,modifier_ip='' WHERE content_id=$content_id" ;
+		$set4subject = $file_info['subject'] ? "`subject`='".mysql_real_escape_string($file_info['subject'])."'," : '' ;
+		$sql = "UPDATE ".$db->prefix($this->mydirname."_contents")." SET $set4subject `modified_time`={$file_info['mtime']},body_cached='',for_search='',`last_cached_time`=0,modifier_uid=0,modifier_ip='' WHERE content_id=$content_id" ;
 		$db->queryF( $sql ) ;
 		return $db->getAffectedRows() ;
 	}

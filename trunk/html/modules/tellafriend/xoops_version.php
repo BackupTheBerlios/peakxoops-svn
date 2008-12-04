@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 
 $modversion['name'] = _MI_TELLAFRIEND_MODNAME ;
-$modversion['version'] = 1.03;
+$modversion['version'] = 1.04;
 $modversion['description'] = _MI_TELLAFRIEND_MODDESC ;
 $modversion['credits'] = "PEAK Corp. http://www.peak.ne.jp/";
 $modversion['author'] = "GIJOE";

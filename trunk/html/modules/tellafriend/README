@@ -159,6 +159,11 @@ schinese
 
 CHANGES:
 
+v1.04 2008-12-15
+- modified the compatibilities with XCL2.1
+- modified MySQL5 compatibility
+- changed altsys friendly module
+
 v1.03 2006-07-13
 - modified xoops_version.php as hasMain=1 (thx Rollei)
 - added language files

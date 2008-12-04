@@ -6,8 +6,8 @@ CREATE TABLE tellafriend_log (
   mail_fromemail varchar(255) NOT NULL default '',
   mail_to varchar(255) NOT NULL default '',
   mail_subject varchar(255) NOT NULL default '',
-  mail_body text NOT NULL default '',
+  mail_body text NOT NULL,
   agent varchar(255) NOT NULL default '',
-  timestamp TIMESTAMP(14) ,
+  timestamp TIMESTAMP ,
   PRIMARY KEY (lid)
 ) TYPE=MyISAM;

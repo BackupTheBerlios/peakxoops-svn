@@ -1,8 +1,26 @@
 <?php
-require_once( '../../../include/cp_header.php' ) ;
-require_once( XOOPS_ROOT_PATH.'/class/pagenav.php' ) ;
-require_once( '../include/gtickets.php' ) ;
+require_once '../../../include/cp_header.php' ;
+require_once '../include/gtickets.php' ;
+define( '_MYMENU_CONSTANT_IN_MODINFO' , '_MI_TELLAFRIEND_MODNAME' ) ;
 
+// branch for altsys
+if( defined( 'XOOPS_TRUST_PATH' ) && ! empty( $_GET['lib'] ) ) {
+	$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
+	$mydirpath = dirname( dirname( __FILE__ ) ) ;
+
+	// common libs (eg. altsys)
+	$lib = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , $_GET['lib'] ) ;
+	$page = preg_replace( '/[^a-zA-Z0-9_-]/' , '' , @$_GET['page'] ) ;
+	
+	if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/'.$page.'.php' ;
+	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ) ) {
+		include XOOPS_TRUST_PATH.'/libs/'.$lib.'/index.php' ;
+	} else {
+		die( 'wrong request' ) ;
+	}
+	exit ;
+}
 
 // GET vars
 $pos = empty( $_GET[ 'pos' ] ) ? 0 : intval( $_GET[ 'pos' ] ) ;
@@ -37,6 +55,7 @@ list( $numrows ) = $xoopsDB->fetchRow( $rs ) ;
 $prs = $xoopsDB->query( "SELECT l.lid, l.uid, l.ip, l.agent, l.mail_fromemail, l.mail_to, UNIX_TIMESTAMP(l.timestamp), u.uname FROM $log_table l LEFT JOIN ".$xoopsDB->prefix("users")." u ON l.uid=u.uid ORDER BY timestamp DESC LIMIT $pos,$num" ) ;
 
 // Page Navigation
+require_once XOOPS_ROOT_PATH.'/class/pagenav.php' ;
 $nav = new XoopsPageNav( $numrows , $num , $pos , 'pos' , "num=$num" ) ;
 $nav_html = $nav->renderNav( 10 ) ;
 

@@ -1,5 +1,10 @@
 <?php
 
+// altsys
+define('_MD_A_MYMENU_MYTPLSADMIN','テンプレート管理');
+define('_MD_A_MYMENU_MYBLOCKSADMIN','アクセス権限');
+define('_MD_A_MYMENU_MYPREFERENCES','一般設定');
+
 // index.php
 define("_AM_TH_DATETIME","日時");
 define("_AM_TH_USER","ユーザ");

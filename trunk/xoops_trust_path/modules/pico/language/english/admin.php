@@ -3,7 +3,6 @@
 // contents list admin
 define('_MD_A_PICO_H2_CONTENTS','Contents list');
 define('_MD_A_PICO_TH_CONTENTSID','ID');
-define('_MD_A_PICO_TH_CONTENTSSUBJECT','Subject');
 define('_MD_A_PICO_TH_CONTENTSWEIGHT','weight');
 define('_MD_A_PICO_TH_CONTENTSVISIBLE','VIS');
 define('_MD_A_PICO_TH_CONTENTSSHOWINNAVI','NAVI');

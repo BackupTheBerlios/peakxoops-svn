@@ -129,9 +129,9 @@ class FormProcessByHtml
 					$label = strip_tags( @$regs[2] ) ;
 				}
 			} else {
-				// search the nearest <regend> for radio/checkbox
-				if( preg_match( '#<fieldset.*'.preg_quote($tag).'.*</fieldset>#isU' , $form_html , $regs ) ) {
-					if( preg_match( '#<legend[^>]*>([^<]+)</legend>#' , $regs[0] , $sub_regs ) ) {
+				// search the nearest <legend> for radio/checkbox
+				foreach( preg_split( '#</fieldset>#i' , $form_html ) as $fieldsetblock ) {
+					if( strstr( $fieldsetblock , $tag ) && preg_match( '#<legend[^>]*>([^<]+)</legend>#' , $fieldsetblock , $sub_regs ) ) {
 						$label = strip_tags( @$sub_regs[1] ) ;
 					}
 				}

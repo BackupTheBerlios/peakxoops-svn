@@ -3,7 +3,6 @@
 // contents list admin
 define('_MD_A_PICO_H2_CONTENTS','コンテンツ一括管理');
 define('_MD_A_PICO_TH_CONTENTSID','記事番号');
-define('_MD_A_PICO_TH_CONTENTSSUBJECT','記事名');
 define('_MD_A_PICO_TH_CONTENTSWEIGHT','表示順');
 define('_MD_A_PICO_TH_CONTENTSVISIBLE','表示');
 define('_MD_A_PICO_TH_CONTENTSSHOWINNAVI','Navi');

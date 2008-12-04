@@ -33,7 +33,8 @@ function updateContent( $content_id , $vpath )
 		pico_transact_backupcontent( $this->mydirname , $content_id ) ;
 
 		// update the content
-		$sql = "UPDATE ".$db->prefix($this->mydirname."_contents")." SET `subject`='".mysql_real_escape_string($file_info['subject'])."',`body`='".mysql_real_escape_string($file_info['body'])."',`modified_time`={$file_info['mtime']},body_cached='',for_search='',`last_cached_time`=0,modifier_uid=0,modifier_ip='' WHERE content_id=$content_id" ;
+		$set4subject = $file_info['subject'] ? "`subject`='".mysql_real_escape_string($file_info['subject'])."'" : '' ;
+		$sql = "UPDATE ".$db->prefix($this->mydirname."_contents")." SET $set4subject ,`modified_time`={$file_info['mtime']},body_cached='',for_search='',`last_cached_time`=0,modifier_uid=0,modifier_ip='' WHERE content_id=$content_id" ;
 		$db->queryF( $sql ) ;
 		return $db->getAffectedRows() ;
 	}
@@ -58,7 +59,7 @@ function getInsertSQL( $cat_id , $vpath )
 	$weight = $this->getRegisteringWeight( $cat_id , $vpath ) ;
 	$file_info = $this->getFileInfo( $vpath ) ;
 
-	return "SET `cat_id`=$cat_id,`vpath`='".mysql_real_escape_string($vpath)."',`subject`='".mysql_real_escape_string($file_info['subject'])."',`body`='".mysql_real_escape_string($file_info['body'])."',`created_time`={$file_info['mtime']},`modified_time`={$file_info['mtime']},expiring_time=0x7fffffff,poster_uid=0,modifier_uid=0,poster_ip='',modifier_ip='',use_cache=0,weight=$weight,filters='wraps',show_in_navi=1,show_in_menu=1,allow_comment=0,visible=1,approval=1,htmlheader='',htmlheader_waiting='',body_waiting='',body_cached='',tags='',extra_fields='',for_search=''" ;
+	return "SET `cat_id`=$cat_id,`vpath`='".mysql_real_escape_string($vpath)."',`subject`='".mysql_real_escape_string($file_info['subject_alt'])."',`body`='".mysql_real_escape_string($file_info['body'])."',`created_time`={$file_info['mtime']},`modified_time`={$file_info['mtime']},expiring_time=0x7fffffff,poster_uid=0,modifier_uid=0,poster_ip='',modifier_ip='',use_cache=0,weight=$weight,filters='wraps',show_in_navi=1,show_in_menu=1,allow_comment=0,visible=1,approval=1,htmlheader='',htmlheader_waiting='',body_waiting='',body_cached='',tags='',extra_fields='',for_search=''" ;
 }
 
 
@@ -172,11 +173,14 @@ function getFileInfo( $vpath )
 	$full_content = pico_convert_encoding_to_ie( ob_get_contents() ) ;
 	ob_end_clean() ;
 
+	// file name
+	$filename = substr( strrchr( $wrap_full_path , '/' ) , 1 ) ;
+
 	// parse full_content (get subject, body etc.)
 	if( preg_match( '/\<title\>([^<>]+)\<\/title\>/is' , $full_content , $regs ) ) {
-		$subject = $regs[1] ;
+		$subject = pico_common_unhtmlspecialchars( $regs[1] ) ;
 	} else {
-		$subject = substr( strrchr( $wrap_full_path , '/' ) , 1 ) ;
+		$subject = false ;
 	}
 	if( preg_match( '/\<body[^<>]*\>(.*)\<\/body\>/is' , $full_content , $regs ) ) {
 		$body = $regs[1] ;
@@ -186,7 +190,9 @@ function getFileInfo( $vpath )
 
 	return array(
 		'mtime' => intval( @filemtime( $wrap_full_path ) ) ,
-		'subject' => pico_common_unhtmlspecialchars( $subject ) ,
+		'subject' => $subject ,
+		'subject_alt' => $subject ? $subject : $filename ,
+		'filename' => $filename ,
 		'body' => $body ,
 	) ;
 }

@@ -119,7 +119,9 @@ pico is fast enough if you use content's cache.
 - fixed the preview for makecontent with wraps (thx mathmay)
 - modified simple html-wapping controller can assign tellafriend
 - fixed html-wrapping controller can work without wraps mode
-- fixed a typo in admin_tags.html (thx salamander)
+- fixed a typo in admin_tags.html (thx salamander) 1.75a
+- modified auto-updater from wrapped file without title tag 1.75a
+- fixed formmail feature cannot get <legend> correctly (thx jidaikobo) 1.75a
 
 1.74 (2008/11/19)
 - added tags manager
@@ -596,7 +598,9 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - wrapsモードでコンテンツ作成時のプレビューがおかしくなるのを修正 (thx mathmay)
 - 単純ページラップで友達に知らせる機能が効かなくなっていたのを改善
 - wrapsモードがoffでも単純ページラップが有効になっていたのを修正
-- テンプレートadmin_tags.htmlのtypoを修正 (thx salamander)
+- テンプレートadmin_tags.htmlのtypoを修正 (thx salamander) 1.75a
+- ラップファイルによる自動更新でSubjectが取得できない場合の処理改善 1.75a
+- formmail機能で<legend>が正しく取得できないバグを修正 (thx jidaikobo) 1.75a
 
 1.74 (2008/11/19)
 - タグ管理を追加

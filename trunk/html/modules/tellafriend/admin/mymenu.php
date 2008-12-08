@@ -11,7 +11,7 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 	else if( ! is_object( $xoopsModule ) ) die( '$xoopsModule is not set' )  ;
 
 	// load modinfo.php if necessary (judged by a specific constant is defined)
-	if( defined( '_MYMENU_CONSTANT_IN_MODINFO' ) && ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
+	if( ! defined( '_MYMENU_CONSTANT_IN_MODINFO' ) || ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
 		if( file_exists("../language/".$xoopsConfig['language']."/modinfo.php") ) {
 			include_once("../language/".$xoopsConfig['language']."/modinfo.php");
 		} else {

@@ -40,6 +40,12 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 			array_push( $adminmenu , array( 'title' => $title , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin' ) ) ;
 		}
 
+		if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mylangadmin.php' ) ) {
+			// mylangadmin
+			$title = defined( '_MD_A_MYMENU_MYLANGADMIN' ) ? _MD_A_MYMENU_MYLANGADMIN : 'langadmin' ;
+			array_push( $adminmenu , array( 'title' => $title , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mylangadmin' ) ) ;
+		}
+
 		// preferences
 		$config_handler =& xoops_gethandler('config');
 		if( count( $config_handler->getConfigs( new Criteria( 'conf_modid' , $module->mid() ) ) ) > 0 ) {

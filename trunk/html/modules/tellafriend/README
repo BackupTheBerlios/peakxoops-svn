@@ -20,8 +20,10 @@ USAGE:
 - Check "access rights" by groups admin in TellAFriend's admin
 
 - Copy modifier.xoops_tellafriend.php into class/smarty/plugins/
+ (this step can be skipped if you use it for native tellafriend modules)
 
 - Edit the templates with links of "Tell a friend" as follows.
+- Or turn "use tellafriend module" on in the preferences of the module which is made as a native with "tellafriend")
 
 
 
@@ -59,9 +61,8 @@ mydownloads_download.html
 <a target="_top" href="<{$down.mail_body|xoops_tellafriend:$down.mail_subject}>">
 [/code]
 
-[b]TinyD[/b]
-Go to preferences of TinyD, and turn 'Use tellafriend modulen' on.
-
+[b]Tellafriend native modules (pico, bulletin etc.)[/b]
+Go to the preferences, and just turn 'Use tellafriend module' on.
 
 
 
@@ -84,8 +85,10 @@ Go to preferences of TinyD, and turn 'Use tellafriend modulen' on.
 - まず、普通にインストールしてください。
 
 - class/smarty/plugins/ に modifier.xoops_tellafriend.php をコピーしてください
+（最初から対応しているモジュールに利用する場合は不要です）
 
-- 「友達に知らせる」アイコンのあるテンプレートを編集してください。（サンプル参照）
+- 「友達に知らせる」リンクのあるテンプレートを編集してください。
+（最初から対応しているモジュールであれば、一般設定の変更を行います）
 
 
 ゲストに許可したい場合は、グループ管理から、ゲストに対してモジュールアクセス権限を与えてください。
@@ -121,45 +124,21 @@ mydownloads_download.html
 <a target="_top" href="<{$down.mail_body|xoops_tellafriend:$down.mail_subject}>">
 [/code]
 
-[b]TinyD[/b]
-TinyDの一般設定にて、「Tell a Friendモジュールを使う」を選択
-
-「友達に紹介」を持った他のモジュールでも、基本的には、mailto: となっている部分のテンプレート変数に、フィルタを追加するだけです。
-
-
-なお、このフォームメールによってメール題名の日本語が化けたとすれば、それは、TellAFriendではなく、XOOPS側のバグです。
-
-2.0.12から正式対応する、とは聞いていますが、それまでは、class/mail/phpmailer/class.phpmailer.php の1299行目に１行追加してください。
-[code]
-    /**
-     * Encode a header string to best of Q, B, quoted or none.  Returns a string.
-     * @access private
-     * @return string
-     */
-    function encode_header ($str, $position = 'text') {
-[color=ff0000]
-      if( $position == 'text' ) return mb_encode_mimeheader( mb_convert_encoding( $str , mb_internal_encoding() , 'auto' ) ) ; // GIJ
-[/color]
-      $x = 0;
-
-      switch (strtolower($position)) {
-[/code]
-
-
-●言語ファイル
-
-korean
-tchinese
-schinese
-を、それぞれ、Lostworldさんとimdavidさんが作ってくれました。
-ありがとうございました。
+[b]Tellafriend対応モジュールの場合 (picoやbulletin等)[/b]
+該当モジュールの一般設定で、「Tell a Friendモジュールを使う」を「はい」とします。
 
 
 [/xlang:ja]
 
 CHANGES:
 
-v1.04 2008-12-15
+v1.05 2008-12-08
+- updated README
+- updated mymenu
+- added language files
+-- portuguesebr (thx leco1)
+
+v1.04 2008-12-05
 - modified the compatibilities with XCL2.1
 - modified MySQL5 compatibility
 - changed altsys friendly module

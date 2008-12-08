@@ -3,6 +3,7 @@
 // altsys
 define('_MD_A_MYMENU_MYTPLSADMIN','Templates');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','Permissions');
+define('_MD_A_MYMENU_MYLANGADMIN','Literals');
 define('_MD_A_MYMENU_MYPREFERENCES','Preferences');
 
 // index.php

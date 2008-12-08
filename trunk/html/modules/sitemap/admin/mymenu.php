@@ -11,7 +11,7 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 	else if( ! is_object( $xoopsModule ) ) die( '$xoopsModule is not set' )  ;
 
 	// load modinfo.php if necessary (judged by a specific constant is defined)
-	if( defined( '_MYMENU_CONSTANT_IN_MODINFO' ) && ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
+	if( ! defined( '_MYMENU_CONSTANT_IN_MODINFO' ) || ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
 		if( file_exists("../language/".$xoopsConfig['language']."/modinfo.php") ) {
 			include_once("../language/".$xoopsConfig['language']."/modinfo.php");
 		} else {
@@ -38,6 +38,12 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 			// myblocksadmin
 			$title = defined( '_MD_A_MYMENU_MYBLOCKSADMIN' ) ? _MD_A_MYMENU_MYBLOCKSADMIN : 'blocksadmin' ;
 			array_push( $adminmenu , array( 'title' => $title , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin' ) ) ;
+		}
+
+		if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/mylangadmin.php' ) ) {
+			// mylangadmin
+			$title = defined( '_MD_A_MYMENU_MYLANGADMIN' ) ? _MD_A_MYMENU_MYLANGADMIN : 'langadmin' ;
+			array_push( $adminmenu , array( 'title' => $title , 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mylangadmin' ) ) ;
 		}
 
 		// preferences

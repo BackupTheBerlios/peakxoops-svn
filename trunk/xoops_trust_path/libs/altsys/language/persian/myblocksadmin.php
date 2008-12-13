@@ -11,6 +11,10 @@
 * @author		http://www.irxoops.org/ The Persian XOOPS support site
 * @version		$Id$
 */
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-12-13 18:32:08
+define('_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK','If you want to use WYSIWYG editor, install common/fckeditor');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
 define('_MD_A_MYBLOCKSADMIN_LINK_FORCECLONE','تکثیر اجباری');
 

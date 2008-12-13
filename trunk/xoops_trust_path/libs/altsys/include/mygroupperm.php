@@ -32,10 +32,10 @@ if( $modid == 1 ) {
 		if( ! is_object( $module ) ) die( 'there is no altsys nor system.' ) ;
 	}
 	$moduleperm_handler =& xoops_gethandler( 'groupperm' ) ;
-	if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_admin' , $module->getVar( 'mid' ) , $xoopsUser->getGroups() ) ) die( 'only admin of altsys can access this area' ) ;
+	if( ! is_object( @$GLOBALS['xoopsUser'] ) || ! $moduleperm_handler->checkRight( 'module_admin' , $module->getVar( 'mid' ) , $GLOBALS['xoopsUser']->getGroups() ) ) die( 'only admin of altsys can access this area' ) ;
 } else {
 	// check the permission of 'module_admin' of the module
-	if ($modid <= 0 || !is_object($xoopsUser) || !$xoopsUser->isAdmin($modid) ) {
+	if ($modid <= 0 || !is_object($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser']->isAdmin($modid) ) {
 		die( _NOPERM ) ;
 	}
 	$module_handler =& xoops_gethandler('module');

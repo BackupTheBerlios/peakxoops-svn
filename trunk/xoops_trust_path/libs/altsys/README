@@ -37,7 +37,7 @@ from 0.2x/0.3x:
 - modifying adminmenu in the left side of XOOPS 2.0.x easier
 - displaying admin controll panels in any conventional themes
 - supporting three types of template auto-updating into the DB
-- modifying operations/developments of any versions of core (X2,XCL2.1,X2.2 etc.) efficient
+- modifying operations/developments of any versions of core (X2,XCL2.1,ImpressCMS etc.) efficient
 
 
 [b]DB template auto-updating feature[/b]
@@ -179,7 +179,7 @@ Duplicatable V3¥â¥¸¥å¡¼¥ë¤«¤é¡¢¥é¥¤¥Ö¥é¥ê¤È¤·¤ÆÍøÍÑ¤Ç¤­¤ë·Á¤Ë¤·¤¿¤¿¤á¡¢¹½Â¤¤«¤éÂ
 - X2´ÉÍı²èÌÌ¤Î´ÉÍı¥á¥Ë¥å¡¼ÉôÊ¬¤òÉ½¼¨²şÁ±¤Ç¤­¤Ş¤¹
 - ´ÉÍı²èÌÌ¤òÄÌ¾ï¥Æ¡¼¥Ş¤ÇÉ½¼¨¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ş¤¹¡Ê´ÉÍı²èÌÌ¥Æ¡¼¥Şµ¡Ç½»²¾È¡Ë
 - ¥Æ¥ó¥×¥ì¡¼¥È¼«Æ°¹¹¿·µ¡Ç½¤òÄó¶¡¤·¤Ş¤¹¡Ê¥Æ¥ó¥×¥ì¡¼¥È¼«Æ°¹¹¿·µ¡Ç½»²¾È¡Ë
-- X2, XCL2.1, X2.2Åù¡¢¤¢¤é¤æ¤ë¥³¥¢¤ÎÁàºîÀ­¡¦³«È¯¸úÎ¨¤ò¸ş¾å¤·¤Ş¤¹
+- X2, XCL2.1, ImpressCMSÅù¡¢¤¢¤é¤æ¤ë¥³¥¢¤ÎÁàºîÀ­¡¦³«È¯¸úÎ¨¤ò¸ş¾å¤·¤Ş¤¹
 
 
 ¡ü¥Æ¥ó¥×¥ì¡¼¥È¼«Æ°¹¹¿·µ¡Ç½

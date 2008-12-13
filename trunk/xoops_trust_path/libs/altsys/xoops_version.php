@@ -6,7 +6,7 @@ include_once dirname(__FILE__).'/include/altsys_functions.php' ;
 altsys_include_language_file( 'modinfo' ) ;
 
 $modversion['name'] = _MI_ALTSYS_MODULENAME ;
-$modversion['version'] = '0.61' ;
+$modversion['version'] = '0.70' ;
 $modversion['description'] = _MI_ALTSYS_MODULEDESC ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
@@ -80,7 +80,7 @@ $modversion['config'][] = array(
 	'description'	=> '_MI_ALTSYS_ENABLEFORCECLONEDSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 0 ,
+	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
 

@@ -1,31 +1,33 @@
 <?php
 
+require_once dirname(__FILE__).'/MyBlocksAdmin.class.php' ;
 
-class MyBlocksAdminForXoops22 extends MyBlocksAdmin {
+class MyBlocksAdminForX22 extends MyBlocksAdmin {
 
-function MyBlocksAadminForXoops22()
+function MyBlocksAadminForX22()
 {
+}
+
+
+function construct()
+{
+	parent::construct() ;
+
+	@include_once XOOPS_ROOT_PATH.'/modules/system/language/'.$this->lang.'/admin/blocksadmin.php' ;
 }
 
 
 function &getInstance()
 {
 	static $instance;
-
-	// language file
-	$system_path = XOOPS_ROOT_PATH . '/modules/system' ;
-	$language = $GLOBALS['xoopsConfig']['language'] ;
-	if( ! file_exists("$system_path/language/$language/admin/blocksadmin.php") ) $language = 'english' ;
-	include_once "$system_path/language/$language/admin/blocksadmin.php" ;
-
 	if (!isset($instance)) {
-		$instance = new MyBlocksAdminForXoops22();
+		$instance =& new MyBlocksAdminForX22();
+		$instance->construct() ;
 	}
 	return $instance;
 }
 
-
-
+/*
 function list_blocks( $target_mid , $target_dirname )
 {
 	global $xoopsGTicket ;
@@ -536,7 +538,7 @@ function get_modules_pages_list()
 
 	return $module_list ;
 }
-
+*/
 
 }
 

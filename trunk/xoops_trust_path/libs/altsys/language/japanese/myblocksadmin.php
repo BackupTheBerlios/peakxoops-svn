@@ -46,7 +46,10 @@ define( '_MD_A_MYBLOCKSADMIN_CTYPE_NOSMILE' , '¥«¥¹¥¿¥à¡ÊHTML+BBCODEÊÑ´¹+¼«Æ°¥ê¥
 define( '_MD_A_MYBLOCKSADMIN_CTYPE_SMILE' , '¥«¥¹¥¿¥à¡ÊHTML+BBCODEÊÑ´¹+¼«Æ°¥ê¥ó¥¯+´é¥¢¥¤¥³¥ó¡Ë' ) ;
 define( '_MD_A_MYBLOCKSADMIN_CTYPE_PHP' , '¥«¥¹¥¿¥à¡ÊPHP eval()¡Ë' ) ;
 
+define( '_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK' , 'common/fckeditor¤òÆþ¤ì¤ë¤³¤È¤ÇWYSIWYG¥¨¥Ç¥£¥¿¤òÍøÍÑ¤Ç¤­¤Þ¤¹' ) ;
 
+
+// Group permission phrases
 define('_MD_A_MYBLOCKSADMIN_PERMADDNG', '¥°¥ë¡¼¥×¡¦¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤ÎÄÉ²Ã¤Ë¼ºÇÔ¤·¤Þ¤·¤¿¡Ê¥Ñ¡¼¥ß¥Ã¥·¥ç¥óÌ¾¡§%s ÂÐ¾Ý¥¢¥¤¥Æ¥à¡§%s ÂÐ¾Ý¥°¥ë¡¼¥×¡§%s¡Ë');
 define('_MD_A_MYBLOCKSADMIN_PERMADDOK','¥°¥ë¡¼¥×¡¦¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤òÄÉ²Ã¤·¤Þ¤·¤¿¡Ê¥Ñ¡¼¥ß¥Ã¥·¥ç¥óÌ¾¡§%s ÂÐ¾Ý¥¢¥¤¥Æ¥à¡§%s ÂÐ¾Ý¥°¥ë¡¼¥×¡§%s¡Ë');
 define('_MD_A_MYBLOCKSADMIN_PERMRESETNG','¡Ö%s¡×¥â¥¸¥å¡¼¥ë¤Î¥°¥ë¡¼¥×¡¦¥Ñ¡¼¥ß¥Ã¥·¥ç¥óÀßÄê¤Î½é´ü²½¤Ë¼ºÇÔ¤·¤Þ¤·¤¿');

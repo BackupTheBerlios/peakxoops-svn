@@ -46,6 +46,8 @@ define( '_MD_A_MYBLOCKSADMIN_CTYPE_NOSMILE' , 'Custom (HTML+BBCODE+AutoLink)' ) 
 define( '_MD_A_MYBLOCKSADMIN_CTYPE_SMILE' , 'Custom (HTML+BBCODE+AutoLink+Smiley)' ) ;
 define( '_MD_A_MYBLOCKSADMIN_CTYPE_PHP' , 'Custom (PHP eval())' ) ;
 
+define( '_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK' , 'If you want to use WYSIWYG editor, install common/fckeditor' ) ;
+
 
 // Group permission phrases
 define('_MD_A_MYBLOCKSADMIN_PERMADDNG', 'Could not add %s permission to %s for group %s');

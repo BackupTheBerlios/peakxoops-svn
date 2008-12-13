@@ -1,5 +1,9 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2008-12-13 18:32:09
+define('_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK','If you want to use WYSIWYG editor, install common/fckeditor');
+
 define( '_MD_A_MYBLOCKSADMIN_PERMUPDATED' , 'Berechtigungen erfolgreich übernommen' ) ;
 define( '_MD_A_MYBLOCKSADMIN_BLOCKADMIN' , 'Administration der Blöcke' ) ;
 define( '_MD_A_MYBLOCKSADMIN_NAME' , 'Name' ) ;

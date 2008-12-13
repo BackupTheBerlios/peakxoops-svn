@@ -46,7 +46,10 @@ define( '_MD_A_MYBLOCKSADMIN_CTYPE_NOSMILE' , 'カスタム（HTML+BBCODE変換+
 define( '_MD_A_MYBLOCKSADMIN_CTYPE_SMILE' , 'カスタム（HTML+BBCODE変換+自動リンク+顔アイコン）' ) ;
 define( '_MD_A_MYBLOCKSADMIN_CTYPE_PHP' , 'カスタム（PHP eval()）' ) ;
 
+define( '_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK' , 'common/fckeditorを入れることでWYSIWYGエディタを利用できます' ) ;
 
+
+// Group permission phrases
 define('_MD_A_MYBLOCKSADMIN_PERMADDNG', 'グループ・パーミッションの追加に失敗しました（パーミッション名：%s 対象アイテム：%s 対象グループ：%s）');
 define('_MD_A_MYBLOCKSADMIN_PERMADDOK','グループ・パーミッションを追加しました（パーミッション名：%s 対象アイテム：%s 対象グループ：%s）');
 define('_MD_A_MYBLOCKSADMIN_PERMRESETNG','「%s」モジュールのグループ・パーミッション設定の初期化に失敗しました');

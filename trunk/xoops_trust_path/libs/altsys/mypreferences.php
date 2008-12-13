@@ -42,7 +42,7 @@ if ($op == 'showmod') {
 	$language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
 
 	// load modinfo.php if necessary (judged by a specific constant is defined)
-	if( defined( '_MYMENU_CONSTANT_IN_MODINFO' ) && ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
+	if( ! defined( '_MYMENU_CONSTANT_IN_MODINFO' ) || ! defined( _MYMENU_CONSTANT_IN_MODINFO ) ) {
 		if( file_exists( "$mydirpath/language/$language/modinfo.php" ) ) {
 			// user customized language file
 			include_once "$mydirpath/language/$language/modinfo.php" ;

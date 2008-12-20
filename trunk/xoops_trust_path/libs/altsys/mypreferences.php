@@ -155,7 +155,7 @@ if ($op == 'showmod') {
 	if( $breadcrumbsObj->hasPaths() ) {
 		$breadcrumbsObj->appendPath( XOOPS_URL.'/modules/altsys/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mypreferences' , _PREFERENCES ) ;
 	}
-	echo "<h3 style='text-align:left;'>".$module->getvar('name').' &nbsp; '._PREFERENCES."</h3>\n" ;
+	echo "<h3 style='text-align:"._GLOBAL_LEFT.";'>".$module->getvar('name').' &nbsp; '._PREFERENCES."</h3>\n" ;
 	// GIJ patch end
 
 	$form->display();

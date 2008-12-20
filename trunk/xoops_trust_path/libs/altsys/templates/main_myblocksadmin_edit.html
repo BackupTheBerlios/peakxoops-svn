@@ -1,10 +1,10 @@
 <a href="?mode=admin&amp;lib=altsys&amp;page=myblocksadmin&amp;dirname=<{$target_dirname}>"><{$smarty.const._MD_A_MYBLOCKSADMIN_BLOCKADMIN}></a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;<{$form_title}><br /><br />
 
-<h3 style='text-align:left;'><{$target_mname}></h3>
+<h3 style='text-align:<{$smarty.const._GLOBAL_LEFT}>;'><{$target_mname}></h3>
 
 <style>
 	td.blockposition	{width:135px;white-space:nowrap;}
-	div.blockposition	{float:left;border:solid 1px #333333;padding:1px;}
+	div.blockposition	{float:<{$smarty.const._GLOBAL_LEFT}>;border:solid 1px #333333;padding:1px;}
 	div.unselected		{background-color:#FFFFFF;}
 	div.selected		{background-color:#00FF00;}
 	div.disabled		{background-color:#FF0000;}
@@ -51,7 +51,7 @@
 	<tr>
 		<td class="head"><{$smarty.const._MD_A_MYBLOCKSADMIN_WEIGHT}></td>
 		<td class="even">
-			<input type="text" name="weights[<{$block.bid}>]" value="<{$block.weight}>" size="3" maxlength="5" style="text-align:right;" />
+			<input type="text" name="weights[<{$block.bid}>]" value="<{$block.weight}>" size="3" maxlength="5" style="text-align:<{$smarty.const._GLOBAL_RIGHT}>;" />
 		</td>
 	</tr>
 	<tr>

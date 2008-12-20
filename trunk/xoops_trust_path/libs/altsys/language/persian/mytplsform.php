@@ -6,14 +6,14 @@
 * @copyright	http://www.irxoops.org/ The Persian XOOPS support site
 * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
 * @package	      Translations
-* @since		 0.59
+* @since		 0.70
 * @author		stranger <pesian_stranger@users.sourceforge.net>
-* @author		http://www.irxoops.org/ The Persian XOOPS support site
+* @author		voltan   <djvoltan@gmail.com>
 * @version		$Id$
 */
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-07-09 13:28:56
-define('_MD_A_MYTPLSFORM_TPLSADMIN','Templates');
+define('_MD_A_MYTPLSFORM_TPLSADMIN','‌الگوها');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-12-28 04:46:26
 define('_MD_A_MYTPLSFORM_CREATED','الگویی با موفقیت ایجاد شد');

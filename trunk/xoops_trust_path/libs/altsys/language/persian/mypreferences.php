@@ -6,9 +6,9 @@
 * @copyright	http://www.irxoops.org/ The Persian XOOPS support site
 * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
 * @package	      Translations
-* @since		 0.59
+* @since		 0.70
 * @author		stranger <pesian_stranger@users.sourceforge.net>
-* @author		http://www.irxoops.org/ The Persian XOOPS support site
+* @author		voltan   <djvoltan@gmail.com>
 * @version		$Id$
 */
 define( '_MD_A_MYPREFERENCES_FORMTITLE' , 'دسترسی ماژول‌ها' ) ;

@@ -6,14 +6,14 @@
 * @copyright	http://www.irxoops.org/ The Persian XOOPS support site
 * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
 * @package	      Translations
-* @since		 0.59
+* @since		 0.70
 * @author		stranger <pesian_stranger@users.sourceforge.net>
-* @author		http://www.irxoops.org/ The Persian XOOPS support site
+* @author		voltan   <djvoltan@gmail.com>
 * @version		$Id$
 */
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-12-13 18:32:08
-define('_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK','If you want to use WYSIWYG editor, install common/fckeditor');
+define('_MD_A_MYBLOCKSADMIN_NOTICE4COMMONFCK','اگر شما میخواهید از یک ویرایشگر WYSIWYG استفاده کنید,common/fckeditor را نصب کنید');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-11 17:24:39
 define('_MD_A_MYBLOCKSADMIN_LINK_FORCECLONE','تکثیر اجباری');

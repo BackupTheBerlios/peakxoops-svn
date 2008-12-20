@@ -100,7 +100,7 @@ function renderRadio4BlockPosition( $target_side , $block_data )
 
 	if( $current_side == $target_side ) {
 		$checked = "checked='checked'" ;
-		$divstyle = "selected" ;
+		$divstyle = $target_side == -1 ? "disabled" : "selected" ;
 	} else {
 		$checked = "" ;
 		$divstyle = "unselected" ;

@@ -202,7 +202,7 @@ if( $breadcrumbsObj->hasPaths() ) {
 	$breadcrumbsObj->appendPath( '' , $target_mname ) ;
 }
 
-echo "<h3 style='text-align:left;'>"._MYTPLSADMIN_H3_MODULE." : $target_mname</h3>\n" ;
+echo "<h3 style='text-align:"._GLOBAL_LEFT.";'>"._MYTPLSADMIN_H3_MODULE." : $target_mname</h3>\n" ;
 
 // link to create a new custom template
 if( $target_dirname == '_custom' ) {

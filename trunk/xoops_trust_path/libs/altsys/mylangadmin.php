@@ -206,7 +206,7 @@ $cache_file_name = $langman->getCacheFileName( $target_file , $target_dirname , 
 $cache_file_mtime = file_exists( $cache_file_name ) ? filemtime( $cache_file_name ) : 0 ;
 
 // check core version and generate message to enable D3LanguageManager
-if( altsys_get_core_type() == ALTSYS_CORE_TYPE_XC21L ) {
+if( altsys_get_core_type() == ALTSYS_CORE_TYPE_XCL21 ) {
 	// XoopsCube Legacy without preload
 	if( class_exists( 'AltsysLangMgr_LanguageManager' ) ) {
 		// the preload enabled

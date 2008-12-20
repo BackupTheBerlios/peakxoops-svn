@@ -164,7 +164,7 @@ $mymenu_fake_uri = 'index.php?mode=admin&lib=altsys&page=mytplsadmin&dirname='.$
 // mymenu
 altsys_include_mymenu() ;
 
-echo "<h3 style='text-align:left;'>"._MD_A_MYTPLSFORM_EDIT." : ".htmlspecialchars($tpl['tpl_type'],ENT_QUOTES)." : ".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)." (".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES).")</h3>\n" ;
+echo "<h3 style='text-align:"._GLOBAL_LEFT.";'>"._MD_A_MYTPLSFORM_EDIT." : ".htmlspecialchars($tpl['tpl_type'],ENT_QUOTES)." : ".htmlspecialchars($tpl['tpl_file'],ENT_QUOTES)." (".htmlspecialchars($tpl['tpl_tplset'],ENT_QUOTES).")</h3>\n" ;
 
 
 // diff from file to selected DB template

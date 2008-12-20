@@ -197,7 +197,7 @@ class MyXoopsGroupPermForm extends XoopsForm
 				$ret .= $elements[$i];
 			} elseif (!$elements[$i]->isHidden()) {
 				// group name
-				$ret .= "<tr valign='top' align='left'><td class='head'>".$elements[$i]->getCaption();
+				$ret .= "<tr valign='top' align='"._GLOBAL_LEFT."'><td class='head'>".$elements[$i]->getCaption();
 				// group description
 				if ($elements[$i]->getDescription() != '') {
 					$ret .= '<br /><br /><span style="font-weight: normal;">'.$elements[$i]->getDescription().'</span>';

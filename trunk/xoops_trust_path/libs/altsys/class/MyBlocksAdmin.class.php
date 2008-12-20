@@ -170,6 +170,17 @@ function canClone( $block )
 
 
 // virtual
+// options
+function renderCell4BlockOptions( $block_data )
+{
+	$bid = intval( $block_data['bid'] ) ;
+
+	$block = new XoopsBlock( $bid ) ;
+	return $block->getOptions() ;
+}
+
+
+// virtual
 // link blocks - modules
 function renderCell4BlockModuleLink( $block_data )
 {
@@ -225,7 +236,7 @@ function renderCell4BlockReadGroupPerm( $block_data )
 	// get selected targets
 	if( is_array( @$block_data['bgroup'] ) ) {
 		// bgroup origined from request (preview etc.)
-		$selected_mids = $block_data['bgroup'] ;
+		$selected_gids = $block_data['bgroup'] ;
 	} else {
 		// origined from the table of `group_perm`
 		$result = $this->db->query( "SELECT gperm_groupid FROM ".$this->db->prefix('group_permission')." WHERE gperm_itemid='$bid' AND gperm_name='block_read'" ) ;
@@ -308,7 +319,7 @@ function renderCell4BlockPosition( $block_data )
 				<div class='blockposition $scol0'>
 					<input type='radio' name='sides[$bid]' value='".XOOPS_SIDEBLOCK_LEFT."' class='blockposition' $ssel0 onclick='document.getElementById(\"extra_side_$bid\").value=".XOOPS_SIDEBLOCK_LEFT.";' />
 				</div>
-				<div style='float:left;'>-</div>
+				<div style='float:"._GLOBAL_LEFT.";'>-</div>
 				<div class='blockposition $scol2'>
 					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_LEFT."' class='blockposition' $ssel2 onclick='document.getElementById(\"extra_side_$bid\").value=".XOOPS_CENTERBLOCK_LEFT.";' />
 				</div>
@@ -318,19 +329,19 @@ function renderCell4BlockPosition( $block_data )
 				<div class='blockposition $scol4'>
 					<input type='radio' name='sides[$bid]' value='".XOOPS_CENTERBLOCK_RIGHT."' class='blockposition' $ssel4 onclick='document.getElementById(\"extra_side_$bid\").value=".XOOPS_CENTERBLOCK_RIGHT.";' />
 				</div>
-				<div style='float:left;'>-</div>
+				<div style='float:"._GLOBAL_LEFT.";'>-</div>
 				<div class='blockposition $scol1'>
 					<input type='radio' name='sides[$bid]' value='".XOOPS_SIDEBLOCK_RIGHT."' class='blockposition' $ssel1 onclick='document.getElementById(\"extra_side_$bid\").value=".XOOPS_SIDEBLOCK_RIGHT.";' />
 				</div>
 				<br />
 				<br />
-				<div style='float:left;width:50px;' class='$stextbox'>
+				<div style='float:"._GLOBAL_LEFT.";width:50px;' class='$stextbox'>
 					<input type='text' name='extra_sides[$bid]' value='".$value4extra_side."' style='width:20px;' id='extra_side_$bid' />
 				</div>
 				<div class='blockposition $scoln'>
 					<input type='radio' name='sides[$bid]' value='-1' class='blockposition' $sseln onclick='document.getElementById(\"extra_side_$bid\").value=-1;' />
 				</div>
-				<div style='float:left;'>"._NONE."</div>
+				<div style='float:"._GLOBAL_LEFT.";'>"._NONE."</div>
 	" ;
 }
 
@@ -745,7 +756,6 @@ function form_edit( $bid , $mode = 'edit' )
 		'bcachetime' => intval( $block->getVar('bcachetime') ) ,
 		'side' => intval( $block->getVar('side') ) ,
 		'visible' => intval( $block->getVar('visible') ) ,
-		'cell_options' => $block->getOptions() ,
 		'template' => $block_template ,
 		'template_tplset' => $block_template_tplset ,
 		'options' => $block->getVar('options') ,
@@ -762,6 +772,7 @@ function form_edit( $bid , $mode = 'edit' )
 		'cell_position' => $this->renderCell4BlockPosition( $block_data ) ,
 		'cell_module_link' => $this->renderCell4BlockModuleLink( $block_data ) ,
 		'cell_group_perm' =>  $this->renderCell4BlockReadGroupPerm( $block_data ) ,
+		'cell_options' => $this->renderCell4BlockOptions( $block_data ) ,
 		'content_preview' => $this->previewContent( $block_data ) ,
 	) + $block_data ;
 

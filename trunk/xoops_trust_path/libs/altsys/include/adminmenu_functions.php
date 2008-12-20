@@ -184,7 +184,7 @@ function altsys_adminmenu_hack_ft_noimg_x20()
 	foreach( $mids as $mid ) {
 		$module =& $module_handler->get( $mid ) ;
 		$xoops_admin_menu_ft[$mid] = preg_replace( '/\<img src\=.*$/' , $module->getVar('name').'</a>' , $xoops_admin_menu_ft[$mid] ) ;
-		$xoops_admin_menu_ft[$mid] = '<div style="text-align:left;background-color:#CCC;" title="'.$module->getVar('dirname').'">'.$xoops_admin_menu_ft[$mid].'</div>' ;
+		$xoops_admin_menu_ft[$mid] = '<div style="text-align:'._GLOBAL_LEFT.';background-color:#CCC;" title="'.$module->getVar('dirname').'">'.$xoops_admin_menu_ft[$mid].'</div>' ;
 		$xoops_admin_menu_ml[$mid] = str_replace( ',105);' , ',45);' , $xoops_admin_menu_ml[$mid] ) ;
 	}
 
@@ -244,7 +244,7 @@ function altsys_adminmenu_hack_ft_xcsty_x20()
 		// version number
 		$icon_img .= '<span class="version" style="">' . sprintf( '%.2f' , $module->getVar('version') / 100.0 ) . '</span>' ;
 		$newline = preg_replace( '/ onmouseover.*$/' , '' , $xoops_admin_menu_ft[$mid] ) ;
-		$newline = "\n".'<!-- '.$popup.' --><div id="adminmenu_ft'.$mid.'" style="text-align:left;background-color:#CCC;" title="'.$module->getVar('dirname').'"><a id="adminmenu_ftpoint'.$mid.'" href="javascript:void(0);" onclick="submenuToggle('.$mid.');">+</a> '.$newline.'>'.$module->getVar('name').'</a></div><div id="adminmenu_ftsub'.$mid.'" style="display:none;"><ul>' ;
+		$newline = "\n".'<!-- '.$popup.' --><div id="adminmenu_ft'.$mid.'" style="text-align:'._GLOBAL_LEFT.';background-color:#CCC;" title="'.$module->getVar('dirname').'"><a id="adminmenu_ftpoint'.$mid.'" href="javascript:void(0);" onclick="submenuToggle('.$mid.');">+</a> '.$newline.'>'.$module->getVar('name').'</a></div><div id="adminmenu_ftsub'.$mid.'" style="display:none;"><ul>' ;
 		foreach( $submenuitems as $submenuitem ) {
 			$newline .= '<li>'.$submenuitem.'</li>' ;
 		}

@@ -7,6 +7,7 @@ v0.71 (2008-12-21)
 - added RTL support (use _GLOBAL_LEFT/RIGHT instead of left,right directly)
 - updated language files
 -- persian (thx voltan)
+- fixed _GLOBAL_LEFT is defined as 'right' if _ADM_USE_RTL is not defined 0.71a
 
 v0.70 (2008-12-14) Note: update the module
 - rewritten myblocksadmin fully
@@ -174,6 +175,7 @@ v0.71 (2008-12-21)
 - RTLサポート (leftやrightを直に記述せずに、_GLOBAL_LEFT/RIGHTを使う)
 - 言語定数更新
 -- persian (thx voltan)
+- _ADM_USE_RTLが定義されていない環境で_GLOBAL_LEFTがrightになるバグを修正 0.71a
 
 v0.70 (2008-12-14) ※ 要モジュールアップデート
 - myblocksadminをまるまる書き直した

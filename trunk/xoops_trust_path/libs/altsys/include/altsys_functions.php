@@ -18,8 +18,8 @@ function altsys_set_module_config()
 	}
 
 	// for RTL users
-	@define( '_GLOBAL_LEFT' , @_ADM_USE_RTL ? 'right' : 'left' ) ;
-	@define( '_GLOBAL_RIGHT' , @_ADM_USE_RTL ? 'left' : 'right' ) ;
+	@define( '_GLOBAL_LEFT' , @_ADM_USE_RTL == 1 ? 'right' : 'left' ) ;
+	@define( '_GLOBAL_RIGHT' , @_ADM_USE_RTL == 1 ? 'left' : 'right' ) ;
 }
 
 

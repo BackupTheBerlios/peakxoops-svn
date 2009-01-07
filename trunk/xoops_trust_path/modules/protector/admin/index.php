@@ -137,6 +137,7 @@ uksort( $bad_ips , 'protector_ip_cmp' ) ;
 $bad_ips4disp = '' ;
 foreach( $bad_ips as $bad_ip => $jailed_time ) {
 	$line = $jailed_time ? $bad_ip . ':' . $jailed_time : $bad_ip ;
+	$line = str_replace( ':2147483647' , '' , $line ) ; // remove :0x7fffffff
 	$bad_ips4disp .= htmlspecialchars( $line , ENT_QUOTES ) . "\n" ;
 }
 
@@ -223,7 +224,7 @@ while( list( $lid , $uid , $ip , $agent , $type , $description , $timestamp , $u
 	$description = htmlspecialchars( $description , ENT_QUOTES ) ;
 	$uname = htmlspecialchars( ( $uid ? $uname : _GUESTS ) , ENT_QUOTES ) ;
 
-	// make agent shorten
+	// make agents shorter
 	if( preg_match( '/MSIE\s+([0-9.]+)/' , $agent , $regs ) ) {
 		$agent_short = 'IE ' . $regs[1] ;
 	} else if( stristr( $agent , 'Gecko' ) !== false ) {
@@ -251,6 +252,10 @@ echo "
     <td colspan='8' align='left'>"._AM_LABEL_REMOVE."<input type='button' value='"._AM_BUTTON_REMOVE."' onclick='if(confirm(\""._AM_JS_REMOVECONFIRM."\")){document.MainForm.action.value=\"delete\"; submit();}' /></td>
   </tr>
 </table>
+<div align='right'>
+  $nav_html
+</div>
+<div style='clear:both;'><br /><br /></div>
 <div align='right'>
 "._AM_LABEL_COMPACTLOG."<input type='button' value='"._AM_BUTTON_COMPACTLOG."' onclick='if(confirm(\""._AM_JS_COMPACTLOGCONFIRM."\")){document.MainForm.action.value=\"compactlog\"; submit();}' />
 &nbsp;

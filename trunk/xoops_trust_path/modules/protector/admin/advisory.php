@@ -7,6 +7,7 @@ xoops_cp_header();
 include dirname(__FILE__).'/mymenu.php' ;
 
 // open table for ADVISORY
+echo "<style>dd {margin-left: 32px;}</style>\n" ;
 echo "<br />\n<div style='border: 2px solid #2F5376;padding:8px;width:95%;' class='bg4'>\n" ;
 
 // calculate the relative path between XOOPS_ROOT_PATH and XOOPS_TRUST_PATH
@@ -65,12 +66,12 @@ echo "</dl>\n" ;
 echo "<dl><dt>'XOOPS_DB_PREFIX' : " ;
 $safe = strtolower( XOOPS_DB_PREFIX ) != 'xoops' ;
 if( $safe ) {
-	echo XOOPS_DB_PREFIX." &nbsp; <span style='color:green;font-weight:bold;'>ok</span></dt>\n" ;
+	echo XOOPS_DB_PREFIX." &nbsp; <span style='color:green;font-weight:bold;'>ok</span></dt>\n<dd>" ;
 } else {
 	echo XOOPS_DB_PREFIX." &nbsp; <span style='color:red;font-weight:bold;'>"._AM_ADV_NOTSECURE."</span></dt>\n" ;
-	echo "<dd>"._AM_ADV_DBPREFIX."</dd>" ;
+	echo "<dd>"._AM_ADV_DBPREFIX."<br />\n" ;
 }
-echo "<br /> &nbsp; <a href='index.php?page=prefix_manager'>"._AM_ADV_LINK_TO_PREFIXMAN."</a>" ;
+echo "<a href='index.php?page=prefix_manager'>"._AM_ADV_LINK_TO_PREFIXMAN."</a></dd>" ;
 echo "</dl>\n" ;
 
 

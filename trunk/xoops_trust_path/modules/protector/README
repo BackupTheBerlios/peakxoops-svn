@@ -111,16 +111,6 @@ This plugin is only for sites of japanese, tchinese, schinese, and korean.
 If you want to turn the plugin on, copy the file in filters_disabled into filters_enabled.
 
 
-= CONTRIBUTIONS =
-
-Here is a good documentation for installing/running the latest Protector.
-http://library.fishbreeder.net/xoopsdocs/protector-3-02.pdf (PDF)
-http://library.fishbreeder.net/xoopsdocs/protector-3-02.odt (OpenDocument)
-http://library.fishbreeder.net/xoopsdocs/protector-3-02.doc (Word)
-
-I thank Madfish for this excellent work!
-
-
 = CHANGES =
 
 3.22 (2008/12/03)
@@ -128,6 +118,9 @@ I thank Madfish for this excellent work!
 - added a checker for the privacy of XOOPS_TRUST_PATH into the Advisory
 - added language files
 -- nederlands (thx Cath)
+- updated language files
+-- persian (thx voltan) 3.22a
+- modified page navigation (thx McDonald) 3.22a
 
 3.21 (2008/11/21)
 - added a preferences for bandwidth limitation
@@ -388,6 +381,9 @@ RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹
 - ¥»¥­¥å¥ê¥Æ¥£¥¬¥¤¥É¤ËXOOPS_TRUST_PATH¤¬¥×¥é¥¤¥Ù¡¼¥È¤È¤Ê¤Ã¤Æ¤¤¤ë¤«¤Î¥Á¥§¥Ã¥¯¤òÄÉ²Ã
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
 -- nederlands (thx Cath)
+- ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
+-- persian (thx voltan) 3.22a
+- ¥Ú¡¼¥¸¥Ê¥Ó¤ò²¼¤Ë¤âÉ½¼¨¤¹¤ë¤è¤¦¤Ë¤·¤¿ (thx McDonald) 3.22a
 
 3.21 (2008/11/21)
 - °ìÈÌÀßÄê¤ËÂÓ°èÀ©¸Â¤òÄÉ²Ã

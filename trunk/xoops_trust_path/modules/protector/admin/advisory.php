@@ -88,6 +88,16 @@ if( ! defined( 'PROTECTOR_PRECHECK_INCLUDED' ) ) {
 }
 echo "</dl>\n" ;
 
+// patch to databasefactory.php
+echo "<dl><dt>'databasefactory.php' : " ;
+$db =& Database::getInstance() ;
+if( strtolower( get_class( $db ) ) != 'protectormysqldatabase' ) {
+	echo "<span style='color:red;font-weight:bold;'>"._AM_ADV_DBFACTORYUNPATCHED."</span></dt>\n" ;
+} else {
+	echo _AM_ADV_DBFACTORYPATCHED."<span style='color:green;font-weight:bold;'>ok</span></dt>\n" ;
+}
+echo "</dl>\n" ;
+
 // close table for ADVISORY
 echo "</div><br />\n" ;
 

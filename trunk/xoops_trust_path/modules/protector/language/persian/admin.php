@@ -1,6 +1,11 @@
 <?php
 
 // mymenu
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:53
+define('_AM_ADV_DBFACTORYPATCHED','Your databasefactory is ready for DBLayer Trapping anti-SQL-Injection');
+define('_AM_ADV_DBFACTORYUNPATCHED','Your databasefactory is not ready for DBLayer Trapping anti-SQL-Injection. Some patches are required.');
+
 define('_MD_A_MYMENU_MYTPLSADMIN','');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','دسترسی ها');
 define('_MD_A_MYMENU_MYPREFERENCES','ویژگی ها');

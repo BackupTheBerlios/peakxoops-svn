@@ -16,6 +16,14 @@ var $error = false ;
 var $_doubtful_requests = array() ;
 var $_bigumbrella_doubtfuls = array() ;
 
+var $_dblayertrap_doubtfuls = array() ;
+var $_dblayertrap_doubtful_needles = array(
+	'information_schema' ,
+	'select' ,
+	"'" ,
+	'"' ,
+) ;
+
 var $_logged = false ;
 
 var $_done_badext = false ;
@@ -420,6 +428,45 @@ function deny_by_htaccess( $ip = null )
 	fclose( $fw ) ;
 
 	return true ;
+}
+
+
+function getDblayertrapDoubtfuls()
+{
+	return $this->_dblayertrap_doubtfuls ;
+}
+
+
+function _dblayertrap_check_recursive( $val )
+{
+	if( is_array( $val ) ) {
+		foreach( $val as $subval ) {
+			$this->_dblayertrap_check_recursive( $subval ) ;
+		}
+	} else {
+		if( strlen( $val ) < 10 ) return ;
+		$val = get_magic_quotes_gpc() ? stripslashes( $val ) : $val ;
+		foreach( $this->_dblayertrap_doubtful_needles as $needle ) {
+			if( stristr( $val , $needle ) ) {
+				$this->_dblayertrap_doubtfuls[] = $val ;
+			}
+		}
+	}
+}
+
+
+function dblayertrap_init( $force_override = false )
+{
+	$this->_dblayertrap_doubtfuls = array() ;
+	$this->_dblayertrap_check_recursive( $_GET ) ;
+	$this->_dblayertrap_check_recursive( $_POST ) ;
+	$this->_dblayertrap_check_recursive( $_COOKIE ) ;
+	$this->_dblayertrap_check_recursive( $_SERVER ) ;
+
+	if( ! empty( $this->_dblayertrap_doubtfuls ) || $force_override ) {
+		@define( 'XOOPS_DB_ALTERNATIVE' , 'ProtectorMysqlDatabase' ) ;
+		require_once dirname(dirname(__FILE__)).'/class/ProtectorMysqlDatabase.class.php' ;
+	}
 }
 
 

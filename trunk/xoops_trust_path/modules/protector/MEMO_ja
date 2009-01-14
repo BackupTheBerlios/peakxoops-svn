@@ -223,6 +223,7 @@ precheck ¤Ç¡¢¤³¤ÎÃÍ¤ò¸«¤Æ¡¢md5²½¤µ¤ì¤Æ¤¤¤Ê¤¤¤Ê¤é¡¢¶¯À©Åª¤Ëmd5¥Ï¥Ã¥·¥å¤ò¤È¤Ã¤¿¤â¤
      CONTAMI, UPLOAD
      BruteForce, xmlrpc, CRITERIA,
      misc debug, misc smilies, edituser avatar choose, findusersh
+     DBLayerTrap¤Ë¤è¤ëSQL Injection¸¡½Ð
 -------------------------------- Quiet
 16:  DoS, CRAWLER
 32:  NullByte, ISOCOM, UNION

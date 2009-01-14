@@ -44,6 +44,11 @@ function protector_prepare()
 		}
 	}
 
+	// "DB Layer Trapper"
+	$force_override = strstr( @$_SERVER['REQUEST_URI'] , 'protector/admin/index.php?page=advisory' ) ? true : false ;
+	// $force_override = true ;
+	if( $force_override || ! empty( $conf['enable_dblayertrap'] ) ) $protector->dblayertrap_init( $force_override ) ;
+
 	// "Big Umbrella" subset version
 	if( ! empty( $conf['enable_bigumbrella'] ) ) $protector->bigumbrella_init() ;
 

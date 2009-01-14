@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 3.22 ;
+$modversion['version'] = 3.30 ;
 $modversion['credits'] = "PEAK Corp." ;
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -152,7 +152,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_UNION_ACTIONDSC' ,
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 1 ,
+	'default'		=> 0 ,
 	'options'		=> array( $constpref.'_OPT_NONE' => 0 , $constpref.'_OPT_SAN' => 1 , $constpref.'_OPT_EXIT' => 3 , $constpref.'_OPT_BIPTIME0' => 7 , $constpref.'_OPT_BIP' => 15 )
 ) ;
 $modversion['config'][] = array(
@@ -271,6 +271,15 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'int' ,
 	'default'		=> 1 ,
 	'options'		=> array('xmlrpc'=>1,'xmlrpc + 2.0.9.2 bugs'=>1025,'_NONE'=>0)
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'enable_dblayertrap' ,
+	'title'			=> $constpref.'_DBLAYERTRAP' ,
+	'description'	=> $constpref.'_DBLAYERTRAPDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
 	'name'			=> 'enable_bigumbrella' ,

@@ -101,6 +101,9 @@ define($constpref.'_BIP_EXCEPTDSC','ここで指定されたユーザーから�
 
 define($constpref.'_DISABLES','危険な機能の無効化');
 
+define($constpref.'_DBLAYERTRAP','DBレイヤートラップanti-SQL-Injectionを有効にする');
+define($constpref.'_DBLAYERTRAPDSC','これを有効にすれば、かなり多くのパターンのSQL Injection脆弱性をカバーすることができるでしょう。ただし、利用しているコアシステム側でこの機能に対応している必要があります。');
+
 define($constpref.'_BIGUMBRELLA','「大きな傘」anti-XSSを有効にする');
 define($constpref.'_BIGUMBRELLADSC','これを有効にすれば、かなり多くのパターンのXSS脆弱性をキャンセルすることができるでしょう。ただし、100%ではありません。');
 

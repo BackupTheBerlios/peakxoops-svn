@@ -1,12 +1,16 @@
 <?php
+// Traducción al español por Colossus, www.zonadepruebas.com
 
 // mymenu
 
 
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:52
+define('_AM_ADV_DBFACTORYPATCHED','Your databasefactory is ready for DBLayer Trapping anti-SQL-Injection');
+define('_AM_ADV_DBFACTORYUNPATCHED','Your databasefactory is not ready for DBLayer Trapping anti-SQL-Injection. Some patches are required.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-12-03 11:47:19
-define('_AM_ADV_TRUSTPATHPUBLIC','If you can look an image -NG- or the link returns normal page, your XOOPS_TRUST_PATH is not placed properly. The best place for XOOPS_TRUST_PATH is outside of DocumentRoot. If you cannot do that, you have to put .htaccess (DENY FROM ALL) just under XOOPS_TRUST_PATH as the second best way.');
-define('_AM_ADV_TRUSTPATHPUBLICLINK','Check php files inside TRUST_PATH are private (it must be 404,403 or 500 error');
+define('_AM_ADV_TRUSTPATHPUBLIC','Si puede ver una imagen con el texto -NG- sobre estas líneas, o si el enlace funciona devolviendo un texto de advertencia, el directorio XOOPS_TRUST_PATH no está configurado correctamente. Lo mejor es colocar el directorio XOOPS_TRUST_PATH fuera del DocumentRoot. Si no puede hacerlo, como segunda mejor alternativa debería crearse un fichero .htaccess (DENY FROM ALL) dentro del directorio XOOPS_TRUST_PATH.');
+define('_AM_ADV_TRUSTPATHPUBLICLINK','Comprobar si los ficheros .php dentro de  TRUST_PATH son privados (el enlace debe devolver un error 403, 404 o 500)');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-10-18 05:36:24
 define('_AM_LABEL_COMPACTLOG','Log compacto');
@@ -36,7 +40,7 @@ define( "_AM_TH_BADIPS" , 'IPs malos<br /><br /><span style="font-weight:normal;
 define( "_AM_TH_GROUP1IPS" , 'IPs permitidas para Grupo=1<br /><br /><span style="font-weight:normal;">Escriba cada IP en una línea.<br />192.168. significa 192.168.*<br />Todo en blanco significa que todos las IPs son permitidas.</span>' ) ;
 
 define( "_AM_LABEL_REMOVE" , "Eliminar los registros marcados:" ) ;
-define( "_AM_BUTTON_REMOVE" , "¡Eliminado!" ) ;
+define( "_AM_BUTTON_REMOVE" , "¡Eliminar!" ) ;
 define( "_AM_JS_REMOVECONFIRM" , "¿Está seguro de la eliminación?" ) ;
 define( "_AM_MSG_IPFILESUPDATED" , "Los archivos de IPs fueron actualizados" ) ;
 define( "_AM_MSG_BADIPSCANTOPEN" , "El archivo para IPs malos no puede ser abierto" ) ;

@@ -94,24 +94,65 @@ Note: "XOOPS_TRUST_PATH" for 3.0 instead of "XOOPS_ROOT_PATH" for 2.x
 
 = Using filter-plugin =
 
-You can put a filter-plugin in XOOPS_TRUST_PATH/modules/protector/filters_enabled/
+You can try filter-plugins in XOOPS_TRUST_PATH/modules/protector/filters_disabled/ just by copying them into filters_enabled.
+Of course, you can make filter-plugins as you like because it is easy to create.
 
-There are two plugins in this archive.
+Here is an introduction for filter-plugins in this archive.
 
 - postcommon_post_deny_by_rbl.php
 an anti-SPAM plugin.
 All of Post from IP registered in RBL will be rejected.
 This plugin can slow the performance of Post, especially chat modules.
 
+- postcommon_post_deny_by_httpbl.php
+an anti-SPAM plugin.
+All of Post from IP registered in http:BL will be rejected.
+Before using it, get HTTPBL_KEY from http://www.projecthoneypot.org/ and set it into the filter file.
+define( 'PROTECTOR_HTTPBL_KEY' , '............' ) ;
+
 - postcommon_post_need_multibyte.php
 an anti-SPAM plugin.
 Post without multi-byte characters will be rejected.
 This plugin is only for sites of japanese, tchinese, schinese, and korean.
 
-If you want to turn the plugin on, copy the file in filters_disabled into filters_enabled.
+-postcommon_post_htmlpurify4guest.php
+All post data sent by guests will be purified by HTMLPurifier.
+If you allow guests posting HTML, I strongly recommend you to enable it.
+
+-postcommon_register_insert_js_check.php
+This plugin prevents your site from robot's user registering.
+Required JavaScript working on the vistors browser.
+
+-bruteforce_overrun_message.php
+Specify a message for visitors tried wrong passwords more than the specified times.
+All plugins named *_message.php specifys the message for rejected accesses.
+
+-precommon_bwlimit_errorlog.php
+When band width limitaion works unfortunately, this plugin logs it into Apache's error_log.
+All plugins named *_errorlog.php log some informations into Apaches error_log.
+
+
+= NEW FEATURE SINCE 3.3: DBLayer trapping anti-SQL-Injection
+
+This feature can beat almost malicious SQL Injection attacks if you uses some modules vulnerable to "SQL Injection".
+
+However, you have to patch a file "class/database/databasefactory.php" to enable the feature.
+
+I prepared patches/ folder, and it contains patched databasefactory.php for each cores.
+
+Of course, I welcome if each core teams adpot the patches as HEAD :-)
+
+minahito, marcan, and phppp BEST REGARDS!
 
 
 = CHANGES =
+
+3.30 beta (2009/01/14)
+- added DBLayer trapping anti-SQL-Injection
+- added a filter precommon_bwlimit_errorlog.php
+- added a filter precommon_badip_errorlog.php
+- updated language files
+-- spanish (thx Colossus)
 
 3.22 (2008/12/03)
 - modified the condition the cookie 'deleted' is sent as autologin_uname
@@ -326,7 +367,7 @@ Xoops Protector ¤ò¥¤¥ó¥¹¥È¡¼¥ë¸å¡¢¤ª»È¤¤¤ÎXOOPS¤Î mainfile.php ¤Î°ìÈÖ²¼¤Î¤¢¤¿¤ê¤
 2.34¤«¤é¡¢¼Â¸³Åª¤Ë¡¢.htaccess¤Ë¤è¤ëDoSËÉ¸æ¤È¤¤¤¦¥ª¥×¥·¥ç¥ó¤òÄÉ²Ã¤·¤Þ¤·¤¿¡£¤³¤ì¤òÍøÍÑ¤¹¤ë¾ì¹ç¡¢XOOPS_ROOT_PATH¤Ë¤¢¤ë.htaccess¤ò½ñ¹þ²ÄÇ½¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£Æ³Æþ¤¹¤ëºÝ¤Ë¤Ï¡¢.htaccess¥Õ¥¡¥¤¥ë¤¬½ñ¹þ²ÄÇ½¤Ç¤¢¤ë¡¢¤È¤¤¤¦¥ê¥¹¥¯¤ÈÈæ³Ó¤·¤Æ²¼¤µ¤¤¡£
 
 
-¡üCube 2.1 Legacy¤Ø¤Î¥¤¥ó¥¹¥È¡¼¥ë
+¡üXOOPS Cube Legacy 2.1¤Ø¤Î¥¤¥ó¥¹¥È¡¼¥ë
 
 ÆÃÃÊ°ã¤¤¤Ï¤¢¤ê¤Þ¤»¤ó¡£
 mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤¹¡£
@@ -357,24 +398,67 @@ mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤
 
 ¡ü¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ÎÍøÍÑ
 
-V3¤«¤é¡¢XOOPS_TRUST_PATH/modules/protector/filters_enabled/ ¤Ë¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ò³ÊÇ¼¤¹¤ë¤³¤È¤Ç¡¢ÄÉ²Ã¥Á¥§¥Ã¥¯¤¬¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤ê¤Þ¤·¤¿¡£
+V3¤«¤é¡¢XOOPS_TRUST_PATH/modules/protector/filters_enabled/ ¤Ë¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤ò³ÊÇ¼¤¹¤ë¤³¤È¤Ç¡¢ÄÉ²Ã¥Á¥§¥Ã¥¯¤äÄÉ²Ã¥á¥Ã¥»¡¼¥¸¡¦¥í¥®¥ó¥°¤Ê¤É¤¬¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤ê¤Þ¤·¤¿¡£ºîÀ®¤ä²þÂ¤¤â´ÊÃ±¤Ê¤Ï¤º¤Ç¤¹¡£
 
-¸½¾õ¤ÇÍÑ°Õ¤µ¤ì¤Æ¤¤¤ë¤Î¤Ï¡¢²¼¤Î£²¼ïÎà¤Ç¤¹¡£
+¤³¤Î¥¢¡¼¥«¥¤¥ÖÆâ¤Ë¥Ç¥Õ¥©¥ë¥È¤ÇÍÑ°Õ¤µ¤ì¤Æ¤¤¤ë¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤Î¤¦¤Á°ìÈÌÅª¤Ê¤â¤Î¤ò¾Ò²ð¤·¤Þ¤¹¡£
 
 - postcommon_post_deny_by_rbl.php
 ¥¹¥Ñ¥àÂÐºöÍÑ¡£
 RBL¤òÍøÍÑ¤·¤ÆPOST¤ò¤Ï¤Í¤Þ¤¹¡£
 RBL¤ËÅÐÏ¿¤µ¤ì¤¿IP¤«¤é¤ÎÅê¹Æ¤Ï¤¹¤Ù¤ÆSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£Ìä¤¤¹ç¤ï¤»¤¬Æþ¤ë¤¿¤á¡¢Åê¹Æ»þ¤Î½èÍý¤¬¤ä¤ä½Å¤¯¤Ê¤ë¤«¤â¤·¤ì¤Þ¤»¤ó¡£¡ÊÆÃ¤ËChat¤Ê¤É¤Ç¤Ï±Æ¶Á¤¬¤¢¤ë¤«¤â¡Ë
 
+- postcommon_post_deny_by_httpbl.php
+¥¹¥Ñ¥àÂÐºöÍÑ¡£
+http:BL¤òÍøÍÑ¤·¤ÆPOST¤ò¤Ï¤Í¤Þ¤¹¡£
+ÍøÍÑ¤¹¤ëÁ°¤Ë¡¢¥Õ¥¡¥¤¥ë¤ò¥¨¥Ç¥£¥¿¤Ç³«¤¤¤Æ¡¢
+define( 'PROTECTOR_HTTPBL_KEY' , '............' ) ;
+¤³¤Î¹Ô¤ò½ñ¤­´¹¤¨¤Þ¤¹¡£HTTPBL_KEY¤Ï¡¢http://www.projecthoneypot.org/ ¤«¤é¼èÆÀ¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 -postcommon_post_need_multibyte.php
 ¥¹¥Ñ¥àÂÐºöÍÑ¡£
 Åê¹Æ¤ËÆüËÜ¸ì¤¬´Þ¤Þ¤ì¤Æ¤¤¤ë¤³¤È¤òÍ×µá¤¹¤ë¥×¥é¥°¥¤¥ó¡£
 ÆüËÜ¸ì¤¬£±Ê¸»ú¤â´Þ¤Þ¤ì¤Æ¤¤¤Ê¤¤100byte°Ê¾å¤ÎÊ¸»úÎó¤¬¤¢¤Ã¤¿¤éSPAM¤À¤ÈÈ½Äê¤·¤Þ¤¹¡£
 
+-postcommon_post_htmlpurify4guest.php
+¥²¥¹¥È¤Ë¤è¤ëPOST¥Ç¡¼¥¿¤¹¤Ù¤Æ¤Ë¤Ä¤¤¤Æ¡¢HTMLPurifier¤òÄÌ²á¤µ¤»¤ë¥Õ¥£¥ë¥¿¡¼¤Ç¤¹¡£
+¥²¥¹¥È¤ËHTML¤òµö²Ä¤·¤Æ¤¤¤ë¾ì¹ç¤Ç¤ÏÍ­¸ú¤Ë¤¹¤ë¤³¤È¤ò¶¯¤¯¤ª´«¤á¤·¤Þ¤¹¡£
+
+-postcommon_register_insert_js_check.php
+¥í¥Ü¥Ã¥È¤Ë¤è¤ë¥æ¡¼¥¶ÅÐÏ¿¤òËÉ¤°¥×¥é¥°¥¤¥ó¡£
+ÅÐÏ¿¤·¤è¤¦¤È¤¹¤ë¥æ¡¼¥¶¤Î¥Ö¥é¥¦¥¶¤ÇJavaScript¤¬Æ°ºî¤·¤Æ¤¤¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
+
+-bruteforce_overrun_message.php
+¥Ñ¥¹¥ï¡¼¥É¤ò»ØÄê²ó¿ô°Ê¾å´Ö°ã¤¨¤¿»þ¤Î¥á¥Ã¥»¡¼¥¸¤ò»ØÄê¤·¤Þ¤¹¡£*_message.php ¤È¤¤¤¦¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤Ï¤¤¤º¤ì¤â¡¢¥á¥Ã¥»¡¼¥¸¤ò»ØÄê¤¹¤ë¥¿¥¤¥×¤Î¥Õ¥£¥ë¥¿¡¼¤Ç¤¹¡£
+
+-precommon_bwlimit_errorlog.php
+²áÉé²ÙËÉ»ßµ¡Ç½¤¬Æ¯¤¤¤¿»þ¤Ë¡¢¤½¤Î»Ý¤òApache¤Î¥¨¥é¡¼¥í¥°¤Ëµ­Ï¿¤·¤Þ¤¹¡£
+*_errorlog.php ¤È¤¤¤¦¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤Ï¤¤¤º¤ì¤â¡¢¥¨¥é¡¼¥í¥°¤Ëµ­Ï¿¤¹¤ë¥¿¥¤¥×¤Î¥Õ¥£¥ë¥¿¡¼¤Ç¤¹¡£
+
+
 ¤¤¤º¤ì¤â¡¢XOOPS_TRUST_PATH/modules/protector/filters_disabled/ ¤ËÃÖ¤¤¤Æ¤¢¤ë¤Î¤Ç¡¢É¬Í×¤Ë±þ¤¸¤Æ¡¢filters_enabled ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 
+¡ü3.3¤«¤é¤Î¿·µ¡Ç½: DB¥ì¥¤¥ä¡¼¥È¥é¥Ã¥×anti-SQL-Injection
+
+Protector-3.3°Ê¹ß¡¢¥Ç¡¼¥¿¥Ù¡¼¥¹¥ì¥¤¥ä¡¼¤ò¾è¤Ã¼è¤Ã¤Æ¡¢Æ°Åª¤ÊSQL InjectionÂÐºö¤ò¤¹¤ëµ¡Ç½¤òÄÉ²Ã¤·¤Þ¤·¤¿¡£¤³¤ì¤Ë¤è¤Ã¤Æ¡¢¤Û¤È¤ó¤É¤ÎSQL InjectionÀÈ¼åÀ­¤ÏÌµ³²²½¤Ç¤­¤ëµ¤¤¬¤·¤Þ¤¹¡£¡Ê¤ï¤¶¤È·ê¤ò¶õ¤±¤ë¤Ä¤â¤ê¤Ê¤é¤¤¤¯¤é¤Ç¤â¼ê¤Ï¤¢¤ë¤Î¤Ç¡¢ÊÝ¾Ú¤Ï¤·¤Þ¤»¤ó¡Ë
+
+¤³¤ì¤òÍ­¸ú¤Ë¤¹¤ë¤¿¤á¤Ë¤Ï¡¢¸¶ÍýÅª¤Ë¥Ç¡¼¥¿¥Ù¡¼¥¹¥Õ¥¡¥¯¥È¥ê¥¯¥é¥¹¤Ë¥Ñ¥Ã¥Á¤òÅö¤Æ¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
+
+patches/ ¥Õ¥©¥ë¥À¤Ë¡¢³Æ¥³¥¢ÍÑ¤Î¥Ñ¥Ã¥ÁºÑ¥Ç¡¼¥¿¥Ù¡¼¥¹¥Õ¥¡¥¯¥È¥ê¥¯¥é¥¹¥Õ¥¡¥¤¥ë¤¬ÍÑ°Õ¤µ¤ì¤Æ¤¤¤ë¤Î¤Ç¡¢¤³¤Îµ¡Ç½¤òÍøÍÑ¤·¤¿¤¤¾ì¹ç¤Ë¤Ï¡¢¤³¤ì¤Ç¾å½ñ¤­¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+¤â¤Á¤í¤ó¡¢³Æ¥³¥¢¥Á¡¼¥à¤¬ÀÑ¶ËÅª¤Ë¤³¤Î¥Ñ¥Ã¥Á¤òHEAD¤ËºÎÍÑ¤·¤Æ¤¯¤ì¤ë¤Î¤¬¥Ù¥¹¥È¤À¤È¹Í¤¨¤Æ¤¤¤Þ¤¹¡£¥Ñ¥Ã¥Á¤Ë¤Ä¤¤¤Æ¤â¡¢¤Ê¤ë¤Ù¤¯ºÎÍÑ¤·¤ä¤¹¤¤·Á¤Ë¤·¤¿¤Ä¤â¤ê¤Ç¤¹¡£
+
+minahito¤µ¤ó¡¢marcan¤µ¤ó¡¢phppp¤µ¤ó¡¢¤è¤í¤·¤¯¡ª
+
+
 ¡üÊÑ¹¹ÍúÎò
+
+3.30 beta (2009/01/14)
+- DB¥ì¥¤¥ä¡¼¥È¥é¥Ã¥×anti-SQL-Injection¤ò¼ÂÁõ¤·¤¿
+- ²áÉé²ÙÃæ¤Î¥Õ¥£¥ë¥¿¡¼¤¬¤«¤«¤Ã¤¿¾ì¹ç¤Ë¥¨¥é¡¼¥í¥°¤òÅÇ¤¯¥Õ¥£¥ë¥¿¡¼¤òÄÉ²Ã
+- ÉÔÀµIP¤È¤·¤ÆÃÆ¤«¤ì¤¿¥¢¥¯¥»¥¹¤Ë¤Ä¤¤¤Æ¥¨¥é¡¼¥í¥°¤òÅÇ¤¯¥Õ¥£¥ë¥¿¡¼¤òÄÉ²Ã
+- ¸À¸ì¥Õ¥¡¥¤¥ë¹¹¿·
+-- spanish (thx Colossus)
 
 3.22 (2008/12/03)
 - ºï½üºÑ¥¯¥Ã¥­¡¼¤¬'deleted'¤È¤¤¤¦ÃÍ¤ÇÁ÷¤é¤ì¡¢BruteForce°·¤¤¤È¤Ê¤ë¸½¾Ý¤ËÂÐ±þ

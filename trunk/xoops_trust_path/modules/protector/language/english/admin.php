@@ -51,6 +51,8 @@ define("_AM_ADV_USETRANSSID","Your Session ID will be diplayed in anchor tags et
 define("_AM_ADV_DBPREFIX","This setting invites 'SQL Injections'.<br />Don't forget turning 'Force sanitizing *' on in this module's preferences.");
 define("_AM_ADV_LINK_TO_PREFIXMAN","Go to prefix manager");
 define("_AM_ADV_MAINUNPATCHED","You should edit your mainfile.php like written in README.");
+define("_AM_ADV_DBFACTORYPATCHED","Your databasefactory is ready for DBLayer Trapping anti-SQL-Injection");
+define("_AM_ADV_DBFACTORYUNPATCHED","Your databasefactory is not ready for DBLayer Trapping anti-SQL-Injection. Some patches are required.");
 
 define("_AM_ADV_SUBTITLECHECK","Check if Protector works well");
 define("_AM_ADV_CHECKCONTAMI","Contaminations");

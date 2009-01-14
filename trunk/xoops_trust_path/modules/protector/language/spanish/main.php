@@ -1,5 +1,5 @@
 <?php
-
+// Traducción al español por Colossus, www.zonadepruebas.com
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-21 04:44:30
 define('_MD_PROTECTOR_FMT_JAILINFO','Esta restricción expirará en %s');

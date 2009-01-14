@@ -51,6 +51,8 @@ define("_AM_ADV_USETRANSSID","セッションIDが自動的にリンクに表示される設定となっ
 define("_AM_ADV_DBPREFIX","DB接頭辞がデフォルトのxoopsのままなので、SQL Injectionに弱い状態です<br />「孤立コメントの無害化」など、SQL Injection対策の設定をONにすることをお忘れなく");
 define("_AM_ADV_LINK_TO_PREFIXMAN","PREFIXマネージャへ");
 define("_AM_ADV_MAINUNPATCHED","READMEに記述された通りに、mainfile.php にパッチを当てて下さい");
+define("_AM_ADV_DBFACTORYPATCHED","データベースファクトリは対応済みです");
+define("_AM_ADV_DBFACTORYUNPATCHED","データベースファクトリクラスへのパッチが当たっていないのでDBレイヤートラップanti-SQL-Injectionは効きません");
 
 define("_AM_ADV_SUBTITLECHECK","Protectorの動作チェック");
 define("_AM_ADV_CHECKCONTAMI","変数汚染");

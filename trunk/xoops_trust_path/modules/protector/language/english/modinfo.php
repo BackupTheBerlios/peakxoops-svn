@@ -101,6 +101,9 @@ define($constpref.'_BIP_EXCEPTDSC','A user who belongs to the group specified he
 
 define($constpref.'_DISABLES','Disable dangerous features in XOOPS');
 
+define($constpref.'_DBLAYERTRAP','Enable DB Layer trapping anti-SQL-Injection');
+define($constpref.'_DBLAYERTRAPDSC','Almost SQL Injection attacks will be canceled by this feature. This feature is required a support from databasefactory. You can check it on Security Advisory page.');
+
 define($constpref.'_BIGUMBRELLA','enable anti-XSS (BigUmbrella)');
 define($constpref.'_BIGUMBRELLADSC','This protects you from almost attacks via XSS vulnerabilities. But it is not 100%');
 

@@ -113,7 +113,6 @@ function checkSql( $sql )
 	// NG: select a from b where c=(select ... from)
 	$sql_wo_strings = $this->removeQuotedStrings( $sql ) ;
 	foreach( $this->doubtful_requests as $request ) {
-		var_dump( $sql_wo_strings , trim( $request ) ) ;
 		if( strstr( $sql_wo_strings , trim( $request ) ) ) {
 			$this->injectionFound( $sql ) ;
 		}

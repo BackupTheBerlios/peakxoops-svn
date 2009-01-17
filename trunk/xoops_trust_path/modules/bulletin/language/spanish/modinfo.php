@@ -10,6 +10,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-18 07:28:25
+define($constpref.'_COM_ORDER','Order of comment-integration');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-05-19 05:51:18
 define($constpref.'_CONFIG145','feed RSS into backend.php (only for XCL)');
 define($constpref.'_CONFIG145_D','');

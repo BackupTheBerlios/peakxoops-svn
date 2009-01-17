@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = constant($constpref.'_NAME');
-$modversion['version']     = 2.16; // HD Version
+$modversion['version']     = 2.17; // HD Version
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';
@@ -279,6 +279,16 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> 'listposts_flat' ,
 	'options'		=> array( '_FLAT' => 'listposts_flat' , '_THREADED' => 'listtopics' )
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'comment_order' ,
+	'title'			=> $constpref.'_COM_ORDER' ,
+	'description'	=> '' ,
+	'formtype'		=> 'select' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'desc' ,
+	'options'		=> array( '_OLDESTFIRST' => 'asc' , '_NEWESTFIRST' => 'desc' )
 ) ;
 
 $modversion['config'][] = array(

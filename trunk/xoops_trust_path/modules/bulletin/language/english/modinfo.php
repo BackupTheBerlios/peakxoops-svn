@@ -90,6 +90,7 @@ define($constpref.'_CONFIG19_D', 'Posters can use FCKeditor on XOOPS if he/she i
 define($constpref.'_COM_DIRNAME','dirname of d3forum integrated as the comment system');
 define($constpref.'_COM_FORUM_ID','forum_id of d3forum integrated');
 define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_ORDER','Order of comment-integration');
 define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
 
 // Text for notifications

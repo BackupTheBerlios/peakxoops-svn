@@ -33,6 +33,9 @@ HD-2.14以降では、d3commentプラグイン必須となりました。アーカイブ内のhtml/class/s
 
 =CHANEGLOG=
 
+HD-2.17 (2009-01-18)
+- added comment order (thx naao)
+
 HD-2.16 (2008-09-21)
 - modified storynum selection can be changed just by the template
 - fixed missing mail_template/story_comment.tpl

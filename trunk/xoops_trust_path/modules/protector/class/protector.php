@@ -444,7 +444,7 @@ function _dblayertrap_check_recursive( $val )
 			$this->_dblayertrap_check_recursive( $subval ) ;
 		}
 	} else {
-		if( strlen( $val ) < 10 ) return ;
+		if( strlen( $val ) < 6 ) return ;
 		$val = get_magic_quotes_gpc() ? stripslashes( $val ) : $val ;
 		foreach( $this->_dblayertrap_doubtful_needles as $needle ) {
 			if( stristr( $val , $needle ) ) {

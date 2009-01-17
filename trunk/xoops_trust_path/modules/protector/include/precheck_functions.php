@@ -16,6 +16,7 @@ function protector_prepare()
 	if( @$conf['bwlimit_count'] >= 10 ) {
 		$bwexpire = $protector->get_bwlimit() ;
 		if( $bwexpire > time() ) {
+			header( 'HTTP/1.0 503 Service unavailable' ) ;
 			$protector->call_filter( 'precommon_bwlimit' , 'This site is very crowed now. try later.' ) ;
 		}
 	}

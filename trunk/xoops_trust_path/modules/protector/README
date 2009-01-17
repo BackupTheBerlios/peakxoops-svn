@@ -153,6 +153,7 @@ minahito, marcan, and phppp BEST REGARDS!
 - added a filter precommon_badip_errorlog.php
 - updated language files
 -- spanish (thx Colossus)
+- modified precommon_bwlimit_*.php returns 503 error (thx Colossus) 3.30a
 
 3.22 (2008/12/03)
 - modified the condition the cookie 'deleted' is sent as autologin_uname
@@ -459,6 +460,7 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 - 不正IPとして弾かれたアクセスについてエラーログを吐くフィルターを追加
 - 言語ファイル更新
 -- spanish (thx Colossus)
+- 過負荷対策フィルターについては503エラーを返すようにした (thx Colossus) 3.30a
 
 3.22 (2008/12/03)
 - 削除済クッキーが'deleted'という値で送られ、BruteForce扱いとなる現象に対応

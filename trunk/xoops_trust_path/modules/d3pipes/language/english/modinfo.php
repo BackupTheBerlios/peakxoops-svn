@@ -61,6 +61,7 @@ define($constpref.'_IMAGES_DIRDSC','relative path should be set in the module di
 define($constpref.'_COM_DIRNAME','Comment-integration: dirname of d3forum');
 define($constpref.'_COM_FORUM_ID','Comment-integration: forum ID');
 define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_ORDER','Order of comment-integration');
 define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
 
 }

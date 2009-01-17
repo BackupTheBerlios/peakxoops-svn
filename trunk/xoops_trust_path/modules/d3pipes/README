@@ -51,6 +51,11 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 
 [b]CHANGELOG[/b]
 
+0.66 2009-01-18
+- added a parse joint D3pipesParsePhpbbactivetopics.class.php
+- modified D3pipesBlockPicolist.class.php fetches ef and tags
+- added the order option for comment-integration
+
 0.65 2008-11-18
 - modified Sitemaps feature easy as possible
 - added a joint to merge entries from the other d3pipes (UnionTheotherd3pipes)
@@ -327,6 +332,11 @@ htmlе╒ейеые└─╛▓╝д╦двды sitemap.php дЄ mainfile.php д╚╞▒д╕│м┴╪д╦е│е╘б╝д╖д╞дпд└д╡д
 
 б№╣╣┐╖═·╬Є
 
+0.66 2009-01-18
+- phpbb═╤е╤б╝е╣е╕ечедеєе╚─╔▓├ (д╩д╝длRSS╢╪╗▀д╦д╩д├д╞дддыsf.net┬╨║Ў)
+- picoд╬╞т╔Ї╝ш╞└е╕ечедеєе╚д╟бвefдфtagsдЄ┼╧д╣дшджд╦д╖д┐
+- е│есеєе╚┼¤╣чд╬╔╜╝и╜ч╗╪─ъ─╔▓├
+
 0.65 2008-11-18
 - Sitemaps╡б╟╜дЄ┤╩├▒д╦═°═╤д╟дндыдшджд╦д╖д┐
 - ┬╛д╬d3pipesд╬е╤еде╫дЄ╜╕╠єд╟дндые╕ечедеєе╚д╬┐╖╡м─╔▓├ (UnionTheotherd3pipes)
@@ -335,7 +345,7 @@ htmlе╒ейеые└─╛▓╝д╦двды sitemap.php дЄ mainfile.php д╚╞▒д╕│м┴╪д╦е│е╘б╝д╖д╞дпд└д╡д
 - б╓е╤еде╫╛Ё╩єдЄ╩▌┬╕д╣дыб╫еке╫е╖ечеєдЄ╧в╖ые╕ечедеєе╚д╦─╔▓├д╖д┐
 - ете╕ехб╝еые╚е├е╫дфе╓еэе├епд╦б╓╛х░╠е╤еде╫╠╛дЄ╔╜╝ид╣дыб╫еке╫е╖ечеєдЄ─╔▓├
 - ┬╛д╬d3pipesдлдщ╗¤д├д╞днд┐е╤еде╫д╬dirname╕э╔╜╝идЄ╜д└╡ (thx ume8) 0.65a
-- UTF-8д╪д╬╩╤┤╣е╕ечедеєе╚д╟encoding="UTF-8"дЄ╢п└йд╖д╞ддд╣дыдшджд╦д╖д┐ 0.65a
+- UTF-8д╪д╬╩╤┤╣е╕ечедеєе╚д╟encoding="UTF-8"дЄ╢п└й╗╪─ъд╣дыдшджд╦д╖д┐ 0.65a
 - ║┘длд╩╗╚дд╛б╝ъд╬▓■┴▒ 0.65a
 
 0.64 2008-09-20

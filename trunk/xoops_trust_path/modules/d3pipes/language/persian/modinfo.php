@@ -7,6 +7,10 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-18 07:46:41
+define($constpref.'_COM_ORDER','Order of comment-integration');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-18 04:46:02
 define($constpref.'_INDEXKEEPPIPE','Displays upper pipes as possible in the top of this module');
 

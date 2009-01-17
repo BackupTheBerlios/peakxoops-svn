@@ -35,6 +35,7 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 
 	function reassign( $data )
 	{
+	var_dump( $data ) ;
 		$entries = array() ;
 		foreach( $data['contents'] as $content ) {
 			$entry = array(
@@ -44,6 +45,8 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 				'category' => $this->unhtmlspecialchars( $content['cat_title'] ) ,
 				'description' => $this->unhtmlspecialchars( $content['body'] ) ,
 				'content_encoded' => $this->unhtmlspecialchars( $content['body'] ) ,
+				'ef' => $content['ef'] ,
+				'tags' => $content['tags'] ,
 			) ;
 			$entry['fingerprint'] = $entry['link'] ;
 			$entries[] = $entry ;

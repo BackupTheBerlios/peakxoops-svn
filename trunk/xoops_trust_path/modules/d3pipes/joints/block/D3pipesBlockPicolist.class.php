@@ -35,7 +35,6 @@ class D3pipesBlockPicolist extends D3pipesBlockAbstract {
 
 	function reassign( $data )
 	{
-	var_dump( $data ) ;
 		$entries = array() ;
 		foreach( $data['contents'] as $content ) {
 			$entry = array(

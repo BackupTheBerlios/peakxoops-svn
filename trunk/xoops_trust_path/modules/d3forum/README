@@ -12,7 +12,7 @@ Enjoy D3 World!
 
 (If necessary)
 - set up XOOPS_TRUST_PATH
-- install the latest altsys module
+- install the latest altsys module (0.61 or upper)
 
 - Copy all files into your XOOPS.
 - Install it as usual D3 module. Of course, you can name the directory under modules/ freely.
@@ -25,6 +25,17 @@ jidaikobo -template coding-
 
 
 [b]CHANGES[/b]
+
+0.85 beta (2009-01-19)
+- removed extra trim() handling post_text at post and edit
+- fixed compatibilities among autolink and the end of quotation tag
+- fixed D3commentAbstract triggers empty 'comment' events (thx spaceship)
+- added an option the order of comments
+- modified comment integration class can override can_vote etc.
+- modifeid templates easy to use
+- updated language files
+-- persian (thx stranger)
+-- portuguesebr (thx leco1)
 
 0.84 beta (2008-08-18)
 - fixed the post_id is passed for onUpdate() in comment-integration (thx toychee)
@@ -223,13 +234,24 @@ XOOPS2用に0から設計し直したフォーラムモジュール。
 
 もしまだなら)
 - XOOPS_TRUST_PATH をセットアップする
-- 最新のaltsysモジュールをインストールする
+- 最新のaltsysモジュールをインストールする (0.61以上)
 
 - 利用中のXOOPSにアーカイブを展開してコピーする。この際、Smartyプラグインのコピーを忘れないこと
 - 通常のD3モジュールとしてインストールします。もちろん、ディレクトリ名は自由に決めることが出来ます
 
 
 ●変更履歴
+
+0.85 beta (2009-01-19)
+- 投稿文を勝手に trim() するのを修正した
+- 自動リンクの直後に [ /quote] が来るとおかしくなるのを修正
+- コメント統合基底クラスが空のコメントをトリガーするのを修正 (thx spaceship)
+- コメント表示順をコントロールできるようにした
+- コメント統合クラス側で、can_vote などをコントロールできるようにした
+- 少しでも使いやすいようにテンプレートに管理者用リンクを追加した
+- 言語ファイル更新
+-- persian (thx stranger)
+-- portuguesebr (thx leco1)
 
 0.84 beta (2008-08-18)
 - コメント統合で常にpost_idがonUpdate()に渡るように修正 (thx toychee)

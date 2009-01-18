@@ -95,4 +95,18 @@
 		}
 	}
 
+	// d3comment object
+	if( ! empty( $forum_row['forum_external_link_format'] ) ) $d3com =& d3forum_main_get_comment_object( $mydirname , $forum_row['forum_external_link_format'] ) ;
+	else $d3com = false ;
+
+	// d3comment overridings
+	if( is_object( $d3com ) ) {
+		$can_vote = $d3com->canVote( $topic_row['topic_external_link_id'] , $can_vote , $post_row['post_id'] ) ;
+		$can_post = $d3com->canPost( $topic_row['topic_external_link_id'] , $can_post ) ;
+		$can_reply = $d3com->canReply( $topic_row['topic_external_link_id'] , $can_reply , $post_row['post_id'] ) ;
+		$can_edit = $d3com->canEdit( $topic_row['topic_external_link_id'] , $can_edit , $post_row['post_id'] ) ;
+		$can_delete = $d3com->canDelete( $topic_row['topic_external_link_id'] , $can_delete , $post_row['post_id'] ) ;
+		$need_approve = $d3com->needApprove( $topic_row['topic_external_link_id'] , $need_approve ) ;
+	}
+
 ?>

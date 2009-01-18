@@ -15,11 +15,13 @@
 	</form>
 </div> -->
 
+<{if $plugin_params.order != 'asc'}>
 <!-- begin simple comment form -->
 <{if $forum.can_post && ! $plugin_params.no_form}>
 	<{include file="db:`$mydirname`_inc_post_form_quick.html" h2_title=$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP quick_form_mode="sametopic"}>
 <{/if}>
 <!-- end simple comment form -->
+<{/if}>
 
 <h2 class="head"><{if $plugin_params.h2_comments}><{$plugin_params.h2_comments}><{else}><{$smarty.const._MD_D3FORUM_COMMENTSLIST}><{/if}></h2>
 
@@ -102,4 +104,12 @@
 	<li><img src="<{$mod_imageurl}>/topic_status_marked1.gif" alt="" /> = <{$smarty.const._MD_D3FORUM_ALT_MARKEDYES}></li>
 </ul>
 </div>-->
+
+<{if $plugin_params.order == 'asc'}>
+<!-- begin simple comment form -->
+<{if $forum.can_post && ! $plugin_params.no_form}>
+	<{include file="db:`$mydirname`_inc_post_form_quick.html" h2_title=$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP quick_form_mode="sametopic"}>
+<{/if}>
+<!-- end simple comment form -->
+<{/if}>
 

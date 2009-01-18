@@ -102,7 +102,7 @@ class D3forumTextSanitizer extends MyTextSanitizer
 			'[code]' , 
 			'[/code]' , 
 			'[quote]' , 
-			'[/quote]' , 
+			"\n".'[/quote]' , 
 		) ;
 		return preg_replace( $patterns , $replacements , $text ) ;
 	}

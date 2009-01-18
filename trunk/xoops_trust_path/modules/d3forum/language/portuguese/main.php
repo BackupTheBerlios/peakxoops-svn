@@ -2,6 +2,13 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-19 05:36:17
+define('_MD_D3FORUM_HISTORIES','Histories');
+define('_MD_D3FORUM_LINK_TOPICHISTORIES','Refer histries about this topic');
+define('_MD_D3FORUM_FMT_POSTHITSINFO','%d hits');
+define('_MD_D3FORUM_FMT_POSTDISPLAYSINFO','%d displayed');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-11-16 18:15:36
 define('_MD_D3FORUM_LINK_ALLRSS','RSS over all categories');
 define('_MD_D3FORUM_LINK_CATEGORYRSS','RSS of this category');

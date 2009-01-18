@@ -2,6 +2,7 @@
 
 define('_MD_D3FORUM_ON','投稿日時');
 define('_MD_D3FORUM_LASTMODIFIED','最終変更');
+define('_MD_D3FORUM_HISTORIES','履歴');
 define('_MD_D3FORUM_BY','投稿者');
 define('_MD_D3FORUM_POSTERFROM','居住地');
 define('_MD_D3FORUM_POSTERJOINED','登録日');
@@ -85,6 +86,7 @@ define('_MD_D3FORUM_MARK_TURNON','注目トピックをオンにする');
 define('_MD_D3FORUM_MARK_TURNOFF','注目トピックをオフにする');
 define('_MD_D3FORUM_SOLVED_TURNON','解決済とする');
 define('_MD_D3FORUM_SOLVED_TURNOFF','未解決とする');
+define('_MD_D3FORUM_LINK_TOPICHISTORIES','このトピックの履歴を確認する');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','投稿一覧の最上部です'); //jidaikobo
 define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','投稿一覧の最下部です'); //jidaikobo
 
@@ -93,6 +95,8 @@ define('_MD_D3FORUM_POSTASCOMMENTTOP','新しくコメントをつける');
 define('_MD_D3FORUM_LINK_COMMENTSOURCE','コメント元');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','より詳細なコメント入力フォームへ');
 define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','すべてのコメント一覧へ');
+define('_MD_D3FORUM_FMT_POSTHITSINFO','全%d件');
+define('_MD_D3FORUM_FMT_POSTDISPLAYSINFO','%d件表示');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 define('_MD_D3FORUM_COMMENTSLIST','コメント一覧');
 define('_MD_D3FORUM_COM_TARGETMODULE','対象モジュール');

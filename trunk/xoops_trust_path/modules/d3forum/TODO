@@ -14,6 +14,16 @@
 ------------ここまで0.70---------------
 
 ●現在のTODO（優先度順不同）
+
+コメント投稿を新規トピックとするかどうかのコントローラ
+d3comment への移行推進 (READMEに書かれたd3forum_commentの使い方も書き直す?)
+
+&#027; とかが混ざるとrssがとれない？
+
+main_listcategoriesでxoops_isadminで判断している編集コントローラリンクを、forum.isadminormoodに変更する
+
+ブラウザのクッキーにIDだけ書き込んで既読未読を保存する
+
 post_text_waiting, subject_waiting の実装
 系統表示ビュー（あるpostの直系の親だけを一覧できるビュー）
 d3forum_make_treeinformations( $data )

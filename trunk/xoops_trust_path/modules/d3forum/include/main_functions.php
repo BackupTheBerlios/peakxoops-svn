@@ -104,12 +104,17 @@ function d3forum_get_category_permissions_of_current_user( $mydirname )
 
 
 // check done
-function d3forum_get_users_can_read_forum( $mydirname , $forum_id , $cat_id )
+function d3forum_get_users_can_read_forum( $mydirname , $forum_id , $cat_id = null )
 {
 	$db =& Database::getInstance() ;
 	$forum_id = intval( $forum_id ) ;
 	$forum_uids = array() ;
 	$cat_uids = array() ;
+
+	if( is_null( $cat_id ) ) {
+		// get $cat_id from $forum_id
+		list( $cat_id ) = $db->fetchRow( $db->query( "SELECT `cat_id` FROM ".$db->prefix($mydirname."_forums")." WHERE `forum_id`=$forum_id" ) ) ;
+	}
 
 	$sql = "SELECT `uid` FROM ".$db->prefix($mydirname."_category_access")." WHERE `cat_id`=$cat_id AND `uid` IS NOT NULL" ;
 	$result = $db->query( $sql ) ;
@@ -267,91 +272,12 @@ function d3forum_make_cat_jumpbox_options( $mydirname , $whr4cat , $cat_selected
 }
 
 
-function d3forum_trigger_event( $category , $item_id , $event , $extra_tags=array() , $user_list=array() , $omit_user_id=null )
+function d3forum_trigger_event( $mydirname ,  $category , $item_id , $event , $extra_tags=array() , $user_list=array() , $omit_user_id=null )
 {
-	global $xoopsModule , $xoopsConfig , $mydirname , $mydirpath , $mytrustdirname , $mytrustdirpath ;
+	require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3NotificationHandler.class.php' ;
 
-	$notification_handler =& xoops_gethandler('notification') ;
-
-	$mid = $xoopsModule->getVar('mid') ;
-
-	// language file
-	$language = empty( $xoopsConfig['language'] ) ? 'english' : $xoopsConfig['language'] ;
-	if( file_exists( "$mydirpath/language/$language/mail_template/" ) ) {
-		// user customized language file
-		$mail_template_dir = "$mydirpath/language/$language/mail_template/" ;
-	} else if( file_exists( "$mytrustdirpath/language/$language/mail_template/" ) ) {
-		// default language file
-		$mail_template_dir = "$mytrustdirpath/language/$language/mail_template/";
-	} else {
-		// fallback english
-		$mail_template_dir = "$mytrustdirpath/language/english/mail_template/";
-	}
-
-	// Check if event is enabled
-	$config_handler =& xoops_gethandler('config');
-	$mod_config =& $config_handler->getConfigsByCat(0,$mid);
-	if (empty($mod_config['notification_enabled'])) {
-		return false;
-	}
-	$category_info =& notificationCategoryInfo ($category, $mid);
-	$event_info =& notificationEventInfo ($category, $event, $mid);
-	if (!in_array(notificationGenerateConfig($category_info,$event_info,'option_name'),$mod_config['notification_events']) && empty($event_info['invisible'])) {
-		return false;
-	}
-
-	if (!isset($omit_user_id)) {
-		global $xoopsUser;
-		if (!empty($xoopsUser)) {
-			$omit_user_id = $xoopsUser->getVar('uid');
-		} else {
-			$omit_user_id = 0;
-		}
-	}
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('not_modid', intval($mid)));
-	$criteria->add(new Criteria('not_category', $category));
-	$criteria->add(new Criteria('not_itemid', intval($item_id)));
-	$criteria->add(new Criteria('not_event', $event));
-	$mode_criteria = new CriteriaCompo();
-	$mode_criteria->add (new Criteria('not_mode', XOOPS_NOTIFICATION_MODE_SENDALWAYS), 'OR');
-	$mode_criteria->add (new Criteria('not_mode', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE), 'OR');
-	$mode_criteria->add (new Criteria('not_mode', XOOPS_NOTIFICATION_MODE_SENDONCETHENWAIT), 'OR');
-	$criteria->add($mode_criteria);
-	if (!empty($user_list)) {
-		$user_criteria = new CriteriaCompo();
-		foreach ($user_list as $user) {
-			$user_criteria->add (new Criteria('not_uid', $user), 'OR');
-		}
-		$criteria->add($user_criteria);
-	}
-	$notifications =& $notification_handler->getObjects($criteria);
-	if (empty($notifications)) {
-		return;
-	}
-
-	// Add some tag substitutions here
-	$tags = array();
-	// {X_ITEM_NAME} {X_ITEM_URL} {X_ITEM_TYPE} from lookup_func are disabled
-	$tags['X_MODULE'] = $xoopsModule->getVar('name','n');
-	$tags['X_MODULE_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/';
-	$tags['X_NOTIFY_CATEGORY'] = $category;
-	$tags['X_NOTIFY_EVENT'] = $event;
-
-	$template = $event_info['mail_template'] . '.tpl';
-	$subject = $event_info['mail_subject'];
-
-	foreach ($notifications as $notification) {
-		if (empty($omit_user_id) || $notification->getVar('not_uid') != $omit_user_id) {
-			// user-specific tags
-			//$tags['X_UNSUBSCRIBE_URL'] = 'TODO';
-			// TODO: don't show unsubscribe link if it is 'one-time' ??
-			$tags['X_UNSUBSCRIBE_URL'] = XOOPS_URL . '/notifications.php';
-			$tags = array_merge ($tags, $extra_tags);
-
-			$notification->notifyUser($mail_template_dir, $template, $subject, $tags);
-		}
-	}
+	$not_handler =& D3NotificationHandler::getInstance() ;
+	$not_handler->triggerEvent( $mydirname , 'd3forum' , $category , $item_id , $event , $extra_tags , $user_list , $omit_user_id ) ;
 }
 
 
@@ -408,7 +334,7 @@ function &d3forum_main_get_comment_object( $mydirname , $external_link_format )
 		return $obj ;
 	}
 
-	$obj =& new $classname( $mydirname , $external_dirname ) ;
+	$obj =& new $classname( $mydirname , $external_dirname , $external_trustdirname ) ;
 	return $obj ;
 }
 

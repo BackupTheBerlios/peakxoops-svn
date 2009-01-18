@@ -1,5 +1,12 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-19 05:36:18
+define('_MD_D3FORUM_HISTORIES','Histories');
+define('_MD_D3FORUM_LINK_TOPICHISTORIES','Refer histries about this topic');
+define('_MD_D3FORUM_FMT_POSTHITSINFO','%d hits');
+define('_MD_D3FORUM_FMT_POSTDISPLAYSINFO','%d displayed');
+
 define('_MD_D3FORUM_ON','Geplaatst op');
 define('_MD_D3FORUM_LASTMODIFIED','Laatst gewijzigd');
 define('_MD_D3FORUM_BY','Geplaatst door');

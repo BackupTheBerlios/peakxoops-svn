@@ -4,6 +4,13 @@
 // PORTAL X-TRAD - http://www.x-trad.org/
 // traduzido por artsgeral
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-19 05:36:17
+define('_MD_D3FORUM_HISTORIES','Histories');
+define('_MD_D3FORUM_LINK_TOPICHISTORIES','Refer histries about this topic');
+define('_MD_D3FORUM_FMT_POSTHITSINFO','%d hits');
+define('_MD_D3FORUM_FMT_POSTDISPLAYSINFO','%d displayed');
+
 define('_MD_D3FORUM_ON','Data da mensagem');
 define('_MD_D3FORUM_LASTMODIFIED','Última modificação');
 define('_MD_D3FORUM_BY','Postado por');

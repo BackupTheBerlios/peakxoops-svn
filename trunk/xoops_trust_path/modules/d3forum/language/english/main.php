@@ -2,6 +2,7 @@
 
 define('_MD_D3FORUM_ON','Posted on');
 define('_MD_D3FORUM_LASTMODIFIED','Last modified');
+define('_MD_D3FORUM_HISTORIES','Histories');
 define('_MD_D3FORUM_BY','Posted by');
 define('_MD_D3FORUM_POSTERFROM','From');
 define('_MD_D3FORUM_POSTERJOINED','Joined');
@@ -85,6 +86,7 @@ define('_MD_D3FORUM_MARK_TURNON','Mark this topic');
 define('_MD_D3FORUM_MARK_TURNOFF','Unmark this topic');
 define('_MD_D3FORUM_SOLVED_TURNON','Turn solved on');
 define('_MD_D3FORUM_SOLVED_TURNOFF','Turn solved off');
+define('_MD_D3FORUM_LINK_TOPICHISTORIES','Refer histries about this topic');
 define('_MD_D3FORUM_A_TOPOFTHETOPIC','Top of the posts'); //jidaikobo
 define('_MD_D3FORUM_A_BOTTOMOFTHETOPIC','Bottom of the posts'); //jidaikobo
 
@@ -93,6 +95,8 @@ define('_MD_D3FORUM_POSTASCOMMENTTOP','Post a new comment');
 define('_MD_D3FORUM_LINK_COMMENTSOURCE','target of the comment');
 define('_MD_D3FORUM_LINK_RICHERCOMMENTFORM','Go to richer form');
 define('_MD_D3FORUM_LINK_LISTALLCOMMENTS','View more comments...');
+define('_MD_D3FORUM_FMT_POSTHITSINFO','%d hits');
+define('_MD_D3FORUM_FMT_POSTDISPLAYSINFO','%d displayed');
 define('_MD_D3FORUM_FMT_COMMENTSUBJECT','Re: %s');
 define('_MD_D3FORUM_COMMENTSLIST','Comments list');
 define('_MD_D3FORUM_COM_TARGETMODULE','Target');

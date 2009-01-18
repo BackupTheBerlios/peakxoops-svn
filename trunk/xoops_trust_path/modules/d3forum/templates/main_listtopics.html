@@ -39,14 +39,14 @@
 
 	<{if $forum.isadminormod}>
 	<!-- edit forum -->
-		<li><a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}></a></li>
+		<li><a href="<{$mod_url}>/index.php?page=forummanager&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMMANAGER}> <img src="<{$mod_imageurl}>/icon_pencil22.gif" alt="<{$smarty.const._EDIT}>" width="16" height="16" /></a></li>
 	<{/if}>
 	<{if $xoops_isadmin}>
 		<li><a href="<{$mod_url}>/admin/index.php?page=forum_access&amp;forum_id=<{$forum.id}>"><{$smarty.const._MD_D3FORUM_LINK_FORUMACCESS}></a></li>
 	<{/if}>
 
 	<!-- rss -->
-	<li><a href="<{$mod_url}>/index.php?page=rss&amp;forum_id=<{$forum.id}>&amp;odr=1"><{$smarty.const._MD_D3FORUM_LINK_FORUMRSS}></a></li>
+	<li><a href="<{$mod_url}>/index.php?page=rss&amp;forum_id=<{$forum.id}>&amp;odr=1"><{$smarty.const._MD_D3FORUM_LINK_FORUMRSS}> <img src="<{$mod_imageurl}>/icon_rss.gif" alt="RSS" width="16" height="16" /></a></li>
 </ul>
 
 <h2 class="d3f_head"><{$forum.title}></h2>

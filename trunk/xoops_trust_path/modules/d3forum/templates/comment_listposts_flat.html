@@ -1,8 +1,10 @@
+<{if $plugin_params.order != 'asc'}>
 <!-- begin simple comment form -->
 <{if $forum.can_post && ! $plugin_params.no_form}>
 	<{include file="db:`$mydirname`_inc_post_form_quick.html" h2_title=$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP quick_form_mode="sametopic"}>
 <{/if}>
 <!-- end simple comment form -->
+<{/if}>
 
 <h2 class="head"><{if $plugin_params.h2_comments}><{$plugin_params.h2_comments}><{else}><{$smarty.const._MD_D3FORUM_COMMENTSLIST}><{/if}></h2>
 
@@ -50,7 +52,18 @@
 </div>
 <!-- bottom of posts -->
 
-<div class="d3f_link"><a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>&amp;external_link_id=<{$external_link_id|escape:"url"}>"><{$smarty.const._MD_D3FORUM_LINK_LISTALLCOMMENTS}></a></div>
+<div class="d3f_link">
+<{$posts|@count|string_format:$smarty.const._MD_D3FORUM_FMT_POSTDISPLAYSINFO}>
+(<{$post_hits|string_format:$smarty.const._MD_D3FORUM_FMT_POSTHITSINFO}>)
+<a href="<{$mod_url}>/index.php?forum_id=<{$forum.id}>&amp;external_link_id=<{$external_link_id|escape:"url"}>"><{$smarty.const._MD_D3FORUM_LINK_LISTALLCOMMENTS}></a></div>
 
 <{if $pagenav}><div class="d3f_pagenav"><{$pagenav}></div><{/if}>
+
+<{if $plugin_params.order == 'asc'}>
+<!-- begin simple comment form -->
+<{if $forum.can_post && ! $plugin_params.no_form}>
+	<{include file="db:`$mydirname`_inc_post_form_quick.html" h2_title=$smarty.const._MD_D3FORUM_POSTASCOMMENTTOP quick_form_mode="sametopic"}>
+<{/if}>
+<!-- end simple comment form -->
+<{/if}>
 

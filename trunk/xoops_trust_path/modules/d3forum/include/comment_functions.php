@@ -170,6 +170,9 @@ function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
 		$db->queryF( "UPDATE ".$db->prefix($mydirname."_forums")." SET forum_external_link_format='".addslashes($external_dirname.'::'.$params['class'].'::'.$external_trustdirname)."' WHERE forum_id=$forum_id" ) ;
 	}
 
+	// check $params
+	$params['posts_num'] = @$params['posts_num'] > 0 ? intval( $params['posts_num'] ) : 10 ;
+
 	// INVISIBLE
 	$whr_invisible = $isadminormod ? '1' : '! t.topic_invisible' ;
 
@@ -182,6 +185,7 @@ function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
 		$sql = "SELECT COUNT(t.topic_id) FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$db->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$db->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND topic_external_link_id='".addslashes($external_link_id)."'" ;
 		if( ! $trs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 		list( $topic_hits ) = $db->fetchRow( $trs ) ;
+		$post_hits = 0 ;
 		
 		// pagenav
 		/*
@@ -191,9 +195,11 @@ function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
 			$pagenav = $pagenav_obj->renderNav() ;
 		}
 		*/
-		
+
+		$sql_order = @$params['order'] == 'asc' ? 'ASC' : 'DESC' ;
+
 		// main query
-		$sql = "SELECT t.*, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$db->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$db->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND topic_external_link_id='".addslashes($external_link_id)."' ORDER BY t.topic_last_post_time DESC" ;
+		$sql = "SELECT t.*, lp.subject AS lp_subject, lp.icon AS lp_icon, lp.number_entity AS lp_number_entity, lp.special_entity AS lp_special_entity, fp.subject AS fp_subject, fp.icon AS fp_icon, fp.number_entity AS fp_number_entity, fp.special_entity AS fp_special_entity, u2t.u2t_time, u2t.u2t_marked, u2t.u2t_rsv FROM ".$db->prefix($mydirname."_topics")." t LEFT JOIN ".$db->prefix($mydirname."_users2topics")." u2t ON t.topic_id=u2t.topic_id AND u2t.uid=$uid LEFT JOIN ".$db->prefix($mydirname."_posts")." lp ON lp.post_id=t.topic_last_post_id LEFT JOIN ".$db->prefix($mydirname."_posts")." fp ON fp.post_id=t.topic_first_post_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND topic_external_link_id='".addslashes($external_link_id)."' ORDER BY t.topic_last_post_time $sql_order" ;
 		if( ! $trs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 	
 		// topics loop
@@ -247,9 +253,16 @@ function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
 	/************ DEFAULT VIEW (listposts_flat) ************/
 	} else {
 		$this_template = 'db:'.$mydirname.'_comment_listposts_flat.html' ;
-		$posts_num = @$params['posts_num'] > 0 ? intval( $params['posts_num'] ) : 10 ;
 		$posts = array() ;
-		$sql = "SELECT p.*,t.topic_locked FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON p.topic_id=t.topic_id WHERE t.forum_id=$forum_id AND ($whr_invisible) AND t.topic_external_link_id='".addslashes($external_link_id)."' ORDER BY post_time DESC LIMIT $posts_num" ;
+		$sql_whr = "t.forum_id=$forum_id AND ($whr_invisible) AND t.topic_external_link_id='".addslashes($external_link_id)."'" ;
+
+		// count post
+		$sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON p.topic_id=t.topic_id WHERE $sql_whr" ;
+		if( ! $nrs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+		list( $post_hits ) = $db->fetchRow( $nrs ) ;
+		$topic_hits = 0 ;
+
+		$sql = "SELECT p.*,t.topic_locked FROM ".$db->prefix($mydirname."_posts")." p LEFT JOIN ".$db->prefix($mydirname."_topics")." t ON p.topic_id=t.topic_id WHERE $sql_whr ORDER BY post_time DESC LIMIT {$params['posts_num']}" ;
 		if( ! $prs = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 		while( $post_row = $db->fetchArray( $prs ) ) {
 		
@@ -308,8 +321,11 @@ function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
 			) ;
 		}
 
+		if( @$params['order'] == 'asc' ) {
+			$posts = array_reverse( $posts ) ; // thx naao
+		}
+
 		$topics = array() ;
-		$topics_hits = 0 ;
 	}
 
 	// form elements or javascripts for anti-SPAM
@@ -337,6 +353,7 @@ function d3forum_render_comments( $mydirname , $forum_id , $params , &$smarty )
 			'forum' => $forum4assign ,
 			'topics' => $topics ,
 			'topic_hits' => intval( @$topic_hits ) ,
+			'post_hits' => intval( @$post_hits ) ,
 			'posts' => $posts ,
 			'odr_options' => @$odr_options ,
 			'solved_options' => @$solved_options ,

@@ -1,6 +1,8 @@
 <?php
 
 require_once XOOPS_TRUST_PATH.'/modules/d3forum/include/comment_functions.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/d3forum/include/main_functions.php' ;
+require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3NotificationHandler.class.php' ;
 
 // abstract class for d3forum comment integration
 class D3commentAbstract {
@@ -77,6 +79,20 @@ function getView( $params )
 		return $this->mod_config['comment_view'] ;
 	} else {
 		return 'listposts' ;
+	}
+}
+
+
+// get view from $params or config
+// override it if necessary
+function getOrder( $params )
+{
+	if( ! empty( $params['order'] ) ) {
+		return strtolower( $params['order'] ) ;
+	} else if( ! empty( $this->mod_config['comment_order'] ) ) {
+		return $this->mod_config['comment_order'] ;
+	} else {
+		return 'desc' ;
 	}
 }
 
@@ -158,6 +174,7 @@ function restructParams( $params )
 	return array(
 		'class' => $params['class'] ,
 		'view' => $this->getView( $params ) ,
+		'order' => $this->getOrder( $params ) ,
 		'posts_num' => $this->getPostsNum( $params ) ,
 		'subject_raw' => $this->getSubjectRaw( $params ) ,
 		'forum_id' => $this->getForumId( $params ) ,
@@ -187,25 +204,80 @@ function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
 }
 
 
+// can vote
+// override it if necessary
+function canVote( $link_id , $original_flag , $post_id )
+{
+	return true ;
+	return $original_flag ;
+}
+
+
+// can post
+// override it if necessary
+function canPost( $link_id , $original_flag )
+{
+	return $original_flag ;
+}
+
+
+// can reply
+// override it if necessary
+function canReply( $link_id , $original_flag , $post_id )
+{
+	return $original_flag ;
+}
+
+
+// can edit
+// override it if necessary
+function canEdit( $link_id , $original_flag , $post_id )
+{
+	return $original_flag ;
+}
+
+
+// can delete
+// override it if necessary
+function canDelete( $link_id , $original_flag , $post_id )
+{
+	return $original_flag ;
+}
+
+
+// can delete
+// override it if necessary
+function needApprove( $link_id , $original_flag )
+{
+	return $original_flag ;
+}
+
+
 // processing xoops notification for 'comment'
 // override it if necessary
 function processCommentNotifications( $mode , $link_id , $forum_id , $topic_id , $post_id )
 {
-	require_once XOOPS_ROOT_PATH . '/include/notification_functions.php' ;
-
 	// non-module integration returns false quickly
 	if( ! is_object( $this->module ) ) return false ;
 
 	$not_module =& $this->module ;
 	$not_modid = $this->module->getVar('mid') ;
 	$not_catinfo =& notificationCommentCategoryInfo( $not_modid ) ;
+
+	// module without 'comment' notification
+	if( empty( $not_catinfo ) ) return false ;
+
 	$not_category = $not_catinfo['name'] ;
 	$not_itemid = $link_id ;
 	$not_event = 'comment' ; // 'comment_submit'?
 
 	$comment_tags = array( 'X_COMMENT_URL' => XOOPS_URL.'/modules/'.$this->d3forum_dirname.'/index.php?post_id='.intval($post_id) ) ;
-	$notification_handler =& xoops_gethandler( 'notification' ) ;
-	$notification_handler->triggerEvent( $not_category , $not_itemid , $not_event , $comment_tags , false , $not_modid ) ;
+
+	$users2notify = d3forum_get_users_can_read_forum( $this->d3forum_dirname , $forum_id ) ;
+	if( empty( $users2notify ) ) $users2notify = array( 0 ) ;
+
+	$not_handler =& D3NotificationHandler::getInstance() ;
+	$not_handler->triggerEvent( $this->mydirname , $this->mytrustdirname , $not_category , $not_itemid , $not_event , $comment_tags , $users2notify ) ;
 }
 
 

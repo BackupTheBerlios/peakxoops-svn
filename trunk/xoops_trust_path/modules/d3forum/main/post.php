@@ -115,7 +115,7 @@ foreach( $requests_int as $key ) {
 }
 // text
 foreach( $requests_text as $key ) {
-	$$key = trim( $myts->stripSlashesGPC( @$_POST[ $key ] ) ) ;
+	$$key = $myts->stripSlashesGPC( @$_POST[ $key ] ) ;
 }
 
 // Validations after FETCH
@@ -351,22 +351,22 @@ if( ! empty( $_POST['contents_preview'] ) ) {
 	if( ! empty( $need_notify ) ) {
 		if( $mode == 'newtopic' ) {
 			// Notify for newtopic
-			d3forum_trigger_event( 'global' , 0 , 'newtopic' , $tags , $users2notify ) ;
-			d3forum_trigger_event( 'category' , $cat_id , 'newtopic' , $tags , $users2notify ) ;
-			d3forum_trigger_event( 'forum' , $forum_id , 'newtopic' , $tags , $users2notify ) ;
+			d3forum_trigger_event( $mydirname , 'global' , 0 , 'newtopic' , $tags , $users2notify ) ;
+			d3forum_trigger_event( $mydirname ,  'category' , $cat_id , 'newtopic' , $tags , $users2notify ) ;
+			d3forum_trigger_event( $mydirname ,  'forum' , $forum_id , 'newtopic' , $tags , $users2notify ) ;
 		}
 		// Notify for newpost
-		d3forum_trigger_event( 'global' , 0 , 'newpost' , $tags , $users2notify ) ;
-		d3forum_trigger_event( 'category' , $cat_id , 'newpost' , $tags , $users2notify ) ;
-		d3forum_trigger_event( 'forum' , $forum_id , 'newpost' , $tags , $users2notify ) ;
-		d3forum_trigger_event( 'topic' , $topic_id , 'newpost' , $tags , $users2notify ) ;
+		d3forum_trigger_event( $mydirname ,  'global' , 0 , 'newpost' , $tags , $users2notify ) ;
+		d3forum_trigger_event( $mydirname ,  'category' , $cat_id , 'newpost' , $tags , $users2notify ) ;
+		d3forum_trigger_event( $mydirname ,  'forum' , $forum_id , 'newpost' , $tags , $users2notify ) ;
+		d3forum_trigger_event( $mydirname ,  'topic' , $topic_id , 'newpost' , $tags , $users2notify ) ;
 		// special event (the meaning of "ALL&FULL POSTS" contains self-post)
-		d3forum_trigger_event( 'global' , 0 , 'newpostfull' , $tags , $users2notify , 0 ) ;
+		d3forum_trigger_event( $mydirname ,  'global' , 0 , 'newpostfull' , $tags , $users2notify , 0 ) ;
 	}
 
 	if( ! empty( $need_admin_notify ) ) {
 		// Notify for new waiting approval
-		d3forum_trigger_event( 'global' , 0 , 'waiting' , $tags , $users2notify ) ;
+		d3forum_trigger_event( $mydirname ,  'global' , 0 , 'waiting' , $tags , $users2notify ) ;
 	}
 
 	// If user checked notification box, subscribe them to the

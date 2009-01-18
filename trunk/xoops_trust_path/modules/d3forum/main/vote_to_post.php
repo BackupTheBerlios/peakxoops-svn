@@ -20,14 +20,17 @@ if( ! include dirname(dirname(__FILE__)).'/include/process_this_forum.inc.php' )
 // get&check this category ($category4assign, $category_row), override options
 if( ! include dirname(dirname(__FILE__)).'/include/process_this_category.inc.php' ) die( _MD_D3FORUM_ERR_READCATEGORY ) ;
 
+// get $post4assign
+include dirname(dirname(__FILE__)).'/include/process_this_post.inc.php' ;
+
 // check if "use_vote" is on
-if( empty( $xoopsModuleConfig['use_vote'] ) ) {
-	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_MSG_VOTEDISABLED ) ;
+if( empty( $post4assign['can_vote'] ) ) {
+	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_MSG_VOTEPERM ) ;
 	exit ;
 }
 
-// special check for vote_to_post
-if( ! $uid && empty( $xoopsModuleConfig['guest_vote_interval'] ) ) {
+// avoid crawlers
+if( preg_match( '/(msnbot|Googlebot|Yahoo! Slurp)/i' , @$_SERVER['HTTP_USER_AGENT'] ) ) {
 	redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_ERR_VOTEPERM ) ;
 	exit ;
 }
@@ -54,18 +57,14 @@ $sql = "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_post_votes")." WHERE pos
 if( ! $result = $db->query( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 list( $count ) = $db->fetchRow( $result ) ;
 if( $count > 0 ) {
-	if( $uid > 0 ) {
-		// delete previous post
-		$sql = "DELETE FROM ".$db->prefix($mydirname."_post_votes")." WHERE post_id=$post_id AND uid=$uid" ;
-		if( ! $db->queryF( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
-	} else {
-		redirect_header( XOOPS_URL."/modules/$mydirname/index.php?post_id=$post_id" , 0 , _MD_D3FORUM_MSG_VOTEDOUBLE ) ;
-		exit ;
-	}
+	// delete previous post
+	$sql = "DELETE FROM ".$db->prefix($mydirname."_post_votes")." WHERE post_id=$post_id AND ($useridentity4select) LIMIT 1" ;
+	if( ! $db->queryF( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 }
 
 // transaction stage
-$sql = "INSERT INTO ".$db->prefix($mydirname."_post_votes")." SET post_id=$post_id, vote_point=$point4vote, vote_time=UNIX_TIMESTAMP(), $useridentity4insert" ;if( ! $db->queryF( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
+$sql = "INSERT INTO ".$db->prefix($mydirname."_post_votes")." SET post_id=$post_id, vote_point=$point4vote, vote_time=UNIX_TIMESTAMP(), $useridentity4insert" ;
+if( ! $db->queryF( $sql ) ) die( _MD_D3FORUM_ERR_SQL.__LINE__ ) ;
 
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 d3forum_sync_post_votes( $mydirname , $post_id ) ;

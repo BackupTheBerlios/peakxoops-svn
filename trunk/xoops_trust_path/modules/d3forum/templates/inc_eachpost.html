@@ -52,7 +52,7 @@
 		<{$smarty.const._MD_D3FORUM_NOCHILDPOSTS}>
 	<{/if}> |
 	
-	<{$smarty.const._MD_D3FORUM_ON}> <{$post.post_time_formatted}> <{if $post.post_time < $post.modified_time}> | <span title="<{$post.modified_time_formatted}>"><{$smarty.const._MD_D3FORUM_LASTMODIFIED}></span><{/if}>
+	<{$smarty.const._MD_D3FORUM_ON}> <{$post.post_time_formatted}> <{if $post.post_time < $post.modified_time}> | <span title="<{$post.modified_time_formatted}>"><{$smarty.const._MD_D3FORUM_LASTMODIFIED}><{if $xoops_isadmin}><a href="<{$mod_url}>/admin/index.php?page=post_histories&amp;post_id=<{$post.id}>"}>(<{$smarty.const._MD_D3FORUM_HISTORIES}>)</a><{/if}></span><{/if}>
 	</div>
 </div>
 <!-- poster info -->
@@ -92,7 +92,7 @@
 	<a href="<{$mod_url}>/index.php?page=update_post_approval&amp;post_id=<{$post.id}>&amp;ret_name=<{$ret_name}>&amp;ret_val=<{$ret_val}>"><{$smarty.const._MD_D3FORUM_LABEL_DOAPPROVAL}></a> |
 <{/if}>
 
-<{if $mod_config.use_vote && ! $post.invisible && $post.approval}>
+<{if $post.can_vote || $mod_config.use_vote && ! $post.invisible && $post.approval}>
 	<span class="d3f_vote">
 		<{$smarty.const._MD_D3FORUM_VOTECOUNT}>:<{$post.votes_count}>
 		<{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}>:<{$post.votes_avg|string_format:"%.2f"}>

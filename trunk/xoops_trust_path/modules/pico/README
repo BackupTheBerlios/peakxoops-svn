@@ -110,6 +110,9 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.76 (2009/01/18)
+- modified comment integration using d3comment instead of d3forum_comment
+
 1.75 (2008/12/03)
 - modified "auto registrar class" can be overridden per category
 - added auto-remover by "auto registrar class"
@@ -122,6 +125,10 @@ pico is fast enough if you use content's cache.
 - fixed a typo in admin_tags.html (thx salamander) 1.75a
 - modified auto-updater from wrapped file without title tag 1.75a
 - fixed formmail feature cannot get <legend> correctly (thx jidaikobo) 1.75a
+- fixed poster_uid and modifier_uid cannot be changed into 0 1.75b
+- confirmed to work with ImpressCMS and slight modifications 1.75b
+- added language files
+-- portuguesebr (thx leco) 1.75b
 
 1.74 (2008/11/19)
 - added tags manager
@@ -589,6 +596,9 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.76 (2009/01/18)
+- コメント統合をd3forumの最新版仕様に追随
+
 1.75 (2008/12/03)
 - ラップファイル自動削除処理追加
 - ラップファイル自動更新処理追加
@@ -601,6 +611,10 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 - テンプレートadmin_tags.htmlのtypoを修正 (thx salamander) 1.75a
 - ラップファイルによる自動更新でSubjectが取得できない場合の処理改善 1.75a
 - formmail機能で<legend>が正しく取得できないバグを修正 (thx jidaikobo) 1.75a
+- 投稿UIDや変更UIDが0に変更できなかったのを修正 1.75b
+- ImpressCMSでの動作確認・微調整 1.75b
+- 言語ファイル追加
+-- portuguesebr (thx leco) 1.75b
 
 1.74 (2008/11/19)
 - タグ管理を追加

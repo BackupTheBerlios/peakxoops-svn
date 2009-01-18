@@ -10,6 +10,11 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-18 18:29:25
+define($constpref.'_COM_ORDER','Order of comment-integration');
+define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-12-02 16:22:09
 define($constpref.'_AUTOREGISTCLASS','class name to register/unregister HTML wrapped files');
 

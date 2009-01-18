@@ -2,11 +2,12 @@
 
 <p>
 	<label for="categories"><{$smarty.const._MB_PICO_CATLIMIT}></label>:
-	<input type="text" size="20" name="options[1]" id="categories" value="<{$categories_imploded}>" /><{$smarty.const._MB_PICO_CATLIMITDSC}>
+	<input type="text" size="20" name="options[1]" id="categories" value="<{$categories_imploded}>" />
+	<blockquote><{$smarty.const._MB_PICO_CATLIMITDSC}></blockquote>
 </p>
 
 <p>
-	<label for="this_template"><{$smarty.const._MB_PICO_SELECTORDER}></label>:
+	<label for="select_order"><{$smarty.const._MB_PICO_SELECTORDER}></label>:
 	<select name="options[2]" id="select_order">
 		<{html_options values=$order_options output=$order_options selected=$selected_order}>
 	</select>

@@ -535,8 +535,8 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 			$ret['expiring_time'] = pico_common_get_server_timestamp( strtotime( $_POST['expiring_time'] ) ) ;
 		}
 		$ret['locked'] = empty( $_POST['locked'] ) ? 0 : 1 ;
-		if( ! empty( $_POST['poster_uid'] ) ) $ret['poster_uid'] = pico_main_get_uid( $_POST['poster_uid'] ) ;
-		if( ! empty( $_POST['modifier_uid'] ) ) $ret['modifier_uid'] = pico_main_get_uid( $_POST['modifier_uid'] ) ;
+		if( isset( $_POST['poster_uid'] ) ) $ret['poster_uid'] = pico_main_get_uid( $_POST['poster_uid'] ) ;
+		if( isset( $_POST['modifier_uid'] ) ) $ret['modifier_uid'] = pico_main_get_uid( $_POST['modifier_uid'] ) ;
 	}
 
 	// HTML Purifier in Protector (only for PHP5)

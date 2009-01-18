@@ -80,7 +80,9 @@ define($constpref.'_IMAGICK_PATH' , 'Path for ImageMagick binaries');
 define($constpref.'_IMAGICK_PATHDSC' , 'Leave blank normal, or set it like /usr/X11R6/bin/');
 define($constpref.'_COM_DIRNAME','Comment-integration: dirname of d3forum');
 define($constpref.'_COM_FORUM_ID','Comment-integration: forum ID');
-define($constpref.'_COM_VIEW','View of Comment-integration');
+define($constpref.'_COM_VIEW','View of comment-integration');
+define($constpref.'_COM_ORDER','Order of comment-integration');
+define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
 
 // blocks
 define($constpref.'_BNAME_MENU','Menu');

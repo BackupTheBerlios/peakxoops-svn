@@ -80,7 +80,9 @@ define($constpref.'_IMAGICK_PATH' , 'ImageMagick実行ファイルのパス');
 define($constpref.'_IMAGICK_PATHDSC' , '空欄では動かない時のみ、実行ファイルのパスを指定する 例) /usr/X11R6/bin/');
 define($constpref.'_COM_DIRNAME','コメント統合するd3forumのdirname');
 define($constpref.'_COM_FORUM_ID','コメント統合するフォーラムの番号');
+define($constpref.'_COM_ORDER','コメント統合の表示順序');
 define($constpref.'_COM_VIEW','コメント統合の表示方法');
+define($constpref.'_COM_POSTSNUM','コメント統合のフラット表示における最大表示件数');
 
 // blocks
 define($constpref.'_BNAME_MENU','メニュー');

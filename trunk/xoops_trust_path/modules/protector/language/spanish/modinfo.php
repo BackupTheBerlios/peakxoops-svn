@@ -1,5 +1,5 @@
 <?php
-// Traducción al español por Colossus (8/1/2008), www.zonadepruebas.com
+// Traducción al español por Colossus (19/1/2008), www.zonadepruebas.com
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'protector' ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
@@ -7,12 +7,9 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
-
-
-
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:52
-define($constpref.'_DBLAYERTRAP','Enable DB Layer trapping anti-SQL-Injection');
-define($constpref.'_DBLAYERTRAPDSC','Almost SQL Injection attacks will be canceled by this feature. This feature is required a support from databasefactory. You can check it on Security Advisory page.');
+define($constpref.'_DBLAYERTRAP','Activar protección contra inyección de SQL por interceptación en la capa de base de datos');
+define($constpref.'_DBLAYERTRAPDSC','Casi todos los ataques de inyección SQL serán neutralizados activando esta opción. Es necesario que la base de datos lo soporte. Puede comprobar si es así en el Asesor de Seguridad.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-21 04:44:30
 define($constpref.'_DEFAULT_LANG','Idioma por defecto');

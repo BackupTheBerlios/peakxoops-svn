@@ -5,8 +5,8 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:52
-define('_AM_ADV_DBFACTORYPATCHED','Your databasefactory is ready for DBLayer Trapping anti-SQL-Injection');
-define('_AM_ADV_DBFACTORYUNPATCHED','Your databasefactory is not ready for DBLayer Trapping anti-SQL-Injection. Some patches are required.');
+define('_AM_ADV_DBFACTORYPATCHED','Su sistema está preparado para evitar inyecciones SQL por intercepción en la capa de base de datos.');
+define('_AM_ADV_DBFACTORYUNPATCHED','Su sistema no está preparado para evitar inyecciones SQL por intercepción en la capa de base de datos. Se necesitan algunos parches.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-12-03 11:47:19
 define('_AM_ADV_TRUSTPATHPUBLIC','Si puede ver una imagen con el texto -NG- sobre estas líneas, o si el enlace funciona devolviendo un texto de advertencia, el directorio XOOPS_TRUST_PATH no está configurado correctamente. Lo mejor es colocar el directorio XOOPS_TRUST_PATH fuera del DocumentRoot. Si no puede hacerlo, como segunda mejor alternativa debería crearse un fichero .htaccess (DENY FROM ALL) dentro del directorio XOOPS_TRUST_PATH.');

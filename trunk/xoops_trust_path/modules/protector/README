@@ -147,6 +147,11 @@ minahito, marcan, and phppp BEST REGARDS!
 
 = CHANGES =
 
+3.31 beta (2009/01/20)
+- fixed DBL anti-SQL-Injection's wrong detection by db->quiteString() with "
+- updated language files
+-- spanish (thx Colossus)
+
 3.30 beta (2009/01/14)
 - added DBLayer trapping anti-SQL-Injection
 - added a filter precommon_bwlimit_errorlog.php
@@ -453,6 +458,11 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 
 
 ●変更履歴
+
+3.31 beta (2009/01/20)
+- 一般設定などでダブルクオーテーションがあるとSQL Injectionと判定される問題を修正
+- 言語ファイル更新
+-- spanish (thx Colossus)
 
 3.30 beta (2009/01/14)
 - DBレイヤートラップanti-SQL-Injectionを実装した

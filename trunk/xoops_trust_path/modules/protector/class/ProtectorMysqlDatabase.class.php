@@ -43,25 +43,30 @@ function injectionFound( $sql )
 }
 
 
-function removeQuotedStrings( $sql )
+function separateStringsInSQL( $sql )
 {
 	$sql = trim( $sql ) ;
 	$sql_len = strlen( $sql ) ;
 	$char = '' ;
 	$string_start = '' ;
 	$in_string = false;
-	$ret = '' ;
+	$sql_wo_string = '' ;
+	$strings = array() ;
+	$current_string = '' ;
 
 	for( $i = 0 ; $i < $sql_len ; $i ++ ) {
 		$char = $sql[$i] ;
 		if( $in_string ) {
 			while( 1 ) {
-				$i = strpos( $sql , $string_start , $i ) ;
+				$new_i = strpos( $sql , $string_start , $i ) ;
+				$current_string .= substr( $sql , $i , $new_i - $i + 1 ) ;
+				$i = $new_i ;
 				if( $i === false ) {
-					return $ret ;
+					break 2 ;
 				} else if( /* $string_start == '`' || */ $sql[$i-1] != '\\' ) {
 					$string_start = '' ;
 					$in_string = false ;
+					$strings[] = $current_string ;
 					break ;
 				} else {
 					$j = 2 ;
@@ -73,6 +78,7 @@ function removeQuotedStrings( $sql )
 					if ($escaped_backslash) {
 						$string_start = '' ;
 						$in_string = false ;
+						$strings[] = $current_string ;
 						break ;
 					} else {
 						$i++;
@@ -82,25 +88,38 @@ function removeQuotedStrings( $sql )
 		} else if( $char == '"' || $char == "'" ) { // dare to ignore ``
 			$in_string = true ;
 			$string_start = $char ;
+			$current_string = $char ;
 		} else {
-			$ret .= $char ;
+			$sql_wo_string .= $char ;
 		}
 		// dare to ignore comment
 		// because unescaped ' or " have been already checked in stage1
 	}
 
-	return $ret ;
+	return array( $sql_wo_string , $strings ) ;
 }
 
 
 
 function checkSql( $sql )
 {
+	list( $sql_wo_strings , $strings ) = $this->separateStringsInSQL( $sql ) ;
+
 	// stage1: addslashes() processed or not
 	foreach( $this->doubtful_requests as $request ) {
 		if( addslashes( $request ) != $request ) {
 			if( stristr( $sql , trim( $request ) ) ) {
-				$this->injectionFound( $sql ) ;
+				// check the request stayed inside of strings as whole
+				$ok_flag = false ;
+				foreach( $strings as $string ) {
+					if( strstr( $string , $request ) ) {
+						$ok_flag = true ;
+						break ;
+					}
+				}
+				if( ! $ok_flag ) {
+					$this->injectionFound( $sql ) ;
+				}
 			}
 		}
 	}
@@ -111,7 +130,6 @@ function checkSql( $sql )
 	// OK: select a from b where c='$d_escaped'
 	// $_GET['d'] = '(select ... FROM)'
 	// NG: select a from b where c=(select ... from)
-	$sql_wo_strings = $this->removeQuotedStrings( $sql ) ;
 	foreach( $this->doubtful_requests as $request ) {
 		if( strstr( $sql_wo_strings , trim( $request ) ) ) {
 			$this->injectionFound( $sql ) ;

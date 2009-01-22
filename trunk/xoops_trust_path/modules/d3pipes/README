@@ -55,6 +55,9 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 - added a parse joint D3pipesParsePhpbbactivetopics.class.php
 - modified D3pipesBlockPicolist.class.php fetches ef and tags
 - added the order option for comment-integration
+- modified a joint D3pipesBlockD3bloglist can specify userID (thx hodaka) 0.66a
+- added language files
+-- portuguesebr (thx leco)
 
 0.65 2008-11-18
 - modified Sitemaps feature easy as possible
@@ -336,6 +339,9 @@ html¥Õ¥©¥ë¥ÀÄ¾²¼¤Ë¤¢¤ë sitemap.php ¤ò mainfile.php ¤ÈÆ±¤¸³¬ÁØ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤
 - phpbbÍÑ¥Ñ¡¼¥¹¥¸¥ç¥¤¥ó¥ÈÄÉ²Ã (¤Ê¤¼¤«RSS¶Ø»ß¤Ë¤Ê¤Ã¤Æ¤¤¤ësf.netÂĞºö)
 - pico¤ÎÆâÉô¼èÆÀ¥¸¥ç¥¤¥ó¥È¤Ç¡¢ef¤ätags¤òÅÏ¤¹¤è¤¦¤Ë¤·¤¿
 - ¥³¥á¥ó¥ÈÅı¹ç¤ÎÉ½¼¨½ç»ØÄêÄÉ²Ã
+- d3blogÍÑ¥¸¥ç¥¤¥ó¥È¤Ç¥æ¡¼¥¶ID¤Î»ØÄê¤¬²ÄÇ½¤Ë¤Ê¤Ã¤¿ (thx hodaka) 0.66a
+- ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
+-- portuguesebr (thx leco)
 
 0.65 2008-11-18
 - Sitemapsµ¡Ç½¤ò´ÊÃ±¤ËÍøÍÑ¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿

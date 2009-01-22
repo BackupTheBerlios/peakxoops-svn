@@ -2,6 +2,10 @@
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-22 18:00:49
+define('_MD_D3PIPES_N4J_UID','User ID');
+
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-18 04:46:02
 define('_MD_D3PIPES_N4J_KEEPPIPEINFO','Keep pipe info');
 define('_MD_D3PIPES_N4J_TARGETMODULE','Target module');

@@ -33,6 +33,7 @@ define('_MD_D3PIPES_N4J_WRITEURL','URLを記入');
 define('_MD_D3PIPES_N4J_WRITEPREG','perl正規表現を記入');
 define('_MD_D3PIPES_N4J_WRITEPOSIX','POSIX正規表現を記入');
 define('_MD_D3PIPES_N4J_CID','カテゴリーID');
+define('_MD_D3PIPES_N4J_UID','ユーザーID');
 define('_MD_D3PIPES_N4J_MAXENTRIES','最大件数');
 define('_MD_D3PIPES_N4J_EACHENTRIES','各パイプからの取得数');
 define('_MD_D3PIPES_N4J_KEEPPIPEINFO','パイプ情報の保存');

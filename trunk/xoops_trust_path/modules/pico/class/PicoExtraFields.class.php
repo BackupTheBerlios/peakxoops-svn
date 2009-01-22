@@ -47,9 +47,9 @@ function getSerializedRequestsFromPost()
 	// text fields
 	foreach( $_POST as $key => $val ) {
 		if( strncmp( $key , PICO_EXTRA_FIELDS_PREFIX , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) === 0 ) {
-			$ret[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) ] = $myts->stripSlashesGPC( $val ) ;
+			$ret[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX ) ) ] = $this->stripSlashesGPC( $val ) ;
 		} elseif( strncmp( $key , PICO_EXTRA_FIELDS_PREFIX_SHORT , strlen( PICO_EXTRA_FIELDS_PREFIX_SHORT ) ) === 0 ) {
-			$ret[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX_SHORT ) ) ] = $myts->stripSlashesGPC( $val ) ;
+			$ret[ substr( $key , strlen( PICO_EXTRA_FIELDS_PREFIX_SHORT ) ) ] = $this->stripSlashesGPC( $val ) ;
 		}
 	}
 
@@ -184,6 +184,17 @@ function removeUnlinkedImages( $current_id )
 				unlink( $filename ) ;
 			}
 		}
+	}
+}
+
+
+function stripSlashesGPC( $data )
+{
+	if( ! get_magic_quotes_gpc() ) return $data ;
+	if( is_array( $data ) ) {
+		return array_map( array( $this , 'stripSlashesGPC' ) , $data ) ;
+	} else {
+		return stripslashes( $data ) ;
 	}
 }
 

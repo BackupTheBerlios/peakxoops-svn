@@ -93,8 +93,8 @@ define($constpref.'_BNAME_MYWAITINGS','自身の承認待ち');
 define($constpref.'_BNAME_TAGS','タグ一覧');
 
 // Notify Categories
-define($constpref.'_NOTCAT_GLOBAL', 'モジュール全体');
-define($constpref.'_NOTCAT_GLOBALDSC', 'このpicoモジュール全体における通知オプション');
+define($constpref.'_NOTCAT_GLOBAL', '全カテゴリー共通');
+define($constpref.'_NOTCAT_GLOBALDSC', '全カテゴリー共通の通知オプション');
 define($constpref.'_NOTCAT_CATEGORY', 'カテゴリー内');
 define($constpref.'_NOTCAT_CATEGORYDSC', 'このカテゴリーにおける通知オプション');
 define($constpref.'_NOTCAT_CONTENT', 'コンテンツ');

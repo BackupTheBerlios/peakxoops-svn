@@ -216,21 +216,21 @@ function getData4html( $process_body = false )
 	return $ret4html ;
 }
 
-function filterBody( $cotnent4assign )
+function filterBody( $content4assign )
 {
 	$db =& Database::getInstance() ;
 
 	// wraps special check (compare filemtime with modified_time )
-	/*if( strstr( $cotnent4assign['filters'] , 'wraps' ) && $cotnent4assign['vpath'] ) {
-		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$cotnent4assign['vpath']) ;
-		if( @filemtime( $wrap_full_path ) > @$cotnent4assign['modified_time'] ) {
-			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($cotnent4assign['content_id']) ) ;
+	/*if( strstr( $content4assign['filters'] , 'wraps' ) && $content4assign['vpath'] ) {
+		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$content4assign['vpath']) ;
+		if( @filemtime( $wrap_full_path ) > @$content4assign['modified_time'] ) {
+			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET modified_time='".filemtime( $wrap_full_path )."' WHERE content_id=".intval($content4assign['content_id']) ) ;
 		}
 	}*/
 
 	// process each filters
-	$text = $cotnent4assign['body_raw'] ;
-	$filters = explode( '|' , $cotnent4assign['filters'] ) ;
+	$text = $content4assign['body_raw'] ;
+	$filters = explode( '|' , $content4assign['filters'] ) ;
 	foreach( array_keys( $filters ) as $i ) {
 		$filter = trim( $filters[ $i ] ) ;
 		if( empty( $filter ) ) continue ;
@@ -249,6 +249,7 @@ function filterBody( $cotnent4assign )
 			require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 			$myts =& PicoTextSanitizer::getInstance() ;
 			$text = $myts->displayTarea( $text , 1 , $smiley , 1 , 1 , $nl2br ) ;
+			$text = $myts->pageBreak( $this->mydirname , $text , $content4assign ) ;
 			continue ;
 		}
 		$func_name = 'pico_'.$filter ;
@@ -256,13 +257,13 @@ function filterBody( $cotnent4assign )
 		if( ! function_exists( $func_name ) ) {
 			require_once $file_path ;
 		}
-		$text = $func_name( $this->mydirname , $text , $cotnent4assign ) ;
+		$text = $func_name( $this->mydirname , $text , $content4assign ) ;
 	}
 
 	// store the result into body_cached and for_search field just after modification of the content
-	if( empty( $cotnent4assign['for_search'] ) ) {
-		$for_search = $cotnent4assign['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$cotnent4assign['extra_fields'] ) ) ) ;
-		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($cotnent4assign['content_id']) ) ;
+	if( empty( $content4assign['for_search'] ) ) {
+		$for_search = $content4assign['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$content4assign['extra_fields'] ) ) ) ;
+		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content4assign['content_id']) ) ;
 
 	}
 

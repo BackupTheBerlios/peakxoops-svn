@@ -102,7 +102,7 @@ class PicoTextSanitizer extends MyTextSanitizer
 	// additional post filters
 	function postCodeDecode( $text , $image )
 	{
-		$removal_tags = array( '[summary]' , '[/summary]' , '[pagebreak]' ) ;
+		$removal_tags = array( '[summary]' , '[/summary]' /*, '[pagebreak]'*/ ) ;
 		$text = str_replace( $removal_tags , '' , $text ) ;
 
 		$patterns = array();
@@ -187,6 +187,45 @@ class PicoTextSanitizer extends MyTextSanitizer
 		
 		return preg_replace( $patterns , $replacements , $text ) ;
 	}
+
+	function pageBreak( $mydirname , $text , $content4assign )
+	{
+		if( ! strstr( $text , '[pagebreak]' ) ) return $text ;
+
+		$html = '' ;
+		$navi = '' ;
+		$ids = array() ;
+		$parts = explode( '[pagebreak]' , $text ) ;
+		foreach( $parts as $i => $part ) {
+			$id = $mydirname . '_pagebreak_' . $i ;
+			$ids[] = "'$id'" ;
+			$html .= '<div id="'.$id.'">'.$part.'</div>' ;
+			$navi .= '<span id="navi_'.$id.'" class="selected"></span>' ;
+		}
+
+		$js = '
+		<script type="text/javascript">
+			picoDisplayDividedPage( 0 ) ;
+			function picoDisplayDividedPage( n ) {
+				n = Math.floor(n) ;
+				var picoPages = new Array('.implode(',',$ids).') ;
+				for( var i in picoPages ) {
+					i = Math.floor(i) ;
+					document.getElementById(picoPages[i]).style.display = "none" ;
+					document.getElementById("navi_"+picoPages[i]).className = "" ;
+					document.getElementById("navi_"+picoPages[i]).innerHTML = "<a href=# onClick=\"picoDisplayDividedPage("+i+");\">"+(i+1)+"</a>" ;
+				}
+				document.getElementById(picoPages[n]).style.display = "block" ;
+				document.getElementById("navi_"+picoPages[n]).className = "selected" ;
+				document.getElementById("navi_"+picoPages[n]).innerHTML = n+1 ;
+			}
+		</script>' ;
+
+
+		return $html . '<div class="pico_pagebreak">' . $navi . '</div>' . $js ;
+	}
+
+
 }
 
 ?>

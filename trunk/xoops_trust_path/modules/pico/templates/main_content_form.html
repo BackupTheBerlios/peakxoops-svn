@@ -313,7 +313,7 @@ function xoopsFormValidate_contentform() {
 <ul class="pico_content_history_list">
 	<{foreach from=$content_histories item="history"}>
 		<li>
-			<{$history.created_time_formatted}>
+			<{$history.modified_time_formatted}>
 			-
 			<{$history.poster_uname}>
 			(<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)

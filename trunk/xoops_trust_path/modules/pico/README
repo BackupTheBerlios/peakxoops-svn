@@ -110,6 +110,14 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.77 (2009/01/23)
+- fixed datetime of histories is displayed as created time in content form
+- fixed array for extra_fields broken with magic_quotes_gpc=on (thx jidaikobo)
+- fixed IE7 cannot download CSVs via SSL (thx jidaikobo)
+- fixed any categories with no contents display thier lists (thx nobu175)
+- added [ pagebreak ] tag into xcode
+- added a parameter replyto_field_name for formmail plugins
+
 1.76 (2009/01/18)
 - modified comment integration using d3comment instead of d3forum_comment
 
@@ -595,6 +603,14 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.77 (2009/01/23)
+- コンテンツ編集履歴が作成日時になっていたのを更新日時に修正
+- magic_quotes_gpc環境でextra_fieldsの配列が壊れるのを修正 (thx jidaikobo)
+- 一部の環境でSSLだとCSVのダウンロードができない現象に対応 (thx jidaikobo)
+- カテゴリー直属コンテンツがない時は強制的にリスト表示するよう修正 (thx nobu175)
+- [ pagebreak ] タグの実装
+- フォーム処理にreplyto_field_nameのパラメータを追加した
 
 1.76 (2009/01/18)
 - コメント統合をd3forumの最新版仕様に追随

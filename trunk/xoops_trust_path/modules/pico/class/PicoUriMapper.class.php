@@ -123,10 +123,17 @@ function modifyRequest( $request , $currentCategoryObj )
 	$this->config = $currentCategoryObj->getOverriddenModConfig() ;
 	$cat_data = $currentCategoryObj->getData() ;
 
-	if( empty( $this->config['show_listasindex'] ) && empty( $request['content_id'] ) ) {
-		$request['controller'] = 'content' ;
-		$request['view'] = 'detail' ;
-		$request['content_id'] = pico_main_get_top_content_id_from_cat_id( $currentCategoryObj->mydirname , $cat_data['id'] ) ; ;
+	if( empty( $this->config['show_listasindex'] ) && $request['controller'] == 'category' && $request['view'] == 'list' && empty( $request['content_id'] ) ) {
+		$top_content_id = pico_main_get_top_content_id_from_cat_id( $currentCategoryObj->mydirname , $cat_data['id'] ) ;
+		if( $top_content_id > 0 ) {
+			$request['controller'] = 'content' ;
+			$request['view'] = 'detail' ;
+			$request['content_id'] = $top_content_id ;
+		} else {
+			$request['controller'] = 'category' ;
+			$request['view'] = 'list' ;
+			$request['content_id'] = 0 ;
+		}
 		/*
 		// redirect to the top of the content
 		$content_id = pico_main_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;

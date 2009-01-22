@@ -58,6 +58,8 @@ if( ! empty( $_POST['extras_output'] ) && is_array( @$_POST['action_selects'] ) 
 		$out = mb_convert_encoding( $out , _MD_PICO_CSVENCODING , _CHARSET ) ;
 	}
 
+	header ('Cache-Control: public'); // for IE7
+	header ('Pragma: public'); // for IE7
 	header ('Content-Type: application/force-download');
 	header ('Content-Disposition: attachment; filename='.$mydirname.'_extras_'.date('Ymd').'.csv');
 	header ('Content-Description: File Transfer');

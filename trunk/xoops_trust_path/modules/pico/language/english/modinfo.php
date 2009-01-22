@@ -94,7 +94,7 @@ define($constpref.'_BNAME_TAGS','Tags');
 
 // Notify Categories
 define($constpref.'_NOTCAT_GLOBAL', 'global');
-define($constpref.'_NOTCAT_GLOBALDSC', 'notifications about this module');
+define($constpref.'_NOTCAT_GLOBALDSC', 'notifications about all categories');
 define($constpref.'_NOTCAT_CATEGORY', 'category');
 define($constpref.'_NOTCAT_CATEGORYDSC', 'notifications under this category');
 define($constpref.'_NOTCAT_CONTENT', 'content');

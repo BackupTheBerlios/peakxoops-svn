@@ -53,3 +53,8 @@ input.pico_number_only { ime-mode: disabled; text-align: right; }
 
 pre.pico_history_diff del { color: red; }
 pre.pico_history_diff ins { color: blue; }
+
+div.pico_pagebreak { margin: 10px; }
+div.pico_pagebreak span {border: 1px solid black; padding: 2px; margin: 2px; }
+div.pico_pagebreak span.selected {border: 0px; }
+

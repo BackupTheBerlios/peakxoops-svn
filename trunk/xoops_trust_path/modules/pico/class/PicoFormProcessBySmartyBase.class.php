@@ -26,6 +26,7 @@ class PicoFormProcessBySmartyBase
 	var $confirm_message = null ; // public
 	var $from_field_name = '' ; // public
 	var $fromname_field_name = '' ; // public
+	var $replyto_field_name = '' ; // public
 	var $cc_field_name = '' ; // public
 	var $cc_mail_body_pre = '' ; // public
 	var $cc_mail_body_post = '' ; // public
@@ -111,6 +112,11 @@ class PicoFormProcessBySmartyBase
 		// field name for "fromname"
 		if( isset( $params['fromname_field_name'] ) ) {
 			$this->fromname_field_name = $params['fromname_field_name'] ;
+		}
+
+		// field name for "reply-to"
+		if( isset( $params['replyto_field_name'] ) ) {
+			$this->replyto_field_name = $params['replyto_field_name'] ;
 		}
 
 		// field name for sending "confirm mail"
@@ -409,12 +415,17 @@ class PicoFormProcessBySmartyBase
 			$toMailer->setFromName( $this->fromName ) ;
 
 			// "from" overridden by form data
-			if( ! empty( $this->from_field_name ) && ! empty( $this->form_processor->fields[ $this->from_field_name ]['value'] ) ) {
+			if( ! empty( $this->from_field_name ) && $this->isValidEmail( $this->form_processor->fields[ $this->from_field_name ]['value'] ) ) {
 				$toMailer->setFromEmail( $this->form_processor->fields[ $this->from_field_name ]['value'] ) ;
+				if( ! empty( $this->fromname_field_name ) && ! empty( $this->form_processor->fields[ $this->fromname_field_name ]['value'] ) ) {
+					// remove cr, lf, null
+					$toMailer->setFromName( str_replace( array( "\n" , "\r" , "\0" ) , '' , $this->form_processor->fields[ $this->fromname_field_name ]['value'] ) ) ;
+				}
 			}
-			if( ! empty( $this->fromname_field_name ) && ! empty( $this->form_processor->fields[ $this->fromname_field_name ]['value'] ) ) {
-				// field data
-				$toMailer->setFromName( $this->form_processor->fields[ $this->fromname_field_name ]['value'] ) ;
+
+			// "Reply-To" header
+			if( ! empty( $this->replyto_field_name ) && $this->isValidEmail( $this->form_processor->fields[ $this->replyto_field_name ]['value'] ) ) {
+				$toMailer->addHeaders( 'Reply-To: '.$this->form_processor->fields[ $this->replyto_field_name ]['value'] ) ;
 			}
 
 			$toMailer->setToEmails( array_unique( $this->toEmails ) ) ;
@@ -465,11 +476,16 @@ class PicoFormProcessBySmartyBase
 		// simple check
 		$ret = 0 ;
 		foreach( $this->toEmails as $mail ) {
-			if( preg_match('/^[a-zA-Z0-9_\.\-]+?@[A-Za-z0-9_\.\-]+$/',$mail) ) {
+			if( $this->isValidEmail( $mail ) ) {
 				$ret ++ ;
 			}
 		}
 		return $ret ;
+	}
+
+	function isValidEmail( $email )
+	{
+		return preg_match( '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i' , $email ) ? true : false ;
 	}
 
 	function storeDB()

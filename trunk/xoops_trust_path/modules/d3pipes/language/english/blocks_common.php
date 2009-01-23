@@ -8,7 +8,7 @@ define('_MB_D3PIPES_MAX_ENTRIES','Displays');
 define('_MB_D3PIPES_MAX_ENTRIES_NOTICE','This means the total number of entries with aggregated view. And it also means the number of entries from each pipes as default with separated view.');
 define('_MB_D3PIPES_THISTEMPLATE','Template of this block');
 define('_MB_D3PIPES_THISTEMPLATE_NOTICE','You can use these templates alternatively');
-define('_MB_D3PIPES_UNIONCLASS','表示方式');
+define('_MB_D3PIPES_UNIONCLASS','Merging method');
 define('_MB_D3PIPES_UNIONOPTION_MERGESORT','Aggregated view from all pipes');
 define('_MB_D3PIPES_UNIONOPTION_SEPARATED','Separated view per each pipes');
 define('_MB_D3PIPES_LINK2CLIPPING','Link to clipping view if the entry is clipped');

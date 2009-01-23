@@ -1,14 +1,15 @@
 <?php
 
 
-// Appended by Xoops Language Checker -GIJOE- in 2009-01-22 18:02:15
+// Appended by Xoops Language Checker -GIJOE- in 2009-01-24 05:31:14
 define('_MD_D3PIPES_N4J_UID','User ID');
+define('_MD_D3PIPES_N4J_KEEPPIPEINFO','Keep pipe info');
 
-define('_MD_D3PIPES_H2_INDEX','Index');
+define('_MD_D3PIPES_H2_INDEX','Canais de Feeds');
 define('_MD_D3PIPES_H2_LATESTHEADLINES','Últimos Registros');
-define('_MD_D3PIPES_H2_EACHPIPE','Listar registros da pipe');
-define('_MD_D3PIPES_H2_CLIPLIST','Lista de clippings');
-define('_MD_D3PIPES_H2_CLIPPING','Detalhes dos clippings');
+define('_MD_D3PIPES_H2_EACHPIPE','Lista de Registros do Feed');
+define('_MD_D3PIPES_H2_CLIPLIST','Lista de Clippings');
+define('_MD_D3PIPES_H2_CLIPPING','Detalhes dos Clippings');
 
 define('_MD_D3PIPES_JOINT_FETCH','Coletados de fora');
 define('_MD_D3PIPES_JOINT_BLOCK','Busca ou análise dos blocos');
@@ -22,7 +23,7 @@ define('_MD_D3PIPES_JOINT_CLIP','Clipping local');
 define('_MD_D3PIPES_JOINT_FILTER','Filtrar entradas por palavras-chave');
 define('_MD_D3PIPES_JOINT_REASSIGN','Reatribuição');
 define('_MD_D3PIPES_JOINT_SORT','Ordenação');
-define('_MD_D3PIPES_JOINT_UNION','União dos pipes');
+define('_MD_D3PIPES_JOINT_UNION','União dos Feeds');
 
 define('_MD_D3PIPES_N4J_FETCH','Informe a URI do RSS/ATOM');
 define('_MD_D3PIPES_N4J_PARSE','Informe o tipo de XML (exemplo: RDF/RSS/ATOM)');
@@ -31,15 +32,15 @@ define('_MD_D3PIPES_N4J_UTF8TO','Normalmente, informe a códificação interna');
 define('_MD_D3PIPES_N4J_UTF8FROM','Normalmente, informe a codificação do XML');
 define('_MD_D3PIPES_N4J_FILTER','Informar padrões e palavras-chave par filtrar');
 define('_MD_D3PIPES_N4J_REASSIGN','Informar regras para a re-atribuição');
-define('_MD_D3PIPES_N4J_UNION','pipe ids separado por virgula');
+define('_MD_D3PIPES_N4J_UNION','IDs dos Feeds separado por virgula');
 
 define('_MD_D3PIPES_N4J_WRITEURL','Informar URL');
 define('_MD_D3PIPES_N4J_WRITEPREG','Informar regex no formato perl');
 define('_MD_D3PIPES_N4J_WRITEPOSIX','Informar regex no formato POSIX');
 define('_MD_D3PIPES_N4J_CID','Id da categoria');
 define('_MD_D3PIPES_N4J_MAXENTRIES','Máximo entradas');
-define('_MD_D3PIPES_N4J_EACHENTRIES','Registrar uma pipe');
-define('_MD_D3PIPES_N4J_KEEPPIPEINFO','Manter informações do pipe');
+define('_MD_D3PIPES_N4J_EACHENTRIES','Registrar um Feeds');
+define('_MD_D3PIPES_N4J_KEEPPIPESINFO','Manter informações dos Feeds');
 define('_MD_D3PIPES_N4J_TARGETMODULE','Objetivo do módulo');
 define('_MD_D3PIPES_N4J_EXTRAOPTIONS','Opções extras');
 define('_MD_D3PIPES_N4J_ENTRIESFROMCLIP','Entradas dos clippings');
@@ -67,27 +68,27 @@ define('_MD_D3PIPES_CLASS_REASSIGNHTMLENTITYDECODE','Fixar extra entidade html')
 define('_MD_D3PIPES_CLASS_REASSIGNTRUNCATE','Truncar');
 define('_MD_D3PIPES_CLASS_CACHETRUSTPATH','Fazer cache sob trust/cache/');
 define('_MD_D3PIPES_CLASS_PINGXMLRPC2','XMLRPC2 weblogUpdates.ping');
-define('_MD_D3PIPES_CLASS_SORTPUBTIMEDSC','DESC hora da pulbicação');
-define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','ASC ordem da palavra');
-define('_MD_D3PIPES_CLASS_SORTHEADLINEINTASC','ASC ordem inteiro');
-define('_MD_D3PIPES_CLASS_UNIONMERGESORT','Agragação e classificação');
-define('_MD_D3PIPES_CLASS_UNIONSEPARATED','Classsificação sem paralelo');
+define('_MD_D3PIPES_CLASS_SORTPUBTIMEDSC','Hora da publicação - Descendente');
+define('_MD_D3PIPES_CLASS_SORTHEADLINESTRASC','Ordem da palavra - Ascendente');
+define('_MD_D3PIPES_CLASS_SORTHEADLINEINTASC','ordem inteira -Ascendente');
+define('_MD_D3PIPES_CLASS_UNIONMERGESORT','Agregação e classificação');
+define('_MD_D3PIPES_CLASS_UNIONSEPARATED','Classificação sem paralelo');
 define('_MD_D3PIPES_CLASS_UNIONTHEOTHERD3PIPES','De outros d3pipes');
 
-define('_MD_D3PIPES_TH_PUBTIME','Hora da publicação');
-define('_MD_D3PIPES_TH_PIPENAME','nome');
-define('_MD_D3PIPES_TH_HEADLINE','manchete');
+define('_MD_D3PIPES_TH_PUBTIME','Data e Hora');
+define('_MD_D3PIPES_TH_PIPENAME','Canal');
+define('_MD_D3PIPES_TH_HEADLINE','Manchete');
 define('_MD_D3PIPES_TH_LINKURL','Link URI');
 define('_MD_D3PIPES_TH_DESCRIPTION','Descrição');
 define('_MD_D3PIPES_TH_ACTIONTOCLIPPING','Ação para este Clipping');
 
-define('_MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING','Destacá-lo');
+define('_MD_D3PIPES_LABEL_HIGHLIGHTCLIPPING','Destacar o Clipping');
 define('_MD_D3PIPES_LABEL_DELETECLIPPING','Deletar este Clipping');
 define('_MD_D3PIPES_LABEL_VISIBLECLIPPING','Mostrar este Clipping');
 
 define('_MD_D3PIPES_BTN_UPDATE','Atualizar');
 
-define('_MD_D3PIPES_LINK_SITEMAPS','Mapas do site');
+define('_MD_D3PIPES_LINK_SITEMAPS','Mapa do Site');
 
 define('_MD_D3PIPES_FMT_LINKTOCLIPLIST','Ir para a lista de clippings (Total: %s registros)');
 define('_MD_D3PIPES_FMT_EXTERNALLINK','Link externo para %s');
@@ -97,14 +98,15 @@ define('_MD_D3PIPES_MSG_CLIPPINGDELETED','O Clipping foi deletado com sucesso');
 define('_MD_D3PIPES_MSG_CLIPPINGCANNOTDELETED','Este Clipping não pode ser deletado porque existem comentário(s). Remova ou mova os comentários primeiro.');
 
 define('_MD_D3PIPES_ERR_INVALIDCLIPPINGID','ID do Clipping inválido');
-define('_MD_D3PIPES_ERR_INVALIDPIPEID','ID do pipe inválido');
+define('_MD_D3PIPES_ERR_INVALIDPIPEID','ID do Feed inválido');
 define('_MD_D3PIPES_ERR_PERMISSION','Erro nas permissões');
-define('_MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK','Inválido pipe_id. Ir a administração dos blocos e editar o pipe_id');
-define('_MD_D3PIPES_ERR_REDIRECTED','A URI do RSS/Atom foi redirecionada. Você deve mudar a URI da pipe para reduzir o tráfico.');
-define('_MD_D3PIPES_ERR_ERRORBEFOREPARSE','Talvez o erro tenha ocorrido nba fase de coleta. Confirme isso no admin pipe');
-define('_MD_D3PIPES_ERR_PARSETYPEMISMATCH','XML tipo não foi trocado. Confirme isso no admin pipe');
+
+define('_MD_D3PIPES_ERR_INVALIDPIPEIDINBLOCK','ID do feed inválido. Ir à administração dos blocos e editar o ID do feed');
+define('_MD_D3PIPES_ERR_REDIRECTED','A URI do RSS/Atom foi redirecionada. Você deve mudar a URI do Feed para reduzir o tráfico.');
+define('_MD_D3PIPES_ERR_ERRORBEFOREPARSE','Talvez o erro tenha ocorrido na fase de coleta. Confirme isso na administração dos feeds');
+define('_MD_D3PIPES_ERR_PARSETYPEMISMATCH','XML tipo não foi trocado. Confirme isso na administração dos feeds');
 define('_MD_D3PIPES_ERR_CACHEFOLDERNOTWRITABLE','A pasta Cache não existe ou não tem permissão de escrita');
-define('_MD_D3PIPES_ERR_INVALIDURIINFETCH','Inválida URI especificada as fetch joint\'s opção');
+define('_MD_D3PIPES_ERR_INVALIDURIINFETCH','URI Inválida especificada como opção de buasca conjunta');
 define('_MD_D3PIPES_ERR_CANTCONNECTINFETCH','Não é possível acessar o conteúdo externo');
 define('_MD_D3PIPES_ERR_DOUBTFULPROXY','Confirmar a configuração do proxy');
 define('_MD_D3PIPES_ERR_DOUBTFULCURLPATH','Confirmar a configuração do percurso do curl');

@@ -11,38 +11,38 @@ define( $constpref.'_LOADED' , 1 ) ;
 define($constpref."_NAME","D3 PIPES");
 
 // A brief description of this module
-define($constpref."_DESC","Módulo flexível de Sindicalização");
+define($constpref."_DESC","Módulo Flexível de Propagação de Informações");
 
 // admin menus
-define($constpref.'_ADMENU_PIPE','Pipes') ;
+define($constpref.'_ADMENU_PIPE','Feed') ;
 define($constpref.'_ADMENU_CACHE','Cache') ;
 define($constpref.'_ADMENU_CLIPPING','Clippings') ;
-define($constpref.'_ADMENU_JOINT','Joint initials') ;
-define($constpref.'_ADMENU_JOINTCLASS','Class initials') ;
+define($constpref.'_ADMENU_JOINT','Conjuntos iniciais') ;
+define($constpref.'_ADMENU_JOINTCLASS','Class Iniciais') ;
 define($constpref.'_ADMENU_MYLANGADMIN','Linguagens') ;
 define($constpref.'_ADMENU_MYTPLSADMIN','Modelos') ;
 define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocos e Permissões') ;
 define($constpref.'_ADMENU_MYPREFERENCES','Preferências') ;
 
 // blocks
-define($constpref.'_BNAME_ASYNC','Listar registros (Async)') ;
-define($constpref.'_BNAME_SYNC','Listar registros (Sync)') ;
+define($constpref.'_BNAME_ASYNC','Últimos Feeds (Async)') ;
+define($constpref.'_BNAME_SYNC','Últimos Feeds (Sync)') ;
 
 // configs
 define($constpref.'_INDEXTOTAL','Total de registros no topo deste módulo');
-define($constpref.'_INDEXEACH','Máximo de registros de um pipe no topo deste módulo');
-define($constpref.'_INDEXKEEPPIPE','Mostrar acima do pipes quando possivel no topo deste módulo');
-define($constpref.'_ENTRIESAPIPE','Entries a view de cada pipes');
-define($constpref.'_ENTRIESAPAGE','Entries a page na lista de clipping');
-define($constpref.'_ENTRIESARSS','Entries a RSS/Atom');
+define($constpref.'_INDEXEACH','Máximo de registros de um feed no topo deste módulo');
+define($constpref.'_INDEXKEEPPIPE','Mostrar no topo deste módulo acima dos feeds, quando possivel ');
+define($constpref.'_ENTRIESAPIPE','Registros vistos de cada um dos feeds');
+define($constpref.'_ENTRIESAPAGE','Registros em uma página na lista de clipping');
+define($constpref.'_ENTRIESARSS','Registros de um RSS/ATOM');
 define($constpref.'_ENTRIESSMAP','Registros do sitemap xml para google etc');
-define($constpref.'_ARCB_FETCHED','Auto expiração por fetched tempo (dias)');
-define($constpref.'_ARCB_FETCHEDDSC','Especificar os dias que os clippings deverão ser removidos. 0 significa disabilitar auto-expiração. Os clippings com comentários e destacados nunca serão removidos.');
+define($constpref.'_ARCB_FETCHED','Auto expiração do tempo das buscas (dias)');
+define($constpref.'_ARCB_FETCHEDDSC','Especificar os dias que os clippings deverão ser removidos. 0 significa desabilitar auto-expiração. Os clippings com comentários e destacados nunca serão removidos.');
 define($constpref.'_INTERNALENC','Codificação interna');
-define($constpref.'_FETCHCACHELT','Fech tempo do cache (seg)');
-define($constpref.'_REDIRECTWARN','Alertar se a URI rss/atom será redirecionada');
-define($constpref.'_SNP_MAXREDIRS','Máximo redirecionamentos para Snoopy');
-define($constpref.'_SNP_MAXREDIRSDSC','Depois de construir pipes com sucesso, configures esta opção como 0');
+define($constpref.'_FETCHCACHELT','Tempo da busca em cache (seg)');
+define($constpref.'_REDIRECTWARN','Alertar se a URI RSS/ATOM será redirecionada');
+define($constpref.'_SNP_MAXREDIRS','Redirecionamento máximo para Snoopy');
+define($constpref.'_SNP_MAXREDIRSDSC','Depois da contrução dos feeds com sucesso, configures esta opção como 0');
 define($constpref.'_SNP_PROXYHOST','Nome do host do servidor proxy');
 define($constpref.'_SNP_PROXYHOSTDSC','especificar isso por FQDN. Normalmente, deixe em branco aqui');
 define($constpref.'_SNP_PROXYPORT','Porta do servidor proxy');

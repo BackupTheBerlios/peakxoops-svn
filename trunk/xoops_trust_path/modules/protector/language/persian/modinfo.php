@@ -7,8 +7,8 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:53
-define($constpref.'_DBLAYERTRAP','Enable DB Layer trapping anti-SQL-Injection');
-define($constpref.'_DBLAYERTRAPDSC','Almost SQL Injection attacks will be canceled by this feature. This feature is required a support from databasefactory. You can check it on Security Advisory page.');
+define($constpref.'_DBLAYERTRAP','فعال سازی سیستم تله گذاری لایه های پایگاه داده ها در برابر تزریق به sql یا ( DB Layer trapping anti-SQL-Injection ) ');
+define($constpref.'_DBLAYERTRAPDSC','همچنین حملات تزریق به SQL توسط این گزینه دفع میشوند. این ویژگی لازم دارد که توسط databasefactory پشتیبانی شود. شما میتوانید این گزینه را در صفحه مشاوره امنیتی برسی کنید.');
 
 define( $constpref.'_LOADED' , 1 ) ;
 
@@ -69,7 +69,7 @@ define($constpref.'_BF_COUNT','Anti Brute Force');
 define($constpref.'_BF_COUNTDSC','تعداد دفعاتی را که کاربر مهمان میتواند نام کاربری و پسورد خود رادر مدت 10 دقیقه وارد کند  مشخص کنید اگر او بعد از گذشت این زمان موفق به ورود (login) نشد IP او توسط سیستم بسته شده است<br /><br />این روش هک روشی است که در آن هکر یک سری کلمات را به عنوان پسورددر نرم افزار هک وارد کرده و این کلمات به ترتیب به عنوان پسورد کاربر چک میشود');
 
 define($constpref.'_BWLIMIT_COUNT','محدودیت پهنای باند');
-define($constpref.'_BWLIMIT_COUNTDSC','Specify the max access to mainfile.php during watching time. This value should be 0 for normal environments which have enough CPU bandwidth. The number fewer than 10 will be ignored.');
+define($constpref.'_BWLIMIT_COUNTDSC','بیشترین دسترسی به mainfile.php را در زمان مشخص شده تعیین کنید. این مقدار در زمان های که پهنای باند کافی CPU را در اختیار دارید بهتر است بر روی ۰ باشد. عدد کمتر از ۱۰ در نظر گرفته نمیشود.');
 
 define($constpref.'_DOS_SKIPMODS','ماژول های که در برابر حملات DoS/Crawler چک نمیشوند');
 define($constpref.'_DOS_SKIPMODSDSC','نام ماژول ها را با | از هم جدا کنید.همچنین این اجازه برای ماژول ها ی چپ مفید خواهد بود.<br />منظور از Crawler روبات های خزنده ی موتور های جستجوگر میباشد');

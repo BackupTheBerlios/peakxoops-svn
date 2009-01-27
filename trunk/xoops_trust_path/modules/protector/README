@@ -147,6 +147,11 @@ minahito, marcan, and phppp BEST REGARDS!
 
 = CHANGES =
 
+3.32 beta (2009/01/27)
+- fixed DBL anti-SQL-Injection is skipped on condition nocommon=1 (thx naao)
+- updated language files
+-- persian (thx voltan)
+
 3.31 beta (2009/01/20)
 - fixed DBL anti-SQL-Injection's wrong detection by db->quiteString() with "
 - updated language files
@@ -458,6 +463,11 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 
 
 ●変更履歴
+
+3.32 beta (2009/01/27)
+- nocommon状況でのDBレイヤートラップanti-SQL-Injection動作を回避した (thx naao)
+- 言語ファイル更新
+-- persian (thx voltan)
 
 3.31 beta (2009/01/20)
 - 一般設定などでダブルクオーテーションがあるとSQL Injectionと判定される問題を修正

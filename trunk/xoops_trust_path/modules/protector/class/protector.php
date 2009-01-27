@@ -457,6 +457,8 @@ function _dblayertrap_check_recursive( $val )
 
 function dblayertrap_init( $force_override = false )
 {
+	if( ! empty( $GLOBALS['xoopsOption']['nocommon'] ) || defined( '_LEGACY_PREVENT_EXEC_COMMON_' ) || defined( '_LEGACY_PREVENT_LOAD_CORE_' ) ) return ; // skip
+
 	$this->_dblayertrap_doubtfuls = array() ;
 	$this->_dblayertrap_check_recursive( $_GET ) ;
 	$this->_dblayertrap_check_recursive( $_POST ) ;

@@ -49,9 +49,16 @@ function triggerEvent( $mydirname , $mytrustdirname , $category , $item_id , $ev
 	$module =& $module_hanlder->getByDirname( $mydirname ) ;
 
 	$notification_handler =& xoops_gethandler('notification') ;
-	$mid = $module->getVar('mid') ;
-
 	$mail_template_dir = $this->getMailTemplateDir( $mydirname , $mytrustdirname ) ;
+
+	// calling a delegate before 
+	if( class_exists( 'XCube_DelegateUtils' ) ) {
+		$force_return = false ;
+		XCube_DelegateUtils::raiseEvent( 'D3NotificationHandler.Trigger' , new XCube_Ref($category), new XCube_Ref($event), new XCube_Ref($item_id), new XCube_Ref($extra_tags), new XCube_Ref($module), new XCube_Ref($user_list), new XCube_Ref($omit_user_id), $module->getInfo( 'notification' ) , new XCube_Ref($force_return) , new XCube_Ref($mail_template_dir) , $mydirname , $mytrustdirname ) ;
+		if( $force_return) return ;
+	}
+
+	$mid = $module->getVar('mid') ;
 
 	// Check if event is enabled
 	$config_handler =& xoops_gethandler('config');

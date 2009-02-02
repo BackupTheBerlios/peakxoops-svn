@@ -24,6 +24,6 @@ define( '_MYTPLSADMIN_BTN_NEWTPLSET' , 'criar' ) ;
 define( '_MYTPLSADMIN_DBUPDATED' , 'Modelos atualizados com sucesso' ) ;
 
 define( '_MYTPLSADMIN_CUSTOMTEMPLATE' , 'Modelos Padronizados' ) ;
-define( '_MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE' , 'Criar um novo modelo pacronizado' ) ;
+define( '_MYTPLSADMIN_CREATENEWCUSTOMTEMPLATE' , 'Criar um novo modelo padronizado' ) ;
 
 ?>

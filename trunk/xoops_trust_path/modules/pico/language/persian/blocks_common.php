@@ -3,7 +3,7 @@
 // definitions for editing blocks
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-17 13:09:55
-define('_MB_PICO_PROCESSBODY','Process body of the content dynamically');
+define('_MB_PICO_PROCESSBODY','پیمایش بدنه سند دینامیک');
 
 define('_MB_PICO_TAGSNUM','نمایش');
 define('_MB_PICO_TAGSLISTORDER','سفارشی کردن برای نمایش');

@@ -10,18 +10,18 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-18 18:29:24
-define($constpref.'_COM_ORDER','Order of comment-integration');
-define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');
+define($constpref.'_COM_ORDER','سفارشی کردن سیستم یکپارچه سازی نظر ها');
+define($constpref.'_COM_POSTSNUM','بیشترین پست های نمایش داده شده در سیستم یکپارچه سازی نظر ها');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-12-02 16:22:07
-define($constpref.'_AUTOREGISTCLASS','class name to register/unregister HTML wrapped files');
+define($constpref.'_AUTOREGISTCLASS','نام کلاس برای ثبت / عدم ثبت فایل های HTML بسته بندی شده');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:54
-define($constpref.'_ADMENU_TAGS','Tags');
+define($constpref.'_ADMENU_TAGS','تگ ها');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-10-01 12:11:21
 define($constpref.'_URIM_CLASS','class mapping URI');
-define($constpref.'_URIM_CLASSDSC','Change it if you want to override the URI mapper. The default value is PicoUriMapper');
+define($constpref.'_URIM_CLASSDSC','ارگ شما میخواهید URI Mapper را باطل کنید این گزینه را ویرایش کنید. The default value is PicoUriMapper');
 
 define( $constpref.'_LOADED' , 1 ) ;
 

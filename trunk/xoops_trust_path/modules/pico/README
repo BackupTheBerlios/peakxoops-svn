@@ -110,6 +110,11 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.78 (2009/02/09)
+- fixed vpath in subcategories block (thx MAMEMARU)
+- updated language files
+-- persian (thx voltan)
+
 1.77 (2009/01/23)
 - fixed datetime of histories is displayed as created time in content form
 - fixed array for extra_fields broken with magic_quotes_gpc=on (thx jidaikobo)
@@ -603,6 +608,11 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.78 (2009/02/09)
+- 仮想パスがサブカテゴリーブロックでおかしかったのを修正 (thx MAMEMARU)
+- 言語ファイル更新
+-- persian (thx voltan)
 
 1.77 (2009/01/23)
 - コンテンツ編集履歴が作成日時になっていたのを更新日時に修正

@@ -31,7 +31,7 @@ function b_pico_subcategories_show( $options )
 		$categories4assign = implode(',',$categories) ;
 	}
 
-	$sql = "SELECT c.cat_id,c.cat_title FROM ".$db->prefix($mydirname."_categories")." c WHERE ($whr_read4cat) AND ($whr_categories) ORDER BY c.cat_weight" ;
+	$sql = "SELECT c.cat_id,c.cat_title,c.cat_vpath FROM ".$db->prefix($mydirname."_categories")." c WHERE ($whr_read4cat) AND ($whr_categories) ORDER BY c.cat_weight" ;
 	if( ! $result = $db->query( $sql ) ) {
 		echo $db->logger->dumpQueries() ;
 		exit ;

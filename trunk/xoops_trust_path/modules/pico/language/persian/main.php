@@ -7,10 +7,10 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:54
-define('_MD_PICO_NUM','displays');
+define('_MD_PICO_NUM','نمایش');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-17 13:18:17
-define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','Are you OK to save as?');
+define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','آیا شما اطمینان دارید که میخواهید ذخیره کنید؟');
 
 define('_MD_PICO_TOP','اصلی');
 define('_MD_PICO_ALLCONTENTS','تمام شاخه‌ها');

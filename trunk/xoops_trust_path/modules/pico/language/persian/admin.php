@@ -3,12 +3,12 @@
 // contents list admin
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-19 04:29:54
-define('_MD_A_PICO_LINK_EXTRACT','Extract');
-define('_MD_A_PICO_LABEL_SEARCHBYPHRASE','Search by phrase');
-define('_MD_A_PICO_H2_TAGS','Tag Manager');
-define('_MD_A_PICO_TH_TAG','Tag');
+define('_MD_A_PICO_LINK_EXTRACT','اضافی');
+define('_MD_A_PICO_LABEL_SEARCHBYPHRASE','جستجو به وسیله عبارت');
+define('_MD_A_PICO_H2_TAGS','مدیریت تگ ها');
+define('_MD_A_PICO_TH_TAG','تگ');
 define('_MD_A_PICO_TH_USED','Used');
-define('_MD_A_PICO_LABEL_ORDER','Order');
+define('_MD_A_PICO_LABEL_ORDER','سفارشی');
 
 define('_MD_A_PICO_H2_INDEPENDENTPERMISSION','دسترسی مستقل');
 define('_MD_A_PICO_LABEL_INDEPENDENTPERMISSION','تنظیم دسترسی‌های این شاخه مستقل از شاخه والد');

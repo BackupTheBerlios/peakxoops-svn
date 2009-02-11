@@ -4,10 +4,10 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-18 04:46:02
-define('_MB_D3PIPES_KEEP_PIPEINFO','Displays upper pipes as possible');
+define('_MB_D3PIPES_KEEP_PIPEINFO','نمایش لوله های به روز شده در صورت امکان');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-05-20 05:41:54
-define('_MB_D3PIPES_LINK2CLIPPING','Link to clipping view if the entry is clipped');
+define('_MB_D3PIPES_LINK2CLIPPING','لینک به نمایش گیره ها اگر گیره ای وارد شده بود');
 
 define('_MB_D3PIPES_PIPE_ID','شماره لوله.');
 define('_MB_D3PIPES_PIPE_ID_NOTICE','pipe_ids های مشخص شده را با استفاده از ویرگول (,) از هم جدا کنید. You can also use drop down located right side.');

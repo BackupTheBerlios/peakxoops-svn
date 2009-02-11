@@ -2,7 +2,7 @@
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-11-10 06:39:37
-define('_MD_A_D3PIPES_TH_PIPEDESCRIPTION','Desc');
+define('_MD_A_D3PIPES_TH_PIPEDESCRIPTION','توضیحات');
 
 define('_MD_A_MYMENU_MYTPLSADMIN','تمپلیت ها');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','بلاک ها / دسترسی ها');

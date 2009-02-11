@@ -2,18 +2,14 @@
 
 
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2009-01-22 18:00:49
-define('_MD_D3PIPES_N4J_UID','User ID');
-
 // Appended by Xoops Language Checker -GIJOE- in 2008-11-18 04:46:02
-define('_MD_D3PIPES_N4J_KEEPPIPEINFO','Keep pipe info');
-define('_MD_D3PIPES_N4J_TARGETMODULE','Target module');
-define('_MD_D3PIPES_CLASS_UNIONTHEOTHERD3PIPES','From the other d3pipes');
-define('_MD_D3PIPES_LINK_SITEMAPS','Sitemaps');
+define('_MD_D3PIPES_N4J_KEEPPIPEINFO','نگهداری اطلاعات لوله');
+define('_MD_D3PIPES_N4J_TARGETMODULE','ماژول هدف');
+define('_MD_D3PIPES_CLASS_UNIONTHEOTHERD3PIPES','از ماژول های d3pipes دیگر');
+define('_MD_D3PIPES_LINK_SITEMAPS','نفشه سایت');
 
 // Appended by Xoops Language Checker -GIJOE- in 2008-09-10 10:57:46
-define('_MD_D3PIPES_N4J_EXTRAOPTIONS','Extra options');
+define('_MD_D3PIPES_N4J_EXTRAOPTIONS','گزینه های اضافی');
 
 define('_MD_D3PIPES_H2_INDEX','صفحه اصلی');
 define('_MD_D3PIPES_H2_LATESTHEADLINES','آخرین ورودی ها');
@@ -113,7 +109,7 @@ define('_MD_D3PIPES_ERR_INVALIDURIINFETCH','Invalid URI specified as fetch joint
 define('_MD_D3PIPES_ERR_CANTCONNECTINFETCH','ناتوان در دستیابی به محتویات خارجی');
 define('_MD_D3PIPES_ERR_DOUBTFULPROXY','تنظیمات از پروکسی را تایید کنید');
 define('_MD_D3PIPES_ERR_DOUBTFULCURLPATH','تنظیمات از مسیر curl را تایید کنید');
-define('_MD_D3PIPES_ERR_URLFOPENINFETCH','You cannot use "fopen" under allow_url_fopen=off');
+define('_MD_D3PIPES_ERR_URLFOPENINFETCH','شما نمیتوانید از "fopen" در حالت allow_url_fopen=off استفاده کنید');
 define('_MD_D3PIPES_ERR_INVALIDDIRNAMEINBLOCK','Invalid dirname on the block joint');
 define('_MD_D3PIPES_ERR_INVALIDFILEINBLOCK','Invalid blockfile on the block joint');
 define('_MD_D3PIPES_ERR_INVALIDFUNCINBLOCK','Invalid blockfunc on the block joint');

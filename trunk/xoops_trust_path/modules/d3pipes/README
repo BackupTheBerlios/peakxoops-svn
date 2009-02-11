@@ -58,6 +58,10 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 - modified a joint D3pipesBlockD3bloglist can specify userID (thx hodaka) 0.66a
 - added language files
 -- portuguesebr (thx leco)
+- updated language files
+-- persian (thx voltan) 0.66b
+- added block joints
+-- eguide2 0.66c
 
 0.65 2008-11-18
 - modified Sitemaps feature easy as possible
@@ -342,6 +346,8 @@ html¥Õ¥©¥ë¥ÀÄ¾²¼¤Ë¤¢¤ë sitemap.php ¤ò mainfile.php ¤ÈÆ±¤¸³¬ÁØ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤
 - d3blogÍÑ¥¸¥ç¥¤¥ó¥È¤Ç¥æ¡¼¥¶ID¤Î»ØÄê¤¬²ÄÇ½¤Ë¤Ê¤Ã¤¿ (thx hodaka) 0.66a
 - ¸À¸ì¥Õ¥¡¥¤¥ëÄÉ²Ã
 -- portuguesebr (thx leco)
+- ¥Ö¥í¥Ã¥¯¥¸¥ç¥¤¥ó¥ÈÄÉ²Ã
+-- eguide2 0.66c
 
 0.65 2008-11-18
 - Sitemapsµ¡Ç½¤ò´ÊÃ±¤ËÍøÍÑ¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿

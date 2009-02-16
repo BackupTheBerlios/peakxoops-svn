@@ -27,4 +27,16 @@ define("_MB_PICO_CONTENTSNUM","Número de elementos a ser desplegados");
 define("_MB_PICO_THISTEMPLATE","Template(recurso) del bloque");
 define("_MB_PICO_CONTENT_ID","ID de contenido");
 
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
+
+
+
 ?>

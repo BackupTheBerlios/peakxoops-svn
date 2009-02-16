@@ -24,4 +24,15 @@ define("_MB_PICO_THISTEMPLATE","区块模板 (源文件)");
 define("_MB_PICO_DISPLAYBODY","同时显示正文内容");
 define("_MB_PICO_CONTENT_ID","文章ID");
 
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
+
+
 ?>

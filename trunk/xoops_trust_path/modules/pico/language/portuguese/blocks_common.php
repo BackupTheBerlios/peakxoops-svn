@@ -28,4 +28,15 @@ define("_MB_PICO_PARENTCAT","Categoria anterior");
 define("_MB_PICO_PARENTCATDSC","Serão mostradas todas as subcategorias desta categoria principal. Você pode especificar as categorias principais escrevendo os seus respectivos números separados com vírgula.");
 define("_MB_PICO_SELECTORDER","Ordenar por");
 define("_MB_PICO_THISTEMPLATE","Modelo do bloco");
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
+
+
 ?>

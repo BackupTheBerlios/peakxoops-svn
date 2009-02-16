@@ -15,4 +15,14 @@ define("_MB_PICO_TAGSNUM","Display");
 define("_MB_PICO_TAGSLISTORDER","Order for displaying");
 define("_MB_PICO_TAGSSQLORDER","Order for extracting");
 
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
+
+
 ?>

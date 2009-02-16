@@ -22,4 +22,14 @@ define('_MB_PICO_TAGSNUM','نمایش');
 define('_MB_PICO_TAGSLISTORDER','سفارشی کردن برای نمایش');
 define('_MB_PICO_TAGSSQLORDER','سفارشی کردن برای تهیه خروجی');
 
-?>
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'right' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'left' ) ;  // change it left for RTL
+}
+
+
+

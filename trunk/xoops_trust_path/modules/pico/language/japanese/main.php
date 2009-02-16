@@ -76,6 +76,7 @@ define('_MD_PICO_ERR_EDITCONTENT','コンテンツ編集権限がありません');
 define('_MD_PICO_ERR_DELETECONTENT','コンテンツ削除権限がありません');
 define('_MD_PICO_ERR_PERMREADFULL','このコンテンツの全文を表示する権限がありません');
 define('_MD_PICO_ERR_LOGINTOREADFULL','このコンテンツの全文を表示するにはログインしてください');
+define('_MD_PICO_ERR_COMPILEERROR','このコンテンツはコンパイルエラー等の理由で本文処理できていません。再度編集してください');
 
 define('_MD_PICO_MSG_CATEGORYMADE','カテゴリーを作成しました');
 define('_MD_PICO_MSG_CATEGORYUPDATED','カテゴリーを更新しました');
@@ -121,6 +122,7 @@ define('_MD_PICO_MSG_CONFIRMDELETECONTENT','コンテンツを削除してよろしいですか？
 define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','コンテンツを複製してよろしいですか？');
 //define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','トップカテゴリーは特別なカテゴリーです。設定変更は管理画面の一般設定で行います');
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','HTMLヘッダカスタマイズ部表示');
+define('_MD_PICO_LABEL_HTMLHEADERCONFIGALERT','(※コンテンツ毎のHTMLヘッダは一般設定によって禁止されています)');
 define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');
 define('_MD_PICO_BTN_SUBMITEDITING','編集内容を登録');
 define('_MD_PICO_BTN_SUBMITSAVEAS','別レコードとして保存');
@@ -172,6 +174,16 @@ define('_MD_PICO_PERMS_CAN_DELETE','削除権限');
 define('_MD_PICO_PERMS_POST_AUTO_APPROVED','承認不要');
 define('_MD_PICO_PERMS_IS_MODERATOR','モデレータ');
 define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','サブカテゴリー作成権限');
+
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
 
 
 if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {

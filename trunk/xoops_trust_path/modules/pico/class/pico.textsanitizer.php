@@ -200,7 +200,7 @@ class PicoTextSanitizer extends MyTextSanitizer
 			$id = $mydirname . '_pagebreak_' . $i ;
 			$ids[] = "'$id'" ;
 			$html .= '<div id="'.$id.'">'.$part.'</div>' ;
-			$navi .= '<span id="navi_'.$id.'" class="selected"></span>' ;
+			$navi .= '<span id="navi_'.$id.'" class="selected"></span>'."\n" ;
 		}
 
 		$js = '

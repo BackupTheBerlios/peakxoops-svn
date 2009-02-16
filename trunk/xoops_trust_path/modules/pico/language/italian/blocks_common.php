@@ -27,4 +27,15 @@ define("_MB_PICO_CONTENTSNUM","Numeri di articoli da mostrare");
 define("_MB_PICO_THISTEMPLATE","Template (risorsa) del blocco");
 define("_MB_PICO_CONTENT_ID","Content ID");
 
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
+
+
 ?>

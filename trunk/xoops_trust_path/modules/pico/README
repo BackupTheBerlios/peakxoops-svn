@@ -110,6 +110,11 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.79 (2009/02/16)
+- modified templates to support RTL (not left/right but _ALIGN_START/END)
+- modified body filtering to rescure it from fatal smarty compiling errors
+- modified the content form to notify "HTML headers for each contents" status
+
 1.78 (2009/02/09)
 - fixed vpath in subcategories block (thx MAMEMARU)
 - updated language files
@@ -608,6 +613,11 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.79 (2009/02/16)
+- RTLにテンプレートレベルで対応してみた (left/rightではなく_ALIGN_START/END利用)
+- Smartyコンテンツのコンパイルエラーを検知することでハマリを防いでみた
+- コンテンツ毎のHTMLヘッダが効かない場合、編集画面で知らせるようにしてみた
 
 1.78 (2009/02/09)
 - 仮想パスがサブカテゴリーブロックでおかしかったのを修正 (thx MAMEMARU)

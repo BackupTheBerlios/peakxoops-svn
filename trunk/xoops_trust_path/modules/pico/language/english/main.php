@@ -76,6 +76,7 @@ define('_MD_PICO_ERR_EDITCONTENT','You cannot edit the content');
 define('_MD_PICO_ERR_DELETECONTENT','You cannot delete the content');
 define('_MD_PICO_ERR_PERMREADFULL','You cannot read full of the contents');
 define('_MD_PICO_ERR_LOGINTOREADFULL','Log in as a member to read the contents entirely');
+define('_MD_PICO_ERR_COMPILEERROR','The body of this content is not processed by some errors like smarty compiling errors. Try to edit it again.');
 
 define('_MD_PICO_MSG_CATEGORYMADE','A category is created successfully');
 define('_MD_PICO_MSG_CATEGORYUPDATED','The category is modified successfully');
@@ -121,6 +122,7 @@ define('_MD_PICO_MSG_CONFIRMDELETECONTENT','Are you OK to delete it?');
 define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','Are you OK to save as?');
 //define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','The TOP category is the special. You can change the settings of the TOP in module preferences.');
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','display the textarea');
+define('_MD_PICO_LABEL_HTMLHEADERCONFIGALERT','(HTML header for each contents is disabled by preferences)');
 define('_MD_PICO_LABEL_INPUTHELPER','Input Helper ON/OFF');
 define('_MD_PICO_BTN_SUBMITEDITING','register this form');
 define('_MD_PICO_BTN_SUBMITSAVEAS','save as');
@@ -173,6 +175,16 @@ define('_MD_PICO_PERMS_CAN_DELETE','DELETE');
 define('_MD_PICO_PERMS_POST_AUTO_APPROVED','AUTO APPROVED');
 define('_MD_PICO_PERMS_IS_MODERATOR','MODERATE');
 define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','MAKE SUBCATEGORY');
+
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
 
 
 if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {

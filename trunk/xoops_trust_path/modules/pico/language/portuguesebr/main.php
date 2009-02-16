@@ -4,6 +4,11 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
 //
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-02-16 14:46:17
+define('_MD_PICO_ERR_COMPILEERROR','The body of this content is not processed by some errors like smarty compiling errors. Try to edit it again.');
+define('_MD_PICO_LABEL_HTMLHEADERCONFIGALERT','(HTML header for each contents is disabled by preferences)');
+
 define('_MD_PICO_NUM','displays');
 define('_MD_PICO_TOP','TOP');
 define('_MD_PICO_ALLCONTENTS','Todo os contéudos');
@@ -167,6 +172,16 @@ define('_MD_PICO_PERMS_CAN_DELETE','Deletar');
 define('_MD_PICO_PERMS_POST_AUTO_APPROVED','Aprovação automática');
 define('_MD_PICO_PERMS_IS_MODERATOR','Moderar');
 define('_MD_PICO_PERMS_CAN_MAKESUBCATEGORY','Criar Subcategoria');
+
+
+// LTR or RTL
+if( defined( '_ADM_USE_RTL' ) ) {
+	@define( '_ALIGN_START' , _ADM_USE_RTL ? 'right' : 'left' ) ;
+	@define( '_ALIGN_END' , _ADM_USE_RTL ? 'left' : 'right' ) ;
+} else {
+	@define( '_ALIGN_START' , 'left' ) ; // change it right for RTL
+	@define( '_ALIGN_END' , 'right' ) ;  // change it left for RTL
+}
 
 
 if( ! defined( 'FOR_XOOPS_LANG_CHECKER' ) && ! function_exists( 'pico_convert_encoding_to_ie' ) ) {

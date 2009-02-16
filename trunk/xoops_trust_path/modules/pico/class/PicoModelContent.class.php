@@ -220,6 +220,15 @@ function filterBody( $content4assign )
 {
 	$db =& Database::getInstance() ;
 
+	// marking for compiling errors
+	if( $content4assign['last_cached_time'] < $content4assign['modified_time'] ) {
+		if( $content4assign['body_cached'] == _MD_PICO_ERR_COMPILEERROR ) {
+			return $content4assign['body_cached'] ;
+		} else {
+			$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string(_MD_PICO_ERR_COMPILEERROR)."' WHERE content_id=".intval($content4assign['content_id']) ) ;
+		}
+	}
+
 	// wraps special check (compare filemtime with modified_time )
 	/*if( strstr( $content4assign['filters'] , 'wraps' ) && $content4assign['vpath'] ) {
 		$wrap_full_path = XOOPS_TRUST_PATH._MD_PICO_WRAPBASE.'/'.$this->mydirname.str_replace('..','',$content4assign['vpath']) ;
@@ -261,7 +270,8 @@ function filterBody( $content4assign )
 	}
 
 	// store the result into body_cached and for_search field just after modification of the content
-	if( empty( $content4assign['for_search'] ) ) {
+	// if( empty( $content4assign['for_search'] ) ) {
+	if( $content4assign['last_cached_time'] < $content4assign['modified_time'] ) {
 		$for_search = $content4assign['subject_raw'] . ' ' . strip_tags( $text ) . ' ' . implode( ' ' , array_values( pico_common_unserialize( @$content4assign['extra_fields'] ) ) ) ;
 		$db->queryF( "UPDATE ".$db->prefix($this->mydirname."_contents")." SET body_cached='".mysql_real_escape_string($text)."', for_search='".mysql_real_escape_string($for_search)."', last_cached_time=UNIX_TIMESTAMP() WHERE content_id=".intval($content4assign['content_id']) ) ;
 

@@ -89,5 +89,5 @@ if( ! empty( $_GET['event_id'] ) ) {
 		break ;
 }
 
-$tpl->display('db:pical_print.html');
+$tpl->display("db:pical{$mydirnumber}_print.html");
 ?>

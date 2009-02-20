@@ -1,5 +1,10 @@
 [xlang:en]
 
+v.092
+- fixed XSS in index.php (thx JPCERT/CC)
+- fixed wrong specifying the template for printing (thx ttts)
+- modified a compatibility with 2.3 from xoops.org (thx Zorro)
+
 v.091 (2007-03-15)
 - modified almost plugins
 - added plugins
@@ -386,6 +391,11 @@ v0.10 (2003-4-23)
 
 [/xlang:en]
 [xlang:ja]
+
+v.092
+- index.phpにXSS脆弱性が１箇所残っていたのを修正 (thx JPCERT/CC)
+- 印刷用テンプレートを修正 (thx ttts)
+- 一応、本家版2.3との相性問題を若干手直ししてみた (thx Zorro)
 
 v.091 (2007-03-15)
 - ほとんどのプラグインからcaldate=の記述を削除

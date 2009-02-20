@@ -8,8 +8,8 @@ if( ! defined( 'PICAL_BLOCK_MINICAL_EX' ) ) {
 
 define( 'PICAL_BLOCK_MINICAL_EX' , 1 ) ;
 
-// XOOPS 2.1/2.2
-if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+// XOOPS 2.2
+if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) == 2.2 ) {
 	$GLOBALS['pical_blockinstance_id'] = $this->getVar('instanceid') ;
 }
 
@@ -26,12 +26,12 @@ function pical_minical_ex_show( $options )
 	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 		// XoopsCube 2.1
 		$bid = $options[ sizeof( $options ) - 1 ] ;
-	} else if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
-		// XOOPS 2.1/2.2
+	} else if( substr( XOOPS_VERSION , 6 , 3 ) == '2.2' ) {
+		// XOOPS 2.2
 		// instanceid as bid from block_instance
 		$bid = @$GLOBALS['pical_blockinstance_id'] ;
 	} else {
-		// XOOPS 2.0.x
+		// XOOPS 2.0.x/2.3.x/ImpressCMS
 		if( is_object( $GLOBALS['block_arr'][$GLOBALS['i']] ) ) {
 			// bid from newblocks
 			$bid = $GLOBALS['block_arr'][$GLOBALS['i']]->getVar('bid') ;

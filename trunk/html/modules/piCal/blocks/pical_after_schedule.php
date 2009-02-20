@@ -9,8 +9,8 @@ if( ! defined( 'PICAL_BLOCK_AFTER_SCHEDULE_INCLUDED' ) ) {
 
 define( 'PICAL_BLOCK_AFTER_SCHEDULE_INCLUDED' , 1 ) ;
 
-// XOOPS 2.1/2.2
-if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+// XOOPS 2.2
+if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) == '2.2' ) {
 	$GLOBALS['pical_blockinstance_object'] =& $this ;
 }
 
@@ -50,7 +50,7 @@ function pical_after_schedule_show_tpl( $options )
 	// ブロック配列の自分自身を書き換える title に %s を含めること
 	if( defined( 'XOOPS_CUBE_LEGACY' ) ) {
 		$GLOBALS['pical_after_schedule_title_parameter'] = sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ;
-	} else if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
+	} else if( substr( XOOPS_VERSION , 6 , 3 ) == '2.2' ) {
 		$title_fmt = $GLOBALS['pical_blockinstance_object']->getVar('title') ;
 		$GLOBALS['pical_blockinstance_object']->setVar('title',sprintf( $title_fmt , sprintf( _PICAL_FMT_MD , $cal->month_short_names[ date( 'n' , $cal->unixtime ) ] , $cal->date_short_names[ date( 'j' , $cal->unixtime ) ] ) ) ) ;
 	} else {

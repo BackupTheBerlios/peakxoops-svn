@@ -151,7 +151,7 @@
 		$xoopsTpl->assign( 'detail_body' , $cal->get_schedule_view_html( ) ) ;
 		$xoopsTpl->assign( 'xoops_pagetitle' , $cal->last_summary ) ;
 		$xoopsTpl->assign( 'xoops_default_comment_title' , 'Re: ' . $cal->last_summary ) ;
-		$xoopsTpl->assign( 'print_link' , "$mod_url/print.php?event_id={$_GET['event_id']}&amp;action=View" ) ;
+		$xoopsTpl->assign( 'print_link' , "$mod_url/print.php?event_id=".intval($_GET['event_id'])."&amp;action=View" ) ;
 		$xoopsTpl->assign( 'skinpath' , "$cal->images_url" ) ;
 		$xoopsTpl->assign( 'lang_print' , _MB_PICAL_ALT_PRINTTHISEVENT ) ;
 		$HTTP_GET_VARS['event_id'] = $_GET['event_id'] = $cal->original_id ;

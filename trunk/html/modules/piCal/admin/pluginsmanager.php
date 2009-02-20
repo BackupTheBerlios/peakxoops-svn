@@ -44,8 +44,8 @@ $myts =& MyTextSanitizer::getInstance();
 
 // get block instances of minicalex
 $mcx_blocks = array() ;
-if( substr( XOOPS_VERSION , 6 , 3 ) > 2.0 ) {
-	// block instance of XOOPS 2.1/2.2
+if( substr( XOOPS_VERSION , 6 , 3 ) == '2.0' ) {
+	// block instance of XOOPS 2.2
 	$mcx_rs = $xoopsDB->query( "SELECT i.instanceid,i.title FROM ".$xoopsDB->prefix("block_instance")." i LEFT JOIN ".$xoopsDB->prefix("newblocks")." b ON i.bid=b.bid WHERE b.mid='".$xoopsModule->getVar('mid')."' AND b.show_func='pical_minical_ex_show'" ) ;
 } else {
 	// newblocks of XOOPS 2.0.x

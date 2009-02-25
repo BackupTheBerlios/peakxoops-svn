@@ -227,6 +227,11 @@ function FileUpload( $currentFolder = '/' )
 	// check the file is valid (image mode only)
 	if( ! $trust_mode ) {
 		$check_result = @getimagesize( $new_filefullpath ) ;
+		if( $check_result === false && empty( $GLOBALS['fck_isadmin'] ) ) {
+			// admin can upload non-image-files into root side
+			SendResultsHTML( 0 , $new_fileurl , $new_filename ) ;
+			return ;
+		}
 		if( ! is_array( @$check_result ) || empty( $check_result['mime'] ) || stristr( $check_result['mime'] , $fck_allowed_extensions[ $extension ] ) === false ) {
 			@unlink( $new_filefullpath ) ;
 			SendResultsHTML( '202', '', 'File extension does not match the file contents' , '' ) ;

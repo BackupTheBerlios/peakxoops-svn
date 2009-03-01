@@ -110,6 +110,10 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.80 (2009/03/02)
+- marked as a stable version
+- fixed missing notification_select in main_viewcontent.html (thx nor)
+
 1.79 (2009/02/16)
 - modified templates to support RTL (not left/right but _ALIGN_START/END)
 - modified body filtering to rescure it from fatal smarty compiling errors
@@ -613,6 +617,10 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 
 [b]HISTORY:[/b]
+
+1.80 (2009/03/02)
+- 安定版としてマーク
+- イベント通知選択がmain_viewcontent.htmlから記述もれしていたのを修正 (thx nor)
 
 1.79 (2009/02/16)
 - RTLにテンプレートレベルで対応してみた (left/rightではなく_ALIGN_START/END利用)

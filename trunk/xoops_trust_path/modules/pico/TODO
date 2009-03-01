@@ -3,6 +3,12 @@
 ・申請内容とのdiff表示
   ペンディング
 
+・コンテンツextra_fieldsの未承認状態がない
+・コンテンツのソート専用テーブルを用意する
+
+・「カテゴリー内記事へのコメント」というイベント通知
+
+
 ・PDF
   意味ある？
 
@@ -27,7 +33,7 @@
 
 ●TODO進行中
 
-・[summary][/summary][pagebreak]実装
+・[summary][/summary]実装
 ・全文閲覧権限のない状況と、RSSのdescriptionやコメント統合サマリ部との関係
 ・各種コントローラ内から、WHERE条件に "visible AND created_time <= UNIX_TIMESTAMP()" 等を直書きしているSQLの根絶
 ・パーミッションについても、var_export形式にする (それと同時に、クエリのLIKEパターンがシリアライズ形式に依存している部分を修正する）
@@ -87,6 +93,8 @@
 ・本文キャッシュではキャッシュ生成timestampとコンテンツ変更timestampを比較する
 ・カテゴリごとのイベント通知（上位カテゴリへの登録に対しても通知する）
 ・期限切れ処理の実装
+・[pagebreak]
+・コンテンツextra_fields
 
 
 ●権限・表示ON/OFF関係の仕様

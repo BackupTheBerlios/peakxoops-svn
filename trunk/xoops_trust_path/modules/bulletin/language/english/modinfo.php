@@ -87,8 +87,8 @@ define($constpref."_CONFIG18_D","A category tree is displayed in each articles."
 define($constpref.'_CONFIG19','use common/fckeditor');
 define($constpref.'_CONFIG19_D', 'Posters can use FCKeditor on XOOPS if he/she is allowed to use HTML');
 
-define($constpref.'_COM_DIRNAME','dirname of d3forum integrated as the comment system');
-define($constpref.'_COM_FORUM_ID','forum_id of d3forum integrated');
+define($constpref.'_COM_DIRNAME','Comment-integration: dirname of d3forum');
+define($constpref.'_COM_FORUM_ID','Comment-integration: forum ID');
 define($constpref.'_COM_VIEW','View of comment-integration');
 define($constpref.'_COM_ORDER','Order of comment-integration');
 define($constpref.'_COM_POSTSNUM','Max posts displayed in comment-integration');

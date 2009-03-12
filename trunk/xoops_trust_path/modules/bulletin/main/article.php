@@ -101,9 +101,9 @@ if($bulletin_disp_list_of_cat && $bulletin_stories_of_cat > 0){
 
 // Tell A Frinedを使う場合
 if($bulletin_use_tell_a_frined){
-	$mail_link = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( "$mydirurl/index.php?page=article&amp;storyid=$storyid" ).'&amp;subject='.rawurlencode(sprintf(_MD_INTARTFOUND,$xoopsConfig['sitename'])) ;
+	$mail_link = XOOPS_URL.'/modules/tellafriend/index.php?target_uri='.rawurlencode( "$mydirurl/index.php?page=article&storyid=$storyid" ).'&amp;subject='.rawurlencode(sprintf(_MD_INTARTFOUND,$xoopsConfig['sitename'])) ;
 }else{
-	$mail_link = 'mailto:?subject='.sprintf(_MD_INTARTICLE,$xoopsConfig['sitename']).'&amp;body='.sprintf(_MD_INTARTFOUND, $xoopsConfig['sitename']).':  '.$mydirurl.'/index.php?page=article&amp;storyid='.$storyid;
+	$mail_link = 'mailto:?subject='.rawurlencode(sprintf(_MD_INTARTICLE,$xoopsConfig['sitename'])).'&amp;body='.rawurlencode(sprintf(_MD_INTARTFOUND, $xoopsConfig['sitename']).':  '.$mydirurl.'/index.php?page=article&storyid='.$storyid);
 }
 
 $xoopsTpl->assign('story', $story);

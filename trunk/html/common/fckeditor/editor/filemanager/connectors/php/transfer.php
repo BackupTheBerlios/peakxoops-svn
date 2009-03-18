@@ -49,6 +49,7 @@ if( $cache_limit > 0 ) {
 	header("Expires: ".date('r',intval(time()/$cache_limit)*$cache_limit+$cache_limit));
 	header("Cache-Control: public, max-age=$cache_limit");
 	header("Last-Modified: ".date('r',intval(time()/$cache_limit)*$cache_limit));
+	header('Pragma: public'); // for IE with SSL
 }
 
 // Content-Type header

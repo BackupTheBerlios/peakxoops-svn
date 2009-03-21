@@ -151,6 +151,7 @@ minahito, marcan, and phppp BEST REGARDS!
 - fixed DBL anti-SQL-Injection is skipped on condition nocommon=1 (thx naao)
 - updated language files
 -- persian (thx voltan)
+-- de_utf8 (ths Rene) 3.32a
 
 3.31 beta (2009/01/20)
 - fixed DBL anti-SQL-Injection's wrong detection by db->quiteString() with "

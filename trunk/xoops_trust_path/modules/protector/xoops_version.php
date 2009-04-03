@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 3.32 ;
+$modversion['version'] = file_get_contents( dirname(__FILE__).'/include/version.txt' ) ;
 $modversion['credits'] = "PEAK Corp." ;
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -215,7 +215,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_DOS_F5COUNTDSC' ,
 	'formtype'		=> 'text' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "10" ,
+	'default'		=> "20" ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
@@ -233,7 +233,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_DOS_CRCOUNTDSC' ,
 	'formtype'		=> 'text' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> "30" ,
+	'default'		=> "40" ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(
@@ -287,7 +287,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_BIGUMBRELLADSC' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 0 ,
+	'default'		=> 1 ,
 	'options'		=> array()
 ) ;
 $modversion['config'][] = array(

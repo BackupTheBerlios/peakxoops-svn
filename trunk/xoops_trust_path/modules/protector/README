@@ -81,6 +81,27 @@ Refer this.
 [/code]
 
 
+= How to install it into ImpressCMS =
+
+You need not patch to mainfile.php.
+Just copy extras/ImpressCMS/preload/protector.php in the archive into your preload/ of ImpressCMS.
+
+I thank vaughan about releasing the preload.
+
+original usage written by vaughan:
+----------------------------------
+Install the module the same way as any other module.
+
+You do not need to edit mainfile.php when using ImpressCMS, instead locate the ImpressCMS_Extras directory
+inside the protector package, and copy the preload directory to your root ImpressCMS directory, so that your
+ImpressCMS preload folder contains the file protector.php
+
+your root ImpressCMS directory is the directory on your server where mainfile.php is located.
+
+example: htdocs/preload/protector.php
+----------------------------------
+
+
 = UPGRADE from Protector 2.x =
 
 - remove two lines for Protector from your mainfile.php
@@ -146,6 +167,13 @@ minahito, marcan, and phppp BEST REGARDS!
 
 
 = CHANGES =
+
+3.33 beta (2009/04/03)
+- stopped to force rewriting PHP_SELF and PATH_INFO (thx nao-pon)
+- added checking PHP_SELF into bigumbrella anti-XSS
+- added a constant PROTECTOR_VERSION
+- modified compatibities with ImpressCMS (thx vaughan)
+- fixed "none" option for F5Attack and Crawler cannot work finen (thx ChaFx)
 
 3.32 beta (2009/01/27)
 - fixed DBL anti-SQL-Injection is skipped on condition nocommon=1 (thx naao)
@@ -395,6 +423,14 @@ mainfile.php ¤Î½ñ¤­´¹¤¨¥Ý¥¤¥ó¥È¤Î¼þÊÕ¤¬°ã¤¦¤Î¤Ç¡¢¥Ñ¥Ã¥Á¤òÅö¤Æ¤¿¸å¤ò¼¨¤·¤Æ¤ª¤­¤Þ¤
 [/code]
 
 
+¡üImpressCMS¤Ø¤Î¥¤¥ó¥¹¥È¡¼¥ë
+
+mainfile.php ¤Ø¤Î¥Ñ¥Ã¥Á¤ÏÉ¬Í×¤¢¤ê¤Þ¤»¤ó¡£
+¥¢¡¼¥«¥¤¥Ö¤Î extras/ImpressCMS/preload/protector.php ¤ò¡¢¤´ÍøÍÑÃæ¤ÎImpressCMS¤Îpreload¥Õ¥©¥ë¥À¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+preload¤òÄó¶¡¤·¤Æ¤¯¤ì¤¿vaughan¤Ë´¶¼Õ¤·¤Þ¤¹¡£
+
+
 ¡ü¥Ð¡¼¥¸¥ç¥ó2¤«¤é¤Î¥Ð¡¼¥¸¥ç¥ó¥¢¥Ã¥×
 
 ¤Þ¤º¡¢mainfile.php ¤«¤é¡¢Protector¤Ë´Ø¤¹¤ë¹Ô¤òºï½ü¤·¤Æ¤¯¤À¤µ¤¤¡£
@@ -464,6 +500,13 @@ minahito¤µ¤ó¡¢marcan¤µ¤ó¡¢phppp¤µ¤ó¡¢¤è¤í¤·¤¯¡ª
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.33 beta (2009/04/03)
+- PHP_SELF¤äPATH_INFO¤ÎÆÃ¼ìÊ¸»ú¶¯À©ÊÑ´¹¤ò¤ä¤á¤¿ (thx nao-pon)
+- PHP_SELF¤âÂç¤­¤Ê»±anti-XSS¤ÎÂÐ¾Ý¤Ë²Ã¤¨¤¿
+- PROTECTOR_VERSION Äê¿ô¤Ç¡¢Protector¤Î¥Ð¡¼¥¸¥ç¥ó¤ò³ÎÇ§¤Ç¤­¤ë¤è¤¦¤Ë¤·¤¿
+- ImpressCMS ¤Ø¤Î¥¤¥ó¥¹¥È¡¼¥ëÊýË¡¤äHTMLPurifier¤ÎÅ¬ÍÑ¤ò²þÁ±¤·¤¿ (thx vaughan)
+- F5Attack¤ä¥¯¥í¡¼¥é¡¼¤Ç¡Ö¥í¥°¤Î¤ß¡×¤Î½èÍý¤¬¤ª¤«¤·¤«¤Ã¤¿¤Î¤ò½¤Àµ (thx ChaFx)
 
 3.32 beta (2009/01/27)
 - nocommon¾õ¶·¤Ç¤ÎDB¥ì¥¤¥ä¡¼¥È¥é¥Ã¥×anti-SQL-InjectionÆ°ºî¤ò²óÈò¤·¤¿ (thx naao)

@@ -71,9 +71,9 @@ function Protector()
 //		die( 'invalid PHP_SELF' ) ;
 //	}
 
-	// sanitize against PHP_SELF/PATH_INFO XSS (enabled in 2.53)
-	$_SERVER['PHP_SELF'] = strtr( @$_SERVER['PHP_SELF'] , array( '<' => '%3C' , '>' => '%3E' , "'" => '%27' , '"' => '%22' ) ) ;
-	if( ! empty( $_SERVER['PATH_INFO'] ) ) $_SERVER['PATH_INFO'] = strtr( @$_SERVER['PATH_INFO'] , array( '<' => '%3C' , '>' => '%3E' , "'" => '%27' , '"' => '%22' ) ) ;
+	// sanitize against PHP_SELF/PATH_INFO XSS (disabled in 3.33)
+//	$_SERVER['PHP_SELF'] = strtr( @$_SERVER['PHP_SELF'] , array( '<' => '%3C' , '>' => '%3E' , "'" => '%27' , '"' => '%22' ) ) ;
+//	if( ! empty( $_SERVER['PATH_INFO'] ) ) $_SERVER['PATH_INFO'] = strtr( @$_SERVER['PATH_INFO'] , array( '<' => '%3C' , '>' => '%3E' , "'" => '%27' , '"' => '%22' ) ) ;
 
 	$this->_bad_globals = array( 'GLOBALS' , '_SESSION' , 'HTTP_SESSION_VARS' , '_GET' , 'HTTP_GET_VARS' , '_POST' , 'HTTP_POST_VARS' , '_COOKIE' , 'HTTP_COOKIE_VARS' , '_SERVER' , 'HTTP_SERVER_VARS' , '_REQUEST' , '_ENV' , '_FILES' , 'xoopsDB' , 'xoopsUser' , 'xoopsUserId' , 'xoopsUserGroups' , 'xoopsUserIsAdmin' , 'xoopsConfig' , 'xoopsOption' , 'xoopsModule' , 'xoopsModuleConfig' ) ;
 
@@ -490,6 +490,7 @@ function bigumbrella_init()
 {
 	$this->_bigumbrella_doubtfuls = array() ;
 	$this->_bigumbrella_check_recursive( $_GET ) ;
+	$this->_bigumbrella_check_recursive( @$_SERVER['PHP_SELF'] ) ;
 
 	if( ! empty( $this->_bigumbrella_doubtfuls ) ) {
 		ob_start( array( $this , 'bigumbrella_outputcheck' ) ) ;
@@ -827,6 +828,9 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 			case 'exit' :
 				$this->output_log( $this->last_error_type , $uid , true , 16 ) ;
 				exit ;
+			case 'none' :
+				$this->output_log( $this->last_error_type , $uid , true , 16 ) ;
+				return true ;
 			case 'biptime0' :
 				if( $can_ban ) $this->register_bad_ips( time() + $this->_conf['banip_time0'] ) ;
 				break ;
@@ -870,6 +874,9 @@ function check_dos_attack( $uid = 0 , $can_ban = false )
 			case 'exit' :
 				$this->output_log( $this->last_error_type , $uid , true , 16 ) ;
 				exit ;
+			case 'none' :
+				$this->output_log( $this->last_error_type , $uid , true , 16 ) ;
+				return true ;
 			case 'biptime0' :
 				if( $can_ban ) $this->register_bad_ips( time() + $this->_conf['banip_time0'] ) ;
 				break ;

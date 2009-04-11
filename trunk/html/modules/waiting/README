@@ -155,7 +155,7 @@ PLUGINS:
 -xfsection (by Bezoops)
 -xyp4all (by flying.tux)
 -yomi search (by nao-pon)
-
+-eguide (by tes)
 
 
 
@@ -167,6 +167,8 @@ ver 0.95|
 - added french (thx marco)
 - added portuguesebr (thx Izzy)
 - added persian (thx stranger) 0.95a
+- a plugin added
+-- eguide (by tes) 0.95b
 
 ver 0.94b|
 - modified the module icon (thx Argon)

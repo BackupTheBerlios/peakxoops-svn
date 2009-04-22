@@ -50,7 +50,7 @@ This modification makes that plug-ins need not to return the information of the 
 
 
 
-This module is made by Ryuji (http://ryus.biz/)
+This module is made by Ryuji (http://ryus.co.jp/)
 If you can read Japanese, let's visit Ryuji's site!
 
 
@@ -59,7 +59,8 @@ If you can read Japanese, let's visit Ryuji's site!
 
 waitingモジュール
 
-詳細は、http://ryus.biz/modules/bwiki/index.php?XOOPS2%2Fwaiting でご確認ください。
+元はRyujiさん作のモジュールでしたが、いつの間にかメンテナンスを引き受けたような形になってます。
+http://ryus.co.jp/
 
 *概要
 プラグインで拡張可能な承認待ちコンテンツブロック
@@ -160,6 +161,7 @@ PLUGINS:
 
 
 
+
 CHANGES:
 
 ver 0.95|
@@ -169,6 +171,8 @@ ver 0.95|
 - added persian (thx stranger) 0.95a
 - a plugin added
 -- eguide (by tes) 0.95b
+- languge files added
+-- ja_utf8 0.95c
 
 ver 0.94b|
 - modified the module icon (thx Argon)

@@ -1,8 +1,8 @@
 <?php
 // $Id: admin.php,v 1.1 2004/10/31 08:17:48 ryuji_amano Exp $
 // FILE		::	admin.php
-// AUTHOR	::	Ryuji AMANO <info@ryus.biz>
-// WEB		::	Ryu's Planning <http://ryus.biz/>
+// AUTHOR	::	Ryuji AMANO <info@ryus.co.jp>
+// WEB		::	Ryu's Planning <http://ryus.co.jp/>
 //
 
 define('_AM_WAITING_MODNAME', 'モジュール名');

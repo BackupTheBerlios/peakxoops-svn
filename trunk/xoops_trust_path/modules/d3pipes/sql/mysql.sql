@@ -105,6 +105,12 @@ INSERT INTO joints (joint_type,default_class) VALUES ('utf8from','mbstring');
 INSERT INTO joints (joint_type,default_class) VALUES ('utf8to','mbstring');
 INSERT INTO joints (joint_type,default_class) VALUES ('union','mergesort');
 INSERT INTO joints (joint_type,default_class) VALUES ('clip','moduledb');
+INSERT INTO joints (joint_type,default_class) VALUES ('cache','trustpath');
+INSERT INTO joints (joint_type,default_class) VALUES ('ping','xmlrpc2');
+INSERT INTO joints (joint_type,default_class) VALUES ('reassign','allowhtml');
+INSERT INTO joints (joint_type,default_class) VALUES ('block','d3forumtopics');
+INSERT INTO joints (joint_type,default_class) VALUES ('replace','mbregex');
+INSERT INTO joints (joint_type,default_class) VALUES ('sort','pubtimedsc');
 
 
 CREATE TABLE joint_classes (

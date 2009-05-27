@@ -51,6 +51,12 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 
 [b]CHANGELOG[/b]
 
+0.67 2009-05-27
+- added defaults for all joint_class into mysql.sql
+- added reassign joints
+-- pico_ef_except
+- modified a joint D3pipesBlockBulletinlist
+
 0.66 2009-01-18
 - added a parse joint D3pipesParsePhpbbactivetopics.class.php
 - modified D3pipesBlockPicolist.class.php fetches ef and tags
@@ -339,13 +345,21 @@ htmlе╒ейеые└─╛▓╝д╦двды sitemap.php дЄ mainfile.php д╚╞▒д╕│м┴╪д╦е│е╘б╝д╖д╞дпд└д╡д
 
 б№╣╣┐╖═·╬Є
 
+0.67 2009-05-27
+- е╕ечедеєе╚╜щ┤№└▀─ъд╟бв┴┤е╕ечедеєе╚е┐еде╫д╦д─ддд╞е╟е╒ейеые╚епеще╣дЄ└▀─ъд╖д┐
+- ║╞│фдъ┼Ўд╞е╕ечедеєе╚д╬─╔▓├
+-- pico_ef_except
+- D3pipesBlockBulletinlist д╬╚∙─┤└░
+
 0.66 2009-01-18
 - phpbb═╤е╤б╝е╣е╕ечедеєе╚─╔▓├ (д╩д╝длRSS╢╪╗▀д╦д╩д├д╞дддыsf.net┬╨║Ў)
 - picoд╬╞т╔Ї╝ш╞└е╕ечедеєе╚д╟бвefдфtagsдЄ┼╧д╣дшджд╦д╖д┐
 - е│есеєе╚┼¤╣чд╬╔╜╝и╜ч╗╪─ъ─╔▓├
 - d3blog═╤е╕ечедеєе╚д╟ецб╝е╢IDд╬╗╪─ъдм▓─╟╜д╦д╩д├д┐ (thx hodaka) 0.66a
 - ╕└╕ье╒ебедеы─╔▓├
--- portuguesebr (thx leco)
+-- portuguesebr (thx leco) 0.66a
+- ╕└╕ье╒ебедеы╣╣┐╖
+-- persian (thx voltan) 0.66b
 - е╓еэе├епе╕ечедеєе╚─╔▓├
 -- eguide2 0.66c
 

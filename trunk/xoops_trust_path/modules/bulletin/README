@@ -36,6 +36,7 @@ HD-2.14以降では、d3commentプラグイン必須となりました。アーカイブ内のhtml/class/s
 HD-2.17 (2009-01-18)
 - added comment order (thx naao)
 - fixed tellafriend link (thx masunari) 2.17a
+- fixed invalid topicid (thx hsmt) 2.17b
 
 HD-2.16 (2008-09-21)
 - modified storynum selection can be changed just by the template

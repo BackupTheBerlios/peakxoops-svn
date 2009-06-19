@@ -34,7 +34,7 @@ class Bulletin extends XoopsObject{
 		$this->initVar("hometext", XOBJ_DTYPE_TXTAREA, null, false);
 		$this->initVar("bodytext", XOBJ_DTYPE_TXTAREA, null, false);
 		$this->initVar("counter", XOBJ_DTYPE_INT, 0, false);
-		$this->initVar("topicid", XOBJ_DTYPE_INT, 1, false);
+		$this->initVar("topicid", XOBJ_DTYPE_INT, 0, false);
 		$this->initVar("ihome", XOBJ_DTYPE_INT, 1, false);
 		$this->initVar("type", XOBJ_DTYPE_INT, 1, false);
 		$this->initVar("topicimg", XOBJ_DTYPE_INT, 1, false);

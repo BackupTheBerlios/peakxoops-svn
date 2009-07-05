@@ -168,6 +168,10 @@ minahito, marcan, and phppp BEST REGARDS!
 
 = CHANGES =
 
+3.34 beta (2009/07/06)
+- modified comment attacking detection of DBL anti-SQL-Injection
+- added an option for some environment always enables DBL trapping
+
 3.33 beta (2009/04/03)
 - stopped to force rewriting PHP_SELF and PATH_INFO (thx nao-pon)
 - added checking PHP_SELF into bigumbrella anti-XSS
@@ -501,6 +505,10 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 
 
 ●変更履歴
+
+3.34 beta (2009/07/06)
+- DBレイヤートラップanti-SQL-Injectionのコメントに対する動作を緩和した
+- DBレイヤートラップが常にONになってしまう環境に対応するオプションの追加
 
 3.33 beta (2009/04/03)
 - PHP_SELFやPATH_INFOの特殊文字強制変換をやめた (thx nao-pon)

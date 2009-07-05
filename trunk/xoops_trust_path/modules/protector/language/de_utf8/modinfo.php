@@ -5,6 +5,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-07-06 05:46:54
+define($constpref.'_DBTRAPWOSRV','Never checking _SERVER for anti-SQL-Injection');
+define($constpref.'_DBTRAPWOSRVDSC','Some servers always enable DB Layer trapping. It causes wrong detections as SQL Injection attack. If you got such errors, turn this option on. You should know this option weakens the security of DB Layer trapping anti-SQL-Injection.');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

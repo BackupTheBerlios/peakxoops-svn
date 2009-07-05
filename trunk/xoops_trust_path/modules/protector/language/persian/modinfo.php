@@ -6,6 +6,11 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-07-06 05:46:52
+define($constpref.'_DBTRAPWOSRV','Never checking _SERVER for anti-SQL-Injection');
+define($constpref.'_DBTRAPWOSRVDSC','Some servers always enable DB Layer trapping. It causes wrong detections as SQL Injection attack. If you got such errors, turn this option on. You should know this option weakens the security of DB Layer trapping anti-SQL-Injection.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:53
 define($constpref.'_DBLAYERTRAP','فعال سازی سیستم تله گذاری لایه های پایگاه داده ها در برابر تزریق به sql یا ( DB Layer trapping anti-SQL-Injection ) ');
 define($constpref.'_DBLAYERTRAPDSC','همچنین حملات تزریق به SQL توسط این گزینه دفع میشوند. این ویژگی لازم دارد که توسط databasefactory پشتیبانی شود. شما میتوانید این گزینه را در صفحه مشاوره امنیتی برسی کنید.');

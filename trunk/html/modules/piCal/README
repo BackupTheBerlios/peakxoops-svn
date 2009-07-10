@@ -8,6 +8,16 @@
                                 (in XOOPS site, my uname is GIJOE)
 
 
+(0) Important Notification
+
+piCal >= 0.93 can work under the environment with Protector's BigUmbrella anti-XSS.
+
+If you don't want such a limitation, don't install/update it.
+
+If you dare to use piCal, install Protector module and confirm the 
+preference "BigUmbrella ant-XSS" is enabled.
+
+
 (1) What about piCal?
 
 piCal is an independent calendar class of php.
@@ -99,6 +109,22 @@ see COPYING for detail.
                                 GIJ=CHECKMATE <gij@peak.ne.jp>
                                 PEAK Corp.   http://www.peak.ne.jp/
                              （XOOPS関連サイトでは、GIJOEというハンドルです）
+
+●重要な通知
+
+piCalは設計の古いモジュールであり、どこかにXSSがあっても不思議はあり
+ません。そんなXSSが後から見つかってJPCERT/CCなどに報告されても、とて
+も対処しきれないので、0.93以降では、Protectorの「大きな傘 Anti-XSS」
+が有効でないと、一切動作しないように仕様変更しました。
+
+この仕様変更が痛いようなら、piCalのアップデートやインストールをしない
+でください。
+
+「大きな傘 Anti-XSS」は、最新のProtectorをインストールすれば、自動的
+に有効になっているはずですが、古いバージョンからのアップデートだと、
+OFFのままかもしれません。piCal 0.93以上をインストール/アップデートす
+る際には、必ずその機能がONになっていることを確認してください。
+
 
 ●piCalとは
 

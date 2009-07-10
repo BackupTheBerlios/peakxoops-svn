@@ -18,6 +18,13 @@
 	// anti-XoopsErrorHandler
 	// restore_error_handler() ;
 
+	// piCal cannot work without Protector's BigUmbrella.
+	$rs= $xoopsDB->query( "SELECT conf_value FROM ".$xoopsDB->prefix('config')." WHERE conf_name='enable_bigumbrella'" ) ;
+	@list( $bigumbrella_enabled ) = $xoopsDB->fetchRow( $rs ) ;
+	if( empty( $bigumbrella_enabled ) ) {
+		die( 'piCal cannot work without Protector\'s BigUmbrella anti-XSS.' ) ;
+	}
+
 	// get my mid
 	$rs = $xoopsDB->query( "SELECT mid FROM ".$xoopsDB->prefix('modules')." WHERE dirname LIKE '$mydirname'" ) ;
 	list( $mid ) = $xoopsDB->fetchRow( $rs ) ;

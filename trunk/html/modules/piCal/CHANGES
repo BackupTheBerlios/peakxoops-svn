@@ -1,6 +1,10 @@
 [xlang:en]
 
-v.092
+v.093 (2009-07-10)
+- changed piCal cannot work without Protector's BigUmbrella Anti-XSS (IMPORTANT!)
+- updated a plugin for eguide2 (thx nobu)
+
+v.092 (2009-02-20)
 - fixed XSS in index.php (thx JPCERT/CC)
 - fixed wrong specifying the template for printing (thx ttts)
 - modified a compatibility with 2.3 from xoops.org (thx Zorro)
@@ -392,7 +396,12 @@ v0.10 (2003-4-23)
 [/xlang:en]
 [xlang:ja]
 
-v.092
+v.093 (2009-07-10)
+- Protectorの大きな傘Anti-XSSが有効でないと一切動作しないように仕様変更した
+- 日本の祝日データを2015年まで追加した
+- eguide2用プラグインのアップデート (thx nobu)
+
+v.092 (2009-02-20)
 - index.phpにXSS脆弱性が１箇所残っていたのを修正 (thx JPCERT/CC)
 - 印刷用テンプレートを修正 (thx ttts)
 - 一応、本家版2.3との相性問題を若干手直ししてみた (thx Zorro)

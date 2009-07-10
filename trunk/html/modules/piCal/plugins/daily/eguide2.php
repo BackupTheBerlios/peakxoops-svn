@@ -28,7 +28,7 @@
         $cond = isset($_GET['eid'])?" AND e.eid=".intval($_GET['eid']):"";
 	$result = $db->query( "SELECT title,e.eid,exid,
 IF(exdate,exdate,edate) edate,summary, 
-IF(x.reserved,x.reserved,o.reserved)/persons*100, closetime, style FROM ".
+IF(x.reserved,x.reserved,o.reserved)/IF(expersons,expersons,persons)*100, closetime, style FROM ".
 			      $db->prefix("eguide")." e LEFT JOIN ".
 			      $db->prefix("eguide_opt")." o ON e.eid=o.eid LEFT JOIN ".
 			      $db->prefix("eguide_extent")." x ON e.eid=eidref 

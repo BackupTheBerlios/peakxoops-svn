@@ -27,9 +27,9 @@ CREATE TABLE pical1_event (
   end_date date,
   cid smallint(5) unsigned zerofill NOT NULL default '0',
   comments mediumint(8) unsigned NOT NULL default '0',
-  event_tz float(2,1) NOT NULL default 0.0,
-  server_tz float(2,1) NOT NULL default 0.0,
-  poster_tz float(2,1) NOT NULL default 0.0,
+  event_tz float(3,1) NOT NULL default 0.0,
+  server_tz float(3,1) NOT NULL default 0.0,
+  poster_tz float(3,1) NOT NULL default 0.0,
 
   extkey0 INT(10) unsigned zerofill NOT NULL DEFAULT 0,
   extkey1 INT(10) unsigned zerofill NOT NULL DEFAULT 0,

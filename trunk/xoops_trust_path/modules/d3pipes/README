@@ -51,6 +51,9 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 
 [b]CHANGELOG[/b]
 
+0.68 2009-08-08
+- patched for the bug of libxml 2.7.0 - 2.7.3 (thx toychee)
+
 0.67 2009-05-27
 - added defaults for all joint_class into mysql.sql
 - added reassign joints
@@ -344,6 +347,9 @@ html¥Õ¥©¥ë¥ÀÄ¾²¼¤Ë¤¢¤ë sitemap.php ¤ò mainfile.php ¤ÈÆ±¤¸³¬ÁØ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤
 
 
 ¡ü¹¹¿·ÍúÎò
+
+0.68 2009-08-08
+- libxml 2.7.0 - 2.7.3 ¤Ç¥¿¥°¤¬¾Ã¤¨¤Æ¤·¤Þ¤¦¥Ð¥°¤ËÂÐ±þ (thx toychee)
 
 0.67 2009-05-27
 - ¥¸¥ç¥¤¥ó¥È½é´üÀßÄê¤Ç¡¢Á´¥¸¥ç¥¤¥ó¥È¥¿¥¤¥×¤Ë¤Ä¤¤¤Æ¥Ç¥Õ¥©¥ë¥È¥¯¥é¥¹¤òÀßÄê¤·¤¿

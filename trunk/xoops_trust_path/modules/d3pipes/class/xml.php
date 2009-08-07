@@ -80,6 +80,12 @@ class XML{
 		$this->document = array();
 		$this->stack    = array();
 		$this->parent   = &$this->document;
+		//libxml2 2.7.0 -2.7.2 stripping leading angle brackets bug patch
+		// thx toychee
+		if( defined( 'LIBXML_DOTTED_VERSION' ) && in_array( LIBXML_DOTTED_VERSION , array( '2.7.0' , '2.7.1' , '2.7.2' , '2.7.3' ) ) ) {
+			$data = str_replace( array( '&lt;' , '&gt;' , '&amp;' ) , array( '&#60' , '&#62' , '&#38' ) , $data ) ;
+		}
+		//end Fix
 		// return xml_parse(&$this->parser, &$data, true) ? $this->document : NULL; // GIJ
 		$ret = @xml_parse($this->parser, $data, true) ? $this->document : NULL;
 		return $ret ;

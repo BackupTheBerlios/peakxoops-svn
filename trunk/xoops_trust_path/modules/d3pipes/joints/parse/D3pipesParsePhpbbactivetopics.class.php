@@ -11,7 +11,7 @@ class D3pipesParsePhpbbactivetopics extends D3pipesParseAbstract {
 		$pipe4assign = d3pipes_common_get_pipe4assign( $this->mydirname , $this->pipe_id ) ;
 		$base_url = substr( $pipe4assign['url'] , 0 , strrpos( $pipe4assign['url'] , '/' ) ) ;
 
-		$result = preg_match_all( '#class\=\"topictitle\"\>([^<]+)\<\/a\>.*viewtopic.php\?f\=(\d+)\&amp\;t\=(\d+)\&[^"]+p=(\d+)\D+.*\<br \/\>on ([^<]+)\<br \/\>#sU' , $html_source , $matches , PREG_SET_ORDER ) ;
+		$result = preg_match_all( '#class\=\"topictitle\"\>([^<]+)\<\/a\>.*viewtopic.php\?f\=(\d+)\&amp\;t\=(\d+)\&[^"]+p=(\d+)\D+.*\<br \/\>([^<]+)\<br \/\>#sU' , $html_source , $matches , PREG_SET_ORDER ) ;
 		if( $result === false ) {
 			$this->errors[] = _MD_D3PIPES_ERR_PARSETYPEMISMATCH."\n($this->pipe_id)" ;
 		}

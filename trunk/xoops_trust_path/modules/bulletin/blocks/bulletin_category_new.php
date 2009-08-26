@@ -152,14 +152,14 @@ function b_bulletin_category_new_show($options) {
 	}
 
 	if( ! empty( $block ) ) {
+		$block['mod_config'] = @$bulletin_configs ;
 		$block['lang_postedby'] = _POSTEDBY;
-		$block['lang_on'] = _ON;
-		$block['lang_reads'] = _READS;
-		$block['lang_morelink'] = _MB_BULLETIN_MORE;
+		$block['lang_on']       = _ON;
+		$block['lang_reads']    = _READS;
 		$block['lang_readmore'] = _MB_BULLETIN_READMORE;
+		$block['type']  = $selected_order;
 		$block['mydirurl'] = XOOPS_URL.'/modules/'.$mydirname;;
 		$block['mydirname'] = $mydirname;
-		$block['type'] = $selected_order;
 	}
 
 	return $block;

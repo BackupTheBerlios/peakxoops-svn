@@ -3,6 +3,12 @@
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( 'BULLETIN_MB_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-08-26 16:24:56
+define('_MD_INPUTHELPER','Input Helper ON/OFF');
+define('_MD_FCKXOOPS_ONOFF','FCK Editor ON/OFF (Note: Each of editors don&#039;t share the text)');
+define('_MD_ERROR_REQUIRED','{0} is a required field.');
+
 // Appended by Xoops Language Checker -GIJOE- in 2007-05-08 12:57:29
 define('_MD_TOPIC_IMAGE','Category image');
 define('_MD_TOPIC_DISABLE','Do not display category icon');

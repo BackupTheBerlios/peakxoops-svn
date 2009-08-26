@@ -10,7 +10,12 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 This HD version needs altsys essentially.
 Install "altsys" before install it.
 
-Don't forget copying html/class/smarty/plugins/function.d3comment.php too.
+Don't forget copying these plugin files.
+- html/class/smarty/plugins/function.d3comment.php
+- html/class/smarty/plugins/function.xoopsdhtmltextarea.php
+
+They are the same files included in the other "D3 modules".
+
 
 [/xlang:en]
 [xlang:ja]
@@ -21,17 +26,26 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 2.04-009以降、altsys必須モジュールとなりました。先にaltsysをインストールしておいてください。
 
-HD-2.14以降では、d3commentプラグイン必須となりました。アーカイブ内のhtml/class/smarty/plugins/function.d3comment.php もコピーしてください。
+アーカイブ内のSmartyプラグインも忘れずにコピーしてください。
+- html/class/smarty/plugins/function.d3comment.php
+- html/class/smarty/plugins/function.xoopsdhtmltextarea.php
+これらは、他のD3モジュールに含まれているものと同じなので、すでにコピー済なら問題ありません。
+
 
 １年近く、ハック版としてメンテしてきましたが、ホダ塾ディストリビューションに収録するに当たって、問題のありそうなコードをかなり大元から書き直しました。
 
-逆に、新たな動作不良などを生み出してしまった可能性もあるため、ホダ塾ディストリビューション版bulletin すなわち bulletinHD として新しくメンテすることにしました。
+逆に、新たな動作不良などを生み出してしまった可能性もあるため、ホダ塾ディストリビューション版bulletin すなわち bulletinHD として新しくメンテすることにしました。ただ一部で誤解があるようですが、bulletinHDにはXCL2.1でしか動かない、なんて意味はありません。他のD3モジュール同様、bulletinHDはX2で当然に動作しますし、ImpressCMSもXCL2.1も動作対象コアです。
 
 [/xlang:ja]
 
 
 
 =CHANEGLOG=
+
+HD-2.20 (2009-08-26)
+- templatized submit form (special thx takitoh)
+- modified text editor can be switched seamlessly
+- fixed mod_config is not assigned for some blocks (thx k_okamoto)
 
 HD-2.17 (2009-01-18)
 - added comment order (thx naao)

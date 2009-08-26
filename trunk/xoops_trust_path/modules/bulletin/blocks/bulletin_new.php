@@ -112,6 +112,7 @@ function b_bulletin_new_show($options) {
 	}
 
 	if( ! empty( $block ) ) {
+		$block['mod_config'] = @$bulletin_configs ;
 		$block['lang_postedby'] = _POSTEDBY;
 		$block['lang_on']       = _ON;
 		$block['lang_reads']    = _READS;

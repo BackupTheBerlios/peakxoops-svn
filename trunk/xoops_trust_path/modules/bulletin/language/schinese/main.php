@@ -1,6 +1,12 @@
 <?php /* English Translation by Marcelo Yuji Himoro <http://yuji.ws> */
 
 //          index.php          //
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-08-26 16:24:55
+define('_MD_INPUTHELPER','Input Helper ON/OFF');
+define('_MD_FCKXOOPS_ONOFF','FCK Editor ON/OFF (Note: Each of editors don&#039;t share the text)');
+define('_MD_ERROR_REQUIRED','{0} is a required field.');
+
 define('_MD_PRINTER', '打印页面');
 define('_MD_SENDSTORY', '转发好友');
 define('_MD_READMORE', '阅读详情...');

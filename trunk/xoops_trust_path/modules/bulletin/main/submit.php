@@ -54,10 +54,15 @@ if( $storyid > 0 && !$isadmin ){
 // トピックIDが指定されている場合
 if( isset( $_GET['topicid'] ) ) $story->setVar('topicid', $_GET['topicid']);
 
+// エディタ切替の結果を反映
+if( ! empty( $_REQUEST['using_fck'] ) ) {
+	$_POST['text'] = $_POST['text_fck'] ;
+}
+
 // ホワイトリストによるサニタイズ
 $str_arr = array('title','text');
-$int_arr = array('topicid','type','topicimg','published','expired','approve');
-$bai_arr = array('html','smiley','br','xcode','autodate','autoexpdate','notifypub','block','ihome');
+$int_arr = array('topicid','type','topicimg','published','expired');
+$bai_arr = array('html','smiley','br','xcode','autodate','autoexpdate','notifypub','block','ihome','approve');
 foreach( $str_arr as $k ){
 	if( isset($_POST[$k]) ) $story->setVar($k, $_POST[$k]);
 }
@@ -263,8 +268,9 @@ if( $op == 'preview' ){
 
 	$p_title    = $myts->makeTboxData4Preview($story->getVar('title', 'n'), 0, 0);
 	$p_hometext = str_replace('[pagebreak]', '<br style="page-break-after:always;" />', $myts->previewTarea($story->getVar('text', 'n'), $story->getVar('html'), $story->getVar('smiley'), $story->getVar('xcode'), 1, $story->getVar('br')));
-	themecenterposts($p_title, $p_hometext);
-	echo '<br />';
+//	themecenterposts($p_title, $p_hometext);
+//	echo '<br />';
+	$xoopsTpl->assign('preview', array('title' => $p_title, 'hometext' => $p_hometext));
 	
 	$op = 'form';
 }
@@ -296,11 +302,13 @@ if( $op == 'form' ){
 		$autoexp = time();
 	}
 
-//	$xoopsOption['template_main'] = "{$mydirname}_submit.html";
+	$xoopsOption['template_main'] = "{$mydirname}_submit.html";
+//	require_once sprintf('%s/modules/legacy/language/%s/main.php' ,XOOPS_ROOT_PATH, $xoopsConfig['language']);
 
 	require_once XOOPS_ROOT_PATH.'/header.php';
 	if( !empty($errors) ) xoops_error($errors);
-	require dirname(dirname(__FILE__)).'/include/storyform.inc.php';
+	// require dirname(dirname(__FILE__)).'/include/storyform.inc.php';
+	require dirname(dirname(__FILE__)).'/include/storyform_templatevars.inc.php';
 	$xoopsTpl->assign( 'xoops_breadcrumbs' , array(
 		array( 'name' => $xoopsModule->getVar('name') , 'url' => XOOPS_URL.'/modules/'.$mydirname.'/' ) ,
 		array( 'name' => _MD_SUBMITNEWS ) ,

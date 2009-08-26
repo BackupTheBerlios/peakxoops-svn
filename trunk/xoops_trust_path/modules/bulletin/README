@@ -12,7 +12,7 @@ Install "altsys" before install it.
 
 Don't forget copying these plugin files.
 - html/class/smarty/plugins/function.d3comment.php
-- html/class/smarty/plugins/function.xoopsdhtmltextarea.php
+- html/class/smarty/plugins/function.xoopsdhtmltarea.php
 
 They are the same files included in the other "D3 modules".
 
@@ -28,7 +28,7 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 アーカイブ内のSmartyプラグインも忘れずにコピーしてください。
 - html/class/smarty/plugins/function.d3comment.php
-- html/class/smarty/plugins/function.xoopsdhtmltextarea.php
+- html/class/smarty/plugins/function.xoopsdhtmltarea.php
 これらは、他のD3モジュールに含まれているものと同じなので、すでにコピー済なら問題ありません。
 
 

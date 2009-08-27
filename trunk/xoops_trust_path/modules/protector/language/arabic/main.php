@@ -1,13 +1,10 @@
 <?php
 
-
-// Appended by Xoops Language Checker -GIJOE- in 2008-11-21 04:44:31
-define('_MD_PROTECTOR_FMT_JAILINFO','This restriction will be expired on %s');
-define('_MD_PROTECTOR_FMT_JAILTIME','Y-m-j H:i:s');
-define('_MD_PROTECTOR_BANDWIDTHLIMITED','This site is very crowed now. try later.');
-
-define('_MD_PROTECTOR_YOUAREBADIP',' ÇäÊå ãÓÌá ÈÞÇÆãÉ ÇáãääæÚíä ãä ÒíÇÑÉ ÇáãæÞÚ . Êã ÈæÇÓØÉ ÈÑäÇãÌ ÇáÍãÇíÉ..') ;
-define('_MD_PROTECTOR_TURNJAVASCRIPTON','Þã ÈÊÝÚíá ÇáÌÇÝÇ ãä ãÊÕÝÍß') ;
-define('_MD_PROTECTOR_DENYBYRBL','Êã ÑÝÖ ãÔÇÑßÊß áÇäß ãÓÌá ÈÞÇÆãÉ ÇáããäæÚíä ãä ÇáÇÖÇÝÉ') ;
+define('_MD_PROTECTOR_YOUAREBADIP','ÇáÇíÈí  ÇáÎÇÕ Èß Êã ãäÚÉ ÈæÇÓØÉ ÈÑäÇãÌ ÇáÍãÇíÉ Ýí ÇáãæÞÚ<br />') ;
+define('_MD_PROTECTOR_FMT_JAILINFO','ÓíÊã ÇÒÇáÉ ÇáãäÚ Úäß Ýí  %s') ;
+define('_MD_PROTECTOR_FMT_JAILTIME','Y-m-j H:i:s') ;
+define('_MD_PROTECTOR_BANDWIDTHLIMITED','ÇáãæÞÚ ÊÍÊ ÖÛØ ÔÏíÏ . ÑÌÇÁ ÍÇæá ÇáÑÌæÚ ááãæÞÚ ãÑå ÇÎÑì') ;
+define('_MD_PROTECTOR_TURNJAVASCRIPTON','Þã ÈÊÝÚíá ÇáÌÇÝÇ Ýí ãÊÕÝÍß') ;
+define('_MD_PROTECTOR_DENYBYRBL','ÞÇã ÈÑäÇãÌ ÇáÍãÇíÉ áÏíäÇ ÈÑÝÖ ãÞÇáÊß áÇä ÇáÇíÈí ÇáÎÇÕ Èß ãÓÌá áÏíäÇ Úáì ÇÓÇÓ ÓÈÇã') ;
 
 ?>

@@ -4,7 +4,7 @@
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:53
 define('_AM_ADV_DBFACTORYPATCHED',' فایل databasefactory شما برای  فعال سازی سیستم تله گذاری لایه های پایگاه داده ها در برابر تزریق به sql یا( DB Layer trapping anti-SQL-Injection )  آماده است.');
-define('_AM_ADV_DBFACTORYUNPATCHED',' فایل databasefactory شما برای  فعال سازی سیستم تله گذاری لایه های پایگاه داده ها در برابر تزریق به sql یا( DB Layer trapping anti-SQL-Injection )  آماده نیست. چند بسته لازم است.');
+define('_AM_ADV_DBFACTORYUNPATCHED',' فایل databasefactory شما برای  فعال سازی سیستم تله گذاری لایه های پایگاه داده ها در برابر تزریق به sql یا( DB Layer trapping anti-SQL-Injection )  آماده نیست. شما باید چند فایل را ویرایش کنید.');
 
 define('_MD_A_MYMENU_MYTPLSADMIN','');
 define('_MD_A_MYMENU_MYBLOCKSADMIN','دسترسی ها');

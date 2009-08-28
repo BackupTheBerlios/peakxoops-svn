@@ -171,6 +171,8 @@ minahito, marcan, and phppp BEST REGARDS!
 3.36 beta (2009/08/27)
 - updated HTMLPurifier into 4.0.0
 - added a filter postcommon_post_htmlpurify4everyone.php
+- updated language files
+-- persian (thx voltan) 3.36a
 
 3.35 beta (2009/08/13)
 - fixed english modinfo.php is always loaded. (thx Phoenyx)
@@ -523,6 +525,8 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 - HTMLPurifier を 4.0.0 に更新
 - フィルター追加
 -- postcommon_post_htmlpurify4everyone.php (POSTが常にHTMLPurifierを通過する)
+- 言語ファイル更新
+-- persian (thx voltan) 3.36a
 
 3.35 beta (2009/08/13)
 - ImpressCMS等でmodinfo.phpが常に英語になっていたのを修正 (thx Phoenyx)

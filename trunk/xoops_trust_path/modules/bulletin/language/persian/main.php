@@ -3,9 +3,9 @@
 //          index.php          //
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-08-26 16:24:56
-define('_MD_INPUTHELPER','Input Helper ON/OFF');
-define('_MD_FCKXOOPS_ONOFF','FCK Editor ON/OFF (Note: Each of editors don&#039;t share the text)');
-define('_MD_ERROR_REQUIRED','{0} is a required field.');
+define('_MD_INPUTHELPER','راهنمای ورود روشن/خاموش');
+define('_MD_FCKXOOPS_ONOFF','ویرایشگر FCK روشن/خاموش (توجه: هیچ کدام از ویرایشگر ها نمیتوانند متن را منتشر کنند)');
+define('_MD_ERROR_REQUIRED','{0} فیلد لازم است.');
 
 define("_MD_PRINTER","صفحه پرینت خبر");
 define("_MD_SENDSTORY","ارسال این خبر برای دوستان");

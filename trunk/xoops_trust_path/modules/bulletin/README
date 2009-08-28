@@ -46,6 +46,8 @@ HD-2.20 (2009-08-26)
 - templatized submit form (special thx takitoh)
 - modified text editor can be switched seamlessly
 - fixed mod_config is not assigned for some blocks (thx k_okamoto)
+- updated language files
+-- persian (thx voltan) 2.20a
 
 HD-2.17 (2009-01-18)
 - added comment order (thx naao)

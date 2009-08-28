@@ -171,6 +171,7 @@ minahito, marcan, and phppp BEST REGARDS!
 3.36 beta (2009/08/27)
 - updated HTMLPurifier into 4.0.0
 - added a filter postcommon_post_htmlpurify4everyone.php
+- added a filter postcommon_post_register_moratorium.php 3.36a
 - updated language files
 -- persian (thx voltan) 3.36a
 
@@ -525,6 +526,7 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 - HTMLPurifier を 4.0.0 に更新
 - フィルター追加
 -- postcommon_post_htmlpurify4everyone.php (POSTが常にHTMLPurifierを通過する)
+-- postcommon_post_register_moratorium.php (登録直後のURL付投稿を禁止する) 3.36a
 - 言語ファイル更新
 -- persian (thx voltan) 3.36a
 

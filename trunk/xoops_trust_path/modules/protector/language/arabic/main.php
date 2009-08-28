@@ -1,5 +1,9 @@
 <?php
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-08-29 04:13:44
+define('_MD_PROTECTOR_FMT_REGISTER_MORATORIUM','Post it again %s minutes later. (for Anti-SPAMMING, sorry)');
+
 define('_MD_PROTECTOR_YOUAREBADIP','«·«Ì»Ì  «·Œ«’ »ﬂ  „ „‰⁄… »Ê«”ÿ… »—‰«„Ã «·Õ„«Ì… ›Ì «·„Êﬁ⁄<br />') ;
 define('_MD_PROTECTOR_FMT_JAILINFO','”Ì „ «“«·… «·„‰⁄ ⁄‰ﬂ ›Ì  %s') ;
 define('_MD_PROTECTOR_FMT_JAILTIME','Y-m-j H:i:s') ;

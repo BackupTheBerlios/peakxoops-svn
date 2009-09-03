@@ -42,6 +42,9 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 =CHANEGLOG=
 
+HD-2.21 (2009-09-04)
+- fixed environment problem with magic_quotes_gpc (thx k_okamoto)
+
 HD-2.20 (2009-08-26)
 - templatized submit form (special thx takitoh)
 - modified text editor can be switched seamlessly

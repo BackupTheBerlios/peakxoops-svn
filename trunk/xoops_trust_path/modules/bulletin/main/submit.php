@@ -266,8 +266,14 @@ if( $op == 'preview' ){
 
 	require_once XOOPS_ROOT_PATH.'/header.php';
 
-	$p_title    = $myts->makeTboxData4Preview($story->getVar('title', 'n'), 0, 0);
-	$p_hometext = str_replace('[pagebreak]', '<br style="page-break-after:always;" />', $myts->previewTarea($story->getVar('text', 'n'), $story->getVar('html'), $story->getVar('smiley'), $story->getVar('xcode'), 1, $story->getVar('br')));
+	// remove extra slashes only for preview
+	if( get_magic_quotes_gpc() ) {
+		$story->setVar( 'title' , stripslashes( $story->getVar( 'title' , 'n' ) ) ) ;
+		$story->setVar( 'text' , stripslashes( $story->getVar( 'text' , 'n' ) ) ) ;
+	}
+
+	$p_title = $myts->makeTboxData4Show($story->getVar('title', 'n'), 0, 0);
+	$p_hometext = str_replace('[pagebreak]', '<br style="page-break-after:always;" />', $myts->displayTarea($story->getVar('text', 'n'), $story->getVar('html'), $story->getVar('smiley'), $story->getVar('xcode'), 1, $story->getVar('br')));
 //	themecenterposts($p_title, $p_hometext);
 //	echo '<br />';
 	$xoopsTpl->assign('preview', array('title' => $p_title, 'hometext' => $p_hometext));

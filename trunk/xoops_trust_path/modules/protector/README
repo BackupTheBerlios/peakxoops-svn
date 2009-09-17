@@ -171,7 +171,7 @@ minahito, marcan, and phppp BEST REGARDS!
 3.40 (2009/09/16)
 - numbered as a STABLE version
 - renamed from "Xoops Protector" to "Protector" simply
-- modified module icons for some forked cores
+- modified module icons for some forked cores (thx rene)
 
 3.36 beta (2009/08/27)
 - updated HTMLPurifier into 4.0.0
@@ -530,7 +530,7 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 3.40 (2009/09/16)
 - 安定版として番号を振り直した
 - "Xoops Protector" という名前をやめてシンプルに "Protector" へと変更した
-- ImpressCMSおよびXCL対応アイコンを用意した
+- ImpressCMSおよびXCL対応アイコンを用意した (thx rene)
 
 3.36 beta (2009/08/27)
 - HTMLPurifier を 4.0.0 に更新

@@ -35,7 +35,7 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions');
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Xoops Protector");
+define($constpref."_NAME","Protector");
 
 // A brief description of this module
 define($constpref."_DESC","Dieses Modul schützt vor Angriffen aufür Ihre Xoops-Seite (DoS , SQL Injektion und Variablen Infektionen)");

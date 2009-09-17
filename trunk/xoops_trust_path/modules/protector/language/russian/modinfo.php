@@ -35,7 +35,7 @@ define($constpref.'_ADMENU_MYBLOCKSADMIN','Permissions');
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Сторож XOOPS");
+define($constpref."_NAME","Стор");
 
 // A brief description of this module
 define($constpref."_DESC","Этот модуль защищает ваш сайт на базе XOOPS от различного вида атак, таких как: DoS, SQL Injection и порчи переменных.");

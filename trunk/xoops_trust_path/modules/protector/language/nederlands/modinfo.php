@@ -24,7 +24,7 @@ define($constpref.'_DEFAULT_LANGDSC','Specify the language set to display messag
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Xoops Protector");
+define($constpref."_NAME","Protector");
 
 // A brief description of this module
 define($constpref."_DESC","Deze module beschermt uw Xoops site tegen verschillende kwaadaardige aanvallen DoS (Denial of Service) , SQL Injectie en vervuiling van variabelen.");

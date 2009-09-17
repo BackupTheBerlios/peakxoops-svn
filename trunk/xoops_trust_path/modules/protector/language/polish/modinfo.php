@@ -29,7 +29,7 @@ define($constpref.'_BANIP_TIME0','Banned IP suspension time (sec)');
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","XOOPS Protector");
+define($constpref."_NAME","Protector");
 
 // A brief description of this module
 define($constpref."_DESC","Modu³ zabezpieczaj±cy Xoopsa, przed ró¿nymi

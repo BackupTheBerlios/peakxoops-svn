@@ -25,7 +25,7 @@ define($constpref.'_BWLIMIT_COUNTDSC','Specify the max access to mainfile.php du
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Xoops Protector");
+define($constpref."_NAME","Protector");
 
 // A brief description of this module
 define($constpref."_DESC","Protector apporte à votre site une sécurité supplémentaire contre les attaques du type DoS, SQL Injection, et contaminations de variables.");

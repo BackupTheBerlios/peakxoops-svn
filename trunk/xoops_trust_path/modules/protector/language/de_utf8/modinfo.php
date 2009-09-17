@@ -13,7 +13,7 @@ define($constpref.'_DBTRAPWOSRVDSC','Some servers always enable DB Layer trappin
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
-define($constpref."_NAME","Xoops Protector");
+define($constpref."_NAME","Protector");
 
 // A brief description of this module
 define($constpref."_DESC","Diese Module schutzt Ihre Seite vor verschiedenen Angriffen z.B. DoS , SQL Injection , ....");

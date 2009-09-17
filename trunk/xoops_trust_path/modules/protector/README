@@ -2,7 +2,7 @@
 [xlang:en]
 = SUMMARY =
 
-Xoops Protector is a module to defend XOOPS2 from various and malicious attacks.
+Protector is a module to defend your CMS origined from XOOPS2 from various and malicious attacks.
 
 This module can protect a various kind of attacks like:
 
@@ -21,12 +21,12 @@ This module can protect a various kind of attacks like:
 - XMLRPC's eval() and SQL Injection Attacks
 - SPAMs for comment, trackback etc.
 
-Xoops Protector defends you XOOPS from these attacks, and it records into its log. 
+Protector defends you CMS from these attacks, and it records into its log. 
 
 Of course, all vulnerablities can't be prevented.
 Be not overconfident, please.
 
-However, I [color=ff0000][b]strongly[/b][/color] recommend installing this module to all XOOPS sites with any versions.
+However, I [color=ff0000][b]strongly[/b][/color] recommend installing this module to all XOOPS/ImpressCMS/XCL sites with any versions.
 
 
 
@@ -39,7 +39,7 @@ Copy xoops_trust_path/modules/protector in the archive into your XOOPS_TRUST_PAT
 
 Turn permission of XOOPS_TRUST_PATH/modules/protector/configs writable
 
-After Xoops Protector is installed, edit your mainfile.php like this:
+After Protector is installed, edit your mainfile.php like this:
 [code]
 	[color=ff0000]include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;[/color]
 	if (!isset($xoopsOption['nocommon']) [color=0000ff]&& XOOPS_ROOT_PATH != ''[/color] ) {
@@ -167,6 +167,11 @@ minahito, marcan, and phppp BEST REGARDS!
 
 
 = CHANGES =
+
+3.40 (2009/09/16)
+- numbered as a STABLE version
+- renamed from "Xoops Protector" to "Protector" simply
+- modified module icons for some forked cores
 
 3.36 beta (2009/08/27)
 - updated HTMLPurifier into 4.0.0
@@ -371,7 +376,7 @@ You are very great programmers!
 
 ●要旨
 
-Xoops Protector は、XOOPS2 を様々な悪意ある攻撃から守るためのモジュールです。
+Protector は、XOOPS2ベースの各種CMSを様々な悪意ある攻撃から守るためのモジュールです。
 
 このモジュールでは、以下の攻撃を防ぎます。
 
@@ -390,12 +395,12 @@ Xoops Protector は、XOOPS2 を様々な悪意ある攻撃から守るためのモジュールです。
 - XMLRPC関連
 - コメントSPAM/トラックバックSPAM等、あらゆるSPAM
 
-これらの攻撃からあなたのXOOPSを守り、ログに記録します。
+これらの攻撃からあなたのXOOPS2ベースCMSを守り、ログに記録します。
 
 ただし、このモジュールはあくまで、最大公約数的な防御しか行いません。
 一部の3rdパーティモジュールに見られるような穴の一部は防げるかもしれませんが、すべての穴を防ぎきるものではなく、過信は禁物です。
 
-その限界は承知の上で、すべてのXOOPSユーザーに対して、インストールを[color=ff0000][b]強く[/b][/color]お勧めします。
+その限界は承知の上で、すべてのXOOPS2ベースCMSユーザーに対して、インストールを[color=ff0000][b]強く[/b][/color]お勧めします。
 
 
 
@@ -409,7 +414,7 @@ Xoops Protector は、XOOPS2 を様々な悪意ある攻撃から守るためのモジュールです。
 
 ただ、それだけではまったく動作していませんので、mainfile.php からも呼び出すようにすることが絶対必要条件です。
 
-Xoops Protector をインストール後、お使いのXOOPSの mainfile.php の一番下のあたりに
+Protector をインストール後、お使いのXOOPS2ベースCMSの mainfile.php の一番下のあたりに
 [code]
 	[color=ff0000]include XOOPS_TRUST_PATH.'/modules/protector/include/precheck.inc.php' ;[/color]
 	if (!isset($xoopsOption['nocommon']) [color=0000ff]&& XOOPS_ROOT_PATH != ''[/color] ) {
@@ -521,6 +526,11 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 
 
 ●変更履歴
+
+3.40 (2009/09/16)
+- 安定版として番号を振り直した
+- "Xoops Protector" という名前をやめてシンプルに "Protector" へと変更した
+- ImpressCMSおよびXCL対応アイコンを用意した
 
 3.36 beta (2009/08/27)
 - HTMLPurifier を 4.0.0 に更新
@@ -733,7 +743,7 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 ------------------------------------------------------------
 
 GIJ=CHECKMATE <gij@peak.ne.jp>
-2004-2008
+2004-2009
 
 PEAK XOOPS  http://xoops.peak.ne.jp/
 

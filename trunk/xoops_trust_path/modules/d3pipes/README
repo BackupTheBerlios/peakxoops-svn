@@ -54,6 +54,7 @@ Note: This feature named "Sitemap" is irrelevant from "sitemap module" I had mai
 0.68 2009-08-08
 - patched for the bug of libxml 2.7.0 - 2.7.3 (thx toychee)
 - modified a parse joint D3pipesParsePhpbbactivetopics.class.php 0.68a
+- fixed the patch for the bug of libxml (thx tsuji) 0.68b
 
 0.67 2009-05-27
 - added defaults for all joint_class into mysql.sql

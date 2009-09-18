@@ -27,7 +27,6 @@ class D3pipesBlockBulletinlist extends D3pipesBlockAbstract {
 			2 => empty( $params[1] ) ? 10 : intval( $params[1] ) , // entries
 			3 => 255 , // max_entries
 			4 => empty( $params[1] ) ? 10 : intval( $params[1] ) , // entries with body
-			4 => 0 ,
 		) ;
 
 		return true ;

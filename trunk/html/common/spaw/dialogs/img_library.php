@@ -14,7 +14,7 @@
 
 // unset $spaw_imglib_include
 //unset($spaw_imglib_include);
-if (isset($spaw_imglib_include)) die(¡Çset this in configuration¡Ç);
+if (isset($spaw_imglib_include)) die('set this in configuration');
 
 // include wysiwyg config
 include '../config/spaw_control.config.php';

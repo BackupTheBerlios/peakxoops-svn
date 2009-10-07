@@ -7,6 +7,7 @@
  - fixed _ALBM_TEXT_SMNAME4 is displayed (thx Masaki) 2.88b
  - added language files
  -- ja_utf8 2.88c
+ - fixed waiting plugin displays wrong link (thx GEM) 2.88d
 
 2006-05-26 v2.87 (2.90 beta1)
  - added mytplsadmin
@@ -371,7 +372,7 @@
  - 自分の投稿の文字定数が定義されていなかったのを修正 (thx Masaki) 2.88b
  - 言語ファイル追加
  -- ja_utf8 2.88c
-
+ - waitingモジュール用プラグインのリンクミスを修正 (thx GEM) 2.88d
 
 2006-05-26 v2.87 (2.90 beta1)
  - mytplsadmin導入

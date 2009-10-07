@@ -25,7 +25,7 @@ function b_waiting_myalbum_base( $mydirname )
 
 	$result = $xoopsDB->query("SELECT COUNT(*) FROM ".$xoopsDB->prefix("myalbum{$mydirnumber}_photos")." WHERE status=0");
 	if ( $result ) {
-		$block['adminlink'] = XOOPS_URL."/modules/myalbum{$mydirnumber}/admin/admission.php";
+		$block['adminlink'] = XOOPS_URL."/modules/{$mydirname}/admin/admission.php";
 		list($block['pendingnum']) = $xoopsDB->fetchRow($result);
 		$block['lang_linkname'] = _PI_WAITING_WAITINGS ;
 	}

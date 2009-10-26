@@ -27,7 +27,7 @@ class protector_postcommon_post_need_multibyte extends ProtectorFilterAbstract {
 	
 			$check_length = isset( $lengths[ $key ] ) ? $lengths[ $key ] : $lengths[ 0 ] ;
 			if( strlen( $data ) > $check_length ) {
-				if( strlen( $data ) == mb_strlen( $data ) ) {
+				if( mb_strlen( $data , 'ISO-8859-1' ) == mb_strlen( $data , _CHARSET ) ) {
 					$this->protector->message .= "No multibyte character was found ($data)\n" ;
 					$this->protector->output_log( 'Singlebyte SPAM' , 0 , false , 128 ) ;
 					die( 'Protector rejects your post, because your post looks like SPAM' ) ;

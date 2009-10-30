@@ -44,6 +44,7 @@ http://www.xugj.org/modules/d3forum/index.php?topic_id=106
 
 HD-2.22 (2009-10-31)
 - fixed new blocks missing initializations (thx chossa2000)
+- added topic images
 
 HD-2.21 (2009-09-04)
 - fixed environment problem with magic_quotes_gpc (thx k_okamoto)

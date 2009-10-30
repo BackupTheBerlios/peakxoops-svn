@@ -9,8 +9,8 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-07-06 05:46:52
-define($constpref.'_DBTRAPWOSRV','Never checking _SERVER for anti-SQL-Injection');
-define($constpref.'_DBTRAPWOSRVDSC','Some servers always enable DB Layer trapping. It causes wrong detections as SQL Injection attack. If you got such errors, turn this option on. You should know this option weakens the security of DB Layer trapping anti-SQL-Injection.');
+define($constpref.'_DBTRAPWOSRV','No comprobar nunca _SERVER en la protección contra inyección SQL');
+define($constpref.'_DBTRAPWOSRVDSC','Algunos servidores siempre activan la intercepción en la capa de base de datos. Esto provoca detecciones erróneas de ataques de inyección SQL. Si observa demasiados errores, active esta opción. Es necesario destacar que esta opción debilita la seguridad de la protección contra inyección de SQL por intercepción en la capa de base de datos.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-14 11:10:52
 define($constpref.'_DBLAYERTRAP','Activar protección contra inyección de SQL por interceptación en la capa de base de datos');

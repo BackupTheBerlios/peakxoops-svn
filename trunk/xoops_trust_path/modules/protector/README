@@ -172,7 +172,9 @@ minahito, marcan, and phppp BEST REGARDS!
 - numbered as a STABLE version
 - renamed from "Xoops Protector" to "Protector" simply
 - modified module icons for some forked cores (thx rene)
-- modified postcommon_post_need_multibyte with func_override (thx orange) 3.40a
+- modified postcommon_post_need_multibyte with func_overload (thx orange) 3.40a
+- updated language files
+-- spanish (thx Colossus) 3.40b
 
 3.36 beta (2009/08/27)
 - updated HTMLPurifier into 4.0.0
@@ -533,6 +535,8 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 - "Xoops Protector" という名前をやめてシンプルに "Protector" へと変更した
 - ImpressCMSおよびXCL対応アイコンを用意した (thx rene)
 - 一部環境でのpostcommon_post_need_multibyteの動作不良に対応 (thx orange) 3.40a
+- 言語ファイル更新
+-- spanish (thx Colossus) 3.40b
 
 3.36 beta (2009/08/27)
 - HTMLPurifier を 4.0.0 に更新

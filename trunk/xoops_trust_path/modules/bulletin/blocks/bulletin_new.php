@@ -38,6 +38,7 @@ function b_bulletin_new_show($options) {
 
 		
 		while ( $myrow = $xoopsDB->fetchArray($result) ) {
+			$fullstory = array() ; // GIJ
 			$fullstory['id']       = $myrow['storyid'];
 			$fullstory['posttime'] = formatTimestamp($myrow['published'], $bulletin_date_format);
 			$fullstory['date']     = formatTimestamp($myrow['published'], $bulletin_date_format);

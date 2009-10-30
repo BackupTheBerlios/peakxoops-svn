@@ -76,6 +76,7 @@ function b_bulletin_category_new_show($options) {
 			$result2 = $xoopsDB->query($sql,$options[5],0);
 
 			while ( $myrow = $xoopsDB->fetchArray($result2) ) {
+				$fullstory = array() ; // GIJ
 				$fullstory['id']       = $myrow['storyid'];
 				$fullstory['posttime'] = formatTimestamp($myrow['published'], $bulletin_date_format);
 				$fullstory['date']     = formatTimestamp($myrow['published'], $bulletin_date_format);

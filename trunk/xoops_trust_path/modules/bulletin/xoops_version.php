@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name']        = constant($constpref.'_NAME');
-$modversion['version']     = 2.21; // HD Version
+$modversion['version']     = 2.22; // HD Version
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['credits']     = 'suin';
 $modversion['help']        = '';

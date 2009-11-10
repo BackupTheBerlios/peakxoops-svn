@@ -131,6 +131,9 @@ config_and_auth.inc.php で $fck_uploadable_groups の設定を変更すれば、管理者では
 - エントリポイントの２ファイル以外は全部TRUST内に追いやる予定
 - configをaltsysあたりの設定に持って行く予定
 
+(2009-11-11) 2.5.1-003
+- Flashがtrustモードとなっていなかったのを修正 (thx salamander)
+
 (2009-03-19) 2.5.1-002
 - SSL経由だとIEでダウンロードができないことに対応
 

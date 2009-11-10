@@ -20,7 +20,7 @@
 
 function GetFolders( $currentFolder , $type )
 {
-	$trust_mode = $type == 'File' ;
+	$trust_mode = $type != 'Image' ;
 
 	// Array that will hold the folders names.
 	$aFolders	= array() ;
@@ -50,7 +50,7 @@ function GetFolders( $currentFolder , $type )
 
 function GetFoldersAndFiles( $currentFolder , $type )
 {
-	$trust_mode = $type == 'File' ;
+	$trust_mode = $type != 'Image' ;
 
 	// Map the virtual path to the local server path.
 	$sServerDir = $trust_mode ? FCK_TRUSTUPLOAD_PATH . $currentFolder : FCK_UPLOAD_PATH . $currentFolder ;
@@ -82,7 +82,12 @@ function GetFoldersAndFiles( $currentFolder , $type )
 			// extension check
 			if( ! empty( $GLOBALS['fck_resource_type_extensions'][$type] ) ) {
 				// file limitation by extension and resource type
-				$extension = strtolower( substr( strrchr( $sFile , '.' ) , 1 ) ) ;
+				if( $trust_mode ) {
+					$extension = strtolower( substr( strrchr( DecodeFileName( substr( $sFile , strlen( $GLOBALS['fck_user_prefix'] ) ) ) , '.' ) , 1 ) ) ;
+
+				} else {
+					$extension = strtolower( substr( strrchr( $sFile , '.' ) , 1 ) ) ;
+				}
 				if( ! in_array( $extension , $GLOBALS['fck_resource_type_extensions'][$type] ) ) continue ;
 			}
 
@@ -138,7 +143,7 @@ function GetFoldersAndFiles( $currentFolder , $type )
 
 function CreateFolder( $currentFolder , $type )
 {
-	$trust_mode = $type == 'File' ;
+	$trust_mode = $type != 'Image' ;
 
 	$sErrorNumber	= '0' ;
 	$sErrorMsg		= '' ;
@@ -251,7 +256,7 @@ function FileUpload( $currentFolder = '/' )
 
 function DeleteFile( $currentFolder = '/' , $type )
 {
-	$trust_mode = $type == 'File' ;
+	$trust_mode = $type != 'Image' ;
 
 	$sErrorNumber	= '0' ;
 	$sErrorMsg		= '' ;

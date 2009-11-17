@@ -114,6 +114,14 @@ define($constpref.'_SPAMURI4UDSC','┤╔═¤╝╘░╩│░д╬░ь╚╠ецб╝е╢д╬┼ъ╣╞╞т═╞д╦бвд│д╬┐Ї░╩╛
 define($constpref.'_SPAMURI4G','SPAM┬╨║Ў:е▓е╣е╚д╦╡Ўд╣URL┐Ї');
 define($constpref.'_SPAMURI4GDSC','е▓е╣е╚д╬┼ъ╣╞╞т═╞д╦бвд│д╬┐Ї░╩╛хд╬URLдмдвд├д┐дщSPAMд╚╕лд╩д╖д▐д╣бг0д╩дщ╠╡└й╕┬╡Ў▓─д╟д╣бг');
 
+define($constpref.'_FILTERS','д│д╬е╡еде╚д╟═н╕·д╦д╣дые╒егеые┐б╝');
+define($constpref.'_FILTERSDSC','filters_byconfig╞тд╬е╒ебедеы╠╛дЄг▒╣╘д║д─╗╪─ъд╖д▐д╣');
+
+define($constpref.'_MANIPUCHECK','е╡еде╚▓■д╢дєе┴езе├епдЄ═н╕·д╦д╣ды');
+define($constpref.'_MANIPUCHECKDSC','┤╩░╫┼кд╩╜ёдн┤╣дие┴езе├епдЄ╣╘ддбвindex.php┼∙д╦╩╤╣╣дмдвд├д┐дщд╜д╬╗▌дЄ─╠├╬д╖д▐д╣');
+define($constpref.'_MANIPUVALUE','е╡еде╚▓■д╢дєе┴езе├еп├═');
+define($constpref.'_MANIPUVALUEDSC','░╒╠гдЄ═¤▓Єд╖д╞ддд╩дд╕┬дъ╩╘╜╕д╖д╩ддд╟дпд└д╡дд');
+
 
 }
 

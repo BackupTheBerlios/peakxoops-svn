@@ -123,13 +123,23 @@ function &getInstance()
 }
 
 
+function updateConfIntoDb( $name , $value )
+{
+	$constpref = '_MI_' . strtoupper( $this->mydirname ) ;
+
+	$db =& Database::getInstance() ;
+	$db->queryF( "UPDATE `".$db->prefix("config")."` SET `conf_value`='".addslashes($value)."' WHERE `conf_title` like '".$constpref."%' AND `conf_name`='".addslashes($name)."' LIMIT 1" ) ;
+	$this->updateConfFromDB() ;
+}
+
+
 function updateConfFromDb()
 {
 	$constpref = '_MI_' . strtoupper( $this->mydirname ) ;
 
 	if( empty( $this->_conn ) ) return false ;
 
-	$result = @mysql_query( "SELECT conf_name,conf_value FROM ".XOOPS_DB_PREFIX."_config WHERE conf_title like '".$constpref."%'" , $this->_conn ) ;
+	$result = @mysql_query( "SELECT `conf_name`,`conf_value` FROM `".XOOPS_DB_PREFIX."_config` WHERE `conf_title` like '".$constpref."%'" , $this->_conn ) ;
 	if( ! $result || mysql_num_rows( $result ) < 5 ) {
 		return false ;
 	}
@@ -977,6 +987,25 @@ function spam_check( $points4deny , $uid )
 		$ret = $this->call_filter( 'spamcheck_overrun' ) ;
 		if( $ret == false ) exit ;
 	}
+}
+
+
+function check_manipulation()
+{
+	if( $_SERVER['SCRIPT_FILENAME'] == XOOPS_ROOT_PATH.'/index.php' ) {
+		$root_stat = stat( XOOPS_ROOT_PATH ) ;
+		$index_stat = stat( XOOPS_ROOT_PATH.'/index.php' ) ;
+		$finger_print = $root_stat['mtime'] .':'. $index_stat['mtime'] .':'. $index_stat['ino'] ;
+		if( empty( $this->_conf['manip_value'] ) ) {
+			$this->updateConfIntoDb( 'manip_value' , $finger_print ) ;
+		} else if( $finger_print != $this->_conf['manip_value'] ) {
+			// Notify if finger_print is ident from old one
+			$ret = $this->call_filter( 'postcommon_manipu' ) ;
+			if( $ret == false ) exit ;
+			$this->updateConfIntoDb( 'manip_value' , $finger_print ) ;
+		}
+	}
+
 }
 
 

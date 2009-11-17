@@ -115,7 +115,9 @@ Note: "XOOPS_TRUST_PATH" for 3.0 instead of "XOOPS_ROOT_PATH" for 2.x
 
 = Using filter-plugin =
 
-You can try filter-plugins in XOOPS_TRUST_PATH/modules/protector/filters_disabled/ just by copying them into filters_enabled.
+You can try filter-plugins in XOOPS_TRUST_PATH/modules/protector/filters_byconfig/ just by copying them into filters_enabled.
+Since XOOPS_TRUST_PATH can be shared by multi-sites, you may want to set a filter enabled for a site but disabled for the other site.
+If you want to turn a filter on for a specific site, input the name of the filter into Protector's preferences.
 Of course, you can make filter-plugins as you like because it is easy to create.
 
 Here is an introduction for filter-plugins in this archive.
@@ -163,10 +165,20 @@ I prepared patches/ folder, and it contains patched databasefactory.php for each
 
 Of course, I welcome if each core teams adpot the patches as HEAD :-)
 
-minahito, marcan, and phppp BEST REGARDS!
+The latest version of these cores are ready for this feature:
+
+- XCL2.1.x
+- ImpressCMS 1.x
+
+Thank you minahito and marcan!
 
 
 = CHANGES =
+
+3.50 beta (2009/11/17)
+- modified filters can be turned on/off by preferences of Protector
+- moved filters under filters_disabled/ into filters_byconfig/
+- added manipulation checker against ftp worms or silent raiders
 
 3.41 (2009/11/17)
 - fixed some swf/swc files are confused often
@@ -517,7 +529,9 @@ define( 'PROTECTOR_HTTPBL_KEY' , '............' ) ;
 *_errorlog.php ¤È¤¤¤¦¥Õ¥£¥ë¥¿¡¼¥×¥é¥°¥¤¥ó¤Ï¤¤¤º¤ì¤â¡¢¥¨¥é¡¼¥í¥°¤Ëµ­Ï¿¤¹¤ë¥¿¥¤¥×¤Î¥Õ¥£¥ë¥¿¡¼¤Ç¤¹¡£
 
 
-¤¤¤º¤ì¤â¡¢XOOPS_TRUST_PATH/modules/protector/filters_disabled/ ¤ËÃÖ¤¤¤Æ¤¢¤ë¤Î¤Ç¡¢É¬Í×¤Ë±þ¤¸¤Æ¡¢filters_enabled ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤¤¡£
+¤¤¤º¤ì¤â¡¢XOOPS_TRUST_PATH/modules/protector/filters_byconfig/ ¤ËÃÖ¤¤¤Æ¤¢¤ë¤Î¤Ç¡¢É¬Í×¤Ë±þ¤¸¤Æ¡¢filters_enabled ¤Ë¥³¥Ô¡¼¤·¤Æ¤¯¤À¤µ¤¤¡£
+XOOPS_TRUST_PATH¤Ï¡¢Ê£¿ô¥µ¥¤¥È¤ËÍøÍÑ½ÐÍè¤ë»ÅÍÍ¤Ê¤Î¤Ç¡¢¤¢¤ë¥Õ¥£¥ë¥¿¡¼¤ò¥µ¥¤¥È¤Ë¤è¤Ã¤Æ»È¤¤Ê¬¤±¤¿¤¤¥±¡¼¥¹¤â¤¢¤ë¤Ç¤·¤ç¤¦¡£
+¤½¤Î¾ì¹ç¤Ï¡¢Protector¤Î°ìÈÌÀßÄê¤Ë¡¢ÍøÍÑ¤·¤¿¤¤¥Õ¥£¥ë¥¿¡¼Ì¾¤òµ­½Ò¤·¤Æ¤¯¤À¤µ¤¤¡£¤â¤Á¤í¤ó¡¢µ­½Ò¤Î¤Ê¤¤¥µ¥¤¥È¤Ç¤ÏÍ­¸ú²½¤µ¤ì¤Þ¤»¤ó¡£
 
 
 ¡ü3.3¤«¤é¤Î¿·µ¡Ç½: DB¥ì¥¤¥ä¡¼¥È¥é¥Ã¥×anti-SQL-Injection
@@ -530,10 +544,18 @@ patches/ ¥Õ¥©¥ë¥À¤Ë¡¢³Æ¥³¥¢ÍÑ¤Î¥Ñ¥Ã¥ÁºÑ¥Ç¡¼¥¿¥Ù¡¼¥¹¥Õ¥¡¥¯¥È¥ê¥¯¥é¥¹¥Õ¥¡¥¤¥ë¤¬ÍÑ°
 
 ¤â¤Á¤í¤ó¡¢³Æ¥³¥¢¥Á¡¼¥à¤¬ÀÑ¶ËÅª¤Ë¤³¤Î¥Ñ¥Ã¥Á¤òHEAD¤ËºÎÍÑ¤·¤Æ¤¯¤ì¤ë¤Î¤¬¥Ù¥¹¥È¤À¤È¹Í¤¨¤Æ¤¤¤Þ¤¹¡£¥Ñ¥Ã¥Á¤Ë¤Ä¤¤¤Æ¤â¡¢¤Ê¤ë¤Ù¤¯ºÎÍÑ¤·¤ä¤¹¤¤·Á¤Ë¤·¤¿¤Ä¤â¤ê¤Ç¤¹¡£
 
-minahito¤µ¤ó¡¢marcan¤µ¤ó¡¢phppp¤µ¤ó¡¢¤è¤í¤·¤¯¡ª
+¤Ê¤ª¡¢°Ê²¼¤Î¥³¥¢¤ÎºÇ¿·ÈÇ¤Ï¡¢¤³¤Îµ¡Ç½¤Î¥Ñ¥Ã¥Á¤¬ºÇ½é¤«¤éÅö¤¿¤Ã¤Æ¤¤¤Þ¤¹¡£¡ÊÂÐ±þ¤¢¤ê¤¬¤È¤¦¤´¤¶¤¤¤Þ¤¹¡Ë
+
+- XCL2.1.x
+- ImpressCMS 1.x
 
 
 ¡üÊÑ¹¹ÍúÎò
+
+3.50 beta (2009/11/17)
+- ³Æ¥µ¥¤¥È¤ÎProtector°ìÈÌÀßÄê¤Ç¥Õ¥£¥ë¥¿¡¼¤ÎON/OFF¤ò¥³¥ó¥È¥í¡¼¥ë²ÄÇ½¤È¤·¤¿
+- filters_disabled ¤Ë¼ý¤Þ¤Ã¤Æ¤¤¤¿¥Õ¥£¥ë¥¿¡¼¤òfilters_byconfig¤Ø°ÜÆ°¤·¤¿
+- FTP¥ï¡¼¥à¤äÂè»°¼Ô¤Ë¤è¤ë¥µ¥¤¥È²þ¤¶¤ó¥Á¥§¥Ã¥«¡¼¤ò¿·Àß¤·¤¿
 
 3.41 (2009/11/17)
 - swf¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥¿¥¤¥×¸íÇ§¤ËÂÐ±þ

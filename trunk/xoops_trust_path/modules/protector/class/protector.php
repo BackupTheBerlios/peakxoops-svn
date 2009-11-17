@@ -1001,7 +1001,7 @@ function check_manipulation()
 		} else if( $finger_print != $this->_conf['manip_value'] ) {
 			// Notify if finger_print is ident from old one
 			$ret = $this->call_filter( 'postcommon_manipu' ) ;
-			if( $ret == false ) exit ;
+			if( $ret == false ) die( 'Protector detects site manipulation.' ) ;
 			$this->updateConfIntoDb( 'manip_value' , $finger_print ) ;
 		}
 	}

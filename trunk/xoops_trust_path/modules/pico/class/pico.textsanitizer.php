@@ -209,7 +209,8 @@ class PicoTextSanitizer extends MyTextSanitizer
 			function picoDisplayDividedPage( n ) {
 				n = Math.floor(n) ;
 				var picoPages = new Array('.implode(',',$ids).') ;
-				for( var i in picoPages ) {
+				picoPagesLength = picoPages.length ;
+				for( i = 0 ; i < picoPagesLength ; i ++ ) {
 					i = Math.floor(i) ;
 					document.getElementById(picoPages[i]).style.display = "none" ;
 					document.getElementById("navi_"+picoPages[i]).className = "" ;

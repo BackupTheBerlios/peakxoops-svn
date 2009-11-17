@@ -287,17 +287,24 @@ function pico_main_filter_cmp( $a , $b )
 // get return_uri from "ret" after editing
 function pico_main_parse_ret2uri( $mydirname , $ret )
 {
-	if( ! preg_match( '/^([a-z]{2})([0-9-]*)$/' , $ret , $regs ) ) return false ;
-	$id = intval( $regs[2] ) ;
-	switch( $regs[1] ) {
-		case 'ac' :
-			return XOOPS_URL.'/modules/'.$mydirname.'/admin/index.php?page=contents&cat_id='.$id ;
-		case 'mc' :
-			return XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$id ;
-		case 'mm' :
-			return XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=menu' ;
-		default :
-			return false ;
+	if( preg_match( '/^([a-z]{2})([0-9-]*)$/' , $ret , $regs ) ) {
+		// specify it by codes inside the module like ret=mm, ret=mc0 or ret=ac0
+		$id = intval( $regs[2] ) ;
+		switch( $regs[1] ) {
+			case 'ac' :
+				return XOOPS_URL.'/modules/'.$mydirname.'/admin/index.php?page=contents&cat_id='.$id ;
+			case 'mc' :
+				return XOOPS_URL.'/modules/'.$mydirname.'/index.php?cat_id='.$id ;
+			case 'mm' :
+				return XOOPS_URL.'/modules/'.$mydirname.'/index.php?page=menu' ;
+			default :
+				return false ;
+		}
+	} else if( $ret{0} == '/' ) {
+		// specify the relative link inside XOOPS_URL
+		return XOOPS_URL.str_replace( '..' , '' , preg_replace( '/[\x00-\x1f]/' , '' , $ret ) ) ;
+	} else {
+		return false ;
 	}
 }
 

@@ -22,7 +22,7 @@ function initGet()
 		$uri_array = parse_url( $_SERVER['REQUEST_URI'] ) ;
 		$queries = explode( '&' , @$uri_array['query'] ) ;
 		foreach( $queries as $query ) {
-			if( preg_match( '/([a-zA-Z0-9_]{1,30})\=([a-zA-Z0-9_]{1,60})/' , $query , $regs ) ) {
+			if( preg_match( '/([a-zA-Z0-9_]{1,30})\=([a-zA-Z0-9_.-]{1,60})/' , $query , $regs ) ) {
 				$_GET[ $regs[1] ] = $regs[2] ;
 				$_REQUEST[ $regs[1] ] = $regs[2] ;
 			}
@@ -126,25 +126,18 @@ function modifyRequest( $request , $currentCategoryObj )
 	if( empty( $this->config['show_listasindex'] ) && $request['controller'] == 'category' && $request['view'] == 'list' && empty( $request['content_id'] ) ) {
 		$top_content_id = pico_main_get_top_content_id_from_cat_id( $currentCategoryObj->mydirname , $cat_data['id'] ) ;
 		if( $top_content_id > 0 ) {
-			$request['controller'] = 'content' ;
-			$request['view'] = 'detail' ;
-			$request['content_id'] = $top_content_id ;
-		} else {
-			$request['controller'] = 'category' ;
-			$request['view'] = 'list' ;
-			$request['content_id'] = 0 ;
-		}
-		/*
-		// redirect to the top of the content
-		$content_id = pico_main_get_top_content_id_from_cat_id( $mydirname , $cat_id ) ;
-		if( $content_id ) {
-			$redirect_uri = XOOPS_URL.'/modules/'.$mydirname.'/'.pico_common_make_content_link4html( $xoopsModuleConfig , $content_id , $mydirname ) ;
+			// redirect to the top of the content
+			$redirect_uri = XOOPS_URL.'/modules/'.$this->mydirname.'/'.pico_common_make_content_link4html( $this->config , $top_content_id , $this->mydirname ) ;
 			if( headers_sent() ) {
 				redirect_header( $redirect_uri , 0 , '&nbsp;' ) ;
 			} else {
 				header( 'Location: '.$redirect_uri ) ;
 			}
-		}*/
+		} else {
+			$request['controller'] = 'category' ;
+			$request['view'] = 'list' ;
+			$request['content_id'] = 0 ;
+		}
 	}
 
 	return $request ;

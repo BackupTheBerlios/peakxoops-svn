@@ -3,9 +3,13 @@
 // this file can be included from transaction procedures
 
 // delete a content
-function pico_delete_content( $mydirname , $content_id )
+function pico_delete_content( $mydirname , $content_id , $skip_sync = false )
 {
 	$db =& Database::getInstance() ;
+
+	// update the content by blank data
+	$_POST = array() ;
+	pico_updatecontent( $mydirname , $content_id , true , true ) ;
 
 	// backup the content, first
 	pico_transact_backupcontent( $mydirname , $content_id , true ) ;
@@ -14,7 +18,9 @@ function pico_delete_content( $mydirname , $content_id )
 	if( ! $db->queryF( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 
 	// rebuild category tree
-	pico_sync_cattree( $mydirname ) ;
+	if( empty( $skip_sync ) ) {
+		pico_sync_cattree( $mydirname ) ;
+	}
 
 	return true ;
 }
@@ -579,11 +585,11 @@ function pico_main_get_uid( $text )
 		$uid = intval( $text ) ;
 		$user =& $user_handler->get( $uid ) ;
 		if( is_object( $user ) ) return $uid ;
-		else return '' ;
+		else return 0 ;
 	} else {
 		$users =& $user_handler->getObjects( new Criteria( 'uname' , addslashes( $text ) ) ) ; // ???
 		if( is_object( @$users[0] ) ) return $users[0]->getVar('uid') ;
-		else return '' ;
+		else return 0 ;
 	}
 }
 
@@ -638,7 +644,7 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 
 
 // update content
-function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , $isadminormod )
+function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , $isadminormod = false )
 {
 	global $xoopsUser ;
 
@@ -708,7 +714,8 @@ function pico_transact_copyfromwaitingcontent( $mydirname , $content_id )
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body=body_waiting, subject=subject_waiting, htmlheader=htmlheader_waiting, visible=1, approval=1 WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='' /*,`modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."'*/ ,body_cached='',for_search='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->query( "UPDATE ".$db->prefix($mydirname."_contents")." SET body_waiting='',subject_waiting='',htmlheader_waiting='' ,body_cached='',for_search='' WHERE content_id=$content_id" ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	// /*,`modified_time`=UNIX_TIMESTAMP(),modifier_uid='$uid',modifier_ip='".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."'*/ 
 
 	return $content_id ;
 }
@@ -747,7 +754,6 @@ function pico_transact_backupcontent( $mydirname , $content_id , $forced = false
 
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 	if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields) SELECT content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-//	if( ! $db->queryF( "INSERT INTO ".$db->prefix($mydirname."_content_histories")." (content_id,vpath,cat_id,created_time,modified_time,poster_uid,poster_ip,modifier_uid,modifier_ip,subject,htmlheader,body,filters,tags,extra_fields) SELECT content_id,vpath,cat_id,created_time,modified_time,modifier_uid,modifier_ip,$uid,'".mysql_real_escape_string(@$_SERVER['REMOTE_ADDR'])."',subject,htmlheader,body,filters,tags,extra_fields FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=".intval($content_id) ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
 }
 
 

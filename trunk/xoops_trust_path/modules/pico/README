@@ -4,8 +4,12 @@
 
 [b]pico[/b] is a module for static contents based on Duplicatable V3 (D3).
 
+This 1.9x branch is under developping.
+
+If you want stable version, try 1.8x
+
 Don't forget updating this module after overwritting older version.
-And you have to "sync" once on upgrading from 1.5x/1.6x
+And you have to "sync" once on upgrading from 1.7x/1.8x
 
 Though functionally pico looks a successor to TinyD, pico is made as full-scratched module.
 
@@ -106,9 +110,28 @@ pico is fast enough if you use content's cache.
 
 [b]HISTORY:[/b]
 
+1.82 (2009/08/20)
+- fixed preload.php considering directories begin with a number (thx 9darts)
+- changed list view for histories from poster/created to modifier/modified
+- fixed Notices in contents admin (thx fooo)
+- fixed no history is stored when it is deleted in contents admin
+- modified two histories will be stored at deleting a content
+- removed xmobile support 1.82a
+- fixed category jumpbox in contentmanager (thx kerokero) 1.82b
+- fixed encoding detection for form with WizMobile 1.82c
+- fixed some SQL Errors with MySQL 5.1 strict (thx moegiiro) 1.82d
+- fixed compatibility with prototype.js (thx tohokuaiki) 1.82e
+
+1.81 (2009/05/09)
+- modified ret can be specified by relative link
+- fixed missing the top content redirection (thx dekki) 1.81a
+- added virtual method canUploadImages() into ExtraFields class (thx naao) 1.81b
+
 1.80 (2009/03/02)
 - marked as a stable version
 - fixed missing notification_select in main_viewcontent.html (thx nor)
+- fixed wrong permissions are applied for histories (thx jidaikobo) 1.80a
+- fixed html headers are not assigned for singlecontent (thx dekki) 1.80b
 
 1.79 (2009/02/16)
 - modified templates to support RTL (not left/right but _ALIGN_START/END)
@@ -509,7 +532,11 @@ pico is fast enough if you use content's cache.
 ====  静的コンテンツ用モジュール pico  ===
 
 pico とは Duplicatable V3 (D3) 技術を応用した静的コンテンツ用モジュールです。
-開発当初から想定していた機能を一通り実装したこともあり、現時点では1.80を安定版としています。
+開発当初から想定していた機能を一通り実装したこともあり、現時点では1.8xを安定版としています。
+
+こちらは、1.8xの次の世代である1.9x系列です。まだ開発版ですが、やる気のある方はぜひこちらをキャッチアップしてください。
+
+また、1.7/1.8 からアップデートした際には、モジュールアップデート後に、管理画面の「インポート/同期」から「同期」を最低1度実行してください。
 
 
 以下、安定版・開発版共通。
@@ -610,9 +637,28 @@ d3forumを一緒にインストールすると幸せになれるかもしれません。
 
 [b]HISTORY:[/b]
 
+1.82 (2009/08/20)
+- preloadが数字からはじまるディレクトリ名を考慮しなかったのを修正 (thx 9darts)
+- 履歴一覧で作成者・作成日となっている部分を更新者・更新日に変更
+- コンテンツ一括管理で、削除済コンテンツを開くと出ていたNoticeを修正 (thx fooo)
+- コンテンツ一括管理で削除すると履歴に残らない問題を修正
+- コンテンツを削除する際、削除直前と削除後の２つの履歴を保存するように変更
+- xmobileの対応を終了した 1.82a
+- 編集権限のみ与えた場合のカテゴリー選択を修正した (thx kerokero) 1.82b
+- WizMobileとの同時利用でエンコーディングを誤認識するバグを修正 1.82c
+- MySQL 5.1 strictモードでエラーになるSQLを修正した (thx moegiiro) 1.82d
+- Object汚染でpagebreakが効かなくなる現象を修正 (thx tohokuaiki) 1.82e
+
+1.81 (2009/05/09)
+- 編集後の戻り先をサイト内について自由に指定できるようにした
+- モジュールトップがコンテンツの時のリダイレクトを復活した (thx dekki) 1.81a
+- イメージアップロードを許可するかどうかの権限確認メソッド追加 (thx naao) 1.81b
+
 1.80 (2009/03/02)
 - 安定版としてマーク
 - イベント通知選択がmain_viewcontent.htmlから記述もれしていたのを修正 (thx nor)
+- 履歴に関する権限確認先が誤っていたのを修正 (thx jidaikobo) 1.80a
+- singlecontentモードでのHTMLヘッダアサイン忘れを修正 (thx dekki) 1.80b
 
 1.79 (2009/02/16)
 - RTLにテンプレートレベルで対応してみた (left/rightではなく_ALIGN_START/END利用)

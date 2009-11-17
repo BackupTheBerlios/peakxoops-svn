@@ -111,8 +111,9 @@ if( ! empty( $_POST['contents_delete'] ) && ! empty( $_POST['action_selects'] ) 
 	foreach( $_POST['action_selects'] as $content_id => $value ) {
 		if( empty( $value ) ) continue ;
 		$content_id = intval( $content_id ) ;
-		$db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ;
-		$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id" ) ;
+		pico_delete_content( $mydirname , $content_id , true ) ;
+		/* $db->query( "DELETE FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ) ;
+		$db->query( "DELETE FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id" ) ; */
 	}
 	pico_sync_all( $mydirname ) ;
 
@@ -149,7 +150,7 @@ $cat_options = pico_common_get_cat_options( $mydirname ) ;
 
 // fetch contents
 if( $cat_id == SPECIAL_CAT_ID_DELETED ) {
-	$ors = $db->query( "SELECT oh.*,up.uname AS poster_uname,um.uname AS modifier_uname,c.cat_title,c.cat_depth_in_tree,1 AS is_deleted  FROM ".$db->prefix($mydirname."_content_histories")." oh LEFT JOIN ".$db->prefix("users")." up ON oh.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON oh.modifier_uid=um.uid LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON oh.cat_id=c.cat_id LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=oh.content_id WHERE o.content_id IS NULL GROUP BY oh.content_id ORDER BY c.cat_depth_in_tree,oh.modified_time DESC" ) ;
+	$ors = $db->query( "SELECT oh.*,up.uname AS poster_uname,um.uname AS modifier_uname,c.cat_title,c.cat_depth_in_tree,1 AS is_deleted  FROM ".$db->prefix($mydirname."_content_histories")." oh LEFT JOIN ".$db->prefix("users")." up ON oh.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON oh.modifier_uid=um.uid LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON oh.cat_id=c.cat_id LEFT JOIN ".$db->prefix($mydirname."_contents")." o ON o.content_id=oh.content_id WHERE o.content_id IS NULL GROUP BY oh.content_id ORDER BY oh.modified_time DESC" ) ;
 } else {
 	$whr_cat_id = $cat_id == SPECIAL_CAT_ID_ALL ? "1" : "o.cat_id=$cat_id" ;
 	$ors = $db->query( "SELECT o.*,up.uname AS poster_uname,um.uname AS modifier_uname,c.cat_title,c.cat_depth_in_tree,0 AS is_deleted  FROM ".$db->prefix($mydirname."_contents")." o LEFT JOIN ".$db->prefix("users")." up ON o.poster_uid=up.uid LEFT JOIN ".$db->prefix("users")." um ON o.modifier_uid=um.uid LEFT JOIN ".$db->prefix($mydirname."_categories")." c ON o.cat_id=c.cat_id WHERE ($whr_cat_id) ORDER BY c.cat_depth_in_tree,o.weight,o.content_id" ) ;
@@ -164,7 +165,7 @@ while( $content_row = $db->fetchArray( $ors ) ) {
 		'cat_title' => $myts->makeTboxData4Show( $content_row['cat_title'] , 1 , 1 ) ,
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] , 'm' ) ,
 		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] , 'm' ) ,
-		'expiring_time_formatted' => formatTimestamp( $content_row['expiring_time'] , 'm' ) ,
+		'expiring_time_formatted' => formatTimestamp( @$content_row['expiring_time'] , 'm' ) ,
 		'poster_uname' => $content_row['poster_uid'] ? $myts->makeTboxData4Show( $content_row['poster_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
 		'modifier_uname' => $content_row['modifier_uid'] ? $myts->makeTboxData4Show( $content_row['modifier_uname'] ) : _MD_PICO_REGISTERED_AUTOMATICALLY ,
 		'subject' => $myts->makeTboxData4Edit( $content_row['subject'] ) ,

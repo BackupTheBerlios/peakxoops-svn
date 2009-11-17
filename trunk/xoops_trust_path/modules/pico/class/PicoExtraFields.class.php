@@ -54,11 +54,18 @@ function getSerializedRequestsFromPost()
 	}
 
 	// process $_FILES (only adminormod )
-	if( $this->isadminormod && ! empty( $_FILES ) && is_array( $_FILES ) ) {
+	if( $this->canUploadImages() && ! empty( $_FILES ) && is_array( $_FILES ) ) {
 		$this->uploadImages( $ret ) ;
 	}
 
 	return pico_common_serialize( $ret ) ;
+}
+
+
+// virtual
+function canUploadImages()
+{
+	return $this->isadminormod ;
 }
 
 

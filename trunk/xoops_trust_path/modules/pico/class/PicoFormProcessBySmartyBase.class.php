@@ -189,7 +189,7 @@ class PicoFormProcessBySmartyBase
 
 	function isMobile()
 	{
-		if( class_exists( 'Wizin_User' ) ) {
+		if( class_exists( 'Wizin_User' , false ) ) {
 			// WizMobile (gusagi)
 			$user =& Wizin_User::getSingleton();
 			return $user->bIsMobile ;
@@ -207,7 +207,7 @@ class PicoFormProcessBySmartyBase
 		if( class_exists( 'Wizin_User' ) ) {
 			// WizMobile (gusagi)
 			$user =& Wizin_User::getSingleton();
-			return $user->sEncoding ;
+			return $user->bIsMobile ? $user->sEncoding : null ;
 		} else if( defined( 'HYP_K_TAI_RENDER' ) && HYP_K_TAI_RENDER ) {
 			// hyp_common ktai-renderer (nao-pon)
 			return HYP_POST_ENCODING ;

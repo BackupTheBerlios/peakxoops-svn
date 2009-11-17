@@ -61,7 +61,7 @@ function execute( $request )
 	$this->assign['categories_can_post'] = array() ;
 	foreach( $categories as $tmpObj ) {
 		$tmp_data = $tmpObj->getData() ;
-		if( empty( $tmp_data['can_post'] ) ) continue ;
+		if( empty( $tmp_data['can_post'] ) && empty( $tmp_data['can_edit'] ) ) continue ;
 		$this->assign['categories_can_post'][ $tmp_data['id'] ] = str_repeat('--',$tmp_data['cat_depth_in_tree']).$tmp_data['cat_title'] ;
 	}
 

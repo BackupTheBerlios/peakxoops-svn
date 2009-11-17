@@ -17,7 +17,7 @@ define('_MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED','右端がチェックされた�
 define('_MD_A_PICO_MSG_CONTENTSMOVED','移動しました');
 define('_MD_A_PICO_LABEL_MAINDISP','表示');
 define('_MD_A_PICO_BTN_DELETE','削除');
-define('_MD_A_PICO_CONFIRM_DELETE','本当に削除してよろしいですか？');
+define('_MD_A_PICO_CONFIRM_DELETE','ここから削除すると「削除済コンテンツ」にも登録されません。本当に削除してよろしいですか？');
 define('_MD_A_PICO_MSG_CONTENTSDELETED','削除しました');
 define('_MD_A_PICO_BTN_EXPORT','他のpicoへのコピー');
 define('_MD_A_PICO_CONFIRM_EXPORT','対象モジュールのトップコンテンツとしてエクスポート（移動ではなくコピー）します。コメントはコピーされません。よろしいですか？');

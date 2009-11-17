@@ -25,10 +25,6 @@
 ・Wikiのようなページ指定方法
   難しいので先送り
 
-・グループ/ユーザの選択肢から各カテゴリーの権限を確認/変更するコントローラ
-
-・カテゴリのextra_fields
-・マルチカテゴリ
 
 
 ●TODO進行中
@@ -37,6 +33,19 @@
 ・全文閲覧権限のない状況と、RSSのdescriptionやコメント統合サマリ部との関係
 ・各種コントローラ内から、WHERE条件に "visible AND created_time <= UNIX_TIMESTAMP()" 等を直書きしているSQLの根絶
 ・パーミッションについても、var_export形式にする (それと同時に、クエリのLIKEパターンがシリアライズ形式に依存している部分を修正する）
+・Modelで、ORDER BY weight と直書きしてある部分を修正する
+・全picoインスタンスをまたぐタグ、もしくは、なんらかの共通タグ機能対応
+http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
+・タグからコンテンツを引っ張ってくるsmartyプラグインまたは既存プラグインへのtag絞り込み機能付与
+http://www.xugj.org/modules/d3forum/index.php?topic_id=915
+・extra_fields のソート機能
+・カテゴリ単位で、編集/閲覧テンプレートを切り替える機能
+・カテゴリのextra_fields
+・CKEditor暫定対応
+・extra_fields画像品質指定
+・ヒストリ処理の抜本的改善
+・グループ/ユーザの選択肢から各カテゴリーの権限を確認/変更するコントローラ
+・マルチカテゴリ
 
 
 

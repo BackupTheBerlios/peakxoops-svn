@@ -679,6 +679,7 @@ function check_uploaded_files()
 			$ext = strtolower( substr( strrchr( $_file['name'] , '.' ) , 1 ) ) ;
 			if( $ext == 'jpeg' ) $ext = 'jpg' ;
 			else if( $ext == 'tiff' ) $ext = 'tif' ;
+			else if( $ext == 'swc' ) $ext = 'swf' ;
 
 			// anti multiple dot file (Apache mod_mime.c)
 			if( count( explode( '.' , str_replace( '.tar.gz' , '.tgz' , $_file['name'] ) ) ) > 2 ) {
@@ -705,7 +706,9 @@ function check_uploaded_files()
 					@unlink( $temp_file ) ;
 				}
 
-				if( $image_attributes === false || $image_extensions[ intval( $image_attributes[2] ) ] != $ext ) {
+				$imagetype = intval( $image_attributes[2] ) ;
+				if( $imagetype == IMAGETYPE_SWC ) $imagetype = IMAGETYPE_SWF ;
+				if( $image_attributes === false || $image_extensions[ $imagetype ] != $ext ) {
 					$this->message .= "Attempt to upload camouflaged image file {$_file['name']}.\n" ;
 					$this->_safe_badext = false ;
 					$this->last_error_type = 'UPLOAD' ;

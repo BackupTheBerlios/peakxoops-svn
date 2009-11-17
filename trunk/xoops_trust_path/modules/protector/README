@@ -168,6 +168,11 @@ minahito, marcan, and phppp BEST REGARDS!
 
 = CHANGES =
 
+3.41 (2009/11/17)
+- fixed some swf/swc files are confused often
+- added language files
+-- polish_utf8 (thx jagi)
+
 3.40 (2009/09/16)
 - numbered as a STABLE version
 - renamed from "Xoops Protector" to "Protector" simply
@@ -529,6 +534,11 @@ minahitoさん、marcanさん、phpppさん、よろしく！
 
 
 ●変更履歴
+
+3.41 (2009/11/17)
+- swfファイルのファイルタイプ誤認に対応
+- 言語ファイル追加
+-- polish_utf8 (thx jagi)
 
 3.40 (2009/09/16)
 - 安定版として番号を振り直した

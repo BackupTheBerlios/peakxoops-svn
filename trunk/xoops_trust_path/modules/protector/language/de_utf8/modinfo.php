@@ -6,6 +6,15 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-11-17 18:12:58
+define($constpref.'_FILTERS','filters enabled in this site');
+define($constpref.'_FILTERSDSC','specify file names inside of filters_byconfig/ separated with LF');
+define($constpref.'_MANIPUCHECK','enable manipulation checking');
+define($constpref.'_MANIPUCHECKDSC','notify to admin if your root folder or index.php is modified.');
+define($constpref.'_MANIPUVALUE','value for manipulation checking');
+define($constpref.'_MANIPUVALUEDSC','do not edit this field');
+
 // Appended by Xoops Language Checker -GIJOE- in 2009-07-06 05:46:54
 define($constpref.'_DBTRAPWOSRV','Never checking _SERVER for anti-SQL-Injection');
 define($constpref.'_DBTRAPWOSRVDSC','Some servers always enable DB Layer trapping. It causes wrong detections as SQL Injection attack. If you got such errors, turn this option on. You should know this option weakens the security of DB Layer trapping anti-SQL-Injection.');

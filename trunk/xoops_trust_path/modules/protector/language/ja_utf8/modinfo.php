@@ -114,6 +114,13 @@ define($constpref.'_SPAMURI4UDSC','管理者以外の一般ユーザの投稿内
 define($constpref.'_SPAMURI4G','SPAM対策:ゲストに許すURL数');
 define($constpref.'_SPAMURI4GDSC','ゲストの投稿内容に、この数以上のURLがあったらSPAMと見なします。0なら無制限許可です。');
 
+define($constpref.'_FILTERS','このサイトで有効にするフィルター');
+define($constpref.'_FILTERSDSC','filters_byconfig内のファイル名を１行ずつ指定します');
+
+define($constpref.'_MANIPUCHECK','サイト改ざんチェックを有効にする');
+define($constpref.'_MANIPUCHECKDSC','簡易的な書き換えチェックを行い、index.php等に変更があったらその旨を通知します');
+define($constpref.'_MANIPUVALUE','サイト改ざんチェック値');
+define($constpref.'_MANIPUVALUEDSC','意味を理解していない限り編集しないでください');
 
 }
 

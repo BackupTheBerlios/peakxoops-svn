@@ -7,6 +7,15 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-11-17 18:12:56
+define($constpref.'_FILTERS','filters enabled in this site');
+define($constpref.'_FILTERSDSC','specify file names inside of filters_byconfig/ separated with LF');
+define($constpref.'_MANIPUCHECK','enable manipulation checking');
+define($constpref.'_MANIPUCHECKDSC','notify to admin if your root folder or index.php is modified.');
+define($constpref.'_MANIPUVALUE','value for manipulation checking');
+define($constpref.'_MANIPUVALUEDSC','do not edit this field');
+
 // Appended by Xoops Language Checker -GIJOE- in 2009-07-06 05:46:52
 define($constpref.'_DBTRAPWOSRV','هیچ وقت _SERVER برای anti-SQL-Injection برسی نکن');
 define($constpref.'_DBTRAPWOSRVDSC','بعضی از کارگذار ها اجازه میدهند سیستم تله گذاری پایگاه داده ها فعال باشد. این باعث اشتباه در تشخیص حمله تزریق به SQL میشود. اگر شما خطاهای دریافت کردید, این گزینه را روشن کنید. باید توجه داشته باشید که این گزینه باعث تضعیف سیستم تله گذاری لایه های پایگاه داده ها در برابر تزریق به sql میشود.');

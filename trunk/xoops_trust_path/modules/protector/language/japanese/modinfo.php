@@ -122,7 +122,6 @@ define($constpref.'_MANIPUCHECKDSC','簡易的な書き換えチェックを行い、index.php等
 define($constpref.'_MANIPUVALUE','サイト改ざんチェック値');
 define($constpref.'_MANIPUVALUEDSC','意味を理解していない限り編集しないでください');
 
-
 }
 
 ?>

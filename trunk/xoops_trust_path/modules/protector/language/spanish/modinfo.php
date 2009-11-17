@@ -8,6 +8,15 @@ if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
 
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-11-17 18:12:56
+define($constpref.'_FILTERS','filters enabled in this site');
+define($constpref.'_FILTERSDSC','specify file names inside of filters_byconfig/ separated with LF');
+define($constpref.'_MANIPUCHECK','enable manipulation checking');
+define($constpref.'_MANIPUCHECKDSC','notify to admin if your root folder or index.php is modified.');
+define($constpref.'_MANIPUVALUE','value for manipulation checking');
+define($constpref.'_MANIPUVALUEDSC','do not edit this field');
+
 // Appended by Xoops Language Checker -GIJOE- in 2009-07-06 05:46:52
 define($constpref.'_DBTRAPWOSRV','No comprobar nunca _SERVER en la protección contra inyección SQL');
 define($constpref.'_DBTRAPWOSRVDSC','Algunos servidores siempre activan la intercepción en la capa de base de datos. Esto provoca detecciones erróneas de ataques de inyección SQL. Si observa demasiados errores, active esta opción. Es necesario destacar que esta opción debilita la seguridad de la protección contra inyección de SQL por intercepción en la capa de base de datos.');

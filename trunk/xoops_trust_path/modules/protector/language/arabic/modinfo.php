@@ -5,6 +5,15 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2009-11-17 18:12:57
+define($constpref.'_FILTERS','filters enabled in this site');
+define($constpref.'_FILTERSDSC','specify file names inside of filters_byconfig/ separated with LF');
+define($constpref.'_MANIPUCHECK','enable manipulation checking');
+define($constpref.'_MANIPUCHECKDSC','notify to admin if your root folder or index.php is modified.');
+define($constpref.'_MANIPUVALUE','value for manipulation checking');
+define($constpref.'_MANIPUVALUEDSC','do not edit this field');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module

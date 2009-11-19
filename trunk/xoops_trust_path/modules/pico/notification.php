@@ -2,8 +2,8 @@
 
 require_once XOOPS_TRUST_PATH.'/modules/pico/include/main_functions.php' ;
 require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoPermission.class.php' ;
-require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoModelCategory.class.php' ;
-require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoModelContent.class.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/pico/models/PicoModelCategory.class.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/pico/models/PicoModelContent.class.php' ;
 
 eval( '
 function '.$mydirname.'_notify_iteminfo( $category, $item_id )

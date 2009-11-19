@@ -1,0 +1,27 @@
+<{* SAMPLE TEMPLATE FOR UNDERSTANDING EXTRA_FIELDS *}>
+
+<dl id="pico_ef_sample">
+	<dt>pronunciation (text)</dt>
+	<dd><{$category.ef.pronunciation|escape}></dd>
+
+	<dt>gender (checkbox)</dt>
+	<dd><{$category.ef.gender|escape}></dd>
+
+	<dt>address1 (select)</dt>
+	<dd><{$category.ef.address1|escape}></dd>
+
+	<dt>myphoto (extra image)</dt>
+	<dd>
+		<img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$category.ef.myphoto|escape}>" /><br />
+		<img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$category.ef.myphoto|escape}>" /><br />
+		<img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_2_<{$category.ef.myphoto|escape}>" /><br />
+	</dd>
+
+</dl>
+
+<{include file="db:`$mydirname`_main_listcontents.html"}>
+
+<script type="text/javascript" src="<{$xoops_url}>/common/lib/jquery.js"></script><script type="text/javascript">
+	jQuery("h1").after( jQuery("dl#pico_ef_sample") ) ;
+</script>
+

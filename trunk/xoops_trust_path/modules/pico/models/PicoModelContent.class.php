@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/pico.textsanitizer.php' ;
+require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoPermission.class.php' ;
 require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
-require_once dirname(__FILE__).'/PicoPermission.class.php' ;
 
 
 class PicoContentHandler {
@@ -255,7 +255,6 @@ function filterBody( $content4assign )
 					$filters[ $j ] = '' ;
 				}
 			}
-			require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 			$myts =& PicoTextSanitizer::getInstance() ;
 			$text = $myts->displayTarea( $text , 1 , $smiley , 1 , 1 , $nl2br ) ;
 			$text = $myts->pageBreak( $this->mydirname , $text , $content4assign ) ;

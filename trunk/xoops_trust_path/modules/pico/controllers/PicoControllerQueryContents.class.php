@@ -1,9 +1,9 @@
 <?php
 
 require_once dirname(__FILE__).'/PicoControllerAbstract.class.php' ;
-require_once dirname(__FILE__).'/PicoModelTag.class.php' ;
-require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
-require_once dirname(__FILE__).'/PicoModelContent.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelTag.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelContent.class.php' ;
 
 class PicoControllerQueryContents extends PicoControllerAbstract {
 

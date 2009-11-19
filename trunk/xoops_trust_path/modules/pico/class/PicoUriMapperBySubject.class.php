@@ -3,6 +3,8 @@
 // You can access pico contents via URI like ...
 // XOOPS_URL/modules/pico/index.php?subject=(subject of the content)
 
+require_once dirname(__FILE__).'/PicoUriMapper.class.php' ;
+
 class PicoUriMapperBySubject extends PicoUriMapper {
 
 function judgeController( &$cat_id , &$content_id )

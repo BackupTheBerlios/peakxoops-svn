@@ -27,7 +27,7 @@ if( ! empty( $_POST['contentman_preview'] ) ) {
 	$controller_class = 'PicoControllerEditContent' ;
 }
 
-require_once dirname(dirname(__FILE__)).'/class/'.$controller_class.'.class.php' ;
+require_once dirname(dirname(__FILE__)).'/controllers/'.$controller_class.'.class.php' ;
 $controller =& new $controller_class( $currentCategoryObj ) ;
 $controller->execute( $picoRequest ) ;
 

@@ -2,9 +2,9 @@
 
 require_once dirname(__FILE__).'/PicoControllerAbstract.class.php' ;
 require_once dirname(__FILE__).'/PicoControllerEditContent.class.php' ;
-require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
-require_once dirname(__FILE__).'/PicoModelContent.class.php' ;
-require_once dirname(__FILE__).'/gtickets.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelContent.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
 require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 require_once dirname(dirname(__FILE__)).'/include/history_functions.php' ;
 

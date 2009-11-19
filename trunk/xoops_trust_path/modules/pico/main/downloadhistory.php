@@ -17,7 +17,7 @@ $picoRequest['content_history_id'] = $content_history_id ;
 $picoRequest['view'] = 'download' ;
 
 // controller
-require_once dirname(dirname(__FILE__)).'/class/PicoControllerGetHistory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/controllers/PicoControllerGetHistory.class.php' ;
 $controller =& new PicoControllerGetHistory( $currentCategoryObj ) ;
 $controller->execute( $picoRequest ) ;
 

@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__).'/include/common_functions.php' ;
 require_once dirname(__FILE__).'/class/pico.textsanitizer.php' ;
-require_once dirname(__FILE__).'/class/PicoModelContent.class.php' ;
+require_once dirname(__FILE__).'/models/PicoModelContent.class.php' ;
 
 eval( '
 

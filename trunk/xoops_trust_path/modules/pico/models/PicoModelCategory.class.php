@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/PicoModelContent.class.php' ;
-require_once dirname(__FILE__).'/PicoPermission.class.php' ;
+require_once dirname(dirname(__FILE__)).'/class/PicoPermission.class.php' ;
 
 class PicoCategoryHandler {
 

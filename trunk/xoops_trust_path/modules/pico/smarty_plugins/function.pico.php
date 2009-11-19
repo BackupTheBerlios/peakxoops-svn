@@ -4,8 +4,8 @@ require_once XOOPS_TRUST_PATH.'/modules/pico/include/common_functions.php' ;
 require_once XOOPS_TRUST_PATH.'/modules/pico/class/pico.textsanitizer.php' ;
 require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoUriMapper.class.php' ;
 require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoPermission.class.php' ;
-require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoModelCategory.class.php' ;
-require_once XOOPS_TRUST_PATH.'/modules/pico/class/PicoModelContent.class.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/pico/models/PicoModelCategory.class.php' ;
+require_once XOOPS_TRUST_PATH.'/modules/pico/models/PicoModelContent.class.php' ;
 require_once XOOPS_TRUST_PATH.'/modules/pico/blocks/content.php' ;
 
 function smarty_function_pico( $params , &$smarty )

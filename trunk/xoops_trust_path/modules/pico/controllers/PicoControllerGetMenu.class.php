@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/PicoControllerAbstract.class.php' ;
-require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelCategory.class.php' ;
 
 class PicoControllerGetMenu extends PicoControllerAbstract {
 

@@ -366,7 +366,7 @@ function pico_get_requests4category( $mydirname , $cat_id = null )
 
 	// extra_fields (read ef class and create the object)
 	$ef_class = empty( $mod_config['extra_fields_cat_class'] ) ? 'PicoExtraFieldsCat' : $mod_config['extra_fields_cat_class'] ;
-	require_once dirname(dirname(__FILE__)).'/class/'.$ef_class.'.class.php' ;
+	require_once dirname(dirname(__FILE__)).'/extra_fields/'.$ef_class.'.class.php' ;
 	$ef_obj =& new $ef_class( $mydirname , $baseCategoryObj , 0 ) ;
 
 	return array( 
@@ -614,7 +614,7 @@ function pico_get_requests4content( $mydirname , &$errors , &$auto_approval , &$
 
 	// extra_fields (read ef class and create the object)
 	$ef_class = empty( $mod_config['extra_fields_class'] ) ? 'PicoExtraFields' : $mod_config['extra_fields_class'] ;
-	require_once dirname(dirname(__FILE__)).'/class/'.$ef_class.'.class.php' ;
+	require_once dirname(dirname(__FILE__)).'/extra_fields/'.$ef_class.'.class.php' ;
 	$ef_obj =& new $ef_class( $mydirname , $newCategoryObj , $content_id ) ;
 	$ret['extra_fields'] = $ef_obj->getSerializedRequestsFromPost() ;
 	$ret['ef_obj'] = $ef_obj ;

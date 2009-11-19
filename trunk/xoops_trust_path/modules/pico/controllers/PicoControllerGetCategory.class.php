@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/PicoControllerAbstract.class.php' ;
-require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelCategory.class.php' ;
 
 class PicoControllerGetCategory extends PicoControllerAbstract {
 
@@ -39,7 +39,7 @@ function execute( $request )
 	// auto-register
 	if( ! empty( $this->mod_config['wraps_auto_register'] ) && @$cat_data['cat_vpath']{0} == '/' ) {
 		$register_class = empty( $this->mod_config['auto_register_class'] ) ? 'PicoAutoRegisterWraps' : $this->mod_config['auto_register_class'] ;
-		require_once dirname(__FILE__).'/'.$register_class.'.class.php' ;
+		require_once dirname(dirname(__FILE__)).'/class/'.$register_class.'.class.php' ;
 		$register_obj =& new $register_class( $this->mydirname , $this->mod_config ) ;
 		$register_obj->registerByCatvpath( $cat_data ) ;
 	}

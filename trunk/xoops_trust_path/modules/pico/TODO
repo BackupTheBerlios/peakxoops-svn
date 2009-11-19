@@ -140,6 +140,7 @@ CREATE TABLE xoops_pico_content_ef_sortables (
 ・カテゴリーを編集する時には該当カテゴリのオプションが適用される
 ・カテゴリのextra_fields
 ・extra_fields のソート用テーブル実装
+・ファイル構成の整理(コントローラ・モデル・extra_fields処理クラスを分離)
 
 
 ●権限・表示ON/OFF関係の仕様
@@ -211,14 +212,14 @@ contents.created_time 未来の日時なら掲示前
 - パンくずの初期化
 - カテゴリーIDの存在確認
 
-・Model (class/PicoModel*.class.php)
+・Model (models/PicoModel*.class.php)
 - パーミッションチェックは積極的に行わない
 - Handlerで全体を取得する時だけが例外。（今後はここでも全部返すようにする*1）
 - ['can_read'] で判定する
 - SQLを発行して良いのは唯一このクラスだけ
 - 逆にGPCSの取得・利用は原則禁止。
 
-・Controller (class/PicoController*.class.php)
+・Controller (controller/PicoController*.class.php)
 - パーミッションチェック・リダイレクト処理はここで行う
 - 原則的にSQL禁止
 

@@ -3,8 +3,8 @@
 // this file can be included from d3forum's blocks or getSublink().
 
 require_once dirname(dirname(__FILE__)).'/class/PicoPermission.class.php' ;
-require_once dirname(dirname(__FILE__)).'/class/PicoModelCategory.class.php' ;
-require_once dirname(dirname(__FILE__)).'/class/PicoModelContent.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelCategory.class.php' ;
+require_once dirname(dirname(__FILE__)).'/models/PicoModelContent.class.php' ;
 
 @include_once dirname(__FILE__).'/constants.php' ;
 if( ! defined( '_MD_PICO_WRAPBASE' ) ) require_once dirname(__FILE__).'/constants.dist.php' ;

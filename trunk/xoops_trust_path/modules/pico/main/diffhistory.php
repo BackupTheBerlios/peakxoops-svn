@@ -17,7 +17,7 @@ $picoRequest['newer_history_id'] = intval( @$_GET['newer_history_id'] ) ;
 $picoRequest['view'] = @$_GET['view'] == 'single' ? 'single' : 'diffhistories' ;
 
 // controller
-require_once dirname(dirname(__FILE__)).'/class/PicoControllerDiffHistories.class.php' ;
+require_once dirname(dirname(__FILE__)).'/controllers/PicoControllerDiffHistories.class.php' ;
 $controller =& new PicoControllerDiffHistories( $currentCategoryObj ) ;
 $controller->execute( $picoRequest ) ;
 

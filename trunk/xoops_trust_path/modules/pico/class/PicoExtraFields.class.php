@@ -14,28 +14,31 @@ define( 'PICO_EXTRA_IMAGES_REMOVAL_COMMAND' , 'remove.gif' ) ;
 class PicoExtraFields {
 
 var $mydirname ;
+var $categoryObj = null ;
 var $mod_config ;
-var $auto_approval ;
-var $isadminormod ;
-var $content_id ;
+var $auto_approval = false ;
+var $isadminormod = false ;
+var $content_id = 0 ;
 var $images_path ;
 var $image_sizes ;
+var $requests = array() ;
 
 
-function PicoExtraFields( $mydirname , $mod_config , $auto_approval , $isadminormod , $content_id )
+function PicoExtraFields( $mydirname , $categoryObj , $content_id = 0 )
 {
 	$this->mydirname = $mydirname ;
-	$this->mod_config = $mod_config ;
-	$this->auto_approval = $auto_approval ;
-	$this->isadminormod = $isadminormod ;
+	$this->categoryObj = $categoryObj ;
+	$this->mod_config = $this->categoryObj->getOverriddenModConfig() ;
+	$cat_data = $this->categoryObj->getData() ;
+	$this->auto_approval = $cat_data['post_auto_approved'] ;
+	$this->isadminormod = $cat_data['isadminormod'] ;
 	$this->content_id = $content_id ;
-	$this->images_path = XOOPS_ROOT_PATH.'/'.$mod_config['extra_images_dir'] ;
+	$this->images_path = XOOPS_ROOT_PATH.'/'.$this->mod_config['extra_images_dir'] ;
 	$this->image_sizes = array() ;
 	$size_combos = preg_split( '/\s+/' , $this->mod_config['extra_images_size'] ) ;
 	foreach( $size_combos as $size_combo ) {
 		$this->image_sizes[] = array_map( 'intval' , preg_split( '/\D+/' , $size_combo ) ) ;
 	}
-
 }
 
 
@@ -58,7 +61,26 @@ function getSerializedRequestsFromPost()
 		$this->uploadImages( $ret ) ;
 	}
 
+	$this->requests = $ret ;
+
 	return pico_common_serialize( $ret ) ;
+}
+
+
+function syncContentEfSortables( $content_id )
+{
+	// store it into the table `content_ef_sortables`
+	$sortables = array_map( 'trim' , explode( ',' , $this->mod_config['extra_fields_sortables'] ) ) ;
+	if( ! empty( $sortables ) ) {
+		$db =& Database::getInstance() ;
+		$fields = array() ;
+		$values = array() ;
+		foreach( $sortables as $key => $field ) {
+			$fields[] = "`ef{$key}`" ;
+			$values[] = "'".mysql_real_escape_string( @$this->requests[ $field ] )."'" ;
+		}
+		$db->queryF( "REPLACE ".$db->prefix("{$this->mydirname}_content_ef_sortables")." (`content_id`,".implode(',',$fields).") VALUES ($content_id,".implode(',',$values).")" ) ;
+	}
 }
 
 
@@ -131,8 +153,7 @@ function uploadImage( &$extra_fields , $file , $field_name )
 	// resize loop
 	foreach( $this->image_sizes as $size_key => $sizes ) {
 		$image_path = $this->getImageFullPath( $field_name , $size_key , $image_id ) ;
-		exec( $this->mod_config['image_magick_path']."convert -geometry {$sizes[0]}x{$sizes[1]} $tmp_image $image_path" ) ;
-		@chmod( $image_path , 0644 ) ;
+		$this->resizeImage( $sizes , $tmp_image , $image_path ) ;
 	}
 
 	// force remove remove temporary
@@ -146,6 +167,18 @@ function uploadImage( &$extra_fields , $file , $field_name )
 
 	// set extra_fields
 	$extra_fields[ $field_name ] = $image_id ;
+}
+
+
+// Resize by ImageMagick
+function resizeImage( $sizes , $tmp_image , $image_path )
+{
+	$box_w = $sizes[0] ;
+	$box_h = $sizes[1] ;
+	$quality = $sizes[2] ;
+
+	exec( $this->mod_config['image_magick_path']."convert -quality $quality -thumbnail {$box_w}x{$box_h} $tmp_image $image_path" ) ;
+	@chmod( $image_path , 0644 ) ;
 }
 
 

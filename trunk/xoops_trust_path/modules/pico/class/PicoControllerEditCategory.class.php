@@ -83,7 +83,7 @@ function execute( $request )
 	$this->assign['category']['wraps_directories'] = array( '' => '---' ) + pico_main_get_wraps_directories_recursively( $this->mydirname , '/' ) ;
 
 	// views
-	$this->template_name = $this->mydirname.'_main_category_form.html' ;
+	$this->template_name = empty( $this->mod_config['tpl_category_form'] ) ? $this->mydirname.'_main_category_form.html' : $this->mod_config['tpl_category_form'] ;
 	$this->is_need_header_footer = true ;
 }
 
@@ -100,7 +100,7 @@ function getCategoryOptions4edit()
 			if( $type == 'int' || $type == 'bool' ) {
 				$val = intval( $val ) ;
 			}
-			$lines[] = htmlspecialchars( $key . ':' . $val , ENT_QUOTES ) ;
+			$lines[] = htmlspecialchars( $key . ': ' . $val , ENT_QUOTES ) ;
 		}
 	}
 	return implode( '<br />' , $lines ) ;

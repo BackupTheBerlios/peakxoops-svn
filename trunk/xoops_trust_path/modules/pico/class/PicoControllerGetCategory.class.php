@@ -63,7 +63,7 @@ function execute( $request )
 	$this->assign['xoops_pagetitle'] = $this->assign['category']['title'] ;
 
 	// views (no views other than 'listcontents')
-	$this->template_name = $this->mydirname.'_main_listcontents.html' ;
+	$this->template_name = empty( $this->mod_config['tpl_listcontents'] ) ? $this->mydirname.'_main_listcontents.html' : $this->mod_config['tpl_listcontents'] ;
 	$this->is_need_header_footer = true ;
 }
 

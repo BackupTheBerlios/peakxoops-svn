@@ -67,25 +67,34 @@ function pico_sync_cattree( $mydirname )
 {
 	$db =& Database::getInstance() ;
 
+	// fetch the top category option
+	list( $top_options ) = $db->fetchRow( $db->query( "SELECT cat_options FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=0" ) ) ;
+
 	// rebuild tree informations
-	list( $tree_array , $subcattree , $contents_total , $subcategories_total , $subcategories_ids_cs ) = pico_makecattree_recursive( $mydirname , 0 ) ;
+	list( $tree_array , $subcattree , $contents_total , $subcategories_total , $subcategories_ids_cs ) = pico_makecattree_recursive( $mydirname , 0 , 'cat_weight' , array() , 0 , '' , $top_options ) ;
+
 	//array_shift( $tree_array ) ;
 	$paths = array() ;
+	$options = array() ;
 	$previous_depth = 0 ;
 
 	if( ! empty( $tree_array ) ) foreach( $tree_array as $key => $val ) {
+
 		// build the absolute path of the category
 		$depth_diff = $val['depth'] - $previous_depth ;
 		$previous_depth = $val['depth'] ;
 		if( $depth_diff > 0 ) {
 			for( $i = 0 ; $i < $depth_diff ; $i ++ ) {
 				$paths[ $val['cat_id'] ] = $val['cat_title'] ;
+				$options[ $val['cat_id'] ] = $val['cat_options'] ;
 			}
 		} else if( $val['cat_id'] !== 0 ) {
 			for( $i = 0 ; $i < - $depth_diff + 1 ; $i ++ ) {
 				array_pop( $paths ) ;
+				array_pop( $options ) ;
 			}
 			$paths[ $val['cat_id'] ] = $val['cat_title'] ;
+			$options[ $val['cat_id'] ] = $val['cat_options'] ;
 		}
 
 		// redundant array
@@ -93,6 +102,7 @@ function pico_sync_cattree( $mydirname )
 			'cat_id' => $val['cat_id'] ,
 			'depth' => $val['depth'] ,
 			'cat_title' => $val['cat_title'] ,
+			'parents_options' => array( 0 => $top_options ) + $options ,
 			'contents_count' => $val['contents_count'] ,
 			'contents_total' => $val['contents_total'] ,
 			'subcategories_count' => $val['subcategories_count'] ,
@@ -106,28 +116,28 @@ function pico_sync_cattree( $mydirname )
 }
 
 
-function pico_makecattree_recursive( $mydirname , $cat_id , $order = 'cat_weight' , $parray = array() , $depth = 0 , $cat_title = '' )
+function pico_makecattree_recursive( $mydirname , $cat_id , $order = 'cat_weight' , $parray = array() , $depth = 0 , $cat_title = '' , $cat_options = '' )
 {
 	$db =& Database::getInstance() ;
 
 	// get number of contents of this category
 	list( $contents_count ) = $db->fetchRow( $db->query( "SELECT COUNT(*) FROM ".$db->prefix($mydirname."_contents")." WHERE cat_id=$cat_id AND visible" ) ) ;
 
-	$sql = "SELECT cat_id,cat_title FROM ".$db->prefix($mydirname."_categories")." WHERE pid=$cat_id ORDER BY $order" ;
+	$sql = "SELECT cat_id,cat_title,cat_options FROM ".$db->prefix($mydirname."_categories")." WHERE pid=$cat_id ORDER BY $order" ;
 	$result = $db->query( $sql ) ;
 /*	if( $db->getRowsNum( $result ) == 0 ) {
 		return array( $parray , $parray[ $myindex ]['contents_total'] , $parray[ $myindex ]['subcategories_total'] ) ;
 	} */
 	$myindex = sizeof( $parray ) ;
-	$myarray = array( 'cat_id' => $cat_id , 'depth' => $depth , 'cat_title' => $cat_title , 'contents_count' => intval( $contents_count ) , 'contents_total' => 0 , 'subcategories_count' => $db->getRowsNum( $result ) , 'subcategories_ids_cs' => '' , 'subcategories_total' => 0 , 'subcattree_raw' => array() ) ;
+	$myarray = array( 'cat_id' => $cat_id , 'depth' => $depth , 'cat_title' => $cat_title , 'cat_options' => $cat_options , 'contents_count' => intval( $contents_count ) , 'contents_total' => 0 , 'subcategories_count' => $db->getRowsNum( $result ) , 'subcategories_ids_cs' => '' , 'subcategories_total' => 0 , 'subcattree_raw' => array() ) ;
 	$parray[ $myindex ] = $myarray ;
 //	$parray[ $myindex ]['subcattree_raw'][] = $parray ;
 
 	$contents_total = intval( $myarray['contents_count'] ) ;
 	$subcategories_total = intval( $myarray['subcategories_count'] ) ;
 
-	while( list( $new_cat_id , $new_cat_title ) = $db->fetchRow( $result ) ) {
-		list( $parray , $subarray , $contents_smallsum , $subcategories_smallsum , $subcateroeis_ids_cs_sub ) = pico_makecattree_recursive( $mydirname , $new_cat_id , $order , $parray , $depth + 1 , $new_cat_title ) ;
+	while( list( $new_cat_id , $new_cat_title , $new_cat_options ) = $db->fetchRow( $result ) ) {
+		list( $parray , $subarray , $contents_smallsum , $subcategories_smallsum , $subcateroeis_ids_cs_sub ) = pico_makecattree_recursive( $mydirname , $new_cat_id , $order , $parray , $depth + 1 , $new_cat_title , $new_cat_options ) ;
 		$myarray['subcattree_raw'][] = $subarray ;
 		$contents_total += $contents_smallsum ;
 		$subcategories_total += $subcategories_smallsum ;
@@ -289,14 +299,57 @@ function pico_get_requests4category( $mydirname , $cat_id = null )
 {
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
+	$picoPermission =& PicoPermission::getInstance() ;
+	$permissions = $picoPermission->getPermissions( $mydirname ) ;
 
+	// First, fetch $pid of the targetted category
+	if( $cat_id === 0 ) {
+		// top category
+		$cat_vpath = null ;
+		$pid = 0xffff ;
+		$baseCategoryObj =& new PicoCategory( $mydirname , 0 , $permissions ) ;
+	} else {
+		// normal category
+		$cat_vpath = trim( $myts->stripSlashesGPC( @$_POST['cat_vpath'] ) ) ;
+		$pid = intval( @$_POST['pid'] ) ;
+		$parentCategoryObj =& new PicoCategory( $mydirname , $pid , $permissions ) ;
+		if( $parentCategoryObj->isError() ) {
+			redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCATEGORY ) ;
+			exit ;
+		}
+
+		if( empty( $cat_id ) ) {
+			$baseCategoryObj =& $parentCategoryObj ;
+		} else {
+			$baseCategoryObj =& new PicoCategory( $mydirname , $cat_id , $permissions ) ;
+			if( $baseCategoryObj->isError() ) {
+				redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCATEGORY ) ;
+				exit ;
+			}
+		}
+	}
+
+	// recheck permissions and reload $config
+	$mod_config = $baseCategoryObj->getOverriddenModConfig() ;
+	$cat_data = $baseCategoryObj->getData() ;
+
+	// fetch cat_options of the targetted category for overriding
 	include dirname(dirname(__FILE__)).'/include/configs_can_override.inc.php' ;
 	$cat_options = array() ;
-	foreach( $GLOBALS['xoopsModuleConfig'] as $key => $val ) {
+	foreach( $mod_config as $key => $val ) {
 		if( empty( $pico_configs_can_be_override[ $key ] ) ) continue ;
 		foreach( explode( "\n" , @$_POST['cat_options'] ) as $line ) {
 			if( preg_match( '/^'.$key.'\:(.{1,100})$/' , $line , $regs ) ) {
 				switch( $pico_configs_can_be_override[ $key ] ) {
+				case 'templates' :
+						$cat_options[ $key ] = preg_replace( '/[^0-9a-zA-Z._:,-]/' , '' , $regs[1] ) ;
+						break ;
+					case 'template' :
+						$cat_options[ $key ] = preg_replace( '/[^0-9a-zA-Z._:-]/' , '' , $regs[1] ) ;
+						break ;
+					case 'class' :
+						$cat_options[ $key ] = preg_replace( '/[^0-9a-zA-Z_]/' , '' , $regs[1] ) ;
+						break ;
 					case 'text' :
 						$cat_options[ $key ] = trim( $regs[1] ) ;
 						break ;
@@ -311,21 +364,10 @@ function pico_get_requests4category( $mydirname , $cat_id = null )
 		}
 	}
 
-	if( $cat_id === 0 ) {
-		// top category
-		$cat_vpath = null ;
-		$pid = 0xffff ;
-	} else {
-		// normal category
-		$cat_vpath = trim( $myts->stripSlashesGPC( @$_POST['cat_vpath'] ) ) ;
-		$pid = intval( @$_POST['pid'] ) ;
-		// check $pid
-		if( $pid ) {
-			$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$pid" ;
-			if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-			if( $db->getRowsNum( $crs ) <= 0 ) die( _MD_PICO_ERR_READCATEGORY ) ;
-		}
-	}
+	// extra_fields (read ef class and create the object)
+	$ef_class = empty( $mod_config['extra_fields_cat_class'] ) ? 'PicoExtraFieldsCat' : $mod_config['extra_fields_cat_class'] ;
+	require_once dirname(dirname(__FILE__)).'/class/'.$ef_class.'.class.php' ;
+	$ef_obj =& new $ef_class( $mydirname , $baseCategoryObj , 0 ) ;
 
 	return array( 
 		'cat_title' => $myts->stripSlashesGPC( @$_POST['cat_title'] ) ,
@@ -334,6 +376,7 @@ function pico_get_requests4category( $mydirname , $cat_id = null )
 		'cat_vpath' => $cat_vpath ,
 		'pid' => $pid ,
 		'cat_options' => pico_common_serialize( $cat_options ) ,
+		'cat_extra_fields' => $ef_obj->getSerializedRequestsFromPost() ,
 	) ;
 }
 
@@ -413,27 +456,30 @@ function pico_updatecategory( $mydirname , $cat_id )
 
 
 // get requests for content's sql (parse options)
-function pico_get_requests4content( $mydirname , &$errors , $auto_approval = true , $isadminormod = false , $content_id = 0 )
+function pico_get_requests4content( $mydirname , &$errors , &$auto_approval , &$isadminormod , $content_id = 0 )
 {
 	global $xoopsUser ;
 
 	$myts =& MyTextSanitizer::getInstance() ;
 	$db =& Database::getInstance() ;
+	$picoPermission =& PicoPermission::getInstance() ;
+	$permissions = $picoPermission->getPermissions( $mydirname ) ;
 
-	// get config
-	$module_handler =& xoops_gethandler('module') ;
-	$module =& $module_handler->getByDirname( $mydirname ) ;
-	if( ! is_object( $module ) ) return array() ;
-	$config_handler =& xoops_gethandler('config') ;
-	$mod_config =& $config_handler->getConfigsByCat( 0 , $module->getVar('mid') ) ;
-
-	// check $cat_id
+	// First, fetch $cat_id
 	$cat_id = intval( @$_POST['cat_id'] ) ;
-	if( $cat_id ) {
-		$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." c WHERE c.cat_id=$cat_id" ;
-		if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
-		if( $db->getRowsNum( $crs ) <= 0 ) die( _MD_PICO_ERR_READCATEGORY ) ;
+
+	// requested category object
+	$newCategoryObj =& new PicoCategory( $mydirname , $cat_id , $permissions ) ;
+	if( $newCategoryObj->isError() ) {
+		redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_PICO_ERR_READCATEGORY ) ;
+		exit ;
 	}
+
+	// recheck permissions and reload $config
+	$mod_config = $newCategoryObj->getOverriddenModConfig() ;
+	$cat_data = $newCategoryObj->getData() ;
+	$auto_approval = $auto_approval && $cat_data['post_auto_approved'] ;
+	$isadminormod = $isadminormod && $cat_data['isadminormod'] ;
 
 	// build filters
 	$filters = array() ;
@@ -479,6 +525,7 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 		'show_in_navi' => empty( $_POST['show_in_navi'] ) ? 0 : 1 ,
 		'show_in_menu' => empty( $_POST['show_in_menu'] ) ? 0 : 1 ,
 		'allow_comment' => empty( $_POST['allow_comment'] ) ? 0 : 1 ,
+		'categoryObj' => $newCategoryObj ,
 	) ;
 
 	// tags (finding a custom tag filter for each languages)
@@ -566,10 +613,11 @@ function pico_get_requests4content( $mydirname , &$errors , $auto_approval = tru
 	}
 
 	// extra_fields (read ef class and create the object)
-	$ef_class = empty( $mod_config['extra_fields_class'] ) ? 'PicoExtraFields' : preg_replace( '/[^0-9a-zA-Z_]/' , '' , $mod_config['extra_fields_class'] ) ;
+	$ef_class = empty( $mod_config['extra_fields_class'] ) ? 'PicoExtraFields' : $mod_config['extra_fields_class'] ;
 	require_once dirname(dirname(__FILE__)).'/class/'.$ef_class.'.class.php' ;
-	$ef_obj =& new $ef_class( $mydirname , $mod_config , $auto_approval , $isadminormod , $content_id ) ;
+	$ef_obj =& new $ef_class( $mydirname , $newCategoryObj , $content_id ) ;
 	$ret['extra_fields'] = $ef_obj->getSerializedRequestsFromPost() ;
+	$ret['ef_obj'] = $ef_obj ;
 
 	return $ret ;
 }
@@ -595,14 +643,19 @@ function pico_main_get_uid( $text )
 
 
 // create content
-function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = false )
+function pico_makecontent( $mydirname )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 	$uid = is_object( $xoopsUser ) ? $xoopsUser->getVar('uid') : 0 ;
 
-	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod ) ;
+	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval = true , $isadminormod = true ) ;
+
+	$targetCategoryObj = $requests['categoryObj'] ;
+	$ef_obj = $requests['ef_obj'] ;
+	unset( $requests['categoryObj'] , $requests['ef_obj'] ) ;
+
 	$requests += array( 'poster_uid' => $uid , 'modifier_uid' => $uid ) ;
 	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['specify_expiring_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] , $requests['expiring_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' ) ;
@@ -639,18 +692,29 @@ function pico_makecontent( $mydirname , $auto_approval = true , $isadminormod = 
 	// update tags
 	pico_sync_tags( $mydirname ) ;
 
+	// update content_ef_sortables
+	$ef_obj->syncContentEfSortables( $new_content_id ) ;
+
 	return $new_content_id ;
 }
 
 
 // update content
-function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , $isadminormod = false )
+function pico_updatecontent( $mydirname , $content_id , $prev_auto_approval = true , $prev_isadminormod = false )
 {
 	global $xoopsUser ;
 
 	$db =& Database::getInstance() ;
 
+	$auto_approval = $prev_auto_approval ;
+	$isadminormod = $prev_isadminormod ;
+
 	$requests = pico_get_requests4content( $mydirname , $errors = array() , $auto_approval , $isadminormod , $content_id ) ;
+
+	$targetCategoryObj = $requests['categoryObj'] ;
+	$ef_obj = $requests['ef_obj'] ;
+	unset( $requests['categoryObj'] , $requests['ef_obj'] ) ;
+
 	unset( $requests['specify_created_time'] , $requests['specify_modified_time'] , $requests['specify_expiring_time'] , $requests['created_time_formatted'] , $requests['modified_time_formatted'] , $requests['expiring_time_formatted'] ) ;
 	$ignore_requests = $auto_approval ? array() : array( 'subject' , 'htmlheader' , 'body' , 'visible' , 'filters' , 'show_in_navi' , 'show_in_menu' , 'allow_comment' , 'use_cache' , 'weight' , 'tags' , 'cat_id' ) ;
 	if( ! $isadminormod ) {
@@ -686,6 +750,9 @@ function pico_updatecontent( $mydirname , $content_id , $auto_approval = true , 
 
 	// update tags
 	pico_sync_tags( $mydirname ) ;
+
+	// update content_ef_sortables
+	$ef_obj->syncContentEfSortables( $content_id ) ;
 
 	return $content_id ;
 }

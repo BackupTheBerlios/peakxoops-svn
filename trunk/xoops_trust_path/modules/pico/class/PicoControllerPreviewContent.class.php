@@ -38,7 +38,8 @@ function processPreview( $request )
 	// permission check (can_edit) done
 
 	// request
-	$request = pico_get_requests4content( $this->mydirname , $errors = array() , $cat_data['post_auto_approved'] , $cat_data['isadminormod'] , $this->assign['content']['id'] ) ;
+	$request = pico_get_requests4content( $this->mydirname , $errors = array() , $auto_approval = $cat_data['post_auto_approved'] , $isadminormod = $cat_data['isadminormod'] , $this->assign['content']['id'] ) ;
+
 	$request['body_raw'] = $request['body'] ;
 	$request['subject_raw'] = $request['subject'] ;
 	$request4assign = array_map( 'htmlspecialchars_ent' , $request ) ;
@@ -46,7 +47,7 @@ function processPreview( $request )
 
 	// override content data for edit
 	$this->assign['content'] = $request4assign + $this->assign['content'] ;
-	$this->assign['content']['filter_infos'] = pico_main_get_filter_infos( $request['filters'] , $cat_data['isadminormod'] ) ;
+	$this->assign['content']['filter_infos'] = pico_main_get_filter_infos( $request['filters'] , $isadminormod ) ;
 	$this->assign['content']['body_raw'] = $request['body'] ;
 	$this->assign['content']['extra_fields'] = $request['extra_fields'] ;
 	$this->assign['content']['ef'] = pico_common_unserialize( $request['extra_fields'] ) ;

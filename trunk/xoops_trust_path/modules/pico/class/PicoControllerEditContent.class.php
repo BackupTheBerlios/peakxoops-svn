@@ -87,16 +87,16 @@ function execute( $request )
 	$this->assign['gticket_hidden'] = $GLOBALS['xoopsGTicket']->getTicketHtml( __LINE__ , 1800 , 'pico') ;
 
 	// views
-	$this->template_name = $this->mydirname.'_main_content_form.html' ;
+	$this->template_name = empty( $this->mod_config['tpl_content_form'] ) ? $this->mydirname.'_main_content_form.html' : $this->mod_config['tpl_content_form'] ;
 	$this->is_need_header_footer = true ;
 
 	// preview
 	$this->processPreview( $request ) ;
 
 	// editor (wysiwyg etc)
-	$editor_assigns = $this->getEditorAssigns( 'body' , $this->assign['content']['body_raw'] ) ;
-	$this->assign['body_wysiwyg'] = $editor_assigns['body'] ;
-	$this->html_header .= $editor_assigns['header'] ;
+	// $editor_assigns = $this->getEditorAssigns( 'body' , $this->assign['content']['body_raw'] ) ;
+	// $this->assign['body_wysiwyg'] = $editor_assigns['body'] ;
+	// $this->html_header .= $editor_assigns['header'] ;
 }
 
 
@@ -106,7 +106,7 @@ function processPreview()
 }
 
 
-function getEditorAssigns( $name , $value )
+/* function getEditorAssigns( $name , $value )
 {
 	if( empty( $_POST['body_editor'] ) ) {
 		$editor = $this->mod_config['body_editor'] ;
@@ -136,7 +136,7 @@ function getEditorAssigns( $name , $value )
 	}
 
 	return array( 'header' => $header , 'body' => $body ) ;
-}
+}*/
 
 
 }

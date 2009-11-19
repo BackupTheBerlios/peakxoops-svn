@@ -82,7 +82,7 @@ function execute( $request )
 			$this->is_need_header_footer = false ;
 			break ;
 		default :
-			$this->template_name = $this->mydirname.'_main_viewcontent.html' ;
+			$this->template_name = empty( $this->mod_config['tpl_viewcontent'] ) ? $this->mydirname.'_main_viewcontent.html' : $this->mod_config['tpl_viewcontent'] ;
 			$this->is_need_header_footer = true ;
 			break ;
 	}

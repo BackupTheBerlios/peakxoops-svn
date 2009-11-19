@@ -1,6 +1,8 @@
 <?php
 
 $pico_configs_can_be_override = array(
+	'wraps_auto_register' => 'bool' ,
+	'auto_register_class' => 'class' ,
 	'show_listasindex' => 'bool' ,
 	'show_breadcrumbs' => 'bool' ,
 	'show_pagenavi' => 'bool' ,
@@ -16,11 +18,20 @@ $pico_configs_can_be_override = array(
 	'allow_each_htmlheader' => 'bool' ,
 	'css_uri' => 'text' ,
 	'images_dir' => 'text' ,
-	'body_editor' => 'text' ,
-	'wraps_auto_register' => 'bool' ,
-	'auto_register_class' => 'text' ,
+	'tpl_viewcontent' => 'template' ,
+	'tpl_content_form' => 'template' ,
+	'tpl_category_form' => 'template' ,
+	'tpl_listcontents' => 'template' ,
+	'extra_fields_class' => 'class' ,
+	'extra_fields_cat_class' => 'class' ,
+	'extra_fields_sortables' => 'text' ,
+	'extra_images_dir' => 'text' ,
+	'extra_images_size' => 'text' ,
 	'comment_dirname' => 'text' ,
 	'comment_forum_id' => 'int' ,
+	'comment_order' => 'text' ,
+	'comment_view' => 'text' ,
+	'comment_posts_num' => 'int' ,
 ) ;
 
 ?>

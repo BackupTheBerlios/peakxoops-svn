@@ -33,6 +33,7 @@ CREATE TABLE categories (
   cat_created_time int(10) NOT NULL default 0,
   cat_modified_time int(10) NOT NULL default 0,
   cat_vpath_mtime int(10) NOT NULL default 0,
+  cat_extra_fields mediumtext,
   cat_redundants mediumtext,
   PRIMARY KEY (cat_id),
   UNIQUE KEY (cat_vpath),
@@ -92,6 +93,31 @@ CREATE TABLE contents (
   KEY (visible),
   KEY (votes_sum),
   KEY (votes_count)
+) TYPE=MyISAM;
+
+CREATE TABLE content_ef_sortables (
+  content_id int(10) unsigned NOT NULL default 0,
+  ef0 char(64) NOT NULL default '',
+  ef1 char(64) NOT NULL default '',
+  ef2 char(64) NOT NULL default '',
+  ef3 char(64) NOT NULL default '',
+  ef4 char(64) NOT NULL default '',
+  ef5 char(64) NOT NULL default '',
+  ef6 char(64) NOT NULL default '',
+  ef7 char(64) NOT NULL default '',
+  ef8 char(64) NOT NULL default '',
+  ef9 char(64) NOT NULL default '',
+  KEY (ef0),
+  KEY (ef1),
+  KEY (ef2),
+  KEY (ef3),
+  KEY (ef4),
+  KEY (ef5),
+  KEY (ef6),
+  KEY (ef7),
+  KEY (ef8),
+  KEY (ef9),
+  PRIMARY KEY (content_id)
 ) TYPE=MyISAM;
 
 CREATE TABLE content_votes (

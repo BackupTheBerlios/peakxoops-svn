@@ -42,7 +42,7 @@ function execute( $request )
 	}
 
 	// insert a content
-	$content_id = pico_makecontent( $this->mydirname , $cat_data['post_auto_approved'] , $cat_data['isadminormod'] ) ;
+	$content_id = pico_makecontent( $this->mydirname ) ;
 	$content_uri4html = XOOPS_URL."/modules/$this->mydirname/".pico_common_make_content_link4html( $this->mod_config , $content_id , $this->mydirname ) ;
 
 	// get contentObj

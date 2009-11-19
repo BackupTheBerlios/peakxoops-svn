@@ -1,3 +1,5 @@
+<{* SAMPLE TEMPLATE FOR UNDERSTANDING EXTRA_FIELDS *}>
+
 <div class="pico_container" id="<{$mydirname}>_container">
 
 <{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
@@ -53,7 +55,6 @@
 			</td>
 		</tr>
 
-<{*
 		<!-- extra fields sample (TEXTBOX) -->
 		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
 			<th class="head"><label for="pronunciation">pronunciation</label></th>
@@ -89,11 +90,10 @@
 				<input type="file" name="ei_myphoto" />
 				<input type="hidden" name="ef_myphoto" value="<{$content.ef.myphoto|escape}>" />
 				<{if $content.ef.myphoto}>
-					<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$content.ef.myphoto|escape}>"><img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$content.ef.myphoto|escape}>" /></a>
+					<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$content.ef.myphoto|escape}>"><img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$content.ef.myphoto|escape}>" /></a><br /><{$smarty.const._MD_PICO_LABEL_HOWTOREMOVEEXTRAIMAGE}>
 				<{/if}>
 			</td>
 		</tr>
-*}>
 
 		<!-- subject reference for a waiting content -->
 		<{if $content.subject_waiting && $page != 'makecontent'}>

@@ -127,10 +127,11 @@ function PicoCategory( $mydirname , $cat_id , $permissions , $allow_makenew = fa
 		'cat_options' => pico_common_unserialize( $cat_row['cat_options'] ) ,
 		'paths_raw' => pico_common_unserialize( $cat_row['cat_path_in_tree'] ) ,
 		'redundants' => pico_common_unserialize( $cat_row['cat_redundants'] ) ,
+		'ef' => pico_common_unserialize( $cat_row['cat_extra_fields'] ) ,
 	) + $cat_row ;
 
 	// array guarantee
-	foreach( array( 'cat_options' , 'paths_raw' , 'redundants' ) as $key ) {
+	foreach( array( 'cat_options' , 'paths_raw' , 'redundants' , 'ef' ) as $key ) {
 		if( ! is_array( $this->data[$key] ) ) $this->data[$key] = array() ;
 	}
 
@@ -162,7 +163,7 @@ function getData4edit()
 {
 	$options4edit = '' ;
 	foreach( $this->data['cat_options'] as $key => $val ) {
-		$options4edit .= htmlspecialchars( $key.':'.$val."\n" , ENT_QUOTES ) ;
+		$options4edit .= htmlspecialchars( $key.': '.$val."\n" , ENT_QUOTES ) ;
 	}
 
 	$ret4edit = array(
@@ -199,6 +200,7 @@ function getBlankCategoryRow( $parentObj )
 		'cat_created_time' => time() ,
 		'cat_modified_time' => time() ,
 		'cat_vpath_mtime' => 0 ,
+		'cat_extra_fields' => pico_common_serialize( array() ) ,
 		'cat_redundants' => '' ,
 	) ;
 }
@@ -212,10 +214,14 @@ function setOverriddenModConfig()
 	$this->mod_config = $config_handler->getConfigList( $module->getVar('mid') ) ;
 	$this->mod_name = $module->getVar( 'name' , 'n' ) ;
 
-	if( ! is_array( $this->data['cat_options'] ) ) return ;
-	foreach( $this->data['cat_options'] as $key => $val ) {
-		if( isset( $this->mod_config[ $key ] ) ) {
-			$this->mod_config[ $key ] = $val ;
+	// options(mod_config) overridden by every parents hierarchically
+	foreach( $this->data['redundants']['parents_options'] as $cat_id => $serialized_options ) {
+		$options = @pico_common_unserialize( $serialized_options ) ;
+		if( ! is_array( $options ) ) continue ;
+		foreach( $options as $key => $val ) {
+			if( isset( $this->mod_config[ $key ] ) ) {
+				$this->mod_config[ $key ] = $val ;
+			}
 		}
 	}
 }

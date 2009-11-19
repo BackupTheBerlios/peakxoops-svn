@@ -366,6 +366,46 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'tpl_viewcontent' ,
+	'title'			=> $constpref.'_TPL_VIEWCONTENT' ,
+	'description'	=> $constpref.'_TPL_VIEWCONTENTDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> $mydirname.'_main_viewcontent.html' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'tpl_content_form' ,
+	'title'			=> $constpref.'_TPL_CONTENT_FORM' ,
+	'description'	=> $constpref.'_TPL_CONTENT_FORMDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> $mydirname.'_main_content_form.html' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'tpl_category_form' ,
+	'title'			=> $constpref.'_TPL_CATEGORY_FORM' ,
+	'description'	=> $constpref.'_TPL_CATEGORY_FORMDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> $mydirname.'_main_category_form.html' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'tpl_listcontents' ,
+	'title'			=> $constpref.'_TPL_LISTCONT_FORM' ,
+	'description'	=> $constpref.'_TPL_LISTCONT_FORMDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> $mydirname.'_main_listcontents.html' ,
+	'options'		=> array()
+) ;
+
+/* $modversion['config'][] = array(
 	'name'			=> 'body_editor' ,
 	'title'			=> $constpref.'_BODY_EDITOR' ,
 	'description'	=> '' ,
@@ -373,7 +413,7 @@ $modversion['config'][] = array(
 	'valuetype'		=> 'text' ,
 	'default'		=> 'xoopsdhtml' ,
 	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'common/fckeditor' => 'common_fckeditor' )
-) ;
+) ; */
 
 $modversion['config'][] = array(
 	'name'			=> 'htmlpurify_except' ,
@@ -426,6 +466,26 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'extra_fields_cat_class' ,
+	'title'			=> $constpref.'_EFCAT_CLASS' ,
+	'description'	=> $constpref.'_EFCAT_CLASSDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'PicoExtraFieldsCat' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
+	'name'			=> 'extra_fields_sortables' ,
+	'title'			=> $constpref.'_EF_SORTABLES' ,
+	'description'	=> $constpref.'_EF_SORTABLESDSC' ,
+	'formtype'		=> 'textbox' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> '' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'uri_mapper_class' ,
 	'title'			=> $constpref.'_URIM_CLASS' ,
 	'description'	=> $constpref.'_URIM_CLASSDSC' ,
@@ -451,7 +511,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_EFIMAGES_SIZEDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> '480x480 160x160' ,
+	'default'		=> '480x480-65 160x160-65' ,
 	'options'		=> array()
 ) ;
 

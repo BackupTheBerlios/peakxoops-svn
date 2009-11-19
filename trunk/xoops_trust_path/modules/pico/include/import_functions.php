@@ -23,6 +23,7 @@ $GLOBALS['pico_tables'] = array(
 		'cat_created_time' ,
 		'cat_modified_time' ,
 		'cat_vpath_mtime' ,
+		'cat_extra_fields' ,
 		'cat_redundants' ,
 	) ,
 	'contents' => array(

@@ -17,11 +17,16 @@ class FormProcessByHtml
 	function __construct()
 	{
 		// register validators
-		$this->validator_dir = dirname(__FILE__) . '/validators' ;
+		$this->validator_dir = dirname(dirname(__FILE__)) . '/validators' ;
 		if( $handler = @opendir( $this->validator_dir ) ) {
 			while( ( $file = readdir( $handler ) ) !== false ) {
 				if( substr( $file , 0 , 1 ) == '.' ) continue ;
-				$this->types[] = substr( $file , 0 , -4 ) ;
+				if( substr( $file , -10 ) == '.class.php' ) {
+					$type = substr( $file , 17 , -10 ) ;
+				} else {
+					$type = substr( $file , 0 , -4 ) ;
+				}
+				$this->types[] = $type ;
 			}
 		}
 	}
@@ -277,9 +282,18 @@ class FormProcessByHtml
 				default :
 					if( in_array( $attribs['type'] , $this->types ) ) {
 						// custom validator
-						require_once $this->validator_dir.'/'.$attribs['type'].'.php' ;
-						$func_name = 'formprocess_validator_'.$attribs['type'] ;
-						$value = $func_name( $value , $field_name , $this ) ;
+						if( file_exists( $this->validator_dir.'/'.$attribs['type'].'.php' ) ) {
+							// function validator (older way)
+							require_once $this->validator_dir.'/'.$attribs['type'].'.php' ;
+							$func_name = 'formprocess_validator_'.$attribs['type'] ;
+							$value = $func_name( $value , $field_name , $this ) ;
+						} else {
+							// class validator (newer way)
+							$class_name = 'PicoFormValidator' . $attribs['type'] ;
+							require_once "{$this->validator_dir}/{$class_name}.class.php" ;
+							$validator_obj =& new $class_name( $this ) ;
+							$value = $validator_obj->validate( $value , $field_name ) ;
+						}
 					}
 					break ;
 			}

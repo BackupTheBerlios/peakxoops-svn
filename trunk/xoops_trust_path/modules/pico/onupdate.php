@@ -91,6 +91,15 @@ function pico_onupdate_base( $module , $mydirname )
 		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_tags")." ( label varchar(255) NOT NULL default '', weight int(10) unsigned NOT NULL default 0, count int(10) unsigned NOT NULL default 0, content_ids mediumtext, created_time int(10) NOT NULL default 0, modified_time int(10) NOT NULL default 0, PRIMARY KEY (label), KEY (count), KEY (weight), KEY (created_time) ) TYPE=MyISAM" ) ;
 	}
 
+	// 1.7/1.8 -> 1.9/2.0 (1)
+	$check_sql = "SELECT * FROM ".$db->prefix($mydirname."_content_ef_sortables") ;
+	if( ! $db->query( $check_sql ) ) {
+		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_categories")." ADD `cat_extra_fields` mediumtext AFTER `cat_vpath_mtime`;" ) ;
+		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_content_ef_sortables")." ( content_id int(10) unsigned NOT NULL default 0, ef0 char(64) NOT NULL default '', ef1 char(64) NOT NULL default '', ef2 char(64) NOT NULL default '', ef3 char(64) NOT NULL default '', ef4 char(64) NOT NULL default '', ef5 char(64) NOT NULL default '', ef6 char(64) NOT NULL default '', ef7 char(64) NOT NULL default '', ef8 char(64) NOT NULL default '', ef9 char(64) NOT NULL default '', KEY (ef0), KEY (ef1), KEY (ef2), KEY (ef3), KEY (ef4), KEY (ef5), KEY (ef6), KEY (ef7), KEY (ef8), KEY (ef9), PRIMARY KEY (content_id) ) TYPE=MyISAM" ) ;
+	}
+	// 1.7/1.8 -> 1.9/2.0 (2)
+	// content_histories ...
+
 	// TEMPLATES (all templates have been already removed by modulesadmin)
 	$tplfile_handler =& xoops_gethandler( 'tplfile' ) ;
 	$tpl_path = dirname(__FILE__).'/templates' ;

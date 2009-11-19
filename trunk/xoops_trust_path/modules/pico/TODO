@@ -42,33 +42,6 @@ http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
 ・タグからコンテンツを引っ張ってくるsmartyプラグインまたは既存プラグインへのtag絞り込み機能付与
 ・ヒストリ処理の抜本的改善
 
-ALTER TABLE xoops_pico_categories ADD `cat_extra_fields` mediumtext AFTER `cat_vpath_mtime`;
-
-CREATE TABLE xoops_pico_content_ef_sortables (
-  content_id int(10) unsigned NOT NULL default 0,
-  ef0 char(64) NOT NULL default '',
-  ef1 char(64) NOT NULL default '',
-  ef2 char(64) NOT NULL default '',
-  ef3 char(64) NOT NULL default '',
-  ef4 char(64) NOT NULL default '',
-  ef5 char(64) NOT NULL default '',
-  ef6 char(64) NOT NULL default '',
-  ef7 char(64) NOT NULL default '',
-  ef8 char(64) NOT NULL default '',
-  ef9 char(64) NOT NULL default '',
-  KEY (ef0),
-  KEY (ef1),
-  KEY (ef2),
-  KEY (ef3),
-  KEY (ef4),
-  KEY (ef5),
-  KEY (ef6),
-  KEY (ef7),
-  KEY (ef8),
-  KEY (ef9),
-  PRIMARY KEY (content_id)
-) TYPE=MyISAM;
-
 
 
 ●実装済
@@ -141,6 +114,8 @@ CREATE TABLE xoops_pico_content_ef_sortables (
 ・カテゴリのextra_fields
 ・extra_fields のソート用テーブル実装
 ・ファイル構成の整理(コントローラ・モデル・extra_fields処理クラスを分離)
+・FormValidatorのクラス化
+
 
 
 ●権限・表示ON/OFF関係の仕様

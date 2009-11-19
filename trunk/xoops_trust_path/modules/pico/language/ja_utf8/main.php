@@ -124,6 +124,13 @@ define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','コンテンツを複製してよろ
 define('_MD_PICO_LABEL_HTMLHEADERONOFF','HTMLヘッダカスタマイズ部表示');
 define('_MD_PICO_LABEL_HTMLHEADERCONFIGALERT','(※コンテンツ毎のHTMLヘッダは一般設定によって禁止されています)');
 define('_MD_PICO_LABEL_INPUTHELPER','入力支援ON/OFF');
+define('_MD_D3TAREA_PLAIN','プレーン');
+define('_MD_D3TAREA_DHTMLTAREA','XOOPS入力支援');
+define('_MD_D3TAREA_CKEDITOR','CKEditor');
+define('_MD_D3TAREA_FCKXOOPS','FCKEditor');
+
+define('_MD_PICO_LABEL_HOWTOREMOVEEXTRAIMAGE','画像を明示的に削除する場合は、remove.gif という名前のダミーファイルを指定してください。<br />（このファイル名の時のみ「削除」指示となり、実際にはアップロードされません）');
+
 define('_MD_PICO_BTN_SUBMITEDITING','編集内容を登録');
 define('_MD_PICO_BTN_SUBMITSAVEAS','別レコードとして保存');
 define('_MD_PICO_BTN_COPYFROMWAITING','申請データへの置換');

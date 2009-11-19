@@ -3,6 +3,7 @@
 require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
 require_once dirname(dirname(__FILE__)).'/class/PicoPermission.class.php' ;
 require_once dirname(__FILE__).'/PicoModelCategory.class.php' ;
+require_once dirname(__FILE__).'/PicoModelTag.class.php' ;
 
 
 class PicoContentHandler {
@@ -65,11 +66,11 @@ function getCategoryLatestContents( &$categoryObj , $num = 10 , $fetch_from_subc
 }
 
 // return not object but array
-function getContents4assign( $whr_append = '1' , $order = 'weight' , $offset = 0 , $limit = 100 , $return_prohibited_also = false )
+function getContents4assign( $whr_append = '1' , $order = 'o.weight' , $offset = 0 , $limit = 100 , $return_prohibited_also = false , $tags = '' )
 {
 	$db =& Database::getInstance() ;
 
-	$sql = "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." o WHERE ($whr_append) ORDER BY $order" ;
+	$sql = "SELECT o.content_id FROM ".$db->prefix($this->mydirname."_contents")." o LEFT JOIN ".$db->prefix($this->mydirname."_content_ef_sortables")." e ON o.content_id=e.content_id WHERE ($whr_append) AND (".$this->getWhrFromTags($tags).") ORDER BY $order" ;
 	if( ! $ors = $db->query( $sql ) ) {
 		if( $GLOBALS['xoopsUser']->isAdmin() ) echo $db->logger->dumpQueries() ;
 		exit ;
@@ -88,6 +89,22 @@ function getContents4assign( $whr_append = '1' , $order = 'weight' , $offset = 0
 		unset( $objTemp ) ;
 	}
 
+	return $ret ;
+}
+
+
+function getWhrFromTags( $tags )
+{
+	$db =& Database::getInstance() ;
+	$tag_handler =& new PicoTagHandler( $this->mydirname ) ;
+
+	$ret = '1' ;
+	foreach( preg_split( '/[ ,]+/' , $tags ) as $tag ) {
+		$tag = trim( $tag ) ;
+		if( $tag == '' ) continue ;
+		$content_ids = $tag_handler->getContentIdsCS( $tag ) ;
+		$ret .= " AND o.`content_id` IN ($content_ids)" ;
+	}
 	return $ret ;
 }
 

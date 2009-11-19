@@ -1,8 +1,8 @@
 <?php
 
-function b_pico_list_allowed_order()
+function b_pico_list_get_order_options( $mod_config )
 {
-	return array(
+	$builtin_orders = array(
 		'o.weight' ,
 		'o.weight DESC' ,
 		'o.created_time' ,
@@ -20,6 +20,17 @@ function b_pico_list_allowed_order()
 		'o.weight,o.content_id' ,
 		'o.weight,o.content_id DESC' ,
 	) ;
+	$ret = array_combine( $builtin_orders , $builtin_orders ) ;
+
+	$sortables = array_map( 'trim' , explode( ',' , $mod_config['extra_fields_sortables'] ) ) ;
+	if( ! empty( $sortables ) ) {
+		foreach( $sortables as $key => $field ) {
+			$ret[ "e.ef{$key}" ] = "$field" ;
+			$ret[ "e.ef{$key} DESC" ] = "$field DESC" ;
+		}
+	}
+
+	return $ret ;
 }
 
 
@@ -29,7 +40,7 @@ function b_pico_list_show( $options )
 	$mytrustdirname = basename(dirname(dirname(__FILE__))) ;
 	$mydirname = empty( $options[0] ) ? $mytrustdirname : $options[0] ;
 	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
-	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
+	$selected_order = empty( $options[2] ) ? 'o.created_time DESC' : $options[2] ;
 	$limit_offset = empty( $options[3] ) ? '10' : preg_replace( '/[^0-9,]/' , '' , $options[3] ) ;
 	if( strstr( $limit_offset , ',' ) ) {
 		list( $offset , $limit ) = array_map( 'intval' , explode( ',' , $limit_offset ) ) ;
@@ -39,6 +50,7 @@ function b_pico_list_show( $options )
 	}
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
 	$display_body = empty( $options[5] ) ? false : true ;
+	$tags = empty( $options[6] ) ? '' : trim( $options[6] ) ;
 
 	// mydirname check
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
@@ -49,13 +61,13 @@ function b_pico_list_show( $options )
 	// contentObjects
 	if( sizeof( $categories ) == 0 ) {
 		// no category specified
-		$contents4assign = $content_handler->getContents4assign( '1' , $selected_order , $offset , $limit , false ) ;
+		$contents4assign = $content_handler->getContents4assign( '1' , $selected_order , $offset , $limit , false , $tags ) ;
 	} else if( sizeof( $categories ) == 1 ) {
 		// single category
-		$contents4assign = $content_handler->getContents4assign( 'o.cat_id='.$categories[0] , $selected_order , $offset , $limit , false ) ;
+		$contents4assign = $content_handler->getContents4assign( 'o.cat_id='.$categories[0] , $selected_order , $offset , $limit , false , $tags ) ;
 	} else {
 		// multi category
-		$contents4assign = $content_handler->getContents4assign( 'o.cat_id IN ('.implode(',',$categories).')' , $selected_order , $offset , $limit , false ) ;
+		$contents4assign = $content_handler->getContents4assign( 'o.cat_id IN ('.implode(',',$categories).')' , $selected_order , $offset , $limit , false , $tags ) ;
 	}
 
 	// compatibility for 1.5/1.6
@@ -106,12 +118,19 @@ function b_pico_list_edit( $options )
 	$mytrustdirname = basename(dirname(dirname(__FILE__))) ;
 	$mydirname = empty( $options[0] ) ? $mytrustdirname : $options[0] ;
 	$categories = trim( @$options[1] ) === '' ? array() : array_map( 'intval' , explode( ',' , $options[1] ) ) ;
-	$selected_order = empty( $options[2] ) || ! in_array( $options[2] , b_pico_list_allowed_order() ) ? 'o.created_time DESC' : $options[2] ;
+	$selected_order = empty( $options[2] ) ? 'o.created_time DESC' : $options[2] ;
 	$limit_offset = empty( $options[3] ) ? '10' : preg_replace( '/[^0-9,]/' , '' , $options[3] ) ;
 	$this_template = empty( $options[4] ) ? 'db:'.$mydirname.'_block_list.html' : trim( $options[4] ) ;
 	$display_body = empty( $options[5] ) ? false : true ;
+	$tags = empty( $options[6] ) ? '' : trim( $options[6] ) ;
 
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
+
+	// module config (not overridden yet)
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
@@ -119,11 +138,12 @@ function b_pico_list_edit( $options )
 		'mydirname' => $mydirname ,
 		'categories' => $categories ,
 		'categories_imploded' => implode( ',' , $categories ) ,
-		'order_options' => b_pico_list_allowed_order() ,
+		'order_options' => b_pico_list_get_order_options( $configs ) ,
 		'selected_order' => $selected_order ,
 		'contents_num' => $limit_offset ,
 		'this_template' => $this_template ,
 		'display_body' => $display_body ,
+		'tags' => $tags ,
 	) ) ;
 	return $tpl->fetch( 'db:'.$mydirname.'_blockedit_list.html' ) ;
 }

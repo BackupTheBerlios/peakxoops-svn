@@ -9,7 +9,7 @@
 <p>
 	<label for="select_order"><{$smarty.const._MB_PICO_SELECTORDER}></label>:
 	<select name="options[2]" id="select_order">
-		<{html_options values=$order_options output=$order_options selected=$selected_order}>
+		<{html_options options=$order_options selected=$selected_order}>
 	</select>
 </p>
 
@@ -31,5 +31,10 @@
 	&nbsp;
 	<label for="display_body_no"><{$smarty.const._NO}></label>
 	<input type="radio" name="options[5]" id="display_body_no" value="0" <{if ! $display_body}>checked="checked"<{/if}> />
+</p>
+
+<p>
+	<label for="tags"><{$smarty.const._MB_PICO_TAGS}></label>:
+	<input type="text" size="60" name="options[6]" id="tags" value="<{$tags|escape}>" />
 </p>
 

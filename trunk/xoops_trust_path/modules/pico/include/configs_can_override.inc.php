@@ -24,7 +24,6 @@ $pico_configs_can_be_override = array(
 	'tpl_listcontents' => 'template' ,
 	'extra_fields_class' => 'class' ,
 	'extra_fields_cat_class' => 'class' ,
-	'extra_fields_sortables' => 'text' ,
 	'extra_images_dir' => 'text' ,
 	'extra_images_size' => 'text' ,
 	'comment_dirname' => 'text' ,

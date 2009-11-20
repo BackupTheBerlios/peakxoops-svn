@@ -1,49 +1,41 @@
 ●TODO停止中
 
 ・申請内容とのdiff表示
-  ペンディング
-
 ・コンテンツextra_fieldsの未承認状態がない
-・コンテンツのソート専用テーブルを用意する
-
 ・「カテゴリー内記事へのコメント」というイベント通知
 
-
-・PDF
-  意味ある？
+・PDF出力
+※意味ある？
 
 ・pukiWikiレンダラー
-  とりあえずnao-ponさんのpico_xpwiki.phpをdisabledとして収録しているからいいか。
+※とりあえずnao-ponさんのpico_xpwiki.phpをdisabledとして収録しているからいいか。
 
 ・全ページを連続表示するページナビ
-  手つかず
-
 ・rewriteモードでは、すべてREQUEST_URIから展開するロジック
-  先送り
 
 ・題名もしくは仮想パスによる記事間自動リンク
+・permalinkを実現するURIMapper
 ・Wikiのようなページ指定方法
-  難しいので先送り
 
-・パーミッションについても、var_export形式にする (それと同時に、クエリのLIKEパターンがシリアライズ形式に依存している部分を修正する）→まいっか
 ・[summary][/summary]実装
-・全文閲覧権限のない状況と、RSSのdescriptionやコメント統合サマリ部との関係
+・全文閲覧権限のない状況と、RSSのdescriptionやコメント統合サマリ部との関係調査
 ・マルチカテゴリ
 ・グループ/ユーザの選択肢から各カテゴリーの権限を確認/変更するコントローラ
-
-・モデル以外（common_functions等）に、WHERE条件に "visible AND created_time <= UNIX_TIMESTAMP()" 等を直書きしているSQLの根絶
 
 
 ●TODO進行中 (1.9まで)
 
 ・全picoインスタンスをまたぐタグ、もしくは、なんらかの共通タグ機能対応
 http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
-・コンテンツ一覧ブロックで、カテゴリー単一指定の時には、そのconfigを拾う？
 ・pico_listからも、efフィールド名でソートカラムを指定できるようにする
 ・ヒストリ処理の抜本的改善(content_histories ALTER)
 ・コンテンツ毎にviewcontentテンプレートを指定できるように(contentsテーブルALTER)
-・Modelで、ORDER BY weight と直書きしてある部分を修正する
-・common内の腐ったサブメニュー処理をなんとかする
+・common_functions内の腐ったサブメニュー処理をなんとかする
+
+（下の２つはセット）
+・コンテンツ一覧ブロックで、カテゴリー単一指定の時には、そのconfigを拾う
+・「子孫カテゴリーを全部拾う」ブロックオプションの追加
+
 
 
 ●実装済
@@ -106,8 +98,8 @@ http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
 ・カテゴリ単位で、アップロードフォルダを切り替える機能
 ・カテゴリ単位で、画像サイズ・品質を切り替える機能
 ・カテゴリ単位で、ExtraFieldsクラスを切り替える機能
-・extra_image画像品質指定オプション
-・階層構造オプション指定（カテゴリーへのオプション指定がその子孫に反映される）
+・extra_image画像品質指定オプション（品質指定がなければ65がデフォルト値）
+・オプション値継承機能（カテゴリーへのオプション指定がその子孫に反映される）
 ・GD2でリサイズするExtraFieldsクラスの用意
 ・本文編集をd3tareaに集約 (ckeditorへの移行準備)
 ・cat_idが変わる編集での権限再チェック（管理者権限等は変更前と変更後のAND権限）
@@ -175,7 +167,7 @@ contents.created_time 未来の日時なら掲示前
 -- この段階ではパーミッションチェックは行わない
 - $GLOBALS['xoopsModuleConfig'] をオーバーライドしておく
 - パンくずにカテゴリーツリーを積む
-- controller/view の最割り当て ( UriMapper::modifyRequest() )
+- controller/view の再割り当て ( UriMapper::modifyRequest() )
 - リクエストcontrollerに応じたコントローラObj作成
 -- content (viewcontent)
 -- category (listcontents)

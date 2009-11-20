@@ -206,6 +206,16 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'inherit_configs' ,
+	'title'			=> $constpref.'_INHERITCONFIGS' ,
+	'description'	=> $constpref.'_INHERITCONFIGSDSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> 1 ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'show_breadcrumbs' ,
 	'title'			=> $constpref.'_SHOW_BREADCRUMBS' ,
 	'description'	=> '' ,

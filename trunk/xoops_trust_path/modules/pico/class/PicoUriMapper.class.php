@@ -118,13 +118,14 @@ function judgeController( &$cat_id , &$content_id )
 }
 
 
-function modifyRequest( $request , $currentCategoryObj )
+function modifyRequest( $request , &$currentCategoryObj )
 {
 	$this->config = $currentCategoryObj->getOverriddenModConfig() ;
 	$cat_data = $currentCategoryObj->getData() ;
 
 	if( empty( $this->config['show_listasindex'] ) && $request['controller'] == 'category' && $request['view'] == 'list' && empty( $request['content_id'] ) ) {
-		$top_content_id = pico_main_get_top_content_id_from_cat_id( $currentCategoryObj->mydirname , $cat_data['id'] ) ;
+		$content_ids = $currentCategoryObj->getContentIdsInNavi() ;
+		$top_content_id = @$content_ids[ 0 ] ;
 		if( $top_content_id > 0 ) {
 			// redirect to the top of the content
 			$redirect_uri = XOOPS_URL.'/modules/'.$this->mydirname.'/'.pico_common_make_content_link4html( $this->config , $top_content_id , $this->mydirname ) ;

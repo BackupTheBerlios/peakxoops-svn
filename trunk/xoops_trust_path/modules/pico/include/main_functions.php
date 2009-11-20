@@ -198,17 +198,6 @@ function pico_main_get_moderators( $mydirname , $cat_id )
 
 
 
-// get top $content_id from $cat_id
-function pico_main_get_top_content_id_from_cat_id( $mydirname , $cat_id )
-{
-	$db =& Database::getInstance() ;
-
-	list( $content_id ) = $db->fetchRow( $db->query( "SELECT o.content_id FROM ".$db->prefix($mydirname."_contents")." o WHERE o.cat_id=".intval($cat_id)." AND o.visible AND o.created_time <= UNIX_TIMESTAMP() AND o.expiring_time > UNIX_TIMESTAMP() ORDER BY o.weight,o.content_id LIMIT 1" ) ) ;
-
-	return intval( $content_id ) ;
-}
-
-
 // escape string for <a href="mailto:..."> (eg. tellafriend)
 function pico_main_escape4mailto( $text )
 {

@@ -215,13 +215,22 @@ function setOverriddenModConfig()
 	$this->mod_config = $config_handler->getConfigList( $module->getVar('mid') ) ;
 	$this->mod_name = $module->getVar( 'name' , 'n' ) ;
 
-	// options(mod_config) overridden by every parents hierarchically
-	foreach( $this->data['redundants']['parents_options'] as $cat_id => $serialized_options ) {
-		$options = @pico_common_unserialize( $serialized_options ) ;
-		if( ! is_array( $options ) ) continue ;
-		foreach( $options as $key => $val ) {
+	if( empty( $this->mod_config['inherit_configs'] ) ) {
+		// 1.7/1.8 compatible (overridding by the single generation)
+		foreach( $this->data['cat_options'] as $key => $val ) {
 			if( isset( $this->mod_config[ $key ] ) ) {
 				$this->mod_config[ $key ] = $val ;
+			}
+		}
+	} else {
+		// options(mod_config) overridden by every parents hierarchically
+		foreach( $this->data['redundants']['parents_options'] as $cat_id => $serialized_options ) {
+			$options = @pico_common_unserialize( $serialized_options ) ;
+			if( ! is_array( $options ) ) continue ;
+			foreach( $options as $key => $val ) {
+				if( isset( $this->mod_config[ $key ] ) ) {
+					$this->mod_config[ $key ] = $val ;
+				}
 			}
 		}
 	}

@@ -16,13 +16,22 @@ function PicoContentHandler( $mydirname )
 	$this->mydirname = $mydirname ;
 }
 
-function getCategoryContents( &$categoryObj , $return_prohibited_also = false )
+
+function cleanOrder( $order )
+{
+	return preg_replace( '/[^0-9a-zA-Z._, ]/' , '' , $order ) ;
+}
+
+
+function getCategoryContents( &$categoryObj , $return_prohibited_also = false , $return_as_object = true , $whr_append = '1' )
 {
 	$db =& Database::getInstance() ;
 
 	$cat_data = $categoryObj->getData() ;
+	$mod_config = $categoryObj->getOverriddenModConfig() ;
+	$order = empty( $mod_config['contents_order_in_cat'] ) ? 'o.weight' : $this->cleanOrder( $mod_config['contents_order_in_cat'] ) ;
 
-	$sql = "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE cat_id=".$cat_data['cat_id']." ORDER BY weight" ;
+	$sql = "SELECT o.content_id FROM ".$db->prefix($this->mydirname."_contents")." o LEFT JOIN ".$db->prefix($this->mydirname."_content_ef_sortables")." e ON o.content_id=e.content_id WHERE o.cat_id=".$cat_data['cat_id']." AND ($whr_append) ORDER BY $order" ;
 	if( ! $ors = $db->query( $sql ) ) {
 		if( $GLOBALS['xoopsUser']->isAdmin() ) echo $db->logger->dumpQueries() ;
 		exit ;
@@ -30,8 +39,12 @@ function getCategoryContents( &$categoryObj , $return_prohibited_also = false )
 
 	$ret = array() ;
 	while( list( $content_id ) = $db->fetchRow( $ors ) ) {
-		$objTemp =& new PicoContent( $this->mydirname , $content_id , $categoryObj ) ;
-		if( $return_prohibited_also || $objTemp->data['can_read'] ) $ret[ $content_id ] =& $objTemp ;
+		if( $return_as_object ) {
+			$objTemp =& new PicoContent( $this->mydirname , $content_id , $categoryObj ) ;
+			if( $return_prohibited_also || $objTemp->data['can_read'] ) $ret[ $content_id ] =& $objTemp ;
+		} else {
+			$ret[] = $content_id ;
+		}
 	}
 
 	return $ret ;
@@ -65,10 +78,13 @@ function getCategoryLatestContents( &$categoryObj , $num = 10 , $fetch_from_subc
 	return $ret ;
 }
 
+
 // return not object but array
 function getContents4assign( $whr_append = '1' , $order = 'o.weight' , $offset = 0 , $limit = 100 , $return_prohibited_also = false , $tags = '' )
 {
 	$db =& Database::getInstance() ;
+
+	$order = $this->cleanOrder( $order ) ;
 
 	$sql = "SELECT o.content_id FROM ".$db->prefix($this->mydirname."_contents")." o LEFT JOIN ".$db->prefix($this->mydirname."_content_ef_sortables")." e ON o.content_id=e.content_id WHERE ($whr_append) AND (".$this->getWhrFromTags($tags).") ORDER BY $order" ;
 	if( ! $ors = $db->query( $sql ) ) {
@@ -133,6 +149,7 @@ var $data = array() ; // public
 var $mydirname ;
 var $id ;
 var $categoryObj ;
+var $mod_config = array() ;
 var $errorno = 0 ;
 var $need_filter_body = false ;
 
@@ -165,11 +182,13 @@ function PicoContent( $mydirname , $content_id , $categoryObj = null , $allow_ma
 		$this->categoryObj =& new PicoCategory( $mydirname , $content_row['cat_id'] , $permissions ) ;
 	}
 	$cat_data = $this->categoryObj->getData() ;
+	$this->mod_config = $this->categoryObj->getOverriddenModConfig() ;
 
 	$is_public = $content_row['visible'] && $content_row['created_time'] <= time() && $content_row['expiring_time'] > time() ;
 
 	$this->data = array(
 		'id' => intval( $content_row['content_id'] ) ,
+		'mod_config' => $this->mod_config ,
 		'created_time_formatted' => formatTimestamp( $content_row['created_time'] ) ,
 		'modified_time_formatted' => formatTimestamp( $content_row['modified_time'] ) ,
 		'expiring_time_formatted' => formatTimestamp( $content_row['expiring_time'] ) ,
@@ -199,7 +218,6 @@ function getData4html( $process_body = false )
 {
 	$myts =& PicoTextSanitizer::getInstance() ;
 	$user_handler =& xoops_gethandler( 'user' ) ;
-	$mod_config = $this->categoryObj->getOverriddenModConfig() ;
 	$cat_data = $this->categoryObj->getData() ;
 
 	// poster & modifier uname
@@ -209,7 +227,7 @@ function getData4html( $process_body = false )
 	$modifier_uname = is_object( $modifier ) ? $modifier->getVar('uname') : @_MD_PICO_REGISTERED_AUTOMATICALLY ;
 
 	$ret4html = array(
-		'link' => pico_common_make_content_link4html( $mod_config , $this->data ) ,
+		'link' => pico_common_make_content_link4html( $this->mod_config , $this->data ) ,
 		'poster_uname' => $poster_uname ,
 		'modifier_uname' => $modifier_uname ,
 		'votes_avg' => $this->data['votes_count'] ? $this->data['votes_sum'] / doubleval( $this->data['votes_count'] ) : 0 ,
@@ -217,7 +235,7 @@ function getData4html( $process_body = false )
 		'body' => $this->data['body_cached'] ,
 		'tags_array' => $this->data['tags'] ? explode( ' ' , htmlspecialchars( $this->data['tags'] , ENT_QUOTES ) ) : array() ,
 		'cat_title' => $myts->makeTboxData4Show( $cat_data['cat_title'] , 1 , 1 ) ,
-		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $mod_config['guest_vote_interval'] ) ? true : false ,
+		'can_vote' => ( is_object( $GLOBALS['xoopsUser'] ) || $this->mod_config['guest_vote_interval'] ) ? true : false ,
 	) + $this->data ;
 
 	// process body
@@ -299,7 +317,6 @@ function filterBody( $content4assign )
 
 function getData4edit()
 {
-	$mod_config = $this->categoryObj->getOverriddenModConfig() ;
 	$cat_data = $this->categoryObj->getData() ;
 
 	$ret4edit = array(
@@ -322,7 +339,6 @@ function getData4edit()
 
 function getBlankContentRow( $categoryObj )
 {
-	$mod_config = $categoryObj->getOverriddenModConfig() ;
 	$cat_data = $categoryObj->getData() ;
 	$uid = is_object( @$GLOBALS['xoopsUser'] ) ? $GLOBALS['xoopsUser']->getVar('uid') : 0 ;
 
@@ -358,7 +374,7 @@ function getBlankContentRow( $categoryObj )
 		'body' => '' ,
 		'body_waiting' => '' ,
 		'body_cached' => '' ,
-		'filters' => $mod_config['filters'] ,
+		'filters' => $this->mod_config['filters'] ,
 		'tags' => '' ,
 		'extra_fields' => pico_common_serialize( array() ) ,
 		'redundants' => '' ,
@@ -369,25 +385,26 @@ function getBlankContentRow( $categoryObj )
 
 function &getPrevContent()
 {
-	$db =& Database::getInstance() ;
+	$content_ids = $this->categoryObj->getContentIdsInNavi() ;
 
-	list( $prev_content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE (weight<".$this->data['weight']." OR content_id<$this->id AND weight=".$this->data['weight'].") AND cat_id=".$this->data['cat_id']." AND visible AND created_time <= UNIX_TIMESTAMP() AND expiring_time > UNIX_TIMESTAMP() AND show_in_navi ORDER BY weight DESC,content_id DESC LIMIT 1" ) ) ;
-
+	$current_position = array_search( $this->id , $content_ids ) ;
 	$ret = null ;
-	if( ! empty( $prev_content_id ) ) {
+	if( $current_position > 0 ) {
+		$prev_content_id = $content_ids[ $current_position - 1 ] ;
 		$ret =& new PicoContent( $this->mydirname , $prev_content_id , $this->categoryObj ) ;
 	}
 	return $ret ;
 }
 
+
 function &getNextContent()
 {
-	$db =& Database::getInstance() ;
+	$content_ids = $this->categoryObj->getContentIdsInNavi() ;
 
-	list( $next_content_id ) = $db->fetchRow( $db->query( "SELECT content_id FROM ".$db->prefix($this->mydirname."_contents")." WHERE (weight>".$this->data['weight']." OR content_id>$this->id AND weight=".$this->data['weight'].") AND cat_id=".$this->data['cat_id']." AND visible AND created_time <= UNIX_TIMESTAMP() AND expiring_time > UNIX_TIMESTAMP() AND show_in_navi ORDER BY weight,content_id LIMIT 1" ) ) ;
-
+	$current_position = array_search( $this->id , $content_ids ) ;
 	$ret = null ;
-	if( ! empty( $next_content_id ) ) {
+	if( $current_position < sizeof( $content_ids ) - 1 ) {
+		$next_content_id = $content_ids[ $current_position + 1 ] ;
 		$ret =& new PicoContent( $this->mydirname , $next_content_id , $this->categoryObj ) ;
 	}
 	return $ret ;
@@ -408,14 +425,13 @@ function incrementViewed()
 
 function vote( $uid , $vote_ip , $point )
 {
-	$mod_config = $this->categoryObj->getOverriddenModConfig() ;
 	$db =& Database::getInstance() ;
 
 	// branch users and guests
 	if( $uid ) {
 		$useridentity4select = "uid=$uid" ;
 	} else {
-		$useridentity4select = "vote_ip='".mysql_real_escape_string($vote_ip)."' AND uid=0 AND vote_time>".( time() - @$mod_config['guest_vote_interval'] ) ;	}
+		$useridentity4select = "vote_ip='".mysql_real_escape_string($vote_ip)."' AND uid=0 AND vote_time>".( time() - @$this->mod_config['guest_vote_interval'] ) ;	}
 
 	// delete previous vote
 	$sql = "DELETE FROM ".$db->prefix($this->mydirname."_content_votes")." WHERE content_id=$this->id AND ($useridentity4select)" ;

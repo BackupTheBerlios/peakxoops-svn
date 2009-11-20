@@ -32,16 +32,18 @@
 ・グループ/ユーザの選択肢から各カテゴリーの権限を確認/変更するコントローラ
 
 ・モデル以外（common_functions等）に、WHERE条件に "visible AND created_time <= UNIX_TIMESTAMP()" 等を直書きしているSQLの根絶
-・Modelで、ORDER BY weight と直書きしてある部分を修正する
 
 
-●TODO進行中
+●TODO進行中 (1.9まで)
 
 ・全picoインスタンスをまたぐタグ、もしくは、なんらかの共通タグ機能対応
 http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
-・タグからコンテンツを引っ張ってくるsmartyプラグインまたは既存プラグインへのtag絞り込み機能付与
+・コンテンツ一覧ブロックで、カテゴリー単一指定の時には、そのconfigを拾う？
+・pico_listからも、efフィールド名でソートカラムを指定できるようにする
 ・ヒストリ処理の抜本的改善(content_histories ALTER)
 ・コンテンツ毎にviewcontentテンプレートを指定できるように(contentsテーブルALTER)
+・Modelで、ORDER BY weight と直書きしてある部分を修正する
+・common内の腐ったサブメニュー処理をなんとかする
 
 
 ●実装済
@@ -115,7 +117,10 @@ http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
 ・extra_fields のソート用テーブル実装
 ・ファイル構成の整理(コントローラ・モデル・extra_fields処理クラスを分離)
 ・FormValidatorのクラス化
-
+・extra_fieldsによるソート機能追加
+・コンテンツ一覧ブロックにタグによる絞り込み機能追加
+・pico_list にタグによる絞り込み機能追加
+・カテゴリー内コンテンツの表示順をコントロールできるようにした
 
 
 ●権限・表示ON/OFF関係の仕様

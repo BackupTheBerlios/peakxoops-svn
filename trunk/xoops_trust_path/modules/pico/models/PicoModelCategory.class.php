@@ -88,6 +88,7 @@ var $mod_config ;
 var $mod_name ;
 var $errorno = 0 ;
 var $isadmin = false ;
+var $content_ids_in_navi = null ;
 var $child_ids = null ;
 
 function PicoCategory( $mydirname , $cat_id , $permissions , $allow_makenew = false , $parentObj = null )
@@ -255,6 +256,16 @@ function getLatestContents( $num = 0 , $fetch_from_subcategories = false )
 {
 	$content_handler =& new PicoContentHandler( $this->mydirname ) ;
 	return $content_handler->getCategoryLatestContents( $this , $num , $fetch_from_subcategories ) ;
+}
+
+function getContentIdsInNavi()
+{
+	if( ! isset( $this->content_ids_in_navi ) ) {
+		$content_handler =& new PicoContentHandler( $this->mydirname ) ;
+		$this->content_ids_in_navi = $content_handler->getCategoryContents( $this , false , false , 'o.show_in_navi>0' ) ;
+	}
+
+	return $this->content_ids_in_navi ;
 }
 
 function crawlChildIds( $node = null )

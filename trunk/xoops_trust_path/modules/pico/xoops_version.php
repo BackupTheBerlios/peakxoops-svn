@@ -196,6 +196,16 @@ $modversion['config'][] = array(
 ) ;
 
 $modversion['config'][] = array(
+	'name'			=> 'contents_order_in_cat' ,
+	'title'			=> $constpref.'_ORDERINCAT' ,
+	'description'	=> $constpref.'_ORDERINCATDSC' ,
+	'formtype'		=> 'text' ,
+	'valuetype'		=> 'text' ,
+	'default'		=> 'o.weight' ,
+	'options'		=> array()
+) ;
+
+$modversion['config'][] = array(
 	'name'			=> 'show_breadcrumbs' ,
 	'title'			=> $constpref.'_SHOW_BREADCRUMBS' ,
 	'description'	=> '' ,

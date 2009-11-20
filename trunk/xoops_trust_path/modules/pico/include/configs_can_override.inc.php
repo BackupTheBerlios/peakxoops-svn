@@ -4,6 +4,7 @@ $pico_configs_can_be_override = array(
 	'wraps_auto_register' => 'bool' ,
 	'auto_register_class' => 'class' ,
 	'show_listasindex' => 'bool' ,
+	'contents_order_in_cat' => 'text' ,
 	'show_breadcrumbs' => 'bool' ,
 	'show_pagenavi' => 'bool' ,
 	'show_printicon' => 'bool' ,

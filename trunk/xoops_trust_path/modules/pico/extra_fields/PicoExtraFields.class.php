@@ -34,11 +34,7 @@ function PicoExtraFields( $mydirname , $categoryObj , $content_id = 0 )
 	$this->isadminormod = $cat_data['isadminormod'] ;
 	$this->content_id = $content_id ;
 	$this->images_path = XOOPS_ROOT_PATH.'/'.$this->mod_config['extra_images_dir'] ;
-	$this->image_sizes = array() ;
-	$size_combos = preg_split( '/\s+/' , $this->mod_config['extra_images_size'] ) ;
-	foreach( $size_combos as $size_combo ) {
-		$this->image_sizes[] = array_map( 'intval' , preg_split( '/\D+/' , $size_combo ) ) ;
-	}
+	$this->image_sizes = preg_split( '/\s+/' , $this->mod_config['extra_images_size'] ) ;
 }
 
 
@@ -151,9 +147,9 @@ function uploadImage( &$extra_fields , $file , $field_name )
 	$image_id = $id . '.' . $this->getExtFromMime( $check_result['mime'] ) ;
 
 	// resize loop
-	foreach( $this->image_sizes as $size_key => $sizes ) {
+	foreach( $this->image_sizes as $size_key => $size_option ) {
 		$image_path = $this->getImageFullPath( $field_name , $size_key , $image_id ) ;
-		$this->resizeImage( $sizes , $tmp_image , $image_path ) ;
+		$this->resizeImage( $size_option , $tmp_image , $image_path ) ;
 	}
 
 	// force remove remove temporary
@@ -171,11 +167,12 @@ function uploadImage( &$extra_fields , $file , $field_name )
 
 
 // Resize by ImageMagick
-function resizeImage( $sizes , $tmp_image , $image_path )
+function resizeImage( $size_option , $tmp_image , $image_path )
 {
-	$box_w = $sizes[0] ;
-	$box_h = $sizes[1] ;
-	$quality = $sizes[2] ;
+	$sizes = preg_split( '/\D+/' , trim( $size_option ) ) ;
+	$box_w = empty( $sizes[0] ) ? 480 : intval( $sizes[0] ) ;
+	$box_h = empty( $sizes[1] ) ? 480 : intval( $sizes[1] ) ;
+	$quality = empty( $sizes[2] ) ? 65 : intval( $sizes[2] ) ; // 0-100
 
 	exec( $this->mod_config['image_magick_path']."convert -quality $quality -thumbnail {$box_w}x{$box_h} $tmp_image $image_path" ) ;
 	@chmod( $image_path , 0644 ) ;

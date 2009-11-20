@@ -35,6 +35,8 @@ define($constpref.'_TOP_MESSAGEDEFAULT','');
 define($constpref.'_MENUINMODULETOP','モジュールトップでは自動生成メニューを表示する');
 define($constpref.'_LISTASINDEX','カテゴリートップでリストを表示する');
 define($constpref.'_LISTASINDEXDSC','「はい」の場合、カテゴリートップではサブカテゴリーと直下のコンテンツがリスト式に表示されます。「いいえ」の場合、そのカテゴリー内で最も表示優先度の高いコンテンツが表示されます。');
+define($constpref.'_ORDERINCAT','カテゴリー内の優先順位');
+define($constpref.'_ORDERINCATDSC','デフォルト値は o.weight');
 define($constpref.'_SHOW_BREADCRUMBS','パンくずを表示する');
 define($constpref.'_SHOW_PAGENAVI','ページナビゲーションを表示する');
 define($constpref.'_SHOW_PRINTICON','印刷画面へのリンクを表示する');

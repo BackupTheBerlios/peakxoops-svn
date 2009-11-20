@@ -8,8 +8,13 @@ require_once dirname(__FILE__).'/PicoExtraFields.class.php' ;
 class PicoExtraFieldsByGD2 extends PicoExtraFields {
 
 // Resize by GD2
-function resizeImage( $sizes , $src_path , $dst_path )
+function resizeImage( $size_option , $src_path , $dst_path )
 {
+	$sizes = preg_split( '/\D+/' , trim( $size_option ) ) ;
+	$box_w = empty( $sizes[0] ) ? 480 : intval( $sizes[0] ) ;
+	$box_h = empty( $sizes[1] ) ? 480 : intval( $sizes[1] ) ;
+	$quality = empty( $sizes[2] ) ? 65 : intval( $sizes[2] ) ; // 0-100
+
 	list( $width , $height , $type ) = getimagesize( $src_path ) ;
 
 	switch( $type ) {
@@ -30,13 +35,13 @@ function resizeImage( $sizes , $src_path , $dst_path )
 			return 2 ;
 	}
 
-	if( $width > $sizes[0] || $height > $sizes[1] ) {
-		if( $width / $sizes[0] > $height / $sizes[1] ) {
-			$new_w = $sizes[0] ;
+	if( $width > $box_w || $height > $box_h ) {
+		if( $width / $box_w > $height / $box_h ) {
+			$new_w = $box_w ;
 			$scale = $width / $new_w ; 
 			$new_h = intval( round( $height / $scale ) ) ;
 		} else {
-			$new_h = $sizes[1] ;
+			$new_h = $box_h ;
 			$scale = $height / $new_h ; 
 			$new_w = intval( round( $width / $scale ) ) ;
 		}
@@ -51,11 +56,11 @@ function resizeImage( $sizes , $src_path , $dst_path )
 			break ;
 		case 2 :
 			// JPEG
-			imagejpeg( $dst_img , $dst_path , $sizes[2] ) ;
+			imagejpeg( $dst_img , $dst_path , $quality ) ;
 			break ;
 		case 3 :
 			// PNG
-			imagepng( $dst_img , $dst_path , intval( $sizes[2] / 10.0 ) ) ;
+			imagepng( $dst_img , $dst_path , intval( $quality / 10.0 ) ) ;
 			break ;
 	}
 

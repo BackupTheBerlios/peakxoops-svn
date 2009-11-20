@@ -55,18 +55,38 @@ function b_pico_list_show( $options )
 	// mydirname check
 	if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
+	// module config (not overridden yet)
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$mod_config = $config_handler->getConfigList( $module->mid() ) ;
+
 	// content handler
 	$content_handler =& new PicoContentHandler( $mydirname ) ;
 
 	// contentObjects
+	$picoPermission =& PicoPermission::getInstance() ;
+	$permissions = $picoPermission->getPermissions( $mydirname ) ;
 	if( sizeof( $categories ) == 0 ) {
 		// no category specified
+		$mod_config_overridden = $mod_config ;
 		$contents4assign = $content_handler->getContents4assign( '1' , $selected_order , $offset , $limit , false , $tags ) ;
-	} else if( sizeof( $categories ) == 1 ) {
-		// single category
-		$contents4assign = $content_handler->getContents4assign( 'o.cat_id='.$categories[0] , $selected_order , $offset , $limit , false , $tags ) ;
+	} else if( sizeof( $categories ) == 1 && $categories[0] > 0 ) {
+		// single category (not hierarchical) eg) cat_id=1
+		$cat_id = abs( $categories[0] ) ;
+		$currentCategoryObj =& new PicoCategory( $mydirname , $cat_id , $permissions ) ;
+		$mod_config_overridden = $currentCategoryObj->getOverriddenModConfig() ;
+		$contents4assign = $content_handler->getContents4assign( 'o.cat_id='.$cat_id , $selected_order , $offset , $limit , false , $tags ) ;
+	} else if( sizeof( $categories ) == 1 && $categories[0] < 0 ) {
+		// single category (hierarchical)  eg) cat_id=-1
+		$cat_id = abs( $categories[0] ) ;
+		$currentCategoryObj =& new PicoCategory( $mydirname , $cat_id , $permissions ) ;
+		$mod_config_overridden = $currentCategoryObj->getOverriddenModConfig() ;
+		$child_ids = $currentCategoryObj->getChildIds() ;
+		$contents4assign = $content_handler->getContents4assign( 'o.cat_id IN ('.$cat_id.','.implode(',',$child_ids).')' , $selected_order , $offset , $limit , false , $tags ) ;
 	} else {
-		// multi category
+		// multi category  eg) cat_id=1,2,3
+		$mod_config_overridden = $mod_config ;
 		$contents4assign = $content_handler->getContents4assign( 'o.cat_id IN ('.implode(',',$categories).')' , $selected_order , $offset , $limit , false , $tags ) ;
 	}
 
@@ -74,12 +94,6 @@ function b_pico_list_show( $options )
 	foreach( array_keys( $contents4assign ) as $i ) {
 		$contents4assign[$i]['body'] = $display_body ? $contents4assign[$i]['body_cached'] : '' ;
 	}
-
-	// module config (not overridden yet)
-	$module_handler =& xoops_gethandler('module');
-	$module =& $module_handler->getByDirname($mydirname);
-	$config_handler =& xoops_gethandler('config');
-	$configs = $config_handler->getConfigList( $module->mid() ) ;
 
 	// constpref
 	$constpref = '_MB_' . strtoupper( $mydirname ) ;
@@ -89,8 +103,9 @@ function b_pico_list_show( $options )
 		'mytrustdirname' => $mytrustdirname ,
 		'mydirname' => $mydirname ,
 		'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
-		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$configs['images_dir'] ,
-		'mod_config' => $configs ,
+		'mod_imageurl' => XOOPS_URL.'/modules/'.$mydirname.'/'.$mod_config_overridden['images_dir'] ,
+		'mod_config_overridden' => $mod_config_overridden ,
+		'mod_config' => $mod_config ,
 		'contents' => $contents4assign ,
 		'display_body' => $display_body ,
 		'lang_category' => constant($constpref.'_CATEGORY') ,
@@ -130,7 +145,7 @@ function b_pico_list_edit( $options )
 	$module_handler =& xoops_gethandler('module');
 	$module =& $module_handler->getByDirname($mydirname);
 	$config_handler =& xoops_gethandler('config');
-	$configs = $config_handler->getConfigList( $module->mid() ) ;
+	$mod_config = $config_handler->getConfigList( $module->mid() ) ;
 
 	require_once XOOPS_ROOT_PATH.'/class/template.php' ;
 	$tpl =& new XoopsTpl() ;
@@ -138,7 +153,7 @@ function b_pico_list_edit( $options )
 		'mydirname' => $mydirname ,
 		'categories' => $categories ,
 		'categories_imploded' => implode( ',' , $categories ) ,
-		'order_options' => b_pico_list_get_order_options( $configs ) ,
+		'order_options' => b_pico_list_get_order_options( $mod_config ) ,
 		'selected_order' => $selected_order ,
 		'contents_num' => $limit_offset ,
 		'this_template' => $this_template ,

@@ -19,6 +19,22 @@ function PicoContentHandler( $mydirname )
 
 function cleanOrder( $order )
 {
+	// simple pattern
+	if( preg_match( '/^[oe]\.[0-9a-z_]+(| DESC| ASC)$/i' , $order ) ) return $order ;
+
+	// get this module's config
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($this->mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$configs = $config_handler->getConfigList( $module->mid() ) ;
+
+	$sortables = array_map( 'trim' , explode( ',' , $configs['extra_fields_sortables'] ) ) ;
+	if( ! empty( $sortables ) ) {
+		foreach( $sortables as $key => $field ) {
+			$order = preg_replace( "/(^|\,| )$field($|\,| )/" , '$1'.'e.ef'.$key.'$2' , $order ) ;
+		}
+	}
+
 	return preg_replace( '/[^0-9a-zA-Z._, ]/' , '' , $order ) ;
 }
 
@@ -31,19 +47,26 @@ function getCategoryContents( &$categoryObj , $return_prohibited_also = false , 
 	$mod_config = $categoryObj->getOverriddenModConfig() ;
 	$order = empty( $mod_config['contents_order_in_cat'] ) ? 'o.weight' : $this->cleanOrder( $mod_config['contents_order_in_cat'] ) ;
 
-	$sql = "SELECT o.content_id FROM ".$db->prefix($this->mydirname."_contents")." o LEFT JOIN ".$db->prefix($this->mydirname."_content_ef_sortables")." e ON o.content_id=e.content_id WHERE o.cat_id=".$cat_data['cat_id']." AND ($whr_append) ORDER BY $order" ;
-	if( ! $ors = $db->query( $sql ) ) {
-		if( $GLOBALS['xoopsUser']->isAdmin() ) echo $db->logger->dumpQueries() ;
-		exit ;
+	$sql_wo_order = "SELECT o.content_id FROM ".$db->prefix($this->mydirname."_contents")." o LEFT JOIN ".$db->prefix($this->mydirname."_content_ef_sortables")." e ON o.content_id=e.content_id WHERE o.cat_id=".$cat_data['cat_id']." AND ($whr_append) ORDER BY " ;
+	if( ! $ors = $db->query( $sql_wo_order . $order ) ) {
+		if( $GLOBALS['xoopsUser']->isAdmin() ) {
+			echo $db->logger->dumpQueries() ;
+			if( ! $ors = $db->query( $sql_wo_order . 'o.weight' ) ) {
+				exit ;
+			}
+		}  else {
+			die( 'Invalid SQL (perhaps it is caused by contents_order_in_cat)' ) ;
+		}
 	}
-
 	$ret = array() ;
 	while( list( $content_id ) = $db->fetchRow( $ors ) ) {
-		if( $return_as_object ) {
-			$objTemp =& new PicoContent( $this->mydirname , $content_id , $categoryObj ) ;
-			if( $return_prohibited_also || $objTemp->data['can_read'] ) $ret[ $content_id ] =& $objTemp ;
-		} else {
-			$ret[] = $content_id ;
+		$objTemp =& new PicoContent( $this->mydirname , $content_id , $categoryObj ) ;
+		if( $return_prohibited_also || $objTemp->data['can_read'] ) {
+			if( $return_as_object ) {
+				$ret[ $content_id ] =& $objTemp ;
+			} else {
+				$ret[] = $content_id ;
+			}
 		}
 	}
 
@@ -114,13 +137,20 @@ function getWhrFromTags( $tags )
 	$db =& Database::getInstance() ;
 	$tag_handler =& new PicoTagHandler( $this->mydirname ) ;
 
-	$ret = '1' ;
-	foreach( preg_split( '/[ ,]+/' , $tags ) as $tag ) {
+	$tags = trim( $tags ) ;
+	if( $tags == '' ) return '1' ;
+
+	$mode = strstr( $tags , '*' ) ? 'AND' : 'OR' ;
+
+	$ret = $mode == 'AND' ? '1' : '0' ;
+	foreach( preg_split( '/[ ,+*]+/' , $tags ) as $tag ) {
 		$tag = trim( $tag ) ;
 		if( $tag == '' ) continue ;
 		$content_ids = $tag_handler->getContentIdsCS( $tag ) ;
-		$ret .= " AND o.`content_id` IN ($content_ids)" ;
+		if( $content_ids === false ) continue ;
+		$ret .= " $mode o.`content_id` IN ($content_ids)" ;
 	}
+
 	return $ret ;
 }
 
@@ -385,10 +415,11 @@ function getBlankContentRow( $categoryObj )
 
 function &getPrevContent()
 {
+	$ret = null ;
 	$content_ids = $this->categoryObj->getContentIdsInNavi() ;
+	if( empty( $content_ids ) ) return $ret ;
 
 	$current_position = array_search( $this->id , $content_ids ) ;
-	$ret = null ;
 	if( $current_position > 0 ) {
 		$prev_content_id = $content_ids[ $current_position - 1 ] ;
 		$ret =& new PicoContent( $this->mydirname , $prev_content_id , $this->categoryObj ) ;
@@ -399,10 +430,11 @@ function &getPrevContent()
 
 function &getNextContent()
 {
+	$ret = null ;
 	$content_ids = $this->categoryObj->getContentIdsInNavi() ;
+	if( empty( $content_ids ) ) return $ret ;
 
 	$current_position = array_search( $this->id , $content_ids ) ;
-	$ret = null ;
 	if( $current_position < sizeof( $content_ids ) - 1 ) {
 		$next_content_id = $content_ids[ $current_position + 1 ] ;
 		$ret =& new PicoContent( $this->mydirname , $next_content_id , $this->categoryObj ) ;

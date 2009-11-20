@@ -10,7 +10,8 @@
  * Author:   GIJOE
  * Purpose:  
  * Input:    dir = dirname (default: caller's mydirname)
- *           cat_id = 
+ *           cat_id = specify category's id as number
+ *             (minus number like -1 means absoluted cat_id with its categories)
  *           order =  (default: o.created_time DESC)
  *           limit =
  *           template = 

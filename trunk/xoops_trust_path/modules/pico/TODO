@@ -27,14 +27,10 @@
 
 ・全picoインスタンスをまたぐタグ、もしくは、なんらかの共通タグ機能対応
 http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
-・pico_listからも、efフィールド名でソートカラムを指定できるようにする
 ・ヒストリ処理の抜本的改善(content_histories ALTER)
 ・コンテンツ毎にviewcontentテンプレートを指定できるように(contentsテーブルALTER)
 ・common_functions内の腐ったサブメニュー処理をなんとかする
 
-（下の２つはセット）
-・コンテンツ一覧ブロックで、カテゴリー単一指定の時には、そのconfigを拾う
-・「子孫カテゴリーを全部拾う」ブロックオプションの追加
 
 
 
@@ -110,9 +106,12 @@ http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
 ・ファイル構成の整理(コントローラ・モデル・extra_fields処理クラスを分離)
 ・FormValidatorのクラス化
 ・extra_fieldsによるソート機能追加
-・コンテンツ一覧ブロックにタグによる絞り込み機能追加
+・コンテンツ一覧ブロックにタグによる絞り込み機能追加(A+BならOR, A*BならAND)
 ・pico_list にタグによる絞り込み機能追加
 ・カテゴリー内コンテンツの表示順をコントロールできるようにした
+・コンテンツ一覧ブロック/pico_listで、カテゴリ単一指定時には、上書きconfigを取得
+・コンテンツ一覧ブロック/pico_listで、マイナス数値にてカテゴリの階層指定可能
+
 
 
 ●権限・表示ON/OFF関係の仕様

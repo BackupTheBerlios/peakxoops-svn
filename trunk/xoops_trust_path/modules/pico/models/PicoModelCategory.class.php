@@ -38,7 +38,7 @@ function getAllCategories( $return_prohibited_also = false )
 	return $ret ;
 }
 
-function getSubCategories( $cat_id , $return_prohibited_also = false )
+function getSubCategories( $cat_id , $return_prohibited_also = false , $return_as_object = true )
 {
 	$db =& Database::getInstance() ;
 
@@ -52,7 +52,13 @@ function getSubCategories( $cat_id , $return_prohibited_also = false )
 	$ret = array() ;
 	while( list( $cat_id ) = $db->fetchRow( $crs ) ) {
 		$objTemp =& new PicoCategory( $this->mydirname , $cat_id , $this->permissions ) ;
-		if( $return_prohibited_also || $objTemp->data['can_read'] ) $ret[ $cat_id ] =& $objTemp ;
+		if( $return_prohibited_also || $objTemp->data['can_read'] ) {
+			if( $return_as_object ) {
+				$ret[ $cat_id ] =& $objTemp ;
+			} else {
+				$ret[] = $content_id ;
+			}
+		}
 	}
 
 	return $ret ;

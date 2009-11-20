@@ -94,6 +94,7 @@ var $mod_config ;
 var $mod_name ;
 var $errorno = 0 ;
 var $isadmin = false ;
+var $content_ids = null ;
 var $content_ids_in_navi = null ;
 var $child_ids = null ;
 
@@ -273,6 +274,18 @@ function getLatestContents( $num = 0 , $fetch_from_subcategories = false )
 	return $content_handler->getCategoryLatestContents( $this , $num , $fetch_from_subcategories ) ;
 }
 
+// all ids of belonging contents
+function getContentIds()
+{
+	if( ! isset( $this->content_ids ) ) {
+		$content_handler =& new PicoContentHandler( $this->mydirname ) ;
+		$this->content_ids = $content_handler->getCategoryContents( $this , true , false ) ;
+	}
+
+	return $this->content_ids ;
+}
+
+// ids of beloging contents can be displayed in the navigation
 function getContentIdsInNavi()
 {
 	if( ! isset( $this->content_ids_in_navi ) ) {

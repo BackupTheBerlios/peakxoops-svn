@@ -62,6 +62,36 @@ function pico_delete_category( $mydirname , $cat_id , $delete_also_contents = tr
 }
 
 
+// extract `extra_fields` into `content_ef_sortables` table
+function pico_sync_content_ef_sortables( $mydirname )
+{
+	$picoPermission =& PicoPermission::getInstance() ;
+	$permissions = $picoPermission->getPermissions( $mydirname ) ;
+	$categoryHandler =& new PicoCategoryHandler( $mydirname , $permissions ) ;
+	$categories = $categoryHandler->getAllCategories() ;
+
+	// categories loop
+	foreach( $categories as $cat_id => $categoryObj ) {
+		$mod_config = $categoryObj->getOverriddenModConfig() ;
+
+		// ef_obj
+		$ef_class = empty( $mod_config['extra_fields_cat_class'] ) ? 'PicoExtraFieldsCat' : $mod_config['extra_fields_cat_class'] ;
+		require_once dirname(dirname(__FILE__)).'/extra_fields/'.$ef_class.'.class.php' ;
+		$ef_obj = new $ef_class( $mydirname , $categoryObj , 0 ) ;
+
+		// contents loop
+		$content_ids = $categoryObj->getContentIds() ;
+		foreach( $content_ids as $content_id ) {
+			$ef_obj->syncContentEfSortables( $content_id ) ;
+		}
+
+		unset( $ef_obj ) ;
+	}
+	
+	return true ;
+}
+
+
 // store tree informations of categories
 function pico_sync_cattree( $mydirname )
 {
@@ -163,10 +193,6 @@ function pico_sync_content_votes( $mydirname , $content_id )
 
 	$content_id = intval( $content_id ) ;
 
-	$sql = "SELECT cat_id FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ;
-	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT content in sync content_votes" ) ;
-	list( $cat_id ) = $db->fetchRow( $result ) ;
-
 	$sql = "SELECT COUNT(*),SUM(vote_point) FROM ".$db->prefix($mydirname."_content_votes")." WHERE content_id=$content_id" ;
 	if( ! $result = $db->query( $sql ) ) die( "ERROR SELECT content_votes in sync content_votes" ) ;
 	list( $votes_count , $votes_sum ) = $db->fetchRow( $result ) ;
@@ -236,7 +262,6 @@ function pico_sync_all( $mydirname )
 	$result = $db->query( "SELECT content_id FROM ".$db->prefix($mydirname."_contents") ) ;
 	while( list( $content_id ) = $db->fetchRow( $result ) ) {
 		pico_sync_content_votes( $mydirname , intval( $content_id ) ) ;
-		//pico_sync_content( $mydirname , intval( $content_id ) ) ;
 	}
 
 	// sync tags
@@ -264,6 +289,9 @@ function pico_sync_all( $mydirname )
 
 	// sync category's tree
 	pico_sync_cattree( $mydirname ) ;
+
+	// sync content_ef_sortables
+	pico_sync_content_ef_sortables( $mydirname ) ;
 }
 
 

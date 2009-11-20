@@ -463,7 +463,8 @@ function vote( $uid , $vote_ip , $point )
 	if( $uid ) {
 		$useridentity4select = "uid=$uid" ;
 	} else {
-		$useridentity4select = "vote_ip='".mysql_real_escape_string($vote_ip)."' AND uid=0 AND vote_time>".( time() - @$this->mod_config['guest_vote_interval'] ) ;	}
+		$useridentity4select = "vote_ip='".mysql_real_escape_string($vote_ip)."' AND uid=0 AND vote_time>".( time() - @$this->mod_config['guest_vote_interval'] ) ;
+	}
 
 	// delete previous vote
 	$sql = "DELETE FROM ".$db->prefix($this->mydirname."_content_votes")." WHERE content_id=$this->id AND ($useridentity4select)" ;

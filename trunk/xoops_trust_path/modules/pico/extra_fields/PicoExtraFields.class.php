@@ -21,7 +21,6 @@ var $isadminormod = false ;
 var $content_id = 0 ;
 var $images_path ;
 var $image_sizes ;
-var $requests = array() ;
 
 
 function PicoExtraFields( $mydirname , $categoryObj , $content_id = 0 )
@@ -57,8 +56,6 @@ function getSerializedRequestsFromPost()
 		$this->uploadImages( $ret ) ;
 	}
 
-	$this->requests = $ret ;
-
 	return pico_common_serialize( $ret ) ;
 }
 
@@ -69,11 +66,14 @@ function syncContentEfSortables( $content_id )
 	$sortables = array_map( 'trim' , explode( ',' , $this->mod_config['extra_fields_sortables'] ) ) ;
 	if( ! empty( $sortables ) ) {
 		$db =& Database::getInstance() ;
+		list( $ef_serialized ) = $db->fetchRow( $db->query( "SELECT extra_fields FROM ".$db->prefix($this->mydirname."_contents")." WHERE content_id=".$content_id ) ) ;
+		$ef = pico_common_unserialize( $ef_serialized ) ;
 		$fields = array() ;
 		$values = array() ;
 		foreach( $sortables as $key => $field ) {
+			if( $key > 9 ) break ;
 			$fields[] = "`ef{$key}`" ;
-			$values[] = "'".mysql_real_escape_string( @$this->requests[ $field ] )."'" ;
+			$values[] = "'".mysql_real_escape_string( @$ef[ $field ] )."'" ;
 		}
 		$db->queryF( "REPLACE ".$db->prefix("{$this->mydirname}_content_ef_sortables")." (`content_id`,".implode(',',$fields).") VALUES ($content_id,".implode(',',$values).")" ) ;
 	}

@@ -1,7 +1,5 @@
 ●TODO停止中
 
-・申請内容とのdiff表示
-・コンテンツextra_fieldsの未承認状態がない
 ・「カテゴリー内記事へのコメント」というイベント通知
 
 ・PDF出力
@@ -27,9 +25,24 @@
 
 ・全picoインスタンスをまたぐタグ、もしくは、なんらかの共通タグ機能対応
 http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
-・ヒストリ処理の抜本的改善(content_histories ALTER)
 ・コンテンツ毎にviewcontentテンプレートを指定できるように(contentsテーブルALTER)
 ・common_functions内の腐ったサブメニュー処理をなんとかする
+
+
+・ヒストリ処理の抜本的改善(content_histories ALTER)
+・コンテンツextra_fieldsの未承認状態がない
+・申請内容とのdiff表示
+↑この３つをまとめて、content_revisions という概念に集約する
+
+CREATE TABLE xoops_pico_content_revisions (
+  content_revision_id bigint(20) unsigned NOT NULL default 0,
+  content_id int(10) unsigned NOT NULL default 0,
+  revision_id int(10) unsigned NOT NULL default 0,
+  data mediumtext,
+  PRIMARY KEY (content_revision_id),
+  UNIQUE KEY (content_id,revision_id)
+) TYPE=MyISAM;
+
 
 
 

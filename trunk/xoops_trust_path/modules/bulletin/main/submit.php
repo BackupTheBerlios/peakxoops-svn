@@ -127,7 +127,7 @@ if( $op == 'post' ){
 
 		// 自動承認かどうか
 		if( $gperm->group_perm(2) ){
-			$story->setVar('type', 1);
+			$story->setVar('type', $story->getVar('approve') ); // GIJ
 		}else{
 			$story->setVar('type', 0);
 		}

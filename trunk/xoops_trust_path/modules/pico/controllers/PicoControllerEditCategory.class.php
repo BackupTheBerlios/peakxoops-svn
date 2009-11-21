@@ -17,6 +17,7 @@ class PicoControllerEditCategory extends PicoControllerAbstract {
 //var $template_name = '' ;
 //var $html_header = '' ;
 //var $contentObjs = array() ;
+var $config_labels = array() ;
 
 function execute( $request )
 {
@@ -75,6 +76,8 @@ function execute( $request )
 	}
 	$this->assign['xoops_breadcrumbs'] = $breadcrumbsObj->getXoopsbreadcrumbs() ;
 
+	$this->setConfigLabels() ;
+
 	// misc assigns
 	$this->assign['page'] = $page ;
 	$this->assign['formtitle'] = $page == 'makecategory' ? _MD_PICO_LINK_MAKECATEGORY : _MD_PICO_CATEGORYMANAGER ;
@@ -85,6 +88,30 @@ function execute( $request )
 	// views
 	$this->template_name = empty( $this->mod_config['tpl_category_form'] ) ? $this->mydirname.'_main_category_form.html' : $this->mod_config['tpl_category_form'] ;
 	$this->is_need_header_footer = true ;
+}
+
+
+function setConfigLabels()
+{
+	// read modinfo.php
+	$langman =& D3LanguageManager::getInstance() ;
+	$langman->read( 'modinfo.php' , $this->mydirname , $this->mytrustdirname ) ;
+
+	// NAME/DESC of the configs
+	$module_handler =& xoops_gethandler('module');
+	$module =& $module_handler->getByDirname($this->mydirname);
+	$config_handler =& xoops_gethandler('config');
+	$criteria =& new Criteria( 'conf_modid' , $module->mid() ) ;
+	$modConfigObjs = $config_handler->getConfigs( $criteria ) ;
+	$this->config_labels = array() ;
+	foreach( $modConfigObjs as $modConfigObj ) {
+		$conf_name = $modConfigObj->getVar('conf_name','n') ;
+		$conf_title = $modConfigObj->getVar('conf_title','n') ;
+		$conf_desc = $modConfigObj->getVar('conf_desc','n') ;
+		if( defined( $conf_title ) ) {
+			$this->config_labels[ $conf_name ] = constant( $conf_title ) . ( $conf_desc ? ":\n \n" . @constant( $conf_desc ) : '' ) ;
+		}
+	}
 }
 
 
@@ -100,10 +127,11 @@ function getCategoryOptions4edit()
 			if( $type == 'int' || $type == 'bool' ) {
 				$val = intval( $val ) ;
 			}
-			$lines[] = htmlspecialchars( $key . ': ' . $val , ENT_QUOTES ) ;
+			$line = htmlspecialchars( $key . ': ' . $val , ENT_QUOTES ) ;
+			$lines[] = '<span class="pico_category_option" title="'.htmlspecialchars(@$this->config_labels[$key],ENT_QUOTES).'" ondblclick="xoopsGetElementById(\'pico_category_options\').value+=this.innerHTML;">'.$line."\n".'</span>' ;
 		}
 	}
-	return implode( '<br />' , $lines ) ;
+	return implode( "<br />\n" , $lines ) ;
 }
 
 

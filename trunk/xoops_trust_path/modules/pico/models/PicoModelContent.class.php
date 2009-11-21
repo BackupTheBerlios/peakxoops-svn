@@ -192,7 +192,7 @@ function PicoContent( $mydirname , $content_id , $categoryObj = null , $allow_ma
 
 	// get this "content" from given $content_id
 	$sql = "SELECT * FROM ".$db->prefix($mydirname."_contents")." WHERE content_id=$content_id" ;
-	if( ! $ors = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $ors = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__.__FUNCTION__ ) ;
 	if( $db->getRowsNum( $ors ) <= 0 ) {
 		if( $allow_makenew && is_object( $categoryObj ) ) {
 			$content_row = $this->getBlankContentRow( $categoryObj ) ;
@@ -370,6 +370,7 @@ function getData4edit()
 function getBlankContentRow( $categoryObj )
 {
 	$cat_data = $categoryObj->getData() ;
+	$mod_config = $categoryObj->getOverriddenModConfig() ;
 	$uid = is_object( @$GLOBALS['xoopsUser'] ) ? $GLOBALS['xoopsUser']->getVar('uid') : 0 ;
 
 	return array(
@@ -404,7 +405,7 @@ function getBlankContentRow( $categoryObj )
 		'body' => '' ,
 		'body_waiting' => '' ,
 		'body_cached' => '' ,
-		'filters' => $this->mod_config['filters'] ,
+		'filters' => $mod_config['filters'] ,
 		'tags' => '' ,
 		'extra_fields' => pico_common_serialize( array() ) ,
 		'redundants' => '' ,
@@ -468,11 +469,11 @@ function vote( $uid , $vote_ip , $point )
 
 	// delete previous vote
 	$sql = "DELETE FROM ".$db->prefix($this->mydirname."_content_votes")." WHERE content_id=$this->id AND ($useridentity4select)" ;
-	if( ! $result = $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $result = $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__.__FUNCTION__ ) ;
 
 	// insert this vote
 	$sql = "INSERT INTO ".$db->prefix($this->mydirname."_content_votes")." (content_id,vote_point,vote_time,vote_ip,uid) VALUES ($this->id,$point,UNIX_TIMESTAMP(),'".mysql_real_escape_string($vote_ip)."',$uid)" ;
-	if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $db->queryF( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__.__FUNCTION__ ) ;
 
 	require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
 	pico_sync_content_votes( $this->mydirname , $this->id ) ;

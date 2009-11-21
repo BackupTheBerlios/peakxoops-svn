@@ -4,6 +4,10 @@
 
 <{* admin controllers *}>
 <{capture name="controllers"}>
+	<{if $category.isadminormod}>
+		<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCATEGORY}>]</a>
+	<{/if}>
+
 	<{if $content.can_edit}>
 		<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
 	<{/if}>

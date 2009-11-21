@@ -7,6 +7,8 @@ div.pico_breadcrumbs{
 	margin				:0 -2px;
 	padding				:15px 8px;}
 
+#pico_body_tarea { width: 100%; }
+
 div.pico_menu h1 { margin: 18px 0 0 0; padding: 3px; background-color:#eee;}
 div.pico_menu h2 { margin: 18px 0 0 10px; padding: 3px; background-color:#eee; }
 div.pico_menu h3 { margin: 18px 0 0 20px; padding: 3px; background-color:#eee; }

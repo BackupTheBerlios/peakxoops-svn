@@ -27,6 +27,7 @@
 http://xoops.peak.ne.jp/md/d3forum/index.php?post_id=11132
 ・コンテンツ毎にviewcontentテンプレートを指定できるように(contentsテーブルALTER)
 ・common_functions内の腐ったサブメニュー処理をなんとかする
+・タグの入力支援(コンテンツ編集フォームにタグ一覧を渡す)
 
 
 ・ヒストリ処理の抜本的改善(content_histories ALTER)
@@ -107,6 +108,7 @@ CREATE TABLE xoops_pico_content_revisions (
 ・カテゴリ単位で、アップロードフォルダを切り替える機能
 ・カテゴリ単位で、画像サイズ・品質を切り替える機能
 ・カテゴリ単位で、ExtraFieldsクラスを切り替える機能
+・カテゴリ編集画面でのオプション入力支援
 ・extra_image画像品質指定オプション（品質指定がなければ65がデフォルト値）
 ・オプション値継承機能（カテゴリーへのオプション指定がその子孫に反映される）
 ・GD2でリサイズするExtraFieldsクラスの用意

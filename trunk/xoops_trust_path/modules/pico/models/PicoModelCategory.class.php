@@ -106,7 +106,7 @@ function PicoCategory( $mydirname , $cat_id , $permissions , $allow_makenew = fa
 
 	// get this "category" from given $cat_id
 	$sql = "SELECT * FROM ".$db->prefix($mydirname."_categories")." WHERE cat_id=$cat_id" ;
-	if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__ ) ;
+	if( ! $crs = $db->query( $sql ) ) die( _MD_PICO_ERR_SQL.__LINE__.__FUNCTION__ ) ;
 	if( $db->getRowsNum( $crs ) <= 0 ) {
 		if( $allow_makenew && is_object( $parentObj ) ) {
 			$cat_row = $this->getBlankCategoryRow( $parentObj ) ;

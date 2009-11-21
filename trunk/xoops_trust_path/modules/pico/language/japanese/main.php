@@ -109,6 +109,8 @@ define('_MD_PICO_LABEL_VISIBLE','表示');
 define('_MD_PICO_LABEL_SHOWINNAVI','ページナビに表示する');
 define('_MD_PICO_LABEL_SHOWINMENU','メニューに表示する');
 define('_MD_PICO_LABEL_ALLOWCOMMENT','コメント可能');
+define('_MD_PICO_LABEL_OPTIONONOFF','オプションを表示する');
+define('_MD_PICO_LABEL_HISTORYONOFF','履歴を表示する');
 define('_MD_PICO_TH_CATEGORYTITLE','タイトル');
 define('_MD_PICO_TH_CATEGORYDESC','説明');
 define('_MD_PICO_TH_CATEGORYPARENT','親カテゴリー');

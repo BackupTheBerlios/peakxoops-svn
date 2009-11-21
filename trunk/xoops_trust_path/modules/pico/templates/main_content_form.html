@@ -17,7 +17,7 @@
 	<input type="hidden" name="content_id" value="<{$content.id}>" />
 	<input type="hidden" name="body_editor" id="body_editor" value="" />
 
-	<table class="outer pico_form_table">
+	<table class="outer pico_form_table" id="pico_content_form_main">
 
 		<!-- category -->
 		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
@@ -53,48 +53,6 @@
 			</td>
 		</tr>
 
-<{*
-		<!-- extra fields sample (TEXTBOX) -->
-		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-			<th class="head"><label for="pronunciation">pronunciation</label></th>
-			<td class="even">
-				<input type="text" name="ef_pronunciation" id="pronunciation" size="80" maxlength="255" value="<{$content.ef.pronunciation|escape}>" />
-			</td>
-		</tr>
-
-		<!-- extra fields sample (RADIO) -->
-		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-			<th class="head">gender</th>
-			<td class="even">
-				<input type="radio" name="ef_gender" id="gender_male" value="1"<{if $content.ef.gender == 1}> checked="checked"<{/if}> /> <label for="gender_male">male</label>
-				<input type="radio" name="ef_gender" id="gender_female" value="2"<{if $content.ef.gender == 2}> checked="checked"<{/if}> /> <label for="gender_female">female</label>
-			</td>
-		</tr>
-
-		<!-- extra fields sample (SELECT) -->
-		<{assign var="countries" value=","|explode:"---,USA,UK,France,Japan"}>
-		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-			<th class="head">country</th>
-			<td class="even">
-				<select id="address1" name="ef_address1">
-					<{html_options values=$countries output=$countries selected=$content.ef.address1}>
-				</select>
-			</td>
-		</tr>
-
-		<!-- extra images sample -->
-		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-			<th class="head">myphoto</th>
-			<td class="even">
-				<input type="file" name="ei_myphoto" />
-				<input type="hidden" name="ef_myphoto" value="<{$content.ef.myphoto|escape}>" />
-				<{if $content.ef.myphoto}>
-					<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$content.ef.myphoto|escape}>"><img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$content.ef.myphoto|escape}>" /></a>
-				<{/if}>
-			</td>
-		</tr>
-*}>
-
 		<!-- subject reference for a waiting content -->
 		<{if $content.subject_waiting && $page != 'makecontent'}>
 		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
@@ -125,22 +83,37 @@
 			</tr>
 			<{/if}>
 		<{/if}>
+	</table>
 
-		<!-- body -->
+	<table class="outer pico_form_table" id="pico_content_form_body">
 		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-			<th class="head"><label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label></th>
+			<th class="head">
+				<label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label>
+			</th>
+		</tr>
+
+		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
 			<td class="even">
-				<{d3tarea name="body" cols="60" rows="15" value=$content.body types="plain,dhtmltarea,fckxoops" default_type="plain"}>
+				<!-- body -->
+				<{d3tarea name="body" id="pico_body_tarea" cols="60" rows="15" value=$content.body types="plain,dhtmltarea,fckxoops" default_type="plain"}>
 			</td>
 		</tr>
 
-		<!-- body reference for a waiting content -->
-		<{if $content.body_waiting && $page != 'makecontent'}>
 		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
-			<td class="even pico_waiting"><{$content.body_waiting|nl2br}></td>
+			<td class="even">
+				<!-- body reference for a waiting content -->
+				<{if $content.body_waiting && $page != 'makecontent'}>
+					<{$content.body_waiting|nl2br}>
+				<{/if}>
+			</td>
 		</tr>
-		<{/if}>
+	</table>
+
+	<p>
+		<input type="checkbox" name="pico_option_ctrl" id="pico_option_ctrl" value="1" onclick="xoopsGetElementById('pico_content_form_options').style.display=(this.checked)?'inline':'none';" /><label for="pico_option_ctrl" > <{$smarty.const._MD_PICO_LABEL_OPTIONONOFF}></label>
+	</p>
+
+	<table class="outer pico_form_table" id="pico_content_form_options" style="display:none;">
 
 		<!-- filters -->
 		<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
@@ -308,26 +281,32 @@ function xoopsFormValidate_contentform() {
 
 <{if $page != 'makecontent'}>
 
-<h2 class="pico_title"><{$smarty.const._MD_PICO_HISTORY}></h2>
-<ul class="pico_content_history_list">
-	<{foreach from=$content_histories item="history"}>
-		<li>
-			<{$history.modified_time_formatted}>
-			-
-			<{$history.modifier_uname}>
-			(<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)
-			<a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_REFERIT}></a>
-			-
-			<a href="<{$mod_url}>/index.php?page=downloadhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DOWNLOADIT}></a>
-			-
-			<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.id}>&amp;newer_history_id=0"><{$smarty.const._MD_PICO_DIFF2NOW}></a>
-			<{if $history.prev_id}>
+<p>
+	<input type="checkbox" name="pico_history_ctrl" id="pico_history_ctrl" value="1" onclick="xoopsGetElementById('pico_content_form_histories').style.display=(this.checked)?'inline':'none';" /><label for="pico_history_ctrl" > <{$smarty.const._MD_PICO_LABEL_HISTORYONOFF}></label>
+</p>
+
+<div id="pico_content_form_histories" style="display: none;">
+	<h2 class="pico_title"><{$smarty.const._MD_PICO_HISTORY}></h2>
+	<ul class="pico_content_history_list">
+		<{foreach from=$content_histories item="history"}>
+			<li>
+				<{$history.modified_time_formatted}>
 				-
-				<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.prev_id}>&amp;newer_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DIFFFROMPREV}></a>
-			<{/if}>
-		</li>
-	<{/foreach}>
-</ul>
+				<{$history.modifier_uname}>
+				(<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)
+				<a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_REFERIT}></a>
+				-
+				<a href="<{$mod_url}>/index.php?page=downloadhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DOWNLOADIT}></a>
+				-
+				<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.id}>&amp;newer_history_id=0"><{$smarty.const._MD_PICO_DIFF2NOW}></a>
+				<{if $history.prev_id}>
+					-
+					<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.prev_id}>&amp;newer_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DIFFFROMPREV}></a>
+				<{/if}>
+			</li>
+		<{/foreach}>
+	</ul>
+</div>
 
 <{/if}>
 
